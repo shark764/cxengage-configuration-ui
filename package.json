@@ -1,0 +1,27 @@
+{
+  "name": "cxengage-configuration-ui",
+  "version": "0.0.0",
+  "description": "CxEngage Configuration and Reporting",
+  "main": "./release/bundle.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "author": "serenova",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.0",
+    "react-table": "^6.7.6",
+    "rx-dom-ajax": "^7.0.3",
+    "rxjs": "^5.5.6"
+  },
+  "devDependencies": {
+    "radium": "^0.21.1",
+    "random-questions": "^1.0.1",
+    "webpack": "^3.10.0"
+  }
+}
