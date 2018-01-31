@@ -5,8 +5,8 @@ import {
   Route,
 } from 'react-router-dom';
 
-import SilentMonitoringToolbar from './containers/SilentMonitoringToolbar.js';
-import InteractionMonitoring from './containers/InteractionMonitoring.js';
+import SilentMonitoringToolbar from './containers/SupervisorToolbar';
+import InteractionMonitoring from './containers/InteractionMonitoring';
 
 ReactDOM.render(
   <Router>

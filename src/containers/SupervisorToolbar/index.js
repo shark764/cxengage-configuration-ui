@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+import styled from 'styled-components';
 
-import { MuteIconSVG, HangUpIconSVG } from 'cx-ui-components';
+import { MutedIconSVG,UnMutedIconSVG,HangUpIconSVG } from 'cx-ui-components';
 
-const styles = {
-  bottomBar: {
-    position: 'fixed',
-    bottom: '0px',
-  },
-};
+const BottomBar = styled.h2`
+  position: fixed;
+  bottom: 0px;
+`;
 
 class SilentMonitoringToolbar extends Component {
   constructor() {
@@ -16,6 +14,7 @@ class SilentMonitoringToolbar extends Component {
     this.state = {
       twilioEnabled: false,
       silentMonitoring: {},
+      muted: false,
     };
   }
 
@@ -134,30 +133,34 @@ class SilentMonitoringToolbar extends Component {
     }
   }
 
-  mute = () => {
-    if (this.state.silentMonitoring !== undefined) {
-      window.parent.postMessage({
-        module: 'interactions.voice',
-        command: 'resourceMute',
-        data: { interactionId: this.state.silentMonitoring.interactionId },
-      }, 'http://localhost:3001');
-    }
+  toggleMute = () => {
+    this.setState({muted: !this.state.muted});
+    console.log('TODO: flow work needs to be completed for this to work');
+    // if (this.state.silentMonitoring !== undefined) {
+    //   window.parent.postMessage({
+    //     module: 'interactions.voice',
+    //     command: 'resourceMute',
+    //     data: { interactionId: this.state.silentMonitoring.interactionId },
+    //   }, 'http://localhost:3001');
+    // }
   }
 
   render() {
     return (
       <div id="silentMonitoringToolbar">
-        { this.state.silentMonitoring.status }
         {
-          this.state.silentMonitoring.status === 'connected' &&
-          <div style={styles.bottomBar}>
-            <MuteIconSVG onClick={() => console.log('TODO mute')} width="40px" style={{display: 'inline-block', width: '40px'}}/>
-            <HangUpIconSVG onClick={this.hangUp} width="40px" style={{display: 'inline-block', width: '40px'}}/>
-          </div>
+          this.state.silentMonitoring.status !== undefined &&
+          <BottomBar>
+            <HangUpIconSVG onClick={this.hangUp} loading={this.state.silentMonitoring.status !== 'connected'} width="40px" style={{display: 'inline-block', width: '40px', marginRight: '10px',marginLeft: '10px'}}/>
+            {this.state.silentMonitoring.status === 'connected' && 
+              (this.state.muted? <UnMutedIconSVG onClick={this.toggleMute} width="40px" style={{display: 'inline-block', width: '40px'}}/> :
+              <MutedIconSVG onClick={this.toggleMute} width="40px" style={{display: 'inline-block', width: '40px'}}/>)
+              }
+          </BottomBar>
         }
       </div>
     );
   }
 }
 
-export default Radium(SilentMonitoringToolbar);
+export default SilentMonitoringToolbar;

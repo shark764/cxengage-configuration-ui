@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+import styled from 'styled-components';
 
 // import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/dom/ajax';
@@ -11,16 +11,14 @@ import 'rxjs/add/observable/dom/ajax';
 import ReactTable from "react-table";
 import './style.css';
 
-const styles = {
-  h2: {
-    fontFamily: 'Arial',
-    fontSize: '21px',
-    color: '#474747',
-    fontWeight: 'bold',
-  },
-};
+const Title = styled.h2`
+  font-size: 21px;
+  font-family: Arial;
+  font-weight: bold;
+  color: #474747;
+`;
 
-class MainContainer extends Component {
+class InteractionMonitoring extends Component {
   constructor() {
     super();
     this.state = {
@@ -63,7 +61,7 @@ class MainContainer extends Component {
 
     return (
       <div>
-        <h2 style={styles.h2}>Interaction Monitoring</h2>
+        <Title >Interaction Monitoring</Title>
         <ReactTable
           defaultPageSize={20}
           className="-striped -highlight" data={data}
@@ -133,4 +131,4 @@ class MainContainer extends Component {
   }
 }
 
-export default Radium(MainContainer);
+export default InteractionMonitoring;

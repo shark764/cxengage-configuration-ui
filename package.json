@@ -12,17 +12,17 @@
   "author": "serenova",
   "license": "ISC",
   "dependencies": {
-    "cx-ui-components": "git+ssh://git@github.com/liveops/cx-ui-components.git#master",
+    "cx-ui-components": "git+ssh://git@github.com/liveops/cx-ui-components.git#0.0.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-table": "^6.7.6",
     "rx-dom-ajax": "^7.0.3",
-    "rxjs": "^5.5.6"
+    "rxjs": "^5.5.6",
+    "styled-components": "^3.1.4"
   },
   "devDependencies": {
-    "radium": "^0.21.1",
     "random-questions": "^1.0.1",
     "webpack": "^3.10.0"
   }
