@@ -12,8 +12,10 @@
   "author": "serenova",
   "license": "ISC",
   "dependencies": {
+    "cx-ui-components": "git+ssh://git@github.com/liveops/cx-ui-components.git#master",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-table": "^6.7.6",
     "rx-dom-ajax": "^7.0.3",
