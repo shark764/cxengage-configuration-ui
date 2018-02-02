@@ -101,15 +101,15 @@ class SilentMonitoringToolbar extends Component {
         }
       } else if (event.data.module === 'monitorCall') {
         this.setState({ silentMonitoring: event.data.data });
-      } else if (event.data.module === 'angularIsReady') {
-        window.parent.postMessage({ module: 'subscribe', command: 'cxengage/session/extension-list' }, '*');
-        window.parent.postMessage({ module: 'subscribe', command: 'cxengage/twilio/device-ready' }, '*');
-        window.parent.postMessage({ module: 'subscribe', command: 'cxengage/session/state-change-request-acknowledged' }, '*');
-        window.parent.postMessage({ module: 'subscribe', command: 'cxengage/interactions/voice/silent-monitor-start' }, '*');
-        window.parent.postMessage({ module: 'subscribe', command: 'cxengage/interactions/voice/silent-monitor-end' }, '*');
-        window.parent.postMessage({ module: 'subscribe', command: 'cxengage/session/sqs-shut-down' }, '*');
       }
     }, false);
+
+    window.parent.postMessage({ module: 'subscribe', command: 'cxengage/session/extension-list' }, '*');
+    window.parent.postMessage({ module: 'subscribe', command: 'cxengage/twilio/device-ready' }, '*');
+    window.parent.postMessage({ module: 'subscribe', command: 'cxengage/session/state-change-request-acknowledged' }, '*');
+    window.parent.postMessage({ module: 'subscribe', command: 'cxengage/interactions/voice/silent-monitor-start' }, '*');
+    window.parent.postMessage({ module: 'subscribe', command: 'cxengage/interactions/voice/silent-monitor-end' }, '*');
+    window.parent.postMessage({ module: 'subscribe', command: 'cxengage/session/sqs-shut-down' }, '*');
   }
 
   silentMonitor = () => {
