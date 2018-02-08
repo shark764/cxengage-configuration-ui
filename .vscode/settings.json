@@ -1,0 +1,4 @@
+{
+  "editor.formatOnSave": true,
+  "jest.pathToJest": "node_modules/jest/bin/jest.js"
+}

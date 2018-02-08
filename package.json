@@ -3,27 +3,58 @@
   "version": "0.0.0",
   "description": "CxEngage Configuration and Reporting",
   "main": "./release/bundle.js",
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --coverage --env=jsdom",
+    "test:update": "react-scripts test --coverage --env=jsdom --updateSnapshot",
+    "eject": "react-scripts eject",
+    "precommit": "lint-staged"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/containers/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/"
+    ]
   },
   "author": "serenova",
   "license": "ISC",
   "dependencies": {
     "cx-ui-components": "git+ssh://git@github.com/liveops/cx-ui-components.git#0.0.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "husky": "^0.14.3",
+    "immutable": "^3.8.2",
+    "lint-staged": "^6.1.0",
+    "moment": "^2.20.1",
+    "prettier": "^1.10.2",
     "react": "^16.2.0",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.2.0",
+    "react-intl": "^2.4.0",
+    "react-moment": "^0.7.0",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-table": "^6.7.6",
+    "react-test-renderer": "^16.2.0",
+    "redux": "^3.7.2",
+    "redux-immutable": "^4.0.0",
+    "reselect": "^3.0.1",
     "rx-dom-ajax": "^7.0.3",
     "rxjs": "^5.5.6",
     "styled-components": "^3.1.4"
   },
   "devDependencies": {
+    "prop-types": "^15.6.0",
     "random-questions": "^1.0.1",
+    "react-test-renderer": "^16.2.0",
     "webpack": "^3.10.0"
   }
 }

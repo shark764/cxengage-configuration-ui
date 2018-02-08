@@ -1,4 +1,5 @@
 # cxengage-configuration-ui
+
 CxEngage Configuration and Reporting
 
 `npm install` to get your dependencies
@@ -9,52 +10,11 @@ CxEngage Configuration and Reporting
 
 `npm t` runs the tests which are comming soon
 
+[VsCode](https://code.visualstudio.com/download)
 
+Settings are confingured for you in .vscode > settings.json
 
-Transition/Migration info
-
-In Angular config-ui add a script to the bottom of the page
-
-```
-
-<script type="text/javascript">
-      window.addEventListener('message',function(event) {
-        console.warn('Parent window received a message:  ' + event.data,event);
-        event.source.postMessage({
-          sdkState: CxEngage.dumpState(), 
-          token: localStorage.getItem('LIVEOPS-SESSION-KEY'),
-          prefrence: localStorage.getItem('LIVEOPS-PREFRENCE-KEY'),
-        },'http://127.0.0.1:8080');
-      },false);
-    </script>
-
-```
-NOTE: if the script ^^ caused gulp --watch to not work , you can comment out the watch functions in the gulp watch.js until we have a better solution
-
-
-
-You would also need an iframe where your angular page would be so silentMonitoring.html:
-```
-<div id="main-content">
-  <div id="table-pane">
-
-    <iframe src="http://127.0.0.1:8080" width="100%" height="99%" scrolling="no" style="overflow:hidden;"></iframe>
-
-    <!-- <table-controls
-      config="tableConfig"
-      items="interactions"
-      greater-or-less-than="greaterOrLessThan"
-      search-query="searchQuery">
-    </table-controls>
-
-    <lo-resource-table
-      config="tableConfig"
-      items="interactions"
-      selected="selectedInteraction"
-      greater-or-less-than="greaterOrLessThan"
-      search-query="searchQuery">
-    </lo-resource-table> -->
-  </div>
-</div>
-
-```
+Install these Extensions:
+Debugger for Chrome (Settings are inclued in this repo. Hit F5 and start debugging in your editor)
+ESLint (Show linter errors in the editor)
+Prettier-Code formatter (formats on file save)
