@@ -1,10 +1,13 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CxEngage Configuration and Reporting",
   "main": "./release/bundle.js",
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,8 +26,7 @@
   "author": "serenova",
   "license": "ISC",
   "dependencies": {
-    "cx-ui-components":
-      "git+ssh://git@github.com/liveops/cx-ui-components.git#0.0.2",
+    "cx-ui-components": "0.0.6",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "husky": "^0.14.3",
@@ -41,7 +43,6 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-table": "^6.7.6",
-    "react-test-renderer": "^16.2.0",
     "redux": "^3.7.2",
     "redux-immutable": "^4.0.0",
     "reselect": "^3.0.1",
