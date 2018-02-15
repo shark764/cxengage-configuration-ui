@@ -1,30 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { selectSupervisorToolbar } from './selectors';
+// import PropTypes from "prop-types";
+import {
+  selectSupervisorToolbarMuted,
+  selectSupervisorToolbarTwilioEnabled,
+  selectSupervisorToolbarTwilioIsDefaultExtension,
+  selectSupervisorToolbarSilentMonitoringStatus,
+  selectSupervisorToolbarSilentMonitoringInteractionId
+} from './selectors';
 import { MutedIconSVG, UnMutedIconSVG, HangUpIconSVG } from 'cx-ui-components';
-import { setTwilioEnabled } from './actions';
-
-const BottomBar = styled.h2`
-  position: fixed;
-  bottom: 0px;
-`;
+import {
+  toggleTwilioEnabled,
+  toggleTwilioIsDefaultExtension,
+  setSilentMonitoringStatus,
+  toggleMute,
+  setSilentMonitoringInteractionId
+} from './actions';
 
 class SupervisorToolbar extends Component {
-  constructor() {
-    super();
-    this.state = {
-      twilioEnabled: false,
-      silentMonitoring: {},
-      muted: false
-    };
-  }
-
   componentDidMount() {
     window.addEventListener(
       'message',
       event => {
+        // console.log("SupervisorToolbar recieved a message", event);
         if (event.data.type === 'webpackOk') {
           return;
         } else if (event.data.subscription !== undefined) {
@@ -39,23 +37,18 @@ class SupervisorToolbar extends Component {
               case 'cxengage/session/extension-list': {
                 if (response.extensions && response.extensions.length) {
                   const defaultExtension = response.extensions[0];
-                  this.setState({
-                    defaultExtensionIsTwilio:
-                      defaultExtension.type === 'webrtc' &&
-                      defaultExtension.provider === 'twilio'
-                  });
+                  defaultExtension.type === 'webrtc' &&
+                    defaultExtension.provider === 'twilio' &&
+                    this.props.toggleTwilioIsDefaultExtension();
                 } else {
                   console.error('No extensions to use for silent monitoring');
                 }
                 break;
               }
               case 'cxengage/twilio/device-ready': {
-                if (!this.state.twilioEnabled) {
-                  this.setState({ twilioEnabled: true });
-                  if (
-                    this.state.silentMonitoring &&
-                    this.state.silentMonitoring.status === 'startingTwilio'
-                  ) {
+                if (!this.props.twilioEnabled) {
+                  this.props.toggleTwilioEnabled();
+                  if (this.props.monitoringStatus === 'startingTwilio') {
                     this.silentMonitor();
                   }
                 }
@@ -63,19 +56,14 @@ class SupervisorToolbar extends Component {
               }
               case 'cxengage/session/state-change-request-acknowledged': {
                 if (response.state === 'notready') {
-                  if (this.state.silentMonitoring) {
-                    if (this.state.defaultExtensionIsTwilio === true) {
-                      if (this.state.twilioEnabled) {
+                  if (this.props.monitoringStatus !== 'offline') {
+                    if (this.props.twilioIsDefault) {
+                      if (this.props.twilioEnabled) {
                         this.silentMonitor();
                       } else {
-                        this.setState({
-                          silentMonitoring: Object.assign(
-                            this.state.silentMonitoring,
-                            { status: 'startingTwilio' }
-                          )
-                        });
+                        this.props.setSilentMonitoringStatus('startingTwilio');
                       }
-                    } else if (this.state.defaultExtensionIsTwilio === false) {
+                    } else if (!this.props.twilioIsDefault) {
                       this.silentMonitor();
                     } else {
                       console.error(
@@ -91,19 +79,11 @@ class SupervisorToolbar extends Component {
                 break;
               }
               case 'cxengage/interactions/voice/silent-monitor-start': {
-                this.setState({
-                  silentMonitoring: Object.assign(this.state.silentMonitoring, {
-                    status: 'connected'
-                  })
-                });
+                this.props.setSilentMonitoringStatus('connected');
                 break;
               }
               case 'cxengage/interactions/voice/silent-monitor-end': {
-                this.setState({
-                  silentMonitoring: Object.assign(this.state.silentMonitoring, {
-                    status: 'endingSession'
-                  })
-                });
+                this.props.setSilentMonitoringStatus('endingSession');
                 window.parent.postMessage(
                   {
                     module: 'authentication',
@@ -115,7 +95,7 @@ class SupervisorToolbar extends Component {
                 break;
               }
               case 'cxengage/session/sqs-shut-down': {
-                this.setState({ silentMonitoring: {} });
+                this.props.setSilentMonitoringStatus('offline');
                 break;
               }
               default: {
@@ -124,7 +104,11 @@ class SupervisorToolbar extends Component {
             }
           }
         } else if (event.data.module === 'monitorCall') {
-          this.setState({ silentMonitoring: event.data.data });
+          console.warn(event.data.data.interactionId);
+          this.props.setSilentMonitoringStatus(event.data.data.status);
+          this.props.setSilentMonitoringInteractionId(
+            event.data.data.interactionId
+          );
         } else if (event.data.module === 'angularIsReady') {
           window.parent.postMessage(
             { module: 'subscribe', command: 'cxengage/session/extension-list' },
@@ -159,45 +143,25 @@ class SupervisorToolbar extends Component {
             { module: 'subscribe', command: 'cxengage/session/sqs-shut-down' },
             '*'
           );
-        } else if (event.data.module === 'monitorCall') {
-          this.setState({ silentMonitoring: event.data.data });
         }
       },
       false
     );
 
-    window.parent.postMessage(
-      { module: 'subscribe', command: 'cxengage/session/extension-list' },
-      '*'
-    );
-    window.parent.postMessage(
-      { module: 'subscribe', command: 'cxengage/twilio/device-ready' },
-      '*'
-    );
-    window.parent.postMessage(
-      {
-        module: 'subscribe',
-        command: 'cxengage/session/state-change-request-acknowledged'
-      },
-      '*'
-    );
-    window.parent.postMessage(
-      {
-        module: 'subscribe',
-        command: 'cxengage/interactions/voice/silent-monitor-start'
-      },
-      '*'
-    );
-    window.parent.postMessage(
-      {
-        module: 'subscribe',
-        command: 'cxengage/interactions/voice/silent-monitor-end'
-      },
-      '*'
-    );
-    window.parent.postMessage(
-      { module: 'subscribe', command: 'cxengage/session/sqs-shut-down' },
-      '*'
+    // Start subscriptions this container requires
+    const subscriptions = [
+      'session/extension-list',
+      'twilio/device-ready',
+      'session/state-change-request-acknowledged',
+      'interactions/voice/silent-monitor-start',
+      'interactions/voice/silent-monitor-end',
+      'session/sqs-shut-down'
+    ];
+    subscriptions.forEach(sub =>
+      window.parent.postMessage(
+        { module: 'subscribe', command: `cxengage/${sub}` },
+        '*'
+      )
     );
   }
 
@@ -206,59 +170,59 @@ class SupervisorToolbar extends Component {
       {
         module: 'interactions.voice',
         command: 'silentMonitor',
-        data: { interactionId: this.state.silentMonitoring.interactionId }
+        data: { interactionId: this.props.interactionId }
       },
       '*'
     );
-    this.setState({
-      silentMonitoring: Object.assign(this.state.silentMonitoring, {
-        status: 'connectingToInteraction'
-      })
-    });
+    this.props.setSilentMonitoringStatus('connectingToInteraction');
   };
 
   hangUp = () => {
-    if (this.state.silentMonitoring !== undefined) {
+    if (this.props.monitoringStatus === 'connected') {
       window.parent.postMessage(
         {
           module: 'interactions.voice',
           command: 'resourceRemove',
-          data: { interactionId: this.state.silentMonitoring.interactionId }
+          data: { interactionId: this.props.interactionId }
         },
-        'http://localhost:3001'
+        '*'
       );
     }
   };
 
   toggleMute = () => {
-    this.setState({ muted: !this.state.muted });
-    console.log('TODO: flow work needs to be completed for this to work');
-    // if (this.state.silentMonitoring !== undefined) {
-    //   window.parent.postMessage({
-    //     module: 'interactions.voice',
-    //     command: 'resourceMute',
-    //     data: { interactionId: this.state.silentMonitoring.interactionId },
-    //   }, 'http://localhost:3001');
-    // }
+    if (this.props.monitoringStatus === 'connected' && !this.props.muted) {
+      window.parent.postMessage(
+        {
+          module: 'interactions.voice',
+          command: 'mute',
+          data: { interactionId: this.props.interactionId }
+        },
+        '*'
+      );
+    } else if (
+      this.props.monitoringStatus === 'connected' &&
+      this.props.muted
+    ) {
+      window.parent.postMessage(
+        {
+          module: 'interactions.voice',
+          command: 'unmute',
+          data: { interactionId: this.props.interactionId }
+        },
+        '*'
+      );
+    }
   };
 
   render() {
     return (
       <div id="SupervisorToolbar">
-        <button
-          onClick={() => {
-            this.props.setTwilioEnabled();
-            console.log(window.store.getState().toJS());
-            console.log(this.props.twilioEnabled);
-          }}
-        >
-          Don't click this{' '}
-        </button>
-        {this.state.silentMonitoring.status !== undefined && (
-          <BottomBar>
+        {this.props.monitoringStatus !== 'offline' && (
+          <div style={{ position: 'fixed', bottom: '0px' }}>
             <HangUpIconSVG
               onClick={this.hangUp}
-              loading={this.state.silentMonitoring.status !== 'connected'}
+              loading={this.props.monitoringStatus !== 'connected'}
               width="40px"
               style={{
                 display: 'inline-block',
@@ -267,8 +231,8 @@ class SupervisorToolbar extends Component {
                 marginLeft: '10px'
               }}
             />
-            {this.state.silentMonitoring.status === 'connected' &&
-              (this.state.muted ? (
+            {this.props.monitoringStatus === 'connected' &&
+              (this.props.muted ? (
                 <UnMutedIconSVG
                   onClick={this.toggleMute}
                   width="40px"
@@ -281,7 +245,7 @@ class SupervisorToolbar extends Component {
                   style={{ display: 'inline-block', width: '40px' }}
                 />
               ))}
-          </BottomBar>
+          </div>
         )}
       </div>
     );
@@ -289,18 +253,39 @@ class SupervisorToolbar extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  twilioEnabled: selectSupervisorToolbar(state, props).get('twilioEnabled')
+  muted: selectSupervisorToolbarMuted(state, props),
+  twilioEnabled: selectSupervisorToolbarTwilioEnabled(state, props),
+  twilioIsDefault: selectSupervisorToolbarTwilioIsDefaultExtension(
+    state,
+    props
+  ),
+  monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props),
+  interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(
+    state,
+    props
+  )
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    setTwilioEnabled: () => dispatch(setTwilioEnabled()),
+    toggleTwilioEnabled: () => dispatch(toggleTwilioEnabled()),
+    toggleTwilioIsDefaultExtension: () =>
+      dispatch(toggleTwilioIsDefaultExtension()),
+    setSilentMonitoringStatus: status =>
+      dispatch(setSilentMonitoringStatus(status)),
+    toggleMute: () => dispatch(toggleMute()),
+    setSilentMonitoringInteractionId: interactionId =>
+      dispatch(setSilentMonitoringInteractionId(interactionId)),
     dispatch
   };
 }
 
 SupervisorToolbar.propTypes = {
-  setTwilioEnabled: PropTypes.func.isRequired
+  // muted: PropTypes.bool.isRequired
+  // twilioEnabled: PropTypes.bool.isRequired,
+  // twilioIsDefault: PropTypes.bool.isRequired,
+  // monitoringStatus: PropTypes.string.isRequired,
+  // interactionId: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SupervisorToolbar);

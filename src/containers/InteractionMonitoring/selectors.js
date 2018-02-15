@@ -11,7 +11,7 @@ export const selectInteractionMonitoring = createSelector(
 export const selectInteractionMonitoringTableData = createSelector(
   selectInteractionMonitoringMap,
   subState => {
-    console.log(subState.toJS());
+    // console.log(subState.toJS());
     return subState.toJS();
   }
   // // console.log(subState.get("tableData").size);

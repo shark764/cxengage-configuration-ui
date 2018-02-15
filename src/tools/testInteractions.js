@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 function guid() {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
@@ -20,15 +22,15 @@ function exampleDuration() {
   let randomTime = secondsMinutesHours[Math.floor(Math.random() * 3 + 1) - 1];
   return randomTime;
 }
-function exampleStartTime() {
-  const timesArray = [
-    '2018-01-24T13:22:59.054Z',
-    '2018-01-24T14:54:59.054Z',
-    '2018-01-24T16:05:59.054Z'
-  ];
-  let randomDate = timesArray[Math.floor(Math.random() * 3 + 1) - 1];
-  return randomDate;
-}
+// function exampleStartTime() {
+//   const timesArray = [
+//     "2018-01-24T13:22:59.054Z",
+//     "2018-03-24T14:54:59.054Z",
+//     "2018-03-09T02:05:47.162Z"
+//   ];
+//   let randomDate = timesArray[Math.floor(Math.random() * 3 + 1) - 1];
+//   return randomDate;
+// }
 
 export function makeFakeInteraction() {
   return {
@@ -38,7 +40,9 @@ export function makeFakeInteraction() {
     contactPoint: randomPhoneNumber(),
     flowName: Math.floor(Math.random() * 10 + 1) > 4 ? 'Sales' : 'Support',
     direction: Math.floor(Math.random() * 10 + 1) > 4 ? 'inbound' : 'outbound',
-    startTimestamp: exampleStartTime(),
-    currentStateDuration: exampleDuration()
+    startTimestamp: moment(),
+    currentStateDuration: exampleDuration(),
+    channelType: 'voice',
+    state: 'in-conversation'
   };
 }
