@@ -36,3 +36,10 @@ export const areAllNotActive = createSelector(
 export const selectTimeFormat = createSelector(selectColumnsMenuMap, subState =>
   subState.get('twelveHourFormat')
 );
+
+export const selectGroups = createSelector(selectColumnsMenuMap, subState =>
+  subState.get('groups')
+);
+export const selectSkills = createSelector(selectColumnsMenuMap, subState =>
+  subState.get('skills')
+);

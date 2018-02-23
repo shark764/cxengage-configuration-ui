@@ -17,8 +17,12 @@ const initialState = fromJS({
     { name: 'Start Date', active: false },
     { name: 'StartTime', active: true },
     { name: 'ElapsedTime', active: true },
-    { name: 'Actions', active: true }
-  ]
+    { name: 'Monitoring', active: true },
+    { name: 'Groups', active: false },
+    { name: 'Skills', active: false }
+  ],
+  groups: [],
+  skills: []
 });
 
 function updateInteractionMonitoringColumnsLocalStorage(state) {
@@ -30,6 +34,14 @@ function updateInteractionMonitoringColumnsLocalStorage(state) {
 
 function ColumnsMenu(state = initialState, action) {
   switch (action.type) {
+    case ACTIONS.SET_GROUPS_DATA:
+      console.log('set groups?', action.arrayOfGroupsData);
+
+      return state.set('groups', fromJS(action.arrayOfGroupData));
+    case ACTIONS.SET_SKILLS_DATA:
+      console.log('set skills?', action.arrayOfSkillsData);
+
+      return state.set('skills', fromJS(action.arrayOfSkillData));
     case ACTIONS.TOGGLE_INVERSE_COLUMNS:
       const newState1 = state.update('columns', columns =>
         columns.map(column => column.set('active', !column.get('active')))

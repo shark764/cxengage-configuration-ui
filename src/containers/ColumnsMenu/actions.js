@@ -6,7 +6,18 @@ export function toggleColumn(columnName) {
     columnName
   };
 }
-
+export function updateGroupsData(arrayOfGroupData) {
+  return {
+    type: ACTIONS.SET_GROUPS_DATA,
+    arrayOfGroupData
+  };
+}
+export function updateSkillsData(arrayOfSkillData) {
+  return {
+    type: ACTIONS.SET_SKILLS_DATA,
+    arrayOfSkillData
+  };
+}
 export function toggleAllColumnsOn() {
   return {
     type: ACTIONS.TOGGLE_ALL_COLUMNS_ON

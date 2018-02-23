@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from "prop-types";
 
-import { selectColumnsMenuColumns, areAllActive } from './selectors';
+import { selectSkills } from '../ColumnsMenu/selectors';
 import {
   toggleAllColumnsOn,
   toggleAllColumnsOff,
   toggleColumn,
   toggleAllInverseColumns
-} from './actions';
+} from '../ColumnsMenu/actions';
 
 import CheckboxMenu from '../../components/checkboxMenu.js';
 
@@ -16,8 +16,8 @@ class ColumnsMenu extends React.Component {
   render() {
     return (
       <CheckboxMenu
-        items={this.props.columns}
-        buttonText="Columns"
+        items={this.props.skills}
+        buttonText="Skills"
         style={this.props.style}
         toggleAllOn={this.props.toggleAllColumnsOn}
         toggleAllOff={this.props.toggleAllColumnsOff}
@@ -30,8 +30,8 @@ class ColumnsMenu extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  columns: selectColumnsMenuColumns(state, props),
-  allActive: areAllActive(state, props)
+  skills: selectSkills(state, props)
+  // allActive: areAllActive(state, props)
 });
 
 function mapDispatchToProps(dispatch) {
@@ -44,13 +44,13 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-ColumnsMenu.propTypes = {
-  columns: PropTypes.object.isRequired,
-  allActive: PropTypes.bool.isRequired,
-  toggleColumn: PropTypes.func.isRequired,
-  toggleAllColumnsOn: PropTypes.func.isRequired,
-  toggleAllColumnsOff: PropTypes.func.isRequired,
-  toggleAllInverseColumns: PropTypes.func.isRequired
-};
+// ColumnsMenu.propTypes = {
+//   columns: PropTypes.object.isRequired,
+//   allActive: PropTypes.bool.isRequired,
+//   toggleColumn: PropTypes.func.isRequired,
+//   toggleAllColumnsOn: PropTypes.func.isRequired,
+//   toggleAllColumnsOff: PropTypes.func.isRequired,
+//   toggleAllInverseColumns: PropTypes.func.isRequired
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColumnsMenu);

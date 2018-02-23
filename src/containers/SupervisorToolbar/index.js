@@ -200,6 +200,7 @@ class SupervisorToolbar extends Component {
         },
         '*'
       );
+      this.props.toggleMute();
     } else if (
       this.props.monitoringStatus === 'connected' &&
       this.props.muted
@@ -212,6 +213,7 @@ class SupervisorToolbar extends Component {
         },
         '*'
       );
+      this.props.toggleMute();
     }
   };
 
@@ -233,13 +235,13 @@ class SupervisorToolbar extends Component {
             />
             {this.props.monitoringStatus === 'connected' &&
               (this.props.muted ? (
-                <UnMutedIconSVG
+                <MutedIconSVG
                   onClick={this.toggleMute}
                   width="40px"
                   style={{ display: 'inline-block', width: '40px' }}
                 />
               ) : (
-                <MutedIconSVG
+                <UnMutedIconSVG
                   onClick={this.toggleMute}
                   width="40px"
                   style={{ display: 'inline-block', width: '40px' }}

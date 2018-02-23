@@ -8,15 +8,33 @@ import {
   selectTimeFormat
 } from '../ColumnsMenu/selectors';
 import { toggleTimeFormat } from '../ColumnsMenu/actions';
+import {
+  updateTableData,
+  setExpanded,
+  setSorted,
+  setSelected,
+  setFiltered,
+  removeSelected
+} from './actions';
+import { updateSkillsData, updateGroupsData } from '../ColumnsMenu/actions';
 import moment from 'moment';
-import { makeFakeInteraction } from '../../tools/testInteractions.js';
+import { fakeInteractions } from '../../tools/testInteractions.js';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import ColumnsMenu from '../ColumnsMenu';
+import GroupsMenu from '../GroupsMenu';
+import SkillsMenu from '../SkillsMenu';
 import { Button } from 'cx-ui-components';
 
 import ReactTable from 'react-table';
 import './style.css';
+import {
+  selectInteractionMonitoringTableData,
+  selectInteractionMonitoringSorted,
+  selectInteractionMonitoringFiltered,
+  selectInteractionMonitoringExpanded,
+  selectInteractionMonitoringSelected
+} from './selectors';
 
 const Title = styled.h2`
   padding: 20px;
@@ -32,6 +50,8 @@ const TableButton = styled.div`
   color: #656565c9;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: inline-block;
+  margin-left: 5px;
 `;
 
 const ConfirmationModal = styled.div`
@@ -64,23 +84,69 @@ const BlueQuestionMark = styled.div`
   margin: 10px;
 `;
 
+const InteractionDetailsHeader = styled.h4`
+  color: grey;
+  border-bottom: 1px solid #8080802e;
+  max-width: 50%;
+  margin-top: 25px;
+`;
+const GreenStatus = styled.b`
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #00800091;
+  display: inline-block;
+  margin-right: 20px;
+`;
+const GreyStatus = styled.b`
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #8080805c;
+  display: inline-block;
+  margin-right: 20px;
+`;
+const GreenStatusIcon = styled.div`
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  margin: 0px 3px;
+  color: white;
+  border-radius: 50%;
+  background: #00800091;
+  display: inline-block;
+`;
+const GreyStatusIcon = styled.div`
+  width: 20px;
+  height: 20px;
+  margin: 0px 3px;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  background: #8080805c;
+  display: inline-block;
+`;
+const Info = styled.div`
+  font-size: 11pt;
+  margin-top: 8px;
+`;
+
+const Duration = styled.p`
+  margin: 7px 5px 12px 40px;
+  font-size: 11pt;
+`;
+
 class InteractionMonitoring extends Component {
   constructor() {
     super();
     this.componentCleanup = this.componentCleanup.bind(this);
     this.state = {
-      clipboardValue: '',
-      copied: false,
-      data: [],
-      sorted: [],
-      page: 0,
-      pageSize: 10,
-      expanded: {},
-      resized: [],
-      filtered: [],
-      selected: null,
       confirmEnd: false,
-      demo: true
+      filtered:
+        JSON.parse(
+          window.localStorage.getItem('interactionMonitoringFilters')
+        ) || [],
+      demo: false
     };
   }
   componentCleanup() {
@@ -97,18 +163,12 @@ class InteractionMonitoring extends Component {
 
   componentWillMount() {
     if (this.state.demo) {
-      let fakeInteractionArray = this.state.data;
-      // fakeInteractionArray.push(makeFakeInteraction());
-      // fakeInteractionArray.push(makeFakeInteraction());
-      // fakeInteractionArray.push(makeFakeInteraction());
-      // fakeInteractionArray.push(makeFakeInteraction());
-      // fakeInteractionArray.push(makeFakeInteraction());
-      this.setState({ data: fakeInteractionArray });
-      setInterval(() => {
-        let fakeInteractionArray = this.state.data;
-        fakeInteractionArray.push(makeFakeInteraction());
-        this.setState({ data: fakeInteractionArray });
-      }, 2000);
+      // setInterval(() => {
+      //   let fakeInteractionArray = this.props.tableData.toJS();
+      //   fakeInteractionArray.push(makeFakeInteraction());
+      //   this.props.updateTableData(fakeInteractionArray);
+      // }, 2000);
+      this.props.updateTableData(fakeInteractions);
     }
 
     window.parent.postMessage(
@@ -120,20 +180,46 @@ class InteractionMonitoring extends Component {
     );
     window.parent.postMessage(
       {
-        module: 'reporting',
-        command: 'addStatSubscription',
-        data: { statistic: 'interactions-in-conversation-list' }
+        module: 'subscribe',
+        command: 'cxengage/reporting/get-skills-response'
       },
       '*'
     );
+    window.parent.postMessage(
+      {
+        module: 'subscribe',
+        command: 'cxengage/reporting/get-groups-response'
+      },
+      '*'
+    );
+    window.parent.postMessage(
+      {
+        module: 'subscribe',
+        command: 'cxengage/reporting/batch-response'
+      },
+      '*'
+    );
+    window.parent.postMessage(
+      {
+        module: 'reporting',
+        command: 'getGroups',
+        data: {}
+      },
+      '*'
+    );
+    window.parent.postMessage(
+      {
+        module: 'reporting',
+        command: 'getSkills',
+        data: {}
+      },
+      '*'
+    );
+    this.getAllActiveInteractions();
 
     window.addEventListener(
       'message',
       event => {
-        // console.log(
-        //   "A secondary iFrame recieved a response from parent window",
-        //   event.data
-        // );
         if (event.data.type === 'webpackOk') {
           return;
         } else if (event.data.subscription !== undefined) {
@@ -146,35 +232,40 @@ class InteractionMonitoring extends Component {
           } else {
             switch (topic) {
               case 'cxengage/reporting/batch-response': {
-                // console.log(
-                //   response.interactionsInConversationList.body.results
-                //     .interactions
-                // );
-                // let fakeInteractionArray = this.state.data;
-                // response.interactionsInConversationList.body.results.interactions.forEach(
-                //   interaction => fakeInteractionArray.push(interaction)
-                // );
-
-                // fakeInteractionArray.push(
-                //   response.interactionsInConversationList.body.results
-                //     .interactions
-                // );
-                if (this.state.demo) {
-                  this.setState(
-                    Object.assign(
-                      this.state.data,
-                      response.interactionsInConversationList.body.results
-                        .interactions
-                    )
+                if (!this.state.demo) {
+                  this.props.updateTableData(
+                    response.interactionsInConversationList.body.results
+                      .interactions
                   );
-                } else {
-                  this.setState({
-                    data:
-                      response.interactionsInConversationList.body.results
-                        .interactions
-                  });
                 }
+                break;
+              }
+              case 'cxengage/reporting/get-groups-response': {
+                console.log('hello? this getting called?');
 
+                let groups = [];
+                response.result.forEach(group => {
+                  groups.push({
+                    name: group.name,
+                    groupId: group.id,
+                    active: true
+                  });
+                });
+                this.props.updateGroupsData(groups);
+                break;
+              }
+              case 'cxengage/reporting/get-skills-response': {
+                console.log('how bout this one?');
+
+                let skills = [];
+                response.result.forEach(skill => {
+                  skills.push({
+                    name: skill.name,
+                    groupId: skill.id,
+                    active: true
+                  });
+                });
+                this.props.updateSkillsData(skills);
                 break;
               }
               default: {
@@ -183,19 +274,6 @@ class InteractionMonitoring extends Component {
               }
             }
           }
-        } else if (event.data.module === 'monitorCall') {
-          // this.setState({ silentMonitoring: event.data.data });
-        } else if (event.data.statId) {
-          console.log(event.data.statId);
-          this.setState({ statId: event.data.statId });
-        } else if (event.data.module === 'angularIsReady') {
-          window.parent.postMessage(
-            {
-              module: 'subscribe',
-              command: 'cxengage/reporting/batch-response'
-            },
-            '*'
-          );
         }
       },
       false
@@ -217,9 +295,17 @@ class InteractionMonitoring extends Component {
       '*'
     );
   }
+  getAllActiveInteractions() {
+    window.parent.postMessage(
+      {
+        module: 'reporting',
+        command: 'addStatSubscription',
+        data: { statistic: 'interactions-in-conversation-list' }
+      },
+      '*'
+    );
+  }
   render() {
-    const { data } = this.state;
-
     return (
       <div>
         <Title>Interaction Monitoring</Title>
@@ -236,12 +322,27 @@ class InteractionMonitoring extends Component {
               marginRight: '20px'
             }}
           />
+
           <Button
             id="timeConversion"
             type="secondary"
             onClick={() => this.props.toggleTimeFormat()}
             inner={this.props.TweleveHourFormat ? '12h' : '24h'}
             style={{ marginRight: '20px', float: 'right' }}
+          />
+          <GroupsMenu
+            style={{
+              position: 'relative',
+              float: 'right',
+              marginRight: '20px'
+            }}
+          />
+          <SkillsMenu
+            style={{
+              position: 'relative',
+              float: 'right',
+              marginRight: '20px'
+            }}
           />
         </div>
         {this.state.confirmEnd && (
@@ -287,7 +388,7 @@ class InteractionMonitoring extends Component {
             style={{ filter: `blur(${this.state.confirmEnd ? 6 : 0}px)` }}
             defaultPageSize={20}
             className="-striped -highlight"
-            data={data}
+            data={this.props.tableData.toJS()}
             filterable
             defaultFilterMethod={(filter, row) =>
               String(row[filter.id])
@@ -295,18 +396,52 @@ class InteractionMonitoring extends Component {
                 .indexOf(filter.value.toLowerCase()) > -1
             }
             filtered={this.state.filtered}
-            onFilteredChange={filtered => this.setState({ filtered })}
+            onFilteredChange={filtered => {
+              this.setState({ filtered: filtered });
+              const groupFilterIndex = filtered.findIndex(
+                filter => filter.id === 'groups'
+              );
+              const skillFilterIndex = filtered.findIndex(
+                filter => filter.id === 'skills'
+              );
+              if (groupFilterIndex !== -1 && skillFilterIndex !== -1) {
+                window.localStorage.setItem(
+                  'interactionMonitoringFilters',
+                  JSON.stringify([
+                    filtered[groupFilterIndex],
+                    filtered[skillFilterIndex]
+                  ])
+                );
+              } else if (groupFilterIndex !== -1) {
+                window.localStorage.setItem(
+                  'interactionMonitoringFilters',
+                  JSON.stringify([filtered[groupFilterIndex]])
+                );
+              } else if (skillFilterIndex !== -1) {
+                window.localStorage.setItem(
+                  'interactionMonitoringFilters',
+                  JSON.stringify([filtered[skillFilterIndex]])
+                );
+              }
+            }}
+            expanded={this.props.expanded}
+            sorted={this.props.sorted}
+            onSortedChange={sorted => this.props.setSorted(sorted)}
             getTrProps={(state, rowInfo, column) => {
               if (rowInfo) {
                 return {
                   onClick: e => {
-                    this.setState({
-                      selected: rowInfo.row.interactionId
-                    });
+                    if (this.props.selected === rowInfo.row.interactionId) {
+                      this.props.removeSelected();
+                    } else {
+                      this.props.setSelected(rowInfo.row.interactionId, {
+                        [rowInfo.viewIndex]: rowInfo.row.interactionId
+                      });
+                    }
                   },
                   style: {
                     background:
-                      rowInfo.row.interactionId === this.state.selected
+                      rowInfo.row.interactionId === this.props.selected
                         ? 'rgba(253, 255, 50, 0.17)'
                         : null
                   }
@@ -315,6 +450,115 @@ class InteractionMonitoring extends Component {
                 return { style: {} };
               }
             }}
+            SubComponent={row => {
+              console.log(row);
+              const startTime = this.props.TweleveHourFormat
+                ? moment.unix(row.row.startTimestamp).format('h:mm a')
+                : moment.unix(row.row.startTimestamp).format('k:mm');
+              const startDate = moment
+                .unix(row.row.startTimestamp)
+                .format('dddd, MMMM Do YYYY');
+              const activeParticipantsArray = row.row.agentName.split(', ');
+              activeParticipantsArray.pop();
+              const lastParticipant = activeParticipantsArray.pop();
+
+              return (
+                <div style={{ padding: '20px 80px' }}>
+                  <InteractionDetailsHeader>
+                    Interactions Details
+                  </InteractionDetailsHeader>
+                  <Info>
+                    {row.row.direction === 'inbound'
+                      ? `Inbound ${row.row.channel} interaction from ${
+                          row.row.customer
+                        } started at ${startTime} on ${startDate}.`
+                      : `Outbound ${row.row.channel} interaction to ${
+                          row.row.customer
+                        } started at ${startTime} on ${startDate}.`}
+                    {/* ${row.row.channel} interaction started`} */}
+                  </Info>
+                  <Info>
+                    {row.row.direction === 'inbound'
+                      ? `Customer reached ${
+                          row.row.contactPoint
+                        } and was directed through the ${
+                          row.row.flowName
+                        } flow.`
+                      : null}
+                  </Info>
+                  <InteractionDetailsHeader>
+                    Active Participants
+                  </InteractionDetailsHeader>
+                  <Info>
+                    {activeParticipantsArray.length === 0
+                      ? `${
+                          activeParticipantsArray[0]
+                        } is handling this interaction.`
+                      : `${activeParticipantsArray.join(
+                          ', '
+                        )} and ${lastParticipant} are active participants on this interaction.`}
+                  </Info>
+                  {row.row.monitoring.length > 0 && (
+                    <InteractionDetailsHeader>
+                      Interaction Monitors
+                    </InteractionDetailsHeader>
+                  )}
+                  <div>
+                    {row.row.monitoring.length > 0 && (
+                      <ul style={{ listStyleType: 'none', paddingLeft: '0px' }}>
+                        {row.row.monitoring.map((agent, i) => [
+                          agent.endTimestamp === null ? (
+                            <GreenStatus key={`inProgress${i}`} />
+                          ) : (
+                            <GreyStatus key={`notInProgress${i}`} />
+                          ),
+                          <p
+                            style={{ display: 'inline-block', margin: '5px' }}
+                            key={`info${i}`}
+                          >{`${agent.agentName} ${
+                            agent.endTimestamp === null
+                              ? `is currently monitoring this interaction and ${
+                                  agent.bargedIn ? '' : 'has not'
+                                } participated in the conversation.`
+                              : `previously monitored this interaction and ${
+                                  agent.bargedIn ? '' : 'has not'
+                                } participated in the conversation.`
+                          }`}</p>,
+                          <br key={`break${i}`} />,
+                          <Duration key={`duration${i}`}>
+                            {agent.endTimestamp === null
+                              ? `${
+                                  this.props.TweleveHourFormat
+                                    ? moment(agent.startTimestamp).format(
+                                        'h:mm a'
+                                      )
+                                    : moment(agent.startTimestamp).format(
+                                        'k:mm'
+                                      )
+                                } - Now`
+                              : `${
+                                  this.props.TweleveHourFormat
+                                    ? moment(agent.startTimestamp).format(
+                                        'h:mm a'
+                                      )
+                                    : moment(agent.startTimestamp).format(
+                                        'k:mm'
+                                      )
+                                } - ${
+                                  this.props.TweleveHourFormat
+                                    ? moment(agent.endTimestamp).format(
+                                        'h:mm a'
+                                      )
+                                    : moment(agent.endTimestamp).format('k:mm')
+                                }`}
+                          </Duration>
+                        ])}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              );
+            }}
             columns={[
               {
                 Header: 'Interaction Id',
@@ -322,10 +566,7 @@ class InteractionMonitoring extends Component {
                 id: 'interactionId',
                 accessor: 'interactionId',
                 Cell: ({ value }) => (
-                  <CopyToClipboard
-                    text={value}
-                    onCopy={() => this.setState({ copied: true })}
-                  >
+                  <CopyToClipboard text={value}>
                     <TableButton>{value}</TableButton>
                   </CopyToClipboard>
                 )
@@ -334,7 +575,14 @@ class InteractionMonitoring extends Component {
                 Header: 'Agent',
                 show: this.props.Agent,
                 id: 'agentName',
-                accessor: d => (d.agents ? d.agents[0].agentName : null)
+                // accessor: d => (d.agents ? d.agents[0].agentName : null)
+                accessor: d => {
+                  let agentString = '';
+                  d.agents.forEach(
+                    agent => (agentString += agent.agentName + ', ')
+                  );
+                  return agentString;
+                }
               },
               {
                 Header: 'Customer Id',
@@ -366,7 +614,7 @@ class InteractionMonitoring extends Component {
                 id: 'direction',
                 accessor: 'direction',
                 filterMethod: (filter, row) => {
-                  if (filter.value === 'any') {
+                  if (filter.value === 'all') {
                     return true;
                   }
                   if (filter.value === 'inbound') {
@@ -375,7 +623,18 @@ class InteractionMonitoring extends Component {
                   if (filter.value === 'outbound') {
                     return row[filter.id] === 'outbound';
                   }
-                }
+                },
+                Filter: ({ filter, onChange }) => (
+                  <select
+                    onChange={event => onChange(event.target.value)}
+                    style={{ width: '100%' }}
+                    value={filter ? filter.value : 'all'}
+                  >
+                    <option value="all">All</option>
+                    <option value="inbound">Inbound</option>
+                    <option value="outbound">Outbound</option>
+                  </select>
+                )
               },
               {
                 Header: 'Presence State',
@@ -394,7 +653,6 @@ class InteractionMonitoring extends Component {
                   const filterArray = filter.value.split(':');
                   const beforeOrAfter = filterArray[0];
                   let dateString = filterArray[1];
-                  // console.log(dateString);
                   if (filterArray[1] === '0' || filterArray[1] === '') {
                     return true;
                   }
@@ -447,7 +705,6 @@ class InteractionMonitoring extends Component {
                 filterMethod: (filter, row) => {
                   const filterArray = filter.value.split('-');
                   const beforeOrAfter = filterArray[0];
-                  // console.log(filterArray);
                   let hours = parseInt(filterArray[1].split(':')[0], 10);
                   if (this.props.TweleveHourFormat && filterArray[2] === 'pm') {
                     hours += 12;
@@ -540,7 +797,6 @@ class InteractionMonitoring extends Component {
                 Header: 'Elapsed Time',
                 show: this.props.ElapsedTime,
                 id: 'elapsedTime',
-                // accessor: "currentStateDuration",
                 accessor: d => parseInt(d.currentStateDuration / 1000, 10),
                 Cell: ({ value }) =>
                   moment()
@@ -548,7 +804,6 @@ class InteractionMonitoring extends Component {
                     .seconds(value)
                     .format('HH:mm:ss'),
                 filterMethod: (filter, row) => {
-                  // console.log(filter);
                   let filterArray = filter.value.split(':');
                   let timeFilter = parseInt(filterArray[1], 10);
                   // time is in seconds by default
@@ -628,20 +883,115 @@ class InteractionMonitoring extends Component {
                 )
               },
               {
-                Header: 'Actions',
-                show: this.props.Actions,
-                filterable: false,
+                Header: 'Monitoring',
+                show: this.props.Monitoring,
+                id: 'monitoring',
+                width: 160,
+                accessor: d => d.monitors,
                 Cell: ({ value, row }) => {
+                  let activeMonitors = 0;
+                  let previousMonitors = 0;
+                  row.monitoring.forEach(monitor => {
+                    if (monitor.endTimestamp === null) {
+                      activeMonitors++;
+                    } else {
+                      previousMonitors++;
+                    }
+                  });
                   return (
-                    <TableButton
-                      onClick={() =>
-                        // console.log("Should get starteds");
-                        this.monitorCall(row.interactionId)
-                      }
-                    >
-                      Monitor Call
-                    </TableButton>
+                    <div>
+                      {row.channel === 'voice' && [
+                        previousMonitors !== 0 && (
+                          <GreyStatusIcon>{previousMonitors}</GreyStatusIcon>
+                        ),
+                        activeMonitors !== 0 && (
+                          <GreenStatusIcon>{activeMonitors}</GreenStatusIcon>
+                        ),
+                        <Button
+                          type="secondary"
+                          inner="Monitor"
+                          style={{
+                            float: 'right',
+                            marginRight: '10px',
+                            height: '20px',
+                            paddingTop: '1px'
+                          }}
+                          onClick={() => this.monitorCall(row.interactionId)}
+                        />
+                      ]}
+                    </div>
                   );
+                },
+                filterMethod: (filter, row) => {
+                  console.log(row[filter.id]);
+                  if (filter.value === 'all') {
+                    return true;
+                  }
+                  if (filter.value === 'monitored') {
+                    return row[filter.id].length > 0;
+                  }
+                  return row[filter.id].length === 0;
+                },
+                Filter: ({ filter, onChange }) => (
+                  <select
+                    onChange={event => onChange(event.target.value)}
+                    style={{ width: '100%' }}
+                    value={filter ? filter.value : 'all'}
+                  >
+                    <option value="all">All</option>
+                    <option value="monitored">Monitored</option>
+                    <option value="unmonitored">Not Monitored</option>
+                  </select>
+                )
+              },
+              {
+                Header: 'Groups',
+                show: this.props.Groups,
+                filterable: false,
+                id: 'groups',
+                accessor: d => {
+                  let groupArray = [];
+                  d.agents.forEach(agent =>
+                    agent.groups.forEach(group => {
+                      if (groupArray.indexOf(group.groupName) === -1) {
+                        groupArray.push(group.groupName);
+                      }
+                    })
+                  );
+                  return groupArray.join(' , ');
+                },
+                filterMethod: (filter, row) => {
+                  // // console.log(row[filter.id]);
+                  // // console.log(filter);
+                  // const thing = row[filter.id];
+                  // if (filter.value.indexOf(",") !== -1) {
+                  //   filter.value.split(",").forEach(filter => {
+                  //     console.log(filter);
+                  //     if (thing.indexOf(filter) === -1) {
+                  //       return thing;
+                  //     }
+                  //   });
+                  // } else {
+                  // }
+                }
+                // Filter: ({ filter, onChange }) => <GroupsMenu />
+              },
+              {
+                Header: 'Skills',
+                show: this.props.Skills,
+                filterable: true,
+                Filter: <SkillsMenu />,
+                id: 'skills',
+                accessor: d => {
+                  let skillsArray = [];
+                  d.agents.forEach(agent =>
+                    agent.skills.forEach(group => {
+                      if (skillsArray.indexOf(group.skillName) === -1) {
+                        skillsArray.push(group.skillName);
+                      }
+                    })
+                  );
+                  return skillsArray.join(' , ');
                 }
               }
             ]}
@@ -687,15 +1037,35 @@ const mapStateToProps = (state, props) => ({
   ElapsedTime: selectColumnsMenuColumns(state, props)
     .get(10)
     .get('active'),
-  Actions: selectColumnsMenuColumns(state, props)
+  Monitoring: selectColumnsMenuColumns(state, props)
     .get(11)
     .get('active'),
-  TweleveHourFormat: selectTimeFormat(state, props)
+  Groups: selectColumnsMenuColumns(state, props)
+    .get(12)
+    .get('active'),
+  Skills: selectColumnsMenuColumns(state, props)
+    .get(13)
+    .get('active'),
+  TweleveHourFormat: selectTimeFormat(state, props),
+  tableData: selectInteractionMonitoringTableData(state, props),
+  expanded: selectInteractionMonitoringExpanded(state, props),
+  filtered: selectInteractionMonitoringFiltered(state, props),
+  selected: selectInteractionMonitoringSelected(state, props),
+  sorted: selectInteractionMonitoringSorted(state, props)
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     toggleTimeFormat: () => dispatch(toggleTimeFormat()),
+    updateTableData: tableData => dispatch(updateTableData(tableData)),
+    updateSkillsData: skillsData => dispatch(updateSkillsData(skillsData)),
+    updateGroupsData: groupsData => dispatch(updateGroupsData(groupsData)),
+    setExpanded: expanded => dispatch(setExpanded(expanded)),
+    setFiltered: filtered => dispatch(setFiltered(filtered)),
+    setSelected: (selected, expanded) =>
+      dispatch(setSelected(selected, expanded)),
+    setSorted: sorted => dispatch(setSorted(sorted)),
+    removeSelected: () => dispatch(removeSelected()),
     dispatch
   };
 }

@@ -2,29 +2,35 @@ import * as ACTIONS from './constants';
 import { fromJS } from 'immutable';
 
 const initialState = fromJS({
-  columns: [
-    { name: 'Actions', active: false },
-    { name: 'InteractionId', active: true },
-    { name: 'Agent', active: false },
-    { name: 'CustomerId', active: true },
-    { name: 'ContactPoint', active: false },
-    { name: 'Flow', active: true },
-    { name: 'Direction', active: false },
-    { name: 'StartTime', active: true },
-    { name: 'ElapsedTime', active: false }
-  ]
+  data: [],
+  sorted: [],
+  filtered: [],
+  expanded: {},
+  selected: ''
 });
 
 function InteractionMonitoring(state = initialState, action) {
   switch (action.type) {
-    case ACTIONS.UPDATE_TABLE_DATA:
-      // console.log("reducer", action.arrayOfTableData);
-      return state.set('data', action.arrayOfTableData);
-    case ACTIONS.SHOW_COLUMN:
-      const index = state
-        .get('columns')
-        .findIndex(col => col.name === action.columnName);
-      return state.setIn(['columns', index, 'active'], action.columnName);
+    case ACTIONS.SET_TABLE_DATA:
+      return state.set('data', fromJS(action.arrayOfTableData));
+    case ACTIONS.SET_SORTED:
+      return state
+        .set('sorted', action.sorted)
+        .set('selected', '')
+        .set('expanded', {});
+    case ACTIONS.SET_FILTERED:
+      return state
+        .set('filtered', action.filtered)
+        .set('expanded', {})
+        .set('selected', '');
+    case ACTIONS.SET_EXPANDED:
+      return state.set('expanded', action.expanded);
+    case ACTIONS.SET_SELECTED:
+      return state
+        .set('selected', action.selected)
+        .set('expanded', action.expanded);
+    case ACTIONS.REMOVE_SELECTED:
+      return state.set('expanded', {}).set('selected', '');
     default:
       return state;
   }

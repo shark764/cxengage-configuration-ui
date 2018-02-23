@@ -7,20 +7,23 @@ export const selectInteractionMonitoring = createSelector(
   selectInteractionMonitoringMap,
   interactionMonitoring => interactionMonitoring
 );
-
 export const selectInteractionMonitoringTableData = createSelector(
   selectInteractionMonitoringMap,
-  subState => {
-    // console.log(subState.toJS());
-    return subState.toJS();
-  }
-  // // console.log(subState.get("tableData").size);
-  // if (subState.get("data").size === 0) {
-  //   //   console.log(subState.get("tableData"));
-  //   return [];
-  // } else {
-  //   //   console.log(subState.get("tableData"));
-  //   return [subState.get("data")];
-  // }
-  //   }
+  subState => subState.get('data')
+);
+export const selectInteractionMonitoringSorted = createSelector(
+  selectInteractionMonitoringMap,
+  subState => subState.get('sorted')
+);
+export const selectInteractionMonitoringFiltered = createSelector(
+  selectInteractionMonitoringMap,
+  subState => subState.get('filtered')
+);
+export const selectInteractionMonitoringExpanded = createSelector(
+  selectInteractionMonitoringMap,
+  subState => subState.get('expanded')
+);
+export const selectInteractionMonitoringSelected = createSelector(
+  selectInteractionMonitoringMap,
+  subState => subState.get('selected')
 );
