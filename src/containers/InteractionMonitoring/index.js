@@ -308,43 +308,32 @@ class InteractionMonitoring extends Component {
   render() {
     return (
       <div>
-        <Title>Interaction Monitoring</Title>
         <div
           style={{
-            width: '100%',
-            height: '50px'
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
           }}
         >
-          <ColumnsMenu
-            style={{
-              position: 'relative',
-              float: 'right',
-              marginRight: '20px'
-            }}
-          />
-
-          <Button
-            id="timeConversion"
-            type="secondary"
-            onClick={() => this.props.toggleTimeFormat()}
-            inner={this.props.TweleveHourFormat ? '12h' : '24h'}
-            style={{ marginRight: '20px', float: 'right' }}
-          />
-          <GroupsMenu
-            style={{
-              position: 'relative',
-              float: 'right',
-              marginRight: '20px'
-            }}
-          />
-          <SkillsMenu
-            style={{
-              position: 'relative',
-              float: 'right',
-              marginRight: '20px'
-            }}
-          />
+          <Title>Interaction Monitoring</Title>
+          <div>
+            <Button
+              id="timeConversion"
+              type="secondary"
+              onClick={() => this.props.toggleTimeFormat()}
+              inner={this.props.TweleveHourFormat ? '12h' : '24h'}
+              style={{ marginRight: '20px' }}
+            />
+            <ColumnsMenu
+              style={{
+                position: 'relative',
+                display: 'inline-block',
+                marginRight: '20px'
+              }}
+            />
+          </div>
         </div>
+
         {this.state.confirmEnd && (
           <ConfirmationModal>
             <div
@@ -947,7 +936,10 @@ class InteractionMonitoring extends Component {
               {
                 Header: 'Groups',
                 show: this.props.Groups,
-                filterable: false,
+                filterable: true,
+                Filter: (
+                  <GroupsMenu style={{ width: '100px', margin: '0 auto' }} />
+                ),
                 id: 'groups',
                 accessor: d => {
                   let groupArray = [];
@@ -959,28 +951,15 @@ class InteractionMonitoring extends Component {
                     })
                   );
                   return groupArray.join(' , ');
-                },
-                filterMethod: (filter, row) => {
-                  // // console.log(row[filter.id]);
-                  // // console.log(filter);
-                  // const thing = row[filter.id];
-                  // if (filter.value.indexOf(",") !== -1) {
-                  //   filter.value.split(",").forEach(filter => {
-                  //     console.log(filter);
-                  //     if (thing.indexOf(filter) === -1) {
-                  //       return thing;
-                  //     }
-                  //   });
-                  // } else {
-                  // }
                 }
-                // Filter: ({ filter, onChange }) => <GroupsMenu />
               },
               {
                 Header: 'Skills',
                 show: this.props.Skills,
                 filterable: true,
-                Filter: <SkillsMenu />,
+                Filter: (
+                  <SkillsMenu style={{ width: '87px', margin: '0 auto' }} />
+                ),
                 id: 'skills',
                 accessor: d => {
                   let skillsArray = [];

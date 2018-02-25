@@ -8,10 +8,10 @@ const SubMenu = styled.div`
   position: absolute;
   background: white;
   padding: 2px;
-  right: -9px;
+  right: -10px;
   top: 37px;
   z-index: 3;
-  width: 188px;
+  width: 215px;
   box-shadow: 0px 0px 2px 0px rgba(42, 45, 41, 0.63);
 `;
 const SubMenuTopArrow = styled.div`
@@ -25,9 +25,9 @@ const SubMenuTopArrow = styled.div`
   width: 0px;
   height: 0px;
   z-index: 4;
-  position: relative;
-  right: -85px;
-  top: -1px;
+  position: absolute;
+  right: 11px;
+  top: 29px;
 `;
 
 const ItemList = styled.ul`
@@ -35,12 +35,14 @@ const ItemList = styled.ul`
   padding-left: 0px;
 `;
 const ListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 80%;
   margin: 4px auto;
   color: #474747;
 `;
 const AllSelector = styled.span`
-  float: right;
   color: #474747;
 `;
 const Seperator = styled.div`
@@ -79,10 +81,9 @@ class CheckboxMenu extends React.Component {
   componentWillUnmount() {
     document.removeEventListener('keydown', this.hotKeys);
   }
-
   render() {
     return (
-      <div style={this.props.style}>
+      <div style={Object.assign({ position: 'relative' }, this.props.style)}>
         <Button
           type="secondary"
           inner={`${this.props.buttonText} |`}
@@ -118,9 +119,7 @@ class CheckboxMenu extends React.Component {
                     checked={item.get('active')}
                     key={i}
                   />
-                  <span key={`listItemName${i}`} style={{ float: 'right' }}>
-                    {item.get('name')}
-                  </span>
+                  <span key={`listItemName${i}`}>{item.get('name')}</span>
                 </ListItem>
               ))}
             </ItemList>
