@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Button } from 'cx-ui-components';
+import { DropdownButton } from 'cx-ui-components';
 
 const SubMenu = styled.div`
   position: absolute;
@@ -98,14 +98,15 @@ class CheckboxMenu extends React.Component {
         {this.props.currentVisibleSubMenu === this.props.menuType && (
           <ClickMask onClick={() => this.props.setSubMenuVisibility('none')} />
         )}
-        <Button
+        <DropdownButton
           type="secondary"
-          inner={`${this.props.buttonText} |`}
           open={this.props.currentVisibleSubMenu === this.props.menuType}
           onClick={() => {
             this.props.setSubMenuVisibility(this.props.menuType);
           }}
-        />
+        >
+          {this.props.buttonText}
+        </DropdownButton>
 
         {this.props.currentVisibleSubMenu === this.props.menuType && [
           <SubMenuTopArrow key="SubMenuTopArrow" />,
