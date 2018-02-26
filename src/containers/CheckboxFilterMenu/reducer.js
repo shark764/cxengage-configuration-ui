@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 
 const initialState = fromJS({
   twelveHourFormat: true,
-  columns: JSON.parse(
+  Columns: JSON.parse(
     window.localStorage.getItem('InteractionMonitoringColumns')
   ) || [
     { name: 'InteractionId', active: true },
@@ -21,51 +21,50 @@ const initialState = fromJS({
     { name: 'Groups', active: false },
     { name: 'Skills', active: false }
   ],
-  groups: [],
-  skills: []
+  Groups: [],
+  Skills: [],
+  visibleMenu: 'none'
 });
 
 function updateInteractionMonitoringColumnsLocalStorage(state) {
   window.localStorage.setItem(
     'InteractionMonitoringColumns',
-    JSON.stringify(state.get('columns').toJS())
+    JSON.stringify(state.get('Columns').toJS())
   );
 }
 
 function ColumnsMenu(state = initialState, action) {
   switch (action.type) {
+    case ACTIONS.SET_VISIBLE_MENU:
+      return state.set('visibleMenu', fromJS(action.menuType));
     case ACTIONS.SET_GROUPS_DATA:
-      console.log('set groups?', action.arrayOfGroupsData);
-
-      return state.set('groups', fromJS(action.arrayOfGroupData));
+      return state.set('Groups', fromJS(action.arrayOfGroupData));
     case ACTIONS.SET_SKILLS_DATA:
-      console.log('set skills?', action.arrayOfSkillsData);
-
-      return state.set('skills', fromJS(action.arrayOfSkillData));
-    case ACTIONS.TOGGLE_INVERSE_COLUMNS:
-      const newState1 = state.update('columns', columns =>
+      return state.set('Skills', fromJS(action.arrayOfSkillData));
+    case ACTIONS.TOGGLE_INVERSE_MENUITEMS:
+      const newState1 = state.update(action.menuType, columns =>
         columns.map(column => column.set('active', !column.get('active')))
       );
       updateInteractionMonitoringColumnsLocalStorage(newState1);
       return newState1;
-    case ACTIONS.TOGGLE_COLUMN: {
+    case ACTIONS.TOGGLE_MENUITEMS: {
       const index = state
-        .get('columns')
-        .findIndex(col => col.get('name') === action.columnName);
-      const newState2 = state.updateIn(['columns', index], column =>
+        .get(action.menuType)
+        .findIndex(col => col.get('name') === action.itemName);
+      const newState2 = state.updateIn([action.menuType, index], column =>
         column.set('active', !column.get('active'))
       );
       updateInteractionMonitoringColumnsLocalStorage(newState2);
       return newState2;
     }
-    case ACTIONS.TOGGLE_ALL_COLUMNS_ON:
-      const newState3 = state.update('columns', columns =>
+    case ACTIONS.TOGGLE_ALL_MENUITEMS_ON:
+      const newState3 = state.update(action.menuType, columns =>
         columns.map(column => column.set('active', true))
       );
       updateInteractionMonitoringColumnsLocalStorage(newState3);
       return newState3;
-    case ACTIONS.TOGGLE_ALL_COLUMNS_OFF:
-      const newState4 = state.update('columns', columns =>
+    case ACTIONS.TOGGLE_ALL_MENUITEMS_OFF:
+      const newState4 = state.update(action.menuType, columns =>
         columns.map(column => column.set('active', false))
       );
       updateInteractionMonitoringColumnsLocalStorage(newState4);

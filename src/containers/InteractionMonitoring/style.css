@@ -35,7 +35,6 @@
   overflow: auto;
 }
 .ReactTable .rt-thead {
-  font-weight: bold;
   color: rgb(101, 101, 101);
   -webkit-box-flex: 1;
   -ms-flex: 1 0 auto;

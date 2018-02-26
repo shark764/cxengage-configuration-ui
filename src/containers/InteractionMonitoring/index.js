@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-  selectColumnsMenuColumns,
-  areAllNotActive,
+  selectColumns,
+  areAllColNotActive,
   selectTimeFormat
-} from '../ColumnsMenu/selectors';
-import { toggleTimeFormat } from '../ColumnsMenu/actions';
+} from '../CheckboxFilterMenu/selectors';
+import { toggleTimeFormat } from '../CheckboxFilterMenu/actions';
 import {
   updateTableData,
   setExpanded,
@@ -16,14 +16,15 @@ import {
   setFiltered,
   removeSelected
 } from './actions';
-import { updateSkillsData, updateGroupsData } from '../ColumnsMenu/actions';
+import {
+  updateSkillsData,
+  updateGroupsData
+} from '../CheckboxFilterMenu/actions';
 import moment from 'moment';
 import { fakeInteractions } from '../../tools/testInteractions.js';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import ColumnsMenu from '../ColumnsMenu';
-import GroupsMenu from '../GroupsMenu';
-import SkillsMenu from '../SkillsMenu';
+import CheckboxFilterMenu from '../CheckboxFilterMenu';
 import { Button } from 'cx-ui-components';
 
 import ReactTable from 'react-table';
@@ -150,7 +151,7 @@ class InteractionMonitoring extends Component {
     };
   }
   componentCleanup() {
-    console.log('cleanup called');
+    console.log('Cleanup called for interaction monitoring component');
     window.parent.postMessage(
       {
         module: 'reporting',
@@ -241,8 +242,6 @@ class InteractionMonitoring extends Component {
                 break;
               }
               case 'cxengage/reporting/get-groups-response': {
-                console.log('hello? this getting called?');
-
                 let groups = [];
                 response.result.forEach(group => {
                   groups.push({
@@ -255,8 +254,6 @@ class InteractionMonitoring extends Component {
                 break;
               }
               case 'cxengage/reporting/get-skills-response': {
-                console.log('how bout this one?');
-
                 let skills = [];
                 response.result.forEach(skill => {
                   skills.push({
@@ -324,12 +321,13 @@ class InteractionMonitoring extends Component {
               inner={this.props.TweleveHourFormat ? '12h' : '24h'}
               style={{ marginRight: '20px' }}
             />
-            <ColumnsMenu
+            <CheckboxFilterMenu
               style={{
                 position: 'relative',
                 display: 'inline-block',
                 marginRight: '20px'
               }}
+              menuType="Columns"
             />
           </div>
         </div>
@@ -416,6 +414,13 @@ class InteractionMonitoring extends Component {
             expanded={this.props.expanded}
             sorted={this.props.sorted}
             onSortedChange={sorted => this.props.setSorted(sorted)}
+            getTheadProps={(state, rowInfo, column) => {
+              return {
+                style: {
+                  fontWeight: 'bold'
+                }
+              };
+            }}
             getTrProps={(state, rowInfo, column) => {
               if (rowInfo) {
                 return {
@@ -440,7 +445,6 @@ class InteractionMonitoring extends Component {
               }
             }}
             SubComponent={row => {
-              console.log(row);
               const startTime = this.props.TweleveHourFormat
                 ? moment.unix(row.row.startTimestamp).format('h:mm a')
                 : moment.unix(row.row.startTimestamp).format('k:mm');
@@ -912,7 +916,6 @@ class InteractionMonitoring extends Component {
                   );
                 },
                 filterMethod: (filter, row) => {
-                  console.log(row[filter.id]);
                   if (filter.value === 'all') {
                     return true;
                   }
@@ -937,8 +940,12 @@ class InteractionMonitoring extends Component {
                 Header: 'Groups',
                 show: this.props.Groups,
                 filterable: true,
+                sortable: false,
                 Filter: (
-                  <GroupsMenu style={{ width: '100px', margin: '0 auto' }} />
+                  <CheckboxFilterMenu
+                    style={{ width: '100px', margin: '0 auto' }}
+                    menuType="Groups"
+                  />
                 ),
                 id: 'groups',
                 accessor: d => {
@@ -957,8 +964,12 @@ class InteractionMonitoring extends Component {
                 Header: 'Skills',
                 show: this.props.Skills,
                 filterable: true,
+                sortable: false,
                 Filter: (
-                  <SkillsMenu style={{ width: '87px', margin: '0 auto' }} />
+                  <CheckboxFilterMenu
+                    style={{ width: '87px', margin: '0 auto' }}
+                    menuType="Skills"
+                  />
                 ),
                 id: 'skills',
                 accessor: d => {
@@ -982,47 +993,47 @@ class InteractionMonitoring extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  columnsNotEmpty: areAllNotActive(state, props),
-  InteractionId: selectColumnsMenuColumns(state, props)
+  columnsNotEmpty: areAllColNotActive(state, props),
+  InteractionId: selectColumns(state, props)
     .get(0)
     .get('active'),
-  Agent: selectColumnsMenuColumns(state, props)
+  Agent: selectColumns(state, props)
     .get(1)
     .get('active'),
-  CustomerId: selectColumnsMenuColumns(state, props)
+  CustomerId: selectColumns(state, props)
     .get(2)
     .get('active'),
-  ContactPoint: selectColumnsMenuColumns(state, props)
+  ContactPoint: selectColumns(state, props)
     .get(3)
     .get('active'),
-  Flow: selectColumnsMenuColumns(state, props)
+  Flow: selectColumns(state, props)
     .get(4)
     .get('active'),
-  Channel: selectColumnsMenuColumns(state, props)
+  Channel: selectColumns(state, props)
     .get(5)
     .get('active'),
-  Direction: selectColumnsMenuColumns(state, props)
+  Direction: selectColumns(state, props)
     .get(6)
     .get('active'),
-  PresenceState: selectColumnsMenuColumns(state, props)
+  PresenceState: selectColumns(state, props)
     .get(7)
     .get('active'),
-  StartDate: selectColumnsMenuColumns(state, props)
+  StartDate: selectColumns(state, props)
     .get(8)
     .get('active'),
-  StartTime: selectColumnsMenuColumns(state, props)
+  StartTime: selectColumns(state, props)
     .get(9)
     .get('active'),
-  ElapsedTime: selectColumnsMenuColumns(state, props)
+  ElapsedTime: selectColumns(state, props)
     .get(10)
     .get('active'),
-  Monitoring: selectColumnsMenuColumns(state, props)
+  Monitoring: selectColumns(state, props)
     .get(11)
     .get('active'),
-  Groups: selectColumnsMenuColumns(state, props)
+  Groups: selectColumns(state, props)
     .get(12)
     .get('active'),
-  Skills: selectColumnsMenuColumns(state, props)
+  Skills: selectColumns(state, props)
     .get(13)
     .get('active'),
   TweleveHourFormat: selectTimeFormat(state, props),
@@ -1050,7 +1061,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 InteractionMonitoring.propTypes = {
-  // setTwilioEnabled: PropTypes.func.isRequired
+  toggleTimeFormat: PropTypes.func.isRequired,
+  updateTableData: PropTypes.func.isRequired,
+  updateSkillsData: PropTypes.func.isRequired,
+  updateGroupsData: PropTypes.func.isRequired,
+  setExpanded: PropTypes.func.isRequired,
+  setFiltered: PropTypes.func.isRequired,
+  setSelected: PropTypes.func.isRequired,
+  setSorted: PropTypes.func.isRequired,
+  removeSelected: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
