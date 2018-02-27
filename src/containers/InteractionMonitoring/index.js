@@ -318,9 +318,10 @@ class InteractionMonitoring extends Component {
               id="timeConversion"
               type="secondary"
               onClick={() => this.props.toggleTimeFormat()}
-              inner={this.props.TweleveHourFormat ? '12h' : '24h'}
               style={{ marginRight: '20px' }}
-            />
+            >
+              {this.props.TweleveHourFormat ? '12h' : '24h'}
+            </Button>
             <CheckboxFilterMenu
               style={{
                 position: 'relative',
@@ -357,16 +358,18 @@ class InteractionMonitoring extends Component {
                 id="confirm"
                 type="secondary"
                 onClick={() => this.props.toggleTimeFormat()}
-                inner="Confirm"
                 style={{ width: '90px' }}
-              />
+              >
+                Confirm
+              </Button>
               <Button
                 id="cancel"
                 type="secondary"
                 onClick={() => this.props.toggleTimeFormat()}
-                inner="Cancel"
                 style={{ width: '90px' }}
-              />
+              >
+                Cancel
+              </Button>
             </div>
           </ConfirmationModal>
         )}
@@ -902,7 +905,6 @@ class InteractionMonitoring extends Component {
                         ),
                         <Button
                           type="secondary"
-                          inner="Monitor"
                           style={{
                             float: 'right',
                             marginRight: '10px',
@@ -910,7 +912,9 @@ class InteractionMonitoring extends Component {
                             paddingTop: '1px'
                           }}
                           onClick={() => this.monitorCall(row.interactionId)}
-                        />
+                        >
+                          Monitor
+                        </Button>
                       ]}
                     </div>
                   );
