@@ -79,11 +79,6 @@ export default class CrudEndpointUiLayout extends Component {
 
     this.props.setCurrentEntity(entityName);
     this.props.fetchData(entityName);
-
-    // Testing only
-    this.timeoutId = setTimeout(() => {
-      this.props.setSelectedEntityId('57083783-332d-11e6-8dd4-c88eee4d9f61');
-    }, 1000);
   }
 
   render() {
