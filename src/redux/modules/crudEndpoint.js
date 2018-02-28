@@ -5,9 +5,6 @@
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
 
-// TESTING ONLY
-import { testListData } from './mocks';
-
 // Constants
 
 const SET_CURRENT_ENTITY = 'SET_CURRENT_ENTITY';
@@ -16,6 +13,7 @@ const SET_SELECTED_ENTITY_ID = 'SET_SELECTED_ENTITY_ID';
 const FETCH_DATA = 'FETCH_DATA';
 // const FETCH_DATA_PENDING = 'FETCH_DATA_PENDING';
 const FETCH_DATA_FULFILLED = 'FETCH_DATA_FULFILLED';
+// const FETCH_DATA_REJECTED = 'FETCH_DATA_REJECTED';
 const ON_FORM_SUBMIT = 'ON_FORM_SUBMIT';
 
 // Actions
@@ -44,8 +42,32 @@ export function fetchData(entityName) {
   // Use entityName to replace the demo promise and meta data below
   return {
     type: FETCH_DATA,
-    payload: new Promise(function(resolve, reject) {
-      setTimeout(resolve, 100, testListData);
+    payload: new Promise((resolve, reject) => {
+      const handleResponse = event => {
+        if (
+          event.data.topic !== undefined &&
+          event.data.topic[0] === `cxengage/entities/get-${entityName}-response`
+        ) {
+          const { error, response } = event.data;
+          if (error) {
+            reject(error);
+          } else {
+            resolve(response);
+          }
+          window.removeEventListener('message', handleResponse, false);
+        }
+      };
+      window.addEventListener('message', handleResponse);
+      window.parent.postMessage(
+        {
+          module: 'entities',
+          command: `get${entityName.charAt(0).toUpperCase()}${entityName.slice(
+            1
+          )}`,
+          data: {}
+        },
+        '*'
+      );
     }),
     meta: {
       entityName: 'lists'
