@@ -4,6 +4,8 @@
 
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
+import { sdkPromise } from '../../utils/sdk';
+import { capitalizeFirstLetter, removeLastLetter } from '../../utils/string';
 
 // Constants
 
@@ -15,6 +17,10 @@ const FETCH_DATA = 'FETCH_DATA';
 const FETCH_DATA_FULFILLED = 'FETCH_DATA_FULFILLED';
 // const FETCH_DATA_REJECTED = 'FETCH_DATA_REJECTED';
 const ON_FORM_SUBMIT = 'ON_FORM_SUBMIT';
+const SET_ENTITY_ACTIVE = 'SET_ENTITY_ACTIVE';
+// const SET_ENTITY_ACTIVE_PENDING = 'FETCH_DATA_PENDING';
+const SET_ENTITY_ACTIVE_FULFILLED = 'SET_ENTITY_ACTIVE_FULFILLED';
+// const SET_ENTITY_ACTIVE_REJECTED = 'SET_ENTITY_ACTIVE_REJECTED';
 
 // Actions
 
@@ -42,35 +48,59 @@ export function fetchData(entityName) {
   // Use entityName to replace the demo promise and meta data below
   return {
     type: FETCH_DATA,
-    payload: new Promise((resolve, reject) => {
-      const handleResponse = event => {
-        if (
-          event.data.topic !== undefined &&
-          event.data.topic[0] === `cxengage/entities/get-${entityName}-response`
-        ) {
-          const { error, response } = event.data;
-          if (error) {
-            reject(error);
-          } else {
-            resolve(response);
-          }
-          window.removeEventListener('message', handleResponse, false);
-        }
-      };
-      window.addEventListener('message', handleResponse);
-      window.parent.postMessage(
-        {
-          module: 'entities',
-          command: `get${entityName.charAt(0).toUpperCase()}${entityName.slice(
-            1
-          )}`,
-          data: {}
-        },
-        '*'
-      );
-    }),
+    payload: sdkPromise(
+      {
+        module: 'entities',
+        command: `get${capitalizeFirstLetter(entityName)}`,
+        data: {}
+      },
+      `cxengage/entities/get-${entityName}-response`
+    ),
     meta: {
-      entityName: 'lists'
+      entityName
+    }
+  };
+}
+
+export function toggleEntityActive() {
+  return function(dispatch, getState) {
+    const crudEndpoint = getState().get('crudEndpoint');
+    const currentEntity = crudEndpoint.get('currentEntity');
+    const selectedEntityId = crudEndpoint.get('selectedEntityId');
+    const selectedEntity = crudEndpoint
+      .get('data')
+      .get(currentEntity)
+      .find(entity => entity.get('id') === selectedEntityId);
+    dispatch(
+      setEntityActive(
+        currentEntity,
+        selectedEntityId,
+        !selectedEntity.get('active')
+      )
+    );
+  };
+}
+
+function setEntityActive(entityName, entityId, active) {
+  const singularEntityName = removeLastLetter(entityName);
+
+  return {
+    type: SET_ENTITY_ACTIVE,
+    payload: sdkPromise(
+      {
+        module: 'entities',
+        command: `update${capitalizeFirstLetter(singularEntityName)}`,
+        data: {
+          [`${singularEntityName}Id`]: entityId,
+          active
+        }
+      },
+      `cxengage/entities/update-${singularEntityName}-response`
+    ),
+    meta: {
+      entityName,
+      entityId,
+      active
     }
   };
 }
@@ -106,6 +136,19 @@ export default function reducer(state = initialState, action) {
         ['data', action.meta.entityName],
         fromJS(action.payload.result)
       );
+    case SET_ENTITY_ACTIVE_FULFILLED: {
+      const entityIndex = state
+        .getIn(['data', action.meta.entityName])
+        .findIndex(entity => entity.get('id') === action.meta.entityId);
+      if (entityIndex !== -1) {
+        return state.setIn(
+          ['data', action.meta.entityName, entityIndex, 'active'],
+          action.meta.active
+        );
+      } else {
+        return state;
+      }
+    }
     case ON_FORM_SUBMIT:
       // TODO add in SDK
       return state;

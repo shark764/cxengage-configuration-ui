@@ -104,8 +104,7 @@ export default class CrudEndpointUiLayout extends Component {
 }
 
 CrudEndpointUiLayout.propTypes = {
-  setCurrentEntity: PropTypes.func,
-  fetchData: PropTypes.func,
-  setSelectedEntityId: PropTypes.func,
+  setCurrentEntity: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   selectedEntityId: PropTypes.string
 };
