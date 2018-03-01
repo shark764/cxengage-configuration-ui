@@ -1,6 +1,6 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "CxEngage Configuration and Reporting",
   "main": "./release/bundle.js",
   "lint-staged": {
@@ -20,6 +20,7 @@
   "jest": {
     "collectCoverageFrom": [
       "src/containers/**/*.{js,jsx}",
+      "src/redux/modules/*.{js}",
       "!<rootDir>/node_modules/"
     ]
   },

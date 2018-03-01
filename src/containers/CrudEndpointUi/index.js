@@ -4,11 +4,7 @@
 
 import { connect } from 'react-redux';
 
-import {
-  setCurrentEntity,
-  fetchData,
-  setSelectedEntityId
-} from '../../redux/modules/crudEndpoint';
+import { setCurrentEntity, fetchData } from '../../redux/modules/crudEndpoint';
 
 import Layout from './Layout';
 
@@ -19,9 +15,6 @@ function mapDispatchToProps(dispatch) {
     },
     fetchData: entityName => {
       dispatch(fetchData(entityName));
-    },
-    setSelectedEntityId: entityId => {
-      dispatch(setSelectedEntityId(entityId));
     },
     dispatch
   };

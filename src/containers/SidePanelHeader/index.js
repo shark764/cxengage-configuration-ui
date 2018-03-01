@@ -9,13 +9,17 @@ import { SidePanelHeader } from 'cx-ui-components';
 
 import {
   getSelectedEntity,
-  deselectCurrentEntity
+  deselectCurrentEntity,
+  toggleEntityActive
 } from '../../redux/modules/crudEndpoint';
 
 function mapDispatchToProps(dispatch) {
   return {
     onClose: () => {
       dispatch(deselectCurrentEntity());
+    },
+    onToggle: () => {
+      dispatch(toggleEntityActive());
     }
   };
 }
