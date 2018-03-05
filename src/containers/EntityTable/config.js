@@ -6,14 +6,19 @@
 export function getTableColumns(entityName) {
   switch (entityName) {
     case 'lists':
-      return [{
-        id: 'name', Header: 'Name', accessor: 'name',
-      },{
-        id: 'description', Header: 'Description', accessor: 'listType.description',
-      },{
-        id: 'status', Header: 'Status', accessor: d => d.active ? 'Enabled' : 'Disabled',
-      }];
+      return [
+        {
+          id: 'name',
+          Header: 'Name',
+          accessor: 'name'
+        },
+        {
+          id: 'status',
+          Header: 'Status',
+          accessor: d => (d.active ? 'Enabled' : 'Disabled')
+        }
+      ];
     default:
-    return [];
+      return [];
   }
 }

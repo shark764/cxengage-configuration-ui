@@ -17,8 +17,7 @@ function mapStateToProps(state) {
 
   if (selectedEntity) {
     return {
-      name: selectedEntity.get('name'),
-      description: selectedEntity.get('description'),
+      listType: selectedEntity.get('listType').get('name'),
       alertMessage: `TODO: session tenantId vs createdby tenantId`,
       tableItems: selectedEntity.get('items').toJS(),
       tableFields: selectedEntity.getIn(['listType', 'fields']).toJS()
