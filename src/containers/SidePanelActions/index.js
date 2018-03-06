@@ -8,7 +8,8 @@ import { SidePanelActions } from 'cx-ui-components';
 
 import {
   onFormButtonSubmit,
-  deselectCurrentEntity
+  deselectCurrentEntity,
+  getSelectedEntity
 } from '../../redux/modules/crudEndpoint';
 
 function mapDispatchToProps(dispatch) {
@@ -23,6 +24,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
+  const selectedEntity = getSelectedEntity(state);
+
+  if (selectedEntity) {
+    return {
+      isSaving: selectedEntity.get('updating') === true
+    };
+  }
   return {};
 }
 

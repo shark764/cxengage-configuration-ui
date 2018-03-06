@@ -34,7 +34,8 @@ function mapStateToProps(state) {
       initialValues: new Map({
         name: selectedEntity.get('name')
       }),
-      listType: selectedEntity.getIn(['listType', 'name'])
+      listType: selectedEntity.getIn(['listType', 'name']),
+      isSaving: selectedEntity.get('updating') === true
     };
   }
   return {};
