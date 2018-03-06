@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 import { SidePanelActions } from 'cx-ui-components';
 
 import {
-  onFormSubmit,
+  onFormButtonSubmit,
   deselectCurrentEntity
 } from '../../redux/modules/crudEndpoint';
 
 function mapDispatchToProps(dispatch) {
   return {
     onSubmit: () => {
-      dispatch(onFormSubmit());
+      dispatch(onFormButtonSubmit());
     },
     onCancel: () => {
       dispatch(deselectCurrentEntity());

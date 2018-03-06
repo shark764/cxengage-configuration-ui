@@ -9,7 +9,7 @@ import { Route } from 'react-router-dom';
 
 import EntityTableContainer from '../EntityTable';
 import SidePanelHeaderContainer from '../SidePanelHeader';
-import ListsDetailsPanelContainer from '../SidePanelDetails/Lists';
+import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';
 import SidePanelActionsContainer from '../SidePanelActions';
 
 const Wrapper = styled.div`

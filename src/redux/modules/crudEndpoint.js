@@ -4,6 +4,7 @@
 
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
+import { submit } from 'redux-form';
 import { sdkPromise } from '../../utils/sdk';
 import { capitalizeFirstLetter, removeLastLetter } from '../../utils/string';
 
@@ -16,11 +17,10 @@ const FETCH_DATA = 'FETCH_DATA';
 // const FETCH_DATA_PENDING = 'FETCH_DATA_PENDING';
 const FETCH_DATA_FULFILLED = 'FETCH_DATA_FULFILLED';
 // const FETCH_DATA_REJECTED = 'FETCH_DATA_REJECTED';
-const ON_FORM_SUBMIT = 'ON_FORM_SUBMIT';
-const SET_ENTITY_ACTIVE = 'SET_ENTITY_ACTIVE';
-// const SET_ENTITY_ACTIVE_PENDING = 'FETCH_DATA_PENDING';
-const SET_ENTITY_ACTIVE_FULFILLED = 'SET_ENTITY_ACTIVE_FULFILLED';
-// const SET_ENTITY_ACTIVE_REJECTED = 'SET_ENTITY_ACTIVE_REJECTED';
+const UPDATE_ENTITY = 'UPDATE_ENTITY';
+// const UPDATE_ENTITY_PENDING = 'UPDATE_ENTITY_PENDING';
+const UPDATE_ENTITY_FULFILLED = 'UPDATE_ENTITY_FULFILLED';
+// const UPDATE_ENTITY_REJECTED = 'UPDATE_ENTITY_REJECTED';
 
 // Actions
 
@@ -62,6 +62,26 @@ export function fetchData(entityName) {
   };
 }
 
+export function onFormButtonSubmit() {
+  return function(dispatch, getState) {
+    const currentEntity = getState()
+      .get('crudEndpoint')
+      .get('currentEntity');
+    dispatch(submit(currentEntity));
+  };
+}
+
+export function onFormSubmit(values, { dirty }) {
+  return function(dispatch, getState) {
+    if (dirty) {
+      const crudEndpoint = getState().get('crudEndpoint');
+      const currentEntity = crudEndpoint.get('currentEntity');
+      const selectedEntityId = crudEndpoint.get('selectedEntityId');
+      dispatch(updateEntity(currentEntity, selectedEntityId, values.toJS()));
+    }
+  };
+}
+
 export function toggleEntityActive() {
   return function(dispatch, getState) {
     const crudEndpoint = getState().get('crudEndpoint');
@@ -72,42 +92,32 @@ export function toggleEntityActive() {
       .get(currentEntity)
       .find(entity => entity.get('id') === selectedEntityId);
     dispatch(
-      setEntityActive(
-        currentEntity,
-        selectedEntityId,
-        !selectedEntity.get('active')
-      )
+      updateEntity(currentEntity, selectedEntityId, {
+        active: !selectedEntity.get('active')
+      })
     );
   };
 }
 
-function setEntityActive(entityName, entityId, active) {
+function updateEntity(entityName, entityId, updatedValues) {
   const singularEntityName = removeLastLetter(entityName);
-
   return {
-    type: SET_ENTITY_ACTIVE,
+    type: UPDATE_ENTITY,
     payload: sdkPromise(
       {
         module: 'entities',
         command: `update${capitalizeFirstLetter(singularEntityName)}`,
-        data: {
-          [`${singularEntityName}Id`]: entityId,
-          active
-        }
+        data: Object.assign(updatedValues, {
+          [`${singularEntityName}Id`]: entityId
+        })
       },
       `cxengage/entities/update-${singularEntityName}-response`
     ),
     meta: {
       entityName,
       entityId,
-      active
+      fields: Object.keys(updatedValues)
     }
-  };
-}
-
-export function onFormSubmit() {
-  return {
-    type: ON_FORM_SUBMIT
   };
 }
 
@@ -136,22 +146,23 @@ export default function reducer(state = initialState, action) {
         ['data', action.meta.entityName],
         fromJS(action.payload.result)
       );
-    case SET_ENTITY_ACTIVE_FULFILLED: {
+    case UPDATE_ENTITY_FULFILLED: {
       const entityIndex = state
         .getIn(['data', action.meta.entityName])
         .findIndex(entity => entity.get('id') === action.meta.entityId);
       if (entityIndex !== -1) {
-        return state.setIn(
-          ['data', action.meta.entityName, entityIndex, 'active'],
-          action.meta.active
+        const updatedFields = new Map();
+        action.meta.fields.forEach(field => {
+          updatedFields.set(field, action.payload[field]);
+        });
+        return state.mergeIn(
+          ['data', action.meta.entityName, entityIndex],
+          updatedFields
         );
       } else {
         return state;
       }
     }
-    case ON_FORM_SUBMIT:
-      // TODO add in SDK
-      return state;
     default:
       return state;
   }
