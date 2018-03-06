@@ -15,7 +15,14 @@ let ListsForm;
 
 ListsForm = reduxForm({
   form: 'lists',
-  onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props))
+  onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
+  validate: values => {
+    const errors = {};
+    if (!values.get('name')) {
+      errors.name = 'Please enter a name';
+    }
+    return errors;
+  }
 })(ListsFormComponent);
 
 function mapStateToProps(state) {
@@ -27,7 +34,8 @@ function mapStateToProps(state) {
       initialValues: new Map({
         name: selectedEntity.get('name')
       }),
-      listType: selectedEntity.getIn(['listType', 'name'])
+      listType: selectedEntity.getIn(['listType', 'name']),
+      isSaving: selectedEntity.get('updating') === true
     };
   }
   return {};

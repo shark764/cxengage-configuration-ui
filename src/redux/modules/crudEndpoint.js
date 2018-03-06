@@ -2,7 +2,7 @@
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
 
-import { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
 import { createSelector } from 'reselect';
 import { submit } from 'redux-form';
 import { sdkPromise } from '../../utils/sdk';
@@ -18,7 +18,7 @@ const FETCH_DATA = 'FETCH_DATA';
 const FETCH_DATA_FULFILLED = 'FETCH_DATA_FULFILLED';
 // const FETCH_DATA_REJECTED = 'FETCH_DATA_REJECTED';
 const UPDATE_ENTITY = 'UPDATE_ENTITY';
-// const UPDATE_ENTITY_PENDING = 'UPDATE_ENTITY_PENDING';
+const UPDATE_ENTITY_PENDING = 'UPDATE_ENTITY_PENDING';
 const UPDATE_ENTITY_FULFILLED = 'UPDATE_ENTITY_FULFILLED';
 // const UPDATE_ENTITY_REJECTED = 'UPDATE_ENTITY_REJECTED';
 
@@ -146,14 +146,27 @@ export default function reducer(state = initialState, action) {
         ['data', action.meta.entityName],
         fromJS(action.payload.result)
       );
+    case UPDATE_ENTITY_PENDING: {
+      const entityIndex = state
+        .getIn(['data', action.meta.entityName])
+        .findIndex(entity => entity.get('id') === action.meta.entityId);
+      if (entityIndex !== -1) {
+        return state.setIn(
+          ['data', action.meta.entityName, entityIndex, 'updating'],
+          true
+        );
+      } else {
+        return state;
+      }
+    }
     case UPDATE_ENTITY_FULFILLED: {
       const entityIndex = state
         .getIn(['data', action.meta.entityName])
         .findIndex(entity => entity.get('id') === action.meta.entityId);
       if (entityIndex !== -1) {
-        const updatedFields = new Map();
+        let updatedFields = new Map({ updating: false });
         action.meta.fields.forEach(field => {
-          updatedFields.set(field, action.payload[field]);
+          updatedFields = updatedFields.set(field, action.payload[field]);
         });
         return state.mergeIn(
           ['data', action.meta.entityName, entityIndex],
@@ -171,10 +184,10 @@ export default function reducer(state = initialState, action) {
 // Selectors
 
 const getCurrentEntity = state =>
-  state.get('crudEndpoint').get('currentEntity');
+  state.getIn(['crudEndpoint', 'currentEntity']);
 const getAllEntities = state => state.get('crudEndpoint').get('data');
 const getSelectedEntityId = state =>
-  state.get('crudEndpoint').get('selectedEntityId');
+  state.getIn(['crudEndpoint', 'selectedEntityId']);
 
 export const getSelectedEntity = createSelector(
   [getCurrentEntity, getAllEntities, getSelectedEntityId],
