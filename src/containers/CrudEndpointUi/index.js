@@ -4,7 +4,11 @@
 
 import { connect } from 'react-redux';
 
-import { setCurrentEntity, fetchData } from '../../redux/modules/crudEndpoint';
+import {
+  setCurrentEntity,
+  fetchData,
+  getSelectedEntityId
+} from '../../redux/modules/crudEndpoint';
 
 import Layout from './Layout';
 
@@ -22,7 +26,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    selectedEntityId: state.getIn(['crudEndpoint', 'selectedEntityId'])
+    selectedEntityId: getSelectedEntityId(state)
   };
 }
 

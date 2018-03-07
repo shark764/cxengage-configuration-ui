@@ -9,6 +9,7 @@ import { Route } from 'react-router-dom';
 
 import EntityTableContainer from '../EntityTable';
 import SidePanelHeaderContainer from '../SidePanelHeader';
+import CreateListForm from '../Form/Lists/Create';
 import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';
 import SidePanelActionsContainer from '../SidePanelActions';
 
@@ -66,6 +67,13 @@ const SidePanelActions = styled(SidePanelActionsContainer)`
   border-top: 1px solid #dadada;
 `;
 
+const createFormRoutes = [
+  {
+    path: '/lists',
+    component: () => DetailsPanel(CreateListForm)
+  }
+];
+
 const detailsPanelRoutes = [
   {
     path: '/lists',
@@ -88,13 +96,21 @@ export default class CrudEndpointUiLayout extends Component {
         {this.props.selectedEntityId && (
           <SidePanel>
             <SidePanelHeader />
-            {detailsPanelRoutes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                component={route.component}
-              />
-            ))}
+            {this.props.selectedEntityId === 'create'
+              ? createFormRoutes.map((route, index) => (
+                  <Route
+                    key={index}
+                    path={route.path}
+                    component={route.component}
+                  />
+                ))
+              : detailsPanelRoutes.map((route, index) => (
+                  <Route
+                    key={index}
+                    path={route.path}
+                    component={route.component}
+                  />
+                ))}
             <SidePanelActions />
           </SidePanel>
         )}

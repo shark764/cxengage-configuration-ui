@@ -7,7 +7,11 @@ import moment from 'moment';
 
 import { SidePanelHeader } from 'cx-ui-components';
 
+import { capitalizeFirstLetter } from '../../utils/string';
+
 import {
+  getCurrentEntity,
+  getSelectedEntityId,
   getSelectedEntity,
   deselectCurrentEntity,
   toggleEntityActive
@@ -25,13 +29,18 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  const selectedEntity = getSelectedEntity(state);
-  const dateCreated = moment(selectedEntity.get('created')).format('lll');
-  const dateUpdated = moment(selectedEntity.get('updated')).format('lll');
+  const selectedEntityId = getSelectedEntityId(state);
 
-  // TODO: Add Created and Updated By X
-
-  if (selectedEntity) {
+  if (selectedEntityId && selectedEntityId === 'create') {
+    const currentEntity = getCurrentEntity(state);
+    return {
+      title: `Creating New ${capitalizeFirstLetter(currentEntity).slice(0, -1)}`
+    };
+  } else if (selectedEntityId) {
+    // TODO: Add Created and Updated By X
+    const selectedEntity = getSelectedEntity(state);
+    const dateCreated = moment(selectedEntity.get('created')).format('lll');
+    const dateUpdated = moment(selectedEntity.get('updated')).format('lll');
     return {
       title: selectedEntity.get('name'),
       createdAt: `Created on ${dateCreated}`,

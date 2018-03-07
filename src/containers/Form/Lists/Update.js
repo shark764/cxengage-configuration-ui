@@ -3,31 +3,28 @@
  */
 
 import { Map } from 'immutable';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
-import { ListsForm as ListsFormComponent } from 'cx-ui-components';
+import { ListsForm } from 'cx-ui-components';
+import { updateFormValidation } from './validation';
 import {
-  getSelectedEntity,
-  onFormSubmit
+  onFormSubmit,
+  getSelectedEntityId,
+  getSelectedEntity
 } from '../../../redux/modules/crudEndpoint';
 
-let ListsForm;
-
-ListsForm = reduxForm({
-  form: 'lists',
-  onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
-  validate: values => {
-    const errors = {};
-    if (!values.get('name')) {
-      errors.name = 'Please enter a name';
-    }
-    return errors;
-  }
-})(ListsFormComponent);
+let UpdateListForm = compose(
+  connect(state => ({ form: `lists:${getSelectedEntityId(state)}` })),
+  reduxForm({
+    onSubmit: (values, dispatch, props) =>
+      dispatch(onFormSubmit(values, props)),
+    validate: updateFormValidation
+  })
+)(ListsForm);
 
 function mapStateToProps(state) {
   const selectedEntity = getSelectedEntity(state);
-
   if (selectedEntity) {
     return {
       update: true,
@@ -41,4 +38,4 @@ function mapStateToProps(state) {
   return {};
 }
 
-export default connect(mapStateToProps)(ListsForm);
+export default connect(mapStateToProps)(UpdateListForm);

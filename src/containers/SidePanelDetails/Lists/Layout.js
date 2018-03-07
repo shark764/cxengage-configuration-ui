@@ -5,12 +5,12 @@
 import React from 'react';
 
 import ListsDetailsPanel from './index';
-import ListsForm from '../../Form/Lists';
+import UpdateListForm from '../../Form/Lists/Update';
 
 export default function ListsLayout(props) {
   return (
     <ListsDetailsPanel>
-      <ListsForm />
+      <UpdateListForm />
     </ListsDetailsPanel>
   );
 }
