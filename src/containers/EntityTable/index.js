@@ -3,16 +3,24 @@
  */
 
 import { connect } from 'react-redux';
-import { List } from 'immutable';
 
 import { EntityTable } from 'cx-ui-components';
 
-import { setSelectedEntityId } from '../../redux/modules/crudEndpoint';
+import { capitalizeFirstLetter } from '../../utils/string';
+
+import {
+  setSelectedEntityId,
+  getCurrentEntity,
+  getAllEntities
+} from '../../redux/modules/crudEndpoint';
 
 import { getTableColumns } from './config';
 
 function mapDispatchToProps(dispatch) {
   return {
+    onCreateButtonClick: () => {
+      dispatch(setSelectedEntityId('create'));
+    },
     onRowClick: id => {
       dispatch(setSelectedEntityId(id));
     }
@@ -20,17 +28,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  const currentEntity = state.get('crudEndpoint').get('currentEntity');
-  const allEntities =
-    state.get('crudEndpoint').getIn(['data', currentEntity]) || List();
-
+  const currentEntity = getCurrentEntity(state);
   return {
-    pageTitle: 'Lists',
+    pageTitle: capitalizeFirstLetter(currentEntity),
     pageHelpLink:
       'https://docs.cxengage.net/Help/Content/Configuring%20CxEngage/Lists/Lists.htm',
     onSearchFilterChange: e => console.log(e.target.value),
-    onCreateBtnClick: () => console.log('SDK new list goes hereeeee'),
-    items: allEntities.toJS(),
+    items: getAllEntities(state) ? getAllEntities(state).toJS() : undefined,
     columns: getTableColumns(currentEntity)
   };
 }

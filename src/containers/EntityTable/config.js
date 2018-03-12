@@ -13,9 +13,14 @@ export function getTableColumns(entityName) {
           accessor: 'name'
         },
         {
+          id: 'listType',
+          Header: 'List Type',
+          accessor: list => list.listType.name
+        },
+        {
           id: 'status',
           Header: 'Status',
-          accessor: d => (d.active ? 'Enabled' : 'Disabled')
+          accessor: list => (list.active ? 'Enabled' : 'Disabled')
         }
       ];
     default:
