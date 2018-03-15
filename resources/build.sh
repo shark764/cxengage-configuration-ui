@@ -1,6 +1,6 @@
 #!/bin/bash
-
 npm install
+npm ls react
 npm run build
 #mv app/assets/favicons/favicon.ico build/favicon.ico
 

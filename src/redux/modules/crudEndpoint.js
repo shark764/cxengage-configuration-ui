@@ -1,175 +1,35 @@
 /*
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
-
-import { fromJS, Map } from 'immutable';
+import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
-import { submit } from 'redux-form';
-import { sdkPromise } from '../../utils/sdk';
-import {
-  capitalizeFirstLetter,
-  removeLastLetter,
-  camelCaseToKebabCase
-} from '../../utils/string';
-import { createFormMetadata, updateFormMetadata } from './formMetadata';
-
-// Constants
-
-const SET_CURRENT_ENTITY = 'SET_CURRENT_ENTITY';
-const DESELECT_CURRENT_ENTITY = 'DESELECT_CURRENT_ENTITY';
-const SET_SELECTED_ENTITY_ID = 'SET_SELECTED_ENTITY_ID';
-const FETCH_DATA = 'FETCH_DATA';
-// const FETCH_DATA_PENDING = 'FETCH_DATA_PENDING';
-const FETCH_DATA_FULFILLED = 'FETCH_DATA_FULFILLED';
-// const FETCH_DATA_REJECTED = 'FETCH_DATA_REJECTED';
-const CREATE_ENTITY = 'CREATE_ENTITY';
-const CREATE_ENTITY_PENDING = 'CREATE_ENTITY_PENDING';
-const CREATE_ENTITY_FULFILLED = 'CREATE_ENTITY_FULFILLED';
-// const CREATE_ENTITY_REJECTED = 'CREATE_ENTITY_REJECTED';
-const UPDATE_ENTITY = 'UPDATE_ENTITY';
-const UPDATE_ENTITY_PENDING = 'UPDATE_ENTITY_PENDING';
-const UPDATE_ENTITY_FULFILLED = 'UPDATE_ENTITY_FULFILLED';
-// const UPDATE_ENTITY_REJECTED = 'UPDATE_ENTITY_REJECTED';
 
 // Actions
 
-export function setCurrentEntity(entityName) {
-  return {
-    type: SET_CURRENT_ENTITY,
-    payload: entityName
-  };
-}
-
-export function deselectCurrentEntity() {
-  return {
-    type: DESELECT_CURRENT_ENTITY
-  };
-}
-
-export function setSelectedEntityId(entityId) {
-  return function(dispatch, getState) {
-    const currentEntity = getState()
-      .get('crudEndpoint')
-      .get('currentEntity');
-    const addUndefinedEntityMetadata = metadataEntity => {
-      if (
-        getState().getIn(['crudEndpoint', metadataEntity, 'data']) === undefined
-      ) {
-        dispatch(fetchData(metadataEntity));
-      }
-    };
-    if (entityId === 'create' && createFormMetadata[currentEntity]) {
-      createFormMetadata[currentEntity].forEach(addUndefinedEntityMetadata);
-    } else if (entityId !== 'create' && updateFormMetadata[currentEntity]) {
-      updateFormMetadata[currentEntity].forEach(addUndefinedEntityMetadata);
-    }
-    dispatch(setSelectedEntityIdInStore(entityId));
-  };
-}
-
-function setSelectedEntityIdInStore(entityId) {
-  return {
-    type: SET_SELECTED_ENTITY_ID,
-    payload: entityId
-  };
-}
-
-export function fetchData(entityName) {
-  return {
-    type: FETCH_DATA,
-    payload: sdkPromise(
-      {
-        module: 'entities',
-        command: `get${capitalizeFirstLetter(entityName)}`,
-        data: {}
-      },
-      `cxengage/entities/get-${camelCaseToKebabCase(entityName)}-response`
-    ),
-    meta: {
-      entityName
-    }
-  };
-}
-
-export function onFormButtonSubmit() {
-  return function(dispatch, getState) {
-    dispatch(
-      submit(
-        `${getCurrentEntity(getState())}:${getSelectedEntityId(getState())}`
-      )
-    );
-  };
-}
-
-export function onFormSubmit(values, { dirty }) {
-  return function(dispatch, getState) {
-    if (dirty) {
-      const currentEntity = getCurrentEntity(getState());
-      const selectedEntityId = getSelectedEntityId(getState());
-      if (selectedEntityId === 'create') {
-        dispatch(createEntity(currentEntity, values.toJS()));
-      } else {
-        dispatch(updateEntity(currentEntity, selectedEntityId, values.toJS()));
-      }
-    }
-  };
-}
-
-export function toggleEntityActive() {
-  return function(dispatch, getState) {
-    const currentEntity = getCurrentEntity(getState());
-    const selectedEntityId = getSelectedEntityId(getState());
-    const selectedEntity = getAllEntities(getState()).find(
-      entity => entity.get('id') === selectedEntityId
-    );
-    dispatch(
-      updateEntity(currentEntity, selectedEntityId, {
-        active: !selectedEntity.get('active')
-      })
-    );
-  };
-}
-
-function createEntity(entityName, values) {
-  const singularEntityName = removeLastLetter(entityName);
-  return {
-    type: CREATE_ENTITY,
-    payload: sdkPromise(
-      {
-        module: 'entities',
-        command: `create${capitalizeFirstLetter(singularEntityName)}`,
-        data: values
-      },
-      `cxengage/entities/create-${singularEntityName}-response`
-    ),
-    meta: {
-      entityName,
-      fields: Object.keys(values)
-    }
-  };
-}
-
-function updateEntity(entityName, entityId, updatedValues) {
-  const singularEntityName = removeLastLetter(entityName);
-  return {
-    type: UPDATE_ENTITY,
-    payload: sdkPromise(
-      {
-        module: 'entities',
-        command: `update${capitalizeFirstLetter(singularEntityName)}`,
-        data: Object.assign(updatedValues, {
-          [`${singularEntityName}Id`]: entityId
-        })
-      },
-      `cxengage/entities/update-${singularEntityName}-response`
-    ),
-    meta: {
-      entityName,
-      entityId,
-      fields: Object.keys(updatedValues)
-    }
-  };
-}
+export const setCurrentEntity = entityName => ({
+  type: 'SET_CURRENT_ENTITY',
+  entityName
+});
+export const deselectCurrentEntity = () => ({
+  type: 'DESELECT_CURRENT_ENTITYS_SELECTED_ENTITY'
+});
+export const setSelectedEntityId = entityId => {
+  return { type: 'SET_SELECTED_ENTITY_ID', entityId };
+};
+export const onFormButtonSubmit = () => ({ type: 'START_FORM_SUBMISSION' });
+export const onFormSubmit = (values, { dirty }) => ({
+  type: 'FORM_SUBMIT',
+  values,
+  dirty
+});
+export const toggleEntityActive = () => {
+  return { type: 'TOGGLE_ENTITY' };
+};
+export const fetchData = entityName => ({ type: 'FETCH_DATA', entityName });
+export const submitForm = form => ({
+  type: '@@redux-form/SUBMIT',
+  meta: { form: form }
+});
 
 // Initial Sub State
 
@@ -177,7 +37,7 @@ const initialState = fromJS({
   currentEntity: '',
   lists: {
     selectedEntityId: '',
-    data: []
+    data: undefined
   },
   listTypes: {
     data: undefined
@@ -188,32 +48,33 @@ const initialState = fromJS({
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_CURRENT_ENTITY:
-      return state.set('currentEntity', action.payload);
-    case DESELECT_CURRENT_ENTITY:
+    case 'SET_CURRENT_ENTITY':
+      return state.set('currentEntity', action.entityName);
+    case 'DESELECT_CURRENT_ENTITYS_SELECTED_ENTITY':
       return state.setIn([state.get('currentEntity'), 'selectedEntityId'], '');
-    case SET_SELECTED_ENTITY_ID:
+    case 'SET_SELECTED_ENTITY_ID': {
       return state.setIn(
         [state.get('currentEntity'), 'selectedEntityId'],
-        action.payload
+        action.entityId
       );
-    case FETCH_DATA_FULFILLED:
-      return state.setIn(
-        [action.meta.entityName, 'data'],
-        fromJS(action.payload.result)
-      );
-    case CREATE_ENTITY_PENDING: {
-      return state.setIn([action.meta.entityName, 'creating'], true);
     }
-    case CREATE_ENTITY_FULFILLED: {
-      return state.update(action.meta.entityName, entityStore =>
+    case 'FETCH_DATA_FULFILLED':
+      return state.setIn(
+        [action.entityName, 'data'],
+        fromJS(action.response.result)
+      );
+    case 'CREATE_ENTITY': {
+      return state.setIn([action.entityName, 'creating'], true);
+    }
+    case 'CREATE_ENTITY_FULFILLED': {
+      return state.update(action.entityName, entityStore =>
         entityStore
-          .update('data', data => data.push(fromJS(action.payload)))
-          .set('selectedEntityId', action.payload.id)
+          .update('data', data => data.push(fromJS(action.response)))
+          .set('selectedEntityId', action.response.id)
           .set('creating', false)
       );
     }
-    case UPDATE_ENTITY_PENDING: {
+    case 'UPDATE_ENTITY_PENDING': {
       const entityIndex = state
         .getIn([action.meta.entityName, 'data'])
         .findIndex(entity => entity.get('id') === action.meta.entityId);
@@ -226,18 +87,14 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
-    case UPDATE_ENTITY_FULFILLED: {
+    case 'UPDATE_ENTITY_FULFILLED': {
       const entityIndex = state
-        .getIn([action.meta.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.meta.entityId);
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === action.payload.id);
       if (entityIndex !== -1) {
-        let updatedFields = new Map({ updating: false });
-        action.meta.fields.forEach(field => {
-          updatedFields = updatedFields.set(field, action.payload[field]);
-        });
         return state.mergeIn(
-          [action.meta.entityName, 'data', entityIndex],
-          updatedFields
+          [action.entityName, 'data', entityIndex],
+          action.payload
         );
       } else {
         return state;
@@ -275,7 +132,7 @@ export const getAllEntities = createSelector(
 export const getSelectedEntity = createSelector(
   [getCurrentEntity, getAllEntities, getSelectedEntityId],
   (currentEntity, allEntities, id) => {
-    if (currentEntity && id) {
+    if (currentEntity && allEntities && id) {
       return allEntities.find(obj => obj.get('id') === id);
     }
     return undefined;

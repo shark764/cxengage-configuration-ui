@@ -3,10 +3,11 @@
  */
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise-middleware';
-
+import { createEpicMiddleware } from 'redux-observable';
+import { rootEpic } from './epics';
 import reducer from './reducers';
+
+const epicMiddleware = createEpicMiddleware(rootEpic);
 
 // Redux Dev Tools
 /* eslint-disable no-underscore-dangle */
@@ -18,8 +19,6 @@ const composeEnhancers =
     : compose;
 /* eslint-enable */
 
-const enhancer = composeEnhancers(
-  applyMiddleware(promise(), thunk),
-);
+const enhancer = composeEnhancers(applyMiddleware(epicMiddleware));
 
 export default createStore(reducer, enhancer);
