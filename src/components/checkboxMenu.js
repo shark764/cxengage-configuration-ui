@@ -99,7 +99,6 @@ class CheckboxMenu extends React.Component {
           <ClickMask onClick={() => this.props.setSubMenuVisibility('none')} />
         )}
         <DropdownButton
-          type="secondary"
           open={this.props.currentVisibleSubMenu === this.props.menuType}
           onClick={() => {
             this.props.setSubMenuVisibility(this.props.menuType);

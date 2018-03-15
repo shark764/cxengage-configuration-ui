@@ -19,7 +19,8 @@ let UpdateListForm = compose(
   reduxForm({
     onSubmit: (values, dispatch, props) =>
       dispatch(onFormSubmit(values, props)),
-    validate: updateFormValidation
+    validate: updateFormValidation,
+    destroyOnUnmount: false
   })
 )(ListsForm);
 

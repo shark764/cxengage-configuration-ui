@@ -6,10 +6,15 @@ import { connect } from 'react-redux';
 
 import { ListsDetailsPanel } from 'cx-ui-components';
 
-import { getSelectedEntity } from '../../../redux/modules/crudEndpoint';
+import {
+  setSelectedSubEntityId,
+  getSelectedEntity
+} from '../../../redux/modules/crudEndpoint';
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    openCreateListItemModal: () => dispatch(setSelectedSubEntityId('create'))
+  };
 }
 
 function mapStateToProps(state) {

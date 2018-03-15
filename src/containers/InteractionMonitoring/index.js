@@ -316,7 +316,6 @@ class InteractionMonitoring extends Component {
           <div>
             <Button
               id="timeConversion"
-              type="secondary"
               onClick={() => this.props.toggleTimeFormat()}
               style={{ marginRight: '20px' }}
             >
@@ -356,7 +355,6 @@ class InteractionMonitoring extends Component {
             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
               <Button
                 id="confirm"
-                type="secondary"
                 onClick={() => this.props.toggleTimeFormat()}
                 style={{ width: '90px' }}
               >
@@ -364,7 +362,6 @@ class InteractionMonitoring extends Component {
               </Button>
               <Button
                 id="cancel"
-                type="secondary"
                 onClick={() => this.props.toggleTimeFormat()}
                 style={{ width: '90px' }}
               >
@@ -904,7 +901,6 @@ class InteractionMonitoring extends Component {
                           <GreenStatusIcon>{activeMonitors}</GreenStatusIcon>
                         ),
                         <Button
-                          type="secondary"
                           style={{
                             float: 'right',
                             marginRight: '10px',
