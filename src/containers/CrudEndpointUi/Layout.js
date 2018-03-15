@@ -7,10 +7,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
+import { Modal } from 'cx-ui-components';
+
 import EntityTableContainer from '../EntityTable';
 import SidePanelHeaderContainer from '../SidePanelHeader';
 import CreateListForm from '../Form/Lists/Create';
 import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';
+import CreateListItemForm from '../Form/ListItems/Create';
 import SidePanelActionsContainer from '../SidePanelActions';
 
 const Wrapper = styled.div`
@@ -81,6 +84,13 @@ const detailsPanelRoutes = [
   }
 ];
 
+const createSubEntityFormRoutes = [
+  {
+    path: '/lists',
+    component: () => <CreateListItemForm />
+  }
+];
+
 export default class CrudEndpointUiLayout extends Component {
   componentDidMount() {
     const entityName = this.props.location.pathname.slice(1);
@@ -113,6 +123,17 @@ export default class CrudEndpointUiLayout extends Component {
                 ))}
             <SidePanelActions />
           </SidePanel>
+        )}
+        {this.props.isCreatingSubEntity && (
+          <Modal>
+            {createSubEntityFormRoutes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                component={route.component}
+              />
+            ))}
+          </Modal>
         )}
       </Wrapper>
     );

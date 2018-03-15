@@ -5,7 +5,7 @@
 import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
-import { ListsForm as ListsFormComponent } from 'cx-ui-components';
+import { ListsForm } from 'cx-ui-components';
 import { createFormValidation } from './validation';
 import {
   onFormSubmit,
@@ -17,7 +17,7 @@ let CreateListForm = reduxForm({
   form: 'lists:create',
   onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
   validate: createFormValidation
-})(ListsFormComponent);
+})(ListsForm);
 
 function mapStateToProps(state) {
   const selectedEntityId = getSelectedEntityId(state);

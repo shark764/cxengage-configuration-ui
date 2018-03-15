@@ -13,7 +13,10 @@ import {
   submitForm,
   getCurrentEntity,
   getSelectedEntityId,
-  getAllEntities
+  getAllEntities,
+  getSelectedEntity,
+  getCurrentSubEntity,
+  getSelectedSubEntityId
 } from '../crudEndpoint.js';
 
 import { createFormMetadata, updateFormMetadata } from '../formMetadata';
@@ -191,3 +194,84 @@ export const FetchFormMetaData = (action$, store) =>
       );
     }
   });
+
+export const SubEntityFormSubmission = (action$, store) =>
+  action$.ofType('SUB_ENTITY_FORM_SUBMIT').mergeMap(({ values, dirty }) => {
+    if (dirty) {
+      const entityName = getCurrentEntity(store.getState());
+      const selectedEntity = getSelectedEntity(store.getState());
+      const subEntityName = getCurrentSubEntity(store.getState());
+      const selectedSubEntityId = getSelectedSubEntityId(store.getState());
+      if (selectedSubEntityId === 'create') {
+        return of({
+          type: 'CREATE_SUB_ENTITY',
+          entityName,
+          selectedEntity,
+          subEntityName,
+          values: values.toJS()
+        });
+      } else if (selectedSubEntityId) {
+        // TODO update case
+      } else {
+        console.warn(
+          'Tried to submit sub entity form without selected sub entity'
+        );
+      }
+    }
+  });
+
+export const CreateSubEntity = (action$, store) =>
+  action$
+    .ofType('CREATE_SUB_ENTITY')
+    .mergeMap(({ entityName, selectedEntity, subEntityName, values }) => {
+      const singularSubEntityName = removeLastLetter(subEntityName);
+      return fromPromise(
+        sdkPromise(
+          {
+            module: 'entities',
+            command: `create${capitalizeFirstLetter(singularSubEntityName)}`,
+            data: listItemData(selectedEntity, values)
+          },
+          `cxengage/entities/create-${camelCaseToKebabCase(
+            singularSubEntityName
+          )}-response`
+        )
+      )
+        .mergeMap(response =>
+          of({
+            type: 'CREATE_SUB_ENTITY_FULFILLED',
+            entityName,
+            entityId: selectedEntity.get('id'),
+            subEntityName,
+            response
+          })
+        )
+        .catch(error =>
+          of({
+            type: 'CREATE_SUB_ENTITY_REJECTED',
+            entityName,
+            entityId: selectedEntity.get('id'),
+            subEntityName,
+            error
+          })
+        );
+    });
+
+function listItemData(list, values) {
+  // Convert number and boolean strings to actual numbers and booleans
+  const fields = list.getIn(['listType', 'fields']);
+  Object.keys(values).forEach(valueName => {
+    const fieldType = fields
+      .find(field => field.get('name') === valueName)
+      .get('type');
+    if (fieldType === 'number') {
+      values[valueName] = Number(values[valueName]);
+    } else if (fieldType === 'boolean') {
+      values[valueName] = values[valueName] === true;
+    }
+  });
+  return {
+    listId: list.get('id'),
+    itemValue: values
+  };
+}

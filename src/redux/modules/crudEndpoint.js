@@ -30,6 +30,14 @@ export const submitForm = form => ({
   type: '@@redux-form/SUBMIT',
   meta: { form: form }
 });
+export const setSelectedSubEntityId = selectedSubEntityId => {
+  return { type: 'SET_SELECTED_SUB_ENTITY_ID', selectedSubEntityId };
+};
+export const onSubEntityFormSubmit = (values, { dirty }) => ({
+  type: 'SUB_ENTITY_FORM_SUBMIT',
+  values,
+  dirty
+});
 
 // Initial Sub State
 
@@ -37,7 +45,10 @@ const initialState = fromJS({
   currentEntity: '',
   lists: {
     selectedEntityId: '',
-    data: undefined
+    data: undefined,
+    subEntity: 'listItems',
+    selectedSubEntityId: undefined,
+    subEntitySaving: false
   },
   listTypes: {
     data: undefined
@@ -74,13 +85,13 @@ export default function reducer(state = initialState, action) {
           .set('creating', false)
       );
     }
-    case 'UPDATE_ENTITY_PENDING': {
+    case 'UPDATE_ENTITY': {
       const entityIndex = state
-        .getIn([action.meta.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.meta.entityId);
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === action.entityId);
       if (entityIndex !== -1) {
         return state.setIn(
-          [action.meta.entityName, 'data', entityIndex, 'updating'],
+          [action.entityName, 'data', entityIndex, 'updating'],
           true
         );
       } else {
@@ -94,7 +105,33 @@ export default function reducer(state = initialState, action) {
       if (entityIndex !== -1) {
         return state.mergeIn(
           [action.entityName, 'data', entityIndex],
-          action.payload
+          fromJS(Object.assign(action.payload, { updating: false}))
+        );
+      } else {
+        return state;
+      }
+    }
+    case 'SET_SELECTED_SUB_ENTITY_ID': {
+      return state.setIn(
+        [state.get('currentEntity'), 'selectedSubEntityId'],
+        action.selectedSubEntityId
+      );
+    }
+    case 'CREATE_SUB_ENTITY': {
+      return state.setIn([action.entityName, 'subEntitySaving'], true);
+    }
+    case 'CREATE_SUB_ENTITY_FULFILLED': {
+      const entityIndex = state
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === action.entityId);
+      if (entityIndex !== -1) {
+        return state.update(action.entityName, entityStore =>
+          entityStore
+            .updateIn(['data', entityIndex, 'items'], subEntityList =>
+              subEntityList.push(fromJS(action.response.itemValue))
+            )
+            .set('selectedSubEntityId', undefined)
+            .set('subEntitySaving', false)
         );
       } else {
         return state;
@@ -113,7 +150,7 @@ export const getCurrentEntity = createSelector(getCrudEndpoint, crudEndpoint =>
   crudEndpoint.get('currentEntity')
 );
 
-const getCurrentEntityStore = createSelector(
+export const getCurrentEntityStore = createSelector(
   [getCrudEndpoint, getCurrentEntity],
   (crudEndpoint, currentEntity) => crudEndpoint.get(currentEntity)
 );
@@ -142,4 +179,23 @@ export const getSelectedEntity = createSelector(
 export const isCreating = createSelector(
   getCurrentEntityStore,
   currentEntityStore => currentEntityStore && currentEntityStore.get('creating')
+);
+
+export const getSelectedSubEntityId = createSelector(
+  getCurrentEntityStore,
+  currentEntityStore =>
+    currentEntityStore && currentEntityStore.get('selectedSubEntityId')
+);
+
+export const isCreatingSubEntity = createSelector(
+  getCurrentEntityStore,
+  currentEntityStore =>
+    currentEntityStore &&
+    currentEntityStore.get('selectedSubEntityId') === 'create'
+);
+
+export const getCurrentSubEntity = createSelector(
+  getCurrentEntityStore,
+  currentEntityStore =>
+    currentEntityStore && currentEntityStore.get('subEntity')
 );
