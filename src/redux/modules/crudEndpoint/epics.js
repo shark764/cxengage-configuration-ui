@@ -201,8 +201,8 @@ export const SubEntityFormSubmission = (action$, store) =>
       const entityName = getCurrentEntity(store.getState());
       const selectedEntity = getSelectedEntity(store.getState());
       const subEntityName = getCurrentSubEntity(store.getState());
-      const selectedSubEntityId = getSelectedSubEntityId(store.getState());
-      if (selectedSubEntityId === 'create') {
+      const subEntityId = getSelectedSubEntityId(store.getState());
+      if (subEntityId === 'create') {
         return of({
           type: 'CREATE_SUB_ENTITY',
           entityName,
@@ -210,10 +210,17 @@ export const SubEntityFormSubmission = (action$, store) =>
           subEntityName,
           values: values.toJS()
         });
-      } else if (selectedSubEntityId) {
-        // TODO update case
+      } else if (subEntityId) {
+        return of({
+          type: 'UPDATE_SUB_ENTITY',
+          entityName,
+          selectedEntity,
+          subEntityName,
+          subEntityId,
+          values: values.toJS()
+        });
       } else {
-        console.warn(
+        throw new Error(
           'Tried to submit sub entity form without selected sub entity'
         );
       }
@@ -230,7 +237,10 @@ export const CreateSubEntity = (action$, store) =>
           {
             module: 'entities',
             command: `create${capitalizeFirstLetter(singularSubEntityName)}`,
-            data: listItemData(selectedEntity, values)
+            data: {
+              [`${removeLastLetter(entityName)}Id`]: selectedEntity.get('id'),
+              itemValue: values
+            }
           },
           `cxengage/entities/create-${camelCaseToKebabCase(
             singularSubEntityName
@@ -257,21 +267,47 @@ export const CreateSubEntity = (action$, store) =>
         );
     });
 
-function listItemData(list, values) {
-  // Convert number and boolean strings to actual numbers and booleans
-  const fields = list.getIn(['listType', 'fields']);
-  Object.keys(values).forEach(valueName => {
-    const fieldType = fields
-      .find(field => field.get('name') === valueName)
-      .get('type');
-    if (fieldType === 'number') {
-      values[valueName] = Number(values[valueName]);
-    } else if (fieldType === 'boolean') {
-      values[valueName] = values[valueName] === true;
-    }
-  });
-  return {
-    listId: list.get('id'),
-    itemValue: values
-  };
-}
+export const UpdateSubEntity = (action$, store) =>
+  action$
+    .ofType('UPDATE_SUB_ENTITY')
+    .mergeMap(
+      ({ entityName, selectedEntity, subEntityName, subEntityId, values }) => {
+        const singularSubEntityName = removeLastLetter(subEntityName);
+        return fromPromise(
+          sdkPromise(
+            {
+              module: 'entities',
+              command: `update${capitalizeFirstLetter(singularSubEntityName)}`,
+              data: {
+                listId: selectedEntity.get('id'),
+                listItemKey: subEntityId,
+                itemValue: values
+              }
+            },
+            `cxengage/entities/update-${camelCaseToKebabCase(
+              singularSubEntityName
+            )}-response`
+          )
+        )
+          .mergeMap(response =>
+            of({
+              type: 'UPDATE_SUB_ENTITY_FULFILLED',
+              entityName,
+              entityId: selectedEntity.get('id'),
+              subEntityName,
+              subEntityId,
+              response
+            })
+          )
+          .catch(error =>
+            of({
+              type: 'UPDATE_SUB_ENTITY_REJECTED',
+              entityName,
+              entityId: selectedEntity.get('id'),
+              subEntityName,
+              subEntityId,
+              error
+            })
+          );
+      }
+    );

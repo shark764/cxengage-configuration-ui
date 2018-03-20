@@ -14,6 +14,7 @@ import SidePanelHeaderContainer from '../SidePanelHeader';
 import CreateListForm from '../Form/Lists/Create';
 import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';
 import CreateListItemForm from '../Form/ListItems/Create';
+import UpdateListItemForm from '../Form/ListItems/Update';
 import SidePanelActionsContainer from '../SidePanelActions';
 
 const Wrapper = styled.div`
@@ -87,7 +88,14 @@ const detailsPanelRoutes = [
 const createSubEntityFormRoutes = [
   {
     path: '/lists',
-    component: () => <CreateListItemForm />
+    component: CreateListItemForm
+  }
+];
+
+const updateSubEntityFormRoutes = [
+  {
+    path: '/lists',
+    component: UpdateListItemForm
   }
 ];
 
@@ -124,15 +132,23 @@ export default class CrudEndpointUiLayout extends Component {
             <SidePanelActions />
           </SidePanel>
         )}
-        {this.props.isCreatingSubEntity && (
+        {this.props.selectedSubEntityId && (
           <Modal>
-            {createSubEntityFormRoutes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                component={route.component}
-              />
-            ))}
+            {this.props.selectedSubEntityId === 'create'
+              ? createSubEntityFormRoutes.map((route, index) => (
+                  <Route
+                    key={index}
+                    path={route.path}
+                    component={route.component}
+                  />
+                ))
+              : updateSubEntityFormRoutes.map((route, index) => (
+                  <Route
+                    key={index}
+                    path={route.path}
+                    component={route.component}
+                  />
+                ))}
           </Modal>
         )}
       </Wrapper>
@@ -143,5 +159,6 @@ export default class CrudEndpointUiLayout extends Component {
 CrudEndpointUiLayout.propTypes = {
   setCurrentEntity: PropTypes.func.isRequired,
   fetchData: PropTypes.func.isRequired,
-  selectedEntityId: PropTypes.string
+  selectedEntityId: PropTypes.string,
+  selectedSubEntityId: PropTypes.string
 };
