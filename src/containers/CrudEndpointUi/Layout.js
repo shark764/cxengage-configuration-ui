@@ -9,13 +9,12 @@ import { Route } from 'react-router-dom';
 
 import { Modal } from 'cx-ui-components';
 
+import SidePanel from '../../components/sidePanel';
 import EntityTableContainer from '../EntityTable';
-import SidePanelHeaderContainer from '../SidePanelHeader';
 import CreateListForm from '../Form/Lists/Create';
 import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';
 import CreateListItemForm from '../Form/ListItems/Create';
 import UpdateListItemForm from '../Form/ListItems/Update';
-import SidePanelActionsContainer from '../SidePanelActions';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -39,20 +38,6 @@ const Table = styled(EntityTableContainer)`
   grid-area: table;
 `;
 
-const SidePanel = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  grid-area: sidePanel;
-  border-left: 1px solid #dadada;
-  overflow-y: auto;
-`;
-
-const SidePanelHeader = styled(SidePanelHeaderContainer)`
-  padding: 10px 14px;
-  border-bottom: 1px solid #dadada;
-`;
-
 function DetailsPanel(ContainerComponent) {
   const DetailsPanelWrapper = styled.div`
     position: relative;
@@ -65,11 +50,6 @@ function DetailsPanel(ContainerComponent) {
     </DetailsPanelWrapper>
   );
 }
-
-const SidePanelActions = styled(SidePanelActionsContainer)`
-  margin-top: auto;
-  border-top: 1px solid #dadada;
-`;
 
 const createFormRoutes = [
   {
@@ -102,7 +82,6 @@ const updateSubEntityFormRoutes = [
 export default class CrudEndpointUiLayout extends Component {
   componentDidMount() {
     const entityName = this.props.location.pathname.slice(1);
-
     this.props.setCurrentEntity(entityName);
     this.props.fetchData(entityName);
   }
@@ -113,7 +92,6 @@ export default class CrudEndpointUiLayout extends Component {
         <Table />
         {this.props.selectedEntityId && (
           <SidePanel>
-            <SidePanelHeader />
             {this.props.selectedEntityId === 'create'
               ? createFormRoutes.map((route, index) => (
                   <Route
@@ -129,7 +107,6 @@ export default class CrudEndpointUiLayout extends Component {
                     component={route.component}
                   />
                 ))}
-            <SidePanelActions />
           </SidePanel>
         )}
         {this.props.selectedSubEntityId && (
