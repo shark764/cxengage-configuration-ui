@@ -8,7 +8,7 @@ import {
   setCurrentEntity,
   fetchData,
   getSelectedEntityId,
-  isCreatingSubEntity
+  getSelectedSubEntityId
 } from '../../redux/modules/crudEndpoint';
 
 import Layout from './Layout';
@@ -28,7 +28,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     selectedEntityId: getSelectedEntityId(state),
-    isCreatingSubEntity: isCreatingSubEntity(state)
+    selectedSubEntityId: getSelectedSubEntityId(state)
   };
 }
 

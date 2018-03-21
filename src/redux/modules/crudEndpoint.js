@@ -105,7 +105,7 @@ export default function reducer(state = initialState, action) {
       if (entityIndex !== -1) {
         return state.mergeIn(
           [action.entityName, 'data', entityIndex],
-          fromJS(Object.assign(action.payload, { updating: false}))
+          fromJS(Object.assign(action.payload, { updating: false }))
         );
       } else {
         return state;
@@ -117,7 +117,8 @@ export default function reducer(state = initialState, action) {
         action.selectedSubEntityId
       );
     }
-    case 'CREATE_SUB_ENTITY': {
+    case 'CREATE_SUB_ENTITY':
+    case 'UPDATE_SUB_ENTITY': {
       return state.setIn([action.entityName, 'subEntitySaving'], true);
     }
     case 'CREATE_SUB_ENTITY_FULFILLED': {
@@ -137,6 +138,33 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'UPDATE_SUB_ENTITY_FULFILLED': {
+      const entityIndex = state
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === action.entityId);
+      if (entityIndex !== -1) {
+        return state.update(action.entityName, entityStore =>
+          entityStore
+            .updateIn(['data', entityIndex, 'items'], subEntityList => {
+              const subEntityIndex = subEntityList.findIndex(
+                subEntity => subEntity.get('key') === action.subEntityId
+              );
+              if (entityIndex !== -1) {
+                return subEntityList.mergeIn(
+                  [subEntityIndex],
+                  fromJS(action.response.apiResponse.result.itemValue)
+                );
+              } else {
+                return subEntityList;
+              }
+            })
+            .set('selectedSubEntityId', undefined)
+            .set('subEntitySaving', false)
+        );
+      } else {
+        return state;
+      }
+    }
     default:
       return state;
   }
@@ -146,56 +174,48 @@ export default function reducer(state = initialState, action) {
 
 const getCrudEndpoint = state => state.get('crudEndpoint');
 
-export const getCurrentEntity = createSelector(getCrudEndpoint, crudEndpoint =>
-  crudEndpoint.get('currentEntity')
-);
+export const getCurrentEntity = state =>
+  getCrudEndpoint(state).get('currentEntity');
 
-export const getCurrentEntityStore = createSelector(
-  [getCrudEndpoint, getCurrentEntity],
-  (crudEndpoint, currentEntity) => crudEndpoint.get(currentEntity)
-);
+export const getCurrentEntityStore = state =>
+  getCrudEndpoint(state).get(getCurrentEntity(state));
 
-export const getSelectedEntityId = createSelector(
-  getCurrentEntityStore,
-  currentEntityStore =>
-    currentEntityStore && currentEntityStore.get('selectedEntityId')
-);
+export const getSelectedEntityId = state =>
+  getCurrentEntityStore(state) &&
+  getCurrentEntityStore(state).get('selectedEntityId');
 
-export const getAllEntities = createSelector(
-  getCurrentEntityStore,
-  currentEntityStore => currentEntityStore && currentEntityStore.get('data')
-);
+export const getAllEntities = state =>
+  getCurrentEntityStore(state) && getCurrentEntityStore(state).get('data');
 
 export const getSelectedEntity = createSelector(
   [getCurrentEntity, getAllEntities, getSelectedEntityId],
-  (currentEntity, allEntities, id) => {
-    if (currentEntity && allEntities && id) {
-      return allEntities.find(obj => obj.get('id') === id);
-    }
-    return undefined;
-  }
+  (currentEntity, allEntities, selectedEntityId) =>
+    selectedEntityId &&
+    allEntities.find(obj => obj.get('id') === selectedEntityId)
 );
 
-export const isCreating = createSelector(
-  getCurrentEntityStore,
-  currentEntityStore => currentEntityStore && currentEntityStore.get('creating')
+export const getSelectedEntityName = state =>
+  getSelectedEntity(state) && getSelectedEntity(state).get('name');
+
+export const isCreating = state =>
+  getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
+
+export const getCurrentSubEntity = state =>
+  getCurrentEntityStore(state) && getCurrentEntityStore(state).get('subEntity');
+
+export const getSelectedSubEntityId = state =>
+  getCurrentEntityStore(state) &&
+  getCurrentEntityStore(state).get('selectedSubEntityId');
+
+export const getSelectedSubEntity = createSelector(
+  [getSelectedEntity, getCurrentSubEntity, getSelectedSubEntityId],
+  (selectedEntity, currentSubEntity, selectedSubEntityId) =>
+    selectedEntity &&
+    selectedEntity
+      .get('items')
+      .find(subEntity => subEntity.get('key') === selectedSubEntityId)
 );
 
-export const getSelectedSubEntityId = createSelector(
-  getCurrentEntityStore,
-  currentEntityStore =>
-    currentEntityStore && currentEntityStore.get('selectedSubEntityId')
-);
-
-export const isCreatingSubEntity = createSelector(
-  getCurrentEntityStore,
-  currentEntityStore =>
-    currentEntityStore &&
-    currentEntityStore.get('selectedSubEntityId') === 'create'
-);
-
-export const getCurrentSubEntity = createSelector(
-  getCurrentEntityStore,
-  currentEntityStore =>
-    currentEntityStore && currentEntityStore.get('subEntity')
-);
+export const isSubEntitySaving = state =>
+  getCurrentEntityStore(state) &&
+  getCurrentEntityStore(state).get('subEntitySaving');

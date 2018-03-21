@@ -3,28 +3,34 @@
  */
 
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import { ListItemsForm } from 'cx-ui-components';
 import {
   setSelectedSubEntityId,
   onSubEntityFormSubmit,
-  getSelectedEntityName,
+  getSelectedSubEntityId,
   isSubEntitySaving
 } from '../../../redux/modules/crudEndpoint';
-import { getFieldItems } from './selectors';
+import { getUpdateFieldItems, getInitialValues } from './selectors';
 import validate from './validation';
 
-let CreateListItemsForm = reduxForm({
-  form: 'listItems:create',
-  onSubmit: (values, dispatch, props) =>
-    dispatch(onSubEntityFormSubmit(values, props)),
-  validate
-})(ListItemsForm);
+let UpdateListItemsForm = compose(
+  connect(state => ({
+    form: `listItems:${getSelectedSubEntityId(state)}`
+  })),
+  reduxForm({
+    onSubmit: (values, dispatch, props) =>
+      dispatch(onSubEntityFormSubmit(values, props)),
+    validate
+  })
+)(ListItemsForm);
 
 function mapStateToProps(state) {
   return {
-    listName: getSelectedEntityName(state),
-    fieldItems: getFieldItems(state),
+    listItemName: getSelectedSubEntityId(state),
+    fieldItems: getUpdateFieldItems(state),
+    initialValues: getInitialValues(state),
     isSaving: isSubEntitySaving(state)
   };
 }
@@ -38,5 +44,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  CreateListItemsForm
+  UpdateListItemsForm
 );
