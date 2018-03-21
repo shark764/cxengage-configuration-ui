@@ -26,10 +26,6 @@ export const toggleEntityActive = () => {
   return { type: 'TOGGLE_ENTITY' };
 };
 export const fetchData = entityName => ({ type: 'FETCH_DATA', entityName });
-export const submitForm = form => ({
-  type: '@@redux-form/SUBMIT',
-  meta: { form: form }
-});
 export const setSelectedSubEntityId = selectedSubEntityId => {
   return { type: 'SET_SELECTED_SUB_ENTITY_ID', selectedSubEntityId };
 };
@@ -37,6 +33,15 @@ export const onSubEntityFormSubmit = (values, { dirty }) => ({
   type: 'SUB_ENTITY_FORM_SUBMIT',
   values,
   dirty
+});
+export const updateEntityFulfilled = (entityName, payload) => ({
+  type: 'UPDATE_ENTITY_FULFILLED',
+  entityName,
+  payload
+});
+export const updateSidePanelWidth = width => ({
+  type: 'UPDATE_SIDE_PANEL_WIDTH',
+  width
 });
 
 // Initial Sub State
@@ -48,7 +53,8 @@ const initialState = fromJS({
     data: undefined,
     subEntity: 'listItems',
     selectedSubEntityId: undefined,
-    subEntitySaving: false
+    subEntitySaving: false,
+    sidePanelWidth: 550
   },
   listTypes: {
     data: undefined
@@ -165,6 +171,12 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'UPDATE_SIDE_PANEL_WIDTH': {
+      return state.setIn(
+        [state.get('currentEntity'), 'sidePanelWidth'],
+        action.width
+      );
+    }
     default:
       return state;
   }
@@ -179,6 +191,10 @@ export const getCurrentEntity = state =>
 
 export const getCurrentEntityStore = state =>
   getCrudEndpoint(state).get(getCurrentEntity(state));
+
+export const getSidePanelWidth = state =>
+  getCurrentEntityStore(state) &&
+  getCurrentEntityStore(state).get('sidePanelWidth');
 
 export const getSelectedEntityId = state =>
   getCurrentEntityStore(state) &&

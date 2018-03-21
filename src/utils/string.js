@@ -8,3 +8,7 @@ export const camelCaseToKebabCase = string =>
   string.replace(/([a-z][A-Z])/g, function(match) {
     return match.substr(0, 1) + '-' + match.substr(1, 1).toLowerCase();
   });
+
+export const capitalizeFirstAndRemoveLastLetter = string => {
+  return capitalizeFirstLetter(removeLastLetter(string));
+};
