@@ -235,3 +235,9 @@ export const getSelectedSubEntity = createSelector(
 export const isSubEntitySaving = state =>
   getCurrentEntityStore(state) &&
   getCurrentEntityStore(state).get('subEntitySaving');
+
+export const getSelectedEntityFormId = createSelector(
+  [getCurrentEntity, getSelectedEntityId],
+  (currentEntity, selectedEntityId) =>
+    `${currentEntity}:${selectedEntityId}`
+);

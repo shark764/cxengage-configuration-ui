@@ -1,0 +1,9 @@
+# Change Log
+All notable changes to this project will be documented in this file.
+This project adheres to [Semantic Versioning](http://semver.org/).
+
+## [0.9.1] (2018-03-21)
+* CXV1-13106 - Manage disabled state of submit button
+
+## [0.9.0] (2018-03-21)
+* CXV1-13115 - make side panel draggable

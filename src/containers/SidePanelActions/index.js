@@ -3,14 +3,15 @@
  */
 
 import { connect } from 'react-redux';
-
+import { isPristine } from 'redux-form/immutable';
 import { SidePanelActions } from 'cx-ui-components';
 
 import {
   onFormButtonSubmit,
   deselectCurrentEntity,
   isCreating,
-  getSelectedEntity
+  getSelectedEntity,
+  getSelectedEntityFormId
 } from '../../redux/modules/crudEndpoint';
 
 function mapDispatchToProps(dispatch) {
@@ -26,10 +27,13 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const selectedEntity = getSelectedEntity(state);
+  const formId = getSelectedEntityFormId(state);
+
   return {
     isSaving:
       isCreating(state) ||
-      (selectedEntity && selectedEntity.get('updating') === true)
+      (selectedEntity && selectedEntity.get('updating') === true),
+    pristine: isPristine(formId)(state)
   };
 }
 
