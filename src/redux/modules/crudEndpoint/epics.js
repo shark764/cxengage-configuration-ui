@@ -318,3 +318,46 @@ export const UpdateSubEntity = (action$, store) =>
           })
         )
     );
+
+export const DeleteSubEntity = (action$, store) =>
+  action$.ofType('DELETE_SUB_ENTITY').mergeMap(({ subEntityId }) => {
+    const entityName = getCurrentEntity(store.getState());
+    const selectedEntity = getSelectedEntity(store.getState());
+    const subEntityName = getCurrentSubEntity(store.getState());
+    const singularSubEntityName = removeLastLetter(subEntityName);
+    return fromPromise(
+      sdkPromise(
+        {
+          module: 'entities',
+          command: `delete${capitalizeFirstLetter(singularSubEntityName)}`,
+          data: {
+            listId: selectedEntity.get('id'),
+            listItemKey: subEntityId
+          }
+        },
+        `cxengage/entities/delete-${camelCaseToKebabCase(
+          singularSubEntityName
+        )}-response`
+      )
+    )
+      .mergeMap(response =>
+        of({
+          type: 'DELETE_SUB_ENTITY_FULFILLED',
+          entityName,
+          entityId: selectedEntity.get('id'),
+          subEntityName,
+          subEntityId,
+          response
+        })
+      )
+      .catch(error =>
+        of({
+          type: 'DELETE_SUB_ENTITY_REJECTED',
+          entityName,
+          entityId: selectedEntity.get('id'),
+          subEntityName,
+          subEntityId,
+          error
+        })
+      );
+  });

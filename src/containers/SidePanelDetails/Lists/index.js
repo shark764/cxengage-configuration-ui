@@ -8,6 +8,7 @@ import { ListsDetailsPanel } from 'cx-ui-components';
 
 import {
   setSelectedSubEntityId,
+  deleteSubEntity,
   getSelectedEntity
 } from '../../../redux/modules/crudEndpoint';
 
@@ -15,7 +16,8 @@ function mapDispatchToProps(dispatch) {
   return {
     openCreateListItemModal: () => dispatch(setSelectedSubEntityId('create')),
     updateSubEntity: subEntityId =>
-      dispatch(setSelectedSubEntityId(subEntityId))
+      dispatch(setSelectedSubEntityId(subEntityId)),
+    deleteSubEntity: subEntityId => dispatch(deleteSubEntity(subEntityId))
   };
 }
 
