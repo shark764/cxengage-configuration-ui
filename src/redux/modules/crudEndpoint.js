@@ -43,6 +43,9 @@ export const updateSidePanelWidth = width => ({
   type: 'UPDATE_SIDE_PANEL_WIDTH',
   width
 });
+export const deleteSubEntity = subEntityId => {
+  return { type: 'DELETE_SUB_ENTITY', subEntityId };
+};
 
 // Initial Sub State
 
@@ -176,6 +179,44 @@ export default function reducer(state = initialState, action) {
         [state.get('currentEntity'), 'sidePanelWidth'],
         action.width
       );
+    }
+    case 'DELETE_SUB_ENTITY': {
+      const currentEntity = state.get('currentEntity');
+      const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
+      const entityIndex = state
+        .getIn([currentEntity, 'data'])
+        .findIndex(entity => entity.get('id') === selectedEntityId);
+      const subEntityIndex = state
+        .getIn([currentEntity, 'data', entityIndex, 'items'])
+        .findIndex(subEntity => subEntity.get('key') === action.subEntityId);
+      return state.updateIn(
+        [currentEntity, 'data', entityIndex, 'items', subEntityIndex],
+        subEntity => subEntity.set('deleting', true)
+      );
+    }
+    case 'DELETE_SUB_ENTITY_FULFILLED': {
+      const entityIndex = state
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === action.entityId);
+      if (entityIndex !== -1) {
+        return state.update(action.entityName, entityStore =>
+          entityStore
+            .updateIn(['data', entityIndex, 'items'], subEntityList => {
+              const subEntityIndex = subEntityList.findIndex(
+                subEntity => subEntity.get('key') === action.subEntityId
+              );
+              if (entityIndex !== -1) {
+                return subEntityList.delete(subEntityIndex);
+              } else {
+                return subEntityList;
+              }
+            })
+            .set('selectedSubEntityId', undefined)
+            .set('subEntitySaving', false)
+        );
+      } else {
+        return state;
+      }
     }
     default:
       return state;
