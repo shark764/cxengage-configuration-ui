@@ -11,7 +11,8 @@ import { capitalizeFirstLetter } from '../../utils/string';
 import {
   setSelectedEntityId,
   getCurrentEntity,
-  getAllEntities
+  getAllEntities,
+  userHasCreatePermission
 } from '../../redux/modules/crudEndpoint';
 
 import { getTableColumns } from './config';
@@ -35,7 +36,8 @@ function mapStateToProps(state) {
       'https://docs.cxengage.net/Help/Content/Configuring%20CxEngage/Lists/Lists.htm',
     onSearchFilterChange: e => console.log(e.target.value),
     items: getAllEntities(state) ? getAllEntities(state).toJS() : undefined,
-    columns: getTableColumns(currentEntity)
+    columns: getTableColumns(currentEntity),
+    userHasCreatePermission: userHasCreatePermission(state)
   };
 }
 

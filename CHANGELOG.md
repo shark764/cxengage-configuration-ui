@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.12.0]
+* CXV1-13102 - User permissions
+
 ## [0.11.0]
 * CXV1-12285 - Delete List items
 

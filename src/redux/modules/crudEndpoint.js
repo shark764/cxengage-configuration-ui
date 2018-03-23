@@ -3,6 +3,7 @@
  */
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
+import { getCurrentPermissions } from './userData.js';
 
 // Actions
 
@@ -50,14 +51,18 @@ export const deleteSubEntity = subEntityId => {
 // Initial Sub State
 
 const initialState = fromJS({
-  currentEntity: '',
+  currentEntity: 'none',
+  none: {},
   lists: {
     selectedEntityId: '',
     data: undefined,
     subEntity: 'listItems',
     selectedSubEntityId: undefined,
     subEntitySaving: false,
-    sidePanelWidth: 550
+    sidePanelWidth: 550,
+    readPermission: 'VIEW_ALL_LISTS',
+    updatePermission: 'MANAGE_ALL_LISTS',
+    createPermission: 'MANAGE_ALL_LISTS'
   },
   listTypes: {
     data: undefined
@@ -234,15 +239,12 @@ export const getCurrentEntityStore = state =>
   getCrudEndpoint(state).get(getCurrentEntity(state));
 
 export const getSidePanelWidth = state =>
-  getCurrentEntityStore(state) &&
   getCurrentEntityStore(state).get('sidePanelWidth');
 
 export const getSelectedEntityId = state =>
-  getCurrentEntityStore(state) &&
   getCurrentEntityStore(state).get('selectedEntityId');
 
-export const getAllEntities = state =>
-  getCurrentEntityStore(state) && getCurrentEntityStore(state).get('data');
+export const getAllEntities = state => getCurrentEntityStore(state).get('data');
 
 export const getSelectedEntity = createSelector(
   [getCurrentEntity, getAllEntities, getSelectedEntityId],
@@ -252,16 +254,30 @@ export const getSelectedEntity = createSelector(
 );
 
 export const getSelectedEntityName = state =>
-  getSelectedEntity(state) && getSelectedEntity(state).get('name');
+  getSelectedEntity(state).get('name');
+
+export const userHasReadPermission = state =>
+  getCurrentPermissions(state).includes(
+    getCurrentEntityStore(state).get('readPermission')
+  );
+
+export const userHasUpdatePermission = state =>
+  getCurrentPermissions(state).includes(
+    getCurrentEntityStore(state).get('updatePermission')
+  );
+
+export const userHasCreatePermission = state =>
+  getCurrentPermissions(state).includes(
+    getCurrentEntityStore(state).get('createPermission')
+  );
 
 export const isCreating = state =>
   getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
 
 export const getCurrentSubEntity = state =>
-  getCurrentEntityStore(state) && getCurrentEntityStore(state).get('subEntity');
+  getCurrentEntityStore(state).get('subEntity');
 
 export const getSelectedSubEntityId = state =>
-  getCurrentEntityStore(state) &&
   getCurrentEntityStore(state).get('selectedSubEntityId');
 
 export const getSelectedSubEntity = createSelector(
@@ -274,11 +290,9 @@ export const getSelectedSubEntity = createSelector(
 );
 
 export const isSubEntitySaving = state =>
-  getCurrentEntityStore(state) &&
   getCurrentEntityStore(state).get('subEntitySaving');
 
 export const getSelectedEntityFormId = createSelector(
   [getCurrentEntity, getSelectedEntityId],
-  (currentEntity, selectedEntityId) =>
-    `${currentEntity}:${selectedEntityId}`
+  (currentEntity, selectedEntityId) => `${currentEntity}:${selectedEntityId}`
 );

@@ -9,6 +9,7 @@ import { ListsDetailsPanel } from 'cx-ui-components';
 import {
   setSelectedSubEntityId,
   deleteSubEntity,
+  userHasUpdatePermission,
   getSelectedEntity
 } from '../../../redux/modules/crudEndpoint';
 
@@ -31,6 +32,7 @@ function mapStateToProps(state) {
       listType: selectedEntity.get('listType').get('name'),
       // TODO alertMessage: `TODO: session tenantId vs createdby tenantId`,
       tableItems: selectedEntity.get('items').toJS(),
+      userHasUpdatePermission: userHasUpdatePermission(state),
       tableFields
     };
   }
