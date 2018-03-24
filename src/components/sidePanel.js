@@ -11,7 +11,8 @@ import SidePanelActionsContainer from '../containers/SidePanelActions';
 
 import {
   getSidePanelWidth,
-  updateSidePanelWidth
+  updateSidePanelWidth,
+  userHasUpdatePermission
 } from '../redux/modules/crudEndpoint.js';
 
 const SidePanelDiv = styled.div.attrs({
@@ -83,9 +84,11 @@ class SidePanel extends Component {
           id="SlidingResizer"
         />
         <SidePanelDiv slidingWidth={this.props.slidingWidth}>
-          <SidePanelHeader />
+          <SidePanelHeader
+            userHasUpdatePermission={this.props.userHasUpdatePermission}
+          />
           {this.props.children}
-          <SidePanelActions />
+          {this.props.userHasUpdatePermission && <SidePanelActions />}
         </SidePanelDiv>
       </Fragment>
     );
@@ -93,7 +96,8 @@ class SidePanel extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  slidingWidth: getSidePanelWidth(state, props)
+  slidingWidth: getSidePanelWidth(state, props),
+  userHasUpdatePermission: userHasUpdatePermission(state)
 });
 
 function mapDispatchToProps(dispatch) {
