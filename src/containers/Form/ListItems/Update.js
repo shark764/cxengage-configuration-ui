@@ -8,10 +8,12 @@ import { reduxForm } from 'redux-form/immutable';
 import { ListItemsForm } from 'cx-ui-components';
 import {
   setSelectedSubEntityId,
-  onSubEntityFormSubmit,
+  onSubEntityFormSubmit
+} from '../../../redux/modules/crudEndpoint';
+import {
   getSelectedSubEntityId,
   isSubEntitySaving
-} from '../../../redux/modules/crudEndpoint';
+} from '../../../redux/modules/crudEndpoint/selectors';
 import { getUpdateFieldItems, getInitialValues } from './selectors';
 import validate from './validation';
 

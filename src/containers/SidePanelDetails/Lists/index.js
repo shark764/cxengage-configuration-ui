@@ -6,13 +6,15 @@ import { connect } from 'react-redux';
 
 import { ListsDetailsPanel } from 'cx-ui-components';
 
+import { setSelectedSubEntityId } from '../../../redux/modules/crudEndpoint';
+
 import {
-  setSelectedSubEntityId,
-  deleteSubEntity,
+  getSelectedEntity,
+  userHasUpdatePermission,
   userHasUpdatePermission,
   getSelectedEntity,
   isInherited
-} from '../../../redux/modules/crudEndpoint';
+} from '../../../redux/modules/crudEndpoint/selectors';
 
 function mapDispatchToProps(dispatch) {
   return {

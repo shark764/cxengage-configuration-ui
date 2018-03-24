@@ -9,11 +9,11 @@ import { SliderExpander } from 'cx-ui-components';
 import SidePanelHeaderContainer from '../containers/SidePanelHeader';
 import SidePanelActionsContainer from '../containers/SidePanelActions';
 
+import { updateSidePanelWidth } from '../redux/modules/crudEndpoint';
 import {
   getSidePanelWidth,
-  updateSidePanelWidth,
   userHasUpdatePermission
-} from '../redux/modules/crudEndpoint.js';
+} from '../redux/modules/crudEndpoint/selectors';
 
 const SidePanelDiv = styled.div.attrs({
   style: props => ({

@@ -5,6 +5,7 @@
 import { combineReducers } from 'redux-immutable';
 import { reducer as form } from 'redux-form/immutable';
 
+import branding from './modules/branding';
 import crudEndpoint from './modules/crudEndpoint';
 import userData from './modules/userData';
 import SupervisorToolbar from '../containers/SupervisorToolbar/reducer';
@@ -12,6 +13,7 @@ import InteractionMonitoring from '../containers/InteractionMonitoring/reducer';
 import CheckboxFilterMenu from '../containers/CheckboxFilterMenu/reducer';
 
 const reducer = combineReducers({
+  branding,
   crudEndpoint,
   userData,
   form,

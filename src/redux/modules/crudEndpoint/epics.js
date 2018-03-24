@@ -1,7 +1,13 @@
+/*
+ * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
+ */
+
 import 'rxjs';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 import { from } from 'rxjs/observable/from';
+import { Toast } from 'cx-ui-components';
+
 import { sdkPromise } from '../../../utils/sdk';
 import {
   capitalizeFirstLetter,
@@ -10,17 +16,20 @@ import {
   capitalizeFirstAndRemoveLastLetter
 } from '../../../utils/string';
 
+import { updateEntityFulfilled } from './index';
 import {
   getCurrentEntity,
   getSelectedEntityId,
   getAllEntities,
   getSelectedEntity,
   getCurrentSubEntity,
-  getSelectedSubEntityId,
-  updateEntityFulfilled
-} from '../crudEndpoint.js';
+  getSelectedSubEntityId
+} from './selectors';
 
-import { createFormMetadata, updateFormMetadata } from '../formMetadata';
+import {
+  createFormMetadata,
+  updateFormMetadata
+} from '../../../utils/formMetaData';
 
 export const StartFormSubmission = (action$, store) =>
   action$
@@ -77,13 +86,16 @@ export const FetchData = (action$, store) =>
         entityName: a.entityName,
         response: response
       }))
-      .catch(error =>
-        of({
+      .catch(error => {
+        Toast.error(
+          'Unable to retrieve entity data, Please reload the page to try again. If this error persists, please contact your systems administrator'
+        );
+        return of({
           type: 'FETCH_DATA_REJECTED',
           entityName: a.entityName,
           error: error
-        })
-      )
+        });
+      })
   );
 
 export const getTenantPermissions = (action$, store) =>
@@ -119,18 +131,24 @@ export const CreateEntity = (action$, store) =>
         `cxengage/entities/create-${removeLastLetter(a.entityName)}-response`
       )
     )
-      .map(response => ({
-        type: 'CREATE_ENTITY_FULFILLED',
-        entityName: a.entityName,
-        response: response
-      }))
-      .catch(error =>
-        of({
+      .map(response => {
+        Toast.success('Entity was created successfully!');
+        return {
+          type: 'CREATE_ENTITY_FULFILLED',
+          entityName: a.entityName,
+          response: response
+        };
+      })
+      .catch(error => {
+        Toast.error(
+          'Entity creation failed. If this error persists, please contact your systems administrator'
+        );
+        return {
           type: 'CREATE_ENTITY_REJECTED',
           entityName: a.entityName,
           error: error
-        })
-      )
+        };
+      })
   );
 export const UpdateEntity = (action$, store) =>
   action$.ofType('UPDATE_ENTITY').mergeMap(a =>
@@ -149,14 +167,20 @@ export const UpdateEntity = (action$, store) =>
         `cxengage/entities/update-${removeLastLetter(a.entityName)}-response`
       )
     )
-      .map(response => updateEntityFulfilled(a.entityName, response))
-      .catch(error =>
-        of({
+      .map(response => {
+        Toast.success('Entity was updated successfully!');
+        return updateEntityFulfilled(a.entityName, response);
+      })
+      .catch(error => {
+        Toast.error(
+          'Entity update failed. If this error persists, please contact your systems administrator'
+        );
+        return of({
           type: 'UPDATE_ENTITY_REJECTED',
           entityName: a.entityName,
           error: error
-        })
-      )
+        });
+      })
   );
 
 export const ToggleEntity = (action$, store) =>
@@ -190,13 +214,19 @@ export const ToggleEntity = (action$, store) =>
           )}-response`
         )
       )
-        .map(response => updateEntityFulfilled(a.currentEntity, response))
-        .catch(error =>
-          of({
+        .map(response => {
+          Toast.success('Entity was updated successfully!');
+          return updateEntityFulfilled(a.entityName, response);
+        })
+        .catch(error => {
+          Toast.error(
+            'Entity update failed. If this error persists, please contact your systems administrator'
+          );
+          return of({
             type: 'TOGGLE_ENTITY_REJECTED',
             error: error
-          })
-        )
+          });
+        })
     );
 
 export const FetchFormMetaData = (action$, store) =>
