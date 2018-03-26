@@ -32,9 +32,9 @@ pipeline {
     }
     stage ('Build') {
       steps {
-        sh "mkdir dist"
+        sh "mkdir build"
         sh "docker build -t ${docker_tag} -f Dockerfile-build ."
-        sh "docker run --rm --mount type=bind,src=$HOME/.ssh,dst=/home/node/.ssh,readonly --mount type=bind,src=${pwd}/dist,dst=/home/node/mount ${docker_tag}"
+        sh "docker run --rm --mount type=bind,src=$HOME/.ssh,dst=/home/node/.ssh,readonly --mount type=bind,src=${pwd}/build,dst=/home/node/mount ${docker_tag}"
       }
     }
     stage ('Push to Github') {
@@ -42,7 +42,7 @@ pipeline {
       steps {
         git url: "git@github.com:SerenovaLLC/${service}"
         sh 'git checkout -b build-${BUILD_TAG}'
-        sh 'git add -f dist/* '
+        sh 'git add -f build/* '
         sh "git commit -m 'release ${build_version}'"
         script {
           if (build_version.contains("SNAPSHOT")) {
