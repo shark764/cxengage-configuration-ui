@@ -36,11 +36,13 @@ const SidePanelDiv = styled.div.attrs({
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
   padding: 10px 14px;
   border-bottom: 1px solid #dadada;
+  min-height: 100px;
 `;
 
 const SidePanelActions = styled(SidePanelActionsContainer)`
   margin-top: auto;
   border-top: 1px solid #dadada;
+  margin-right: 50px;
 `;
 
 let mouseObservableSubscription;

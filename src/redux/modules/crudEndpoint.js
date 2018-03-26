@@ -3,7 +3,7 @@
  */
 import { fromJS } from 'immutable';
 import { createSelector } from 'reselect';
-import { getCurrentPermissions } from './userData.js';
+import { getCurrentPermissions, getCurrentTenantId } from './userData.js';
 
 // Actions
 
@@ -270,6 +270,9 @@ export const userHasCreatePermission = state =>
   getCurrentPermissions(state).includes(
     getCurrentEntityStore(state).get('createPermission')
   );
+
+export const isListInherited = state =>
+  getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
 
 export const isCreating = state =>
   getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
