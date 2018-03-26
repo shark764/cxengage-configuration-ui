@@ -28,7 +28,6 @@ import CheckboxFilterMenu from '../CheckboxFilterMenu';
 import { Button } from 'cx-ui-components';
 
 import ReactTable from 'react-table';
-import './style.css';
 import {
   selectInteractionMonitoringTableData,
   selectInteractionMonitoringSorted,
