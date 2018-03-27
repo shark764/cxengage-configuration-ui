@@ -11,7 +11,7 @@ import {
   deleteSubEntity,
   userHasUpdatePermission,
   getSelectedEntity,
-  isListInherited
+  isInherited
 } from '../../../redux/modules/crudEndpoint';
 
 function mapDispatchToProps(dispatch) {
@@ -25,14 +25,25 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const selectedEntity = getSelectedEntity(state);
+  let alertMessage = '';
+  let inherited = false;
+
+  if (isInherited(state)) {
+    alertMessage = 'This list is inherited and cannot be edited';
+    inherited = true;
+  }
+
+  const tableFields = selectedEntity.getIn(['listType', 'fields']).toJS();
   if (selectedEntity) {
     return {
       listType: selectedEntity.get('listType').get('name'),
       // TODO alertMessage: `TODO: session tenantId vs createdby tenantId`,
       tableItems: selectedEntity.get('items').toJS(),
       userHasUpdatePermission: userHasUpdatePermission(state),
-      listIsInherited: isListInherited(state),
-      tableFields: selectedEntity.getIn(['listType', 'fields']).toJS()
+      tableFields: selectedEntity.getIn(['listType', 'fields']).toJS(),
+      inherited,
+      alertMessage,
+      tableFields
     };
   }
   return {};

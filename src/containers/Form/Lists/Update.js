@@ -11,7 +11,8 @@ import { updateFormValidation } from './validation';
 import {
   onFormSubmit,
   getSelectedEntityId,
-  getSelectedEntity
+  getSelectedEntity,
+  isInherited
 } from '../../../redux/modules/crudEndpoint';
 
 let UpdateListForm = compose(
@@ -33,7 +34,8 @@ function mapStateToProps(state) {
         name: selectedEntity.get('name')
       }),
       listType: selectedEntity.getIn(['listType', 'name']),
-      isSaving: selectedEntity.get('updating') === true
+      isSaving: selectedEntity.get('updating') === true,
+      inherited: isInherited(state)
     };
   }
   return {};

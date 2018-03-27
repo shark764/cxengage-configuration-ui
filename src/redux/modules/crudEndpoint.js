@@ -271,7 +271,7 @@ export const userHasCreatePermission = state =>
     getCurrentEntityStore(state).get('createPermission')
   );
 
-export const isListInherited = state =>
+export const isInherited = state =>
   getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
 
 export const isCreating = state =>
