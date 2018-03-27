@@ -14,7 +14,8 @@ import {
   getSelectedEntityId,
   getSelectedEntity,
   deselectCurrentEntity,
-  toggleEntityActive
+  toggleEntityActive,
+  isInherited
 } from '../../redux/modules/crudEndpoint';
 
 function mapDispatchToProps(dispatch) {
@@ -45,7 +46,8 @@ function mapStateToProps(state) {
       title: selectedEntity.get('name'),
       createdAt: `Created on ${dateCreated}`,
       updatedAt: `Updated on ${dateUpdated}`,
-      toggleStatus: selectedEntity.get('active')
+      toggleStatus: selectedEntity.get('active'),
+      inherited: isInherited(state)
     };
   }
   return {};
