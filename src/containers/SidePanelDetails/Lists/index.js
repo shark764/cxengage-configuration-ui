@@ -10,7 +10,8 @@ import {
   setSelectedSubEntityId,
   deleteSubEntity,
   userHasUpdatePermission,
-  getSelectedEntity
+  getSelectedEntity,
+  isListInherited
 } from '../../../redux/modules/crudEndpoint';
 
 function mapDispatchToProps(dispatch) {
@@ -24,16 +25,14 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const selectedEntity = getSelectedEntity(state);
-
-  const tableFields = selectedEntity.getIn(['listType', 'fields']).toJS();
-  tableFields.push({ label: 'Actions', name: 'subEntityActions' });
   if (selectedEntity) {
     return {
       listType: selectedEntity.get('listType').get('name'),
       // TODO alertMessage: `TODO: session tenantId vs createdby tenantId`,
       tableItems: selectedEntity.get('items').toJS(),
       userHasUpdatePermission: userHasUpdatePermission(state),
-      tableFields
+      listIsInherited: isListInherited(state),
+      tableFields: selectedEntity.getIn(['listType', 'fields']).toJS()
     };
   }
   return {};
