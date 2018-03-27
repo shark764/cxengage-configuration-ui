@@ -11,13 +11,13 @@ import { capitalizeFirstLetter } from '../../utils/string';
 
 import {
   deselectCurrentEntity,
-  toggleEntityActive,
-  isInherited
+  toggleEntityActive
 } from '../../redux/modules/crudEndpoint';
 import {
   getCurrentEntity,
   getSelectedEntityId,
-  getSelectedEntity
+  getSelectedEntity,
+  isInherited
 } from '../../redux/modules/crudEndpoint/selectors';
 
 function mapDispatchToProps(dispatch) {

@@ -12,8 +12,7 @@ import { onFormSubmit } from '../../../redux/modules/crudEndpoint';
 import {
   getSelectedEntityId,
   getSelectedEntity,
-  isInherited,
-  getSelectedEntity
+  isInherited
 } from '../../../redux/modules/crudEndpoint/selectors';
 
 let UpdateListForm = compose(

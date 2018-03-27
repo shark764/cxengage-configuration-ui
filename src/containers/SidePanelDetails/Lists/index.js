@@ -11,8 +11,6 @@ import { setSelectedSubEntityId } from '../../../redux/modules/crudEndpoint';
 import {
   getSelectedEntity,
   userHasUpdatePermission,
-  userHasUpdatePermission,
-  getSelectedEntity,
   isInherited
 } from '../../../redux/modules/crudEndpoint/selectors';
 

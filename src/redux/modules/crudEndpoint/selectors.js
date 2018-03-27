@@ -3,7 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
-import { getCurrentPermissions, getCurrentTenantId } from './userData.js';
+import { getCurrentPermissions, getCurrentTenantId } from '../userData.js';
 // Selectors
 
 const getCrudEndpoint = state => state.get('crudEndpoint');
