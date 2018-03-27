@@ -10,13 +10,15 @@ import { SidePanelHeader } from 'cx-ui-components';
 import { capitalizeFirstLetter } from '../../utils/string';
 
 import {
+  deselectCurrentEntity,
+  toggleEntityActive
+} from '../../redux/modules/crudEndpoint';
+import {
   getCurrentEntity,
   getSelectedEntityId,
   getSelectedEntity,
-  deselectCurrentEntity,
-  toggleEntityActive,
   isInherited
-} from '../../redux/modules/crudEndpoint';
+} from '../../redux/modules/crudEndpoint/selectors';
 
 function mapDispatchToProps(dispatch) {
   return {

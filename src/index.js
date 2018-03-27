@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
-import { RootStyles } from 'cx-ui-components';
+import RootStyles from './containers/RootStyles';
 
 import store from './redux/store';
 
@@ -16,8 +16,8 @@ import InteractionMonitoring from './containers/InteractionMonitoring';
 import CrudEndpointUi from './containers/CrudEndpointUi';
 
 ReactDOM.render(
-  <RootStyles>
-    <Provider store={store}>
+  <Provider store={store}>
+    <RootStyles>
       <Router>
         <React.Fragment>
           <Route path="/supervisorToolbar" component={SupervisorToolbar} />
@@ -28,7 +28,7 @@ ReactDOM.render(
           <Route path="/(lists)/" component={CrudEndpointUi} />
         </React.Fragment>
       </Router>
-    </Provider>
-  </RootStyles>,
+    </RootStyles>
+  </Provider>,
   document.getElementById('root')
 );

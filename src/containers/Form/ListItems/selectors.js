@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 import {
   getSelectedEntity,
   getSelectedSubEntity
-} from '../../../redux/modules/crudEndpoint';
+} from '../../../redux/modules/crudEndpoint/selectors';
 
 export const getFieldItems = createSelector(getSelectedEntity, selectedList =>
   selectedList.getIn(['listType', 'fields']).toJS()

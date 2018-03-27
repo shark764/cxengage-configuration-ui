@@ -8,12 +8,12 @@ import { EntityTable } from 'cx-ui-components';
 
 import { capitalizeFirstLetter } from '../../utils/string';
 
+import { setSelectedEntityId } from '../../redux/modules/crudEndpoint';
 import {
-  setSelectedEntityId,
   getCurrentEntity,
   getAllEntities,
   userHasCreatePermission
-} from '../../redux/modules/crudEndpoint';
+} from '../../redux/modules/crudEndpoint/selectors';
 
 import { getTableColumns } from './config';
 

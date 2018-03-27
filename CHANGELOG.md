@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.15.0]
+* CXV1-13100 - Branding styles added
+* CXV1-13096 - Toasts added into entity epics
+
 ## [0.14.0]
 * CXV1-13099 - List inheritance and minor bug fixes
 

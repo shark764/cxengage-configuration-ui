@@ -4,12 +4,12 @@
 
 import { connect } from 'react-redux';
 
+import { setCurrentEntity, fetchData } from '../../redux/modules/crudEndpoint';
+
 import {
-  setCurrentEntity,
-  fetchData,
   getSelectedEntityId,
   getSelectedSubEntityId
-} from '../../redux/modules/crudEndpoint';
+} from '../../redux/modules/crudEndpoint/selectors';
 
 import Layout from './Layout';
 

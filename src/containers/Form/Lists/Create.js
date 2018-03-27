@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import { ListsForm } from 'cx-ui-components';
 import { createFormValidation } from './validation';
+import { onFormSubmit } from '../../../redux/modules/crudEndpoint';
 import {
-  onFormSubmit,
   getSelectedEntityId,
   isCreating
-} from '../../../redux/modules/crudEndpoint';
+} from '../../../redux/modules/crudEndpoint/selectors';
 
 let CreateListForm = reduxForm({
   form: 'lists:create',
