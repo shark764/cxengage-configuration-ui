@@ -44,6 +44,14 @@ export const StartFormSubmission = (action$, store) =>
       meta: { form: `${a.currentEntity}:${a.selectedIdentityId}` }
     }));
 
+export const resetForm = (action$, store) =>
+  action$
+    .ofType(['UPDATE_SUB_ENTITY_FUFILLED', 'UPDATE_ENTITY_FUFILLED'])
+    .map(a => ({
+      type: '@@redux-form/RESET',
+      meta: { form: a.meta.form }
+    }));
+
 export const FormSubmission = (action$, store) =>
   action$
     .ofType('FORM_SUBMIT')
@@ -331,7 +339,8 @@ export const UpdateSubEntity = (action$, store) =>
     .ofType('UPDATE_SUB_ENTITY')
     .map(action => ({
       ...action,
-      singularSubEntityName: removeLastLetter(action.subEntityName)
+      singularSubEntityName: removeLastLetter(action.subEntityName),
+      subEntityId: getSelectedSubEntityId(store.getState())
     }))
     .mergeMap(a =>
       fromPromise(

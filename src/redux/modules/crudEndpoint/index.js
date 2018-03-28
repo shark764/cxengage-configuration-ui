@@ -142,7 +142,12 @@ export default function reducer(state = initialState, action) {
         return state.update(action.entityName, entityStore =>
           entityStore
             .updateIn(['data', entityIndex, 'items'], subEntityList =>
-              subEntityList.push(fromJS(action.response.itemValue))
+              subEntityList.push(
+                fromJS({
+                  ...action.response.itemValue,
+                  key: action.response.key
+                })
+              )
             )
             .set('selectedSubEntityId', undefined)
             .set('subEntitySaving', false)
@@ -163,9 +168,13 @@ export default function reducer(state = initialState, action) {
                 subEntity => subEntity.get('key') === action.subEntityId
               );
               if (entityIndex !== -1) {
+                const { itemValue } = action.response.apiResponse.result;
                 return subEntityList.mergeIn(
                   [subEntityIndex],
-                  fromJS(action.response.apiResponse.result.itemValue)
+                  fromJS({
+                    ...itemValue,
+                    key: action.response.key
+                  })
                 );
               } else {
                 return subEntityList;

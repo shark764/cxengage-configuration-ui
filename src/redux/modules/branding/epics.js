@@ -5,6 +5,7 @@
 import 'rxjs';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { sdkPromise } from '../../../utils/sdk';
+import { of } from 'rxjs/observable/of';
 
 export const FetchBranding = action$ =>
   action$.ofType('FETCH_BRANDING').switchMap(() =>
@@ -22,8 +23,10 @@ export const FetchBranding = action$ =>
         type: 'FETCH_BRANDING_FULFILLED',
         response
       }))
-      .catch(error => ({
-        type: 'FETCH_BRANDING_REJECTED',
-        error
-      }))
+      .catch(error =>
+        of({
+          type: 'FETCH_BRANDING_REJECTED',
+          error
+        })
+      )
   );
