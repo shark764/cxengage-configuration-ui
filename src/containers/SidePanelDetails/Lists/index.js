@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 
 import { ListsDetailsPanel } from 'cx-ui-components';
 
-import { setSelectedSubEntityId } from '../../../redux/modules/crudEndpoint';
+import {
+  setSelectedSubEntityId,
+  deleteSubEntity
+} from '../../../redux/modules/crudEndpoint';
 
 import {
   getSelectedEntity,

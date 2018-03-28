@@ -11,17 +11,19 @@ export function getTableColumns(entityName) {
       return [
         {
           id: 'name',
-          Header: 'Name',
-          accessor: 'name'
+          Header: <abbr title="Name">Name</abbr>,
+          accessor: list => <abbr title={list.name}>{list.name}</abbr>
         },
         {
           id: 'listType',
-          Header: 'List Type',
-          accessor: list => list.listType.name
+          Header: <abbr title="List Type">List Type</abbr>,
+          accessor: list => (
+            <abbr title={list.listType.name}>{list.listType.name}</abbr>
+          )
         },
         {
           id: 'status',
-          Header: 'Status',
+          Header: <abbr title="Status">Status</abbr>,
           accessor: list => (list.active ? 'Enabled' : 'Disabled'),
           filterMethod: (filter, row) => {
             if (filter.value === 'all') {

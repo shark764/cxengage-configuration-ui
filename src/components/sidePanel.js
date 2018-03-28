@@ -36,7 +36,8 @@ const SidePanelDiv = styled.div.attrs({
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
   padding: 10px 14px;
   border-bottom: 1px solid #dadada;
-  min-height: 100px;
+  min-height: 90px;
+  height: 90px;
 `;
 
 const SidePanelActions = styled(SidePanelActionsContainer)`
