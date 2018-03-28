@@ -12,3 +12,5 @@ export const camelCaseToKebabCase = string =>
 export const capitalizeFirstAndRemoveLastLetter = string => {
   return capitalizeFirstLetter(removeLastLetter(string));
 };
+
+export const atLeastOneLetterOrNumber = /([a-z]|[0-9])/i;
