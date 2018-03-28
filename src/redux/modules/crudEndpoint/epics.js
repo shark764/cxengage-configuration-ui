@@ -224,7 +224,7 @@ export const ToggleEntity = (action$, store) =>
       )
         .map(response => {
           Toast.success('Entity was updated successfully!');
-          return updateEntityFulfilled(a.entityName, response);
+          return updateEntityFulfilled(a.currentEntity, response);
         })
         .catch(error => {
           Toast.error(
