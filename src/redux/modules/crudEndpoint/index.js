@@ -173,7 +173,7 @@ export default function reducer(state = initialState, action) {
                   [subEntityIndex],
                   fromJS({
                     ...itemValue,
-                    key: action.response.key
+                    key: action.response.apiResponse.result.key
                   })
                 );
               } else {
