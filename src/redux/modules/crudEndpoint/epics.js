@@ -140,7 +140,7 @@ export const CreateEntity = (action$, store) =>
       )
     )
       .map(response => {
-        Toast.success('Entity was created successfully!');
+        Toast.success(`${a.entityName} was created successfully!`);
         return {
           type: 'CREATE_ENTITY_FULFILLED',
           entityName: a.entityName,
@@ -176,7 +176,7 @@ export const UpdateEntity = (action$, store) =>
       )
     )
       .map(response => {
-        Toast.success('Entity was updated successfully!');
+        Toast.success(`${a.entityName} was updated successfully!`);
         return updateEntityFulfilled(a.entityName, response);
       })
       .catch(error => {
@@ -223,7 +223,7 @@ export const ToggleEntity = (action$, store) =>
         )
       )
         .map(response => {
-          Toast.success('Entity was updated successfully!');
+          Toast.success(`${a.currentEntity} was updated successfully!`);
           return updateEntityFulfilled(a.currentEntity, response);
         })
         .catch(error => {
@@ -316,22 +316,26 @@ export const CreateSubEntity = (action$, store) =>
           )}-response`
         )
       )
-        .map(response => ({
-          type: 'CREATE_SUB_ENTITY_FULFILLED',
-          entityName: a.entityName,
-          entityId: a.selectedEntity.get('id'),
-          subEntityName: a.subEntityName,
-          response: response
-        }))
-        .catch(error =>
-          of({
+        .map(response => {
+          Toast.success('List item was created successfully!');
+          return {
+            type: 'CREATE_SUB_ENTITY_FULFILLED',
+            entityName: a.entityName,
+            entityId: a.selectedEntity.get('id'),
+            subEntityName: a.subEntityName,
+            response: response
+          };
+        })
+        .catch(error => {
+          Toast.error('List item creation failed!');
+          return of({
             type: 'CREATE_SUB_ENTITY_REJECTED',
             entityName: a.entityName,
             entityId: a.selectedEntity.get('id'),
             subEntityName: a.subEntityName,
             error: error
-          })
-        )
+          });
+        })
     );
 
 export const UpdateSubEntity = (action$, store) =>
@@ -359,24 +363,28 @@ export const UpdateSubEntity = (action$, store) =>
           )}-response`
         )
       )
-        .map(response => ({
-          type: 'UPDATE_SUB_ENTITY_FULFILLED',
-          entityName: a.entityName,
-          entityId: a.selectedEntity.get('id'),
-          subEntityName: a.subEntityName,
-          subEntityId: a.subEntityId,
-          response: response
-        }))
-        .catch(error =>
-          of({
+        .map(response => {
+          Toast.success('List item was updated successfully!');
+          return {
+            type: 'UPDATE_SUB_ENTITY_FULFILLED',
+            entityName: a.entityName,
+            entityId: a.selectedEntity.get('id'),
+            subEntityName: a.subEntityName,
+            subEntityId: a.subEntityId,
+            response: response
+          };
+        })
+        .catch(error => {
+          Toast.error('List item update failed!');
+          return of({
             type: 'UPDATE_SUB_ENTITY_REJECTED',
             entityName: a.entityName,
             entityId: a.selectedEntity.get('id'),
             subEntityName: a.subEntityName,
             subEntityId: a.subEntityId,
             error
-          })
-        )
+          });
+        })
     );
 
 export const DeleteSubEntity = (action$, store) =>
@@ -400,24 +408,26 @@ export const DeleteSubEntity = (action$, store) =>
         )}-response`
       )
     )
-      .mergeMap(response =>
-        of({
+      .map(response => {
+        Toast.success('List item was deleted successfully!');
+        return {
           type: 'DELETE_SUB_ENTITY_FULFILLED',
           entityName,
           entityId: selectedEntity.get('id'),
           subEntityName,
           subEntityId,
           response
-        })
-      )
-      .catch(error =>
-        of({
+        };
+      })
+      .catch(error => {
+        Toast.error('List item deletion failed!');
+        return of({
           type: 'DELETE_SUB_ENTITY_REJECTED',
           entityName,
           entityId: selectedEntity.get('id'),
           subEntityName,
           subEntityId,
           error
-        })
-      );
+        });
+      });
   });
