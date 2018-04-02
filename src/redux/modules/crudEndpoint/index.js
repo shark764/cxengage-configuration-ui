@@ -169,7 +169,7 @@ export default function reducer(state = initialState, action) {
               );
               if (entityIndex !== -1) {
                 const { itemValue } = action.response.apiResponse.result;
-                return subEntityList.mergeIn(
+                return subEntityList.setIn(
                   [subEntityIndex],
                   fromJS({
                     ...itemValue,
