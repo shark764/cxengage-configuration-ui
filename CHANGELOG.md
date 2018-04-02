@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.15.5]
+* CXV1-13326 - Fix for Env Minified code error
+
 ## [0.15.4]
 * CXV1-13339 - Generic Lists - Booleans can't go back to no value
 
