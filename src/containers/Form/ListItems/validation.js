@@ -7,6 +7,7 @@ export default function(values, props) {
     if (
       field.required &&
       (value === undefined ||
+        value === null ||
         (typeof value === 'string' && !atLeastOneLetterOrNumber.test(value)))
     ) {
       errors[field.name] = 'Please enter a value';

@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.15.4]
+* CXV1-13339 - Generic Lists - Booleans can't go back to no value
+
 ## [0.15.3]
 * CXV1-13336 - Updating the List name, submitting then trying to change it back is not submittable.
 * CXV1-13096 - Failure and Success popup dismissible messages
