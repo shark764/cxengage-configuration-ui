@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -23,15 +24,22 @@ module.exports = {
 
     // namedModules: false,  //  true in dev mode
     // namedChunks: false, // true in dev mode
-    
+
     nodeEnv:"custom", //production or development
 
     // minimizer?, you can choose what minimizer you want and customize behaviour
     // minimize: true, // true in prod mode
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: 'index.html'
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    })
+  ],
   module: {
     rules: [
       {
