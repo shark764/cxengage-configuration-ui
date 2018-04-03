@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.15.7]
+* CXV1-13362 - Clean up state when API error occurs
+* CXV1-13422 - Use SDK/API error in error toast
+* CXV1-13430 - Use 'enabled'/'disabled' in toggle success message. Capitalize first letter of entity/subentity.
+
 ## [0.15.6]
 * CXV1-13336 - Generic Lists - Updating the List name, submitting then trying to change it back is not submittable.
 

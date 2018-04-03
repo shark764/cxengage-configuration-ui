@@ -2,7 +2,7 @@
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
 
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 
 // Initial Sub State
 
@@ -88,6 +88,8 @@ export default function reducer(state = initialState, action) {
         [action.entityName, 'data'],
         fromJS(action.response.result)
       );
+    case 'FETCH_DATA_REJECTED':
+      return state.setIn([action.entityName, 'data'], new List());
     case 'CREATE_ENTITY': {
       return state.setIn([action.entityName, 'creating'], true);
     }
@@ -99,18 +101,11 @@ export default function reducer(state = initialState, action) {
           .set('creating', false)
       );
     }
+    case 'CREATE_ENTITY_REJECTED': {
+      return state.setIn([action.entityName, 'creating'], false);
+    }
     case 'UPDATE_ENTITY': {
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.entityId);
-      if (entityIndex !== -1) {
-        return state.setIn(
-          [action.entityName, 'data', entityIndex, 'updating'],
-          true
-        );
-      } else {
-        return state;
-      }
+      return setEntityUpdating(state, action, true);
     }
     case 'UPDATE_ENTITY_FULFILLED': {
       const entityIndex = state
@@ -124,6 +119,9 @@ export default function reducer(state = initialState, action) {
       } else {
         return state;
       }
+    }
+    case 'UPDATE_ENTITY_REJECTED': {
+      return setEntityUpdating(state, action, false);
     }
     case 'SET_SELECTED_SUB_ENTITY_ID': {
       return state.setIn(
@@ -188,6 +186,10 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'CREATE_SUB_ENTITY_REJECTED':
+    case 'UPDATE_SUB_ENTITY_REJECTED': {
+      return state.setIn([action.entityName, 'subEntitySaving'], false);
+    }
     case 'UPDATE_SIDE_PANEL_WIDTH': {
       return state.setIn(
         [state.get('currentEntity'), 'sidePanelWidth'],
@@ -195,18 +197,7 @@ export default function reducer(state = initialState, action) {
       );
     }
     case 'DELETE_SUB_ENTITY': {
-      const currentEntity = state.get('currentEntity');
-      const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
-      const entityIndex = state
-        .getIn([currentEntity, 'data'])
-        .findIndex(entity => entity.get('id') === selectedEntityId);
-      const subEntityIndex = state
-        .getIn([currentEntity, 'data', entityIndex, 'items'])
-        .findIndex(subEntity => subEntity.get('key') === action.subEntityId);
-      return state.updateIn(
-        [currentEntity, 'data', entityIndex, 'items', subEntityIndex],
-        subEntity => subEntity.set('deleting', true)
-      );
+      return setSubEntityDeleting(state, action, true);
     }
     case 'DELETE_SUB_ENTITY_FULFILLED': {
       const entityIndex = state
@@ -232,7 +223,37 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'DELETE_SUB_ENTITY_REJECTED': {
+      return setSubEntityDeleting(state, action, false);
+    }
     default:
       return state;
   }
 }
+
+// Reducer helper functions
+const setEntityUpdating = (state, { entityName, entityId }, updating) => {
+  const entityIndex = state
+    .getIn([entityName, 'data'])
+    .findIndex(entity => entity.get('id') === entityId);
+  if (entityIndex !== -1) {
+    return state.setIn([entityName, 'data', entityIndex, 'updating'], updating);
+  } else {
+    return state;
+  }
+};
+
+const setSubEntityDeleting = (state, { subEntityId }, deleting) => {
+  const currentEntity = state.get('currentEntity');
+  const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
+  const entityIndex = state
+    .getIn([currentEntity, 'data'])
+    .findIndex(entity => entity.get('id') === selectedEntityId);
+  const subEntityIndex = state
+    .getIn([currentEntity, 'data', entityIndex, 'items'])
+    .findIndex(subEntity => subEntity.get('key') === subEntityId);
+  return state.updateIn(
+    [currentEntity, 'data', entityIndex, 'items', subEntityIndex],
+    subEntity => subEntity.set('deleting', deleting)
+  );
+};

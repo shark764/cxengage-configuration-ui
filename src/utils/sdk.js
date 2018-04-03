@@ -14,3 +14,18 @@ export const sdkPromise = (sdkCall, topic) =>
     window.addEventListener('message', handleResponse);
     window.parent.postMessage(sdkCall, '*');
   });
+
+export const errorLabel = error => {
+  let errorDetails;
+  if (
+    error.data &&
+    error.data.apiResponse &&
+    error.data.apiResponse.apiResponse &&
+    error.data.apiResponse.apiResponse.response &&
+    error.data.apiResponse.apiResponse.response.error
+  ) {
+    let { code, message } = error.data.apiResponse.apiResponse.response.error;
+    errorDetails = ` ${code}: ${message}`;
+  }
+  return `${error.message} ${errorDetails ? errorDetails : ''}`;
+};
