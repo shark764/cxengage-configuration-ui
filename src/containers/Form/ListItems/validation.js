@@ -12,6 +12,7 @@ export default function(values, props) {
     ) {
       errors[field.name] = 'Please enter a value';
     } else if (
+      value !== null &&
       field.type === 'number' &&
       value !== undefined &&
       !atLeastOneLetterOrNumber.test(value)
