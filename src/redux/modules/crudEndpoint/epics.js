@@ -44,13 +44,14 @@ export const StartFormSubmission = (action$, store) =>
       meta: { form: `${a.currentEntity}:${a.selectedIdentityId}` }
     }));
 
-export const resetForm = (action$, store) =>
-  action$
-    .ofType(['UPDATE_SUB_ENTITY_FUFILLED', 'UPDATE_ENTITY_FUFILLED'])
-    .map(a => ({
-      type: '@@redux-form/RESET',
-      meta: { form: a.meta.form }
-    }));
+export const reInitForm = (action$, store) =>
+  action$.ofType('UPDATE_ENTITY_FULFILLED').map(a => ({
+    type: '@@redux-form/INITIALIZE',
+    meta: {
+      form: `${a.entityName}:${a.entityId}`
+    },
+    payload: { name: a.payload.name }
+  }));
 
 export const FormSubmission = (action$, store) =>
   action$
@@ -177,7 +178,7 @@ export const UpdateEntity = (action$, store) =>
     )
       .map(response => {
         Toast.success(`${a.entityName} was updated successfully!`);
-        return updateEntityFulfilled(a.entityName, response);
+        return updateEntityFulfilled(a.entityName, response, a.entityId);
       })
       .catch(error => {
         Toast.error(
@@ -186,6 +187,7 @@ export const UpdateEntity = (action$, store) =>
         return of({
           type: 'UPDATE_ENTITY_REJECTED',
           entityName: a.entityName,
+          entityId: a.entityId,
           error: error
         });
       })

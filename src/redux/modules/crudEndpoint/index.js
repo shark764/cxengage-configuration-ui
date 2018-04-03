@@ -55,10 +55,11 @@ export const onSubEntityFormSubmit = (values, { dirty }) => ({
   values,
   dirty
 });
-export const updateEntityFulfilled = (entityName, payload) => ({
+export const updateEntityFulfilled = (entityName, payload, entityId) => ({
   type: 'UPDATE_ENTITY_FULFILLED',
   entityName,
-  payload
+  payload,
+  entityId
 });
 export const updateSidePanelWidth = width => ({
   type: 'UPDATE_SIDE_PANEL_WIDTH',

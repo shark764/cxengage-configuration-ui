@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.15.6]
+* CXV1-13336 - Generic Lists - Updating the List name, submitting then trying to change it back is not submittable.
+
 ## [0.15.5]
 * CXV1-13326 - Fix for Env Minified code error
 
