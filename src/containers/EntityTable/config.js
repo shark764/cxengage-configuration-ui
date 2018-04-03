@@ -12,14 +12,14 @@ export function getTableColumns(entityName) {
         {
           id: 'name',
           Header: <abbr title="Name">Name</abbr>,
-          accessor: list => <abbr title={list.name}>{list.name}</abbr>
+          accessor: 'name',
+          Cell: ({ row }) => <abbr title={row.name}>{row.name}</abbr>
         },
         {
           id: 'listType',
           Header: <abbr title="List Type">List Type</abbr>,
-          accessor: list => (
-            <abbr title={list.listType.name}>{list.listType.name}</abbr>
-          )
+          accessor: list => list.listType.name,
+          Cell: ({ row }) => <abbr title={row.listType}>{row.listType}</abbr>
         },
         {
           id: 'status',
