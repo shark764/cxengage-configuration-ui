@@ -7,11 +7,13 @@ import moment from 'moment';
 
 import { SidePanelHeader } from 'cx-ui-components';
 
+import * as MODALS from '../ConfirmationDialog/constants.js';
+
 import { capitalizeFirstLetter } from '../../utils/string';
 
 import {
   deselectCurrentEntity,
-  toggleEntityActive
+  setConfirmationDialog
 } from '../../redux/modules/crudEndpoint';
 import {
   getCurrentEntity,
@@ -26,7 +28,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(deselectCurrentEntity());
     },
     onToggle: () => {
-      dispatch(toggleEntityActive());
+      dispatch(setConfirmationDialog(MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE));
     }
   };
 }

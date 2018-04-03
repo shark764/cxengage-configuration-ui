@@ -8,6 +8,8 @@ import { of } from 'rxjs/observable/of';
 import { from } from 'rxjs/observable/from';
 import { Toast } from 'cx-ui-components';
 
+import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
+
 import { sdkPromise, errorLabel } from '../../../utils/sdk';
 import {
   capitalizeFirstLetter,
@@ -25,7 +27,8 @@ import {
   getAllEntities,
   getSelectedEntity,
   getCurrentSubEntity,
-  getSelectedSubEntityId
+  getSelectedSubEntityId,
+  getConfirmationDialogType
 } from './selectors';
 
 import {
@@ -450,4 +453,25 @@ export const DeleteSubEntity = (action$, store) =>
           error
         });
       });
+  });
+
+export const ExecuteConfirmationDialogCallback = (action$, store) =>
+  action$.ofType('EXECUTE_CONFIRM_CALLBACK').switchMap(action => {
+    const currentConfirmationModal = getConfirmationDialogType(
+      store.getState()
+    );
+    switch (currentConfirmationModal) {
+      case MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE:
+        return [
+          {
+            type: 'TOGGLE_ENTITY'
+          },
+          {
+            type: 'SET_CONIFIRMATION_DIALOG',
+            modalType: undefined
+          }
+        ];
+      default:
+        return {}; // nothing necessary to do here
+    }
   });

@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
 import { Modal } from 'cx-ui-components';
+import Confirmation from '../ConfirmationDialog';
 
 import SidePanel from '../../components/sidePanel';
 import EntityTableContainer from '../EntityTable';
@@ -128,6 +129,8 @@ export default class CrudEndpointUiLayout extends Component {
                 ))}
           </Modal>
         )}
+
+        {this.props.showConfirmationDialog && <Confirmation />}
       </Wrapper>
     );
   }
@@ -137,5 +140,6 @@ CrudEndpointUiLayout.propTypes = {
   setCurrentEntity: PropTypes.func.isRequired,
   fetchData: PropTypes.func.isRequired,
   selectedEntityId: PropTypes.string,
-  selectedSubEntityId: PropTypes.string
+  selectedSubEntityId: PropTypes.string,
+  showConfirmationDialog: PropTypes.string
 };
