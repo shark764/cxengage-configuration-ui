@@ -8,11 +8,13 @@ import { of } from 'rxjs/observable/of';
 import { from } from 'rxjs/observable/from';
 import { Toast } from 'cx-ui-components';
 
-import { sdkPromise } from '../../../utils/sdk';
+import { sdkPromise, errorLabel } from '../../../utils/sdk';
 import {
   capitalizeFirstLetter,
   removeLastLetter,
   camelCaseToKebabCase,
+  camelCaseToRegularForm,
+  camelCaseToRegularFormAndRemoveLastLetter,
   capitalizeFirstAndRemoveLastLetter
 } from '../../../utils/string';
 
@@ -96,9 +98,7 @@ export const FetchData = (action$, store) =>
         response: response
       }))
       .catch(error => {
-        Toast.error(
-          'Unable to retrieve entity data, Please reload the page to try again. If this error persists, please contact your systems administrator'
-        );
+        Toast.error(errorLabel(error));
         return of({
           type: 'FETCH_DATA_REJECTED',
           entityName: a.entityName,
@@ -141,7 +141,11 @@ export const CreateEntity = (action$, store) =>
       )
     )
       .map(response => {
-        Toast.success(`${a.entityName} was created successfully!`);
+        Toast.success(
+          `${camelCaseToRegularFormAndRemoveLastLetter(
+            a.entityName
+          )} was created successfully!`
+        );
         return {
           type: 'CREATE_ENTITY_FULFILLED',
           entityName: a.entityName,
@@ -149,9 +153,7 @@ export const CreateEntity = (action$, store) =>
         };
       })
       .catch(error => {
-        Toast.error(
-          'Entity creation failed. If this error persists, please contact your systems administrator'
-        );
+        Toast.error(errorLabel(error));
         return {
           type: 'CREATE_ENTITY_REJECTED',
           entityName: a.entityName,
@@ -177,13 +179,15 @@ export const UpdateEntity = (action$, store) =>
       )
     )
       .map(response => {
-        Toast.success(`${a.entityName} was updated successfully!`);
+        Toast.success(
+          `${camelCaseToRegularFormAndRemoveLastLetter(
+            a.entityName
+          )} was updated successfully!`
+        );
         return updateEntityFulfilled(a.entityName, response, a.entityId);
       })
       .catch(error => {
-        Toast.error(
-          'Entity update failed. If this error persists, please contact your systems administrator'
-        );
+        Toast.error(errorLabel(error));
         return of({
           type: 'UPDATE_ENTITY_REJECTED',
           entityName: a.entityName,
@@ -225,13 +229,17 @@ export const ToggleEntity = (action$, store) =>
         )
       )
         .map(response => {
-          Toast.success(`${a.currentEntity} was updated successfully!`);
+          Toast.success(
+            `${camelCaseToRegularFormAndRemoveLastLetter(
+              a.currentEntity
+            )} was ${
+              a.selectedEntity.get('active') ? 'disabled' : 'enabled'
+            } successfully!`
+          );
           return updateEntityFulfilled(a.currentEntity, response);
         })
         .catch(error => {
-          Toast.error(
-            'Entity update failed. If this error persists, please contact your systems administrator'
-          );
+          Toast.error(errorLabel(error));
           return of({
             type: 'TOGGLE_ENTITY_REJECTED',
             error: error
@@ -319,7 +327,11 @@ export const CreateSubEntity = (action$, store) =>
         )
       )
         .map(response => {
-          Toast.success('List item was created successfully!');
+          Toast.success(
+            `${camelCaseToRegularForm(
+              a.singularSubEntityName
+            )} was created successfully!`
+          );
           return {
             type: 'CREATE_SUB_ENTITY_FULFILLED',
             entityName: a.entityName,
@@ -329,7 +341,7 @@ export const CreateSubEntity = (action$, store) =>
           };
         })
         .catch(error => {
-          Toast.error('List item creation failed!');
+          Toast.error(errorLabel(error));
           return of({
             type: 'CREATE_SUB_ENTITY_REJECTED',
             entityName: a.entityName,
@@ -366,7 +378,11 @@ export const UpdateSubEntity = (action$, store) =>
         )
       )
         .map(response => {
-          Toast.success('List item was updated successfully!');
+          Toast.success(
+            `${camelCaseToRegularForm(
+              a.singularSubEntityName
+            )} was updated successfully!`
+          );
           return {
             type: 'UPDATE_SUB_ENTITY_FULFILLED',
             entityName: a.entityName,
@@ -377,7 +393,7 @@ export const UpdateSubEntity = (action$, store) =>
           };
         })
         .catch(error => {
-          Toast.error('List item update failed!');
+          Toast.error(errorLabel(error));
           return of({
             type: 'UPDATE_SUB_ENTITY_REJECTED',
             entityName: a.entityName,
@@ -411,7 +427,11 @@ export const DeleteSubEntity = (action$, store) =>
       )
     )
       .map(response => {
-        Toast.success('List item was deleted successfully!');
+        Toast.success(
+          `${camelCaseToRegularForm(
+            singularSubEntityName
+          )} was deleted successfully!`
+        );
         return {
           type: 'DELETE_SUB_ENTITY_FULFILLED',
           entityName,
@@ -422,7 +442,7 @@ export const DeleteSubEntity = (action$, store) =>
         };
       })
       .catch(error => {
-        Toast.error('List item deletion failed!');
+        Toast.error(errorLabel(error));
         return of({
           type: 'DELETE_SUB_ENTITY_REJECTED',
           entityName,
