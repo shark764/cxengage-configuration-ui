@@ -260,14 +260,12 @@ export const FetchFormMetaData = (action$, store) =>
     .mergeMap(
       a =>
         a.entityId === 'create'
-          ? from(createFormMetadata[a.currentEntityName] || []).map(
-              entityName =>
-                a.isDefined(entityName) && { type: 'FETCH_DATA', entityName }
-            )
-          : from(updateFormMetadata[a.currentEntityName] || []).map(
-              entityName =>
-                a.isDefined(entityName) && { type: 'FETCH_DATA', entityName }
-            )
+          ? from(createFormMetadata[a.currentEntityName] || [])
+              .filter(entityName => a.isDefined(entityName))
+              .map(entityName => ({ type: 'FETCH_DATA', entityName }))
+          : from(updateFormMetadata[a.currentEntityName] || [])
+              .filter(entityName => a.isDefined(entityName))
+              .map(entityName => ({ type: 'FETCH_DATA', entityName }))
     );
 
 export const SubEntityFormSubmission = (action$, store) =>
