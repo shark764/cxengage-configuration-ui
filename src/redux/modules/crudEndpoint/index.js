@@ -45,6 +45,9 @@ export const deselectCurrentEntity = () => ({
 export const setSelectedEntityId = entityId => {
   return { type: 'SET_SELECTED_ENTITY_ID', entityId };
 };
+export const setEntityUpdating = (entityName, entityId, updating) => {
+  return { type: 'SET_ENTITY_UPDATING', entityName, entityId, updating };
+};
 export const onFormButtonSubmit = () => ({ type: 'START_FORM_SUBMISSION' });
 export const onFormSubmit = (values, { dirty }) => ({
   type: 'FORM_SUBMIT',
@@ -56,16 +59,22 @@ export const toggleEntityActive = () => {
     type: 'TOGGLE_ENTITY'
   };
 };
-export const setConfirmationDialog = modalType => {
+export const setConfirmationDialog = (modalType, metaData) => {
   return {
     type: 'SET_CONIFIRMATION_DIALOG',
-    modalType
+    modalType,
+    metaData
   };
 };
-export const executeConfirmCallback = () => {
-  return { type: 'EXECUTE_CONFIRM_CALLBACK' };
+export const executeConfirmCallback = referenceData => {
+  return { type: 'EXECUTE_CONFIRM_CALLBACK', referenceData };
 };
 export const fetchData = entityName => ({ type: 'FETCH_DATA', entityName });
+export const fetchDataItem = (entityName, id) => ({
+  type: 'FETCH_DATA_ITEM',
+  entityName,
+  id
+});
 export const setSelectedSubEntityId = selectedSubEntityId => {
   return { type: 'SET_SELECTED_SUB_ENTITY_ID', selectedSubEntityId };
 };
@@ -93,6 +102,12 @@ export const updateSidePanelWidth = width => ({
 export const deleteSubEntity = subEntityId => {
   return { type: 'DELETE_SUB_ENTITY', subEntityId };
 };
+export const downloadCsv = () => {
+  return { type: 'DOWNLOAD_CSV' };
+};
+export const uploadCsv = target => {
+  return { type: 'UPLOAD_CSV', target };
+};
 
 // Reducer
 
@@ -101,9 +116,10 @@ export default function reducer(state = initialState, action) {
     case 'SET_CURRENT_ENTITY':
       return state.set('currentEntity', action.entityName);
     case 'SET_CONIFIRMATION_DIALOG':
-      return state.setIn(
-        [state.get('currentEntity'), 'confirmationDialogType'],
-        action.modalType
+      return state.update(state.get('currentEntity'), entityStore =>
+        entityStore
+          .set('confirmationDialogType', action.modalType)
+          .set('confirmationDialogMetaData', action.metaData)
       );
     case 'DESELECT_CURRENT_ENTITYS_SELECTED_ENTITY':
       return state.setIn([state.get('currentEntity'), 'selectedEntityId'], '');
@@ -113,6 +129,8 @@ export default function reducer(state = initialState, action) {
         action.entityId
       );
     }
+    case 'SET_ENTITY_UPDATING':
+      return setEntityUpdatingHelper(state, action, action.state);
     case 'FETCH_DATA_FULFILLED':
       return state.setIn(
         [action.entityName, 'data'],
@@ -120,6 +138,23 @@ export default function reducer(state = initialState, action) {
       );
     case 'FETCH_DATA_REJECTED':
       return state.setIn([action.entityName, 'data'], new List());
+    case 'FETCH_DATA_ITEM_FULFILLED':
+      const entityIndex = state
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === action.id);
+      if (entityIndex !== -1) {
+        return state.mergeIn(
+          [action.entityName, 'data', entityIndex],
+          fromJS(Object.assign(action.response, { updating: false }))
+        );
+      } else {
+        return state;
+      }
+    case 'FETCH_DATA_ITEM_REJECTED':
+      return setEntityUpdatingHelper(state, action, false);
+    case 'UPLOAD_CSV_REJECTED': {
+      return setEntityUpdatingHelper(state, action, false);
+    }
     case 'CREATE_ENTITY': {
       return state.setIn([action.entityName, 'creating'], true);
     }
@@ -135,7 +170,7 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], false);
     }
     case 'UPDATE_ENTITY': {
-      return setEntityUpdating(state, action, true);
+      return setEntityUpdatingHelper(state, action, true);
     }
     case 'UPDATE_ENTITY_FULFILLED': {
       const entityIndex = state
@@ -151,7 +186,7 @@ export default function reducer(state = initialState, action) {
       }
     }
     case 'UPDATE_ENTITY_REJECTED': {
-      return setEntityUpdating(state, action, false);
+      return setEntityUpdatingHelper(state, action, false);
     }
     case 'SET_SELECTED_SUB_ENTITY_ID': {
       return state.setIn(
@@ -262,7 +297,7 @@ export default function reducer(state = initialState, action) {
 }
 
 // Reducer helper functions
-const setEntityUpdating = (state, { entityName, entityId }, updating) => {
+const setEntityUpdatingHelper = (state, { entityName, entityId }, updating) => {
   const entityIndex = state
     .getIn([entityName, 'data'])
     .findIndex(entity => entity.get('id') === entityId);

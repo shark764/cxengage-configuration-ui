@@ -20,7 +20,7 @@ import {
   capitalizeFirstAndRemoveLastLetter
 } from '../../../utils/string';
 
-import { updateEntityFulfilled } from './index';
+import { updateEntityFulfilled, uploadCsv, setEntityUpdating } from './index';
 import {
   getCurrentEntity,
   getSelectedEntityId,
@@ -28,7 +28,9 @@ import {
   getSelectedEntity,
   getCurrentSubEntity,
   getSelectedSubEntityId,
-  getConfirmationDialogType
+  getConfirmationDialogType,
+  getConfirmationDialogMetaData,
+  getSelectedEntityName
 } from './selectors';
 
 import {
@@ -111,6 +113,41 @@ export const FetchData = (action$, store) =>
       })
   );
 
+export const FetchDataItem = (action$, store) =>
+  action$.ofType('FETCH_DATA_ITEM').switchMap(a =>
+    fromPromise(
+      sdkPromise(
+        {
+          module: 'entities',
+          command: `get${capitalizeFirstLetter(
+            removeLastLetter(a.entityName)
+          )}`,
+          data: {
+            [removeLastLetter(a.entityName) + 'Id']: a.id
+          }
+        },
+        `cxengage/entities/get-${camelCaseToKebabCase(
+          removeLastLetter(a.entityName)
+        )}-response`
+      )
+    )
+      .map(response => ({
+        type: 'FETCH_DATA_ITEM_FULFILLED',
+        entityName: a.entityName,
+        id: a.id,
+        response: response
+      }))
+      .catch(error => {
+        Toast.error(errorLabel(error));
+        return of({
+          type: 'FETCH_DATA_ITEM_REJECTED',
+          entityName: a.entityName,
+          entityId: a.entityId,
+          error: error
+        });
+      })
+  );
+
 export const getTenantPermissions = (action$, store) =>
   action$.ofType('SET_CURRENT_ENTITY').switchMap(action =>
     fromPromise(
@@ -164,6 +201,7 @@ export const CreateEntity = (action$, store) =>
         };
       })
   );
+
 export const UpdateEntity = (action$, store) =>
   action$
     .ofType('UPDATE_ENTITY')
@@ -463,6 +501,7 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
     const currentConfirmationModal = getConfirmationDialogType(
       store.getState()
     );
+    const metaData = getConfirmationDialogMetaData(store.getState());
     switch (currentConfirmationModal) {
       case MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE:
         return [
@@ -474,7 +513,136 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
             modalType: undefined
           }
         ];
+      case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
+        return [
+          uploadCsv(metaData),
+          setEntityUpdating(
+            getCurrentEntity(store.getState()),
+            getSelectedEntityId(store.getState()),
+            true
+          ),
+          {
+            type: 'SET_CONIFIRMATION_DIALOG',
+            modalType: undefined,
+            metaData: undefined
+          }
+        ];
       default:
+        console.log(`No epic callback found for: ${currentConfirmationModal}`);
         return {}; // nothing necessary to do here
     }
   });
+
+export const UploadCsv = (action$, store) =>
+  action$
+    .ofType('UPLOAD_CSV')
+    .map(action => ({
+      ...action,
+      entityName: getCurrentEntity(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState())
+    }))
+    .switchMap(a =>
+      fromPromise(
+        sdkPromise(
+          {
+            module: 'entities',
+            command: `upload${capitalizeFirstLetter(
+              removeLastLetter(a.entityName)
+            )}`,
+            data: {
+              [`${removeLastLetter(a.entityName)}Id`]: a.selectedEntityId,
+              file: a.target.files[0]
+            }
+          },
+          `cxengage/entities/upload-${camelCaseToKebabCase(
+            removeLastLetter(a.entityName)
+          )}-response`
+        )
+      )
+        .do(response => {
+          if (response.result.totalItemsProcessed > 0) {
+            Toast.success(`
+              Items Created: ${response.result.itemsCreated}
+              </br>
+              Items Updated: ${response.result.itemsUpdated}
+              </br>
+              Items Deleted: ${response.result.itemsDeleted}
+              </br>
+              </br>
+              Total Items Processed: ${response.result.totalItemsProcessed}
+            `);
+          }
+
+          if (response.result.numberOfFailures > 0) {
+            Toast.error(
+              `Number of Failures: ${response.result.numberOfFailures}`
+            );
+          }
+        })
+        .map(response => {
+          return {
+            type: 'FETCH_DATA_ITEM',
+            entityName: a.entityName,
+            id: a.selectedEntityId
+          };
+        })
+        .catch(error => {
+          Toast.error(errorLabel(error));
+          return of({
+            type: 'UPLOAD_CSV_REJECTED',
+            entityName: a.entityName,
+            entityId: a.selectedEntityId,
+            error: error
+          });
+        })
+    );
+
+export const DownloadCsv = (action$, store) =>
+  action$
+    .ofType('DOWNLOAD_CSV')
+    .map(action => ({
+      ...action,
+      entityName: getCurrentEntity(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState()),
+      selectedEntityName: getSelectedEntityName(store.getState())
+    }))
+    .switchMap(a =>
+      fromPromise(
+        sdkPromise(
+          {
+            module: 'entities',
+            command: `download${capitalizeFirstLetter(
+              removeLastLetter(a.entityName)
+            )}`,
+            data: {
+              [`${removeLastLetter(a.entityName)}Id`]: a.selectedEntityId
+            }
+          },
+          `cxengage/entities/download-${camelCaseToKebabCase(
+            removeLastLetter(a.entityName)
+          )}-response`
+        )
+      )
+        .map(response => {
+          const aTag = document.createElement('a');
+          const blob = new Blob([response], { type: 'text/csv' });
+          const url = URL.createObjectURL(blob);
+          aTag.href = url;
+          aTag.setAttribute('download', `${a.selectedEntityName}.csv`);
+          var events = document.createEvent('MouseEvents');
+          events.initEvent('click', false, true);
+          aTag.dispatchEvent(events);
+
+          Toast.info('CSV Download Started');
+          return {
+            type: 'DOWNLOAD_CSV_FULFILLED'
+          };
+        })
+        .catch(error => {
+          Toast.error(errorLabel(error));
+          return of({
+            type: 'DOWNLOAD_CSV_REJECTED',
+            error: error
+          });
+        })
+    );

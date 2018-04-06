@@ -4,6 +4,7 @@
 
 import { createSelector } from 'reselect';
 import { getCurrentPermissions, getCurrentTenantId } from '../userData.js';
+
 // Selectors
 
 const getCrudEndpoint = state => state.get('crudEndpoint');
@@ -22,6 +23,9 @@ export const getSelectedEntityId = state =>
 
 export const getConfirmationDialogType = state =>
   getCurrentEntityStore(state).get('confirmationDialogType');
+
+export const getConfirmationDialogMetaData = state =>
+  getCurrentEntityStore(state).get('confirmationDialogMetaData');
 
 export const getAllEntities = state => getCurrentEntityStore(state).get('data');
 
