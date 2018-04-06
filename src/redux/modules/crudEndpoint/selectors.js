@@ -20,6 +20,9 @@ export const getSidePanelWidth = state =>
 export const getSelectedEntityId = state =>
   getCurrentEntityStore(state).get('selectedEntityId');
 
+export const getConfirmationDialogType = state =>
+  getCurrentEntityStore(state).get('confirmationDialogType');
+
 export const getAllEntities = state => getCurrentEntityStore(state).get('data');
 
 export const getSelectedEntity = createSelector(

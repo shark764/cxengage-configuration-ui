@@ -10,6 +10,7 @@ const initialState = fromJS({
   currentEntity: 'none',
   none: {},
   lists: {
+    confirmationDialogType: undefined,
     selectedEntityId: '',
     data: undefined,
     subEntity: 'listItems',
@@ -44,7 +45,18 @@ export const onFormSubmit = (values, { dirty }) => ({
   dirty
 });
 export const toggleEntityActive = () => {
-  return { type: 'TOGGLE_ENTITY' };
+  return {
+    type: 'TOGGLE_ENTITY'
+  };
+};
+export const setConfirmationDialog = modalType => {
+  return {
+    type: 'SET_CONIFIRMATION_DIALOG',
+    modalType
+  };
+};
+export const executeConfirmCallback = () => {
+  return { type: 'EXECUTE_CONFIRM_CALLBACK' };
 };
 export const fetchData = entityName => ({ type: 'FETCH_DATA', entityName });
 export const setSelectedSubEntityId = selectedSubEntityId => {
@@ -75,6 +87,11 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case 'SET_CURRENT_ENTITY':
       return state.set('currentEntity', action.entityName);
+    case 'SET_CONIFIRMATION_DIALOG':
+      return state.setIn(
+        [state.get('currentEntity'), 'confirmationDialogType'],
+        action.modalType
+      );
     case 'DESELECT_CURRENT_ENTITYS_SELECTED_ENTITY':
       return state.setIn([state.get('currentEntity'), 'selectedEntityId'], '');
     case 'SET_SELECTED_ENTITY_ID': {

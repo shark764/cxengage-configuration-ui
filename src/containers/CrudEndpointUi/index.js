@@ -8,7 +8,8 @@ import { setCurrentEntity, fetchData } from '../../redux/modules/crudEndpoint';
 
 import {
   getSelectedEntityId,
-  getSelectedSubEntityId
+  getSelectedSubEntityId,
+  getConfirmationDialogType
 } from '../../redux/modules/crudEndpoint/selectors';
 
 import Layout from './Layout';
@@ -28,7 +29,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     selectedEntityId: getSelectedEntityId(state),
-    selectedSubEntityId: getSelectedSubEntityId(state)
+    selectedSubEntityId: getSelectedSubEntityId(state),
+    showConfirmationDialog: getConfirmationDialogType(state)
   };
 }
 
