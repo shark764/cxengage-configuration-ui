@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.17.0]
+* CXV1-13326 - fixed build process
+
 ## [0.16.0]
 * CXV1-13325 - Added global confirmation modal and implemented it on entity enable and disable toggle
 
