@@ -43,7 +43,7 @@ const SidePanelHeader = styled(SidePanelHeaderContainer)`
 const SidePanelActions = styled(SidePanelActionsContainer)`
   margin-top: auto;
   border-top: 1px solid #dadada;
-  margin-right: 50px;
+  padding-right: 50px;
 `;
 
 let mouseObservableSubscription;

@@ -36,17 +36,14 @@ function mapStateToProps(state) {
     inherited = true;
   }
 
-  const tableFields = selectedEntity.getIn(['listType', 'fields']).toJS();
   if (selectedEntity) {
     return {
       listType: selectedEntity.get('listType').get('name'),
-      // TODO alertMessage: `TODO: session tenantId vs createdby tenantId`,
       tableItems: selectedEntity.get('items').toJS(),
       userHasUpdatePermission: userHasUpdatePermission(state),
       tableFields: selectedEntity.getIn(['listType', 'fields']).toJS(),
       inherited,
-      alertMessage,
-      tableFields
+      alertMessage
     };
   }
   return {};

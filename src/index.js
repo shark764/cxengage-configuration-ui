@@ -25,7 +25,7 @@ ReactDOM.render(
             path="/interactionMonitoring"
             component={InteractionMonitoring}
           />
-          <Route path="/(lists)/" component={CrudEndpointUi} />
+          <Route path="/:currentEntity/" component={CrudEndpointUi} />
         </React.Fragment>
       </Router>
     </RootStyles>

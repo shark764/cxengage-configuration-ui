@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import { ListsForm } from 'cx-ui-components';
 import { onFormSubmit } from '../../../redux/modules/crudEndpoint';
-import validate from '../ListItems/validation';
+import { createFormValidation } from './validation';
 import {
   getSelectedEntityId,
   isCreating
@@ -16,7 +16,7 @@ import {
 let CreateListForm = reduxForm({
   form: 'lists:create',
   onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
-  validate
+  validate: createFormValidation
 })(ListsForm);
 
 function mapStateToProps(state) {
@@ -34,23 +34,6 @@ function mapStateToProps(state) {
       initialValues: new Map({
         active: true
       }),
-      fieldItems: [
-        {
-          name: 'name',
-          label: 'Name',
-          type: 'input',
-          required: true,
-          isSaving: isCreating(state)
-        },
-        {
-          name: 'listTypeId',
-          label: 'List Type',
-          type: 'select',
-          required: true,
-          isSaving: isCreating(state),
-          options: listTypes
-        }
-      ],
       isSaving: isCreating(state)
     };
   }

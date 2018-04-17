@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import { ListsForm } from 'cx-ui-components';
 import { onFormSubmit } from '../../../redux/modules/crudEndpoint';
-import validate from '../ListItems/validation';
+import { updateFormValidation } from './validation';
 import {
   getSelectedEntityId,
   getSelectedEntity,
@@ -20,7 +20,7 @@ let UpdateListForm = compose(
   reduxForm({
     onSubmit: (values, dispatch, props) =>
       dispatch(onFormSubmit(values, props)),
-    validate,
+    validate: updateFormValidation,
     destroyOnUnmount: false
   })
 )(ListsForm);
@@ -35,17 +35,7 @@ function mapStateToProps(state) {
       }),
       listType: selectedEntity.getIn(['listType', 'name']),
       isSaving: selectedEntity.get('updating') === true,
-      inherited: isInherited(state),
-      fieldItems: [
-        {
-          name: 'name',
-          label: 'Name',
-          type: 'input',
-          required: true,
-          isSaving: selectedEntity.get('updating') === true,
-          inherited: isInherited(state)
-        }
-      ]
+      inherited: isInherited(state)
     };
   }
   return {};
