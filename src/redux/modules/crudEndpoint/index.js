@@ -5,24 +5,31 @@
 import { fromJS, List } from 'immutable';
 
 // Initial Sub State
-
+const defaultEntity = {
+  data: undefined,
+  selectedEntityId: '',
+  sidePanelWidth: 550,
+  confirmationDialogType: undefined
+};
 const initialState = fromJS({
   currentEntity: 'none',
   none: {},
   lists: {
-    confirmationDialogType: undefined,
-    selectedEntityId: '',
-    data: undefined,
+    ...defaultEntity,
     subEntity: 'listItems',
     selectedSubEntityId: undefined,
     subEntitySaving: false,
-    sidePanelWidth: 550,
     readPermission: 'VIEW_ALL_LISTS',
     updatePermission: 'MANAGE_ALL_LISTS',
     createPermission: 'MANAGE_ALL_LISTS'
   },
   listTypes: {
     data: undefined
+  },
+  emailTemplates: {
+    ...defaultEntity,
+    readPermission: 'USER_MANAGEMENT_EMAIL_READ',
+    updatePermission: 'USER_MANAGEMENT_EMAIL_UPDATE'
   }
 });
 
@@ -67,11 +74,17 @@ export const onSubEntityFormSubmit = (values, { dirty }) => ({
   values,
   dirty
 });
-export const updateEntityFulfilled = (entityName, payload, entityId) => ({
+export const updateEntityFulfilled = (
+  entityName,
+  entityId,
+  payload,
+  values
+) => ({
   type: 'UPDATE_ENTITY_FULFILLED',
   entityName,
+  entityId,
   payload,
-  entityId
+  values
 });
 export const updateSidePanelWidth = width => ({
   type: 'UPDATE_SIDE_PANEL_WIDTH',
@@ -103,7 +116,7 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_DATA_FULFILLED':
       return state.setIn(
         [action.entityName, 'data'],
-        fromJS(action.response.result)
+        fromJS(action.response.result || action.response)
       );
     case 'FETCH_DATA_REJECTED':
       return state.setIn([action.entityName, 'data'], new List());

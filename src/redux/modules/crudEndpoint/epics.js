@@ -36,6 +36,8 @@ import {
   updateFormMetadata
 } from '../../../utils/formMetaData';
 
+import { hasCustomUpdateEntity } from './config';
+
 export const StartFormSubmission = (action$, store) =>
   action$
     .ofType('START_FORM_SUBMISSION')
@@ -55,7 +57,7 @@ export const reInitForm = (action$, store) =>
     meta: {
       form: `${a.entityName}:${a.entityId}`
     },
-    payload: { name: a.payload.name }
+    payload: { ...a.values }
   }));
 
 export const FormSubmission = (action$, store) =>
@@ -104,8 +106,7 @@ export const FetchData = (action$, store) =>
         Toast.error(errorLabel(error));
         return of({
           type: 'FETCH_DATA_REJECTED',
-          entityName: a.entityName,
-          error: error
+          entityName: a.entityName
         });
       })
   );
@@ -159,46 +160,52 @@ export const CreateEntity = (action$, store) =>
         Toast.error(errorLabel(error));
         return {
           type: 'CREATE_ENTITY_REJECTED',
-          entityName: a.entityName,
-          error: error
+          entityName: a.entityName
         };
       })
   );
 export const UpdateEntity = (action$, store) =>
-  action$.ofType('UPDATE_ENTITY').mergeMap(a =>
-    fromPromise(
-      sdkPromise(
-        {
-          module: 'entities',
-          command: `update${capitalizeFirstLetter(
-            removeLastLetter(a.entityName)
-          )}`,
-          data: {
-            ...a.values,
-            [`${removeLastLetter(a.entityName)}Id`]: a.entityId
-          }
-        },
-        `cxengage/entities/update-${removeLastLetter(a.entityName)}-response`
+  action$
+    .ofType('UPDATE_ENTITY')
+    .filter(({ entityName }) => hasCustomUpdateEntity(entityName))
+    .mergeMap(a =>
+      fromPromise(
+        sdkPromise(
+          {
+            module: 'entities',
+            command: `update${capitalizeFirstLetter(
+              removeLastLetter(a.entityName)
+            )}`,
+            data: {
+              ...a.values,
+              [`${removeLastLetter(a.entityName)}Id`]: a.entityId
+            }
+          },
+          `cxengage/entities/update-${removeLastLetter(a.entityName)}-response`
+        )
       )
-    )
-      .map(response => {
-        Toast.success(
-          `${camelCaseToRegularFormAndRemoveLastLetter(
-            a.entityName
-          )} was updated successfully!`
-        );
-        return updateEntityFulfilled(a.entityName, response, a.entityId);
-      })
-      .catch(error => {
-        Toast.error(errorLabel(error));
-        return of({
-          type: 'UPDATE_ENTITY_REJECTED',
-          entityName: a.entityName,
-          entityId: a.entityId,
-          error: error
-        });
-      })
-  );
+        .map(response => {
+          Toast.success(
+            `${camelCaseToRegularFormAndRemoveLastLetter(
+              a.entityName
+            )} was updated successfully!`
+          );
+          return updateEntityFulfilled(
+            a.entityName,
+            a.entityId,
+            response,
+            values
+          );
+        })
+        .catch(error => {
+          Toast.error(errorLabel(error));
+          return of({
+            type: 'UPDATE_ENTITY_REJECTED',
+            entityName: a.entityName,
+            entityId: a.entityId
+          });
+        })
+    );
 
 export const ToggleEntity = (action$, store) =>
   action$
@@ -244,8 +251,7 @@ export const ToggleEntity = (action$, store) =>
         .catch(error => {
           Toast.error(errorLabel(error));
           return of({
-            type: 'TOGGLE_ENTITY_REJECTED',
-            error: error
+            type: 'TOGGLE_ENTITY_REJECTED'
           });
         })
     );
@@ -347,8 +353,7 @@ export const CreateSubEntity = (action$, store) =>
             type: 'CREATE_SUB_ENTITY_REJECTED',
             entityName: a.entityName,
             entityId: a.selectedEntity.get('id'),
-            subEntityName: a.subEntityName,
-            error: error
+            subEntityName: a.subEntityName
           });
         })
     );
@@ -400,8 +405,7 @@ export const UpdateSubEntity = (action$, store) =>
             entityName: a.entityName,
             entityId: a.selectedEntity.get('id'),
             subEntityName: a.subEntityName,
-            subEntityId: a.subEntityId,
-            error
+            subEntityId: a.subEntityId
           });
         })
     );
@@ -449,8 +453,7 @@ export const DeleteSubEntity = (action$, store) =>
           entityName,
           entityId: selectedEntity.get('id'),
           subEntityName,
-          subEntityId,
-          error
+          subEntityId
         });
       });
   });

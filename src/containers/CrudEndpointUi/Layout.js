@@ -14,6 +14,7 @@ import SidePanel from '../../components/sidePanel';
 import EntityTableContainer from '../EntityTable';
 import CreateListForm from '../Form/Lists/Create';
 import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';
+import EmailTemplatesDetailsPanelContainer from '../SidePanelDetails/EmailTemplates/Layout';
 import CreateListItemForm from '../Form/ListItems/Create';
 import UpdateListItemForm from '../Form/ListItems/Update';
 
@@ -52,6 +53,20 @@ function DetailsPanel(ContainerComponent) {
   );
 }
 
+function NoScrollDetailsPanel(ContainerComponent) {
+  const DetailsPanelWrapper = styled.div`
+    position: relative;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+  `;
+  return (
+    <DetailsPanelWrapper>
+      <ContainerComponent />
+    </DetailsPanelWrapper>
+  );
+}
+
 const createFormRoutes = [
   {
     path: '/lists',
@@ -63,6 +78,10 @@ const detailsPanelRoutes = [
   {
     path: '/lists',
     component: () => DetailsPanel(ListsDetailsPanelContainer)
+  },
+  {
+    path: '/emailTemplates',
+    component: () => NoScrollDetailsPanel(EmailTemplatesDetailsPanelContainer)
   }
 ];
 

@@ -25,3 +25,5 @@ export const capitalizeFirstAndRemoveLastLetter = string =>
   capitalizeFirstLetter(removeLastLetter(string));
 
 export const atLeastOneLetterOrNumber = /([a-z]|[0-9])/i;
+
+export const containsNonWhiteSpace = string => /\S/.test(string);

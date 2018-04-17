@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { EntityTable } from 'cx-ui-components';
 
-import { capitalizeFirstLetter } from '../../utils/string';
+import { camelCaseToRegularForm } from '../../utils/string';
 
 import { setSelectedEntityId } from '../../redux/modules/crudEndpoint';
 import {
@@ -15,7 +15,7 @@ import {
   userHasCreatePermission
 } from '../../redux/modules/crudEndpoint/selectors';
 
-import { getTableColumns } from './config';
+import { getHelpLink, getTableColumns } from './config';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -31,9 +31,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   const currentEntity = getCurrentEntity(state);
   return {
-    pageTitle: capitalizeFirstLetter(currentEntity),
-    pageHelpLink:
-      'https://docs.cxengage.net/Help/Content/Configuring%20CxEngage/Lists/Lists.htm',
+    pageTitle: camelCaseToRegularForm(currentEntity),
+    pageHelpLink: getHelpLink(currentEntity),
     onSearchFilterChange: e => console.log(e.target.value),
     items: getAllEntities(state) ? getAllEntities(state).toJS() : undefined,
     columns: getTableColumns(currentEntity),
