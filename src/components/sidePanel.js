@@ -87,9 +87,7 @@ class SidePanel extends Component {
           id="SlidingResizer"
         />
         <SidePanelDiv slidingWidth={this.props.slidingWidth}>
-          <SidePanelHeader
-            userHasUpdatePermission={this.props.userHasUpdatePermission}
-          />
+          <SidePanelHeader />
           {this.props.children}
           {this.props.userHasUpdatePermission && <SidePanelActions />}
         </SidePanelDiv>

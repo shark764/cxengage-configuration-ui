@@ -19,6 +19,7 @@ import {
   getCurrentEntity,
   getSelectedEntityId,
   getSelectedEntity,
+  userHasUpdatePermission,
   isInherited
 } from '../../redux/modules/crudEndpoint/selectors';
 
@@ -51,6 +52,7 @@ function mapStateToProps(state) {
       createdAt: `Created on ${dateCreated}`,
       updatedAt: `Updated on ${dateUpdated}`,
       toggleStatus: selectedEntity.get('active'),
+      userHasUpdatePermission: userHasUpdatePermission(state),
       inherited: isInherited(state)
     };
   }

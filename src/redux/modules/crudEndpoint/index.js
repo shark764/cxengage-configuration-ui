@@ -19,17 +19,20 @@ const initialState = fromJS({
     subEntity: 'listItems',
     selectedSubEntityId: undefined,
     subEntitySaving: false,
-    readPermission: 'VIEW_ALL_LISTS',
-    updatePermission: 'MANAGE_ALL_LISTS',
-    createPermission: 'MANAGE_ALL_LISTS'
+    readPermission: ['VIEW_ALL_LISTS'],
+    updatePermission: ['MANAGE_ALL_LISTS'],
+    createPermission: ['MANAGE_ALL_LISTS']
   },
   listTypes: {
     data: undefined
   },
   emailTemplates: {
     ...defaultEntity,
-    readPermission: 'USER_MANAGEMENT_EMAIL_READ',
-    updatePermission: 'USER_MANAGEMENT_EMAIL_UPDATE'
+    readPermission: ['USER_MANAGEMENT_EMAIL_READ'],
+    updatePermission: [
+      'USER_MANAGEMENT_EMAIL_UPDATE',
+      'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE'
+    ]
   }
 });
 

@@ -2,6 +2,7 @@
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
 
+import { List } from 'immutable';
 import { createSelector } from 'reselect';
 import { getCurrentPermissions, getCurrentTenantId } from '../userData.js';
 
@@ -40,19 +41,33 @@ export const getSelectedEntityName = state =>
   getSelectedEntity(state).get('name');
 
 export const userHasReadPermission = state =>
-  getCurrentPermissions(state).includes(
+  hasPermission(
+    getCurrentPermissions(state),
     getCurrentEntityStore(state).get('readPermission')
   );
 
 export const userHasUpdatePermission = state =>
-  getCurrentPermissions(state).includes(
+  hasPermission(
+    getCurrentPermissions(state),
     getCurrentEntityStore(state).get('updatePermission')
   );
 
 export const userHasCreatePermission = state =>
-  getCurrentPermissions(state).includes(
+  hasPermission(
+    getCurrentPermissions(state),
     getCurrentEntityStore(state).get('createPermission')
   );
+
+const hasPermission = (userPermissions, permissionsNeeded) => {
+  if (permissionsNeeded !== undefined) {
+    // Return true if they have at least one of the permissions
+    return permissionsNeeded.some(permissionNeeded =>
+      userPermissions.includes(permissionNeeded)
+    );
+  } else {
+    return false;
+  }
+};
 
 export const isInherited = state =>
   getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
