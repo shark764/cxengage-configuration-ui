@@ -2,11 +2,8 @@
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
 
-import { List } from 'immutable';
 import { createSelector } from 'reselect';
 import { getCurrentPermissions, getCurrentTenantId } from '../userData.js';
-
-// Selectors
 
 const getCrudEndpoint = state => state.get('crudEndpoint');
 
@@ -74,6 +71,9 @@ export const isInherited = state =>
 
 export const isCreating = state =>
   getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
+
+export const isUpdating = state =>
+  getCurrentEntityStore(state).get('updating');
 
 export const getCurrentSubEntity = state =>
   getCurrentEntityStore(state).get('subEntity');

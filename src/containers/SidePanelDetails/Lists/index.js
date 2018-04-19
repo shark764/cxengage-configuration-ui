@@ -12,7 +12,6 @@ import {
   setSelectedSubEntityId,
   deleteSubEntity,
   downloadCsv,
-  uploadCsv,
   setConfirmationDialog
 } from '../../../redux/modules/crudEndpoint';
 

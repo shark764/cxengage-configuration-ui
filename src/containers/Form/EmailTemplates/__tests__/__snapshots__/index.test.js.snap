@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps maps properly 1`] = `
+Object {
+  "email": "mock email template form value",
+  "initialValues": "mock initial values",
+  "isSaving": "mock is updating",
+  "templates": "mock templates",
+}
+`;

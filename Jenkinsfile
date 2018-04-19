@@ -30,7 +30,7 @@ pipeline {
         }
       }
     }
-    stage ('Build') {
+    stage ('Test && Build') {
       steps {
         sh "mkdir build"
         sh "docker build -t ${docker_tag} -f Dockerfile-build ."
