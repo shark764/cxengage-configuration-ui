@@ -5,9 +5,9 @@
 import { connect } from 'react-redux';
 import { Confirmation } from 'cx-ui-components';
 
-import { removeLastLetter } from '../../utils/string';
-
 import * as MODALS from './constants.js';
+
+import { removeLastLetter } from '../../utils/string';
 
 import {
   executeConfirmCallback,
@@ -22,8 +22,8 @@ import {
 
 function mapDispatchToProps(dispatch) {
   return {
-    confirmBtnCallback: () => {
-      dispatch(executeConfirmCallback());
+    confirmBtnCallback: metaData => {
+      dispatch(executeConfirmCallback(metaData));
     },
     cancelBtnCallback: () => {
       dispatch(setConfirmationDialog(undefined));
@@ -40,10 +40,18 @@ function mapStateToProps(state) {
   const modalType = getConfirmationDialogType(state);
   const currentEntity = removeLastLetter(getCurrentEntity(state));
 
-  if (modalType === MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE) {
-    mainText = getSelectedEntity(state).get('active')
-      ? `This will disable this ${currentEntity}. Do you want to continue?`
-      : `This will enable this ${currentEntity}. Do you want to continue?`;
+  switch (modalType) {
+    case MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE:
+      mainText = getSelectedEntity(state).get('active')
+        ? `This will disable this ${currentEntity}. Do you want to continue?`
+        : `This will enable this ${currentEntity}. Do you want to continue?`;
+      break;
+    case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
+      mainText = `Are you sure you want to override this ${removeLastLetter(
+        getCurrentEntity(state)
+      )}?`;
+      break;
+    default:
   }
 
   return {

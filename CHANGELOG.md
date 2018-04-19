@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.0]
+* CXV1-12310 created epics for bulk lists UI
+
 ## [0.18.0]
 * CXV1-13300 - Email Templates
 

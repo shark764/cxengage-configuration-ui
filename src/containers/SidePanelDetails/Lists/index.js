@@ -6,15 +6,21 @@ import { connect } from 'react-redux';
 
 import { ListsDetailsPanel } from 'cx-ui-components';
 
+import { CONFIRM_ENTITY_CSV_UPLOAD } from '../../ConfirmationDialog/constants.js';
+
 import {
   setSelectedSubEntityId,
-  deleteSubEntity
+  deleteSubEntity,
+  downloadCsv,
+  uploadCsv,
+  setConfirmationDialog
 } from '../../../redux/modules/crudEndpoint';
 
 import {
   getSelectedEntity,
   userHasUpdatePermission,
-  isInherited
+  isInherited,
+  isSubEntitySaving
 } from '../../../redux/modules/crudEndpoint/selectors';
 
 function mapDispatchToProps(dispatch) {
@@ -22,7 +28,10 @@ function mapDispatchToProps(dispatch) {
     openCreateListItemModal: () => dispatch(setSelectedSubEntityId('create')),
     updateSubEntity: subEntityId =>
       dispatch(setSelectedSubEntityId(subEntityId)),
-    deleteSubEntity: subEntityId => dispatch(deleteSubEntity(subEntityId))
+    deleteSubEntity: subEntityId => dispatch(deleteSubEntity(subEntityId)),
+    downloadCsv: () => dispatch(downloadCsv()),
+    uploadCsv: event =>
+      dispatch(setConfirmationDialog(CONFIRM_ENTITY_CSV_UPLOAD, event.target))
   };
 }
 
@@ -43,7 +52,8 @@ function mapStateToProps(state) {
       userHasUpdatePermission: userHasUpdatePermission(state),
       tableFields: selectedEntity.getIn(['listType', 'fields']).toJS(),
       inherited,
-      alertMessage
+      alertMessage,
+      isSaving: isSubEntitySaving(state)
     };
   }
   return {};
