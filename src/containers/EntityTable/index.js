@@ -33,7 +33,6 @@ function mapStateToProps(state) {
   return {
     pageTitle: camelCaseToRegularForm(currentEntity),
     pageHelpLink: getHelpLink(currentEntity),
-    onSearchFilterChange: e => console.log(e.target.value),
     items: getAllEntities(state) ? getAllEntities(state).toJS() : undefined,
     columns: getTableColumns(currentEntity),
     userHasCreatePermission: userHasCreatePermission(state)
