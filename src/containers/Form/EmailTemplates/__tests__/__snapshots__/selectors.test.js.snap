@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getInitialValues gets the custom email values when the tenantIds are different 1`] = `
+Immutable.Map {
+  "email": "custom",
+  "shared": true,
+  "subject": "mock template subject",
+  "body": "mock template body",
+}
+`;
+
+exports[`getInitialValues gets the inherited email values when the tenantIds are the same 1`] = `
+Immutable.Map {
+  "email": "default",
+  "shared": false,
+  "subject": "mock inherited subject",
+  "body": "mock inherited body",
+}
+`;
+
+exports[`getTemplates returns the variables names mapped to an array 1`] = `
+Array [
+  "mock variable 1",
+  "mock variable 2",
+]
+`;

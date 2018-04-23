@@ -232,7 +232,7 @@ export const UpdateEntity = (action$, store) =>
             a.entityName,
             a.entityId,
             response,
-            values
+            a.values
           );
         })
         .catch(error => {

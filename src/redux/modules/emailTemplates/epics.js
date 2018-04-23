@@ -1,7 +1,6 @@
 import 'rxjs';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
-import { from } from 'rxjs/observable/from';
 import { Toast } from 'cx-ui-components';
 
 import { sdkPromise, errorLabel } from '../../../utils/sdk';
@@ -13,7 +12,6 @@ import {
 
 import {
   updateEntityFulfilled,
-  updateEntityInFulfilled
 } from '../crudEndpoint';
 
 export const UpdateEntity = (action$, store) =>

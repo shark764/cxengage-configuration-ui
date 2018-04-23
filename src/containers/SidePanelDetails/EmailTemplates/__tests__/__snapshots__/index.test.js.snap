@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps maps properly 1`] = `
+Object {
+  "emailFormValue": "mock email template form value",
+  "inheritedBody": "mock inherited body",
+  "inheritedSubject": "mock inherited subject",
+  "templateBody": "mock template body",
+  "templateEmail": "mock template email",
+  "templateShared": "mock template shared",
+  "templateSubject": "mock template subject",
+  "userHasUpdatePermission": true,
+  "variables": Array [
+    "mock variable",
+  ],
+}
+`;

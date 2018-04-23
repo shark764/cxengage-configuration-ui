@@ -7,38 +7,33 @@ import { connect } from 'react-redux';
 import { EmailTemplatesDetailsPanel } from 'cx-ui-components';
 
 import {
-  getSelectedEntity,
-  getSelectedEntityId,
   userHasUpdatePermission
 } from '../../../redux/modules/crudEndpoint/selectors';
+import {
+  getEmailTemplateFormValue
+} from '../../../redux/modules/emailTemplates/selectors';
+import {
+  getVariables,
+  getInheritedSubject,
+  getInheritedBody,
+  getTemplateEmail,
+  getTemplateShared,
+  getTemplateSubject,
+  getTemplateBody,
+} from './selectors';
 
-function mapStateToProps(state) {
-  const selectedEntity = getSelectedEntity(state);
-
-  if (selectedEntity) {
-    const inheritedTemplate = selectedEntity.get('inherited');
-    const template = selectedEntity.get('template');
-    return {
-      variables: selectedEntity.get('variables').toJS(),
-      userHasUpdatePermission: userHasUpdatePermission(state),
-      emailFormValue: state.getIn([
-        'form',
-        `emailTemplates:${getSelectedEntityId(state)}`,
-        'values',
-        'email'
-      ]),
-      inheritedSubject: inheritedTemplate.get('subject'),
-      inheritedBody: inheritedTemplate.get('body'),
-      templateEmail:
-        template.get('tenantId') === inheritedTemplate.get('tenantId')
-          ? 'Default'
-          : 'Custom',
-      templateShared: template.get('shared') ? 'Yes' : 'No',
-      templateSubject: template.get('subject'),
-      templateBody: template.get('body')
-    };
-  }
-  return {};
+export function mapStateToProps(state) {
+  return {
+    variables: getVariables(state),
+    userHasUpdatePermission: userHasUpdatePermission(state),
+    emailFormValue: getEmailTemplateFormValue(state),
+    inheritedSubject: getInheritedSubject(state),
+    inheritedBody: getInheritedBody(state),
+    templateEmail: getTemplateEmail(state),
+    templateShared: getTemplateShared(state),
+    templateSubject: getTemplateSubject(state),
+    templateBody: getTemplateBody(state)
+  };
 }
 
 export default connect(mapStateToProps)(EmailTemplatesDetailsPanel);
