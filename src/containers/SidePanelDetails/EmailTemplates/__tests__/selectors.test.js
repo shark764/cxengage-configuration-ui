@@ -8,11 +8,9 @@ import {
   getTemplateSubject,
   getTemplateBody
 } from '../selectors';
-import {
-  getSelectedEntity
-} from '../../../../redux/modules/crudEndpoint/selectors';
+import { getSelectedEntity } from '../../../../redux/modules/entities/selectors';
 
-jest.mock('../../../../redux/modules/crudEndpoint/selectors');
+jest.mock('../../../../redux/modules/entities/selectors');
 const mockSelectedEntity = fromJS({
   inherited: {
     tenantId: 'mock tenant id 1',
@@ -23,12 +21,9 @@ const mockSelectedEntity = fromJS({
     tenantId: 'mock tenant id 2',
     shared: true,
     subject: 'mock template subject',
-    body: 'mock template body',
+    body: 'mock template body'
   },
-  variables: [
-    { name: 'mock template 1' },
-    { name: 'mock template 2' },
-  ],
+  variables: [{ name: 'mock template 1' }, { name: 'mock template 2' }]
 });
 getSelectedEntity.mockImplementation(() => mockSelectedEntity);
 
@@ -55,7 +50,9 @@ describe('getTemplateEmail', () => {
     expect(getTemplateEmail()).toEqual('Custom');
   });
   it('returns "Default" when the inherited and template emails have the same tenantId', () => {
-    getSelectedEntity.mockImplementation(() => mockSelectedEntity.setIn(['template', 'tenantId'], 'mock tenant id 1'));
+    getSelectedEntity.mockImplementation(() =>
+      mockSelectedEntity.setIn(['template', 'tenantId'], 'mock tenant id 1')
+    );
     expect(getTemplateEmail()).toEqual('Default');
   });
 });
@@ -65,7 +62,9 @@ describe('getTemplateShared', () => {
     expect(getTemplateShared()).toEqual('Yes');
   });
   it('returns "No" when the template is not shared', () => {
-    getSelectedEntity.mockImplementation(() => mockSelectedEntity.setIn(['template', 'shared'], false));
+    getSelectedEntity.mockImplementation(() =>
+      mockSelectedEntity.setIn(['template', 'shared'], false)
+    );
     expect(getTemplateShared()).toEqual('No');
   });
 });

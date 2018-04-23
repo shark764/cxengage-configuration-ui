@@ -2,7 +2,7 @@
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
@@ -25,7 +25,7 @@ ReactDOM.render(
             path="/interactionMonitoring"
             component={InteractionMonitoring}
           />
-          <Route path="/:currentEntity/" component={CrudEndpointUi} />
+          <Route path="/configuration/:entityName" component={CrudEndpointUi} />
         </React.Fragment>
       </Router>
     </RootStyles>

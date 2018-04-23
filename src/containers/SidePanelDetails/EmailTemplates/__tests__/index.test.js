@@ -3,12 +3,12 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import EmailTemplatesDetailsPanel, { mapStateToProps } from '../';
 
-jest.mock('../../../../redux/modules/crudEndpoint/selectors', () => ({
-  userHasUpdatePermission: () => true,
+jest.mock('../../../../redux/modules/entities/selectors', () => ({
+  userHasUpdatePermission: () => true
 }));
 
 jest.mock('../../../../redux/modules/emailTemplates/selectors', () => ({
-  getEmailTemplateFormValue: () => 'mock email template form value',
+  getEmailTemplateFormValue: () => 'mock email template form value'
 }));
 
 jest.mock('../selectors', () => ({
@@ -24,7 +24,11 @@ jest.mock('../selectors', () => ({
 describe('EmailTemplatesDetailsPanel', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    shallow(<EmailTemplatesDetailsPanel store={store}>Child</EmailTemplatesDetailsPanel>);
+    shallow(
+      <EmailTemplatesDetailsPanel store={store}>
+        Child
+      </EmailTemplatesDetailsPanel>
+    );
   });
 });
 

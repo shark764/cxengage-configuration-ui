@@ -4,11 +4,9 @@
 
 import { fromJS } from 'immutable';
 import { getInitialValues, getTemplates } from '../selectors';
-import {
-  getSelectedEntity
-} from '../../../../redux/modules/crudEndpoint/selectors';
+import { getSelectedEntity } from '../../../../redux/modules/entities/selectors';
 
-jest.mock('../../../../redux/modules/crudEndpoint/selectors');
+jest.mock('../../../../redux/modules/entities/selectors');
 const mockSelectedEntity = fromJS({
   inherited: {
     tenantId: 'mock tenant id 1',
@@ -21,10 +19,7 @@ const mockSelectedEntity = fromJS({
     subject: 'mock template subject',
     body: 'mock template body'
   },
-  variables: [
-    { name: 'mock variable 1' },
-    { name: 'mock variable 2' }
-  ]
+  variables: [{ name: 'mock variable 1' }, { name: 'mock variable 2' }]
 });
 getSelectedEntity.mockImplementation(() => mockSelectedEntity);
 
@@ -33,7 +28,9 @@ describe('getInitialValues', () => {
     expect(getInitialValues()).toMatchSnapshot();
   });
   it('gets the inherited email values when the tenantIds are the same', () => {
-    getSelectedEntity.mockImplementation(() => mockSelectedEntity.setIn(['inherited', 'tenantId'], 'mock tenant id 2'));
+    getSelectedEntity.mockImplementation(() =>
+      mockSelectedEntity.setIn(['inherited', 'tenantId'], 'mock tenant id 2')
+    );
     expect(getInitialValues()).toMatchSnapshot();
   });
 });

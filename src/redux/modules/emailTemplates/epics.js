@@ -5,14 +5,9 @@ import { Toast } from 'cx-ui-components';
 
 import { sdkPromise, errorLabel } from '../../../utils/sdk';
 
-import {
-  getCurrentEntity,
-  getSelectedEntityId
-} from '../crudEndpoint/selectors';
+import { getCurrentEntity, getSelectedEntityId } from '../entities/selectors';
 
-import {
-  updateEntityFulfilled,
-} from '../crudEndpoint';
+import { updateEntityFulfilled, updateEntityInFulfilled } from '../entities';
 
 export const UpdateEntity = (action$, store) =>
   action$

@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fromEvent } from 'rxjs/observable/fromEvent';
+import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/map';
+
 import PropTypes, { number } from 'prop-types';
 import styled from 'styled-components';
 
@@ -9,11 +12,11 @@ import { SliderExpander } from 'cx-ui-components';
 import SidePanelHeaderContainer from '../containers/SidePanelHeader';
 import SidePanelActionsContainer from '../containers/SidePanelActions';
 
-import { updateSidePanelWidth } from '../redux/modules/crudEndpoint';
+import { updateSidePanelWidth } from '../redux/modules/entities';
 import {
   getSidePanelWidth,
   userHasUpdatePermission
-} from '../redux/modules/crudEndpoint/selectors';
+} from '../redux/modules/entities/selectors';
 
 const SidePanelDiv = styled.div.attrs({
   style: props => ({

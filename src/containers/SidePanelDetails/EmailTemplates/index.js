@@ -6,12 +6,8 @@ import { connect } from 'react-redux';
 
 import { EmailTemplatesDetailsPanel } from 'cx-ui-components';
 
-import {
-  userHasUpdatePermission
-} from '../../../redux/modules/crudEndpoint/selectors';
-import {
-  getEmailTemplateFormValue
-} from '../../../redux/modules/emailTemplates/selectors';
+import { userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import { getEmailTemplateFormValue } from '../../../redux/modules/emailTemplates/selectors';
 import {
   getVariables,
   getInheritedSubject,
@@ -19,7 +15,7 @@ import {
   getTemplateEmail,
   getTemplateShared,
   getTemplateSubject,
-  getTemplateBody,
+  getTemplateBody
 } from './selectors';
 
 export function mapStateToProps(state) {

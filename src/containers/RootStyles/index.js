@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 
 import { RootStyles } from 'cx-ui-components';
 
-import { fetchBranding } from '../../redux/modules/branding';
+import { fetchData } from '../../redux/modules/entities';
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchStyles: () => {
-      dispatch(fetchBranding());
+      dispatch(fetchData('branding'));
     },
     dispatch
   };
@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    theme: state.getIn(['branding', 'styles'])
+    theme: state.getIn(['Entities', 'branding', 'data'])
   };
 }
 

@@ -9,11 +9,11 @@ import { ListItemsForm } from 'cx-ui-components';
 import {
   setSelectedSubEntityId,
   onSubEntityFormSubmit
-} from '../../../redux/modules/crudEndpoint';
+} from '../../../redux/modules/entities';
 import {
   getSelectedSubEntityId,
   isSubEntitySaving
-} from '../../../redux/modules/crudEndpoint/selectors';
+} from '../../../redux/modules/entities/selectors';
 import { getUpdateFieldItems, getInitialValues } from './selectors';
 import validate from './validation';
 

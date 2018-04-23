@@ -7,14 +7,14 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import { ListsForm } from 'cx-ui-components';
-import { onFormSubmit } from '../../../redux/modules/crudEndpoint';
+import { onFormSubmit } from '../../../redux/modules/entities';
 import { updateFormValidation } from './validation';
 import {
   getSelectedEntityId,
   getSelectedEntity,
   isInherited,
   isUpdating,
-} from '../../../redux/modules/crudEndpoint/selectors';
+} from '../../../redux/modules/entities/selectors';
 
 let UpdateListForm = compose(
   connect(state => ({ form: `lists:${getSelectedEntityId(state)}` })),

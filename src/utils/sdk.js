@@ -15,6 +15,12 @@ export const sdkPromise = (sdkCall, topic) =>
     window.parent.postMessage(sdkCall, '*');
   });
 
+export const sdkCall = sdkCall =>
+  new Promise((resolve, reject) => {
+    window.parent.postMessage(sdkCall, '*');
+    resolve();
+  });
+
 export const errorLabel = error => {
   let errorDetails;
   if (

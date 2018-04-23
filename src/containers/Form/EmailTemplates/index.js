@@ -6,19 +6,14 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import { EmailTemplatesForm } from 'cx-ui-components';
-import { onFormSubmit } from '../../../redux/modules/crudEndpoint';
+import { onFormSubmit } from '../../../redux/modules/entities';
 import { validate } from './validation';
 import {
   getSelectedEntityId,
-  isUpdating,
-} from '../../../redux/modules/crudEndpoint/selectors';
-import {
-  getEmailTemplateFormValue,
-} from '../../../redux/modules/emailTemplates/selectors';
-import {
-  getInitialValues,
-  getTemplates,
-} from './selectors';
+  isUpdating
+} from '../../../redux/modules/entities/selectors';
+import { getEmailTemplateFormValue } from '../../../redux/modules/emailTemplates/selectors';
+import { getInitialValues, getTemplates } from './selectors';
 
 /* istanbul ignore next */
 let UpdateEmailTemplateForm = compose(
@@ -36,7 +31,7 @@ export function mapStateToProps(state) {
     initialValues: getInitialValues(state),
     isSaving: isUpdating(state),
     email: getEmailTemplateFormValue(state),
-    templates: getTemplates(state),
+    templates: getTemplates(state)
   };
 }
 

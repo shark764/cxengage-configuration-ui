@@ -9,12 +9,12 @@ import { SidePanelActions } from 'cx-ui-components';
 import {
   onFormButtonSubmit,
   deselectCurrentEntity
-} from '../../redux/modules/crudEndpoint';
+} from '../../redux/modules/entities';
 import {
   isCreating,
   getSelectedEntity,
   getSelectedEntityFormId
-} from '../../redux/modules/crudEndpoint/selectors';
+} from '../../redux/modules/entities/selectors';
 
 function mapDispatchToProps(dispatch) {
   return {
