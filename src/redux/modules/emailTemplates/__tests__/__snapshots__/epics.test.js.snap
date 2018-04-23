@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpdateEmailTemplate emailTemplates entity sdk promise fails calls toastr error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "mock error",
+    ],
+  ],
+}
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity sdk promise fails returns UPDATE_ENTITY_REJECTED 1`] = `
+Array [
+  Object {
+    "entityId": "mock entity id",
+    "entityName": "emailTemplates",
+    "type": "UPDATE_ENTITY_REJECTED",
+  },
+]
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity unchanged default email calls toastr info 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "\\"Default Email\\" is unchanged. Nothing to submit.",
+    ],
+  ],
+}
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity unchanged default email returns UPDATE_ENTITY_REJECTED 1`] = `
+Array [
+  Object {
+    "entityId": "mock entity id",
+    "entityName": "emailTemplates",
+    "type": "UPDATE_ENTITY_REJECTED",
+  },
+]
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity with custom email calls the correct sdk function 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "command": "createEmailTemplate",
+        "data": Object {
+          "active": true,
+          "body": "mock body",
+          "email": "custom",
+          "emailTypeId": "mock entity id",
+        },
+        "module": "entities",
+      },
+      "cxengage/entities/create-email-template-response",
+    ],
+  ],
+}
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity with custom email calls toastr success 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "Email template was updated successfully!",
+    ],
+  ],
+}
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity with custom email returns updateEntityFulfilled 1`] = `
+Array [
+  Object {
+    "entityId": "mock entity id",
+    "entityName": "emailTemplates",
+    "payload": "mock response",
+    "type": "UPDATE_ENTITY_FULFILLED",
+    "values": Object {
+      "body": "mock body",
+      "email": "custom",
+    },
+  },
+]
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity with default email calls the correct sdk function 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "command": "updateEmailTemplate",
+        "data": Object {
+          "active": false,
+          "emailTypeId": "mock entity id",
+        },
+        "module": "entities",
+      },
+      "cxengage/entities/update-email-template-response",
+    ],
+  ],
+}
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity with default email calls toastr success 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "Email template was updated successfully!",
+    ],
+  ],
+}
+`;
+
+exports[`UpdateEmailTemplate emailTemplates entity with default email returns updateEntityFulfilled 1`] = `
+Array [
+  Object {
+    "entityId": "mock entity id",
+    "entityName": "emailTemplates",
+    "payload": "mock response",
+    "type": "UPDATE_ENTITY_FULFILLED",
+    "values": Object {
+      "body": "mock body",
+      "email": "default",
+    },
+  },
+]
+`;

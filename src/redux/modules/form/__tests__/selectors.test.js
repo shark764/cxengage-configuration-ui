@@ -3,7 +3,7 @@
  */
 
 import { fromJS } from 'immutable';
-import { getCurrentForm } from '../selectors';
+import { getCurrentForm, getCurrentFormInitialValues } from '../selectors';
 
 jest.mock('../../entities/selectors', () => ({
   getCurrentEntity: () => 'mock current entity',
@@ -18,5 +18,20 @@ describe('getCurrentForm', () => {
       }
     });
     expect(getCurrentForm(initalState)).toEqual('mock current form value');
+  });
+});
+
+describe('getCurrentFormInitialValues', () => {
+  it("returns the current form's inital values converted to javascript", () => {
+    const initalState = fromJS({
+      form: {
+        'mock current entity:mock current entity id': {
+          initial: {
+            mockProperty: 'mock value'
+          }
+        }
+      }
+    });
+    expect(getCurrentFormInitialValues(initalState)).toMatchSnapshot();
   });
 });
