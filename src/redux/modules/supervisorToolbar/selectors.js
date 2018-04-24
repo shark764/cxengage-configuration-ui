@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ */
+
 import { createSelector } from 'reselect';
 
 const selectSupervisorToolbarMap = state => state.get('SupervisorToolbar');

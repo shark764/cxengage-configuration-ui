@@ -5,21 +5,19 @@
 import { combineReducers } from 'redux-immutable';
 import { reducer as form } from 'redux-form/immutable';
 
-import branding from './modules/branding';
-import crudEndpoint from './modules/crudEndpoint';
-import userData from './modules/userData';
-import SupervisorToolbar from '../containers/SupervisorToolbar/reducer';
-import InteractionMonitoring from '../containers/InteractionMonitoring/reducer';
-import CheckboxFilterMenu from '../containers/CheckboxFilterMenu/reducer';
+import Entities from './modules/entities';
+import UserData from './modules/userData';
+import SupervisorToolbar from './modules/supervisorToolbar';
+import InteractionMonitoring from './modules/reporting/interactionMonitoring';
+import ColumnFilterMenus from './modules/columnFilterMenus';
 
 const reducer = combineReducers({
-  branding,
-  crudEndpoint,
-  userData,
+  Entities,
+  UserData,
   form,
   SupervisorToolbar,
   InteractionMonitoring,
-  CheckboxFilterMenu
+  ColumnFilterMenus
 });
 
 export default reducer;

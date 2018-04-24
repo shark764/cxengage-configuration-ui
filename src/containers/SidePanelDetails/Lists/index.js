@@ -13,14 +13,14 @@ import {
   deleteSubEntity,
   downloadCsv,
   setConfirmationDialog
-} from '../../../redux/modules/crudEndpoint';
+} from '../../../redux/modules/entities';
 
 import {
   getSelectedEntity,
   userHasUpdatePermission,
   isInherited,
   isSubEntitySaving
-} from '../../../redux/modules/crudEndpoint/selectors';
+} from '../../../redux/modules/entities/selectors';
 
 function mapDispatchToProps(dispatch) {
   return {

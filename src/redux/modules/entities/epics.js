@@ -2,13 +2,23 @@
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
 
-import 'rxjs';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/catch';
+
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 import { from } from 'rxjs/observable/from';
 import { Toast } from 'cx-ui-components';
 
 import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
+
+import {
+  updateSkillsColumnFilter,
+  updateGroupsColumnFilter
+} from '../columnFilterMenus';
 
 import { sdkPromise, errorLabel } from '../../../utils/sdk';
 import {
@@ -88,7 +98,7 @@ export const FormSubmission = (action$, store) =>
     );
 
 export const FetchData = (action$, store) =>
-  action$.ofType('FETCH_DATA').switchMap(a =>
+  action$.ofType('FETCH_DATA').mergeMap(a =>
     fromPromise(
       sdkPromise(
         {
@@ -102,6 +112,7 @@ export const FetchData = (action$, store) =>
       .map(response => ({
         type: 'FETCH_DATA_FULFILLED',
         entityName: a.entityName,
+        tableType: a.tableType,
         response: response
       }))
       .catch(error => {
@@ -302,7 +313,7 @@ export const FetchFormMetaData = (action$, store) =>
       currentEntityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState()),
       isDefined: name =>
-        store.getState().getIn(['crudEndpoint', name, 'data']) === undefined
+        store.getState().getIn(['Entities', name, 'data']) === undefined
     }))
     .mergeMap(
       a =>

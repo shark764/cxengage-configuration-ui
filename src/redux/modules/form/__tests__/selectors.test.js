@@ -5,7 +5,7 @@
 import { fromJS } from 'immutable';
 import { getCurrentForm } from '../selectors';
 
-jest.mock('../../crudEndpoint/selectors', () => ({
+jest.mock('../../entities/selectors', () => ({
   getCurrentEntity: () => 'mock current entity',
   getSelectedEntityId: () => 'mock current entity id'
 }));

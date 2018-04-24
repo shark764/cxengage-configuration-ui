@@ -8,12 +8,12 @@ import { EntityTable } from 'cx-ui-components';
 
 import { camelCaseToRegularForm } from '../../utils/string';
 
-import { setSelectedEntityId } from '../../redux/modules/crudEndpoint';
+import { setSelectedEntityId } from '../../redux/modules/entities';
 import {
   getCurrentEntity,
   getAllEntities,
   userHasCreatePermission
-} from '../../redux/modules/crudEndpoint/selectors';
+} from '../../redux/modules/entities/selectors';
 
 import { getHelpLink, getTableColumns } from './config';
 

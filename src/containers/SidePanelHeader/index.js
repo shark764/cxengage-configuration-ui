@@ -14,14 +14,14 @@ import { capitalizeFirstLetter } from '../../utils/string';
 import {
   deselectCurrentEntity,
   setConfirmationDialog
-} from '../../redux/modules/crudEndpoint';
+} from '../../redux/modules/entities';
 import {
   getCurrentEntity,
   getSelectedEntityId,
   getSelectedEntity,
   userHasUpdatePermission,
   isInherited
-} from '../../redux/modules/crudEndpoint/selectors';
+} from '../../redux/modules/entities/selectors';
 
 function mapDispatchToProps(dispatch) {
   return {

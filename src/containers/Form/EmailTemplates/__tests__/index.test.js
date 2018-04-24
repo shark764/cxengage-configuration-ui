@@ -7,24 +7,26 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import UpdateEmailTemplateForm, { mapStateToProps } from '../';
 
-jest.mock('../../../../redux/modules/crudEndpoint/selectors', () => ({
+jest.mock('../../../../redux/modules/entities/selectors', () => ({
   getSelectedEntityId: () => 'mockSelectedEntityId',
-  isUpdating: () => 'mock is updating',
+  isUpdating: () => 'mock is updating'
 }));
 
 jest.mock('../../../../redux/modules/emailTemplates/selectors', () => ({
-  getEmailTemplateFormValue: () => 'mock email template form value',
+  getEmailTemplateFormValue: () => 'mock email template form value'
 }));
 
 jest.mock('../selectors', () => ({
   getInitialValues: () => 'mock initial values',
-  getTemplates: () => 'mock templates',
+  getTemplates: () => 'mock templates'
 }));
 
 describe('EmailTemplatesDetailsPanel', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    shallow(<UpdateEmailTemplateForm store={store}>Child</UpdateEmailTemplateForm>);
+    shallow(
+      <UpdateEmailTemplateForm store={store}>Child</UpdateEmailTemplateForm>
+    );
   });
 });
 

@@ -4,13 +4,13 @@
 
 import { connect } from 'react-redux';
 
-import { setCurrentEntity, fetchData } from '../../redux/modules/crudEndpoint';
+import { setCurrentEntity, fetchData } from '../../redux/modules/entities';
 
 import {
   getSelectedEntityId,
   getSelectedSubEntityId,
   getConfirmationDialogType
-} from '../../redux/modules/crudEndpoint/selectors';
+} from '../../redux/modules/entities/selectors';
 
 import Layout from './Layout';
 

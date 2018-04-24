@@ -72,7 +72,11 @@ export const setConfirmationDialog = (modalType, metaData) => {
 export const executeConfirmCallback = referenceData => {
   return { type: 'EXECUTE_CONFIRM_CALLBACK', referenceData };
 };
-export const fetchData = entityName => ({ type: 'FETCH_DATA', entityName });
+export const fetchData = (entityName, tableType) => ({
+  type: 'FETCH_DATA',
+  entityName,
+  tableType
+});
 export const fetchDataItem = (entityName, id) => ({
   type: 'FETCH_DATA_ITEM',
   entityName,
@@ -134,11 +138,12 @@ export default function reducer(state = initialState, action) {
     }
     case 'SET_ENTITY_UPDATING':
       return setEntityUpdatingHelper(state, action, action.state);
-    case 'FETCH_DATA_FULFILLED':
+    case 'FETCH_DATA_FULFILLED': {
       return state.setIn(
         [action.entityName, 'data'],
         fromJS(action.response.result || action.response)
       );
+    }
     case 'FETCH_DATA_REJECTED':
       return state.setIn([action.entityName, 'data'], new List());
     case 'FETCH_DATA_ITEM_FULFILLED':

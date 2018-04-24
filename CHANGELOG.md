@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.3]
+* CXV1-13584 - Covert interaction table / supervisor toolbar to use epics to handle side effects.
+
 ## [0.19.2]
 * CXV1-13304 - Unit Tests
 

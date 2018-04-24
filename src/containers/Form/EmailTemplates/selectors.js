@@ -3,19 +3,14 @@
  */
 
 import { Map } from 'immutable';
-import {
-  getSelectedEntity
-} from '../../../redux/modules/crudEndpoint/selectors';
+import { getSelectedEntity } from '../../../redux/modules/entities/selectors';
 
 export const getInitialValues = state => {
   const selectedEntity = getSelectedEntity(state);
   const template = selectedEntity.get('template');
   const inherited = selectedEntity.get('inherited');
   let initialValues;
-  if (
-    template.get('tenantId') ===
-    inherited.get('tenantId')
-  ) {
+  if (template.get('tenantId') === inherited.get('tenantId')) {
     initialValues = {
       email: 'default',
       shared: false,
@@ -31,10 +26,10 @@ export const getInitialValues = state => {
     };
   }
   return new Map(initialValues);
-}
+};
 
 export const getTemplates = state =>
- getSelectedEntity(state)
-  .get('variables')
-  .map(variable => variable.get('name'))
-  .toJS()
+  getSelectedEntity(state)
+    .get('variables')
+    .map(variable => variable.get('name'))
+    .toJS();

@@ -81,7 +81,7 @@
   "author": "SerenovaLLC",
   "license": "UNLICENSED",
   "dependencies": {
-    "cx-ui-components": "0.19.1",
+    "cx-ui-components": "0.19.3",
     "immutable": "3.8.2",
     "moment": "2.22.0",
     "react": "16.2.0",

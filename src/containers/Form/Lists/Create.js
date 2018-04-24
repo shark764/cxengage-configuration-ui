@@ -6,12 +6,12 @@ import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import { ListsForm } from 'cx-ui-components';
-import { onFormSubmit } from '../../../redux/modules/crudEndpoint';
+import { onFormSubmit } from '../../../redux/modules/entities';
 import { createFormValidation } from './validation';
 import {
   getSelectedEntityId,
   isCreating
-} from '../../../redux/modules/crudEndpoint/selectors';
+} from '../../../redux/modules/entities/selectors';
 
 let CreateListForm = reduxForm({
   form: 'lists:create',
@@ -22,7 +22,7 @@ let CreateListForm = reduxForm({
 function mapStateToProps(state) {
   const selectedEntityId = getSelectedEntityId(state);
   if (selectedEntityId === 'create') {
-    let listTypes = state.getIn(['crudEndpoint', 'listTypes', 'data']);
+    let listTypes = state.getIn(['Entities', 'listTypes', 'data']);
     if (listTypes) {
       listTypes = listTypes
         .toJS()

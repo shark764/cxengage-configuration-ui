@@ -101,7 +101,7 @@ const updateSubEntityFormRoutes = [
 
 export default class CrudEndpointUiLayout extends Component {
   componentDidMount() {
-    const entityName = this.props.location.pathname.slice(1);
+    const entityName = this.props.match.params.entityName;
     this.props.setCurrentEntity(entityName);
     this.props.fetchData(entityName);
   }

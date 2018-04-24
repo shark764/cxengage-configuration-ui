@@ -1,8 +1,0 @@
-export const TOGGLE_TWILIO_ENABLED = 'src/SupervisorToolbar/SET_TWILIO_ENABLED';
-export const TOGGLE_TWILIO_IS_DEFAULT_EXTENSION =
-  'src/SupervisorToolbar/TOGGLE_TWILIO_IS_DEFAULT_EXTENSION';
-export const SET_SILENT_MONITORING_STATUS =
-  'src/SupervisorToolbar/SET_SILENT_MONITORING_STATUS';
-export const TOGGLE_MUTE = 'src/SupervisorToolbar/TOGGLE_MUTE';
-export const SET_SILENT_MONITORING_INTERACTION_ID =
-  'src/SupervisorToolbar/SET_SILENT_MONITORING_INTERACTION_ID';

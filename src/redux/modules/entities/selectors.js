@@ -3,15 +3,18 @@
  */
 
 import { createSelector } from 'reselect';
-import { getCurrentPermissions, getCurrentTenantId } from '../userData.js';
+import {
+  getCurrentPermissions,
+  getCurrentTenantId
+} from '../userData/selectors';
 
-const getCrudEndpoint = state => state.get('crudEndpoint');
+const getEntities = state => state.get('Entities');
 
 export const getCurrentEntity = state =>
-  getCrudEndpoint(state).get('currentEntity');
+  getEntities(state).get('currentEntity');
 
 export const getCurrentEntityStore = state =>
-  getCrudEndpoint(state).get(getCurrentEntity(state));
+  getEntities(state).get(getCurrentEntity(state));
 
 export const getSidePanelWidth = state =>
   getCurrentEntityStore(state).get('sidePanelWidth');
@@ -72,8 +75,7 @@ export const isInherited = state =>
 export const isCreating = state =>
   getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
 
-export const isUpdating = state =>
-  getCurrentEntityStore(state).get('updating');
+export const isUpdating = state => getCurrentEntityStore(state).get('updating');
 
 export const getCurrentSubEntity = state =>
   getCurrentEntityStore(state).get('subEntity');
