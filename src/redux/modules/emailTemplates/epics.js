@@ -5,26 +5,17 @@ import { Toast } from 'cx-ui-components';
 
 import { sdkPromise, errorLabel } from '../../../utils/sdk';
 
-import { getCurrentEntity, getSelectedEntityId } from '../entities/selectors';
+import { getCurrentFormInitialValues } from '../form/selectors';
 
-import { updateEntityFulfilled, updateEntityInFulfilled } from '../entities';
+import { updateEntityFulfilled } from '../entities';
 
-export const UpdateEntity = (action$, store) =>
+export const UpdateEmailTemplate = (action$, store) =>
   action$
     .ofType('UPDATE_ENTITY')
     .filter(({ entityName }) => entityName === 'emailTemplates')
     .map(action => ({
       ...action,
-      currentEntity: getCurrentEntity(store.getState()),
-      selectedIdentityId: getSelectedEntityId(store.getState()),
-      initialValues: store
-        .getState()
-        .getIn([
-          'form',
-          `emailTemplates:${getSelectedEntityId(store.getState())}`,
-          'initial'
-        ])
-        .toJS()
+      initialValues: getCurrentFormInitialValues(store.getState())
     }))
     .mergeMap(a => {
       // Don't submit the form if the user changes a custom email field, then changes email back to "default"

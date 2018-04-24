@@ -9,3 +9,8 @@ export const getCurrentForm = state =>
     'form',
     `${getCurrentEntity(state)}:${getSelectedEntityId(state)}`
   ]);
+
+export const getCurrentFormInitialValues = state =>
+  getCurrentForm(state)
+    .get('initial')
+    .toJS();

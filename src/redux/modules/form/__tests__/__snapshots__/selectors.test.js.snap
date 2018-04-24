@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCurrentFormInitialValues returns the current form's inital values converted to javascript 1`] = `
+Object {
+  "mockProperty": "mock value",
+}
+`;
