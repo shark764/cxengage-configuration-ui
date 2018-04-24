@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validate with custom email missing body errors 1`] = `
+Object {
+  "body": "Please enter a body",
+}
+`;
+
+exports[`validate with custom email missing subject errors 1`] = `
+Object {
+  "subject": "Please enter a subject",
+}
+`;
