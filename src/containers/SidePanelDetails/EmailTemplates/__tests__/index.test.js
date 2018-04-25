@@ -1,6 +1,6 @@
 import React from 'react';
-import { createStore } from 'redux';
 import { shallow } from 'enzyme';
+import { mockStore } from '../../../../utils/testUtils';
 import EmailTemplatesDetailsPanel, { mapStateToProps } from '../';
 
 jest.mock('../../../../redux/modules/entities/selectors', () => ({
@@ -23,9 +23,8 @@ jest.mock('../selectors', () => ({
 
 describe('EmailTemplatesDetailsPanel', () => {
   it('renders', () => {
-    const store = createStore(state => state);
     shallow(
-      <EmailTemplatesDetailsPanel store={store}>
+      <EmailTemplatesDetailsPanel store={mockStore}>
         Child
       </EmailTemplatesDetailsPanel>
     );
@@ -33,7 +32,7 @@ describe('EmailTemplatesDetailsPanel', () => {
 });
 
 describe('mapStateToProps', () => {
-  it('maps properly', () => {
+  it('maps the selectors to the object correctly', () => {
     expect(mapStateToProps()).toMatchSnapshot();
   });
 });

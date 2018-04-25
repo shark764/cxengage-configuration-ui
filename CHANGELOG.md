@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.6]
+* CXV1-13304 - Entity table test (first mapping actions)
+
 ## [0.19.5]
 * CXV1-13304 - Validation, string, and Entity table config unit tests
 * CXV1-13603 - Add email templates help doc link

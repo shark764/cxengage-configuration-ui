@@ -3,8 +3,8 @@
  */
 
 import React from 'react';
-import { createStore } from 'redux';
 import { shallow } from 'enzyme';
+import { mockStore } from '../../../../utils/testUtils';
 import UpdateEmailTemplateForm, { mapStateToProps } from '../';
 
 jest.mock('../../../../redux/modules/entities/selectors', () => ({
@@ -23,15 +23,14 @@ jest.mock('../selectors', () => ({
 
 describe('EmailTemplatesDetailsPanel', () => {
   it('renders', () => {
-    const store = createStore(state => state);
     shallow(
-      <UpdateEmailTemplateForm store={store}>Child</UpdateEmailTemplateForm>
+      <UpdateEmailTemplateForm store={mockStore}>Child</UpdateEmailTemplateForm>
     );
   });
 });
 
 describe('mapStateToProps', () => {
-  it('maps properly', () => {
+  it('maps the selectors to the object correctly', () => {
     expect(mapStateToProps()).toMatchSnapshot();
   });
 });

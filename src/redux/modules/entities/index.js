@@ -48,6 +48,7 @@ export const deselectCurrentEntity = () => ({
 export const setSelectedEntityId = entityId => {
   return { type: 'SET_SELECTED_ENTITY_ID', entityId };
 };
+export const setSelectedEntityCreate = () => setSelectedEntityId('create');
 export const setEntityUpdating = (entityName, entityId, updating) => {
   return { type: 'SET_ENTITY_UPDATING', entityName, entityId, updating };
 };
