@@ -69,32 +69,32 @@ function NoScrollDetailsPanel(ContainerComponent) {
 
 const createFormRoutes = [
   {
-    path: '/lists',
+    path: '/configuration/lists',
     component: () => DetailsPanel(CreateListForm)
   }
 ];
 
 const detailsPanelRoutes = [
   {
-    path: '/lists',
+    path: '/configuration/lists',
     component: () => DetailsPanel(ListsDetailsPanelContainer)
   },
   {
-    path: '/emailTemplates',
+    path: '/configuration/emailTemplates',
     component: () => NoScrollDetailsPanel(EmailTemplatesDetailsPanelContainer)
   }
 ];
 
 const createSubEntityFormRoutes = [
   {
-    path: '/lists',
+    path: '/configuration/lists',
     component: CreateListItemForm
   }
 ];
 
 const updateSubEntityFormRoutes = [
   {
-    path: '/lists',
+    path: '/configuration/lists',
     component: UpdateListItemForm
   }
 ];

@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`statusColumn Filter renders correctly 1`] = `
+<select
+  onChange={[Function]}
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  value="all"
+>
+  <option
+    value="all"
+  >
+    All
+  </option>
+  <option
+    value="enabled"
+  >
+    View Enabled
+  </option>
+  <option
+    value="disabled"
+  >
+    View Disabled
+  </option>
+</select>
+`;
+
+exports[`statusColumn is configured correctly 1`] = `
+Object {
+  "Filter": [Function],
+  "Header": <abbr
+    title="Status"
+  >
+    Status
+  </abbr>,
+  "accessor": [Function],
+  "filterMethod": [Function],
+  "id": "status",
+}
+`;

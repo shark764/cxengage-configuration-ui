@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getHelpLink returns correct link for emailTemplates 1`] = `"https://docs.cxengage.net/Help/Content/Configuring%20CxEngage/Email_Templates/Email_Templates_Overview.htm"`;
+
+exports[`getHelpLink returns correct link for lists 1`] = `"https://docs.cxengage.net/Help/Content/Configuring%20CxEngage/Lists/Lists.htm"`;
+
+exports[`getTableColumns lists returns correct columns 1`] = `
+Array [
+  "mock name column",
+  "mock list type column",
+  "mock status column",
+]
+`;
+
+exports[`getTableColumns returns correct columns for emailTemplates 1`] = `
+Array [
+  "mock name column",
+  "mock description column",
+]
+`;

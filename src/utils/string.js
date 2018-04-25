@@ -24,6 +24,14 @@ export const camelCaseToRegularFormAndRemoveLastLetter = string =>
 export const capitalizeFirstAndRemoveLastLetter = string =>
   capitalizeFirstLetter(removeLastLetter(string));
 
-export const atLeastOneLetterOrNumber = /([a-z]|[0-9])/i;
+/**
+ * Accepts undefined/null so form validation works properly.
+ * Regex tests that it can start with a "-", any number of digits, and can end with a "." followed by any number of digits.
+ */
+export const isNumber = string =>
+  string === undefined || string === null || /^-?\d*\.?\d*$/.test(string);
 
-export const containsNonWhiteSpace = string => /\S/.test(string);
+/**
+ * Returns true if string is falsey or contains whitespace
+ */
+export const isEmpty = string => !string || !/\S/.test(string);
