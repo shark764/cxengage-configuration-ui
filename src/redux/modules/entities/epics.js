@@ -25,7 +25,13 @@ import {
   capitalizeFirstAndRemoveLastLetter
 } from '../../../utils/string';
 
-import { updateEntityFulfilled, uploadCsv, setEntityUpdating } from './index';
+import {
+  fetchDataFulfilled,
+  fetchDataRejected,
+  updateEntityFulfilled,
+  uploadCsv,
+  setEntityUpdating
+} from './index';
 import {
   getCurrentEntity,
   getSelectedEntityId,
@@ -104,18 +110,10 @@ export const FetchData = (action$, store) =>
         `cxengage/entities/get-${camelCaseToKebabCase(a.entityName)}-response`
       )
     )
-      .map(response => ({
-        type: 'FETCH_DATA_FULFILLED',
-        entityName: a.entityName,
-        tableType: a.tableType,
-        response: response
-      }))
+      .map(response => fetchDataFulfilled(a.entityName, response, a.tableType))
       .catch(error => {
         Toast.error(errorLabel(error));
-        return of({
-          type: 'FETCH_DATA_REJECTED',
-          entityName: a.entityName
-        });
+        return of(fetchDataRejected(a.entityName));
       })
   );
 
@@ -236,8 +234,8 @@ export const UpdateEntity = (action$, store) =>
           );
           return updateEntityFulfilled(
             a.entityName,
-            a.entityId,
             response,
+            a.entityId,
             a.values
           );
         })

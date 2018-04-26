@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FetchData calls the correct sdk function 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "command": "getMockEntity",
+        "data": Object {},
+        "module": "entities",
+      },
+      "cxengage/entities/get-mock-entity-response",
+    ],
+  ],
+}
+`;
+
+exports[`FetchData on sdkPromise error calls toastr error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "mock error",
+    ],
+  ],
+}
+`;
+
+exports[`FetchData on sdkPromise error returns fetchDataRejected 1`] = `
+Object {
+  "entityName": "mockEntity",
+  "type": "FETCH_DATA_REJECTED",
+}
+`;
+
+exports[`FetchData on sdkPromise success returns fetchDataFulfilled 1`] = `
+Object {
+  "entityName": "mockEntity",
+  "response": "mock response",
+  "tableType": "mockTableType",
+  "type": "FETCH_DATA_FULFILLED",
+}
+`;

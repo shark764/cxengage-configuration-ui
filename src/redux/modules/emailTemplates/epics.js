@@ -7,7 +7,7 @@ import { sdkPromise, errorLabel } from '../../../utils/sdk';
 
 import { getCurrentFormInitialValues } from '../form/selectors';
 
-import { updateEntityFulfilled } from '../entities';
+import { updateEntityFulfilled, updateEntityRejected } from '../entities';
 
 export const UpdateEmailTemplate = (action$, store) =>
   action$
@@ -51,25 +51,17 @@ export const UpdateEmailTemplate = (action$, store) =>
             Toast.success('Email template was updated successfully!');
             return updateEntityFulfilled(
               a.entityName,
-              a.entityId,
               response,
+              a.entityId,
               a.values
             );
           })
           .catch(error => {
             Toast.error(errorLabel(error));
-            return of({
-              type: 'UPDATE_ENTITY_REJECTED',
-              entityName: a.entityName,
-              entityId: a.entityId
-            });
+            return of(updateEntityRejected(a.entityName, a.entityId));
           });
       } else {
         Toast.info('"Default Email" is unchanged. Nothing to submit.');
-        return of({
-          type: 'UPDATE_ENTITY_REJECTED',
-          entityName: a.entityName,
-          entityId: a.entityId
-        });
+        return of(updateEntityRejected(a.entityName, a.entityId));
       }
     });
