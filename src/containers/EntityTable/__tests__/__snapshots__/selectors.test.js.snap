@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAllEntities is defined returns the entities toJS 1`] = `
+Array [
+  Object {
+    "mockAttribute": "mock value",
+  },
+]
+`;

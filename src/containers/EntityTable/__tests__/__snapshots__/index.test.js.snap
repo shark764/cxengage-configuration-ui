@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions maps the redux actions to the object correctly 1`] = `
+Object {
+  "onCreateButtonClick": "mock set selected entity create",
+  "onRowClick": "mock set selected entity id",
+}
+`;
+
+exports[`mapStateToProps maps the selectors to the object correctly 1`] = `
+Object {
+  "columns": Array [
+    "mock table columns",
+  ],
+  "items": Array [
+    "mock all entities",
+  ],
+  "pageHelpLink": "mock help link",
+  "pageTitle": "Mock current entity",
+  "userHasCreatePermission": "mock user has create permission",
+}
+`;

@@ -8,35 +8,31 @@ import { EntityTable } from 'cx-ui-components';
 
 import { camelCaseToRegularForm } from '../../utils/string';
 
-import { setSelectedEntityId } from '../../redux/modules/entities';
+import {
+  setSelectedEntityCreate,
+  setSelectedEntityId
+} from '../../redux/modules/entities';
 import {
   getCurrentEntity,
-  getAllEntities,
   userHasCreatePermission
 } from '../../redux/modules/entities/selectors';
-
+import { getAllEntities } from './selectors';
 import { getHelpLink, getTableColumns } from './config';
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onCreateButtonClick: () => {
-      dispatch(setSelectedEntityId('create'));
-    },
-    onRowClick: id => {
-      dispatch(setSelectedEntityId(id));
-    }
-  };
-}
-
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   const currentEntity = getCurrentEntity(state);
   return {
     pageTitle: camelCaseToRegularForm(currentEntity),
     pageHelpLink: getHelpLink(currentEntity),
-    items: getAllEntities(state) ? getAllEntities(state).toJS() : undefined,
+    items: getAllEntities(state),
     columns: getTableColumns(currentEntity),
     userHasCreatePermission: userHasCreatePermission(state)
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EntityTable);
+export const actions = {
+  onCreateButtonClick: setSelectedEntityCreate,
+  onRowClick: setSelectedEntityId
+};
+
+export default connect(mapStateToProps, actions)(EntityTable);
