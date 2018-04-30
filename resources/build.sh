@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-npm install
+npm install --no-package-lock
 npm ls react
 npm run lint
 npm run test:coverage

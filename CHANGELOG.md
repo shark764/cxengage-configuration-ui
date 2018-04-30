@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.7]
+* Try to fix jenkins build (https://github.com/npm/npm/issues/19353)
+
 ## [0.19.6]
 * CXV1-13304 - Entity table test (first mapping actions)
 
