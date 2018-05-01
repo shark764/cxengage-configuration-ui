@@ -16,14 +16,14 @@ import {
   getCurrentEntity,
   userHasCreatePermission
 } from '../../redux/modules/entities/selectors';
-import { getAllEntities } from './selectors';
-import { getHelpLink, getTableColumns } from './config';
+import { getHelpLink, getAllEntities } from './selectors';
+import { getTableColumns } from './config';
 
 export function mapStateToProps(state) {
   const currentEntity = getCurrentEntity(state);
   return {
     pageTitle: camelCaseToRegularForm(currentEntity),
-    pageHelpLink: getHelpLink(currentEntity),
+    pageHelpLink: getHelpLink(state),
     items: getAllEntities(state),
     columns: getTableColumns(currentEntity),
     userHasCreatePermission: userHasCreatePermission(state)

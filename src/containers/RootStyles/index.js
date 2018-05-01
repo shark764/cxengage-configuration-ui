@@ -6,25 +6,12 @@ import { connect } from 'react-redux';
 
 import { RootStyles } from 'cx-ui-components';
 
-import { fetchData } from '../../redux/modules/entities';
-
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchStyles: () => {
-      dispatch(fetchData('branding'));
-    },
-    dispatch
-  };
-}
-
 function mapStateToProps(state) {
   return {
     theme: state.getIn(['Entities', 'branding', 'data'])
   };
 }
 
-const RootStylesContainer = connect(mapStateToProps, mapDispatchToProps)(
-  RootStyles
-);
+const RootStylesContainer = connect(mapStateToProps)(RootStyles);
 
 export default RootStylesContainer;

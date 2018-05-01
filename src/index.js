@@ -2,33 +2,42 @@
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { Switch, HashRouter as Router, Route } from 'react-router-dom';
 
 import RootStyles from './containers/RootStyles';
 
 import store from './redux/store';
 
+import Startup from './containers/Startup';
 import SupervisorToolbar from './containers/SupervisorToolbar';
 import InteractionMonitoring from './containers/InteractionMonitoring';
 import CrudEndpointUi from './containers/CrudEndpointUi';
 
 ReactDOM.render(
   <Provider store={store}>
-    <RootStyles>
-      <Router>
-        <React.Fragment>
-          <Route path="/supervisorToolbar" component={SupervisorToolbar} />
-          <Route
-            path="/interactionMonitoring"
-            component={InteractionMonitoring}
-          />
-          <Route path="/configuration/:entityName" component={CrudEndpointUi} />
-        </React.Fragment>
-      </Router>
-    </RootStyles>
+    <Router>
+      <Switch>
+        {/* Branding is not required for SupervisorToolbar and we do not want to display the loading spinner for it */}
+        <Route path="/supervisorToolbar" component={SupervisorToolbar} />
+        <Startup>
+          <RootStyles>
+            <Fragment>
+              <Route
+                path="/interactionMonitoring"
+                component={InteractionMonitoring}
+              />
+              <Route
+                path="/configuration/:entityName"
+                component={CrudEndpointUi}
+              />
+            </Fragment>
+          </RootStyles>
+        </Startup>
+      </Switch>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

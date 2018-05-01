@@ -10,9 +10,9 @@ import { descriptionColumn } from './columns/description';
 export const getHelpLink = entityName => {
   switch (entityName) {
     case 'lists':
-      return 'https://docs.cxengage.net/Help/Content/Configuring%20CxEngage/Lists/Lists.htm';
+      return 'docs.cxengage.net/Help/Content/Configuration/Lists/Lists.htm';
     case 'emailTemplates':
-      return 'https://docs.cxengage.net/Help/Content/Configuring%20CxEngage/Email_Templates/Email_Templates_Overview.htm';
+      return 'docs.cxengage.net/Help/Content/Configuration/Email_Templates/Email_Templates_Overview.htm';
     default:
       return undefined;
   }

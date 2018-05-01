@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.8]
+* CXV1-13761: Protected branding custom domain for help links
+* Added inital loading state for branding and protected branding (fixes issue where fetching the entities on page load would happen twice when branding was present)
+
 ## [0.19.7]
 * Try to fix jenkins build (https://github.com/npm/npm/issues/19353)
 

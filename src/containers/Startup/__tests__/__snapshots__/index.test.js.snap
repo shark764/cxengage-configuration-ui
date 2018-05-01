@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions maps the redux actions to the object correctly 1`] = `
+Object {
+  "start": [MockFunction],
+}
+`;
+
+exports[`mapStateToProps maps the selectors to the object correctly 1`] = `
+Object {
+  "hasStarted": true,
+}
+`;

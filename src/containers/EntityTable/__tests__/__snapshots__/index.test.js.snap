@@ -2,8 +2,8 @@
 
 exports[`actions maps the redux actions to the object correctly 1`] = `
 Object {
-  "onCreateButtonClick": "mock set selected entity create",
-  "onRowClick": "mock set selected entity id",
+  "onCreateButtonClick": [MockFunction],
+  "onRowClick": [MockFunction],
 }
 `;
 
