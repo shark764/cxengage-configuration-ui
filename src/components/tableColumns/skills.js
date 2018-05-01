@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import styled from 'styled-components';
 import CheckboxFilterMenu from '../../containers/CheckboxFilterMenu';
 
 export default function(value, tableType) {

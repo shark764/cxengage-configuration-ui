@@ -5,7 +5,7 @@
 import { fromJS } from 'immutable';
 
 // Initial Sub State
-const initialState = fromJS({
+export const initialState = fromJS({
   twelveHourFormat: true,
   InteractionMonitoring: {
     Columns: JSON.parse(
@@ -118,7 +118,6 @@ export default function ColumnsMenu(state = initialState, action) {
       );
     }
     case 'ONE_ON_REST_OFF': {
-      console.warn(action);
       return state.setIn(
         [action.tableType, action.menuType],
         state

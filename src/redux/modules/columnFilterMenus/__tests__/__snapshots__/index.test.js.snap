@@ -1,0 +1,239 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`columnFilterMenus reducer snapshots dispatches oneOnRestOff 1`] = `
+Immutable.Map {
+  "mockTable": Immutable.Map {
+    "mockMenu": Immutable.List [
+      Immutable.Map {
+        "name": "item1",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "item2",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "item3",
+        "active": true,
+      },
+    ],
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches setVisibleMenu 1`] = `
+Immutable.Map {
+  "mockTable": Immutable.Map {
+    "visibleMenu": "Groups",
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches toggleAllInverseMenuItems 1`] = `
+Immutable.Map {
+  "mockTable": Immutable.Map {
+    "mockMenu": Immutable.List [
+      Immutable.Map {
+        "name": "item1",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "item2",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "item3",
+        "active": true,
+      },
+    ],
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches toggleAllMenuItemsOff 1`] = `
+Immutable.Map {
+  "mockTable": Immutable.Map {
+    "mockMenu": Immutable.List [
+      Immutable.Map {
+        "name": "item1",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "item2",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "item3",
+        "active": false,
+      },
+    ],
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches toggleAllMenuItemsOn 1`] = `
+Immutable.Map {
+  "mockTable": Immutable.Map {
+    "mockMenu": Immutable.List [
+      Immutable.Map {
+        "name": "item1",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "item2",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "item3",
+        "active": true,
+      },
+    ],
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches toggleMenuItems 1`] = `
+Immutable.Map {
+  "mockTable": Immutable.Map {
+    "mockMenu": Immutable.List [
+      Immutable.Map {
+        "name": "item1",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "item2",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "item3",
+        "active": false,
+      },
+    ],
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches toggleTimeFormat 1`] = `
+Immutable.Map {
+  "twelveHourFormat": false,
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches updateGroupsColumnFilter 1`] = `
+Immutable.Map {
+  "mockTable": Immutable.Map {
+    "Groups": Immutable.List [
+      "mockGroupData1",
+      "mockGroupData2",
+    ],
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches updateSkillsColumnFilter 1`] = `
+Immutable.Map {
+  "mockTable": Immutable.Map {
+    "Skills": Immutable.List [
+      "mockSkillsData1",
+      "mockSkillsData2",
+    ],
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots returns the correct initial state 1`] = `
+Immutable.Map {
+  "twelveHourFormat": true,
+  "InteractionMonitoring": Immutable.Map {
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "InteractionId",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Agent",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "CustomerId",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "ContactPoint",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Flow",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Channel",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Direction",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Presence State",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Start Date",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "StartTime",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "ElapsedTime",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Monitoring",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Groups",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Skills",
+        "active": false,
+      },
+    ],
+    "Groups": Immutable.List [],
+    "Skills": Immutable.List [],
+    "Direction": Immutable.List [
+      Immutable.Map {
+        "name": "All",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Inbound",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Outbound",
+        "active": false,
+      },
+    ],
+    "Monitoring": Immutable.List [
+      Immutable.Map {
+        "name": "All",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Monitored",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Not Monitored",
+        "active": false,
+      },
+    ],
+    "visibleMenu": "none",
+  },
+}
+`;

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { fromEvent } from 'rxjs/observable/fromEvent';
-import 'rxjs/add/operator/map';
+import { subscribe, unsubscribe } from './Observable.js';
 import { MutedIconSVG, UnMutedIconSVG, HangUpIconSVG } from 'cx-ui-components';
 
 const HangUpIconSVGWrapper = styled(HangUpIconSVG)`
@@ -15,62 +14,14 @@ const Toolbar = styled.div`
   padding-bottom: 10px;
 `;
 
-let messageObservableSubscription;
 export default class SupervisorToolbar extends Component {
-  messageObservable = fromEvent(window, 'message')
-    .filter(
-      ({ data }) =>
-        data.subscription &&
-        (data.subscription.topic === 'cxengage/session/sqs-shut-down' ||
-          data.subscription.topic === 'cxengage/twilio/device-ready' ||
-          data.subscription.topic ===
-            'cxengage/interactions/voice/silent-monitor-start' ||
-          data.subscription.topic ===
-            'cxengage/interactions/voice/silent-monitor-end' ||
-          data.subscription.topic ===
-            'cxengage/interactions/voice/unmute-acknowledged' ||
-          data.subscription.topic ===
-            'cxengage/interactions/voice/mute-acknowledged' ||
-          data.subscription.topic === 'monitorCall')
-    )
-    .map(event => ({
-      topic: event.data.subscription.topic,
-      response: event.data.subscription.response
-    }));
-
   componentWillMount() {
     this.props.startSupervisorToolbarSubscriptions();
-    messageObservableSubscription = this.messageObservable.subscribe(
-      ({ topic, response }) => {
-        switch (topic) {
-          case 'cxengage/twilio/device/ready':
-            !this.props.twilioEnabled && this.props.toggleTwilioEnabled();
-            break;
-          case 'cxengage/interactions/voice/silent-monitor-start':
-            this.props.setSilentMonitoringStatus('connected');
-            break;
-          case 'cxengage/session/sqs-shut-down':
-          case 'cxengage/interactions/voice/silent-monitor-end':
-            this.props.setSilentMonitoringStatus('offline');
-            break;
-          case 'cxengage/interactions/voice/unmute-acknowledged':
-          case 'cxengage/interactions/voice/mute-acknowledged':
-            this.props.toggleMute();
-            break;
-          case 'monitorCall':
-            const { interactionId, status } = response;
-            this.props.setSilentMonitoringStatus(status);
-            this.props.setSilentMonitoringInteractionId(interactionId);
-            break;
-          default:
-            break;
-        }
-      }
-    );
+    subscribe();
   }
 
   componentWillUnmount() {
-    messageObservableSubscription.unsubscribe();
+    unsubscribe();
   }
 
   render() {
@@ -79,20 +30,23 @@ export default class SupervisorToolbar extends Component {
         {this.props.monitoringStatus !== 'offline' && (
           <Toolbar>
             <HangUpIconSVGWrapper
+              id="hangUpButton"
               className="HangUpIconSVG"
-              onClick={() => this.props.requestingHangUp()}
+              onClick={this.props.requestingHangUp}
               loading={this.props.monitoringStatus !== 'connected'}
               size={40}
             />
             {this.props.monitoringStatus === 'connected' &&
               (this.props.muted ? (
                 <MutedIconSVG
-                  onClick={() => this.props.requestingToggleMute()}
+                  id="unmuteButton"
+                  onClick={this.props.requestingToggleMute}
                   size={40}
                 />
               ) : (
                 <UnMutedIconSVG
-                  onClick={() => this.props.requestingToggleMute()}
+                  id="muteButton"
+                  onClick={this.props.requestingToggleMute}
                   size={40}
                 />
               ))}
@@ -104,15 +58,11 @@ export default class SupervisorToolbar extends Component {
 }
 
 SupervisorToolbar.propTypes = {
+  startSupervisorToolbarSubscriptions: PropTypes.func.isRequired,
   requestingToggleMute: PropTypes.func.isRequired,
   requestingHangUp: PropTypes.func.isRequired,
   muted: PropTypes.bool.isRequired,
   twilioEnabled: PropTypes.bool.isRequired,
-  twilioIsDefault: PropTypes.bool.isRequired,
   monitoringStatus: PropTypes.string.isRequired,
-  interactionId: PropTypes.string.isRequired,
-  setSilentMonitoringInteractionId: PropTypes.func.isRequired,
-  toggleTwilioIsDefaultExtension: PropTypes.func.isRequired,
-  toggleTwilioEnabled: PropTypes.func.isRequired,
-  setSilentMonitoringStatus: PropTypes.func.isRequired
+  interactionId: PropTypes.string.isRequired
 };

@@ -1,10 +1,7 @@
-import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import {
   areAllActive,
-  totalRatio,
-  activeFilter
+  totalRatio
 } from '../../redux/modules/columnFilterMenus/selectors';
 import {
   toggleAllMenuItemsOn,
@@ -26,7 +23,6 @@ const mapStateToProps = (state, props) => ({
     .getIn(['ColumnFilterMenus', props.tableType, props.menuType])
     .toJS(),
   allActive: areAllActive(state, props),
-  value: activeFilter(state, props),
   totalRatio: totalRatio(state, props)
 });
 

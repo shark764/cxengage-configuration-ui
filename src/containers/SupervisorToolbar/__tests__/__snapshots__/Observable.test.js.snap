@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/interactions/voice/mute-acknowledged to redux 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "response": undefined,
+        "type": "cxengage/interactions/voice/mute-acknowledged",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/interactions/voice/silent-monitor-end to redux 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "response": undefined,
+        "type": "cxengage/interactions/voice/silent-monitor-end",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/interactions/voice/silent-monitor-start to redux 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "response": undefined,
+        "type": "cxengage/interactions/voice/silent-monitor-start",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/interactions/voice/unmute-acknowledged to redux 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "response": undefined,
+        "type": "cxengage/interactions/voice/unmute-acknowledged",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/session/sqs-shut-down to redux 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "response": undefined,
+        "type": "cxengage/session/sqs-shut-down",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/twilio/device-ready to redux 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "response": undefined,
+        "type": "cxengage/twilio/device-ready",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`Observable Test Mapping topics to dispatched actions can call monitorCall action throught observable 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "response": Object {
+          "interactionId": "mockId",
+          "status": "mockStatus",
+        },
+        "type": "monitorCall",
+      },
+    ],
+  ],
+}
+`;
