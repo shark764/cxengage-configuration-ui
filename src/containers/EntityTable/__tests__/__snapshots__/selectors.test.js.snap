@@ -7,3 +7,7 @@ Array [
   },
 ]
 `;
+
+exports[`getHelpLink entity help link exists for entity custom domain does not exist returns the help link 1`] = `"https://mockentityhelplink.com"`;
+
+exports[`getHelpLink entity help link exists for entity custom domain exists prepends custom domain to help link 1`] = `"https://mockcustomdomain-mockentityhelplink.com"`;

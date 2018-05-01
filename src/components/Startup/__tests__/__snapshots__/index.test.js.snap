@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Startup false hasStarted renders a loading spinner 1`] = `
+<Styled(LoadingSpinnerSVG)
+  size={120}
+/>
+`;
+
+exports[`Startup true hasStarted renders the children 1`] = `"Children"`;

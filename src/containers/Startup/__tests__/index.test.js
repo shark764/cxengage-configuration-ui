@@ -5,27 +5,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { mockStore } from '../../../utils/testUtils';
-import EntityTable, { mapStateToProps, actions } from '../';
-
-jest.mock('../../../redux/modules/entities');
-
-jest.mock('../../../redux/modules/entities/selectors', () => ({
-  getCurrentEntity: () => 'mock current entity',
-  userHasCreatePermission: () => 'mock user has create permission'
-}));
+import Startup, { mapStateToProps, actions } from '../';
 
 jest.mock('../selectors', () => ({
-  getAllEntities: () => ['mock all entities'],
-  getHelpLink: () => 'mock help link'
+  hasStarted: () => true
 }));
 
-jest.mock('../config', () => ({
-  getTableColumns: () => ['mock table columns']
-}));
+jest.mock('../../../redux/modules/entities/branding/actions');
 
-describe('EntityTable', () => {
+describe('Startup', () => {
   it('renders', () => {
-    shallow(<EntityTable store={mockStore} />);
+    shallow(<Startup store={mockStore} />);
   });
 });
 
