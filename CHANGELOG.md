@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.10]
+* CXV1-13762 - Fix handling of email template updates and all other SDK breaking changes
+
 ## [0.19.9]
 * CXV1-12637 - Config UI unit tests for supervisor toolbar
 

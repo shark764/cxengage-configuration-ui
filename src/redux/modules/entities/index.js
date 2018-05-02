@@ -142,7 +142,7 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_DATA_FULFILLED': {
       return state.setIn(
         [action.entityName, 'data'],
-        fromJS(action.response.result || action.response)
+        fromJS(action.response.result)
       );
     }
     case 'FETCH_DATA_REJECTED':
@@ -168,10 +168,11 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], true);
     }
     case 'CREATE_ENTITY_FULFILLED': {
+      const { result } = action.response;
       return state.update(action.entityName, entityStore =>
         entityStore
-          .update('data', data => data.push(fromJS(action.response)))
-          .set('selectedEntityId', action.response.id)
+          .update('data', data => data.push(fromJS(result)))
+          .set('selectedEntityId', result.id)
           .set('creating', false)
       );
     }
@@ -182,13 +183,14 @@ export default function reducer(state = initialState, action) {
       return setEntityUpdatingHelper(state, action, true);
     }
     case 'UPDATE_ENTITY_FULFILLED': {
+      const { result } = action.payload;
       const entityIndex = state
         .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.payload.id);
+        .findIndex(entity => entity.get('id') === result.id);
       if (entityIndex !== -1) {
         return state.mergeIn(
           [action.entityName, 'data', entityIndex],
-          fromJS(Object.assign(action.payload, { updating: false }))
+          fromJS(Object.assign(result, { updating: false }))
         );
       } else {
         return state;
@@ -212,13 +214,14 @@ export default function reducer(state = initialState, action) {
         .getIn([action.entityName, 'data'])
         .findIndex(entity => entity.get('id') === action.entityId);
       if (entityIndex !== -1) {
+        const { itemValue, key } = action.response.result;
         return state.update(action.entityName, entityStore =>
           entityStore
             .updateIn(['data', entityIndex, 'items'], subEntityList =>
               subEntityList.push(
                 fromJS({
-                  ...action.response.itemValue,
-                  key: action.response.key
+                  ...itemValue,
+                  key
                 })
               )
             )
@@ -241,12 +244,12 @@ export default function reducer(state = initialState, action) {
                 subEntity => subEntity.get('key') === action.subEntityId
               );
               if (entityIndex !== -1) {
-                const { itemValue } = action.response.apiResponse.result;
+                const { itemValue, key } = action.response.result;
                 return subEntityList.setIn(
                   [subEntityIndex],
                   fromJS({
                     ...itemValue,
-                    key: action.response.apiResponse.result.key
+                    key
                   })
                 );
               } else {
