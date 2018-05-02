@@ -6,25 +6,12 @@ import { fromJS } from 'immutable';
 
 // Initial Sub State
 const initialState = fromJS({
-  twilio: { enabled: false, isDefaultExtension: false },
+  twilio: { enabled: false },
   silentMonitoring: { status: 'offline', interactionId: 'na' },
   muted: true
 });
 
 // Actions
-export const toggleTwilioEnabled = () => ({ type: 'TOGGLE_TWILIO_ENABLED' });
-export const toggleMute = () => ({ type: 'TOGGLE_MUTE' });
-export const toggleTwilioIsDefaultExtension = () => ({
-  type: 'TOGGLE_TWILIO_IS_DEFAULT_EXTENSION'
-});
-export const setSilentMonitoringStatus = status => ({
-  type: 'SET_SILENT_MONITORING_STATUS',
-  status
-});
-export const setSilentMonitoringInteractionId = interactionId => ({
-  type: 'SET_SILENT_MONITORING_INTERACTION_ID',
-  interactionId
-});
 export const requestingToggleMute = () => ({ type: 'REQUESTING_TOGGLE_MUTE' });
 export const requestingMonitorCall = interactionId => ({
   type: 'REQUESTING_MONITOR_CALL',
@@ -38,25 +25,31 @@ export const startSupervisorToolbarSubscriptions = () => ({
 // Reducer
 export default function supervisorToolbarReducer(state = initialState, action) {
   switch (action.type) {
-    case 'TOGGLE_TWILIO_ENABLED':
+    case 'cxengage/twilio/device-ready':
       return state.setIn(
         ['twilio', 'enabled'],
         !state.getIn(['twilio', 'enabled'])
       );
-    case 'TOGGLE_TWILIO_IS_DEFAULT_EXTENSION':
-      return state.setIn(
-        ['twilio', 'isDefaultExtension'],
-        !state.getIn(['twilio', 'isDefaultExtension'])
+    case 'cxengage/interactions/voice/silent-monitor-start':
+    case 'cxengage/session/sqs-shut-down':
+    case 'cxengage/interactions/voice/silent-monitor-end':
+      let status =
+        action.type === 'cxengage/interactions/voice/silent-monitor-start'
+          ? 'connected'
+          : 'offline';
+      return state.setIn(['silentMonitoring', 'status'], status);
+    case 'monitorCall': {
+      const { interactionId, status } = action.response;
+      return state.update('silentMonitoring', silentMonitoring =>
+        silentMonitoring
+          .set('status', status)
+          .set('interactionId', interactionId)
       );
-    case 'SET_SILENT_MONITORING_STATUS':
-      return state.setIn(['silentMonitoring', 'status'], action.status);
-    case 'SET_SILENT_MONITORING_INTERACTION_ID':
-      return state.setIn(
-        ['silentMonitoring', 'interactionId'],
-        action.interactionId
-      );
-    case 'TOGGLE_MUTE':
-      return state.set('muted', !state.get('muted'));
+    }
+    case 'cxengage/interactions/voice/unmute-acknowledged':
+      return state.set('muted', false);
+    case 'cxengage/interactions/voice/mute-acknowledged':
+      return state.set('muted', true);
     default:
       return state;
   }

@@ -63,12 +63,12 @@ function updateInteractionMonitoringColumnsLocalStorage(state) {
 
 function updateStatSubscriptionFilters(state) {
   const groupIds = Array.from(
-    selectGroups(state),
+    selectGroups(state, { tableType: 'InteractionMonitoring' }),
     x => x.active && x.groupId
   ).filter(x => x);
 
   const skillIds = Array.from(
-    selectSkills(state),
+    selectSkills(state, { tableType: 'InteractionMonitoring' }),
     x => x.active && x.skillId
   ).filter(x => x);
 

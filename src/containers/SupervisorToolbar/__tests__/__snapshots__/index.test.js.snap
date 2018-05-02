@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "interactionId": "mockInteractionId",
+  "monitoringStatus": "conected",
+  "muted": true,
+  "twilioEnabled": true,
+  "twilioIsDefault": true,
+}
+`;

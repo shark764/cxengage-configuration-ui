@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import {
   selectInteractionMonitoringColumns,
@@ -30,7 +29,10 @@ import {
 import Layout from './Layout';
 
 const mapStateToProps = (state, props) => ({
-  columnsNotEmpty: areAllColNotActive(state, props),
+  areAllColNotActive: areAllColNotActive(state, {
+    menuType: 'Columns',
+    tableType: 'InteractionMonitoring'
+  }),
   totalRatio: totalRatio(state, props),
   activeColumns: selectInteractionMonitoringColumns(state, props).map(
     ({ active, name }) => active

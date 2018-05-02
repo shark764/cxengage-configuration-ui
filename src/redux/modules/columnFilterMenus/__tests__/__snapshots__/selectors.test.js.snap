@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectGroups selector returns the groups of a given menu 1`] = `
+Array [
+  Object {
+    "active": true,
+    "name": "mockGroup_1",
+  },
+  Object {
+    "active": true,
+    "name": "mockGroup_2",
+  },
+  Object {
+    "active": false,
+    "name": "mockGroup_3",
+  },
+  Object {
+    "active": true,
+    "name": "mockGroup_4",
+  },
+]
+`;
+
+exports[`selectInteractionMonitoringColumns selector returns the interaction monitoring columns 1`] = `
+Array [
+  Object {
+    "active": true,
+    "name": "mockColumn_1",
+  },
+  Object {
+    "active": true,
+    "name": "mockColumn_2",
+  },
+  Object {
+    "active": false,
+    "name": "mockColumn_3",
+  },
+  Object {
+    "active": true,
+    "name": "mockColumn_4",
+  },
+]
+`;
+
+exports[`selectSkills selector returns the skills of a given menu 1`] = `
+Array [
+  Object {
+    "active": true,
+    "name": "mockSkill_1",
+  },
+  Object {
+    "active": true,
+    "name": "mockSkill_2",
+  },
+  Object {
+    "active": false,
+    "name": "mockSkill_3",
+  },
+  Object {
+    "active": true,
+    "name": "mockSkill_4",
+  },
+]
+`;

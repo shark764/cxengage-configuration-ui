@@ -15,11 +15,6 @@ import { Toast } from 'cx-ui-components';
 
 import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
 
-import {
-  updateSkillsColumnFilter,
-  updateGroupsColumnFilter
-} from '../columnFilterMenus';
-
 import { sdkPromise, errorLabel } from '../../../utils/sdk';
 import {
   capitalizeFirstLetter,

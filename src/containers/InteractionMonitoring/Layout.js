@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled, { injectGlobal } from 'styled-components';
+import styled from 'styled-components';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import CheckboxFilterMenu from '../CheckboxFilterMenu';
@@ -96,7 +95,7 @@ export default class InteractionMonitoring extends Component {
           </div>
         </PageHeader>
 
-        {this.props.columnsNotEmpty && (
+        {!this.props.areAllColNotActive && (
           <ReactTable
             defaultPageSize={20}
             className="-striped -highlight"
@@ -218,7 +217,7 @@ InteractionMonitoring.propTypes = {
   tableData: PropTypes.object.isRequired,
   expanded: PropTypes.object.isRequired,
   selected: PropTypes.string.isRequired,
-  columnsNotEmpty: PropTypes.bool.isRequired,
+  areAllColNotActive: PropTypes.bool.isRequired,
   sorted: PropTypes.any.isRequired,
   toggleTimeFormat: PropTypes.func.isRequired,
   updateTableData: PropTypes.func.isRequired,

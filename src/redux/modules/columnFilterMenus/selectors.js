@@ -3,6 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
+import { List } from 'immutable';
 
 const subState = state => state.get('ColumnFilterMenus');
 
@@ -12,55 +13,54 @@ const menuItems = (state, props) => {
       .get('ColumnFilterMenus')
       .getIn([props.tableType, props.menuType]);
   } else {
-    return [];
+    return new List();
   }
 };
 
-export const activeFilter = createSelector(
-  [subState, menuItems],
-  (subState, menuItems) => {
-    const activeItem = menuItems.toJS().filter(item => item.active === true)[0];
-    return activeItem ? activeItem.name : null;
+const menu = (state, props) => {
+  if (props.tableType) {
+    return state.get('ColumnFilterMenus').get(props.tableType);
+  } else {
+    return new List();
   }
-);
+};
 
-export const areAllActive = createSelector(
-  [subState, menuItems],
-  (subState, menuItems) => {
-    let active = true;
-    menuItems.forEach(item => (!item.get('active') ? (active = false) : null));
-    return active;
-  }
-);
+export const selectVisibleSubMenu = createSelector([menu], menu => {
+  return menu.get('visibleMenu');
+});
 
-export const totalRatio = createSelector(
-  [subState, menuItems],
-  (subState, menuItems) => {
-    let activeAmount = 0;
-    const totalItems = menuItems.size;
-    menuItems.forEach(item => (item.get('active') ? activeAmount++ : null));
-    return [activeAmount, totalItems];
-  }
-);
+export const areAllActive = createSelector([menuItems], menuItems => {
+  let active = true;
+  menuItems.forEach(item => (!item.get('active') ? (active = false) : null));
+  return menuItems.size === 0 ? false : active;
+});
+
+export const totalRatio = createSelector([menuItems], menuItems => {
+  let activeAmount = 0;
+  const totalItems = menuItems.size;
+  menuItems.forEach(item => (item.get('active') ? activeAmount++ : null));
+  return [activeAmount, totalItems];
+});
 
 export const selectInteractionMonitoringColumns = createSelector(
   subState,
   subState => subState.getIn(['InteractionMonitoring', 'Columns']).toJS()
 );
-export const selectGroups = createSelector(subState, subState =>
-  subState.getIn(['InteractionMonitoring', 'Groups']).toJS()
+export const selectGroups = createSelector(menu, menu =>
+  menu.get('Groups').toJS()
 );
-export const selectSkills = createSelector(subState, subState =>
-  subState.getIn(['InteractionMonitoring', 'Skills']).toJS()
+export const selectSkills = createSelector(menu, menu =>
+  menu.get('Skills').toJS()
 );
-export const areAllColNotActive = createSelector(subState, subState => {
-  let active = false;
-  subState
-    .getIn(['InteractionMonitoring', 'Columns'])
-    .forEach(col => (col.get('active') ? (active = true) : null));
-  return active;
+export const areAllColNotActive = createSelector(menuItems, menuItems => {
+  if (menuItems.size === 0) {
+    return true;
+  } else {
+    let anyActive = false;
+    menuItems.forEach(col => (col.get('active') ? (anyActive = true) : null));
+    return anyActive ? false : true;
+  }
 });
 
-export const selectTimeFormat = createSelector(subState, subState =>
-  subState.get('twelveHourFormat')
-);
+export const selectTimeFormat = state =>
+  subState(state).get('twelveHourFormat');

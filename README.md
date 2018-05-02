@@ -1,20 +1,31 @@
-# cxengage-configuration-ui
+# CxEngage Configuration and Reporting
 
-CxEngage Configuration and Reporting
+![image](https://user-images.githubusercontent.com/23345135/39488729-7d023510-4d59-11e8-9044-db7e3c372480.png)
 
-`npm install` to get your dependencies
+## Preface
+Currently this project resides inside of [config-ui](https://github.com/SerenovaLLC/config-ui)
+as iframes for us to be able to convert config-ui to a new updated framework with best practices.
 
-`npm start` to start working on a HMR local dev instance
+It is important to note that the SDK lives inside of config-ui and we post messages on the window to be able to make use of the sdk inside the new project.
 
-`npm run build` to get a static site version built
+This project also has a major dependency on the [cx-ui-components](https://github.com/SerenovaLLC/cx-ui-components) library.
 
-`npm t` runs the tests which are comming soon
+<br><br>
+## To work on cxengage-configuration-ui in a standalone manner (no access to sdk):
+1. `npm install` to get your dependencies
+2. `npm start` to start working on a HMR local dev instance (defaults to port 3000)
+3. `npm t` runs the tests in a watch mode
+4. `npm t -- --coverage` runs the tests and returns coverage report
 
-[VsCode](https://code.visualstudio.com/download)
+<br><br>
+## To work on cxengage-configuration-ui inside an instance of config-ui:
+1. First run `npm start` on cxengage-configuration-ui which will run on port 3000
+2. Navigate to config-ui repo and verify the .env files variable for `config2Url` will point to your local running instace `http://localhost:3000`
+3. In config-ui repo run `npm start`, which will run that project in dev mode on the next available port in 3000 range
 
-Settings are confingured for you in .vscode > settings.json
-
-Install these Extensions:
-Debugger for Chrome (Settings are inclued in this repo. Hit F5 and start debugging in your editor)
-ESLint (Show linter errors in the editor)
-Prettier-Code formatter (formats on file save)
+<br><br>
+## Editing the component library
+Editing the component library can mostly be acomplished via it's `npm start` to run the components in it's styleguide app,  but to test your components changes inside the cxengage-configuration-ui project you will need to do the following:
+1. Navigate to cx-ui-components library and run `npm pack`
+This will create a npm package , a replica of what would be stored in the npm registry as cx-ui-components-<version>.tgz
+2. Navigate to cxengage-configuration-ui and run `npm i ../cx-ui-components/cx-ui-components-<version>.tgz` where the path is relative to where the repo is on your computer and the version matches the result of the prevous npm pack command
