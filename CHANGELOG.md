@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.11]
+* CXV1-13801 - Fix npm link issues for component lib
+
 ## [0.19.10]
 * CXV1-13762 - Fix handling of email template updates and all other SDK breaking changes
 

@@ -26,6 +26,9 @@ This project also has a major dependency on the [cx-ui-components](https://githu
 <br><br>
 ## Editing the component library
 Editing the component library can mostly be acomplished via it's `npm start` to run the components in it's styleguide app,  but to test your components changes inside the cxengage-configuration-ui project you will need to do the following:
-1. Navigate to cx-ui-components library and run `npm pack`
-This will create a npm package , a replica of what would be stored in the npm registry as cx-ui-components-<version>.tgz
-2. Navigate to cxengage-configuration-ui and run `npm i ../cx-ui-components/cx-ui-components-<version>.tgz` where the path is relative to where the repo is on your computer and the version matches the result of the prevous npm pack command
+1. Navigate to cx-ui-components library and run `npm link` to create a global symlink
+2. Navigate to cxengage-configuration-ui and run `npm link cx-ui-components` to create the local symlink
+Now when you edit components you notice changes occur automatically.
+
+To unlink the project run `npm unlink cx-ui-components` after this run `npm i cx-ui-components@<version>` to reinstall the now missing cx-ui-components library
+To remove the global symlink, navigate to cx-ui-components and run `npm unlink`

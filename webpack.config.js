@@ -8,7 +8,9 @@ module.exports = {
     filename: '[name]-[chunkhash:6].bundle.js',
     path: path.resolve(__dirname, 'build')
   },
-
+  resolve: {
+    modules: [path.resolve(__dirname, "node_modules")]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html'
