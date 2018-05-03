@@ -56,4 +56,24 @@ describe('FetchData', () => {
       });
     });
   });
+  describe('on sdkPromise error on ignore list', () => {
+    beforeEach(() => {
+      action = ActionsObservable.of(fetchData('branding'));
+      sdkPromise.mockReturnValue(
+        new Promise((resolve, reject) => reject('mock error'))
+      );
+    });
+    it('does not call toastr error', done => {
+      FetchData(action, mockStore).subscribe(() => {
+        expect(toastr.error).toMatchSnapshot();
+        done();
+      });
+    });
+    it('returns fetchDataRejected', done => {
+      FetchData(action, mockStore).subscribe(actualOutputActions => {
+        expect(actualOutputActions).toMatchSnapshot();
+        done();
+      });
+    });
+  });
 });

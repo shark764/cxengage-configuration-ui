@@ -25,6 +25,15 @@ exports[`FetchData on sdkPromise error calls toastr error 1`] = `
 }
 `;
 
+exports[`FetchData on sdkPromise error on ignore list does not call toastr error 1`] = `[MockFunction]`;
+
+exports[`FetchData on sdkPromise error on ignore list returns fetchDataRejected 1`] = `
+Object {
+  "entityName": "branding",
+  "type": "FETCH_DATA_REJECTED",
+}
+`;
+
 exports[`FetchData on sdkPromise error returns fetchDataRejected 1`] = `
 Object {
   "entityName": "mockEntity",

@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 
 import { RootStyles } from 'cx-ui-components';
 
+import { getCustomTheme } from '../../redux/modules/entities/branding/selectors';
+
 function mapStateToProps(state) {
   return {
-    theme: state.getIn(['Entities', 'branding', 'data'])
+    theme: getCustomTheme(state)
   };
 }
 
