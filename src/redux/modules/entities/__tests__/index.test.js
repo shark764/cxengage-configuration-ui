@@ -103,19 +103,13 @@ describe('entities reducer', () => {
 
   describe('UPDATE_ENTITY', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
-      const spy = jest.spyOn(
-        entitiesReducerFunctions,
-        'setEntityUpdatingHelper'
-      );
-      const initialState = fromJS({
-        mockEntity: {
-          data: []
-        }
-      });
+      const spy = jest
+        .spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper')
+        .mockImplementation(() => {});
       entitiesReducer(
-        initialState,
+        'mock initial state',
         entitiesReducerFunctions.updateEntity(
-          'mockEntity',
+          'mock entity',
           'mock entity id',
           'mock values'
         )
@@ -168,19 +162,13 @@ describe('entities reducer', () => {
 
   describe('UPDATE_ENTITY_REJECTED', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
-      const spy = jest.spyOn(
-        entitiesReducerFunctions,
-        'setEntityUpdatingHelper'
-      );
-      const initialState = fromJS({
-        mockEntity: {
-          data: []
-        }
-      });
+      const spy = jest
+        .spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper')
+        .mockImplementation(() => {});
       entitiesReducer(
-        initialState,
+        'mock inital state',
         entitiesReducerFunctions.updateEntityRejected(
-          'mockEntity',
+          'mock entity',
           'mock entity id'
         )
       );

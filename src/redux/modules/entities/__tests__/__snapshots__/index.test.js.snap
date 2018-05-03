@@ -57,14 +57,10 @@ exports[`entities reducer UPDATE_ENTITY calls setEntityUpdatingHelper correctly 
 [MockFunction] {
   "calls": Array [
     Array [
-      Immutable.Map {
-        "mockEntity": Immutable.Map {
-          "data": Immutable.List [],
-        },
-      },
+      "mock initial state",
       Object {
         "entityId": "mock entity id",
-        "entityName": "mockEntity",
+        "entityName": "mock entity",
         "type": "UPDATE_ENTITY",
         "values": "mock values",
       },
@@ -92,14 +88,10 @@ exports[`entities reducer UPDATE_ENTITY_REJECTED calls setEntityUpdatingHelper c
 [MockFunction] {
   "calls": Array [
     Array [
-      Immutable.Map {
-        "mockEntity": Immutable.Map {
-          "data": Immutable.List [],
-        },
-      },
+      "mock inital state",
       Object {
         "entityId": "mock entity id",
-        "entityName": "mockEntity",
+        "entityName": "mock entity",
         "type": "UPDATE_ENTITY_REJECTED",
       },
       false,
