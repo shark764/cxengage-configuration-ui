@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.13]
+* CXV1-13685 - Fixed length of side panel details header when side panel is expanded
+* CXV1-13304 - Updated reducer test
+
 ## [0.19.12]
 * CXV1-13304 - Entities reducer and epics tests. Made action generators for all actions used that didn't have any.
 * Fixed entity toggle handling
