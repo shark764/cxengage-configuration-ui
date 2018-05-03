@@ -8,7 +8,7 @@ import { SidePanelActions } from 'cx-ui-components';
 
 import {
   onFormButtonSubmit,
-  deselectCurrentEntity
+  unsetSelectedEntityId
 } from '../../redux/modules/entities';
 import {
   isCreating,
@@ -22,7 +22,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(onFormButtonSubmit());
     },
     onCancel: () => {
-      dispatch(deselectCurrentEntity());
+      dispatch(unsetSelectedEntityId());
     }
   };
 }

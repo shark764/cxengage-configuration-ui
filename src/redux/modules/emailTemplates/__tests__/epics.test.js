@@ -1,5 +1,7 @@
 import { ActionsObservable } from 'redux-observable';
 import { UpdateEmailTemplate } from '../epics';
+import { mockStore } from '../../../../utils/testUtils';
+import { updateEntity } from '../../entities';
 
 import { sdkPromise, errorLabel } from '../../../../utils/sdk';
 import { getSelectedEntityId } from '../../entities/selectors';
@@ -15,7 +17,6 @@ errorLabel.mockReturnValue('mock error');
 getSelectedEntityId.mockReturnValue('mock selected entity id');
 
 describe('UpdateEmailTemplate', () => {
-  const mockStore = { getState: () => {} };
   let action;
   describe('emailTemplates entity', () => {
     beforeEach(() => {
@@ -33,15 +34,12 @@ describe('UpdateEmailTemplate', () => {
 
     describe('with custom email', () => {
       beforeEach(() => {
-        action = ActionsObservable.of({
-          type: 'UPDATE_ENTITY',
-          entityName: 'emailTemplates',
-          entityId: 'mock entity id',
-          values: {
+        action = ActionsObservable.of(
+          updateEntity('emailTemplates', 'mock entity id', {
             email: 'custom',
             body: 'mock body'
-          }
-        });
+          })
+        );
       });
       it('calls the correct sdk function', done => {
         UpdateEmailTemplate(action, mockStore).subscribe(() => {
@@ -67,15 +65,12 @@ describe('UpdateEmailTemplate', () => {
 
     describe('with default email', () => {
       beforeEach(() => {
-        action = ActionsObservable.of({
-          type: 'UPDATE_ENTITY',
-          entityName: 'emailTemplates',
-          entityId: 'mock entity id',
-          values: {
+        action = ActionsObservable.of(
+          updateEntity('emailTemplates', 'mock entity id', {
             email: 'default',
             body: 'mock body'
-          }
-        });
+          })
+        );
       });
       it('calls the correct sdk function', done => {
         UpdateEmailTemplate(action, mockStore).subscribe(() => {
@@ -102,14 +97,11 @@ describe('UpdateEmailTemplate', () => {
     describe('unchanged default email', () => {
       beforeEach(() => {
         getCurrentFormInitialValues.mockReturnValue({ email: 'default' });
-        action = ActionsObservable.of({
-          type: 'UPDATE_ENTITY',
-          entityName: 'emailTemplates',
-          entityId: 'mock entity id',
-          values: {
+        action = ActionsObservable.of(
+          updateEntity('emailTemplates', 'mock entity id', {
             email: 'default'
-          }
-        });
+          })
+        );
       });
       it('calls toastr info', done => {
         UpdateEmailTemplate(action, mockStore).subscribe(() => {
@@ -117,7 +109,7 @@ describe('UpdateEmailTemplate', () => {
           done();
         });
       });
-      it('returns UPDATE_ENTITY_REJECTED', done => {
+      it('returns updateEntityRejected', done => {
         UpdateEmailTemplate(action, mockStore)
           .toArray()
           .subscribe(actualOutputActions => {
@@ -139,7 +131,7 @@ describe('UpdateEmailTemplate', () => {
           done();
         });
       });
-      it('returns UPDATE_ENTITY_REJECTED', done => {
+      it('returns updateEntityRejected', done => {
         UpdateEmailTemplate(action, mockStore)
           .toArray()
           .subscribe(actualOutputActions => {
@@ -152,10 +144,7 @@ describe('UpdateEmailTemplate', () => {
 
   describe('other entities', () => {
     beforeEach(() => {
-      action = ActionsObservable.of({
-        type: 'UPDATE_ENTITY',
-        entityName: 'other entity'
-      });
+      action = ActionsObservable.of(updateEntity('other entity'));
     });
     it('are ignored', done => {
       UpdateEmailTemplate(action, mockStore)

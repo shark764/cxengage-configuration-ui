@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`entities reducer FETCH_DATA_FULFILLED sets the data as the immutable value passed in 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "mockEntityId": "mock entity id",
+      },
+    ],
+  },
+}
+`;
+
+exports[`entities reducer FETCH_DATA_REJECTED sets the data to an empty List 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [],
+  },
+}
+`;
+
+exports[`entities reducer SET_CURRENT_ENTITY sets the current entity 1`] = `
+Immutable.Map {
+  "currentEntity": "mock current entity",
+}
+`;
+
+exports[`entities reducer SET_SELECTED_ENTITY_ID with setSelectedEntityCreate() sets the current entity's selected entity id to "create" 1`] = `
+Immutable.Map {
+  "currentEntity": "mockEntity",
+  "mockEntity": Immutable.Map {
+    "selectedEntityId": "create",
+  },
+}
+`;
+
+exports[`entities reducer SET_SELECTED_ENTITY_ID with setSelectedEntityId() sets the current entity's selected entity id 1`] = `
+Immutable.Map {
+  "currentEntity": "mockEntity",
+  "mockEntity": Immutable.Map {
+    "selectedEntityId": "mock entity id",
+  },
+}
+`;
+
+exports[`entities reducer SET_SELECTED_ENTITY_ID with unsetSelectedEntityId() sets the current entity's selected entity id to "" 1`] = `
+Immutable.Map {
+  "currentEntity": "mockEntity",
+  "mockEntity": Immutable.Map {
+    "selectedEntityId": "",
+  },
+}
+`;
+
+exports[`entities reducer UPDATE_ENTITY calls setEntityUpdatingHelper correctly 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Immutable.Map {
+        "mockEntity": Immutable.Map {
+          "data": Immutable.List [],
+        },
+      },
+      Object {
+        "entityId": "mock entity id",
+        "entityName": "mockEntity",
+        "type": "UPDATE_ENTITY",
+        "values": "mock values",
+      },
+      true,
+    ],
+  ],
+}
+`;
+
+exports[`entities reducer UPDATE_ENTITY_FULFILLED when the entity is present merges the result in and sets "updating" to false 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "id": "mock entity id",
+        "mockResult": "mock result value",
+        "updating": false,
+      },
+    ],
+  },
+}
+`;
+
+exports[`entities reducer UPDATE_ENTITY_REJECTED calls setEntityUpdatingHelper correctly 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Immutable.Map {
+        "mockEntity": Immutable.Map {
+          "data": Immutable.List [],
+        },
+      },
+      Object {
+        "entityId": "mock entity id",
+        "entityName": "mockEntity",
+        "type": "UPDATE_ENTITY_REJECTED",
+      },
+      false,
+    ],
+  ],
+}
+`;
+
+exports[`entities reducer helper functions setEntityUpdatingHelper when the entity is present sets the entity's updated field 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "id": "mock entity id",
+        "updating": true,
+      },
+    ],
+  },
+}
+`;
+
+exports[`entities reducer returns the correct initial state 1`] = `
+Immutable.Map {
+  "currentEntity": "none",
+  "none": Immutable.Map {},
+  "lists": Immutable.Map {
+    "selectedSubEntityId": undefined,
+    "subEntity": "listItems",
+    "readPermission": Immutable.List [
+      "VIEW_ALL_LISTS",
+    ],
+    "data": undefined,
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_LISTS",
+    ],
+    "confirmationDialogType": undefined,
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_LISTS",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "subEntitySaving": false,
+  },
+  "listTypes": Immutable.Map {
+    "data": undefined,
+  },
+  "emailTemplates": Immutable.Map {
+    "data": undefined,
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "USER_MANAGEMENT_EMAIL_READ",
+    ],
+    "updatePermission": Immutable.List [
+      "USER_MANAGEMENT_EMAIL_UPDATE",
+      "PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE",
+    ],
+  },
+}
+`;

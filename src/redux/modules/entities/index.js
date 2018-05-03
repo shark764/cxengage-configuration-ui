@@ -42,13 +42,11 @@ export const setCurrentEntity = entityName => ({
   type: 'SET_CURRENT_ENTITY',
   entityName
 });
-export const deselectCurrentEntity = () => ({
-  type: 'DESELECT_CURRENT_ENTITYS_SELECTED_ENTITY'
-});
 export const setSelectedEntityId = entityId => {
   return { type: 'SET_SELECTED_ENTITY_ID', entityId };
 };
 export const setSelectedEntityCreate = () => setSelectedEntityId('create');
+export const unsetSelectedEntityId = () => setSelectedEntityId('');
 export const setEntityUpdating = (entityName, entityId, updating) => {
   return { type: 'SET_ENTITY_UPDATING', entityName, entityId, updating };
 };
@@ -78,6 +76,16 @@ export const fetchData = (entityName, tableType) => ({
   entityName,
   tableType
 });
+export const fetchDataFulfilled = (entityName, response, tableType) => ({
+  type: 'FETCH_DATA_FULFILLED',
+  entityName,
+  response,
+  tableType
+});
+export const fetchDataRejected = entityName => ({
+  type: 'FETCH_DATA_REJECTED',
+  entityName
+});
 export const fetchDataItem = (entityName, id) => ({
   type: 'FETCH_DATA_ITEM',
   entityName,
@@ -91,17 +99,28 @@ export const onSubEntityFormSubmit = (values, { dirty }) => ({
   values,
   dirty
 });
-export const updateEntityFulfilled = (
+export const updateEntity = (entityName, entityId, values) => ({
+  type: 'UPDATE_ENTITY',
   entityName,
   entityId,
+  values
+});
+export const updateEntityFulfilled = (
+  entityName,
   payload,
+  entityId,
   values
 ) => ({
   type: 'UPDATE_ENTITY_FULFILLED',
   entityName,
-  entityId,
   payload,
+  entityId,
   values
+});
+export const updateEntityRejected = (entityName, entityId) => ({
+  type: 'UPDATE_ENTITY_REJECTED',
+  entityName,
+  entityId
 });
 export const updateSidePanelWidth = width => ({
   type: 'UPDATE_SIDE_PANEL_WIDTH',
@@ -129,16 +148,12 @@ export default function reducer(state = initialState, action) {
           .set('confirmationDialogType', action.modalType)
           .set('confirmationDialogMetaData', action.metaData)
       );
-    case 'DESELECT_CURRENT_ENTITYS_SELECTED_ENTITY':
-      return state.setIn([state.get('currentEntity'), 'selectedEntityId'], '');
     case 'SET_SELECTED_ENTITY_ID': {
       return state.setIn(
         [state.get('currentEntity'), 'selectedEntityId'],
         action.entityId
       );
     }
-    case 'SET_ENTITY_UPDATING':
-      return setEntityUpdatingHelper(state, action, action.state);
     case 'FETCH_DATA_FULFILLED': {
       return state.setIn(
         [action.entityName, 'data'],
@@ -147,7 +162,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'FETCH_DATA_REJECTED':
       return state.setIn([action.entityName, 'data'], new List());
-    case 'FETCH_DATA_ITEM_FULFILLED':
+    case 'FETCH_DATA_ITEM_FULFILLED': {
       const entityIndex = state
         .getIn([action.entityName, 'data'])
         .findIndex(entity => entity.get('id') === action.id);
@@ -159,10 +174,9 @@ export default function reducer(state = initialState, action) {
       } else {
         return state;
       }
-    case 'FETCH_DATA_ITEM_REJECTED':
-      return setEntityUpdatingHelper(state, action, false);
-    case 'UPLOAD_CSV_REJECTED': {
-      return setEntityUpdatingHelper(state, action, false);
+    }
+    case 'FETCH_DATA_ITEM_REJECTED': {
+      return exports.setEntityUpdatingHelper(state, action, false);
     }
     case 'CREATE_ENTITY': {
       return state.setIn([action.entityName, 'creating'], true);
@@ -180,7 +194,7 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], false);
     }
     case 'UPDATE_ENTITY': {
-      return setEntityUpdatingHelper(state, action, true);
+      return exports.setEntityUpdatingHelper(state, action, true);
     }
     case 'UPDATE_ENTITY_FULFILLED': {
       const { result } = action.payload;
@@ -196,9 +210,12 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
-    case 'UPDATE_ENTITY_REJECTED': {
-      return setEntityUpdatingHelper(state, action, false);
+    case 'UPDATE_ENTITY_REJECTED':
+    case 'UPLOAD_CSV_REJECTED': {
+      return exports.setEntityUpdatingHelper(state, action, false);
     }
+    case 'SET_ENTITY_UPDATING':
+      return exports.setEntityUpdatingHelper(state, action, action.state);
     case 'SET_SELECTED_SUB_ENTITY_ID': {
       return state.setIn(
         [state.get('currentEntity'), 'selectedSubEntityId'],
@@ -309,7 +326,12 @@ export default function reducer(state = initialState, action) {
 }
 
 // Reducer helper functions
-const setEntityUpdatingHelper = (state, { entityName, entityId }, updating) => {
+
+export const setEntityUpdatingHelper = (
+  state,
+  { entityName, entityId },
+  updating
+) => {
   const entityIndex = state
     .getIn([entityName, 'data'])
     .findIndex(entity => entity.get('id') === entityId);

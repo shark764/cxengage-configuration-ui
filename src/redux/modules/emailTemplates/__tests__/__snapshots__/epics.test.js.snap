@@ -10,7 +10,7 @@ exports[`UpdateEmailTemplate emailTemplates entity sdk promise fails calls toast
 }
 `;
 
-exports[`UpdateEmailTemplate emailTemplates entity sdk promise fails returns UPDATE_ENTITY_REJECTED 1`] = `
+exports[`UpdateEmailTemplate emailTemplates entity sdk promise fails returns updateEntityRejected 1`] = `
 Array [
   Object {
     "entityId": "mock entity id",
@@ -30,7 +30,7 @@ exports[`UpdateEmailTemplate emailTemplates entity unchanged default email calls
 }
 `;
 
-exports[`UpdateEmailTemplate emailTemplates entity unchanged default email returns UPDATE_ENTITY_REJECTED 1`] = `
+exports[`UpdateEmailTemplate emailTemplates entity unchanged default email returns updateEntityRejected 1`] = `
 Array [
   Object {
     "entityId": "mock entity id",

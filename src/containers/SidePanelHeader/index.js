@@ -12,7 +12,7 @@ import * as MODALS from '../ConfirmationDialog/constants.js';
 import { capitalizeFirstLetter } from '../../utils/string';
 
 import {
-  deselectCurrentEntity,
+  unsetSelectedEntityId,
   setConfirmationDialog
 } from '../../redux/modules/entities';
 import {
@@ -26,7 +26,7 @@ import {
 function mapDispatchToProps(dispatch) {
   return {
     onClose: () => {
-      dispatch(deselectCurrentEntity());
+      dispatch(unsetSelectedEntityId());
     },
     onToggle: () => {
       dispatch(setConfirmationDialog(MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE));
