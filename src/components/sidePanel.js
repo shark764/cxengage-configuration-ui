@@ -37,6 +37,7 @@ const SidePanelDiv = styled.div.attrs({
 `;
 
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
+  flex-shrink: 0;
   padding: 10px 14px 16px;
   border-bottom: 1px solid #dadada;
 `;
