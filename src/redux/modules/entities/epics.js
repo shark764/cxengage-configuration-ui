@@ -555,7 +555,7 @@ export const UploadCsv = (action$, store) =>
             )}`,
             data: {
               [`${removeLastLetter(a.entityName)}Id`]: a.selectedEntityId,
-              file: a.target.files[0]
+              file: a.target
             }
           },
           `cxengage/entities/upload-${camelCaseToKebabCase(

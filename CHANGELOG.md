@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.15]
+* CXV1-13855 - Fixed saving state for list CSV upload
+* CXV1-13856 - Fixed list items being set (caused by SDK breaking changes referenced in 0.19.10)
+* CXV1-13858 - Fixed header height when side panel details height is large
+
 ## [0.19.14]
 * CXV1-13849 - Changed the email template text editor regex to use triple curly brackets instead of double brackets and an ampersand
 

@@ -169,7 +169,7 @@ export default function reducer(state = initialState, action) {
       if (entityIndex !== -1) {
         return state.mergeIn(
           [action.entityName, 'data', entityIndex],
-          fromJS(Object.assign(action.response, { updating: false }))
+          fromJS(Object.assign(action.response.result, { updating: false }))
         );
       } else {
         return state;
@@ -215,7 +215,7 @@ export default function reducer(state = initialState, action) {
       return exports.setEntityUpdatingHelper(state, action, false);
     }
     case 'SET_ENTITY_UPDATING':
-      return exports.setEntityUpdatingHelper(state, action, action.state);
+      return exports.setEntityUpdatingHelper(state, action, action.updating);
     case 'SET_SELECTED_SUB_ENTITY_ID': {
       return state.setIn(
         [state.get('currentEntity'), 'selectedSubEntityId'],

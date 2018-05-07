@@ -30,7 +30,9 @@ function mapDispatchToProps(dispatch) {
     deleteSubEntity: subEntityId => dispatch(deleteSubEntity(subEntityId)),
     downloadCsv: () => dispatch(downloadCsv()),
     uploadCsv: event =>
-      dispatch(setConfirmationDialog(CONFIRM_ENTITY_CSV_UPLOAD, event.target))
+      dispatch(
+        setConfirmationDialog(CONFIRM_ENTITY_CSV_UPLOAD, event.target.files[0])
+      )
   };
 }
 
