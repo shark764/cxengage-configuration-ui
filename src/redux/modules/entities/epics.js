@@ -15,6 +15,7 @@ import { Toast } from 'cx-ui-components';
 
 import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
 
+import { isIgnoredError } from './errors';
 import { sdkPromise, errorLabel } from '../../../utils/sdk';
 import {
   capitalizeFirstLetter,
@@ -112,7 +113,9 @@ export const FetchData = (action$, store) =>
     )
       .map(response => fetchDataFulfilled(a.entityName, response, a.tableType))
       .catch(error => {
-        Toast.error(errorLabel(error));
+        if (!isIgnoredError('FETCH_DATA', a.entityName)) {
+          Toast.error(errorLabel(error));
+        }
         return of(fetchDataRejected(a.entityName));
       })
   );

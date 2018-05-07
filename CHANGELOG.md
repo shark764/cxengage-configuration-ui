@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.16]
+* < No Ticket > - Branding was broken when moving it into the entity epic. This is fixes for that.
+* < No Ticket > - Adding ignore errors on entities for branding 404
+
 ## [0.19.15]
 * CXV1-13855 - Fixed saving state for list CSV upload
 * CXV1-13856 - Fixed list items being set (caused by SDK breaking changes referenced in 0.19.10)
