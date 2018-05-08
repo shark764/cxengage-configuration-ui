@@ -73,18 +73,22 @@ export default function(value, tableType) {
       }
       return row[filter.id].length === 0;
     },
-    Filter: ({ filter, onChange }) => (
-      <CheckboxFilterMenu
-        menuType="Monitoring"
-        tableType={tableType}
-        buttonType="columnFilter"
-        selectionType="select"
-        updateFilter={onChange}
-      >
-        Monitoring
-      </CheckboxFilterMenu>
-    )
+    Filter: ({ onChange }) => monitorFilter(tableType, onChange)
   };
+}
+
+export function monitorFilter(tableType, onChange) {
+  return (
+    <CheckboxFilterMenu
+      menuType="Monitoring"
+      tableType={tableType}
+      buttonType="columnFilter"
+      selectionType="select"
+      updateFilter={onChange}
+    >
+      Monitoring
+    </CheckboxFilterMenu>
+  );
 }
 
 function monitoringCell(

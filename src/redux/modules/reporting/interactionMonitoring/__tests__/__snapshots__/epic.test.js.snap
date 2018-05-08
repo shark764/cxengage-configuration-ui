@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`startBatchRequest calls the correct sdk function 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "command": "addStatSubscription",
+        "data": Object {
+          "statId": "interactions-in-conversation-list",
+          "statistic": "interactions-in-conversation-list",
+        },
+        "module": "reporting",
+      },
+      "cxengage/reporting/stat-subscription-added",
+    ],
+  ],
+}
+`;
+
+exports[`startBatchRequest return START_REPORTING_SUBSCRIPTION_$ action 1`] = `
+Object {
+  "type": "START_REPORTING_SUBSCRIPTION_$",
+}
+`;
+
+exports[`startBatchSubscription calls the correct sdk function 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "command": "cxengage/reporting/batch-response",
+        "module": "subscribe",
+      },
+      "cxengage/reporting/batch-response",
+    ],
+  ],
+}
+`;
+
+exports[`startBatchSubscription return REPORTING_SUBSCRIPTION_STARTED_$ action 1`] = `
+Object {
+  "type": "REPORTING_SUBSCRIPTION_STARTED_$",
+}
+`;

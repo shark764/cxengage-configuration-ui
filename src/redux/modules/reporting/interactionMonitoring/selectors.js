@@ -7,13 +7,9 @@ import { createSelector } from 'reselect';
 const selectInteractionMonitoringMap = state =>
   state.get('InteractionMonitoring');
 
-export const selectInteractionMonitoring = createSelector(
-  selectInteractionMonitoringMap,
-  interactionMonitoring => interactionMonitoring
-);
 export const selectInteractionMonitoringTableData = createSelector(
   selectInteractionMonitoringMap,
-  subState => subState.get('data')
+  subState => subState.get('data').toJS()
 );
 export const selectInteractionMonitoringSorted = createSelector(
   selectInteractionMonitoringMap,

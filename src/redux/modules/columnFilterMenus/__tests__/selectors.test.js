@@ -2,7 +2,7 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
-import * as SEL from '../selectors';
+import * as sel from '../selectors';
 import { fromJS } from 'immutable';
 
 describe('selectVisibleSubMenu selector', () => {
@@ -15,7 +15,7 @@ describe('selectVisibleSubMenu selector', () => {
       }
     });
     expect(
-      SEL.selectVisibleSubMenu(initialState, { tableType: 'mockTable' })
+      sel.selectVisibleSubMenu(initialState, { tableType: 'mockTable' })
     ).toEqual('mock visible sub menu');
   });
   it('returns undefined when you dont pass the tableType prop in', () => {
@@ -26,7 +26,7 @@ describe('selectVisibleSubMenu selector', () => {
         }
       }
     });
-    expect(SEL.selectVisibleSubMenu(initialState, {})).toEqual(undefined);
+    expect(sel.selectVisibleSubMenu(initialState, {})).toEqual(undefined);
   });
 });
 describe('areAllActive selector', () => {
@@ -44,7 +44,7 @@ describe('areAllActive selector', () => {
       }
     });
     expect(
-      SEL.areAllActive(initialState, {
+      sel.areAllActive(initialState, {
         menuType: 'mockColumns',
         tableType: 'mockTable'
       })
@@ -64,7 +64,7 @@ describe('areAllActive selector', () => {
       }
     });
     expect(
-      SEL.areAllActive(initialState, {
+      sel.areAllActive(initialState, {
         menuType: 'mockColumns',
         tableType: 'mockTable'
       })
@@ -83,7 +83,7 @@ describe('areAllActive selector', () => {
         }
       }
     });
-    expect(SEL.areAllActive(initialState, {})).toEqual(false);
+    expect(sel.areAllActive(initialState, {})).toEqual(false);
   });
 });
 
@@ -102,7 +102,7 @@ describe('totalRatio selector', () => {
       }
     });
     expect(
-      SEL.totalRatio(initialState, {
+      sel.totalRatio(initialState, {
         menuType: 'mockColumns',
         tableType: 'mockTable'
       })
@@ -125,7 +125,7 @@ describe('selectInteractionMonitoringColumns selector', () => {
       }
     });
     expect(
-      SEL.selectInteractionMonitoringColumns(initialState, {
+      sel.selectInteractionMonitoringColumns(initialState, {
         menuType: 'Columns',
         tableType: 'InteractionMonitoring'
       })
@@ -148,7 +148,7 @@ describe('selectGroups selector', () => {
       }
     });
     expect(
-      SEL.selectGroups(initialState, {
+      sel.selectGroups(initialState, {
         menuType: 'Groups',
         tableType: 'mockTable'
       })
@@ -171,7 +171,7 @@ describe('selectSkills selector', () => {
       }
     });
     expect(
-      SEL.selectSkills(initialState, {
+      sel.selectSkills(initialState, {
         menuType: 'Skills',
         tableType: 'mockTable'
       })
@@ -194,7 +194,7 @@ describe('areAllColNotActive selector', () => {
       }
     });
     expect(
-      SEL.areAllColNotActive(initialState, {
+      sel.areAllColNotActive(initialState, {
         menuType: 'mockItems',
         tableType: 'mockTable'
       })
@@ -214,7 +214,7 @@ describe('areAllColNotActive selector', () => {
       }
     });
     expect(
-      SEL.areAllColNotActive(initialState, {
+      sel.areAllColNotActive(initialState, {
         menuType: 'mockItems',
         tableType: 'mockTable'
       })
@@ -233,7 +233,7 @@ describe('areAllColNotActive selector', () => {
         }
       }
     });
-    expect(SEL.areAllColNotActive(initialState, {})).toEqual(true);
+    expect(sel.areAllColNotActive(initialState, {})).toEqual(true);
   });
 });
 
@@ -244,6 +244,6 @@ describe('selectTimeFormat selector', () => {
         twelveHourFormat: true
       }
     });
-    expect(SEL.selectTimeFormat(initialState)).toEqual(true);
+    expect(sel.selectTimeFormat(initialState)).toEqual(true);
   });
 });

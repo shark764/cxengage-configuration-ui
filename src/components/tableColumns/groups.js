@@ -11,16 +11,7 @@ export default function(value, tableType) {
     show: value,
     filterable: true,
     sortable: false,
-    Filter: (
-      <CheckboxFilterMenu
-        menuType="Groups"
-        tableType={tableType}
-        buttonType="columnFilter"
-        selectionType="checkbox"
-      >
-        Groups
-      </CheckboxFilterMenu>
-    ),
+    Filter: groupsFilter(tableType),
     id: 'groups',
     accessor: d => {
       let groupArray = [];
@@ -34,4 +25,17 @@ export default function(value, tableType) {
       return groupArray.join(', ');
     }
   };
+}
+
+export function groupsFilter(tableType) {
+  return (
+    <CheckboxFilterMenu
+      menuType="Groups"
+      tableType={tableType}
+      buttonType="columnFilter"
+      selectionType="checkbox"
+    >
+      Groups
+    </CheckboxFilterMenu>
+  );
 }

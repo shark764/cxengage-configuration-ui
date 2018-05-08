@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`direction Filter method returns the filter menu returns the proper component 1`] = `
+<Connect(CheckboxMenu)
+  buttonType="columnFilter"
+  className="direction"
+  menuType="Direction"
+  selectionType="select"
+  tableType="mockTable"
+  updateFilter={undefined}
+>
+  Direction
+</Connect(CheckboxMenu)>
+`;
+
+exports[`direction table column function returns correct object 1`] = `
+Object {
+  "Filter": [Function],
+  "Header": "Direction",
+  "accessor": "direction",
+  "filterMethod": [Function],
+  "id": "direction",
+  "show": "All",
+  "width": 140,
+}
+`;

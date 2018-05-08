@@ -1,3 +1,10 @@
 {
-  "extends": "react-app"
+  "extends": "react-app",
+  "globals": {
+    "CxEngage": true
+  },
+  "rules": {
+    "no-restricted-globals": [0],
+    "react/prop-types": [1]
+  }
 }

@@ -3,15 +3,19 @@
  */
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import { sdkPromise } from '../../../../utils/sdk';
+import {
+  startReportingSubscriptions,
+  reportingSubscriptionStarted
+} from './index';
 
-export const startBatchRequest = (action$, store) =>
+export const StartBatchRequest = (action$, store) =>
   action$.ofType('START_REPORTING_BATCH_REQUEST_$').switchMap(action =>
     fromPromise(
       sdkPromise(
@@ -25,10 +29,10 @@ export const startBatchRequest = (action$, store) =>
         },
         `cxengage/reporting/stat-subscription-added`
       )
-    ).map(response => ({ type: 'START_REPORTING_SUBSCRIPTION_$' }))
+    ).mapTo(startReportingSubscriptions())
   );
 
-export const startBatchSubscription = (action$, store) =>
+export const StartBatchSubscription = (action$, store) =>
   action$.ofType('START_REPORTING_SUBSCRIPTION_$').switchMap(action =>
     fromPromise(
       sdkPromise(
@@ -38,5 +42,5 @@ export const startBatchSubscription = (action$, store) =>
         },
         'cxengage/reporting/batch-response'
       )
-    ).map(response => ({ type: 'REPORTING_SUBSCRIPTION_STARTED_$' }))
+    ).mapTo(reportingSubscriptionStarted())
   );

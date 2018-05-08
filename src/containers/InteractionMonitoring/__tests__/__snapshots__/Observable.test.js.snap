@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/reporting/batch-response to redux 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "arrayOfTableData": Array [
+          Object {
+            "item1": "item1",
+          },
+        ],
+        "type": "SET_TABLE_DATA",
+      },
+    ],
+  ],
+}
+`;

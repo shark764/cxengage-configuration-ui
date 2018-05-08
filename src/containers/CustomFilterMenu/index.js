@@ -1,23 +1,12 @@
 import { connect } from 'react-redux';
-
 import { setVisibleMenu } from '../../redux/modules/columnFilterMenus';
-
 import { CustomDropdownMenu } from 'cx-ui-components';
+import { selectVisibleSubMenu } from '../../redux/modules/columnFilterMenus/selectors';
 
-const mapStateToProps = (state, props) => ({
-  currentVisibleSubMenu: state.getIn([
-    'ColumnFilterMenus',
-    props.tableType,
-    'visibleMenu'
-  ])
+export const mapStateToProps = (state, props) => ({
+  currentVisibleSubMenu: selectVisibleSubMenu(state, props)
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    setVisibleMenu: (menuType, tableType) =>
-      dispatch(setVisibleMenu(menuType, tableType)),
-    dispatch
-  };
-}
+export const actions = { setVisibleMenu };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomDropdownMenu);
+export default connect(mapStateToProps, actions)(CustomDropdownMenu);

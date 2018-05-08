@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import {
   areAllActive,
-  totalRatio
+  totalRatio,
+  selectVisibleSubMenu,
+  menuItemsJs
 } from '../../redux/modules/columnFilterMenus/selectors';
 import {
   toggleAllMenuItemsOn,
@@ -13,35 +15,20 @@ import {
 } from '../../redux/modules/columnFilterMenus';
 import { CheckboxMenu } from 'cx-ui-components';
 
-const mapStateToProps = (state, props) => ({
-  currentVisibleSubMenu: state.getIn([
-    'ColumnFilterMenus',
-    props.tableType,
-    'visibleMenu'
-  ]),
-  items: state
-    .getIn(['ColumnFilterMenus', props.tableType, props.menuType])
-    .toJS(),
+export const mapStateToProps = (state, props) => ({
+  currentVisibleSubMenu: selectVisibleSubMenu(state, props),
+  items: menuItemsJs(state, props),
   allActive: areAllActive(state, props),
   totalRatio: totalRatio(state, props)
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    oneOnRestOff: (itemName, menuType, tableType) =>
-      dispatch(oneOnRestOff(itemName, menuType, tableType)),
-    toggleItem: (itemName, menuType, tableType) =>
-      dispatch(toggleMenuItems(itemName, menuType, tableType)),
-    toggleAllOn: (menuType, tableType) =>
-      dispatch(toggleAllMenuItemsOn(menuType, tableType)),
-    toggleAllOff: (menuType, tableType) =>
-      dispatch(toggleAllMenuItemsOff(menuType, tableType)),
-    toggleAllInverse: (menuType, tableType) =>
-      dispatch(toggleAllInverseMenuItems(menuType, tableType)),
-    setSubMenuVisibility: (menuType, tableType) =>
-      dispatch(setVisibleMenu(menuType, tableType)),
-    dispatch
-  };
-}
+export const actions = {
+  oneOnRestOff: oneOnRestOff,
+  toggleItem: toggleMenuItems,
+  toggleAllOn: toggleAllMenuItemsOn,
+  toggleAllOff: toggleAllMenuItemsOff,
+  toggleAllInverse: toggleAllInverseMenuItems,
+  setSubMenuVisibility: setVisibleMenu
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckboxMenu);
+export default connect(mapStateToProps, actions)(CheckboxMenu);

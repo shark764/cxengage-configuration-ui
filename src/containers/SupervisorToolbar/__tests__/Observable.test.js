@@ -9,9 +9,9 @@ function createWindowMessageSubscriptionEvent(topic, response) {
     {
       data: {
         subscription: {
-          topic: topic
-        },
-        response: response
+          topic: topic,
+          response: response
+        }
       }
     }
   ];
@@ -30,7 +30,7 @@ describe('Observable Test Filters', () => {
       });
     });
   }
-  filterArray.forEach(topic => filterTest(topic));
+  filterArray.forEach(topic => topic !== 'monitorCall' && filterTest(topic));
 });
 
 describe('Observable Test Mapping topics to dispatched actions', () => {
@@ -74,10 +74,7 @@ describe('Observable Test Mapping topics to dispatched actions', () => {
     expect(store.dispatch).toBeCalledWith(
       expect.objectContaining({
         type: expect.any(String),
-        response: expect.objectContaining({
-          interactionId: expect.any(String),
-          status: expect.any(String)
-        })
+        interactionId: expect.any(String)
       })
     );
     expect(store.dispatch).toHaveBeenCalledTimes(1);

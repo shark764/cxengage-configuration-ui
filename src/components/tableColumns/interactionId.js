@@ -22,10 +22,14 @@ export default function(interactionId) {
     show: interactionId,
     id: 'interactionId',
     accessor: 'interactionId',
-    Cell: ({ value }) => (
-      <CopyToClipboard text={value}>
-        <TableButton>{value}</TableButton>
-      </CopyToClipboard>
-    )
+    Cell: ({ value }) => interactionIdCell(value)
   };
+}
+
+export function interactionIdCell(value) {
+  return (
+    <CopyToClipboard text={value}>
+      <TableButton>{value}</TableButton>
+    </CopyToClipboard>
+  );
 }

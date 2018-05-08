@@ -1,0 +1,327 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Interaction Monitoring Layout renders all columns , all columns are active  1`] = `
+<styled.div>
+  <PageHeader
+    helpLink="https://docs.cxengage.net/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring"
+    text="Interaction Monitoring"
+  >
+    <div>
+      <Styled(Button)
+        className="timeConversion"
+        id="timeConversion"
+        onClick={[Function]}
+        type="secondary"
+      >
+        12h
+      </Styled(Button)>
+      <Styled(Connect(CheckboxMenu))
+        menuType="Columns"
+        selectionType="checkbox"
+        tableType="InteractionMonitoring"
+        type="secondary"
+      >
+        Columns
+      </Styled(Connect(CheckboxMenu))>
+    </div>
+  </PageHeader>
+  <ReactTable
+    AggregatedComponent={[Function]}
+    ExpanderComponent={[Function]}
+    FilterComponent={[Function]}
+    LoadingComponent={[Function]}
+    NoDataComponent={[Function]}
+    PadRowComponent={[Function]}
+    PaginationComponent={[Function]}
+    PivotValueComponent={[Function]}
+    ResizerComponent={[Function]}
+    SubComponent={[Function]}
+    TableComponent={[Function]}
+    TbodyComponent={[Function]}
+    TdComponent={[Function]}
+    TfootComponent={[Function]}
+    ThComponent={[Function]}
+    TheadComponent={[Function]}
+    TrComponent={[Function]}
+    TrGroupComponent={[Function]}
+    aggregatedKey="_aggregated"
+    className="-striped -highlight"
+    collapseOnDataChange={true}
+    collapseOnPageChange={true}
+    collapseOnSortingChange={true}
+    column={
+      Object {
+        "Aggregated": undefined,
+        "Cell": undefined,
+        "Expander": undefined,
+        "Filter": undefined,
+        "Footer": undefined,
+        "Header": undefined,
+        "Pivot": undefined,
+        "PivotValue": undefined,
+        "aggregate": undefined,
+        "className": "",
+        "filterAll": false,
+        "filterMethod": undefined,
+        "filterable": undefined,
+        "footerClassName": "",
+        "footerStyle": Object {},
+        "getFooterProps": [Function],
+        "getHeaderProps": [Function],
+        "getProps": [Function],
+        "headerClassName": "",
+        "headerStyle": Object {},
+        "minWidth": 100,
+        "resizable": undefined,
+        "show": true,
+        "sortMethod": undefined,
+        "sortable": undefined,
+        "style": Object {},
+      }
+    }
+    columns={
+      Array [
+        Object {
+          "Expander": [Function],
+          "expander": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Header": "Interaction Id",
+          "accessor": "interactionId",
+          "id": "interactionId",
+          "show": true,
+        },
+        Object {
+          "Header": "Agent",
+          "accessor": [Function],
+          "id": "agentName",
+          "show": true,
+        },
+        Object {
+          "Header": "Customer Id",
+          "accessor": "customer",
+          "id": "customer",
+          "show": true,
+        },
+        Object {
+          "Header": "Contact Point",
+          "accessor": "contactPoint",
+          "id": "contactPoint",
+          "show": true,
+        },
+        Object {
+          "Header": "Flow",
+          "accessor": "flowName",
+          "id": "flowName",
+          "show": true,
+        },
+        Object {
+          "Header": "Channel",
+          "accessor": "channelType",
+          "id": "channel",
+          "show": true,
+        },
+        Object {
+          "Filter": [Function],
+          "Header": "Direction",
+          "accessor": "direction",
+          "filterMethod": [Function],
+          "id": "direction",
+          "show": true,
+          "width": 140,
+        },
+        Object {
+          "Header": "Presence State",
+          "accessor": "state",
+          "id": "presenceState",
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Start Date",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "startDateTimestamp",
+          "minWidth": 170,
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Start Time",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "startTimestamp",
+          "resizable": false,
+          "show": true,
+          "width": 180,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Elapsed Time",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "elapsedTime",
+          "show": true,
+          "width": 150,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Monitoring",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "monitoring",
+          "show": true,
+          "width": 180,
+        },
+        Object {
+          "Filter": <Connect(CheckboxMenu)
+            buttonType="columnFilter"
+            menuType="Groups"
+            selectionType="checkbox"
+            tableType="InteractionMonitoring"
+          >
+            Groups
+          </Connect(CheckboxMenu)>,
+          "Header": "Groups",
+          "accessor": [Function],
+          "filterable": true,
+          "id": "groups",
+          "show": true,
+          "sortable": false,
+        },
+        Object {
+          "Filter": <Connect(CheckboxMenu)
+            buttonType="columnFilter"
+            menuType="Skills"
+            selectionType="checkbox"
+            tableType="InteractionMonitoring"
+          >
+            Skills
+          </Connect(CheckboxMenu)>,
+          "Header": "Skills",
+          "accessor": [Function],
+          "filterable": true,
+          "id": "skills",
+          "show": true,
+          "sortable": false,
+        },
+      ]
+    }
+    data={Array []}
+    defaultExpanded={Object {}}
+    defaultFilterMethod={[Function]}
+    defaultFiltered={Array []}
+    defaultPageSize={20}
+    defaultResized={Array []}
+    defaultSortDesc={false}
+    defaultSortMethod={[Function]}
+    defaultSorted={Array []}
+    expanded={Object {}}
+    expanderDefaults={
+      Object {
+        "filterable": false,
+        "resizable": false,
+        "sortable": false,
+        "width": 35,
+      }
+    }
+    filterable={true}
+    filtered={Array []}
+    freezeWhenExpanded={false}
+    getLoadingProps={[Function]}
+    getNoDataProps={[Function]}
+    getPaginationProps={[Function]}
+    getProps={[Function]}
+    getResizerProps={[Function]}
+    getTableProps={[Function]}
+    getTbodyProps={[Function]}
+    getTdProps={[Function]}
+    getTfootProps={[Function]}
+    getTfootTdProps={[Function]}
+    getTfootTrProps={[Function]}
+    getTheadFilterProps={[Function]}
+    getTheadFilterThProps={[Function]}
+    getTheadFilterTrProps={[Function]}
+    getTheadGroupProps={[Function]}
+    getTheadGroupThProps={[Function]}
+    getTheadGroupTrProps={[Function]}
+    getTheadProps={[Function]}
+    getTheadThProps={[Function]}
+    getTheadTrProps={[Function]}
+    getTrGroupProps={[Function]}
+    getTrProps={[Function]}
+    groupedByPivotKey="_groupedByPivot"
+    indexKey="_index"
+    loading={false}
+    loadingText="Loading..."
+    multiSort={true}
+    nestingLevelKey="_nestingLevel"
+    nextText="Next"
+    noDataText="No rows found"
+    ofText="of"
+    onFetchData={[Function]}
+    onFilteredChange={[Function]}
+    onSortedChange={[Function]}
+    originalKey="_original"
+    pageSizeOptions={
+      Array [
+        5,
+        10,
+        20,
+        25,
+        50,
+        100,
+      ]
+    }
+    pageText="Page"
+    pivotDefaults={Object {}}
+    pivotIDKey="_pivotID"
+    pivotValKey="_pivotVal"
+    previousText="Previous"
+    resizable={true}
+    rowsText="rows"
+    showPageJump={true}
+    showPageSizeOptions={true}
+    showPagination={true}
+    showPaginationBottom={true}
+    showPaginationTop={false}
+    sortable={true}
+    sorted={Object {}}
+    style={Object {}}
+    subRowsKey="_subRows"
+  />
+</styled.div>
+`;
+
+exports[`Interaction Monitoring Layout renders no columns , all columns are not active  1`] = `
+<styled.div>
+  <PageHeader
+    helpLink="https://docs.cxengage.net/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring"
+    text="Interaction Monitoring"
+  >
+    <div>
+      <Styled(Button)
+        className="timeConversion"
+        id="timeConversion"
+        onClick={[Function]}
+        type="secondary"
+      >
+        12h
+      </Styled(Button)>
+      <Styled(Connect(CheckboxMenu))
+        menuType="Columns"
+        selectionType="checkbox"
+        tableType="InteractionMonitoring"
+        type="secondary"
+      >
+        Columns
+      </Styled(Connect(CheckboxMenu))>
+    </div>
+  </PageHeader>
+</styled.div>
+`;

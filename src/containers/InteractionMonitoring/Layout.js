@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { fromEvent } from 'rxjs/observable/fromEvent';
 import 'rxjs/add/operator/map';
+import { subscribe, unsubscribe } from './Observable';
 import CheckboxFilterMenu from '../CheckboxFilterMenu';
 import { Button, PageHeader, InteractionDetails } from 'cx-ui-components';
 import ReactTable from 'react-table';
@@ -33,7 +33,6 @@ const Wrapper = styled.div`
   padding: 20px;
 `;
 
-let messageObservableSubscription;
 export default class InteractionMonitoring extends Component {
   constructor() {
     super();
@@ -41,31 +40,17 @@ export default class InteractionMonitoring extends Component {
       filtered: []
     };
   }
-  messageObservable = fromEvent(window, 'message')
-    .filter(
-      ({ data }) =>
-        data.subscription &&
-        data.subscription.topic === 'cxengage/reporting/batch-response'
-    )
-    .map(
-      event =>
-        event.data.subscription.response.interactionsInConversationList.body
-          .results.interactions
-    );
 
   componentWillMount() {
-    const entityName = this.props.location.pathname.slice(1);
-    this.props.setCurrentEntity(entityName);
+    subscribe();
+    this.props.setCurrentEntity('InteractionMonitoring');
     this.props.fetchData('groups', 'InteractionMonitoring');
     this.props.fetchData('skills', 'InteractionMonitoring');
     this.props.startInteractionMonitoring();
-    messageObservableSubscription = this.messageObservable.subscribe(data =>
-      this.props.updateTableData(data)
-    );
   }
 
   componentWillUnmount() {
-    messageObservableSubscription.unsubscribe();
+    unsubscribe();
   }
 
   render() {
@@ -99,7 +84,7 @@ export default class InteractionMonitoring extends Component {
           <ReactTable
             defaultPageSize={20}
             className="-striped -highlight"
-            data={this.props.tableData.toJS()}
+            data={this.props.tableData}
             filterable
             defaultFilterMethod={(filter, row) =>
               String(row[filter.id])
@@ -214,7 +199,7 @@ export default class InteractionMonitoring extends Component {
 
 InteractionMonitoring.propTypes = {
   totalRatio: PropTypes.array,
-  tableData: PropTypes.object.isRequired,
+  tableData: PropTypes.any,
   expanded: PropTypes.object.isRequired,
   selected: PropTypes.string.isRequired,
   areAllColNotActive: PropTypes.bool.isRequired,

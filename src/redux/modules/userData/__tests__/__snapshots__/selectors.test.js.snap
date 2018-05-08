@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCurrentPermissions returns current tenant permissions 1`] = `"mockPermissions"`;
+
+exports[`getCurrentTenantId returns current tenant id 1`] = `"mockTenantId"`;
+
+exports[`getCurrentTenantName returns current tenant name 1`] = `"mockTenantName"`;

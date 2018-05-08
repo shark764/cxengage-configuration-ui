@@ -39,45 +39,50 @@ export default function(startDate, tableType) {
       }
       return row[filter.id] < filterTime;
     },
-    Filter: ({ filter, onChange }) => (
-      <div>
-        <CustomFilterMenu
-          menuType="Start Date"
-          tableType={tableType}
-          className="startDate"
-          buttonType="columnFilter"
-          updateFilter={onChange}
-          currentFilter={
-            filter ? filter.value.split(':').join(' ') : 'All Results'
-          }
-        >
-          <CustomSubMenuWrapper>
-            <FilterSelect
-              onChange={event => {
-                let filterArray = filter
-                  ? filter.value.split(':')
-                  : ['After', ''];
-                onChange(`${event.target.value}:${filterArray[1]}`);
-              }}
-              options={['After', 'Before']}
-              // The below style is required as styled component
-              // doesn't like the type="date" input
-              style={{ width: '160px' }}
-            />
-
-            <input
-              value={filter ? filter.value.split(':')[1] : ''}
-              type="date"
-              onChange={event => {
-                let filterArray = filter
-                  ? filter.value.split(':')
-                  : ['After', ''];
-                onChange(`${filterArray[0]}:${event.target.value}`);
-              }}
-            />
-          </CustomSubMenuWrapper>
-        </CustomFilterMenu>
-      </div>
-    )
+    Filter: ({ filter, onChange }) =>
+      startDateFilter(filter, onChange, tableType)
   };
+}
+
+export function startDateFilter(filter, onChange, tableType) {
+  return (
+    <div>
+      <CustomFilterMenu
+        menuType="Start Date"
+        tableType={tableType}
+        className="startDate"
+        buttonType="columnFilter"
+        updateFilter={onChange}
+        currentFilter={
+          filter ? filter.value.split(':').join(' ') : 'All Results'
+        }
+      >
+        <CustomSubMenuWrapper>
+          <FilterSelect
+            onChange={event => {
+              let filterArray = filter
+                ? filter.value.split(':')
+                : ['After', ''];
+              onChange(`${event.target.value}:${filterArray[1]}`);
+            }}
+            options={['After', 'Before']}
+            // The below style is required as styled component
+            // doesn't like the type="date" input
+            style={{ width: '160px' }}
+          />
+
+          <input
+            value={filter ? filter.value.split(':')[1] : ''}
+            type="date"
+            onChange={event => {
+              let filterArray = filter
+                ? filter.value.split(':')
+                : ['After', ''];
+              onChange(`${filterArray[0]}:${event.target.value}`);
+            }}
+          />
+        </CustomSubMenuWrapper>
+      </CustomFilterMenu>
+    </div>
+  );
 }

@@ -4,10 +4,24 @@
 import { fromJS } from 'immutable';
 
 // Initial Sub State
-const initialState = fromJS({
+export const initialState = fromJS({
   permissions: '',
   currentTenantName: '',
   currentTenantId: ''
+});
+
+// Actions
+export const updateUserPermissions = (
+  tenantId,
+  tenantName,
+  tenantPermissions
+) => ({
+  type: 'UPDATE_USER_PERMISSIONS',
+  tenantInfo: {
+    tenantId: tenantId,
+    tenantName: tenantName,
+    tenantPermissions: tenantPermissions
+  }
 });
 
 // Reducer

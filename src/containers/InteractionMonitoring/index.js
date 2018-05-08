@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {
-  selectInteractionMonitoringColumns,
+  selectInteractionMonitoringActiveColumns,
   areAllColNotActive,
   selectTimeFormat,
   totalRatio
@@ -28,15 +28,13 @@ import {
 
 import Layout from './Layout';
 
-const mapStateToProps = (state, props) => ({
+export const mapStateToProps = (state, props) => ({
   areAllColNotActive: areAllColNotActive(state, {
     menuType: 'Columns',
     tableType: 'InteractionMonitoring'
   }),
   totalRatio: totalRatio(state, props),
-  activeColumns: selectInteractionMonitoringColumns(state, props).map(
-    ({ active, name }) => active
-  ),
+  activeColumns: selectInteractionMonitoringActiveColumns(state, props),
   twelveHourFormat: selectTimeFormat(state, props),
   tableData: selectInteractionMonitoringTableData(state, props),
   expanded: selectInteractionMonitoringExpanded(state, props),
@@ -44,27 +42,18 @@ const mapStateToProps = (state, props) => ({
   sorted: selectInteractionMonitoringSorted(state, props)
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    toggleTimeFormat: () => dispatch(toggleTimeFormat()),
-    updateTableData: tableData => dispatch(updateTableData(tableData)),
-    updateSkillsColumnFilter: (skillsData, tableType) =>
-      dispatch(updateSkillsColumnFilter(skillsData, tableType)),
-    updateGroupsColumnFilter: (groupsData, tableType) =>
-      dispatch(updateGroupsColumnFilter(groupsData, tableType)),
-    setExpanded: expanded => dispatch(setExpanded(expanded)),
-    setSelected: (selected, expanded) =>
-      dispatch(setSelected(selected, expanded)),
-    setSorted: sorted => dispatch(setSorted(sorted)),
-    removeSelected: () => dispatch(removeSelected()),
-    fetchData: (entityName, tableType) =>
-      dispatch(fetchData(entityName, tableType)),
-    startInteractionMonitoring: () => dispatch(startInteractionMonitoring()),
-    setCurrentEntity: entityName => {
-      dispatch(setCurrentEntity(entityName));
-    },
-    dispatch
-  };
-}
+export const actions = {
+  toggleTimeFormat,
+  updateTableData,
+  updateSkillsColumnFilter,
+  updateGroupsColumnFilter,
+  setExpanded,
+  setSelected,
+  setSorted,
+  removeSelected,
+  fetchData,
+  startInteractionMonitoring,
+  setCurrentEntity
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default connect(mapStateToProps, actions)(Layout);

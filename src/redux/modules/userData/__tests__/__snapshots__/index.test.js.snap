@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserData reducer snapshots dispatches UPDATE_USER_PERMISSIONS 1`] = `
+Immutable.Map {
+  "permissions": "tenantPermissions",
+  "currentTenantName": "tenantName",
+  "currentTenantId": "tenantId",
+}
+`;
+
+exports[`UserData reducer snapshots returns the correct initial state 1`] = `
+Immutable.Map {
+  "permissions": "",
+  "currentTenantName": "",
+  "currentTenantId": "",
+}
+`;

@@ -8,8 +8,14 @@ module.exports = {
     filename: '[name]-[chunkhash:6].bundle.js',
     path: path.resolve(__dirname, 'build')
   },
+  externals: {
+    CxEngage: 'CxEngage'
+  },
   resolve: {
-    modules: [path.resolve(__dirname, "node_modules")]
+    modules: [path.resolve(__dirname, "node_modules")],
+    alias: {
+      Utils: path.resolve(__dirname, 'src', 'utils'),
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
