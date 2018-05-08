@@ -10,7 +10,7 @@ import { Route } from 'react-router-dom';
 import { Modal } from 'cx-ui-components';
 import Confirmation from '../ConfirmationDialog';
 
-import SidePanel from '../../components/sidePanel';
+import SidePanel from '../../containers/SidePanel';
 import EntityTableContainer from '../EntityTable';
 import CreateListForm from '../Form/Lists/Create';
 import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';

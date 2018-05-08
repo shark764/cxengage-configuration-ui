@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectInteractionMonitoringExpanded returns the interaction monitoring expanded 1`] = `
+Immutable.Map {
+  "item1": "item1",
+}
+`;
+
+exports[`selectInteractionMonitoringSelected returns the interaction monitoring selected 1`] = `"item1"`;
+
+exports[`selectInteractionMonitoringSorted returns the interaction monitoring sorted 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "item1": "item1",
+  },
+  Immutable.Map {
+    "item2": "item2",
+  },
+]
+`;
+
+exports[`selectInteractionMonitoringTableData returns the interaction monitoring data 1`] = `
+Array [
+  Object {
+    "item1": "item1",
+  },
+  Object {
+    "item2": "item2",
+  },
+]
+`;

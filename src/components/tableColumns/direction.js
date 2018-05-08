@@ -23,17 +23,21 @@ export default function(direction, tableType) {
         return row[filter.id] === 'outbound';
       }
     },
-    Filter: ({ filter, onChange }) => (
-      <CheckboxFilterMenu
-        menuType="Direction"
-        tableType={tableType}
-        className="direction"
-        buttonType="columnFilter"
-        selectionType="select"
-        updateFilter={onChange}
-      >
-        Direction
-      </CheckboxFilterMenu>
-    )
+    Filter: ({ onChange }) => directionFilter(onChange, tableType)
   };
+}
+
+function directionFilter(onChange, tableType) {
+  return (
+    <CheckboxFilterMenu
+      menuType="Direction"
+      tableType={tableType}
+      className="direction"
+      buttonType="columnFilter"
+      selectionType="select"
+      updateFilter={onChange}
+    >
+      Direction
+    </CheckboxFilterMenu>
+  );
 }

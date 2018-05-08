@@ -16,18 +16,12 @@ import {
   getSelectedEntityFormId
 } from '../../redux/modules/entities/selectors';
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onSubmit: () => {
-      dispatch(onFormButtonSubmit());
-    },
-    onCancel: () => {
-      dispatch(unsetSelectedEntityId());
-    }
-  };
-}
+export const actions = {
+  onSubmit: onFormButtonSubmit,
+  onCancel: unsetSelectedEntityId
+};
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   const selectedEntity = getSelectedEntity(state);
   const formId = getSelectedEntityFormId(state);
 
@@ -39,4 +33,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SidePanelActions);
+export default connect(mapStateToProps, actions)(SidePanelActions);

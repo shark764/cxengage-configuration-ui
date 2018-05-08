@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions map properly 1`] = `
+Object {
+  "oneOnRestOff": [Function],
+  "setSubMenuVisibility": [Function],
+  "toggleAllInverse": [Function],
+  "toggleAllOff": [Function],
+  "toggleAllOn": [Function],
+  "toggleItem": [Function],
+}
+`;
+
+exports[`CheckboxFilterMenu Renders renders 1`] = `
+<CheckboxMenu
+  menuType="mockMenu"
+  oneOnRestOff={[Function]}
+  selectionType="checkbox"
+  setSubMenuVisibility={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tableType="mockTable"
+  toggleAllInverse={[Function]}
+  toggleAllOff={[Function]}
+  toggleAllOn={[Function]}
+  toggleItem={[Function]}
+/>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "allActive": undefined,
+  "currentVisibleSubMenu": undefined,
+  "items": undefined,
+  "totalRatio": undefined,
+}
+`;

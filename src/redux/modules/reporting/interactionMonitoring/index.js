@@ -5,7 +5,7 @@
 import { fromJS } from 'immutable';
 
 // Initial Sub State
-const initialState = fromJS({
+export const initialState = fromJS({
   data: [],
   sorted: [],
   expanded: {},
@@ -27,6 +27,12 @@ export const setSorted = sorted => ({ type: 'SET_SORTED', sorted });
 export const removeSelected = () => ({ type: 'REMOVE_SELECTED' });
 export const startInteractionMonitoring = () => ({
   type: 'START_REPORTING_BATCH_REQUEST_$'
+});
+export const startReportingSubscriptions = () => ({
+  type: 'START_REPORTING_SUBSCRIPTION_$'
+});
+export const reportingSubscriptionStarted = () => ({
+  type: 'REPORTING_SUBSCRIPTION_STARTED_$'
 });
 
 // Reducer

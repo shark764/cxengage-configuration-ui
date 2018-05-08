@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`errorLabel calls errorLabel with error object 1`] = `"mockMessage  mockCode: mockResponseMessage"`;
+
+exports[`errorLabel calls errorLabel with mockMessage 1`] = `"mockMessage "`;

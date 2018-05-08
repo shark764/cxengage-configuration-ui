@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectSupervisorToolbarSilentMonitoringInteractionId returns the monitoring status 1`] = `"0000-0000-0000-0000"`;
+
+exports[`selectSupervisorToolbarSilentMonitoringStatus returns the monitoring status 1`] = `"offline"`;

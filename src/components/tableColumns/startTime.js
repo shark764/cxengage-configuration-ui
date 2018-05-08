@@ -67,58 +67,63 @@ export default function(startTime, tableType, twelveHourFormat) {
       }
       return row[filter.id] < filterTime;
     },
-    Filter: ({ filter, onChange }) => (
-      <CustomFilterMenu
-        menuType="Start Time"
-        tableType={tableType}
-        buttonType="columnFilter"
-        className="startTime"
-        updateFilter={onChange}
-        currentFilter={
-          filter ? filter.value.split('-').join(' ') : 'After 00:00 AM'
-        }
-      >
-        <CustomSubMenuWrapper>
-          <FilterSelect
-            className="StartTimeFilter"
-            onChange={event => {
-              let filterArray = filter
-                ? filter.value.split('-')
-                : ['After', '00:00', 'AM'];
-              onChange(
-                `${event.target.value}-${filterArray[1]}-${filterArray[2]}`
-              );
-            }}
-            options={['After', 'Before']}
-          />
-
-          <TimeInput
-            value={filter ? filter.value.split('-')[1] : '00:00'}
-            onChange={event => {
-              let filterArray = filter
-                ? filter.value.split('-')
-                : ['After', '00:00', 'AM'];
-              onChange(
-                `${filterArray[0]}-${event.target.value}-${filterArray[2]}`
-              );
-            }}
-          />
-
-          {twelveHourFormat && (
-            <FilterSelect
-              onChange={event => {
-                let filterArray = filter
-                  ? filter.value.split('-')
-                  : ['After', '00:00', 'minutes'];
-                onChange(
-                  `${filterArray[0]}-${filterArray[1]}-${event.target.value}`
-                );
-              }}
-              options={['AM', 'PM']}
-            />
-          )}
-        </CustomSubMenuWrapper>
-      </CustomFilterMenu>
-    )
+    Filter: ({ filter, onChange }) =>
+      startTimeFilter(filter, onChange, tableType, twelveHourFormat)
   };
+}
+
+export function startTimeFilter(filter, onChange, tableType, twelveHourFormat) {
+  return (
+    <CustomFilterMenu
+      menuType="Start Time"
+      tableType={tableType}
+      buttonType="columnFilter"
+      className="startTime"
+      updateFilter={onChange}
+      currentFilter={
+        filter ? filter.value.split('-').join(' ') : 'After 00:00 AM'
+      }
+    >
+      <CustomSubMenuWrapper>
+        <FilterSelect
+          className="StartTimeFilter"
+          onChange={event => {
+            let filterArray = filter
+              ? filter.value.split('-')
+              : ['After', '00:00', 'AM'];
+            onChange(
+              `${event.target.value}-${filterArray[1]}-${filterArray[2]}`
+            );
+          }}
+          options={['After', 'Before']}
+        />
+
+        <TimeInput
+          value={filter ? filter.value.split('-')[1] : '00:00'}
+          onChange={event => {
+            let filterArray = filter
+              ? filter.value.split('-')
+              : ['After', '00:00', 'AM'];
+            onChange(
+              `${filterArray[0]}-${event.target.value}-${filterArray[2]}`
+            );
+          }}
+        />
+
+        {twelveHourFormat && (
+          <FilterSelect
+            onChange={event => {
+              let filterArray = filter
+                ? filter.value.split('-')
+                : ['After', '00:00', 'minutes'];
+              onChange(
+                `${filterArray[0]}-${filterArray[1]}-${event.target.value}`
+              );
+            }}
+            options={['AM', 'PM']}
+          />
+        )}
+      </CustomSubMenuWrapper>
+    </CustomFilterMenu>
+  );
 }

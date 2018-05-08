@@ -11,16 +11,7 @@ export default function(value, tableType) {
     show: value,
     filterable: true,
     sortable: false,
-    Filter: (
-      <CheckboxFilterMenu
-        menuType="Skills"
-        tableType={tableType}
-        buttonType="columnFilter"
-        selectionType="checkbox"
-      >
-        Skills
-      </CheckboxFilterMenu>
-    ),
+    Filter: skillsFilter(tableType),
     id: 'skills',
     accessor: d => {
       let skillsArray = [];
@@ -34,4 +25,17 @@ export default function(value, tableType) {
       return skillsArray.join(', ');
     }
   };
+}
+
+export function skillsFilter(tableType) {
+  return (
+    <CheckboxFilterMenu
+      menuType="Skills"
+      tableType={tableType}
+      buttonType="columnFilter"
+      selectionType="checkbox"
+    >
+      Skills
+    </CheckboxFilterMenu>
+  );
 }

@@ -4,6 +4,7 @@
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -19,8 +20,15 @@ import {
   selectSupervisorToolbarMuted
 } from './selectors';
 
+import {
+  supervisorSubscriptionsAdded,
+  monitorInteractionRequested,
+  hangUpRequested,
+  toggleMuteRequested
+} from './index';
+
 // Start all the required subscriptions
-export const startBatchRequest = (action$, store) =>
+export const StartBatchRequest = (action$, store) =>
   action$
     .ofType('START_SUPERVISOR_TOOLBAR_$')
     .debounceTime(400)
@@ -34,20 +42,17 @@ export const startBatchRequest = (action$, store) =>
         'cxengage/interactions/voice/unmute-acknowledged',
         'cxengage/interactions/voice/mute-acknowledged',
         'cxengage/session/sqs-shut-down'
-      ]).mergeMap(sub =>
-        fromPromise(sdkCall({ module: 'subscribe', command: sub })).map(
-          response => ({
-            type: 'SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$',
-            sub
-          })
-        )
+      ]).mergeMap(subscription =>
+        fromPromise(
+          sdkCall({ module: 'subscribe', command: subscription })
+        ).mapTo(supervisorSubscriptionsAdded(subscription))
       )
     );
 
-export const monitorInteraction = (action$, store) =>
+export const MonitorInteraction = (action$, store) =>
   action$.ofType('REQUESTING_MONITOR_CALL').switchMap(action =>
     fromPromise(
-      sdkPromise(
+      sdkCall(
         {
           module: 'interactions.voice',
           command: `silentMonitor`,
@@ -55,24 +60,10 @@ export const monitorInteraction = (action$, store) =>
         },
         `monitorCall`
       )
-    ).map(response => ({ type: 'MONITOR_INTERACTION_REQUESTED' }))
+    ).mapTo(monitorInteractionRequested(action.interactionId))
   );
 
-export const silentMonitorEpic = (action$, store) =>
-  action$.ofType('SET_SILENT_MONITORING_INTERACTION_ID').switchMap(a =>
-    fromPromise(
-      sdkPromise(
-        {
-          module: 'interactions.voice',
-          command: `silentMonitor`,
-          data: { interactionId: a.interactionId }
-        },
-        'cxengage/interactions/voice/silent-monitoring-start-acknowledged'
-      )
-    ).map(response => ({ type: 'MONITOR_INTERACTION_REQUESTED' }))
-  );
-
-export const hangUpEpic = (action$, store) =>
+export const HangUpEpic = (action$, store) =>
   action$
     .ofType('REQUESTING_HANG_UP')
     .map(action => ({
@@ -93,10 +84,10 @@ export const hangUpEpic = (action$, store) =>
           },
           'cxengage/interactions/voice/resource-removed-acknowledged'
         )
-      ).map(response => ({ type: 'HANG_UP_REQUESTED_$' }))
+      ).mapTo(hangUpRequested())
     );
 
-export const toggleMuteEpic = (action$, store) =>
+export const ToggleMuteEpic = (action$, store) =>
   action$
     .ofType('REQUESTING_TOGGLE_MUTE')
     .map(action => ({
@@ -120,5 +111,5 @@ export const toggleMuteEpic = (action$, store) =>
             ? 'cxengage/interactions/voice/unmute-acknowledged'
             : 'cxengage/interactions/voice/mute-acknowledged'
         )
-      ).map(response => ({ type: 'TOGGLE_MUTE_REQUESTED_$' }))
+      ).mapTo(toggleMuteRequested())
     );

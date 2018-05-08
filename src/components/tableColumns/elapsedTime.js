@@ -23,13 +23,14 @@ const MinutesInput = styled.input`
   marginleft: 5px;
 `;
 
+export const formatFilter = filter => {
+  let facts = filter.split(':');
+  return `${facts[0] === 'Greater Than' ? ' + ' : ' - '} ${facts[1]} ${
+    facts[2] === 'Minutes' ? 'Min' : 'Sec'
+  }`;
+};
+
 export default function(value, tableType) {
-  const formatFilter = filter => {
-    let facts = filter.split(':');
-    return `${facts[0] === 'Greater Than' ? ' + ' : ' - '} ${facts[1]} ${
-      facts[2] === 'Minutes' ? 'Min' : 'Sec'
-    }`;
-  };
   return {
     Header: 'Elapsed Time',
     show: value,
@@ -55,53 +56,58 @@ export default function(value, tableType) {
         (filterArray[2] === 'Minutes' ? timeFilter * 60 : timeFilter)
       );
     },
-    Filter: ({ filter, onChange }) => (
-      <CustomFilterMenu
-        menuType="Elapsed Time"
-        tableType={tableType}
-        buttonType="columnFilter"
-        className="elapsedTime"
-        updateFilter={onChange}
-        currentFilter={filter ? formatFilter(filter.value) : 'All Results'}
-      >
-        <CustomSubMenuWrapper>
-          <FilterSelect
-            onChange={event => {
-              let filterArray = filter
-                ? filter.value.split(':')
-                : ['Greater Than', 0, 'Minutes'];
-              onChange(
-                `${event.target.value}:${filterArray[1]}:${filterArray[2]}`
-              );
-            }}
-            options={['Greater Than', 'Less Than']}
-          />
-
-          <MinutesInput
-            value={filter ? filter.value.split(':')[1] : 0}
-            onChange={event => {
-              let filterArray = filter
-                ? filter.value.split(':')
-                : ['Greater Than', 0, 'Minutes'];
-              onChange(
-                `${filterArray[0]}:${event.target.value}:${filterArray[2]}`
-              );
-            }}
-          />
-
-          <FilterSelect
-            onChange={event => {
-              let filterArray = filter
-                ? filter.value.split(':')
-                : ['Greater Than', 0, 'Minutes'];
-              onChange(
-                `${filterArray[0]}:${filterArray[1]}:${event.target.value}`
-              );
-            }}
-            options={['Minutes', 'Seconds']}
-          />
-        </CustomSubMenuWrapper>
-      </CustomFilterMenu>
-    )
+    Filter: ({ filter, onChange }) =>
+      elapsedTimeFilter(filter, onChange, tableType)
   };
+}
+
+export function elapsedTimeFilter(filter, onChange, tableType) {
+  return (
+    <CustomFilterMenu
+      menuType="Elapsed Time"
+      tableType={tableType}
+      buttonType="columnFilter"
+      className="elapsedTime"
+      updateFilter={onChange}
+      currentFilter={filter ? formatFilter(filter.value) : 'All Results'}
+    >
+      <CustomSubMenuWrapper>
+        <FilterSelect
+          onChange={event => {
+            let filterArray = filter
+              ? filter.value.split(':')
+              : ['Greater Than', 0, 'Minutes'];
+            onChange(
+              `${event.target.value}:${filterArray[1]}:${filterArray[2]}`
+            );
+          }}
+          options={['Greater Than', 'Less Than']}
+        />
+
+        <MinutesInput
+          value={filter ? filter.value.split(':')[1] : 0}
+          onChange={event => {
+            let filterArray = filter
+              ? filter.value.split(':')
+              : ['Greater Than', 0, 'Minutes'];
+            onChange(
+              `${filterArray[0]}:${event.target.value}:${filterArray[2]}`
+            );
+          }}
+        />
+
+        <FilterSelect
+          onChange={event => {
+            let filterArray = filter
+              ? filter.value.split(':')
+              : ['Greater Than', 0, 'Minutes'];
+            onChange(
+              `${filterArray[0]}:${filterArray[1]}:${event.target.value}`
+            );
+          }}
+          options={['Minutes', 'Seconds']}
+        />
+      </CustomSubMenuWrapper>
+    </CustomFilterMenu>
+  );
 }

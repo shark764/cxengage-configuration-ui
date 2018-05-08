@@ -8,17 +8,17 @@ export const sdkPromise = (sdkCall, topic) =>
         } else {
           resolve(response);
         }
-        window.removeEventListener('message', handleResponse, false);
+        removeEventListener('message', handleResponse, false);
       }
     };
-    window.addEventListener('message', handleResponse);
+    addEventListener('message', handleResponse);
     window.parent.postMessage(sdkCall, '*');
   });
 
 export const sdkCall = sdkCall =>
   new Promise((resolve, reject) => {
     window.parent.postMessage(sdkCall, '*');
-    resolve();
+    resolve('Posted Message To Parent iFrame');
   });
 
 export const errorLabel = error => {

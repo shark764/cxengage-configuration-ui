@@ -13,14 +13,18 @@ const Expander = styled(CaretIconSVG)`
 export default function() {
   return {
     expander: true,
-    Expander: ({ isExpanded }) => (
-      <div>
-        {isExpanded ? (
-          <Expander direction="up" strokeColor="#024f7999" />
-        ) : (
-          <Expander direction="down" strokeColor="#024f7999" />
-        )}
-      </div>
-    )
+    Expander: ({ isExpanded }) => tableExpander(isExpanded)
   };
+}
+
+export function tableExpander(isExpanded) {
+  return (
+    <div>
+      {isExpanded ? (
+        <Expander direction="up" strokeColor="#024f7999" />
+      ) : (
+        <Expander direction="down" strokeColor="#024f7999" />
+      )}
+    </div>
+  );
 }

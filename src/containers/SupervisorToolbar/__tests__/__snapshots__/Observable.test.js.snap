@@ -83,11 +83,8 @@ exports[`Observable Test Mapping topics to dispatched actions can call monitorCa
   "calls": Array [
     Array [
       Object {
-        "response": Object {
-          "interactionId": "mockId",
-          "status": "mockStatus",
-        },
-        "type": "monitorCall",
+        "interactionId": "mockId",
+        "type": "REQUESTING_MONITOR_CALL",
       },
     ],
   ],

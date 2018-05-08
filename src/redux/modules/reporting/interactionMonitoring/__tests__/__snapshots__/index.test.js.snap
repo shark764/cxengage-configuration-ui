@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`columnFilterMenus reducer snapshots dispatches removeSelected 1`] = `
+Immutable.Map {
+  "selected": "",
+  "expanded": Object {},
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches setExpanded 1`] = `
+Immutable.Map {
+  "expanded": Object {
+    "item2": "item2",
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches setSelected 1`] = `
+Immutable.Map {
+  "selected": "item2",
+  "expanded": Object {
+    "item2": "item2",
+  },
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches setSorted 1`] = `
+Immutable.Map {
+  "sorted": Array [
+    Object {
+      "item3": "item3",
+      "item4": "item4",
+    },
+  ],
+  "selected": "",
+  "expanded": Object {},
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots dispatches updateTableData 1`] = `
+Immutable.Map {
+  "data": Immutable.List [
+    Immutable.Map {
+      "item3": "item3",
+      "item4": "item4",
+    },
+  ],
+}
+`;
+
+exports[`columnFilterMenus reducer snapshots returns the correct initial state 1`] = `
+Immutable.Map {
+  "data": Immutable.List [],
+  "sorted": Immutable.List [],
+  "expanded": Immutable.Map {},
+  "selected": "",
+}
+`;

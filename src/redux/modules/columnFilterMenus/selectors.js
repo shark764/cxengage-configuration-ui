@@ -7,7 +7,7 @@ import { List } from 'immutable';
 
 const subState = state => state.get('ColumnFilterMenus');
 
-const menuItems = (state, props) => {
+export const menuItems = (state, props) => {
   if (props.menuType && props.tableType) {
     return state
       .get('ColumnFilterMenus')
@@ -16,6 +16,10 @@ const menuItems = (state, props) => {
     return new List();
   }
 };
+
+export const menuItemsJs = createSelector([menuItems], menuItems => {
+  return menuItems.toJS();
+});
 
 const menu = (state, props) => {
   if (props.tableType) {
@@ -46,6 +50,11 @@ export const selectInteractionMonitoringColumns = createSelector(
   subState,
   subState => subState.getIn(['InteractionMonitoring', 'Columns']).toJS()
 );
+export const selectInteractionMonitoringActiveColumns = createSelector(
+  selectInteractionMonitoringColumns,
+  columns => columns.map(({ active, name }) => active)
+);
+
 export const selectGroups = createSelector(menu, menu =>
   menu.get('Groups').toJS()
 );

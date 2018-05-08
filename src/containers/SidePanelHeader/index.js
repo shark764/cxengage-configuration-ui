@@ -23,7 +23,7 @@ import {
   isInherited
 } from '../../redux/modules/entities/selectors';
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     onClose: () => {
       dispatch(unsetSelectedEntityId());
@@ -34,7 +34,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   const selectedEntityId = getSelectedEntityId(state);
 
   if (selectedEntityId && selectedEntityId === 'create') {

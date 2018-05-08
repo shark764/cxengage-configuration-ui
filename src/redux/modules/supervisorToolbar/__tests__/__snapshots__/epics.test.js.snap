@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HangUpEpic returns HANG_UP_REQUESTED_$ action 1`] = `
+Object {
+  "type": "HANG_UP_REQUESTED_$",
+}
+`;
+
+exports[`MonitorInteraction returns MONITOR_INTERACTION_REQUESTED action 1`] = `
+Object {
+  "interactionId": "0000-0000-0000-0000",
+  "type": "MONITOR_INTERACTION_REQUESTED",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 1`] = `
+Object {
+  "subscription": "cxengage/session/extension-list",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 2`] = `
+Object {
+  "subscription": "cxengage/twilio/device-ready",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 3`] = `
+Object {
+  "subscription": "cxengage/session/state-change-request-acknowledged",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 4`] = `
+Object {
+  "subscription": "cxengage/interactions/voice/silent-monitor-start",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 5`] = `
+Object {
+  "subscription": "cxengage/interactions/voice/silent-monitor-end",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 6`] = `
+Object {
+  "subscription": "cxengage/interactions/voice/unmute-acknowledged",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 7`] = `
+Object {
+  "subscription": "cxengage/interactions/voice/mute-acknowledged",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 8`] = `
+Object {
+  "subscription": "cxengage/session/sqs-shut-down",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`ToggleMuteEpic returnsTOGGLE_MUTE_REQUESTED_$ action when muted 1`] = `
+Object {
+  "type": "TOGGLE_MUTE_REQUESTED_$",
+}
+`;
+
+exports[`ToggleMuteEpic returnsTOGGLE_MUTE_REQUESTED_$ action when unmuted 1`] = `
+Object {
+  "type": "TOGGLE_MUTE_REQUESTED_$",
+}
+`;

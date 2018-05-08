@@ -14,10 +14,10 @@ import { sdkCall } from '../../../utils/sdk';
 import { getCurrentEntity } from '../entities/selectors';
 
 // This epic tells the SDK to start a session
-export const setSdkActiveTenant = (action$, store) =>
+export const SetSdkActiveTenant = (action$, store) =>
   action$
     .ofType('UPDATE_USER_PERMISSIONS')
-    .filter(a => getCurrentEntity(store.getState()) === 'interactionMonitoring')
+    .filter(a => getCurrentEntity(store.getState()) === 'InteractionMonitoring')
     .switchMap(action =>
       fromPromise(
         sdkCall({

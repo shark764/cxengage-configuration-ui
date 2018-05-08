@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/mute-acknowledged 1`] = `
+Immutable.Map {
+  "muted": true,
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/silent-monitor-end 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "offline",
+    "interactionId": "0000-0000-0000-0000",
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/silent-monitor-start 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "connected",
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/unmute-acknowledged 1`] = `
+Immutable.Map {
+  "muted": false,
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/session/sqs-shut-down 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "offline",
+    "interactionId": "0000-0000-0000-0000",
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/twilio/device-ready 1`] = `
+Immutable.Map {
+  "twilio": Immutable.Map {
+    "enabled": true,
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches monitorCall 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "connecting",
+    "interactionId": "0000-0000-0000-0000",
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots returns the correct initial state 1`] = `
+Immutable.Map {
+  "twilio": Immutable.Map {
+    "enabled": false,
+  },
+  "silentMonitoring": Immutable.Map {
+    "status": "offline",
+    "interactionId": "na",
+  },
+  "muted": true,
+}
+`;
