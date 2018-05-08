@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions maps the redux actions to the object correctly 1`] = `
+Object {
+  "onCancel": [MockFunction],
+  "onSubmit": [MockFunction],
+}
+`;
+
+exports[`mapStateToProps maps the selectors to the object correctly 1`] = `
+Object {
+  "invalid": true,
+  "isSaving": true,
+  "pristine": false,
+}
+`;

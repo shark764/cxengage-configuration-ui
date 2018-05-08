@@ -3,18 +3,18 @@
  */
 
 import { connect } from 'react-redux';
-import { isPristine } from 'redux-form/immutable';
 import { SidePanelActions } from 'cx-ui-components';
 
 import {
   onFormButtonSubmit,
   unsetSelectedEntityId
 } from '../../redux/modules/entities';
+import { isSaving } from '../../redux/modules/entities/selectors';
+
 import {
-  isCreating,
-  getSelectedEntity,
-  getSelectedEntityFormId
-} from '../../redux/modules/entities/selectors';
+  isFormInvalid,
+  isFormPristine
+} from '../../redux/modules/form/selectors';
 
 export const actions = {
   onSubmit: onFormButtonSubmit,
@@ -22,14 +22,10 @@ export const actions = {
 };
 
 export function mapStateToProps(state) {
-  const selectedEntity = getSelectedEntity(state);
-  const formId = getSelectedEntityFormId(state);
-
   return {
-    isSaving:
-      isCreating(state) ||
-      (selectedEntity && selectedEntity.get('updating') === true),
-    pristine: isPristine(formId)(state)
+    isSaving: isSaving(state),
+    pristine: isFormPristine(state),
+    invalid: isFormInvalid(state)
   };
 }
 

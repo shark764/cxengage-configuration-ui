@@ -3,6 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
+
 import {
   getCurrentPermissions,
   getCurrentTenantId
@@ -76,6 +77,10 @@ export const isCreating = state =>
   getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
 
 export const isUpdating = state => getCurrentEntityStore(state).get('updating');
+
+export const isSaving = state =>
+  isCreating(state) ||
+  isUpdating(state)
 
 export const getCurrentSubEntity = state =>
   getCurrentEntityStore(state).get('subEntity');

@@ -5,3 +5,23 @@ Object {
   "mockProperty": "mock value",
 }
 `;
+
+exports[`isFormInvalid correctly calls redux-form's 'isInvalid' method 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "mock current entity form id",
+    ],
+  ],
+}
+`;
+
+exports[`isFormPristine correctly calls redux-form's 'isPristine' method 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "mock current entity form id",
+    ],
+  ],
+}
+`;

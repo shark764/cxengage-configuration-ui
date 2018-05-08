@@ -3,11 +3,21 @@
  */
 
 import { fromJS } from 'immutable';
-import { getCurrentForm, getCurrentFormInitialValues } from '../selectors';
+import { isPristine, isInvalid } from 'redux-form/immutable';
+
+import {
+  getCurrentForm,
+  getCurrentFormInitialValues,
+  isFormInvalid,
+  isFormPristine
+} from '../selectors';
+
+jest.mock('redux-form/immutable');
 
 jest.mock('../../entities/selectors', () => ({
   getCurrentEntity: () => 'mock current entity',
-  getSelectedEntityId: () => 'mock current entity id'
+  getSelectedEntityId: () => 'mock current entity id',
+  getSelectedEntityFormId: () => 'mock current entity form id'
 }));
 
 describe('getCurrentForm', () => {
@@ -33,5 +43,31 @@ describe('getCurrentFormInitialValues', () => {
       }
     });
     expect(getCurrentFormInitialValues(initalState)).toMatchSnapshot();
+  });
+});
+
+describe('isFormInvalid', () => {
+  beforeEach(() => {
+    isInvalid.mockImplementation(() => {
+      return () => {};
+    });
+  });
+
+  it("correctly calls redux-form's 'isInvalid' method", () => {
+    isFormInvalid('mock inital state');
+    expect(isInvalid).toMatchSnapshot();
+  });
+});
+
+describe('isFormPristine', () => {
+  beforeEach(() => {
+    isPristine.mockImplementation(() => {
+      return () => {};
+    });
+  });
+
+  it("correctly calls redux-form's 'isPristine' method", () => {
+    isFormPristine('mock inital state');
+    expect(isPristine).toMatchSnapshot();
   });
 });
