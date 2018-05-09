@@ -83,8 +83,8 @@
   "author": "SerenovaLLC",
   "license": "UNLICENSED",
   "engines": {
-    "node": "~9.4.0",
-    "npm": "~6.0.0"
+    "node": ">=9.4.0",
+    "npm": ">=6.0.0"
   },
   "dependencies": {
     "cx-ui-components": "0.19.7",
