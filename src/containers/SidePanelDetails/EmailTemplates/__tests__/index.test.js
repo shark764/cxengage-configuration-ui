@@ -7,9 +7,12 @@ jest.mock('../../../../redux/modules/entities/selectors', () => ({
   userHasUpdatePermission: () => true
 }));
 
-jest.mock('../../../../redux/modules/emailTemplates/selectors', () => ({
-  getEmailTemplateFormValue: () => 'mock email template form value'
-}));
+jest.mock(
+  '../../../../redux/modules/entities/emailTemplates/selectors',
+  () => ({
+    getEmailTemplateFormValue: () => 'mock email template form value'
+  })
+);
 
 jest.mock('../selectors', () => ({
   getVariables: () => ['mock variable'],

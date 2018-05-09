@@ -10,12 +10,12 @@ const mockCurrentForm = fromJS({
     email: 'mock email value'
   }
 });
-jest.mock('../../form/selectors', () => ({
-  getCurrentForm: () => mockCurrentForm,
+jest.mock('../../../form/selectors', () => ({
+  getCurrentForm: () => mockCurrentForm
 }));
 
 describe('getEmailTemplateFormValue', () => {
-  it('returns the current form\'s email value', () => {
+  it("returns the current form's email value", () => {
     expect(getEmailTemplateFormValue()).toEqual('mock email value');
   });
 });

@@ -12,7 +12,7 @@ import {
   getSelectedEntityId,
   isUpdating
 } from '../../../redux/modules/entities/selectors';
-import { getEmailTemplateFormValue } from '../../../redux/modules/emailTemplates/selectors';
+import { getEmailTemplateFormValue } from '../../../redux/modules/entities/emailTemplates/selectors';
 import { getInitialValues, getTemplates } from './selectors';
 
 /* istanbul ignore next */

@@ -1,16 +1,16 @@
 import { ActionsObservable } from 'redux-observable';
 import { UpdateEmailTemplate } from '../epics';
-import { mockStore } from '../../../../utils/testUtils';
-import { updateEntity } from '../../entities';
+import { mockStore } from '../../../../../utils/testUtils';
+import { updateEntity } from '../../';
 
-import { sdkPromise, errorLabel } from '../../../../utils/sdk';
-import { getSelectedEntityId } from '../../entities/selectors';
-import { getCurrentFormInitialValues } from '../../form/selectors';
+import { sdkPromise, errorLabel } from '../../../../../utils/sdk';
+import { getSelectedEntityId } from '../../selectors';
+import { getCurrentFormInitialValues } from '../../../form/selectors';
 import toastr from 'toastr';
 
-jest.mock('../../../../utils/sdk');
-jest.mock('../../entities/selectors');
-jest.mock('../../form/selectors');
+jest.mock('../../../../../utils/sdk');
+jest.mock('../../selectors');
+jest.mock('../../../form/selectors');
 jest.mock('toastr');
 
 errorLabel.mockReturnValue('mock error');

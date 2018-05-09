@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { EmailTemplatesDetailsPanel } from 'cx-ui-components';
 
 import { userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
-import { getEmailTemplateFormValue } from '../../../redux/modules/emailTemplates/selectors';
+import { getEmailTemplateFormValue } from '../../../redux/modules/entities/emailTemplates/selectors';
 import {
   getVariables,
   getInheritedSubject,
