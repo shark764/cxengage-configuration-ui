@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getInitialValues gets the custom email values when the tenantIds are different 1`] = `
+exports[`getInitialFormValues gets the custom email values when the tenantIds are different 1`] = `
 Immutable.Map {
   "email": "custom",
   "shared": true,
@@ -9,7 +9,7 @@ Immutable.Map {
 }
 `;
 
-exports[`getInitialValues gets the inherited email values when the tenantIds are the same 1`] = `
+exports[`getInitialFormValues gets the inherited email values when the tenantIds are the same 1`] = `
 Immutable.Map {
   "email": "default",
   "shared": false,
@@ -22,5 +22,16 @@ exports[`getTemplates returns the variables names mapped to an array 1`] = `
 Array [
   "mock variable 1",
   "mock variable 2",
+]
+`;
+
+exports[`getVariables gets the variables and converts them from immutable to javascript 1`] = `
+Array [
+  Object {
+    "name": "mock variable 1",
+  },
+  Object {
+    "name": "mock variable 2",
+  },
 ]
 `;

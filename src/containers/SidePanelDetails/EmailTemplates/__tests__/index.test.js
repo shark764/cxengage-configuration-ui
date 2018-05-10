@@ -7,19 +7,19 @@ jest.mock('../../../../redux/modules/entities/selectors', () => ({
   userHasUpdatePermission: () => true
 }));
 
-jest.mock('../../../../redux/modules/emailTemplates/selectors', () => ({
-  getEmailTemplateFormValue: () => 'mock email template form value'
-}));
-
-jest.mock('../selectors', () => ({
-  getVariables: () => ['mock variable'],
-  getInheritedSubject: () => 'mock inherited subject',
-  getInheritedBody: () => 'mock inherited body',
-  getTemplateEmail: () => 'mock template email',
-  getTemplateShared: () => 'mock template shared',
-  getTemplateSubject: () => 'mock template subject',
-  getTemplateBody: () => 'mock template body'
-}));
+jest.mock(
+  '../../../../redux/modules/entities/emailTemplates/selectors',
+  () => ({
+    getVariables: () => ['mock variable'],
+    getInheritedSubject: () => 'mock inherited subject',
+    getInheritedBody: () => 'mock inherited body',
+    getTemplateEmail: () => 'mock template email',
+    getTemplateShared: () => 'mock template shared',
+    getTemplateSubject: () => 'mock template subject',
+    getTemplateBody: () => 'mock template body',
+    getEmailTemplateFormValue: () => 'mock email template form value'
+  })
+);
 
 describe('EmailTemplatesDetailsPanel', () => {
   it('renders', () => {

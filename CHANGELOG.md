@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.18]
+* CXV1-13304 - Make proper sub module for emailTemplates. Move container selectors into submodules.
+
 ## [0.19.17]
 * CXV1-13675 - Move subscription observables to their own file
 * CXV1-13676 - Make column filters into their own components

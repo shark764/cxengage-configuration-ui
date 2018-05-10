@@ -1,5 +1,12 @@
+/*
+ * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ */
+
 import { fromJS } from 'immutable';
 import {
+  getEmailTemplateFormValue,
+  getInitialFormValues,
+  getTemplates,
   getVariables,
   getInheritedSubject,
   getInheritedBody,
@@ -8,9 +15,18 @@ import {
   getTemplateSubject,
   getTemplateBody
 } from '../selectors';
-import { getSelectedEntity } from '../../../../redux/modules/entities/selectors';
+import { getSelectedEntity } from '../../selectors';
 
-jest.mock('../../../../redux/modules/entities/selectors');
+const mockCurrentForm = fromJS({
+  values: {
+    email: 'mock email value'
+  }
+});
+jest.mock('../../../form/selectors', () => ({
+  getCurrentForm: () => mockCurrentForm
+}));
+
+jest.mock('../../selectors');
 const mockSelectedEntity = fromJS({
   inherited: {
     tenantId: 'mock tenant id 1',
@@ -23,9 +39,33 @@ const mockSelectedEntity = fromJS({
     subject: 'mock template subject',
     body: 'mock template body'
   },
-  variables: [{ name: 'mock template 1' }, { name: 'mock template 2' }]
+  variables: [{ name: 'mock variable 1' }, { name: 'mock variable 2' }]
 });
 getSelectedEntity.mockImplementation(() => mockSelectedEntity);
+
+describe('getInitialFormValues', () => {
+  it('gets the custom email values when the tenantIds are different', () => {
+    expect(getInitialFormValues()).toMatchSnapshot();
+  });
+  it('gets the inherited email values when the tenantIds are the same', () => {
+    getSelectedEntity.mockImplementation(() =>
+      mockSelectedEntity.setIn(['inherited', 'tenantId'], 'mock tenant id 2')
+    );
+    expect(getInitialFormValues()).toMatchSnapshot();
+  });
+});
+
+describe('getEmailTemplateFormValue', () => {
+  it("returns the current form's email value", () => {
+    expect(getEmailTemplateFormValue()).toEqual('mock email value');
+  });
+});
+
+describe('getTemplates', () => {
+  it('returns the variables names mapped to an array', () => {
+    expect(getTemplates()).toMatchSnapshot();
+  });
+});
 
 describe('getVariables', () => {
   it('gets the variables and converts them from immutable to javascript', () => {
@@ -47,6 +87,9 @@ describe('getInheritedBody', () => {
 
 describe('getTemplateEmail', () => {
   it('returns "Custom" when the inherited and template emails have different tenantIds', () => {
+    getSelectedEntity.mockImplementation(() =>
+      mockSelectedEntity.setIn(['template', 'tenantId'], 'mock tenant id 2')
+    );
     expect(getTemplateEmail()).toEqual('Custom');
   });
   it('returns "Default" when the inherited and template emails have the same tenantId', () => {

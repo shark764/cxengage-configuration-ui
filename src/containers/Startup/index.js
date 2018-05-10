@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 
 import Startup from '../../components/Startup';
 
-import { hasStarted } from './selectors';
+import { hasAllBranding } from '../../redux/modules/entities/branding/selectors';
 import { fetchBranding } from '../../redux/modules/entities/branding/actions';
 
 export function mapStateToProps(state) {
   return {
-    hasStarted: hasStarted(state)
+    hasStarted: hasAllBranding(state)
   };
 }
 

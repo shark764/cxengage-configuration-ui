@@ -12,14 +12,14 @@ jest.mock('../../../../redux/modules/entities/selectors', () => ({
   isUpdating: () => 'mock is updating'
 }));
 
-jest.mock('../../../../redux/modules/emailTemplates/selectors', () => ({
-  getEmailTemplateFormValue: () => 'mock email template form value'
-}));
-
-jest.mock('../selectors', () => ({
-  getInitialValues: () => 'mock initial values',
-  getTemplates: () => 'mock templates'
-}));
+jest.mock(
+  '../../../../redux/modules/entities/emailTemplates/selectors',
+  () => ({
+    getInitialFormValues: () => 'mock initial values',
+    getEmailTemplateFormValue: () => 'mock email template form value',
+    getTemplates: () => 'mock templates'
+  })
+);
 
 describe('EmailTemplatesDetailsPanel', () => {
   it('renders', () => {

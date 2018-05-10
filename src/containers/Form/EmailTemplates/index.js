@@ -12,8 +12,11 @@ import {
   getSelectedEntityId,
   isUpdating
 } from '../../../redux/modules/entities/selectors';
-import { getEmailTemplateFormValue } from '../../../redux/modules/emailTemplates/selectors';
-import { getInitialValues, getTemplates } from './selectors';
+import {
+  getInitialFormValues,
+  getEmailTemplateFormValue,
+  getTemplates
+} from '../../../redux/modules/entities/emailTemplates/selectors';
 
 /* istanbul ignore next */
 let UpdateEmailTemplateForm = compose(
@@ -28,7 +31,7 @@ let UpdateEmailTemplateForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    initialValues: getInitialValues(state),
+    initialValues: getInitialFormValues(state),
     isSaving: isUpdating(state),
     email: getEmailTemplateFormValue(state),
     templates: getTemplates(state)

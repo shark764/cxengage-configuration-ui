@@ -3,11 +3,11 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 import { Toast } from 'cx-ui-components';
 
-import { sdkPromise, errorLabel } from '../../../utils/sdk';
+import { sdkPromise, errorLabel } from '../../../../utils/sdk';
 
-import { getCurrentFormInitialValues } from '../form/selectors';
+import { getCurrentFormInitialValues } from '../../form/selectors';
 
-import { updateEntityFulfilled, updateEntityRejected } from '../entities';
+import { updateEntityFulfilled, updateEntityRejected } from '../';
 
 export const UpdateEmailTemplate = (action$, store) =>
   action$
