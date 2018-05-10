@@ -7,8 +7,8 @@ import { shallow } from 'enzyme';
 import { mockStore } from '../../../utils/testUtils';
 import Startup, { mapStateToProps, actions } from '../';
 
-jest.mock('../selectors', () => ({
-  hasStarted: () => true
+jest.mock('../../../redux/modules/entities/branding/selectors', () => ({
+  hasAllBranding: () => true
 }));
 
 jest.mock('../../../redux/modules/entities/branding/actions');

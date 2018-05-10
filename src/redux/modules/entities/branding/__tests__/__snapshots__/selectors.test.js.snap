@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCustomTheme when styles is defined returns JSON parsed style 1`] = `
+Object {
+  "mockStyle": "mock style value",
+}
+`;
