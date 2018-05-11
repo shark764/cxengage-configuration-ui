@@ -16,9 +16,13 @@ export const supervisorSubscriptionsAdded = subscription => ({
   type: 'SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$',
   subscription
 });
-export const requestingMonitorCall = interactionId => ({
+export const requestingMonitorCall = (
+  interactionId,
+  defaultExtensionProvider
+) => ({
   type: 'REQUESTING_MONITOR_CALL',
-  interactionId
+  interactionId,
+  defaultExtensionProvider
 });
 export const monitorInteractionRequested = interactionId => ({
   type: 'MONITOR_INTERACTION_REQUESTED',
@@ -26,6 +30,7 @@ export const monitorInteractionRequested = interactionId => ({
 });
 export const toggleMuteRequested = () => ({ type: 'TOGGLE_MUTE_REQUESTED_$' });
 export const hangUpRequested = () => ({ type: 'HANG_UP_REQUESTED_$' });
+export const endSessionRequested = () => ({ type: 'END_SESSION_REQUESTED_$' });
 export const requestingToggleMute = () => ({ type: 'REQUESTING_TOGGLE_MUTE' });
 export const requestingHangUp = () => ({ type: 'REQUESTING_HANG_UP' });
 export const startSupervisorToolbarSubscriptions = () => ({

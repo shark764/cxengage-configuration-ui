@@ -1,12 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`EndSessionOnSilentMonitoringEnd returns HANG_UP_REQUESTED_$ action 1`] = `
+Object {
+  "type": "END_SESSION_REQUESTED_$",
+}
+`;
+
 exports[`HangUpEpic returns HANG_UP_REQUESTED_$ action 1`] = `
 Object {
   "type": "HANG_UP_REQUESTED_$",
 }
 `;
 
-exports[`MonitorInteraction returns MONITOR_INTERACTION_REQUESTED action 1`] = `
+exports[`MonitorInteraction, Twilio is Default Extension returns MONITOR_INTERACTION_REQUESTED action 1`] = `
+Object {
+  "interactionId": "0000-0000-0000-0000",
+  "type": "MONITOR_INTERACTION_REQUESTED",
+}
+`;
+
+exports[`MonitorInteraction, Twilio is not Default Extension returns MONITOR_INTERACTION_REQUESTED action 1`] = `
 Object {
   "interactionId": "0000-0000-0000-0000",
   "type": "MONITOR_INTERACTION_REQUESTED",
@@ -29,40 +42,47 @@ Object {
 
 exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 3`] = `
 Object {
-  "subscription": "cxengage/session/state-change-request-acknowledged",
+  "subscription": "cxengage/session/started",
   "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
 }
 `;
 
 exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 4`] = `
 Object {
-  "subscription": "cxengage/interactions/voice/silent-monitor-start",
+  "subscription": "cxengage/session/state-change-request-acknowledged",
   "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
 }
 `;
 
 exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 5`] = `
 Object {
-  "subscription": "cxengage/interactions/voice/silent-monitor-end",
+  "subscription": "cxengage/interactions/voice/silent-monitor-start",
   "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
 }
 `;
 
 exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 6`] = `
 Object {
-  "subscription": "cxengage/interactions/voice/unmute-acknowledged",
+  "subscription": "cxengage/interactions/voice/silent-monitor-end",
   "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
 }
 `;
 
 exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 7`] = `
 Object {
-  "subscription": "cxengage/interactions/voice/mute-acknowledged",
+  "subscription": "cxengage/interactions/voice/unmute-acknowledged",
   "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
 }
 `;
 
 exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 8`] = `
+Object {
+  "subscription": "cxengage/interactions/voice/mute-acknowledged",
+  "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 9`] = `
 Object {
   "subscription": "cxengage/session/sqs-shut-down",
   "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
