@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.20]
+* CXV1-13328 - Fixed issue with Submit button not being grayed out when required fields have no value
+* CXV1-13345 - Version bump for new cx-ui-components update to apply custom branding to table nav buttons
+
 ## [0.19.19]
 * CXV1-9940 - Make silent monitoring start session on calls and not page start
 
