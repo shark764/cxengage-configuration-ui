@@ -13,6 +13,9 @@ Object {
 
 exports[`CheckboxFilterMenu Renders renders 1`] = `
 <CheckboxMenu
+  allActive={true}
+  currentVisibleSubMenu="mockSubmenu"
+  items={Array []}
   menuType="mockMenu"
   oneOnRestOff={[Function]}
   selectionType="checkbox"
@@ -51,14 +54,23 @@ exports[`CheckboxFilterMenu Renders renders 1`] = `
   toggleAllOff={[Function]}
   toggleAllOn={[Function]}
   toggleItem={[Function]}
+  totalRatio={
+    Array [
+      0,
+      0,
+    ]
+  }
 />
 `;
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "allActive": undefined,
-  "currentVisibleSubMenu": undefined,
-  "items": undefined,
-  "totalRatio": undefined,
+  "allActive": true,
+  "currentVisibleSubMenu": "mockSubmenu",
+  "items": Array [],
+  "totalRatio": Array [
+    0,
+    0,
+  ],
 }
 `;

@@ -13,6 +13,7 @@ export const filterArray = [
   'cxengage/interactions/voice/silent-monitor-end',
   'cxengage/interactions/voice/unmute-acknowledged',
   'cxengage/interactions/voice/mute-acknowledged',
+  'cxengage/session/started',
   'monitorCall'
 ];
 

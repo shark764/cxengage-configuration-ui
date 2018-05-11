@@ -65,6 +65,19 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
 }
 `;
 
+exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/session/started to redux 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "response": undefined,
+        "type": "cxengage/session/started",
+      },
+    ],
+  ],
+}
+`;
+
 exports[`Observable Test Mapping topics to dispatched actions Observable map dispatchs cxengage/twilio/device-ready to redux 1`] = `
 [MockFunction] {
   "calls": Array [
@@ -83,6 +96,7 @@ exports[`Observable Test Mapping topics to dispatched actions can call monitorCa
   "calls": Array [
     Array [
       Object {
+        "defaultExtensionProvider": undefined,
         "interactionId": "mockId",
         "type": "REQUESTING_MONITOR_CALL",
       },

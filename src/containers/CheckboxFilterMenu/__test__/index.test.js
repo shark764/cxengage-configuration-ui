@@ -7,7 +7,12 @@ import { shallow } from 'enzyme';
 import CheckboxFilterMenu, { mapStateToProps, actions } from '../';
 import { mockStore } from 'TestUtils';
 
-jest.mock('../../../redux/modules/columnFilterMenus/selectors');
+jest.mock('../../../redux/modules/columnFilterMenus/selectors', () => ({
+  menuItemsJs: () => [],
+  areAllActive: () => true,
+  totalRatio: () => [0, 0],
+  selectVisibleSubMenu: () => 'mockSubmenu'
+}));
 
 describe('CheckboxFilterMenu Renders', () => {
   it('renders', () => {

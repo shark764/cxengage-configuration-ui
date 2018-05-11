@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.19]
+* CXV1-9940 - Make silent monitoring start session on calls and not page start
+
 ## [0.19.18]
 * CXV1-13304 - Make proper sub module for emailTemplates. Move container selectors into submodules.
 

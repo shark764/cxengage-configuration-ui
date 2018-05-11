@@ -4,10 +4,12 @@
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
+import { zip } from 'rxjs/observable/zip';
 
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { from } from 'rxjs/observable/from';
@@ -24,6 +26,7 @@ import {
   supervisorSubscriptionsAdded,
   monitorInteractionRequested,
   hangUpRequested,
+  endSessionRequested,
   toggleMuteRequested
 } from './index';
 
@@ -36,6 +39,7 @@ export const StartBatchRequest = (action$, store) =>
       from([
         'cxengage/session/extension-list',
         'cxengage/twilio/device-ready',
+        'cxengage/session/started',
         'cxengage/session/state-change-request-acknowledged',
         'cxengage/interactions/voice/silent-monitor-start',
         'cxengage/interactions/voice/silent-monitor-end',
@@ -50,18 +54,33 @@ export const StartBatchRequest = (action$, store) =>
     );
 
 export const MonitorInteraction = (action$, store) =>
-  action$.ofType('REQUESTING_MONITOR_CALL').switchMap(action =>
-    fromPromise(
-      sdkCall(
-        {
-          module: 'interactions.voice',
-          command: `silentMonitor`,
-          data: { interactionId: action.interactionId }
-        },
-        `monitorCall`
-      )
-    ).mapTo(monitorInteractionRequested(action.interactionId))
-  );
+  action$
+    .ofType('REQUESTING_MONITOR_CALL')
+    .switchMap(action => {
+      if (action.defaultExtensionProvider === 'twilio') {
+        return zip(
+          action$.ofType('cxengage/twilio/device-ready').take(1),
+          action$.ofType('cxengage/session/started').take(1)
+        ).mapTo(action);
+      } else {
+        return action$
+          .ofType('cxengage/session/started')
+          .take(1)
+          .mapTo(action);
+      }
+    })
+    .switchMap(action =>
+      fromPromise(
+        sdkCall(
+          {
+            module: 'interactions.voice',
+            command: `silentMonitor`,
+            data: { interactionId: action.interactionId }
+          },
+          `monitorCall`
+        )
+      ).mapTo(monitorInteractionRequested(action.interactionId))
+    );
 
 export const HangUpEpic = (action$, store) =>
   action$
@@ -74,6 +93,22 @@ export const HangUpEpic = (action$, store) =>
       status: selectSupervisorToolbarSilentMonitoringStatus(store.getState())
     }))
     .filter(({ status }) => status === 'connected')
+    .mergeMap(a => {
+      return fromPromise(
+        sdkPromise(
+          {
+            module: 'comfirmPrompt',
+            command: `Stop monitoring Interaction? ${a.interactionId}`,
+            data: { interactionId: a.interactionId }
+          },
+          'comfirmPrompt'
+        )
+      ).map(response => ({
+        ...a,
+        confirmationResponse: response
+      }));
+    })
+    .filter(({ confirmationResponse }) => confirmationResponse)
     .switchMap(a =>
       fromPromise(
         sdkPromise(
@@ -85,6 +120,15 @@ export const HangUpEpic = (action$, store) =>
           'cxengage/interactions/voice/resource-removed-acknowledged'
         )
       ).mapTo(hangUpRequested())
+    );
+
+export const EndSessionOnSilentMonitoringEnd = (action$, store) =>
+  action$
+    .ofType('cxengage/interactions/voice/silent-monitor-end')
+    .switchMap(a =>
+      fromPromise(
+        sdkCall({ module: 'authentication', command: 'logout' })
+      ).mapTo(endSessionRequested())
     );
 
 export const ToggleMuteEpic = (action$, store) =>
