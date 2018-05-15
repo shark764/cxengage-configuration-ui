@@ -24,6 +24,11 @@ jest.mock(
     selectInteractionMonitoringSelected: () => 'conected'
   })
 );
+jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
+  selectSupervisorToolbarSilentMonitoringInteractionId: () =>
+    '0000-0000-0000-0000',
+  selectSupervisorToolbarSilentMonitoringStatus: () => 'mockStatus'
+}));
 
 describe('Supervisor Toolbar Renders', () => {
   it('renders', () => {

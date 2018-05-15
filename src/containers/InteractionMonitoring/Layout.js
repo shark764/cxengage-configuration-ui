@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import 'rxjs/add/operator/map';
-import { subscribe, unsubscribe } from './Observable';
+import {
+  messageSubscribe,
+  messageUnsubscribe
+} from './windowMessageObservable';
+import {
+  localStorageSubscribe,
+  localStorageUnsubscribe
+} from './localStorageObservable';
 import CheckboxFilterMenu from '../CheckboxFilterMenu';
 import { Button, PageHeader, InteractionDetails } from 'cx-ui-components';
 import ReactTable from 'react-table';
@@ -42,7 +49,8 @@ export default class InteractionMonitoring extends Component {
   }
 
   componentWillMount() {
-    subscribe();
+    messageSubscribe();
+    localStorageSubscribe();
     this.props.setCurrentEntity('InteractionMonitoring');
     this.props.fetchData('groups', 'InteractionMonitoring');
     this.props.fetchData('skills', 'InteractionMonitoring');
@@ -50,7 +58,8 @@ export default class InteractionMonitoring extends Component {
   }
 
   componentWillUnmount() {
-    unsubscribe();
+    messageUnsubscribe();
+    localStorageUnsubscribe();
   }
 
   render() {
@@ -115,7 +124,7 @@ export default class InteractionMonitoring extends Component {
                   },
                   style: {
                     background:
-                      rowInfo.row.interactionId === this.props.selected
+                      rowInfo.row.interactionId === this.props.monitoredId
                         ? 'rgba(253, 255, 50, 0.17)'
                         : null
                   }
@@ -179,7 +188,9 @@ export default class InteractionMonitoring extends Component {
               ),
               monitoringColumn(
                 this.props.activeColumns[11],
-                'InteractionMonitoring'
+                'InteractionMonitoring',
+                this.props.monitoredId,
+                this.props.monitoringStatus
               ),
               groupsColumn(
                 this.props.activeColumns[12],
@@ -198,6 +209,8 @@ export default class InteractionMonitoring extends Component {
 }
 
 InteractionMonitoring.propTypes = {
+  monitoredId: PropTypes.string,
+  monitoringStatus: PropTypes.string,
   totalRatio: PropTypes.array,
   tableData: PropTypes.any,
   expanded: PropTypes.object.isRequired,

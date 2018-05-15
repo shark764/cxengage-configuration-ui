@@ -1,8 +1,13 @@
+import { fromJS } from 'immutable';
 import { from } from 'rxjs/observable/from';
 import { fromEvent } from 'rxjs/observable/fromEvent';
-import { messageObservable, subscribe, unsubscribe } from '../Observable';
+import {
+  messageObservable,
+  messageSubscribe,
+  messageUnsubscribe
+} from '../windowMessageObservable';
 import store from '../../../redux/store.js';
-import { filterArray } from '../Observable.js';
+import { filterArray } from '../windowMessageObservable.js';
 
 function createWindowMessageSubscriptionEvent(topic, response) {
   return [
@@ -16,9 +21,10 @@ function createWindowMessageSubscriptionEvent(topic, response) {
     }
   ];
 }
-
+const mockState = fromJS({ SupervisorToolbar: {} });
 jest.mock('rxjs/observable/fromEvent');
 jest.mock('../../../redux/store.js');
+store.getState.mockImplementation(() => mockState);
 
 describe('Observable Test Filters', () => {
   function filterTest(topic) {
@@ -39,8 +45,8 @@ describe('Observable Test Mapping topics to dispatched actions', () => {
       const messageEvent = from(createWindowMessageSubscriptionEvent(topic));
       fromEvent.mockImplementationOnce(() => messageEvent);
       store.dispatch.mockClear();
-      subscribe();
-      unsubscribe();
+      messageSubscribe();
+      messageUnsubscribe();
       expect(store.dispatch).toBeCalledWith(
         expect.objectContaining({
           type: expect.any(String)
@@ -56,7 +62,7 @@ describe('Observable Test Mapping topics to dispatched actions', () => {
     topic => topic !== 'monitorCall' && dispatchFromMapTest(topic)
   );
 
-  it('can call monitorCall action throught observable', done => {
+  it('can call monitorCall action through observable', done => {
     const monitorCallMessageEvent = from([
       {
         data: {
@@ -69,8 +75,8 @@ describe('Observable Test Mapping topics to dispatched actions', () => {
     ]);
     fromEvent.mockImplementationOnce(() => monitorCallMessageEvent);
     store.dispatch.mockClear();
-    subscribe();
-    unsubscribe();
+    messageSubscribe();
+    messageUnsubscribe();
     expect(store.dispatch).toBeCalledWith(
       expect.objectContaining({
         type: expect.any(String),

@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SupervisorToolbar reducer snapshots dispatches MONITOR_INTERACTION_INITIALIZATION 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "connecting",
+    "interactionId": undefined,
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches REQUESTING_MONITOR_CALL 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "connecting",
+    "interactionId": undefined,
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches UPDATE_SUPERVISOR_TOOLBAR_STATE 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "connected",
+    "interactionId": "0000-0000-0000-0000",
+  },
+}
+`;
+
 exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/mute-acknowledged 1`] = `
 Immutable.Map {
   "muted": true,
@@ -10,7 +37,7 @@ exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/vo
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
     "status": "offline",
-    "interactionId": "0000-0000-0000-0000",
+    "interactionId": "na",
   },
 }
 `;
@@ -33,7 +60,7 @@ exports[`SupervisorToolbar reducer snapshots dispatches cxengage/session/sqs-shu
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
     "status": "offline",
-    "interactionId": "0000-0000-0000-0000",
+    "interactionId": "na",
   },
 }
 `;
@@ -49,7 +76,7 @@ Immutable.Map {
 exports[`SupervisorToolbar reducer snapshots dispatches monitorCall 1`] = `
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
-    "status": "connecting",
+    "status": "connected",
     "interactionId": "0000-0000-0000-0000",
   },
 }

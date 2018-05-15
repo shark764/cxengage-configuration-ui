@@ -26,6 +26,12 @@ Object {
 }
 `;
 
+exports[`MonitorInteractionInitialization returns HANG_UP_REQUESTED_$ action 1`] = `
+Object {
+  "type": "MONITOR_INTERACTION_INITIALIZATION_COMPLETED_$",
+}
+`;
+
 exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ action 1`] = `
 Object {
   "subscription": "cxengage/session/extension-list",

@@ -1,6 +1,7 @@
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/do';
 
 import { requestingMonitorCall } from '../../redux/modules/supervisorToolbar';
 
@@ -23,10 +24,25 @@ export function messageObservable() {
       ({ data }) =>
         data.subscription && filterArray.includes(data.subscription.topic)
     )
+    .do(({ data }) => {
+      data.subscription.topic !== 'monitorCall' &&
+        localStorage.setItem(
+          'SupervisorToolbar',
+          JSON.stringify(
+            store
+              .getState()
+              .get('SupervisorToolbar')
+              .toJS()
+          )
+        );
+    })
     .map(event => {
       if (event.data.subscription.topic === 'monitorCall') {
         return store.dispatch(
-          requestingMonitorCall(event.data.subscription.response.interactionId)
+          requestingMonitorCall(
+            event.data.subscription.response.interactionId,
+            event.data.subscription.response.defaultExtensionProvider
+          )
         );
       } else {
         return store.dispatch({
@@ -38,9 +54,9 @@ export function messageObservable() {
 }
 
 let subscription;
-export function subscribe() {
+export function messageSubscribe() {
   subscription = messageObservable().subscribe();
 }
-export function unsubscribe() {
+export function messageUnsubscribe() {
   subscription.unsubscribe();
 }
