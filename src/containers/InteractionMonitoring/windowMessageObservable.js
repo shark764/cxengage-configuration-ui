@@ -2,7 +2,6 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import { updateTableData } from '../../redux/modules/reporting/interactionMonitoring';
-
 import store from '../../redux/store.js';
 
 export function messageObservable() {
@@ -23,9 +22,9 @@ export function messageObservable() {
 }
 
 let subscription;
-export function subscribe() {
+export function messageSubscribe() {
   subscription = messageObservable().subscribe();
 }
-export function unsubscribe() {
+export function messageUnsubscribe() {
   subscription.unsubscribe();
 }

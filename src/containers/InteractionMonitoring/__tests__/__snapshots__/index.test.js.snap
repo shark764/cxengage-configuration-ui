@@ -7,6 +7,8 @@ Object {
   ],
   "areAllColNotActive": false,
   "expanded": Object {},
+  "monitoredId": "0000-0000-0000-0000",
+  "monitoringStatus": "mockStatus",
   "selected": "conected",
   "sorted": true,
   "tableData": Object {

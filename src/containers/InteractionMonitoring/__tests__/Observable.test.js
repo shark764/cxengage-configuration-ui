@@ -1,6 +1,10 @@
 import { from } from 'rxjs/observable/from';
 import { fromEvent } from 'rxjs/observable/fromEvent';
-import { messageObservable, subscribe, unsubscribe } from '../Observable';
+import {
+  messageObservable,
+  messageSubscribe,
+  messageUnsubscribe
+} from '../windowMessageObservable';
 import store from '../../../redux/store.js';
 
 function createWindowMessageSubscriptionEvent(topic, response) {
@@ -47,8 +51,8 @@ describe('Observable Test Mapping topics to dispatched actions', () => {
       const messageEvent = from(createWindowMessageSubscriptionEvent(topic));
       fromEvent.mockImplementationOnce(() => messageEvent);
       store.dispatch.mockClear();
-      subscribe();
-      unsubscribe();
+      messageSubscribe();
+      messageUnsubscribe();
       expect(store.dispatch).toBeCalledWith(
         expect.objectContaining({
           type: expect.any(String)

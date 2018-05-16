@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { subscribe, unsubscribe } from './Observable.js';
+import {
+  messageSubscribe,
+  messageUnsubscribe
+} from './windowMessageObservable.js';
 import { MutedIconSVG, UnMutedIconSVG, HangUpIconSVG } from 'cx-ui-components';
 
 const HangUpIconSVGWrapper = styled(HangUpIconSVG)`
@@ -17,11 +20,11 @@ const Toolbar = styled.div`
 export default class SupervisorToolbar extends Component {
   componentWillMount() {
     this.props.startSupervisorToolbarSubscriptions();
-    subscribe();
+    messageSubscribe();
   }
 
   componentWillUnmount() {
-    unsubscribe();
+    messageUnsubscribe();
   }
 
   render() {

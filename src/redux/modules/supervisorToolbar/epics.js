@@ -25,6 +25,7 @@ import {
 import {
   supervisorSubscriptionsAdded,
   monitorInteractionRequested,
+  monitorInteractionInitializationCompleted,
   hangUpRequested,
   endSessionRequested,
   toggleMuteRequested
@@ -51,6 +52,15 @@ export const StartBatchRequest = (action$, store) =>
           sdkCall({ module: 'subscribe', command: subscription })
         ).mapTo(supervisorSubscriptionsAdded(subscription))
       )
+    );
+
+export const MonitorInteractionInitialization = (action$, store) =>
+  action$
+    .ofType('MONITOR_INTERACTION_INITIALIZATION')
+    .switchMap(({ interactionId }) =>
+      fromPromise(
+        sdkCall({ module: 'monitorCall', data: { interactionId } })
+      ).mapTo(monitorInteractionInitializationCompleted())
     );
 
 export const MonitorInteraction = (action$, store) =>

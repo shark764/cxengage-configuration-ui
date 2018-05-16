@@ -25,6 +25,10 @@ import {
   selectInteractionMonitoringExpanded,
   selectInteractionMonitoringSelected
 } from '../../redux/modules/reporting/interactionMonitoring/selectors';
+import {
+  selectSupervisorToolbarSilentMonitoringInteractionId,
+  selectSupervisorToolbarSilentMonitoringStatus
+} from '../../redux/modules/supervisorToolbar/selectors';
 
 import Layout from './Layout';
 
@@ -39,7 +43,12 @@ export const mapStateToProps = (state, props) => ({
   tableData: selectInteractionMonitoringTableData(state, props),
   expanded: selectInteractionMonitoringExpanded(state, props),
   selected: selectInteractionMonitoringSelected(state, props),
-  sorted: selectInteractionMonitoringSorted(state, props)
+  sorted: selectInteractionMonitoringSorted(state, props),
+  monitoredId: selectSupervisorToolbarSilentMonitoringInteractionId(
+    state,
+    props
+  ),
+  monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props)
 });
 
 export const actions = {

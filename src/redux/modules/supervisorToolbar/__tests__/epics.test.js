@@ -11,7 +11,8 @@ import {
   MonitorInteraction,
   HangUpEpic,
   ToggleMuteEpic,
-  EndSessionOnSilentMonitoringEnd
+  EndSessionOnSilentMonitoringEnd,
+  MonitorInteractionInitialization
 } from '../epics';
 
 import {
@@ -24,7 +25,8 @@ import {
   requestingToggleMute,
   requestingMonitorCall,
   requestingHangUp,
-  startSupervisorToolbarSubscriptions
+  startSupervisorToolbarSubscriptions,
+  monitorInteractionInitialization
 } from '../index';
 
 jest.mock('../../../../utils/sdk');
@@ -55,6 +57,35 @@ describe('StartBatchRequest', () => {
       expect(actualOutputActions).toMatchSnapshot();
       done();
     });
+  });
+});
+
+describe('MonitorInteractionInitialization', () => {
+  beforeEach(() => {
+    sdkCall.mockReturnValue(new Promise(resolve => resolve('mock response')));
+  });
+  afterEach(() => {
+    sdkCall.mockClear();
+  });
+  it('calls the correct sdk function', done => {
+    const action = ActionsObservable.of(
+      monitorInteractionInitialization('0000-0000-0000-0000')
+    );
+    MonitorInteractionInitialization(action, mockStore).subscribe(() => {
+      expect(sdkCall).toBeCalled();
+      done();
+    });
+  });
+  it('returns HANG_UP_REQUESTED_$ action', done => {
+    const action = ActionsObservable.of(
+      monitorInteractionInitialization('0000-0000-0000-0000')
+    );
+    MonitorInteractionInitialization(action, mockStore).subscribe(
+      actualOutputActions => {
+        expect(actualOutputActions).toMatchSnapshot();
+        done();
+      }
+    );
   });
 });
 

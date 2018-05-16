@@ -5,6 +5,8 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import CheckboxFilterMenu from '../../containers/CheckboxFilterMenu';
+import { monitorInteractionInitialization } from '../../redux/modules/supervisorToolbar';
+import store from '../../redux/store';
 
 import { Button } from 'cx-ui-components';
 
@@ -40,7 +42,7 @@ const FillerSpaceIcon = styled.div`
   margin: 0px 3px;
 `;
 
-export default function(value, tableType) {
+export default function(value, tableType, monitoredId, monitoringStatus) {
   return {
     Header: 'Monitoring',
     show: value,
@@ -61,7 +63,9 @@ export default function(value, tableType) {
         row.channel,
         previousMonitors,
         activeMonitors,
-        row.interactionId
+        row.interactionId,
+        monitoredId,
+        monitoringStatus
       );
     },
     filterMethod: (filter, row) => {
@@ -95,7 +99,9 @@ function monitoringCell(
   channel,
   previousMonitors,
   activeMonitors,
-  interactionId
+  interactionId,
+  monitoredId,
+  monitoringStatus
 ) {
   return (
     <div>
@@ -114,16 +120,12 @@ function monitoringCell(
           <MonitorCallButton
             type="secondary"
             className="monitorCall"
+            disabled={
+              monitoredId === interactionId ||
+              ['connecting'].includes(monitoringStatus)
+            }
             onClick={() =>
-              window.parent.postMessage(
-                {
-                  module: 'monitorCall',
-                  data: {
-                    interactionId: interactionId
-                  }
-                },
-                '*'
-              )
+              store.dispatch(monitorInteractionInitialization(interactionId))
             }
           >
             Monitor

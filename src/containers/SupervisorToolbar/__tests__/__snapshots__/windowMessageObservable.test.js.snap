@@ -91,7 +91,7 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
 }
 `;
 
-exports[`Observable Test Mapping topics to dispatched actions can call monitorCall action throught observable 1`] = `
+exports[`Observable Test Mapping topics to dispatched actions can call monitorCall action through observable 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [

@@ -1,8 +1,11 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import SupervisorToolbarLayout from '../Layout';
-import { subscribe, unsubscribe } from '../Observable';
-jest.mock('../Observable');
+import {
+  messageSubscribe,
+  messageUnsubscribe
+} from '../windowMessageObservable';
+jest.mock('../windowMessageObservable');
 const toggleMuteMock = jest.fn();
 const hangUpMock = jest.fn();
 const startSupervisorToolbarSubscriptionsMock = jest.fn();
@@ -97,8 +100,8 @@ describe('Full mount to test lifecycle events', () => {
       />
     );
     expect(startSupervisorToolbarSubscriptionsMock).toHaveBeenCalled();
-    expect(subscribe).toHaveBeenCalled();
+    expect(messageSubscribe).toHaveBeenCalled();
     wrapper.unmount();
-    expect(unsubscribe).toHaveBeenCalled();
+    expect(messageUnsubscribe).toHaveBeenCalled();
   });
 });
