@@ -45,7 +45,7 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
     TrComponent={[Function]}
     TrGroupComponent={[Function]}
     aggregatedKey="_aggregated"
-    className="-striped -highlight"
+    className="InteractionMonitoringTable -striped -highlight"
     collapseOnDataChange={true}
     collapseOnPageChange={true}
     collapseOnSortingChange={true}

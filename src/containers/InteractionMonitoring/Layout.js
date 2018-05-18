@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 import 'rxjs/add/operator/map';
 import {
   messageSubscribe,
@@ -38,6 +38,12 @@ const ConverTimeButton = styled(Button)`
 
 const Wrapper = styled.div`
   padding: 20px;
+`;
+
+injectGlobal`
+.InteractionMonitoringTable .rt-tbody {
+  overflow: initial;
+}
 `;
 
 export default class InteractionMonitoring extends Component {
@@ -92,7 +98,7 @@ export default class InteractionMonitoring extends Component {
         {!this.props.areAllColNotActive && (
           <ReactTable
             defaultPageSize={20}
-            className="-striped -highlight"
+            className="InteractionMonitoringTable -striped -highlight"
             data={this.props.tableData}
             filterable
             defaultFilterMethod={(filter, row) =>
