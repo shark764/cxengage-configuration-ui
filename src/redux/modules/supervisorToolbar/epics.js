@@ -19,7 +19,8 @@ import { sdkPromise, sdkCall } from '../../../utils/sdk';
 import {
   selectSupervisorToolbarSilentMonitoringInteractionId,
   selectSupervisorToolbarSilentMonitoringStatus,
-  selectSupervisorToolbarMuted
+  selectSupervisorToolbarMuted,
+  selectSupervisorToolbarTwilioEnabled
 } from './selectors';
 
 import {
@@ -66,8 +67,15 @@ export const MonitorInteractionInitialization = (action$, store) =>
 export const MonitorInteraction = (action$, store) =>
   action$
     .ofType('REQUESTING_MONITOR_CALL')
+    .map(action => ({
+      ...action,
+      twilioEnabled: selectSupervisorToolbarTwilioEnabled(store.getState())
+    }))
     .switchMap(action => {
-      if (action.defaultExtensionProvider === 'twilio') {
+      if (
+        action.defaultExtensionProvider === 'twilio' &&
+        !action.twilioEnabled
+      ) {
         return zip(
           action$.ofType('cxengage/twilio/device-ready').take(1),
           action$.ofType('cxengage/session/started').take(1)

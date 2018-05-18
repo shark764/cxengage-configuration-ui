@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.22]
+* <no-ticket> - css issue with columns not lining up , scrollbar was pushing columns to the left
+* <no-ticket> - fixed bug where you couldn't monitor a call right after an exisiting one as it was waiting for the twilio enabled signal
+
+
 ## [0.19.21]
 * CXV1-13933 - Share state from supervisor toolbar to interaction monitoring table
 
