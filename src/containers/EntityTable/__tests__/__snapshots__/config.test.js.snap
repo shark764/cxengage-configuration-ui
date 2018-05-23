@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getHelpLink returns correct link for emailTemplates 1`] = `"docs.cxengage.net/Help/Content/Configuration/Email_Templates/Email_Templates_Overview.htm"`;
+exports[`getHelpLink returns correct link for emailTemplates 1`] = `"docs.cxengage.net/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm"`;
 
 exports[`getHelpLink returns correct link for lists 1`] = `"docs.cxengage.net/Help/Content/Configuration/Lists/Lists.htm"`;
 

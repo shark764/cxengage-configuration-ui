@@ -12,7 +12,7 @@ export const getHelpLink = entityName => {
     case 'lists':
       return 'docs.cxengage.net/Help/Content/Configuration/Lists/Lists.htm';
     case 'emailTemplates':
-      return 'docs.cxengage.net/Help/Content/Configuration/Email_Templates/Email_Templates_Overview.htm';
+      return 'docs.cxengage.net/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
     default:
       return undefined;
   }
