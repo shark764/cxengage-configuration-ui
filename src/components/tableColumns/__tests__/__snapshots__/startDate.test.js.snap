@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`startDate Column configuration returns the proper object column configuration object 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": "Start Date",
+  "accessor": [Function],
+  "filterMethod": [Function],
+  "id": "startDateTimestamp",
+  "minWidth": 170,
+  "show": "2018-02-20T14:24:41.519Z",
+}
+`;
+
+exports[`startDate Filter renders properly renders the After filter 1`] = `
+<div>
+  <Connect(CustomDropdownMenu)
+    buttonType="columnFilter"
+    className="startDate"
+    currentFilter="After 0"
+    menuType="Start Date"
+    tableType="mockTableType"
+    updateFilter={[Function]}
+  >
+    <styled.div>
+      <FilterSelect
+        onChange={[Function]}
+        options={
+          Array [
+            "After",
+            "Before",
+          ]
+        }
+        style={
+          Object {
+            "width": "160px",
+          }
+        }
+      />
+      <input
+        onChange={[Function]}
+        type="date"
+        value="0"
+      />
+    </styled.div>
+  </Connect(CustomDropdownMenu)>
+</div>
+`;
+
+exports[`startDate Filter renders properly renders the Before filter 1`] = `
+<div>
+  <Connect(CustomDropdownMenu)
+    buttonType="columnFilter"
+    className="startDate"
+    currentFilter="Before 0"
+    menuType="Start Date"
+    tableType="mockTableType"
+    updateFilter={[Function]}
+  >
+    <styled.div>
+      <FilterSelect
+        onChange={[Function]}
+        options={
+          Array [
+            "After",
+            "Before",
+          ]
+        }
+        style={
+          Object {
+            "width": "160px",
+          }
+        }
+      />
+      <input
+        onChange={[Function]}
+        type="date"
+        value="0"
+      />
+    </styled.div>
+  </Connect(CustomDropdownMenu)>
+</div>
+`;
+
+exports[`startDate Filter renders properly renders the default filter 1`] = `
+<div>
+  <Connect(CustomDropdownMenu)
+    buttonType="columnFilter"
+    className="startDate"
+    currentFilter="All Results"
+    menuType="Start Date"
+    tableType="mockTableType"
+    updateFilter={[Function]}
+  >
+    <styled.div>
+      <FilterSelect
+        onChange={[Function]}
+        options={
+          Array [
+            "After",
+            "Before",
+          ]
+        }
+        style={
+          Object {
+            "width": "160px",
+          }
+        }
+      />
+      <input
+        onChange={[Function]}
+        type="date"
+        value=""
+      />
+    </styled.div>
+  </Connect(CustomDropdownMenu)>
+</div>
+`;

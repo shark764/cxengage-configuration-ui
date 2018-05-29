@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Observable Test chaneges in localStorage to dispatched actions updates the state when localstorage is changed 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "state": null,
+        "type": "UPDATE_SUPERVISOR_TOOLBAR_STATE",
+      },
+    ],
+  ],
+}
+`;

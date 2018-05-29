@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expander Column calling the expander column Expander method returns the correct jsx when NOT expanded 1`] = `
+<div>
+  <Styled(CaretIconSVG)
+    direction="down"
+    strokeColor="#024f7999"
+  />
+</div>
+`;
+
+exports[`Expander Column calling the expander column Expander method returns the correct jsx when expanded 1`] = `
+<div>
+  <Styled(CaretIconSVG)
+    direction="up"
+    strokeColor="#024f7999"
+  />
+</div>
+`;
+
+exports[`Expander Column returns the proper exapnder column configuration object 1`] = `
+Object {
+  "Expander": [Function],
+  "expander": true,
+}
+`;

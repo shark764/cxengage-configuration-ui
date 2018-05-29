@@ -1,4 +1,4 @@
-import direction from '../direction';
+import direction, { helperFunctions } from '../direction';
 
 describe('direction table column', () => {
   it('function returns correct object', () => {
@@ -44,12 +44,22 @@ describe('direction table filter method', () => {
       )
     ).toEqual(false);
   });
+  it('not passing a filter in results in All as a default value and shoudld retrun all results ', () => {
+    expect(
+      direction('Outbound', 'mockTable').filterMethod(
+        { id: 'outbound' },
+        { inbound: 'inbound' }
+      )
+    ).toEqual(true);
+  });
 });
 
 describe('direction Filter method returns the filter menu', () => {
   it('returns the proper component', () => {
+    const filter = helperFunctions.directionFilter(() => {}, 'mockTable');
     expect(
       direction('All', 'mockTable').Filter(() => {}, 'mockTable')
     ).toMatchSnapshot();
+    expect(filter).toMatchSnapshot();
   });
 });

@@ -2,7 +2,8 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CustomFilterMenu from '../../containers/CustomFilterMenu';
 import {
@@ -45,6 +46,9 @@ export default function(startTime, tableType, twelveHourFormat) {
       if (isNaN(mins)) {
         mins = '00';
       }
+      if (isNaN(hours)) {
+        hours = '00';
+      }
       if (
         filterArray[1] === '0' ||
         filterArray[1] === '' ||
@@ -58,8 +62,9 @@ export default function(startTime, tableType, twelveHourFormat) {
         return true;
       }
       const now = currentTime();
-
-      const filterString = `${now} ${hours}:${mins}`;
+      const filterString = `${now} ${hours === 0 ? '00' : hours}:${
+        mins === 0 ? '00' : mins
+      }`;
       const filterTime = timeStampToSeconds(filterString);
 
       if (beforeOrAfter === 'After') {
@@ -67,63 +72,77 @@ export default function(startTime, tableType, twelveHourFormat) {
       }
       return row[filter.id] < filterTime;
     },
-    Filter: ({ filter, onChange }) =>
-      startTimeFilter(filter, onChange, tableType, twelveHourFormat)
+    Filter: ({ filter, onChange }) => (
+      <StartTimeFilter
+        filter={filter}
+        onChange={onChange}
+        tableType={tableType}
+        twelveHourFormat={twelveHourFormat}
+      />
+    )
   };
 }
 
-export function startTimeFilter(filter, onChange, tableType, twelveHourFormat) {
-  return (
-    <CustomFilterMenu
-      menuType="Start Time"
-      tableType={tableType}
-      buttonType="columnFilter"
-      className="startTime"
-      updateFilter={onChange}
-      currentFilter={
-        filter ? filter.value.split('-').join(' ') : 'After 00:00 AM'
-      }
-    >
-      <CustomSubMenuWrapper>
-        <FilterSelect
-          className="StartTimeFilter"
-          onChange={event => {
-            let filterArray = filter
-              ? filter.value.split('-')
-              : ['After', '00:00', 'AM'];
-            onChange(
-              `${event.target.value}-${filterArray[1]}-${filterArray[2]}`
-            );
-          }}
-          options={['After', 'Before']}
-        />
+export class StartTimeFilter extends Component {
+  filterArray = () =>
+    this.props.filter
+      ? this.props.filter.value.split('-')
+      : ['After', '00:00', 'AM'];
+  afterBeforeOnchange = event =>
+    this.props.onChange(
+      `${event.target.value}-${this.filterArray()[1]}-${this.filterArray()[2]}`
+    );
+  timeInputOnchange = event =>
+    this.props.onChange(
+      `${this.filterArray()[0]}-${event.target.value}-${this.filterArray()[2]}`
+    );
+  amPmOnChange = event =>
+    this.props.onChange(
+      `${this.filterArray()[0]}-${this.filterArray()[1]}-${event.target.value}`
+    );
 
-        <TimeInput
-          value={filter ? filter.value.split('-')[1] : '00:00'}
-          onChange={event => {
-            let filterArray = filter
-              ? filter.value.split('-')
-              : ['After', '00:00', 'AM'];
-            onChange(
-              `${filterArray[0]}-${event.target.value}-${filterArray[2]}`
-            );
-          }}
-        />
-
-        {twelveHourFormat && (
+  render() {
+    return (
+      <CustomFilterMenu
+        menuType="Start Time"
+        tableType={this.props.tableType}
+        buttonType="columnFilter"
+        className="startTime"
+        updateFilter={this.props.onChange}
+        currentFilter={
+          this.props.filter
+            ? this.props.filter.value.split('-').join(' ')
+            : 'All Results'
+        }
+      >
+        <CustomSubMenuWrapper>
           <FilterSelect
-            onChange={event => {
-              let filterArray = filter
-                ? filter.value.split('-')
-                : ['After', '00:00', 'minutes'];
-              onChange(
-                `${filterArray[0]}-${filterArray[1]}-${event.target.value}`
-              );
-            }}
-            options={['AM', 'PM']}
+            className="StartTimeFilter"
+            onChange={this.afterBeforeOnchange}
+            options={['After', 'Before']}
           />
-        )}
-      </CustomSubMenuWrapper>
-    </CustomFilterMenu>
-  );
+
+          <TimeInput
+            value={
+              this.props.filter
+                ? this.props.filter.value.split('-')[1]
+                : '00:00'
+            }
+            onChange={this.timeInputOnchange}
+          />
+
+          {this.props.twelveHourFormat && (
+            <FilterSelect onChange={this.amPmOnChange} options={['AM', 'PM']} />
+          )}
+        </CustomSubMenuWrapper>
+      </CustomFilterMenu>
+    );
+  }
 }
+
+StartTimeFilter.propTypes = {
+  twelveHourFormat: PropTypes.bool,
+  tableType: PropTypes.string,
+  onChange: PropTypes.func,
+  filter: PropTypes.object
+};

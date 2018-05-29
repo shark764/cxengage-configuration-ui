@@ -21,6 +21,15 @@ Array [
 ]
 `;
 
+exports[`selectInteractionMonitoringActiveColumns selector returns interaction monitoring active columns 1`] = `
+Array [
+  true,
+  false,
+  true,
+  true,
+]
+`;
+
 exports[`selectInteractionMonitoringColumns selector returns the interaction monitoring columns 1`] = `
 Array [
   Object {

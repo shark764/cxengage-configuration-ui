@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ElapsedTime column returns the proper object column configuration object 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": "Elapsed Time",
+  "accessor": [Function],
+  "filterMethod": [Function],
+  "id": "elapsedTime",
+  "show": 300000,
+  "width": 150,
+}
+`;
+
+exports[`ElapsedTimeFilter renders a default properly when no filter is passed in 1`] = `
+<Connect(CustomDropdownMenu)
+  buttonType="columnFilter"
+  className="elapsedTime"
+  currentFilter="All Results"
+  menuType="Elapsed Time"
+  tableType="mockTable"
+  updateFilter={[Function]}
+>
+  <styled.div>
+    <FilterSelect
+      onChange={[Function]}
+      options={
+        Array [
+          "Greater Than",
+          "Less Than",
+        ]
+      }
+    />
+    <styled.input
+      onChange={[Function]}
+      value={0}
+    />
+    <FilterSelect
+      onChange={[Function]}
+      options={
+        Array [
+          "Minutes",
+          "Seconds",
+        ]
+      }
+    />
+  </styled.div>
+</Connect(CustomDropdownMenu)>
+`;
+
+exports[`Time filter sub menu renders the time filter menu with default values 1`] = `
+<ElapsedTimeFilter
+  filter={
+    Object {
+      "id": "0000-0000-0000-0000",
+      "value": "",
+    }
+  }
+  onChange={[Function]}
+  tableType="mockTable"
+/>
+`;
+
+exports[`Time filter sub menu renders the time filter menu, greater than in minutes 1`] = `
+<ElapsedTimeFilter
+  filter={
+    Object {
+      "id": "0000-0000-0000-0000",
+      "value": "Greater Than:1:Minutes",
+    }
+  }
+  onChange={[Function]}
+  tableType="mockTable"
+/>
+`;
+
+exports[`Time filter sub menu renders the time filter menu, greater than in seconds 1`] = `
+<ElapsedTimeFilter
+  filter={
+    Object {
+      "id": "0000-0000-0000-0000",
+      "value": "Greater Than:1:Seconds",
+    }
+  }
+  onChange={[Function]}
+  tableType="mockTable"
+/>
+`;
+
+exports[`Time filter sub menu renders the time filter menu, less than in minutes 1`] = `
+<ElapsedTimeFilter
+  filter={
+    Object {
+      "id": "0000-0000-0000-0000",
+      "value": "Less Than:1:Minutes",
+    }
+  }
+  onChange={[Function]}
+  tableType="mockTable"
+/>
+`;
+
+exports[`Time filter sub menu renders the time filter menu, less than in seconds 1`] = `
+<ElapsedTimeFilter
+  filter={
+    Object {
+      "id": "0000-0000-0000-0000",
+      "value": "Less Than:1:Seconds",
+    }
+  }
+  onChange={[Function]}
+  tableType="mockTable"
+/>
+`;

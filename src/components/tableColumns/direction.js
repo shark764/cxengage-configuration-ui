@@ -5,6 +5,20 @@
 import React from 'react';
 import CheckboxFilterMenu from '../../containers/CheckboxFilterMenu';
 
+export const helperFunctions = {
+  directionFilter: (onChange, tableType) =>
+    directionFilter(onChange, tableType),
+  filterMethod: ({ value = 'All', id }, row) => {
+    if (value === 'Inbound') {
+      return row[id] === 'inbound';
+    } else if (value === 'Outbound') {
+      return row[id] === 'outbound';
+    } else {
+      return true;
+    }
+  }
+};
+
 export default function(direction, tableType) {
   return {
     Header: 'Direction',
@@ -12,18 +26,9 @@ export default function(direction, tableType) {
     show: direction,
     id: 'direction',
     accessor: 'direction',
-    filterMethod: (filter, row) => {
-      if (filter.value === 'All') {
-        return true;
-      }
-      if (filter.value === 'Inbound') {
-        return row[filter.id] === 'inbound';
-      }
-      if (filter.value === 'Outbound') {
-        return row[filter.id] === 'outbound';
-      }
-    },
-    Filter: ({ onChange }) => directionFilter(onChange, tableType)
+    filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row),
+    Filter: ({ onChange }) =>
+      helperFunctions.directionFilter(onChange, tableType)
   };
 }
 

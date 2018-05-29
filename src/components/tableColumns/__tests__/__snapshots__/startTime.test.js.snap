@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`startTimeColumn Filter renders properly 24 hour format, with default filter 1`] = `
+<Connect(CustomDropdownMenu)
+  buttonType="columnFilter"
+  className="startTime"
+  currentFilter="All Results"
+  menuType="Start Time"
+  tableType="mockTableType"
+  updateFilter={[Function]}
+>
+  <styled.div>
+    <FilterSelect
+      className="StartTimeFilter"
+      onChange={[Function]}
+      options={
+        Array [
+          "After",
+          "Before",
+        ]
+      }
+    />
+    <styled.input
+      onChange={[Function]}
+      value="00:00"
+    />
+  </styled.div>
+</Connect(CustomDropdownMenu)>
+`;
+
+exports[`startTimeColumn Filter renders properly tweleve hour format , with default filter 1`] = `
+<Connect(CustomDropdownMenu)
+  buttonType="columnFilter"
+  className="startTime"
+  currentFilter="All Results"
+  menuType="Start Time"
+  tableType="mockTableType"
+  updateFilter={[Function]}
+>
+  <styled.div>
+    <FilterSelect
+      className="StartTimeFilter"
+      onChange={[Function]}
+      options={
+        Array [
+          "After",
+          "Before",
+        ]
+      }
+    />
+    <styled.input
+      onChange={[Function]}
+      value="00:00"
+    />
+    <FilterSelect
+      onChange={[Function]}
+      options={
+        Array [
+          "AM",
+          "PM",
+        ]
+      }
+    />
+  </styled.div>
+</Connect(CustomDropdownMenu)>
+`;
+
+exports[`startTimeColumn configuration object Cell 1`] = `"Invalid date"`;
+
+exports[`startTimeColumn configuration object Cell 2`] = `"Invalid date"`;
+
+exports[`startTimeColumn configuration object returns the proper object column configuration object 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": "Start Time",
+  "accessor": [Function],
+  "filterMethod": [Function],
+  "id": "startTimestamp",
+  "resizable": false,
+  "show": "2018-02-20T14:24:41.519Z",
+  "width": 180,
+}
+`;

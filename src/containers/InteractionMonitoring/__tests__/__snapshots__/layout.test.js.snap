@@ -212,7 +212,132 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
         },
       ]
     }
-    data={Array []}
+    data={
+      Array [
+        Object {
+          "agents": Array [
+            Object {
+              "agentId": "4c67ac60-16f9-11e7-9873-1b92cd79a0c3",
+              "agentName": "Nick Guimond",
+              "groups": Array [
+                Object {
+                  "groupId": "e2fc7760-163e-11e8-8039-827d48dc951b",
+                  "groupName": "HQ",
+                },
+                Object {
+                  "groupId": "e2458080-8801-11e7-b018-9a5ac3da6edd",
+                  "groupName": "everyone",
+                },
+              ],
+              "skills": Array [
+                Object {
+                  "skillId": "d5bce530-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Support Questions",
+                },
+                Object {
+                  "skillId": "d13f9a70-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Sales Questions",
+                },
+              ],
+            },
+            Object {
+              "agentName": "Alex Giordano",
+              "groups": Array [
+                Object {
+                  "groupId": "e2fc7760-163e-11e8-8039-827d48dc951b",
+                  "groupName": "HQ",
+                },
+                Object {
+                  "groupId": "e2458080-8801-11e7-b018-9a5ac3da6edd",
+                  "groupName": "everyone",
+                },
+              ],
+              "skills": Array [
+                Object {
+                  "skillId": "d5bce530-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Support Questions",
+                },
+                Object {
+                  "skillId": "d13f9a70-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Sales Questions",
+                },
+              ],
+            },
+            Object {
+              "agentName": "Doron Orenstein",
+              "groups": Array [
+                Object {
+                  "groupId": "e2fc7760-163e-11e8-8039-827d48dc951b",
+                  "groupName": "HQ",
+                },
+                Object {
+                  "groupId": "e2458080-8801-11e7-b018-9a5ac3da6edd",
+                  "groupName": "everyone",
+                },
+              ],
+              "skills": Array [
+                Object {
+                  "skillId": "d5bce530-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Support Questions",
+                },
+                Object {
+                  "skillId": "d13f9a70-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Sales Questions",
+                },
+              ],
+            },
+            Object {
+              "agentName": "Josh Clowater",
+              "groups": Array [
+                Object {
+                  "groupId": "e2fc7760-163e-11e8-8039-827d48dc951b",
+                  "groupName": "HQ",
+                },
+                Object {
+                  "groupId": "e2458080-8801-11e7-b018-9a5ac3da6edd",
+                  "groupName": "everyone",
+                },
+              ],
+              "skills": Array [
+                Object {
+                  "skillId": "d5bce530-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Support Questions",
+                },
+                Object {
+                  "skillId": "d13f9a70-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Sales Questions",
+                },
+              ],
+            },
+          ],
+          "channelType": "sms",
+          "contactPoint": "+23334444",
+          "currentStateDuration": 500,
+          "customer": "+12223333",
+          "direction": "inbound",
+          "flowName": "Sales",
+          "interactionId": "0000-1111-2222-3333",
+          "monitors": Array [
+            Object {
+              "agentId": "4c67ac60-16f9-11e7-9873-1b92cd79a0c3",
+              "agentName": "Anil Reddy",
+              "bargedIn": true,
+              "endTimestamp": "2018-02-20T14:24:41.519Z",
+              "startTimestamp": "2018-02-20T14:07:41.519Z",
+            },
+            Object {
+              "agentId": "4c67ac60-16f9-11e7-9873-1b92cd79a0c3",
+              "agentName": "Josh Williams",
+              "bargedIn": false,
+              "endTimestamp": null,
+              "startTimestamp": "2018-02-20T14:07:41.519Z",
+            },
+          ],
+          "startTimestamp": "2018-02-20T14:24:41.519Z",
+          "state": "in-conversation",
+        },
+      ]
+    }
     defaultExpanded={Object {}}
     defaultFilterMethod={[Function]}
     defaultFiltered={Array []}
@@ -231,7 +356,14 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
       }
     }
     filterable={true}
-    filtered={Array []}
+    filtered={
+      Array [
+        Object {
+          "id": "channel",
+          "value": "voice",
+        },
+      ]
+    }
     freezeWhenExpanded={false}
     getLoadingProps={[Function]}
     getNoDataProps={[Function]}
@@ -311,7 +443,7 @@ exports[`Interaction Monitoring Layout renders no columns , all columns are not 
         onClick={[Function]}
         type="secondary"
       >
-        12h
+        24h
       </Styled(Button)>
       <Styled(Connect(CheckboxMenu))
         menuType="Columns"
@@ -324,4 +456,22 @@ exports[`Interaction Monitoring Layout renders no columns , all columns are not 
     </div>
   </PageHeader>
 </styled.div>
+`;
+
+exports[`Interaction monitoring methods SubComponent renders the sub compnent given the correct inputs 1`] = `
+<InteractionDetails
+  data={
+    Object {
+      "agentName": "agent one",
+      "channel": "voice",
+      "contactPoint": "+115064561",
+      "customer": "+15064567",
+      "direction": "inbound",
+      "flowName": "flowName",
+      "monitoring": Array [],
+      "startTimestamp": "start",
+    }
+  }
+  twelveHourFormat={true}
+/>
 `;

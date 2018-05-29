@@ -16,9 +16,9 @@ export default function(value, tableType) {
     accessor: d => {
       let skillsArray = [];
       d.agents.forEach(agent =>
-        agent.skills.forEach(group => {
-          if (skillsArray.indexOf(group.skillName) === -1) {
-            skillsArray.push(group.skillName);
+        agent.skills.forEach(skill => {
+          if (skillsArray.indexOf(skill.skillName) === -1) {
+            skillsArray.push(skill.skillName);
           }
         })
       );

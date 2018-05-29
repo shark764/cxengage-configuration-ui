@@ -50,7 +50,7 @@ export default class InteractionMonitoring extends Component {
   constructor() {
     super();
     this.state = {
-      filtered: []
+      filtered: [{ id: 'channel', value: 'voice' }]
     };
   }
 
@@ -67,6 +67,66 @@ export default class InteractionMonitoring extends Component {
     messageUnsubscribe();
     localStorageUnsubscribe();
   }
+  defaultFilterMethod = ({ value, id }, row) =>
+    String(row[id])
+      .toLowerCase()
+      .indexOf(value.toLowerCase()) > -1;
+
+  getTableRowProps = (state, rowInfo) => {
+    if (rowInfo) {
+      return {
+        onClick: () => {
+          if (this.props.selected === rowInfo.row.interactionId) {
+            return this.props.removeSelected();
+          } else {
+            return this.props.setSelected(rowInfo.row.interactionId, {
+              [rowInfo.viewIndex]: rowInfo.row.interactionId
+            });
+          }
+        },
+        style: {
+          background:
+            rowInfo.row.interactionId === this.props.monitoredId
+              ? 'rgba(253, 255, 50, 0.17)'
+              : null
+        }
+      };
+    } else {
+      return { style: {} };
+    }
+  };
+  getTableProps = () => ({ style: { height: '80vh' } });
+  getTdProps = () => ({ style: { fontSize: '11.5pt' } });
+  getTheadProps = () => ({ style: { color: 'grey' } });
+  onFilteredChange = filtered => this.setState({ filtered: filtered });
+  onSortedChange = sorted => this.props.setSorted(sorted);
+  SubComponent = ({
+    row: {
+      startTimestamp,
+      agentName,
+      direction,
+      channel,
+      contactPoint,
+      flowName,
+      customer,
+      monitoring
+    }
+  }) => (
+    <InteractionDetails
+      data={{
+        startTimestamp,
+        agentName,
+        direction,
+        channel,
+        contactPoint,
+        flowName,
+        customer,
+        monitoring
+      }}
+      twelveHourFormat={this.props.twelveHourFormat}
+    />
+  );
+  toggleTimeFormat = () => this.props.toggleTimeFormat();
 
   render() {
     return (
@@ -80,7 +140,7 @@ export default class InteractionMonitoring extends Component {
               id="timeConversion"
               type="secondary"
               className="timeConversion"
-              onClick={() => this.props.toggleTimeFormat()}
+              onClick={this.toggleTimeFormat}
             >
               {this.props.twelveHourFormat ? '12h' : '24h'}
             </ConverTimeButton>
@@ -101,71 +161,17 @@ export default class InteractionMonitoring extends Component {
             className="InteractionMonitoringTable -striped -highlight"
             data={this.props.tableData}
             filterable
-            defaultFilterMethod={(filter, row) =>
-              String(row[filter.id])
-                .toLowerCase()
-                .indexOf(filter.value.toLowerCase()) > -1
-            }
+            defaultFilterMethod={this.defaultFilterMethod}
             expanded={this.props.expanded}
             sorted={this.props.sorted}
             filtered={this.state.filtered}
-            onFilteredChange={filtered => {
-              this.setState({ filtered: filtered });
-            }}
-            onSortedChange={sorted => this.props.setSorted(sorted)}
-            getTableProps={() => ({ style: { height: '80vh' } })}
-            getTdProps={() => ({ style: { fontSize: '11.5pt' } })}
-            getTheadProps={() => ({ style: { color: 'grey' } })}
-            getTrProps={(state, rowInfo, column) => {
-              if (rowInfo) {
-                return {
-                  onClick: e => {
-                    if (this.props.selected === rowInfo.row.interactionId) {
-                      this.props.removeSelected();
-                    } else {
-                      this.props.setSelected(rowInfo.row.interactionId, {
-                        [rowInfo.viewIndex]: rowInfo.row.interactionId
-                      });
-                    }
-                  },
-                  style: {
-                    background:
-                      rowInfo.row.interactionId === this.props.monitoredId
-                        ? 'rgba(253, 255, 50, 0.17)'
-                        : null
-                  }
-                };
-              } else {
-                return { style: {} };
-              }
-            }}
-            SubComponent={({ row }) => {
-              const {
-                startTimestamp,
-                agentName,
-                direction,
-                channel,
-                contactPoint,
-                flowName,
-                customer,
-                monitoring
-              } = row;
-              return (
-                <InteractionDetails
-                  data={{
-                    startTimestamp,
-                    agentName,
-                    direction,
-                    channel,
-                    contactPoint,
-                    flowName,
-                    customer,
-                    monitoring
-                  }}
-                  twelveHourFormat={this.props.twelveHourFormat}
-                />
-              );
-            }}
+            onFilteredChange={this.onFilteredChange}
+            onSortedChange={this.onSortedChange}
+            getTableProps={this.getTableProps}
+            getTdProps={this.getTdProps}
+            getTheadProps={this.getTheadProps}
+            getTrProps={this.getTableRowProps}
+            SubComponent={this.SubComponent}
             columns={[
               expanderColumn(),
               interactionIdColumn(this.props.activeColumns[0]),
@@ -232,5 +238,8 @@ InteractionMonitoring.propTypes = {
   setSorted: PropTypes.func.isRequired,
   removeSelected: PropTypes.func.isRequired,
   twelveHourFormat: PropTypes.bool.isRequired,
-  activeColumns: PropTypes.arrayOf(PropTypes.bool.isRequired)
+  activeColumns: PropTypes.arrayOf(PropTypes.bool.isRequired),
+  setCurrentEntity: PropTypes.func,
+  fetchData: PropTypes.func,
+  startInteractionMonitoring: PropTypes.func
 };

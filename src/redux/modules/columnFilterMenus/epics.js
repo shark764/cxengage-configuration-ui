@@ -4,7 +4,14 @@
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mapTo';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/ignoreElements';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { of } from 'rxjs/observable/of';
 
 import {
   selectInteractionMonitoringColumns,
@@ -28,17 +35,51 @@ export const SaveColumnsToLocalStorage = (action$, store) =>
     .ofType(...ColumnRelatedActions)
     .debounceTime(4000)
     .filter(({ menuType }) => menuType === 'Columns')
+    .map(action => ({
+      ...action,
+      columnsData: JSON.stringify(
+        selectInteractionMonitoringColumns(store.getState())
+      )
+    }))
     .do(action =>
-      updateInteractionMonitoringColumnsLocalStorage(store.getState())
+      localStorage.setItem('InteractionMonitoringColumns', action.columnsData)
     )
-    .ignoreElements();
+    .map(action => ({
+      type: 'COLUMNS_LOCALSTORAGE_UPDATED_$',
+      columnsData: action.columnsData
+    }));
 
 export const UpdateStatSubscriptionFilters = (action$, store) =>
   action$
     .ofType(...ColumnRelatedActions)
     .filter(({ menuType }) => menuType === 'Skills' || menuType === 'Groups')
-    .do(action => updateStatSubscriptionFilters(store.getState()))
-    .ignoreElements();
+    .map(action => ({
+      ...action,
+      groupIds: Array.from(
+        selectGroups(store.getState(), { tableType: 'InteractionMonitoring' }),
+        x => x.active && x.id
+      ).filter(x => x),
+      skillIds: Array.from(
+        selectSkills(store.getState(), { tableType: 'InteractionMonitoring' }),
+        x => x.active && x.id
+      ).filter(x => x)
+    }))
+    .mergeMap(action =>
+      fromPromise(
+        sdkPromise({
+          module: 'reporting',
+          command: 'addStatSubscription',
+          data: {
+            groupId: action.groupIds,
+            skillId: action.skillIds,
+            statistic: 'interactions-in-conversation-list',
+            statId: 'interactions-in-conversation-list'
+          }
+        })
+      )
+        .mapTo({ type: 'STATS_UPDATED_$' })
+        .catch(err => of({ type: 'STATS_NOT_UPDATED_$' }))
+    );
 
 export const UpdateSkillsAndGroupsFilter = (action$, store) =>
   action$
@@ -53,32 +94,3 @@ export const UpdateSkillsAndGroupsFilter = (action$, store) =>
         return updateGroupsColumnFilter(a.response.result, a.tableType);
       }
     });
-
-function updateInteractionMonitoringColumnsLocalStorage(state) {
-  window.localStorage.setItem(
-    'InteractionMonitoringColumns',
-    JSON.stringify(selectInteractionMonitoringColumns(state))
-  );
-}
-
-function updateStatSubscriptionFilters(state) {
-  const groupIds = Array.from(
-    selectGroups(state, { tableType: 'InteractionMonitoring' }),
-    x => x.active && x.groupId
-  ).filter(x => x);
-
-  const skillIds = Array.from(
-    selectSkills(state, { tableType: 'InteractionMonitoring' }),
-    x => x.active && x.skillId
-  ).filter(x => x);
-
-  sdkPromise({
-    module: 'reporting',
-    command: 'addStatSubscription',
-    data: {
-      groupId: groupIds,
-      skillId: skillIds,
-      statistic: 'interactions-in-conversation-list'
-    }
-  });
-}
