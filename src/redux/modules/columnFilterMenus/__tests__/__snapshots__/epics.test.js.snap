@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SaveColumnsToLocalStorage localstorage is updated on column changes 1`] = `
+Object {
+  "columnsData": "\\"mockColumnData\\"",
+  "type": "COLUMNS_LOCALSTORAGE_UPDATED_$",
+}
+`;
+
+exports[`UpdateSkillsAndGroupsFilter localstorage is updated on groups column changes 1`] = `
+Object {
+  "arrayOfGroupData": "results",
+  "tableType": "mockTableGroups",
+  "type": "SET_GROUPS_DATA",
+}
+`;
+
+exports[`UpdateSkillsAndGroupsFilter localstorage is updated on skills column changes 1`] = `
+Object {
+  "arrayOfSkillData": "results",
+  "tableType": "mockTableSkills",
+  "type": "SET_SKILLS_DATA",
+}
+`;
+
+exports[`UpdateStatSubscriptionFilters dispatch the proper action on failure: groups 1`] = `
+Object {
+  "type": "STATS_NOT_UPDATED_$",
+}
+`;
+
+exports[`UpdateStatSubscriptionFilters dispatch the proper action on failure: skills 1`] = `
+Object {
+  "type": "STATS_NOT_UPDATED_$",
+}
+`;
+
+exports[`UpdateStatSubscriptionFilters dispatch the proper action on success: groups 1`] = `
+Object {
+  "type": "STATS_UPDATED_$",
+}
+`;
+
+exports[`UpdateStatSubscriptionFilters dispatch the proper action on success: skills 1`] = `
+Object {
+  "type": "STATS_UPDATED_$",
+}
+`;

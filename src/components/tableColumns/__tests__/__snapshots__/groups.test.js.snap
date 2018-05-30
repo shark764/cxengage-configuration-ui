@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`groups table column accessor returns groups names as a string seperated by commas 1`] = `"mockSkill1, mockSkill2, mockSkill3, mockSkill4, mockSkill5, mockSkill6"`;
+
+exports[`groups table column accessor returns groups names as a string seperated by commas avoiding duplicate groups from multiple agents 1`] = `"mockSkill1, mockSkill2"`;
+
+exports[`groups table column accessor returns single skill name with no comma 1`] = `"mockSkill1"`;
+
+exports[`groups table column function returns correct object 1`] = `
+Object {
+  "Filter": <Connect(CheckboxMenu)
+    buttonType="columnFilter"
+    menuType="Groups"
+    selectionType="checkbox"
+    tableType="mockTableType"
+  >
+    Groups
+  </Connect(CheckboxMenu)>,
+  "Header": "Groups",
+  "accessor": [Function],
+  "filterable": true,
+  "id": "groups",
+  "show": "groups",
+  "sortable": false,
+}
+`;

@@ -2,7 +2,8 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CustomFilterMenu from '../../containers/CustomFilterMenu';
 
@@ -23,11 +24,41 @@ const MinutesInput = styled.input`
   marginleft: 5px;
 `;
 
-export const formatFilter = filter => {
-  let facts = filter.split(':');
-  return `${facts[0] === 'Greater Than' ? ' + ' : ' - '} ${facts[1]} ${
-    facts[2] === 'Minutes' ? 'Min' : 'Sec'
-  }`;
+export const helperFunctions = {
+  columnFilterOnChangeEvents: (filter, onChange, event, inputSource) => {
+    let filterArray = filter
+      ? filter.value.split(':')
+      : ['Greater Than', 0, 'Minutes'];
+    switch (inputSource) {
+      case 'greaterThanOrLessThan':
+        return onChange(
+          `${event.target.value}:${filterArray[1]}:${filterArray[2]}`
+        );
+      case 'timeInput':
+        return onChange(
+          `${filterArray[0]}:${event.target.value}:${filterArray[2]}`
+        );
+      case 'secondsOrMinutes':
+        return onChange(
+          `${filterArray[0]}:${filterArray[1]}:${event.target.value}`
+        );
+      default:
+        return filterArray;
+    }
+  },
+  formatFilter: filter => {
+    let facts = filter.split(':');
+    return `${facts[0] === 'Greater Than' ? ' + ' : ' - '} ${facts[1]} ${
+      facts[2] === 'Minutes' ? 'Min' : 'Sec'
+    }`;
+  },
+  elapsedTimeFilter: (filter, onChange, tableType) => (
+    <ElapsedTimeFilter
+      filter={filter}
+      onChange={onChange}
+      tableType={tableType}
+    />
+  )
 };
 
 export default function(value, tableType) {
@@ -57,57 +88,71 @@ export default function(value, tableType) {
       );
     },
     Filter: ({ filter, onChange }) =>
-      elapsedTimeFilter(filter, onChange, tableType)
+      helperFunctions.elapsedTimeFilter(filter, onChange, tableType)
   };
 }
 
-export function elapsedTimeFilter(filter, onChange, tableType) {
-  return (
-    <CustomFilterMenu
-      menuType="Elapsed Time"
-      tableType={tableType}
-      buttonType="columnFilter"
-      className="elapsedTime"
-      updateFilter={onChange}
-      currentFilter={filter ? formatFilter(filter.value) : 'All Results'}
-    >
-      <CustomSubMenuWrapper>
-        <FilterSelect
-          onChange={event => {
-            let filterArray = filter
-              ? filter.value.split(':')
-              : ['Greater Than', 0, 'Minutes'];
-            onChange(
-              `${event.target.value}:${filterArray[1]}:${filterArray[2]}`
-            );
-          }}
-          options={['Greater Than', 'Less Than']}
-        />
+export class ElapsedTimeFilter extends Component {
+  greaterThanOnChange = event =>
+    helperFunctions.columnFilterOnChangeEvents(
+      this.props.filter,
+      this.props.onChange,
+      event,
+      'greaterThanOrLessThan'
+    );
+  minutesInputOnChange = event =>
+    helperFunctions.columnFilterOnChangeEvents(
+      this.props.filter,
+      this.props.onChange,
+      event,
+      'timeInput'
+    );
+  timeToggleOnChange = event =>
+    helperFunctions.columnFilterOnChangeEvents(
+      this.props.filter,
+      this.props.onChange,
+      event,
+      'secondsOrMinutes'
+    );
+  render() {
+    return (
+      <CustomFilterMenu
+        menuType="Elapsed Time"
+        tableType={this.props.tableType}
+        buttonType="columnFilter"
+        className="elapsedTime"
+        updateFilter={this.props.onChange}
+        currentFilter={
+          this.props.filter
+            ? helperFunctions.formatFilter(this.props.filter.value)
+            : 'All Results'
+        }
+      >
+        <CustomSubMenuWrapper>
+          <FilterSelect
+            onChange={this.greaterThanOnChange}
+            options={['Greater Than', 'Less Than']}
+          />
 
-        <MinutesInput
-          value={filter ? filter.value.split(':')[1] : 0}
-          onChange={event => {
-            let filterArray = filter
-              ? filter.value.split(':')
-              : ['Greater Than', 0, 'Minutes'];
-            onChange(
-              `${filterArray[0]}:${event.target.value}:${filterArray[2]}`
-            );
-          }}
-        />
+          <MinutesInput
+            value={
+              this.props.filter ? this.props.filter.value.split(':')[1] : 0
+            }
+            onChange={this.minutesInputOnChange}
+          />
 
-        <FilterSelect
-          onChange={event => {
-            let filterArray = filter
-              ? filter.value.split(':')
-              : ['Greater Than', 0, 'Minutes'];
-            onChange(
-              `${filterArray[0]}:${filterArray[1]}:${event.target.value}`
-            );
-          }}
-          options={['Minutes', 'Seconds']}
-        />
-      </CustomSubMenuWrapper>
-    </CustomFilterMenu>
-  );
+          <FilterSelect
+            onChange={this.timeToggleOnChange}
+            options={['Minutes', 'Seconds']}
+          />
+        </CustomSubMenuWrapper>
+      </CustomFilterMenu>
+    );
+  }
 }
+
+ElapsedTimeFilter.propTypes = {
+  tableType: PropTypes.string,
+  filter: PropTypes.object,
+  onChange: PropTypes.func
+};

@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.19.24]
+* CXV1-12637 - Unit tests for silent monitoring
+* CXV1-14197 - Fix for groups and skills filtering (Interaction Monitoring)
+* CXV1-14198 - By default only show voice interactions (Interaction Monitoring)
+
 ## [0.19.23]
 * CXV1-14040 - Email Template Help URL Incorrect - should navigate to updating_email_templates
 

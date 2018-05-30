@@ -13,6 +13,19 @@ exports[`direction Filter method returns the filter menu returns the proper comp
 </Connect(CheckboxMenu)>
 `;
 
+exports[`direction Filter method returns the filter menu returns the proper component 2`] = `
+<Connect(CheckboxMenu)
+  buttonType="columnFilter"
+  className="direction"
+  menuType="Direction"
+  selectionType="select"
+  tableType="mockTable"
+  updateFilter={[Function]}
+>
+  Direction
+</Connect(CheckboxMenu)>
+`;
+
 exports[`direction table column function returns correct object 1`] = `
 Object {
   "Filter": [Function],

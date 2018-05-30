@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InteractionId column calling the columns Cell method with a value prop renders properly 1`] = `
+<CopyToClipboard
+  onCopy={undefined}
+  options={undefined}
+  text="0000-0000-0000-0003"
+>
+  <styled.div>
+    0000-0000-0000-0003
+  </styled.div>
+</CopyToClipboard>
+`;
+
+exports[`InteractionId column renders the cell properly given a value 1`] = `
+<CopyToClipboard
+  onCopy={undefined}
+  options={undefined}
+  text="0000-0000-0000-0002"
+>
+  <styled.div>
+    0000-0000-0000-0002
+  </styled.div>
+</CopyToClipboard>
+`;
+
+exports[`InteractionId column returns the proper object configuration for the row 1`] = `
+Object {
+  "Cell": [Function],
+  "Header": "Interaction Id",
+  "accessor": "interactionId",
+  "id": "interactionId",
+  "show": "0000-0000-0000-0001",
+}
+`;

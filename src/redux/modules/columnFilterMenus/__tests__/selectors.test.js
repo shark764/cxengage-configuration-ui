@@ -247,3 +247,23 @@ describe('selectTimeFormat selector', () => {
     expect(sel.selectTimeFormat(initialState)).toEqual(true);
   });
 });
+
+describe('selectInteractionMonitoringActiveColumns selector', () => {
+  it('returns interaction monitoring active columns', () => {
+    const initialState = fromJS({
+      ColumnFilterMenus: {
+        InteractionMonitoring: {
+          Columns: [
+            { active: true },
+            { active: false },
+            { active: true },
+            { active: true }
+          ]
+        }
+      }
+    });
+    expect(
+      sel.selectInteractionMonitoringActiveColumns(initialState)
+    ).toMatchSnapshot();
+  });
+});

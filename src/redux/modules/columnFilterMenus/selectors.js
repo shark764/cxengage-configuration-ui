@@ -52,7 +52,7 @@ export const selectInteractionMonitoringColumns = createSelector(
 );
 export const selectInteractionMonitoringActiveColumns = createSelector(
   selectInteractionMonitoringColumns,
-  columns => columns.map(({ active, name }) => active)
+  columns => columns.map(({ active }) => active)
 );
 
 export const selectGroups = createSelector(menu, menu =>
