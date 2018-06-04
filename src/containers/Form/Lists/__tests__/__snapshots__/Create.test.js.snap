@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps maps the selectors to the object correctly 1`] = `
+Object {
+  "initialValues": Immutable.Map {
+    "active": true,
+    "shared": true,
+  },
+  "isSaving": "mock is creating",
+  "listTypes": "mock list types options",
+}
+`;

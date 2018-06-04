@@ -21,7 +21,7 @@ jest.mock(
   })
 );
 
-describe('EmailTemplatesDetailsPanel', () => {
+describe('UpdateEmailTemplateForm', () => {
   it('renders', () => {
     shallow(
       <UpdateEmailTemplateForm store={mockStore}>Child</UpdateEmailTemplateForm>
