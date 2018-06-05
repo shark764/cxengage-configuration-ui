@@ -26,13 +26,14 @@ jest.mock('../columns/status', () => ({
 }));
 
 describe('getTableColumns', () => {
-  describe('lists', () => {
-    it('returns correct columns', () => {
-      expect(getTableColumns('lists')).toMatchSnapshot();
-    });
+  it('returns correct columns for lists', () => {
+    expect(getTableColumns('lists')).toMatchSnapshot();
   });
   it('returns correct columns for emailTemplates', () => {
     expect(getTableColumns('emailTemplates')).toMatchSnapshot();
+  });
+  it('returns correct columns for outbound identifiers', () => {
+    expect(getTableColumns('outboundIdentifiers')).toMatchSnapshot();
   });
   it('returns empty array by default', () => {
     expect(getTableColumns()).toEqual([]);

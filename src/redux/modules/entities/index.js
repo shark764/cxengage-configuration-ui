@@ -23,8 +23,19 @@ const initialState = fromJS({
     updatePermission: ['MANAGE_ALL_LISTS'],
     createPermission: ['MANAGE_ALL_LISTS']
   },
+  flows: {
+    data: undefined
+  },
   listTypes: {
     data: undefined
+  },
+  outboundIdentifiers: {
+    ...defaultEntity,
+    readPermission: ['OUTBOUND_IDENTIFIER_READ'],
+    updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
+    createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
+    disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
+    assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
   },
   emailTemplates: {
     ...defaultEntity,
@@ -42,35 +53,39 @@ export const setCurrentEntity = entityName => ({
   type: 'SET_CURRENT_ENTITY',
   entityName
 });
-export const setSelectedEntityId = entityId => {
-  return { type: 'SET_SELECTED_ENTITY_ID', entityId };
-};
+export const setSelectedEntityId = entityId => ({
+  type: 'SET_SELECTED_ENTITY_ID',
+  entityId
+});
+
 export const setSelectedEntityCreate = () => setSelectedEntityId('create');
 export const unsetSelectedEntityId = () => setSelectedEntityId('');
-export const setEntityUpdating = (entityName, entityId, updating) => {
-  return { type: 'SET_ENTITY_UPDATING', entityName, entityId, updating };
-};
+export const setEntityUpdating = (entityName, entityId, updating) => ({
+  type: 'SET_ENTITY_UPDATING',
+  entityName,
+  entityId,
+  updating
+});
+
 export const onFormButtonSubmit = () => ({ type: 'START_FORM_SUBMISSION' });
 export const onFormSubmit = (values, { dirty }) => ({
   type: 'FORM_SUBMIT',
   values,
   dirty
 });
-export const toggleEntityActive = () => {
-  return {
-    type: 'TOGGLE_ENTITY'
-  };
-};
-export const setConfirmationDialog = (modalType, metaData) => {
-  return {
-    type: 'SET_CONIFIRMATION_DIALOG',
-    modalType,
-    metaData
-  };
-};
-export const executeConfirmCallback = referenceData => {
-  return { type: 'EXECUTE_CONFIRM_CALLBACK', referenceData };
-};
+export const toggleEntityActive = () => ({ type: 'TOGGLE_ENTITY' });
+
+export const setConfirmationDialog = (modalType, metaData) => ({
+  type: 'SET_CONIFIRMATION_DIALOG',
+  modalType,
+  metaData
+});
+
+export const executeConfirmCallback = referenceData => ({
+  type: 'EXECUTE_CONFIRM_CALLBACK',
+  referenceData
+});
+
 export const fetchData = (entityName, tableType) => ({
   type: 'FETCH_DATA',
   entityName,
@@ -91,9 +106,11 @@ export const fetchDataItem = (entityName, id) => ({
   entityName,
   id
 });
-export const setSelectedSubEntityId = selectedSubEntityId => {
-  return { type: 'SET_SELECTED_SUB_ENTITY_ID', selectedSubEntityId };
-};
+export const setSelectedSubEntityId = selectedSubEntityId => ({
+  type: 'SET_SELECTED_SUB_ENTITY_ID',
+  selectedSubEntityId
+});
+
 export const onSubEntityFormSubmit = (values, { dirty }) => ({
   type: 'SUB_ENTITY_FORM_SUBMIT',
   values,
@@ -126,15 +143,14 @@ export const updateSidePanelWidth = width => ({
   type: 'UPDATE_SIDE_PANEL_WIDTH',
   width
 });
-export const deleteSubEntity = subEntityId => {
-  return { type: 'DELETE_SUB_ENTITY', subEntityId };
-};
-export const downloadCsv = () => {
-  return { type: 'DOWNLOAD_CSV' };
-};
-export const uploadCsv = target => {
-  return { type: 'UPLOAD_CSV', target };
-};
+export const deleteSubEntity = subEntityId => ({
+  type: 'DELETE_SUB_ENTITY',
+  subEntityId
+});
+
+export const downloadCsv = () => ({ type: 'DOWNLOAD_CSV' });
+
+export const uploadCsv = target => ({ type: 'UPLOAD_CSV', target });
 
 // Reducer
 

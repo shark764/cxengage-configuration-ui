@@ -25,3 +25,11 @@ exports[`isFormPristine correctly calls redux-form's 'isPristine' method 1`] = `
   ],
 }
 `;
+
+exports[`selectFormInitialValues returns immutable map {active: true} when getSelectedEntity is undefined 1`] = `
+Immutable.Map {
+  "active": true,
+}
+`;
+
+exports[`selectFormInitialValues returns the selected entity when not undefiend or create 1`] = `"mockEntity"`;

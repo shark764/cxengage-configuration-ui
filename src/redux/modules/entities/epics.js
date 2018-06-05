@@ -23,6 +23,7 @@ import {
   camelCaseToKebabCase,
   camelCaseToRegularForm,
   camelCaseToRegularFormAndRemoveLastLetter,
+  camelCaseToKebabCaseAndRemoveLastLetter,
   capitalizeFirstAndRemoveLastLetter
 } from '../../../utils/string';
 
@@ -185,7 +186,9 @@ export const CreateEntity = (action$, store) =>
           command: `create${capitalizeFirstAndRemoveLastLetter(a.entityName)}`,
           data: a.values
         },
-        `cxengage/entities/create-${removeLastLetter(a.entityName)}-response`
+        `cxengage/entities/create-${camelCaseToKebabCaseAndRemoveLastLetter(
+          a.entityName
+        )}-response`
       )
     )
       .map(response => {
@@ -226,7 +229,9 @@ export const UpdateEntity = (action$, store) =>
               [`${removeLastLetter(a.entityName)}Id`]: a.entityId
             }
           },
-          `cxengage/entities/update-${removeLastLetter(a.entityName)}-response`
+          `cxengage/entities/update-${camelCaseToKebabCaseAndRemoveLastLetter(
+            a.entityName
+          )}-response`
         )
       )
         .map(response => {
@@ -278,7 +283,7 @@ export const ToggleEntity = (action$, store) =>
               active: !a.selectedEntity.get('active')
             }
           },
-          `cxengage/entities/update-${removeLastLetter(
+          `cxengage/entities/update-${camelCaseToKebabCaseAndRemoveLastLetter(
             a.currentEntity
           )}-response`
         )

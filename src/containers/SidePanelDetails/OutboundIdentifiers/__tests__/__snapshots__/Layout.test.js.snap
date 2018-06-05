@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OutboundIdentifiersSiePanelDetailsLayout Layout renders  1`] = `
+<Connect(OutboundIdentifiersDetailsPanel)>
+  <Connect(Connect(ReduxForm)) />
+</Connect(OutboundIdentifiersDetailsPanel)>
+`;

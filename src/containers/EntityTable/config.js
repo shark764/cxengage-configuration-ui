@@ -24,6 +24,8 @@ export function getTableColumns(entityName) {
       return [nameColumn, listTypeColumn, statusColumn];
     case 'emailTemplates':
       return [nameColumn, descriptionColumn];
+    case 'outboundIdentifiers':
+      return [nameColumn, descriptionColumn];
     default:
       return [];
   }

@@ -9,16 +9,22 @@ import {
   getCurrentForm,
   getCurrentFormInitialValues,
   isFormInvalid,
-  isFormPristine
+  isFormPristine,
+  selectFormInitialValues
 } from '../selectors';
 
-jest.mock('redux-form/immutable');
+import {
+  getSelectedEntity,
+  getCurrentEntity,
+  getSelectedEntityId,
+  getSelectedEntityFormId
+} from '../../entities/selectors';
 
-jest.mock('../../entities/selectors', () => ({
-  getCurrentEntity: () => 'mock current entity',
-  getSelectedEntityId: () => 'mock current entity id',
-  getSelectedEntityFormId: () => 'mock current entity form id'
-}));
+jest.mock('redux-form/immutable');
+jest.mock('../../entities/selectors');
+getCurrentEntity.mockImplementation(() => 'mock current entity');
+getSelectedEntityId.mockImplementation(() => 'mock current entity id');
+getSelectedEntityFormId.mockImplementation(() => 'mock current entity form id');
 
 describe('getCurrentForm', () => {
   it('returns the current form', () => {
@@ -69,5 +75,16 @@ describe('isFormPristine', () => {
   it("correctly calls redux-form's 'isPristine' method", () => {
     isFormPristine('mock inital state');
     expect(isPristine).toMatchSnapshot();
+  });
+});
+
+describe('selectFormInitialValues', () => {
+  it('returns immutable map {active: true} when getSelectedEntity is undefined', () => {
+    getSelectedEntity.mockImplementationOnce(() => undefined);
+    expect(selectFormInitialValues({})).toMatchSnapshot();
+  });
+  it('returns the selected entity when not undefiend or create', () => {
+    getSelectedEntity.mockImplementation(() => 'mockEntity');
+    expect(selectFormInitialValues({})).toMatchSnapshot();
   });
 });

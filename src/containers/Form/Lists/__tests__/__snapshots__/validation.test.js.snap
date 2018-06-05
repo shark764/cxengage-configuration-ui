@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createFormValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "listTypeId": "Please select a list type",
+  "name": "Please enter a name",
+}
+`;
+
+exports[`createFormValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "listTypeId": false,
+  "name": false,
+}
+`;
+
+exports[`updateFormValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "name": "Please enter a name",
+}
+`;
+
+exports[`updateFormValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "name": false,
+}
+`;
