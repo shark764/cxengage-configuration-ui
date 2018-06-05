@@ -8,36 +8,25 @@ import { reduxForm } from 'redux-form/immutable';
 import { ListsForm } from 'cx-ui-components';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { createFormValidation } from './validation';
-import {
-  getSelectedEntityId,
-  isCreating
-} from '../../../redux/modules/entities/selectors';
+import { isCreating } from '../../../redux/modules/entities/selectors';
+import { getListTypesOptions } from '../../../redux/modules/entities/listTypes/selectors';
 
+/* istanbul ignore next */
 let CreateListForm = reduxForm({
   form: 'lists:create',
   onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
   validate: createFormValidation
 })(ListsForm);
 
-function mapStateToProps(state) {
-  const selectedEntityId = getSelectedEntityId(state);
-  if (selectedEntityId === 'create') {
-    let listTypes = state.getIn(['Entities', 'listTypes', 'data']);
-    if (listTypes) {
-      listTypes = listTypes
-        .toJS()
-        .filter(listType => listType.active)
-        .map(listType => ({ value: listType.id, label: listType.name }));
-    }
-    return {
-      listTypes,
-      initialValues: new Map({
-        active: true
-      }),
-      isSaving: isCreating(state)
-    };
-  }
-  return {};
+export function mapStateToProps(state) {
+  return {
+    listTypes: getListTypesOptions(),
+    initialValues: new Map({
+      active: true,
+      shared: true
+    }),
+    isSaving: isCreating(state)
+  };
 }
 
 export default connect(mapStateToProps)(CreateListForm);

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getInitialUpdateFormValues returns a map of the initial values needed for the update form 1`] = `
+Immutable.Map {
+  "name": "mock list name",
+  "shared": true,
+}
+`;

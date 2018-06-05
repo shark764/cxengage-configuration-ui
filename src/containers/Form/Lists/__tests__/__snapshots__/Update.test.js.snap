@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapStateToProps maps the selectors to the object correctly 1`] = `
+Object {
+  "inherited": "mock is inherited",
+  "initialValues": "mock initial update form values",
+  "isSaving": "mock is updating",
+  "listType": "mock list type name",
+  "update": true,
+}
+`;

@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.20.0]
+* CXV1-13838 - Added shared toggle to list form
+
 ## [0.19.24]
 * CXV1-12637 - Unit tests for silent monitoring
 * CXV1-14197 - Fix for groups and skills filtering (Interaction Monitoring)
