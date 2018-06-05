@@ -4,6 +4,7 @@ import {
   camelCaseToKebabCase,
   camelCaseToRegularForm,
   camelCaseToRegularFormAndRemoveLastLetter,
+  camelCaseToKebabCaseAndRemoveLastLetter,
   capitalizeFirstAndRemoveLastLetter,
   isNumber,
   isEmpty
@@ -39,6 +40,14 @@ describe('camelCaseToRegularFormAndRemoveLastLetter', () => {
   it('does camelCaseToRegularForm and removeLastLetter', () => {
     expect(camelCaseToRegularFormAndRemoveLastLetter('camelCases')).toEqual(
       'Camel Case'
+    );
+  });
+});
+
+describe('camelCaseToKebabCaseAndRemoveLastLetter', () => {
+  it('does camelCaseToKebabCase and removeLastLetter', () => {
+    expect(camelCaseToKebabCaseAndRemoveLastLetter('camelCases')).toEqual(
+      'camel-case'
     );
   });
 });

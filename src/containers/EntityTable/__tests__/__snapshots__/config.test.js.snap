@@ -4,7 +4,14 @@ exports[`getHelpLink returns correct link for emailTemplates 1`] = `"docs.cxenga
 
 exports[`getHelpLink returns correct link for lists 1`] = `"docs.cxengage.net/Help/Content/Configuration/Lists/Lists.htm"`;
 
-exports[`getTableColumns lists returns correct columns 1`] = `
+exports[`getTableColumns returns correct columns for emailTemplates 1`] = `
+Array [
+  "mock name column",
+  "mock description column",
+]
+`;
+
+exports[`getTableColumns returns correct columns for lists 1`] = `
 Array [
   "mock name column",
   "mock list type column",
@@ -12,7 +19,7 @@ Array [
 ]
 `;
 
-exports[`getTableColumns returns correct columns for emailTemplates 1`] = `
+exports[`getTableColumns returns correct columns for outbound identifiers 1`] = `
 Array [
   "mock name column",
   "mock description column",

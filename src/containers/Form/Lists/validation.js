@@ -4,18 +4,11 @@
 
 import { isEmpty } from '../../../utils/string';
 
-export const updateFormValidation = values => {
-  const errors = {};
-  if (isEmpty(values.get('name'))) {
-    errors.name = 'Please enter a name';
-  }
-  return errors;
-};
+export const updateFormValidation = values => ({
+  name: isEmpty(values.get('name')) && 'Please enter a name'
+});
 
-export const createFormValidation = values => {
-  const errors = updateFormValidation(values);
-  if (!values.get('listTypeId')) {
-    errors.listTypeId = 'Please select a list type';
-  }
-  return errors;
-};
+export const createFormValidation = values => ({
+  ...updateFormValidation(values),
+  listTypeId: !values.get('listTypeId') && 'Please select a list type'
+});

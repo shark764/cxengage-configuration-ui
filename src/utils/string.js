@@ -21,6 +21,9 @@ export const camelCaseToRegularForm = string =>
 export const camelCaseToRegularFormAndRemoveLastLetter = string =>
   camelCaseToRegularForm(removeLastLetter(string));
 
+export const camelCaseToKebabCaseAndRemoveLastLetter = string =>
+  camelCaseToKebabCase(removeLastLetter(string));
+
 export const capitalizeFirstAndRemoveLastLetter = string =>
   capitalizeFirstLetter(removeLastLetter(string));
 

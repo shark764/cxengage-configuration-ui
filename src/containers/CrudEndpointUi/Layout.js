@@ -13,8 +13,10 @@ import Confirmation from '../ConfirmationDialog';
 import SidePanel from '../../containers/SidePanel';
 import EntityTableContainer from '../EntityTable';
 import CreateListForm from '../Form/Lists/Create';
+import OutboundIdentifiersForm from '../Form/OutboundIdentifiers';
 import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';
 import EmailTemplatesDetailsPanelContainer from '../SidePanelDetails/EmailTemplates/Layout';
+import OutboundIdentifiersPanelContainer from '../SidePanelDetails/OutboundIdentifiers/Layout';
 import CreateListItemForm from '../Form/ListItems/Create';
 import UpdateListItemForm from '../Form/ListItems/Update';
 
@@ -71,6 +73,10 @@ const createFormRoutes = [
   {
     path: '/configuration/lists',
     component: () => DetailsPanel(CreateListForm)
+  },
+  {
+    path: '/configuration/outboundIdentifiers',
+    component: () => DetailsPanel(OutboundIdentifiersForm)
   }
 ];
 
@@ -82,6 +88,10 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/emailTemplates',
     component: () => NoScrollDetailsPanel(EmailTemplatesDetailsPanelContainer)
+  },
+  {
+    path: '/configuration/outboundIdentifiers',
+    component: () => NoScrollDetailsPanel(OutboundIdentifiersPanelContainer)
   }
 ];
 
