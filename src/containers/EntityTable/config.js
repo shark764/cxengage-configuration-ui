@@ -26,6 +26,7 @@ export function getTableColumns(entityName) {
       return [nameColumn, descriptionColumn];
     case 'outboundIdentifiers':
       return [nameColumn, descriptionColumn];
+    //hygen-inject-before
     default:
       return [];
   }

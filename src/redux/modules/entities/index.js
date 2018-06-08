@@ -45,6 +45,7 @@ const initialState = fromJS({
       'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE'
     ]
   }
+  //hygen-inject-before
 });
 
 // Actions
