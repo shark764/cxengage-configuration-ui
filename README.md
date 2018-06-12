@@ -36,3 +36,10 @@ We have a number of tests for this project which generate good (hopefully comple
 ### Common testing issues
 1. Tests using the `toastr` library will fail when this project is linked, so make sure to re-install cx-ui-components before running all tests when making a commit.
 2. Your node and npm versions must be up to date. If you see test errors like `"TypeError: Object.values is not a function"`, make sure to install/use the latest node and npm.
+
+## Code Generation
+Reduce your boilerplate with code generation using [hygen](http://www.hygen.io/quick-start)
+```
+npm i hygen -g
+```
+Then head over to our existing [generators](docs/CODE_GENERATION.md) to supercharge your workflow.

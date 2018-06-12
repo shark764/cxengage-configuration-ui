@@ -78,6 +78,7 @@ const createFormRoutes = [
     path: '/configuration/outboundIdentifiers',
     component: () => DetailsPanel(OutboundIdentifiersForm)
   }
+  //hygen-inject-before1
 ];
 
 const detailsPanelRoutes = [
@@ -93,6 +94,7 @@ const detailsPanelRoutes = [
     path: '/configuration/outboundIdentifiers',
     component: () => NoScrollDetailsPanel(OutboundIdentifiersPanelContainer)
   }
+  //hygen-inject-before2
 ];
 
 const createSubEntityFormRoutes = [
