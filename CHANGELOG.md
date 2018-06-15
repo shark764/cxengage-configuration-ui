@@ -2,10 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.21.0]
+## [0.21.1]
+* CXV1-13838 - Fix create lists
+
+## [0.21.0] (Broken)
 * CXV1-12475 - outbound identifiers page
 
-## [0.20.0]
+## [0.20.0] (Broken)
 * CXV1-13838 - Added shared toggle to list form
 
 ## [0.19.24]
@@ -19,7 +22,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.19.22]
 * <no-ticket> - css issue with columns not lining up , scrollbar was pushing columns to the left
 * <no-ticket> - fixed bug where you couldn't monitor a call right after an exisiting one as it was waiting for the twilio enabled signal
-
 
 ## [0.19.21]
 * CXV1-13933 - Share state from supervisor toolbar to interaction monitoring table
