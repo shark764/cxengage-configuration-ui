@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
 import { Map } from 'immutable';
@@ -11,7 +11,6 @@ import { createFormValidation } from './validation';
 import { isCreating } from '../../../redux/modules/entities/selectors';
 import { getListTypesOptions } from '../../../redux/modules/entities/listTypes/selectors';
 
-/* istanbul ignore next */
 let CreateListForm = reduxForm({
   form: 'lists:create',
   onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
@@ -20,7 +19,7 @@ let CreateListForm = reduxForm({
 
 export function mapStateToProps(state) {
   return {
-    listTypes: getListTypesOptions(),
+    listTypes: getListTypesOptions(state),
     initialValues: new Map({
       active: true,
       shared: true

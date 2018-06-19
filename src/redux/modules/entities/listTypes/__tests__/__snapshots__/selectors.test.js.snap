@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getListTypesOptions converts the list types to javascript, filters out active false, and maps to the name and id 1`] = `
+exports[`getListTypesOptions list types defined converted to javascript, filters out active false, and maps to the name and id 1`] = `
 Array [
   Object {
     "label": "mock list type name 1",
