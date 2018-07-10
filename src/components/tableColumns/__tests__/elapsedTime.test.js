@@ -12,7 +12,7 @@ describe('ElapsedTime column', () => {
     ).toEqual(300);
   });
   it('calling the columns Cell method results in proper response or object', () => {
-    expect(columnConfigObject.Cell({ value: 300000 })).toEqual('11:20:00');
+    expect(columnConfigObject.Cell({ value: 300000 })).toMatchSnapshot();
   });
 });
 describe('calling the columns filterMethod method results in proper response or object', () => {

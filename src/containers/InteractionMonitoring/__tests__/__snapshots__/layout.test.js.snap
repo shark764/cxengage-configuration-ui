@@ -93,36 +93,42 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
           "show": true,
         },
         Object {
+          "Cell": [Function],
           "Header": "Agent",
           "accessor": [Function],
           "id": "agentName",
           "show": true,
         },
         Object {
+          "Cell": [Function],
           "Header": "Customer Id",
           "accessor": "customer",
           "id": "customer",
           "show": true,
         },
         Object {
+          "Cell": [Function],
           "Header": "Contact Point",
           "accessor": "contactPoint",
           "id": "contactPoint",
           "show": true,
         },
         Object {
+          "Cell": [Function],
           "Header": "Flow",
           "accessor": "flowName",
           "id": "flowName",
           "show": true,
         },
         Object {
+          "Cell": [Function],
           "Header": "Channel",
           "accessor": "channelType",
           "id": "channel",
           "show": true,
         },
         Object {
+          "Cell": [Function],
           "Filter": [Function],
           "Header": "Direction",
           "accessor": "direction",
@@ -132,6 +138,7 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
           "width": 140,
         },
         Object {
+          "Cell": [Function],
           "Header": "Presence State",
           "accessor": "state",
           "id": "presenceState",
@@ -144,7 +151,7 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
           "accessor": [Function],
           "filterMethod": [Function],
           "id": "startDateTimestamp",
-          "minWidth": 170,
+          "minWidth": 195,
           "show": true,
         },
         Object {
@@ -154,9 +161,9 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
           "accessor": [Function],
           "filterMethod": [Function],
           "id": "startTimestamp",
+          "minWidth": 190,
           "resizable": false,
           "show": true,
-          "width": 180,
         },
         Object {
           "Cell": [Function],
@@ -179,6 +186,7 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
           "width": 180,
         },
         Object {
+          "Cell": [Function],
           "Filter": <Connect(CheckboxMenu)
             buttonType="columnFilter"
             menuType="Groups"
@@ -191,10 +199,12 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
           "accessor": [Function],
           "filterable": true,
           "id": "groups",
+          "minWidth": 115,
           "show": true,
           "sortable": false,
         },
         Object {
+          "Cell": [Function],
           "Filter": <Connect(CheckboxMenu)
             buttonType="columnFilter"
             menuType="Skills"

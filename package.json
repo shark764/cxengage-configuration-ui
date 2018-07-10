@@ -1,6 +1,6 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.21.1",
+  "version": "0.21.2",
   "description": "CxEngage Configuration and Reporting",
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --port 3000 --mode development",
+    "preinstall": "node ./resources/npmcheckversion",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "profile": "webpack --profile --json > stats.json",
@@ -83,11 +84,11 @@
   "author": "SerenovaLLC",
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=9.4.0",
-    "npm": ">=6.0.0"
+    "node": "10.5.0",
+    "npm": "6.1.0"
   },
   "dependencies": {
-    "cx-ui-components": "0.21.0",
+    "cx-ui-components": "^0.21.2",
     "immutable": "3.8.2",
     "moment": "2.22.0",
     "react": "16.2.0",

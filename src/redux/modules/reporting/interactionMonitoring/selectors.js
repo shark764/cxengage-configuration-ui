@@ -3,6 +3,8 @@
  */
 
 import { createSelector } from 'reselect';
+import { hasPermission } from '../../entities/selectors';
+import { getCurrentPermissions } from '../../userData/selectors';
 
 const selectInteractionMonitoringMap = state =>
   state.get('InteractionMonitoring');
@@ -23,3 +25,21 @@ export const selectInteractionMonitoringSelected = createSelector(
   selectInteractionMonitoringMap,
   subState => subState.get('selected')
 );
+
+export const userHasMonitorAllCallsPermission = state =>
+  hasPermission(
+    getCurrentPermissions(state),
+    selectInteractionMonitoringMap(state).get('monitorAllCallsPermission')
+  );
+
+export const userHasBargeAllCallsPermission = state =>
+  hasPermission(
+    getCurrentPermissions(state),
+    selectInteractionMonitoringMap(state).get('bargeAllCallsPermission')
+  );
+
+export const userHasViewAllMonitoredCallsPermission = state =>
+  hasPermission(
+    getCurrentPermissions(state),
+    selectInteractionMonitoringMap(state).get('viewAllMonitoredCallsPermission')
+  );

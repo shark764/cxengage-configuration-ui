@@ -123,8 +123,10 @@ exports[`columnFilterMenus reducer snapshots dispatches updateGroupsColumnFilter
 Immutable.Map {
   "mockTable": Immutable.Map {
     "Groups": Immutable.List [
-      "mockGroupData1",
-      "mockGroupData2",
+      Immutable.Map {
+        "mockItem": "",
+        "active": true,
+      },
     ],
   },
 }
@@ -134,8 +136,10 @@ exports[`columnFilterMenus reducer snapshots dispatches updateSkillsColumnFilter
 Immutable.Map {
   "mockTable": Immutable.Map {
     "Skills": Immutable.List [
-      "mockSkillsData1",
-      "mockSkillsData2",
+      Immutable.Map {
+        "mockItem": "",
+        "active": true,
+      },
     ],
   },
 }
@@ -168,7 +172,7 @@ Immutable.Map {
       },
       Immutable.Map {
         "name": "Channel",
-        "active": false,
+        "active": true,
       },
       Immutable.Map {
         "name": "Direction",

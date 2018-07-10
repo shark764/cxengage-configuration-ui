@@ -30,11 +30,17 @@ export default function(startTime, tableType, twelveHourFormat) {
     Header: 'Start Time',
     show: startTime,
     id: 'startTimestamp',
-    width: 180,
+    minWidth: 190,
     resizable: false,
     accessor: d => timeStampToSeconds(d.startTimestamp),
     Cell: ({ value }) =>
-      twelveHourFormat ? twelveHourTime(value) : twentyFourHourTime(value),
+      twelveHourFormat ? (
+        <span title={twelveHourTime(value)}>{twelveHourTime(value)}</span>
+      ) : (
+        <span title={twentyFourHourTime(value)}>
+          {twentyFourHourTime(value)}
+        </span>
+      ),
     filterMethod: (filter, row) => {
       const filterArray = filter.value.split('-');
       const beforeOrAfter = filterArray[0];
@@ -120,6 +126,11 @@ export class StartTimeFilter extends Component {
             className="StartTimeFilter"
             onChange={this.afterBeforeOnchange}
             options={['After', 'Before']}
+            defaultValue={
+              this.props.filter
+                ? this.props.filter.value.split('-')[0]
+                : 'After'
+            }
           />
 
           <TimeInput

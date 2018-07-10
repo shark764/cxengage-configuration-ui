@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ElapsedTime column calling the columns Cell method results in proper response or object 1`] = `
+<span
+  title="11:20:00"
+>
+  11:20:00
+</span>
+`;
+
 exports[`ElapsedTime column returns the proper object column configuration object 1`] = `
 Object {
   "Cell": [Function],

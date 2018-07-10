@@ -4,6 +4,11 @@ describe('direction table column', () => {
   it('function returns correct object', () => {
     expect(direction('All', 'mockTable')).toMatchSnapshot();
   });
+  it('Cell returns the value wrapped in a span', () => {
+    expect(
+      expect(direction('All', 'mockTable').Cell({ value: 'mockValue' }))
+    ).toMatchSnapshot();
+  });
 });
 
 describe('direction table filter method', () => {

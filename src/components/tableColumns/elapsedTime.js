@@ -68,7 +68,9 @@ export default function(value, tableType) {
     id: 'elapsedTime',
     width: 150,
     accessor: d => parseInt(d.currentStateDuration / 1000, 10),
-    Cell: ({ value }) => startOfDay(value),
+    Cell: ({ value }) => (
+      <span title={startOfDay(value)}>{startOfDay(value)}</span>
+    ),
     filterMethod: (filter, row) => {
       let filterArray = filter.value.split(':');
       let timeFilter = parseInt(filterArray[1], 10);

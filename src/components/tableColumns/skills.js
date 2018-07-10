@@ -23,7 +23,8 @@ export default function(value, tableType) {
         })
       );
       return skillsArray.join(', ');
-    }
+    },
+    Cell: ({ value }) => <span title={value}>{value}</span>
   };
 }
 

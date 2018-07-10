@@ -41,4 +41,9 @@ describe('skills table column', () => {
       })
     ).toMatchSnapshot();
   });
+  it('Cell returns the value wrapped in a span', () => {
+    expect(
+      skills('Skills', 'mockTableType').Cell({ value: 'mockValue' })
+    ).toMatchSnapshot();
+  });
 });

@@ -26,6 +26,7 @@ export default function(direction, tableType) {
     show: direction,
     id: 'direction',
     accessor: 'direction',
+    Cell: ({ value }) => <span title={value}>{value}</span>,
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row),
     Filter: ({ onChange }) =>
       helperFunctions.directionFilter(onChange, tableType)

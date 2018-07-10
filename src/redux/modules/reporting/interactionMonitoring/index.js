@@ -9,7 +9,10 @@ export const initialState = fromJS({
   data: [],
   sorted: [],
   expanded: {},
-  selected: ''
+  selected: '',
+  monitorAllCallsPermission: ['MONITOR_ALL_CALLS'],
+  bargeAllCallsPermission: ['BARGE_ALL_CALLS'],
+  viewAllMonitoredCallsPermission: ['VIEW_ALL_MONITORED_CALLS']
 });
 
 // Actions

@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`descriptionColumn Cell renders correctly 1`] = `
-<abbr
+<span
   title="mock description"
 >
   mock description
-</abbr>
+</span>
 `;
 
 exports[`descriptionColumn is configured correctly 1`] = `
 Object {
   "Cell": [Function],
-  "Header": <abbr
+  "Header": <span
     title="Description"
   >
     Description
-  </abbr>,
+  </span>,
   "accessor": "description",
   "id": "description",
 }

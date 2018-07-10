@@ -6,7 +6,7 @@ import React from 'react';
 
 export const statusColumn = {
   id: 'status',
-  Header: <abbr title="Status">Status</abbr>,
+  Header: <span title="Status">Status</span>,
   accessor: list => (list.active ? 'Enabled' : 'Disabled'),
   filterMethod: (filter, row) => {
     if (filter.value === 'all') {

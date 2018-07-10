@@ -12,6 +12,7 @@ exports[`startTimeColumn Filter renders properly 24 hour format, with default fi
   <styled.div>
     <FilterSelect
       className="StartTimeFilter"
+      defaultValue="After"
       onChange={[Function]}
       options={
         Array [
@@ -40,6 +41,7 @@ exports[`startTimeColumn Filter renders properly tweleve hour format , with defa
   <styled.div>
     <FilterSelect
       className="StartTimeFilter"
+      defaultValue="After"
       onChange={[Function]}
       options={
         Array [
@@ -65,9 +67,21 @@ exports[`startTimeColumn Filter renders properly tweleve hour format , with defa
 </Connect(CustomDropdownMenu)>
 `;
 
-exports[`startTimeColumn configuration object Cell 1`] = `"Invalid date"`;
+exports[`startTimeColumn configuration object Cell 1`] = `
+<span
+  title="Invalid date"
+>
+  Invalid date
+</span>
+`;
 
-exports[`startTimeColumn configuration object Cell 2`] = `"Invalid date"`;
+exports[`startTimeColumn configuration object Cell 2`] = `
+<span
+  title="Invalid date"
+>
+  Invalid date
+</span>
+`;
 
 exports[`startTimeColumn configuration object returns the proper object column configuration object 1`] = `
 Object {
@@ -77,8 +91,8 @@ Object {
   "accessor": [Function],
   "filterMethod": [Function],
   "id": "startTimestamp",
+  "minWidth": 190,
   "resizable": false,
   "show": "2018-02-20T14:24:41.519Z",
-  "width": 180,
 }
 `;

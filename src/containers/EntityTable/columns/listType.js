@@ -6,7 +6,7 @@ import React from 'react';
 
 export const listTypeColumn = {
   id: 'listType',
-  Header: <abbr title="List Type">List Type</abbr>,
+  Header: <span title="List Type">List Type</span>,
   accessor: list => list.listType.name,
-  Cell: ({ row }) => <abbr title={row.listType}>{row.listType}</abbr>
+  Cell: ({ row }) => <span title={row.listType}>{row.listType}</span>
 };

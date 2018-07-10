@@ -41,4 +41,9 @@ describe('groups table column', () => {
       })
     ).toMatchSnapshot();
   });
+  it('Cell returns the value wrapped in a span', () => {
+    expect(
+      groups('groups', 'mockTableType').Cell({ value: 'mockValue' })
+    ).toMatchSnapshot();
+  });
 });

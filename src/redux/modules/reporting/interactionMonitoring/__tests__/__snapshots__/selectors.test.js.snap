@@ -29,3 +29,9 @@ Array [
   },
 ]
 `;
+
+exports[`userHasBargeAllCallsPermission returns true if the user has the proper permission 1`] = `true`;
+
+exports[`userHasMonitorAllCallsPermission returns true if the user has the proper permission 1`] = `true`;
+
+exports[`userHasViewAllMonitoredCallsPermission returns true if the user has the proper permission 1`] = `true`;

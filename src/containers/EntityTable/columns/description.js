@@ -6,7 +6,7 @@ import React from 'react';
 
 export const descriptionColumn = {
   id: 'description',
-  Header: <abbr title="Description">Description</abbr>,
+  Header: <span title="Description">Description</span>,
   accessor: 'description',
-  Cell: ({ row }) => <abbr title={row.description}>{row.description}</abbr>
+  Cell: ({ row }) => <span title={row.description}>{row.description}</span>
 };

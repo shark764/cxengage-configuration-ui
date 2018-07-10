@@ -23,6 +23,24 @@ describe('Supervisor Toolbar Layout', () => {
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
         startSupervisorToolbarSubscriptions={() => ''}
+        userHasBargeAllCallsPermission={true}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+  it('does not render the unmute button when userHasBargeAllCallsPermission is false', () => {
+    const component = shallow(
+      <SupervisorToolbarLayout
+        requestingToggleMute={() => ''}
+        requestingHangUp={() => ''}
+        muted={true}
+        twilioEnabled={true}
+        twilioIsDefault={true}
+        monitoringStatus={'connected'}
+        interactionId={'interactionId'}
+        setSilentMonitoringInteractionId={() => ''}
+        startSupervisorToolbarSubscriptions={() => ''}
+        userHasBargeAllCallsPermission={false}
       />
     );
     expect(component).toMatchSnapshot();
@@ -39,6 +57,7 @@ describe('Supervisor Toolbar Layout', () => {
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
         startSupervisorToolbarSubscriptions={() => ''}
+        userHasBargeAllCallsPermission={true}
       />
     );
     expect(component).toMatchSnapshot();
@@ -55,6 +74,7 @@ describe('Supervisor Toolbar Layout', () => {
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
         startSupervisorToolbarSubscriptions={() => ''}
+        userHasBargeAllCallsPermission={true}
       />
     );
     expect(component).toMatchSnapshot();
@@ -73,6 +93,7 @@ describe('Supervisor Toolbar Layout', () => {
         startSupervisorToolbarSubscriptions={
           startSupervisorToolbarSubscriptionsMock
         }
+        userHasBargeAllCallsPermission={true}
       />
     );
     component3.find('#muteButton').simulate('click');
@@ -97,6 +118,7 @@ describe('Full mount to test lifecycle events', () => {
         startSupervisorToolbarSubscriptions={
           startSupervisorToolbarSubscriptionsMock
         }
+        userHasBargeAllCallsPermission={true}
       />
     );
     expect(startSupervisorToolbarSubscriptionsMock).toHaveBeenCalled();

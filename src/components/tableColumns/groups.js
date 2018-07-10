@@ -13,6 +13,7 @@ export default function(value, tableType) {
     sortable: false,
     Filter: groupsFilter(tableType),
     id: 'groups',
+    minWidth: 115,
     accessor: d => {
       let groupArray = [];
       d.agents.forEach(agent =>
@@ -23,7 +24,8 @@ export default function(value, tableType) {
         })
       );
       return groupArray.join(', ');
-    }
+    },
+    Cell: ({ value }) => <span title={value}>{value}</span>
   };
 }
 

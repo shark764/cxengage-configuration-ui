@@ -56,3 +56,55 @@ describe('selectInteractionMonitoringSelected', () => {
     ).toMatchSnapshot();
   });
 });
+
+describe('userHasMonitorAllCallsPermission', () => {
+  it('returns true if the user has the proper permission', () => {
+    const initialState = fromJS({
+      UserData: {
+        permissions: ['mockPermission1']
+      },
+      InteractionMonitoring: {
+        monitorAllCallsPermission: ['mockPermission1'],
+        bargeAllCallsPermission: ['mockPermission2'],
+        viewAllMonitoredCallsPermission: ['mockPermission3']
+      }
+    });
+    expect(
+      sel.userHasMonitorAllCallsPermission(initialState)
+    ).toMatchSnapshot();
+  });
+});
+
+describe('userHasBargeAllCallsPermission', () => {
+  it('returns true if the user has the proper permission', () => {
+    const initialState = fromJS({
+      UserData: {
+        permissions: ['mockPermission2']
+      },
+      InteractionMonitoring: {
+        monitorAllCallsPermission: ['mockPermission1'],
+        bargeAllCallsPermission: ['mockPermission2'],
+        viewAllMonitoredCallsPermission: ['mockPermission3']
+      }
+    });
+    expect(sel.userHasBargeAllCallsPermission(initialState)).toMatchSnapshot();
+  });
+});
+
+describe('userHasViewAllMonitoredCallsPermission', () => {
+  it('returns true if the user has the proper permission', () => {
+    const initialState = fromJS({
+      UserData: {
+        permissions: ['mockPermission3']
+      },
+      InteractionMonitoring: {
+        monitorAllCallsPermission: ['mockPermission1'],
+        bargeAllCallsPermission: ['mockPermission2'],
+        viewAllMonitoredCallsPermission: ['mockPermission3']
+      }
+    });
+    expect(
+      sel.userHasViewAllMonitoredCallsPermission(initialState)
+    ).toMatchSnapshot();
+  });
+});
