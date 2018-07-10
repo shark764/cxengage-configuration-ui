@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`listTypeColumn Cell renders correctly 1`] = `
-<abbr
+<span
   title="mock list type"
 >
   mock list type
-</abbr>
+</span>
 `;
 
 exports[`listTypeColumn is configured correctly 1`] = `
 Object {
   "Cell": [Function],
-  "Header": <abbr
+  "Header": <span
     title="List Type"
   >
     List Type
-  </abbr>,
+  </span>,
   "accessor": [Function],
   "id": "listType",
 }

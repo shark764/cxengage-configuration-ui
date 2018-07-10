@@ -106,6 +106,7 @@ describe('Interaction Monitoring Layout', () => {
         removeSelected={() => {}}
         twelveHourFormat={true}
         activeColumns={activeColumnsActive}
+        userHasViewAllMonitoredCallsPermission={false}
       />
     );
     expect(component).toMatchSnapshot();
@@ -147,6 +148,7 @@ describe('Interaction Monitoring Layout', () => {
         removeSelected={() => {}}
         twelveHourFormat={false}
         activeColumns={allColumnsNotActive}
+        userHasViewAllMonitoredCallsPermission={true}
       />
     );
     expect(component).toMatchSnapshot();
@@ -192,6 +194,7 @@ describe('Full mount to test lifecycle events', () => {
           removeSelected={() => {}}
           twelveHourFormat={true}
           activeColumns={activeColumnsActive}
+          userHasViewAllMonitoredCallsPermission={true}
         />
       </Provider>
     );
@@ -244,6 +247,7 @@ describe('Interaction monitoring methods', () => {
       twelveHourFormat={true}
       activeColumns={activeColumnsActive}
       monitoredId={'0000-0000-0000-0002'}
+      userHasViewAllMonitoredCallsPermission={true}
     />
   );
   describe('getTableRowProps', () => {

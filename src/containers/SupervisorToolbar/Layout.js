@@ -40,6 +40,7 @@ export default class SupervisorToolbar extends Component {
               size={40}
             />
             {this.props.monitoringStatus === 'connected' &&
+              this.props.userHasBargeAllCallsPermission &&
               (this.props.muted ? (
                 <MutedIconSVG
                   id="unmuteButton"
@@ -67,5 +68,6 @@ SupervisorToolbar.propTypes = {
   muted: PropTypes.bool.isRequired,
   twilioEnabled: PropTypes.bool.isRequired,
   monitoringStatus: PropTypes.string.isRequired,
-  interactionId: PropTypes.string.isRequired
+  interactionId: PropTypes.string.isRequired,
+  userHasBargeAllCallsPermission: PropTypes.bool.isRequired
 };

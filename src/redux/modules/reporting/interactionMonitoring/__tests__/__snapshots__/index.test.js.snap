@@ -54,5 +54,14 @@ Immutable.Map {
   "sorted": Immutable.List [],
   "expanded": Immutable.Map {},
   "selected": "",
+  "monitorAllCallsPermission": Immutable.List [
+    "MONITOR_ALL_CALLS",
+  ],
+  "bargeAllCallsPermission": Immutable.List [
+    "BARGE_ALL_CALLS",
+  ],
+  "viewAllMonitoredCallsPermission": Immutable.List [
+    "VIEW_ALL_MONITORED_CALLS",
+  ],
 }
 `;

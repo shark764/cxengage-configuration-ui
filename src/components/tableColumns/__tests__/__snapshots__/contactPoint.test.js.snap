@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contactPoint table column Cell returns the value wrapped in a span 1`] = `
+<span
+  title="mockValue"
+>
+  mockValue
+</span>
+`;
+
+exports[`contactPoint table column accessor returns the contactPoint name 1`] = `"contactPoint"`;
+
+exports[`contactPoint table column function returns correct object 1`] = `
+Object {
+  "Cell": [Function],
+  "Header": "Contact Point",
+  "accessor": "contactPoint",
+  "id": "contactPoint",
+  "show": undefined,
+}
+`;

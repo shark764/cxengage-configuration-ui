@@ -1,11 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`agent table column Cell returns the value wrapped in a span 1`] = `
+<span
+  title="mockValue"
+>
+  mockValue
+</span>
+`;
+
 exports[`agent table column accessor returns agents names as a string seperated by commas 1`] = `"firstName1 lastName1, firstName2 lastName2, firstName3 lastName3"`;
 
 exports[`agent table column accessor returns single agents name with no comma 1`] = `"firstName1 lastName1"`;
 
 exports[`agent table column function returns correct object 1`] = `
 Object {
+  "Cell": [Function],
   "Header": "Agent",
   "accessor": [Function],
   "id": "agentName",

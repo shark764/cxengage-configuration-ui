@@ -21,11 +21,13 @@ const CustomSubMenuWrapper = styled.div`
 export default function(startDate, tableType) {
   return {
     Header: 'Start Date',
-    minWidth: 170,
+    minWidth: 195,
     show: startDate,
     id: 'startDateTimestamp',
     accessor: d => timeStampToSeconds(d.startTimestamp),
-    Cell: ({ value }) => fullDateString(value),
+    Cell: ({ value }) => (
+      <span title={fullDateString(value)}>{fullDateString(value)}</span>
+    ),
     filterMethod: (filter, row) => {
       const filterArray = filter.value.split(':');
       const beforeOrAfter = filterArray[0];
@@ -59,6 +61,11 @@ export class StartDateFilter extends Component {
     this.props.onChange(`${event.target.value}:${this.filterArray()[1]}`);
   changeDateInput = event =>
     this.props.onChange(`${this.filterArray()[0]}:${event.target.value}`);
+  formatCurrentFilter = filter => {
+    const beforeOrAfter = filter.value.split(':')[0];
+    const dateArray = filter.value.split(':')[1].split('-');
+    return `${beforeOrAfter} ${dateArray[1]}-${dateArray[2]}-${dateArray[0]}`;
+  };
 
   render() {
     return (
@@ -71,7 +78,7 @@ export class StartDateFilter extends Component {
           updateFilter={this.props.onChange}
           currentFilter={
             this.props.filter
-              ? this.props.filter.value.split(':').join(' ')
+              ? this.formatCurrentFilter(this.props.filter)
               : 'All Results'
           }
         >
@@ -79,18 +86,17 @@ export class StartDateFilter extends Component {
             <FilterSelect
               onChange={this.changeAfterBefore}
               options={['After', 'Before']}
+              defaultValue={
+                this.props.filter
+                  ? this.props.filter.value.split(':')[0]
+                  : 'After'
+              }
               // The below style is required as styled component
               // doesn't like the type="date" input
               style={{ width: '160px' }}
             />
 
-            <input
-              value={
-                this.props.filter ? this.props.filter.value.split(':')[1] : ''
-              }
-              type="date"
-              onChange={this.changeDateInput}
-            />
+            <input type="date" onChange={this.changeDateInput} />
           </CustomSubMenuWrapper>
         </CustomFilterMenu>
       </div>

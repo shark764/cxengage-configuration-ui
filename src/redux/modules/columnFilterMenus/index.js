@@ -16,7 +16,7 @@ export const initialState = fromJS({
       { name: 'CustomerId', active: true },
       { name: 'ContactPoint', active: true },
       { name: 'Flow', active: true },
-      { name: 'Channel', active: false },
+      { name: 'Channel', active: true },
       { name: 'Direction', active: true },
       { name: 'Presence State', active: false },
       { name: 'Start Date', active: false },
@@ -98,12 +98,12 @@ export default function ColumnsMenu(state = initialState, action) {
     case 'SET_GROUPS_DATA':
       return state.setIn(
         [action.tableType, 'Groups'],
-        fromJS(action.arrayOfGroupData)
+        fromJS(action.arrayOfGroupData).filter(x => x.get('active'))
       );
     case 'SET_SKILLS_DATA':
       return state.setIn(
         [action.tableType, 'Skills'],
-        fromJS(action.arrayOfSkillData)
+        fromJS(action.arrayOfSkillData).filter(x => x.get('active'))
       );
     case 'TOGGLE_INVERSE_MENUITEMS':
       return state.updateIn([action.tableType, action.menuType], columns =>

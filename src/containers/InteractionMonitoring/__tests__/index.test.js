@@ -21,7 +21,8 @@ jest.mock(
     selectInteractionMonitoringTableData: () => ({ item1: '', item2: '' }),
     selectInteractionMonitoringSorted: () => true,
     selectInteractionMonitoringExpanded: () => ({}),
-    selectInteractionMonitoringSelected: () => 'conected'
+    selectInteractionMonitoringSelected: () => 'conected',
+    userHasViewAllMonitoredCallsPermission: () => true
   })
 );
 jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
@@ -30,7 +31,7 @@ jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
   selectSupervisorToolbarSilentMonitoringStatus: () => 'mockStatus'
 }));
 
-describe('Supervisor Toolbar Renders', () => {
+describe('InteractionMonitoring Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
     shallow(<InteractionMonitoring store={store}>Child</InteractionMonitoring>);

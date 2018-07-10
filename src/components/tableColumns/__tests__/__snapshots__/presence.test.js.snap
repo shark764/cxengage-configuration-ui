@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`presence table column Cell returns the value wrapped in a span 1`] = `
+<span
+  title="mockValue"
+>
+  mockValue
+</span>
+`;
+
+exports[`presence table column accessor returns the presence name 1`] = `"state"`;
+
+exports[`presence table column function returns correct object 1`] = `
+Object {
+  "Cell": [Function],
+  "Header": "Presence State",
+  "accessor": "state",
+  "id": "presenceState",
+  "show": undefined,
+}
+`;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`channel table column Cell returns the value wrapped in a span 1`] = `
+<span
+  title="mockValue"
+>
+  mockValue
+</span>
+`;
+
+exports[`channel table column accessor returns the channel name 1`] = `"channelType"`;
+
+exports[`channel table column function returns correct object 1`] = `
+Object {
+  "Cell": [Function],
+  "Header": "Channel",
+  "accessor": "channelType",
+  "id": "channel",
+  "show": undefined,
+}
+`;

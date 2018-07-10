@@ -17,6 +17,12 @@ jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
   selectSupervisorToolbarSilentMonitoringInteractionId: () =>
     'mockInteractionId'
 }));
+jest.mock(
+  '../../../redux/modules/reporting/interactionMonitoring/selectors',
+  () => ({
+    userHasBargeAllCallsPermission: () => true
+  })
+);
 
 describe('Supervisor Toolbar Renders', () => {
   it('renders', () => {

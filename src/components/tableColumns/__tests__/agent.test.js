@@ -20,4 +20,7 @@ describe('agent table column', () => {
       agent().accessor({ agents: [{ agentName: 'firstName1 lastName1' }] })
     ).toMatchSnapshot();
   });
+  it('Cell returns the value wrapped in a span', () => {
+    expect(agent().Cell({ value: 'mockValue' })).toMatchSnapshot();
+  });
 });

@@ -14,6 +14,8 @@ import {
   requestingHangUp
 } from '../../redux/modules/supervisorToolbar';
 
+import { userHasBargeAllCallsPermission } from '../../redux/modules/reporting/interactionMonitoring/selectors';
+
 import Layout from './Layout';
 
 export const mapStateToProps = (state, props) => ({
@@ -27,7 +29,8 @@ export const mapStateToProps = (state, props) => ({
   interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(
     state,
     props
-  )
+  ),
+  userHasBargeAllCallsPermission: userHasBargeAllCallsPermission(state)
 });
 
 const actions = {

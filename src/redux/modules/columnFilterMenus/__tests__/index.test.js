@@ -70,10 +70,7 @@ describe('columnFilterMenus reducer snapshots', () => {
     expect(
       ColumnsMenu(
         mockInitialState,
-        updateGroupsColumnFilter(
-          ['mockGroupData1', 'mockGroupData2'],
-          'mockTable'
-        )
+        updateGroupsColumnFilter([{ mockItem: '', active: true }], 'mockTable')
       )
     ).toMatchSnapshot();
   });
@@ -86,10 +83,7 @@ describe('columnFilterMenus reducer snapshots', () => {
     expect(
       ColumnsMenu(
         mockInitialState,
-        updateSkillsColumnFilter(
-          ['mockSkillsData1', 'mockSkillsData2'],
-          'mockTable'
-        )
+        updateSkillsColumnFilter([{ mockItem: '', active: true }], 'mockTable')
       )
     ).toMatchSnapshot();
   });

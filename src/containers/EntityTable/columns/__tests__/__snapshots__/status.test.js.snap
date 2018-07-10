@@ -31,11 +31,11 @@ exports[`statusColumn Filter renders correctly 1`] = `
 exports[`statusColumn is configured correctly 1`] = `
 Object {
   "Filter": [Function],
-  "Header": <abbr
+  "Header": <span
     title="Status"
   >
     Status
-  </abbr>,
+  </span>,
   "accessor": [Function],
   "filterMethod": [Function],
   "id": "status",

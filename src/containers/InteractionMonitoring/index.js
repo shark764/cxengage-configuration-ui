@@ -23,7 +23,8 @@ import {
   selectInteractionMonitoringTableData,
   selectInteractionMonitoringSorted,
   selectInteractionMonitoringExpanded,
-  selectInteractionMonitoringSelected
+  selectInteractionMonitoringSelected,
+  userHasViewAllMonitoredCallsPermission
 } from '../../redux/modules/reporting/interactionMonitoring/selectors';
 import {
   selectSupervisorToolbarSilentMonitoringInteractionId,
@@ -48,7 +49,10 @@ export const mapStateToProps = (state, props) => ({
     state,
     props
   ),
-  monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props)
+  monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props),
+  userHasViewAllMonitoredCallsPermission: userHasViewAllMonitoredCallsPermission(
+    state
+  )
 });
 
 export const actions = {

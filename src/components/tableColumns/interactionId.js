@@ -28,8 +28,10 @@ export default function(interactionId) {
 
 export function interactionIdCell(value) {
   return (
-    <CopyToClipboard text={value}>
-      <TableButton>{value}</TableButton>
-    </CopyToClipboard>
+    <span title={value}>
+      <CopyToClipboard text={value}>
+        <TableButton>{value}</TableButton>
+      </CopyToClipboard>
+    </span>
   );
 }

@@ -44,6 +44,12 @@ injectGlobal`
 .InteractionMonitoringTable .rt-tbody {
   overflow: initial;
 }
+.InteractionMonitoringTable .rt-table {
+  overflow: hidden !important;
+}
+.InteractionMonitoringTable .rt-resizer {
+  z-index: 3 !important;
+}
 `;
 
 export default class InteractionMonitoring extends Component {
@@ -111,21 +117,22 @@ export default class InteractionMonitoring extends Component {
       customer,
       monitoring
     }
-  }) => (
-    <InteractionDetails
-      data={{
-        startTimestamp,
-        agentName,
-        direction,
-        channel,
-        contactPoint,
-        flowName,
-        customer,
-        monitoring
-      }}
-      twelveHourFormat={this.props.twelveHourFormat}
-    />
-  );
+  }) =>
+    this.props.userHasViewAllMonitoredCallsPermission && (
+      <InteractionDetails
+        data={{
+          startTimestamp,
+          agentName,
+          direction,
+          channel,
+          contactPoint,
+          flowName,
+          customer,
+          monitoring
+        }}
+        twelveHourFormat={this.props.twelveHourFormat}
+      />
+    );
   toggleTimeFormat = () => this.props.toggleTimeFormat();
 
   render() {
@@ -241,5 +248,6 @@ InteractionMonitoring.propTypes = {
   activeColumns: PropTypes.arrayOf(PropTypes.bool.isRequired),
   setCurrentEntity: PropTypes.func,
   fetchData: PropTypes.func,
-  startInteractionMonitoring: PropTypes.func
+  startInteractionMonitoring: PropTypes.func,
+  userHasViewAllMonitoredCallsPermission: PropTypes.bool.isRequired
 };

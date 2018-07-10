@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.2]
+* CXV1-14539 - Silent Monitoring - "All" checkbox not clickable under columns
+* CXV1-14540 - Silent Monitoring - Groups and Skills UX issues
+* CXV1-14542 - Silent Monitoring - Start Date Filter Issue
+* CXV1-14543 - Silent Monitoring - Start time / Elapsed time filter issues.
+* CXV1-14588 - Silent Monitoring - Only filtering on enabled filters causes issues when voice is default filter value for channel
+* CXV1-14591 - Silent Monitoring - Ellipsis could use on hover tooltips
+* CXV1-14590 - Silent Monitoring - Disabled groups and skills appear in drop down menu
+
 ## [0.21.1]
 * CXV1-13838 - Fix create lists
 

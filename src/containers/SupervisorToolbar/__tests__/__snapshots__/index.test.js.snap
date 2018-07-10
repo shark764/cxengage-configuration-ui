@@ -7,5 +7,6 @@ Object {
   "muted": true,
   "twilioEnabled": true,
   "twilioIsDefault": true,
+  "userHasBargeAllCallsPermission": true,
 }
 `;

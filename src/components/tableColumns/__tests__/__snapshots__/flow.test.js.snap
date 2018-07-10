@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`flow table column Cell returns the value wrapped in a span 1`] = `
+<span
+  title="mockValue"
+>
+  mockValue
+</span>
+`;
+
+exports[`flow table column accessor returns the flow name 1`] = `"flowName"`;
+
+exports[`flow table column function returns correct object 1`] = `
+Object {
+  "Cell": [Function],
+  "Header": "Flow",
+  "accessor": "flowName",
+  "id": "flowName",
+  "show": undefined,
+}
+`;
