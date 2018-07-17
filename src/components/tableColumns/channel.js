@@ -8,6 +8,8 @@ export default function chnnelColumn(channel) {
     Header: 'Channel',
     show: channel,
     id: 'channel',
+    width: 140,
+    resizable: false,
     accessor: 'channelType',
     Cell: ({ value }) => <span title={value}>{value}</span>
   };

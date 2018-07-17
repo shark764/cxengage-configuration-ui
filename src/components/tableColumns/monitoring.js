@@ -84,7 +84,8 @@ export default function(value, tableType, monitoredId, monitoringStatus) {
     Header: 'Monitoring',
     show: value,
     id: 'monitoring',
-    width: 180,
+    minWidth: 180,
+    resizable: false,
     accessor: d => helperFunctions.accessor(d),
     Cell: ({ value, row }) =>
       helperFunctions.Cell(value, row, monitoredId, monitoringStatus),

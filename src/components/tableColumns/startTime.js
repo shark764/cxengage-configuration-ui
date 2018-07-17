@@ -143,7 +143,13 @@ export class StartTimeFilter extends Component {
           />
 
           {this.props.twelveHourFormat && (
-            <FilterSelect onChange={this.amPmOnChange} options={['AM', 'PM']} />
+            <FilterSelect
+              onChange={this.amPmOnChange}
+              options={['AM', 'PM']}
+              defaultValue={
+                this.props.filter ? this.props.filter.value.split('-')[2] : 'AM'
+              }
+            />
           )}
         </CustomSubMenuWrapper>
       </CustomFilterMenu>

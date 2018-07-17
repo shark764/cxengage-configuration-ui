@@ -168,6 +168,31 @@ describe('startTimeColumn Filter', () => {
       );
       expect(wrapper).toMatchSnapshot();
     });
+    it('tweleve hour format , with no filter', () => {
+      const columnConfigObject = startTimeColumn(
+        '2018-02-20T14:24:41.519Z',
+        'mockTableType',
+        true
+      );
+      const wrapper = shallow(
+        columnConfigObject.Filter({ onChange: answerKey => answerKey })
+      );
+      expect(wrapper).toMatchSnapshot();
+    });
+    it('tweleve hour format , with filter', () => {
+      const columnConfigObject = startTimeColumn(
+        '2018-02-20T14:24:41.519Z',
+        'mockTableType',
+        true
+      );
+      const wrapper = shallow(
+        columnConfigObject.Filter({
+          filter: { value: 'Before-12:12-PM' },
+          onChange: answerKey => answerKey
+        })
+      );
+      expect(wrapper).toMatchSnapshot();
+    });
     it('24 hour format, with default filter', () => {
       const columnConfigObject = startTimeColumn(
         '2018-02-20T14:24:41.519Z',

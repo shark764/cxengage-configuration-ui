@@ -8,7 +8,8 @@ Object {
   "accessor": [Function],
   "filterMethod": [Function],
   "id": "startDateTimestamp",
-  "minWidth": 195,
+  "minWidth": 210,
+  "resizable": false,
   "show": "2018-02-20T14:24:41.519Z",
 }
 `;
@@ -18,7 +19,7 @@ exports[`startDate Filter renders properly renders the After filter 1`] = `
   <Connect(CustomDropdownMenu)
     buttonType="columnFilter"
     className="startDate"
-    currentFilter="After undefined-undefined-0"
+    currentFilter="After mm/dd/yyyy"
     menuType="Start Date"
     tableType="mockTableType"
     updateFilter={[Function]}
@@ -53,7 +54,7 @@ exports[`startDate Filter renders properly renders the Before filter 1`] = `
   <Connect(CustomDropdownMenu)
     buttonType="columnFilter"
     className="startDate"
-    currentFilter="Before undefined-undefined-0"
+    currentFilter="Before mm/dd/yyyy"
     menuType="Start Date"
     tableType="mockTableType"
     updateFilter={[Function]}

@@ -21,7 +21,8 @@ const CustomSubMenuWrapper = styled.div`
 export default function(startDate, tableType) {
   return {
     Header: 'Start Date',
-    minWidth: 195,
+    minWidth: 210,
+    resizable: false,
     show: startDate,
     id: 'startDateTimestamp',
     accessor: d => timeStampToSeconds(d.startTimestamp),
@@ -64,7 +65,9 @@ export class StartDateFilter extends Component {
   formatCurrentFilter = filter => {
     const beforeOrAfter = filter.value.split(':')[0];
     const dateArray = filter.value.split(':')[1].split('-');
-    return `${beforeOrAfter} ${dateArray[1]}-${dateArray[2]}-${dateArray[0]}`;
+    return dateArray[1]
+      ? `${beforeOrAfter} ${dateArray[1]}-${dateArray[2]}-${dateArray[0]}`
+      : `${beforeOrAfter} mm/dd/yyyy`;
   };
 
   render() {

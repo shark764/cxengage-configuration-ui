@@ -16,6 +16,8 @@ Object {
   "Header": "Channel",
   "accessor": "channelType",
   "id": "channel",
+  "resizable": false,
   "show": undefined,
+  "width": 140,
 }
 `;

@@ -41,6 +41,14 @@ describe('direction table filter method', () => {
       )
     ).toEqual(true);
   });
+  it('filter value Agent Initiated returns rows matching agent-initiated ', () => {
+    expect(
+      direction('Agent Initiated', 'mockTable').filterMethod(
+        { value: 'Agent Initiated', id: 'agent-initiated' },
+        { 'agent-initiated': 'agent-initiated' }
+      )
+    ).toEqual(true);
+  });
   it("filter value Outbound doesn't match rows matching inbound ", () => {
     expect(
       direction('Outbound', 'mockTable').filterMethod(

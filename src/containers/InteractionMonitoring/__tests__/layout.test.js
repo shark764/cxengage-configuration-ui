@@ -306,13 +306,6 @@ describe('Interaction monitoring methods', () => {
       ).toEqual('sortedItem');
     });
   });
-  describe('getTableProps', () => {
-    it('returns the proper style object', () => {
-      expect(interactionMonitoring.instance().getTableProps().style).toEqual({
-        height: '80vh'
-      });
-    });
-  });
   describe('getTdProps', () => {
     it('returns the proper style object', () => {
       expect(interactionMonitoring.instance().getTdProps().style).toEqual({

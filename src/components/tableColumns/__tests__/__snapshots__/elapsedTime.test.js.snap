@@ -16,8 +16,9 @@ Object {
   "accessor": [Function],
   "filterMethod": [Function],
   "id": "elapsedTime",
+  "minWidth": 150,
+  "resizable": false,
   "show": 300000,
-  "width": 150,
 }
 `;
 
@@ -32,6 +33,7 @@ exports[`ElapsedTimeFilter renders a default properly when no filter is passed i
 >
   <styled.div>
     <FilterSelect
+      defaultValue="Greater Than"
       onChange={[Function]}
       options={
         Array [
@@ -45,6 +47,7 @@ exports[`ElapsedTimeFilter renders a default properly when no filter is passed i
       value={0}
     />
     <FilterSelect
+      defaultValue="Seconds"
       onChange={[Function]}
       options={
         Array [

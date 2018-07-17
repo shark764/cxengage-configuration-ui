@@ -31,7 +31,8 @@ export const initialState = fromJS({
     Direction: [
       { name: 'All', active: true },
       { name: 'Inbound', active: false },
-      { name: 'Outbound', active: false }
+      { name: 'Outbound', active: false },
+      { name: 'Agent Initiated', active: false }
     ],
     Monitoring: [
       { name: 'All', active: true },

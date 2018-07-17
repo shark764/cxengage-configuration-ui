@@ -13,7 +13,7 @@ export default function(value, tableType) {
     sortable: false,
     Filter: groupsFilter(tableType),
     id: 'groups',
-    minWidth: 115,
+    minWidth: 190,
     accessor: d => {
       let groupArray = [];
       d.agents.forEach(agent =>

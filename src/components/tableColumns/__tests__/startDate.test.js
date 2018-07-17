@@ -122,6 +122,26 @@ describe('startDate Filter renders properly', () => {
       wrapper.instance().changeAfterBefore({ target: { value: '05/24/2018' } })
     ).toEqual({ answerKey: '05/24/2018:0' });
   });
+  it('formatCurrentFilter method returns default dd/mm/yyyy when no there is no date input', () => {
+    const wrapper = shallow(
+      columnConfigObject.Filter({
+        onChange: answerKey => ({ answerKey })
+      })
+    );
+    expect(
+      wrapper.instance().formatCurrentFilter({ value: 'Before: undefined' })
+    ).toEqual('Before mm/dd/yyyy');
+  });
+  it('formatCurrentFilter method returns a proper formated filter when date input is valid', () => {
+    const wrapper = shallow(
+      columnConfigObject.Filter({
+        onChange: answerKey => ({ answerKey })
+      })
+    );
+    expect(
+      wrapper.instance().formatCurrentFilter({ value: 'Before:2018-09-08' })
+    ).toEqual('Before 09-08-2018');
+  });
   it('inputOnChange method', () => {
     const wrapper = shallow(
       columnConfigObject.Filter({
