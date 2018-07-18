@@ -157,25 +157,27 @@ export const FetchDataItem = (action$, store) =>
   );
 
 export const getTenantPermissions = (action$, store) =>
-  action$.ofType('SET_CURRENT_ENTITY').switchMap(action =>
-    fromPromise(
-      sdkPromise(
-        {
-          module: 'updateLocalStorage',
-          command: `updateLocalStorage`,
-          data: 'updateLocalStorage'
-        },
-        `updateLocalStorage`
-      )
-    ).map(response => ({
-      type: 'UPDATE_USER_PERMISSIONS',
-      tenantInfo: {
-        tenantId: response.tenantId,
-        tenantName: response.tenantName,
-        tenantPermissions: response.tenantPermissions
-      }
-    }))
-  );
+  action$
+    .ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$')
+    .switchMap(action =>
+      fromPromise(
+        sdkPromise(
+          {
+            module: 'updateLocalStorage',
+            command: `updateLocalStorage`,
+            data: 'updateLocalStorage'
+          },
+          `updateLocalStorage`
+        )
+      ).map(response => ({
+        type: 'UPDATE_USER_PERMISSIONS',
+        tenantInfo: {
+          tenantId: response.tenantId,
+          tenantName: response.tenantName,
+          tenantPermissions: response.tenantPermissions
+        }
+      }))
+    );
 
 export const CreateEntity = (action$, store) =>
   action$.ofType('CREATE_ENTITY').mergeMap(a =>

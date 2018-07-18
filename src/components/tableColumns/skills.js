@@ -11,6 +11,7 @@ export default function(value, tableType) {
     show: value,
     filterable: true,
     sortable: false,
+    minWidth: 190,
     Filter: skillsFilter(tableType),
     id: 'skills',
     accessor: d => {

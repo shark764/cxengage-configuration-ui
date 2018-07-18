@@ -29,6 +29,7 @@ Object {
   "accessor": [Function],
   "filterable": true,
   "id": "skills",
+  "minWidth": 190,
   "show": "Skills",
   "sortable": false,
 }

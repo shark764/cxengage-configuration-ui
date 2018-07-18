@@ -42,13 +42,10 @@ const Wrapper = styled.div`
 
 injectGlobal`
 .InteractionMonitoringTable .rt-tbody {
-  overflow: initial;
-}
-.InteractionMonitoringTable .rt-table {
-  overflow: hidden !important;
+  overflow-y: overlay;
 }
 .InteractionMonitoringTable .rt-resizer {
-  z-index: 3 !important;
+  z-index: 2 !important;
 }
 `;
 
@@ -56,7 +53,8 @@ export default class InteractionMonitoring extends Component {
   constructor() {
     super();
     this.state = {
-      filtered: [{ id: 'channel', value: 'voice' }]
+      filtered: [{ id: 'channel', value: 'voice' }],
+      defaultRowsNumber: parseFloat((window.innerHeight / 32 - 8).toFixed(0))
     };
   }
 
@@ -101,7 +99,6 @@ export default class InteractionMonitoring extends Component {
       return { style: {} };
     }
   };
-  getTableProps = () => ({ style: { height: '80vh' } });
   getTdProps = () => ({ style: { fontSize: '11.5pt' } });
   getTheadProps = () => ({ style: { color: 'grey' } });
   onFilteredChange = filtered => this.setState({ filtered: filtered });
@@ -164,7 +161,8 @@ export default class InteractionMonitoring extends Component {
 
         {!this.props.areAllColNotActive && (
           <ReactTable
-            defaultPageSize={20}
+            defaultPageSize={this.state.defaultRowsNumber}
+            pageSizeOptions={[this.state.defaultRowsNumber, 20, 50, 100]}
             className="InteractionMonitoringTable -striped -highlight"
             data={this.props.tableData}
             filterable

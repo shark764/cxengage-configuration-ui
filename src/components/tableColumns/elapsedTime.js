@@ -66,7 +66,8 @@ export default function(value, tableType) {
     Header: 'Elapsed Time',
     show: value,
     id: 'elapsedTime',
-    width: 150,
+    minWidth: 150,
+    resizable: false,
     accessor: d => parseInt(d.currentStateDuration / 1000, 10),
     Cell: ({ value }) => (
       <span title={startOfDay(value)}>{startOfDay(value)}</span>
@@ -134,6 +135,11 @@ export class ElapsedTimeFilter extends Component {
           <FilterSelect
             onChange={this.greaterThanOnChange}
             options={['Greater Than', 'Less Than']}
+            defaultValue={
+              this.props.filter
+                ? this.props.filter.value.split(':')[0]
+                : 'Greater Than'
+            }
           />
 
           <MinutesInput
@@ -146,6 +152,11 @@ export class ElapsedTimeFilter extends Component {
           <FilterSelect
             onChange={this.timeToggleOnChange}
             options={['Minutes', 'Seconds']}
+            defaultValue={
+              this.props.filter
+                ? this.props.filter.value.split(':')[2]
+                : 'Seconds'
+            }
           />
         </CustomSubMenuWrapper>
       </CustomFilterMenu>

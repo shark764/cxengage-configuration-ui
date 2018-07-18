@@ -29,7 +29,7 @@ Object {
   "accessor": [Function],
   "filterable": true,
   "id": "groups",
-  "minWidth": 115,
+  "minWidth": 190,
   "show": "groups",
   "sortable": false,
 }

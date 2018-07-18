@@ -222,6 +222,10 @@ Immutable.Map {
         "name": "Outbound",
         "active": false,
       },
+      Immutable.Map {
+        "name": "Agent Initiated",
+        "active": false,
+      },
     ],
     "Monitoring": Immutable.List [
       Immutable.Map {

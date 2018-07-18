@@ -101,8 +101,9 @@ Object {
   "accessor": [Function],
   "filterMethod": [Function],
   "id": "monitoring",
+  "minWidth": 180,
+  "resizable": false,
   "show": false,
-  "width": 180,
 }
 `;
 
@@ -114,7 +115,8 @@ Object {
   "accessor": [Function],
   "filterMethod": [Function],
   "id": "monitoring",
+  "minWidth": 180,
+  "resizable": false,
   "show": true,
-  "width": 180,
 }
 `;

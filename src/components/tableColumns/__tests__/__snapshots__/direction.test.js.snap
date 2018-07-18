@@ -235,6 +235,7 @@ Object {
   "accessor": "direction",
   "filterMethod": [Function],
   "id": "direction",
+  "resizable": false,
   "show": "All",
   "width": 140,
 }

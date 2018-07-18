@@ -13,6 +13,8 @@ export const helperFunctions = {
       return row[id] === 'inbound';
     } else if (value === 'Outbound') {
       return row[id] === 'outbound';
+    } else if (value === 'Agent Initiated') {
+      return row[id] === 'agent-initiated';
     } else {
       return true;
     }
@@ -23,6 +25,7 @@ export default function(direction, tableType) {
   return {
     Header: 'Direction',
     width: 140,
+    resizable: false,
     show: direction,
     id: 'direction',
     accessor: 'direction',

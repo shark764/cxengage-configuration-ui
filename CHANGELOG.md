@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.3]
+* CXV1-14543 - Silent Monitoring - Start time / Elapsed time filter issues and other minor css fixes
+
 ## [0.21.2]
 * CXV1-14539 - Silent Monitoring - "All" checkbox not clickable under columns
 * CXV1-14540 - Silent Monitoring - Groups and Skills UX issues
