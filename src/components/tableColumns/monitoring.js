@@ -111,8 +111,10 @@ export class MonitorFilter extends Component {
 }
 
 export class MonitoringCell extends Component {
-  monitorInteractionRequestor = () =>
-    store.dispatch(monitorInteractionInitialization(this.props.interactionId));
+  monitorInteractionRequestor = e =>
+    store.dispatch(
+      monitorInteractionInitialization(this.props.interactionId)
+    ) && e.stopPropagation();
   render() {
     return (
       <div>

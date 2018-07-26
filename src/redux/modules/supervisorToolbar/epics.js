@@ -10,6 +10,8 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import { zip } from 'rxjs/observable/zip';
+import { of } from 'rxjs/observable/of';
+import { concat } from 'rxjs/observable/concat';
 
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { from } from 'rxjs/observable/from';
@@ -20,7 +22,8 @@ import {
   selectSupervisorToolbarSilentMonitoringInteractionId,
   selectSupervisorToolbarSilentMonitoringStatus,
   selectSupervisorToolbarMuted,
-  selectSupervisorToolbarTwilioEnabled
+  selectSupervisorToolbarTwilioEnabled,
+  selectTransitionCall
 } from './selectors';
 
 import {
@@ -28,8 +31,8 @@ import {
   monitorInteractionRequested,
   monitorInteractionInitializationCompleted,
   hangUpRequested,
-  endSessionRequested,
-  toggleMuteRequested
+  toggleMuteRequested,
+  transitionCallEnding
 } from './index';
 
 // Start all the required subscriptions
@@ -60,8 +63,17 @@ export const MonitorInteractionInitialization = (action$, store) =>
     .ofType('MONITOR_INTERACTION_INITIALIZATION')
     .switchMap(({ interactionId }) =>
       fromPromise(
-        sdkCall({ module: 'monitorCall', data: { interactionId } })
-      ).mapTo(monitorInteractionInitializationCompleted())
+        sdkPromise(
+          {
+            module: 'monitorCall',
+            data: { interactionId },
+            topic: 'monitorCall'
+          },
+          `monitorCall`
+        )
+      )
+        .filter(response => response !== 'cancelled')
+        .mapTo(monitorInteractionInitializationCompleted())
     );
 
 export const MonitorInteraction = (action$, store) =>
@@ -69,7 +81,8 @@ export const MonitorInteraction = (action$, store) =>
     .ofType('REQUESTING_MONITOR_CALL')
     .map(action => ({
       ...action,
-      twilioEnabled: selectSupervisorToolbarTwilioEnabled(store.getState())
+      twilioEnabled: selectSupervisorToolbarTwilioEnabled(store.getState()),
+      transitionCall: selectTransitionCall(store.getState())
     }))
     .switchMap(action => {
       if (
@@ -80,11 +93,14 @@ export const MonitorInteraction = (action$, store) =>
           action$.ofType('cxengage/twilio/device-ready').take(1),
           action$.ofType('cxengage/session/started').take(1)
         ).mapTo(action);
+      } else if (action.transitionCall) {
+        return zip(
+          action$
+            .ofType('cxengage/interactions/voice/silent-monitor-end')
+            .take(1)
+        ).mapTo(action);
       } else {
-        return action$
-          .ofType('cxengage/session/started')
-          .take(1)
-          .mapTo(action);
+        return from([action]);
       }
     })
     .switchMap(action =>
@@ -128,25 +144,19 @@ export const HangUpEpic = (action$, store) =>
     })
     .filter(({ confirmationResponse }) => confirmationResponse)
     .switchMap(a =>
-      fromPromise(
-        sdkPromise(
-          {
-            module: 'interactions.voice',
-            command: 'resourceRemove',
-            data: { interactionId: a.interactionId }
-          },
-          'cxengage/interactions/voice/resource-removed-acknowledged'
-        )
-      ).mapTo(hangUpRequested())
-    );
-
-export const EndSessionOnSilentMonitoringEnd = (action$, store) =>
-  action$
-    .ofType('cxengage/interactions/voice/silent-monitor-end')
-    .switchMap(a =>
-      fromPromise(
-        sdkCall({ module: 'authentication', command: 'logout' })
-      ).mapTo(endSessionRequested())
+      concat(
+        of(a).mapTo(transitionCallEnding()),
+        fromPromise(
+          sdkPromise(
+            {
+              module: 'interactions.voice',
+              command: 'resourceRemove',
+              data: { interactionId: a.interactionId }
+            },
+            'cxengage/interactions/voice/resource-removed-acknowledged'
+          )
+        ).mapTo(hangUpRequested())
+      )
     );
 
 export const ToggleMuteEpic = (action$, store) =>

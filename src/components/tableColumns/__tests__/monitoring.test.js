@@ -143,13 +143,17 @@ describe('monitoringColumn Cells onclick handler works as expected', () => {
       channel: 'voice',
       monitoring: [{ endTimestamp: '2018-02-20T14:24:41.519Z' }]
     };
+    const event = {
+      stopPropagation: function() {
+        return row.interactionId;
+      }
+    };
     const cell = shallow(
       helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline')
     );
-    expect(cell.instance().monitorInteractionRequestor()).toEqual({
-      interactionId: '0000-0000-0000-0000',
-      type: 'MONITOR_INTERACTION_INITIALIZATION'
-    });
+    expect(cell.instance().monitorInteractionRequestor(event)).toEqual(
+      row.interactionId
+    );
   });
 });
 

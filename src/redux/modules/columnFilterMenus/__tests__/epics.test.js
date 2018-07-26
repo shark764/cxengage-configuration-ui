@@ -82,6 +82,40 @@ describe('UpdateStatSubscriptionFilters', () => {
   afterEach(() => {
     sdkPromise.mockClear();
   });
+  it('dispatch the proper action on success: skills / empty array', done => {
+    selectSkills.mockReturnValueOnce([]);
+    selectGroups.mockReturnValueOnce([]);
+    sdkPromise.mockReturnValue(
+      new Promise(resolve => resolve('mock response'))
+    );
+    const action = ActionsObservable.of({
+      type: 'TOGGLE_ALL_MENUITEMS_OFF',
+      menuType: 'Skills'
+    });
+    UpdateStatSubscriptionFilters(action, mockStore).subscribe(
+      actualOutputActions => {
+        expect(actualOutputActions).toMatchSnapshot();
+        done();
+      }
+    );
+  });
+  it('dispatch the proper action on success: groups / empty array', done => {
+    selectSkills.mockReturnValueOnce([]);
+    selectGroups.mockReturnValueOnce([]);
+    sdkPromise.mockReturnValue(
+      new Promise(resolve => resolve('mock response'))
+    );
+    const action = ActionsObservable.of({
+      type: 'TOGGLE_ALL_MENUITEMS_OFF',
+      menuType: 'Groups'
+    });
+    UpdateStatSubscriptionFilters(action, mockStore).subscribe(
+      actualOutputActions => {
+        expect(actualOutputActions).toMatchSnapshot();
+        done();
+      }
+    );
+  });
   it('dispatch the proper action on success: skills', done => {
     sdkPromise.mockReturnValue(
       new Promise(resolve => resolve('mock response'))

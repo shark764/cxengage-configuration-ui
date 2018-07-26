@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EndSessionOnSilentMonitoringEnd returns HANG_UP_REQUESTED_$ action 1`] = `
+exports[`HangUpEpic returns HANG_UP_REQUESTED_$ action 1`] = `
 Object {
-  "type": "END_SESSION_REQUESTED_$",
+  "type": "TRANSITION_CALL_ENDING",
 }
 `;
 
-exports[`HangUpEpic returns HANG_UP_REQUESTED_$ action 1`] = `
+exports[`HangUpEpic returns HANG_UP_REQUESTED_$ action 2`] = `
 Object {
   "type": "HANG_UP_REQUESTED_$",
 }

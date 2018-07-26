@@ -86,6 +86,29 @@ describe('selectSupervisorToolbarSilentMonitoringStatus', () => {
   });
 });
 
+describe('selectTransitionCall', () => {
+  it('returns false if the call is a transition call', () => {
+    const initialState = fromJS({
+      SupervisorToolbar: {
+        silentMonitoring: {
+          transitionCall: false
+        }
+      }
+    });
+    expect(sel.selectTransitionCall(initialState)).toEqual(false);
+  });
+  it('returns true if the call is a transition call', () => {
+    const initialState = fromJS({
+      SupervisorToolbar: {
+        silentMonitoring: {
+          transitionCall: true
+        }
+      }
+    });
+    expect(sel.selectTransitionCall(initialState)).toEqual(true);
+  });
+});
+
 describe('selectSupervisorToolbarSilentMonitoringInteractionId', () => {
   it('returns the monitoring status', () => {
     const initialState = fromJS({

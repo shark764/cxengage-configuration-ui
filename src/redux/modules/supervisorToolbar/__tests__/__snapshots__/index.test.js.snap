@@ -3,8 +3,8 @@
 exports[`SupervisorToolbar reducer snapshots dispatches MONITOR_INTERACTION_INITIALIZATION 1`] = `
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
-    "status": "connecting",
-    "interactionId": undefined,
+    "status": "offline",
+    "interactionId": "na",
   },
 }
 `;
@@ -14,6 +14,17 @@ Immutable.Map {
   "silentMonitoring": Immutable.Map {
     "status": "connecting",
     "interactionId": undefined,
+    "transitionCall": undefined,
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches TRANSITION_CALL_ENDING 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "connected",
+    "interactionId": "0000-0000-0000-0000",
+    "transitionCall": false,
   },
 }
 `;
@@ -33,11 +44,22 @@ Immutable.Map {
 }
 `;
 
-exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/silent-monitor-end 1`] = `
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/silent-monitor-end on a non transition call 1`] = `
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
     "status": "offline",
     "interactionId": "na",
+    "transitionCall": false,
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/silent-monitor-end on a transition call 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "offline",
+    "interactionId": "na",
+    "transitionCall": false,
   },
 }
 `;
@@ -56,11 +78,22 @@ Immutable.Map {
 }
 `;
 
-exports[`SupervisorToolbar reducer snapshots dispatches cxengage/session/sqs-shut-down 1`] = `
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/session/sqs-shut-down on a non transition call 1`] = `
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
     "status": "offline",
     "interactionId": "na",
+    "transitionCall": false,
+  },
+}
+`;
+
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/session/sqs-shut-down on a transition call 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "connected",
+    "interactionId": "0000-0000-0000-0000",
+    "transitionCall": true,
   },
 }
 `;

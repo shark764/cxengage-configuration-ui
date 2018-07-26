@@ -24,6 +24,23 @@ export function messageObservable() {
       ({ data }) =>
         data.subscription && filterArray.includes(data.subscription.topic)
     )
+    .map(event => {
+      if (event.data.subscription.topic === 'monitorCall') {
+        store.dispatch(
+          requestingMonitorCall(
+            event.data.subscription.response.interactionId,
+            event.data.subscription.response.defaultExtensionProvider,
+            event.data.subscription.response.transitionCall
+          )
+        );
+      } else {
+        store.dispatch({
+          type: event.data.subscription.topic,
+          response: event.data.subscription.response
+        });
+      }
+      return event;
+    })
     .do(({ data }) => {
       data.subscription.topic !== 'monitorCall' &&
         localStorage.setItem(
@@ -36,21 +53,7 @@ export function messageObservable() {
           )
         );
     })
-    .map(event => {
-      if (event.data.subscription.topic === 'monitorCall') {
-        return store.dispatch(
-          requestingMonitorCall(
-            event.data.subscription.response.interactionId,
-            event.data.subscription.response.defaultExtensionProvider
-          )
-        );
-      } else {
-        return store.dispatch({
-          type: event.data.subscription.topic,
-          response: event.data.subscription.response
-        });
-      }
-    });
+    .map(event => ({ type: `${event.data.subscription.topic}_$` }));
 }
 
 let subscription;

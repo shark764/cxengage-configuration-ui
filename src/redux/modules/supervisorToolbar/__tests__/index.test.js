@@ -37,11 +37,12 @@ describe('SupervisorToolbar reducer snapshots', () => {
     ).toMatchSnapshot();
   });
 
-  it('dispatches cxengage/session/sqs-shut-down', () => {
+  it('dispatches cxengage/session/sqs-shut-down on a non transition call', () => {
     const mockInitialState = fromJS({
       silentMonitoring: {
         status: 'connected',
-        interactionId: '0000-0000-0000-0000'
+        interactionId: '0000-0000-0000-0000',
+        transitionCall: false
       }
     });
     expect(
@@ -51,11 +52,57 @@ describe('SupervisorToolbar reducer snapshots', () => {
     ).toMatchSnapshot();
   });
 
-  it('dispatches cxengage/interactions/voice/silent-monitor-end', () => {
+  it('dispatches cxengage/session/sqs-shut-down on a transition call', () => {
     const mockInitialState = fromJS({
       silentMonitoring: {
         status: 'connected',
-        interactionId: '0000-0000-0000-0000'
+        interactionId: '0000-0000-0000-0000',
+        transitionCall: true
+      }
+    });
+    expect(
+      SupervisorToolbar(mockInitialState, {
+        type: 'cxengage/session/sqs-shut-down'
+      })
+    ).toMatchSnapshot();
+  });
+
+  it('dispatches cxengage/interactions/voice/silent-monitor-end on a non transition call', () => {
+    const mockInitialState = fromJS({
+      silentMonitoring: {
+        status: 'connected',
+        interactionId: '0000-0000-0000-0000',
+        transitionCall: false
+      }
+    });
+    expect(
+      SupervisorToolbar(mockInitialState, {
+        type: 'cxengage/interactions/voice/silent-monitor-end'
+      })
+    ).toMatchSnapshot();
+  });
+
+  it('dispatches TRANSITION_CALL_ENDING', () => {
+    const mockInitialState = fromJS({
+      silentMonitoring: {
+        status: 'connected',
+        interactionId: '0000-0000-0000-0000',
+        transitionCall: true
+      }
+    });
+    expect(
+      SupervisorToolbar(mockInitialState, {
+        type: 'TRANSITION_CALL_ENDING'
+      })
+    ).toMatchSnapshot();
+  });
+
+  it('dispatches cxengage/interactions/voice/silent-monitor-end on a transition call', () => {
+    const mockInitialState = fromJS({
+      silentMonitoring: {
+        status: 'connected',
+        interactionId: '0000-0000-0000-0000',
+        transitionCall: false
       }
     });
     expect(

@@ -35,7 +35,19 @@ Object {
 }
 `;
 
+exports[`UpdateStatSubscriptionFilters dispatch the proper action on success: groups / empty array 1`] = `
+Object {
+  "type": "STATS_UPDATED_$",
+}
+`;
+
 exports[`UpdateStatSubscriptionFilters dispatch the proper action on success: groups 1`] = `
+Object {
+  "type": "STATS_UPDATED_$",
+}
+`;
+
+exports[`UpdateStatSubscriptionFilters dispatch the proper action on success: skills / empty array 1`] = `
 Object {
   "type": "STATS_UPDATED_$",
 }
