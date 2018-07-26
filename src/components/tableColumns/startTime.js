@@ -106,6 +106,18 @@ export class StartTimeFilter extends Component {
     this.props.onChange(
       `${this.filterArray()[0]}-${this.filterArray()[1]}-${event.target.value}`
     );
+  currentFilterString = () => {
+    if (this.props.filter) {
+      const filter = this.props.filter.value.split('-');
+      if (this.props.twelveHourFormat) {
+        return filter.join(' ');
+      } else {
+        return `${filter[0]} ${filter[1]}`;
+      }
+    } else {
+      return 'All Results';
+    }
+  };
 
   render() {
     return (
@@ -115,11 +127,7 @@ export class StartTimeFilter extends Component {
         buttonType="columnFilter"
         className="startTime"
         updateFilter={this.props.onChange}
-        currentFilter={
-          this.props.filter
-            ? this.props.filter.value.split('-').join(' ')
-            : 'All Results'
-        }
+        currentFilter={this.currentFilterString()}
       >
         <CustomSubMenuWrapper>
           <FilterSelect

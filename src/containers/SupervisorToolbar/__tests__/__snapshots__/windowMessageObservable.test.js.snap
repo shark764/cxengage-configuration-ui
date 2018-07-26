@@ -98,6 +98,7 @@ exports[`Observable Test Mapping topics to dispatched actions can call monitorCa
       Object {
         "defaultExtensionProvider": undefined,
         "interactionId": "mockId",
+        "transitionCall": undefined,
         "type": "REQUESTING_MONITOR_CALL",
       },
     ],

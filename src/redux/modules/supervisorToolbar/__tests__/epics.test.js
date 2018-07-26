@@ -11,14 +11,14 @@ import {
   MonitorInteraction,
   HangUpEpic,
   ToggleMuteEpic,
-  EndSessionOnSilentMonitoringEnd,
   MonitorInteractionInitialization
 } from '../epics';
 
 import {
   selectSupervisorToolbarSilentMonitoringInteractionId,
   selectSupervisorToolbarSilentMonitoringStatus,
-  selectSupervisorToolbarMuted
+  selectSupervisorToolbarMuted,
+  selectTransitionCall
 } from '../selectors';
 
 import {
@@ -62,17 +62,19 @@ describe('StartBatchRequest', () => {
 
 describe('MonitorInteractionInitialization', () => {
   beforeEach(() => {
-    sdkCall.mockReturnValue(new Promise(resolve => resolve('mock response')));
+    sdkPromise.mockReturnValue(
+      new Promise(resolve => resolve('mock response'))
+    );
   });
   afterEach(() => {
-    sdkCall.mockClear();
+    sdkPromise.mockClear();
   });
   it('calls the correct sdk function', done => {
     const action = ActionsObservable.of(
       monitorInteractionInitialization('0000-0000-0000-0000')
     );
     MonitorInteractionInitialization(action, mockStore).subscribe(() => {
-      expect(sdkCall).toBeCalled();
+      expect(sdkPromise).toBeCalled();
       done();
     });
   });
@@ -168,13 +170,23 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
       done();
     });
   });
-  it("we don't recieve the required event and do not call the sdk", done => {
+  it("we don't recieve an event and monitor call sdk should fire", done => {
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', 'mockExtension')
       // {type: 'cxengage/session/started'}
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {});
-    expect(sdkCall).toHaveBeenCalledTimes(0);
+    expect(sdkCall).toHaveBeenCalledTimes(1);
+    done();
+  });
+  it('transition call waits for silent monitor end before monitor call sdk should fire', done => {
+    selectTransitionCall.mockReturnValueOnce(true);
+    const action = ActionsObservable.from([
+      requestingMonitorCall('0000-0000-0000-0000', 'mockExtension', true),
+      { type: 'cxengage/interactions/voice/silent-monitor-end' }
+    ]);
+    MonitorInteraction(action, mockStore).subscribe(() => {});
+    expect(sdkCall).toHaveBeenCalledTimes(1);
     done();
   });
   it('returns MONITOR_INTERACTION_REQUESTED action', done => {
@@ -191,7 +203,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
 
 describe('HangUpEpic', () => {
   beforeEach(() => {
-    sdkPromise.mockReturnValue(
+    sdkPromise.mockReturnValueOnce(
       new Promise(resolve => resolve('mock response'))
     );
   });
@@ -211,35 +223,6 @@ describe('HangUpEpic', () => {
       expect(actualOutputActions).toMatchSnapshot();
       done();
     });
-  });
-});
-
-describe('EndSessionOnSilentMonitoringEnd', () => {
-  beforeEach(() => {
-    sdkCall.mockReturnValue(new Promise(resolve => resolve('mock response')));
-  });
-  afterEach(() => {
-    sdkCall.mockClear();
-  });
-  it('calls the correct sdk function', done => {
-    const action = ActionsObservable.of({
-      type: 'cxengage/interactions/voice/silent-monitor-end'
-    });
-    EndSessionOnSilentMonitoringEnd(action, mockStore).subscribe(() => {
-      expect(sdkCall).toBeCalled();
-      done();
-    });
-  });
-  it('returns HANG_UP_REQUESTED_$ action', done => {
-    const action = ActionsObservable.of({
-      type: 'cxengage/interactions/voice/silent-monitor-end'
-    });
-    EndSessionOnSilentMonitoringEnd(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
   });
 });
 

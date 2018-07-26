@@ -14,6 +14,11 @@ export const selectSupervisorToolbarTwilioEnabled = createSelector(
   selectSupervisorToolbarMap,
   supervisorToolbar => supervisorToolbar.getIn(['twilio', 'enabled'])
 );
+export const selectTransitionCall = createSelector(
+  selectSupervisorToolbarMap,
+  supervisorToolbar =>
+    supervisorToolbar.getIn(['silentMonitoring', 'transitionCall'])
+);
 export const selectSupervisorToolbarTwilioIsDefaultExtension = createSelector(
   selectSupervisorToolbarMap,
   supervisorToolbar => supervisorToolbar.getIn(['twilio', 'isDefaultExtension'])

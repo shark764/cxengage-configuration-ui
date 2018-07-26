@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.4]
+* CXV1-14541 - Silent Monitoring - Skills and Groups filters not working properly
+* CXV1-14656 - Silent Monitoring - 24 hour format shows "AM" in filter
+* CXV1-14693 - Silent Monitoring - Cannot switch monitored interactions
+* <no jira>  - Silent Monitoring - Moved from session based calls to keeping session alive
+
 ## [0.21.3]
 * CXV1-14543 - Silent Monitoring - Start time / Elapsed time filter issues and other minor css fixes
 

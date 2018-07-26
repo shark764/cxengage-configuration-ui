@@ -34,14 +34,18 @@ export const monitorInteractionInitializationCompleted = () => ({
 /**
  * 2.
  requestingMonitorCall is the action that actually kicks off the request to the sdk to monitor the call
+ the transitionCall property is when you move from one call directly to the next isntead of hanging up
+ and taking the next call manually
  */
 export const requestingMonitorCall = (
   interactionId,
-  defaultExtensionProvider
+  defaultExtensionProvider,
+  transitionCall
 ) => ({
   type: 'REQUESTING_MONITOR_CALL',
   interactionId,
-  defaultExtensionProvider
+  defaultExtensionProvider,
+  transitionCall
 });
 /**
  * 3.
@@ -54,7 +58,7 @@ export const monitorInteractionRequested = interactionId => ({
 });
 export const toggleMuteRequested = () => ({ type: 'TOGGLE_MUTE_REQUESTED_$' });
 export const hangUpRequested = () => ({ type: 'HANG_UP_REQUESTED_$' });
-export const endSessionRequested = () => ({ type: 'END_SESSION_REQUESTED_$' });
+export const transitionCallEnding = () => ({ type: 'TRANSITION_CALL_ENDING' });
 export const requestingToggleMute = () => ({ type: 'REQUESTING_TOGGLE_MUTE' });
 export const requestingHangUp = () => ({ type: 'REQUESTING_HANG_UP' });
 export const startSupervisorToolbarSubscriptions = () => ({
@@ -77,15 +81,23 @@ export default function supervisorToolbarReducer(state = initialState, action) {
       return state.setIn(['silentMonitoring', 'status'], 'connected');
     case 'cxengage/session/sqs-shut-down':
     case 'cxengage/interactions/voice/silent-monitor-end':
+      if (state.getIn(['silentMonitoring', 'transitionCall'])) {
+        return state;
+      } else {
+        return state.update('silentMonitoring', silentMonitoring =>
+          silentMonitoring.set('status', 'offline').set('interactionId', 'na')
+        );
+      }
+    case 'TRANSITION_CALL_ENDING':
       return state.update('silentMonitoring', silentMonitoring =>
-        silentMonitoring.set('status', 'offline').set('interactionId', 'na')
+        silentMonitoring.set('transitionCall', false)
       );
-    case 'MONITOR_INTERACTION_INITIALIZATION':
     case 'REQUESTING_MONITOR_CALL':
       return state.update('silentMonitoring', silentMonitoring =>
         silentMonitoring
           .set('status', 'connecting')
           .set('interactionId', action.interactionId)
+          .set('transitionCall', action.transitionCall)
       );
     case 'MONITOR_INTERACTION_REQUESTED':
       return state.update('silentMonitoring', silentMonitoring =>

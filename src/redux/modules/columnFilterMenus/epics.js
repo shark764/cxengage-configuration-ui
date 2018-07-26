@@ -55,26 +55,41 @@ export const UpdateStatSubscriptionFilters = (action$, store) =>
     .filter(({ menuType }) => menuType === 'Skills' || menuType === 'Groups')
     .map(action => ({
       ...action,
-      groupIds: Array.from(
-        selectGroups(store.getState(), { tableType: 'InteractionMonitoring' }),
-        x => x.active && x.id
-      ).filter(x => x),
-      skillIds: Array.from(
-        selectSkills(store.getState(), { tableType: 'InteractionMonitoring' }),
-        x => x.active && x.id
-      ).filter(x => x)
+      groupsArray: selectGroups(store.getState(), {
+        tableType: 'InteractionMonitoring'
+      }),
+      skillsArray: selectSkills(store.getState(), {
+        tableType: 'InteractionMonitoring'
+      })
     }))
+    .map(action => ({
+      ...action,
+      groupIds: Array.from(action.groupsArray, x => x.active && x.id).filter(
+        x => x
+      ),
+      skillIds: Array.from(action.skillsArray, x => x.active && x.id).filter(
+        x => x
+      )
+    }))
+    .map(action => {
+      action.payload = {
+        statistic: 'interactions-in-conversation-list',
+        statId: 'interactions-in-conversation-list'
+      };
+      if (action.groupIds.length !== action.groupsArray.length) {
+        action.payload.groupId = action.groupIds;
+      }
+      if (action.skillIds.length !== action.skillsArray.length) {
+        action.payload.skillId = action.skillIds;
+      }
+      return { ...action };
+    })
     .mergeMap(action =>
       fromPromise(
         sdkPromise({
           module: 'reporting',
           command: 'addStatSubscription',
-          data: {
-            groupId: action.groupIds,
-            skillId: action.skillIds,
-            statistic: 'interactions-in-conversation-list',
-            statId: 'interactions-in-conversation-list'
-          }
+          data: action.payload
         })
       )
         .mapTo({ type: 'STATS_UPDATED_$' })
