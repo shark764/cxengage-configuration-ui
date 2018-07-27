@@ -21,25 +21,45 @@ node(){
 pipeline {
   agent any
   stages {
-    stage ('Export Properties') {
+    stage ('Set build version') {
       steps {
+        sh 'echo "Stage Description: Set build version from package.json"'
         script {
           n.export()
           build_version = readFile('version')
-          c.setDisplayName("${build_version}")
         }
       }
     }
-    stage ('Test && Build') {
+    stage ('Setup Docker') {
       steps {
-        sh "mkdir build"
-        sh "docker build -t ${docker_tag} -f Dockerfile-build ."
-        sh "docker run --rm --mount type=bind,src=$HOME/.ssh,dst=/home/node/.ssh,readonly --mount type=bind,src=${pwd}/build,dst=/home/node/mount ${docker_tag}"
+        sh 'echo "Stage Description: Sets up docker image for use in the next stages"'
+        sh "mkdir build -p"
+        sh "docker build -t ${docker_tag} -f Dockerfile ."
+        sh "docker run --rm -t -d --name=${docker_tag} --mount type=bind,src=$HOME/.ssh,dst=/home/node/.ssh,readonly --mount type=bind,src=${pwd}/build,dst=/home/node/mount ${docker_tag}"
+        sh "docker cp ${docker_tag}:/home/node/app/build build"
       }
     }
-    stage ('Push to Github') {
+    stage ('Lint for errors') {
+      when { changeRequest() }
+      steps {
+        sh 'echo "Stage Description: Lints the project for common js errors and formatting"'
+        sh "docker exec ${docker_tag} npm run lint"
+      }
+    }
+    stage ('Unit Tests') {
+      when { changeRequest() }
+      steps {
+        sh 'echo "Stage Description: Runs unit tests and fails if they do not meet coverage expectations"'
+        sh "docker ps"
+        sh "docker exec ${docker_tag} npm run test:coverage"
+        sh "docker exec ${docker_tag} ls"
+        sh "docker cp ${docker_tag}:/home/node/app/junit.xml build"
+      }
+    }
+    stage ('Github tagged release') {
       when { anyOf {branch 'master'; branch 'develop'; branch 'release'; branch 'hotfix'}}
       steps {
+        sh "Makes a github tagged release under a new branch with the same name as the tag version"
         git url: "git@github.com:SerenovaLLC/${service}"
         sh 'git checkout -b build-${BUILD_TAG}'
         sh 'git add -f build/* '
@@ -53,9 +73,10 @@ pipeline {
         sh "git push origin ${build_version}"
       }
     }
-    stage ('Push to S3') {
+    stage ('Store in S3') {
       when { anyOf {branch 'master'; branch 'develop'; branch 'release'; branch 'hotfix'}}
       steps {
+        sh "Stage Description: Syncs a copy of the build folder to > s3://cxengagelabs-jenkins/frontend/{{service}}/{{version}}/"
         script {
           n.push("${service}", "${build_version}")
         }
@@ -74,25 +95,31 @@ pipeline {
         }
       }
     }
-    stage ('Notify Success') {
-      steps {
+  }
+  post {
+    always {
+      sh "docker rmi ${docker_tag} --force"
+      junit 'build/junit.xml'
+      script {
+        c.cleanup()
+      }
+    }
+    success {
         script {
           h.hipchatPullRequestSuccess("${service}", "${build_version}")
         }
-      }
     }
-  }
-  post {
     failure {
       script {
         h.hipchatPullRequestFailure("${service}", "${build_version}")
       }
     }
-    always {
-      script {
-        c.cleanup()
-      }
-      sh "docker rmi ${docker_tag}"
+    unstable {
+        echo 'This will run only if the run was marked as unstable'
+    }
+    changed {
+        echo 'This will run only if the state of the Pipeline has changed'
+        echo 'For example, if the Pipeline was previously failing but is now successful'
     }
   }
 }

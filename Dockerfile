@@ -1,8 +1,5 @@
 FROM node:10.5.0
 
-#RUN apt-get update
-#RUN apt-get install -y git
-
 RUN mkdir /home/node/.npm-global
 ENV PATH=/home/node/.npm-global/bin:$PATH
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
@@ -10,10 +7,10 @@ ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 COPY . /home/node/app
 RUN chown -R node /home/node/app
 
-#RUN npm install -g gulp
-
 RUN usermod -u 106 node
 
 USER node
 WORKDIR /home/node/app
-ENTRYPOINT ["/home/node/app/resources/build.sh"]
+
+RUN npm install
+RUN npm build
