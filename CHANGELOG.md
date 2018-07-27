@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.5]
+* Jenkins build improvments 
+
 ## [0.21.4]
 * CXV1-14541 - Silent Monitoring - Skills and Groups filters not working properly
 * CXV1-14656 - Silent Monitoring - 24 hour format shows "AM" in filter
