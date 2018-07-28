@@ -9,6 +9,7 @@ import frontend
 
 def service = 'cxengage-configuration-ui'
 def docker_tag = BUILD_TAG.toLowerCase()
+def pr = env.CHANGE_ID
 def c = new common()
 def h = new hipchat()
 def n = new node()
@@ -36,7 +37,6 @@ pipeline {
         sh "mkdir build -p"
         sh "docker build -t ${docker_tag} -f Dockerfile ."
         sh "docker run --rm -t -d --name=${docker_tag} --mount type=bind,src=$HOME/.ssh,dst=/home/node/.ssh,readonly --mount type=bind,src=${pwd}/build,dst=/home/node/mount ${docker_tag}"
-        sh "docker cp ${docker_tag}:/home/node/app/build build"
       }
     }
     stage ('Lint for errors') {
@@ -50,19 +50,25 @@ pipeline {
       when { changeRequest() }
       steps {
         sh 'echo "Stage Description: Runs unit tests and fails if they do not meet coverage expectations"'
-        sh "docker ps"
         sh "docker exec ${docker_tag} npm run test:coverage"
-        sh "docker exec ${docker_tag} ls"
         sh "docker cp ${docker_tag}:/home/node/app/junit.xml build"
+        junit 'build/junit.xml'
+      }
+    }
+    stage ('Build') {
+      steps {
+        sh 'echo "Stage Description: Builds the production version of the app"'
+        sh "docker exec ${docker_tag} npm run build"
+        sh "docker cp ${docker_tag}:/home/node/app/build build"
       }
     }
     stage ('Github tagged release') {
-      when { anyOf {branch 'master'; branch 'develop'; branch 'release'; branch 'hotfix'}}
+      when { anyOf {branch 'master'}}
       steps {
-        sh "Makes a github tagged release under a new branch with the same name as the tag version"
+        sh 'echo "Makes a github tagged release under a new branch with the same name as the tag version"'
         git url: "git@github.com:SerenovaLLC/${service}"
-        sh 'git checkout -b build-${BUILD_TAG}'
-        sh 'git add -f build/* '
+        sh "git checkout -b build-${BUILD_TAG}"
+        sh 'git add -f build/build/* '
         sh "git commit -m 'release ${build_version}'"
         script {
           if (build_version.contains("SNAPSHOT")) {
@@ -74,16 +80,14 @@ pipeline {
       }
     }
     stage ('Store in S3') {
-      when { anyOf {branch 'master'; branch 'develop'; branch 'release'; branch 'hotfix'}}
+      when { anyOf {branch 'master'}}
       steps {
-        sh "Stage Description: Syncs a copy of the build folder to > s3://cxengagelabs-jenkins/frontend/{{service}}/{{version}}/"
-        script {
-          n.push("${service}", "${build_version}")
-        }
+        sh 'echo "Stage Description: Syncs a copy of the build folder to > s3://cxengagelabs-jenkins/frontend/{{service}}/{{version}}/"'
+        sh "aws s3 sync ./build/build s3://cxengagelabs-jenkins/frontend/${service}/${build_version}/ --delete"
       }
     }
-    stage ('Deploy') {
-      when { anyOf {branch 'master'; branch 'develop'; branch 'release'; branch 'hotfix'}}
+    stage ('Deploy to Dev') {
+      when { anyOf {branch 'master'}}
       steps {
         script {
           f.pull("${service}", "${build_version}") // pull down version of site from s3
@@ -99,19 +103,51 @@ pipeline {
   post {
     always {
       sh "docker rmi ${docker_tag} --force"
-      junit 'build/junit.xml'
       script {
         c.cleanup()
       }
     }
     success {
-        script {
-          h.hipchatPullRequestSuccess("${service}", "${build_version}")
+      script {
+        def jobType = 'hipchat message goes here based on jenkins job type'
+        def notifyPpl = 'ppl to @ in hipchat that should action this notification'
+        if (env.BRANCH_NAME == "master") {
+          jobType = "Merged PR successfully built and deployed to dev, ready to be tested"
+          notifyPpl = "@JWilliams @RDominguez"
+        } else {
+          jobType = "PR was linted, unit tested, built and is ready for code review"
+          notifyPpl = "@nick @DHernandez @mjones @RandhalRamirez  ^^^^"
         }
+        hipchatSend(color: 'GREEN',
+                    credentialId: 'HipChat-API-Token',
+                    message: "<b>${service} PR${pr} | ${jobType}</b><br/><a href=\"http://jenkins.cxengagelabs.net/blue/organizations/jenkins/Serenova%2F${service}/activity\">Build Activity</a><br/><a href=\"https://github.com/SerenovaLLC/${service}/pull/${pr}\">Pull Request</a>",
+                    notify: true,
+                    room: 'Admin/Supervisor Experience',
+                    sendAs: 'Jenkins',
+                    server: 'api.hipchat.com',
+                    textFormat: false,
+                    v2enabled: false)
+        hipchatSend(credentialId: 'HipChat-API-Token',
+                    message: "${notifyPpl}",
+                    notify: true,
+                    room: 'Admin/Supervisor Experience',
+                    sendAs: 'Jenkins',
+                    server: 'api.hipchat.com',
+                    textFormat: true,
+                    v2enabled: false)
+      }
     }
     failure {
       script {
-        h.hipchatPullRequestFailure("${service}", "${build_version}")
+        hipchatSend(color: 'RED',
+                    credentialId: 'HipChat-API-Token',
+                    message: "<b>${service}#${pr} - Failed! </b><br/><a href=\"http://jenkins.cxengagelabs.net/blue/organizations/jenkins/Serenova%2F${service}/activity\">Build Activity</a>",
+                    notify: true,
+                    room: 'Admin/Supervisor Experience',
+                    sendAs: 'Jenkins',
+                    server: 'api.hipchat.com',
+                    textFormat: false,
+                    v2enabled: false)
       }
     }
     unstable {
