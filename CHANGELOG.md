@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.8]
+* CXV1-13462 - Version bump for cx-ui-components related to Generic Lists Names and Keys hover tooltip.
+
 ## [0.21.7]
 * Jenkins build improvments 3
 
