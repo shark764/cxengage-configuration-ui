@@ -109,6 +109,29 @@ describe('selectTransitionCall', () => {
   });
 });
 
+describe('isSessionActive', () => {
+  it('returns false if session is not active', () => {
+    const initialState = fromJS({
+      SupervisorToolbar: {
+        silentMonitoring: {
+          activeSession: false
+        }
+      }
+    });
+    expect(sel.isSessionActive(initialState)).toEqual(false);
+  });
+  it('returns true if session is active', () => {
+    const initialState = fromJS({
+      SupervisorToolbar: {
+        silentMonitoring: {
+          activeSession: true
+        }
+      }
+    });
+    expect(sel.isSessionActive(initialState)).toEqual(true);
+  });
+});
+
 describe('selectSupervisorToolbarSilentMonitoringInteractionId', () => {
   it('returns the monitoring status', () => {
     const initialState = fromJS({

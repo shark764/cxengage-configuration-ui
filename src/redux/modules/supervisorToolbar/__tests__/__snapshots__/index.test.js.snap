@@ -98,6 +98,17 @@ Immutable.Map {
 }
 `;
 
+exports[`SupervisorToolbar reducer snapshots dispatches cxengage/session/started 1`] = `
+Immutable.Map {
+  "silentMonitoring": Immutable.Map {
+    "status": "connected",
+    "interactionId": "0000-0000-0000-0000",
+    "transitionCall": false,
+    "activeSession": true,
+  },
+}
+`;
+
 exports[`SupervisorToolbar reducer snapshots dispatches cxengage/twilio/device-ready 1`] = `
 Immutable.Map {
   "twilio": Immutable.Map {
@@ -123,6 +134,7 @@ Immutable.Map {
   "silentMonitoring": Immutable.Map {
     "status": "offline",
     "interactionId": "na",
+    "activeSession": false,
   },
   "muted": true,
 }
