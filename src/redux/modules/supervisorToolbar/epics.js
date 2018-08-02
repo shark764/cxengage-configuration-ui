@@ -23,7 +23,8 @@ import {
   selectSupervisorToolbarSilentMonitoringStatus,
   selectSupervisorToolbarMuted,
   selectSupervisorToolbarTwilioEnabled,
-  selectTransitionCall
+  selectTransitionCall,
+  isSessionActive
 } from './selectors';
 
 import {
@@ -82,25 +83,45 @@ export const MonitorInteraction = (action$, store) =>
     .map(action => ({
       ...action,
       twilioEnabled: selectSupervisorToolbarTwilioEnabled(store.getState()),
-      transitionCall: selectTransitionCall(store.getState())
+      transitionCall: selectTransitionCall(store.getState()),
+      sessionIsActive: isSessionActive(store.getState())
     }))
-    .switchMap(action => {
-      if (
-        action.defaultExtensionProvider === 'twilio' &&
-        !action.twilioEnabled
-      ) {
-        return zip(
-          action$.ofType('cxengage/twilio/device-ready').take(1),
-          action$.ofType('cxengage/session/started').take(1)
-        ).mapTo(action);
-      } else if (action.transitionCall) {
+    .switchMap(a => {
+      if (a.defaultExtensionProvider === 'twilio') {
+        if (!a.twilioEnabled && !a.sessionIsActive) {
+          return zip(
+            action$.ofType('cxengage/twilio/device-ready').take(1),
+            action$.ofType('cxengage/session/started').take(1)
+          ).mapTo(a);
+        } else if (!a.twilioEnabled && a.sessionIsActive) {
+          return zip(
+            action$.ofType('cxengage/twilio/device-ready').take(1)
+          ).mapTo(a);
+        } else if (a.twilioEnabled && !a.sessionIsActive) {
+          return zip(action$.ofType('cxengage/session/started').take(1)).mapTo(
+            a
+          );
+        } else if (a.twilioEnabled && a.sessionIsActive) {
+          if (a.transitionCall) {
+            return zip(
+              action$
+                .ofType('cxengage/interactions/voice/silent-monitor-end')
+                .take(1)
+            ).mapTo(a);
+          } else {
+            return from([a]);
+          }
+        }
+      } else if (!a.sessionIsActive) {
+        return zip(action$.ofType('cxengage/session/started').take(1)).mapTo(a);
+      } else if (a.transitionCall) {
         return zip(
           action$
             .ofType('cxengage/interactions/voice/silent-monitor-end')
             .take(1)
-        ).mapTo(action);
+        ).mapTo(a);
       } else {
-        return from([action]);
+        return from([a]);
       }
     })
     .switchMap(action =>

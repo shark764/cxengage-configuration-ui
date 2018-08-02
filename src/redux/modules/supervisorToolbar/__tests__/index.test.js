@@ -37,6 +37,22 @@ describe('SupervisorToolbar reducer snapshots', () => {
     ).toMatchSnapshot();
   });
 
+  it('dispatches cxengage/session/started', () => {
+    const mockInitialState = fromJS({
+      silentMonitoring: {
+        status: 'connected',
+        interactionId: '0000-0000-0000-0000',
+        transitionCall: false,
+        activeSession: false
+      }
+    });
+    expect(
+      SupervisorToolbar(mockInitialState, {
+        type: 'cxengage/session/started'
+      })
+    ).toMatchSnapshot();
+  });
+
   it('dispatches cxengage/session/sqs-shut-down on a non transition call', () => {
     const mockInitialState = fromJS({
       silentMonitoring: {

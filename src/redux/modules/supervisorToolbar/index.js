@@ -7,7 +7,11 @@ import { fromJS } from 'immutable';
 // Initial Sub State
 export const initialState = fromJS({
   twilio: { enabled: false },
-  silentMonitoring: { status: 'offline', interactionId: 'na' },
+  silentMonitoring: {
+    status: 'offline',
+    interactionId: 'na',
+    activeSession: false
+  },
   muted: true
 });
 
@@ -77,6 +81,8 @@ export default function supervisorToolbarReducer(state = initialState, action) {
         ['twilio', 'enabled'],
         !state.getIn(['twilio', 'enabled'])
       );
+    case 'cxengage/session/started':
+      return state.setIn(['silentMonitoring', 'activeSession'], true);
     case 'cxengage/interactions/voice/silent-monitor-start':
       return state.setIn(['silentMonitoring', 'status'], 'connected');
     case 'cxengage/session/sqs-shut-down':

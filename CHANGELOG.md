@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.9]
+* CXV1-14752 - Silent Monitoring - Cannot Read property "SilentMonitor" of undefined when using PSTN
+
 ## [0.21.8]
 * CXV1-13462 - Version bump for cx-ui-components related to Generic Lists Names and Keys hover tooltip.
 
