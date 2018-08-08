@@ -40,7 +40,7 @@ exports[`monitoringColumn Cell renders 1 person previously monitored the call 1`
     <styled.div />
     <Styled(Button)
       className="monitorCall"
-      disabled={true}
+      disabled={false}
       id="monitorCallButton"
       onClick={[Function]}
       type="secondary"
@@ -62,7 +62,7 @@ exports[`monitoringColumn Cell renders monitor button is disabled when monitorin
     <styled.div />
     <Styled(Button)
       className="monitorCall"
-      disabled={true}
+      disabled={false}
       id="monitorCallButton"
       onClick={[Function]}
       type="secondary"

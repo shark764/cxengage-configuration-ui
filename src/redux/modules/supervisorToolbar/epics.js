@@ -9,6 +9,7 @@ import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/throttleTime';
 import { zip } from 'rxjs/observable/zip';
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
@@ -62,6 +63,7 @@ export const StartBatchRequest = (action$, store) =>
 export const MonitorInteractionInitialization = (action$, store) =>
   action$
     .ofType('MONITOR_INTERACTION_INITIALIZATION')
+    .throttleTime(4000)
     .switchMap(({ interactionId }) =>
       fromPromise(
         sdkPromise(

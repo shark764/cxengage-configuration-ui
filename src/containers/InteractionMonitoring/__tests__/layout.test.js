@@ -107,6 +107,7 @@ describe('Interaction Monitoring Layout', () => {
         twelveHourFormat={true}
         activeColumns={activeColumnsActive}
         userHasViewAllMonitoredCallsPermission={false}
+        getCurrentAgentId={'0000-0000-0000-0000'}
       />
     );
     expect(component).toMatchSnapshot();
@@ -149,6 +150,7 @@ describe('Interaction Monitoring Layout', () => {
         twelveHourFormat={false}
         activeColumns={allColumnsNotActive}
         userHasViewAllMonitoredCallsPermission={true}
+        getCurrentAgentId={'0000-0000-0000-0000'}
       />
     );
     expect(component).toMatchSnapshot();
@@ -195,6 +197,7 @@ describe('Full mount to test lifecycle events', () => {
           twelveHourFormat={true}
           activeColumns={activeColumnsActive}
           userHasViewAllMonitoredCallsPermission={true}
+          getCurrentAgentId={'0000-0000-0000-0000'}
         />
       </Provider>
     );
@@ -248,6 +251,7 @@ describe('Interaction monitoring methods', () => {
       activeColumns={activeColumnsActive}
       monitoredId={'0000-0000-0000-0002'}
       userHasViewAllMonitoredCallsPermission={true}
+      getCurrentAgentId={'0000-0000-0000-0000'}
     />
   );
   describe('getTableRowProps', () => {
@@ -262,7 +266,7 @@ describe('Interaction monitoring methods', () => {
           .instance()
           .getTableRowProps(
             { state: {} },
-            { row: { interactionId: '0000-0000-0000-0000' } }
+            { row: { interactionId: '0000-0000-0000-0000', monitoring: [] } }
           )
           .onClick().answerKey
       ).toEqual('removed');
@@ -273,7 +277,7 @@ describe('Interaction monitoring methods', () => {
           .instance()
           .getTableRowProps(
             { state: {} },
-            { row: { interactionId: '0000-0000-0000-0001' } }
+            { row: { interactionId: '0000-0000-0000-0001', monitoring: [] } }
           )
           .onClick().answerKey
       ).toEqual('selected');
@@ -284,7 +288,7 @@ describe('Interaction monitoring methods', () => {
           .instance()
           .getTableRowProps(
             { state: {} },
-            { row: { interactionId: '0000-0000-0000-0002' } }
+            { row: { interactionId: '0000-0000-0000-0002', monitoring: [] } }
           ).style
       ).toEqual({ background: 'rgba(253, 255, 50, 0.17)' });
     });
@@ -294,7 +298,7 @@ describe('Interaction monitoring methods', () => {
           .instance()
           .getTableRowProps(
             { state: {} },
-            { row: { interactionId: '0000-0000-0000-0003' } }
+            { row: { interactionId: '0000-0000-0000-0003', monitoring: [] } }
           ).style
       ).toEqual({ background: null });
     });
@@ -340,6 +344,57 @@ describe('Interaction monitoring methods', () => {
       ).toEqual(true);
     });
   });
+
+  describe('highlightRow', () => {
+    it('returns true when interaction ids match a moniters agent id', () => {
+      expect(
+        interactionMonitoring.instance().highlightRow({
+          row: {
+            interactionId: '0000-0000-0000-0000',
+            monitoring: [
+              {
+                agentId: '0000-0000-0000-0000',
+                endTimestamp: null
+              }
+            ]
+          }
+        })
+      ).toEqual(true);
+    });
+
+    it('returns false when interaction ids dont match a moniters agent id', () => {
+      expect(
+        interactionMonitoring.instance().highlightRow({
+          row: {
+            interactionId: '0000-0000-0000-0001',
+            monitoring: [
+              {
+                agentId: '0000-0000-0000-0001',
+                endTimestamp: null
+              }
+            ]
+          }
+        })
+      ).toEqual(false);
+    });
+
+    it('returns false when interaction ids match a moniters agent id but end timestamp is not null', () => {
+      expect(
+        interactionMonitoring.instance().highlightRow({
+          row: {
+            interactionId: '0000-0000-0000-0000',
+            monitoring: [
+              {
+                agentId: '0000-0000-0000-0000',
+                endTimestamp: 'notNull'
+              }
+            ]
+          }
+        })
+      ).toEqual(false);
+    });
+  });
+
   describe('onFilteredChange', () => {
     it('passes filtered item to components state', () => {
       interactionMonitoring.instance().onFilteredChange('filteredItem');

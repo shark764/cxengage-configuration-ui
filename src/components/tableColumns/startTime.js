@@ -45,7 +45,11 @@ export default function(startTime, tableType, twelveHourFormat) {
       const filterArray = filter.value.split('-');
       const beforeOrAfter = filterArray[0];
       let hours = parseInt(filterArray[1].split(':')[0], 10);
-      if (twelveHourFormat && filterArray[2] === 'PM') {
+      if (
+        twelveHourFormat &&
+        ((filterArray[2] === 'PM' && hours !== 12) ||
+          (filterArray[2] === 'AM' && hours === 12))
+      ) {
         hours += 12;
       }
       let mins = parseInt(filterArray[1].split(':')[1], 10);

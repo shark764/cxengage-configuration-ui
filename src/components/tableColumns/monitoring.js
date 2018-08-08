@@ -43,6 +43,9 @@ const FillerSpaceIcon = styled.div`
 `;
 
 export const helperFunctions = {
+  implicitDisable: (row, agentId) =>
+    row.monitoring.filter(x => x.agentId === agentId && x.endTimestamp === null)
+      .length === 1,
   accessor: d => d.monitors,
   monitoringFilterMethod: (filter, row) => {
     if (filter.value === 'All') {
@@ -56,7 +59,7 @@ export const helperFunctions = {
   monitorFilter: (tableType, onChange) => (
     <MonitorFilter tableType={tableType} onChange={onChange} />
   ),
-  Cell: (value, row, monitoredId, monitoringStatus) => {
+  Cell: function(value, row, monitoredId, monitoringStatus, agentId) {
     let activeMonitors = 0;
     let previousMonitors = 0;
     row.monitoring.forEach(monitor => {
@@ -74,12 +77,19 @@ export const helperFunctions = {
         interactionId={row.interactionId}
         monitoredId={monitoredId}
         monitoringStatus={monitoringStatus}
+        implicitDisable={this.implicitDisable(row, agentId)}
       />
     );
   }
 };
 
-export default function(value, tableType, monitoredId, monitoringStatus) {
+export default function(
+  value,
+  tableType,
+  monitoredId,
+  monitoringStatus,
+  agentId
+) {
   return {
     Header: 'Monitoring',
     show: value,
@@ -88,7 +98,7 @@ export default function(value, tableType, monitoredId, monitoringStatus) {
     resizable: false,
     accessor: d => helperFunctions.accessor(d),
     Cell: ({ value, row }) =>
-      helperFunctions.Cell(value, row, monitoredId, monitoringStatus),
+      helperFunctions.Cell(value, row, monitoredId, monitoringStatus, agentId),
     filterMethod: (filter, row) =>
       helperFunctions.monitoringFilterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.monitorFilter(tableType, onChange)
@@ -135,8 +145,8 @@ export class MonitoringCell extends Component {
               id={'monitorCallButton'}
               className="monitorCall"
               disabled={
-                this.props.monitoredId === this.props.interactionId ||
-                ['connecting'].includes(this.props.monitoringStatus)
+                this.props.monitoringStatus !== 'offline' ||
+                this.props.implicitDisable
               }
               onClick={this.monitorInteractionRequestor}
             >
@@ -155,7 +165,8 @@ MonitoringCell.propTypes = {
   activeMonitors: PropTypes.number,
   monitoredId: PropTypes.string,
   interactionId: PropTypes.string,
-  monitoringStatus: PropTypes.string
+  monitoringStatus: PropTypes.string,
+  implicitDisable: PropTypes.bool
 };
 MonitorFilter.propTypes = {
   tableType: PropTypes.string,

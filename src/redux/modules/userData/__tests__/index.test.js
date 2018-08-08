@@ -21,7 +21,8 @@ describe('UserData reducer snapshots', () => {
     const mockInitialState = fromJS({
       permissions: '',
       currentTenantName: '',
-      currentTenantId: ''
+      currentTenantId: '',
+      agentId: '0000-0000-0000-0000'
     });
     expect(
       UserData(

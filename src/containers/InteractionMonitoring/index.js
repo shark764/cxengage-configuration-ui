@@ -30,10 +30,12 @@ import {
   selectSupervisorToolbarSilentMonitoringInteractionId,
   selectSupervisorToolbarSilentMonitoringStatus
 } from '../../redux/modules/supervisorToolbar/selectors';
+import { getCurrentAgentId } from '../../redux/modules/userData/selectors';
 
 import Layout from './Layout';
 
 export const mapStateToProps = (state, props) => ({
+  getCurrentAgentId: getCurrentAgentId(state),
   areAllColNotActive: areAllColNotActive(state, {
     menuType: 'Columns',
     tableType: 'InteractionMonitoring'

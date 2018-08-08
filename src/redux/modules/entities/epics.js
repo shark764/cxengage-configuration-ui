@@ -172,10 +172,11 @@ export const getTenantPermissions = (action$, store) =>
       ).map(response => ({
         type: 'UPDATE_USER_PERMISSIONS',
         tenantInfo: {
-          tenantId: response.tenantId,
-          tenantName: response.tenantName,
-          tenantPermissions: response.tenantPermissions
-        }
+          tenantId: response.tenant.tenantId,
+          tenantName: response.tenant.tenantName,
+          tenantPermissions: response.tenant.tenantPermissions
+        },
+        agentId: response.agentId
       }))
     );
 
