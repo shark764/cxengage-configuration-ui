@@ -1,7 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EmailTemplates Layout Renders correctly 1`] = `
-<Connect(EmailTemplatesDetailsPanel)>
-  <Connect(Connect(ReduxForm)) />
-</Connect(EmailTemplatesDetailsPanel)>
+exports[`<EmailTemplatesDetailsPanel /> renders emailTemplates detailsPanel 1`] = `
+<styled.div
+  className="details-panel"
+  id="7c96c534-31f9-11e8-33ff-9440dab83f66"
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    Mock Child
+    <React.Fragment>
+      <Detail
+        label="Subject"
+        value="Welcome to CxEngage"
+      />
+      <Detail
+        label="Body"
+        value="Hello {{{variable-test-1}}} {{{variable-test-2}}}! Welcome to The Serenova Team!"
+      />
+    </React.Fragment>
+  </React.Fragment>
+</styled.div>
 `;

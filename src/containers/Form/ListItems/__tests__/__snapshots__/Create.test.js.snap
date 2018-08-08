@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "fieldItems": "mock field items",
+  "isSaving": false,
+  "listName": "mockName",
+}
+`;
+
+exports[`mapDispatchToProps maps the dispatch to the props correctly 1`] = `
+Object {
+  "onCancel": [Function],
+}
+`;

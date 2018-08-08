@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OutboundIdentifiersForm /> renders 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div>
+    <InputField
+      componentType="input"
+      disabled={false}
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="input"
+      disabled={false}
+      inputType="text"
+      label="Value *"
+      name="value"
+    />
+    <SelectField
+      disabled={false}
+      label="Flow Id *"
+      name="flowId"
+      options={
+        Array [
+          Object {
+            "label": "Outbound Identifier Label Test 1",
+            "value": "Outbound Identifier Value Test 1",
+          },
+          Object {
+            "label": "Outbound Identifier Label Test 2",
+            "value": "Outbound Identifier Value Test 2",
+          },
+        ]
+      }
+      required={false}
+    />
+    <SelectField
+      disabled={false}
+      label="Channel Type *"
+      name="channelType"
+      options={
+        Array [
+          Object {
+            "label": "Voice",
+            "value": "voice",
+          },
+          Object {
+            "label": "Sms",
+            "value": "sms",
+          },
+          Object {
+            "label": "Email",
+            "value": "email",
+          },
+        ]
+      }
+      required={false}
+    />
+    <InputField
+      componentType="textarea"
+      disabled={false}
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+  </div>
+</form>
+`;

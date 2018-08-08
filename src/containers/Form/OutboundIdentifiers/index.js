@@ -1,11 +1,11 @@
 /*
- * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
-import { OutboundIdentifiersForm } from 'cx-ui-components';
+import OutboundIdentifiersForm from './Layout';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { formValidation } from './validation';
 import {

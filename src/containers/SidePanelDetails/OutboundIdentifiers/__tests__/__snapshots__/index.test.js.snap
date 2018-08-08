@@ -7,7 +7,7 @@ Object {
 }
 `;
 
-exports[`OutboundIdentifiersSiePanelDetails Renders renders 1`] = `
+exports[`OutboundIdentifiersDetailsPanel Renders renders 1`] = `
 <OutboundIdentifiersDetailsPanel
   dispatch={[Function]}
   store={

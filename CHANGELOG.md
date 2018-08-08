@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.10]
+* CXV1-14874 - Move config-2 forms out of the component library and into config-2 repo.
+
 ## [0.21.9]
 * CXV1-14752 - Silent Monitoring - Cannot Read property "SilentMonitor" of undefined when using PSTN
 

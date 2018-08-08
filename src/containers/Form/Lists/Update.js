@@ -5,7 +5,7 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
-import { ListsForm } from 'cx-ui-components';
+import ListsForm from './Layout';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { updateFormValidation } from './validation';
 import {
