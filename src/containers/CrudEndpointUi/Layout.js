@@ -13,10 +13,12 @@ import Confirmation from '../ConfirmationDialog';
 import SidePanel from '../../containers/SidePanel';
 import EntityTableContainer from '../EntityTable';
 import CreateListForm from '../Form/Lists/Create';
+import EmailTemplatesDetailsPanel from '../SidePanelDetails/EmailTemplates';
+import EmailTemplatesForm from '../Form/EmailTemplates';
+import ListsDetailsPanel from '../SidePanelDetails/Lists';
+import UpdateListForm from '../Form/Lists/Update';
+import OutboundIdentifiersDetailsPanel from '../SidePanelDetails/OutboundIdentifiers';
 import OutboundIdentifiersForm from '../Form/OutboundIdentifiers';
-import ListsDetailsPanelContainer from '../SidePanelDetails/Lists/Layout';
-import EmailTemplatesDetailsPanelContainer from '../SidePanelDetails/EmailTemplates/Layout';
-import OutboundIdentifiersPanelContainer from '../SidePanelDetails/OutboundIdentifiers/Layout';
 import CreateListItemForm from '../Form/ListItems/Create';
 import UpdateListItemForm from '../Form/ListItems/Update';
 
@@ -42,41 +44,35 @@ const Table = styled(EntityTableContainer)`
   grid-area: table;
 `;
 
-function DetailsPanel(ContainerComponent) {
-  const DetailsPanelWrapper = styled.div`
-    position: relative;
-    padding: 10px 14px;
-    overflow-y: auto;
-  `;
-  return (
-    <DetailsPanelWrapper>
-      <ContainerComponent />
-    </DetailsPanelWrapper>
-  );
-}
+const DetailsPanel = styled.div`
+  position: relative;
+  padding: 10px 14px;
+  overflow-y: auto;
+`;
 
-function NoScrollDetailsPanel(ContainerComponent) {
-  const DetailsPanelWrapper = styled.div`
-    position: relative;
-    padding: 10px 14px;
-    display: flex;
-    flex-direction: column;
-  `;
-  return (
-    <DetailsPanelWrapper>
-      <ContainerComponent />
-    </DetailsPanelWrapper>
-  );
-}
+const NoScrollDetailsPanel = styled.div`
+  position: relative;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+`;
 
 const createFormRoutes = [
   {
     path: '/configuration/lists',
-    component: () => DetailsPanel(CreateListForm)
+    component: () => (
+      <DetailsPanel>
+        <CreateListForm />
+      </DetailsPanel>
+    )
   },
   {
     path: '/configuration/outboundIdentifiers',
-    component: () => DetailsPanel(OutboundIdentifiersForm)
+    component: () => (
+      <DetailsPanel>
+        <OutboundIdentifiersForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before1
 ];
@@ -84,15 +80,33 @@ const createFormRoutes = [
 const detailsPanelRoutes = [
   {
     path: '/configuration/lists',
-    component: () => DetailsPanel(ListsDetailsPanelContainer)
+    component: () => (
+      <DetailsPanel>
+        <ListsDetailsPanel>
+          <UpdateListForm />
+        </ListsDetailsPanel>
+      </DetailsPanel>
+    )
   },
   {
     path: '/configuration/emailTemplates',
-    component: () => NoScrollDetailsPanel(EmailTemplatesDetailsPanelContainer)
+    component: () => (
+      <NoScrollDetailsPanel>
+        <EmailTemplatesDetailsPanel>
+          <EmailTemplatesForm />
+        </EmailTemplatesDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
   },
   {
     path: '/configuration/outboundIdentifiers',
-    component: () => NoScrollDetailsPanel(OutboundIdentifiersPanelContainer)
+    component: () => (
+      <NoScrollDetailsPanel>
+        <OutboundIdentifiersDetailsPanel>
+          <OutboundIdentifiersForm />
+        </OutboundIdentifiersDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
   }
   //hygen-inject-before2
 ];

@@ -1,10 +1,10 @@
 /*
- * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
 import { connect } from 'react-redux';
 
-import { ListsDetailsPanel } from 'cx-ui-components';
+import ListsDetailsPanel from './Layout';
 
 import { CONFIRM_ENTITY_CSV_UPLOAD } from '../../ConfirmationDialog/constants.js';
 
@@ -22,7 +22,7 @@ import {
   isSubEntitySaving
 } from '../../../redux/modules/entities/selectors';
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     openCreateListItemModal: () => dispatch(setSelectedSubEntityId('create')),
     updateSubEntity: subEntityId =>
@@ -36,7 +36,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   const selectedEntity = getSelectedEntity(state);
   let alertMessage = '';
   let inherited = false;

@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListItemsForm /> renders create list item 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <React.Fragment>
+    <styled.h3>
+      Creating list item for : 
+    </styled.h3>
+    <styled.h3
+      title="Disposition Code List"
+    >
+      Disposition Code List
+    </styled.h3>
+  </React.Fragment>
+  <styled.div>
+    <InputField
+      componentType="input"
+      dataType="string"
+      disabled={false}
+      key="Test Field Item Name 1"
+      label="Test Field Item Label 1"
+      name="Test Field Item Name 1"
+    />
+    <InputField
+      componentType="input"
+      dataType="number"
+      disabled={false}
+      key="Test Field Item Name 1"
+      label="Test Field Item Label 1"
+      name="Test Field Item Name 1"
+    />
+    <SelectField
+      disabled={false}
+      key="Test Field Item Name 1"
+      label="Test Field Item Label 1"
+      name="Test Field Item Name 1"
+      options="boolean"
+      required={false}
+    />
+  </styled.div>
+  <SidePanelActions
+    invalid={false}
+    isSaving={false}
+    onCancel={[Function]}
+    pristine={false}
+  />
+</form>
+`;
+
+exports[`<ListItemsForm /> renders update list item 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <React.Fragment>
+    <styled.h3>
+      Updating list item : 
+    </styled.h3>
+    <styled.h3
+      title="Angry Customer"
+    >
+      Angry Customer
+    </styled.h3>
+  </React.Fragment>
+  <styled.div>
+    <InputField
+      componentType="input"
+      dataType="string"
+      disabled={false}
+      key="Test Field Item Name 1"
+      label="Test Field Item Label 1"
+      name="Test Field Item Name 1"
+    />
+    <InputField
+      componentType="input"
+      dataType="number"
+      disabled={false}
+      key="Test Field Item Name 1"
+      label="Test Field Item Label 1"
+      name="Test Field Item Name 1"
+    />
+    <SelectField
+      disabled={false}
+      key="Test Field Item Name 1"
+      label="Test Field Item Label 1"
+      name="Test Field Item Name 1"
+      options="boolean"
+      required={false}
+    />
+  </styled.div>
+  <SidePanelActions
+    invalid={false}
+    isSaving={false}
+    onCancel={[Function]}
+    pristine={false}
+  />
+</form>
+`;

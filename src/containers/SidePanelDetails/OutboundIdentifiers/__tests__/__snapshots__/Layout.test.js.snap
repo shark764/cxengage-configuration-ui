@@ -1,7 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OutboundIdentifiersSiePanelDetailsLayout Layout renders  1`] = `
-<Connect(OutboundIdentifiersDetailsPanel)>
-  <Connect(Connect(ReduxForm)) />
-</Connect(OutboundIdentifiersDetailsPanel)>
+exports[`<OutboundIdentifiersDetailsPanel /> renders outboundIdentifiers detailsPanel 1`] = `
+<styled.div
+  className="details-panel"
+  id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+>
+  <DetailHeader
+    text="Details"
+  />
+  Mock Child
+</styled.div>
 `;

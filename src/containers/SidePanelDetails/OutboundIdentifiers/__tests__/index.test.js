@@ -5,7 +5,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import OutboundIdentifiersSiePanelDetails, { mapStateToProps } from '../';
+import OutboundIdentifiersDetailsPanel, { mapStateToProps } from '../';
 import {
   getSelectedEntity,
   userHasUpdatePermission
@@ -15,14 +15,14 @@ jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntity.mockImplementation(() => {});
 userHasUpdatePermission.mockImplementation(() => true);
 
-describe('OutboundIdentifiersSiePanelDetails Renders', () => {
+describe('OutboundIdentifiersDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
     expect(
       shallow(
-        <OutboundIdentifiersSiePanelDetails store={store}>
+        <OutboundIdentifiersDetailsPanel store={store}>
           Child
-        </OutboundIdentifiersSiePanelDetails>
+        </OutboundIdentifiersDetailsPanel>
       )
     ).toMatchSnapshot();
   });
