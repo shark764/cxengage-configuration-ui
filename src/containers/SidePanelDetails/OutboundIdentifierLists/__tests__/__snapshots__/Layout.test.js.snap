@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
+<styled.div
+  className="mockClassName"
+  id="mockId"
+>
+  <DetailHeader
+    text="Details"
+  />
+  Child
+</styled.div>
+`;
+
+exports[`OutboundIdentifierListsDetailsPanel Renders renders without update permissions 1`] = `
+<styled.div
+  className="mockClassName"
+  id="mockId"
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <Detail
+      label="Name"
+      value="mockName"
+    />
+    <Detail
+      label="Value"
+      value="mockValue"
+    />
+    <Detail
+      label="Flow Id"
+      value="0000-0000-0000-0000"
+    />
+    <Detail
+      label="Channel Type"
+      value="mockChannel"
+    />
+    <Detail
+      label="Description"
+      value="mockDescription"
+    />
+  </React.Fragment>
+</styled.div>
+`;

@@ -12,15 +12,21 @@ import Confirmation from '../ConfirmationDialog';
 
 import SidePanel from '../../containers/SidePanel';
 import EntityTableContainer from '../EntityTable';
+
+// Forms
 import CreateListForm from '../Form/Lists/Create';
-import EmailTemplatesDetailsPanel from '../SidePanelDetails/EmailTemplates';
-import EmailTemplatesForm from '../Form/EmailTemplates';
-import ListsDetailsPanel from '../SidePanelDetails/Lists';
 import UpdateListForm from '../Form/Lists/Update';
-import OutboundIdentifiersDetailsPanel from '../SidePanelDetails/OutboundIdentifiers';
-import OutboundIdentifiersForm from '../Form/OutboundIdentifiers';
-import CreateListItemForm from '../Form/ListItems/Create';
 import UpdateListItemForm from '../Form/ListItems/Update';
+import CreateListItemForm from '../Form/ListItems/Create';
+import EmailTemplatesForm from '../Form/EmailTemplates';
+import OutboundIdentifiersForm from '../Form/OutboundIdentifiers';
+import OutboundIdentifierListsForm from '../Form/OutboundIdentifierLists';
+
+// Side Panels
+import ListsDetailsPanel from '../SidePanelDetails/Lists';
+import EmailTemplatesDetailsPanel from '../SidePanelDetails/EmailTemplates';
+import OutboundIdentifiersDetailsPanel from '../SidePanelDetails/OutboundIdentifiers';
+import OutboundIdentifierListsPanelContainer from '../SidePanelDetails/OutboundIdentifierLists';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -105,6 +111,16 @@ const detailsPanelRoutes = [
         <OutboundIdentifiersDetailsPanel>
           <OutboundIdentifiersForm />
         </OutboundIdentifiersDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/outboundIdentifierLists',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <OutboundIdentifierListsPanelContainer>
+          <OutboundIdentifierListsForm />
+        </OutboundIdentifierListsPanelContainer>
       </NoScrollDetailsPanel>
     )
   }

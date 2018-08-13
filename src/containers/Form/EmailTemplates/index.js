@@ -18,8 +18,7 @@ import {
   getTemplates
 } from '../../../redux/modules/entities/emailTemplates/selectors';
 
-/* istanbul ignore next */
-let UpdateEmailTemplateForm = compose(
+const UpdateEmailTemplateForm = compose(
   connect(state => ({ form: `emailTemplates:${getSelectedEntityId(state)}` })),
   reduxForm({
     onSubmit: (values, dispatch, props) =>

@@ -16,7 +16,7 @@ import {
 import { getFieldItems } from './selectors';
 import validate from './validation';
 
-let CreateListItemsForm = reduxForm({
+const CreateListItemsForm = reduxForm({
   form: 'listItems:create',
   onSubmit: (values, dispatch, props) =>
     dispatch(onSubEntityFormSubmit(values, props)),

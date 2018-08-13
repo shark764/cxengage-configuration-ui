@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OutboundIdentifierListsFormLayout renders , inherited is true , fields should be disabled 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    inputType="text"
+    label="Value *"
+    name="value"
+  />
+  <SelectField
+    disabled={true}
+    label="Flow Id *"
+    name="flowId"
+    options={Array []}
+    required={false}
+  />
+  <SelectField
+    disabled={true}
+    label="Channel Type *"
+    name="channelType"
+    options={
+      Array [
+        Object {
+          "label": "Voice",
+          "value": "voice",
+        },
+        Object {
+          "label": "Sms",
+          "value": "sms",
+        },
+        Object {
+          "label": "Email",
+          "value": "email",
+        },
+      ]
+    }
+    required={false}
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;
+
+exports[`OutboundIdentifierListsFormLayout renders , isSaving is true , fields should be disabled 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    inputType="text"
+    label="Value *"
+    name="value"
+  />
+  <SelectField
+    disabled={true}
+    label="Flow Id *"
+    name="flowId"
+    options={Array []}
+    required={false}
+  />
+  <SelectField
+    disabled={true}
+    label="Channel Type *"
+    name="channelType"
+    options={
+      Array [
+        Object {
+          "label": "Voice",
+          "value": "voice",
+        },
+        Object {
+          "label": "Sms",
+          "value": "sms",
+        },
+        Object {
+          "label": "Email",
+          "value": "email",
+        },
+      ]
+    }
+    required={false}
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;
+
+exports[`OutboundIdentifierListsFormLayout renders regular form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Value *"
+    name="value"
+  />
+  <SelectField
+    disabled={false}
+    label="Flow Id *"
+    name="flowId"
+    options={Array []}
+    required={false}
+  />
+  <SelectField
+    disabled={false}
+    label="Channel Type *"
+    name="channelType"
+    options={
+      Array [
+        Object {
+          "label": "Voice",
+          "value": "voice",
+        },
+        Object {
+          "label": "Sms",
+          "value": "sms",
+        },
+        Object {
+          "label": "Email",
+          "value": "email",
+        },
+      ]
+    }
+    required={false}
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;

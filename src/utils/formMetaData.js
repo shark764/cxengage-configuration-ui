@@ -1,8 +1,10 @@
 export const createFormMetadata = {
   lists: ['listTypes'],
-  outboundIdentifiers: ['flows']
+  outboundIdentifiers: ['flows'],
+  outboundIdentifierLists: ['flows']
 };
 
 export const updateFormMetadata = {
-  outboundIdentifiers: ['flows']
+  outboundIdentifiers: ['flows'],
+  outboundIdentifierLists: ['flows']
 };

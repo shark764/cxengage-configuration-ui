@@ -18,8 +18,7 @@ import {
   getInitialUpdateFormValues
 } from '../../../redux/modules/entities/lists/selectors';
 
-/* istanbul ignore next */
-let UpdateListForm = compose(
+const UpdateListForm = compose(
   connect(state => ({ form: `lists:${getSelectedEntityId(state)}` })),
   reduxForm({
     onSubmit: (values, dispatch, props) =>

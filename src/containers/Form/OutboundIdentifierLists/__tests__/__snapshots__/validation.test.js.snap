@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "channelType": "Please select a channel type",
+  "flowId": "Please select a flow",
+  "name": "Please enter a name",
+  "value": "Please enter a value",
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "channelType": false,
+  "flowId": false,
+  "name": false,
+  "value": false,
+}
+`;
