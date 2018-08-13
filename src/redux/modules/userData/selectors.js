@@ -9,6 +9,8 @@ const getUserData = state => state.get('UserData');
 export const getCurrentTenantName = state =>
   state.get('UserData').get('currentTenantName');
 
+export const getCurrentAgentId = state => state.get('UserData').get('agentId');
+
 export const getCurrentTenantId = state =>
   state.get('UserData').get('currentTenantId');
 

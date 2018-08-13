@@ -30,6 +30,9 @@ jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
     '0000-0000-0000-0000',
   selectSupervisorToolbarSilentMonitoringStatus: () => 'mockStatus'
 }));
+jest.mock('../../../redux/modules/userData/selectors', () => ({
+  getCurrentAgentId: () => '0000-0000-0000-0000'
+}));
 
 describe('InteractionMonitoring Renders', () => {
   it('renders', () => {

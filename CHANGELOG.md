@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.21.11]
+* CXV1-14739 - Silent Monitoring - 12h format causing issues when filtering on the 12th hour.
+
 ## [0.21.10]
 * CXV1-14874 - Move config-2 forms out of the component library and into config-2 repo.
 

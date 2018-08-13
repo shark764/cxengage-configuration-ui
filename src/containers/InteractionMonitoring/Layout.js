@@ -76,6 +76,12 @@ export default class InteractionMonitoring extends Component {
       .toLowerCase()
       .indexOf(value.toLowerCase()) > -1;
 
+  highlightRow = ({ row }) =>
+    row.interactionId === this.props.monitoredId ||
+    row.monitoring.filter(
+      x => x.agentId === this.props.getCurrentAgentId && x.endTimestamp === null
+    ).length === 1;
+
   getTableRowProps = (state, rowInfo) => {
     if (rowInfo) {
       return {
@@ -89,10 +95,9 @@ export default class InteractionMonitoring extends Component {
           }
         },
         style: {
-          background:
-            rowInfo.row.interactionId === this.props.monitoredId
-              ? 'rgba(253, 255, 50, 0.17)'
-              : null
+          background: this.highlightRow(rowInfo)
+            ? 'rgba(253, 255, 50, 0.17)'
+            : null
         }
       };
     } else {
@@ -207,7 +212,8 @@ export default class InteractionMonitoring extends Component {
                 this.props.activeColumns[11],
                 'InteractionMonitoring',
                 this.props.monitoredId,
-                this.props.monitoringStatus
+                this.props.monitoringStatus,
+                this.props.getCurrentAgentId
               ),
               groupsColumn(
                 this.props.activeColumns[12],
@@ -227,6 +233,7 @@ export default class InteractionMonitoring extends Component {
 
 InteractionMonitoring.propTypes = {
   monitoredId: PropTypes.string,
+  getCurrentAgentId: PropTypes.string,
   monitoringStatus: PropTypes.string,
   totalRatio: PropTypes.array,
   tableData: PropTypes.any,

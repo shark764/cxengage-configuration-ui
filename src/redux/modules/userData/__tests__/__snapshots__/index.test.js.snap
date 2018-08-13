@@ -5,11 +5,13 @@ Immutable.Map {
   "permissions": "tenantPermissions",
   "currentTenantName": "tenantName",
   "currentTenantId": "tenantId",
+  "agentId": undefined,
 }
 `;
 
 exports[`UserData reducer snapshots returns the correct initial state 1`] = `
 Immutable.Map {
+  "agentId": "",
   "permissions": "",
   "currentTenantName": "",
   "currentTenantId": "",

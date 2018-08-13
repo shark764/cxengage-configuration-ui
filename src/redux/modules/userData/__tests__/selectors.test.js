@@ -37,3 +37,14 @@ describe('getCurrentPermissions', () => {
     expect(sel.getCurrentPermissions(initialState)).toMatchSnapshot();
   });
 });
+
+describe('getCurrentAgentId', () => {
+  it('returns current agent id', () => {
+    const initialState = fromJS({
+      UserData: {
+        agentId: '0000-0000-0000-0000'
+      }
+    });
+    expect(sel.getCurrentAgentId(initialState)).toMatchSnapshot();
+  });
+});
