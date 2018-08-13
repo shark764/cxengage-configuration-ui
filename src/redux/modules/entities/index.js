@@ -52,6 +52,11 @@ const initialState = fromJS({
     createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
     disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
     assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
+  },
+  customMetrics: {
+    ...defaultEntity,
+    readPermission: ['CUSTOM_STATS_READ'],
+    updatePermission: ['CUSTOM_STATS_UPDATE']
   }
   //hygen-inject-before
 });

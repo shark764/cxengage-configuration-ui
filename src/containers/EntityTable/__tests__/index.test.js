@@ -20,7 +20,8 @@ jest.mock('../selectors', () => ({
 }));
 
 jest.mock('../config', () => ({
-  getTableColumns: () => ['mock table columns']
+  getTableColumns: () => ['mock table columns'],
+  getTitle: () => 'mock entity name'
 }));
 
 describe('EntityTable', () => {

@@ -24,6 +24,12 @@ jest.mock('../columns/name', () => ({
 jest.mock('../columns/status', () => ({
   statusColumn: 'mock status column'
 }));
+jest.mock('../columns/metricName', () => ({
+  metricNameColumn: 'mock Metric Name column'
+}));
+jest.mock('../columns/metricType', () => ({
+  metricTypeColumn: 'mock Metric Type column'
+}));
 
 describe('getTableColumns', () => {
   it('returns correct columns for lists', () => {
@@ -34,6 +40,9 @@ describe('getTableColumns', () => {
   });
   it('returns correct columns for outbound identifiers', () => {
     expect(getTableColumns('outboundIdentifiers')).toMatchSnapshot();
+  });
+  it('returns correct columns for Custom Metrics', () => {
+    expect(getTableColumns('customMetrics')).toMatchSnapshot();
   });
   it('returns empty array by default', () => {
     expect(getTableColumns()).toEqual([]);

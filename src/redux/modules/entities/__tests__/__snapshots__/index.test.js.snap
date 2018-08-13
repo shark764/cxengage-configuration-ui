@@ -115,8 +115,21 @@ Immutable.Map {
 
 exports[`entities reducer returns the correct initial state 1`] = `
 Immutable.Map {
-  "currentEntity": "none",
-  "none": Immutable.Map {},
+  "flows": Immutable.Map {
+    "data": undefined,
+  },
+  "customMetrics": Immutable.Map {
+    "data": undefined,
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "CUSTOM_STATS_READ",
+    ],
+    "updatePermission": Immutable.List [
+      "CUSTOM_STATS_UPDATE",
+    ],
+  },
   "lists": Immutable.Map {
     "selectedSubEntityId": undefined,
     "subEntity": "listItems",
@@ -135,13 +148,33 @@ Immutable.Map {
     "sidePanelWidth": 550,
     "subEntitySaving": false,
   },
-  "flows": Immutable.Map {
+  "none": Immutable.Map {},
+  "outboundIdentifiers": Immutable.Map {
+    "readPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_READ",
+    ],
     "data": undefined,
+    "createPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_CREATE",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_DISABLE",
+    ],
+    "updatePermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_MODIFY",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_ASSIGN",
+    ],
   },
   "listTypes": Immutable.Map {
     "data": undefined,
   },
-  "outboundIdentifiers": Immutable.Map {
+  "currentEntity": "none",
+  "outboundIdentifierLists": Immutable.Map {
     "readPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_READ",
     ],
@@ -173,27 +206,6 @@ Immutable.Map {
     "updatePermission": Immutable.List [
       "USER_MANAGEMENT_EMAIL_UPDATE",
       "PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE",
-    ],
-  },
-  "outboundIdentifierLists": Immutable.Map {
-    "readPermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_READ",
-    ],
-    "data": undefined,
-    "createPermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_CREATE",
-    ],
-    "confirmationDialogType": undefined,
-    "disablePermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_DISABLE",
-    ],
-    "updatePermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_MODIFY",
-    ],
-    "selectedEntityId": "",
-    "sidePanelWidth": 550,
-    "assignPermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_ASSIGN",
     ],
   },
 }

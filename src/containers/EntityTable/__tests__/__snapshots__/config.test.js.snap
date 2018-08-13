@@ -4,6 +4,15 @@ exports[`getHelpLink returns correct link for emailTemplates 1`] = `"docs.cxenga
 
 exports[`getHelpLink returns correct link for lists 1`] = `"docs.cxengage.net/Help/Content/Configuration/Lists/Lists.htm"`;
 
+exports[`getTableColumns returns correct columns for Custom Metrics 1`] = `
+Array [
+  "mock Metric Type column",
+  "mock Metric Name column",
+  "mock description column",
+  "mock status column",
+]
+`;
+
 exports[`getTableColumns returns correct columns for emailTemplates 1`] = `
 Array [
   "mock name column",

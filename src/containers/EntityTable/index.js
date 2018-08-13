@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 
 import { EntityTable } from 'cx-ui-components';
 
-import { camelCaseToRegularForm } from '../../utils/string';
-
 import {
   setSelectedEntityCreate,
   setSelectedEntityId
@@ -17,12 +15,12 @@ import {
   userHasCreatePermission
 } from '../../redux/modules/entities/selectors';
 import { getHelpLink, getAllEntities } from './selectors';
-import { getTableColumns } from './config';
+import { getTableColumns, getTitle } from './config';
 
 export function mapStateToProps(state) {
   const currentEntity = getCurrentEntity(state);
   return {
-    pageTitle: camelCaseToRegularForm(currentEntity),
+    pageTitle: getTitle(currentEntity),
     pageHelpLink: getHelpLink(state),
     items: getAllEntities(state),
     columns: getTableColumns(currentEntity),
