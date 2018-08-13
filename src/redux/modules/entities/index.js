@@ -44,6 +44,14 @@ const initialState = fromJS({
       'USER_MANAGEMENT_EMAIL_UPDATE',
       'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE'
     ]
+  },
+  outboundIdentifierLists: {
+    ...defaultEntity,
+    readPermission: ['OUTBOUND_IDENTIFIER_READ'],
+    updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
+    createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
+    disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
+    assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
   }
   //hygen-inject-before
 });

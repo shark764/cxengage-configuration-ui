@@ -175,5 +175,26 @@ Immutable.Map {
       "PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE",
     ],
   },
+  "outboundIdentifierLists": Immutable.Map {
+    "readPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_READ",
+    ],
+    "data": undefined,
+    "createPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_CREATE",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_DISABLE",
+    ],
+    "updatePermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_MODIFY",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_ASSIGN",
+    ],
+  },
 }
 `;

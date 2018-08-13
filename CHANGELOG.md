@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.22.0]
+* CXV1-13352 - Outbound Identifiers - Create outbound identifiers lists page.
+
 ## [0.21.11]
 * CXV1-14739 - Silent Monitoring - 12h format causing issues when filtering on the 12th hour.
 

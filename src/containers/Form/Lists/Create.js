@@ -11,7 +11,7 @@ import { createFormValidation } from './validation';
 import { isCreating } from '../../../redux/modules/entities/selectors';
 import { getListTypesOptions } from '../../../redux/modules/entities/listTypes/selectors';
 
-let CreateListForm = reduxForm({
+const CreateListForm = reduxForm({
   form: 'lists:create',
   onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
   validate: createFormValidation

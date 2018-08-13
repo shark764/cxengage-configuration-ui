@@ -17,7 +17,7 @@ import {
 import { getUpdateFieldItems, getInitialValues } from './selectors';
 import validate from './validation';
 
-let UpdateListItemsForm = compose(
+const UpdateListItemsForm = compose(
   connect(state => ({
     form: `listItems:${getSelectedSubEntityId(state)}`
   })),

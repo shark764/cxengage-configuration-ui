@@ -5,7 +5,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
-import OutboundIdentifiersForm from './Layout';
+import { OutboundIdentifierListsFormLayout } from './layout';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { formValidation } from './validation';
 import {
@@ -18,17 +18,17 @@ import { selectFormInitialValues } from '../../../redux/modules/form/selectors';
 export const formSubmission = (values, dispatch, props) =>
   dispatch(onFormSubmit(values, props));
 export const createFormName = state => ({
-  form: `outboundIdentifiers:${getSelectedEntityId(state)}`
+  form: `outboundIdentifierLists:${getSelectedEntityId(state)}`
 });
 
-const CreateOutboundIdentifierForm = compose(
+const CreateOutboundIdentifierListsForm = compose(
   connect(createFormName),
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
     destroyOnUnmount: false
   })
-)(OutboundIdentifiersForm);
+)(OutboundIdentifierListsFormLayout);
 
 export function mapStateToProps(state) {
   return {
@@ -38,4 +38,4 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CreateOutboundIdentifierForm);
+export default connect(mapStateToProps)(CreateOutboundIdentifierListsForm);

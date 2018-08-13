@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "flowIds": Array [
+    Object {
+      "label": "mockLabel",
+      "value": "mockValue",
+    },
+  ],
+  "initialValues": Object {
+    "active": true,
+  },
+  "isSaving": false,
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `
+Object {
+  "form": "outboundIdentifierLists:mockId",
+}
+`;
+
+exports[`formSubmission returns proper values 1`] = `
+Object {
+  "dirty": true,
+  "type": "FORM_SUBMIT",
+  "values": Object {
+    "channelType": "mockChannel",
+    "desciption": "mockDescription",
+    "name": "mockName",
+    "value": "mockValue",
+  },
+}
+`;
