@@ -12,6 +12,7 @@ Object {
     "active": true,
   },
   "isSaving": false,
+  "key": "mockId",
 }
 `;
 

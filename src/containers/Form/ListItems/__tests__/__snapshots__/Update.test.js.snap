@@ -2,9 +2,11 @@
 
 exports[`Maps state to props only using selectors validates object updated from mapStateToProps 1`] = `
 Object {
-  "fieldItems": "mock field items",
+  "fieldItems": "mock update field items",
+  "initialValues": "mock initial values",
   "isSaving": false,
-  "listName": "mockName",
+  "key": "mockSubEntityId",
+  "listItemName": "mockSubEntityId",
 }
 `;
 

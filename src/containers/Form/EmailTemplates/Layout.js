@@ -16,7 +16,7 @@ import { TemplateTextEditorField } from 'cx-ui-components';
 
 export default function EmailTemplatesForm(props) {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={props.handleSubmit} key={props.key}>
       <SelectField
         name="email"
         label="Email"
@@ -59,6 +59,7 @@ export default function EmailTemplatesForm(props) {
 }
 
 EmailTemplatesForm.propTypes = {
+  key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,

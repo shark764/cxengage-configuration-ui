@@ -33,7 +33,8 @@ export function mapStateToProps(state) {
     initialValues: getInitialFormValues(state),
     isSaving: isUpdating(state),
     email: getEmailTemplateFormValue(state),
-    templates: getTemplates(state)
+    templates: getTemplates(state),
+    key: getSelectedEntityId(state)
   };
 }
 

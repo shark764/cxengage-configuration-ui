@@ -33,7 +33,8 @@ export function mapStateToProps(state) {
     listItemName: getSelectedSubEntityId(state),
     fieldItems: getUpdateFieldItems(state),
     initialValues: getInitialValues(state),
-    isSaving: isSubEntitySaving(state)
+    isSaving: isSubEntitySaving(state),
+    key: getSelectedSubEntityId(state)
   };
 }
 

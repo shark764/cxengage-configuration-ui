@@ -5,10 +5,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { mockStore } from '../../../../utils/testUtils';
-import UpdateListItemsForm, { mapStateToProps, mapDispatchToProps } from '../Create';
+import UpdateListItemsForm, {
+  mapStateToProps,
+  mapDispatchToProps
+} from '../Update';
 import {
   getSelectedEntityName,
-  isSubEntitySaving
+  isSubEntitySaving,
+  getSelectedSubEntityId
 } from '../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../redux/modules/entities', () => ({
@@ -21,6 +25,7 @@ jest.mock('../../../../redux/modules/entities', () => ({
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntityName.mockImplementation(() => 'mockName');
+getSelectedSubEntityId.mockImplementation(() => 'mockSubEntityId');
 isSubEntitySaving.mockImplementation(() => false);
 
 jest.mock('../selectors', () => ({

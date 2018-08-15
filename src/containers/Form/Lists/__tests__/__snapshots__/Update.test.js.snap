@@ -5,6 +5,7 @@ Object {
   "inherited": "mock is inherited",
   "initialValues": "mock initial update form values",
   "isSaving": "mock is updating",
+  "key": "mockId",
   "listType": "mock list type name",
   "update": true,
 }

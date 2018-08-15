@@ -17,10 +17,11 @@ export function OutboundIdentifierListsFormLayout({
   handleSubmit,
   isSaving,
   inherited,
-  flowIds
+  flowIds,
+  key
 }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} key={key}>
       <InputField
         name="name"
         label="Name *"
@@ -63,6 +64,7 @@ export function OutboundIdentifierListsFormLayout({
 }
 
 OutboundIdentifierListsFormLayout.propTypes = {
+  key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,

@@ -34,7 +34,8 @@ export function mapStateToProps(state) {
   return {
     flowIds: selectFlowIds(state),
     initialValues: selectFormInitialValues(state),
-    isSaving: isCreating(state)
+    isSaving: isCreating(state),
+    key: getSelectedEntityId(state)
   };
 }
 

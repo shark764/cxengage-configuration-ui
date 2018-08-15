@@ -17,10 +17,11 @@ export default function OutboundIdentifiersForm({
   handleSubmit,
   isSaving,
   inherited,
-  flowIds
+  flowIds,
+  key
 }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} key={key}>
       <div>
         <InputField
           name="name"
@@ -65,6 +66,7 @@ export default function OutboundIdentifiersForm({
 }
 
 OutboundIdentifiersForm.propTypes = {
+  key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,

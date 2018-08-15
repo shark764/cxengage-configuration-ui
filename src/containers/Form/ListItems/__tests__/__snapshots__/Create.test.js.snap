@@ -4,6 +4,7 @@ exports[`Maps state to props only using selectors validates object created from 
 Object {
   "fieldItems": "mock field items",
   "isSaving": false,
+  "key": "create",
   "listName": "mockName",
 }
 `;

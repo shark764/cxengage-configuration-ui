@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.22.1]
+* <no-ticket> - Fixed bug with redux forms not remounting, causing forms not to update properly when switching beteween them
+
 ## [0.22.0]
 * CXV1-13352 - Outbound Identifiers - Create outbound identifiers lists page.
 
