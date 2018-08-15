@@ -13,6 +13,7 @@ import {
   getSelectedEntityName,
   isSubEntitySaving
 } from '../../../redux/modules/entities/selectors';
+
 import { getFieldItems } from './selectors';
 import validate from './validation';
 
@@ -27,7 +28,8 @@ export function mapStateToProps(state) {
   return {
     listName: getSelectedEntityName(state),
     fieldItems: getFieldItems(state),
-    isSaving: isSubEntitySaving(state)
+    isSaving: isSubEntitySaving(state),
+    key: 'create'
   };
 }
 

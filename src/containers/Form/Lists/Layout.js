@@ -16,7 +16,7 @@ import { ToggleField } from 'cx-ui-components';
 
 export default function ListsForm(props) {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={props.handleSubmit} key={props.key}>
       <InputField
         name="name"
         label="Name *"
@@ -42,6 +42,7 @@ export default function ListsForm(props) {
 }
 
 ListsForm.propTypes = {
+  key: PropTypes.string,
   listTypes: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,

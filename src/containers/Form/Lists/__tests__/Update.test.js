@@ -9,7 +9,8 @@ import UpdateListForm, { mapStateToProps } from '../Update';
 
 jest.mock('../../../../redux/modules/entities/selectors', () => ({
   isInherited: () => 'mock is inherited',
-  isUpdating: () => 'mock is updating'
+  isUpdating: () => 'mock is updating',
+  getSelectedEntityId: () => 'mockId'
 }));
 
 jest.mock('../../../../redux/modules/entities/lists/selectors', () => ({

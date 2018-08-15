@@ -12,6 +12,7 @@ Object {
     "active": true,
   },
   "isSaving": false,
+  "key": "mockId",
 }
 `;
 
@@ -32,6 +33,7 @@ exports[`OutboundIdentifiersForm Renders renders 1`] = `
     }
   }
   isSaving={false}
+  key="mockId"
   store={
     Object {
       "dispatch": [Function],

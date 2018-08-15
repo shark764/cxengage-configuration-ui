@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 
 export default function ListItemsForm(props) {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={props.handleSubmit} key={props.key}>
       {props.listName ? (
         <Fragment>
           <Header>Creating list item for : </Header>
@@ -90,6 +90,7 @@ export default function ListItemsForm(props) {
 }
 
 ListItemsForm.propTypes = {
+  key: PropTypes.string,
   listName: PropTypes.string,
   listItemName: PropTypes.string,
   fieldItems: PropTypes.arrayOf(

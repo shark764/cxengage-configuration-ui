@@ -5,6 +5,7 @@ Object {
   "email": "mock email template form value",
   "initialValues": "mock initial values",
   "isSaving": "mock is updating",
+  "key": "mockSelectedEntityId",
   "templates": "mock templates",
 }
 `;

@@ -24,7 +24,8 @@ export function mapStateToProps(state) {
       active: true,
       shared: true
     }),
-    isSaving: isCreating(state)
+    isSaving: isCreating(state),
+    key: 'create'
   };
 }
 

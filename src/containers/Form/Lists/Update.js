@@ -34,7 +34,8 @@ export function mapStateToProps(state) {
     initialValues: getInitialUpdateFormValues(state),
     listType: getListTypeName(state),
     isSaving: isUpdating(state),
-    inherited: isInherited(state)
+    inherited: isInherited(state),
+    key: getSelectedEntityId(state)
   };
 }
 
