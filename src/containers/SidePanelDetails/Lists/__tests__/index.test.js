@@ -20,20 +20,20 @@ const mockSelectedEntity = fromJS({
     name: 'mock list type name',
     fields: [
       {
-        type: "string",
-        name: "reasonName",
-        label: "Reason Name",
+        type: 'string',
+        name: 'reasonName',
+        label: 'Reason Name',
         required: true
-      },
-    ],
+      }
+    ]
   },
   items: [
     {
-      reasonName: "Test 1",
+      reasonName: 'Test 1',
       reasonCode: 101,
-      description: "Nothing"
-    },
-  ],
+      description: 'Nothing'
+    }
+  ]
 });
 jest.mock('../../../../redux/modules/entities/selectors', () => ({
   getSelectedEntity: () => mockSelectedEntity,
@@ -45,13 +45,7 @@ jest.mock('../../../../redux/modules/entities/selectors', () => ({
 describe('ListsDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(
-      shallow(
-        <ListsDetailsPanel store={store}>
-          Child
-        </ListsDetailsPanel>
-      )
-    ).toMatchSnapshot();
+    expect(shallow(<ListsDetailsPanel store={store}>Child</ListsDetailsPanel>)).toMatchSnapshot();
   });
 });
 

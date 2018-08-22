@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import CustomMetricsForm from '../Layout';
+import CustomMetricsForm from '../layout';
 
 describe('<CustomMetricsForm />', () => {
   it('renders create customMetric', () => {

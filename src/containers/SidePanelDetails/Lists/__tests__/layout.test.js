@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ListsDetailsPanel from '../Layout';
+import ListsDetailsPanel from '../layout';
 
 describe('<ListsDetailsPanel />', () => {
   let customTableItems;
@@ -16,34 +16,34 @@ describe('<ListsDetailsPanel />', () => {
         tableField1: 'test 1',
         tableField2: 'test 2',
         tableField3: 'test 3',
-        tableField4: 'test 4',
-      },
+        tableField4: 'test 4'
+      }
     ];
     customTableFields = [
       {
         type: 'string',
         name: 'tableField1',
         label: 'label 1',
-        required: true,
+        required: true
       },
       {
         type: 'string',
         name: 'tableField2',
         label: 'label 2',
-        required: true,
+        required: true
       },
       {
         type: 'string',
         name: 'tableField3',
         label: 'label 3',
-        required: true,
+        required: true
       },
       {
         type: 'string',
         name: 'tableField4',
         label: 'label 4',
-        required: true,
-      },
+        required: true
+      }
     ];
   });
   it('renders lists detailsPanel', () => {

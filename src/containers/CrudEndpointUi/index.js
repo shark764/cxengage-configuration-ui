@@ -5,11 +5,7 @@
 import { connect } from 'react-redux';
 
 // Actions
-import {
-  setCurrentEntity,
-  fetchData,
-  setSelectedSubEntityId
-} from '../../redux/modules/entities';
+import { setCurrentEntity, fetchData, setSelectedSubEntityId } from '../../redux/modules/entities';
 
 // Selectors
 import {
@@ -18,7 +14,7 @@ import {
   getConfirmationDialogType
 } from '../../redux/modules/entities/selectors';
 
-import Layout from './Layout';
+import Layout from './layout';
 
 function mapStateToProps(state) {
   return {

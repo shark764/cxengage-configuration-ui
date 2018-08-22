@@ -4,7 +4,7 @@
 
 import { connect } from 'react-redux';
 
-import ListsDetailsPanel from './Layout';
+import ListsDetailsPanel from './layout';
 
 import { CONFIRM_ENTITY_CSV_UPLOAD } from '../../ConfirmationDialog/constants.js';
 
@@ -25,14 +25,10 @@ import {
 export function mapDispatchToProps(dispatch) {
   return {
     openCreateListItemModal: () => dispatch(setSelectedSubEntityId('create')),
-    updateSubEntity: subEntityId =>
-      dispatch(setSelectedSubEntityId(subEntityId)),
+    updateSubEntity: subEntityId => dispatch(setSelectedSubEntityId(subEntityId)),
     deleteSubEntity: subEntityId => dispatch(deleteSubEntity(subEntityId)),
     downloadCsv: () => dispatch(downloadCsv()),
-    uploadCsv: event =>
-      dispatch(
-        setConfirmationDialog(CONFIRM_ENTITY_CSV_UPLOAD, event.target.files[0])
-      )
+    uploadCsv: event => dispatch(setConfirmationDialog(CONFIRM_ENTITY_CSV_UPLOAD, event.target.files[0]))
   };
 }
 

@@ -4,23 +4,16 @@
 
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
-import ListItemsForm from './Layout';
-import {
-  setSelectedSubEntityId,
-  onSubEntityFormSubmit
-} from '../../../redux/modules/entities';
-import {
-  getSelectedEntityName,
-  isSubEntitySaving
-} from '../../../redux/modules/entities/selectors';
+import ListItemsForm from './layout';
+import { setSelectedSubEntityId, onSubEntityFormSubmit } from '../../../redux/modules/entities';
+import { getSelectedEntityName, isSubEntitySaving } from '../../../redux/modules/entities/selectors';
 
 import { getFieldItems } from './selectors';
 import validate from './validation';
 
 const CreateListItemsForm = reduxForm({
   form: 'listItems:create',
-  onSubmit: (values, dispatch, props) =>
-    dispatch(onSubEntityFormSubmit(values, props)),
+  onSubmit: (values, dispatch, props) => dispatch(onSubEntityFormSubmit(values, props)),
   validate
 })(ListItemsForm);
 
@@ -41,6 +34,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CreateListItemsForm
-);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateListItemsForm);

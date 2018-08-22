@@ -6,10 +6,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { mockStore } from '../../../../utils/testUtils';
 import CreateListItemsForm, { mapStateToProps, mapDispatchToProps } from '../Create';
-import {
-  getSelectedEntityName,
-  isSubEntitySaving
-} from '../../../../redux/modules/entities/selectors';
+import { getSelectedEntityName, isSubEntitySaving } from '../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../redux/modules/entities', () => ({
   setSelectedSubEntityId: () => 'mock selected sub entity'

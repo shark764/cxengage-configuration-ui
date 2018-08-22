@@ -8,6 +8,7 @@ to: src/containers/Form/<%= name %>/__tests__/index.test.js
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
+import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import <%= name %>Form, {
   mapStateToProps,
   createFormName,
@@ -15,14 +16,16 @@ import <%= name %>Form, {
 } from '../';
 import {
   getSelectedEntityId,
+  isInherited,
   isCreating
 } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
+getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
-isCreating.mockImplementation(() => false);
+isCreating.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 describe('<%= name %> Renders', () => {
@@ -52,6 +55,12 @@ describe('formSubmission', () => {
   // Change values to match the form your making
   // If you see this in a PR the unit tests may not have been completed
   // const values = { name: 'mockName', value: 'mockValue' };
+  const values = {
+    id: 'mockId',
+    name: 'mockName',
+    description: 'mockDescription',
+    type: 'mockType'
+  };
   const dispatch = action => action;
   const props = { dirty: true };
   it('returns proper values', () => {

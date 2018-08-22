@@ -1,10 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import SupervisorToolbarLayout from '../Layout';
-import {
-  messageSubscribe,
-  messageUnsubscribe
-} from '../windowMessageObservable';
+import SupervisorToolbarLayout from '../layout';
+import { messageSubscribe, messageUnsubscribe } from '../windowMessageObservable';
 jest.mock('../windowMessageObservable');
 const toggleMuteMock = jest.fn();
 const hangUpMock = jest.fn();
@@ -90,9 +87,7 @@ describe('Supervisor Toolbar Layout', () => {
         monitoringStatus={'connected'}
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
-        startSupervisorToolbarSubscriptions={
-          startSupervisorToolbarSubscriptionsMock
-        }
+        startSupervisorToolbarSubscriptions={startSupervisorToolbarSubscriptionsMock}
         userHasBargeAllCallsPermission={true}
       />
     );
@@ -115,9 +110,7 @@ describe('Full mount to test lifecycle events', () => {
         monitoringStatus={'connected'}
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
-        startSupervisorToolbarSubscriptions={
-          startSupervisorToolbarSubscriptionsMock
-        }
+        startSupervisorToolbarSubscriptions={startSupervisorToolbarSubscriptionsMock}
         userHasBargeAllCallsPermission={true}
       />
     );

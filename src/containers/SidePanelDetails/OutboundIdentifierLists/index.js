@@ -3,7 +3,7 @@
  */
 
 import { connect } from 'react-redux';
-import { OutboundIdentifierListsDetailsPanel } from './Layout.js';
+import OutboundIdentifierListsDetailsPanel from './layout';
 
 import {
   userHasUpdatePermission,
@@ -12,11 +12,7 @@ import {
   getListSize
 } from '../../../redux/modules/entities/selectors';
 
-import {
-  toggleEntityListItemActive,
-  setSelectedSubEntityId,
-  removeListItem
-} from '../../../redux/modules/entities';
+import { toggleEntityListItemActive, setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
 
 export function mapStateToProps(state, props) {
   return {
@@ -33,6 +29,4 @@ export const actions = {
   setSelectedSubEntityId
 };
 
-export default connect(mapStateToProps, actions)(
-  OutboundIdentifierListsDetailsPanel
-);
+export default connect(mapStateToProps, actions)(OutboundIdentifierListsDetailsPanel);

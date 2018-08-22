@@ -5,30 +5,30 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import CustomMetricsDetailsPanel from '../Layout';
+import CustomMetricsDetailsPanel from '../layout';
 
 describe('<CustomMetricsDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
   beforeEach(() => {
     customItem = {
-      customMetricsName: "SLA",
-      description: "Test",
-      customMetricsType: "SLA",
-      customMetricsId: "7a11c534-cc2e-11n8-76hd-9440dab8147",
+      customMetricsName: 'SLA',
+      description: 'Test',
+      customMetricsType: 'SLA',
+      customMetricsId: '7a11c534-cc2e-11n8-76hd-9440dab8147',
       status: true,
       slaThreshold: 20,
-      slaAbandonType: "ignored-abandoned-calls",
+      slaAbandonType: 'ignored-abandoned-calls',
       slaAbandonThreshold: 20
     };
     customItemDisabled = {
-      customMetricsName: "SLA",
-      description: "Test",
-      customMetricsType: "SLA",
-      customMetricsId: "7a11c534-cc2e-11n8-76hd-9440dab8147",
+      customMetricsName: 'SLA',
+      description: 'Test',
+      customMetricsType: 'SLA',
+      customMetricsId: '7a11c534-cc2e-11n8-76hd-9440dab8147',
       status: false,
       slaThreshold: 20,
-      slaAbandonType: "ignored-abandoned-calls",
+      slaAbandonType: 'ignored-abandoned-calls',
       slaAbandonThreshold: 20
     };
   });

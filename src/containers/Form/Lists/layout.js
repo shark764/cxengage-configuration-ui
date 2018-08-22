@@ -25,12 +25,7 @@ export default function ListsForm(props) {
         inputType="text"
         disabled={props.isSaving || props.inherited}
       />
-      <ToggleField
-        name="shared"
-        label="Shared *"
-        id="frm-lists-shared"
-        disabled={props.isSaving || props.inherited}
-      />
+      <ToggleField name="shared" label="Shared *" id="frm-lists-shared" disabled={props.isSaving || props.inherited} />
       {!props.update && (
         <SelectField
           name="listTypeId"

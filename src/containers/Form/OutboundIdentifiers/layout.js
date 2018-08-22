@@ -13,13 +13,7 @@ import PropTypes from 'prop-types';
 import { InputField } from 'cx-ui-components';
 import { SelectField } from 'cx-ui-components';
 
-export default function OutboundIdentifiersForm({
-  handleSubmit,
-  isSaving,
-  inherited,
-  flowIds,
-  key
-}) {
+export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inherited, flowIds, key }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <div>
@@ -37,12 +31,7 @@ export default function OutboundIdentifiersForm({
           inputType="text"
           disabled={isSaving || inherited}
         />
-        <SelectField
-          name="flowId"
-          label="Flow Id *"
-          options={flowIds}
-          disabled={isSaving || inherited}
-        />
+        <SelectField name="flowId" label="Flow Id *" options={flowIds} disabled={isSaving || inherited} />
         <SelectField
           name="channelType"
           label="Channel Type *"

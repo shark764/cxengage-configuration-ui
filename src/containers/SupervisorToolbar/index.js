@@ -16,20 +16,14 @@ import {
 
 import { userHasBargeAllCallsPermission } from '../../redux/modules/reporting/interactionMonitoring/selectors';
 
-import Layout from './Layout';
+import Layout from './layout';
 
 export const mapStateToProps = (state, props) => ({
   muted: selectSupervisorToolbarMuted(state, props),
   twilioEnabled: selectSupervisorToolbarTwilioEnabled(state, props),
-  twilioIsDefault: selectSupervisorToolbarTwilioIsDefaultExtension(
-    state,
-    props
-  ),
+  twilioIsDefault: selectSupervisorToolbarTwilioIsDefaultExtension(state, props),
   monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props),
-  interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(
-    state,
-    props
-  ),
+  interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(state, props),
   userHasBargeAllCallsPermission: userHasBargeAllCallsPermission(state)
 });
 

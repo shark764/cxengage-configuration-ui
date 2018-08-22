@@ -6,7 +6,7 @@ to: src/containers/SidePanelDetails/<%= name %>/index.js
  */
 
 import { connect } from 'react-redux';
-import { <%= name %>DetailsPanel } from 'cx-ui-components';
+import <%= name %>DetailsPanel from './layout';
 import {
   userHasUpdatePermission,
   getSelectedEntity

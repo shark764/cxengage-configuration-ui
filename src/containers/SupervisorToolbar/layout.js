@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-  messageSubscribe,
-  messageUnsubscribe
-} from './windowMessageObservable.js';
+import { messageSubscribe, messageUnsubscribe } from './windowMessageObservable.js';
 import { MutedIconSVG, UnMutedIconSVG, HangUpIconSVG } from 'cx-ui-components';
 
 const HangUpIconSVGWrapper = styled(HangUpIconSVG)`
@@ -42,17 +39,9 @@ export default class SupervisorToolbar extends Component {
             {this.props.monitoringStatus === 'connected' &&
               this.props.userHasBargeAllCallsPermission &&
               (this.props.muted ? (
-                <MutedIconSVG
-                  id="unmuteButton"
-                  onClick={this.props.requestingToggleMute}
-                  size={40}
-                />
+                <MutedIconSVG id="unmuteButton" onClick={this.props.requestingToggleMute} size={40} />
               ) : (
-                <UnMutedIconSVG
-                  id="muteButton"
-                  onClick={this.props.requestingToggleMute}
-                  size={40}
-                />
+                <UnMutedIconSVG id="muteButton" onClick={this.props.requestingToggleMute} size={40} />
               ))}
           </Toolbar>
         )}

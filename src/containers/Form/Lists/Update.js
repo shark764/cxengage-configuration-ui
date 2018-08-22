@@ -5,24 +5,16 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
-import ListsForm from './Layout';
+import ListsForm from './layout';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { updateFormValidation } from './validation';
-import {
-  getSelectedEntityId,
-  isInherited,
-  isUpdating
-} from '../../../redux/modules/entities/selectors';
-import {
-  getListTypeName,
-  getInitialUpdateFormValues
-} from '../../../redux/modules/entities/lists/selectors';
+import { getSelectedEntityId, isInherited, isUpdating } from '../../../redux/modules/entities/selectors';
+import { getListTypeName, getInitialUpdateFormValues } from '../../../redux/modules/entities/lists/selectors';
 
 const UpdateListForm = compose(
   connect(state => ({ form: `lists:${getSelectedEntityId(state)}` })),
   reduxForm({
-    onSubmit: (values, dispatch, props) =>
-      dispatch(onFormSubmit(values, props)),
+    onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
     validate: updateFormValidation,
     destroyOnUnmount: false
   })

@@ -8,11 +8,12 @@ to: src/containers/Form/<%= name %>/index.js
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
-import { <%= name %>Form } from 'cx-ui-components';
+import <%= name %>Form from './layout';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { formValidation } from './validation';
 import {
   getSelectedEntityId,
+  isInherited,
   isCreating
 } from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../redux/modules/form/selectors';
@@ -35,10 +36,10 @@ let Create<%= name %>Form = compose(
 export function mapStateToProps(state) {
   return {
     initialValues: selectFormInitialValues(state),
-    isSaving: isCreating(state)
+    isSaving: isCreating(state),
+    inherited: isInherited(state),
+    key: getSelectedEntityId(state)
   };
 }
 
 export default connect(mapStateToProps)(Create<%= name %>Form);
-
-

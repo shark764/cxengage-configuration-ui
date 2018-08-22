@@ -32,7 +32,7 @@ import {
 } from '../../redux/modules/supervisorToolbar/selectors';
 import { getCurrentAgentId } from '../../redux/modules/userData/selectors';
 
-import Layout from './Layout';
+import Layout from './layout';
 
 export const mapStateToProps = (state, props) => ({
   getCurrentAgentId: getCurrentAgentId(state),
@@ -47,14 +47,9 @@ export const mapStateToProps = (state, props) => ({
   expanded: selectInteractionMonitoringExpanded(state, props),
   selected: selectInteractionMonitoringSelected(state, props),
   sorted: selectInteractionMonitoringSorted(state, props),
-  monitoredId: selectSupervisorToolbarSilentMonitoringInteractionId(
-    state,
-    props
-  ),
+  monitoredId: selectSupervisorToolbarSilentMonitoringInteractionId(state, props),
   monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props),
-  userHasViewAllMonitoredCallsPermission: userHasViewAllMonitoredCallsPermission(
-    state
-  )
+  userHasViewAllMonitoredCallsPermission: userHasViewAllMonitoredCallsPermission(state)
 });
 
 export const actions = {

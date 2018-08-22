@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ListItemsForm from '../Layout';
+import ListItemsForm from '../layout';
 
 describe('<ListItemsForm />', () => {
   let customFieldItems;
@@ -28,7 +28,7 @@ describe('<ListItemsForm />', () => {
         name: 'Test Field Item Name 1',
         label: 'Test Field Item Label 1',
         required: false
-      },
+      }
     ];
   });
   it('renders create list item', () => {
