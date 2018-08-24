@@ -22,6 +22,9 @@ import EmailTemplatesForm from '../Form/EmailTemplates';
 import OutboundIdentifiersForm from '../Form/OutboundIdentifiers';
 import OutboundIdentifierListsForm from '../Form/OutboundIdentifierLists';
 
+// AddMembersToList table modal
+import AddMembersToList from '../AddMembersToList';
+
 // Side Panels
 import ListsDetailsPanel from '../SidePanelDetails/Lists';
 import EmailTemplatesDetailsPanel from '../SidePanelDetails/EmailTemplates';
@@ -79,6 +82,14 @@ const createFormRoutes = [
         <OutboundIdentifiersForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/outboundIdentifierLists',
+    component: () => (
+      <DetailsPanel>
+        <OutboundIdentifierListsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before1
 ];
@@ -117,11 +128,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/outboundIdentifierLists',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <OutboundIdentifierListsPanelContainer>
           <OutboundIdentifierListsForm />
         </OutboundIdentifierListsPanelContainer>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   }
   //hygen-inject-before2
@@ -138,6 +149,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/lists',
     component: UpdateListItemForm
+  },
+  {
+    path: '/configuration/outboundIdentifierLists',
+    component: AddMembersToList
   }
 ];
 
@@ -172,7 +187,10 @@ export default class CrudEndpointUiLayout extends Component {
           </SidePanel>
         )}
         {this.props.selectedSubEntityId && (
-          <Modal>
+          <Modal
+            selectedSubEntityId={this.props.selectedSubEntityId}
+            onMaskClick={this.props.setSelectedSubEntityId}
+          >
             {this.props.selectedSubEntityId === 'create'
               ? createSubEntityFormRoutes.map((route, index) => (
                   <Route
@@ -202,5 +220,6 @@ CrudEndpointUiLayout.propTypes = {
   fetchData: PropTypes.func.isRequired,
   selectedEntityId: PropTypes.string,
   selectedSubEntityId: PropTypes.string,
-  showConfirmationDialog: PropTypes.string
+  showConfirmationDialog: PropTypes.string,
+  setSelectedSubEntityId: PropTypes.func
 };

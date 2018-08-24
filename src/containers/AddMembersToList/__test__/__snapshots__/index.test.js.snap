@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddMemberToList Renders renders 1`] = `
+<AddMemberToList
+  addListItem={[Function]}
+  listName="mockName"
+  onCancel={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tableItems={Array []}
+  toggleEntityListItemActive={[Function]}
+  userHasUpdatePermission={true}
+/>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "listName": "mockName",
+  "tableItems": Array [],
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`actions onCancel returns setSelectedSubEntityId(undefined) 1`] = `"mockId"`;

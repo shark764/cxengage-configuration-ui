@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<OutboundIdentifiersDetailsPanel /> renders outboundIdentifiers detailsPanel , no update permissions 1`] = `
+<styled.div
+  className="details-panel"
+  id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <Detail
+      label="Name"
+      value="test-1"
+    />
+    <Detail
+      label="Value"
+      value="test 1"
+    />
+    <Detail
+      label="Flow Id"
+      value="7a11c534-cc2e-11n8-76hd-9440dab8147"
+    />
+    <Detail
+      label="Channel Type"
+      value="voice"
+    />
+    <Detail
+      label="Description"
+      value="test item"
+    />
+  </React.Fragment>
+</styled.div>
+`;
+
 exports[`<OutboundIdentifiersDetailsPanel /> renders outboundIdentifiers detailsPanel 1`] = `
 <styled.div
   className="details-panel"

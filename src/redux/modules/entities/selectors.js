@@ -3,6 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
+import { List } from 'immutable';
 
 import {
   getCurrentPermissions,
@@ -102,3 +103,43 @@ export const getSelectedEntityFormId = createSelector(
   [getCurrentEntity, getSelectedEntityId],
   (currentEntity, selectedEntityId) => `${currentEntity}:${selectedEntityId}`
 );
+
+export const availableEntitiesForList = state => {
+  const entityIndex = getCurrentEntityStore(state)
+    .get('data')
+    .findIndex(
+      entity =>
+        entity.get('id') ===
+        getCurrentEntityStore(state).get('selectedEntityId')
+    );
+  const currentListMembers = getCurrentEntityStore(state)
+    .getIn(['data', entityIndex, 'members'])
+    .toOrderedSet();
+  const allListOptions = state
+    .getIn(['Entities', getListDependency(state), 'data'])
+    .toOrderedSet();
+  const availableOptions = allListOptions.subtract(currentListMembers);
+  return availableOptions.toJS();
+};
+
+export const getListDependency = state =>
+  getCurrentEntityStore(state).getIn(['metaData', 'listDependency']);
+
+export const getEntityListMembers = state =>
+  getSelectedEntity(state)
+    .getIn(['members'], new List([]))
+    .toJS();
+
+export const getListSize = state => {
+  const entityIndex = getCurrentEntityStore(state)
+    .get('data')
+    .findIndex(
+      entity =>
+        entity.get('id') ===
+        getCurrentEntityStore(state).get('selectedEntityId')
+    );
+  return getCurrentEntityStore(state).getIn(
+    ['data', entityIndex, 'members'],
+    new List([])
+  ).size;
+};

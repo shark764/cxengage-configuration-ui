@@ -5,12 +5,14 @@
 import { mapStateToProps } from '../';
 import {
   getSelectedEntity,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  getEntityListMembers
 } from '../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntity.mockImplementation(() => {});
 userHasUpdatePermission.mockImplementation(() => true);
+getEntityListMembers.mockImplementation(() => 'mockListMembers');
 
 describe('Maps state to props only using selectors', () => {
   it('validates object created from mapStateToProps', () => {

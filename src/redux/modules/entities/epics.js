@@ -31,8 +31,11 @@ import {
   fetchDataFulfilled,
   fetchDataRejected,
   updateEntityFulfilled,
+  updateListItemFufilled,
   uploadCsv,
-  setEntityUpdating
+  setEntityUpdating,
+  removeListItemFufilled,
+  addListItemFufilled
 } from './index';
 import {
   getCurrentEntity,
@@ -41,6 +44,7 @@ import {
   getSelectedEntity,
   getCurrentSubEntity,
   getSelectedSubEntityId,
+  getListDependency,
   getConfirmationDialogType,
   getConfirmationDialogMetaData,
   getSelectedEntityName
@@ -309,6 +313,119 @@ export const ToggleEntity = (action$, store) =>
         })
     );
 
+export const ToggleEntityListItem = (action$, store) =>
+  action$
+    .ofType('TOGGLE_ENTITY_LIST_ITEM')
+    .map(action => ({
+      ...action,
+      currentEntity: getCurrentEntity(store.getState()),
+      listDependency: getListDependency(store.getState())
+    }))
+    .mergeMap(a =>
+      fromPromise(
+        sdkPromise(
+          {
+            module: 'entities',
+            command: `update${capitalizeFirstAndRemoveLastLetter(
+              a.listDependency
+            )}`,
+            data: {
+              [`${removeLastLetter(a.listDependency)}Id`]: a.entity.id,
+              active: !a.entity.active
+            }
+          },
+          `cxengage/entities/update-${camelCaseToKebabCaseAndRemoveLastLetter(
+            a.listDependency
+          )}-response`
+        )
+      )
+        .map(response => {
+          return updateListItemFufilled(response);
+        })
+        .catch(error => {
+          Toast.error(errorLabel(error));
+          return of({
+            type: 'TOGGLE_ENTITY_REJECTED'
+          });
+        })
+    );
+
+export const RemoveListItem = (action$, store) =>
+  action$
+    .ofType('REMOVE_LIST_ITEM')
+    .map(action => ({
+      ...action,
+      currentEntity: getCurrentEntity(store.getState()),
+      listDependency: getListDependency(store.getState()),
+      listId: getSelectedEntityId(store.getState())
+    }))
+    .mergeMap(a =>
+      fromPromise(
+        sdkPromise(
+          {
+            module: 'entities',
+            command: `remove${capitalizeFirstAndRemoveLastLetter(
+              a.currentEntity
+            )}Member`,
+            data: {
+              outboundIdentifierListId: a.listId,
+              outboundIdentifierId: a.listItemId
+            }
+          },
+          `cxengage/entities/remove-${camelCaseToKebabCaseAndRemoveLastLetter(
+            a.currentEntity
+          )}-member-response`
+        )
+      )
+        .map(response => {
+          return removeListItemFufilled(a.listItemId, a.listId);
+        })
+        .catch(error => {
+          Toast.error(errorLabel(error));
+          return of({
+            type: 'REMOVE_LIST_ITEM_REJECTED'
+          });
+        })
+    );
+
+export const AddListItem = (action$, store) =>
+  action$
+    .ofType('ADD_LIST_ITEM')
+    .map(action => ({
+      ...action,
+      currentEntity: getCurrentEntity(store.getState()),
+      listDependency: getListDependency(store.getState()),
+      listId: getSelectedEntityId(store.getState())
+    }))
+    .mergeMap(a =>
+      fromPromise(
+        sdkPromise(
+          {
+            module: 'entities',
+            command: `add${capitalizeFirstAndRemoveLastLetter(
+              a.currentEntity
+            )}Member`,
+            data: {
+              outboundIdentifierListId: a.listId,
+              outboundIdentifierId: a.listItemId
+            }
+          },
+          `cxengage/entities/add-${camelCaseToKebabCaseAndRemoveLastLetter(
+            a.currentEntity
+          )}-member-response`
+        )
+      )
+        .map(response => {
+          return addListItemFufilled(a.listItemId, a.listId);
+        })
+        .catch(error => {
+          Toast.error(errorLabel(error));
+          return of({
+            type: 'ADD_LIST_ITEM_REJECTED'
+          });
+        })
+    );
+
 export const FetchFormMetaData = (action$, store) =>
   action$
     .ofType('SET_SELECTED_ENTITY_ID')
@@ -329,6 +446,28 @@ export const FetchFormMetaData = (action$, store) =>
               .filter(entityName => a.isDefined(entityName))
               .map(entityName => ({ type: 'FETCH_DATA', entityName }))
     );
+
+export const FetchSidePanelData = (action$, store) =>
+  action$
+    .ofType('SET_SELECTED_ENTITY_ID')
+    .map(action => ({
+      ...action,
+      currentEntityName: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState()),
+      isDefined: name =>
+        store.getState().getIn(['Entities', name, 'data']) !== undefined
+    }))
+    .filter(
+      a =>
+        a.entityId !== 'create' &&
+        a.entityId !== '' &&
+        a.currentEntityName === 'outboundIdentifierLists'
+    )
+    .map(a => ({
+      type: 'FETCH_DATA_ITEM',
+      entityName: a.currentEntityName,
+      id: a.entityId
+    }));
 
 export const SubEntityFormSubmission = (action$, store) =>
   action$

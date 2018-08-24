@@ -4,16 +4,35 @@
 
 import { connect } from 'react-redux';
 import { OutboundIdentifierListsDetailsPanel } from './Layout.js';
+
 import {
   userHasUpdatePermission,
-  getSelectedEntity
+  getSelectedEntity,
+  getEntityListMembers,
+  getListSize
 } from '../../../redux/modules/entities/selectors';
 
-export function mapStateToProps(state) {
+import {
+  toggleEntityListItemActive,
+  setSelectedSubEntityId,
+  removeListItem
+} from '../../../redux/modules/entities';
+
+export function mapStateToProps(state, props) {
   return {
     item: getSelectedEntity(state),
-    userHasUpdatePermission: userHasUpdatePermission(state)
+    userHasUpdatePermission: userHasUpdatePermission(state),
+    tableItems: getEntityListMembers(state),
+    listSize: getListSize(state)
   };
 }
 
-export default connect(mapStateToProps)(OutboundIdentifierListsDetailsPanel);
+export const actions = {
+  toggleEntityListItemActive,
+  removeListItem,
+  setSelectedSubEntityId
+};
+
+export default connect(mapStateToProps, actions)(
+  OutboundIdentifierListsDetailsPanel
+);

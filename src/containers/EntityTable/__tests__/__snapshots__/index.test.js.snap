@@ -17,6 +17,6 @@ Object {
   ],
   "pageHelpLink": "mock help link",
   "pageTitle": "mock entity name",
-  "userHasCreatePermission": "mock user has create permission",
+  "userHasCreatePermission": true,
 }
 `;

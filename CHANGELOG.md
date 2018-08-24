@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.23.1]
+* CXV1-14932 - Outbound Identification Lists side panel table and modal
+
 ## [0.23.0]
 * CXV1-14784 - added table config for Custom Metrics (SLA)
 

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddMemberToListLayout Layout renders the AddMemberToListLayout 1`] = `
+<React.Fragment>
+  <div>
+    <styled.h3>
+      Add list items : 
+    </styled.h3>
+    <styled.h3 />
+    <styled.div>
+      <CloseIconSVG
+        closeIconType="secondary"
+        onClick={[Function]}
+        size={18}
+      />
+    </styled.div>
+  </div>
+  <_class
+    fields={
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Value",
+          "name": "value",
+        },
+        Object {
+          "label": "Channel Type",
+          "name": "channelType",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ]
+    }
+    userHasUpdatePermission={true}
+  />
+</React.Fragment>
+`;

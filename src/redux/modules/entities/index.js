@@ -47,6 +47,9 @@ const initialState = fromJS({
   },
   outboundIdentifierLists: {
     ...defaultEntity,
+    metaData: {
+      listDependency: 'outboundIdentifiers'
+    },
     readPermission: ['OUTBOUND_IDENTIFIER_READ'],
     updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
     createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
@@ -88,6 +91,30 @@ export const onFormSubmit = (values, { dirty }) => ({
   dirty
 });
 export const toggleEntityActive = () => ({ type: 'TOGGLE_ENTITY' });
+
+export const toggleEntityListItemActive = entity => ({
+  type: 'TOGGLE_ENTITY_LIST_ITEM',
+  entity
+});
+export const addListItem = listItemId => ({
+  type: 'ADD_LIST_ITEM',
+  listItemId
+});
+export const removeListItem = listItemId => ({
+  type: 'REMOVE_LIST_ITEM',
+  listItemId
+});
+
+export const addListItemFufilled = (listItemId, listId) => ({
+  type: 'ADD_LIST_ITEM_FULFILLED',
+  listItemId,
+  listId
+});
+export const removeListItemFufilled = (listItemId, listId) => ({
+  type: 'REMOVE_LIST_ITEM_FULFILLED',
+  listItemId,
+  listId
+});
 
 export const setConfirmationDialog = (modalType, metaData) => ({
   type: 'SET_CONIFIRMATION_DIALOG',
@@ -148,6 +175,10 @@ export const updateEntityFulfilled = (
   entityId,
   values
 });
+export const updateListItemFufilled = response => ({
+  type: 'UPDATE_LIST_ITEM_FULFILLED',
+  response
+});
 export const updateEntityRejected = (entityName, entityId) => ({
   type: 'UPDATE_ENTITY_REJECTED',
   entityName,
@@ -167,17 +198,18 @@ export const downloadCsv = () => ({ type: 'DOWNLOAD_CSV' });
 export const uploadCsv = target => ({ type: 'UPLOAD_CSV', target });
 
 // Reducer
-
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'SET_CURRENT_ENTITY':
+    case 'SET_CURRENT_ENTITY': {
       return state.set('currentEntity', action.entityName);
-    case 'SET_CONIFIRMATION_DIALOG':
+    }
+    case 'SET_CONIFIRMATION_DIALOG': {
       return state.update(state.get('currentEntity'), entityStore =>
         entityStore
           .set('confirmationDialogType', action.modalType)
           .set('confirmationDialogMetaData', action.metaData)
       );
+    }
     case 'SET_SELECTED_ENTITY_ID': {
       return state.setIn(
         [state.get('currentEntity'), 'selectedEntityId'],
@@ -190,8 +222,9 @@ export default function reducer(state = initialState, action) {
         fromJS(action.response.result)
       );
     }
-    case 'FETCH_DATA_REJECTED':
+    case 'FETCH_DATA_REJECTED': {
       return state.setIn([action.entityName, 'data'], new List());
+    }
     case 'FETCH_DATA_ITEM_FULFILLED': {
       const entityIndex = state
         .getIn([action.entityName, 'data'])
@@ -244,8 +277,9 @@ export default function reducer(state = initialState, action) {
     case 'UPLOAD_CSV_REJECTED': {
       return exports.setEntityUpdatingHelper(state, action, false);
     }
-    case 'SET_ENTITY_UPDATING':
+    case 'SET_ENTITY_UPDATING': {
       return exports.setEntityUpdatingHelper(state, action, action.updating);
+    }
     case 'SET_SELECTED_SUB_ENTITY_ID': {
       return state.setIn(
         [state.get('currentEntity'), 'selectedSubEntityId'],
@@ -278,6 +312,48 @@ export default function reducer(state = initialState, action) {
       } else {
         return state;
       }
+    }
+    case 'UPDATE_LIST_ITEM_FULFILLED': {
+      const entity = selectedEntity(state);
+      const { response: { result } } = action;
+      return state
+        .updateIn(
+          [entity.type, 'data', entity.index, 'members'],
+          membersList => {
+            const memberIndex = membersList.findIndex(
+              member => member.get('id') === result.id
+            );
+            if (entity.index !== -1 && memberIndex !== -1) {
+              return membersList.setIn([memberIndex], fromJS(result));
+            } else {
+              return membersList;
+            }
+          }
+        )
+        .updateIn(
+          [entity.dependency, 'data', entity.dependencyItemIndex(result.id)],
+          item => item.merge(fromJS(result))
+        );
+    }
+    case 'REMOVE_LIST_ITEM_FULFILLED': {
+      const entity = selectedEntity(state);
+      const filteredListMembers = state
+        .getIn([entity.type, 'data', entity.index, 'members'])
+        .filterNot(member => member.get('id') === action.listItemId);
+      return state.setIn(
+        [entity.type, 'data', entity.index, 'members'],
+        filteredListMembers
+      );
+    }
+    case 'ADD_LIST_ITEM_FULFILLED': {
+      const entity = selectedEntity(state);
+      const entityToAdd = state
+        .getIn([entity.dependency, 'data'])
+        .find(entity => entity.get('id') === action.listItemId);
+      return state.updateIn(
+        [entity.type, 'data', entity.index, 'members'],
+        members => members.push(entityToAdd)
+      );
     }
     case 'UPDATE_SUB_ENTITY_FULFILLED': {
       const entityIndex = state
@@ -386,3 +462,24 @@ const setSubEntityDeleting = (state, { subEntityId }, deleting) => {
     subEntity => subEntity.set('deleting', deleting)
   );
 };
+
+function selectedEntity(state) {
+  const currentEntity = state.get('currentEntity');
+  const dependentEntity = state.getIn(
+    [currentEntity, 'metaData', 'listDependency'],
+    undefined
+  );
+  const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
+  let context = {
+    index: state
+      .getIn([currentEntity, 'data'])
+      .findIndex(entity => entity.get('id') === selectedEntityId),
+    type: currentEntity,
+    dependency: dependentEntity,
+    dependencyItemIndex: itemId =>
+      state
+        .getIn([dependentEntity, 'data'])
+        .findIndex(entity => entity.get('id') === itemId)
+  };
+  return context;
+}
