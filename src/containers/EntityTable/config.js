@@ -6,6 +6,9 @@ import { nameColumn } from './columns/name';
 import { statusColumn } from './columns/status';
 import { listTypeColumn } from './columns/listType';
 import { descriptionColumn } from './columns/description';
+import { metricTypeColumn } from './columns/metricType';
+import { metricNameColumn } from './columns/metricName';
+import { camelCaseToRegularForm } from '../../utils/string';
 
 export const getHelpLink = entityName => {
   switch (entityName) {
@@ -28,8 +31,24 @@ export function getTableColumns(entityName) {
       return [nameColumn, descriptionColumn];
     case 'outboundIdentifierLists':
       return [nameColumn, descriptionColumn];
+    case 'customMetrics':
+      return [
+        metricTypeColumn,
+        metricNameColumn,
+        descriptionColumn,
+        statusColumn
+      ];
     //hygen-inject-before
     default:
       return [];
+  }
+}
+
+export function getTitle(entityName) {
+  switch (entityName) {
+    case 'customMetrics':
+      return 'Statistics Management';
+    default:
+      return camelCaseToRegularForm(entityName);
   }
 }
