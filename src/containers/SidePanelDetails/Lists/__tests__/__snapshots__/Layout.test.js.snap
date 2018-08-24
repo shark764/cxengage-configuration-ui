@@ -19,7 +19,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel 1`] = `
     text="List Item(s)"
     userHasUpdatePermission={true}
   />
-  <SidePanelTable
+  <_class
     deleteSubEntity={[Function]}
     fields={
       Array [
@@ -60,7 +60,6 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel 1`] = `
         },
       ]
     }
-    pagination={true}
     updateSubEntity={[Function]}
     userHasUpdatePermission={true}
   />

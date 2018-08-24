@@ -11,7 +11,7 @@ jest.mock('../../../redux/modules/entities');
 
 jest.mock('../../../redux/modules/entities/selectors', () => ({
   getCurrentEntity: () => 'mock current entity',
-  userHasCreatePermission: () => 'mock user has create permission'
+  userHasCreatePermission: () => true
 }));
 
 jest.mock('../selectors', () => ({

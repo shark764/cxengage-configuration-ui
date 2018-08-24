@@ -9,6 +9,34 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
     text="Details"
   />
   Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined List Item(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    fields={
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Value",
+          "name": "value",
+        },
+        Object {
+          "label": "Channel Type",
+          "name": "channelType",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ]
+    }
+    userHasUpdatePermission={true}
+  />
 </styled.div>
 `;
 
@@ -26,21 +54,37 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders without update perm
       value="mockName"
     />
     <Detail
-      label="Value"
-      value="mockValue"
-    />
-    <Detail
-      label="Flow Id"
-      value="0000-0000-0000-0000"
-    />
-    <Detail
-      label="Channel Type"
-      value="mockChannel"
-    />
-    <Detail
       label="Description"
       value="mockDescription"
     />
   </React.Fragment>
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined List Item(s)"
+    userHasUpdatePermission={false}
+  />
+  <_class
+    fields={
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Value",
+          "name": "value",
+        },
+        Object {
+          "label": "Channel Type",
+          "name": "channelType",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ]
+    }
+    userHasUpdatePermission={false}
+  />
 </styled.div>
 `;

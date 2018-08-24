@@ -4,8 +4,14 @@
 
 import { connect } from 'react-redux';
 
-import { setCurrentEntity, fetchData } from '../../redux/modules/entities';
+// Actions
+import {
+  setCurrentEntity,
+  fetchData,
+  setSelectedSubEntityId
+} from '../../redux/modules/entities';
 
+// Selectors
 import {
   getSelectedEntityId,
   getSelectedSubEntityId,
@@ -13,18 +19,6 @@ import {
 } from '../../redux/modules/entities/selectors';
 
 import Layout from './Layout';
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setCurrentEntity: entityName => {
-      dispatch(setCurrentEntity(entityName));
-    },
-    fetchData: entityName => {
-      dispatch(fetchData(entityName));
-    },
-    dispatch
-  };
-}
 
 function mapStateToProps(state) {
   return {
@@ -34,6 +28,12 @@ function mapStateToProps(state) {
   };
 }
 
-const CrudEndpointUi = connect(mapStateToProps, mapDispatchToProps)(Layout);
+export const actions = {
+  setCurrentEntity,
+  fetchData,
+  setSelectedSubEntityId: setSelectedSubEntityId(undefined)
+};
+
+const CrudEndpointUi = connect(mapStateToProps, actions)(Layout);
 
 export default CrudEndpointUi;

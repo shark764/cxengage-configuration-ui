@@ -182,6 +182,9 @@ Immutable.Map {
     "createPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_CREATE",
     ],
+    "metaData": Immutable.Map {
+      "listDependency": "outboundIdentifiers",
+    },
     "confirmationDialogType": undefined,
     "disablePermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_DISABLE",

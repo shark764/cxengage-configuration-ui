@@ -3,6 +3,8 @@
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "item": undefined,
+  "listSize": undefined,
+  "tableItems": "mockListMembers",
   "userHasUpdatePermission": true,
 }
 `;

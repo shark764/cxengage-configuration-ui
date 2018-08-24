@@ -11,13 +11,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { InputField } from 'cx-ui-components';
-import { SelectField } from 'cx-ui-components';
 
 export function OutboundIdentifierListsFormLayout({
   handleSubmit,
   isSaving,
   inherited,
-  flowIds,
   key
 }) {
   return (
@@ -27,29 +25,6 @@ export function OutboundIdentifierListsFormLayout({
         label="Name *"
         componentType="input"
         inputType="text"
-        disabled={isSaving || inherited}
-      />
-      <InputField
-        name="value"
-        label="Value *"
-        componentType="input"
-        inputType="text"
-        disabled={isSaving || inherited}
-      />
-      <SelectField
-        name="flowId"
-        label="Flow Id *"
-        options={flowIds}
-        disabled={isSaving || inherited}
-      />
-      <SelectField
-        name="channelType"
-        label="Channel Type *"
-        options={[
-          { value: 'voice', label: 'Voice' },
-          { value: 'sms', label: 'Sms' },
-          { value: 'email', label: 'Email' }
-        ]}
         disabled={isSaving || inherited}
       />
       <InputField
@@ -67,11 +42,5 @@ OutboundIdentifierListsFormLayout.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool,
-  flowIds: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string.isRequired
-    })
-  )
+  inherited: PropTypes.bool
 };

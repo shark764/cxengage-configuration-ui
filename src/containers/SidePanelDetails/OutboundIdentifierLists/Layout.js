@@ -14,10 +14,12 @@ import styled from 'styled-components';
 
 import { Detail } from 'cx-ui-components';
 import { DetailHeader } from 'cx-ui-components';
+import { SidePanelTable } from 'cx-ui-components';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 180px);
 `;
 
 export function OutboundIdentifierListsDetailsPanel({
@@ -25,7 +27,12 @@ export function OutboundIdentifierListsDetailsPanel({
   userHasUpdatePermission,
   id,
   className,
-  item: { name, value, flowId, channelType, description }
+  tableItems,
+  toggleEntityListItemActive,
+  removeListItem,
+  setSelectedSubEntityId,
+  listSize,
+  item: { name, description }
 }) {
   return (
     <Wrapper id={id} className={className}>
@@ -35,12 +42,38 @@ export function OutboundIdentifierListsDetailsPanel({
       ) : (
         <Fragment>
           <Detail label="Name" value={name} />
-          <Detail label="Value" value={value} />
-          <Detail label="Flow Id" value={flowId} />
-          <Detail label="Channel Type" value={channelType} />
           <Detail label="Description" value={description} />
         </Fragment>
       )}
+      <DetailHeader
+        userHasUpdatePermission={userHasUpdatePermission}
+        text={`${listSize} List Item(s)`}
+        onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
+      />
+      <SidePanelTable
+        userHasUpdatePermission={userHasUpdatePermission}
+        deleteSubEntity={removeListItem}
+        toggleSubEntityActive={toggleEntityListItemActive}
+        items={tableItems}
+        fields={[
+          {
+            label: 'Name',
+            name: 'name'
+          },
+          {
+            label: 'Value',
+            name: 'value'
+          },
+          {
+            label: 'Channel Type',
+            name: 'channelType'
+          },
+          {
+            label: 'Description',
+            name: 'description'
+          }
+        ]}
+      />
     </Wrapper>
   );
 }
@@ -50,11 +83,13 @@ OutboundIdentifierListsDetailsPanel.propTypes = {
   className: PropTypes.string,
   item: PropTypes.shape({
     name: PropTypes.string,
-    value: PropTypes.string,
-    flowId: PropTypes.string,
-    channelType: PropTypes.sting,
     description: PropTypes.string
   }),
   userHasUpdatePermission: PropTypes.bool,
-  children: PropTypes.any
+  children: PropTypes.any,
+  tableItems: PropTypes.array,
+  toggleEntityListItemActive: PropTypes.func,
+  removeListItem: PropTypes.func,
+  setSelectedSubEntityId: PropTypes.func,
+  listSize: PropTypes.number
 };
