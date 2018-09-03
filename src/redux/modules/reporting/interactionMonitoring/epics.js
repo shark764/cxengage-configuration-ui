@@ -25,9 +25,9 @@ export const StartBatchRequest = (action$, store) =>
           data: {
             statistic: 'interactions-in-conversation-list',
             statId: 'interactions-in-conversation-list'
-          }
-        },
-        `cxengage/reporting/stat-subscription-added`
+          },
+          topic: `cxengage/reporting/stat-subscription-added`
+        }
       )
     ).mapTo(startReportingSubscriptions())
   );
@@ -38,9 +38,9 @@ export const StartBatchSubscription = (action$, store) =>
       sdkPromise(
         {
           module: 'subscribe',
-          command: 'cxengage/reporting/batch-response'
-        },
-        'cxengage/reporting/batch-response'
+          command: 'cxengage/reporting/batch-response',
+          topic: 'cxengage/reporting/batch-response'
+        }
       )
     ).mapTo(reportingSubscriptionStarted())
   );

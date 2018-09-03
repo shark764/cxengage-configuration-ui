@@ -42,6 +42,9 @@ export const getSelectedEntity = createSelector(
 export const getSelectedEntityName = state =>
   getSelectedEntity(state).get('name');
 
+export const getSelectedEntityStatus = state =>
+  getSelectedEntity(state).get('active');
+
 export const userHasReadPermission = state =>
   hasPermission(
     getCurrentPermissions(state),

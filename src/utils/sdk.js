@@ -1,7 +1,7 @@
-export const sdkPromise = (sdkCall, topic) =>
+export const sdkPromise = (sdkCall) =>
   new Promise((resolve, reject) => {
     const handleResponse = event => {
-      if (event.data.topic !== undefined && event.data.topic[0] === topic) {
+      if (event.data.topic !== undefined && event.data.topic[0] === sdkCall.topic) {
         const { error, response } = event.data;
         if (error) {
           reject(error);

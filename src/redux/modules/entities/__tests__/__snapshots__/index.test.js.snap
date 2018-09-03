@@ -1,5 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CREATE_ENTITY sets creating to true on the entity that was passed in 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": undefined,
+    "creating": true,
+  },
+}
+`;
+
+exports[`CREATE_ENTITY_FULFILLED add the created entity into the data on said entity 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "mockData": Immutable.Map {},
+      },
+    ],
+    "selectedEntityId": undefined,
+    "creating": false,
+  },
+}
+`;
+
+exports[`CREATE_ENTITY_REJECTED calls setEntityUpdatingHelper correctly 1`] = `[MockFunction]`;
+
+exports[`entities reducer CREATE_SUB_ENTITY sets subEntitySaving true on the current sub entity 1`] = `
+Immutable.Map {
+  "currentEntity": "none",
+  "mockEntity": Immutable.Map {
+    "subEntitySaving": true,
+  },
+}
+`;
+
+exports[`entities reducer CREATE_SUB_ENTITY_FULFILLED add new subentiy into entities data 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "id": "mockId",
+      },
+    ],
+  },
+}
+`;
+
+exports[`entities reducer CREATE_SUB_ENTITY_FULFILLED main entity doesnt exist in state , return unchanged state 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [],
+  },
+}
+`;
+
 exports[`entities reducer FETCH_DATA_FULFILLED sets the data as the immutable value passed in 1`] = `
 Immutable.Map {
   "mockEntity": Immutable.Map {
@@ -12,6 +66,42 @@ Immutable.Map {
 }
 `;
 
+exports[`entities reducer FETCH_DATA_ITEM_FULFILLED data item doesn't exists in entity , return unchanged state 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [],
+  },
+}
+`;
+
+exports[`entities reducer FETCH_DATA_ITEM_FULFILLED data item exists in entity , make sure it updates 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "id": "mockId",
+        undefined: undefined,
+      },
+    ],
+  },
+}
+`;
+
+exports[`entities reducer FETCH_DATA_ITEM_REJECTED calls setEntityUpdatingHelper correctly 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "mock initial state",
+      Object {
+        "entityName": "mockEntity",
+        "type": "FETCH_DATA_ITEM_REJECTED",
+      },
+      false,
+    ],
+  ],
+}
+`;
+
 exports[`entities reducer FETCH_DATA_REJECTED sets the data to an empty List 1`] = `
 Immutable.Map {
   "mockEntity": Immutable.Map {
@@ -20,9 +110,34 @@ Immutable.Map {
 }
 `;
 
+exports[`entities reducer SET_CONIFIRMATION_DIALOG sets the confirmation dialog 1`] = `
+Immutable.Map {
+  "currentEntity": "mockEntity",
+  "mockEntity": Immutable.Map {
+    "confirmationDialogType": "mockModalType",
+    "confirmationDialogMetaData": "mockModalMetaData",
+  },
+}
+`;
+
 exports[`entities reducer SET_CURRENT_ENTITY sets the current entity 1`] = `
 Immutable.Map {
   "currentEntity": "mock current entity",
+}
+`;
+
+exports[`entities reducer SET_ENTITY_UPDATING calls setEntityUpdatingHelper correctly 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "mock inital state",
+      Object {
+        "entityName": "mockEntity",
+        "type": "SET_ENTITY_UPDATING",
+      },
+      undefined,
+    ],
+  ],
 }
 `;
 
@@ -49,6 +164,29 @@ Immutable.Map {
   "currentEntity": "mockEntity",
   "mockEntity": Immutable.Map {
     "selectedEntityId": "",
+  },
+}
+`;
+
+exports[`entities reducer SET_SELECTED_SUB_ENTITY_ID sets the current selected sub entity id 1`] = `
+Immutable.Map {
+  "currentEntity": "none",
+  "none": Immutable.Map {
+    "selectedSubEntityId": "mockId",
+  },
+}
+`;
+
+exports[`entities reducer TOGGLE_ENTITY_FULFILLED when the entity is present merges the result in and sets "updating" to false 1`] = `
+Immutable.Map {
+  "mockEntity": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "id": "mock entity id",
+        "mockResult": "mock result value",
+        "updating": false,
+      },
+    ],
   },
 }
 `;
@@ -93,6 +231,31 @@ exports[`entities reducer UPDATE_ENTITY_REJECTED calls setEntityUpdatingHelper c
         "entityId": "mock entity id",
         "entityName": "mock entity",
         "type": "UPDATE_ENTITY_REJECTED",
+      },
+      false,
+    ],
+  ],
+}
+`;
+
+exports[`entities reducer UPDATE_SUB_ENTITY sets subEntitySaving true on the current sub entity 1`] = `
+Immutable.Map {
+  "currentEntity": "none",
+  "mockEntity": Immutable.Map {
+    "subEntitySaving": true,
+  },
+}
+`;
+
+exports[`entities reducer UPLOAD_CSV_REJECTED calls setEntityUpdatingHelper correctly 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "mock inital state",
+      Object {
+        "entityId": "mockId",
+        "entityName": "mockEntity",
+        "type": "UPLOAD_CSV_REJECTED",
       },
       false,
     ],

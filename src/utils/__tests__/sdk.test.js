@@ -10,14 +10,12 @@ describe('sdkPromise', () => {
           response: 'mockResponse'
         }
       });
-    SDK.sdkPromise(
-      {
-        module: 'updateLocalStorage',
-        command: `updateLocalStorage`,
-        data: 'updateLocalStorage'
-      },
-      `updateLocalStorage`
-    ).then(a => expect(a).toEqual('mockResponse'));
+    SDK.sdkPromise({
+      module: 'updateLocalStorage',
+      command: `updateLocalStorage`,
+      data: 'updateLocalStorage',
+      topic: 'updateLocalStorage'
+    }).then(a => expect(a).toEqual('mockResponse'));
   });
   it('calls an sdk promise and sdk returned an error, promise should reject with the error from sdk', () => {
     global.addEventListener = (message, func) =>
@@ -28,38 +26,30 @@ describe('sdkPromise', () => {
           response: 'mockResponse'
         }
       });
-    SDK.sdkPromise(
-      {
-        module: 'updateLocalStorage',
-        command: `updateLocalStorage`,
-        data: 'updateLocalStorage'
-      },
-      `updateLocalStorage`
-    ).catch(err => expect(err).toEqual('ERROR FROM SDK'));
+    SDK.sdkPromise({
+      module: 'updateLocalStorage',
+      command: `updateLocalStorage`,
+      data: 'updateLocalStorage',
+      topic: 'updateLocalStorage'
+    }).catch(err => expect(err).toEqual('ERROR FROM SDK'));
   });
   it('calls an sdk promise with undefined topic , should result in promise rejection "Topic mismatch"', () => {
-    global.addEventListener = (message, func) =>
-      func({ data: { error: 'ERROR', topic: ['updateLocalStorage'] } });
-    SDK.sdkPromise(
-      {
-        module: 'updateLocalStorage',
-        command: `updateLocalStorage`,
-        data: 'updateLocalStorage'
-      },
-      undefined
-    ).catch(err => expect(err).toEqual('Topic mismatch'));
+    global.addEventListener = (message, func) => func({ data: { error: 'ERROR', topic: ['updateLocalStorage'] } });
+    SDK.sdkPromise({
+      module: 'updateLocalStorage',
+      command: `updateLocalStorage`,
+      data: 'updateLocalStorage',
+      topic: undefined
+    }).catch(err => expect(err).toEqual('Topic mismatch'));
   });
   it('topic returned from sdk doesn\'t match topic provided , should result in promise rejection "Topic mismatch"', () => {
-    global.addEventListener = (message, func) =>
-      func({ data: { error: 'ERROR', topic: ['update-Local-Storage'] } });
-    SDK.sdkPromise(
-      {
-        module: 'updateLocalStorage',
-        command: `updateLocalStorage`,
-        data: 'updateLocalStorage'
-      },
-      'updateLocalStorage'
-    ).catch(err => expect(err).toEqual('Topic mismatch'));
+    global.addEventListener = (message, func) => func({ data: { error: 'ERROR', topic: ['update-Local-Storage'] } });
+    SDK.sdkPromise({
+      module: 'updateLocalStorage',
+      command: `updateLocalStorage`,
+      data: 'updateLocalStorage',
+      topic: 'updateLocalStorage'
+    }).catch(err => expect(err).toEqual('Topic mismatch'));
   });
 });
 

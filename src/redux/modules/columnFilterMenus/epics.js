@@ -92,8 +92,11 @@ export const UpdateStatSubscriptionFilters = (action$, store) =>
           data: action.payload
         })
       )
-        .mapTo({ type: 'STATS_UPDATED_$' })
-        .catch(err => of({ type: 'STATS_NOT_UPDATED_$' }))
+      // TODO: sdkPromise requires a topic to get anything returned.. 
+      // so the below will never fire the way we have it now..
+      // either remove the mapTo and catch .. or make it so we will get the responses
+      .mapTo({ type: 'STATS_UPDATED_$' })
+      .catch(err => of({ type: 'STATS_NOT_UPDATED_$' }))
     );
 
 export const UpdateSkillsAndGroupsFilter = (action$, store) =>

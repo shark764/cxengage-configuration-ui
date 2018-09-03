@@ -11,8 +11,8 @@ exports[`startBatchRequest calls the correct sdk function 1`] = `
           "statistic": "interactions-in-conversation-list",
         },
         "module": "reporting",
+        "topic": "cxengage/reporting/stat-subscription-added",
       },
-      "cxengage/reporting/stat-subscription-added",
     ],
   ],
 }
@@ -31,8 +31,8 @@ exports[`startBatchSubscription calls the correct sdk function 1`] = `
       Object {
         "command": "cxengage/reporting/batch-response",
         "module": "subscribe",
+        "topic": "cxengage/reporting/batch-response",
       },
-      "cxengage/reporting/batch-response",
     ],
   ],
 }
