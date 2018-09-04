@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.23.2]
+* CXV1-15089 - Silent Monitoring - Mute button state stored and persists during subsequent silent monitoring calls.
+
 ## [0.23.1]
 * CXV1-14932 - Outbound Identification Lists side panel table and modal
 
