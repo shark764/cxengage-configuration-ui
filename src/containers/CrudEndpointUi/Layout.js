@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
 import React, { Component } from 'react';
@@ -21,6 +21,8 @@ import CreateListItemForm from '../Form/ListItems/Create';
 import EmailTemplatesForm from '../Form/EmailTemplates';
 import OutboundIdentifiersForm from '../Form/OutboundIdentifiers';
 import OutboundIdentifierListsForm from '../Form/OutboundIdentifierLists';
+import CustomMetricsForm from '../Form/CustomMetrics';
+//hygen-inject-before3
 
 // AddMembersToList table modal
 import AddMembersToList from '../AddMembersToList';
@@ -30,6 +32,8 @@ import ListsDetailsPanel from '../SidePanelDetails/Lists';
 import EmailTemplatesDetailsPanel from '../SidePanelDetails/EmailTemplates';
 import OutboundIdentifiersDetailsPanel from '../SidePanelDetails/OutboundIdentifiers';
 import OutboundIdentifierListsPanelContainer from '../SidePanelDetails/OutboundIdentifierLists';
+import CustomMetricsDetailsPanel from '../SidePanelDetails/CustomMetrics';
+//hygen-inject-before4
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -90,6 +94,14 @@ const createFormRoutes = [
         <OutboundIdentifierListsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/customMetrics',
+    component: () => (
+      <DetailsPanel>
+        <CustomMetricsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before1
 ];
@@ -133,6 +145,16 @@ const detailsPanelRoutes = [
           <OutboundIdentifierListsForm />
         </OutboundIdentifierListsPanelContainer>
       </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/customMetrics',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <CustomMetricsDetailsPanel>
+          <CustomMetricsForm />
+        </CustomMetricsDetailsPanel>
+      </NoScrollDetailsPanel>
     )
   }
   //hygen-inject-before2

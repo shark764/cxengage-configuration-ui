@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomMetrics Renders renders 1`] = `
+<Connect(ReduxForm)
+  dispatch={[Function]}
+  initialValues={
+    Object {
+      "active": true,
+    }
+  }
+  key="mockId"
+  slaAbandonType="ignored-abandoned-calls"
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+>
+  Child
+</Connect(ReduxForm)>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": undefined,
+  "initialValues": Object {
+    "active": true,
+  },
+  "isSaving": undefined,
+  "key": "mockId",
+  "slaAbandonType": "ignored-abandoned-calls",
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `
+Object {
+  "form": "customMetrics:mockId",
+}
+`;
+
+exports[`formSubmission returns proper values 1`] = `
+Object {
+  "dirty": true,
+  "type": "FORM_SUBMIT",
+  "values": Object {
+    "customMetricsId": "mockId",
+    "customMetricsName": "mockName",
+    "customMetricsType": "SLA",
+    "description": "mockDescription",
+    "slaAbandonThreshold": 20,
+    "slaAbandonType": "ignored-abandoned-calls",
+    "slaThreshold": 20,
+  },
+}
+`;
