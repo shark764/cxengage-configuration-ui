@@ -95,9 +95,11 @@ export default function supervisorToolbarReducer(state = initialState, action) {
         );
       }
     case 'TRANSITION_CALL_ENDING':
-      return state.update('silentMonitoring', silentMonitoring =>
-        silentMonitoring.set('transitionCall', false)
-      );
+      return state
+        .update('silentMonitoring', silentMonitoring =>
+          silentMonitoring.set('transitionCall', false)
+        )
+        .set('muted', true);
     case 'REQUESTING_MONITOR_CALL':
       return state.update('silentMonitoring', silentMonitoring =>
         silentMonitoring

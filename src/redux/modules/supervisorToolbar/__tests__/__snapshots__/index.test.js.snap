@@ -26,6 +26,7 @@ Immutable.Map {
     "interactionId": "0000-0000-0000-0000",
     "transitionCall": false,
   },
+  "muted": true,
 }
 `;
 
