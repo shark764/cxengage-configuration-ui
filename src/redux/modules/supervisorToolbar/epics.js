@@ -14,10 +14,12 @@ import { zip } from 'rxjs/observable/zip';
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
 
+import { Toast } from 'cx-ui-components';
+
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { from } from 'rxjs/observable/from';
 
-import { sdkPromise, sdkCall } from '../../../utils/sdk';
+import { sdkPromise, sdkCall, errorLabel } from '../../../utils/sdk';
 
 import {
   selectSupervisorToolbarSilentMonitoringInteractionId,
@@ -36,6 +38,21 @@ import {
   toggleMuteRequested,
   transitionCallEnding
 } from './index';
+
+function handleError(error, store) {
+  Toast.error(errorLabel(error));
+  localStorage.setItem(
+    'SupervisorToolbar',
+    JSON.stringify(
+      store
+        .getState()
+        .get('SupervisorToolbar')
+        .toJS()
+    )
+  );
+  sdkCall({ module: 'session', command: 'clearMonitoredInteraction' });
+  return of({ type: 'cxengage/interactions/voice/silent-monitor-end' });
+}
 
 // Start all the required subscriptions
 export const StartBatchRequest = (action$, store) =>
@@ -136,7 +153,9 @@ export const MonitorInteraction = (action$, store) =>
           },
           `monitorCall`
         )
-      ).mapTo(monitorInteractionRequested(action.interactionId))
+      )
+        .mapTo(monitorInteractionRequested(action.interactionId))
+        .catch(error => handleError(error, store))
     );
 
 export const HangUpEpic = (action$, store) =>
@@ -178,7 +197,9 @@ export const HangUpEpic = (action$, store) =>
             },
             'cxengage/interactions/voice/resource-removed-acknowledged'
           )
-        ).mapTo(hangUpRequested())
+        )
+          .mapTo(hangUpRequested())
+          .catch(error => handleError(error, store))
       )
     );
 
@@ -206,5 +227,7 @@ export const ToggleMuteEpic = (action$, store) =>
             ? 'cxengage/interactions/voice/unmute-acknowledged'
             : 'cxengage/interactions/voice/mute-acknowledged'
         )
-      ).mapTo(toggleMuteRequested())
+      )
+        .mapTo(toggleMuteRequested())
+        .catch(error => handleError(error, store))
     );

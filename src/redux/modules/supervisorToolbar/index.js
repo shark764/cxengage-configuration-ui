@@ -84,7 +84,9 @@ export default function supervisorToolbarReducer(state = initialState, action) {
     case 'cxengage/session/started':
       return state.setIn(['silentMonitoring', 'activeSession'], true);
     case 'cxengage/interactions/voice/silent-monitor-start':
-      return state.setIn(['silentMonitoring', 'status'], 'connected');
+      return state
+        .setIn(['silentMonitoring', 'status'], 'connected')
+        .set('muted', true);
     case 'cxengage/session/sqs-shut-down':
     case 'cxengage/interactions/voice/silent-monitor-end':
       if (state.getIn(['silentMonitoring', 'transitionCall'])) {
@@ -110,7 +112,7 @@ export default function supervisorToolbarReducer(state = initialState, action) {
     case 'MONITOR_INTERACTION_REQUESTED':
       return state.update('silentMonitoring', silentMonitoring =>
         silentMonitoring
-          .set('status', 'connected')
+          .set('status', 'connecting')
           .set('interactionId', action.interactionId)
       );
     case 'cxengage/interactions/voice/unmute-acknowledged':
