@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.24.1]
+* CXV1-15087 - Silent Monitoring - Unmuting a silent monitoring PSTN call before connecting kills interaction.
+* CXV1-15088 - Silent Monitoring - Errors are not being caught and we do not dismiss the iframe.
+* CXV1-15089 - Silent Monitoring - Mute button state stored and persists during subsequent silent monitoring calls.
+
 ## [0.24.0]
 * CXV1-14785 - Create SLA Side panel form.
 

@@ -70,6 +70,7 @@ Immutable.Map {
   "silentMonitoring": Immutable.Map {
     "status": "connected",
   },
+  "muted": true,
 }
 `;
 
@@ -121,7 +122,7 @@ Immutable.Map {
 exports[`SupervisorToolbar reducer snapshots dispatches monitorCall 1`] = `
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
-    "status": "connected",
+    "status": "connecting",
     "interactionId": "0000-0000-0000-0000",
   },
 }
