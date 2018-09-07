@@ -21,6 +21,7 @@
     "profile": "webpack --profile --json > stats.json",
     "test": "node scripts/test.js --env=jsdom",
     "test:coverage": "npm run test -- --coverage",
+    "test:auto": "node ./node_modules/cx-automation-utils && wdio ./automation/wdio.conf.js --suite \"inProgress\"",
     "lint": "eslint src/",
     "precommit": "npm run lint && lint-staged && npm run test:coverage"
   },
@@ -96,8 +97,8 @@
   "author": "SerenovaLLC",
   "license": "UNLICENSED",
   "engines": {
-    "node": "10.5.0",
-    "npm": "6.1.0"
+    "node": "8.11.3",
+    "npm": "5.6.0"
   },
   "dependencies": {
     "cx-ui-components": "^0.22.0",
@@ -132,6 +133,7 @@
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.11",
+    "cx-automation-utils": "^1.0.8",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-to-json": "3.3.3",
@@ -153,6 +155,9 @@
     "react-test-renderer": "16.2.0",
     "style-loader": "0.20.3",
     "url-loader": "1.0.1",
+    "wdio-jasmine-framework": "^0.3.6",
+    "wdio-spec-reporter": "^0.1.5",
+    "webdriverio": "^4.13.2",
     "webpack": "4.2.0",
     "webpack-bundle-analyzer": "2.11.1",
     "webpack-cli": "2.0.13",

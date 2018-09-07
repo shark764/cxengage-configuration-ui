@@ -43,3 +43,7 @@ Reduce your boilerplate with code generation using [hygen](http://www.hygen.io/q
 npm i hygen -g
 ```
 Then head over to our existing [generators](docs/CODE_GENERATION.md) to supercharge your workflow.
+
+### E2E Regression Test Automation
+`npm run test:auto` will run any tests specs inside ./automation./specs/inProgress
+[More Info Here.](automation/gettingStarted.md)
