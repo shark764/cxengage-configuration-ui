@@ -88,6 +88,9 @@ export default function supervisorToolbarReducer(state = initialState, action) {
         .setIn(['silentMonitoring', 'status'], 'connected')
         .set('muted', true);
     case 'cxengage/session/sqs-shut-down':
+      return state.update('silentMonitoring', silentMonitoring =>
+        silentMonitoring.set('status', 'sqsShutDown')
+      );
     case 'cxengage/interactions/voice/silent-monitor-end':
       if (state.getIn(['silentMonitoring', 'transitionCall'])) {
         return state;
