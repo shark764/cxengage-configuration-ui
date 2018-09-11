@@ -146,7 +146,8 @@ export class MonitoringCell extends Component {
               className="monitorCall"
               disabled={
                 this.props.monitoringStatus !== 'offline' ||
-                this.props.implicitDisable
+                this.props.implicitDisable ||
+                this.props.monitoringStatus === 'sqsShutDown'
               }
               onClick={this.monitorInteractionRequestor}
             >

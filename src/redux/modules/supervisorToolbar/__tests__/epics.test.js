@@ -4,14 +4,16 @@
 
 import { ActionsObservable } from 'redux-observable';
 import 'rxjs/add/operator/take';
-import { mockStore } from 'TestUtils';
+import { mockStore, supervisorToolbarMockStore } from 'TestUtils';
 import { sdkPromise, sdkCall } from '../../../../utils/sdk';
 import {
   StartBatchRequest,
   MonitorInteraction,
   HangUpEpic,
   ToggleMuteEpic,
-  MonitorInteractionInitialization
+  MonitorInteractionInitialization,
+  SqsSessionLost,
+  handleError
 } from '../epics';
 
 import {
@@ -279,6 +281,19 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
       done();
     });
   });
+  it('catches and handles error from sdk', done => {
+    sdkCall.mockReturnValueOnce(
+      new Promise((resolve, reject) => reject('mock response'))
+    );
+    const action = ActionsObservable.from([
+      requestingMonitorCall('0000-0000-0000-0000', 'mockExtension'),
+      { type: 'cxengage/session/started' }
+    ]);
+    MonitorInteraction(action, supervisorToolbarMockStore).subscribe(output => {
+      expect(output).toMatchSnapshot();
+      done();
+    });
+  });
 });
 
 describe('HangUpEpic', () => {
@@ -301,6 +316,16 @@ describe('HangUpEpic', () => {
     const action = ActionsObservable.of(requestingHangUp());
     HangUpEpic(action, mockStore).subscribe(actualOutputActions => {
       expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
+  });
+  it('catches and handles error from sdk', done => {
+    sdkPromise.mockReturnValueOnce(
+      new Promise((resolve, reject) => reject('mock response'))
+    );
+    const action = ActionsObservable.of(requestingHangUp());
+    HangUpEpic(action, supervisorToolbarMockStore).subscribe(output => {
+      expect(output).toMatchSnapshot();
       done();
     });
   });
@@ -334,6 +359,30 @@ describe('ToggleMuteEpic', () => {
     const action = ActionsObservable.of(requestingToggleMute());
     selectSupervisorToolbarMuted.mockReturnValue(false);
     ToggleMuteEpic(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
+  });
+  it('catches and handles error from sdk', done => {
+    sdkPromise.mockReturnValueOnce(
+      new Promise((resolve, reject) => reject('mock response'))
+    );
+    const action = ActionsObservable.of(requestingToggleMute());
+    ToggleMuteEpic(action, supervisorToolbarMockStore).subscribe(output => {
+      expect(output).toMatchSnapshot();
+      done();
+    });
+  });
+});
+
+describe('SqsSessionLost', () => {
+  it('returns SQS_SHUT_DOWN_ALERTED_$ action', done => {
+    global.alert = jest.fn();
+    const action = ActionsObservable.of({
+      type: 'cxengage/session/sqs-shut-down'
+    });
+    SqsSessionLost(action, mockStore).subscribe(actualOutputActions => {
+      expect(alert).toBeCalled();
       expect(actualOutputActions).toMatchSnapshot();
       done();
     });

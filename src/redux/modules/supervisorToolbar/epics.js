@@ -39,16 +39,11 @@ import {
   transitionCallEnding
 } from './index';
 
-function handleError(error, store) {
+function handleError(error, state) {
   Toast.error(errorLabel(error));
   localStorage.setItem(
     'SupervisorToolbar',
-    JSON.stringify(
-      store
-        .getState()
-        .get('SupervisorToolbar')
-        .toJS()
-    )
+    JSON.stringify(state.get('SupervisorToolbar').toJS())
   );
   sdkCall({ module: 'session', command: 'clearMonitoredInteraction' });
   return of({ type: 'cxengage/interactions/voice/silent-monitor-end' });
@@ -155,7 +150,7 @@ export const MonitorInteraction = (action$, store) =>
         )
       )
         .mapTo(monitorInteractionRequested(action.interactionId))
-        .catch(error => handleError(error, store))
+        .catch(error => handleError(error, store.getState()))
     );
 
 export const HangUpEpic = (action$, store) =>
@@ -199,7 +194,7 @@ export const HangUpEpic = (action$, store) =>
           )
         )
           .mapTo(hangUpRequested())
-          .catch(error => handleError(error, store))
+          .catch(error => handleError(error, store.getState()))
       )
     );
 
@@ -229,5 +224,15 @@ export const ToggleMuteEpic = (action$, store) =>
         )
       )
         .mapTo(toggleMuteRequested())
-        .catch(error => handleError(error, store))
+        .catch(error => handleError(error, store.getState()))
     );
+
+export const SqsSessionLost = action$ =>
+  action$
+    .ofType('cxengage/session/sqs-shut-down')
+    .do(a => {
+      alert(
+        'Session was lost or expired please refresh to monitor interactions.'
+      );
+    })
+    .mapTo({ type: 'SQS_SHUT_DOWN_ALERTED_$' });

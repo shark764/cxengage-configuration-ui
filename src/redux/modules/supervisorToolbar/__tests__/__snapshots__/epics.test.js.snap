@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HangUpEpic catches and handles error from sdk 1`] = `
+Object {
+  "type": "TRANSITION_CALL_ENDING",
+}
+`;
+
+exports[`HangUpEpic catches and handles error from sdk 2`] = `
+Object {
+  "type": "cxengage/interactions/voice/silent-monitor-end",
+}
+`;
+
 exports[`HangUpEpic returns HANG_UP_REQUESTED_$ action 1`] = `
 Object {
   "type": "TRANSITION_CALL_ENDING",
@@ -19,6 +31,12 @@ Object {
 }
 `;
 
+exports[`MonitorInteraction, Twilio is not Default Extension catches and handles error from sdk 1`] = `
+Object {
+  "type": "cxengage/interactions/voice/silent-monitor-end",
+}
+`;
+
 exports[`MonitorInteraction, Twilio is not Default Extension returns MONITOR_INTERACTION_REQUESTED action 1`] = `
 Object {
   "interactionId": "0000-0000-0000-0000",
@@ -29,6 +47,12 @@ Object {
 exports[`MonitorInteractionInitialization returns HANG_UP_REQUESTED_$ action 1`] = `
 Object {
   "type": "MONITOR_INTERACTION_INITIALIZATION_COMPLETED_$",
+}
+`;
+
+exports[`SqsSessionLost returns SQS_SHUT_DOWN_ALERTED_$ action 1`] = `
+Object {
+  "type": "SQS_SHUT_DOWN_ALERTED_$",
 }
 `;
 
@@ -92,6 +116,12 @@ exports[`StartBatchRequest returns SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$ acti
 Object {
   "subscription": "cxengage/session/sqs-shut-down",
   "type": "SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$",
+}
+`;
+
+exports[`ToggleMuteEpic catches and handles error from sdk 1`] = `
+Object {
+  "type": "cxengage/interactions/voice/silent-monitor-end",
 }
 `;
 

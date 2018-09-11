@@ -118,7 +118,7 @@ describe('SupervisorToolbar reducer snapshots', () => {
       silentMonitoring: {
         status: 'connected',
         interactionId: '0000-0000-0000-0000',
-        transitionCall: false
+        transitionCall: true
       }
     });
     expect(

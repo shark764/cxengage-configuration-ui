@@ -30,13 +30,13 @@ export default class SupervisorToolbar extends Component {
   render() {
     return (
       <div id="SupervisorToolbar">
-        {this.props.monitoringStatus !== 'offline' && (
+        {!['offline', 'sqsShutDown'].includes(this.props.monitoringStatus) && (
           <Toolbar>
             <HangUpIconSVGWrapper
               id="hangUpButton"
               className="HangUpIconSVG"
               onClick={this.props.requestingHangUp}
-              loading={this.props.monitoringStatus !== 'connected'}
+              loading={this.props.monitoringStatus === 'connecting'}
               size={40}
             />
             {this.props.monitoringStatus === 'connected' &&

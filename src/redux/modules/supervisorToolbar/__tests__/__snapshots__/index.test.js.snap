@@ -58,9 +58,9 @@ Immutable.Map {
 exports[`SupervisorToolbar reducer snapshots dispatches cxengage/interactions/voice/silent-monitor-end on a transition call 1`] = `
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
-    "status": "offline",
-    "interactionId": "na",
-    "transitionCall": false,
+    "status": "connected",
+    "interactionId": "0000-0000-0000-0000",
+    "transitionCall": true,
   },
 }
 `;
@@ -83,8 +83,8 @@ Immutable.Map {
 exports[`SupervisorToolbar reducer snapshots dispatches cxengage/session/sqs-shut-down on a non transition call 1`] = `
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
-    "status": "offline",
-    "interactionId": "na",
+    "status": "sqsShutDown",
+    "interactionId": "0000-0000-0000-0000",
     "transitionCall": false,
   },
 }
@@ -93,7 +93,7 @@ Immutable.Map {
 exports[`SupervisorToolbar reducer snapshots dispatches cxengage/session/sqs-shut-down on a transition call 1`] = `
 Immutable.Map {
   "silentMonitoring": Immutable.Map {
-    "status": "connected",
+    "status": "sqsShutDown",
     "interactionId": "0000-0000-0000-0000",
     "transitionCall": true,
   },
