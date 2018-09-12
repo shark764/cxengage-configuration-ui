@@ -24,8 +24,7 @@ exec('npm -v', function(err, stdout, stderr) {
   if (stdout !== `${npm}\n`) {
     console.log(
       '\x1b[33m%s\x1b[0m',
-      `\nConfig 2 \nYou need npm version ${npm}, you have ${stdout}`
+      `\nConfig 2 \n Npm version mismatch: ${npm} recommended, you have ${stdout}`
     );
-    process.exit(1);
   }
 });

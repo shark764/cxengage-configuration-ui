@@ -79,6 +79,13 @@ pipeline {
         sh "git push origin ${build_version}"
       }
     }
+    stage ('Publish specs to npm') {
+      when { anyOf {branch 'master'}}
+      steps {
+        sh 'echo "Stage Description: Publishes the automation folder to npm so you can run the tests from other projects"'
+        sh "docker exec ${docker_tag} npm publish"
+      }
+    }
     stage ('Store in S3') {
       when { anyOf {branch 'master'}}
       steps {
