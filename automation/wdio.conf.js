@@ -5,6 +5,3 @@ config.suites = {
 }
 
 exports.config = config;
-
-exports.suites = config.suites;
-

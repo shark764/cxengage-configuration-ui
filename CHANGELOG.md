@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.24.3]
+* <no-jira> - Publish automation specs to npm
+
 ## [0.24.2]
 * CXV1-15088 - Silent Monitoring - Handle sqs session being lost or dropped
 
