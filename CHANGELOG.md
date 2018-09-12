@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.24.4]
+* <no-jira> - change from private to published package.json
+
 ## [0.24.3]
 * <no-jira> - Publish automation specs to npm
 
