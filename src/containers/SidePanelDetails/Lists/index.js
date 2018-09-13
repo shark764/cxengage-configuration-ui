@@ -48,7 +48,7 @@ export function mapStateToProps(state) {
 
   if (selectedEntity) {
     return {
-      id: 'dtPanel-lists',
+      id: 'dtpanel-lists',
       listType: selectedEntity.get('listType').get('name'),
       tableItems: selectedEntity.get('items').toJS(),
       userHasUpdatePermission: userHasUpdatePermission(state),

@@ -35,7 +35,7 @@ export default function ListsForm(props) {
         <SelectField
           name="listTypeId"
           label="List Type *"
-          id="frm-lists-listTypeId"
+          id="frm-lists-list-type-id"
           options={props.listTypes}
           disabled={props.isSaving}
         />

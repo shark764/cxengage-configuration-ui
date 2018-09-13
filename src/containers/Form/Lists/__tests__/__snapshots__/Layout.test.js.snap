@@ -21,7 +21,7 @@ exports[`<ListsForm /> renders create list 1`] = `
   />
   <SelectField
     disabled={false}
-    id="frm-lists-listTypeId"
+    id="frm-lists-list-type-id"
     label="List Type *"
     name="listTypeId"
     options={
