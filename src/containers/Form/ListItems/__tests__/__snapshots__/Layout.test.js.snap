@@ -2,6 +2,7 @@
 
 exports[`<ListItemsForm /> renders create list item 1`] = `
 <form
+  id="frm-listItem"
   onSubmit={[Function]}
 >
   <React.Fragment>
@@ -19,6 +20,7 @@ exports[`<ListItemsForm /> renders create list item 1`] = `
       componentType="input"
       dataType="string"
       disabled={false}
+      id="frm-listItem-Test Field Item Name 1"
       key="Test Field Item Name 1"
       label="Test Field Item Label 1"
       name="Test Field Item Name 1"
@@ -27,12 +29,14 @@ exports[`<ListItemsForm /> renders create list item 1`] = `
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-listItem-Test Field Item Name 1"
       key="Test Field Item Name 1"
       label="Test Field Item Label 1"
       name="Test Field Item Name 1"
     />
     <SelectField
       disabled={false}
+      id="frm-listItem-Test Field Item Name 1"
       key="Test Field Item Name 1"
       label="Test Field Item Label 1"
       name="Test Field Item Name 1"
@@ -51,6 +55,7 @@ exports[`<ListItemsForm /> renders create list item 1`] = `
 
 exports[`<ListItemsForm /> renders update list item 1`] = `
 <form
+  id="frm-listItem"
   onSubmit={[Function]}
 >
   <React.Fragment>
@@ -68,6 +73,7 @@ exports[`<ListItemsForm /> renders update list item 1`] = `
       componentType="input"
       dataType="string"
       disabled={false}
+      id="frm-listItem-Test Field Item Name 1"
       key="Test Field Item Name 1"
       label="Test Field Item Label 1"
       name="Test Field Item Name 1"
@@ -76,12 +82,14 @@ exports[`<ListItemsForm /> renders update list item 1`] = `
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-listItem-Test Field Item Name 1"
       key="Test Field Item Name 1"
       label="Test Field Item Label 1"
       name="Test Field Item Name 1"
     />
     <SelectField
       disabled={false}
+      id="frm-listItem-Test Field Item Name 1"
       key="Test Field Item Name 1"
       label="Test Field Item Label 1"
       name="Test Field Item Name 1"

@@ -5,6 +5,7 @@ exports[`ListsDetailsPanel Renders renders 1`] = `
   alertMessage="This list is inherited and cannot be edited"
   deleteSubEntity={[Function]}
   downloadCsv={[Function]}
+  id="dtPanel-lists"
   inherited={true}
   isSaving={true}
   listType="mock list type name"
@@ -68,6 +69,7 @@ exports[`ListsDetailsPanel Renders renders 1`] = `
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "alertMessage": "This list is inherited and cannot be edited",
+  "id": "dtPanel-lists",
   "inherited": true,
   "isSaving": true,
   "listType": "mock list type name",
