@@ -28,11 +28,15 @@ function ListsDetailsPanel(props) {
       {!props.inherited && (
         <React.Fragment>
           <DetailHeader text="Bulk CSV" />
-          <FileDownload onClick={props.downloadCsv} disabled={props.isSaving} />
+          <FileDownload
+            onClick={props.downloadCsv}
+            disabled={props.isSaving}
+            id="dtPanel-lists-downloadCsv" />
           <FileUpload
             onFileSelect={props.uploadCsv}
             acceptedFileType=".csv"
             disabled={props.isSaving}
+            id="dtPanel-lists-uploadCsv"
           />
         </React.Fragment>
       )}

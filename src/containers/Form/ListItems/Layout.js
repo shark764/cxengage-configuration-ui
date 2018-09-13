@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 
 export default function ListItemsForm(props) {
   return (
-    <form onSubmit={props.handleSubmit} key={props.key}>
+    <form onSubmit={props.handleSubmit} key={props.key} id="frm-listItem">
       {props.listName ? (
         <Fragment>
           <Header>Creating list item for : </Header>
@@ -64,6 +64,7 @@ export default function ListItemsForm(props) {
                 key={field.name}
                 name={field.name}
                 label={`${field.label}${field.required ? ' *' : ''}`}
+                id={'frm-listItem-' + field.name}
                 disabled={props.isSaving}
                 options="boolean"
               />
@@ -72,6 +73,7 @@ export default function ListItemsForm(props) {
                 key={field.name}
                 name={field.name}
                 label={`${field.label}${field.required ? ' *' : ''}`}
+                id={'frm-listItem-' + field.name}
                 disabled={props.isSaving}
                 componentType="input"
                 dataType={field.type}

@@ -16,10 +16,11 @@ import { ToggleField } from 'cx-ui-components';
 
 export default function ListsForm(props) {
   return (
-    <form onSubmit={props.handleSubmit} key={props.key}>
+    <form onSubmit={props.handleSubmit} key={props.key} id="frm-lists">
       <InputField
         name="name"
         label="Name *"
+        id="frm-lists-name"
         componentType="input"
         inputType="text"
         disabled={props.isSaving || props.inherited}
@@ -27,12 +28,14 @@ export default function ListsForm(props) {
       <ToggleField
         name="shared"
         label="Shared *"
+        id="frm-lists-shared"
         disabled={props.isSaving || props.inherited}
       />
       {!props.update && (
         <SelectField
           name="listTypeId"
           label="List Type *"
+          id="frm-lists-listTypeId"
           options={props.listTypes}
           disabled={props.isSaving}
         />
