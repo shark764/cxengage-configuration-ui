@@ -126,39 +126,42 @@ export const FetchData = (action$, store) =>
   );
 
 export const FetchDataItem = (action$, store) =>
-  action$.ofType('FETCH_DATA_ITEM').switchMap(a =>
-    fromPromise(
-      sdkPromise(
-        {
-          module: 'entities',
-          command: `get${capitalizeFirstLetter(
+  action$
+    .ofType('FETCH_DATA_ITEM')
+    .debounceTime(300)
+    .switchMap(a =>
+      fromPromise(
+        sdkPromise(
+          {
+            module: 'entities',
+            command: `get${capitalizeFirstLetter(
+              removeLastLetter(a.entityName)
+            )}`,
+            data: {
+              [removeLastLetter(a.entityName) + 'Id']: a.id
+            }
+          },
+          `cxengage/entities/get-${camelCaseToKebabCase(
             removeLastLetter(a.entityName)
-          )}`,
-          data: {
-            [removeLastLetter(a.entityName) + 'Id']: a.id
-          }
-        },
-        `cxengage/entities/get-${camelCaseToKebabCase(
-          removeLastLetter(a.entityName)
-        )}-response`
+          )}-response`
+        )
       )
-    )
-      .map(response => ({
-        type: 'FETCH_DATA_ITEM_FULFILLED',
-        entityName: a.entityName,
-        id: a.id,
-        response: response
-      }))
-      .catch(error => {
-        Toast.error(errorLabel(error));
-        return of({
-          type: 'FETCH_DATA_ITEM_REJECTED',
+        .map(response => ({
+          type: 'FETCH_DATA_ITEM_FULFILLED',
           entityName: a.entityName,
-          entityId: a.entityId,
-          error: error
-        });
-      })
-  );
+          id: a.id,
+          response: response
+        }))
+        .catch(error => {
+          Toast.error(errorLabel(error));
+          return of({
+            type: 'FETCH_DATA_ITEM_REJECTED',
+            entityName: a.entityName,
+            entityId: a.entityId,
+            error: error
+          });
+        })
+    );
 
 export const getTenantPermissions = (action$, store) =>
   action$
@@ -212,10 +215,10 @@ export const CreateEntity = (action$, store) =>
       })
       .catch(error => {
         Toast.error(errorLabel(error));
-        return {
+        return of({
           type: 'CREATE_ENTITY_REJECTED',
           entityName: a.entityName
-        };
+        });
       })
   );
 

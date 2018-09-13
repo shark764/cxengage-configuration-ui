@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.24.5]
+* CXV1-15277 - Outbound Identifiers - Switching between lists quickly causes issues.
+
 ## [0.24.4]
 * <no-jira> - change from private to published package.json
 
