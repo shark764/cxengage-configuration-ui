@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.24.8]
+* CXV1-15040 - save all entity metadata in a single place
+
 ## [0.24.7]
 * <no-jira> - Version bump for cx-ui-components related to Generic Lists for automation traversal.
 

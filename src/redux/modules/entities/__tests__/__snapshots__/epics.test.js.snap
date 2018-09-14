@@ -8,22 +8,14 @@ exports[`FetchData calls the correct sdk function 1`] = `
         "command": "getMockEntity",
         "data": Object {},
         "module": "entities",
+        "topic": "cxengage/entities/get-mock-entity-response",
       },
-      "cxengage/entities/get-mock-entity-response",
     ],
   ],
 }
 `;
 
-exports[`FetchData on sdkPromise error calls toastr error 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      "mock error",
-    ],
-  ],
-}
-`;
+exports[`FetchData on sdkPromise error calls toastr error 1`] = `[MockFunction]`;
 
 exports[`FetchData on sdkPromise error on ignore list does not call toastr error 1`] = `[MockFunction]`;
 
@@ -45,7 +37,6 @@ exports[`FetchData on sdkPromise success returns fetchDataFulfilled 1`] = `
 Object {
   "entityName": "mockEntity",
   "response": "mock response",
-  "tableType": "mockTableType",
   "type": "FETCH_DATA_FULFILLED",
 }
 `;

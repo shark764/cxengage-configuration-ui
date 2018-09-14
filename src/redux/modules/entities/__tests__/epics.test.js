@@ -6,10 +6,14 @@ import { fetchData } from '../index';
 import { sdkPromise, errorLabel } from '../../../../utils/sdk';
 import toastr from 'toastr';
 
+import { EntityMetaData, entitiesMetaData } from '../metaData';
+
 jest.mock('../../../../utils/sdk');
 jest.mock('toastr');
 
 errorLabel.mockReturnValue('mock error');
+
+entitiesMetaData.mockEntity = new EntityMetaData('mockEntity');
 
 describe('FetchData', () => {
   let action;

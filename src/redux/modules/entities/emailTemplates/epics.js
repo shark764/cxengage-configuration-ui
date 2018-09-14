@@ -3,11 +3,13 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 import { Toast } from 'cx-ui-components';
 
-import { sdkPromise, errorLabel } from '../../../../utils/sdk';
+import { sdkPromise } from '../../../../utils/sdk';
 
 import { getCurrentFormInitialValues } from '../../form/selectors';
 
-import { updateEntityFulfilled, updateEntityRejected } from '../';
+import { updateEntityRejected } from '../';
+
+import { handleSuccess, handleError } from '../handleResult';
 
 export const UpdateEmailTemplate = (action$, store) =>
   action$
@@ -40,26 +42,15 @@ export const UpdateEmailTemplate = (action$, store) =>
                   : {
                       emailTypeId: a.entityId,
                       active: false
-                    }
-            },
-            a.values.email === 'custom'
+                    },
+              topic: a.values.email === 'custom'
               ? 'cxengage/entities/create-email-template-response'
-              : 'cxengage/entities/update-email-template-response'
+              : 'cxengage/entities/update-email-template-response',
+            }
           )
         )
-          .map(response => {
-            Toast.success('Email template was updated successfully!');
-            return updateEntityFulfilled(
-              a.entityName,
-              response,
-              a.entityId,
-              a.values
-            );
-          })
-          .catch(error => {
-            Toast.error(errorLabel(error));
-            return of(updateEntityRejected(a.entityName, a.entityId));
-          });
+        .map(response => handleSuccess(response, a, 'Email template was updated successfully!'))
+        .catch(error => handleError(error, a));
       } else {
         Toast.info('"Default Email" is unchanged. Nothing to submit.');
         return of(updateEntityRejected(a.entityName, a.entityId));

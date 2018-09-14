@@ -15,7 +15,13 @@ Array [
   Object {
     "entityId": "mock entity id",
     "entityName": "emailTemplates",
+    "initialValues": Object {
+      "email": "custom",
+    },
     "type": "UPDATE_ENTITY_REJECTED",
+    "values": Object {
+      "email": "default",
+    },
   },
 ]
 `;
@@ -53,8 +59,8 @@ exports[`UpdateEmailTemplate emailTemplates entity with custom email calls the c
           "emailTypeId": "mock entity id",
         },
         "module": "entities",
+        "topic": "cxengage/entities/create-email-template-response",
       },
-      "cxengage/entities/create-email-template-response",
     ],
   ],
 }
@@ -75,7 +81,10 @@ Array [
   Object {
     "entityId": "mock entity id",
     "entityName": "emailTemplates",
-    "payload": "mock response",
+    "initialValues": Object {
+      "email": "custom",
+    },
+    "response": "mock response",
     "type": "UPDATE_ENTITY_FULFILLED",
     "values": Object {
       "body": "mock body",
@@ -96,8 +105,8 @@ exports[`UpdateEmailTemplate emailTemplates entity with default email calls the 
           "emailTypeId": "mock entity id",
         },
         "module": "entities",
+        "topic": "cxengage/entities/update-email-template-response",
       },
-      "cxengage/entities/update-email-template-response",
     ],
   ],
 }
@@ -118,7 +127,10 @@ Array [
   Object {
     "entityId": "mock entity id",
     "entityName": "emailTemplates",
-    "payload": "mock response",
+    "initialValues": Object {
+      "email": "custom",
+    },
+    "response": "mock response",
     "type": "UPDATE_ENTITY_FULFILLED",
     "values": Object {
       "body": "mock body",

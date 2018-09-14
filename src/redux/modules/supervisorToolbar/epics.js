@@ -83,8 +83,7 @@ export const MonitorInteractionInitialization = (action$, store) =>
             module: 'monitorCall',
             data: { interactionId },
             topic: 'monitorCall'
-          },
-          `monitorCall`
+          }
         )
       )
         .filter(response => response !== 'cancelled')
@@ -170,9 +169,9 @@ export const HangUpEpic = (action$, store) =>
           {
             module: 'comfirmPrompt',
             command: `Stop monitoring Interaction? ${a.interactionId}`,
-            data: { interactionId: a.interactionId }
-          },
-          'comfirmPrompt'
+            data: { interactionId: a.interactionId },
+            topic: 'comfirmPrompt'
+          }
         )
       ).map(response => ({
         ...a,
@@ -188,9 +187,9 @@ export const HangUpEpic = (action$, store) =>
             {
               module: 'interactions.voice',
               command: 'resourceRemove',
-              data: { interactionId: a.interactionId }
-            },
-            'cxengage/interactions/voice/resource-removed-acknowledged'
+              data: { interactionId: a.interactionId },
+              topic: 'cxengage/interactions/voice/resource-removed-acknowledged'
+            }
           )
         )
           .mapTo(hangUpRequested())
@@ -216,11 +215,11 @@ export const ToggleMuteEpic = (action$, store) =>
           {
             module: 'interactions.voice',
             command: a.muted ? 'unmute' : 'mute',
-            data: { interactionId: a.interactionId }
-          },
-          a.muted
+            data: { interactionId: a.interactionId },
+            topic: a.muted
             ? 'cxengage/interactions/voice/unmute-acknowledged'
             : 'cxengage/interactions/voice/mute-acknowledged'
+          }
         )
       )
         .mapTo(toggleMuteRequested())

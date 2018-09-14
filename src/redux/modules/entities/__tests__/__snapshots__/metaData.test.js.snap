@@ -1,0 +1,354 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`entitiesMetaData creates all metaData info 1`] = `
+Object {
+  "branding": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "branding",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "branding",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
+  "emailTemplates": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "emailTemplates",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "emailTemplates",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
+  "flows": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "flows",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "flows",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
+  "listTypes": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "listTypes",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "listTypes",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
+  "lists": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [
+      "listTypes",
+    ],
+    "dependentEntity": "",
+    "entityName": "lists",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "lists",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "listItems",
+    "updateFormDependencies": Array [],
+  },
+  "outboundIdentifierLists": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "outboundIdentifiers",
+    "entityName": "outboundIdentifierLists",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "outboundIdentifierLists",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "",
+    "updateFormDependencies": Array [
+      "outboundIdentifiers",
+    ],
+  },
+  "outboundIdentifiers": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [
+      "flows",
+    ],
+    "dependentEntity": "",
+    "entityName": "outboundIdentifiers",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "outboundIdentifiers",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "",
+    "updateFormDependencies": Array [
+      "flows",
+    ],
+  },
+  "protectedBranding": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "protectedBranding",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "protectedBranding",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in mainEntity as apiMethod 1`] = `
+Object {
+  "command": "getMockEntity",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/get-mock-entity-response",
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in mainEntity as apiMethod 2`] = `
+Object {
+  "command": "createMockEntity",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/create-mock-entity-response",
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in mainEntity as apiMethod 3`] = `
+Object {
+  "command": "updateMockEntity",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/update-mock-entity-response",
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in singleMainEntity as apiMethod 1`] = `
+Object {
+  "command": "getMockEntit",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/get-mock-entit-response",
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in singleMainEntity as apiMethod 2`] = `
+Object {
+  "command": "createMockEntit",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/create-mock-entit-response",
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in singleMainEntity as apiMethod 3`] = `
+Object {
+  "command": "updateMockEntit",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/update-mock-entit-response",
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in subEntity as apiMethod 1`] = `
+Object {
+  "command": "get",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/get--response",
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in subEntity as apiMethod 2`] = `
+Object {
+  "command": "create",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/create--response",
+}
+`;
+
+exports[`entitiesMetaData entityApiRequest, passing in subEntity as apiMethod 3`] = `
+Object {
+  "command": "update",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/update--response",
+}
+`;
+
+exports[`entitiesMetaData entityListItemApiRequest, passing in any other apiMethod 1`] = `
+Object {
+  "command": "getListMember",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/get--list-member-response",
+}
+`;
+
+exports[`entitiesMetaData entityListItemApiRequest, passing in any other apiMethod 2`] = `
+Object {
+  "command": "createListMember",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/create--list-member-response",
+}
+`;
+
+exports[`entitiesMetaData entityListItemApiRequest, passing in update as apiMethod 1`] = `
+Object {
+  "command": "update",
+  "data": Object {},
+  "module": "entities",
+  "topic": "cxengage/entities/update--response",
+}
+`;
