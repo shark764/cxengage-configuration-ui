@@ -31,12 +31,12 @@ function ListsDetailsPanel(props) {
           <FileDownload
             onClick={props.downloadCsv}
             disabled={props.isSaving}
-            id="dtPanel-lists-downloadCsv" />
+            id="dtpanel-lists-download-csv" />
           <FileUpload
             onFileSelect={props.uploadCsv}
             acceptedFileType=".csv"
             disabled={props.isSaving}
-            id="dtPanel-lists-uploadCsv"
+            id="dtpanel-lists-upload-csv"
           />
         </React.Fragment>
       )}
