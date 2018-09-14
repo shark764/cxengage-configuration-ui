@@ -36,7 +36,7 @@ pipeline {
         sh 'echo "Stage Description: Sets up docker image for use in the next stages"'
         sh "mkdir build -p"
         sh "docker build -t ${docker_tag} -f Dockerfile ."
-        sh "docker run --rm -t -d --name=${docker_tag} --mount type=bind,src=$HOME/.ssh,dst=/home/node/.ssh,readonly --mount type=bind,src=${pwd}/build,dst=/home/node/mount ${docker_tag}"
+        sh "docker run --rm -t -d --name=${docker_tag} ${docker_tag}"
       }
     }
     stage ('Lint for errors') {
