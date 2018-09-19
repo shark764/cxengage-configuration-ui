@@ -8,5 +8,13 @@ export const nameColumn = {
   id: 'name',
   Header: <span title="Name">Name</span>,
   accessor: 'name',
-  Cell: ({ row }) => <span title={row.name}>{row.name}</span>
+  Cell: ({ row }) => <span title={row.name}>{row.name}</span>,
+  Filter: ({ filter, onChange }) => (
+    <input
+      className="entity-table-filter-column-name"
+      onChange={event => onChange(event.target.value)}
+      style={{ width: '100%' }}
+      value={filter ? filter.value : ''}
+    />
+  )
 };

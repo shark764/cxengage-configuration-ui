@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.24.11]
+* <no-jira> - Version bump for cx-ui-components related to missing id/className in column filters for automation traversal.
+
 ## [0.24.10]
 * <no-jira> - Added missing entity metadata for groups, skills, and customMetrics
 

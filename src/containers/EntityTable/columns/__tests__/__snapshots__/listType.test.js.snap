@@ -11,6 +11,7 @@ exports[`listTypeColumn Cell renders correctly 1`] = `
 exports[`listTypeColumn is configured correctly 1`] = `
 Object {
   "Cell": [Function],
+  "Filter": [Function],
   "Header": <span
     title="List Type"
   >

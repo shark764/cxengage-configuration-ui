@@ -19,13 +19,14 @@ export const statusColumn = {
   },
   Filter: ({ filter, onChange }) => (
     <select
+      className="entity-table-filter-column-status"
       onChange={event => onChange(event.target.value)}
       style={{ width: '100%' }}
       value={filter ? filter.value : 'all'}
     >
-      <option value="all">All</option>
-      <option value="enabled">View Enabled</option>
-      <option value="disabled">View Disabled</option>
+      <option value="all" className="entity-table-filter-status-option-all">All</option>
+      <option value="enabled" className="entity-table-filter-status-option-enabled">View Enabled</option>
+      <option value="disabled" className="entity-table-filter-status-option-disabled">View Disabled</option>
     </select>
   )
 };
