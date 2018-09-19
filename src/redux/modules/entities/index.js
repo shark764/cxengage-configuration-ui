@@ -57,6 +57,14 @@ const initialState = fromJS({
     ...defaultEntity,
     readPermission: ['CUSTOM_STATS_READ'],
     updatePermission: ['CUSTOM_STATS_UPDATE']
+  },
+  chatWidgets: {
+    ...defaultEntity,
+    readPermission: ['OUTBOUND_IDENTIFIER_READ'],
+    updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
+    createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
+    disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
+    assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
   }
   //hygen-inject-before
 });
@@ -79,6 +87,12 @@ export const setEntityUpdating = (entityName, entityId, updating) => ({
   entityName,
   entityId,
   updating
+});
+
+export const toggleBulkEntityChange = (entityName, entityId) => ({
+  type: 'TOGGLE_BULK_ENTITY_CHANGE',
+  entityName,
+  entityId
 });
 
 export const onFormButtonSubmit = () => ({ type: 'START_FORM_SUBMISSION' });
@@ -185,6 +199,21 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_DATA_ITEM_REJECTED': {
       return exports.setEntityUpdatingHelper(state, action, false);
     }
+    case 'TOGGLE_BULK_ENTITY_CHANGE': {
+      const entityIndex = state
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === action.entityId);
+      if (entityIndex !== -1) {
+        return state
+          .mergeIn(
+            [action.entityName, 'data', entityIndex],
+            fromJS({ bulkChangeItem: !state.getIn([action.entityName, 'data', entityIndex, 'bulkChangeItem'], false) })
+          )
+          .setIn([action.entityName, 'selectedEntityId'], 'bulk');
+      } else {
+        return state;
+      }
+    }
     case 'CREATE_ENTITY': {
       return state.setIn([action.entityName, 'creating'], true);
     }
@@ -204,7 +233,8 @@ export default function reducer(state = initialState, action) {
       return exports.setEntityUpdatingHelper(state, action, true);
     }
     case 'TOGGLE_ENTITY_FULFILLED':
-    case 'UPDATE_ENTITY_FULFILLED': {
+    case 'UPDATE_ENTITY_FULFILLED':
+    case 'BULK_ENTITY_UPDATE_FULFILLED': {
       const { result } = action.response;
       const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === result.id);
       if (entityIndex !== -1) {

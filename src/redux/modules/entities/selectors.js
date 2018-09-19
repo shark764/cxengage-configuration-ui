@@ -5,102 +5,78 @@
 import { createSelector } from 'reselect';
 import { List } from 'immutable';
 
-import {
-  getCurrentPermissions,
-  getCurrentTenantId
-} from '../userData/selectors';
+import { getCurrentPermissions, getCurrentTenantId } from '../userData/selectors';
 
 const getEntities = state => state.get('Entities');
 
-export const getCurrentEntity = state =>
-  getEntities(state).get('currentEntity');
+export const getCurrentEntity = state => getEntities(state).get('currentEntity');
 
-export const getCurrentEntityStore = state =>
-  getEntities(state).get(getCurrentEntity(state));
+export const getCurrentEntityStore = state => getEntities(state).get(getCurrentEntity(state));
 
-export const getSidePanelWidth = state =>
-  getCurrentEntityStore(state).get('sidePanelWidth');
+export const getSidePanelWidth = state => getCurrentEntityStore(state).get('sidePanelWidth');
 
-export const getSelectedEntityId = state =>
-  getCurrentEntityStore(state).get('selectedEntityId');
+export const getSelectedEntityId = state => getCurrentEntityStore(state).get('selectedEntityId');
 
-export const getConfirmationDialogType = state =>
-  getCurrentEntityStore(state).get('confirmationDialogType');
+export const getSelectedEntityBulkChangeItems = state =>
+  getCurrentEntityStore(state).get('data') &&
+  getCurrentEntityStore(state)
+    .get('data')
+    .filter(item => item.get('bulkChangeItem') === true)
+    .reduce((accum, item) => accum.push(item.get('id')), List());
 
-export const getConfirmationDialogMetaData = state =>
-  getCurrentEntityStore(state).get('confirmationDialogMetaData');
+export const getConfirmationDialogType = state => getCurrentEntityStore(state).get('confirmationDialogType');
+
+export const getConfirmationDialogMetaData = state => getCurrentEntityStore(state).get('confirmationDialogMetaData');
 
 export const getAllEntities = state => getCurrentEntityStore(state).get('data');
 
 export const getSelectedEntity = createSelector(
   [getCurrentEntity, getAllEntities, getSelectedEntityId],
   (currentEntity, allEntities, selectedEntityId) =>
-    selectedEntityId &&
-    allEntities.find(obj => obj.get('id') === selectedEntityId)
+    selectedEntityId && allEntities.find(obj => obj.get('id') === selectedEntityId)
 );
 
-export const getSelectedEntityName = state =>
-  getSelectedEntity(state).get('name');
+export const getSelectedEntityName = state => getSelectedEntity(state).get('name');
 
-export const getSelectedEntityStatus = state =>
-  getSelectedEntity(state).get('active');
+export const getSelectedEntityStatus = state => getSelectedEntity(state).get('active');
 
 export const userHasReadPermission = state =>
-  hasPermission(
-    getCurrentPermissions(state),
-    getCurrentEntityStore(state).get('readPermission')
-  );
+  hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('readPermission'));
 
 export const userHasUpdatePermission = state =>
-  hasPermission(
-    getCurrentPermissions(state),
-    getCurrentEntityStore(state).get('updatePermission')
-  );
+  hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('updatePermission'));
 
 export const userHasCreatePermission = state =>
-  hasPermission(
-    getCurrentPermissions(state),
-    getCurrentEntityStore(state).get('createPermission')
-  );
+  hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('createPermission'));
 
 export const hasPermission = (userPermissions, permissionsNeeded) => {
   if (permissionsNeeded !== undefined) {
     // Return true if they have at least one of the permissions
-    return permissionsNeeded.some(permissionNeeded =>
-      userPermissions.includes(permissionNeeded)
-    );
+    return permissionsNeeded.some(permissionNeeded => userPermissions.includes(permissionNeeded));
   } else {
     return false;
   }
 };
 
-export const isInherited = state =>
-  getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
+export const isInherited = state => getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
 
-export const isCreating = state =>
-  getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
+export const isCreating = state => getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
 
 export const isUpdating = state => getCurrentEntityStore(state).get('updating');
 
 export const isSaving = state => isCreating(state) || isUpdating(state);
 
-export const getCurrentSubEntity = state =>
-  getCurrentEntityStore(state).get('subEntity');
+export const getCurrentSubEntity = state => getCurrentEntityStore(state).get('subEntity');
 
-export const getSelectedSubEntityId = state =>
-  getCurrentEntityStore(state).get('selectedSubEntityId');
+export const getSelectedSubEntityId = state => getCurrentEntityStore(state).get('selectedSubEntityId');
 
 export const getSelectedSubEntity = createSelector(
   [getSelectedEntity, getCurrentSubEntity, getSelectedSubEntityId],
   (selectedEntity, currentSubEntity, selectedSubEntityId) =>
-    selectedEntity &&
-    selectedEntity
-      .get('items')
-      .find(subEntity => subEntity.get('key') === selectedSubEntityId)
+    selectedEntity && selectedEntity.get('items').find(subEntity => subEntity.get('key') === selectedSubEntityId)
 );
 
-export const isSubEntitySaving = state =>
-  getCurrentEntityStore(state).get('subEntitySaving');
+export const isSubEntitySaving = state => getCurrentEntityStore(state).get('subEntitySaving');
 
 export const getSelectedEntityFormId = createSelector(
   [getCurrentEntity, getSelectedEntityId],
@@ -110,23 +86,16 @@ export const getSelectedEntityFormId = createSelector(
 export const availableEntitiesForList = state => {
   const entityIndex = getCurrentEntityStore(state)
     .get('data')
-    .findIndex(
-      entity =>
-        entity.get('id') ===
-        getCurrentEntityStore(state).get('selectedEntityId')
-    );
+    .findIndex(entity => entity.get('id') === getCurrentEntityStore(state).get('selectedEntityId'));
   const currentListMembers = getCurrentEntityStore(state)
     .getIn(['data', entityIndex, 'members'])
     .toOrderedSet();
-  const allListOptions = state
-    .getIn(['Entities', getListDependency(state), 'data'])
-    .toOrderedSet();
+  const allListOptions = state.getIn(['Entities', getListDependency(state), 'data']).toOrderedSet();
   const availableOptions = allListOptions.subtract(currentListMembers);
   return availableOptions.toJS();
 };
 
-export const getListDependency = state =>
-  getCurrentEntityStore(state).getIn(['metaData', 'listDependency']);
+export const getListDependency = state => getCurrentEntityStore(state).getIn(['metaData', 'listDependency']);
 
 export const getEntityListMembers = state =>
   getSelectedEntity(state)
@@ -136,13 +105,6 @@ export const getEntityListMembers = state =>
 export const getListSize = state => {
   const entityIndex = getCurrentEntityStore(state)
     .get('data')
-    .findIndex(
-      entity =>
-        entity.get('id') ===
-        getCurrentEntityStore(state).get('selectedEntityId')
-    );
-  return getCurrentEntityStore(state).getIn(
-    ['data', entityIndex, 'members'],
-    new List([])
-  ).size;
+    .findIndex(entity => entity.get('id') === getCurrentEntityStore(state).get('selectedEntityId'));
+  return getCurrentEntityStore(state).getIn(['data', entityIndex, 'members'], new List([])).size;
 };

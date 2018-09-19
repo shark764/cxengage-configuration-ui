@@ -38,6 +38,8 @@ export function getTableColumns(entityName) {
         descriptionColumn,
         statusColumn
       ];
+    case 'chatWidgets':
+      return [nameColumn, descriptionColumn, statusColumn];
     //hygen-inject-before
     default:
       return [];

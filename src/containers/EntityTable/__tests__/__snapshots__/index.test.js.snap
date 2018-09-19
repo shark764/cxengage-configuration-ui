@@ -2,6 +2,7 @@
 
 exports[`actions maps the redux actions to the object correctly 1`] = `
 Object {
+  "onBulkClick": [MockFunction],
   "onCreateButtonClick": [MockFunction],
   "onRowClick": [MockFunction],
 }
@@ -12,6 +13,7 @@ Object {
   "columns": Array [
     "mock table columns",
   ],
+  "entityMetadata": undefined,
   "items": Array [
     "mock all entities",
   ],

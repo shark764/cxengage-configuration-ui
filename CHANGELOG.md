@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.25.0]
+* CXV1-14889 - Chat widget page
+* CXV1-14892 - Chat widget form
+* CXV1-15343 - support for bulk actions (feature flagged)
+
 ## [0.24.11]
 * <no-jira> - Version bump for cx-ui-components related to missing id/className in column filters for automation traversal.
 

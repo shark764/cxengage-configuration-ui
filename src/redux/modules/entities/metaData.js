@@ -1,26 +1,22 @@
-import { 
-  capitalizeFirstLetter,
-  camelCaseToKebabCase,
-  removeLastLetter
-} from 'serenova-js-utils/strings'
+import { capitalizeFirstLetter, camelCaseToKebabCase, removeLastLetter } from 'serenova-js-utils/strings';
 
 /**
  * All the information about an entity that it does not provide about itself
- * 
- *  Notes: 
+ *
+ *  Notes:
  *  You will notice there is an update form and create form dependencies
- *  This is because most of the time they are the same form but there are 
- *  times where some fields are permanently set and cannot be changed so below 
+ *  This is because most of the time they are the same form but there are
+ *  times where some fields are permanently set and cannot be changed so below
  *  we allways add both even if they are the same, leave an empty array if not required
  *  as redux observable epic picks this up and converts it to an observable
- *  Also note that if the side panel is dependent on other entities they should be in 
+ *  Also note that if the side panel is dependent on other entities they should be in
  *  the updateFormDependencies
  */
 
 export class EntityMetaData {
   /**
-   * 
-   * @param {string} entityName is the name of the entity matching the url's entity endpoint 
+   *
+   * @param {string} entityName is the name of the entity matching the url's entity endpoint
    */
   constructor(entityName) {
     this.entityName = entityName;
@@ -31,27 +27,24 @@ export class EntityMetaData {
       message: '',
       trueButtonText: '',
       falseButtonText: ''
-    }
+    };
     /**
      * Form dependencies are what a form needs to work
-     * Example: Outbound Identifiers needs to have flow id's and names, 
+     * Example: Outbound Identifiers needs to have flow id's and names,
      * so we make sure to grab all flow data first
      */
     this.createFormDependencies = [];
     this.updateFormDependencies = [];
-    this.fields = [[
-      { label: 'Name', name: 'name' },
-      { label: 'Description', name: 'description' },
-    ]];
+    this.fields = [[{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }]];
     this.sdkCall = {
       module: 'entities',
-      data: {},
+      data: {}
     };
   }
 
   /**
    * This constructs the data object for the sdk so all you need to do is add the data in the epic
-   * @param {string} apiMethod get, create, update, download, upload 
+   * @param {string} apiMethod get, create, update, download, upload
    * @param {string} entityType inidcate if this is a 'mainEntity' , a singleMainEntity, or a 'subEntity'
    */
   entityApiRequest(apiMethod, entityType) {
@@ -59,29 +52,33 @@ export class EntityMetaData {
     const mainEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(this.entityName)}-response`;
 
     const singleEntityCommand = `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.entityName))}`;
-    const singleEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(removeLastLetter(this.entityName))}-response`;
+    const singleEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
+      removeLastLetter(this.entityName)
+    )}-response`;
 
     const subEntityCommand = `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.subEntityName))}`;
-    const subEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(removeLastLetter(this.subEntityName))}-response`;
+    const subEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
+      removeLastLetter(this.subEntityName)
+    )}-response`;
 
-    if(entityType === 'subEntity') {
-      return ({
+    if (entityType === 'subEntity') {
+      return {
         ...this.sdkCall,
         command: subEntityCommand,
-        topic: subEntityTopic,
-      });
-    } else if(entityType === 'singleMainEntity') {
-      return ({
+        topic: subEntityTopic
+      };
+    } else if (entityType === 'singleMainEntity') {
+      return {
         ...this.sdkCall,
         command: singleEntityCommand,
-        topic: singleEntityTopic,
-      });
+        topic: singleEntityTopic
+      };
     } else {
-      return ({
+      return {
         ...this.sdkCall,
         command: mainEntityCommand,
-        topic: mainEntityTopic,
-      });
+        topic: mainEntityTopic
+      };
     }
   }
 
@@ -91,22 +88,26 @@ export class EntityMetaData {
    * @param {string} apiMethod add, remove, update
    */
   entityListItemApiRequest(apiMethod) {
-    if(apiMethod === 'update') {
-      return ({
+    if (apiMethod === 'update') {
+      return {
         ...this.sdkCall,
         command: `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.dependentEntity))}`,
-        topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(removeLastLetter(this.dependentEntity))}-response`,
-      })
+        topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(removeLastLetter(this.dependentEntity))}-response`
+      };
     } else {
-      return ({
+      return {
         ...this.sdkCall,
         command: `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.dependentEntity))}ListMember`,
-        topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(removeLastLetter(this.dependentEntity))}-list-member-response`,
-      })
+        topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
+          removeLastLetter(this.dependentEntity)
+        )}-list-member-response`
+      };
     }
   }
+  bulkEditsAvailable() {
+    return this.entityName !== 'emailTemplates' && location.hash.includes('alpha');
+  }
 }
-
 
 /**
  * Create the entity objects and add or modify the properties
@@ -116,6 +117,7 @@ export class EntityMetaData {
 
 export const listOfEntities = [
   'branding',
+  'chatWidgets',
   'protectedBranding',
   'flows',
   'listTypes',
@@ -125,11 +127,11 @@ export const listOfEntities = [
   'outboundIdentifierLists',
   'customMetrics',
   'groups',
-  'skills',
+  'skills'
 ];
 
 const entities = {};
-listOfEntities.forEach(x => entities[x] = new EntityMetaData(x));
+listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
 
 entities.lists.createFormDependencies.push('listTypes');
 entities.lists.subEntityName = 'listItems';
