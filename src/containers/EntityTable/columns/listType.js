@@ -8,5 +8,13 @@ export const listTypeColumn = {
   id: 'listType',
   Header: <span title="List Type">List Type</span>,
   accessor: list => list.listType.name,
-  Cell: ({ row }) => <span title={row.listType}>{row.listType}</span>
+  Cell: ({ row }) => <span title={row.listType}>{row.listType}</span>,
+  Filter: ({ filter, onChange }) => (
+    <input
+      className="entity-table-filter-column-list-type"
+      onChange={event => onChange(event.target.value)}
+      style={{ width: '100%' }}
+      value={filter ? filter.value : ''}
+    />
+  )
 };

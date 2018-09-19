@@ -11,6 +11,7 @@ exports[`nameColumn Cell renders correctly 1`] = `
 exports[`nameColumn is configured correctly 1`] = `
 Object {
   "Cell": [Function],
+  "Filter": [Function],
   "Header": <span
     title="Name"
   >

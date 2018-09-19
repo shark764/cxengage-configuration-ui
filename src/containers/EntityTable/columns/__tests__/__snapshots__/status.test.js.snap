@@ -2,6 +2,7 @@
 
 exports[`statusColumn Filter renders correctly 1`] = `
 <select
+  className="entity-table-filter-column-status"
   onChange={[Function]}
   style={
     Object {
@@ -11,16 +12,19 @@ exports[`statusColumn Filter renders correctly 1`] = `
   value="all"
 >
   <option
+    className="entity-table-filter-status-option-all"
     value="all"
   >
     All
   </option>
   <option
+    className="entity-table-filter-status-option-enabled"
     value="enabled"
   >
     View Enabled
   </option>
   <option
+    className="entity-table-filter-status-option-disabled"
     value="disabled"
   >
     View Disabled
