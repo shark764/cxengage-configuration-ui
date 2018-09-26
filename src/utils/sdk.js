@@ -1,7 +1,17 @@
-export const sdkPromise = (sdkCall) =>
+export const sdkPromise = sdkCall =>
   new Promise((resolve, reject) => {
     const handleResponse = event => {
-      if (event.data.topic !== undefined && event.data.topic[0] === sdkCall.topic) {
+      if (event.data.uuid && sdkCall.uuid && sdkCall.uuid === event.data.uuid) {
+        const { error, response } = event.data;
+        if (error) {
+          reject(error);
+        } else {
+          resolve(response);
+        }
+        removeEventListener('message', handleResponse, false);
+      }
+
+      if (event.data.topic !== undefined && event.data.topic[0] === sdkCall.topic && !sdkCall.uuid) {
         const { error, response } = event.data;
         if (error) {
           reject(error);
@@ -11,6 +21,7 @@ export const sdkPromise = (sdkCall) =>
         removeEventListener('message', handleResponse, false);
       }
     };
+
     addEventListener('message', handleResponse);
     window.parent.postMessage(sdkCall, '*');
   });

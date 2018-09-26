@@ -311,6 +311,27 @@ Immutable.Map {
     "sidePanelWidth": 550,
     "subEntitySaving": false,
   },
+  "chatWidgets": Immutable.Map {
+    "readPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_READ",
+    ],
+    "data": undefined,
+    "createPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_CREATE",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_DISABLE",
+    ],
+    "updatePermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_MODIFY",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [
+      "OUTBOUND_IDENTIFIER_ASSIGN",
+    ],
+  },
   "none": Immutable.Map {},
   "outboundIdentifiers": Immutable.Map {
     "readPermission": Immutable.List [

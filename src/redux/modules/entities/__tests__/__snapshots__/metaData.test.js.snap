@@ -31,6 +31,35 @@ Object {
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
+  "chatWidgets": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "chatWidgets",
+    "fields": Array [
+      Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+      ],
+    ],
+    "pageTitle": "chatWidgets",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
   "customMetrics": EntityMetaData {
     "confirmationDialog": Object {
       "falseButtonText": "",

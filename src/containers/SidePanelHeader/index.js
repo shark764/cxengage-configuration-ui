@@ -11,16 +11,14 @@ import * as MODALS from '../ConfirmationDialog/constants.js';
 
 import { capitalizeFirstLetter } from '../../utils/string';
 
-import {
-  unsetSelectedEntityId,
-  setConfirmationDialog
-} from '../../redux/modules/entities';
+import { unsetSelectedEntityId, setConfirmationDialog } from '../../redux/modules/entities';
 import {
   getCurrentEntity,
   getSelectedEntityId,
   getSelectedEntity,
   userHasUpdatePermission,
-  isInherited
+  isInherited,
+  getSelectedEntityBulkChangeItems
 } from '../../redux/modules/entities/selectors';
 
 export function mapDispatchToProps(dispatch) {
@@ -36,11 +34,13 @@ export function mapDispatchToProps(dispatch) {
 
 export function mapStateToProps(state) {
   const selectedEntityId = getSelectedEntityId(state);
-
   if (selectedEntityId && selectedEntityId === 'create') {
-    const currentEntity = getCurrentEntity(state);
     return {
-      title: `Creating New ${capitalizeFirstLetter(currentEntity).slice(0, -1)}`
+      title: `Creating New ${capitalizeFirstLetter(getCurrentEntity(state)).slice(0, -1)}`
+    };
+  } else if (selectedEntityId && selectedEntityId === 'bulk') {
+    return {
+      title: `Bulk Actions: ${getSelectedEntityBulkChangeItems(state).size} Selected`
     };
   } else if (selectedEntityId) {
     // TODO: Add Created and Updated By X

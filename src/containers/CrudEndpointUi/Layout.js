@@ -20,8 +20,10 @@ import UpdateListItemForm from '../Form/ListItems/Update';
 import CreateListItemForm from '../Form/ListItems/Create';
 import EmailTemplatesForm from '../Form/EmailTemplates';
 import OutboundIdentifiersForm from '../Form/OutboundIdentifiers';
+import GenericBulkActionsForm from '../Form/Bulk';
 import OutboundIdentifierListsForm from '../Form/OutboundIdentifierLists';
 import CustomMetricsForm from '../Form/CustomMetrics';
+import ChatWidgetsForm from '../Form/ChatWidgets';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -33,6 +35,7 @@ import EmailTemplatesDetailsPanel from '../SidePanelDetails/EmailTemplates';
 import OutboundIdentifiersDetailsPanel from '../SidePanelDetails/OutboundIdentifiers';
 import OutboundIdentifierListsPanelContainer from '../SidePanelDetails/OutboundIdentifierLists';
 import CustomMetricsDetailsPanel from '../SidePanelDetails/CustomMetrics';
+import ChatWidgetsDetailsPanel from '../SidePanelDetails/ChatWidgets';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -96,10 +99,10 @@ const createFormRoutes = [
     )
   },
   {
-    path: '/configuration/customMetrics',
+    path: '/configuration/chatWidgets',
     component: () => (
       <DetailsPanel>
-        <CustomMetricsForm />
+        <ChatWidgetsForm />
       </DetailsPanel>
     )
   }
@@ -156,8 +159,46 @@ const detailsPanelRoutes = [
         </CustomMetricsDetailsPanel>
       </NoScrollDetailsPanel>
     )
+  },
+  {
+    path: '/configuration/chatWidgets',
+    component: () => (
+      <DetailsPanel>
+        <ChatWidgetsDetailsPanel>
+          <ChatWidgetsForm />
+        </ChatWidgetsDetailsPanel>
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before2
+];
+
+const bulkChangeFormRoutes = [
+  {
+    path: '/configuration/lists',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/outboundIdentifiers',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/outboundIdentifierLists',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  }
+  //hygen-inject-before3
 ];
 
 const createSubEntityFormRoutes = [
@@ -191,42 +232,29 @@ export default class CrudEndpointUiLayout extends Component {
         <Table />
         {this.props.selectedEntityId && (
           <SidePanel>
-            {this.props.selectedEntityId === 'create'
-              ? createFormRoutes.map((route, index) => (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    component={route.component}
-                  />
-                ))
-              : detailsPanelRoutes.map((route, index) => (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    component={route.component}
-                  />
-                ))}
+            {this.props.selectedEntityId === 'create' &&
+              createFormRoutes.map((route, index) => (
+                <Route key={index} path={route.path} component={route.component} />
+              ))}
+            {this.props.selectedEntityId === 'bulk' &&
+              bulkChangeFormRoutes.map((route, index) => (
+                <Route key={index} path={route.path} component={route.component} />
+              ))}
+            {this.props.selectedEntityId !== 'create' &&
+              this.props.selectedEntityId !== 'bulk' &&
+              detailsPanelRoutes.map((route, index) => (
+                <Route key={index} path={route.path} component={route.component} />
+              ))}
           </SidePanel>
         )}
         {this.props.selectedSubEntityId && (
-          <Modal
-            selectedSubEntityId={this.props.selectedSubEntityId}
-            onMaskClick={this.props.setSelectedSubEntityId}
-          >
+          <Modal selectedSubEntityId={this.props.selectedSubEntityId} onMaskClick={this.props.setSelectedSubEntityId}>
             {this.props.selectedSubEntityId === 'create'
               ? createSubEntityFormRoutes.map((route, index) => (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    component={route.component}
-                  />
+                  <Route key={index} path={route.path} component={route.component} />
                 ))
               : updateSubEntityFormRoutes.map((route, index) => (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    component={route.component}
-                  />
+                  <Route key={index} path={route.path} component={route.component} />
                 ))}
           </Modal>
         )}

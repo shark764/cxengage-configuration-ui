@@ -14,17 +14,18 @@ const ignoredErrorList = {
  * Always ignore these successfull api async calls
  */
 export const explicitSuccessIgnores = [
+  'BULK_ENTITY_UPDATE',
   'TOGGLE_ENTITY_LIST_ITEM',
   'REMOVE_LIST_ITEM',
   'ADD_LIST_ITEM',
   'FETCH_DATA_ITEM',
   'FETCH_DATA'
-]
+];
 
 export const isIgnoredToast = (action, entity) => {
   if (ignoredErrorList[action] && ignoredErrorList[action].indexOf(entity) > -1) {
     return true;
-  } else if(explicitSuccessIgnores.indexOf(action) > -1) {
+  } else if (explicitSuccessIgnores.indexOf(action) > -1) {
     return true;
   }
   return false;

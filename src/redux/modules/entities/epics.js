@@ -10,22 +10,21 @@ import 'rxjs/add/operator/catch';
 
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { from } from 'rxjs/observable/from';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Toast } from 'cx-ui-components';
+import { clearFields } from 'redux-form';
 
 import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
 
 import { sdkPromise } from '../../../utils/sdk';
-import { handleError, handleSuccess } from './handleResult';
+import { handleError, handleSuccess, handleBulkSuccess } from './handleResult';
 import {
   removeLastLetter,
   camelCaseToRegularForm,
-  camelCaseToRegularFormAndRemoveLastLetter,
+  camelCaseToRegularFormAndRemoveLastLetter
 } from '../../../utils/string';
 
-import {
-  uploadCsv,
-  setEntityUpdating,
-} from './index';
+import { uploadCsv, setEntityUpdating } from './index';
 import {
   getCurrentEntity,
   getSelectedEntityId,
@@ -35,39 +34,40 @@ import {
   getSelectedEntityStatus,
   getConfirmationDialogType,
   getConfirmationDialogMetaData,
-  getSelectedEntityName
+  getSelectedEntityName,
+  getSelectedEntityBulkChangeItems
 } from './selectors';
 
 import { entitiesMetaData } from './metaData';
 
 import { hasCustomUpdateEntity } from './config';
 
-import { downloadFile } from 'serenova-js-utils/browser'
+import { downloadFile } from 'serenova-js-utils/browser';
 
 /**
- * Note: When you see the variable 'a' shorthand being used 
+ * Note: When you see the variable 'a' shorthand being used
  * it represents the keyword 'action'
  * Redux observable epics are actions in and actions out,
  * you will notice we keep the original action and just add
  * to it as it passes throught the observable
- * 
+ *
  */
 
 export const StartFormSubmission = (action$, store) =>
-  action$.ofType('START_FORM_SUBMISSION')
-  .map(a => ({
-    ...a,
-    entityName: getCurrentEntity(store.getState()),
-    selectedIdentityId: getSelectedEntityId(store.getState())
-  }))
-  .map(a => ({
-    type: '@@redux-form/SUBMIT',
-    meta: { form: `${a.entityName}:${a.selectedIdentityId}` }
-  }));
+  action$
+    .ofType('START_FORM_SUBMISSION')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      selectedIdentityId: getSelectedEntityId(store.getState())
+    }))
+    .map(a => ({
+      type: '@@redux-form/SUBMIT',
+      meta: { form: `${a.entityName}:${a.selectedIdentityId}` }
+    }));
 
 export const reInitForm = action$ =>
-  action$.ofType('UPDATE_ENTITY_FULFILLED')
-  .map(a => ({
+  action$.ofType('UPDATE_ENTITY_FULFILLED').map(a => ({
     type: '@@redux-form/INITIALIZE',
     meta: {
       form: `${a.entityName}:${a.entityId}`
@@ -75,70 +75,75 @@ export const reInitForm = action$ =>
     payload: { ...a.values }
   }));
 
+export const ClearBulkFormFields = action$ =>
+  action$
+    .ofType('@@redux-form/UNREGISTER_FIELD')
+    .filter(a => a.meta.form.includes('bulk'))
+    .map(a => clearFields(a.meta.form, false, false, a.payload.name));
+
 export const FormSubmission = (action$, store) =>
-  action$.ofType('FORM_SUBMIT')
-  .filter(({ dirty }) => dirty)
-  .map(a => ({
-    ...a,
-    entityName: getCurrentEntity(store.getState()),
-    selectedEntityId: getSelectedEntityId(store.getState())
-  }))
-  .map(
-    a =>
-    a.selectedEntityId === 'create'?
-    {
-      type: 'CREATE_ENTITY',
-      entityName: a.entityName,
-      values: a.values.toJS()
-    }
-    : 
-    {
-      type: 'UPDATE_ENTITY',
-      entityName: a.entityName,
-      entityId: a.selectedEntityId,
-      values: a.values.toJS()
-    }
-  );
+  action$
+    .ofType('FORM_SUBMIT')
+    .filter(({ dirty }) => dirty)
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState())
+    }))
+    .map(a => {
+      if (a.selectedEntityId === 'create') {
+        return {
+          type: 'CREATE_ENTITY',
+          entityName: a.entityName,
+          values: a.values.toJS()
+        };
+      } else if (a.selectedEntityId === 'bulk') {
+        return {
+          type: 'BULK_ENTITY_UPDATE',
+          entityName: a.entityName,
+          values: a.values.toJS()
+        };
+      } else {
+        return {
+          type: 'UPDATE_ENTITY',
+          entityName: a.entityName,
+          entityId: a.selectedEntityId,
+          values: a.values.toJS()
+        };
+      }
+    });
 
 export const FetchData = action$ =>
-  action$.ofType('FETCH_DATA')
-  .mergeMap(a =>
-    fromPromise(
-      sdkPromise(
-        entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')
-      )
-    )
-    .map(response => handleSuccess(response, a))
-    .catch(error => handleError(error, a))
+  action$.ofType('FETCH_DATA').mergeMap(a =>
+    fromPromise(sdkPromise(entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')))
+      .map(response => handleSuccess(response, a))
+      .catch(error => handleError(error, a))
   );
 
 export const FetchDataItem = action$ =>
-  action$.ofType('FETCH_DATA_ITEM')
-  .debounceTime(300)
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('get', 'singleMainEntity');
-    a.sdkCall.data = {[removeLastLetter(a.entityName) + 'Id']: a.id}
-    return ({...a})
-  })
-  .switchMap(a =>
-    fromPromise(sdkPromise( a.sdkCall ))
-    .map(response => handleSuccess(response, a))
-    .catch(error => handleError(error, a))
-  );
-
+  action$
+    .ofType('FETCH_DATA_ITEM')
+    .debounceTime(300)
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('get', 'singleMainEntity');
+      a.sdkCall.data = { [removeLastLetter(a.entityName) + 'Id']: a.id };
+      return { ...a };
+    })
+    .switchMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
+    );
 
 export const getTenantPermissions = action$ =>
-  action$.ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$')
-  .switchMap(a =>
+  action$.ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$').switchMap(a =>
     fromPromise(
-      sdkPromise(
-        {
-          module: 'updateLocalStorage',
-          command: `updateLocalStorage`,
-          data: 'updateLocalStorage',
-          topic: 'updateLocalStorage'
-        },
-      )
+      sdkPromise({
+        module: 'updateLocalStorage',
+        command: `updateLocalStorage`,
+        data: 'updateLocalStorage',
+        topic: 'updateLocalStorage'
+      })
     ).map(response => ({
       type: 'UPDATE_USER_PERMISSIONS',
       tenantInfo: {
@@ -151,273 +156,328 @@ export const getTenantPermissions = action$ =>
   );
 
 export const CreateEntity = action$ =>
-  action$.ofType('CREATE_ENTITY')
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
-    a.sdkCall.data = a.values;
-    return ({...a})
-  })
-  .mergeMap(a =>
-    fromPromise(
-      sdkPromise(a.sdkCall)
-    )
-    .map(response => 
-      handleSuccess(
-        response,
-        a,
-        `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`))
-    .catch(error => handleError(error, a))
-  );
+  action$
+    .ofType('CREATE_ENTITY')
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
+      a.sdkCall.data = a.values;
+      return { ...a };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`
+          )
+        )
+        .catch(error => handleError(error, a))
+    );
 
 export const UpdateEntity = (action$, store) =>
-  action$.ofType('UPDATE_ENTITY')
-  .filter(({ entityName }) => hasCustomUpdateEntity(entityName))
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
-    a.sdkCall.data = {
-      ...a.values,
-      [removeLastLetter(a.entityName) + 'Id']: a.entityId
-    }
-    return ({...a})
-  })
-  .mergeMap(a =>
-    fromPromise(sdkPromise(a.sdkCall))
-    .map(response => handleSuccess(
-      response,
-      a,
-      `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!` ))
-    .catch(error => handleError(error, a))
-  );
+  action$
+    .ofType('UPDATE_ENTITY')
+    .filter(({ entityName }) => hasCustomUpdateEntity(entityName))
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
+      a.sdkCall.data = {
+        ...a.values,
+        [removeLastLetter(a.entityName) + 'Id']: a.entityId
+      };
+      return { ...a };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
+          )
+        )
+        .catch(error => handleError(error, a))
+    );
+
+export const BulkEntityUpdate = (action$, store) =>
+  action$
+    .ofType('BULK_ENTITY_UPDATE')
+    .map(a => {
+      a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
+      a.allSdkCalls = [...a.allIdsToProcess.toJS()].map(item => ({
+        ...a.sdkCall,
+        uuid: item,
+        data: {
+          ...a.values,
+          [removeLastLetter(a.entityName) + 'Id']: item
+        }
+      }));
+      return { ...a };
+    })
+    .mergeMap(a =>
+      forkJoin(a.allSdkCalls.map(apiCall => 
+        from(sdkPromise(apiCall))
+        .catch(error => handleError(error, a))
+        ))
+        .do(allResult => handleBulkSuccess(allResult))
+        .mergeMap(result =>
+          from(result).map(response =>
+            handleSuccess(
+              response,
+              a
+            )
+          )
+        )
+    );
 
 export const ToggleEntity = (action$, store) =>
-  action$.ofType('TOGGLE_ENTITY')
-  .map(a => ({
-    ...a,
-    entityName: getCurrentEntity(store.getState()),
-    selectedEntityId: getSelectedEntityId(store.getState()),
-    entityStatusActive :getSelectedEntityStatus(store.getState()),
-  }))
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
-    a.sdkCall.data = {
-      active: !a.entityStatusActive,
-      [removeLastLetter(a.entityName) + 'Id']: a.selectedEntityId
-    }
-    return ({...a})
-  })
-  .mergeMap(a =>
-    fromPromise(sdkPromise(a.sdkCall))
-    .map(response => handleSuccess(response, a, `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was ${ a.entityStatusActive ? 'disabled' : 'enabled'} successfully!`))
-    .catch(error => handleError(error, a))
-  );
+  action$
+    .ofType('TOGGLE_ENTITY')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState()),
+      entityStatusActive: getSelectedEntityStatus(store.getState())
+    }))
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
+      a.sdkCall.data = {
+        active: !a.entityStatusActive,
+        [removeLastLetter(a.entityName) + 'Id']: a.selectedEntityId
+      };
+      return { ...a };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was ${
+              a.entityStatusActive ? 'disabled' : 'enabled'
+            } successfully!`
+          )
+        )
+        .catch(error => handleError(error, a))
+    );
 
 export const ToggleEntityListItem = (action$, store) =>
-  action$.ofType('TOGGLE_ENTITY_LIST_ITEM')
+  action$
+    .ofType('TOGGLE_ENTITY_LIST_ITEM')
     .map(action => ({
       ...action,
-      entityName: getCurrentEntity(store.getState()),
+      entityName: getCurrentEntity(store.getState())
     }))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('update');
       a.sdkCall.data = {
         [`${removeLastLetter(entitiesMetaData[a.entityName].dependentEntity)}Id`]: a.entity.id,
         active: !a.entity.active
-      }
-      return ({...a})
+      };
+      return { ...a };
     })
     .mergeMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-      .map(response => handleSuccess(response, a))
-      .catch(error => handleError(error, a))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
     );
 
 export const RemoveListItem = (action$, store) =>
-  action$.ofType('REMOVE_LIST_ITEM')
-  .map(action => ({
-    ...action,
-    entityName: getCurrentEntity(store.getState()),
-    listId: getSelectedEntityId(store.getState())
-  }))
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('remove');
-    a.sdkCall.data = {
-      [`${removeLastLetter(entitiesMetaData[a.entityName].entityName)}Id`]: a.listId,
-      [`${removeLastLetter(entitiesMetaData[a.entityName].dependentEntity)}Id`]: a.listItemId,
-    }
-    return ({...a})
-  })
-  .mergeMap(a =>
-    fromPromise(sdkPromise(a.sdkCall))
-    .map(response => handleSuccess(response,a))
-    .catch(error => handleError(error, a))
-  );
+  action$
+    .ofType('REMOVE_LIST_ITEM')
+    .map(action => ({
+      ...action,
+      entityName: getCurrentEntity(store.getState()),
+      listId: getSelectedEntityId(store.getState())
+    }))
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('remove');
+      a.sdkCall.data = {
+        [`${removeLastLetter(entitiesMetaData[a.entityName].entityName)}Id`]: a.listId,
+        [`${removeLastLetter(entitiesMetaData[a.entityName].dependentEntity)}Id`]: a.listItemId
+      };
+      return { ...a };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
+    );
 
 export const AddListItem = (action$, store) =>
-  action$.ofType('ADD_LIST_ITEM')
-  .map(a => ({
-    ...a,
-    entityName: getCurrentEntity(store.getState()),
-    listId: getSelectedEntityId(store.getState())
-  }))
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('add');
-    a.sdkCall.data = {
-      [`${removeLastLetter(entitiesMetaData[a.entityName].entityName)}Id`]: a.listId,
-      [`${removeLastLetter(entitiesMetaData[a.entityName].dependentEntity)}Id`]: a.listItemId,
-    }
-    return a;
-  })
-  .mergeMap(a =>
-    fromPromise(sdkPromise(a.sdkCall))
-    .map(response => handleSuccess(response, a))
-    .catch(error => handleError(error, a))
-  );
+  action$
+    .ofType('ADD_LIST_ITEM')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      listId: getSelectedEntityId(store.getState())
+    }))
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('add');
+      a.sdkCall.data = {
+        [`${removeLastLetter(entitiesMetaData[a.entityName].entityName)}Id`]: a.listId,
+        [`${removeLastLetter(entitiesMetaData[a.entityName].dependentEntity)}Id`]: a.listItemId
+      };
+      return a;
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
+    );
 
 export const FetchFormMetaData = (action$, store) =>
-  action$.ofType('SET_SELECTED_ENTITY_ID')
-  .map(a => ({
-    ...a,
-    currentEntityName: getCurrentEntity(store.getState()),
-    entityId: getSelectedEntityId(store.getState()),
-    isDefined: name =>
-      store.getState().getIn(['Entities', name, 'data']) === undefined
-  }))
-  .mergeMap(a =>
-    a.entityId === 'create'?
-    from(entitiesMetaData[a.currentEntityName].createFormDependencies)
-        .filter(entityName => a.isDefined(entityName))
-        .map(entityName => ({ type: 'FETCH_DATA', entityName }))
-    : 
-    from(entitiesMetaData[a.currentEntityName].updateFormDependencies)
-        .filter(entityName => a.isDefined(entityName))
-        .map(entityName => ({ type: 'FETCH_DATA', entityName }))
-  );
+  action$
+    .ofType('SET_SELECTED_ENTITY_ID')
+    .map(a => ({
+      ...a,
+      currentEntityName: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState()),
+      isDefined: name => store.getState().getIn(['Entities', name, 'data']) === undefined
+    }))
+    .mergeMap(
+      a =>
+        a.entityId === 'create'
+          ? from(entitiesMetaData[a.currentEntityName].createFormDependencies)
+              .filter(entityName => a.isDefined(entityName))
+              .map(entityName => ({ type: 'FETCH_DATA', entityName }))
+          : from(entitiesMetaData[a.currentEntityName].updateFormDependencies)
+              .filter(entityName => a.isDefined(entityName))
+              .map(entityName => ({ type: 'FETCH_DATA', entityName }))
+    );
 
 export const FetchSidePanelData = (action$, store) =>
-  action$.ofType('SET_SELECTED_ENTITY_ID')
-  .map(action => ({
-    ...action,
-    currentEntityName: getCurrentEntity(store.getState()),
-    entityId: getSelectedEntityId(store.getState()),
-    isDefined: name =>
-      store.getState().getIn(['Entities', name, 'data']) !== undefined
-  }))
-  .filter(a =>
-    a.entityId !== 'create' &&
-    a.entityId !== '' &&
-    a.currentEntityName === 'outboundIdentifierLists'
-  )
-  .map(a => ({
-    type: 'FETCH_DATA_ITEM',
-    entityName: a.currentEntityName,
-    id: a.entityId
-  }));
+  action$
+    .ofType('SET_SELECTED_ENTITY_ID')
+    .map(action => ({
+      ...action,
+      currentEntityName: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState()),
+      isDefined: name => store.getState().getIn(['Entities', name, 'data']) !== undefined
+    }))
+    .filter(a => a.entityId !== 'create' && a.entityId !== '' && a.currentEntityName === 'outboundIdentifierLists')
+    .map(a => ({
+      type: 'FETCH_DATA_ITEM',
+      entityName: a.currentEntityName,
+      id: a.entityId
+    }));
 
 export const SubEntityFormSubmission = (action$, store) =>
-  action$.ofType('SUB_ENTITY_FORM_SUBMIT')
-  .filter(({ dirty }) => dirty)
-  .map(action => ({
-    ...action,
-    entityName: getCurrentEntity(store.getState()),
-    selectedEntity: getSelectedEntity(store.getState()),
-    subEntityName: getCurrentSubEntity(store.getState()),
-    selectedSubEntityId: getSelectedSubEntityId(store.getState())
-  }))
-  .filter(({ selectedSubEntityId }) => selectedSubEntityId)
-  .map(a =>
-    a.selectedSubEntityId === 'create'?
-    {
-      type: 'CREATE_SUB_ENTITY',
-      entityName: a.entityName,
-      selectedEntity: a.selectedEntity,
-      subEntityName: a.subEntityName,
-      values: a.values.toJS()
-    }
-    :
-    {
-      type: 'UPDATE_SUB_ENTITY',
-      entityName: a.entityName,
-      selectedEntity: a.selectedEntity,
-      subEntityName: a.subEntityName,
-      values: a.values.toJS()
-    }
-  );
+  action$
+    .ofType('SUB_ENTITY_FORM_SUBMIT')
+    .filter(({ dirty }) => dirty)
+    .map(action => ({
+      ...action,
+      entityName: getCurrentEntity(store.getState()),
+      selectedEntity: getSelectedEntity(store.getState()),
+      subEntityName: getCurrentSubEntity(store.getState()),
+      selectedSubEntityId: getSelectedSubEntityId(store.getState())
+    }))
+    .filter(({ selectedSubEntityId }) => selectedSubEntityId)
+    .map(
+      a =>
+        a.selectedSubEntityId === 'create'
+          ? {
+              type: 'CREATE_SUB_ENTITY',
+              entityName: a.entityName,
+              selectedEntity: a.selectedEntity,
+              subEntityName: a.subEntityName,
+              values: a.values.toJS()
+            }
+          : {
+              type: 'UPDATE_SUB_ENTITY',
+              entityName: a.entityName,
+              selectedEntity: a.selectedEntity,
+              subEntityName: a.subEntityName,
+              values: a.values.toJS()
+            }
+    );
 
 export const CreateSubEntity = (action$, store) =>
-  action$.ofType('CREATE_SUB_ENTITY')
-  .map(a => ({
-    ...a,
-    entityName: getCurrentEntity(store.getState()),
-    entityId: getSelectedEntityId(store.getState()),
-  }))
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'subEntity');
-    a.sdkCall.data = {
-      [`${removeLastLetter(a.entityName)}Id`]: a.entityId,
-      itemValue: a.values
-    }
-    return ({...a})
-  })
-  .mergeMap(a =>
-    fromPromise(sdkPromise(a.sdkCall))
-    .map(response => handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.entityName)}</i> was created successfully!`))
-    .catch(error => handleError(error,a))
-  );
+  action$
+    .ofType('CREATE_SUB_ENTITY')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState())
+    }))
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'subEntity');
+      a.sdkCall.data = {
+        [`${removeLastLetter(a.entityName)}Id`]: a.entityId,
+        itemValue: a.values
+      };
+      return { ...a };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.entityName)}</i> was created successfully!`)
+        )
+        .catch(error => handleError(error, a))
+    );
 
 export const UpdateSubEntity = (action$, store) =>
-  action$.ofType('UPDATE_SUB_ENTITY')
-  .map(action => ({
-    ...action,
-    subEntityId: getSelectedSubEntityId(store.getState()),
-    entityName: getCurrentEntity(store.getState()),
-    subEntityName: getSelectedEntityName(store.getState()),
-    entityId: getSelectedEntityId(store.getState()),
-  }))
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update','subEntity');
-    a.sdkCall.data = {
-      listId: a.selectedEntity.get('id'),
-      listItemKey: a.subEntityId,
-      itemValue: a.values
-    }
-    return ({...a})
-  })
-  .mergeMap(a =>
-    fromPromise(sdkPromise(a.sdkCall))
-    .map(response => handleSuccess(response, a , `<i>${camelCaseToRegularForm(a.subEntityName)} </i> was updated successfully!`))
-    .catch(error => handleError(error,a))
-  );
+  action$
+    .ofType('UPDATE_SUB_ENTITY')
+    .map(action => ({
+      ...action,
+      subEntityId: getSelectedSubEntityId(store.getState()),
+      entityName: getCurrentEntity(store.getState()),
+      subEntityName: getSelectedEntityName(store.getState()),
+      entityId: getSelectedEntityId(store.getState())
+    }))
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'subEntity');
+      a.sdkCall.data = {
+        listId: a.selectedEntity.get('id'),
+        listItemKey: a.subEntityId,
+        itemValue: a.values
+      };
+      return { ...a };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.subEntityName)} </i> was updated successfully!`)
+        )
+        .catch(error => handleError(error, a))
+    );
 
 export const DeleteSubEntity = (action$, store) =>
-  action$.ofType('DELETE_SUB_ENTITY')
-  .map(a => 
-    ({
-    ...a,
-    entityName: getCurrentEntity(store.getState()),
-    selectedEntity: getSelectedEntity(store.getState()),
-    entityId: getSelectedEntityId(store.getState()),
-    subEntityName: getSelectedEntityName(store.getState()),
-  }))
-  .map(a => {
-    a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('delete', 'subEntity');
-    a.sdkCall.data = {
-      listId: a.entityId,
-      listItemKey: a.subEntityId
-    }
-    return ({...a})
-  })
-  .mergeMap(a => 
-    fromPromise(sdkPromise(a.sdkCall))
-    .map(response => handleSuccess(response, a ,`<i>${camelCaseToRegularForm(a.selectedEntity.get('name'))}</i> was deleted successfully!`))
-    .catch(error => handleError(error, a))
-  );
+  action$
+    .ofType('DELETE_SUB_ENTITY')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      selectedEntity: getSelectedEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState()),
+      subEntityName: getSelectedEntityName(store.getState())
+    }))
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('delete', 'subEntity');
+      a.sdkCall.data = {
+        listId: a.entityId,
+        listItemKey: a.subEntityId
+      };
+      return { ...a };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `<i>${camelCaseToRegularForm(a.selectedEntity.get('name'))}</i> was deleted successfully!`
+          )
+        )
+        .catch(error => handleError(error, a))
+    );
 
 export const ExecuteConfirmationDialogCallback = (action$, store) =>
-  action$.ofType('EXECUTE_CONFIRM_CALLBACK')
-  .switchMap(action => {
-    const currentConfirmationModal = getConfirmationDialogType(
-      store.getState()
-    );
+  action$.ofType('EXECUTE_CONFIRM_CALLBACK').switchMap(action => {
+    const currentConfirmationModal = getConfirmationDialogType(store.getState());
     const metaData = getConfirmationDialogMetaData(store.getState());
     switch (currentConfirmationModal) {
       case MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE:
@@ -433,11 +493,7 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
       case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
         return [
           uploadCsv(metaData),
-          setEntityUpdating(
-            getCurrentEntity(store.getState()),
-            getSelectedEntityId(store.getState()),
-            true
-          ),
+          setEntityUpdating(getCurrentEntity(store.getState()), getSelectedEntityId(store.getState()), true),
           {
             type: 'SET_CONIFIRMATION_DIALOG',
             modalType: undefined,
@@ -463,14 +519,14 @@ export const UploadCsv = (action$, store) =>
       a.sdkCall.data = {
         [`${removeLastLetter(a.entityName)}Id`]: a.selectedEntityId,
         file: a.target
-      }
-      return ({...a})
+      };
+      return { ...a };
     })
     .switchMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-      .do(response => {
-        if (response.result.totalItemsProcessed > 0) {
-          Toast.success(`
+        .do(response => {
+          if (response.result.totalItemsProcessed > 0) {
+            Toast.success(`
             Items Created: ${response.result.itemsCreated}
             </br>
             Items Updated: ${response.result.itemsUpdated}
@@ -480,20 +536,18 @@ export const UploadCsv = (action$, store) =>
             </br>
             Total Items Processed: ${response.result.totalItemsProcessed}
           `);
-        }
+          }
 
-        if (response.result.numberOfFailures > 0) {
-          Toast.error(
-            `Number of Failures: ${response.result.numberOfFailures}`
-          );
-        }
-      })
-      .map(response => ({
-        type: 'FETCH_DATA_ITEM',
-        entityName: a.entityName,
-        id: a.selectedEntityId
-      }))
-      .catch(error => handleError(error,a))
+          if (response.result.numberOfFailures > 0) {
+            Toast.error(`Number of Failures: ${response.result.numberOfFailures}`);
+          }
+        })
+        .map(response => ({
+          type: 'FETCH_DATA_ITEM',
+          entityName: a.entityName,
+          id: a.selectedEntityId
+        }))
+        .catch(error => handleError(error, a))
     );
 
 export const DownloadCsv = (action$, store) =>
@@ -506,17 +560,17 @@ export const DownloadCsv = (action$, store) =>
       selectedEntityName: getSelectedEntityName(store.getState())
     }))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('download', 'singleMainEntity');;
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('download', 'singleMainEntity');
       a.sdkCall.data = {
         [`${removeLastLetter(a.entityName)}Id`]: a.selectedEntityId
-      }
-      return ({...a})
+      };
+      return { ...a };
     })
     .switchMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-      .map(response => {
-        downloadFile(response, 'text/csv', a.selectedEntityName, '.csv')
-        return handleSuccess(response, a, 'CSV Download Started')
-      })
-      .catch(error => handleError(error, a))
-  );
+        .map(response => {
+          downloadFile(response, 'text/csv', a.selectedEntityName, '.csv');
+          return handleSuccess(response, a, 'CSV Download Started');
+        })
+        .catch(error => handleError(error, a))
+    );
