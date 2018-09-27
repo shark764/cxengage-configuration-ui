@@ -23,7 +23,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "branding",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Branding",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -52,7 +53,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "chatWidgets",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Chat Widgets",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -81,7 +83,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "customMetrics",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Statistics Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -110,7 +113,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "emailTemplates",
+    "helpLink": "/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm",
+    "pageTitle": "Email Templates",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -139,7 +143,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "flows",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Flows",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -168,7 +173,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "groups",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Groups",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -197,7 +203,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "listTypes",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "List Types",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -228,7 +235,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "lists",
+    "helpLink": "/Help/Content/Configuration/Lists/Lists.htm",
+    "pageTitle": "Lists",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -257,7 +265,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "outboundIdentifierLists",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Outbound Identifier Lists",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -290,7 +299,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "outboundIdentifiers",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Outbound Identifiers",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -321,7 +331,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "protectedBranding",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Protected Branding",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -350,7 +361,8 @@ Object {
         },
       ],
     ],
-    "pageTitle": "skills",
+    "helpLink": "/Help/Content/Home.htm",
+    "pageTitle": "Skills",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",

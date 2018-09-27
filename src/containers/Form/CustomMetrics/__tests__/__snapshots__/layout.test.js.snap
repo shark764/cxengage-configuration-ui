@@ -13,7 +13,7 @@ exports[`<CustomMetricsForm /> renders create customMetric 1`] = `
       disabled={false}
       inputType="text"
       label="Name *"
-      name="customMetricsName"
+      name="name"
     />
     <InputField
       componentType="textarea"
@@ -80,7 +80,7 @@ exports[`<CustomMetricsForm /> renders update customMetric 1`] = `
       disabled={false}
       inputType="text"
       label="Name *"
-      name="customMetricsName"
+      name="name"
     />
     <InputField
       componentType="textarea"
@@ -147,7 +147,7 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
       disabled={true}
       inputType="text"
       label="Name *"
-      name="customMetricsName"
+      name="name"
     />
     <InputField
       componentType="textarea"
@@ -206,7 +206,7 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
       disabled={true}
       inputType="text"
       label="Name *"
-      name="customMetricsName"
+      name="name"
     />
     <InputField
       componentType="textarea"
@@ -273,7 +273,7 @@ exports[`<CustomMetricsForm /> renders update customMetric with count-against-sl
       disabled={false}
       inputType="text"
       label="Name *"
-      name="customMetricsName"
+      name="name"
     />
     <InputField
       componentType="textarea"
@@ -332,7 +332,7 @@ exports[`<CustomMetricsForm /> renders update customMetric with ignored-abandone
       disabled={false}
       inputType="text"
       label="Name *"
-      name="customMetricsName"
+      name="name"
     />
     <InputField
       componentType="textarea"

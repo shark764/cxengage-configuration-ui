@@ -1,12 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapStateToProps maps the selectors to the object correctly 1`] = `
+exports[`CreateListForm Renders renders 1`] = `
+<ReduxForm
+  dispatch={[Function]}
+  initialValues={
+    Immutable.Map {
+      "active": true,
+      "shared": true,
+    }
+  }
+  isSaving={false}
+  key="create"
+  listTypes="mock list types options"
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+>
+  Child
+</ReduxForm>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "initialValues": Immutable.Map {
     "active": true,
     "shared": true,
   },
-  "isSaving": "mock is creating",
+  "isSaving": false,
   "key": "create",
   "listTypes": "mock list types options",
 }

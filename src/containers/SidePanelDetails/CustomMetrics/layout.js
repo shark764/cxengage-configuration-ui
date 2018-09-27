@@ -25,11 +25,10 @@ export default function CustomMetricsDetailsPanel({
   id,
   className,
   item: {
-    customMetricsName,
+    name,
     description,
     customMetricsType,
-    customMetricsId,
-    status,
+    active,
     slaThreshold,
     slaAbandonType,
     slaAbandonThreshold
@@ -41,11 +40,10 @@ export default function CustomMetricsDetailsPanel({
         children
       ) : (
         <Fragment>
-          <Detail label="Name" value={customMetricsName} />
+          <Detail label="Name" value={name} />
           <Detail label="Description" value={description} />
           <Detail label="Custom Metric Type" value={customMetricsType} />
-          <Detail label="ID" value={customMetricsId} />
-          <Detail label="Status" value={status ? 'Enabled' : 'Disabled'} />
+          <Detail label="Status" value={active ? 'Enabled' : 'Disabled'} />
           <Detail label="SLA Threshold" intValue={slaThreshold} />
           <Detail label="SLA Abandon Type" value={slaAbandonType} />
           <Detail label="SLA Abandon Threshold" intValue={slaAbandonThreshold} />
@@ -59,11 +57,10 @@ CustomMetricsDetailsPanel.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   item: PropTypes.shape({
-    customMetricsName: PropTypes.string,
+    name: PropTypes.string,
     description: PropTypes.string,
     customMetricsType: PropTypes.string,
-    customMetricsId: PropTypes.string,
-    status: PropTypes.bool,
+    active: PropTypes.bool,
     slaThreshold: PropTypes.number,
     slaAbandonType: PropTypes.sting,
     slaAbandonThreshold: PropTypes.number

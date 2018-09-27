@@ -12,35 +12,33 @@ describe('<CustomMetricsDetailsPanel />', () => {
   let customItemDisabled;
   beforeEach(() => {
     customItem = {
-      customMetricsName: 'SLA',
-      description: 'Test',
-      customMetricsType: 'SLA',
-      customMetricsId: '7a11c534-cc2e-11n8-76hd-9440dab8147',
-      status: true,
+      name: "SLA",
+      description: "Test",
+      customMetricsType: "SLA",
+      active: true,
       slaThreshold: 20,
-      slaAbandonType: 'ignored-abandoned-calls',
+      slaAbandonType: "ignored-abandoned-calls",
       slaAbandonThreshold: 20
     };
     customItemDisabled = {
-      customMetricsName: 'SLA',
-      description: 'Test',
-      customMetricsType: 'SLA',
-      customMetricsId: '7a11c534-cc2e-11n8-76hd-9440dab8147',
-      status: false,
+      name: "SLA",
+      description: "Test",
+      customMetricsType: "SLA",
+      active: false,
       slaThreshold: 20,
-      slaAbandonType: 'ignored-abandoned-calls',
+      slaAbandonType: "ignored-abandoned-calls",
       slaAbandonThreshold: 20
     };
   });
   it('renders customMetrics detailsPanel', () => {
     const rendered = shallow(
       <CustomMetricsDetailsPanel
-        id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+        id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={true}
         children={'Mock Child'}
         item={customItem}
-        status={true}
+        active={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -48,25 +46,25 @@ describe('<CustomMetricsDetailsPanel />', () => {
   it('renders customMetrics detailsPanel with no update permision', () => {
     const rendered = shallow(
       <CustomMetricsDetailsPanel
-        id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+        id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={false}
         children={'Mock Child'}
         item={customItem}
-        status={true}
+        active={true}
       />
     );
     expect(rendered).toMatchSnapshot();
   });
-  it('renders customMetrics detailsPanel with no update permision and status disabled', () => {
+  it('renders customMetrics detailsPanel with no update permision and active disabled', () => {
     const rendered = shallow(
       <CustomMetricsDetailsPanel
-        id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+        id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={false}
         children={'Mock Child'}
         item={customItemDisabled}
-        status={false}
+        active={false}
       />
     );
     expect(rendered).toMatchSnapshot();
