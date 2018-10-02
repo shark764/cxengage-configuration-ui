@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   height: calc(100vh - 180px);
 `;
 
-export function OutboundIdentifierListsDetailsPanel({
+export default function OutboundIdentifierListsDetailsPanel({
   children,
   userHasUpdatePermission,
   id,

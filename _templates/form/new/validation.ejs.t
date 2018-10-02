@@ -9,5 +9,5 @@ import { isEmpty } from '../../../utils/string';
 
 export const formValidation = values => ({
   isEmptyString: isEmpty(values.get('name')) && 'Please enter a ...',
-  requiredField: !values.get('flowId') && 'Please select a ...',
+  requiredField: !values.get('type') && 'Please select a ...',
 });

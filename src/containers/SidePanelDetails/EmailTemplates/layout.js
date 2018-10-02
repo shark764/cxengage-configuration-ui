@@ -33,10 +33,7 @@ export default function EmailTemplatesDetailsPanel(props) {
               <DetailHeader text="Available Variables" />
               <SidePanelTable
                 items={props.variables}
-                fields={[
-                  { name: 'name', label: 'Name' },
-                  { name: 'description', label: 'Description' }
-                ]}
+                fields={[{ name: 'name', label: 'Name' }, { name: 'description', label: 'Description' }]}
                 pagination={false}
               />
             </Fragment>

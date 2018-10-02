@@ -35,11 +35,7 @@ export default function EmailTemplatesForm(props) {
       />
       {props.email === 'custom' && (
         <Fragment>
-          <ToggleField
-            name="shared"
-            label="Shared"
-            disabled={props.isSaving || props.inherited}
-          />
+          <ToggleField name="shared" label="Shared" disabled={props.isSaving || props.inherited} />
           <TemplateTextEditorField
             name="subject"
             label="Subject"

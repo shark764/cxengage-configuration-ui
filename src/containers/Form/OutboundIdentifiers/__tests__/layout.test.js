@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import OutboundIdentifiersForm from '../Layout';
+import OutboundIdentifiersForm from '../layout';
 
 describe('<OutboundIdentifiersForm />', () => {
   let customFlowIds;
@@ -13,12 +13,12 @@ describe('<OutboundIdentifiersForm />', () => {
     customFlowIds = [
       {
         label: 'Outbound Identifier Label Test 1',
-        value: 'Outbound Identifier Value Test 1',
+        value: 'Outbound Identifier Value Test 1'
       },
       {
         label: 'Outbound Identifier Label Test 2',
-        value: 'Outbound Identifier Value Test 2',
-      },
+        value: 'Outbound Identifier Value Test 2'
+      }
     ];
   });
   it('renders', () => {

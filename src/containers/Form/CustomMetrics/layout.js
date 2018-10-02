@@ -14,13 +14,7 @@ import { DetailHeader } from 'cx-ui-components';
 import { InputField } from 'cx-ui-components';
 import { RadioGroupField } from 'cx-ui-components';
 
-export default function CustomMetricsForm({
-  handleSubmit,
-  isSaving,
-  inherited,
-  slaAbandonType,
-  key
-}) {
+export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, slaAbandonType, key }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />

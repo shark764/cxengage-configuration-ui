@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import OutboundIdentifiersDetailsPanel from '../Layout';
+import OutboundIdentifiersDetailsPanel from '../layout';
 
 describe('<OutboundIdentifiersDetailsPanel />', () => {
   let customItem;

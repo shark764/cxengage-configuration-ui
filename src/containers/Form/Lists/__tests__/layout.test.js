@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ListsForm from '../Layout';
+import ListsForm from '../layout';
 
 describe('<ListsForm />', () => {
   let customListTypes;
@@ -13,12 +13,12 @@ describe('<ListsForm />', () => {
     customListTypes = [
       {
         label: 'Disposition Label',
-        value: 'Disposition Value',
+        value: 'Disposition Value'
       },
       {
         label: 'Reason Label',
-        value: 'Reason Value',
-      },
+        value: 'Reason Value'
+      }
     ];
   });
   it('renders create list', () => {

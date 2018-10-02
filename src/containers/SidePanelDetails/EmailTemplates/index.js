@@ -4,7 +4,7 @@
 
 import { connect } from 'react-redux';
 
-import EmailTemplatesDetailsPanel from './Layout';
+import EmailTemplatesDetailsPanel from './layout';
 
 import { userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
 import {

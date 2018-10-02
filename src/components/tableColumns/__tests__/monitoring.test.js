@@ -1,11 +1,8 @@
-import monitoringColumn, {
-  helperFunctions,
-  MonitorFilter
-} from '../monitoring';
+import monitoringColumn, { helperFunctions, MonitorFilter } from '../monitoring';
 import React from 'react';
 // import {Provider} from 'react-redux';
 import { shallow } from 'enzyme';
-// import InteractionMonitoringLayout, { getTableRowProps } from '../Layout';
+// import InteractionMonitoringLayout, { getTableRowProps } from '../layout';
 // import { createStore } from 'redux';
 // import {fromJS} from 'immutable';
 // import { mockInteraction } from '../../../tools/testInteractions';
@@ -13,21 +10,11 @@ import { shallow } from 'enzyme';
 
 describe('monitoringColumn configuration object', () => {
   it('configurations show method returns false when value is false', () => {
-    const configObject = monitoringColumn(
-      false,
-      'mockTable',
-      '0000-0000-0000-0000',
-      'connected'
-    );
+    const configObject = monitoringColumn(false, 'mockTable', '0000-0000-0000-0000', 'connected');
     expect(configObject).toMatchSnapshot();
   });
   it('configurations show method returns true when value is true', () => {
-    const configObject = monitoringColumn(
-      true,
-      'mockTable',
-      '0000-0000-0000-0000',
-      'connected'
-    );
+    const configObject = monitoringColumn(true, 'mockTable', '0000-0000-0000-0000', 'connected');
     expect(configObject).toMatchSnapshot();
   });
 });
@@ -36,27 +23,15 @@ describe('Calling monitoringColumn methods should fire proper functions', () => 
   const filter = { id: 'monitored', value: 'All' };
   const row = { monitored: [], monitoring: [] };
 
-  const configObjectMethodsTest = monitoringColumn(
-    true,
-    'mockTable',
-    '0000-0000-0000-0000',
-    'connected'
-  );
+  const configObjectMethodsTest = monitoringColumn(true, 'mockTable', '0000-0000-0000-0000', 'connected');
 
   const accessorSpy = jest.spyOn(helperFunctions, 'accessor');
-  const monitoringFilterMethodSpy = jest.spyOn(
-    helperFunctions,
-    'monitoringFilterMethod'
-  );
+  const monitoringFilterMethodSpy = jest.spyOn(helperFunctions, 'monitoringFilterMethod');
   const monitorFilterSpy = jest.spyOn(helperFunctions, 'monitorFilter');
   const CellSpy = jest.spyOn(helperFunctions, 'Cell');
 
   it('calls accessor', () => {
-    expect(configObjectMethodsTest.accessor({ monitors: [1, 2, 3] })).toEqual([
-      1,
-      2,
-      3
-    ]);
+    expect(configObjectMethodsTest.accessor({ monitors: [1, 2, 3] })).toEqual([1, 2, 3]);
     expect(accessorSpy).toHaveBeenCalledTimes(1);
   });
   it('calls filter method', () => {
@@ -80,35 +55,25 @@ describe('monitoringColumn Cell renders', () => {
       channel: 'sms',
       monitoring: [{ endTimestamp: '2018-02-20T14:24:41.519Z' }]
     };
-    const cell = shallow(
-      helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline')
-    );
+    const cell = shallow(helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline'));
     expect(cell).toMatchSnapshot();
   });
   it('monitor button is disabled when monitoring id matches the rows id', () => {
     const row = {
       interactionId: '0000-0000-0000-0000',
       channel: 'voice',
-      monitoring: [
-        { id: '0000-0000-0000-0000', endTimestamp: '2018-02-20T14:24:41.519Z' }
-      ]
+      monitoring: [{ id: '0000-0000-0000-0000', endTimestamp: '2018-02-20T14:24:41.519Z' }]
     };
-    const cell = shallow(
-      helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline')
-    );
+    const cell = shallow(helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline'));
     expect(cell).toMatchSnapshot();
   });
   it('monitor button is disabled when monitoring status is connecting', () => {
     const row = {
       interactionId: '0000-0000-0000-0000',
       channel: 'voice',
-      monitoring: [
-        { id: '0000-0000-0000-0000', endTimestamp: '2018-02-20T14:24:41.519Z' }
-      ]
+      monitoring: [{ id: '0000-0000-0000-0000', endTimestamp: '2018-02-20T14:24:41.519Z' }]
     };
-    const cell = shallow(
-      helperFunctions.Cell({}, row, '1111-1111-1111-1111', 'connecting')
-    );
+    const cell = shallow(helperFunctions.Cell({}, row, '1111-1111-1111-1111', 'connecting'));
     expect(cell).toMatchSnapshot();
   });
   it('1 person previously monitored the call', () => {
@@ -117,9 +82,7 @@ describe('monitoringColumn Cell renders', () => {
       channel: 'voice',
       monitoring: [{ endTimestamp: '2018-02-20T14:24:41.519Z' }]
     };
-    const cell = shallow(
-      helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline')
-    );
+    const cell = shallow(helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline'));
     expect(cell).toMatchSnapshot();
   });
 
@@ -129,9 +92,7 @@ describe('monitoringColumn Cell renders', () => {
       channel: 'voice',
       monitoring: [{ endTimestamp: null }]
     };
-    const cell = shallow(
-      helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline')
-    );
+    const cell = shallow(helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline'));
     expect(cell).toMatchSnapshot();
   });
 });
@@ -148,12 +109,8 @@ describe('monitoringColumn Cells onclick handler works as expected', () => {
         return row.interactionId;
       }
     };
-    const cell = shallow(
-      helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline')
-    );
-    expect(cell.instance().monitorInteractionRequestor(event)).toEqual(
-      row.interactionId
-    );
+    const cell = shallow(helperFunctions.Cell({}, row, '0000-0000-0000-0000', 'offline'));
+    expect(cell.instance().monitorInteractionRequestor(event)).toEqual(row.interactionId);
   });
 });
 
@@ -179,9 +136,7 @@ describe('monitoringFilterMethod', () => {
 
 describe('MonitorFilter components', () => {
   it('renders properly', () => {
-    const renderedMonitorFilter = shallow(
-      <MonitorFilter onChange={() => {}} />
-    );
+    const renderedMonitorFilter = shallow(<MonitorFilter onChange={() => {}} />);
     expect(renderedMonitorFilter).toMatchSnapshot();
   });
 });

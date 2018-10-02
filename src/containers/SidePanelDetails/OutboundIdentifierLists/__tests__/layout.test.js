@@ -4,7 +4,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { OutboundIdentifierListsDetailsPanel } from '../Layout';
+import OutboundIdentifierListsDetailsPanel from '../layout';
 
 describe('OutboundIdentifierListsDetailsPanel Renders', () => {
   it('renders', () => {

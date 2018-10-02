@@ -3,11 +3,8 @@
  */
 
 import { connect } from 'react-redux';
-import OutboundIdentifiersDetailsPanel from './Layout';
-import {
-  userHasUpdatePermission,
-  getSelectedEntity
-} from '../../../redux/modules/entities/selectors';
+import OutboundIdentifiersDetailsPanel from './layout';
+import { userHasUpdatePermission, getSelectedEntity } from '../../../redux/modules/entities/selectors';
 
 export function mapStateToProps(state) {
   return {

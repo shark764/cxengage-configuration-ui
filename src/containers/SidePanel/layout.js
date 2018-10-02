@@ -49,10 +49,7 @@ export default class SidePanelLayout extends Component {
   render() {
     return (
       <Fragment>
-        <SliderExpander
-          rightPageOffset={this.props.slidingWidth}
-          id="SlidingResizer"
-        />
+        <SliderExpander rightPageOffset={this.props.slidingWidth} id="SlidingResizer" />
         <SidePanelDiv slidingWidth={this.props.slidingWidth}>
           <SidePanelHeader />
           {this.props.children}

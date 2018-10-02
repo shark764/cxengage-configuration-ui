@@ -12,20 +12,15 @@ jest.mock('../../../../redux/modules/entities/selectors', () => ({
   isUpdating: () => 'mock is updating'
 }));
 
-jest.mock(
-  '../../../../redux/modules/entities/emailTemplates/selectors',
-  () => ({
-    getInitialFormValues: () => 'mock initial values',
-    getEmailTemplateFormValue: () => 'mock email template form value',
-    getTemplates: () => 'mock templates'
-  })
-);
+jest.mock('../../../../redux/modules/entities/emailTemplates/selectors', () => ({
+  getInitialFormValues: () => 'mock initial values',
+  getEmailTemplateFormValue: () => 'mock email template form value',
+  getTemplates: () => 'mock templates'
+}));
 
 describe('UpdateEmailTemplateForm', () => {
   it('renders', () => {
-    shallow(
-      <UpdateEmailTemplateForm store={mockStore}>Child</UpdateEmailTemplateForm>
-    );
+    shallow(<UpdateEmailTemplateForm store={mockStore}>Child</UpdateEmailTemplateForm>);
   });
 });
 

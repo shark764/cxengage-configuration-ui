@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import EmailTemplatesDetailsPanel from '../Layout';
+import EmailTemplatesDetailsPanel from '../layout';
 
 describe('<EmailTemplatesDetailsPanel />', () => {
   let customVariables;
@@ -15,14 +15,14 @@ describe('<EmailTemplatesDetailsPanel />', () => {
         description: 'variable-test-1',
         emailTypeId: '9a96c534-31f9-11e8-88b9-9440dab83f25',
         id: '9abac7f0-31f9-11e8-88b9-9440dab83f25',
-        name: 'variable-test-1',
+        name: 'variable-test-1'
       },
       {
         description: 'variable-test-2',
         emailTypeId: '7a96c534-31f9-11e8-88b9-9440dab83f21',
         id: 'gabac7f0-31f9-11e8-88b9-9440dab83f22',
-        name: 'variable-test-2',
-      },
+        name: 'variable-test-2'
+      }
     ];
   });
   it('renders emailTemplates detailsPanel', () => {

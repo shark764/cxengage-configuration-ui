@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import 'rxjs/add/operator/map';
-import {
-  messageSubscribe,
-  messageUnsubscribe
-} from './windowMessageObservable';
-import {
-  localStorageSubscribe,
-  localStorageUnsubscribe
-} from './localStorageObservable';
+import { messageSubscribe, messageUnsubscribe } from './windowMessageObservable';
+import { localStorageSubscribe, localStorageUnsubscribe } from './localStorageObservable';
 import CheckboxFilterMenu from '../CheckboxFilterMenu';
 import { Button, PageHeader, InteractionDetails } from 'cx-ui-components';
 import ReactTable from 'react-table';
@@ -78,9 +72,7 @@ export default class InteractionMonitoring extends Component {
 
   highlightRow = ({ row }) =>
     row.interactionId === this.props.monitoredId ||
-    row.monitoring.filter(
-      x => x.agentId === this.props.getCurrentAgentId && x.endTimestamp === null
-    ).length === 1;
+    row.monitoring.filter(x => x.agentId === this.props.getCurrentAgentId && x.endTimestamp === null).length === 1;
 
   getTableRowProps = (state, rowInfo) => {
     if (rowInfo) {
@@ -95,9 +87,7 @@ export default class InteractionMonitoring extends Component {
           }
         },
         style: {
-          background: this.highlightRow(rowInfo)
-            ? 'rgba(253, 255, 50, 0.17)'
-            : null
+          background: this.highlightRow(rowInfo) ? 'rgba(253, 255, 50, 0.17)' : null
         }
       };
     } else {
@@ -109,16 +99,7 @@ export default class InteractionMonitoring extends Component {
   onFilteredChange = filtered => this.setState({ filtered: filtered });
   onSortedChange = sorted => this.props.setSorted(sorted);
   SubComponent = ({
-    row: {
-      startTimestamp,
-      agentName,
-      direction,
-      channel,
-      contactPoint,
-      flowName,
-      customer,
-      monitoring
-    }
+    row: { startTimestamp, agentName, direction, channel, contactPoint, flowName, customer, monitoring }
   }) =>
     this.props.userHasViewAllMonitoredCallsPermission && (
       <InteractionDetails
@@ -190,24 +171,11 @@ export default class InteractionMonitoring extends Component {
               contactPointColumn(this.props.activeColumns[3]),
               flowColumn(this.props.activeColumns[4]),
               channelColumn(this.props.activeColumns[5]),
-              directionColumn(
-                this.props.activeColumns[6],
-                'InteractionMonitoring'
-              ),
+              directionColumn(this.props.activeColumns[6], 'InteractionMonitoring'),
               presenceStateColumn(this.props.activeColumns[7]),
-              startDateColumn(
-                this.props.activeColumns[8],
-                'InteractionMonitoring'
-              ),
-              startTimeColumn(
-                this.props.activeColumns[9],
-                'InteractionMonitoring',
-                this.props.twelveHourFormat
-              ),
-              elapsedTimeColumn(
-                this.props.activeColumns[10],
-                'InteractionMonitoring'
-              ),
+              startDateColumn(this.props.activeColumns[8], 'InteractionMonitoring'),
+              startTimeColumn(this.props.activeColumns[9], 'InteractionMonitoring', this.props.twelveHourFormat),
+              elapsedTimeColumn(this.props.activeColumns[10], 'InteractionMonitoring'),
               monitoringColumn(
                 this.props.activeColumns[11],
                 'InteractionMonitoring',
@@ -215,14 +183,8 @@ export default class InteractionMonitoring extends Component {
                 this.props.monitoringStatus,
                 this.props.getCurrentAgentId
               ),
-              groupsColumn(
-                this.props.activeColumns[12],
-                'InteractionMonitoring'
-              ),
-              skillsColumn(
-                this.props.activeColumns[13],
-                'InteractionMonitoring'
-              )
+              groupsColumn(this.props.activeColumns[12], 'InteractionMonitoring'),
+              skillsColumn(this.props.activeColumns[13], 'InteractionMonitoring')
             ]}
           />
         )}

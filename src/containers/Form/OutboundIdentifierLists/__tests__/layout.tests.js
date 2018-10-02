@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { OutboundIdentifierListsFormLayout } from '../layout';
+import OutboundIdentifierListsForm from '../layout';
 
-describe('OutboundIdentifierListsFormLayout', () => {
+describe('OutboundIdentifierListsForm', () => {
   it('renders regular form', () => {
     const component = shallow(
-      <OutboundIdentifierListsFormLayout
+      <OutboundIdentifierListsForm
         handleSubmit={() => 'mockFunctionReturn'}
         isSaving={false}
         inherited={false}
@@ -16,7 +16,7 @@ describe('OutboundIdentifierListsFormLayout', () => {
   });
   it('renders , isSaving is true , fields should be disabled', () => {
     const component = shallow(
-      <OutboundIdentifierListsFormLayout
+      <OutboundIdentifierListsForm
         handleSubmit={() => 'mockFunctionReturn'}
         isSaving={true}
         inherited={false}
@@ -27,7 +27,7 @@ describe('OutboundIdentifierListsFormLayout', () => {
   });
   it('renders , inherited is true , fields should be disabled', () => {
     const component = shallow(
-      <OutboundIdentifierListsFormLayout
+      <OutboundIdentifierListsForm
         handleSubmit={() => 'mockFunctionReturn'}
         isSaving={false}
         inherited={true}

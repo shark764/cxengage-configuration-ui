@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.25.1]
+* <no-jira> - Hygen templates added/refactorized for form, SidePanelDetails and Unit testing.
+* CXV1-15042 - config-2 tech debt - change filenames of Layout.js.
+
 ## [0.25.0]
 * CXV1-14889 - Chat widget page
 * CXV1-14892 - Chat widget form
