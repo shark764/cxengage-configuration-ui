@@ -163,7 +163,7 @@ export const CreateEntity = action$ =>
       a.sdkCall.data = a.values;
       return { ...a };
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
           handleSuccess(
@@ -187,7 +187,7 @@ export const UpdateEntity = (action$, store) =>
       };
       return { ...a };
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
           handleSuccess(
@@ -216,19 +216,9 @@ export const BulkEntityUpdate = (action$, store) =>
       return { ...a };
     })
     .mergeMap(a =>
-      forkJoin(a.allSdkCalls.map(apiCall => 
-        from(sdkPromise(apiCall))
-        .catch(error => handleError(error, a))
-        ))
+      forkJoin(a.allSdkCalls.map(apiCall => from(sdkPromise(apiCall)).catch(error => handleError(error, a))))
         .do(allResult => handleBulkSuccess(allResult))
-        .mergeMap(result =>
-          from(result).map(response =>
-            handleSuccess(
-              response,
-              a
-            )
-          )
-        )
+        .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
     );
 
 export const ToggleEntity = (action$, store) =>
@@ -248,7 +238,7 @@ export const ToggleEntity = (action$, store) =>
       };
       return { ...a };
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
           handleSuccess(
@@ -277,7 +267,7 @@ export const ToggleEntityListItem = (action$, store) =>
       };
       return { ...a };
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response => handleSuccess(response, a))
         .catch(error => handleError(error, a))
@@ -299,7 +289,7 @@ export const RemoveListItem = (action$, store) =>
       };
       return { ...a };
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response => handleSuccess(response, a))
         .catch(error => handleError(error, a))
@@ -308,6 +298,7 @@ export const RemoveListItem = (action$, store) =>
 export const AddListItem = (action$, store) =>
   action$
     .ofType('ADD_LIST_ITEM')
+    .debounceTime(200)
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),
@@ -321,7 +312,7 @@ export const AddListItem = (action$, store) =>
       };
       return a;
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response => handleSuccess(response, a))
         .catch(error => handleError(error, a))
@@ -336,7 +327,7 @@ export const FetchFormMetaData = (action$, store) =>
       entityId: getSelectedEntityId(store.getState()),
       isDefined: name => store.getState().getIn(['Entities', name, 'data']) === undefined
     }))
-    .mergeMap(
+    .switchMap(
       a =>
         a.entityId === 'create'
           ? from(entitiesMetaData[a.currentEntityName].createFormDependencies)
@@ -410,7 +401,7 @@ export const CreateSubEntity = (action$, store) =>
       };
       return { ...a };
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
           handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.entityName)}</i> was created successfully!`)
@@ -437,7 +428,7 @@ export const UpdateSubEntity = (action$, store) =>
       };
       return { ...a };
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
           handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.subEntityName)} </i> was updated successfully!`)
@@ -463,7 +454,7 @@ export const DeleteSubEntity = (action$, store) =>
       };
       return { ...a };
     })
-    .mergeMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
           handleSuccess(
@@ -522,7 +513,7 @@ export const UploadCsv = (action$, store) =>
       };
       return { ...a };
     })
-    .switchMap(a =>
+    .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .do(response => {
           if (response.result.totalItemsProcessed > 0) {
