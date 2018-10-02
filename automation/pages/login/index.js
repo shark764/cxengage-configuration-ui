@@ -1,5 +1,7 @@
+/**
+ * Page Objects for login and top menu bar
+ */
 const {Element, Brow} = require('cx-automation-utils/pageObject');
-
 const uiLoginPage = {
 	usernameInpt: new Element('input[ng-model="innerScope.username"]'),
 	passwordInpt: new Element('input[ ng-model="innerScope.password"]'),
@@ -8,15 +10,18 @@ const uiLoginPage = {
 	privacyPolicyLink: new Element('a[href="https://www.serenova.com/privacy"]'),
 	restPasswordLink: new Element('input[value="Reset Password"]'),
 	backtoLogin: new Element('a[href="https://www.serenova.com/privacy"]'),
+
+	// Tenant dropdown
+	tenantDropDown: new Element('dropdown[id="tenant-dropdown"]'),
+	
 	login: function(username, password) {
-		Brow.url('https://qe-config.cxengagelabs.net/#/login');
+		Brow.url('https://dev-config.cxengagelabs.net/#/login');
 		this.usernameInpt.waitForVisible(60000);
 		this.usernameInpt.setValue(username);
 		this.passwordInpt.waitForVisible();
 		this.passwordInpt.setValue(password);
 		this.loginButton.waitAndClick();
-		Brow.pause(8000);
+
 	}
 };
-
 module.exports = uiLoginPage;
