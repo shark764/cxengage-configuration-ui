@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.25.2]
+* CXV1-15053 - Outbound Identifiers - Able to add duplicate identifier to list.
+
 ## [0.25.1]
 * <no-jira> - Hygen templates added/refactorized for form, SidePanelDetails and Unit testing.
 * CXV1-15042 - config-2 tech debt - change filenames of Layout.js.
