@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.25.2]
 * CXV1-15053 - Outbound Identifiers - Able to add duplicate identifier to list.
+* CXV1-15151 - Rename attributes customMetricsId, customMetricsName on SLA form to coincide with API new fixes.
+* CXV1-15344 - Branded help links in config2.
 
 ## [0.25.1]
 * <no-jira> - Hygen templates added/refactorized for form, SidePanelDetails and Unit testing.

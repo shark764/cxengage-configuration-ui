@@ -3,29 +3,37 @@
  */
 
 import React from 'react';
+import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { mockStore } from '../../../../utils/testUtils';
 import UpdateListForm, { mapStateToProps } from '../Update';
+import { getSelectedEntityId, isUpdating } from '../../../../redux/modules/entities/selectors';
+import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
-jest.mock('../../../../redux/modules/entities/selectors', () => ({
-  isInherited: () => 'mock is inherited',
-  isUpdating: () => 'mock is updating',
-  getSelectedEntityId: () => 'mockId'
-}));
+jest.mock('../../../../redux/modules/entities/selectors');
+jest.mock('../../../../redux/modules/form/selectors');
+getSelectedEntityId.mockImplementation(() => 'mockId');
+isUpdating.mockImplementation(() => false);
+selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 jest.mock('../../../../redux/modules/entities/lists/selectors', () => ({
   getListTypeName: () => 'mock list type name',
   getInitialUpdateFormValues: () => 'mock initial update form values'
 }));
 
-describe('UpdateListForm', () => {
+jest.mock('../../../../redux/modules/entities/listTypes/selectors', () => ({
+  getListTypesOptions: () => 'mock list types options'
+}));
+
+describe('UpdateListForm Renders', () => {
   it('renders', () => {
-    shallow(<UpdateListForm store={mockStore}>Child</UpdateListForm>);
+    const store = createStore(state => state);
+    expect(shallow(<UpdateListForm store={store}>Child</UpdateListForm>)).toMatchSnapshot();
   });
 });
 
-describe('mapStateToProps', () => {
-  it('maps the selectors to the object correctly', () => {
+describe('Maps state to props only using selectors', () => {
+  it('validates object created from mapStateToProps', () => {
     expect(mapStateToProps()).toMatchSnapshot();
   });
 });

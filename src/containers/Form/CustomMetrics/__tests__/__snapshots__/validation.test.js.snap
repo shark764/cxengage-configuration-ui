@@ -2,8 +2,8 @@
 
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
-  "customMetricsName": "Please enter a name",
   "customMetricsType": "Please select a metric type",
+  "name": "Please enter a name",
   "slaAbandonThreshold": "SLA Abandon Threshold must be a number",
   "slaAbandonType": "Please select an abandon type",
   "slaThreshold": "SLA Threshold must be a number",
@@ -12,8 +12,8 @@ Object {
 
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
-  "customMetricsName": "Please enter a name",
   "customMetricsType": "Please select a metric type",
+  "name": "Please enter a name",
   "slaAbandonThreshold": "SLA Abandon Threshold must be a number",
   "slaAbandonType": "Please select an abandon type",
   "slaThreshold": "SLA Threshold must be a number",
@@ -22,8 +22,8 @@ Object {
 
 exports[`formValidation returns proper object when required fields are provided 1`] = `
 Object {
-  "customMetricsName": false,
   "customMetricsType": false,
+  "name": false,
   "slaAbandonThreshold": false,
   "slaAbandonType": false,
   "slaThreshold": false,

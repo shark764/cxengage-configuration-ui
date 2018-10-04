@@ -1,17 +1,5 @@
 import { getHelpLink, getTableColumns } from '../config';
 
-describe('getHelpLink', () => {
-  it('returns correct link for lists', () => {
-    expect(getHelpLink('lists')).toMatchSnapshot();
-  });
-  it('returns correct link for emailTemplates', () => {
-    expect(getHelpLink('emailTemplates')).toMatchSnapshot();
-  });
-  it('returns undefined by default', () => {
-    expect(getHelpLink()).toBe(undefined);
-  });
-});
-
 jest.mock('../columns/description', () => ({
   descriptionColumn: 'mock description column'
 }));
@@ -23,9 +11,6 @@ jest.mock('../columns/name', () => ({
 }));
 jest.mock('../columns/status', () => ({
   statusColumn: 'mock status column'
-}));
-jest.mock('../columns/metricName', () => ({
-  metricNameColumn: 'mock Metric Name column'
 }));
 jest.mock('../columns/metricType', () => ({
   metricTypeColumn: 'mock Metric Type column'
@@ -41,8 +26,14 @@ describe('getTableColumns', () => {
   it('returns correct columns for outbound identifiers', () => {
     expect(getTableColumns('outboundIdentifiers')).toMatchSnapshot();
   });
-  it('returns correct columns for Custom Metrics', () => {
+  it('returns correct columns for outbound identifier list', () => {
+    expect(getTableColumns('outboundIdentifierLists')).toMatchSnapshot();
+  });
+  it('returns correct columns for custom metrics', () => {
     expect(getTableColumns('customMetrics')).toMatchSnapshot();
+  });
+  it('returns correct columns for chat widgets', () => {
+    expect(getTableColumns('chatWidgets')).toMatchSnapshot();
   });
   it('returns empty array by default', () => {
     expect(getTableColumns()).toEqual([]);

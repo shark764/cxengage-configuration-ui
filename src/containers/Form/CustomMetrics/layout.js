@@ -20,7 +20,7 @@ export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, s
       <DetailHeader text="Details" />
       <Fragment>
         <InputField
-          name="customMetricsName"
+          name="name"
           label="Name *"
           componentType="input"
           inputType="text"

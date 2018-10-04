@@ -9,17 +9,17 @@ import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 import { setSelectedEntityCreate, setSelectedEntityId, toggleBulkEntityChange } from '../../redux/modules/entities';
 import { getCurrentEntity, userHasCreatePermission } from '../../redux/modules/entities/selectors';
 import { getHelpLink, getAllEntities } from './selectors';
-import { getTableColumns, getTitle } from './config';
+import { getTableColumns } from './config';
 
 export function mapStateToProps(state) {
-  const currentEntity = getCurrentEntity(state);
+  let entity = entitiesMetaData[getCurrentEntity(state)];
   return {
-    pageTitle: getTitle(currentEntity),
+    pageTitle: entity ? entity.pageTitle : '',
     pageHelpLink: getHelpLink(state),
     items: getAllEntities(state),
-    columns: getTableColumns(currentEntity),
+    columns: getTableColumns(entity ? entity.entityName : undefined),
     userHasCreatePermission: userHasCreatePermission(state),
-    entityMetadata: entitiesMetaData[currentEntity]
+    entityMetadata: entity
   };
 }
 

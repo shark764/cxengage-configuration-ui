@@ -5,7 +5,7 @@
 import { isEmpty, isNumber } from '../../../utils/string';
 
 export const formValidation = values => ({
-  customMetricsName: isEmpty(values.get('customMetricsName')) && 'Please enter a name',
+  name: isEmpty(values.get('name')) && 'Please enter a name',
   customMetricsType: !values.get('customMetricsType') && 'Please select a metric type',
   slaAbandonType: !values.get('slaAbandonType') && 'Please select an abandon type',
   slaThreshold: (isEmpty(values.get('slaThreshold'))

@@ -3,7 +3,7 @@
 exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel 1`] = `
 <styled.div
   className="details-panel"
-  id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+  id="details-panel-id"
 >
   Mock Child
 </styled.div>
@@ -12,7 +12,7 @@ exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel 1`] = 
 exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with no update permision 1`] = `
 <styled.div
   className="details-panel"
-  id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+  id="details-panel-id"
 >
   <React.Fragment>
     <Detail
@@ -26,10 +26,6 @@ exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with n
     <Detail
       label="Custom Metric Type"
       value="SLA"
-    />
-    <Detail
-      label="ID"
-      value="7a11c534-cc2e-11n8-76hd-9440dab8147"
     />
     <Detail
       label="Status"
@@ -51,10 +47,10 @@ exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with n
 </styled.div>
 `;
 
-exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with no update permision and status disabled 1`] = `
+exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with no update permision and active disabled 1`] = `
 <styled.div
   className="details-panel"
-  id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+  id="details-panel-id"
 >
   <React.Fragment>
     <Detail
@@ -68,10 +64,6 @@ exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with n
     <Detail
       label="Custom Metric Type"
       value="SLA"
-    />
-    <Detail
-      label="ID"
-      value="7a11c534-cc2e-11n8-76hd-9440dab8147"
     />
     <Detail
       label="Status"

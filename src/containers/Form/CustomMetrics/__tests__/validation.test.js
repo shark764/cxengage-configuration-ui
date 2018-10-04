@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 describe('formValidation', () => {
   it('returns proper object when required fields are provided', () => {
     const values = new Map({
-      customMetricsName: 'mockName',
+      name: 'mockName',
       description: 'mockDescription',
       customMetricsType: 'SLA',
       slaAbandonType: 'ignored-abandoned-calls',
@@ -15,7 +15,7 @@ describe('formValidation', () => {
   });
   it('returns proper object (errors) when required fields are not provided', () => {
     const values = new Map({
-      customMetricsName: '',
+      name: '',
       customMetricsType: '',
       slaAbandonType: '',
       slaThreshold: '',
@@ -25,7 +25,7 @@ describe('formValidation', () => {
   });
   it('returns proper object (errors) when wrong values are provided', () => {
     const values = new Map({
-      customMetricsName: undefined,
+      name: undefined,
       customMetricsType: null,
       slaAbandonType: null,
       slaThreshold: 'abcd',

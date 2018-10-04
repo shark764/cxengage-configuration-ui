@@ -58,8 +58,8 @@ describe('createFormName', () => {
 
 describe('formSubmission', () => {
   const values = {
-    customMetricsId: 'mockId',
-    customMetricsName: 'mockName',
+    id: 'mockId',
+    name: 'mockName',
     description: 'mockDescription',
     customMetricsType: 'SLA',
     slaAbandonType: 'ignored-abandoned-calls',

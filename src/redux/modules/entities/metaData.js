@@ -1,4 +1,9 @@
-import { capitalizeFirstLetter, camelCaseToKebabCase, removeLastLetter } from 'serenova-js-utils/strings';
+import {
+  capitalizeFirstLetter,
+  camelCaseToKebabCase,
+  removeLastLetter,
+  camelCaseToRegularForm
+} from 'serenova-js-utils/strings';
 
 /**
  * All the information about an entity that it does not provide about itself
@@ -22,7 +27,8 @@ export class EntityMetaData {
     this.entityName = entityName;
     this.dependentEntity = '';
     this.subEntityName = '';
-    this.pageTitle = entityName;
+    this.pageTitle = camelCaseToRegularForm(entityName);
+    this.helpLink = '/Help/Content/Home.htm';
     this.confirmationDialog = {
       message: '',
       trueButtonText: '',
@@ -141,5 +147,12 @@ entities.outboundIdentifiers.updateFormDependencies.push('flows');
 
 entities.outboundIdentifierLists.updateFormDependencies.push('outboundIdentifiers');
 entities.outboundIdentifierLists.dependentEntity = 'outboundIdentifiers';
+
+// Custom page titles
+entities.customMetrics.pageTitle = 'Statistics Management';
+
+// Custom page help links
+entities.lists.helpLink = '/Help/Content/Configuration/Lists/Lists.htm';
+entities.emailTemplates.helpLink = '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
 
 export const entitiesMetaData = entities;
