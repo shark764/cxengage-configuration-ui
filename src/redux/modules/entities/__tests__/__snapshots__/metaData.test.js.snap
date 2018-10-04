@@ -11,24 +11,42 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "branding",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Branding",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
@@ -41,24 +59,42 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "chatWidgets",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Chat Widgets",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
@@ -71,24 +107,42 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "customMetrics",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Statistics Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
@@ -101,24 +155,42 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "emailTemplates",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Email Templates",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
@@ -131,24 +203,42 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "flows",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Flows",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
@@ -161,24 +251,42 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "groups",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Groups",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
@@ -191,24 +299,42 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "listTypes",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "List Types",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
@@ -223,24 +349,42 @@ Object {
     ],
     "dependentEntity": "",
     "entityName": "lists",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Configuration/Lists/Lists.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Lists",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "listItems",
     "updateFormDependencies": Array [],
   },
@@ -253,24 +397,50 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "outboundIdentifiers",
     "entityName": "outboundIdentifierLists",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Value",
+        "name": "value",
+      },
+      Object {
+        "label": "Channel Type",
+        "name": "channelType",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Outbound Identifier Lists",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [
       "outboundIdentifiers",
@@ -287,28 +457,94 @@ Object {
     ],
     "dependentEntity": "",
     "entityName": "outboundIdentifiers",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Outbound Identifiers",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [
       "flows",
     ],
+  },
+  "permissions": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "permissions",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Permissions",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
   },
   "protectedBranding": EntityMetaData {
     "confirmationDialog": Object {
@@ -319,26 +555,94 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "protectedBranding",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Protected Branding",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
+  },
+  "roles": EntityMetaData {
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "roles",
+    "entityName": "roles",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Roles",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [
+      "permissions",
+    ],
   },
   "skills": EntityMetaData {
     "confirmationDialog": Object {
@@ -349,24 +653,42 @@ Object {
     "createFormDependencies": Array [],
     "dependentEntity": "",
     "entityName": "skills",
-    "fields": Array [
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ],
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "pageTitle": "Skills",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },

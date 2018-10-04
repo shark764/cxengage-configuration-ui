@@ -6,6 +6,7 @@ import { nameColumn } from './columns/name';
 import { statusColumn } from './columns/status';
 import { listTypeColumn } from './columns/listType';
 import { descriptionColumn } from './columns/description';
+import { permissionsColumn } from './columns/permissions';
 import { metricTypeColumn } from './columns/metricType';
 
 /**
@@ -25,6 +26,8 @@ export function getTableColumns(entityName) {
       return [metricTypeColumn, nameColumn, descriptionColumn, statusColumn];
     case 'chatWidgets':
       return [nameColumn, descriptionColumn, statusColumn];
+    case 'roles':
+      return [nameColumn, descriptionColumn, permissionsColumn];
     //hygen-inject-before
     default:
       return [];

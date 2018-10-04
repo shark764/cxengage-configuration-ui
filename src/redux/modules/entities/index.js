@@ -65,6 +65,29 @@ const initialState = fromJS({
     createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
     disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
     assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
+  },
+  roles: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_ROLES'],
+    updatePermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'PLATFORM_CREATE_TENANT_ROLES',
+      'VIEW_ALL_ROLES',
+      'MANAGE_ALL_ROLES',
+      'MANAGE_TENANT_ENROLLMENT'
+    ],
+    createPermission: ['PLATFORM_CREATE_TENANT_ROLES', 'MANAGE_ALL_ROLES']
+  },
+  permissions: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_ROLES'],
+    updatePermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'PLATFORM_CREATE_TENANT_ROLES',
+      'VIEW_ALL_ROLES',
+      'MANAGE_ALL_ROLES',
+      'MANAGE_TENANT_ENROLLMENT'
+    ]
   }
   //hygen-inject-before
 });
@@ -79,6 +102,8 @@ export const setSelectedEntityId = entityId => ({
   type: 'SET_SELECTED_ENTITY_ID',
   entityId
 });
+
+export const copyCurrentEntity = () => ({ type: 'COPY_CURRENT_ENTITY' });
 
 export const setSelectedEntityCreate = () => setSelectedEntityId('create');
 export const unsetSelectedEntityId = () => setSelectedEntityId('');
@@ -217,6 +242,7 @@ export default function reducer(state = initialState, action) {
     case 'CREATE_ENTITY': {
       return state.setIn([action.entityName, 'creating'], true);
     }
+    case 'COPY_CURRENT_ENTITY_FULFILLED':
     case 'CREATE_ENTITY_FULFILLED': {
       const { result } = action.response;
       return state.update(action.entityName, entityStore =>

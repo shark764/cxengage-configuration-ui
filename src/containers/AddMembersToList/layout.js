@@ -46,36 +46,15 @@ export default function AddMemberToList(props) {
         <Header>Add list items : </Header>
         <Item title={props.listName}>{props.listName}</Item>
         <CloseButtonWrapper>
-          <CloseIconSVG
-            onClick={props.onCancel}
-            size={18}
-            closeIconType="secondary"
-          />
+          <CloseIconSVG onClick={props.onCancel} size={18} closeIconType="secondary" />
         </CloseButtonWrapper>
       </div>
       <SidePanelTable
         userHasUpdatePermission={props.userHasUpdatePermission}
         addSubEntity={props.addListItem}
-        toggleSubEntityActive={props.toggleEntityListItemActive}
+        toggleSubEntityActive={props.entityName !== 'roles' && props.toggleEntityListItemActive}
         items={props.tableItems}
-        fields={[
-          {
-            label: 'Name',
-            name: 'name'
-          },
-          {
-            label: 'Value',
-            name: 'value'
-          },
-          {
-            label: 'Channel Type',
-            name: 'channelType'
-          },
-          {
-            label: 'Description',
-            name: 'description'
-          }
-        ]}
+        fields={props.fields}
       />
     </Fragment>
   );
@@ -87,5 +66,6 @@ AddMemberToList.propTypes = {
   addListItem: PropTypes.func,
   toggleEntityListItemActive: PropTypes.func,
   userHasUpdatePermission: PropTypes.bool.isRequired,
-  tableItems: PropTypes.array
+  tableItems: PropTypes.array,
+  fields: PropTypes.array
 };

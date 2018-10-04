@@ -24,7 +24,10 @@ import {
   camelCaseToRegularFormAndRemoveLastLetter
 } from '../../../utils/string';
 
+import { entityAddedToList, entityRemovedFromList } from '../../modules/entities/roles/selectors';
+
 import { uploadCsv, setEntityUpdating } from './index';
+
 import {
   getCurrentEntity,
   getSelectedEntityId,
@@ -175,6 +178,28 @@ export const CreateEntity = action$ =>
         .catch(error => handleError(error, a))
     );
 
+export const CopyEntity = (action$, store) =>
+  action$
+    .ofType('COPY_CURRENT_ENTITY')
+    .map(a => {
+      a.entityName = getCurrentEntity(store.getState());
+      a.sdkCall = entitiesMetaData[getCurrentEntity(store.getState())].entityApiRequest('create', 'singleMainEntity');
+      a.sdkCall.data = getSelectedEntity(store.getState()).toJS();
+      a.sdkCall.data.name += ' (Copy)';
+      return { ...a };
+    })
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was copied successfully!`
+          )
+        )
+        .catch(error => handleError(error, a))
+    );
+
 export const UpdateEntity = (action$, store) =>
   action$
     .ofType('UPDATE_ENTITY')
@@ -281,6 +306,7 @@ export const RemoveListItem = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       listId: getSelectedEntityId(store.getState())
     }))
+    .filter(a => a.entityName !== 'roles')
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('remove');
       a.sdkCall.data = {
@@ -298,12 +324,12 @@ export const RemoveListItem = (action$, store) =>
 export const AddListItem = (action$, store) =>
   action$
     .ofType('ADD_LIST_ITEM')
-    .debounceTime(200)
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),
       listId: getSelectedEntityId(store.getState())
     }))
+    .filter(a => a.entityName !== 'roles')
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('add');
       a.sdkCall.data = {
@@ -317,6 +343,46 @@ export const AddListItem = (action$, store) =>
         .map(response => handleSuccess(response, a))
         .catch(error => handleError(error, a))
     );
+
+export const AddingListItems = (action$, store) =>
+  action$
+    .ofType('ADD_LIST_ITEM')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState())
+    }))
+    .filter(a => a.entityName === 'roles')
+    .map(a => ({
+      ...a,
+      values: { permissions: entityAddedToList(store.getState(), a.listItemId) }
+    }))
+    .map(a => ({
+      type: 'UPDATE_ENTITY',
+      values: a.values,
+      entityName: a.entityName,
+      entityId: a.entityId
+    }));
+
+export const RemovingListItems = (action$, store) =>
+  action$
+    .ofType('REMOVE_LIST_ITEM')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState())
+    }))
+    .filter(a => a.entityName === 'roles')
+    .map(a => ({
+      ...a,
+      values: { permissions: entityRemovedFromList(store.getState(), a.listItemId) }
+    }))
+    .map(a => ({
+      type: 'UPDATE_ENTITY',
+      values: a.values,
+      entityName: a.entityName,
+      entityId: a.entityId
+    }));
 
 export const FetchFormMetaData = (action$, store) =>
   action$
