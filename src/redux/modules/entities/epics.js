@@ -18,11 +18,6 @@ import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
 
 import { sdkPromise } from '../../../utils/sdk';
 import { handleError, handleSuccess, handleBulkSuccess } from './handleResult';
-import {
-  removeLastLetter,
-  camelCaseToRegularForm,
-  camelCaseToRegularFormAndRemoveLastLetter
-} from '../../../utils/string';
 
 import { entityAddedToList, entityRemovedFromList } from '../../modules/entities/roles/selectors';
 
@@ -46,6 +41,11 @@ import { entitiesMetaData } from './metaData';
 import { hasCustomUpdateEntity } from './config';
 
 import { downloadFile } from 'serenova-js-utils/browser';
+import {
+  removeLastLetter,
+  camelCaseToRegularForm,
+  camelCaseToRegularFormAndRemoveLastLetter
+} from 'serenova-js-utils/strings';
 
 /**
  * Note: When you see the variable 'a' shorthand being used
@@ -82,6 +82,13 @@ export const ClearBulkFormFields = action$ =>
   action$
     .ofType('@@redux-form/UNREGISTER_FIELD')
     .filter(a => a.meta.form.includes('bulk'))
+    .map(a => clearFields(a.meta.form, false, false, a.payload.name));
+
+export const ClearCustomMetricsFormFields = action$ =>
+  action$
+    .ofType('@@redux-form/UNREGISTER_FIELD')
+    .filter(a => a.meta.form.includes('customMetrics'))
+    .filter(a => a.payload.name.includes('slaAbandonThreshold'))
     .map(a => clearFields(a.meta.form, false, false, a.payload.name));
 
 export const FormSubmission = (action$, store) =>
@@ -324,6 +331,7 @@ export const RemoveListItem = (action$, store) =>
 export const AddListItem = (action$, store) =>
   action$
     .ofType('ADD_LIST_ITEM')
+    .debounceTime(200)
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),

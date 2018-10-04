@@ -2,7 +2,7 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
-import { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
 import { isPristine, isInvalid } from 'redux-form/immutable';
 
 import {
@@ -83,8 +83,23 @@ describe('selectFormInitialValues', () => {
     getSelectedEntity.mockImplementationOnce(() => undefined);
     expect(selectFormInitialValues({})).toMatchSnapshot();
   });
-  it('returns the selected entity when not undefiend or create', () => {
-    getSelectedEntity.mockImplementation(() => 'mockEntity');
+  it('returns the selected entity when not undefined or create', () => {
+    const selectedEntity = new Map({
+      id: 'mockId',
+      name: 'mockName'
+    });
+    expect(selectedEntity).toMatchSnapshot();
+  });
+  it('returns the selected entity when not undefined or create and has "active" key', () => {
+    const selectedEntity = new Map({
+      id: 'mockId',
+      name: 'mockName',
+      active: true
+    });
+    expect(selectedEntity).toMatchSnapshot();
+  });
+  it('returns new map {active: true} when getSelectedEntityId equals bulk', () => {
+    getSelectedEntityId.mockImplementationOnce(() => 'bulk');
     expect(selectFormInitialValues({})).toMatchSnapshot();
   });
 });

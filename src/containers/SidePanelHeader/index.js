@@ -9,7 +9,7 @@ import { SidePanelHeader } from 'cx-ui-components';
 
 import * as MODALS from '../ConfirmationDialog/constants.js';
 
-import { capitalizeFirstLetter } from '../../utils/string';
+import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
 import { unsetSelectedEntityId, setConfirmationDialog, copyCurrentEntity } from '../../redux/modules/entities';
 import {

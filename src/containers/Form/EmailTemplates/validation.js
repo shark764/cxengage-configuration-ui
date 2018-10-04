@@ -1,4 +1,4 @@
-import { isEmpty } from '../../../utils/string';
+import { isEmpty } from 'serenova-js-utils/strings';
 
 export const validate = values => {
   const errors = {};

@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
-<CustomMetricsDetailsPanel
+exports[`ChatWidgetsDetailsPanel Renders renders 1`] = `
+<ChatWidgetsDetailsPanel
   dispatch={[Function]}
-  id="dtpanel-custom-metrics"
   store={
     Object {
       "dispatch": [Function],
@@ -36,12 +35,11 @@ exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
   userHasUpdatePermission={true}
 >
   Child
-</CustomMetricsDetailsPanel>
+</ChatWidgetsDetailsPanel>
 `;
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "id": "dtpanel-custom-metrics",
   "item": undefined,
   "userHasUpdatePermission": true,
 }

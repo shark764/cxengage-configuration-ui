@@ -20,13 +20,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function ChatWidgetsDetailsPanel({
-  children,
-  userHasUpdatePermission,
-  id,
-  className,
-  item: { name, description }
-}) {
+export default function ChatWidgetsDetailsPanel({ children, userHasUpdatePermission, id, className, item: { name } }) {
   return (
     <Wrapper id={id} className={className}>
       <DetailHeader text="Details" />
@@ -35,7 +29,6 @@ export default function ChatWidgetsDetailsPanel({
       ) : (
         <Fragment>
           <Detail label="Name" value={name} />
-          
         </Fragment>
       )}
     </Wrapper>
@@ -46,7 +39,7 @@ ChatWidgetsDetailsPanel.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   item: PropTypes.shape({
-    name: PropTypes.string,
+    name: PropTypes.string
   }),
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any

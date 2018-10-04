@@ -65,4 +65,42 @@ describe('<ListsDetailsPanel />', () => {
     );
     expect(rendered).toMatchSnapshot();
   });
+  it('renders lists detailsPanel with alert message', () => {
+    const rendered = shallow(
+      <ListsDetailsPanel
+        id="7a96c534-31f9-11n8-88b9-9440dab83f21"
+        className="details-panel"
+        userHasUpdatePermission={true}
+        alertMessage="mockAlertMessage"
+        children={'Mock Child'}
+        listType="Reason Codes Type"
+        tableItems={customTableItems}
+        tableFields={customTableFields}
+        openCreateListItemModal={() => {}}
+        updateSubEntity={() => {}}
+        deleteSubEntity={() => {}}
+        inherited={true}
+      />
+    );
+    expect(rendered).toMatchSnapshot();
+  });
+  it('renders lists detailsPanel not inherited', () => {
+    const rendered = shallow(
+      <ListsDetailsPanel
+        id="7a96c534-31f9-11n8-88b9-9440dab83f21"
+        className="details-panel"
+        userHasUpdatePermission={true}
+        alertMessage="mockAlertMessage"
+        children={'Mock Child'}
+        listType="Reason Codes Type"
+        tableItems={customTableItems}
+        tableFields={customTableFields}
+        openCreateListItemModal={() => {}}
+        updateSubEntity={() => {}}
+        deleteSubEntity={() => {}}
+        inherited={false}
+      />
+    );
+    expect(rendered).toMatchSnapshot();
+  });
 });
