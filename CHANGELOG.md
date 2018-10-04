@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.26.1]
+* CXV1-15319 - Fixed download button for generic lists
+
 ## [0.26.0]
 * <no-jira> - Added roles page feature flagged
 
