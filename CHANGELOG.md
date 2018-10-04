@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.26.0]
+* <no-jira> - Added roles page feature flagged
+
 ## [0.25.2]
 * CXV1-15053 - Outbound Identifiers - Able to add duplicate identifier to list.
 * CXV1-15151 - Rename attributes customMetricsId, customMetricsName on SLA form to coincide with API new fixes.

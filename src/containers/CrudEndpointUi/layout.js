@@ -24,6 +24,7 @@ import GenericBulkActionsForm from '../Form/Bulk';
 import OutboundIdentifierListsForm from '../Form/OutboundIdentifierLists';
 import CustomMetricsForm from '../Form/CustomMetrics';
 import ChatWidgetsForm from '../Form/ChatWidgets';
+import RolesForm from '../Form/Roles';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -36,6 +37,7 @@ import OutboundIdentifiersDetailsPanel from '../SidePanelDetails/OutboundIdentif
 import OutboundIdentifierListsPanelContainer from '../SidePanelDetails/OutboundIdentifierLists';
 import CustomMetricsDetailsPanel from '../SidePanelDetails/CustomMetrics';
 import ChatWidgetsDetailsPanel from '../SidePanelDetails/ChatWidgets';
+import RolesDetailsPanel from '../SidePanelDetails/Roles';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -105,6 +107,14 @@ const createFormRoutes = [
         <ChatWidgetsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/roles',
+    component: () => (
+      <DetailsPanel>
+        <RolesForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before1
 ];
@@ -169,6 +179,16 @@ const detailsPanelRoutes = [
         </ChatWidgetsDetailsPanel>
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/roles',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <RolesDetailsPanel>
+          <RolesForm />
+        </RolesDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
   }
   //hygen-inject-before2
 ];
@@ -215,6 +235,10 @@ const updateSubEntityFormRoutes = [
   },
   {
     path: '/configuration/outboundIdentifierLists',
+    component: AddMembersToList
+  },
+  {
+    path: '/configuration/roles',
     component: AddMembersToList
   }
 ];

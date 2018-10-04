@@ -41,7 +41,9 @@ export class EntityMetaData {
      */
     this.createFormDependencies = [];
     this.updateFormDependencies = [];
-    this.fields = [[{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }]];
+    this.entityTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.sdkCall = {
       module: 'entities',
       data: {}
@@ -133,7 +135,9 @@ export const listOfEntities = [
   'outboundIdentifierLists',
   'customMetrics',
   'groups',
-  'skills'
+  'skills',
+  'roles',
+  'permissions'
 ];
 
 const entities = {};
@@ -147,6 +151,15 @@ entities.outboundIdentifiers.updateFormDependencies.push('flows');
 
 entities.outboundIdentifierLists.updateFormDependencies.push('outboundIdentifiers');
 entities.outboundIdentifierLists.dependentEntity = 'outboundIdentifiers';
+entities.outboundIdentifierLists.modalListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Value', name: 'value' },
+  { label: 'Channel Type', name: 'channelType' },
+  { label: 'Description', name: 'description' }
+];
+
+entities.roles.updateFormDependencies.push('permissions');
+entities.roles.dependentEntity = 'roles';
 
 // Custom page titles
 entities.customMetrics.pageTitle = 'Statistics Management';
