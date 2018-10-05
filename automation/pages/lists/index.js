@@ -35,9 +35,17 @@ const ListsPage = {
 // Reason list item values
   RasonName : new Element('input[id="frm-list-item-reasonName"]'),
   ResonCode : new Element('input[id="frm-list-item-reasonCode"]'),
-// main lists
-  DispositionsMainList: new Element('span[title="auto list Disposition type"]'),
-	ReasonsMainList: new Element('span[title="auto list Reason type"]'),
+
+  DisablListToggle : new Element('label[id="sdpanel-toggle-status"]'),
+  ConfirmButton : new Element('button[id="confirm"]'),
+	DispositionNameLable : new Element('span[title="Disposition Name"]'),
+  DispositionCodeLable : new Element('span[title="Disposition Code"]'),
+	DispositionDescriptionLable : new Element('span[title="Description"]'),
+	DispositionActionLable : new Element('div[class="rt-resizable-header-content"]'),
+	ListtypeDS : new Element('span[title="Disposition Codes Type"]'),
+	ListEnabled : new Element('div[class="rt-td"]Enabled'),
+  ListDisabled : new Element('div[class="rt-td"]Disabled'),
+
 
   NavigateToListPage: function(){
 		this.configurationDropDown.waitAndClick();
@@ -50,6 +58,7 @@ const ListsPage = {
 		this.newListNameInpt.setValue(ListName);
     this.selectListTypeDrpDown.click();
 		this.ListTypeDispositionsCode.click();
+		//look into second click
 		this.ListTypeDispositionsCode.click();
     Brow.pause(8000);
 	},
