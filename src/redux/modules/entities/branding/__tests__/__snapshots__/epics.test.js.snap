@@ -3,6 +3,7 @@
 exports[`FetchBranding calls fetch data for branding and protectedBranding 1`] = `
 Object {
   "entityName": "branding",
+  "tableType": undefined,
   "type": "FETCH_DATA",
 }
 `;
@@ -10,6 +11,7 @@ Object {
 exports[`FetchBranding calls fetch data for branding and protectedBranding 2`] = `
 Object {
   "entityName": "protectedBranding",
+  "tableType": undefined,
   "type": "FETCH_DATA",
 }
 `;

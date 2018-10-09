@@ -8,28 +8,26 @@ import { listTypeColumn } from './columns/listType';
 import { descriptionColumn } from './columns/description';
 import { permissionsColumn } from './columns/permissions';
 import { metricTypeColumn } from './columns/metricType';
+import { constructGeneralTextColumn } from './columns/genericTextColum';
 
-/**
- * Returns table columns for current entity
- */
-export function getTableColumns(entityName) {
-  switch (entityName) {
-    case 'lists':
-      return [nameColumn, listTypeColumn, statusColumn];
-    case 'emailTemplates':
-      return [nameColumn, descriptionColumn];
-    case 'outboundIdentifiers':
-      return [nameColumn, descriptionColumn];
-    case 'outboundIdentifierLists':
-      return [nameColumn, descriptionColumn];
-    case 'customMetrics':
-      return [metricTypeColumn, nameColumn, descriptionColumn, statusColumn];
-    case 'chatWidgets':
-      return [nameColumn, descriptionColumn, statusColumn];
-    case 'roles':
-      return [nameColumn, descriptionColumn, permissionsColumn];
-    //hygen-inject-before
-    default:
-      return [];
+export function getTableColumns(columns) {
+  /**
+   * Maps the name of a column provided by redux to its designated component
+   * The name doesn't match the component id as we also use the name directly in the columns menu
+   * @param {array} columns is an array of predefined columns from redux fetched from a selector
+   */
+  const columnMap = {
+    'Name': nameColumn,
+    'Description': descriptionColumn,
+    'Status': statusColumn,
+    'List Type': listTypeColumn,
+    'Permissions': permissionsColumn,
+    'Metric Type': metricTypeColumn,
+    'Value': constructGeneralTextColumn('value'),
+    'channelType': constructGeneralTextColumn('channelType'),
+    'flowId': constructGeneralTextColumn('flowId'),
   }
+  let result = [];
+  columns.forEach(x => x.active && result.push(columnMap[x.name]))
+  return result;
 }

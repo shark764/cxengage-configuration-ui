@@ -10,6 +10,7 @@ import { Route } from 'react-router-dom';
 import { Modal } from 'cx-ui-components';
 import Confirmation from '../ConfirmationDialog';
 
+import CheckboxFilterMenu from '../CheckboxFilterMenu';
 import SidePanel from '../../containers/SidePanel';
 import EntityTableContainer from '../EntityTable';
 
@@ -73,6 +74,11 @@ const NoScrollDetailsPanel = styled.div`
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
+`;
+
+const InlineCheckboxFilterMenu = styled(CheckboxFilterMenu)`
+  display: inline-block;
+  margin-left: 5px;
 `;
 
 const createFormRoutes = [
@@ -217,6 +223,14 @@ const bulkChangeFormRoutes = [
         <GenericBulkActionsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/chatWidgets',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before3
 ];
@@ -250,10 +264,37 @@ export default class CrudEndpointUiLayout extends Component {
     this.props.fetchData(entityName);
   }
 
+  componentDidUpdate(prevProps) {
+    /**
+     * if we go from haveing selected items 
+     * to no selected items , close the side panel
+     */
+    if(
+      prevProps.bulkSelectedTotal !== undefined && 
+      this.props.bulkSelectedTotal !== undefined && 
+      prevProps.bulkSelectedTotal.size > 0 &&
+      this.props.bulkSelectedTotal.size === 0
+      ) {
+      this.props.setSelectedEntityId('')
+    }
+  }
+
   render() {
     return (
       <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''}>
-        <Table />
+        <Table 
+          tableType={this.props.match.params.entityName} 
+        >
+          <InlineCheckboxFilterMenu
+            type="secondary"
+            menuType="Columns"
+            tableType={this.props.tableType}
+            currentVisibleSubMenu={this.props.currentVisibleSubMenu}
+            selectionType="checkbox"
+          >
+            Columns
+          </InlineCheckboxFilterMenu>
+        </Table>
         {this.props.selectedEntityId && (
           <SidePanel>
             {this.props.selectedEntityId === 'create' &&
@@ -290,7 +331,12 @@ export default class CrudEndpointUiLayout extends Component {
 }
 
 CrudEndpointUiLayout.propTypes = {
+  bulkSelectedTotal: PropTypes.object,
+  tableType: PropTypes.string,
+  setSelectedEntityId: PropTypes.func,
+  currentVisibleSubMenu: PropTypes.string,
   setCurrentEntity: PropTypes.func.isRequired,
+  match: PropTypes.object,
   fetchData: PropTypes.func.isRequired,
   selectedEntityId: PropTypes.string,
   selectedSubEntityId: PropTypes.string,

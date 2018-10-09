@@ -22,6 +22,7 @@ exports[`FetchData on sdkPromise error on ignore list does not call toastr error
 exports[`FetchData on sdkPromise error on ignore list returns fetchDataRejected 1`] = `
 Object {
   "entityName": "branding",
+  "tableType": undefined,
   "type": "FETCH_DATA_REJECTED",
 }
 `;
@@ -29,6 +30,7 @@ Object {
 exports[`FetchData on sdkPromise error returns fetchDataRejected 1`] = `
 Object {
   "entityName": "mockEntity",
+  "tableType": "mockTableType",
   "type": "FETCH_DATA_REJECTED",
 }
 `;
@@ -37,6 +39,7 @@ exports[`FetchData on sdkPromise success returns fetchDataFulfilled 1`] = `
 Object {
   "entityName": "mockEntity",
   "response": "mock response",
+  "tableType": "mockTableType",
   "type": "FETCH_DATA_FULFILLED",
 }
 `;

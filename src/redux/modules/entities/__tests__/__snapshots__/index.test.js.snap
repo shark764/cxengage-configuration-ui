@@ -370,6 +370,11 @@ Immutable.Map {
       "OUTBOUND_IDENTIFIER_ASSIGN",
     ],
   },
+  "interactionMonitoring": Immutable.Map {
+    "readPermission": Immutable.List [
+      "MONITOR_ALL_CALLS",
+    ],
+  },
   "listTypes": Immutable.Map {
     "data": undefined,
   },

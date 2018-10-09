@@ -11,7 +11,13 @@ jest.mock('../../../redux/modules/entities');
 
 jest.mock('../../../redux/modules/entities/selectors', () => ({
   getCurrentEntity: () => 'mock current entity',
-  userHasCreatePermission: () => true
+  userHasCreatePermission: () => true,
+  userHasUpdatePermission: () => true,
+}));
+
+jest.mock('../../../redux/modules/columnFilterMenus/selectors', () => ({
+  selectTableColumns: () => [{name: 'Name', active: true},{name: 'Description', active: true}],
+  selectVisibleSubMenu: () => 'none',
 }));
 
 jest.mock('../selectors', () => ({

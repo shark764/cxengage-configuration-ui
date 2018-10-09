@@ -1,30 +1,40 @@
-export const sdkPromise = sdkCall =>
-  new Promise((resolve, reject) => {
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+export const sdkPromise = sdkCall => {
+  
+  return new Promise((resolve, reject) => {
+
+    const completeSdkCall = {messageId: guid(), ...sdkCall};
+
     const handleResponse = event => {
-      if (event.data.uuid && sdkCall.uuid && sdkCall.uuid === event.data.uuid) {
+
+      if ( completeSdkCall.messageId === event.data.messageId) {
+
         const { error, response } = event.data;
+
         if (error) {
           reject(error);
         } else {
           resolve(response);
         }
         removeEventListener('message', handleResponse, false);
+
       }
 
-      if (event.data.topic !== undefined && event.data.topic[0] === sdkCall.topic && !sdkCall.uuid) {
-        const { error, response } = event.data;
-        if (error) {
-          reject(error);
-        } else {
-          resolve(response);
-        }
-        removeEventListener('message', handleResponse, false);
-      }
     };
 
     addEventListener('message', handleResponse);
-    window.parent.postMessage(sdkCall, '*');
+    window.parent.postMessage(completeSdkCall, '*');
   });
+}
 
 export const sdkCall = sdkCall =>
   new Promise((resolve, reject) => {

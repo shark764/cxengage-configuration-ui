@@ -3,45 +3,51 @@
  */
 
 import { fromJS } from 'immutable';
+import { entitiesMetaData } from '../entities/metaData';
 
-// Initial Sub State
-export const initialState = fromJS({
-  twelveHourFormat: true,
-  InteractionMonitoring: {
-    Columns: JSON.parse(
-      window.localStorage.getItem('InteractionMonitoringColumns')
-    ) || [
-      { name: 'InteractionId', active: true },
-      { name: 'Agent', active: true },
-      { name: 'CustomerId', active: true },
-      { name: 'ContactPoint', active: true },
-      { name: 'Flow', active: true },
-      { name: 'Channel', active: true },
-      { name: 'Direction', active: true },
-      { name: 'Presence State', active: false },
-      { name: 'Start Date', active: false },
-      { name: 'StartTime', active: true },
-      { name: 'ElapsedTime', active: true },
-      { name: 'Monitoring', active: true },
-      { name: 'Groups', active: false },
-      { name: 'Skills', active: false }
-    ],
-    Groups: [],
-    Skills: [],
-    Direction: [
-      { name: 'All', active: true },
-      { name: 'Inbound', active: false },
-      { name: 'Outbound', active: false },
-      { name: 'Agent Initiated', active: false }
-    ],
-    Monitoring: [
-      { name: 'All', active: true },
-      { name: 'Monitored', active: false },
-      { name: 'Not Monitored', active: false }
-    ],
-    visibleMenu: 'none'
-  }
-});
+/**
+ * Construct the initial state from the information in the entities metadata file
+ */
+export const constructInitialState = () => {
+  /**
+   * Start with basic defaults
+   */
+  let initialState = {
+    twelveHourFormat: true,
+    none: {
+      Columns: [],
+      visibleMenu: 'none'
+    }
+  };
+  /**
+   * Add all columns from entityMetaData file
+   */
+  Object.keys(entitiesMetaData).forEach(entityName => {
+    initialState[entityName] = {
+      visibleMenu: 'none'
+    }
+    initialState[entityName].Columns = JSON.parse( window.localStorage.getItem(`${entityName}Columns`)) || entitiesMetaData[entityName].columns;
+  });
+  /**
+   * Add entities custom menus
+   * for example silent monitoring table has custom filters
+   */
+  initialState.interactionMonitoring.Groups = [];
+  initialState.interactionMonitoring.Skills = [];
+  initialState.interactionMonitoring.Direction = [
+    { name: 'All', active: true },
+    { name: 'Inbound', active: false },
+    { name: 'Outbound', active: false },
+    { name: 'Agent Initiated', active: false }
+  ];
+  initialState.interactionMonitoring.Monitoring = [
+    { name: 'All', active: true },
+    { name: 'Monitored', active: false },
+    { name: 'Not Monitored', active: false }
+  ];
+
+  return fromJS(initialState);
+}
 
 // Actions
 export const toggleMenuItems = (itemName, menuType, tableType) => ({
@@ -88,8 +94,8 @@ export const toggleAllInverseMenuItems = (menuType, tableType) => ({
 });
 export const toggleTimeFormat = () => ({ type: 'TOGGLE_TIME_FORMAT' });
 
-// Redducer
-export default function ColumnsMenu(state = initialState, action) {
+// Reducer
+export default function ColumnsMenu(state = constructInitialState(), action) {
   switch (action.type) {
     case 'SET_VISIBLE_MENU':
       return state.setIn(

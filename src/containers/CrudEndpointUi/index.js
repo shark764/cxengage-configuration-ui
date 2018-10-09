@@ -5,29 +5,36 @@
 import { connect } from 'react-redux';
 
 // Actions
-import { setCurrentEntity, fetchData, setSelectedSubEntityId } from '../../redux/modules/entities';
+import { setCurrentEntity, fetchData, setSelectedSubEntityId, setSelectedEntityId } from '../../redux/modules/entities';
 
 // Selectors
 import {
   getSelectedEntityId,
   getSelectedSubEntityId,
-  getConfirmationDialogType
+  getConfirmationDialogType,
+  getCurrentEntity,
+  getSelectedEntityBulkChangeItems,
 } from '../../redux/modules/entities/selectors';
+import { selectVisibleSubMenu } from '../../redux/modules/columnFilterMenus/selectors';
 
 import Layout from './layout';
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
     selectedEntityId: getSelectedEntityId(state),
     selectedSubEntityId: getSelectedSubEntityId(state),
-    showConfirmationDialog: getConfirmationDialogType(state)
+    showConfirmationDialog: getConfirmationDialogType(state),
+    currentVisibleSubMenu: selectVisibleSubMenu(state, props),
+    tableType: getCurrentEntity(state),
+    bulkSelectedTotal: getSelectedEntityBulkChangeItems(state),
   };
 }
 
 export const actions = {
   setCurrentEntity,
   fetchData,
-  setSelectedSubEntityId: setSelectedSubEntityId(undefined)
+  setSelectedSubEntityId: setSelectedSubEntityId(undefined),
+  setSelectedEntityId,
 };
 
 const CrudEndpointUi = connect(mapStateToProps, actions)(Layout);

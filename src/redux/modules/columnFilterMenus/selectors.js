@@ -17,6 +17,16 @@ export const menuItems = (state, props) => {
   }
 };
 
+export const selectTableColumns = (state, tableType) => {
+  if (tableType) {
+    return state
+      .get('ColumnFilterMenus')
+      .getIn([tableType, 'Columns']).toJS();
+  } else {
+    return new List();
+  }
+};
+
 export const menuItemsJs = createSelector([menuItems], menuItems => {
   return menuItems.toJS();
 });
@@ -48,7 +58,7 @@ export const totalRatio = createSelector([menuItems], menuItems => {
 
 export const selectInteractionMonitoringColumns = createSelector(
   subState,
-  subState => subState.getIn(['InteractionMonitoring', 'Columns']).toJS()
+  subState => subState.getIn(['interactionMonitoring', 'Columns']).toJS()
 );
 export const selectInteractionMonitoringActiveColumns = createSelector(
   selectInteractionMonitoringColumns,

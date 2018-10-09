@@ -5,6 +5,7 @@ Object {
   "onBulkClick": [MockFunction],
   "onCreateButtonClick": [MockFunction],
   "onRowClick": [MockFunction],
+  "setVisibleMenu": [Function],
 }
 `;
 
@@ -13,6 +14,7 @@ Object {
   "columns": Array [
     "mock table columns",
   ],
+  "currentVisibleSubMenu": "none",
   "entityMetadata": undefined,
   "items": Array [
     "mock all entities",
@@ -20,5 +22,6 @@ Object {
   "pageHelpLink": "mock help link",
   "pageTitle": "",
   "userHasCreatePermission": true,
+  "userHasUpdatePermission": true,
 }
 `;

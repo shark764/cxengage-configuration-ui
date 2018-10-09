@@ -14,6 +14,9 @@ const defaultEntity = {
 const initialState = fromJS({
   currentEntity: 'none',
   none: {},
+  interactionMonitoring: {
+    readPermission: ['MONITOR_ALL_CALLS'],
+  },
   lists: {
     ...defaultEntity,
     subEntity: 'listItems',
@@ -114,10 +117,11 @@ export const setEntityUpdating = (entityName, entityId, updating) => ({
   updating
 });
 
-export const toggleBulkEntityChange = (entityName, entityId) => ({
+export const toggleBulkEntityChange = (entityName, entityId, bool) => ({
   type: 'TOGGLE_BULK_ENTITY_CHANGE',
   entityName,
-  entityId
+  entityId,
+  bool
 });
 
 export const onFormButtonSubmit = () => ({ type: 'START_FORM_SUBMISSION' });
@@ -151,9 +155,10 @@ export const executeConfirmCallback = referenceData => ({
   referenceData
 });
 
-export const fetchData = entityName => ({
+export const fetchData = (entityName, tableType) => ({
   type: 'FETCH_DATA',
-  entityName
+  entityName,
+  tableType
 });
 export const setSelectedSubEntityId = selectedSubEntityId => ({
   type: 'SET_SELECTED_SUB_ENTITY_ID',
@@ -228,7 +233,14 @@ export default function reducer(state = initialState, action) {
       const entityIndex = state
         .getIn([action.entityName, 'data'])
         .findIndex(entity => entity.get('id') === action.entityId);
-      if (entityIndex !== -1) {
+      if (entityIndex !== -1 && action.bool !== undefined) {
+        return state
+          .mergeIn(
+            [action.entityName, 'data', entityIndex],
+            fromJS({ bulkChangeItem: action.bool })
+          )
+          .setIn([action.entityName, 'selectedEntityId'], 'bulk');
+      } else if(entityIndex !== -1) {
         return state
           .mergeIn(
             [action.entityName, 'data', entityIndex],

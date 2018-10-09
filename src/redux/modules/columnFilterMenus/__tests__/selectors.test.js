@@ -114,7 +114,7 @@ describe('selectInteractionMonitoringColumns selector', () => {
   it('returns the interaction monitoring columns', () => {
     const initialState = fromJS({
       ColumnFilterMenus: {
-        InteractionMonitoring: {
+        interactionMonitoring: {
           Columns: [
             { name: 'mockColumn_1', active: true },
             { name: 'mockColumn_2', active: true },
@@ -127,7 +127,7 @@ describe('selectInteractionMonitoringColumns selector', () => {
     expect(
       sel.selectInteractionMonitoringColumns(initialState, {
         menuType: 'Columns',
-        tableType: 'InteractionMonitoring'
+        tableType: 'interactionMonitoring'
       })
     ).toMatchSnapshot();
   });
@@ -252,7 +252,7 @@ describe('selectInteractionMonitoringActiveColumns selector', () => {
   it('returns interaction monitoring active columns', () => {
     const initialState = fromJS({
       ColumnFilterMenus: {
-        InteractionMonitoring: {
+        interactionMonitoring: {
           Columns: [
             { active: true },
             { active: false },
