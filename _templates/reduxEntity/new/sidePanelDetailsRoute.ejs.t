@@ -1,6 +1,6 @@
 ---
 inject: true
-to: src/containers/CrudEndpointUi/Layout.js
+to: src/containers/CrudEndpointUi/layout.js
 before: //hygen-inject-before2
 ---
   ,
