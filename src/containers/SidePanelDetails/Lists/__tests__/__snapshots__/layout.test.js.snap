@@ -65,3 +65,153 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel 1`] = `
   />
 </div>
 `;
+
+exports[`<ListsDetailsPanel /> renders lists detailsPanel not inherited 1`] = `
+<div
+  className="details-panel"
+  id="7a96c534-31f9-11n8-88b9-9440dab83f21"
+>
+  <DetailHeader
+    text="Details"
+  />
+  <DetailsPanelAlert
+    text="mockAlertMessage"
+  />
+  Mock Child
+  <Detail
+    label="List Type"
+    value="Reason Codes Type"
+  />
+  <React.Fragment>
+    <DetailHeader
+      text="Bulk CSV"
+    />
+    <FileDownload
+      id="dtpanel-lists-download-csv"
+    />
+    <FileUpload
+      acceptedFileType=".csv"
+      id="dtpanel-lists-upload-csv"
+    />
+  </React.Fragment>
+  <DetailHeader
+    inherited={false}
+    onActionButtonClick={[Function]}
+    text="List Item(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    deleteSubEntity={[Function]}
+    fields={
+      Array [
+        Object {
+          "label": "label 1",
+          "name": "tableField1",
+          "required": true,
+          "type": "string",
+        },
+        Object {
+          "label": "label 2",
+          "name": "tableField2",
+          "required": true,
+          "type": "string",
+        },
+        Object {
+          "label": "label 3",
+          "name": "tableField3",
+          "required": true,
+          "type": "string",
+        },
+        Object {
+          "label": "label 4",
+          "name": "tableField4",
+          "required": true,
+          "type": "string",
+        },
+      ]
+    }
+    inherited={false}
+    items={
+      Array [
+        Object {
+          "tableField1": "test 1",
+          "tableField2": "test 2",
+          "tableField3": "test 3",
+          "tableField4": "test 4",
+        },
+      ]
+    }
+    updateSubEntity={[Function]}
+    userHasUpdatePermission={true}
+  />
+</div>
+`;
+
+exports[`<ListsDetailsPanel /> renders lists detailsPanel with alert message 1`] = `
+<div
+  className="details-panel"
+  id="7a96c534-31f9-11n8-88b9-9440dab83f21"
+>
+  <DetailHeader
+    text="Details"
+  />
+  <DetailsPanelAlert
+    text="mockAlertMessage"
+  />
+  Mock Child
+  <Detail
+    label="List Type"
+    value="Reason Codes Type"
+  />
+  <DetailHeader
+    inherited={true}
+    onActionButtonClick={[Function]}
+    text="List Item(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    deleteSubEntity={[Function]}
+    fields={
+      Array [
+        Object {
+          "label": "label 1",
+          "name": "tableField1",
+          "required": true,
+          "type": "string",
+        },
+        Object {
+          "label": "label 2",
+          "name": "tableField2",
+          "required": true,
+          "type": "string",
+        },
+        Object {
+          "label": "label 3",
+          "name": "tableField3",
+          "required": true,
+          "type": "string",
+        },
+        Object {
+          "label": "label 4",
+          "name": "tableField4",
+          "required": true,
+          "type": "string",
+        },
+      ]
+    }
+    inherited={true}
+    items={
+      Array [
+        Object {
+          "tableField1": "test 1",
+          "tableField2": "test 2",
+          "tableField3": "test 3",
+          "tableField4": "test 4",
+        },
+      ]
+    }
+    updateSubEntity={[Function]}
+    userHasUpdatePermission={true}
+  />
+</div>
+`;

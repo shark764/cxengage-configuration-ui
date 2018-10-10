@@ -2,7 +2,7 @@
  * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
  */
 
-import { isEmpty } from '../../../utils/string';
+import { isEmpty } from 'serenova-js-utils/strings';
 
 export const formValidation = values => ({
   name: isEmpty(values.get('name')) && 'Please enter a name',

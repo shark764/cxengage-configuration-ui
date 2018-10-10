@@ -32,4 +32,19 @@ Immutable.Map {
 }
 `;
 
-exports[`selectFormInitialValues returns the selected entity when not undefiend or create 1`] = `"mockEntity"`;
+exports[`selectFormInitialValues returns new map {active: true} when getSelectedEntityId equals bulk 1`] = `Immutable.Map {}`;
+
+exports[`selectFormInitialValues returns the selected entity when not undefined or create 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "name": "mockName",
+}
+`;
+
+exports[`selectFormInitialValues returns the selected entity when not undefined or create and has "active" key 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "name": "mockName",
+  "active": true,
+}
+`;

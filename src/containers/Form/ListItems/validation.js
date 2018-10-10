@@ -1,4 +1,4 @@
-import { isEmpty, isNumber } from '../../../utils/string';
+import { isEmpty, isNumber } from 'serenova-js-utils/strings';
 
 export default function(values, props) {
   let errors = {};

@@ -16,7 +16,7 @@ jest.mock('../../../redux/modules/entities/selectors', () => ({
   getSelectedEntityName: () => 'mockName',
   availableEntitiesForList: () => [],
   userHasUpdatePermission: () => true,
-  getCurrentEntity: () => {}
+  getCurrentEntity: () => 'outboundIdentifierLists'
 }));
 
 describe('AddMemberToList Renders', () => {

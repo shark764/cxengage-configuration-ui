@@ -7,18 +7,11 @@ import { Confirmation } from 'cx-ui-components';
 
 import * as MODALS from './constants.js';
 
-import { removeLastLetter } from '../../utils/string';
+import { removeLastLetter } from 'serenova-js-utils/strings';
 
-import {
-  executeConfirmCallback,
-  setConfirmationDialog
-} from '../../redux/modules/entities';
+import { executeConfirmCallback, setConfirmationDialog } from '../../redux/modules/entities';
 
-import {
-  getConfirmationDialogType,
-  getSelectedEntity,
-  getCurrentEntity
-} from '../../redux/modules/entities/selectors';
+import { getConfirmationDialogType, getSelectedEntity, getCurrentEntity } from '../../redux/modules/entities/selectors';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -47,9 +40,7 @@ function mapStateToProps(state) {
         : `This will enable this ${currentEntity}. Do you want to continue?`;
       break;
     case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
-      mainText = `Are you sure you want to override this ${removeLastLetter(
-        getCurrentEntity(state)
-      )}?`;
+      mainText = `Are you sure you want to override this ${removeLastLetter(getCurrentEntity(state))}?`;
       break;
     default:
   }

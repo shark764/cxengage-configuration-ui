@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChatWidgets Renders renders 1`] = `
+<Connect(ReduxForm)
+  dispatch={[Function]}
+  initialValues={
+    Object {
+      "active": true,
+    }
+  }
+  isSaving={true}
+  key="mockId"
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+>
+  Child
+</Connect(ReduxForm)>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "initialValues": Object {
+    "active": true,
+  },
+  "isSaving": true,
+  "key": "mockId",
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `
+Object {
+  "form": "chatWidgets:mockId",
+}
+`;
+
+exports[`formSubmission returns proper values 1`] = `
+Object {
+  "dirty": true,
+  "type": "FORM_SUBMIT",
+  "values": Object {
+    "agentHeader": "#000000",
+    "agentText": "#000000",
+    "borderColor": "#000000",
+    "buttonText": "#000000",
+    "chatbg": "#000000",
+    "customerHeader": "#000000",
+    "customerText": "#000000",
+    "fontFamily": "arial",
+    "fontSize": "12pt",
+    "headerColor": "#000000",
+    "headerTextIcons": "#000000",
+    "iconColor": "#000000",
+    "id": "mockId",
+    "name": "mockName",
+    "shared": false,
+    "systemText": "#000000",
+    "welcome": "hero",
+  },
+}
+`;

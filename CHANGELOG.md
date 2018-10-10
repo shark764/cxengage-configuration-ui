@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.26.2]
+* CXV1-15437 - Submitting form toggles status on Outbound Identifiers, Outbound Identifier List and Custom Metrics.
+* CXV1-15422 - Update references from utils inside each repo to serenova-js-utils.
+* <no-jira> - Update Custom Metrics epic to clear slaAbandonThreshold value.
+
 ## [0.26.1]
 * CXV1-15319 - Fixed download button for generic lists
 

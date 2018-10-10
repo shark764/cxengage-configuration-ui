@@ -23,6 +23,7 @@ describe('OutboundIdentifierListsDetailsPanel Renders', () => {
             channelType: 'mockChannel',
             description: 'mockDescription'
           }}
+          setSelectedSubEntityId={() => {}}
         >
           Child
         </OutboundIdentifierListsDetailsPanel>
@@ -45,6 +46,7 @@ describe('OutboundIdentifierListsDetailsPanel Renders', () => {
             channelType: 'mockChannel',
             description: 'mockDescription'
           }}
+          setSelectedSubEntityId={() => {}}
         >
           Child
         </OutboundIdentifierListsDetailsPanel>

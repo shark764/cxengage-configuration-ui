@@ -3,6 +3,28 @@
 exports[`AddMemberToList Renders renders 1`] = `
 <AddMemberToList
   addListItem={[Function]}
+  entityName="outboundIdentifierLists"
+  fields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Value",
+        "name": "value",
+      },
+      Object {
+        "label": "Channel Type",
+        "name": "channelType",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  listName="mockName"
   onCancel={[Function]}
   store={
     Object {
@@ -33,10 +55,37 @@ exports[`AddMemberToList Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  tableItems={Array []}
   toggleEntityListItemActive={[Function]}
+  userHasUpdatePermission={true}
 />
 `;
 
-exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `undefined`;
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "entityName": "outboundIdentifierLists",
+  "fields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Value",
+      "name": "value",
+    },
+    Object {
+      "label": "Channel Type",
+      "name": "channelType",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "listName": "mockName",
+  "tableItems": Array [],
+  "userHasUpdatePermission": true,
+}
+`;
 
 exports[`actions onCancel returns setSelectedSubEntityId(undefined) 1`] = `"mockId"`;

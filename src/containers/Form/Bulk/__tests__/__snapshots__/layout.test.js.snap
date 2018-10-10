@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GenericBulkItemsForm /> renders create customMetric 1`] = `
+<React.Fragment>
+  <styled.span>
+    <span>
+      Active
+    </span>
+    <styled.input
+      onChange={[Function]}
+      type="checkbox"
+      value={false}
+    />
+  </styled.span>
+  <form
+    onSubmit={[Function]}
+  />
+</React.Fragment>
+`;

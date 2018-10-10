@@ -1,9 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
-<CustomMetricsDetailsPanel
+exports[`GenericBulkItems Renders renders 1`] = `
+<Connect(ReduxForm)
   dispatch={[Function]}
-  id="dtpanel-custom-metrics"
+  initialValues={
+    Object {
+      "active": true,
+    }
+  }
+  isSaving={true}
+  key="mockEntity:bulk"
   store={
     Object {
       "dispatch": [Function],
@@ -33,16 +39,33 @@ exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
-  userHasUpdatePermission={true}
 >
   Child
-</CustomMetricsDetailsPanel>
+</Connect(ReduxForm)>
 `;
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "id": "dtpanel-custom-metrics",
-  "item": undefined,
-  "userHasUpdatePermission": true,
+  "initialValues": Object {
+    "active": true,
+  },
+  "isSaving": true,
+  "key": "mockEntity:bulk",
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `
+Object {
+  "form": "mockEntity:bulk",
+}
+`;
+
+exports[`formSubmission returns proper values 1`] = `
+Object {
+  "dirty": true,
+  "type": "FORM_SUBMIT",
+  "values": Object {
+    "active": true,
+  },
 }
 `;
