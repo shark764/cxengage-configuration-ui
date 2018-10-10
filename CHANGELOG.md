@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.27.2] - 2018-10-10
+### Changed
+- Fixed bug where you couldn't remove list items
+
 ## [0.27.1] - 2018-10-10
 ### Changed
 - Changed hygen templates destiny route to coincide with real filename
