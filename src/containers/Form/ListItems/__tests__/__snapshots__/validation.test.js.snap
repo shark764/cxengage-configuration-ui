@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validate returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "active": "Please enter a value",
+  "name": "Please enter a value",
+}
+`;
+
+exports[`validate returns proper object (errors) when wrong values are provided 1`] = `
+Object {
+  "active": "Please enter a value",
+  "name": "Please enter a value",
+}
+`;
+
+exports[`validate returns proper object when false is provided to not required boolean fields 1`] = `Object {}`;
+
+exports[`validate returns proper object when false is provided to required boolean fields 1`] = `Object {}`;
+
+exports[`validate returns proper object when required fields are provided 1`] = `Object {}`;
