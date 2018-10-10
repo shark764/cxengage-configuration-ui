@@ -7,26 +7,32 @@ import { connect } from 'react-redux';
 import { EntityTable } from 'cx-ui-components';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 import { setSelectedEntityCreate, setSelectedEntityId, toggleBulkEntityChange } from '../../redux/modules/entities';
-import { getCurrentEntity, userHasCreatePermission } from '../../redux/modules/entities/selectors';
+import { getCurrentEntity, userHasCreatePermission, userHasUpdatePermission } from '../../redux/modules/entities/selectors';
+import { selectVisibleSubMenu, selectTableColumns } from '../../redux/modules/columnFilterMenus/selectors';
+import { setVisibleMenu } from '../../redux/modules/columnFilterMenus';
 import { getHelpLink, getAllEntities } from './selectors';
-import { getTableColumns, getTitle } from './config';
+import { getTableColumns } from './config';
 
-export function mapStateToProps(state) {
-  const currentEntity = getCurrentEntity(state);
+export function mapStateToProps(state, props) {
+  let entity = entitiesMetaData[getCurrentEntity(state)];
+  let entityName = entity ? entity.entityName : 'none';
   return {
-    pageTitle: getTitle(currentEntity),
+    pageTitle: entity ? entity.pageTitle : '',
     pageHelpLink: getHelpLink(state),
     items: getAllEntities(state),
-    columns: getTableColumns(currentEntity),
+    columns: getTableColumns(selectTableColumns(state, entityName)),
     userHasCreatePermission: userHasCreatePermission(state),
-    entityMetadata: entitiesMetaData[currentEntity]
+    userHasUpdatePermission: userHasUpdatePermission(state),
+    entityMetadata: entity,
+    currentVisibleSubMenu: selectVisibleSubMenu(state, props),
   };
 }
 
 export const actions = {
   onCreateButtonClick: setSelectedEntityCreate,
   onRowClick: setSelectedEntityId,
-  onBulkClick: toggleBulkEntityChange
+  onBulkClick: toggleBulkEntityChange,
+  setVisibleMenu
 };
 
 export default connect(mapStateToProps, actions)(EntityTable);

@@ -12,12 +12,30 @@ export function handleError(error, a) {
 }
 
 export function handleSuccess(response, a, successMessage) {
-  if (!isIgnoredToast(a.type, a.entityName)) {
+  if (!isIgnoredToast(a.type, a.entityName) && successMessage !== undefined) {
     Toast.success(successMessage);
+  }
+  if(response.error) {
+    console.warn(response.error)
+    return {type: `${a.type}_rejected`, error: response.error};
   }
   return { ...a, type: `${a.type}_FULFILLED`, response };
 }
 
 export function handleBulkSuccess(response) {
-  Toast.success(`${response.length} items updated successfully.`);
+  const successCalls = response.filter(item => item.error === undefined);
+  const failedCalls = response.filter(item => item.error !== undefined);
+
+  Toast.success(`
+  ${successCalls.length} items updated successfully.
+  `);
+  if(failedCalls.length > 0) {
+    Toast.error(`
+    ${failedCalls.length} items failed to update.
+    ${failedCalls.map(call => `<br/></br>
+      ${call.id}<br/>
+      ${call.error.data.apiResponse.apiResponse.response.error.message}
+      `)}
+    `)
+  }
 }

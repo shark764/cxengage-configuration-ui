@@ -14,6 +14,7 @@ import store from './redux/store';
 import Startup from './containers/Startup';
 import SupervisorToolbar from './containers/SupervisorToolbar';
 import InteractionMonitoring from './containers/InteractionMonitoring';
+import BetaFeatures from './containers/BetaFeatures';
 import CrudEndpointUi from './containers/CrudEndpointUi';
 
 ReactDOM.render(
@@ -28,6 +29,10 @@ ReactDOM.render(
               <Route
                 path="/interactionMonitoring"
                 component={InteractionMonitoring}
+              />
+              <Route
+                path="/betaFeatures"
+                component={BetaFeatures}
               />
               <Route
                 path="/configuration/:entityName"

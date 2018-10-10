@@ -13,6 +13,12 @@ import {
   isInherited,
   isSubEntitySaving
 } from '../../../../redux/modules/entities/selectors';
+import {
+  setSelectedSubEntityId,
+  deleteSubEntity,
+  downloadCsv,
+  setConfirmationDialog
+} from '../../../../redux/modules/entities';
 const mockSelectedEntity = fromJS({
   name: 'mock list name',
   shared: true,
@@ -20,20 +26,20 @@ const mockSelectedEntity = fromJS({
     name: 'mock list type name',
     fields: [
       {
-        type: "string",
-        name: "reasonName",
-        label: "Reason Name",
+        type: 'string',
+        name: 'reasonName',
+        label: 'Reason Name',
         required: true
-      },
-    ],
+      }
+    ]
   },
   items: [
     {
-      reasonName: "Test 1",
+      reasonName: 'Test 1',
       reasonCode: 101,
-      description: "Nothing"
-    },
-  ],
+      description: 'Nothing'
+    }
+  ]
 });
 jest.mock('../../../../redux/modules/entities/selectors', () => ({
   getSelectedEntity: () => mockSelectedEntity,
@@ -42,16 +48,22 @@ jest.mock('../../../../redux/modules/entities/selectors', () => ({
   isSubEntitySaving: () => true
 }));
 
+const mockSelectedSubEntity = fromJS({
+  description: 'Nothing',
+  dispositionCode: 1,
+  dispositionName: 'Test 1'
+});
+jest.mock('../../../../redux/modules/entities', () => ({
+  setSelectedSubEntityId: () => 'create',
+  deleteSubEntity: () => 'mock is deleting sub entity',
+  downloadCsv: () => 'mock is downloading',
+  setConfirmationDialog: () => 'mock ConfirmationDialog'
+}));
+
 describe('ListsDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(
-      shallow(
-        <ListsDetailsPanel store={store}>
-          Child
-        </ListsDetailsPanel>
-      )
-    ).toMatchSnapshot();
+    expect(shallow(<ListsDetailsPanel store={store}>Child</ListsDetailsPanel>)).toMatchSnapshot();
   });
 });
 

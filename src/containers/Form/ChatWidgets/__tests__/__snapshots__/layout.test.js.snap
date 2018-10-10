@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChatWidgetsForm /> renders create chatWidgets 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    className="name-input-field"
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <ToggleField
+    className="shared-toggle-field"
+    disabled={false}
+    label="Shared"
+    name="shared"
+  />
+  <DetailHeader
+    text="Fields"
+  />
+  <ListField
+    className="list-inputs-field-chat-widgets"
+    disabled={false}
+    label="Inputs"
+    name="inputs"
+  />
+  <DetailHeader
+    text="Images"
+  />
+  <RadioGroupField
+    className="radio-group-field-chat-widgets"
+    disabled={false}
+    label="Welcome"
+    name="welcome"
+    options={
+      Array [
+        Object {
+          "helpText": "(Display 300 x 410)",
+          "label": "Hero",
+          "value": "hero",
+        },
+        Object {
+          "helpText": "(Display 300 x 800)",
+          "label": "Logo",
+          "value": "logo",
+        },
+      ]
+    }
+    required={true}
+  />
+  <FileUpload
+    acceptedFileType=".jpg"
+    className="file-upload-field"
+    id="dtpanel-chat-widget-upload-csv"
+  />
+  <DetailHeader
+    text="Type"
+  />
+  <SelectField
+    className="font-input-select-field"
+    disabled={false}
+    label="Font Family"
+    name="fontFamily"
+    options={
+      Array [
+        Object {
+          "label": "Arial",
+          "value": "arial",
+        },
+      ]
+    }
+    required={false}
+  />
+  <SelectField
+    className="font-input-select-field"
+    disabled={false}
+    label="Font Size"
+    name="fontSize"
+    options={
+      Array [
+        Object {
+          "label": "12pt",
+          "value": "12pt",
+        },
+      ]
+    }
+    required={false}
+  />
+  <DetailHeader
+    text="Color"
+  />
+  <ColorField
+    className="chat-widgets-header-color"
+    disabled={false}
+    label="Header Color"
+    name="headerColor"
+  />
+  <ColorField
+    className="chat-widgets-header-text-icons"
+    disabled={false}
+    label="Header Text/Icons"
+    name="headerTextIcons"
+  />
+  <ColorField
+    className="chat-widgets-chat-background"
+    disabled={false}
+    label="Chat BG"
+    name="chatbg"
+  />
+  <ColorField
+    className="chat-widgets-agent-header"
+    disabled={false}
+    label="Agent Header"
+    name="agentHeader"
+  />
+  <ColorField
+    className="chat-widgets-agent-text"
+    disabled={false}
+    label="Agent Text"
+    name="agentText"
+  />
+  <ColorField
+    className="chat-widgets-customer-header"
+    disabled={false}
+    label="Customer Header"
+    name="customerHeader"
+  />
+  <ColorField
+    className="chat-widgets-customer-text"
+    disabled={false}
+    label="Customer Text"
+    name="customerText"
+  />
+  <ColorField
+    className="chat-widgets-system-text"
+    disabled={false}
+    label="System Text"
+    name="systemText"
+  />
+  <ColorField
+    className="chat-widgets-button-text"
+    disabled={false}
+    label="Button Text"
+    name="buttonText"
+  />
+  <ColorField
+    className="chat-widgets-icon-color"
+    disabled={false}
+    label="Icon Color"
+    name="iconColor"
+  />
+  <ColorField
+    className="chat-widgets-border-color"
+    disabled={false}
+    label="Border Color"
+    name="borderColor"
+  />
+  <DetailHeader
+    text="Whitelist"
+  />
+  <ListField
+    className="list-urls-field-chat-widgets"
+    disabled={false}
+    label="Urls"
+    name="urls"
+  />
+</form>
+`;

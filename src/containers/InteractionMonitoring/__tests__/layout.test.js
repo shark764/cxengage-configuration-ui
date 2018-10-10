@@ -1,21 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
-import InteractionMonitoringLayout from '../Layout';
+import InteractionMonitoringLayout from '../layout';
 import { createStore } from 'redux';
 import { fromJS } from 'immutable';
 import { mockInteraction } from '../../../tools/testInteractions';
 // import { mockStore } from 'TestUtils';
 
 // Observables
-import {
-  localStorageSubscribe,
-  localStorageUnsubscribe
-} from '../localStorageObservable';
-import {
-  messageSubscribe,
-  messageUnsubscribe
-} from '../windowMessageObservable';
+import { localStorageSubscribe, localStorageUnsubscribe } from '../localStorageObservable';
+import { messageSubscribe, messageUnsubscribe } from '../windowMessageObservable';
 
 export const mockStore = createStore(state =>
   fromJS({
@@ -26,7 +20,7 @@ export const mockStore = createStore(state =>
       selected: ''
     },
     ColumnFilterMenus: {
-      InteractionMonitoring: {
+      interactionMonitoring: {
         Columns: [
           { name: 'InteractionId', active: true },
           { name: 'Agent', active: true },
@@ -69,22 +63,7 @@ const fetchDataMock = jest.fn();
 const startInteractionMonitoringMock = jest.fn();
 
 describe('Interaction Monitoring Layout', () => {
-  const activeColumnsActive = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true
-  ];
+  const activeColumnsActive = [true, true, true, true, true, true, true, true, true, true, true, true, true, true];
   it('renders all columns , all columns are active ', () => {
     const component = shallow(
       <InteractionMonitoringLayout
@@ -158,22 +137,7 @@ describe('Interaction Monitoring Layout', () => {
 });
 
 describe('Full mount to test lifecycle events', () => {
-  const activeColumnsActive = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true
-  ];
+  const activeColumnsActive = [true, true, true, true, true, true, true, true, true, true, true, true, true, true];
   it('calls componentDidMount', () => {
     const wrapper = mount(
       <Provider store={mockStore}>
@@ -213,22 +177,7 @@ describe('Full mount to test lifecycle events', () => {
 });
 
 describe('Interaction monitoring methods', () => {
-  const activeColumnsActive = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true
-  ];
+  const activeColumnsActive = [true, true, true, true, true, true, true, true, true, true, true, true, true, true];
   const interactionMonitoring = shallow(
     <InteractionMonitoringLayout
       setCurrentEntity={setCurrentEntityMock}
@@ -264,10 +213,7 @@ describe('Interaction monitoring methods', () => {
       expect(
         interactionMonitoring
           .instance()
-          .getTableRowProps(
-            { state: {} },
-            { row: { interactionId: '0000-0000-0000-0000', monitoring: [] } }
-          )
+          .getTableRowProps({ state: {} }, { row: { interactionId: '0000-0000-0000-0000', monitoring: [] } })
           .onClick().answerKey
       ).toEqual('removed');
     });
@@ -275,10 +221,7 @@ describe('Interaction monitoring methods', () => {
       expect(
         interactionMonitoring
           .instance()
-          .getTableRowProps(
-            { state: {} },
-            { row: { interactionId: '0000-0000-0000-0001', monitoring: [] } }
-          )
+          .getTableRowProps({ state: {} }, { row: { interactionId: '0000-0000-0000-0001', monitoring: [] } })
           .onClick().answerKey
       ).toEqual('selected');
     });
@@ -286,28 +229,20 @@ describe('Interaction monitoring methods', () => {
       expect(
         interactionMonitoring
           .instance()
-          .getTableRowProps(
-            { state: {} },
-            { row: { interactionId: '0000-0000-0000-0002', monitoring: [] } }
-          ).style
+          .getTableRowProps({ state: {} }, { row: { interactionId: '0000-0000-0000-0002', monitoring: [] } }).style
       ).toEqual({ background: 'rgba(253, 255, 50, 0.17)' });
     });
     it('the row your on is not the monitored interaction  , should not have style applied', () => {
       expect(
         interactionMonitoring
           .instance()
-          .getTableRowProps(
-            { state: {} },
-            { row: { interactionId: '0000-0000-0000-0003', monitoring: [] } }
-          ).style
+          .getTableRowProps({ state: {} }, { row: { interactionId: '0000-0000-0000-0003', monitoring: [] } }).style
       ).toEqual({ background: null });
     });
   });
   describe('onSortedChange', () => {
     it('pass the sorted value to the set sortedd prop', () => {
-      expect(
-        interactionMonitoring.instance().onSortedChange('sortedItem').answerKey
-      ).toEqual('sortedItem');
+      expect(interactionMonitoring.instance().onSortedChange('sortedItem').answerKey).toEqual('sortedItem');
     });
   });
   describe('getTdProps', () => {
@@ -403,9 +338,7 @@ describe('Interaction monitoring methods', () => {
   });
   describe('toggleTimeFormat', () => {
     it('triggers the toggle time format prop', () => {
-      expect(interactionMonitoring.instance().toggleTimeFormat()).toEqual(
-        'time was toggled'
-      );
+      expect(interactionMonitoring.instance().toggleTimeFormat()).toEqual('time was toggled');
     });
   });
   describe('SubComponent', () => {

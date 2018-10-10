@@ -9,9 +9,9 @@ import { SidePanelHeader } from 'cx-ui-components';
 
 import * as MODALS from '../ConfirmationDialog/constants.js';
 
-import { capitalizeFirstLetter } from '../../utils/string';
+import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
-import { unsetSelectedEntityId, setConfirmationDialog } from '../../redux/modules/entities';
+import { unsetSelectedEntityId, setConfirmationDialog, copyCurrentEntity } from '../../redux/modules/entities';
 import {
   getCurrentEntity,
   getSelectedEntityId,
@@ -21,14 +21,16 @@ import {
   getSelectedEntityBulkChangeItems
 } from '../../redux/modules/entities/selectors';
 
-export function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch, ownProps) {
+  let actions = {};
+  // TODO: copy button is experimental feature and is feature flagged.
+  if (location.hash.includes('alpha')) {
+    actions.copy = () => dispatch(copyCurrentEntity());
+  }
   return {
-    onClose: () => {
-      dispatch(unsetSelectedEntityId());
-    },
-    onToggle: () => {
-      dispatch(setConfirmationDialog(MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE));
-    }
+    ...actions,
+    onClose: () => dispatch(unsetSelectedEntityId()),
+    onToggle: () => dispatch(setConfirmationDialog(MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE))
   };
 }
 

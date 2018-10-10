@@ -3,26 +3,32 @@
  */
 
 import React from 'react';
+import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { mockStore } from '../../../../utils/testUtils';
 import CreateListForm, { mapStateToProps } from '../Create';
+import { getSelectedEntityId, isCreating } from '../../../../redux/modules/entities/selectors';
+import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
-jest.mock('../../../../redux/modules/entities/selectors', () => ({
-  isCreating: () => 'mock is creating'
-}));
+jest.mock('../../../../redux/modules/entities/selectors');
+jest.mock('../../../../redux/modules/form/selectors');
+getSelectedEntityId.mockImplementation(() => 'mockId');
+isCreating.mockImplementation(() => false);
+selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 jest.mock('../../../../redux/modules/entities/listTypes/selectors', () => ({
   getListTypesOptions: () => 'mock list types options'
 }));
 
-describe('CreateListForm', () => {
+describe('CreateListForm Renders', () => {
   it('renders', () => {
-    shallow(<CreateListForm store={mockStore}>Child</CreateListForm>);
+    const store = createStore(state => state);
+    expect(shallow(<CreateListForm store={store}>Child</CreateListForm>)).toMatchSnapshot();
   });
 });
 
-describe('mapStateToProps', () => {
-  it('maps the selectors to the object correctly', () => {
+describe('Maps state to props only using selectors', () => {
+  it('validates object created from mapStateToProps', () => {
     expect(mapStateToProps()).toMatchSnapshot();
   });
 });

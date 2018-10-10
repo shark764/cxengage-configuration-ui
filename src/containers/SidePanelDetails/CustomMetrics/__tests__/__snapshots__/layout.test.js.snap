@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel 1`] = `
+<styled.div
+  className="details-panel"
+  id="details-panel-id"
+>
+  Mock Child
+</styled.div>
+`;
+
+exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with no update permision 1`] = `
+<styled.div
+  className="details-panel"
+  id="details-panel-id"
+>
+  <React.Fragment>
+    <Detail
+      label="Name"
+      value="SLA"
+    />
+    <Detail
+      label="Description"
+      value="Test"
+    />
+    <Detail
+      label="Custom Metric Type"
+      value="SLA"
+    />
+    <Detail
+      label="Status"
+      value="Enabled"
+    />
+    <Detail
+      intValue={20}
+      label="SLA Threshold"
+    />
+    <Detail
+      label="SLA Abandon Type"
+      value="ignored-abandoned-calls"
+    />
+    <Detail
+      intValue={20}
+      label="SLA Abandon Threshold"
+    />
+  </React.Fragment>
+</styled.div>
+`;
+
+exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with no update permision and active disabled 1`] = `
+<styled.div
+  className="details-panel"
+  id="details-panel-id"
+>
+  <React.Fragment>
+    <Detail
+      label="Name"
+      value="SLA"
+    />
+    <Detail
+      label="Description"
+      value="Test"
+    />
+    <Detail
+      label="Custom Metric Type"
+      value="SLA"
+    />
+    <Detail
+      label="Status"
+      value="Disabled"
+    />
+    <Detail
+      intValue={20}
+      label="SLA Threshold"
+    />
+    <Detail
+      label="SLA Abandon Type"
+      value="ignored-abandoned-calls"
+    />
+    <Detail
+      intValue={20}
+      label="SLA Abandon Threshold"
+    />
+  </React.Fragment>
+</styled.div>
+`;

@@ -278,6 +278,22 @@ Immutable.Map {
 
 exports[`entities reducer returns the correct initial state 1`] = `
 Immutable.Map {
+  "permissions": Immutable.Map {
+    "data": undefined,
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "VIEW_ALL_ROLES",
+    ],
+    "updatePermission": Immutable.List [
+      "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",
+      "PLATFORM_CREATE_TENANT_ROLES",
+      "VIEW_ALL_ROLES",
+      "MANAGE_ALL_ROLES",
+      "MANAGE_TENANT_ENROLLMENT",
+    ],
+  },
   "flows": Immutable.Map {
     "data": undefined,
   },
@@ -354,6 +370,11 @@ Immutable.Map {
       "OUTBOUND_IDENTIFIER_ASSIGN",
     ],
   },
+  "interactionMonitoring": Immutable.Map {
+    "readPermission": Immutable.List [
+      "MONITOR_ALL_CALLS",
+    ],
+  },
   "listTypes": Immutable.Map {
     "data": undefined,
   },
@@ -380,6 +401,26 @@ Immutable.Map {
     "sidePanelWidth": 550,
     "assignPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_ASSIGN",
+    ],
+  },
+  "roles": Immutable.Map {
+    "data": undefined,
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "VIEW_ALL_ROLES",
+    ],
+    "updatePermission": Immutable.List [
+      "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",
+      "PLATFORM_CREATE_TENANT_ROLES",
+      "VIEW_ALL_ROLES",
+      "MANAGE_ALL_ROLES",
+      "MANAGE_TENANT_ENROLLMENT",
+    ],
+    "createPermission": Immutable.List [
+      "PLATFORM_CREATE_TENANT_ROLES",
+      "MANAGE_ALL_ROLES",
     ],
   },
   "emailTemplates": Immutable.Map {

@@ -29,6 +29,14 @@ export const selectFormInitialValues = state => {
   } else if (getSelectedEntity(state) === undefined) {
     return new Map({ active: true });
   } else {
+    // Since active is handled by toggle in header
+    // we don't need to add it in form submission
+    // if we don't remove active from map, it gets
+    // toggled automatically on every submit
+    if (getSelectedEntity(state).has('active')) {
+      // Returns new Map without "active" key
+      return getSelectedEntity(state).delete('active');
+    }
     return getSelectedEntity(state);
   }
 };

@@ -3,6 +3,7 @@
 exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
 <CustomMetricsDetailsPanel
   dispatch={[Function]}
+  id="dtpanel-custom-metrics"
   store={
     Object {
       "dispatch": [Function],
@@ -40,6 +41,7 @@ exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "id": "dtpanel-custom-metrics",
   "item": undefined,
   "userHasUpdatePermission": true,
 }

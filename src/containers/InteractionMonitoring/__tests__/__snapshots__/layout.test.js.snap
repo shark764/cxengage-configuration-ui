@@ -18,7 +18,7 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
       <Styled(Connect(CheckboxMenu))
         menuType="Columns"
         selectionType="checkbox"
-        tableType="InteractionMonitoring"
+        tableType="interactionMonitoring"
         type="secondary"
       >
         Columns
@@ -197,7 +197,7 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
             buttonType="columnFilter"
             menuType="Groups"
             selectionType="checkbox"
-            tableType="InteractionMonitoring"
+            tableType="interactionMonitoring"
           >
             Groups
           </Connect(CheckboxMenu)>,
@@ -215,7 +215,7 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
             buttonType="columnFilter"
             menuType="Skills"
             selectionType="checkbox"
-            tableType="InteractionMonitoring"
+            tableType="interactionMonitoring"
           >
             Skills
           </Connect(CheckboxMenu)>,
@@ -463,7 +463,7 @@ exports[`Interaction Monitoring Layout renders no columns , all columns are not 
       <Styled(Connect(CheckboxMenu))
         menuType="Columns"
         selectionType="checkbox"
-        tableType="InteractionMonitoring"
+        tableType="interactionMonitoring"
         type="secondary"
       >
         Columns

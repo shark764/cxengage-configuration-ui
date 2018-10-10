@@ -2,7 +2,7 @@
 
 exports[`SaveColumnsToLocalStorage localstorage is updated on column changes 1`] = `
 Object {
-  "columnsData": "\\"mockColumnData\\"",
+  "columnsData": undefined,
   "type": "COLUMNS_LOCALSTORAGE_UPDATED_$",
 }
 `;

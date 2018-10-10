@@ -8,24 +8,28 @@ to: src/containers/SidePanelDetails/<%= name %>/__tests__/index.test.js
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import OutboundIdentifiersSiePanelDetails, { mapStateToProps } from '../';
+import <%= name %>DetailsPanel, { mapStateToProps } from '../';
 import {
   getSelectedEntity,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  isInherited,
+  isSaving
 } from '../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntity.mockImplementation(() => {});
 userHasUpdatePermission.mockImplementation(() => true);
+isInherited.mockImplementation(() => false);
+isSaving.mockImplementation(() => false);
 
-describe('OutboundIdentifiersSiePanelDetails Renders', () => {
+describe('<%= name %>DetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
     expect(
       shallow(
-        <OutboundIdentifiersSiePanelDetails store={store}>
+        <<%= name %>DetailsPanel store={store}>
           Child
-        </OutboundIdentifiersSiePanelDetails>
+        </<%= name %>DetailsPanel>
       )
     ).toMatchSnapshot();
   });

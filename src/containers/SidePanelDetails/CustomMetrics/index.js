@@ -3,14 +3,12 @@
  */
 
 import { connect } from 'react-redux';
-import CustomMetricsDetailsPanel from './Layout';
-import {
-  userHasUpdatePermission,
-  getSelectedEntity
-} from '../../../redux/modules/entities/selectors';
+import CustomMetricsDetailsPanel from './layout';
+import { userHasUpdatePermission, getSelectedEntity } from '../../../redux/modules/entities/selectors';
 
 export function mapStateToProps(state) {
   return {
+    id: 'dtpanel-custom-metrics',
     item: getSelectedEntity(state),
     userHasUpdatePermission: userHasUpdatePermission(state)
   };

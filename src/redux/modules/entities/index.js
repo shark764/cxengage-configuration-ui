@@ -14,6 +14,9 @@ const defaultEntity = {
 const initialState = fromJS({
   currentEntity: 'none',
   none: {},
+  interactionMonitoring: {
+    readPermission: ['MONITOR_ALL_CALLS'],
+  },
   lists: {
     ...defaultEntity,
     subEntity: 'listItems',
@@ -65,6 +68,29 @@ const initialState = fromJS({
     createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
     disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
     assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
+  },
+  roles: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_ROLES'],
+    updatePermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'PLATFORM_CREATE_TENANT_ROLES',
+      'VIEW_ALL_ROLES',
+      'MANAGE_ALL_ROLES',
+      'MANAGE_TENANT_ENROLLMENT'
+    ],
+    createPermission: ['PLATFORM_CREATE_TENANT_ROLES', 'MANAGE_ALL_ROLES']
+  },
+  permissions: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_ROLES'],
+    updatePermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'PLATFORM_CREATE_TENANT_ROLES',
+      'VIEW_ALL_ROLES',
+      'MANAGE_ALL_ROLES',
+      'MANAGE_TENANT_ENROLLMENT'
+    ]
   }
   //hygen-inject-before
 });
@@ -80,6 +106,8 @@ export const setSelectedEntityId = entityId => ({
   entityId
 });
 
+export const copyCurrentEntity = () => ({ type: 'COPY_CURRENT_ENTITY' });
+
 export const setSelectedEntityCreate = () => setSelectedEntityId('create');
 export const unsetSelectedEntityId = () => setSelectedEntityId('');
 export const setEntityUpdating = (entityName, entityId, updating) => ({
@@ -89,10 +117,11 @@ export const setEntityUpdating = (entityName, entityId, updating) => ({
   updating
 });
 
-export const toggleBulkEntityChange = (entityName, entityId) => ({
+export const toggleBulkEntityChange = (entityName, entityId, bool) => ({
   type: 'TOGGLE_BULK_ENTITY_CHANGE',
   entityName,
-  entityId
+  entityId,
+  bool
 });
 
 export const onFormButtonSubmit = () => ({ type: 'START_FORM_SUBMISSION' });
@@ -126,9 +155,10 @@ export const executeConfirmCallback = referenceData => ({
   referenceData
 });
 
-export const fetchData = entityName => ({
+export const fetchData = (entityName, tableType) => ({
   type: 'FETCH_DATA',
-  entityName
+  entityName,
+  tableType
 });
 export const setSelectedSubEntityId = selectedSubEntityId => ({
   type: 'SET_SELECTED_SUB_ENTITY_ID',
@@ -203,7 +233,14 @@ export default function reducer(state = initialState, action) {
       const entityIndex = state
         .getIn([action.entityName, 'data'])
         .findIndex(entity => entity.get('id') === action.entityId);
-      if (entityIndex !== -1) {
+      if (entityIndex !== -1 && action.bool !== undefined) {
+        return state
+          .mergeIn(
+            [action.entityName, 'data', entityIndex],
+            fromJS({ bulkChangeItem: action.bool })
+          )
+          .setIn([action.entityName, 'selectedEntityId'], 'bulk');
+      } else if(entityIndex !== -1) {
         return state
           .mergeIn(
             [action.entityName, 'data', entityIndex],
@@ -217,6 +254,7 @@ export default function reducer(state = initialState, action) {
     case 'CREATE_ENTITY': {
       return state.setIn([action.entityName, 'creating'], true);
     }
+    case 'COPY_CURRENT_ENTITY_FULFILLED':
     case 'CREATE_ENTITY_FULFILLED': {
       const { result } = action.response;
       return state.update(action.entityName, entityStore =>

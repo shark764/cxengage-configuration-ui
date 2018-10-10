@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OutboundIdentifierListsFormLayout renders , inherited is true , fields should be disabled 1`] = `
+exports[`OutboundIdentifierListsForm renders , inherited is true , fields should be disabled 1`] = `
 <form
   onSubmit={[Function]}
 >
@@ -21,7 +21,7 @@ exports[`OutboundIdentifierListsFormLayout renders , inherited is true , fields 
 </form>
 `;
 
-exports[`OutboundIdentifierListsFormLayout renders , isSaving is true , fields should be disabled 1`] = `
+exports[`OutboundIdentifierListsForm renders , isSaving is true , fields should be disabled 1`] = `
 <form
   onSubmit={[Function]}
 >
@@ -42,7 +42,7 @@ exports[`OutboundIdentifierListsFormLayout renders , isSaving is true , fields s
 </form>
 `;
 
-exports[`OutboundIdentifierListsFormLayout renders regular form 1`] = `
+exports[`OutboundIdentifierListsForm renders regular form 1`] = `
 <form
   onSubmit={[Function]}
 >

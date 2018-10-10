@@ -147,8 +147,113 @@ Immutable.Map {
 
 exports[`columnFilterMenus reducer snapshots returns the correct initial state 1`] = `
 Immutable.Map {
+  "skills": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
+  "permissions": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
+  "flows": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
+  "protectedBranding": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
+  "customMetrics": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Metric Type",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
+  "groups": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "twelveHourFormat": true,
-  "InteractionMonitoring": Immutable.Map {
+  "lists": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "List Type",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
+  "chatWidgets": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
+  "none": Immutable.Map {
+    "Columns": Immutable.List [],
+    "visibleMenu": "none",
+  },
+  "outboundIdentifiers": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Value",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "channelType",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "flowId",
+        "active": false,
+      },
+    ],
+  },
+  "interactionMonitoring": Immutable.Map {
+    "visibleMenu": "none",
     "Columns": Immutable.List [
       Immutable.Map {
         "name": "InteractionId",
@@ -241,7 +346,57 @@ Immutable.Map {
         "active": false,
       },
     ],
+  },
+  "listTypes": Immutable.Map {
     "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
+  "branding": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
+  "outboundIdentifierLists": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+    ],
+  },
+  "roles": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Permissions",
+        "active": true,
+      },
+    ],
+  },
+  "emailTemplates": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+    ],
   },
 }
 `;

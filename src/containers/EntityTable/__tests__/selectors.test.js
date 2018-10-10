@@ -5,9 +5,8 @@
 import { fromJS, List } from 'immutable';
 import { getAllEntities, getHelpLink } from '../selectors';
 
-import { getAllEntities as getAllEntitiesFromStore } from '../../../redux/modules/entities/selectors';
+import { getAllEntities as getAllEntitiesFromStore, getCurrentEntity } from '../../../redux/modules/entities/selectors';
 import { getProtectedBranding } from '../../../redux/modules/entities/branding/selectors';
-import { getHelpLink as getEntityHelpLink } from '../config';
 
 jest.mock('../../../redux/modules/entities/selectors');
 const mockAllEntities = fromJS([{ mockAttribute: 'mock value' }]);
@@ -22,9 +21,6 @@ getProtectedBranding.mockReturnValue(
     }
   ])
 );
-
-jest.mock('../config');
-getEntityHelpLink.mockReturnValue('mockentityhelplink.com');
 
 describe('getAllEntities', () => {
   describe('is defined', () => {
@@ -56,9 +52,9 @@ describe('getHelpLink', () => {
       });
     });
   });
-  describe('entity help link is undefined', () => {
+  describe('entity is undefined', () => {
     beforeEach(() => {
-      getEntityHelpLink.mockReturnValueOnce(undefined);
+      getCurrentEntity.mockReturnValueOnce(undefined);
     });
     it('returns undefined', () => {
       expect(getHelpLink()).toBe(undefined);

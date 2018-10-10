@@ -1,4 +1,9 @@
-import { capitalizeFirstLetter, camelCaseToKebabCase, removeLastLetter } from 'serenova-js-utils/strings';
+import {
+  capitalizeFirstLetter,
+  camelCaseToKebabCase,
+  removeLastLetter,
+  camelCaseToRegularForm
+} from 'serenova-js-utils/strings';
 
 /**
  * All the information about an entity that it does not provide about itself
@@ -22,12 +27,15 @@ export class EntityMetaData {
     this.entityName = entityName;
     this.dependentEntity = '';
     this.subEntityName = '';
-    this.pageTitle = entityName;
+    this.pageTitle = camelCaseToRegularForm(entityName);
+    this.helpLink = '/Help/Content/Home.htm';
+    this.betaFeature = false;
     this.confirmationDialog = {
       message: '',
       trueButtonText: '',
       falseButtonText: ''
     };
+    this.columns = [];
     /**
      * Form dependencies are what a form needs to work
      * Example: Outbound Identifiers needs to have flow id's and names,
@@ -35,7 +43,9 @@ export class EntityMetaData {
      */
     this.createFormDependencies = [];
     this.updateFormDependencies = [];
-    this.fields = [[{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }]];
+    this.entityTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.sdkCall = {
       module: 'entities',
       data: {}
@@ -105,7 +115,9 @@ export class EntityMetaData {
     }
   }
   bulkEditsAvailable() {
-    return this.entityName !== 'emailTemplates' && location.hash.includes('alpha');
+    return this.entityName !== 'emailTemplates' &&
+      this.entityName !== 'roles' &&
+      location.hash.includes('alpha');
   }
 }
 
@@ -127,19 +139,100 @@ export const listOfEntities = [
   'outboundIdentifierLists',
   'customMetrics',
   'groups',
-  'skills'
+  'skills',
+  'roles',
+  'permissions',
+  'interactionMonitoring'
 ];
 
 const entities = {};
 listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
 
+// Generic Lists
 entities.lists.createFormDependencies.push('listTypes');
 entities.lists.subEntityName = 'listItems';
+entities.lists.helpLink = '/Help/Content/Configuration/Lists/Lists.htm';
+entities.lists.columns = [
+  { name: 'Name', active: true },
+  { name: 'List Type', active: true },
+  { name: 'Status', active: true },
+];
 
+// Outbound Identifiers
 entities.outboundIdentifiers.createFormDependencies.push('flows');
 entities.outboundIdentifiers.updateFormDependencies.push('flows');
+entities.outboundIdentifiers.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Value', active: true },
+  { name: 'channelType', active: true },
+  { name: 'flowId', active: false },
+];
 
+// Outbound Identifiers Lists
 entities.outboundIdentifierLists.updateFormDependencies.push('outboundIdentifiers');
 entities.outboundIdentifierLists.dependentEntity = 'outboundIdentifiers';
+entities.outboundIdentifierLists.modalListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Value', name: 'value' },
+  { label: 'Channel Type', name: 'channelType' },
+  { label: 'Description', name: 'description' }
+];
+entities.outboundIdentifierLists.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+];
+
+// Roles
+entities.roles.updateFormDependencies.push('permissions');
+entities.roles.dependentEntity = 'roles';
+entities.roles.betaFeature = true;
+entities.roles.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Permissions', active: true },
+];
+
+//Silent Monitoring
+entities.interactionMonitoring.betaFeature = true;
+entities.interactionMonitoring.columns = [
+  { name: 'InteractionId', active: true },
+  { name: 'Agent', active: true },
+  { name: 'CustomerId', active: true },
+  { name: 'ContactPoint', active: true },
+  { name: 'Flow', active: true },
+  { name: 'Channel', active: true },
+  { name: 'Direction', active: true },
+  { name: 'Presence State', active: false },
+  { name: 'Start Date', active: false },
+  { name: 'StartTime', active: true },
+  { name: 'ElapsedTime', active: true },
+  { name: 'Monitoring', active: true },
+  { name: 'Groups', active: false },
+  { name: 'Skills', active: false }
+]
+
+// Custom Metrics
+entities.customMetrics.pageTitle = 'Statistics Management';
+entities.customMetrics.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Metric Type', active: true },
+  { name: 'Status', active: true },
+];
+
+// Email Templates
+entities.emailTemplates.helpLink = '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
+entities.emailTemplates.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+];
+
+// Chat Widgets
+entities.chatWidgets.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true },
+];
 
 export const entitiesMetaData = entities;

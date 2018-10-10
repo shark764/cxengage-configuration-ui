@@ -12,21 +12,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputField } from 'cx-ui-components';
 
-export function OutboundIdentifierListsFormLayout({
-  handleSubmit,
-  isSaving,
-  inherited,
-  key
-}) {
+export default function OutboundIdentifierListsForm({ handleSubmit, isSaving, inherited, key }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
-      <InputField
-        name="name"
-        label="Name *"
-        componentType="input"
-        inputType="text"
-        disabled={isSaving || inherited}
-      />
+      <InputField name="name" label="Name *" componentType="input" inputType="text" disabled={isSaving || inherited} />
       <InputField
         name="description"
         label="Description"
@@ -38,7 +27,7 @@ export function OutboundIdentifierListsFormLayout({
   );
 }
 
-OutboundIdentifierListsFormLayout.propTypes = {
+OutboundIdentifierListsForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,

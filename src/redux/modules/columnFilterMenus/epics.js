@@ -14,7 +14,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 
 import {
-  selectInteractionMonitoringColumns,
+  selectTableColumns,
   selectGroups,
   selectSkills
 } from './selectors';
@@ -33,16 +33,16 @@ const ColumnRelatedActions = [
 export const SaveColumnsToLocalStorage = (action$, store) =>
   action$
     .ofType(...ColumnRelatedActions)
-    .debounceTime(4000)
+    .debounceTime(2000)
     .filter(({ menuType }) => menuType === 'Columns')
     .map(action => ({
       ...action,
       columnsData: JSON.stringify(
-        selectInteractionMonitoringColumns(store.getState())
+        selectTableColumns(store.getState(), action.tableType)
       )
     }))
     .do(action =>
-      localStorage.setItem('InteractionMonitoringColumns', action.columnsData)
+      localStorage.setItem(`${action.tableType}Columns`, action.columnsData)
     )
     .map(action => ({
       type: 'COLUMNS_LOCALSTORAGE_UPDATED_$',
@@ -56,10 +56,10 @@ export const UpdateStatSubscriptionFilters = (action$, store) =>
     .map(action => ({
       ...action,
       groupsArray: selectGroups(store.getState(), {
-        tableType: 'InteractionMonitoring'
+        tableType: 'interactionMonitoring'
       }),
       skillsArray: selectSkills(store.getState(), {
-        tableType: 'InteractionMonitoring'
+        tableType: 'interactionMonitoring'
       })
     }))
     .map(action => ({
