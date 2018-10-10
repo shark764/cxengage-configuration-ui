@@ -38,7 +38,7 @@ export const mapStateToProps = (state, props) => ({
   getCurrentAgentId: getCurrentAgentId(state),
   areAllColNotActive: areAllColNotActive(state, {
     menuType: 'Columns',
-    tableType: 'InteractionMonitoring'
+    tableType: 'interactionMonitoring'
   }),
   totalRatio: totalRatio(state, props),
   activeColumns: selectInteractionMonitoringActiveColumns(state, props),

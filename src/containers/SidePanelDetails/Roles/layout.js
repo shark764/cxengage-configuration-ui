@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import { Detail } from 'cx-ui-components';
 import { DetailHeader } from 'cx-ui-components';
 import { SidePanelTable } from 'cx-ui-components';
+import { DetailsPanelAlert } from 'cx-ui-components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,15 +29,18 @@ export function RolesDetailsPanel({
   id,
   className,
   tableItems,
+  inherited,
   removeListItem,
   setSelectedSubEntityId,
   listSize,
-  item: { name, description }
+  item: {name, description}
 }) {
   return (
     <Wrapper id={id} className={className}>
       <DetailHeader text="Details" />
-      {userHasUpdatePermission ? (
+      {inherited && <DetailsPanelAlert text="This role is inherited and cannot be edited" />}
+      { !inherited &&
+        userHasUpdatePermission? (
         children
       ) : (
         <Fragment>
@@ -48,11 +52,13 @@ export function RolesDetailsPanel({
         userHasUpdatePermission={userHasUpdatePermission}
         text={`${listSize} Permission(s)`}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
+        inherited={inherited}
       />
       <SidePanelTable
         userHasUpdatePermission={userHasUpdatePermission}
         deleteSubEntity={removeListItem}
         items={tableItems}
+        inherited={inherited}
         fields={[
           {
             label: 'Name',
@@ -80,5 +86,6 @@ RolesDetailsPanel.propTypes = {
   tableItems: PropTypes.array,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
-  listSize: PropTypes.number
+  listSize: PropTypes.number,
+  inherited: PropTypes.bool,
 };

@@ -1,47 +1,148 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getTableColumns returns correct columns for chat widgets 1`] = `
+exports[`getTableColumns correctly maps given columns to thier components when all are active 1`] = `
 Array [
-  "mock name column",
-  "mock description column",
-  "mock status column",
+  Object {
+    "Cell": [Function],
+    "Filter": [Function],
+    "Header": <span
+      title="Name"
+    >
+      Name
+    </span>,
+    "accessor": "name",
+    "id": "name",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Description"
+    >
+      Description
+    </span>,
+    "accessor": "description",
+    "id": "description",
+  },
+  Object {
+    "Filter": [Function],
+    "Header": <span
+      title="Status"
+    >
+      Status
+    </span>,
+    "accessor": [Function],
+    "filterMethod": [Function],
+    "id": "status",
+  },
+  Object {
+    "Cell": [Function],
+    "Filter": [Function],
+    "Header": <span
+      title="List Type"
+    >
+      List Type
+    </span>,
+    "accessor": [Function],
+    "id": "listType",
+  },
+  Object {
+    "Cell": [Function],
+    "Filter": [Function],
+    "Header": <span
+      title="permissions"
+    >
+      Permissions
+    </span>,
+    "accessor": "permissions",
+    "id": "permissions",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Type"
+    >
+      Type
+    </span>,
+    "accessor": "customMetricsType",
+    "id": "metricType",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Value"
+    >
+      Value
+    </span>,
+    "accessor": "value",
+    "id": "value",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Channel Type"
+    >
+      Channel Type
+    </span>,
+    "accessor": "channelType",
+    "id": "channelType",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Flow Id"
+    >
+      Flow Id
+    </span>,
+    "accessor": "flowId",
+    "id": "flowId",
+  },
 ]
 `;
 
-exports[`getTableColumns returns correct columns for custom metrics 1`] = `
+exports[`getTableColumns correctly maps given columns to thier components when half are active 1`] = `
 Array [
-  "mock Metric Type column",
-  "mock name column",
-  "mock description column",
-  "mock status column",
-]
-`;
-
-exports[`getTableColumns returns correct columns for emailTemplates 1`] = `
-Array [
-  "mock name column",
-  "mock description column",
-]
-`;
-
-exports[`getTableColumns returns correct columns for lists 1`] = `
-Array [
-  "mock name column",
-  "mock list type column",
-  "mock status column",
-]
-`;
-
-exports[`getTableColumns returns correct columns for outbound identifier list 1`] = `
-Array [
-  "mock name column",
-  "mock description column",
-]
-`;
-
-exports[`getTableColumns returns correct columns for outbound identifiers 1`] = `
-Array [
-  "mock name column",
-  "mock description column",
+  Object {
+    "Cell": [Function],
+    "Filter": [Function],
+    "Header": <span
+      title="Name"
+    >
+      Name
+    </span>,
+    "accessor": "name",
+    "id": "name",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Description"
+    >
+      Description
+    </span>,
+    "accessor": "description",
+    "id": "description",
+  },
+  Object {
+    "Filter": [Function],
+    "Header": <span
+      title="Status"
+    >
+      Status
+    </span>,
+    "accessor": [Function],
+    "filterMethod": [Function],
+    "id": "status",
+  },
+  Object {
+    "Cell": [Function],
+    "Filter": [Function],
+    "Header": <span
+      title="List Type"
+    >
+      List Type
+    </span>,
+    "accessor": [Function],
+    "id": "listType",
+  },
 ]
 `;

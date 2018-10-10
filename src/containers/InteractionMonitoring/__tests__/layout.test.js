@@ -20,7 +20,7 @@ export const mockStore = createStore(state =>
       selected: ''
     },
     ColumnFilterMenus: {
-      InteractionMonitoring: {
+      interactionMonitoring: {
         Columns: [
           { name: 'InteractionId', active: true },
           { name: 'Agent', active: true },

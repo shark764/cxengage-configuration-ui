@@ -5,7 +5,7 @@
 import { connect } from 'react-redux';
 import { RolesDetailsPanel } from './layout.js';
 
-import { userHasUpdatePermission, getSelectedEntity } from '../../../redux/modules/entities/selectors';
+import { userHasUpdatePermission, getSelectedEntity, isInherited } from '../../../redux/modules/entities/selectors';
 
 import { getEntityListMembers, getListSize } from '../../../redux/modules/entities/roles/selectors';
 
@@ -13,10 +13,11 @@ import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/e
 
 export function mapStateToProps(state, props) {
   return {
-    item: getSelectedEntity(state),
+    item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state),
     tableItems: getEntityListMembers(state),
-    listSize: getListSize(state)
+    listSize: getListSize(state),
+    inherited: isInherited(state), 
   };
 }
 

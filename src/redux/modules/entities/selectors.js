@@ -43,6 +43,9 @@ export const getSelectedEntityStatus = state => getSelectedEntity(state).get('ac
 export const userHasReadPermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('readPermission'));
 
+export const userHasReadPermissionManual = (state, entityName) =>
+  hasPermission(getCurrentPermissions(state), state.getIn(['Entities',entityName, 'readPermission']) );
+
 export const userHasUpdatePermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('updatePermission'));
 
@@ -58,7 +61,13 @@ export const hasPermission = (userPermissions, permissionsNeeded) => {
   }
 };
 
-export const isInherited = state => getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
+export const isInherited = state =>  {
+  if(getCurrentEntity(state) === 'roles') {
+    return getSelectedEntity(state).get('type') === 'system';
+  } else {
+    return getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
+  }
+}
 
 export const isCreating = state => getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
 

@@ -1,6 +1,31 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Alpha User Acceptance Testing]
+- Bulk actions
+- Roles (permissions)
+- Outbound Identifiers / Outbound Identifier Lists
+- Beta UAT page
+- Chat Widgets
+
+## [Beta User Acceptance Testing]
+- Interaction Monitoring
+
+## [0.27.0] - 2018-10-09
+### Added
+- Error handling on bulk action failures
+- Inheritance for roles page
+- Actions button with ability to select or deselect all visible or all items in a table for bulk actions
+- Columns filter button for all entity tables, columns filters persist in localstorage
+- Created a generic column constructor for react table columns for faster column generation when it's a simple text column
+- Can only see beta features for which you have existing permissions for
+
+### Changed
+- Refactored entity tables column config to come from the entity metadata file
+- sdk promise to use a uuid to validate message transmission between iframes
 
 ## [0.26.2]
 * CXV1-15437 - Submitting form toggles status on Outbound Identifiers, Outbound Identifier List and Custom Metrics.

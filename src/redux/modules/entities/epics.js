@@ -146,7 +146,7 @@ export const FetchDataItem = action$ =>
     );
 
 export const getTenantPermissions = action$ =>
-  action$.ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$').switchMap(a =>
+  action$.ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$', 'FETCH_BRANDING_$').switchMap(a =>
     fromPromise(
       sdkPromise({
         module: 'updateLocalStorage',
@@ -239,7 +239,6 @@ export const BulkEntityUpdate = (action$, store) =>
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.allSdkCalls = [...a.allIdsToProcess.toJS()].map(item => ({
         ...a.sdkCall,
-        uuid: item,
         data: {
           ...a.values,
           [removeLastLetter(a.entityName) + 'Id']: item
@@ -248,9 +247,14 @@ export const BulkEntityUpdate = (action$, store) =>
       return { ...a };
     })
     .mergeMap(a =>
-      forkJoin(a.allSdkCalls.map(apiCall => from(sdkPromise(apiCall)).catch(error => handleError(error, a))))
-        .do(allResult => handleBulkSuccess(allResult))
-        .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+      forkJoin(
+        a.allSdkCalls.map(
+          apiCall => from(
+            sdkPromise(apiCall).catch(error => ({error: error, id: apiCall.data[removeLastLetter(a.entityName) + 'Id']}) )
+          )))
+      .do(allResult => handleBulkSuccess(allResult))
+      .mergeMap(result => from(result)
+      .map(response => handleSuccess(response, a)))
     );
 
 export const ToggleEntity = (action$, store) =>

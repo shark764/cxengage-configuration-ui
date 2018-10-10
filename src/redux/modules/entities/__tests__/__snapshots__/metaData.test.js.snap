@@ -3,6 +3,8 @@
 exports[`entitiesMetaData creates all metaData info 1`] = `
 Object {
   "branding": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -51,6 +53,21 @@ Object {
     "updateFormDependencies": Array [],
   },
   "chatWidgets": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -99,6 +116,25 @@ Object {
     "updateFormDependencies": Array [],
   },
   "customMetrics": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Metric Type",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -147,6 +183,17 @@ Object {
     "updateFormDependencies": Array [],
   },
   "emailTemplates": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -195,6 +242,8 @@ Object {
     "updateFormDependencies": Array [],
   },
   "flows": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -243,6 +292,8 @@ Object {
     "updateFormDependencies": Array [],
   },
   "groups": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -290,7 +341,116 @@ Object {
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
+  "interactionMonitoring": EntityMetaData {
+    "betaFeature": true,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "InteractionId",
+      },
+      Object {
+        "active": true,
+        "name": "Agent",
+      },
+      Object {
+        "active": true,
+        "name": "CustomerId",
+      },
+      Object {
+        "active": true,
+        "name": "ContactPoint",
+      },
+      Object {
+        "active": true,
+        "name": "Flow",
+      },
+      Object {
+        "active": true,
+        "name": "Channel",
+      },
+      Object {
+        "active": true,
+        "name": "Direction",
+      },
+      Object {
+        "active": false,
+        "name": "Presence State",
+      },
+      Object {
+        "active": false,
+        "name": "Start Date",
+      },
+      Object {
+        "active": true,
+        "name": "StartTime",
+      },
+      Object {
+        "active": true,
+        "name": "ElapsedTime",
+      },
+      Object {
+        "active": true,
+        "name": "Monitoring",
+      },
+      Object {
+        "active": false,
+        "name": "Groups",
+      },
+      Object {
+        "active": false,
+        "name": "Skills",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "interactionMonitoring",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Interaction Monitoring",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
   "listTypes": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -339,6 +499,21 @@ Object {
     "updateFormDependencies": Array [],
   },
   "lists": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "List Type",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -389,6 +564,17 @@ Object {
     "updateFormDependencies": Array [],
   },
   "outboundIdentifierLists": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -447,6 +633,29 @@ Object {
     ],
   },
   "outboundIdentifiers": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Value",
+      },
+      Object {
+        "active": true,
+        "name": "channelType",
+      },
+      Object {
+        "active": false,
+        "name": "flowId",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -499,6 +708,8 @@ Object {
     ],
   },
   "permissions": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -547,6 +758,8 @@ Object {
     "updateFormDependencies": Array [],
   },
   "protectedBranding": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -595,6 +808,21 @@ Object {
     "updateFormDependencies": Array [],
   },
   "roles": EntityMetaData {
+    "betaFeature": true,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Permissions",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -645,6 +873,8 @@ Object {
     ],
   },
   "skills": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
