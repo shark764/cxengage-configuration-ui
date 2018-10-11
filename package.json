@@ -24,6 +24,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "test:coverage": "npm run test -- --coverage",
     "test:auto": "node ./node_modules/cx-automation-utils | wdio ./automation/wdio.conf.js --suite \"inProgress\"",
+    "test:all": "wdio ./automation/wdio.conf.js --suite \"inProgress\"",
     "lint": "eslint src/",
     "precommit": "npm run lint && lint-staged && npm run test:coverage"
   },
