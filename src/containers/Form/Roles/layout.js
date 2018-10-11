@@ -10,11 +10,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputField } from 'cx-ui-components';
+import { DetailHeader, InputField } from 'cx-ui-components';
 
 export default function RolesForm({ handleSubmit, isSaving, inherited, key }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
+      <DetailHeader text="Details" />
       <InputField
         name="name"
         label="Name *"

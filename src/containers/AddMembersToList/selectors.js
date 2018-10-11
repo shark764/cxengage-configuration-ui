@@ -4,6 +4,7 @@
 
 import { availableEntitiesForList } from '../../redux/modules/entities/selectors';
 import { availablePermissionsForList } from '../../redux/modules/entities/roles/selectors';
+import { availableUsersForList } from '../../redux/modules/entities/dataAccessReports/selectors';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 import { availableItemsForList } from '../../redux/modules/entities/listItemSelectors';
 
@@ -20,6 +21,9 @@ export const selectSidePanelTableItems = (state, currentEntity) => {
     }
     case 'roles': {
       return availablePermissionsForList(state, dependentEntity, currentEntity);
+    }
+    case 'dataAccessReports': {
+      return availableUsersForList(state, dependentEntity, currentEntity);
     }
     default:
       break;

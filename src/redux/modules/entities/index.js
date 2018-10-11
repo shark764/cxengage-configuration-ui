@@ -157,6 +157,21 @@ const initialState = fromJS({
       'MANAGE_ALL_GROUP_OWNERS',
       'MANAGE_TENANT_ENROLLMENT'
     ]
+  },
+  dashboards: {
+    ...defaultEntity
+  },
+  historicalReportFolders: {
+    ...defaultEntity
+  },
+  dataAccessReports: {
+    ...defaultEntity,
+    metaData: {
+      listDependency: 'users'
+    },
+    readPermission: ['CUSTOM_STATS_READ'],
+    updatePermission: ['CUSTOM_STATS_UPDATE'],
+    createPermission: ['CUSTOM_STATS_CREATE']
   }
   //hygen-inject-before
 });
@@ -318,7 +333,9 @@ export default function reducer(state = initialState, action) {
         return state
           .mergeIn(
             [action.entityName, 'data', entityIndex],
-            fromJS({ bulkChangeItem: !state.getIn([action.entityName, 'data', entityIndex, 'bulkChangeItem'], false) })
+            fromJS({
+              bulkChangeItem: !state.getIn([action.entityName, 'data', entityIndex, 'bulkChangeItem'], false)
+            })
           )
           .setIn([action.entityName, 'selectedEntityId'], 'bulk');
       } else {

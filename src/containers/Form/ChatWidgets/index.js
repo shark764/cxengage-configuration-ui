@@ -13,7 +13,7 @@ const CreateChatWidgetsForm = compose(
   connect(createFormName),
   reduxForm({
     onSubmit: formSubmission,
-    destroyOnUnmount: false
+    destroyOnUnmount: true
   })
 )(ChatWidgetsForm);
 

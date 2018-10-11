@@ -146,6 +146,9 @@ export const listOfEntities = [
   'reasonLists',
   'messageTemplates',
   'transferLists',
+  'historicalReportFolders',
+  'dashboards',
+  'dataAccessReports'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -292,13 +295,11 @@ entities.outboundIdentifierLists.sidePanelListTableFields = [
 entities.outboundIdentifierLists.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Roles
+entities.roles.pageTitle = 'Role Management';
+entities.roles.helpLink = '/Help/Content/Managing%20Users/Adding_roles.htm';
 entities.roles.updateFormDependencies.push('permissions');
 entities.roles.dependentEntity = 'roles';
 entities.roles.betaFeature = true;
-entities.roles.sidePanelListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Description', name: 'description' }
-];
 entities.roles.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -384,6 +385,38 @@ entities.transferLists.columns = [
 entities.transferLists.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' }
+];
+
+// Data Access Report
+entities.dataAccessReports.pageTitle = 'Access Controlled Reports';
+entities.dataAccessReports.createFormDependencies = [
+  ...entities.dataAccessReports.createFormDependencies,
+  'users',
+  'historicalReportFolders',
+  'dashboards'
+];
+entities.dataAccessReports.updateFormDependencies = [
+  ...entities.dataAccessReports.updateFormDependencies,
+  'users',
+  'historicalReportFolders',
+  'dashboards'
+];
+entities.dataAccessReports.dependentEntity = 'users';
+entities.dataAccessReports.modalListTableFields = [
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'Email', name: 'email' }
+];
+entities.dataAccessReports.sidePanelListTableFields = [
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'Email', name: 'email' }
+];
+entities.dataAccessReports.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Report Type', active: true },
+  { name: 'Status', active: true }
 ];
 
 //Hygen-insert-new-entity-configuration

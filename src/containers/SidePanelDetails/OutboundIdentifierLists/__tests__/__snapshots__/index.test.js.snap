@@ -2,16 +2,16 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "item": Immutable.Map {
-    "id": "mockId",
-    "name": "mockName",
-    "description": "mockDescription",
+  "item": Object {
     "active": true,
+    "description": "mockDescription",
+    "id": "mockId",
     "members": Array [
       Object {
         "id": "mockSubEntityId",
       },
     ],
+    "name": "mockName",
   },
   "listSize": 0,
   "tableFields": Array [
@@ -38,16 +38,16 @@ Object {
 exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
 <OutboundIdentifierListsDetailsPanel
   item={
-    Immutable.Map {
-      "id": "mockId",
-      "name": "mockName",
-      "description": "mockDescription",
+    Object {
       "active": true,
+      "description": "mockDescription",
+      "id": "mockId",
       "members": Array [
         Object {
           "id": "mockSubEntityId",
         },
       ],
+      "name": "mockName",
     }
   }
   listSize={0}

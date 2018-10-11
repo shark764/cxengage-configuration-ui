@@ -4,9 +4,9 @@
 import { createSelector } from 'reselect';
 import { getCurrentForm } from '../../form/selectors';
 
-const getUsers = state => state.getIn(['Entities', 'users', 'data']);
+export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
-export const selectNonDisabledUsers = createSelector([ getUsers ], ( users ) => {
+export const selectNonDisabledUsers = createSelector([getUsers], users => {
   return users !== undefined
     ? users
         .toJS()

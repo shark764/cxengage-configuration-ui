@@ -53,7 +53,11 @@ export default function AddMemberToList(props) {
         contains={props.contains}
         userHasUpdatePermission={props.userHasUpdatePermission}
         addSubEntity={props.addListItem}
-        toggleSubEntityActive={props.entityName !== 'roles' && props.toggleEntityListItemActive}
+        toggleSubEntityActive={
+          props.entityName !== 'roles' && props.entityName !== 'dataAccessReports'
+            ? props.toggleEntityListItemActive
+            : null
+        }
         items={props.tableItems}
         fields={props.fields}
       />

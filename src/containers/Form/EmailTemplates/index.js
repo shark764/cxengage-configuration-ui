@@ -20,7 +20,7 @@ const UpdateEmailTemplateForm = compose(
   reduxForm({
     onSubmit: formSubmission,
     validate,
-    destroyOnUnmount: false
+    destroyOnUnmount: true
   })
 )(EmailTemplatesForm);
 

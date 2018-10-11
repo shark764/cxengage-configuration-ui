@@ -16,7 +16,7 @@ const CreateOutboundIdentifiersForm = compose(
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
-    destroyOnUnmount: false
+    destroyOnUnmount: true
   })
 )(OutboundIdentifiersForm);
 
