@@ -42,12 +42,12 @@ exports[`<CustomMetricsForm /> renders create customMetric 1`] = `
       options={
         Array [
           Object {
-            "helpText": "(Include short abandons against/in SLA)",
+            "helpText": "(Filter Out / Exclude Short Abandons)",
             "label": "Ignore Abandons",
             "value": "ignored-abandoned-calls",
           },
           Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
+            "helpText": "(Include short abandons against/in SLA)",
             "label": "Count Against SLA",
             "value": "count-against-sla",
           },
@@ -109,12 +109,12 @@ exports[`<CustomMetricsForm /> renders update customMetric 1`] = `
       options={
         Array [
           Object {
-            "helpText": "(Include short abandons against/in SLA)",
+            "helpText": "(Filter Out / Exclude Short Abandons)",
             "label": "Ignore Abandons",
             "value": "ignored-abandoned-calls",
           },
           Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
+            "helpText": "(Include short abandons against/in SLA)",
             "label": "Count Against SLA",
             "value": "count-against-sla",
           },
@@ -176,12 +176,12 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
       options={
         Array [
           Object {
-            "helpText": "(Include short abandons against/in SLA)",
+            "helpText": "(Filter Out / Exclude Short Abandons)",
             "label": "Ignore Abandons",
             "value": "ignored-abandoned-calls",
           },
           Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
+            "helpText": "(Include short abandons against/in SLA)",
             "label": "Count Against SLA",
             "value": "count-against-sla",
           },
@@ -235,12 +235,12 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
       options={
         Array [
           Object {
-            "helpText": "(Include short abandons against/in SLA)",
+            "helpText": "(Filter Out / Exclude Short Abandons)",
             "label": "Ignore Abandons",
             "value": "ignored-abandoned-calls",
           },
           Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
+            "helpText": "(Include short abandons against/in SLA)",
             "label": "Count Against SLA",
             "value": "count-against-sla",
           },
@@ -302,12 +302,12 @@ exports[`<CustomMetricsForm /> renders update customMetric with count-against-sl
       options={
         Array [
           Object {
-            "helpText": "(Include short abandons against/in SLA)",
+            "helpText": "(Filter Out / Exclude Short Abandons)",
             "label": "Ignore Abandons",
             "value": "ignored-abandoned-calls",
           },
           Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
+            "helpText": "(Include short abandons against/in SLA)",
             "label": "Count Against SLA",
             "value": "count-against-sla",
           },
@@ -361,12 +361,12 @@ exports[`<CustomMetricsForm /> renders update customMetric with ignored-abandone
       options={
         Array [
           Object {
-            "helpText": "(Include short abandons against/in SLA)",
+            "helpText": "(Filter Out / Exclude Short Abandons)",
             "label": "Ignore Abandons",
             "value": "ignored-abandoned-calls",
           },
           Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
+            "helpText": "(Include short abandons against/in SLA)",
             "label": "Count Against SLA",
             "value": "count-against-sla",
           },
