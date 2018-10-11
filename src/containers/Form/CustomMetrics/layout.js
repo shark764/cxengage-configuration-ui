@@ -52,12 +52,12 @@ export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, s
             {
               label: 'Ignore Abandons',
               value: 'ignored-abandoned-calls',
-              helpText: '(Include short abandons against/in SLA)'
+              helpText: '(Filter Out / Exclude Short Abandons)'
             },
             {
               label: 'Count Against SLA',
               value: 'count-against-sla',
-              helpText: '(Filter Out / Exclude Short Abandons)'
+              helpText: '(Include short abandons against/in SLA)'
             }
           ]}
           required
