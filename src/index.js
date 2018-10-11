@@ -11,7 +11,7 @@ import RootStyles from './containers/RootStyles';
 
 import store from './redux/store';
 
-import Startup from './containers/Startup';
+import Login from './containers/Login';
 import SupervisorToolbar from './containers/SupervisorToolbar';
 import InteractionMonitoring from './containers/InteractionMonitoring';
 import BetaFeatures from './containers/BetaFeatures';
@@ -23,24 +23,15 @@ ReactDOM.render(
       <Switch>
         {/* Branding is not required for SupervisorToolbar and we do not want to display the loading spinner for it */}
         <Route path="/supervisorToolbar" component={SupervisorToolbar} />
-        <Startup>
+        <Login>
           <RootStyles>
             <Fragment>
-              <Route
-                path="/interactionMonitoring"
-                component={InteractionMonitoring}
-              />
-              <Route
-                path="/betaFeatures"
-                component={BetaFeatures}
-              />
-              <Route
-                path="/configuration/:entityName"
-                component={CrudEndpointUi}
-              />
+              <Route path="/interactionMonitoring" component={InteractionMonitoring} />
+              <Route path="/betaFeatures" component={BetaFeatures} />
+              <Route path="/configuration/:entityName" component={CrudEndpointUi} />
             </Fragment>
           </RootStyles>
-        </Startup>
+        </Login>
       </Switch>
     </Router>
   </Provider>,

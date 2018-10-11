@@ -1,5 +1,8 @@
 import * as SDK from '../sdk';
 
+// This make the test think it's in an iframe
+window.parent = 'window';
+
 describe('sdkPromise', () => {
   it('calls an sdk promise with correct topic should result resolve promise with proper result', () => {
     global.addEventListener = (message, func) =>
@@ -32,24 +35,6 @@ describe('sdkPromise', () => {
       data: 'updateLocalStorage',
       topic: 'updateLocalStorage'
     }).catch(err => expect(err).toEqual('ERROR FROM SDK'));
-  });
-  it('calls an sdk promise with undefined topic , should result in promise rejection "Topic mismatch"', () => {
-    global.addEventListener = (message, func) => func({ data: { error: 'ERROR', topic: ['updateLocalStorage'] } });
-    SDK.sdkPromise({
-      module: 'updateLocalStorage',
-      command: `updateLocalStorage`,
-      data: 'updateLocalStorage',
-      topic: undefined
-    }).catch(err => expect(err).toEqual('Topic mismatch'));
-  });
-  it('topic returned from sdk doesn\'t match topic provided , should result in promise rejection "Topic mismatch"', () => {
-    global.addEventListener = (message, func) => func({ data: { error: 'ERROR', topic: ['update-Local-Storage'] } });
-    SDK.sdkPromise({
-      module: 'updateLocalStorage',
-      command: `updateLocalStorage`,
-      data: 'updateLocalStorage',
-      topic: 'updateLocalStorage'
-    }).catch(err => expect(err).toEqual('Topic mismatch'));
   });
 });
 

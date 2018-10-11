@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.28.0] - 2018-10-11
+### Added
+- Added ability to login to config 2 directly
+
+### Changed
+- Merged Startup components duties into login component
+
 ## [0.27.2] - 2018-10-10
 ### Changed
 - Fixed bug where you couldn't remove list items
