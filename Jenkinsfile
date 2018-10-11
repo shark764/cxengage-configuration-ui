@@ -55,6 +55,13 @@ pipeline {
         junit 'build/junit.xml'
       }
     }
+    stage ('Automated Tests') {
+      when { changeRequest() }
+      steps {
+        sh 'echo "Stage Description: Runs automation tests and fails if any single test fails"'
+        sh "docker exec ${docker_tag} npm run test:all"
+      }
+    }
     stage ('Build') {
       steps {
         sh 'echo "Stage Description: Builds the production version of the app"'

@@ -12,4 +12,10 @@ RUN usermod -u 106 node
 USER node
 WORKDIR /home/node/app
 
+ENV TENANT=selenium
+ENV PORT=4444
+ENV REGIONVAR=us-east-1
+ENV ENVIRONMENT=dev
+ENV HOST=resources-selenium.cxengagelabs.net
+
 RUN npm install
