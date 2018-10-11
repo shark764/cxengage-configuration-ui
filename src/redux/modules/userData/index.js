@@ -2,30 +2,28 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 import { fromJS } from 'immutable';
+import { isInIframe } from 'serenova-js-utils/browser';
 
 // Initial Sub State
 export const initialState = fromJS({
   agentId: '',
+  userIsAuthed: !isInIframe(),
   permissions: '',
   currentTenantName: '',
   currentTenantId: ''
 });
 
 // Actions
-export const updateUserPermissions = (
-  tenantId,
-  tenantName,
-  tenantPermissions,
-  agentId
-) => ({
+export const updateUserPermissions = (tenantId, tenantName, tenantPermissions, userId) => ({
   type: 'UPDATE_USER_PERMISSIONS',
   tenantInfo: {
-    tenantId: tenantId,
-    tenantName: tenantName,
-    tenantPermissions: tenantPermissions
+    tenantId,
+    tenantName,
+    tenantPermissions
   },
-  agentId: agentId
+  userId
 });
+export const toggleUserAuthed = () => ({ type: 'TOGGLE_USER_AUTH' });
 
 // Reducer
 export default function reducer(state = initialState, action) {
@@ -36,7 +34,10 @@ export default function reducer(state = initialState, action) {
         .set('permissions', fromJS(tenantPermissions))
         .set('currentTenantId', tenantId)
         .set('currentTenantName', tenantName)
-        .set('agentId', action.agentId);
+        .set('agentId', action.userId);
+    }
+    case 'TOGGLE_USER_AUTH': {
+      return state.set('userIsAuthed', !state.get('userIsAuthed'));
     }
     default:
       return state;

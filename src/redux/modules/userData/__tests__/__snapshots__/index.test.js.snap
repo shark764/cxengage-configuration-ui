@@ -12,6 +12,7 @@ Immutable.Map {
 exports[`UserData reducer snapshots returns the correct initial state 1`] = `
 Immutable.Map {
   "agentId": "",
+  "userIsAuthed": false,
   "permissions": "",
   "currentTenantName": "",
   "currentTenantId": "",

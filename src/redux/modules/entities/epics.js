@@ -22,6 +22,7 @@ import { handleError, handleSuccess, handleBulkSuccess } from './handleResult';
 import { entityAddedToList, entityRemovedFromList } from '../../modules/entities/roles/selectors';
 
 import { uploadCsv, setEntityUpdating } from './index';
+import { isInIframe } from 'serenova-js-utils/browser';
 
 import {
   getCurrentEntity,
@@ -146,24 +147,27 @@ export const FetchDataItem = action$ =>
     );
 
 export const getTenantPermissions = action$ =>
-  action$.ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$', 'FETCH_BRANDING_$').switchMap(a =>
-    fromPromise(
-      sdkPromise({
-        module: 'updateLocalStorage',
-        command: `updateLocalStorage`,
-        data: 'updateLocalStorage',
-        topic: 'updateLocalStorage'
-      })
-    ).map(response => ({
-      type: 'UPDATE_USER_PERMISSIONS',
-      tenantInfo: {
-        tenantId: response.tenant.tenantId,
-        tenantName: response.tenant.tenantName,
-        tenantPermissions: response.tenant.tenantPermissions
-      },
-      agentId: response.agentId
-    }))
-  );
+  action$
+    .ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$', 'FETCH_BRANDING_$')
+    .filter(a => !isInIframe())
+    .switchMap(a =>
+      fromPromise(
+        sdkPromise({
+          module: 'updateLocalStorage',
+          command: `updateLocalStorage`,
+          data: 'updateLocalStorage',
+          topic: 'updateLocalStorage'
+        })
+      ).map(response => ({
+        type: 'UPDATE_USER_PERMISSIONS',
+        tenantInfo: {
+          tenantId: response.tenant.tenantId,
+          tenantName: response.tenant.tenantName,
+          tenantPermissions: response.tenant.tenantPermissions
+        },
+        agentId: response.agentId
+      }))
+    );
 
 export const CreateEntity = action$ =>
   action$
@@ -248,13 +252,17 @@ export const BulkEntityUpdate = (action$, store) =>
     })
     .mergeMap(a =>
       forkJoin(
-        a.allSdkCalls.map(
-          apiCall => from(
-            sdkPromise(apiCall).catch(error => ({error: error, id: apiCall.data[removeLastLetter(a.entityName) + 'Id']}) )
-          )))
-      .do(allResult => handleBulkSuccess(allResult))
-      .mergeMap(result => from(result)
-      .map(response => handleSuccess(response, a)))
+        a.allSdkCalls.map(apiCall =>
+          from(
+            sdkPromise(apiCall).catch(error => ({
+              error: error,
+              id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
+            }))
+          )
+        )
+      )
+        .do(allResult => handleBulkSuccess(allResult))
+        .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
     );
 
 export const ToggleEntity = (action$, store) =>

@@ -1,3 +1,4 @@
+import { isInIframe } from 'serenova-js-utils/browser';
 
 function guid() {
   function s4() {
@@ -9,32 +10,37 @@ function guid() {
 }
 
 export const sdkPromise = sdkCall => {
-  
-  return new Promise((resolve, reject) => {
-
-    const completeSdkCall = {messageId: guid(), ...sdkCall};
-
-    const handleResponse = event => {
-
-      if ( completeSdkCall.messageId === event.data.messageId) {
-
-        const { error, response } = event.data;
-
+  if (isInIframe()) {
+    return new Promise((resolve, reject) => {
+      /* istanbul ignore next */
+      CxEngage[sdkCall.module][sdkCall.command](sdkCall.data, function(error, topic, response) {
+        console.log('[SDK] SDK sending back:', error, topic, response);
         if (error) {
           reject(error);
         } else {
           resolve(response);
         }
-        removeEventListener('message', handleResponse, false);
-
-      }
-
-    };
-
-    addEventListener('message', handleResponse);
-    window.parent.postMessage(completeSdkCall, '*');
-  });
-}
+      });
+    });
+  } else {
+    return new Promise((resolve, reject) => {
+      const completeSdkCall = { messageId: guid(), ...sdkCall };
+      const handleResponse = event => {
+        if (completeSdkCall.messageId === event.data.messageId) {
+          const { error, response } = event.data;
+          if (error) {
+            reject(error);
+          } else {
+            resolve(response);
+          }
+          removeEventListener('message', handleResponse, false);
+        }
+      };
+      addEventListener('message', handleResponse);
+      window.parent.postMessage(completeSdkCall, '*');
+    });
+  }
+};
 
 export const sdkCall = sdkCall =>
   new Promise((resolve, reject) => {
