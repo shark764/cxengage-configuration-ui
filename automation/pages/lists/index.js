@@ -43,9 +43,11 @@ const ListsPage = {
 	DispositionDescriptionLable : new Element('span[title="Description"]'),
 	DispositionActionLable : new Element('div[class="rt-resizable-header-content"]'),
 	ListtypeDS : new Element('span[title="Disposition Codes Type"]'),
+	ListtypeReason : new Element('span[title="Reason Codes Type"]'),
 	ListEnabled : new Element('div[class="rt-td"]Enabled'),
   ListDisabled : new Element('div[class="rt-td"]Disabled'),
-
+  ReasonNameLable: new Element('span[title="Reason Name"]'),
+	ReasonCodeLable: new Element('span[title="Reason Code"]'),
 
   NavigateToListPage: function(){
 		this.configurationDropDown.waitAndClick();
@@ -92,7 +94,6 @@ AddDispositionListItem: function( NewListName , Newcode){
 	this.DispositionCode.setValue(Newcode);
 	this.Description.setValue("this list item has been crated by auto test and this is Nourhan ");
 	this.SubmitButtonListItem.waitAndClick();
-	Brow.pause(2000);
 },
 
 AddReasonListItem: function( NewListName , Newcode){
@@ -101,7 +102,6 @@ AddReasonListItem: function( NewListName , Newcode){
 	this.ResonCode.setValue(Newcode);
 	this.Description.setValue("this list item has been crated by auto test and this is Nourhan ");
 	this.SubmitButtonListItem.waitAndClick();
-	Brow.pause(8000);
 },
 
 
@@ -125,8 +125,7 @@ this.SubmitButtonListItem.waitAndClick();
 },
 
 RemoveListItem: function(){
-this.RemoveListItemButton.click();
-Brow.pause(8000);
+this.RemoveListItemButton.waitAndClick();
 }
 
 };

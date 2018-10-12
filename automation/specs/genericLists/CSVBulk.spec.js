@@ -1,6 +1,8 @@
 const LoginPage = require('../../pages/login'),
       ListsPage = require('../../pages/lists');
 const {Element, Brow} = require('cx-automation-utils/pageObject');
+var ListName = uuid() + "List",
+    newListName = "New"+ uuid(),
 //const	Brow = require('../../../resources/classes/protractorObjects');
 describe('Config-UI Login spec', ()=>{
   it('Login and just hang out for a while', () => {
@@ -11,23 +13,14 @@ describe('Config-UI Login spec', ()=>{
     Brow.pause(8000);
   });
 
- it('check if a list  is exists if yes edit if no create new List with type Dispostion Code', ()=>{
+ it('create new list ', ()=>{
+
    ListsPage.iframe.switchToFrame();
-   ListsPage.NameSearchinput.setValue("auto list Disposition type");
-   if (ListsPage.DispositionsMainList.isExisting()) {
-    ListsPage.DispositionsMainList.click();
-    ListsPage.EditListDetails("new name for Dispostion list ");
-    Brow.pause(80000);
-   }
-   else {
 
-    ListsPage.CreateListTypeDispositionsCode("auto list Disposition type");
-    ListsPage.CreateNewList();
-    Brow.pause(8000);
-   }
-
-  ListsPage.closeListPanel();
-
+   ListsPage.CreateListTypeDispositionsCode(ListName);
+   ListsPage.CreateNewList();
+   Brow.pause(8000);
+   ListsPage.closeListPanel();
   });
 
 it('adding list items to the Disposition list',() =>{
