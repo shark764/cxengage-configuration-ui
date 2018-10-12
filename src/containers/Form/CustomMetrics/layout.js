@@ -39,6 +39,7 @@ export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, s
         <InputField
           name="slaThreshold"
           label="SLA Threshold"
+          labelHelpText="(seconds)"
           inputType="text"
           disabled={isSaving || inherited}
           componentType="input"
@@ -66,6 +67,7 @@ export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, s
           <InputField
             name="slaAbandonThreshold"
             label="Abandon Threshold"
+            labelHelpText="(seconds)"
             inputType="text"
             disabled={isSaving || inherited}
             componentType="input"

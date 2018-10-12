@@ -3,27 +3,28 @@
  */
 
 import React from 'react';
+import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import OutboundIdentifiersDetailsPanel, { mapStateToProps } from '../';
-import {
-  getSelectedEntity,
-  userHasUpdatePermission
-} from '../../../../redux/modules/entities/selectors';
+import { getSelectedEntity, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
-getSelectedEntity.mockImplementation(() => {});
+getSelectedEntity.mockImplementation(
+  () =>
+    new Map({
+      id: 'mockId',
+      name: 'mockName',
+      active: true
+    })
+);
 userHasUpdatePermission.mockImplementation(() => true);
 
 describe('OutboundIdentifiersDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
     expect(
-      shallow(
-        <OutboundIdentifiersDetailsPanel store={store}>
-          Child
-        </OutboundIdentifiersDetailsPanel>
-      )
+      shallow(<OutboundIdentifiersDetailsPanel store={store}>Child</OutboundIdentifiersDetailsPanel>)
     ).toMatchSnapshot();
   });
 });

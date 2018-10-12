@@ -2,8 +2,7 @@
 
 exports[`<OutboundIdentifiersDetailsPanel /> renders outboundIdentifiers detailsPanel , no update permissions 1`] = `
 <styled.div
-  className="details-panel"
-  id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+  id="dtpanel-outbound-identifiers"
 >
   <DetailHeader
     text="Details"
@@ -35,8 +34,7 @@ exports[`<OutboundIdentifiersDetailsPanel /> renders outboundIdentifiers details
 
 exports[`<OutboundIdentifiersDetailsPanel /> renders outboundIdentifiers detailsPanel 1`] = `
 <styled.div
-  className="details-panel"
-  id="7a96c534-cc2e-11n8-88b9-9440dab8141"
+  id="dtpanel-outbound-identifiers"
 >
   <DetailHeader
     text="Details"

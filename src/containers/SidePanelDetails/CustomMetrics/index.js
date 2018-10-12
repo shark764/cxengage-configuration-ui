@@ -8,8 +8,7 @@ import { userHasUpdatePermission, getSelectedEntity } from '../../../redux/modul
 
 export function mapStateToProps(state) {
   return {
-    id: 'dtpanel-custom-metrics',
-    item: getSelectedEntity(state),
+    item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }

@@ -23,12 +23,10 @@ const Wrapper = styled.div`
 export default function OutboundIdentifiersDetailsPanel({
   children,
   userHasUpdatePermission,
-  id,
-  className,
   item: { name, value, flowId, channelType, description }
 }) {
   return (
-    <Wrapper id={id} className={className}>
+    <Wrapper id="dtpanel-outbound-identifiers">
       <DetailHeader text="Details" />
       {userHasUpdatePermission ? (
         children
@@ -46,8 +44,6 @@ export default function OutboundIdentifiersDetailsPanel({
 }
 
 OutboundIdentifiersDetailsPanel.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
   item: PropTypes.shape({
     name: PropTypes.string,
     value: PropTypes.string,

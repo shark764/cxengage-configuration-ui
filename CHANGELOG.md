@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.28.3] - 2018-10-12
+### Added
+- Help text to label for inputTexts
+
+### Fixed
+- Fixed issue with SLA sidePanel where values were not shown to user with read permission
+
 ## [0.28.2] - 2018-10-11
 ### Changed
 - Fixed issue with SLA form where Abandon Types had backwards help text

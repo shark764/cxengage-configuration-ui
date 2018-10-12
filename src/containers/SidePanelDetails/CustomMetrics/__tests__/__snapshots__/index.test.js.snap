@@ -3,7 +3,13 @@
 exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
 <CustomMetricsDetailsPanel
   dispatch={[Function]}
-  id="dtpanel-custom-metrics"
+  item={
+    Object {
+      "active": true,
+      "id": "mockId",
+      "name": "mockName",
+    }
+  }
   store={
     Object {
       "dispatch": [Function],
@@ -41,8 +47,11 @@ exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "id": "dtpanel-custom-metrics",
-  "item": undefined,
+  "item": Object {
+    "active": true,
+    "id": "mockId",
+    "name": "mockName",
+  },
   "userHasUpdatePermission": true,
 }
 `;
