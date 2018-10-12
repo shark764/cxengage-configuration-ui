@@ -22,20 +22,10 @@ const Wrapper = styled.div`
 export default function CustomMetricsDetailsPanel({
   children,
   userHasUpdatePermission,
-  id,
-  className,
-  item: {
-    name,
-    description,
-    customMetricsType,
-    active,
-    slaThreshold,
-    slaAbandonType,
-    slaAbandonThreshold
-  }
+  item: { name, description, customMetricsType, active, slaThreshold, slaAbandonType, slaAbandonThreshold }
 }) {
   return (
-    <Wrapper id={id} className={className}>
+    <Wrapper id="dtpanel-custom-metrics">
       {userHasUpdatePermission ? (
         children
       ) : (
@@ -44,9 +34,11 @@ export default function CustomMetricsDetailsPanel({
           <Detail label="Description" value={description} />
           <Detail label="Custom Metric Type" value={customMetricsType} />
           <Detail label="Status" value={active ? 'Enabled' : 'Disabled'} />
-          <Detail label="SLA Threshold" intValue={slaThreshold} />
+          <Detail label="SLA Threshold" value={String(slaThreshold)} />
           <Detail label="SLA Abandon Type" value={slaAbandonType} />
-          <Detail label="SLA Abandon Threshold" intValue={slaAbandonThreshold} />
+          {slaAbandonType === 'ignored-abandoned-calls' ? (
+            <Detail label="SLA Abandon Threshold" value={String(slaAbandonThreshold)} />
+          ) : null}
         </Fragment>
       )}
     </Wrapper>
@@ -54,8 +46,6 @@ export default function CustomMetricsDetailsPanel({
 }
 
 CustomMetricsDetailsPanel.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
   item: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,

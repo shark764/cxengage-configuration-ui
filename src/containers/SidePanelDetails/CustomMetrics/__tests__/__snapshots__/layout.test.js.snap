@@ -2,8 +2,7 @@
 
 exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel 1`] = `
 <styled.div
-  className="details-panel"
-  id="details-panel-id"
+  id="dtpanel-custom-metrics"
 >
   Mock Child
 </styled.div>
@@ -11,8 +10,7 @@ exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel 1`] = 
 
 exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with no update permision 1`] = `
 <styled.div
-  className="details-panel"
-  id="details-panel-id"
+  id="dtpanel-custom-metrics"
 >
   <React.Fragment>
     <Detail
@@ -32,16 +30,16 @@ exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with n
       value="Enabled"
     />
     <Detail
-      intValue={20}
       label="SLA Threshold"
+      value="20"
     />
     <Detail
       label="SLA Abandon Type"
       value="ignored-abandoned-calls"
     />
     <Detail
-      intValue={20}
       label="SLA Abandon Threshold"
+      value="20"
     />
   </React.Fragment>
 </styled.div>
@@ -49,8 +47,7 @@ exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with n
 
 exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with no update permision and active disabled 1`] = `
 <styled.div
-  className="details-panel"
-  id="details-panel-id"
+  id="dtpanel-custom-metrics"
 >
   <React.Fragment>
     <Detail
@@ -70,16 +67,16 @@ exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel with n
       value="Disabled"
     />
     <Detail
-      intValue={20}
       label="SLA Threshold"
+      value="20"
     />
     <Detail
       label="SLA Abandon Type"
       value="ignored-abandoned-calls"
     />
     <Detail
-      intValue={20}
       label="SLA Abandon Threshold"
+      value="20"
     />
   </React.Fragment>
 </styled.div>

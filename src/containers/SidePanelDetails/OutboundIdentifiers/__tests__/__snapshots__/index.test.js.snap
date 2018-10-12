@@ -2,7 +2,11 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "item": undefined,
+  "item": Object {
+    "active": true,
+    "id": "mockId",
+    "name": "mockName",
+  },
   "userHasUpdatePermission": true,
 }
 `;
@@ -10,6 +14,13 @@ Object {
 exports[`OutboundIdentifiersDetailsPanel Renders renders 1`] = `
 <OutboundIdentifiersDetailsPanel
   dispatch={[Function]}
+  item={
+    Object {
+      "active": true,
+      "id": "mockId",
+      "name": "mockName",
+    }
+  }
   store={
     Object {
       "dispatch": [Function],
