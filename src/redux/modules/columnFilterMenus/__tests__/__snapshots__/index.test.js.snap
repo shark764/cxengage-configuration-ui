@@ -159,6 +159,43 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "users": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "First Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Last Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Email",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "External Id",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Role",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Presence",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Invitation Status",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Platform Status",
+        "active": true,
+      },
+    ],
+  },
   "protectedBranding": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],

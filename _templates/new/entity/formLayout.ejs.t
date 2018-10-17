@@ -13,7 +13,7 @@ to: src/containers/Form/<%= name %>/layout.js
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Detail } from 'cx-ui-components';
+import { DetailHeader } from 'cx-ui-components';
 import { InputField } from 'cx-ui-components';
 import { SelectField } from 'cx-ui-components';
 

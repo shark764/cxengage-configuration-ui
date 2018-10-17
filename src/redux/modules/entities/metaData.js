@@ -115,9 +115,7 @@ export class EntityMetaData {
     }
   }
   bulkEditsAvailable() {
-    return this.entityName !== 'emailTemplates' &&
-      this.entityName !== 'roles' &&
-      location.hash.includes('alpha');
+    return this.entityName !== 'emailTemplates' && this.entityName !== 'roles' && location.hash.includes('alpha');
   }
 }
 
@@ -142,11 +140,28 @@ export const listOfEntities = [
   'skills',
   'roles',
   'permissions',
-  'interactionMonitoring'
+  'interactionMonitoring',
+  'users'
+  //Hygen-insert-at-end-of-list
 ];
 
 const entities = {};
 listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
+
+// Users
+entities.users.columns = [
+  { name: 'First Name', active: true },
+  { name: 'Last Name', active: true },
+  { name: 'Email', active: true },
+  { name: 'External Id', active: true },
+  // TODO: Skills and Groups require a special column to work
+  // {name: 'Skills', active: true},
+  // {name: 'Groups', active: true},
+  { name: 'Role', active: true },
+  { name: 'Presence', active: true },
+  { name: 'Invitation Status', active: true },
+  { name: 'Platform Status', active: true }
+];
 
 // Generic Lists
 entities.lists.createFormDependencies.push('listTypes');
@@ -155,7 +170,7 @@ entities.lists.helpLink = '/Help/Content/Configuration/Lists/Lists.htm';
 entities.lists.columns = [
   { name: 'Name', active: true },
   { name: 'List Type', active: true },
-  { name: 'Status', active: true },
+  { name: 'Status', active: true }
 ];
 
 // Outbound Identifiers
@@ -166,7 +181,7 @@ entities.outboundIdentifiers.columns = [
   { name: 'Description', active: true },
   { name: 'Value', active: true },
   { name: 'channelType', active: true },
-  { name: 'flowId', active: false },
+  { name: 'flowId', active: false }
 ];
 
 // Outbound Identifiers Lists
@@ -178,10 +193,7 @@ entities.outboundIdentifierLists.modalListTableFields = [
   { label: 'Channel Type', name: 'channelType' },
   { label: 'Description', name: 'description' }
 ];
-entities.outboundIdentifierLists.columns = [
-  { name: 'Name', active: true },
-  { name: 'Description', active: true },
-];
+entities.outboundIdentifierLists.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Roles
 entities.roles.updateFormDependencies.push('permissions');
@@ -190,7 +202,7 @@ entities.roles.betaFeature = true;
 entities.roles.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Permissions', active: true },
+  { name: 'Permissions', active: true }
 ];
 
 //Silent Monitoring
@@ -210,7 +222,7 @@ entities.interactionMonitoring.columns = [
   { name: 'Monitoring', active: true },
   { name: 'Groups', active: false },
   { name: 'Skills', active: false }
-]
+];
 
 // Custom Metrics
 entities.customMetrics.pageTitle = 'Statistics Management';
@@ -218,21 +230,18 @@ entities.customMetrics.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Metric Type', active: true },
-  { name: 'Status', active: true },
+  { name: 'Status', active: true }
 ];
 
 // Email Templates
 entities.emailTemplates.helpLink = '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
-entities.emailTemplates.columns = [
-  { name: 'Name', active: true },
-  { name: 'Description', active: true },
-];
+entities.emailTemplates.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Chat Widgets
 entities.chatWidgets.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Status', active: true },
+  { name: 'Status', active: true }
 ];
 
 export const entitiesMetaData = entities;
