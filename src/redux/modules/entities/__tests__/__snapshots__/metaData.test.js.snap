@@ -922,6 +922,89 @@ Object {
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
+  "users": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "First Name",
+      },
+      Object {
+        "active": true,
+        "name": "Last Name",
+      },
+      Object {
+        "active": true,
+        "name": "Email",
+      },
+      Object {
+        "active": true,
+        "name": "External Id",
+      },
+      Object {
+        "active": true,
+        "name": "Role",
+      },
+      Object {
+        "active": true,
+        "name": "Presence",
+      },
+      Object {
+        "active": true,
+        "name": "Invitation Status",
+      },
+      Object {
+        "active": true,
+        "name": "Platform Status",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "users",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Users",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
 }
 `;
 

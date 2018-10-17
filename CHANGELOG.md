@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.29.1] - 2018-10-17
+### Fixed
+- hygen consolidation
+
 ## [0.29.0] - 2018-10-15
 ### Added
 - Component to be able to expand or collapse side panel details CXV1-14811
