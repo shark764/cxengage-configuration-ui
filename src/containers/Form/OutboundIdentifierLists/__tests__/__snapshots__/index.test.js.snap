@@ -15,22 +15,3 @@ Object {
   "key": "mockId",
 }
 `;
-
-exports[`createFormName returns proper values 1`] = `
-Object {
-  "form": "outboundIdentifierLists:mockId",
-}
-`;
-
-exports[`formSubmission returns proper values 1`] = `
-Object {
-  "dirty": true,
-  "type": "FORM_SUBMIT",
-  "values": Object {
-    "channelType": "mockChannel",
-    "desciption": "mockDescription",
-    "name": "mockName",
-    "value": "mockValue",
-  },
-}
-`;

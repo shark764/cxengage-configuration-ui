@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createFormName returns proper values 1`] = `
+Object {
+  "form": "mock current entity:mock current entity id",
+}
+`;
+
+exports[`formSubmission returns proper values 1`] = `
+Object {
+  "dirty": true,
+  "type": "FORM_SUBMIT",
+  "values": Object {
+    "id": "mockId",
+    "name": "mockName",
+  },
+}
+`;
+
 exports[`getCurrentFormInitialValues returns the current form's inital values converted to javascript 1`] = `
 Object {
   "mockProperty": "mock value",
@@ -46,5 +63,16 @@ Immutable.Map {
   "id": "mockId",
   "name": "mockName",
   "active": true,
+}
+`;
+
+exports[`subEntityFormSubmission returns proper values 1`] = `
+Object {
+  "dirty": true,
+  "type": "SUB_ENTITY_FORM_SUBMIT",
+  "values": Object {
+    "id": "mockSubEntityId",
+    "name": "mockSubEntityName",
+  },
 }
 `;

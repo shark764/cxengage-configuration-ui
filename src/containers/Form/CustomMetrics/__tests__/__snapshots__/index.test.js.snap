@@ -55,25 +55,3 @@ Object {
   "slaAbandonType": "ignored-abandoned-calls",
 }
 `;
-
-exports[`createFormName returns proper values 1`] = `
-Object {
-  "form": "customMetrics:mockId",
-}
-`;
-
-exports[`formSubmission returns proper values 1`] = `
-Object {
-  "dirty": true,
-  "type": "FORM_SUBMIT",
-  "values": Object {
-    "customMetricsType": "SLA",
-    "description": "mockDescription",
-    "id": "mockId",
-    "name": "mockName",
-    "slaAbandonThreshold": 20,
-    "slaAbandonType": "ignored-abandoned-calls",
-    "slaThreshold": 20,
-  },
-}
-`;

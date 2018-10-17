@@ -11,21 +11,15 @@ import { reduxForm } from 'redux-form/immutable';
 import <%= name %>Form from './layout';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { formValidation } from './validation';
+import { getSelectedEntityId, isInherited, isCreating } from '../../../redux/modules/entities/selectors';
 import {
-  getSelectedEntityId,
-  isInherited,
-  isCreating
-} from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../redux/modules/form/selectors';
+  selectFormInitialValues,
+  formSubmission,
+  createFormName
+} from '../../../redux/modules/form/selectors';
 
-export const formSubmission = (values, dispatch, props) =>
-  dispatch(onFormSubmit(values, props));
-export const createFormName = state => ({
-  form: `<%= name %>:${getSelectedEntityId(state)}`
-});
-
-let Create<%= name %>Form = compose(
-  connect(createFormName),
+const Create<%= name %>Form = compose(
+  connect((state) => createFormName(state)),
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,

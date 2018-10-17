@@ -26,8 +26,6 @@ const Wrapper = styled.div`
 export default function <%= name %>DetailsPanel({
   children,
   userHasUpdatePermission,
-  id,
-  className,
   item: {
     name,
     description,
@@ -35,7 +33,7 @@ export default function <%= name %>DetailsPanel({
   }
 }) {
   return (
-    <Wrapper id={id} className={className}>
+    <Wrapper className="dtpanel-entity-<%= name %>">
       {userHasUpdatePermission ? (
         children
       ) : (
@@ -50,8 +48,6 @@ export default function <%= name %>DetailsPanel({
 }
 
 <%= name %>DetailsPanel.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
   item: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,

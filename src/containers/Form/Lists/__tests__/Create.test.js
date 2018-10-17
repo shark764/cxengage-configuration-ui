@@ -6,7 +6,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { mockStore } from '../../../../utils/testUtils';
-import CreateListForm, { mapStateToProps } from '../Create';
+import CreateListsForm, { mapStateToProps } from '../Create';
 import { getSelectedEntityId, isCreating } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
@@ -20,10 +20,10 @@ jest.mock('../../../../redux/modules/entities/listTypes/selectors', () => ({
   getListTypesOptions: () => 'mock list types options'
 }));
 
-describe('CreateListForm Renders', () => {
+describe('CreateListsForm Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(shallow(<CreateListForm store={store}>Child</CreateListForm>)).toMatchSnapshot();
+    expect(shallow(<CreateListsForm store={store}>Child</CreateListsForm>)).toMatchSnapshot();
   });
 });
 

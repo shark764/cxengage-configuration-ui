@@ -12,5 +12,5 @@ export function constructGeneralTextColumn(string) {
     Header: <span title={normalizedString}>{normalizedString}</span>,
     accessor: string,
     Cell: ({ row }) => <span title={row[string]}>{row[string]}</span>
-  }
+  };
 }

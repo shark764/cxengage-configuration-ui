@@ -15,26 +15,6 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
     userHasUpdatePermission={true}
   />
   <_class
-    fields={
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Value",
-          "name": "value",
-        },
-        Object {
-          "label": "Channel Type",
-          "name": "channelType",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ]
-    }
     userHasUpdatePermission={true}
   />
 </styled.div>
@@ -64,26 +44,6 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders without update perm
     userHasUpdatePermission={false}
   />
   <_class
-    fields={
-      Array [
-        Object {
-          "label": "Name",
-          "name": "name",
-        },
-        Object {
-          "label": "Value",
-          "name": "value",
-        },
-        Object {
-          "label": "Channel Type",
-          "name": "channelType",
-        },
-        Object {
-          "label": "Description",
-          "name": "description",
-        },
-      ]
-    }
     userHasUpdatePermission={false}
   />
 </styled.div>

@@ -2,26 +2,44 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
+import { fromJS } from 'immutable';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { mockStore } from 'TestUtils';
-import AddMemberToList, { mapStateToProps, actions } from '../';
+import { getCurrentEntity, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import AddMemberToListLayout, { mapStateToProps, actions } from '../';
+import { selectSidePanelTableItems } from '../selectors';
+
+const initialState = fromJS({
+  Entities: {
+    outboundIdentifierLists: {
+      data: [
+        {
+          id: 'mockId',
+          name: 'mockName',
+          dependentEntity: 'outboundIdentifiers'
+        }
+      ]
+    }
+  }
+});
+
+jest.mock('../../../redux/modules/entities/selectors');
+getCurrentEntity.mockImplementation(() => 'skills');
+userHasUpdatePermission.mockImplementation(() => true);
 
 jest.mock('../../../redux/modules/entities', () => ({
   setSelectedSubEntityId: () => 'mockId',
   addListItem: () => 'mockListItems',
   toggleEntityListItemActive: () => true
 }));
-jest.mock('../../../redux/modules/entities/selectors', () => ({
-  getSelectedEntityName: () => 'mockName',
-  availableEntitiesForList: () => [],
-  userHasUpdatePermission: () => true,
-  getCurrentEntity: () => 'outboundIdentifierLists'
-}));
 
-describe('AddMemberToList Renders', () => {
+jest.mock('../selectors');
+selectSidePanelTableItems.mockImplementation(() => []);
+
+describe('AddMemberToListLayout Renders', () => {
   it('renders', () => {
-    const rendered = shallow(<AddMemberToList store={mockStore} />);
+    const rendered = shallow(<AddMemberToListLayout store={mockStore} />);
     expect(rendered).toMatchSnapshot();
   });
 });

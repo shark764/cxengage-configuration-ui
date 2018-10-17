@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateListForm Renders renders 1`] = `
-<ReduxForm
+exports[`CreateListsForm Renders renders 1`] = `
+<Connect(ReduxForm)
   dispatch={[Function]}
   initialValues={
     Immutable.Map {
@@ -43,7 +43,7 @@ exports[`CreateListForm Renders renders 1`] = `
   }
 >
   Child
-</ReduxForm>
+</Connect(ReduxForm)>
 `;
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `

@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import ListItemsForm from './layout';
-import { setSelectedSubEntityId, onSubEntityFormSubmit } from '../../../redux/modules/entities';
+import { setSelectedSubEntityId } from '../../../redux/modules/entities';
 import { getSelectedSubEntityId, isSubEntitySaving } from '../../../redux/modules/entities/selectors';
+import { subEntityFormSubmission } from '../../../redux/modules/form/selectors';
 import { getUpdateFieldItems, getInitialValues } from './selectors';
 import validate from './validation';
 
@@ -16,7 +17,7 @@ const UpdateListItemsForm = compose(
     form: `listItems:${getSelectedSubEntityId(state)}`
   })),
   reduxForm({
-    onSubmit: (values, dispatch, props) => dispatch(onSubEntityFormSubmit(values, props)),
+    onSubmit: subEntityFormSubmission,
     validate
   })
 )(ListItemsForm);

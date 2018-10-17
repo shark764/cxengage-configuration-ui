@@ -6,6 +6,7 @@ to: src/containers/SidePanelDetails/<%= name %>/__tests__/index.test.js
  */
 
 import React from 'react';
+import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import <%= name %>DetailsPanel, { mapStateToProps } from '../';
@@ -17,7 +18,14 @@ import {
 } from '../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
-getSelectedEntity.mockImplementation(() => {});
+getSelectedEntity.mockImplementation(
+  () =>
+    new Map({
+      id: 'mockId',
+      name: 'mockName',
+      type: 'mockType'
+    })
+);
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);

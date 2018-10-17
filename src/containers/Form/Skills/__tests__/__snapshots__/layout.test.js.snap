@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SkillsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <InputField
+      componentType="input"
+      disabled={false}
+      id="frm-skills-name"
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="textarea"
+      disabled={false}
+      id="frm-skills-description"
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+    <ToggleField
+      disabled={false}
+      id="frm-skills-has-proficiency"
+      label="Has Proficiency"
+      name="hasProficiency"
+    />
+  </React.Fragment>
+</form>
+`;
+
+exports[`<SkillsForm /> renders create form with no proficiency 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <InputField
+      componentType="input"
+      disabled={false}
+      id="frm-skills-name"
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="textarea"
+      disabled={false}
+      id="frm-skills-description"
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+    <ToggleField
+      disabled={false}
+      id="frm-skills-has-proficiency"
+      label="Has Proficiency"
+      name="hasProficiency"
+    />
+  </React.Fragment>
+</form>
+`;
+
+exports[`<SkillsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <InputField
+      componentType="input"
+      disabled={false}
+      id="frm-skills-name"
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="textarea"
+      disabled={false}
+      id="frm-skills-description"
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+    <ToggleField
+      disabled={false}
+      id="frm-skills-has-proficiency"
+      label="Has Proficiency"
+      name="hasProficiency"
+    />
+  </React.Fragment>
+</form>
+`;
+
+exports[`<SkillsForm /> renders update form with no proficiency 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <InputField
+      componentType="input"
+      disabled={false}
+      id="frm-skills-name"
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="textarea"
+      disabled={false}
+      id="frm-skills-description"
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+    <ToggleField
+      disabled={false}
+      id="frm-skills-has-proficiency"
+      label="Has Proficiency"
+      name="hasProficiency"
+    />
+  </React.Fragment>
+</form>
+`;
