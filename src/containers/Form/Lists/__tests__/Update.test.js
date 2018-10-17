@@ -5,7 +5,6 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { mockStore } from '../../../../utils/testUtils';
 import UpdateListsForm, { mapStateToProps } from '../Update';
 import { getSelectedEntityId, isUpdating } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';

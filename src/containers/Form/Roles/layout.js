@@ -18,13 +18,15 @@ export default function RolesForm({ handleSubmit, isSaving, inherited, key }) {
       <InputField
         name="name"
         label="Name *"
+        id="frm-roles-name"
         componentType="input"
         inputType="text"
         disabled={isSaving || inherited}
-      /> disabled={isSaving || inherited} />
+      />
       <InputField
         name="description"
         label="Description"
+        id="frm-roles-description"
         componentType="textarea"
         inputType="text"
         disabled={isSaving || inherited}

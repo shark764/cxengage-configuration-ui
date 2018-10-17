@@ -1,11 +1,8 @@
-import startDateColumn, { helperFunctions } from '../startDate';
+import startDateColumn from '../startDate';
 import { shallow } from 'enzyme';
 
 describe('startDate Column configuration', () => {
-  const columnConfigObject = startDateColumn(
-    '2018-02-20T14:24:41.519Z',
-    'mockTableType'
-  );
+  const columnConfigObject = startDateColumn('2018-02-20T14:24:41.519Z', 'mockTableType');
   it('returns the proper object column configuration object', () => {
     expect(columnConfigObject).toMatchSnapshot();
   });
@@ -64,14 +61,9 @@ describe('startDate Column configuration', () => {
 });
 
 describe('startDate Filter renders properly', () => {
-  const columnConfigObject = startDateColumn(
-    '2018-02-20T14:24:41.519Z',
-    'mockTableType'
-  );
+  const columnConfigObject = startDateColumn('2018-02-20T14:24:41.519Z', 'mockTableType');
   it('renders the default filter', () => {
-    const wrapper = shallow(
-      columnConfigObject.Filter({ onChange: answerKey => ({ answerKey }) })
-    );
+    const wrapper = shallow(columnConfigObject.Filter({ onChange: answerKey => ({ answerKey }) }));
     expect(wrapper).toMatchSnapshot();
   });
   it('renders the After filter', () => {
@@ -93,12 +85,10 @@ describe('startDate Filter renders properly', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('filterArray method, default filter', () => {
-    const wrapper = shallow(
-      columnConfigObject.Filter({ onChange: answerKey => ({ answerKey }) })
-    );
-    expect(
-      wrapper.instance().changeAfterBefore({ target: { value: '05/24/2018' } })
-    ).toEqual({ answerKey: '05/24/2018:' });
+    const wrapper = shallow(columnConfigObject.Filter({ onChange: answerKey => ({ answerKey }) }));
+    expect(wrapper.instance().changeAfterBefore({ target: { value: '05/24/2018' } })).toEqual({
+      answerKey: '05/24/2018:'
+    });
   });
   it('filterArray method, custom filter', () => {
     const wrapper = shallow(
@@ -107,9 +97,9 @@ describe('startDate Filter renders properly', () => {
         onChange: answerKey => ({ answerKey })
       })
     );
-    expect(
-      wrapper.instance().changeAfterBefore({ target: { value: '05/24/2018' } })
-    ).toEqual({ answerKey: '05/24/2018:8' });
+    expect(wrapper.instance().changeAfterBefore({ target: { value: '05/24/2018' } })).toEqual({
+      answerKey: '05/24/2018:8'
+    });
   });
   it('beforeOrAfterOnChange method', () => {
     const wrapper = shallow(
@@ -118,9 +108,9 @@ describe('startDate Filter renders properly', () => {
         onChange: answerKey => ({ answerKey })
       })
     );
-    expect(
-      wrapper.instance().changeAfterBefore({ target: { value: '05/24/2018' } })
-    ).toEqual({ answerKey: '05/24/2018:0' });
+    expect(wrapper.instance().changeAfterBefore({ target: { value: '05/24/2018' } })).toEqual({
+      answerKey: '05/24/2018:0'
+    });
   });
   it('formatCurrentFilter method returns default dd/mm/yyyy when no there is no date input', () => {
     const wrapper = shallow(
@@ -128,9 +118,7 @@ describe('startDate Filter renders properly', () => {
         onChange: answerKey => ({ answerKey })
       })
     );
-    expect(
-      wrapper.instance().formatCurrentFilter({ value: 'Before: undefined' })
-    ).toEqual('Before mm/dd/yyyy');
+    expect(wrapper.instance().formatCurrentFilter({ value: 'Before: undefined' })).toEqual('Before mm/dd/yyyy');
   });
   it('formatCurrentFilter method returns a proper formated filter when date input is valid', () => {
     const wrapper = shallow(
@@ -138,9 +126,7 @@ describe('startDate Filter renders properly', () => {
         onChange: answerKey => ({ answerKey })
       })
     );
-    expect(
-      wrapper.instance().formatCurrentFilter({ value: 'Before:2018-09-08' })
-    ).toEqual('Before 09-08-2018');
+    expect(wrapper.instance().formatCurrentFilter({ value: 'Before:2018-09-08' })).toEqual('Before 09-08-2018');
   });
   it('inputOnChange method', () => {
     const wrapper = shallow(
@@ -149,8 +135,8 @@ describe('startDate Filter renders properly', () => {
         onChange: answerKey => ({ answerKey })
       })
     );
-    expect(
-      wrapper.instance().changeDateInput({ target: { value: 'newValue' } })
-    ).toEqual({ answerKey: 'After:newValue' });
+    expect(wrapper.instance().changeDateInput({ target: { value: 'newValue' } })).toEqual({
+      answerKey: 'After:newValue'
+    });
   });
 });

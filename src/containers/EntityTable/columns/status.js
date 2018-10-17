@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const statusColumn = {
   id: 'status',
@@ -24,9 +25,20 @@ export const statusColumn = {
       style={{ width: '100%' }}
       value={filter ? filter.value : 'all'}
     >
-      <option value="all" className="entity-table-filter-status-option-all">All</option>
-      <option value="enabled" className="entity-table-filter-status-option-enabled">View Enabled</option>
-      <option value="disabled" className="entity-table-filter-status-option-disabled">View Disabled</option>
+      <option value="all" className="entity-table-filter-status-option-all">
+        All
+      </option>
+      <option value="enabled" className="entity-table-filter-status-option-enabled">
+        View Enabled
+      </option>
+      <option value="disabled" className="entity-table-filter-status-option-disabled">
+        View Disabled
+      </option>
     </select>
   )
+};
+
+statusColumn.Filter.propTypes = {
+  filter: PropTypes.func,
+  onChange: PropTypes.func
 };

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RolesForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-roles-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="frm-roles-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;
+
+exports[`<RolesForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-roles-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="frm-roles-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;

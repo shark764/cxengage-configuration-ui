@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import OutboundIdentifiersForm from './layout';
-import { onFormSubmit } from '../../../redux/modules/entities';
 import { formValidation } from './validation';
 import { getSelectedEntityId, isCreating } from '../../../redux/modules/entities/selectors';
 import { selectFlowIds } from '../../../redux/modules/entities/flows/selectors';

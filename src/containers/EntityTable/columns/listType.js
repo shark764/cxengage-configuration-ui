@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const listTypeColumn = {
   id: 'listType',
@@ -17,4 +18,12 @@ export const listTypeColumn = {
       value={filter ? filter.value : ''}
     />
   )
+};
+
+listTypeColumn.Cell.propTypes = {
+  row: PropTypes.any
+};
+listTypeColumn.Filter.propTypes = {
+  filter: PropTypes.func,
+  onChange: PropTypes.func
 };

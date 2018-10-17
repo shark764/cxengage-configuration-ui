@@ -96,6 +96,107 @@ Array [
     "accessor": "flowId",
     "id": "flowId",
   },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="First Name"
+    >
+      First Name
+    </span>,
+    "accessor": "firstName",
+    "id": "firstName",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Last Name"
+    >
+      Last Name
+    </span>,
+    "accessor": "lastName",
+    "id": "lastName",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Platform Status"
+    >
+      Platform Status
+    </span>,
+    "accessor": "platformStatus",
+    "id": "platformStatus",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Role Name"
+    >
+      Role Name
+    </span>,
+    "accessor": "roleName",
+    "id": "roleName",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Email"
+    >
+      Email
+    </span>,
+    "accessor": "email",
+    "id": "email",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="State"
+    >
+      State
+    </span>,
+    "accessor": "state",
+    "id": "state",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="External Id"
+    >
+      External Id
+    </span>,
+    "accessor": "externalId",
+    "id": "externalId",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Invitation Status"
+    >
+      Invitation Status
+    </span>,
+    "accessor": "invitationStatus",
+    "id": "invitationStatus",
+  },
+  Object {
+    "Cell": [Function],
+    "Header": <span
+      title="Proficiency"
+    >
+      Proficiency
+    </span>,
+    "accessor": "proficiency",
+    "id": "proficiency",
+  },
+  Object {
+    "Filter": [Function],
+    "Header": <span
+      title="Has Proficiency"
+    >
+      Has Proficiency
+    </span>,
+    "accessor": [Function],
+    "filterMethod": [Function],
+    "id": "hasProficiency",
+  },
 ]
 `;
 

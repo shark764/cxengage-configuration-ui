@@ -7,18 +7,6 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 import ListsDetailsPanel, { mapStateToProps } from '../';
-import {
-  getSelectedEntity,
-  userHasUpdatePermission,
-  isInherited,
-  isSubEntitySaving
-} from '../../../../redux/modules/entities/selectors';
-import {
-  setSelectedSubEntityId,
-  deleteSubEntity,
-  downloadCsv,
-  setConfirmationDialog
-} from '../../../../redux/modules/entities';
 const mockSelectedEntity = fromJS({
   name: 'mock list name',
   shared: true,
@@ -48,11 +36,6 @@ jest.mock('../../../../redux/modules/entities/selectors', () => ({
   isSubEntitySaving: () => true
 }));
 
-const mockSelectedSubEntity = fromJS({
-  description: 'Nothing',
-  dispositionCode: 1,
-  dispositionName: 'Test 1'
-});
 jest.mock('../../../../redux/modules/entities', () => ({
   setSelectedSubEntityId: () => 'create',
   deleteSubEntity: () => 'mock is deleting sub entity',

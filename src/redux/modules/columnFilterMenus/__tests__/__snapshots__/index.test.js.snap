@@ -159,7 +159,7 @@ Immutable.Map {
         "active": true,
       },
       Immutable.Map {
-        "name": "Proficiency",
+        "name": "Has Proficiency",
         "active": true,
       },
       Immutable.Map {

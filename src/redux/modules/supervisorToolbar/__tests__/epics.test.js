@@ -12,8 +12,7 @@ import {
   HangUpEpic,
   ToggleMuteEpic,
   MonitorInteractionInitialization,
-  SqsSessionLost,
-  handleError
+  SqsSessionLost
 } from '../epics';
 
 import {
@@ -36,9 +35,7 @@ import {
 jest.mock('../../../../utils/sdk');
 jest.mock('../selectors');
 selectSupervisorToolbarMuted.mockReturnValue(false);
-selectSupervisorToolbarSilentMonitoringInteractionId.mockReturnValue(
-  '0000-0000-0000-0000'
-);
+selectSupervisorToolbarSilentMonitoringInteractionId.mockReturnValue('0000-0000-0000-0000');
 selectSupervisorToolbarSilentMonitoringStatus.mockReturnValue('connected');
 
 describe('StartBatchRequest', () => {
@@ -66,32 +63,24 @@ describe('StartBatchRequest', () => {
 
 describe('MonitorInteractionInitialization', () => {
   beforeEach(() => {
-    sdkPromise.mockReturnValue(
-      new Promise(resolve => resolve('mock response'))
-    );
+    sdkPromise.mockReturnValue(new Promise(resolve => resolve('mock response')));
   });
   afterEach(() => {
     sdkPromise.mockClear();
   });
   it('calls the correct sdk function', done => {
-    const action = ActionsObservable.of(
-      monitorInteractionInitialization('0000-0000-0000-0000')
-    );
+    const action = ActionsObservable.of(monitorInteractionInitialization('0000-0000-0000-0000'));
     MonitorInteractionInitialization(action, mockStore).subscribe(() => {
       expect(sdkPromise).toBeCalled();
       done();
     });
   });
   it('returns HANG_UP_REQUESTED_$ action', done => {
-    const action = ActionsObservable.of(
-      monitorInteractionInitialization('0000-0000-0000-0000')
-    );
-    MonitorInteractionInitialization(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    const action = ActionsObservable.of(monitorInteractionInitialization('0000-0000-0000-0000'));
+    MonitorInteractionInitialization(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
 });
 
@@ -181,9 +170,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
     selectTransitionCall.mockReturnValueOnce(false);
     isSessionActive.mockReturnValueOnce(true);
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(true);
-    const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio')
-    ]);
+    const action = ActionsObservable.from([requestingMonitorCall('0000-0000-0000-0000', 'twilio')]);
     MonitorInteraction(action, mockStore).subscribe(() => {
       expect(sdkCall).toBeCalled();
       done();
@@ -282,9 +269,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
     });
   });
   it('catches and handles error from sdk', done => {
-    sdkCall.mockReturnValueOnce(
-      new Promise((resolve, reject) => reject('mock response'))
-    );
+    sdkCall.mockReturnValueOnce(new Promise((resolve, reject) => reject('mock response')));
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', 'mockExtension'),
       { type: 'cxengage/session/started' }
@@ -298,9 +283,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
 
 describe('HangUpEpic', () => {
   beforeEach(() => {
-    sdkPromise.mockReturnValueOnce(
-      new Promise(resolve => resolve('mock response'))
-    );
+    sdkPromise.mockReturnValueOnce(new Promise(resolve => resolve('mock response')));
   });
   afterEach(() => {
     sdkPromise.mockClear();
@@ -320,9 +303,7 @@ describe('HangUpEpic', () => {
     });
   });
   it('catches and handles error from sdk', done => {
-    sdkPromise.mockReturnValueOnce(
-      new Promise((resolve, reject) => reject('mock response'))
-    );
+    sdkPromise.mockReturnValueOnce(new Promise((resolve, reject) => reject('mock response')));
     const action = ActionsObservable.of(requestingHangUp());
     HangUpEpic(action, supervisorToolbarMockStore).subscribe(output => {
       expect(output).toMatchSnapshot();
@@ -333,9 +314,7 @@ describe('HangUpEpic', () => {
 
 describe('ToggleMuteEpic', () => {
   beforeEach(() => {
-    sdkPromise.mockReturnValue(
-      new Promise(resolve => resolve('mock response'))
-    );
+    sdkPromise.mockReturnValue(new Promise(resolve => resolve('mock response')));
   });
   afterEach(() => {
     sdkPromise.mockClear();
@@ -364,9 +343,7 @@ describe('ToggleMuteEpic', () => {
     });
   });
   it('catches and handles error from sdk', done => {
-    sdkPromise.mockReturnValueOnce(
-      new Promise((resolve, reject) => reject('mock response'))
-    );
+    sdkPromise.mockReturnValueOnce(new Promise((resolve, reject) => reject('mock response')));
     const action = ActionsObservable.of(requestingToggleMute());
     ToggleMuteEpic(action, supervisorToolbarMockStore).subscribe(output => {
       expect(output).toMatchSnapshot();

@@ -68,7 +68,10 @@ ListsDetailsPanel.propTypes = {
   openCreateListItemModal: PropTypes.func.isRequired,
   updateSubEntity: PropTypes.func.isRequired,
   deleteSubEntity: PropTypes.func.isRequired,
-  inherited: PropTypes.bool
+  inherited: PropTypes.bool,
+  isSaving: PropTypes.bool,
+  downloadCsv: PropTypes.func,
+  uploadCsv: PropTypes.func
 };
 
 export default ListsDetailsPanel;

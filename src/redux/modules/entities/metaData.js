@@ -181,12 +181,12 @@ entities.skills.modalListTableFields = [
 entities.skills.sidePanelListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
-  { label: 'Email', name: 'email' },
+  { label: 'Email', name: 'email' }
 ];
 entities.skills.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Proficiency', active: true },
+  { name: 'Has Proficiency', active: true },
   { name: 'Status', active: true }
 ];
 

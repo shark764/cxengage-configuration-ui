@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const permissionsColumn = {
   id: 'permissions',
@@ -17,4 +18,9 @@ export const permissionsColumn = {
       value={filter ? filter.value : ''}
     />
   )
+};
+
+permissionsColumn.Filter.propTypes = {
+  filter: PropTypes.func,
+  onChange: PropTypes.func
 };

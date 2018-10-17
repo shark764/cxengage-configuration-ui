@@ -22,7 +22,6 @@ import {
   getSelectedEntityId,
   getSelectedEntityFormId
 } from '../../entities/selectors';
-import { onFormSubmit, onSubEntityFormSubmit } from '../../entities';
 
 jest.mock('redux-form/immutable');
 jest.mock('../../entities/selectors');

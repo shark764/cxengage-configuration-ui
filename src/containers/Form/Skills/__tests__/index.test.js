@@ -6,7 +6,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
-import SkillsForm, { mapStateToProps, createFormName, formSubmission } from '../';
+import SkillsForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isInherited, isCreating } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
@@ -14,6 +14,7 @@ jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
+isInherited.mockImplementation(() => false);
 isCreating.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 

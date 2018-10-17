@@ -2,8 +2,7 @@
 
 exports[`<EmailTemplatesDetailsPanel /> renders emailTemplates detailsPanel 1`] = `
 <styled.div
-  className="details-panel"
-  id="7c96c534-31f9-11e8-33ff-9440dab83f66"
+  id="dtpanel-email-templates"
 >
   <DetailHeader
     text="Details"

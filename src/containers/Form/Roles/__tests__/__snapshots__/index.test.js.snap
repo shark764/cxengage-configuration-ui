@@ -1,6 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Groups Renders renders 1`] = `
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": false,
+  "initialValues": Object {
+    "active": true,
+  },
+  "isSaving": true,
+  "key": "mockId",
+}
+`;
+
+exports[`Roles Renders renders 1`] = `
 <Connect(ReduxForm)
   dispatch={[Function]}
   inherited={false}
@@ -43,15 +54,4 @@ exports[`Groups Renders renders 1`] = `
 >
   Child
 </Connect(ReduxForm)>
-`;
-
-exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
-Object {
-  "inherited": false,
-  "initialValues": Object {
-    "active": true,
-  },
-  "isSaving": true,
-  "key": "mockId",
-}
 `;

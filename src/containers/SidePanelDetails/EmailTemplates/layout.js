@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 
 export default function EmailTemplatesDetailsPanel(props) {
   return (
-    <Wrapper id={props.id} className={props.className}>
+    <Wrapper id="dtpanel-email-templates">
       <DetailHeader text="Details" />
       {props.userHasUpdatePermission ? (
         <Fragment>
@@ -57,8 +57,6 @@ export default function EmailTemplatesDetailsPanel(props) {
 }
 
 EmailTemplatesDetailsPanel.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.node.isRequired,
   emailFormValue: PropTypes.string,

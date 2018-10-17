@@ -966,7 +966,7 @@ Object {
       },
       Object {
         "active": true,
-        "name": "Proficiency",
+        "name": "Has Proficiency",
       },
       Object {
         "active": true,

@@ -2,7 +2,7 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "inherited": undefined,
+  "inherited": false,
   "initialValues": Object {
     "active": true,
   },
@@ -14,6 +14,7 @@ Object {
 exports[`Skills Renders renders 1`] = `
 <Connect(ReduxForm)
   dispatch={[Function]}
+  inherited={false}
   initialValues={
     Object {
       "active": true,

@@ -17,6 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.33.1] - 2018-10-29
+### Added
+- Unit-test for Roles.
+
+### Fixed
+- Fixed warnings and issues on files.
+- Removing unused files and references.
+
 ## [0.33.0] - 2018-10-29
 ### Added
 - Skills and groups members lists

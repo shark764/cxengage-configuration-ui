@@ -61,6 +61,7 @@ export default function AddMemberToList(props) {
 }
 
 AddMemberToList.propTypes = {
+  entityName: PropTypes.string,
   listName: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   addListItem: PropTypes.func,

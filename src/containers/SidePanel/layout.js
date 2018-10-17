@@ -65,5 +65,6 @@ SidePanelLayout.propTypes = {
   slidingWidth: number,
   children: PropTypes.any,
   onClick: PropTypes.func,
+  userHasUpdatePermission: PropTypes.bool,
   updateSidePanelWidth: PropTypes.func
 };

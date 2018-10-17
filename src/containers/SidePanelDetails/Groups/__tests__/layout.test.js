@@ -10,7 +10,6 @@ import GroupsDetailsPanel from '../layout';
 describe('<GroupsDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
-  let customItemNoProficiency;
   beforeEach(() => {
     customItem = {
       id: 'mockId',
