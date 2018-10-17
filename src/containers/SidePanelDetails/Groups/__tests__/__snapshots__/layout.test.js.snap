@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
+exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
 <styled.div
-  id="dtpanel-skills"
+  id="dtpanel-groups"
 >
   Mock Child
   <DetailHeader
@@ -16,25 +16,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
 </styled.div>
 `;
 
-exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no proficiency 1`] = `
+exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permision 1`] = `
 <styled.div
-  id="dtpanel-skills"
->
-  Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    text="undefined Member(s)"
-    userHasUpdatePermission={true}
-  />
-  <_class
-    userHasUpdatePermission={true}
-  />
-</styled.div>
-`;
-
-exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permision 1`] = `
-<styled.div
-  id="dtpanel-skills"
+  id="dtpanel-groups"
 >
   <React.Fragment>
     <Detail
@@ -44,10 +28,6 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permi
     <Detail
       label="Description"
       value="mockDescription"
-    />
-    <Detail
-      label="Has Proficiency"
-      value="Yes"
     />
     <Detail
       label="Status"
@@ -65,9 +45,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permi
 </styled.div>
 `;
 
-exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled 1`] = `
+exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled 1`] = `
 <styled.div
-  id="dtpanel-skills"
+  id="dtpanel-groups"
 >
   Mock Child
   <DetailHeader

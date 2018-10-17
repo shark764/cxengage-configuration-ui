@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 
 const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
-export const selectTenantUsers = createSelector(getUsers, users => {
+export const selectNonDisabledUsers = createSelector(getUsers, users => {
   return users !== undefined
     ? users
         .toJS()

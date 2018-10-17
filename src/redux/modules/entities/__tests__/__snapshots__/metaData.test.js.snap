@@ -293,14 +293,31 @@ Object {
   },
   "groups": EntityMetaData {
     "betaFeature": false,
-    "columns": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Members",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
-    "dependentEntity": "",
+    "dependentEntity": "users",
     "entityName": "groups",
     "entityTableFields": Array [
       Object {
@@ -312,34 +329,44 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Managing%20Users/Creating_Groups.htm",
     "modalListTableFields": Array [
       Object {
-        "label": "Name",
-        "name": "name",
+        "label": "First Name",
+        "name": "firstName",
       },
       Object {
-        "label": "Description",
-        "name": "description",
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
       },
     ],
-    "pageTitle": "Groups",
+    "pageTitle": "Group Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
     "sidePanelListTableFields": Array [
       Object {
-        "label": "Name",
-        "name": "name",
+        "label": "First Name",
+        "name": "firstName",
       },
       Object {
-        "label": "Description",
-        "name": "description",
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
       },
     ],
     "subEntityName": "",
-    "updateFormDependencies": Array [],
+    "updateFormDependencies": Array [
+      "users",
+    ],
   },
   "interactionMonitoring": EntityMetaData {
     "betaFeature": true,

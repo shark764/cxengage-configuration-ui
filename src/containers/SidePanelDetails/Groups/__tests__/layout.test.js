@@ -5,9 +5,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SkillsDetailsPanel from '../layout';
+import GroupsDetailsPanel from '../layout';
 
-describe('<SkillsDetailsPanel />', () => {
+describe('<GroupsDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
   let customItemNoProficiency;
@@ -26,17 +26,10 @@ describe('<SkillsDetailsPanel />', () => {
       active: false,
       hasProficiency: true
     };
-    customItemNoProficiency = {
-      id: 'mockId',
-      name: 'mockName',
-      description: 'mockDescription',
-      active: false,
-      hasProficiency: false
-    };
   });
-  it('renders Skills detailsPanel', () => {
+  it('renders Groups detailsPanel', () => {
     const rendered = shallow(
-      <SkillsDetailsPanel
+      <GroupsDetailsPanel
         id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={true}
@@ -47,9 +40,9 @@ describe('<SkillsDetailsPanel />', () => {
     );
     expect(rendered).toMatchSnapshot();
   });
-  it('renders Skills detailsPanel with status disabled', () => {
+  it('renders Groups detailsPanel with status disabled', () => {
     const rendered = shallow(
-      <SkillsDetailsPanel
+      <GroupsDetailsPanel
         id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={true}
@@ -60,22 +53,9 @@ describe('<SkillsDetailsPanel />', () => {
     );
     expect(rendered).toMatchSnapshot();
   });
-  it('renders Skills detailsPanel with no proficiency', () => {
+  it('renders Groups detailsPanel with no update permision', () => {
     const rendered = shallow(
-      <SkillsDetailsPanel
-        id="details-panel-id"
-        className="details-panel"
-        userHasUpdatePermission={true}
-        children={'Mock Child'}
-        item={customItemNoProficiency}
-        setSelectedSubEntityId={() => {}}
-      />
-    );
-    expect(rendered).toMatchSnapshot();
-  });
-  it('renders Skills detailsPanel with no update permision', () => {
-    const rendered = shallow(
-      <SkillsDetailsPanel
+      <GroupsDetailsPanel
         id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={false}

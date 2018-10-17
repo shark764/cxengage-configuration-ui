@@ -3,7 +3,7 @@
  */
 
 import { fromJS } from 'immutable';
-import { selectTenantUsers, getDisplay } from '../selectors';
+import { selectNonDisabledUsers, getDisplay } from '../selectors';
 
 const initialState = fromJS({
   Entities: {
@@ -60,9 +60,9 @@ describe('getDisplay', () => {
   });
 });
 
-describe('selectTenantUsers', () => {
+describe('selectNonDisabledUsers', () => {
   it('should get users, then return it mapped with new data and filtered', () => {
-    expect(selectTenantUsers(initialState)).toEqual([
+    expect(selectNonDisabledUsers(initialState)).toEqual([
       {
         name: 'mockFirstName 1 mockLastName 1',
         email: 'mockEmail 1',
@@ -81,6 +81,6 @@ describe('selectTenantUsers', () => {
         }
       }
     });
-    expect(selectTenantUsers(initialStateNoData)).toEqual(undefined);
+    expect(selectNonDisabledUsers(initialStateNoData)).toEqual(undefined);
   });
 });

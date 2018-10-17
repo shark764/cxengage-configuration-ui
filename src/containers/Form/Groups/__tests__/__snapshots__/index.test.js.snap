@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CustomMetrics Renders renders 1`] = `
+exports[`Groups Renders renders 1`] = `
 <Connect(ReduxForm)
   dispatch={[Function]}
   initialValues={
@@ -8,8 +8,8 @@ exports[`CustomMetrics Renders renders 1`] = `
       "active": true,
     }
   }
+  isSaving={true}
   key="mockId"
-  slaAbandonType="ignored-abandoned-calls"
   store={
     Object {
       "dispatch": [Function],
@@ -39,7 +39,6 @@ exports[`CustomMetrics Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
-  userHasUpdatePermission={true}
 >
   Child
 </Connect(ReduxForm)>
@@ -51,9 +50,7 @@ Object {
   "initialValues": Object {
     "active": true,
   },
-  "isSaving": undefined,
+  "isSaving": true,
   "key": "mockId",
-  "slaAbandonType": "ignored-abandoned-calls",
-  "userHasUpdatePermission": true,
 }
 `;

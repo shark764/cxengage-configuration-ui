@@ -113,6 +113,27 @@ const initialState = fromJS({
       'MANAGE_ALL_USER_SKILLS',
       'MANAGE_TENANT_ENROLLMENT'
     ]
+  },
+  groups: {
+    ...defaultEntity,
+    metaData: {
+      listDependency: 'users'
+    },
+    readPermission: ['VIEW_ALL_GROUPS'],
+    updatePermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'MANAGE_ALL_GROUPS',
+      'MANAGE_ALL_GROUP_USERS',
+      'MANAGE_ALL_GROUP_OWNERS',
+      'MANAGE_TENANT_ENROLLMENT'
+    ],
+    createPermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'MANAGE_ALL_GROUPS',
+      'MANAGE_ALL_GROUP_USERS',
+      'MANAGE_ALL_GROUP_OWNERS',
+      'MANAGE_TENANT_ENROLLMENT'
+    ]
   }
   //hygen-inject-before
 });

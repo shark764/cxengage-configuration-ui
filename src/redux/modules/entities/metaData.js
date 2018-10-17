@@ -187,6 +187,28 @@ entities.skills.columns = [
   { name: 'Status', active: true }
 ];
 
+// Groups
+entities.groups.pageTitle = 'Group Management';
+entities.groups.helpLink = '/Help/Content/Managing%20Users/Creating_Groups.htm';
+entities.groups.updateFormDependencies.push('users');
+entities.groups.dependentEntity = 'users';
+entities.groups.modalListTableFields = [
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'Email', name: 'email' }
+];
+entities.groups.sidePanelListTableFields = [
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'Email', name: 'email' }
+];
+entities.groups.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Members', active: true },
+  { name: 'Status', active: true }
+];
+
 // Generic Lists
 entities.lists.createFormDependencies.push('listTypes');
 entities.lists.subEntityName = 'listItems';

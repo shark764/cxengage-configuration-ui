@@ -5,30 +5,27 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
-import CustomMetricsForm from './layout';
+import GroupsForm from './layout';
 import { formValidation } from './validation';
-import { getSelectedEntityId, isInherited, isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import { getSelectedEntityId, isInherited, isCreating } from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
-import { getAbandonTypeFormValue } from '../../../redux/modules/entities/customMetrics/selectors';
 
-const CreateCustomMetricsForm = compose(
+const CreateGroupsForm = compose(
   connect(createFormName),
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
     destroyOnUnmount: false
   })
-)(CustomMetricsForm);
+)(GroupsForm);
 
 export function mapStateToProps(state) {
   return {
-    slaAbandonType: getAbandonTypeFormValue(state),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
-    userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state)
   };
 }
 
-export default connect(mapStateToProps)(CreateCustomMetricsForm);
+export default connect(mapStateToProps)(CreateGroupsForm);

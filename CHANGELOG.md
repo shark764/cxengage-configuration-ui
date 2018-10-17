@@ -10,9 +10,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Beta UAT page
 - Chat Widgets
+- Skills
+- Groups
+- Users
 
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
+
+## [0.31.0] - 2018-10-23
+### Added
+- CXV1-15517 - Adding Groups Page.
+- CXV1-15516 - Adding Skills Page.
+- Added selectors for users.
+
+### Changed
+- CXV1-15472 - Show disabled Configurable SLA form for users with only read permissions.
+- Fixed selectors for Access Control.
+- Refactored forms and sidePanel to new standard.
+- Consolidation of entities attributes to metaData.
 
 ## [0.30.0] - 2018-10-22
 ### Added
@@ -176,7 +191,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Jenkins build improvments 2
 
 ## [0.21.5]
-* Jenkins build improvments (Broken) 
+* Jenkins build improvments (Broken)
 
 ## [0.21.4]
 * CXV1-14541 - Silent Monitoring - Skills and Groups filters not working properly

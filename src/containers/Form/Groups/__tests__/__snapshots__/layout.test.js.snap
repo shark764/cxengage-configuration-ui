@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GroupsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <InputField
+      componentType="input"
+      disabled={false}
+      id="frm-groups-name"
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="textarea"
+      disabled={false}
+      id="frm-groups-description"
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+  </React.Fragment>
+</form>
+`;
+
+exports[`<GroupsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <InputField
+      componentType="input"
+      disabled={false}
+      id="frm-groups-name"
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="textarea"
+      disabled={false}
+      id="frm-groups-description"
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+  </React.Fragment>
+</form>
+`;

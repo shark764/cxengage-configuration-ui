@@ -337,6 +337,31 @@ Immutable.Map {
       "CUSTOM_STATS_UPDATE",
     ],
   },
+  "groups": Immutable.Map {
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "metaData": Immutable.Map {
+      "listDependency": "users",
+    },
+    "readPermission": Immutable.List [
+      "VIEW_ALL_GROUPS",
+    ],
+    "updatePermission": Immutable.List [
+      "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",
+      "MANAGE_ALL_GROUPS",
+      "MANAGE_ALL_GROUP_USERS",
+      "MANAGE_ALL_GROUP_OWNERS",
+      "MANAGE_TENANT_ENROLLMENT",
+    ],
+    "createPermission": Immutable.List [
+      "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",
+      "MANAGE_ALL_GROUPS",
+      "MANAGE_ALL_GROUP_USERS",
+      "MANAGE_ALL_GROUP_OWNERS",
+      "MANAGE_TENANT_ENROLLMENT",
+    ],
+  },
   "lists": Immutable.Map {
     "selectedSubEntityId": undefined,
     "subEntity": "listItems",

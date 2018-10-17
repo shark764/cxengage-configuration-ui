@@ -14,7 +14,14 @@ import { DetailHeader } from 'cx-ui-components';
 import { InputField } from 'cx-ui-components';
 import { RadioGroupField } from 'cx-ui-components';
 
-export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, slaAbandonType, key }) {
+export default function CustomMetricsForm({
+  handleSubmit,
+  isSaving,
+  inherited,
+  userHasUpdatePermission,
+  slaAbandonType,
+  key
+}) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
@@ -24,14 +31,14 @@ export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, s
           label="Name *"
           componentType="input"
           inputType="text"
-          disabled={isSaving || inherited}
+          disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         <InputField
           name="description"
           label="Description"
           componentType="textarea"
           inputType="text"
-          disabled={isSaving || inherited}
+          disabled={isSaving || inherited || !userHasUpdatePermission}
         />
       </Fragment>
       <DetailHeader text="Properties" />
@@ -41,14 +48,14 @@ export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, s
           label="SLA Threshold"
           labelHelpText="(seconds)"
           inputType="text"
-          disabled={isSaving || inherited}
+          disabled={isSaving || inherited || !userHasUpdatePermission}
           componentType="input"
           dataType="number"
         />
         <RadioGroupField
           name="slaAbandonType"
           label="SLA Abandon Type"
-          disabled={isSaving || inherited}
+          disabled={isSaving || inherited || !userHasUpdatePermission}
           options={[
             {
               label: 'Ignore Abandons',
@@ -69,7 +76,7 @@ export default function CustomMetricsForm({ handleSubmit, isSaving, inherited, s
             label="Abandon Threshold"
             labelHelpText="(seconds)"
             inputType="text"
-            disabled={isSaving || inherited}
+            disabled={isSaving || inherited || !userHasUpdatePermission}
             componentType="input"
             dataType="number"
           />
@@ -84,5 +91,6 @@ CustomMetricsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
+  userHasUpdatePermission: PropTypes.bool,
   slaAbandonType: PropTypes.string
 };
