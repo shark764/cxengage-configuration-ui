@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.29.3] - 2018-10-19
+### Changed
+- fix jenkins auto deploy to dev
+
 ## [0.29.2] - 2018-10-19
 ### Changed
 - jenkins workflow to do tests in parallel
