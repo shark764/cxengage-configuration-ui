@@ -125,10 +125,10 @@ pipeline {
       when { anyOf {branch 'master'}}
       steps {
         build(
-        job: 'Deploy%20-%20Front-End',
+        job: 'Deploy - Front-End',
         parameters: [
           [
-            $class: 'ActiveChoicesParameterValue',
+            $class: 'StringParameterValue',
             name: 'Service',
             value: "Config-UI2",
           ],
@@ -143,7 +143,7 @@ pipeline {
             value: build_version,
           ],
           [
-            $class: 'ActiveChoicesParameterValue',
+            $class: 'StringParameterValue',
             name: 'Environment',
             value: 'dev',
           ],
