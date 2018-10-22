@@ -1,65 +1,52 @@
 const LoginPage = require('../../pages/login'),
+      uuid = require('uuid'),
       ListsPage = require('../../pages/lists');
 const {Element, Brow} = require('cx-automation-utils/pageObject');
 var ListName = uuid() + "List",
-    newListName = "New"+ uuid(),
-//const	Brow = require('../../../resources/classes/protractorObjects');
+    path = require('path'),
+    listfilename = path.resolve(__dirname, '../../../../../Downloads/'+ListName+'.csv');
 describe('Config-UI Login spec', ()=>{
   it('Login and just hang out for a while', () => {
       LoginPage.login('nmoaaness@serenova.com', 'Canada2016@NB');
   });
   it('navigate to Lists page', ()=>{
     ListsPage.NavigateToListPage();
-    Brow.pause(8000);
   });
 
  it('create new list ', ()=>{
 
    ListsPage.iframe.switchToFrame();
-
    ListsPage.CreateListTypeDispositionsCode(ListName);
    ListsPage.CreateNewList();
    Brow.pause(8000);
    ListsPage.closeListPanel();
   });
 
-it('adding list items to the Disposition list',() =>{
-  //ListsPage.iframe.switchToFrame();
-  ListsPage.DispositionsMainList.click();
-  ListsPage.AddDispositionListItem("First Item","1");
-  ListsPage.AddDispositionListItem("Second Item","2");
-  ListsPage.AddDispositionListItem("Third Item","3");
-  ListsPage.RemoveListItem();
-  ListsPage.EditDispositionListItem();
+
+
+it('start download list as CSV file',() =>{
+   //ListsPage.iframe.switchToFrame();
+   ListsPage.NameSearchinput.setValue(ListName);
+   if(new Element('span[title="'+ListName+'"]').isExisting()){
+      new Element('span[title="'+ListName+'"]').click();
+   }
+   ListsPage.startdownloadbutton.waitAndClick();
+    Brow.pause(8000);
+   ListsPage.choosefilebutton.waitAndClick();
+   ListsPage.uploadlistfile(listfilename);
+   ListsPage.ConfirmButton.waitAndClick();
+   Brow.pause(8000);
 
 });
 
-  it('check if a list  is exists if yes edit if no create new List with type Reason Code', ()=>{
-  //  ListsPage.iframe.switchToFrame();
-    ListsPage.NameSearchinput.setValue("auto list Reason type");
-    if (ListsPage.ReasonsMainList.isExisting()) {
-     ListsPage.ReasonsMainList.click();
-     ListsPage.EditListDetails("new name for Reasons list ");
-     Brow.pause(8000);
-    }
-    else {
-     ListsPage.CreateListTypeReasonCodes("auto list Reason type");
-     ListsPage.CreateNewList();
-     Brow.pause(8000);
-    }
-ListsPage.closeListPanel();
-  });
+it('start download list as CSV file',() =>{
+   ListsPage.choosefilebutton.waitAndClick();
+   ListsPage.uploadlistfile(listfilename);
+   ListsPage.ConfirmButton.waitAndClick();
+   Brow.pause(8000);
 
-  it('adding list items to the Reason list',() =>{
-    //ListsPage.iframe.switchToFrame();
-    ListsPage.ReasonsMainList.click();
-    ListsPage.AddReasonListItem("Reason First Item","11");
-    ListsPage.AddReasonListItem("Reason Second Item","12");
-    ListsPage.AddReasonListItem("Reason Third Item","13");
-    ListsPage.RemoveListItem();
-    ListsPage.EditReasonListItem();
+});
 
-  });
 
 
 

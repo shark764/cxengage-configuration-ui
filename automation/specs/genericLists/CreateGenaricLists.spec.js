@@ -18,7 +18,6 @@ describe('Config-UI Login spec', ()=>{
  it('create DS code list type and check ', ()=>{
 
    ListsPage.iframe.switchToFrame();
-
    ListsPage.CreateListTypeDispositionsCode(ListName);
    ListsPage.CreateNewList();
    Brow.pause(8000);

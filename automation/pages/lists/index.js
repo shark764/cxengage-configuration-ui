@@ -29,8 +29,8 @@ const ListsPage = {
 	// Disposition list item values
 	DispositionName : new Element('input[id="frm-list-item-dispositionName"]'),
 	DispositionCode : new Element('input[id="frm-list-item-dispositionCode"]'),
-	EditListItemButton: new Element('button[class="dtpanel-action-update-item sc-hqyNC eeFTzR sc-bdVaJa dGShxa"]'),
-	RemoveListItemButton: new Element('button[class="dtpanel-action-remove-item sc-hqyNC eeFTzR sc-bdVaJa dGShxa"]'),
+	EditListItemButton: new Element('button[class="dtpanel-action-update-item sc-tilXH cBqqcf sc-bdVaJa dGShxa"]'),
+	RemoveListItemButton: new Element('button[class="dtpanel-action-remove-item sc-tilXH cBqqcf sc-bdVaJa dGShxa"]'),
 
 // Reason list item values
   RasonName : new Element('input[id="frm-list-item-reasonName"]'),
@@ -48,6 +48,9 @@ const ListsPage = {
   ListDisabled : new Element('div[class="rt-td"]Disabled'),
   ReasonNameLable: new Element('span[title="Reason Name"]'),
 	ReasonCodeLable: new Element('span[title="Reason Code"]'),
+// CSV Bulk
+ startdownloadbutton : new Element('button[id="dtpanel-lists-download-csv"]'),
+ choosefilebutton : new Element('input[id="dtpanel-lists-upload-csv"]'),
 
   NavigateToListPage: function(){
 		this.configurationDropDown.waitAndClick();
@@ -94,6 +97,7 @@ AddDispositionListItem: function( NewListName , Newcode){
 	this.DispositionCode.setValue(Newcode);
 	this.Description.setValue("this list item has been crated by auto test and this is Nourhan ");
 	this.SubmitButtonListItem.waitAndClick();
+	  Brow.pause(800);
 },
 
 AddReasonListItem: function( NewListName , Newcode){
@@ -102,6 +106,7 @@ AddReasonListItem: function( NewListName , Newcode){
 	this.ResonCode.setValue(Newcode);
 	this.Description.setValue("this list item has been crated by auto test and this is Nourhan ");
 	this.SubmitButtonListItem.waitAndClick();
+	Brow.pause(800);
 },
 
 
@@ -125,8 +130,13 @@ this.SubmitButtonListItem.waitAndClick();
 },
 
 RemoveListItem: function(){
-this.RemoveListItemButton.waitAndClick();
-}
+this.RemoveListItemButton.click();
+},
+
+uploadlistfile: function (uri) {
+	new Element('input[id="dtpanel-lists-upload-csv"]').setValue(uri);
+	// $$('input[type="file"]').first().sendKeys(uri);
+ }
 
 };
 
