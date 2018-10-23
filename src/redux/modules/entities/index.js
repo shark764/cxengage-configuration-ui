@@ -6,7 +6,7 @@ import { fromJS, List } from 'immutable';
 
 // Initial Sub State
 const defaultEntity = {
-  data: undefined,
+  ...defaultEntity,
   selectedEntityId: '',
   sidePanelWidth: 550,
   confirmationDialogType: undefined
@@ -27,10 +27,10 @@ const initialState = fromJS({
     createPermission: ['MANAGE_ALL_LISTS']
   },
   flows: {
-    data: undefined
+    ...defaultEntity
   },
   listTypes: {
-    data: undefined
+    ...defaultEntity
   },
   outboundIdentifiers: {
     ...defaultEntity,
@@ -69,6 +69,9 @@ const initialState = fromJS({
     disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
     assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
   },
+  users: {
+    ...defaultEntity
+  },
   roles: {
     ...defaultEntity,
     readPermission: ['VIEW_ALL_ROLES'],
@@ -89,6 +92,25 @@ const initialState = fromJS({
       'PLATFORM_CREATE_TENANT_ROLES',
       'VIEW_ALL_ROLES',
       'MANAGE_ALL_ROLES',
+      'MANAGE_TENANT_ENROLLMENT'
+    ]
+  },
+  skills: {
+    ...defaultEntity,
+    metaData: {
+      listDependency: 'users'
+    },
+    readPermission: ['VIEW_ALL_SKILLS'],
+    updatePermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'MANAGE_ALL_SKILLS',
+      'MANAGE_ALL_USER_SKILLS',
+      'MANAGE_TENANT_ENROLLMENT'
+    ],
+    createPermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'MANAGE_ALL_SKILLS',
+      'MANAGE_ALL_USER_SKILLS',
       'MANAGE_TENANT_ENROLLMENT'
     ]
   }

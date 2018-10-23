@@ -10,7 +10,10 @@ import {
   getCurrentFormInitialValues,
   isFormInvalid,
   isFormPristine,
-  selectFormInitialValues
+  selectFormInitialValues,
+  formSubmission,
+  subEntityFormSubmission,
+  createFormName
 } from '../selectors';
 
 import {
@@ -19,6 +22,7 @@ import {
   getSelectedEntityId,
   getSelectedEntityFormId
 } from '../../entities/selectors';
+import { onFormSubmit, onSubEntityFormSubmit } from '../../entities';
 
 jest.mock('redux-form/immutable');
 jest.mock('../../entities/selectors');
@@ -101,5 +105,29 @@ describe('selectFormInitialValues', () => {
   it('returns new map {active: true} when getSelectedEntityId equals bulk', () => {
     getSelectedEntityId.mockImplementationOnce(() => 'bulk');
     expect(selectFormInitialValues({})).toMatchSnapshot();
+  });
+});
+
+describe('createFormName', () => {
+  it('returns proper values', () => {
+    expect(createFormName()).toMatchSnapshot();
+  });
+});
+
+describe('formSubmission', () => {
+  const values = { id: 'mockId', name: 'mockName' };
+  const dispatch = action => action;
+  const props = { dirty: true };
+  it('returns proper values', () => {
+    expect(formSubmission(values, dispatch, props)).toMatchSnapshot();
+  });
+});
+
+describe('subEntityFormSubmission', () => {
+  const values = { id: 'mockSubEntityId', name: 'mockSubEntityName' };
+  const dispatch = action => action;
+  const props = { dirty: true };
+  it('returns proper values', () => {
+    expect(subEntityFormSubmission(values, dispatch, props)).toMatchSnapshot();
   });
 });

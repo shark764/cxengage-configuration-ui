@@ -6,16 +6,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import CustomMetricsForm from './layout';
-import { onFormSubmit } from '../../../redux/modules/entities';
 import { formValidation } from './validation';
 import { getSelectedEntityId, isInherited, isCreating } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../redux/modules/form/selectors';
+import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import { getAbandonTypeFormValue } from '../../../redux/modules/entities/customMetrics/selectors';
-
-export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit(values, props));
-export const createFormName = state => ({
-  form: `customMetrics:${getSelectedEntityId(state)}`
-});
 
 const CreateCustomMetricsForm = compose(
   connect(createFormName),

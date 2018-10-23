@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
+<styled.div
+  id="dtpanel-skills"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined Member(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    userHasUpdatePermission={true}
+  />
+</styled.div>
+`;
+
+exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with historical type 1`] = `
+<styled.div
+  id="dtpanel-skills"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined Member(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    userHasUpdatePermission={true}
+  />
+</styled.div>
+`;
+
+exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permision 1`] = `
+<styled.div
+  id="dtpanel-skills"
+>
+  <React.Fragment>
+    <Detail
+      label="Name"
+      value="mockName"
+    />
+    <Detail
+      label="Description"
+      value="mockDescription"
+    />
+    <Detail
+      label="Has Proficiency"
+      value="Yes"
+    />
+    <Detail
+      label="Status"
+      value="Enabled"
+    />
+  </React.Fragment>
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined Member(s)"
+    userHasUpdatePermission={false}
+  />
+  <_class
+    userHasUpdatePermission={false}
+  />
+</styled.div>
+`;
+
+exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled 1`] = `
+<styled.div
+  id="dtpanel-skills"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined Member(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    userHasUpdatePermission={true}
+  />
+</styled.div>
+`;

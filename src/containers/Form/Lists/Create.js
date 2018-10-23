@@ -3,19 +3,22 @@
  */
 
 import { Map } from 'immutable';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import ListsForm from './layout';
-import { onFormSubmit } from '../../../redux/modules/entities';
-import { createFormValidation } from './validation';
+import { createFormValidation as formValidation } from './validation';
 import { isCreating } from '../../../redux/modules/entities/selectors';
+import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import { getListTypesOptions } from '../../../redux/modules/entities/listTypes/selectors';
 
-const CreateListForm = reduxForm({
-  form: 'lists:create',
-  onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
-  validate: createFormValidation
-})(ListsForm);
+const CreateListsForm = compose(
+  connect(createFormName),
+  reduxForm({
+    onSubmit: formSubmission,
+    validate: formValidation
+  })
+)(ListsForm);
 
 export function mapStateToProps(state) {
   return {
@@ -29,4 +32,4 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CreateListForm);
+export default connect(mapStateToProps)(CreateListsForm);

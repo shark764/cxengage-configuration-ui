@@ -623,6 +623,14 @@ Object {
         "name": "name",
       },
       Object {
+        "label": "Value",
+        "name": "value",
+      },
+      Object {
+        "label": "Channel Type",
+        "name": "channelType",
+      },
+      Object {
         "label": "Description",
         "name": "description",
       },
@@ -874,14 +882,35 @@ Object {
   },
   "skills": EntityMetaData {
     "betaFeature": false,
-    "columns": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Members",
+      },
+      Object {
+        "active": true,
+        "name": "Proficiency",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
-    "dependentEntity": "",
+    "dependentEntity": "users",
     "entityName": "skills",
     "entityTableFields": Array [
       Object {
@@ -893,34 +922,48 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Managing%20Users/Creating_Skills.htm",
     "modalListTableFields": Array [
       Object {
-        "label": "Name",
-        "name": "name",
+        "label": "First Name",
+        "name": "firstName",
       },
       Object {
-        "label": "Description",
-        "name": "description",
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
       },
     ],
-    "pageTitle": "Skills",
+    "pageTitle": "Skill Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
     },
     "sidePanelListTableFields": Array [
       Object {
-        "label": "Name",
-        "name": "name",
+        "label": "First Name",
+        "name": "firstName",
       },
       Object {
-        "label": "Description",
-        "name": "description",
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
+      },
+      Object {
+        "label": "Proficiency",
+        "name": "proficiency",
       },
     ],
     "subEntityName": "",
-    "updateFormDependencies": Array [],
+    "updateFormDependencies": Array [
+      "users",
+    ],
   },
   "users": EntityMetaData {
     "betaFeature": false,

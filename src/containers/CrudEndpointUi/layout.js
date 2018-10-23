@@ -15,8 +15,8 @@ import SidePanel from '../../containers/SidePanel';
 import EntityTableContainer from '../EntityTable';
 
 // Forms
-import CreateListForm from '../Form/Lists/Create';
-import UpdateListForm from '../Form/Lists/Update';
+import CreateListsForm from '../Form/Lists/Create';
+import UpdateListsForm from '../Form/Lists/Update';
 import UpdateListItemForm from '../Form/ListItems/Update';
 import CreateListItemForm from '../Form/ListItems/Create';
 import EmailTemplatesForm from '../Form/EmailTemplates';
@@ -26,6 +26,7 @@ import OutboundIdentifierListsForm from '../Form/OutboundIdentifierLists';
 import CustomMetricsForm from '../Form/CustomMetrics';
 import ChatWidgetsForm from '../Form/ChatWidgets';
 import RolesForm from '../Form/Roles';
+import SkillsForm from '../Form/Skills';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -39,6 +40,7 @@ import OutboundIdentifierListsPanelContainer from '../SidePanelDetails/OutboundI
 import CustomMetricsDetailsPanel from '../SidePanelDetails/CustomMetrics';
 import ChatWidgetsDetailsPanel from '../SidePanelDetails/ChatWidgets';
 import RolesDetailsPanel from '../SidePanelDetails/Roles';
+import SkillsDetailsPanel from '../SidePanelDetails/Skills';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -86,7 +88,7 @@ const createFormRoutes = [
     path: '/configuration/lists',
     component: () => (
       <DetailsPanel>
-        <CreateListForm />
+        <CreateListsForm />
       </DetailsPanel>
     )
   },
@@ -121,6 +123,14 @@ const createFormRoutes = [
         <RolesForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/skills',
+    component: () => (
+      <DetailsPanel>
+        <SkillsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before1
 ];
@@ -131,7 +141,7 @@ const detailsPanelRoutes = [
     component: () => (
       <DetailsPanel>
         <ListsDetailsPanel>
-          <UpdateListForm />
+          <UpdateListsForm />
         </ListsDetailsPanel>
       </DetailsPanel>
     )
@@ -193,6 +203,16 @@ const detailsPanelRoutes = [
         <RolesDetailsPanel>
           <RolesForm />
         </RolesDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/skills',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <SkillsDetailsPanel>
+          <SkillsForm />
+        </SkillsDetailsPanel>
       </NoScrollDetailsPanel>
     )
   }
@@ -266,25 +286,23 @@ export default class CrudEndpointUiLayout extends Component {
 
   componentDidUpdate(prevProps) {
     /**
-     * if we go from haveing selected items 
+     * if we go from haveing selected items
      * to no selected items , close the side panel
      */
-    if(
-      prevProps.bulkSelectedTotal !== undefined && 
-      this.props.bulkSelectedTotal !== undefined && 
+    if (
+      prevProps.bulkSelectedTotal !== undefined &&
+      this.props.bulkSelectedTotal !== undefined &&
       prevProps.bulkSelectedTotal.size > 0 &&
       this.props.bulkSelectedTotal.size === 0
-      ) {
-      this.props.setSelectedEntityId('')
+    ) {
+      this.props.setSelectedEntityId('');
     }
   }
 
   render() {
     return (
       <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''}>
-        <Table 
-          tableType={this.props.match.params.entityName} 
-        >
+        <Table tableType={this.props.match.params.entityName}>
           <InlineCheckboxFilterMenu
             type="secondary"
             menuType="Columns"

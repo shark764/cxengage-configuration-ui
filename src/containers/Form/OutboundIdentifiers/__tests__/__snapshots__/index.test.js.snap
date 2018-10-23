@@ -67,20 +67,3 @@ exports[`OutboundIdentifiersForm Renders renders 1`] = `
   Child
 </Connect(ReduxForm)>
 `;
-
-exports[`createFormName returns proper values 1`] = `
-Object {
-  "form": "outboundIdentifiers:mockId",
-}
-`;
-
-exports[`formSubmission returns proper values 1`] = `
-Object {
-  "dirty": true,
-  "type": "FORM_SUBMIT",
-  "values": Object {
-    "name": "mockName",
-    "value": "mockValue",
-  },
-}
-`;

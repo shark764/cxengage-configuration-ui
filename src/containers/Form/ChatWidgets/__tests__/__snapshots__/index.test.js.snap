@@ -53,35 +53,3 @@ Object {
   "key": "mockId",
 }
 `;
-
-exports[`createFormName returns proper values 1`] = `
-Object {
-  "form": "chatWidgets:mockId",
-}
-`;
-
-exports[`formSubmission returns proper values 1`] = `
-Object {
-  "dirty": true,
-  "type": "FORM_SUBMIT",
-  "values": Object {
-    "agentHeader": "#000000",
-    "agentText": "#000000",
-    "borderColor": "#000000",
-    "buttonText": "#000000",
-    "chatbg": "#000000",
-    "customerHeader": "#000000",
-    "customerText": "#000000",
-    "fontFamily": "arial",
-    "fontSize": "12pt",
-    "headerColor": "#000000",
-    "headerTextIcons": "#000000",
-    "iconColor": "#000000",
-    "id": "mockId",
-    "name": "mockName",
-    "shared": false,
-    "systemText": "#000000",
-    "welcome": "hero",
-  },
-}
-`;

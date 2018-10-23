@@ -28,6 +28,7 @@ export default function OutboundIdentifierListsDetailsPanel({
   id,
   className,
   tableItems,
+  tableFields,
   toggleEntityListItemActive,
   removeListItem,
   setSelectedSubEntityId,
@@ -55,24 +56,7 @@ export default function OutboundIdentifierListsDetailsPanel({
         deleteSubEntity={removeListItem}
         toggleSubEntityActive={toggleEntityListItemActive}
         items={tableItems}
-        fields={[
-          {
-            label: 'Name',
-            name: 'name'
-          },
-          {
-            label: 'Value',
-            name: 'value'
-          },
-          {
-            label: 'Channel Type',
-            name: 'channelType'
-          },
-          {
-            label: 'Description',
-            name: 'description'
-          }
-        ]}
+        fields={tableFields}
       />
     </Wrapper>
   );
@@ -88,6 +72,7 @@ OutboundIdentifierListsDetailsPanel.propTypes = {
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
   tableItems: PropTypes.array,
+  tableFields: PropTypes.array,
   toggleEntityListItemActive: PropTypes.func,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,

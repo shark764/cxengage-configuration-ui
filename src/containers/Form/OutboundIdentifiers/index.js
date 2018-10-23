@@ -10,14 +10,9 @@ import { onFormSubmit } from '../../../redux/modules/entities';
 import { formValidation } from './validation';
 import { getSelectedEntityId, isCreating } from '../../../redux/modules/entities/selectors';
 import { selectFlowIds } from '../../../redux/modules/entities/flows/selectors';
-import { selectFormInitialValues } from '../../../redux/modules/form/selectors';
+import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
-export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit(values, props));
-export const createFormName = state => ({
-  form: `outboundIdentifiers:${getSelectedEntityId(state)}`
-});
-
-const CreateOutboundIdentifierForm = compose(
+const CreateOutboundIdentifiersForm = compose(
   connect(createFormName),
   reduxForm({
     onSubmit: formSubmission,
@@ -35,4 +30,4 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CreateOutboundIdentifierForm);
+export default connect(mapStateToProps)(CreateOutboundIdentifiersForm);

@@ -6,7 +6,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
-import GenericBulkItemsForm, { mapStateToProps, createFormName, formSubmission } from '../';
+import GenericBulkItemsForm, { mapStateToProps, createFormName } from '../';
 import { getCurrentEntity, isCreating } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
@@ -35,16 +35,5 @@ describe('Maps state to props only using selectors', () => {
 describe('createFormName', () => {
   it('returns proper values', () => {
     expect(createFormName()).toMatchSnapshot();
-  });
-});
-
-describe('formSubmission', () => {
-  const values = {
-    active: true
-  };
-  const dispatch = action => action;
-  const props = { dirty: true };
-  it('returns proper values', () => {
-    expect(formSubmission(values, dispatch, props)).toMatchSnapshot();
   });
 });

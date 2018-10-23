@@ -11,7 +11,7 @@ Object {
 }
 `;
 
-exports[`UpdateListForm Renders renders 1`] = `
+exports[`UpdateListsForm Renders renders 1`] = `
 <Connect(ReduxForm)
   dispatch={[Function]}
   initialValues="mock initial update form values"

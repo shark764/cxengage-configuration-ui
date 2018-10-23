@@ -10,6 +10,7 @@ import {
   getSelectedEntityId,
   getSelectedEntityFormId
 } from '../entities/selectors';
+import { onFormSubmit, onSubEntityFormSubmit } from '../entities';
 
 export const getCurrentForm = state =>
   state.getIn(['form', `${getCurrentEntity(state)}:${getSelectedEntityId(state)}`]);
@@ -40,3 +41,9 @@ export const selectFormInitialValues = state => {
     return getSelectedEntity(state);
   }
 };
+
+export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit(values, props));
+
+export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onSubEntityFormSubmit(values, props));
+
+export const createFormName = state => ({ form: `${getCurrentEntity(state)}:${getSelectedEntityId(state)}` });

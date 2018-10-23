@@ -6,9 +6,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import EmailTemplatesForm from './layout';
-import { onFormSubmit } from '../../../redux/modules/entities';
 import { validate } from './validation';
 import { getSelectedEntityId, isUpdating } from '../../../redux/modules/entities/selectors';
+import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import {
   getInitialFormValues,
   getEmailTemplateFormValue,
@@ -16,9 +16,9 @@ import {
 } from '../../../redux/modules/entities/emailTemplates/selectors';
 
 const UpdateEmailTemplateForm = compose(
-  connect(state => ({ form: `emailTemplates:${getSelectedEntityId(state)}` })),
+  connect(createFormName),
   reduxForm({
-    onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
+    onSubmit: formSubmission,
     validate,
     destroyOnUnmount: false
   })

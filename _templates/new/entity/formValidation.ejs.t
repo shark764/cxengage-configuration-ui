@@ -8,6 +8,6 @@ to: src/containers/Form/<%= name %>/validation.js
 import { isEmpty } from 'serenova-js-utils/strings';
 
 export const formValidation = values => ({
-  isEmptyString: isEmpty(values.get('name')) && 'Please enter a ...',
-  requiredField: !values.get('type') && 'Please select a ...',
+  name: isEmpty(values.get('name')) && 'Please enter a ...',
+  type: !values.get('type') && 'Please select a ...',
 });

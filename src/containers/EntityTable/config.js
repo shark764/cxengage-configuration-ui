@@ -8,7 +8,8 @@ import { listTypeColumn } from './columns/listType';
 import { descriptionColumn } from './columns/description';
 import { permissionsColumn } from './columns/permissions';
 import { metricTypeColumn } from './columns/metricType';
-import { constructGeneralTextColumn } from './columns/genericTextColum';
+import { constructGeneralTextColumn } from './columns/genericTextColumn';
+import { constructGeneralBooleanColumn } from './columns/genericBooleanColumn';
 
 export function getTableColumns(columns) {
   /**
@@ -36,7 +37,8 @@ export function getTableColumns(columns) {
     'Metric Type': metricTypeColumn,
     Value: constructGeneralTextColumn('value'),
     channelType: constructGeneralTextColumn('channelType'),
-    flowId: constructGeneralTextColumn('flowId')
+    flowId: constructGeneralTextColumn('flowId'),
+    Proficiency: constructGeneralBooleanColumn('hasProficiency')
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

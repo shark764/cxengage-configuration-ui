@@ -6,13 +6,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import GenericBulkItemsFormLayout from './layout';
-import { onFormSubmit } from '../../../redux/modules/entities';
-
 import { isCreating, getCurrentEntity } from '../../../redux/modules/entities/selectors';
+import { selectFormInitialValues, formSubmission } from '../../../redux/modules/form/selectors';
 
-import { selectFormInitialValues } from '../../../redux/modules/form/selectors';
-
-export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit(values, props));
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
 
 const GenericBulkItemsForm = compose(

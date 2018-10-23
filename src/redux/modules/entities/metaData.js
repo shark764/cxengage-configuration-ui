@@ -163,6 +163,30 @@ entities.users.columns = [
   { name: 'Platform Status', active: true }
 ];
 
+// Skills
+entities.skills.pageTitle = 'Skill Management';
+entities.skills.helpLink = '/Help/Content/Managing%20Users/Creating_Skills.htm';
+entities.skills.updateFormDependencies.push('users');
+entities.skills.dependentEntity = 'users';
+entities.skills.modalListTableFields = [
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'Email', name: 'email' }
+];
+entities.skills.sidePanelListTableFields = [
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'Email', name: 'email' },
+  { label: 'Proficiency', name: 'proficiency' }
+];
+entities.skills.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Members', active: true },
+  { name: 'Proficiency', active: true },
+  { name: 'Status', active: true }
+];
+
 // Generic Lists
 entities.lists.createFormDependencies.push('listTypes');
 entities.lists.subEntityName = 'listItems';
@@ -193,12 +217,22 @@ entities.outboundIdentifierLists.modalListTableFields = [
   { label: 'Channel Type', name: 'channelType' },
   { label: 'Description', name: 'description' }
 ];
+entities.outboundIdentifierLists.sidePanelListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Value', name: 'value' },
+  { label: 'Channel Type', name: 'channelType' },
+  { label: 'Description', name: 'description' }
+];
 entities.outboundIdentifierLists.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Roles
 entities.roles.updateFormDependencies.push('permissions');
 entities.roles.dependentEntity = 'roles';
 entities.roles.betaFeature = true;
+entities.roles.sidePanelListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Description', name: 'description' }
+];
 entities.roles.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -243,5 +277,7 @@ entities.chatWidgets.columns = [
   { name: 'Description', active: true },
   { name: 'Status', active: true }
 ];
+
+//Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

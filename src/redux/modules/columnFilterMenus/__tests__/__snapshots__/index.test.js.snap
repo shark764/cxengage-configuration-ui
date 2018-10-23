@@ -149,7 +149,28 @@ exports[`columnFilterMenus reducer snapshots returns the correct initial state 1
 Immutable.Map {
   "skills": Immutable.Map {
     "visibleMenu": "none",
-    "Columns": Immutable.List [],
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Members",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Proficiency",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
   },
   "permissions": Immutable.Map {
     "visibleMenu": "none",

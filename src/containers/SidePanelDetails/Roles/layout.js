@@ -34,6 +34,7 @@ export function RolesDetailsPanel({
   id,
   className,
   tableItems,
+  tableFields,
   inherited,
   removeListItem,
   setSelectedSubEntityId,
@@ -67,16 +68,7 @@ export function RolesDetailsPanel({
           deleteSubEntity={removeListItem}
           items={tableItems}
           inherited={inherited}
-          fields={[
-            {
-              label: 'Name',
-              name: 'name'
-            },
-            {
-              label: 'Description',
-              name: 'description'
-            }
-          ]}
+          fields={tableFields}
         />
       </DetailWrapper>
     </Wrapper>
@@ -93,6 +85,7 @@ RolesDetailsPanel.propTypes = {
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
   tableItems: PropTypes.array,
+  tableFields: PropTypes.array,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   listSize: PropTypes.number,

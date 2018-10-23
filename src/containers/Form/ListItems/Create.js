@@ -5,15 +5,15 @@
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import ListItemsForm from './layout';
-import { setSelectedSubEntityId, onSubEntityFormSubmit } from '../../../redux/modules/entities';
+import { setSelectedSubEntityId } from '../../../redux/modules/entities';
 import { getSelectedEntityName, isSubEntitySaving } from '../../../redux/modules/entities/selectors';
-
+import { subEntityFormSubmission } from '../../../redux/modules/form/selectors';
 import { getFieldItems } from './selectors';
 import validate from './validation';
 
 const CreateListItemsForm = reduxForm({
   form: 'listItems:create',
-  onSubmit: (values, dispatch, props) => dispatch(onSubEntityFormSubmit(values, props)),
+  onSubmit: subEntityFormSubmission,
   validate
 })(ListItemsForm);
 

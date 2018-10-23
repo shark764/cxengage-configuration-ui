@@ -6,16 +6,16 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import ListsForm from './layout';
-import { onFormSubmit } from '../../../redux/modules/entities';
-import { updateFormValidation } from './validation';
+import { updateFormValidation as formValidation } from './validation';
 import { getSelectedEntityId, isInherited, isUpdating } from '../../../redux/modules/entities/selectors';
 import { getListTypeName, getInitialUpdateFormValues } from '../../../redux/modules/entities/lists/selectors';
+import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
-const UpdateListForm = compose(
-  connect(state => ({ form: `lists:${getSelectedEntityId(state)}` })),
+const UpdateListsForm = compose(
+  connect(createFormName),
   reduxForm({
-    onSubmit: (values, dispatch, props) => dispatch(onFormSubmit(values, props)),
-    validate: updateFormValidation,
+    onSubmit: formSubmission,
+    validate: formValidation,
     destroyOnUnmount: false
   })
 )(ListsForm);
@@ -31,4 +31,4 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(UpdateListForm);
+export default connect(mapStateToProps)(UpdateListsForm);

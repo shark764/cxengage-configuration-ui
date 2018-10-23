@@ -59,13 +59,3 @@ Object {
   "form": "mockEntity:bulk",
 }
 `;
-
-exports[`formSubmission returns proper values 1`] = `
-Object {
-  "dirty": true,
-  "type": "FORM_SUBMIT",
-  "values": Object {
-    "active": true,
-  },
-}
-`;

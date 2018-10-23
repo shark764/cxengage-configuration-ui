@@ -7,14 +7,11 @@ to: src/containers/SidePanelDetails/<%= name %>/index.js
 
 import { connect } from 'react-redux';
 import <%= name %>DetailsPanel from './layout';
-import {
-  userHasUpdatePermission,
-  getSelectedEntity
-} from '../../../redux/modules/entities/selectors';
+import { userHasUpdatePermission, getSelectedEntity } from '../../../redux/modules/entities/selectors';
 
 export function mapStateToProps(state) {
   return {
-    item: getSelectedEntity(state),
+    item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }

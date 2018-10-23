@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "item": Object {
+    "active": true,
+    "description": "mockDescription",
+    "hasProficiency": true,
+    "id": "mockId",
+    "members": Array [
+      Object {
+        "id": "mockSubEntityId",
+      },
+    ],
+    "name": "mockName",
+  },
+  "listSize": 0,
+  "tableFields": Array [
+    Object {
+      "label": "First Name",
+      "name": "firstName",
+    },
+    Object {
+      "label": "Last Name",
+      "name": "lastName",
+    },
+    Object {
+      "label": "Email",
+      "name": "email",
+    },
+    Object {
+      "label": "Proficiency",
+      "name": "proficiency",
+    },
+  ],
+  "tableItems": Array [
+    "mockListMembers",
+  ],
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`SkillsDetailsPanel Renders renders 1`] = `
+<SkillsDetailsPanel
+  item={
+    Object {
+      "active": true,
+      "description": "mockDescription",
+      "hasProficiency": true,
+      "id": "mockId",
+      "members": Array [
+        Object {
+          "id": "mockSubEntityId",
+        },
+      ],
+      "name": "mockName",
+    }
+  }
+  listSize={0}
+  removeListItem={[Function]}
+  setSelectedSubEntityId={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tableFields={
+    Array [
+      Object {
+        "label": "First Name",
+        "name": "firstName",
+      },
+      Object {
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
+      },
+      Object {
+        "label": "Proficiency",
+        "name": "proficiency",
+      },
+    ]
+  }
+  tableItems={
+    Array [
+      "mockListMembers",
+    ]
+  }
+  userHasUpdatePermission={true}
+>
+  Child
+</SkillsDetailsPanel>
+`;

@@ -2,9 +2,118 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "item": undefined,
-  "listSize": undefined,
-  "tableItems": "mockListMembers",
+  "item": Immutable.Map {
+    "id": "mockId",
+    "name": "mockName",
+    "description": "mockDescription",
+    "active": true,
+    "members": Array [
+      Object {
+        "id": "mockSubEntityId",
+      },
+    ],
+  },
+  "listSize": 0,
+  "tableFields": Array [
+    Object {
+      "label": "First Name",
+      "name": "firstName",
+    },
+    Object {
+      "label": "Last Name",
+      "name": "lastName",
+    },
+    Object {
+      "label": "Email",
+      "name": "email",
+    },
+    Object {
+      "label": "Proficiency",
+      "name": "proficiency",
+    },
+  ],
+  "tableItems": Array [
+    "mockListMembers",
+  ],
   "userHasUpdatePermission": true,
 }
+`;
+
+exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
+<OutboundIdentifierListsDetailsPanel
+  item={
+    Immutable.Map {
+      "id": "mockId",
+      "name": "mockName",
+      "description": "mockDescription",
+      "active": true,
+      "members": Array [
+        Object {
+          "id": "mockSubEntityId",
+        },
+      ],
+    }
+  }
+  listSize={0}
+  removeListItem={[Function]}
+  setSelectedSubEntityId={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tableFields={
+    Array [
+      Object {
+        "label": "First Name",
+        "name": "firstName",
+      },
+      Object {
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
+      },
+      Object {
+        "label": "Proficiency",
+        "name": "proficiency",
+      },
+    ]
+  }
+  tableItems={
+    Array [
+      "mockListMembers",
+    ]
+  }
+  toggleEntityListItemActive={[Function]}
+  userHasUpdatePermission={true}
+>
+  Child
+</OutboundIdentifierListsDetailsPanel>
 `;
