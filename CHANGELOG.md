@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.30.0] - 2018-10-22
+### Added
+- Access to read-only version of redux dev tools in production builds
+- Named redux stores for faster identification
+
 ## [0.29.3] - 2018-10-19
 ### Changed
 - fix jenkins auto deploy to dev
