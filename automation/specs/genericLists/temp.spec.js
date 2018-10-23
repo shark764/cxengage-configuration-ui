@@ -17,7 +17,7 @@ describe('Config-UI Login spec', ()=>{
    if (ListsPage.DispositionsMainList.isExisting()) {
     ListsPage.DispositionsMainList.click();
     ListsPage.EditListDetails("new name for Dispostion list ");
-    Brow.pause(80000);
+    Brow.pause(8000);
    }
    else {
 
@@ -71,3 +71,4 @@ ListsPage.closeListPanel();
 
 
 });
+
