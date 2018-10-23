@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import CustomMetricsDetailsPanel, { mapStateToProps } from '../';
@@ -14,7 +15,14 @@ import {
 } from '../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
-getSelectedEntity.mockImplementation(() => {});
+getSelectedEntity.mockImplementation(
+  () =>
+    new Map({
+      id: 'mockId',
+      name: 'mockName',
+      active: true
+    })
+);
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
@@ -22,13 +30,7 @@ isSaving.mockImplementation(() => false);
 describe('CustomMetricsDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(
-      shallow(
-        <CustomMetricsDetailsPanel store={store}>
-          Child
-        </CustomMetricsDetailsPanel>
-      )
-    ).toMatchSnapshot();
+    expect(shallow(<CustomMetricsDetailsPanel store={store}>Child</CustomMetricsDetailsPanel>)).toMatchSnapshot();
   });
 });
 

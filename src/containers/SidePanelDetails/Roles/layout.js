@@ -17,10 +17,15 @@ import { DetailHeader } from 'cx-ui-components';
 import { SidePanelTable } from 'cx-ui-components';
 import { DetailsPanelAlert } from 'cx-ui-components';
 
+import { DetailWrapper } from '../../../components/DetailWrapper';
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100vh - 180px);
+`;
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
 `;
 
 export function RolesDetailsPanel({
@@ -33,43 +38,47 @@ export function RolesDetailsPanel({
   removeListItem,
   setSelectedSubEntityId,
   listSize,
-  item: {name, description}
+  item: { name, description }
 }) {
   return (
     <Wrapper id={id} className={className}>
-      <DetailHeader text="Details" />
-      {inherited && <DetailsPanelAlert text="This role is inherited and cannot be edited" />}
-      { !inherited &&
-        userHasUpdatePermission? (
-        children
-      ) : (
-        <Fragment>
-          <Detail label="Name" value={name} />
-          <Detail label="Description" value={description} />
-        </Fragment>
-      )}
-      <DetailHeader
-        userHasUpdatePermission={userHasUpdatePermission}
-        text={`${listSize} Permission(s)`}
-        onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
-        inherited={inherited}
-      />
-      <SidePanelTable
-        userHasUpdatePermission={userHasUpdatePermission}
-        deleteSubEntity={removeListItem}
-        items={tableItems}
-        inherited={inherited}
-        fields={[
-          {
-            label: 'Name',
-            name: 'name'
-          },
-          {
-            label: 'Description',
-            name: 'description'
-          }
-        ]}
-      />
+      <DetailWrapper open={true}>
+        <WrappedDetailHeader text="Details" />
+        {inherited && <DetailsPanelAlert text="This role is inherited and cannot be edited" />}
+        {!inherited && userHasUpdatePermission ? (
+          children
+        ) : (
+          <Fragment>
+            <Detail label="Name" value={name} />
+            <Detail label="Description" value={description} />
+          </Fragment>
+        )}
+      </DetailWrapper>
+
+      <DetailWrapper open={true}>
+        <WrappedDetailHeader
+          userHasUpdatePermission={userHasUpdatePermission}
+          text={`${listSize} Permission(s)`}
+          onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
+          inherited={inherited}
+        />
+        <SidePanelTable
+          userHasUpdatePermission={userHasUpdatePermission}
+          deleteSubEntity={removeListItem}
+          items={tableItems}
+          inherited={inherited}
+          fields={[
+            {
+              label: 'Name',
+              name: 'name'
+            },
+            {
+              label: 'Description',
+              name: 'description'
+            }
+          ]}
+        />
+      </DetailWrapper>
     </Wrapper>
   );
 }
@@ -87,5 +96,5 @@ RolesDetailsPanel.propTypes = {
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   listSize: PropTypes.number,
-  inherited: PropTypes.bool,
+  inherited: PropTypes.bool
 };

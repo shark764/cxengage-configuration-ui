@@ -17,17 +17,28 @@ export function getTableColumns(columns) {
    * @param {array} columns is an array of predefined columns from redux fetched from a selector
    */
   const columnMap = {
-    'Name': nameColumn,
-    'Description': descriptionColumn,
-    'Status': statusColumn,
+    Name: nameColumn,
+    'First Name': constructGeneralTextColumn('firstName'),
+    'Last Name': constructGeneralTextColumn('lastName'),
+    Role: constructGeneralTextColumn('roleName'),
+    Email: constructGeneralTextColumn('email'),
+    Presence: constructGeneralTextColumn('state'),
+    // TODO: Skills and Groups require a special column to work
+    // 'Skills': constructGeneralTextColumn('skills'),
+    // 'Groups': constructGeneralTextColumn('groups'),
+    'Platform Status': constructGeneralTextColumn('platformStatus'),
+    'External Id': constructGeneralTextColumn('externalId'),
+    'Invitation Status': constructGeneralTextColumn('invitationStatus'),
+    Description: descriptionColumn,
+    Status: statusColumn,
     'List Type': listTypeColumn,
-    'Permissions': permissionsColumn,
+    Permissions: permissionsColumn,
     'Metric Type': metricTypeColumn,
-    'Value': constructGeneralTextColumn('value'),
-    'channelType': constructGeneralTextColumn('channelType'),
-    'flowId': constructGeneralTextColumn('flowId'),
-  }
+    Value: constructGeneralTextColumn('value'),
+    channelType: constructGeneralTextColumn('channelType'),
+    flowId: constructGeneralTextColumn('flowId')
+  };
   let result = [];
-  columns.forEach(x => x.active && result.push(columnMap[x.name]))
+  columns.forEach(x => x.active && result.push(columnMap[x.name]));
   return result;
 }

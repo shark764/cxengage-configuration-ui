@@ -50,10 +50,10 @@ export function mapStateToProps(state) {
     const dateCreated = moment(selectedEntity.get('created')).format('lll');
     const dateUpdated = moment(selectedEntity.get('updated')).format('lll');
     return {
-      title: selectedEntity.get('name'),
+      title: selectedEntity.get('name') || `${selectedEntity.get('firstName')} ${selectedEntity.get('lastName')}`,
       createdAt: `Created on ${dateCreated}`,
       updatedAt: `Updated on ${dateUpdated}`,
-      toggleStatus: selectedEntity.get('active'),
+      toggleStatus: selectedEntity.get('active') || selectedEntity.get('status'),
       userHasUpdatePermission: userHasUpdatePermission(state),
       inherited: isInherited(state)
     };

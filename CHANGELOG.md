@@ -14,6 +14,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.30.0] - 2018-10-22
+### Added
+- Access to read-only version of redux dev tools in production builds
+- Named redux stores for faster identification
+
+## [0.29.3] - 2018-10-19
+### Changed
+- fix jenkins auto deploy to dev
+
+## [0.29.2] - 2018-10-19
+### Changed
+- jenkins workflow to do tests in parallel
+- jenkins workflow to use existing jenkins job to deploy to dev instead of having it's own
+
+## [0.29.1] - 2018-10-17
+### Fixed
+- hygen consolidation
+
+## [0.29.0] - 2018-10-15
+### Added
+- Component to be able to expand or collapse side panel details CXV1-14811
+
+## [0.28.3] - 2018-10-12
+### Added
+- Help text to label for inputTexts
+
+### Fixed
+- Fixed issue with SLA sidePanel where values were not shown to user with read permission
+
 ## [0.28.2] - 2018-10-11
 ### Changed
 - Fixed issue with SLA form where Abandon Types had backwards help text

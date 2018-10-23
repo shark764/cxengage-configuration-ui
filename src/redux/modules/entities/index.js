@@ -15,7 +15,7 @@ const initialState = fromJS({
   currentEntity: 'none',
   none: {},
   interactionMonitoring: {
-    readPermission: ['MONITOR_ALL_CALLS'],
+    readPermission: ['MONITOR_ALL_CALLS']
   },
   lists: {
     ...defaultEntity,
@@ -235,12 +235,9 @@ export default function reducer(state = initialState, action) {
         .findIndex(entity => entity.get('id') === action.entityId);
       if (entityIndex !== -1 && action.bool !== undefined) {
         return state
-          .mergeIn(
-            [action.entityName, 'data', entityIndex],
-            fromJS({ bulkChangeItem: action.bool })
-          )
+          .mergeIn([action.entityName, 'data', entityIndex], fromJS({ bulkChangeItem: action.bool }))
           .setIn([action.entityName, 'selectedEntityId'], 'bulk');
-      } else if(entityIndex !== -1) {
+      } else if (entityIndex !== -1) {
         return state
           .mergeIn(
             [action.entityName, 'data', entityIndex],
