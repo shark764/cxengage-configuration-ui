@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.31.2] - 2018-10-25
+### Added
+- CXV1-15468 - Adding Help Link for Configurable SLA.
+
 ## [0.31.1] - 2018-10-25
 ### Changed
 - Bump version for components library to 0.28.1.
