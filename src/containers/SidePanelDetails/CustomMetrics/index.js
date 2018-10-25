@@ -4,13 +4,9 @@
 
 import { connect } from 'react-redux';
 import CustomMetricsDetailsPanel from './layout';
-import { userHasUpdatePermission, getSelectedEntity } from '../../../redux/modules/entities/selectors';
 
 export function mapStateToProps(state) {
-  return {
-    item: getSelectedEntity(state).toJS(),
-    userHasUpdatePermission: userHasUpdatePermission(state)
-  };
+  return {};
 }
 
 export default connect(mapStateToProps)(CustomMetricsDetailsPanel);

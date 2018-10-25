@@ -17,6 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.31.1] - 2018-10-25
+### Changed
+- Bump version for components library to 0.28.1.
+
+### Fixed
+- CXV1-15842 - After disabling entity, toggle field in sidepanel header disappears.
+
 ## [0.31.0] - 2018-10-23
 ### Added
 - CXV1-15517 - Adding Groups Page.

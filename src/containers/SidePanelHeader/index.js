@@ -53,7 +53,9 @@ export function mapStateToProps(state) {
       title: selectedEntity.get('name') || `${selectedEntity.get('firstName')} ${selectedEntity.get('lastName')}`,
       createdAt: `Created on ${dateCreated}`,
       updatedAt: `Updated on ${dateUpdated}`,
-      toggleStatus: selectedEntity.get('active') || selectedEntity.get('status'),
+      // We convert both values to boolean since each entity could have
+      // any of them, this way we avoid getting undefined instead of true/false
+      toggleStatus: Boolean(selectedEntity.get('active')) || Boolean(selectedEntity.get('status')),
       userHasUpdatePermission: userHasUpdatePermission(state),
       inherited: isInherited(state)
     };
