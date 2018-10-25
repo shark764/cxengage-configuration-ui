@@ -3,13 +3,6 @@
 exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
 <CustomMetricsDetailsPanel
   dispatch={[Function]}
-  item={
-    Object {
-      "active": true,
-      "id": "mockId",
-      "name": "mockName",
-    }
-  }
   store={
     Object {
       "dispatch": [Function],
@@ -39,19 +32,9 @@ exports[`CustomMetricsDetailsPanel Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
-  userHasUpdatePermission={true}
 >
   Child
 </CustomMetricsDetailsPanel>
 `;
 
-exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
-Object {
-  "item": Object {
-    "active": true,
-    "id": "mockId",
-    "name": "mockName",
-  },
-  "userHasUpdatePermission": true,
-}
-`;
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `Object {}`;

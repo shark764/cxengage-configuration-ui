@@ -7,7 +7,12 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import CustomMetricsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isInherited, isUpdating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isInherited,
+  isUpdating,
+  userHasUpdatePermission
+} from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 import { getAbandonTypeFormValue } from '../../../../redux/modules/entities/customMetrics/selectors';
 
@@ -15,6 +20,7 @@ jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
+isInherited.mockImplementation(() => false);
 isUpdating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));

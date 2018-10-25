@@ -3,29 +3,9 @@
  */
 
 import React from 'react';
-import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import CustomMetricsDetailsPanel, { mapStateToProps } from '../';
-import {
-  getSelectedEntity,
-  userHasUpdatePermission,
-  isInherited,
-  isSaving
-} from '../../../../redux/modules/entities/selectors';
-
-jest.mock('../../../../redux/modules/entities/selectors');
-getSelectedEntity.mockImplementation(
-  () =>
-    new Map({
-      id: 'mockId',
-      name: 'mockName',
-      active: true
-    })
-);
-userHasUpdatePermission.mockImplementation(() => true);
-isInherited.mockImplementation(() => false);
-isSaving.mockImplementation(() => false);
 
 describe('CustomMetricsDetailsPanel Renders', () => {
   it('renders', () => {
