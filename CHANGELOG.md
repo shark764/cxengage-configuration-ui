@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.32.0] - 2018-10-26
+### Added
+- CXV1-15517 - Adding Users Page.
+- Function to get and map platform roles.
+
 ## [0.31.3] - 2018-10-26
 ### Fixed
 - CXV1-15468 - Fixing incorrect Help Link for Configurable SLA.

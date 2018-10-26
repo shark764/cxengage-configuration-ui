@@ -304,10 +304,6 @@ Object {
       },
       Object {
         "active": true,
-        "name": "Members",
-      },
-      Object {
-        "active": true,
         "name": "Status",
       },
     ],
@@ -792,6 +788,56 @@ Object {
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
+  "platformRoles": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "platformRoles",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Platform Roles",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
   "protectedBranding": EntityMetaData {
     "betaFeature": false,
     "columns": Array [],
@@ -920,10 +966,6 @@ Object {
       },
       Object {
         "active": true,
-        "name": "Members",
-      },
-      Object {
-        "active": true,
         "name": "Proficiency",
       },
       Object {
@@ -1033,7 +1075,10 @@ Object {
       "message": "",
       "trueButtonText": "",
     },
-    "createFormDependencies": Array [],
+    "createFormDependencies": Array [
+      "roles",
+      "platformRoles",
+    ],
     "dependentEntity": "",
     "entityName": "users",
     "entityTableFields": Array [
@@ -1046,7 +1091,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Managing%20Users/Adding_users.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -1057,7 +1102,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Users",
+    "pageTitle": "User Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -1073,7 +1118,10 @@ Object {
       },
     ],
     "subEntityName": "",
-    "updateFormDependencies": Array [],
+    "updateFormDependencies": Array [
+      "roles",
+      "platformRoles",
+    ],
   },
 }
 `;

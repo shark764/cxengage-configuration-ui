@@ -28,6 +28,7 @@ import ChatWidgetsForm from '../Form/ChatWidgets';
 import RolesForm from '../Form/Roles';
 import SkillsForm from '../Form/Skills';
 import GroupsForm from '../Form/Groups';
+import UsersForm from '../Form/Users';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -43,6 +44,7 @@ import ChatWidgetsDetailsPanel from '../SidePanelDetails/ChatWidgets';
 import RolesDetailsPanel from '../SidePanelDetails/Roles';
 import SkillsDetailsPanel from '../SidePanelDetails/Skills';
 import GroupsDetailsPanel from '../SidePanelDetails/Groups';
+import UsersDetailsPanel from '../SidePanelDetails/Users';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -141,6 +143,14 @@ const createFormRoutes = [
         <GroupsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/users',
+    component: () => (
+      <DetailsPanel>
+        <UsersForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before1
 ];
@@ -233,6 +243,16 @@ const detailsPanelRoutes = [
         <GroupsDetailsPanel>
           <GroupsForm />
         </GroupsDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/users',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <UsersDetailsPanel>
+          <UsersForm />
+        </UsersDetailsPanel>
       </NoScrollDetailsPanel>
     )
   }

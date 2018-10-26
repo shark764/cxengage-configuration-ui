@@ -139,6 +139,7 @@ export const listOfEntities = [
   'groups',
   'skills',
   'roles',
+  'platformRoles',
   'permissions',
   'interactionMonitoring',
   'users'
@@ -149,6 +150,10 @@ const entities = {};
 listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
 
 // Users
+entities.users.pageTitle = 'User Management';
+entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
+entities.users.createFormDependencies.push('roles', 'platformRoles');
+entities.users.updateFormDependencies.push('roles', 'platformRoles');
 entities.users.columns = [
   { name: 'First Name', active: true },
   { name: 'Last Name', active: true },
@@ -182,7 +187,6 @@ entities.skills.sidePanelListTableFields = [
 entities.skills.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Members', active: true },
   { name: 'Proficiency', active: true },
   { name: 'Status', active: true }
 ];
@@ -205,7 +209,6 @@ entities.groups.sidePanelListTableFields = [
 entities.groups.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Members', active: true },
   { name: 'Status', active: true }
 ];
 
