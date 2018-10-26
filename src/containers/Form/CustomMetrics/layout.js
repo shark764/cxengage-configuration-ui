@@ -8,11 +8,16 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader } from 'cx-ui-components';
-import { InputField } from 'cx-ui-components';
-import { RadioGroupField } from 'cx-ui-components';
+import styled from 'styled-components';
+import { DetailHeader, InputField, RadioGroupField } from 'cx-ui-components';
+
+import { DetailWrapper } from '../../../components/DetailWrapper';
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
 
 export default function CustomMetricsForm({
   handleSubmit,
@@ -24,11 +29,12 @@ export default function CustomMetricsForm({
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
-      <DetailHeader text="Details" />
-      <Fragment>
+      <DetailWrapper open={true}>
+        <WrappedDetailHeader text="Details" />
         <InputField
           name="name"
           label="Name *"
+          id="frm-Custom-metrics-name"
           componentType="input"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -36,16 +42,18 @@ export default function CustomMetricsForm({
         <InputField
           name="description"
           label="Description"
+          id="frm-Custom-metrics-description"
           componentType="textarea"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
-      </Fragment>
-      <DetailHeader text="Properties" />
-      <Fragment>
+      </DetailWrapper>
+      <DetailWrapper open={true}>
+        <WrappedDetailHeader text="Properties" />
         <InputField
           name="slaThreshold"
           label="SLA Threshold"
+          id="frm-Custom-metrics-sla-threshold"
           labelHelpText="(seconds)"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -55,6 +63,7 @@ export default function CustomMetricsForm({
         <RadioGroupField
           name="slaAbandonType"
           label="SLA Abandon Type"
+          id="frm-Custom-metrics-sla-abandon-type"
           disabled={isSaving || inherited || !userHasUpdatePermission}
           options={[
             {
@@ -74,6 +83,7 @@ export default function CustomMetricsForm({
           <InputField
             name="slaAbandonThreshold"
             label="Abandon Threshold"
+            id="frm-Custom-metrics-sla-abandon-threshold"
             labelHelpText="(seconds)"
             inputType="text"
             disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -81,7 +91,7 @@ export default function CustomMetricsForm({
             dataType="number"
           />
         )}
-      </Fragment>
+      </DetailWrapper>
     </form>
   );
 }

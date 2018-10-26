@@ -4,13 +4,16 @@ exports[`<CustomMetricsForm /> renders create customMetric 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Details"
+    />
     <InputField
       componentType="input"
       disabled={false}
+      id="frm-Custom-metrics-name"
       inputType="text"
       label="Name *"
       name="name"
@@ -18,19 +21,23 @@ exports[`<CustomMetricsForm /> renders create customMetric 1`] = `
     <InputField
       componentType="textarea"
       disabled={false}
+      id="frm-Custom-metrics-description"
       inputType="text"
       label="Description"
       name="description"
     />
-  </React.Fragment>
-  <DetailHeader
-    text="Properties"
-  />
-  <React.Fragment>
+  </DetailWrapper>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Properties"
+    />
     <InputField
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-Custom-metrics-sla-threshold"
       inputType="text"
       label="SLA Threshold"
       labelHelpText="(seconds)"
@@ -38,6 +45,7 @@ exports[`<CustomMetricsForm /> renders create customMetric 1`] = `
     />
     <RadioGroupField
       disabled={false}
+      id="frm-Custom-metrics-sla-abandon-type"
       label="SLA Abandon Type"
       name="slaAbandonType"
       options={
@@ -60,12 +68,13 @@ exports[`<CustomMetricsForm /> renders create customMetric 1`] = `
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-Custom-metrics-sla-abandon-threshold"
       inputType="text"
       label="Abandon Threshold"
       labelHelpText="(seconds)"
       name="slaAbandonThreshold"
     />
-  </React.Fragment>
+  </DetailWrapper>
 </form>
 `;
 
@@ -73,13 +82,16 @@ exports[`<CustomMetricsForm /> renders update customMetric 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Details"
+    />
     <InputField
       componentType="input"
       disabled={false}
+      id="frm-Custom-metrics-name"
       inputType="text"
       label="Name *"
       name="name"
@@ -87,19 +99,23 @@ exports[`<CustomMetricsForm /> renders update customMetric 1`] = `
     <InputField
       componentType="textarea"
       disabled={false}
+      id="frm-Custom-metrics-description"
       inputType="text"
       label="Description"
       name="description"
     />
-  </React.Fragment>
-  <DetailHeader
-    text="Properties"
-  />
-  <React.Fragment>
+  </DetailWrapper>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Properties"
+    />
     <InputField
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-Custom-metrics-sla-threshold"
       inputType="text"
       label="SLA Threshold"
       labelHelpText="(seconds)"
@@ -107,6 +123,7 @@ exports[`<CustomMetricsForm /> renders update customMetric 1`] = `
     />
     <RadioGroupField
       disabled={false}
+      id="frm-Custom-metrics-sla-abandon-type"
       label="SLA Abandon Type"
       name="slaAbandonType"
       options={
@@ -129,12 +146,13 @@ exports[`<CustomMetricsForm /> renders update customMetric 1`] = `
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-Custom-metrics-sla-abandon-threshold"
       inputType="text"
       label="Abandon Threshold"
       labelHelpText="(seconds)"
       name="slaAbandonThreshold"
     />
-  </React.Fragment>
+  </DetailWrapper>
 </form>
 `;
 
@@ -142,13 +160,16 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Details"
+    />
     <InputField
       componentType="input"
       disabled={true}
+      id="frm-Custom-metrics-name"
       inputType="text"
       label="Name *"
       name="name"
@@ -156,19 +177,23 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
     <InputField
       componentType="textarea"
       disabled={true}
+      id="frm-Custom-metrics-description"
       inputType="text"
       label="Description"
       name="description"
     />
-  </React.Fragment>
-  <DetailHeader
-    text="Properties"
-  />
-  <React.Fragment>
+  </DetailWrapper>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Properties"
+    />
     <InputField
       componentType="input"
       dataType="number"
       disabled={true}
+      id="frm-Custom-metrics-sla-threshold"
       inputType="text"
       label="SLA Threshold"
       labelHelpText="(seconds)"
@@ -176,6 +201,7 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
     />
     <RadioGroupField
       disabled={true}
+      id="frm-Custom-metrics-sla-abandon-type"
       label="SLA Abandon Type"
       name="slaAbandonType"
       options={
@@ -194,7 +220,7 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
       }
       required={true}
     />
-  </React.Fragment>
+  </DetailWrapper>
 </form>
 `;
 
@@ -202,13 +228,16 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Details"
+    />
     <InputField
       componentType="input"
       disabled={true}
+      id="frm-Custom-metrics-name"
       inputType="text"
       label="Name *"
       name="name"
@@ -216,19 +245,23 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
     <InputField
       componentType="textarea"
       disabled={true}
+      id="frm-Custom-metrics-description"
       inputType="text"
       label="Description"
       name="description"
     />
-  </React.Fragment>
-  <DetailHeader
-    text="Properties"
-  />
-  <React.Fragment>
+  </DetailWrapper>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Properties"
+    />
     <InputField
       componentType="input"
       dataType="number"
       disabled={true}
+      id="frm-Custom-metrics-sla-threshold"
       inputType="text"
       label="SLA Threshold"
       labelHelpText="(seconds)"
@@ -236,6 +269,7 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
     />
     <RadioGroupField
       disabled={true}
+      id="frm-Custom-metrics-sla-abandon-type"
       label="SLA Abandon Type"
       name="slaAbandonType"
       options={
@@ -258,12 +292,13 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
       componentType="input"
       dataType="number"
       disabled={true}
+      id="frm-Custom-metrics-sla-abandon-threshold"
       inputType="text"
       label="Abandon Threshold"
       labelHelpText="(seconds)"
       name="slaAbandonThreshold"
     />
-  </React.Fragment>
+  </DetailWrapper>
 </form>
 `;
 
@@ -271,13 +306,16 @@ exports[`<CustomMetricsForm /> renders update customMetric with count-against-sl
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Details"
+    />
     <InputField
       componentType="input"
       disabled={false}
+      id="frm-Custom-metrics-name"
       inputType="text"
       label="Name *"
       name="name"
@@ -285,19 +323,23 @@ exports[`<CustomMetricsForm /> renders update customMetric with count-against-sl
     <InputField
       componentType="textarea"
       disabled={false}
+      id="frm-Custom-metrics-description"
       inputType="text"
       label="Description"
       name="description"
     />
-  </React.Fragment>
-  <DetailHeader
-    text="Properties"
-  />
-  <React.Fragment>
+  </DetailWrapper>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Properties"
+    />
     <InputField
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-Custom-metrics-sla-threshold"
       inputType="text"
       label="SLA Threshold"
       labelHelpText="(seconds)"
@@ -305,6 +347,7 @@ exports[`<CustomMetricsForm /> renders update customMetric with count-against-sl
     />
     <RadioGroupField
       disabled={false}
+      id="frm-Custom-metrics-sla-abandon-type"
       label="SLA Abandon Type"
       name="slaAbandonType"
       options={
@@ -323,7 +366,7 @@ exports[`<CustomMetricsForm /> renders update customMetric with count-against-sl
       }
       required={true}
     />
-  </React.Fragment>
+  </DetailWrapper>
 </form>
 `;
 
@@ -331,13 +374,16 @@ exports[`<CustomMetricsForm /> renders update customMetric with ignored-abandone
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Details"
+    />
     <InputField
       componentType="input"
       disabled={false}
+      id="frm-Custom-metrics-name"
       inputType="text"
       label="Name *"
       name="name"
@@ -345,19 +391,23 @@ exports[`<CustomMetricsForm /> renders update customMetric with ignored-abandone
     <InputField
       componentType="textarea"
       disabled={false}
+      id="frm-Custom-metrics-description"
       inputType="text"
       label="Description"
       name="description"
     />
-  </React.Fragment>
-  <DetailHeader
-    text="Properties"
-  />
-  <React.Fragment>
+  </DetailWrapper>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Properties"
+    />
     <InputField
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-Custom-metrics-sla-threshold"
       inputType="text"
       label="SLA Threshold"
       labelHelpText="(seconds)"
@@ -365,6 +415,7 @@ exports[`<CustomMetricsForm /> renders update customMetric with ignored-abandone
     />
     <RadioGroupField
       disabled={false}
+      id="frm-Custom-metrics-sla-abandon-type"
       label="SLA Abandon Type"
       name="slaAbandonType"
       options={
@@ -387,12 +438,13 @@ exports[`<CustomMetricsForm /> renders update customMetric with ignored-abandone
       componentType="input"
       dataType="number"
       disabled={false}
+      id="frm-Custom-metrics-sla-abandon-threshold"
       inputType="text"
       label="Abandon Threshold"
       labelHelpText="(seconds)"
       name="slaAbandonThreshold"
     />
-  </React.Fragment>
+  </DetailWrapper>
 </form>
 `;
 
@@ -400,13 +452,16 @@ exports[`<CustomMetricsForm /> renders update customMetric without update permis
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Details"
+    />
     <InputField
       componentType="input"
       disabled={true}
+      id="frm-Custom-metrics-name"
       inputType="text"
       label="Name *"
       name="name"
@@ -414,19 +469,23 @@ exports[`<CustomMetricsForm /> renders update customMetric without update permis
     <InputField
       componentType="textarea"
       disabled={true}
+      id="frm-Custom-metrics-description"
       inputType="text"
       label="Description"
       name="description"
     />
-  </React.Fragment>
-  <DetailHeader
-    text="Properties"
-  />
-  <React.Fragment>
+  </DetailWrapper>
+  <DetailWrapper
+    open={true}
+  >
+    <Styled(DetailHeader)
+      text="Properties"
+    />
     <InputField
       componentType="input"
       dataType="number"
       disabled={true}
+      id="frm-Custom-metrics-sla-threshold"
       inputType="text"
       label="SLA Threshold"
       labelHelpText="(seconds)"
@@ -434,6 +493,7 @@ exports[`<CustomMetricsForm /> renders update customMetric without update permis
     />
     <RadioGroupField
       disabled={true}
+      id="frm-Custom-metrics-sla-abandon-type"
       label="SLA Abandon Type"
       name="slaAbandonType"
       options={
@@ -456,11 +516,12 @@ exports[`<CustomMetricsForm /> renders update customMetric without update permis
       componentType="input"
       dataType="number"
       disabled={true}
+      id="frm-Custom-metrics-sla-abandon-threshold"
       inputType="text"
       label="Abandon Threshold"
       labelHelpText="(seconds)"
       name="slaAbandonThreshold"
     />
-  </React.Fragment>
+  </DetailWrapper>
 </form>
 `;

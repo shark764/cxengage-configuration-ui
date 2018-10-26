@@ -282,7 +282,7 @@ entities.interactionMonitoring.columns = [
 
 // Custom Metrics
 entities.customMetrics.pageTitle = 'Statistics Management';
-entities.customMetrics.helpLink = '/Help/Content/Configuration/Statistics_Management/Service_Level.htm';
+entities.customMetrics.helpLink = '/Help/Content/Configuration/Statistics_Management/About_Statistics_Management.htm';
 entities.customMetrics.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
