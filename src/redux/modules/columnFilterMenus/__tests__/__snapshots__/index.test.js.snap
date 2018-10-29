@@ -159,10 +159,6 @@ Immutable.Map {
         "active": true,
       },
       Immutable.Map {
-        "name": "Members",
-        "active": true,
-      },
-      Immutable.Map {
         "name": "Proficiency",
         "active": true,
       },
@@ -221,6 +217,10 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "platformRoles": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "customMetrics": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [
@@ -251,10 +251,6 @@ Immutable.Map {
       },
       Immutable.Map {
         "name": "Description",
-        "active": true,
-      },
-      Immutable.Map {
-        "name": "Members",
         "active": true,
       },
       Immutable.Map {

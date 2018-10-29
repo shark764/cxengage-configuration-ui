@@ -59,7 +59,8 @@ const initialState = fromJS({
   customMetrics: {
     ...defaultEntity,
     readPermission: ['CUSTOM_STATS_READ'],
-    updatePermission: ['CUSTOM_STATS_UPDATE']
+    updatePermission: ['CUSTOM_STATS_UPDATE'],
+    createPermission: ['CUSTOM_STATS_CREATE']
   },
   chatWidgets: {
     ...defaultEntity,
@@ -70,6 +71,26 @@ const initialState = fromJS({
     assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
   },
   users: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_USERS'],
+    updatePermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'MANAGE_ALL_USER_EXTENSIONS',
+      'MANAGE_ALL_GROUP_USERS',
+      'MANAGE_ALL_USER_SKILLS',
+      'MANAGE_ALL_USER_LOCATIONS',
+      'MANAGE_TENANT_ENROLLMENT'
+    ],
+    createPermission: [
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'MANAGE_ALL_USER_EXTENSIONS',
+      'MANAGE_ALL_GROUP_USERS',
+      'MANAGE_ALL_USER_SKILLS',
+      'MANAGE_ALL_USER_LOCATIONS',
+      'MANAGE_TENANT_ENROLLMENT'
+    ]
+  },
+  platformRoles: {
     ...defaultEntity
   },
   roles: {

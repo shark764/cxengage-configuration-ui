@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
+<styled.div
+  id="dtpanel-users"
+>
+  Mock Child
+</styled.div>
+`;
+
+exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permision 1`] = `
+<styled.div
+  id="dtpanel-users"
+>
+  Mock Child
+</styled.div>
+`;
+
+exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permision and active disabled 1`] = `
+<styled.div
+  id="dtpanel-users"
+>
+  Mock Child
+</styled.div>
+`;

@@ -325,6 +325,30 @@ Immutable.Map {
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "VIEW_ALL_USERS",
+    ],
+    "updatePermission": Immutable.List [
+      "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",
+      "MANAGE_ALL_USER_EXTENSIONS",
+      "MANAGE_ALL_GROUP_USERS",
+      "MANAGE_ALL_USER_SKILLS",
+      "MANAGE_ALL_USER_LOCATIONS",
+      "MANAGE_TENANT_ENROLLMENT",
+    ],
+    "createPermission": Immutable.List [
+      "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",
+      "MANAGE_ALL_USER_EXTENSIONS",
+      "MANAGE_ALL_GROUP_USERS",
+      "MANAGE_ALL_USER_SKILLS",
+      "MANAGE_ALL_USER_LOCATIONS",
+      "MANAGE_TENANT_ENROLLMENT",
+    ],
+  },
+  "platformRoles": Immutable.Map {
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
   },
   "customMetrics": Immutable.Map {
     "selectedEntityId": "",
@@ -335,6 +359,9 @@ Immutable.Map {
     ],
     "updatePermission": Immutable.List [
       "CUSTOM_STATS_UPDATE",
+    ],
+    "createPermission": Immutable.List [
+      "CUSTOM_STATS_CREATE",
     ],
   },
   "groups": Immutable.Map {
