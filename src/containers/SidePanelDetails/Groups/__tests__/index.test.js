@@ -11,12 +11,13 @@ import {
   getSelectedEntity,
   getCurrentEntity,
   userHasUpdatePermission,
-  getEntityListMembers,
-  getListSize,
   isInherited,
   isSaving
 } from '../../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
+import { getDependantEntityTableItems, getListSize } from '../../../../redux/modules/entities/listItemSelectors';
+
+jest.mock('../../../../redux/modules/entities/listItemSelectors');
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntity.mockImplementation(
@@ -26,7 +27,7 @@ getSelectedEntity.mockImplementation(
       name: 'mockName',
       description: 'mockDescription',
       active: true,
-      members: [
+      users: [
         {
           id: 'mockSubEntityId'
         }
@@ -34,7 +35,7 @@ getSelectedEntity.mockImplementation(
     })
 );
 getCurrentEntity.mockImplementation(() => 'groups');
-getEntityListMembers.mockImplementation(() => ['mockListMembers']);
+getDependantEntityTableItems.mockImplementation(() => ['mockListMembers']);
 getListSize.mockImplementation(() => 0);
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);

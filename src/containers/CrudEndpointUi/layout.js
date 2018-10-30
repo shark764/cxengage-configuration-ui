@@ -314,6 +314,14 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/roles',
     component: AddMembersToList
+  },
+  {
+    path: '/configuration/skills',
+    component: AddMembersToList
+  },
+  {
+    path: '/configuration/groups',
+    component: AddMembersToList
   }
 ];
 

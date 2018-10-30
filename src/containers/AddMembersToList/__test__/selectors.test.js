@@ -21,7 +21,9 @@ const initialState = fromJS({
 
 jest.mock('../../../redux/modules/entities/selectors', () => ({
   availableEntitiesForList: () => [],
-  availablePermissionsForList: () => []
+  availableItemsForList: () => [],
+  availablePermissionsForList: () => [],
+  getCurrentEntity: () => 'skills'
 }));
 
 describe('selectSidePanelTableItems', () => {

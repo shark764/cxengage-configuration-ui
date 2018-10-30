@@ -27,10 +27,6 @@ Object {
       "label": "Email",
       "name": "email",
     },
-    Object {
-      "label": "Proficiency",
-      "name": "proficiency",
-    },
   ],
   "tableItems": Array [
     "mockListMembers",
@@ -99,10 +95,6 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Email",
         "name": "email",
-      },
-      Object {
-        "label": "Proficiency",
-        "name": "proficiency",
       },
     ]
   }

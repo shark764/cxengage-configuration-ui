@@ -17,6 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.33.0] - 2018-10-29
+### Added
+- Skills and groups members lists
+
+### Fixed
+- updated sdk version to match config-ui
+
+
 ## [0.32.0] - 2018-10-26
 ### Added
 - CXV1-15517 - Adding Users Page.

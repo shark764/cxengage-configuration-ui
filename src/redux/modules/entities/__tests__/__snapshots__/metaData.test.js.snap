@@ -1024,10 +1024,6 @@ Object {
         "label": "Email",
         "name": "email",
       },
-      Object {
-        "label": "Proficiency",
-        "name": "proficiency",
-      },
     ],
     "subEntityName": "",
     "updateFormDependencies": Array [

@@ -7,12 +7,12 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       "active": true,
       "description": "mockDescription",
       "id": "mockId",
-      "members": Array [
+      "name": "mockName",
+      "users": Array [
         Object {
           "id": "mockSubEntityId",
         },
       ],
-      "name": "mockName",
     }
   }
   listSize={0}
@@ -80,12 +80,12 @@ Object {
     "active": true,
     "description": "mockDescription",
     "id": "mockId",
-    "members": Array [
+    "name": "mockName",
+    "users": Array [
       Object {
         "id": "mockSubEntityId",
       },
     ],
-    "name": "mockName",
   },
   "listSize": 0,
   "tableFields": Array [

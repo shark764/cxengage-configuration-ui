@@ -6,7 +6,7 @@ import { fromJS, List } from 'immutable';
 
 // Initial Sub State
 const defaultEntity = {
-  ...defaultEntity,
+  data: undefined,
   selectedEntityId: '',
   sidePanelWidth: 550,
   confirmationDialogType: undefined

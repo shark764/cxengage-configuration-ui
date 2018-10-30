@@ -182,7 +182,6 @@ entities.skills.sidePanelListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
   { label: 'Email', name: 'email' },
-  { label: 'Proficiency', name: 'proficiency' }
 ];
 entities.skills.columns = [
   { name: 'Name', active: true },
