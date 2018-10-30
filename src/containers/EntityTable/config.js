@@ -30,7 +30,7 @@ export function getTableColumns(columns) {
     'Platform Status': constructGeneralTextColumn('platformStatus'),
     'External Id': constructGeneralTextColumn('externalId'),
     'Invitation Status': constructGeneralTextColumn('invitationStatus'),
-    Description: descriptionColumn,
+    Description: constructGeneralTextColumn('description'),
     Status: statusColumn,
     'List Type': listTypeColumn,
     Permissions: permissionsColumn,

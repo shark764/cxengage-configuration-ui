@@ -7,12 +7,12 @@ Object {
     "description": "mockDescription",
     "hasProficiency": true,
     "id": "mockId",
-    "members": Array [
+    "name": "mockName",
+    "users": Array [
       Object {
         "id": "mockSubEntityId",
       },
     ],
-    "name": "mockName",
   },
   "listSize": 0,
   "tableFields": Array [
@@ -27,10 +27,6 @@ Object {
     Object {
       "label": "Email",
       "name": "email",
-    },
-    Object {
-      "label": "Proficiency",
-      "name": "proficiency",
     },
   ],
   "tableItems": Array [
@@ -48,12 +44,12 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
       "description": "mockDescription",
       "hasProficiency": true,
       "id": "mockId",
-      "members": Array [
+      "name": "mockName",
+      "users": Array [
         Object {
           "id": "mockSubEntityId",
         },
       ],
-      "name": "mockName",
     }
   }
   listSize={0}
@@ -101,10 +97,6 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Email",
         "name": "email",
-      },
-      Object {
-        "label": "Proficiency",
-        "name": "proficiency",
       },
     ]
   }

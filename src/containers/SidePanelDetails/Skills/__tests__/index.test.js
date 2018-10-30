@@ -11,14 +11,15 @@ import {
   getSelectedEntity,
   getCurrentEntity,
   userHasUpdatePermission,
-  getEntityListMembers,
-  getListSize,
   isInherited,
   isSaving
 } from '../../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
+import { getDependantEntityTableItems, getListSize } from '../../../../redux/modules/entities/listItemSelectors';
 
+jest.mock('../../../../redux/modules/entities');
 jest.mock('../../../../redux/modules/entities/selectors');
+jest.mock('../../../../redux/modules/entities/listItemSelectors');
 getSelectedEntity.mockImplementation(
   () =>
     new Map({
@@ -27,7 +28,7 @@ getSelectedEntity.mockImplementation(
       description: 'mockDescription',
       active: true,
       hasProficiency: true,
-      members: [
+      users: [
         {
           id: 'mockSubEntityId'
         }
@@ -35,13 +36,11 @@ getSelectedEntity.mockImplementation(
     })
 );
 getCurrentEntity.mockImplementation(() => 'skills');
-getEntityListMembers.mockImplementation(() => ['mockListMembers']);
+getDependantEntityTableItems.mockImplementation(() => ['mockListMembers']);
 getListSize.mockImplementation(() => 0);
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
-
-jest.mock('../../../../redux/modules/entities');
 removeListItem.mockImplementation(() => 'mockId');
 setSelectedSubEntityId.mockImplementation(() => 'mockId');
 

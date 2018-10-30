@@ -7,11 +7,10 @@ import GroupsDetailsPanel from './layout';
 import {
   userHasUpdatePermission,
   getSelectedEntity,
-  getCurrentEntity,
-  getEntityListMembers,
-  getListSize
+  getCurrentEntity
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
+import { getDependantEntityTableItems, getListSize } from '../../../redux/modules/entities/listItemSelectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
 export function mapStateToProps(state, props) {
@@ -19,7 +18,7 @@ export function mapStateToProps(state, props) {
   return {
     item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state),
-    tableItems: getEntityListMembers(state),
+    tableItems: getDependantEntityTableItems(state),
     tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
     listSize: getListSize(state)
   };

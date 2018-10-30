@@ -433,7 +433,7 @@ export const FetchSidePanelData = (action$, store) =>
       entityId: getSelectedEntityId(store.getState()),
       isDefined: name => store.getState().getIn(['Entities', name, 'data']) !== undefined
     }))
-    .filter(a => a.entityId !== 'create' && a.entityId !== '' && a.currentEntityName === 'outboundIdentifierLists')
+    .filter(a => a.entityId !== 'create' && a.entityId !== '' && entitiesMetaData[a.currentEntityName].dependentEntity)
     .map(a => ({
       type: 'FETCH_DATA_ITEM',
       entityName: a.currentEntityName,
