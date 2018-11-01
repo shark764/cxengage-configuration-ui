@@ -384,6 +384,47 @@ export const AddingListItems = (action$, store) =>
       entityId: a.entityId
     }));
 
+export const addAndRemoveListItemEntities = (action$, store) =>
+  action$
+    .ofType('TOGGLE_LIST_ITEM_ENTITY')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState()),
+      assoc: entitiesMetaData[getCurrentEntity(store.getState())].associations
+    }))
+    .map(a => ({
+      ...a,
+      values: {
+        originEntity: {
+          name: a.assoc[a.name][0],
+          id: a.assoc[a.name][0] !== a.entityName ? a.id : a.entityId
+        },
+        destinationEntity: {
+          name: a.assoc[a.name][1],
+          id: a.assoc[a.name][1] !== a.entityName ? a.id : a.entityId
+        }
+      }
+    }))
+    .concatMap(a =>
+      fromPromise(
+        sdkPromise({
+          module: 'entities',
+          data: { ...a.values },
+          command: a.actionType,
+          topic: `cxengage/entities/${a.actionType}-response`
+        })
+      )
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
+          )
+        )
+        .catch(error => handleError(error, a))
+    );
+
 export const RemovingListItems = (action$, store) =>
   action$
     .ofType('REMOVE_LIST_ITEM')

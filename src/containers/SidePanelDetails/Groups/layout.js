@@ -12,9 +12,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Detail } from 'cx-ui-components';
-import { DetailHeader } from 'cx-ui-components';
-import { SidePanelTable } from 'cx-ui-components';
+import { Detail, SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,11 +27,13 @@ export default function GroupsDetailsPanel({
   removeListItem,
   setSelectedSubEntityId,
   listSize,
+  inherited,
   item: { name, description, active }
 }) {
   return (
     <Wrapper id="dtpanel-groups">
-      {userHasUpdatePermission ? (
+      {inherited && <DetailsPanelAlert text="This group is inherited and cannot be edited" />}
+      {!inherited && userHasUpdatePermission ? (
         children
       ) : (
         <Fragment>
@@ -44,10 +44,11 @@ export default function GroupsDetailsPanel({
       )}
       <DetailHeader
         userHasUpdatePermission={userHasUpdatePermission}
-        text={`${listSize} Member(s)`}
-        onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
+        text={`${listSize} ${listSize > 1 ? 'Users' : 'User(s)'}`}
+        onActionButtonClick={() => setSelectedSubEntityId('users')}
       />
       <SidePanelTable
+        contains="users"
         userHasUpdatePermission={userHasUpdatePermission}
         deleteSubEntity={removeListItem}
         items={tableItems}
@@ -63,6 +64,7 @@ GroupsDetailsPanel.propTypes = {
     description: PropTypes.string,
     active: PropTypes.bool
   }),
+  inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
   tableItems: PropTypes.array,

@@ -33,6 +33,7 @@ import UsersForm from '../Form/Users';
 
 // AddMembersToList table modal
 import AddMembersToList from '../AddMembersToList';
+import AddMembersToListEntitys from '../AddMembersToList/Entities';
 
 // Side Panels
 import ListsDetailsPanel from '../SidePanelDetails/Lists';
@@ -317,11 +318,11 @@ const updateSubEntityFormRoutes = [
   },
   {
     path: '/configuration/skills',
-    component: AddMembersToList
+    component: AddMembersToListEntitys
   },
   {
     path: '/configuration/groups',
-    component: AddMembersToList
+    component: AddMembersToListEntitys
   }
 ];
 
