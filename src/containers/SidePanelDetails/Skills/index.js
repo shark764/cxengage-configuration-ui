@@ -9,7 +9,7 @@ import {
   getSelectedEntity,
   getCurrentEntity
 } from '../../../redux/modules/entities/selectors';
-import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
+import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
 import { getDependantEntityTableItems, getListSize } from '../../../redux/modules/entities/listItemSelectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
@@ -25,7 +25,7 @@ export function mapStateToProps(state, props) {
 }
 
 export const actions = {
-  removeListItem,
+  removeListItem: toggleListItemEntity,
   setSelectedSubEntityId
 };
 

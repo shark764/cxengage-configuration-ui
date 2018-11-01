@@ -7,10 +7,11 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
   Mock Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined Member(s)"
+    text="undefined User(s)"
     userHasUpdatePermission={true}
   />
   <_class
+    contains="users"
     userHasUpdatePermission={true}
   />
 </styled.div>
@@ -36,10 +37,11 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
   </React.Fragment>
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined Member(s)"
+    text="undefined User(s)"
     userHasUpdatePermission={false}
   />
   <_class
+    contains="users"
     userHasUpdatePermission={false}
   />
 </styled.div>
@@ -52,10 +54,11 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
   Mock Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined Member(s)"
+    text="undefined User(s)"
     userHasUpdatePermission={true}
   />
   <_class
+    contains="users"
     userHasUpdatePermission={true}
   />
 </styled.div>

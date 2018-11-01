@@ -29,12 +29,7 @@ export default function SkillsDetailsPanel({
   removeListItem,
   setSelectedSubEntityId,
   listSize,
-  item: {
-    name,
-    description,
-    hasProficiency,
-    active
-  }
+  item: { name, description, active, hasProficiency }
 }) {
   return (
     <Wrapper id="dtpanel-skills">
@@ -50,10 +45,11 @@ export default function SkillsDetailsPanel({
       )}
       <DetailHeader
         userHasUpdatePermission={userHasUpdatePermission}
-        text={`${listSize} Member(s)`}
-        onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
+        text={`${listSize} ${listSize > 1 ? 'Users' : 'User(s)'}`}
+        onActionButtonClick={() => setSelectedSubEntityId('users')}
       />
       <SidePanelTable
+        contains="users"
         userHasUpdatePermission={userHasUpdatePermission}
         deleteSubEntity={removeListItem}
         items={tableItems}

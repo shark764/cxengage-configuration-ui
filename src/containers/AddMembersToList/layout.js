@@ -50,6 +50,7 @@ export default function AddMemberToList(props) {
         </CloseButtonWrapper>
       </div>
       <SidePanelTable
+        contains={props.contains}
         userHasUpdatePermission={props.userHasUpdatePermission}
         addSubEntity={props.addListItem}
         toggleSubEntityActive={props.entityName !== 'roles' && props.toggleEntityListItemActive}
@@ -62,6 +63,7 @@ export default function AddMemberToList(props) {
 
 AddMemberToList.propTypes = {
   entityName: PropTypes.string,
+  contains: PropTypes.string,
   listName: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   addListItem: PropTypes.func,

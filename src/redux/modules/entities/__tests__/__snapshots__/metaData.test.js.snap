@@ -292,6 +292,16 @@ Object {
     "updateFormDependencies": Array [],
   },
   "groups": EntityMetaData {
+    "associations": Object {
+      "outboundIdentifierLists": Array [
+        "groups",
+        "outboundIdentifierLists",
+      ],
+      "users": Array [
+        "groups",
+        "users",
+      ],
+    },
     "betaFeature": false,
     "columns": Array [
       Object {
@@ -954,6 +964,16 @@ Object {
     ],
   },
   "skills": EntityMetaData {
+    "associations": Object {
+      "outboundIdentifierLists": Array [
+        "users",
+        "outboundIdentifierLists",
+      ],
+      "users": Array [
+        "users",
+        "skills",
+      ],
+    },
     "betaFeature": false,
     "columns": Array [
       Object {

@@ -173,6 +173,10 @@ entities.skills.pageTitle = 'Skill Management';
 entities.skills.helpLink = '/Help/Content/Managing%20Users/Creating_Skills.htm';
 entities.skills.updateFormDependencies.push('users');
 entities.skills.dependentEntity = 'users';
+entities.skills.associations = {
+  users: ['users', 'skills'],
+  outboundIdentifierLists: ['users', 'outboundIdentifierLists']
+};
 entities.skills.modalListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
@@ -195,6 +199,10 @@ entities.groups.pageTitle = 'Group Management';
 entities.groups.helpLink = '/Help/Content/Managing%20Users/Creating_Groups.htm';
 entities.groups.updateFormDependencies.push('users');
 entities.groups.dependentEntity = 'users';
+entities.groups.associations = {
+  users: ['groups', 'users'],
+  outboundIdentifierLists: ['groups', 'outboundIdentifierLists']
+};
 entities.groups.modalListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },

@@ -62,12 +62,22 @@ export const hasPermission = (userPermissions, permissionsNeeded) => {
 };
 
 export const isInherited = state => {
-  if (getCurrentEntity(state) === 'roles') {
-    return getSelectedEntity(state).get('type') === 'system';
-  } else if (getCurrentEntity(state) === 'users') {
-    return false;
+  if (getSelectedEntityId(state) !== 'create') {
+    switch (getCurrentEntity(state)) {
+      case 'roles': {
+        return getSelectedEntity(state).get('type') === 'system';
+      }
+      case 'users': {
+        return false;
+      }
+      case 'groups': {
+        return getSelectedEntity(state).get('name') === 'everyone';
+      }
+      default:
+        return getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
+    }
   } else {
-    return getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
+    return false;
   }
 };
 

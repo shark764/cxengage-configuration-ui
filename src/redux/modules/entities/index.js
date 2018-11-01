@@ -203,6 +203,12 @@ export const addListItem = listItemId => ({
   type: 'ADD_LIST_ITEM',
   listItemId
 });
+export const toggleListItemEntity = (id, name, actionType) => ({
+  type: 'TOGGLE_LIST_ITEM_ENTITY',
+  id,
+  name,
+  actionType
+});
 export const removeListItem = listItemId => ({
   type: 'REMOVE_LIST_ITEM',
   listItemId
@@ -341,6 +347,17 @@ export default function reducer(state = initialState, action) {
           [action.entityName, 'data', entityIndex],
           fromJS(Object.assign(result, { updating: false }))
         );
+      } else {
+        return state;
+      }
+    }
+    case 'TOGGLE_LIST_ITEM_ENTITY_FULFILLED': {
+      const { actionType, entityName, entityId, name, id } = action;
+      const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === entityId);
+      const currentList = state.getIn([entityName, 'data', entityIndex, name]);
+      const modifiedList = actionType === 'associate' ? currentList.push(id) : currentList.filter(x => x !== id);
+      if (entityIndex !== -1) {
+        return state.setIn([entityName, 'data', entityIndex, name], modifiedList);
       } else {
         return state;
       }
