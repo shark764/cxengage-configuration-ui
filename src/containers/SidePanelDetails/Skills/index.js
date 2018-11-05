@@ -4,23 +4,22 @@
 
 import { connect } from 'react-redux';
 import SkillsDetailsPanel from './layout';
-import {
-  userHasUpdatePermission,
-  getSelectedEntity,
-  getCurrentEntity
-} from '../../../redux/modules/entities/selectors';
+import { userHasUpdatePermission, getSelectedEntity } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
-import { getDependantEntityTableItems, getListSize } from '../../../redux/modules/entities/listItemSelectors';
+import {
+  getDependantEntityTableItems,
+  getSidePanelTableItems
+} from '../../../redux/modules/entities/listItemSelectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
 export function mapStateToProps(state, props) {
-  const currentEntity = getCurrentEntity(state);
   return {
     item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state),
-    tableItems: getDependantEntityTableItems(state),
-    tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
-    listSize: getListSize(state)
+    usersItems: getDependantEntityTableItems(state),
+    usersFields: entitiesMetaData.users.memberListTableFields,
+    outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
+    outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields
   };
 }
 

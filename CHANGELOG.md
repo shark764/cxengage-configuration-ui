@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.35.0] - 2018-11-05
+### Added
+- Skills and groups members lists.. ability to add and remove outbound identifier lists
+
 ## [0.34.0] - 2018-11-01
 ### Added
 - Skills and groups members lists.. ability to add and remove members

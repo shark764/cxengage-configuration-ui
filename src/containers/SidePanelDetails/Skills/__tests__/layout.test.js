@@ -40,6 +40,8 @@ describe('<SkillsDetailsPanel />', () => {
         id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={true}
+        usersItems={[]}
+        outboundIdentifierListsItems={[]}
         children={'Mock Child'}
         item={customItem}
         setSelectedSubEntityId={() => {}}
@@ -53,6 +55,8 @@ describe('<SkillsDetailsPanel />', () => {
         id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={true}
+        usersItems={[]}
+        outboundIdentifierListsItems={[]}
         children={'Mock Child'}
         item={customItemDisabled}
         setSelectedSubEntityId={() => {}}
@@ -66,6 +70,8 @@ describe('<SkillsDetailsPanel />', () => {
         id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={true}
+        usersItems={[]}
+        outboundIdentifierListsItems={[]}
         children={'Mock Child'}
         item={customItemNoProficiency}
         setSelectedSubEntityId={() => {}}
@@ -79,6 +85,8 @@ describe('<SkillsDetailsPanel />', () => {
         id="details-panel-id"
         className="details-panel"
         userHasUpdatePermission={false}
+        usersItems={[]}
+        outboundIdentifierListsItems={[]}
         children={'Mock Child'}
         item={customItem}
         setSelectedSubEntityId={() => {}}

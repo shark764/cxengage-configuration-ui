@@ -16,7 +16,30 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       ],
     }
   }
-  listSize={0}
+  outboundIdentifierListsFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  reasonListsFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
   store={
@@ -48,7 +71,8 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
-  tableFields={
+  userHasUpdatePermission={true}
+  usersFields={
     Array [
       Object {
         "label": "First Name",
@@ -64,12 +88,11 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       },
     ]
   }
-  tableItems={
+  usersItems={
     Array [
       "mockListMembers",
     ]
   }
-  userHasUpdatePermission={true}
 >
   Child
 </GroupsDetailsPanel>
@@ -89,8 +112,30 @@ Object {
       },
     ],
   },
-  "listSize": 0,
-  "tableFields": Array [
+  "outboundIdentifierListsFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "outboundIdentifierListsItems": undefined,
+  "reasonListsFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "reasonListsItems": undefined,
+  "userHasUpdatePermission": true,
+  "usersFields": Array [
     Object {
       "label": "First Name",
       "name": "firstName",
@@ -104,9 +149,8 @@ Object {
       "name": "email",
     },
   ],
-  "tableItems": Array [
+  "usersItems": Array [
     "mockListMembers",
   ],
-  "userHasUpdatePermission": true,
 }
 `;

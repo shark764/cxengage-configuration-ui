@@ -12,12 +12,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Detail } from 'cx-ui-components';
-import { DetailHeader } from 'cx-ui-components';
-import { SidePanelTable } from 'cx-ui-components';
-import { DetailsPanelAlert } from 'cx-ui-components';
-
 import { DetailWrapper } from '../../../components/DetailWrapper';
+import { Detail, SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
 
 const Wrapper = styled.div`
   display: flex;

@@ -180,11 +180,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/outboundIdentifiers',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <OutboundIdentifiersDetailsPanel>
           <OutboundIdentifiersForm />
         </OutboundIdentifiersDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {
@@ -200,11 +200,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/customMetrics',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <CustomMetricsDetailsPanel>
           <CustomMetricsForm />
         </CustomMetricsDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {
@@ -220,41 +220,41 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/roles',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <RolesDetailsPanel>
           <RolesForm />
         </RolesDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {
     path: '/configuration/skills',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <SkillsDetailsPanel>
           <SkillsForm />
         </SkillsDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {
     path: '/configuration/groups',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <GroupsDetailsPanel>
           <GroupsForm />
         </GroupsDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {
     path: '/configuration/users',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <UsersDetailsPanel>
           <UsersForm />
         </UsersDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   }
   //hygen-inject-before2

@@ -142,7 +142,8 @@ export const listOfEntities = [
   'platformRoles',
   'permissions',
   'interactionMonitoring',
-  'users'
+  'users',
+  'reasonLists'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -154,6 +155,11 @@ entities.users.pageTitle = 'User Management';
 entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
 entities.users.createFormDependencies.push('roles', 'platformRoles');
 entities.users.updateFormDependencies.push('roles', 'platformRoles');
+entities.users.memberListTableFields = [
+  { label: 'First Name', name: 'firstName' },
+  { label: 'Last Name', name: 'lastName' },
+  { label: 'Email', name: 'email' }
+];
 entities.users.columns = [
   { name: 'First Name', active: true },
   { name: 'Last Name', active: true },
@@ -175,7 +181,7 @@ entities.skills.updateFormDependencies.push('users');
 entities.skills.dependentEntity = 'users';
 entities.skills.associations = {
   users: ['users', 'skills'],
-  outboundIdentifierLists: ['users', 'outboundIdentifierLists']
+  outboundIdentifierLists: ['skills', 'outboundIdentifierLists']
 };
 entities.skills.modalListTableFields = [
   { label: 'First Name', name: 'firstName' },
@@ -201,18 +207,24 @@ entities.groups.updateFormDependencies.push('users');
 entities.groups.dependentEntity = 'users';
 entities.groups.associations = {
   users: ['groups', 'users'],
-  outboundIdentifierLists: ['groups', 'outboundIdentifierLists']
+  outboundIdentifierLists: ['groups', 'outboundIdentifierLists'],
+  reasonLists: ['groups', 'reasonLists']
 };
 entities.groups.modalListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
   { label: 'Email', name: 'email' }
 ];
+entities.groups.outboundIdentifiersFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Description', name: 'description' }
+];
 entities.groups.sidePanelListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
   { label: 'Email', name: 'email' }
 ];
+
 entities.groups.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -247,6 +259,10 @@ entities.outboundIdentifierLists.modalListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Value', name: 'value' },
   { label: 'Channel Type', name: 'channelType' },
+  { label: 'Description', name: 'description' }
+];
+entities.outboundIdentifierLists.memberListTableFields = [
+  { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' }
 ];
 entities.outboundIdentifierLists.sidePanelListTableFields = [
@@ -309,6 +325,19 @@ entities.chatWidgets.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Status', active: true }
+];
+
+// Presence Reasons Lists
+entities.reasonLists.pageTitle = 'Reason List Management';
+entities.reasonLists.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
+entities.reasonLists.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true }
+];
+entities.reasonLists.memberListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Description', name: 'description' }
 ];
 
 //Hygen-insert-new-entity-configuration

@@ -5,15 +5,50 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
   id="dtpanel-groups"
 >
   Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    text="undefined User(s)"
-    userHasUpdatePermission={true}
-  />
-  <_class
-    contains="users"
-    userHasUpdatePermission={true}
-  />
+  <Connect(DetailWrapper)
+    open={true}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Users"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="users"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="outboundIdentifierLists"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="reasonLists"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;
 
@@ -35,15 +70,50 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
       value="Enabled"
     />
   </React.Fragment>
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    text="undefined User(s)"
-    userHasUpdatePermission={false}
-  />
-  <_class
-    contains="users"
-    userHasUpdatePermission={false}
-  />
+  <Connect(DetailWrapper)
+    open={true}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Users"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="users"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="outboundIdentifierLists"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="reasonLists"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;
 
@@ -52,14 +122,49 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
   id="dtpanel-groups"
 >
   Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    text="undefined User(s)"
-    userHasUpdatePermission={true}
-  />
-  <_class
-    contains="users"
-    userHasUpdatePermission={true}
-  />
+  <Connect(DetailWrapper)
+    open={true}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Users"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="users"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="outboundIdentifierLists"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="reasonLists"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;
