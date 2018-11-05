@@ -12,23 +12,27 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Detail } from 'cx-ui-components';
-import { DetailHeader } from 'cx-ui-components';
-import { SidePanelTable } from 'cx-ui-components';
+import { Detail, SidePanelTable, DetailHeader } from 'cx-ui-components';
+import DetailWrapper from '../../../components/DetailWrapper';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
+
 export default function SkillsDetailsPanel({
   children,
   userHasUpdatePermission,
-  tableItems,
-  tableFields,
+  usersItems,
+  usersFields,
+  outboundIdentifierListsItems,
+  outboundIdentifierListsFields,
   removeListItem,
   setSelectedSubEntityId,
-  listSize,
   item: { name, description, active, hasProficiency }
 }) {
   return (
@@ -43,18 +47,36 @@ export default function SkillsDetailsPanel({
           <Detail label="Status" value={active ? 'Enabled' : 'Disabled'} />
         </Fragment>
       )}
-      <DetailHeader
-        userHasUpdatePermission={userHasUpdatePermission}
-        text={`${listSize} ${listSize > 1 ? 'Users' : 'User(s)'}`}
-        onActionButtonClick={() => setSelectedSubEntityId('users')}
-      />
-      <SidePanelTable
-        contains="users"
-        userHasUpdatePermission={userHasUpdatePermission}
-        deleteSubEntity={removeListItem}
-        items={tableItems}
-        fields={tableFields}
-      />
+      <DetailWrapper open={true}>
+        <WrappedDetailHeader
+          userHasUpdatePermission={userHasUpdatePermission}
+          text={`${usersItems.length > 1 ? usersItems.length : ''} Users`}
+          onActionButtonClick={() => setSelectedSubEntityId('users')}
+        />
+        <SidePanelTable
+          contains="users"
+          userHasUpdatePermission={userHasUpdatePermission}
+          deleteSubEntity={removeListItem}
+          items={usersItems}
+          fields={usersFields}
+        />
+      </DetailWrapper>
+      <DetailWrapper open={false} contains="outboundIdentifierLists">
+        <WrappedDetailHeader
+          userHasUpdatePermission={userHasUpdatePermission}
+          text={`${
+            outboundIdentifierListsItems.length > 1 ? outboundIdentifierListsItems.length : ''
+          } Outbound Identifier Lists`}
+          onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
+        />
+        <SidePanelTable
+          contains="outboundIdentifierLists"
+          userHasUpdatePermission={userHasUpdatePermission}
+          deleteSubEntity={removeListItem}
+          items={outboundIdentifierListsItems}
+          fields={outboundIdentifierListsFields}
+        />
+      </DetailWrapper>
     </Wrapper>
   );
 }
@@ -68,8 +90,10 @@ SkillsDetailsPanel.propTypes = {
   }),
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
-  tableItems: PropTypes.array,
-  tableFields: PropTypes.array,
+  usersItems: PropTypes.array,
+  usersFields: PropTypes.array,
+  outboundIdentifierListsItems: PropTypes.array,
+  outboundIdentifierListsFields: PropTypes.array,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   listSize: PropTypes.number

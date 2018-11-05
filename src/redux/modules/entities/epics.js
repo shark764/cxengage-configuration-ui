@@ -45,7 +45,8 @@ import { downloadFile } from 'serenova-js-utils/browser';
 import {
   removeLastLetter,
   camelCaseToRegularForm,
-  camelCaseToRegularFormAndRemoveLastLetter
+  camelCaseToRegularFormAndRemoveLastLetter,
+  camelCaseToKebabCase
 } from 'serenova-js-utils/strings';
 
 /**
@@ -397,11 +398,11 @@ export const addAndRemoveListItemEntities = (action$, store) =>
       ...a,
       values: {
         originEntity: {
-          name: a.assoc[a.name][0],
+          name: camelCaseToKebabCase(a.assoc[a.name][0]),
           id: a.assoc[a.name][0] !== a.entityName ? a.id : a.entityId
         },
         destinationEntity: {
-          name: a.assoc[a.name][1],
+          name: camelCaseToKebabCase(a.assoc[a.name][1]),
           id: a.assoc[a.name][1] !== a.entityName ? a.id : a.entityId
         }
       }
@@ -424,6 +425,41 @@ export const addAndRemoveListItemEntities = (action$, store) =>
         )
         .catch(error => handleError(error, a))
     );
+
+export const fetchEntityListItems = (action$, store) =>
+  action$
+    .ofType('FETCH_LIST_ITEMS')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      name: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState()),
+      assoc: entitiesMetaData[getCurrentEntity(store.getState())].associations
+    }))
+    .map(a => ({
+      ...a,
+      values: {
+        path: [a.entityName, a.entityId, camelCaseToKebabCase(a.associatedEntityName)]
+      }
+    }))
+    .concatMap(a =>
+      fromPromise(
+        sdkPromise({
+          module: 'entities',
+          data: { ...a.values },
+          command: 'getEntity',
+          topic: `cxengage/entities/get-entity-response`
+        })
+      )
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
+    );
+
+export const fetchEntityListItemDependency = (action$, store) =>
+  action$.ofType('FETCH_LIST_ITEMS').map(a => ({
+    type: 'FETCH_DATA',
+    entityName: a.associatedEntityName
+  }));
 
 export const RemovingListItems = (action$, store) =>
   action$

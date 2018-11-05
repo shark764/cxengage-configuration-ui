@@ -31,6 +31,9 @@ describe('<GroupsDetailsPanel />', () => {
       <GroupsDetailsPanel
         id="details-panel-id"
         className="details-panel"
+        usersItems={[]}
+        outboundIdentifierListsItems={[]}
+        reasonListsItems={[]}
         userHasUpdatePermission={true}
         children={'Mock Child'}
         item={customItem}
@@ -44,6 +47,9 @@ describe('<GroupsDetailsPanel />', () => {
       <GroupsDetailsPanel
         id="details-panel-id"
         className="details-panel"
+        usersItems={[]}
+        outboundIdentifierListsItems={[]}
+        reasonListsItems={[]}
         userHasUpdatePermission={true}
         children={'Mock Child'}
         item={customItemDisabled}
@@ -57,6 +63,9 @@ describe('<GroupsDetailsPanel />', () => {
       <GroupsDetailsPanel
         id="details-panel-id"
         className="details-panel"
+        usersItems={[]}
+        outboundIdentifierListsItems={[]}
+        reasonListsItems={[]}
         userHasUpdatePermission={false}
         children={'Mock Child'}
         item={customItem}

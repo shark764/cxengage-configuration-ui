@@ -14,8 +14,19 @@ Object {
       },
     ],
   },
-  "listSize": 0,
-  "tableFields": Array [
+  "outboundIdentifierListsFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "outboundIdentifierListsItems": undefined,
+  "userHasUpdatePermission": true,
+  "usersFields": Array [
     Object {
       "label": "First Name",
       "name": "firstName",
@@ -29,10 +40,9 @@ Object {
       "name": "email",
     },
   ],
-  "tableItems": Array [
+  "usersItems": Array [
     "mockListMembers",
   ],
-  "userHasUpdatePermission": true,
 }
 `;
 
@@ -52,7 +62,18 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
       ],
     }
   }
-  listSize={0}
+  outboundIdentifierListsFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
   store={
@@ -84,7 +105,8 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
-  tableFields={
+  userHasUpdatePermission={true}
+  usersFields={
     Array [
       Object {
         "label": "First Name",
@@ -100,12 +122,11 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
       },
     ]
   }
-  tableItems={
+  usersItems={
     Array [
       "mockListMembers",
     ]
   }
-  userHasUpdatePermission={true}
 >
   Child
 </SkillsDetailsPanel>

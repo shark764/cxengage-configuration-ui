@@ -366,9 +366,7 @@ Immutable.Map {
     "updatePermission": Immutable.List [
       "CUSTOM_STATS_UPDATE",
     ],
-    "createPermission": Immutable.List [
-      "CUSTOM_STATS_CREATE",
-    ],
+    "createPermission": Immutable.List [],
   },
   "groups": Immutable.Map {
     "data": undefined,

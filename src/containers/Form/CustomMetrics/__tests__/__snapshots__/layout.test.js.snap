@@ -4,77 +4,69 @@ exports[`<CustomMetricsForm /> renders create customMetric 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      disabled={false}
-      id="frm-Custom-metrics-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={false}
-      id="frm-Custom-metrics-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </DetailWrapper>
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Properties"
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={false}
-      id="frm-Custom-metrics-sla-threshold"
-      inputType="text"
-      label="SLA Threshold"
-      labelHelpText="(seconds)"
-      name="slaThreshold"
-    />
-    <RadioGroupField
-      disabled={false}
-      id="frm-Custom-metrics-sla-abandon-type"
-      label="SLA Abandon Type"
-      name="slaAbandonType"
-      options={
-        Array [
-          Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
-            "label": "Ignore Abandons",
-            "value": "ignored-abandoned-calls",
-          },
-          Object {
-            "helpText": "(Include short abandons against/in SLA)",
-            "label": "Count Against SLA",
-            "value": "count-against-sla",
-          },
-        ]
-      }
-      required={true}
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={false}
-      id="frm-Custom-metrics-sla-abandon-threshold"
-      inputType="text"
-      label="Abandon Threshold"
-      labelHelpText="(seconds)"
-      name="slaAbandonThreshold"
-    />
-  </DetailWrapper>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-Custom-metrics-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="frm-Custom-metrics-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={false}
+    id="frm-Custom-metrics-sla-threshold"
+    inputType="text"
+    label="SLA Threshold"
+    labelHelpText="(seconds)"
+    name="slaThreshold"
+  />
+  <RadioGroupField
+    disabled={false}
+    id="frm-Custom-metrics-sla-abandon-type"
+    label="SLA Abandon Type"
+    name="slaAbandonType"
+    options={
+      Array [
+        Object {
+          "helpText": "(Filter Out / Exclude Short Abandons)",
+          "label": "Ignore Abandons",
+          "value": "ignored-abandoned-calls",
+        },
+        Object {
+          "helpText": "(Include short abandons against/in SLA)",
+          "label": "Count Against SLA",
+          "value": "count-against-sla",
+        },
+      ]
+    }
+    required={true}
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={false}
+    id="frm-Custom-metrics-sla-abandon-threshold"
+    inputType="text"
+    label="Abandon Threshold"
+    labelHelpText="(seconds)"
+    name="slaAbandonThreshold"
+  />
 </form>
 `;
 
@@ -82,77 +74,69 @@ exports[`<CustomMetricsForm /> renders update customMetric 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      disabled={false}
-      id="frm-Custom-metrics-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={false}
-      id="frm-Custom-metrics-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </DetailWrapper>
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Properties"
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={false}
-      id="frm-Custom-metrics-sla-threshold"
-      inputType="text"
-      label="SLA Threshold"
-      labelHelpText="(seconds)"
-      name="slaThreshold"
-    />
-    <RadioGroupField
-      disabled={false}
-      id="frm-Custom-metrics-sla-abandon-type"
-      label="SLA Abandon Type"
-      name="slaAbandonType"
-      options={
-        Array [
-          Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
-            "label": "Ignore Abandons",
-            "value": "ignored-abandoned-calls",
-          },
-          Object {
-            "helpText": "(Include short abandons against/in SLA)",
-            "label": "Count Against SLA",
-            "value": "count-against-sla",
-          },
-        ]
-      }
-      required={true}
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={false}
-      id="frm-Custom-metrics-sla-abandon-threshold"
-      inputType="text"
-      label="Abandon Threshold"
-      labelHelpText="(seconds)"
-      name="slaAbandonThreshold"
-    />
-  </DetailWrapper>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-Custom-metrics-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="frm-Custom-metrics-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={false}
+    id="frm-Custom-metrics-sla-threshold"
+    inputType="text"
+    label="SLA Threshold"
+    labelHelpText="(seconds)"
+    name="slaThreshold"
+  />
+  <RadioGroupField
+    disabled={false}
+    id="frm-Custom-metrics-sla-abandon-type"
+    label="SLA Abandon Type"
+    name="slaAbandonType"
+    options={
+      Array [
+        Object {
+          "helpText": "(Filter Out / Exclude Short Abandons)",
+          "label": "Ignore Abandons",
+          "value": "ignored-abandoned-calls",
+        },
+        Object {
+          "helpText": "(Include short abandons against/in SLA)",
+          "label": "Count Against SLA",
+          "value": "count-against-sla",
+        },
+      ]
+    }
+    required={true}
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={false}
+    id="frm-Custom-metrics-sla-abandon-threshold"
+    inputType="text"
+    label="Abandon Threshold"
+    labelHelpText="(seconds)"
+    name="slaAbandonThreshold"
+  />
 </form>
 `;
 
@@ -160,67 +144,59 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
 <form
   onSubmit={[Function]}
 >
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      disabled={true}
-      id="frm-Custom-metrics-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={true}
-      id="frm-Custom-metrics-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </DetailWrapper>
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Properties"
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={true}
-      id="frm-Custom-metrics-sla-threshold"
-      inputType="text"
-      label="SLA Threshold"
-      labelHelpText="(seconds)"
-      name="slaThreshold"
-    />
-    <RadioGroupField
-      disabled={true}
-      id="frm-Custom-metrics-sla-abandon-type"
-      label="SLA Abandon Type"
-      name="slaAbandonType"
-      options={
-        Array [
-          Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
-            "label": "Ignore Abandons",
-            "value": "ignored-abandoned-calls",
-          },
-          Object {
-            "helpText": "(Include short abandons against/in SLA)",
-            "label": "Count Against SLA",
-            "value": "count-against-sla",
-          },
-        ]
-      }
-      required={true}
-    />
-  </DetailWrapper>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    id="frm-Custom-metrics-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    id="frm-Custom-metrics-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={true}
+    id="frm-Custom-metrics-sla-threshold"
+    inputType="text"
+    label="SLA Threshold"
+    labelHelpText="(seconds)"
+    name="slaThreshold"
+  />
+  <RadioGroupField
+    disabled={true}
+    id="frm-Custom-metrics-sla-abandon-type"
+    label="SLA Abandon Type"
+    name="slaAbandonType"
+    options={
+      Array [
+        Object {
+          "helpText": "(Filter Out / Exclude Short Abandons)",
+          "label": "Ignore Abandons",
+          "value": "ignored-abandoned-calls",
+        },
+        Object {
+          "helpText": "(Include short abandons against/in SLA)",
+          "label": "Count Against SLA",
+          "value": "count-against-sla",
+        },
+      ]
+    }
+    required={true}
+  />
 </form>
 `;
 
@@ -228,77 +204,69 @@ exports[`<CustomMetricsForm /> renders update customMetric saving and inherited 
 <form
   onSubmit={[Function]}
 >
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      disabled={true}
-      id="frm-Custom-metrics-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={true}
-      id="frm-Custom-metrics-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </DetailWrapper>
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Properties"
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={true}
-      id="frm-Custom-metrics-sla-threshold"
-      inputType="text"
-      label="SLA Threshold"
-      labelHelpText="(seconds)"
-      name="slaThreshold"
-    />
-    <RadioGroupField
-      disabled={true}
-      id="frm-Custom-metrics-sla-abandon-type"
-      label="SLA Abandon Type"
-      name="slaAbandonType"
-      options={
-        Array [
-          Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
-            "label": "Ignore Abandons",
-            "value": "ignored-abandoned-calls",
-          },
-          Object {
-            "helpText": "(Include short abandons against/in SLA)",
-            "label": "Count Against SLA",
-            "value": "count-against-sla",
-          },
-        ]
-      }
-      required={true}
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={true}
-      id="frm-Custom-metrics-sla-abandon-threshold"
-      inputType="text"
-      label="Abandon Threshold"
-      labelHelpText="(seconds)"
-      name="slaAbandonThreshold"
-    />
-  </DetailWrapper>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    id="frm-Custom-metrics-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    id="frm-Custom-metrics-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={true}
+    id="frm-Custom-metrics-sla-threshold"
+    inputType="text"
+    label="SLA Threshold"
+    labelHelpText="(seconds)"
+    name="slaThreshold"
+  />
+  <RadioGroupField
+    disabled={true}
+    id="frm-Custom-metrics-sla-abandon-type"
+    label="SLA Abandon Type"
+    name="slaAbandonType"
+    options={
+      Array [
+        Object {
+          "helpText": "(Filter Out / Exclude Short Abandons)",
+          "label": "Ignore Abandons",
+          "value": "ignored-abandoned-calls",
+        },
+        Object {
+          "helpText": "(Include short abandons against/in SLA)",
+          "label": "Count Against SLA",
+          "value": "count-against-sla",
+        },
+      ]
+    }
+    required={true}
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={true}
+    id="frm-Custom-metrics-sla-abandon-threshold"
+    inputType="text"
+    label="Abandon Threshold"
+    labelHelpText="(seconds)"
+    name="slaAbandonThreshold"
+  />
 </form>
 `;
 
@@ -306,67 +274,59 @@ exports[`<CustomMetricsForm /> renders update customMetric with count-against-sl
 <form
   onSubmit={[Function]}
 >
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      disabled={false}
-      id="frm-Custom-metrics-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={false}
-      id="frm-Custom-metrics-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </DetailWrapper>
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Properties"
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={false}
-      id="frm-Custom-metrics-sla-threshold"
-      inputType="text"
-      label="SLA Threshold"
-      labelHelpText="(seconds)"
-      name="slaThreshold"
-    />
-    <RadioGroupField
-      disabled={false}
-      id="frm-Custom-metrics-sla-abandon-type"
-      label="SLA Abandon Type"
-      name="slaAbandonType"
-      options={
-        Array [
-          Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
-            "label": "Ignore Abandons",
-            "value": "ignored-abandoned-calls",
-          },
-          Object {
-            "helpText": "(Include short abandons against/in SLA)",
-            "label": "Count Against SLA",
-            "value": "count-against-sla",
-          },
-        ]
-      }
-      required={true}
-    />
-  </DetailWrapper>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-Custom-metrics-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="frm-Custom-metrics-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={false}
+    id="frm-Custom-metrics-sla-threshold"
+    inputType="text"
+    label="SLA Threshold"
+    labelHelpText="(seconds)"
+    name="slaThreshold"
+  />
+  <RadioGroupField
+    disabled={false}
+    id="frm-Custom-metrics-sla-abandon-type"
+    label="SLA Abandon Type"
+    name="slaAbandonType"
+    options={
+      Array [
+        Object {
+          "helpText": "(Filter Out / Exclude Short Abandons)",
+          "label": "Ignore Abandons",
+          "value": "ignored-abandoned-calls",
+        },
+        Object {
+          "helpText": "(Include short abandons against/in SLA)",
+          "label": "Count Against SLA",
+          "value": "count-against-sla",
+        },
+      ]
+    }
+    required={true}
+  />
 </form>
 `;
 
@@ -374,77 +334,69 @@ exports[`<CustomMetricsForm /> renders update customMetric with ignored-abandone
 <form
   onSubmit={[Function]}
 >
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      disabled={false}
-      id="frm-Custom-metrics-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={false}
-      id="frm-Custom-metrics-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </DetailWrapper>
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Properties"
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={false}
-      id="frm-Custom-metrics-sla-threshold"
-      inputType="text"
-      label="SLA Threshold"
-      labelHelpText="(seconds)"
-      name="slaThreshold"
-    />
-    <RadioGroupField
-      disabled={false}
-      id="frm-Custom-metrics-sla-abandon-type"
-      label="SLA Abandon Type"
-      name="slaAbandonType"
-      options={
-        Array [
-          Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
-            "label": "Ignore Abandons",
-            "value": "ignored-abandoned-calls",
-          },
-          Object {
-            "helpText": "(Include short abandons against/in SLA)",
-            "label": "Count Against SLA",
-            "value": "count-against-sla",
-          },
-        ]
-      }
-      required={true}
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={false}
-      id="frm-Custom-metrics-sla-abandon-threshold"
-      inputType="text"
-      label="Abandon Threshold"
-      labelHelpText="(seconds)"
-      name="slaAbandonThreshold"
-    />
-  </DetailWrapper>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-Custom-metrics-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="frm-Custom-metrics-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={false}
+    id="frm-Custom-metrics-sla-threshold"
+    inputType="text"
+    label="SLA Threshold"
+    labelHelpText="(seconds)"
+    name="slaThreshold"
+  />
+  <RadioGroupField
+    disabled={false}
+    id="frm-Custom-metrics-sla-abandon-type"
+    label="SLA Abandon Type"
+    name="slaAbandonType"
+    options={
+      Array [
+        Object {
+          "helpText": "(Filter Out / Exclude Short Abandons)",
+          "label": "Ignore Abandons",
+          "value": "ignored-abandoned-calls",
+        },
+        Object {
+          "helpText": "(Include short abandons against/in SLA)",
+          "label": "Count Against SLA",
+          "value": "count-against-sla",
+        },
+      ]
+    }
+    required={true}
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={false}
+    id="frm-Custom-metrics-sla-abandon-threshold"
+    inputType="text"
+    label="Abandon Threshold"
+    labelHelpText="(seconds)"
+    name="slaAbandonThreshold"
+  />
 </form>
 `;
 
@@ -452,76 +404,68 @@ exports[`<CustomMetricsForm /> renders update customMetric without update permis
 <form
   onSubmit={[Function]}
 >
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      disabled={true}
-      id="frm-Custom-metrics-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={true}
-      id="frm-Custom-metrics-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </DetailWrapper>
-  <DetailWrapper
-    open={true}
-  >
-    <Styled(DetailHeader)
-      text="Properties"
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={true}
-      id="frm-Custom-metrics-sla-threshold"
-      inputType="text"
-      label="SLA Threshold"
-      labelHelpText="(seconds)"
-      name="slaThreshold"
-    />
-    <RadioGroupField
-      disabled={true}
-      id="frm-Custom-metrics-sla-abandon-type"
-      label="SLA Abandon Type"
-      name="slaAbandonType"
-      options={
-        Array [
-          Object {
-            "helpText": "(Filter Out / Exclude Short Abandons)",
-            "label": "Ignore Abandons",
-            "value": "ignored-abandoned-calls",
-          },
-          Object {
-            "helpText": "(Include short abandons against/in SLA)",
-            "label": "Count Against SLA",
-            "value": "count-against-sla",
-          },
-        ]
-      }
-      required={true}
-    />
-    <InputField
-      componentType="input"
-      dataType="number"
-      disabled={true}
-      id="frm-Custom-metrics-sla-abandon-threshold"
-      inputType="text"
-      label="Abandon Threshold"
-      labelHelpText="(seconds)"
-      name="slaAbandonThreshold"
-    />
-  </DetailWrapper>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    id="frm-Custom-metrics-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    id="frm-Custom-metrics-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={true}
+    id="frm-Custom-metrics-sla-threshold"
+    inputType="text"
+    label="SLA Threshold"
+    labelHelpText="(seconds)"
+    name="slaThreshold"
+  />
+  <RadioGroupField
+    disabled={true}
+    id="frm-Custom-metrics-sla-abandon-type"
+    label="SLA Abandon Type"
+    name="slaAbandonType"
+    options={
+      Array [
+        Object {
+          "helpText": "(Filter Out / Exclude Short Abandons)",
+          "label": "Ignore Abandons",
+          "value": "ignored-abandoned-calls",
+        },
+        Object {
+          "helpText": "(Include short abandons against/in SLA)",
+          "label": "Count Against SLA",
+          "value": "count-against-sla",
+        },
+      ]
+    }
+    required={true}
+  />
+  <InputField
+    componentType="input"
+    dataType="number"
+    disabled={true}
+    id="frm-Custom-metrics-sla-abandon-threshold"
+    inputType="text"
+    label="Abandon Threshold"
+    labelHelpText="(seconds)"
+    name="slaAbandonThreshold"
+  />
 </form>
 `;

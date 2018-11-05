@@ -60,7 +60,9 @@ const initialState = fromJS({
     ...defaultEntity,
     readPermission: ['CUSTOM_STATS_READ'],
     updatePermission: ['CUSTOM_STATS_UPDATE'],
-    createPermission: ['CUSTOM_STATS_CREATE']
+    // removing create permission 'CUSTOM_STATS_CREATE' until
+    // we have the ability to create more than one sla
+    createPermission: []
   },
   chatWidgets: {
     ...defaultEntity,
@@ -230,6 +232,11 @@ export const fetchData = (entityName, tableType) => ({
   entityName,
   tableType
 });
+export const fetchListItems = (entityName, associatedEntityName) => ({
+  type: 'FETCH_LIST_ITEMS',
+  entityName,
+  associatedEntityName
+});
 export const setSelectedSubEntityId = selectedSubEntityId => ({
   type: 'SET_SELECTED_SUB_ENTITY_ID',
   selectedSubEntityId
@@ -358,6 +365,19 @@ export default function reducer(state = initialState, action) {
       const modifiedList = actionType === 'associate' ? currentList.push(id) : currentList.filter(x => x !== id);
       if (entityIndex !== -1) {
         return state.setIn([entityName, 'data', entityIndex, name], modifiedList);
+      } else {
+        return state;
+      }
+    }
+    case 'FETCH_LIST_ITEMS_FULFILLED': {
+      const entityIndex = state
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === action.entityId);
+      if (entityIndex !== -1) {
+        return state.setIn(
+          [action.entityName, 'data', entityIndex, action.associatedEntityName],
+          fromJS(action.response.result.map(x => x.id))
+        );
       } else {
         return state;
       }

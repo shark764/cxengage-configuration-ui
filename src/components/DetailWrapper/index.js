@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { CaretIconSVG } from 'cx-ui-components';
+import { fetchListItems } from '../../redux/modules/entities';
+import { getCurrentEntity } from '../../redux/modules/entities/selectors';
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -11,14 +14,19 @@ const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-export class DetailWrapper extends Component {
+class DetailWrapper extends Component {
   constructor(props) {
     super();
     this.state = {
       open: props.open
     };
   }
-  toggle = () => this.setState({ open: !this.state.open });
+  toggle = () => {
+    this.setState({ open: !this.state.open });
+    if (this.props.contains) {
+      this.props.fetchListItems(this.props.entityName, this.props.contains);
+    }
+  };
   render() {
     return (
       <span>
@@ -32,7 +40,19 @@ export class DetailWrapper extends Component {
   }
 }
 
+export function mapStateToProps(state, props) {
+  return {
+    entityName: getCurrentEntity(state)
+  };
+}
+
+export const actions = {
+  fetchListItems
+};
+
 DetailWrapper.propTypes = {
   open: PropTypes.bool.isRequired,
   children: PropTypes.any
 };
+
+export default connect(mapStateToProps, actions)(DetailWrapper);

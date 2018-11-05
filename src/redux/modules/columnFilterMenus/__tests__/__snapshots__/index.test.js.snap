@@ -221,6 +221,23 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "reasonLists": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
   "customMetrics": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [

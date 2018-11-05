@@ -297,6 +297,10 @@ Object {
         "groups",
         "outboundIdentifierLists",
       ],
+      "reasonLists": Array [
+        "groups",
+        "reasonLists",
+      ],
       "users": Array [
         "groups",
         "users",
@@ -348,6 +352,16 @@ Object {
       Object {
         "label": "Email",
         "name": "email",
+      },
+    ],
+    "outboundIdentifiersFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
       },
     ],
     "pageTitle": "Group Management",
@@ -627,6 +641,16 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "memberListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -898,6 +922,79 @@ Object {
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
+  "reasonLists": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "reasonLists",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm",
+    "memberListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Reason List Management",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
   "roles": EntityMetaData {
     "betaFeature": true,
     "columns": Array [
@@ -966,7 +1063,7 @@ Object {
   "skills": EntityMetaData {
     "associations": Object {
       "outboundIdentifierLists": Array [
-        "users",
+        "skills",
         "outboundIdentifierLists",
       ],
       "users": Array [
@@ -1108,6 +1205,20 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Managing%20Users/Adding_users.htm",
+    "memberListTableFields": Array [
+      Object {
+        "label": "First Name",
+        "name": "firstName",
+      },
+      Object {
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
+      },
+    ],
     "modalListTableFields": Array [
       Object {
         "label": "Name",
