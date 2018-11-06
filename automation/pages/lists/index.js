@@ -48,7 +48,11 @@ const ListsPage = {
 
 	// Reason list item values
   	reasonName : new Element('input[id="frm-list-item-reasonName"]'),
-  	reasonCode : new Element('input[id="frm-list-item-reasonCode"]'),
+	reasonCode : new Element('input[id="frm-list-item-reasonCode"]'),
+	reasonNameLabel : new Element('span[title="Reason Name"]'),
+	reasonCodeLabel : new Element('span[title="Reason Code"]'),
+	listtypeReason : new Element('span[title="Reason Codes Type"]'),
+	
 
   	disableListToggle : new Element('label[id="sdpanel-toggle-status"]'),
   	confirmButton : new Element('button[id="confirm"]'),
@@ -97,6 +101,7 @@ const ListsPage = {
 		this.submitButton.click();
 		Brow.pause(2000);
 		this.dispositionNameLabel.validateElementsState('isExisting', true);
+		this.submitButton.click();
 	},
 
 	createListTypeReasonCodes: function(ListName){
@@ -108,10 +113,7 @@ const ListsPage = {
 		Brow.pause(2000);
 		this.submitButton.click();
 		Brow.pause(2000);
-		this.dispositionNameLabel.validateElementsState('isExisting', true);
-	},
-
-	createNewList: function(){
+		//this.dispositionNameLabel.validateElementsState('isExisting', true);
 		this.submitButton.click();
 	},
 
