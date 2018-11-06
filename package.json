@@ -1,6 +1,6 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.35.0",
+  "version": "0.36.0",
   "description": "CxEngage Configuration and Reporting",
   "repository": {
     "type": "git",
@@ -35,8 +35,8 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 68,
-        "functions": 57,
+        "branches": 66,
+        "functions": 55,
         "lines": 61,
         "statements": 61
       }

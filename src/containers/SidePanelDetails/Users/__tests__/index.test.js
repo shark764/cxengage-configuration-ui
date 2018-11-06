@@ -13,8 +13,11 @@ import {
   isInherited,
   isSaving
 } from '../../../../redux/modules/entities/selectors';
+import { getSidePanelTableItems } from '../../../../redux/modules/entities/listItemSelectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
+jest.mock('../../../../redux/modules/entities/listItemSelectors');
+getSidePanelTableItems.mockImplementation(() => []);
 getSelectedEntity.mockImplementation(
   () =>
     new Map({

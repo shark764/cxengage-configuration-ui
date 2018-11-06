@@ -143,7 +143,9 @@ export const listOfEntities = [
   'permissions',
   'interactionMonitoring',
   'users',
-  'reasonLists'
+  'reasonLists',
+  'messageTemplates',
+  'transferLists',
   //Hygen-insert-at-end-of-list
 ];
 
@@ -160,6 +162,14 @@ entities.users.memberListTableFields = [
   { label: 'Last Name', name: 'lastName' },
   { label: 'Email', name: 'email' }
 ];
+entities.users.associations = {
+  skills: ['users', 'skills'],
+  groups: ['groups', 'users'],
+  reasonLists: ['users', 'reasonLists'],
+  messageTemplates: ['users', 'messageTemplates'],
+  transferLists: ['users','transferLists'],
+  outboundIdentifierLists: ['users', 'outboundIdentifierLists']
+};
 entities.users.columns = [
   { name: 'First Name', active: true },
   { name: 'Last Name', active: true },
@@ -187,6 +197,10 @@ entities.skills.modalListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
   { label: 'Email', name: 'email' }
+];
+entities.skills.memberListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Description', name: 'description' }
 ];
 entities.skills.sidePanelListTableFields = [
   { label: 'First Name', name: 'firstName' },
@@ -223,6 +237,10 @@ entities.groups.sidePanelListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
   { label: 'Email', name: 'email' }
+];
+entities.groups.memberListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Description', name: 'description' }
 ];
 
 entities.groups.columns = [
@@ -336,6 +354,34 @@ entities.reasonLists.columns = [
   { name: 'Status', active: true }
 ];
 entities.reasonLists.memberListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Description', name: 'description' }
+];
+
+// Message Templates
+entities.messageTemplates.pageTitle = 'Message Templates';
+entities.messageTemplates.helpLink = '/Help/Content/Configuration/Messaging_Templates/Creating_Messaging_Templates.htm';
+entities.messageTemplates.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Type', active: true },
+  { name: 'Channels', active: true },
+  { name: 'Status', active: true }
+];
+entities.messageTemplates.memberListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Description', name: 'description' }
+];
+
+// Transfer Lists
+entities.transferLists.pageTitle = 'Transfer Lists';
+entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
+entities.transferLists.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true }
+];
+entities.transferLists.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' }
 ];

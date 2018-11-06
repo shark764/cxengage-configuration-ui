@@ -5,6 +5,96 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
   id="dtpanel-users"
 >
   Mock Child
+  <Connect(DetailWrapper)
+    contains="skills"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Skills"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="skills"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="groups"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Groups"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="groups"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="reasonLists"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="messageTemplates"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Message Templates"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="messageTemplates"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="transferLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Transfer Lists"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="transferLists"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      contains="outboundIdentifierLists"
+      items={Array []}
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;
 
@@ -13,6 +103,96 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   id="dtpanel-users"
 >
   Mock Child
+  <Connect(DetailWrapper)
+    contains="skills"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Skills"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="skills"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="groups"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Groups"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="groups"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="reasonLists"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="messageTemplates"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Message Templates"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="messageTemplates"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="transferLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Transfer Lists"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="transferLists"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="outboundIdentifierLists"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;
 
@@ -21,5 +201,95 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   id="dtpanel-users"
 >
   Mock Child
+  <Connect(DetailWrapper)
+    contains="skills"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Skills"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="skills"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="groups"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Groups"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="groups"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="reasonLists"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="messageTemplates"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Message Templates"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="messageTemplates"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="transferLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Transfer Lists"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="transferLists"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      contains="outboundIdentifierLists"
+      items={Array []}
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;

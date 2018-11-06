@@ -11,8 +11,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { DetailHeader, InputField, SelectField, ToggleField } from 'cx-ui-components';
-import { DetailWrapper } from '../../../components/DetailWrapper';
+import { DetailHeader, InputField, SelectField, ToggleField, SidePanelTable } from 'cx-ui-components';
+import DetailWrapper from '../../../components/DetailWrapper';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const WrappedDetailHeader = styled(DetailHeader)`
   margin-left: 35px;
@@ -31,6 +36,7 @@ export default function UsersForm({
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
+    <Wrapper>
       <DetailWrapper open={true}>
         <WrappedDetailHeader text="Details" />
         <InputField
@@ -66,44 +72,44 @@ export default function UsersForm({
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
       </DetailWrapper>
-      {scenario.indexOf('invite') === 0 && (
-        <DetailWrapper open={true}>
-          <WrappedDetailHeader text="Login Information" />
-          <InputField
-            name="email"
-            label="Email *"
-            id="frm-users-email"
-            componentType="input"
-            inputType="text"
+
+      
+      <DetailWrapper open={true}>
+        <WrappedDetailHeader text="Login" />
+        <InputField
+          name="email"
+          label="Email"
+          id="frm-users-email"
+          componentType="input"
+          inputType="text"
+          disabled
+        />
+        <SelectField
+          name="platformRoleId"
+          label="Platform Role *"
+          id="frm-users-platform-role-id"
+          disabled={isSaving || inherited || !userHasUpdatePermission}
+          options={platformRoles}
+          required
+        />
+        <SelectField
+          name="roleId"
+          label="Tenant Role *"
+          id="frm-users-role-id"
+          disabled={isSaving || inherited || !userHasUpdatePermission}
+          options={tenantRoles}
+          required
+        />
+        {status !== 'invited' && (
+          <ToggleField
+            name="inviteNow"
+            label="Invite Now"
+            id="frm-users-invite-now"
             disabled={isSaving || inherited || !userHasUpdatePermission}
-            required
           />
-          <SelectField
-            name="platformRoleId"
-            label="Platform Role *"
-            id="frm-users-platform-role-id"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
-            options={platformRoles}
-            required
-          />
-          <SelectField
-            name="roleId"
-            label="Tenant Role *"
-            id="frm-users-role-id"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
-            options={tenantRoles}
-            required
-          />
-          {status !== 'invited' && (
-            <ToggleField
-              name="inviteNow"
-              label="Invite Now"
-              id="frm-users-invite-now"
-              disabled={isSaving || inherited || !userHasUpdatePermission}
-            />
-          )}
-        </DetailWrapper>
-      )}
+        )}
+      </DetailWrapper>
+      </Wrapper>
     </form>
   );
 }

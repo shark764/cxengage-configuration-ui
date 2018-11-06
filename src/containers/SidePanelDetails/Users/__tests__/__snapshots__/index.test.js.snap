@@ -1,10 +1,148 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `Object {}`;
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "groupsFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "groupsItems": Array [],
+  "inherited": false,
+  "messageTemplatesFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "messageTemplatesItems": Array [],
+  "outboundIdentifierListsFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "outboundIdentifierListsItems": Array [],
+  "reasonListsFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "reasonListsItems": Array [],
+  "skillsFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "skillsItems": Array [],
+  "transferListsFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "transferListsItems": Array [],
+  "userHasUpdatePermission": true,
+}
+`;
 
 exports[`UsersDetailsPanel Renders renders 1`] = `
 <UsersDetailsPanel
-  dispatch={[Function]}
+  groupsFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  groupsItems={Array []}
+  inherited={false}
+  messageTemplatesFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  messageTemplatesItems={Array []}
+  outboundIdentifierListsFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  outboundIdentifierListsItems={Array []}
+  reasonListsFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  reasonListsItems={Array []}
+  removeListItem={[Function]}
+  setSelectedSubEntityId={[Function]}
+  skillsFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  skillsItems={Array []}
   store={
     Object {
       "dispatch": [Function],
@@ -34,6 +172,20 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  transferListsFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  transferListsItems={Array []}
+  userHasUpdatePermission={true}
 >
   Child
 </UsersDetailsPanel>
