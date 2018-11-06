@@ -370,13 +370,35 @@ export default function reducer(state = initialState, action) {
       }
     }
     case 'FETCH_LIST_ITEMS_FULFILLED': {
+      let idType, response;
+      switch (action.associatedEntityName) {
+        case 'groups': {
+          idType = 'groupId';
+          break;
+        }
+        case 'skills': {
+          idType = 'skillId';
+          break;
+        }
+        default: {
+          idType = 'id';
+        }
+      }
+      if (action.associatedEntityName === 'outboundIdentifierLists' && action.entityName === 'users') {
+        response = action.response.result.assigned;
+      } else {
+        response = action.response.result;
+      }
+      if (action.associatedEntityName === 'outboundIdentifierLists' && action.entityName !== 'users') {
+        idType = 'id';
+      }
       const entityIndex = state
         .getIn([action.entityName, 'data'])
         .findIndex(entity => entity.get('id') === action.entityId);
       if (entityIndex !== -1) {
         return state.setIn(
           [action.entityName, 'data', entityIndex, action.associatedEntityName],
-          fromJS(action.response.result.map(x => x.id))
+          fromJS(response.map(x => x[idType]))
         );
       } else {
         return state;

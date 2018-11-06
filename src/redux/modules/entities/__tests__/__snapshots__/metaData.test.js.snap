@@ -340,6 +340,16 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Managing%20Users/Creating_Groups.htm",
+    "memberListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "modalListTableFields": Array [
       Object {
         "label": "First Name",
@@ -608,6 +618,87 @@ Object {
       },
     ],
     "subEntityName": "listItems",
+    "updateFormDependencies": Array [],
+  },
+  "messageTemplates": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Type",
+      },
+      Object {
+        "active": true,
+        "name": "Channels",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "messageTemplates",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Configuration/Messaging_Templates/Creating_Messaging_Templates.htm",
+    "memberListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Message Templates",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
     "updateFormDependencies": Array [],
   },
   "outboundIdentifierLists": EntityMetaData {
@@ -1109,6 +1200,16 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Managing%20Users/Creating_Skills.htm",
+    "memberListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
     "modalListTableFields": Array [
       Object {
         "label": "First Name",
@@ -1147,7 +1248,106 @@ Object {
       "users",
     ],
   },
+  "transferLists": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "transferLists",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm",
+    "memberListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Transfer Lists",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
   "users": EntityMetaData {
+    "associations": Object {
+      "groups": Array [
+        "groups",
+        "users",
+      ],
+      "messageTemplates": Array [
+        "users",
+        "messageTemplates",
+      ],
+      "outboundIdentifierLists": Array [
+        "users",
+        "outboundIdentifierLists",
+      ],
+      "reasonLists": Array [
+        "users",
+        "reasonLists",
+      ],
+      "skills": Array [
+        "users",
+        "skills",
+      ],
+      "transferLists": Array [
+        "users",
+        "transferLists",
+      ],
+    },
     "betaFeature": false,
     "columns": Array [
       Object {

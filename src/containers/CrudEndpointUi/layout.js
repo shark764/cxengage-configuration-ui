@@ -323,7 +323,11 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/groups',
     component: AddMembersToListEntitys
-  }
+  },
+  {
+    path: '/configuration/users',
+    component: AddMembersToListEntitys
+  },
 ];
 
 export default class CrudEndpointUiLayout extends Component {
