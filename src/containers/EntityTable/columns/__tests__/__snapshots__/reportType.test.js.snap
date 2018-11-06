@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reportTypeColumn Cell renders correctly 1`] = `
+<span
+  title="mock report type"
+>
+  Mock report type
+</span>
+`;
+
+exports[`reportTypeColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Type"
+  >
+    Type
+  </span>,
+  "accessor": "reportType",
+  "filterMethod": [Function],
+  "id": "reportType",
+}
+`;

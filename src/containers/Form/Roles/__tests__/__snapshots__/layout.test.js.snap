@@ -4,6 +4,9 @@ exports[`<RolesForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
+  <DetailHeader
+    text="Details"
+  />
   <InputField
     componentType="input"
     disabled={false}
@@ -27,6 +30,9 @@ exports[`<RolesForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
+  <DetailHeader
+    text="Details"
+  />
   <InputField
     componentType="input"
     disabled={false}

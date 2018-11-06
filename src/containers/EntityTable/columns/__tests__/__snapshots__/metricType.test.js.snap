@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`metricTypeColumn Cell renders correctly 1`] = `
+<span
+  title="mock metric type"
+>
+  mock metric type
+</span>
+`;
+
+exports[`metricTypeColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Header": <span
+    title="Type"
+  >
+    Type
+  </span>,
+  "accessor": "customMetricsType",
+  "id": "metricType",
+}
+`;

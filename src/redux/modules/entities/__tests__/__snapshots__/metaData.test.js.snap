@@ -182,6 +182,139 @@ Object {
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
+  "dashboards": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "dashboards",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Dashboards",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
+  "dataAccessReports": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Report Type",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [
+      "users",
+      "historicalReportFolders",
+      "dashboards",
+    ],
+    "dependentEntity": "users",
+    "entityName": "dataAccessReports",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "First Name",
+        "name": "firstName",
+      },
+      Object {
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
+      },
+    ],
+    "pageTitle": "Access Controlled Reports",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "First Name",
+        "name": "firstName",
+      },
+      Object {
+        "label": "Last Name",
+        "name": "lastName",
+      },
+      Object {
+        "label": "Email",
+        "name": "email",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [
+      "users",
+      "historicalReportFolders",
+      "dashboards",
+    ],
+  },
   "emailTemplates": EntityMetaData {
     "betaFeature": false,
     "columns": Array [
@@ -397,6 +530,56 @@ Object {
     "updateFormDependencies": Array [
       "users",
     ],
+  },
+  "historicalReportFolders": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "historicalReportFolders",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Historical Report Folders",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
   },
   "interactionMonitoring": EntityMetaData {
     "betaFeature": true,
@@ -1120,7 +1303,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Managing%20Users/Adding_roles.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -1131,7 +1314,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Roles",
+    "pageTitle": "Role Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",

@@ -26,7 +26,7 @@ export function mapStateToProps(state, props) {
     tableItems: getEntityListMembers(state),
     tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
     listSize: getListSize(state),
-    inherited: isInherited(state),
+    inherited: isInherited(state)
   };
 }
 

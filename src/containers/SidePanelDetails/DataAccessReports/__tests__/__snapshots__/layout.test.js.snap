@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPanel 1`] = `
+<styled.div
+  id="dtpanel-data-access-reports"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined Member(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    userHasUpdatePermission={true}
+  />
+</styled.div>
+`;
+
+exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPanel with historical type 1`] = `
+<styled.div
+  id="dtpanel-data-access-reports"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined Member(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    userHasUpdatePermission={true}
+  />
+</styled.div>
+`;
+
+exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPanel with no update permision 1`] = `
+<styled.div
+  id="dtpanel-data-access-reports"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined Member(s)"
+    userHasUpdatePermission={false}
+  />
+  <_class
+    userHasUpdatePermission={false}
+  />
+</styled.div>
+`;
+
+exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPanel with status disabled 1`] = `
+<styled.div
+  id="dtpanel-data-access-reports"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    text="undefined Member(s)"
+    userHasUpdatePermission={true}
+  />
+  <_class
+    userHasUpdatePermission={true}
+  />
+</styled.div>
+`;

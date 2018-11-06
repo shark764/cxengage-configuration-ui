@@ -98,6 +98,18 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
+    "Header": <span
+      title="Type"
+    >
+      Type
+    </span>,
+    "accessor": "reportType",
+    "filterMethod": [Function],
+    "id": "reportType",
+  },
+  Object {
+    "Cell": [Function],
     "Header": <span
       title="First Name"
     >

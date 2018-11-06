@@ -176,6 +176,10 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "historicalReportFolders": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "users": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [
@@ -230,6 +234,27 @@ Immutable.Map {
       },
       Immutable.Map {
         "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
+  "dataAccessReports": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Report Type",
         "active": true,
       },
       Immutable.Map {
@@ -527,6 +552,10 @@ Immutable.Map {
         "active": true,
       },
     ],
+  },
+  "dashboards": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
   },
 }
 `;

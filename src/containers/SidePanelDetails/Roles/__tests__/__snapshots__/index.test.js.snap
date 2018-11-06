@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": false,
+  "item": Object {
+    "description": "mockDescription",
+    "id": "mockId",
+    "name": "mockName",
+    "permissions": Array [
+      Object {
+        "id": "mockSubEntityId",
+      },
+    ],
+  },
+  "listSize": 0,
+  "tableFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+  ],
+  "tableItems": Array [
+    "mockListMembers",
+  ],
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`RolesDetailsPanel Renders renders 1`] = `
+<RolesDetailsPanel
+  inherited={false}
+  item={
+    Object {
+      "description": "mockDescription",
+      "id": "mockId",
+      "name": "mockName",
+      "permissions": Array [
+        Object {
+          "id": "mockSubEntityId",
+        },
+      ],
+    }
+  }
+  listSize={0}
+  removeListItem={[Function]}
+  setSelectedSubEntityId={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tableFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
+  tableItems={
+    Array [
+      "mockListMembers",
+    ]
+  }
+  userHasUpdatePermission={true}
+>
+  Child
+</RolesDetailsPanel>
+`;

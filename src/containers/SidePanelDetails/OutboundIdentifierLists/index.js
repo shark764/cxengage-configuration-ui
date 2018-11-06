@@ -19,7 +19,7 @@ import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 export function mapStateToProps(state, props) {
   const currentEntity = getCurrentEntity(state);
   return {
-    item: getSelectedEntity(state),
+    item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state),
     tableItems: getEntityListMembers(state),
     tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,

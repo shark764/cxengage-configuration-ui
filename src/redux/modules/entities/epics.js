@@ -20,6 +20,7 @@ import { sdkPromise } from '../../../utils/sdk';
 import { handleError, handleSuccess, handleBulkSuccess } from './handleResult';
 
 import { entityAddedToList, entityRemovedFromList } from '../../modules/entities/roles/selectors';
+import { userAddedToList, userRemovedFromList } from '../../modules/entities/dataAccessReports/selectors';
 
 import { uploadCsv, setEntityUpdating } from './index';
 import { isInIframe } from 'serenova-js-utils/browser';
@@ -91,6 +92,18 @@ export const ClearCustomMetricsFormFields = action$ =>
     .ofType('@@redux-form/UNREGISTER_FIELD')
     .filter(a => a.meta.form.includes('customMetrics'))
     .filter(a => a.payload.name.includes('slaAbandonThreshold'))
+    .map(a => clearFields(a.meta.form, false, false, a.payload.name));
+
+export const ClearDataAccessReportsFormFields = action$ =>
+  action$
+    .ofType('@@redux-form/UNREGISTER_FIELD')
+    .filter(a => a.meta.form.includes('dataAccessReports'))
+    .filter(
+      a =>
+        a.payload.name.includes('realtimeReportType') ||
+        a.payload.name.includes('realtimeReportName') ||
+        a.payload.name.includes('historicalCatalogName')
+    )
     .map(a => clearFields(a.meta.form, false, false, a.payload.name));
 
 export const FormSubmission = (action$, store) =>
@@ -326,7 +339,7 @@ export const RemoveListItem = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       listId: getSelectedEntityId(store.getState())
     }))
-    .filter(a => a.entityName !== 'roles')
+    .filter(a => a.entityName !== 'roles' && a.entityName !== 'dataAccessReports')
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('remove');
       a.sdkCall.data = {
@@ -350,7 +363,7 @@ export const AddListItem = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       listId: getSelectedEntityId(store.getState())
     }))
-    .filter(a => a.entityName !== 'roles')
+    .filter(a => a.entityName !== 'roles' && a.entityName !== 'dataAccessReports')
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('add');
       a.sdkCall.data = {
@@ -373,10 +386,13 @@ export const AddingListItems = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState())
     }))
-    .filter(a => a.entityName === 'roles')
+    .filter(a => a.entityName === 'roles' || a.entityName === 'dataAccessReports')
     .map(a => ({
       ...a,
-      values: { permissions: entityAddedToList(store.getState(), a.listItemId) }
+      values: {
+        permissions: a.entityName === 'roles' ? entityAddedToList(store.getState(), a.listItemId) : null,
+        users: a.entityName === 'dataAccessReports' ? userAddedToList(store.getState(), a.listItemId) : null
+      }
     }))
     .map(a => ({
       type: 'UPDATE_ENTITY',
@@ -469,10 +485,13 @@ export const RemovingListItems = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState())
     }))
-    .filter(a => a.entityName === 'roles')
+    .filter(a => a.entityName === 'roles' || a.entityName === 'dataAccessReports')
     .map(a => ({
       ...a,
-      values: { permissions: entityRemovedFromList(store.getState(), a.listItemId) }
+      values: {
+        permissions: a.entityName === 'roles' ? entityRemovedFromList(store.getState(), a.listItemId) : null,
+        users: a.entityName === 'dataAccessReports' ? userRemovedFromList(store.getState(), a.listItemId) : null
+      }
     }))
     .map(a => ({
       type: 'UPDATE_ENTITY',

@@ -52,7 +52,10 @@ export const actions = {
 
 DetailWrapper.propTypes = {
   open: PropTypes.bool.isRequired,
-  children: PropTypes.any
+  children: PropTypes.any,
+  fetchListItems: PropTypes.func,
+  entityName: PropTypes.string,
+  contains: PropTypes.string
 };
 
 export default connect(mapStateToProps, actions)(DetailWrapper);

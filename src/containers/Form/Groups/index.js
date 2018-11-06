@@ -15,7 +15,7 @@ const CreateGroupsForm = compose(
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
-    destroyOnUnmount: false
+    destroyOnUnmount: true
   })
 )(GroupsForm);
 

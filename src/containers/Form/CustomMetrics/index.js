@@ -7,7 +7,12 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import CustomMetricsForm from './layout';
 import { formValidation } from './validation';
-import { getSelectedEntityId, isInherited, isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isInherited,
+  isCreating,
+  userHasUpdatePermission
+} from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import { getAbandonTypeFormValue } from '../../../redux/modules/entities/customMetrics/selectors';
 
@@ -16,7 +21,7 @@ const CreateCustomMetricsForm = compose(
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
-    destroyOnUnmount: false
+    destroyOnUnmount: true
   })
 )(CustomMetricsForm);
 

@@ -7,6 +7,7 @@ import { statusColumn } from './columns/status';
 import { listTypeColumn } from './columns/listType';
 import { permissionsColumn } from './columns/permissions';
 import { metricTypeColumn } from './columns/metricType';
+import { reportTypeColumn } from './columns/reportType';
 import { constructGeneralTextColumn } from './columns/genericTextColumn';
 import { constructGeneralBooleanColumn } from './columns/genericBooleanColumn';
 
@@ -38,7 +39,8 @@ export function getTableColumns(columns) {
     channelType: constructGeneralTextColumn('channelType'),
     flowId: constructGeneralTextColumn('flowId'),
     Proficiency: constructGeneralTextColumn('proficiency'),
-    'Has Proficiency': constructGeneralBooleanColumn('hasProficiency')
+    'Has Proficiency': constructGeneralBooleanColumn('hasProficiency'),
+    'Report Type': reportTypeColumn,
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

@@ -29,6 +29,7 @@ import RolesForm from '../Form/Roles';
 import SkillsForm from '../Form/Skills';
 import GroupsForm from '../Form/Groups';
 import UsersForm from '../Form/Users';
+import DataAccessReportsForm from '../Form/DataAccessReports';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -46,6 +47,7 @@ import RolesDetailsPanel from '../SidePanelDetails/Roles';
 import SkillsDetailsPanel from '../SidePanelDetails/Skills';
 import GroupsDetailsPanel from '../SidePanelDetails/Groups';
 import UsersDetailsPanel from '../SidePanelDetails/Users';
+import DataAccessReportsDetailsPanel from '../SidePanelDetails/DataAccessReports';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -152,6 +154,14 @@ const createFormRoutes = [
         <UsersForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/dataAccessReports',
+    component: () => (
+      <DetailsPanel>
+        <DataAccessReportsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before1
 ];
@@ -256,6 +266,16 @@ const detailsPanelRoutes = [
         </UsersDetailsPanel>
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/dataAccessReports',
+    component: () => (
+      <DetailsPanel>
+        <DataAccessReportsDetailsPanel>
+          <DataAccessReportsForm />
+        </DataAccessReportsDetailsPanel>
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before2
 ];
@@ -328,6 +348,10 @@ const updateSubEntityFormRoutes = [
     path: '/configuration/users',
     component: AddMembersToListEntitys
   },
+  {
+    path: '/configuration/dataAccessReports',
+    component: AddMembersToList
+  }
 ];
 
 export default class CrudEndpointUiLayout extends Component {
