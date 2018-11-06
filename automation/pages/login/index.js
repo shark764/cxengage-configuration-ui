@@ -16,12 +16,12 @@ const uiLoginPage = {
 	
 	login: function(username, password) {
 		Brow.url('https://dev-config.cxengagelabs.net/#/login');
+		Brow.pause(5000); //added to fix issue with getting another tenants list items.
 		this.usernameInpt.waitForVisible(60000);
 		this.usernameInpt.setValue(username);
 		this.passwordInpt.waitForVisible();
 		this.passwordInpt.setValue(password);
 		this.loginButton.waitAndClick();
-
 	}
 };
 module.exports = uiLoginPage;
