@@ -9,10 +9,13 @@ import {
   getCurrentEntity,
   isInherited
 } from '../../../redux/modules/entities/selectors';
-import { getEntityListMembers, getListSize } from '../../../redux/modules/entities/dataAccessReports/selectors';
+import {
+  getEntityListMembers,
+  getListSize
+} from '../../../redux/modules/entities/listItemSelectors';
 import {
   setSelectedSubEntityId,
-  removeListItem,
+  removeListItem
 } from '../../../redux/modules/entities';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
@@ -29,7 +32,7 @@ export function mapStateToProps(state, props) {
 
 export const actions = {
   removeListItem,
-  setSelectedSubEntityId,
+  setSelectedSubEntityId
 };
 
 export default connect(mapStateToProps, actions)(DataAccessReportsDetailsPanel);
