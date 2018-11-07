@@ -3,10 +3,11 @@
  */
 
 import { availableEntitiesForList } from '../../redux/modules/entities/selectors';
-import { availablePermissionsForList } from '../../redux/modules/entities/roles/selectors';
-import { availableUsersForList } from '../../redux/modules/entities/dataAccessReports/selectors';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
-import { availableItemsForList } from '../../redux/modules/entities/listItemSelectors';
+import {
+  availableItemsForList,
+  availableEntityMembersForList
+} from '../../redux/modules/entities/listItemSelectors';
 
 export const selectSidePanelTableItems = (state, currentEntity) => {
   const { dependentEntity } = entitiesMetaData[currentEntity];
@@ -19,11 +20,13 @@ export const selectSidePanelTableItems = (state, currentEntity) => {
     case 'groups': {
       return availableItemsForList(state, dependentEntity, currentEntity);
     }
-    case 'roles': {
-      return availablePermissionsForList(state, dependentEntity, currentEntity);
-    }
+    case 'roles':
     case 'dataAccessReports': {
-      return availableUsersForList(state, dependentEntity, currentEntity);
+      return availableEntityMembersForList(
+        state,
+        dependentEntity,
+        currentEntity
+      );
     }
     default:
       break;

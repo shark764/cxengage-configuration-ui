@@ -14,8 +14,14 @@ import {
   isInherited,
   isSaving
 } from '../../../../redux/modules/entities/selectors';
-import { getEntityListMembers, getListSize } from '../../../../redux/modules/entities/roles/selectors';
-import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
+import {
+  getEntityListMembers,
+  getListSize
+} from '../../../../redux/modules/entities/listItemSelectors';
+import {
+  setSelectedSubEntityId,
+  removeListItem
+} from '../../../../redux/modules/entities';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntity.mockImplementation(
@@ -36,7 +42,7 @@ userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
 
-jest.mock('../../../../redux/modules/entities/roles/selectors');
+jest.mock('../../../../redux/modules/entities/listItemSelectors');
 getEntityListMembers.mockImplementation(() => ['mockListMembers']);
 getListSize.mockImplementation(() => 0);
 
@@ -47,7 +53,9 @@ setSelectedSubEntityId.mockImplementation(() => 'mockId');
 describe('RolesDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(shallow(<RolesDetailsPanel store={store}>Child</RolesDetailsPanel>)).toMatchSnapshot();
+    expect(
+      shallow(<RolesDetailsPanel store={store}>Child</RolesDetailsPanel>)
+    ).toMatchSnapshot();
   });
 });
 

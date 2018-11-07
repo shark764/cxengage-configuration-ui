@@ -1291,7 +1291,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
-    "dependentEntity": "roles",
+    "dependentEntity": "permissions",
     "entityName": "roles",
     "entityTableFields": Array [
       Object {

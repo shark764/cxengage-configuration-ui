@@ -12,9 +12,15 @@ import {
   isInherited
 } from '../../../redux/modules/entities/selectors';
 
-import { getEntityListMembers, getListSize } from '../../../redux/modules/entities/roles/selectors';
+import {
+  getEntityListMembers,
+  getListSize
+} from '../../../redux/modules/entities/listItemSelectors';
 
-import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
+import {
+  setSelectedSubEntityId,
+  removeListItem
+} from '../../../redux/modules/entities';
 
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 

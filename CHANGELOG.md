@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.2] - 2018-11-07
+### Changed
+- Refactoring selectors for Access Control and Roles.
+- SDK call is not sending keys for members not needed.
+
 ## [0.37.1] - 2018-11-06
 ### Changed
 - Bump version for components library to 0.29.1.
