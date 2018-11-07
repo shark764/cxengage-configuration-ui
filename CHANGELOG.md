@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.1] - 2018-11-06
+### Changed
+- Bump version for components library to 0.29.1.
+- Bump version for SDK to 8.29.0.
+
 ## [0.37.0] - 2018-11-05
 ### Added
 - CXV1-14795 - Create Access Control Page with Table Config.
