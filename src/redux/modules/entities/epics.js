@@ -19,10 +19,7 @@ import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
 import { sdkPromise } from '../../../utils/sdk';
 import { handleError, handleSuccess, handleBulkSuccess } from './handleResult';
 
-import {
-  entityAddedToList,
-  entityRemovedFromList
-} from '../../modules/entities/listItemSelectors';
+import { entityAddedToList, entityRemovedFromList } from '../../modules/entities/listItemSelectors';
 
 import { uploadCsv, setEntityUpdating } from './index';
 import { isInIframe } from 'serenova-js-utils/browser';
@@ -75,13 +72,19 @@ export const StartFormSubmission = (action$, store) =>
     }));
 
 export const reInitForm = action$ =>
-  action$.ofType('UPDATE_ENTITY_FULFILLED').map(a => ({
-    type: '@@redux-form/INITIALIZE',
-    meta: {
-      form: `${a.entityName}:${a.entityId}`
-    },
-    payload: { ...a.values }
-  }));
+  action$
+    .ofType('UPDATE_ENTITY_FULFILLED')
+    // This filter prevents entity form from reinitializing
+    // when modifying entity membersList
+    // values just contains the dependentEntity as key
+    .filter(a => a.values.id !== undefined)
+    .map(a => ({
+      type: '@@redux-form/INITIALIZE',
+      meta: {
+        form: `${a.entityName}:${a.entityId}`
+      },
+      payload: { ...a.values }
+    }));
 
 export const ClearBulkFormFields = action$ =>
   action$
@@ -142,11 +145,7 @@ export const FormSubmission = (action$, store) =>
 
 export const FetchData = action$ =>
   action$.ofType('FETCH_DATA').mergeMap(a =>
-    fromPromise(
-      sdkPromise(
-        entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')
-      )
-    )
+    fromPromise(sdkPromise(entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')))
       .map(response => handleSuccess(response, a))
       .catch(error => handleError(error, a))
   );
@@ -156,10 +155,7 @@ export const FetchDataItem = action$ =>
     .ofType('FETCH_DATA_ITEM')
     .debounceTime(300)
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'get',
-        'singleMainEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('get', 'singleMainEntity');
       a.sdkCall.data = { [removeLastLetter(a.entityName) + 'Id']: a.id };
       return { ...a };
     })
@@ -171,11 +167,7 @@ export const FetchDataItem = action$ =>
 
 export const getTenantPermissions = action$ =>
   action$
-    .ofType(
-      'SET_CURRENT_ENTITY',
-      'START_SUPERVISOR_TOOLBAR_$',
-      'FETCH_BRANDING_$'
-    )
+    .ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$', 'FETCH_BRANDING_$')
     .filter(a => !isInIframe())
     .switchMap(a =>
       fromPromise(
@@ -200,10 +192,7 @@ export const CreateEntity = action$ =>
   action$
     .ofType('CREATE_ENTITY')
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'create',
-        'singleMainEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
       a.sdkCall.data = a.values;
       return { ...a };
     })
@@ -213,9 +202,7 @@ export const CreateEntity = action$ =>
           handleSuccess(
             response,
             a,
-            `${camelCaseToRegularFormAndRemoveLastLetter(
-              a.entityName
-            )} was created successfully!`
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`
           )
         )
         .catch(error => handleError(error, a))
@@ -226,9 +213,7 @@ export const CopyEntity = (action$, store) =>
     .ofType('COPY_CURRENT_ENTITY')
     .map(a => {
       a.entityName = getCurrentEntity(store.getState());
-      a.sdkCall = entitiesMetaData[
-        getCurrentEntity(store.getState())
-      ].entityApiRequest('create', 'singleMainEntity');
+      a.sdkCall = entitiesMetaData[getCurrentEntity(store.getState())].entityApiRequest('create', 'singleMainEntity');
       a.sdkCall.data = getSelectedEntity(store.getState()).toJS();
       a.sdkCall.data.name += ' (Copy)';
       return { ...a };
@@ -239,9 +224,7 @@ export const CopyEntity = (action$, store) =>
           handleSuccess(
             response,
             a,
-            `${camelCaseToRegularFormAndRemoveLastLetter(
-              a.entityName
-            )} was copied successfully!`
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was copied successfully!`
           )
         )
         .catch(error => handleError(error, a))
@@ -252,10 +235,7 @@ export const UpdateEntity = (action$, store) =>
     .ofType('UPDATE_ENTITY')
     .filter(({ entityName }) => hasCustomUpdateEntity(entityName))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'update',
-        'singleMainEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.sdkCall.data = {
         ...a.values,
         [removeLastLetter(a.entityName) + 'Id']: a.entityId
@@ -268,9 +248,7 @@ export const UpdateEntity = (action$, store) =>
           handleSuccess(
             response,
             a,
-            `${camelCaseToRegularFormAndRemoveLastLetter(
-              a.entityName
-            )} was updated successfully!`
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
           )
         )
         .catch(error => handleError(error, a))
@@ -281,10 +259,7 @@ export const BulkEntityUpdate = (action$, store) =>
     .ofType('BULK_ENTITY_UPDATE')
     .map(a => {
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'update',
-        'singleMainEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.allSdkCalls = [...a.allIdsToProcess.toJS()].map(item => ({
         ...a.sdkCall,
         data: {
@@ -306,9 +281,7 @@ export const BulkEntityUpdate = (action$, store) =>
         )
       )
         .do(allResult => handleBulkSuccess(allResult))
-        .mergeMap(result =>
-          from(result).map(response => handleSuccess(response, a))
-        )
+        .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
     );
 
 export const ToggleEntity = (action$, store) =>
@@ -321,10 +294,7 @@ export const ToggleEntity = (action$, store) =>
       entityStatusActive: getSelectedEntityStatus(store.getState())
     }))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'update',
-        'singleMainEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.sdkCall.data = {
         active: !a.entityStatusActive,
         [removeLastLetter(a.entityName) + 'Id']: a.selectedEntityId
@@ -353,13 +323,9 @@ export const ToggleEntityListItem = (action$, store) =>
       entityName: getCurrentEntity(store.getState())
     }))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest(
-        'update'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('update');
       a.sdkCall.data = {
-        [`${removeLastLetter(
-          entitiesMetaData[a.entityName].dependentEntity
-        )}Id`]: a.entity.id,
+        [`${removeLastLetter(entitiesMetaData[a.entityName].dependentEntity)}Id`]: a.entity.id,
         active: !a.entity.active
       };
       return { ...a };
@@ -378,20 +344,12 @@ export const RemoveListItem = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       listId: getSelectedEntityId(store.getState())
     }))
-    .filter(
-      a => a.entityName !== 'roles' && a.entityName !== 'dataAccessReports'
-    )
+    .filter(a => a.entityName !== 'roles' && a.entityName !== 'dataAccessReports')
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest(
-        'remove'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('remove');
       a.sdkCall.data = {
-        [`${removeLastLetter(
-          entitiesMetaData[a.entityName].entityName
-        )}Id`]: a.listId,
-        [`${removeLastLetter(
-          entitiesMetaData[a.entityName].dependentEntity
-        )}Id`]: a.listItemId
+        [`${removeLastLetter(entitiesMetaData[a.entityName].entityName)}Id`]: a.listId,
+        [`${removeLastLetter(entitiesMetaData[a.entityName].dependentEntity)}Id`]: a.listItemId
       };
       return { ...a };
     })
@@ -410,20 +368,12 @@ export const AddListItem = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       listId: getSelectedEntityId(store.getState())
     }))
-    .filter(
-      a => a.entityName !== 'roles' && a.entityName !== 'dataAccessReports'
-    )
+    .filter(a => a.entityName !== 'roles' && a.entityName !== 'dataAccessReports')
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest(
-        'add'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityListItemApiRequest('add');
       a.sdkCall.data = {
-        [`${removeLastLetter(
-          entitiesMetaData[a.entityName].entityName
-        )}Id`]: a.listId,
-        [`${removeLastLetter(
-          entitiesMetaData[a.entityName].dependentEntity
-        )}Id`]: a.listItemId
+        [`${removeLastLetter(entitiesMetaData[a.entityName].entityName)}Id`]: a.listId,
+        [`${removeLastLetter(entitiesMetaData[a.entityName].dependentEntity)}Id`]: a.listItemId
       };
       return a;
     })
@@ -441,14 +391,14 @@ export const AddingListItems = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState())
     }))
-    .filter(
-      a => a.entityName === 'roles' || a.entityName === 'dataAccessReports'
-    )
+    .filter(a => a.entityName === 'roles' || a.entityName === 'dataAccessReports')
     .map(a => ({
       ...a,
       values: {
-        [entitiesMetaData[getCurrentEntity(store.getState())]
-          .dependentEntity]: entityAddedToList(store.getState(), a.listItemId)
+        [entitiesMetaData[getCurrentEntity(store.getState())].dependentEntity]: entityAddedToList(
+          store.getState(),
+          a.listItemId
+        )
       }
     }))
     .map(a => ({
@@ -493,9 +443,7 @@ export const addAndRemoveListItemEntities = (action$, store) =>
           handleSuccess(
             response,
             a,
-            `${camelCaseToRegularFormAndRemoveLastLetter(
-              a.entityName
-            )} was updated successfully!`
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
           )
         )
         .catch(error => handleError(error, a))
@@ -514,11 +462,7 @@ export const fetchEntityListItems = (action$, store) =>
     .map(a => ({
       ...a,
       values: {
-        path: [
-          a.entityName,
-          a.entityId,
-          camelCaseToKebabCase(a.associatedEntityName)
-        ]
+        path: [a.entityName, a.entityId, camelCaseToKebabCase(a.associatedEntityName)]
       }
     }))
     .concatMap(a =>
@@ -548,14 +492,11 @@ export const RemovingListItems = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState())
     }))
-    .filter(
-      a => a.entityName === 'roles' || a.entityName === 'dataAccessReports'
-    )
+    .filter(a => a.entityName === 'roles' || a.entityName === 'dataAccessReports')
     .map(a => ({
       ...a,
       values: {
-        [entitiesMetaData[getCurrentEntity(store.getState())]
-          .dependentEntity]: entityRemovedFromList(
+        [entitiesMetaData[getCurrentEntity(store.getState())].dependentEntity]: entityRemovedFromList(
           store.getState(),
           a.listItemId
         )
@@ -575,8 +516,7 @@ export const FetchFormMetaData = (action$, store) =>
       ...a,
       currentEntityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState()),
-      isDefined: name =>
-        store.getState().getIn(['Entities', name, 'data']) === undefined
+      isDefined: name => store.getState().getIn(['Entities', name, 'data']) === undefined
     }))
     .switchMap(
       a =>
@@ -596,15 +536,9 @@ export const FetchSidePanelData = (action$, store) =>
       ...action,
       currentEntityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState()),
-      isDefined: name =>
-        store.getState().getIn(['Entities', name, 'data']) !== undefined
+      isDefined: name => store.getState().getIn(['Entities', name, 'data']) !== undefined
     }))
-    .filter(
-      a =>
-        a.entityId !== 'create' &&
-        a.entityId !== '' &&
-        entitiesMetaData[a.currentEntityName].dependentEntity
-    )
+    .filter(a => a.entityId !== 'create' && a.entityId !== '' && entitiesMetaData[a.currentEntityName].dependentEntity)
     .map(a => ({
       type: 'FETCH_DATA_ITEM',
       entityName: a.currentEntityName,
@@ -651,10 +585,7 @@ export const CreateSubEntity = (action$, store) =>
       entityId: getSelectedEntityId(store.getState())
     }))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'create',
-        'subEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'subEntity');
       a.sdkCall.data = {
         [`${removeLastLetter(a.entityName)}Id`]: a.entityId,
         itemValue: a.values
@@ -664,13 +595,7 @@ export const CreateSubEntity = (action$, store) =>
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
-          handleSuccess(
-            response,
-            a,
-            `<i>${camelCaseToRegularForm(
-              a.entityName
-            )}</i> was created successfully!`
-          )
+          handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.entityName)}</i> was created successfully!`)
         )
         .catch(error => handleError(error, a))
     );
@@ -686,10 +611,7 @@ export const UpdateSubEntity = (action$, store) =>
       entityId: getSelectedEntityId(store.getState())
     }))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'update',
-        'subEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'subEntity');
       a.sdkCall.data = {
         listId: a.selectedEntity.get('id'),
         listItemKey: a.subEntityId,
@@ -700,13 +622,7 @@ export const UpdateSubEntity = (action$, store) =>
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
-          handleSuccess(
-            response,
-            a,
-            `<i>${camelCaseToRegularForm(
-              a.subEntityName
-            )} </i> was updated successfully!`
-          )
+          handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.subEntityName)} </i> was updated successfully!`)
         )
         .catch(error => handleError(error, a))
     );
@@ -722,10 +638,7 @@ export const DeleteSubEntity = (action$, store) =>
       subEntityName: getSelectedEntityName(store.getState())
     }))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'delete',
-        'subEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('delete', 'subEntity');
       a.sdkCall.data = {
         listId: a.entityId,
         listItemKey: a.subEntityId
@@ -738,9 +651,7 @@ export const DeleteSubEntity = (action$, store) =>
           handleSuccess(
             response,
             a,
-            `<i>${camelCaseToRegularForm(
-              a.selectedEntity.get('name')
-            )}</i> was deleted successfully!`
+            `<i>${camelCaseToRegularForm(a.selectedEntity.get('name'))}</i> was deleted successfully!`
           )
         )
         .catch(error => handleError(error, a))
@@ -748,9 +659,7 @@ export const DeleteSubEntity = (action$, store) =>
 
 export const ExecuteConfirmationDialogCallback = (action$, store) =>
   action$.ofType('EXECUTE_CONFIRM_CALLBACK').switchMap(action => {
-    const currentConfirmationModal = getConfirmationDialogType(
-      store.getState()
-    );
+    const currentConfirmationModal = getConfirmationDialogType(store.getState());
     const metaData = getConfirmationDialogMetaData(store.getState());
     switch (currentConfirmationModal) {
       case MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE:
@@ -766,11 +675,7 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
       case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
         return [
           uploadCsv(metaData),
-          setEntityUpdating(
-            getCurrentEntity(store.getState()),
-            getSelectedEntityId(store.getState()),
-            true
-          ),
+          setEntityUpdating(getCurrentEntity(store.getState()), getSelectedEntityId(store.getState()), true),
           {
             type: 'SET_CONIFIRMATION_DIALOG',
             modalType: undefined,
@@ -792,10 +697,7 @@ export const UploadCsv = (action$, store) =>
       selectedEntityId: getSelectedEntityId(store.getState())
     }))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'upload',
-        'singleMainEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('upload', 'singleMainEntity');
       a.sdkCall.data = {
         [`${removeLastLetter(a.entityName)}Id`]: a.selectedEntityId,
         file: a.target
@@ -819,9 +721,7 @@ export const UploadCsv = (action$, store) =>
           }
 
           if (response.result.numberOfFailures > 0) {
-            Toast.error(
-              `Number of Failures: ${response.result.numberOfFailures}`
-            );
+            Toast.error(`Number of Failures: ${response.result.numberOfFailures}`);
           }
         })
         .map(response => ({
@@ -842,10 +742,7 @@ export const DownloadCsv = (action$, store) =>
       selectedEntityName: getSelectedEntityName(store.getState())
     }))
     .map(a => {
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest(
-        'download',
-        'singleMainEntity'
-      );
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('download', 'singleMainEntity');
       a.sdkCall.data = {
         [`${removeLastLetter(a.entityName)}Id`]: a.selectedEntityId
       };

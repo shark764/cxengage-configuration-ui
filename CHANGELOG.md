@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.3] - 2018-11-07
+### Fixed
+- CXV1-15972 - Adding/Removing members from entity was cleared the rest of inputs.
+- DAC was not validating if user typed not existing report/folder.
+
 ## [0.37.2] - 2018-11-07
 ### Changed
 - Refactoring selectors for Access Control and Roles.

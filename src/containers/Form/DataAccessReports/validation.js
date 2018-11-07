@@ -4,10 +4,44 @@
 
 import { isEmpty } from 'serenova-js-utils/strings';
 
-export const formValidation = values => ({
-  name: isEmpty(values.get('name')) && 'Please enter a name',
-  reportType: !values.get('reportType') && 'Please select a report type',
-  realtimeReportType: !values.get('realtimeReportType') && 'Please select a realtime report type',
-  realtimeReportName: isEmpty(values.get('realtimeReportName')) && 'Please enter a realtime report name',
-  historicalCatalogName: isEmpty(values.get('historicalCatalogName')) && 'Please enter an historical catalog name'
-});
+export const formValidation = (values, props) => {
+  let validation = {};
+  validation.name = isEmpty(values.get('name')) && 'Please enter a name';
+  validation.reportType = !values.get('reportType') && 'Please select a report type';
+  validation.realtimeReportType = !values.get('realtimeReportType') && 'Please select a realtime report type';
+  validation.realtimeReportName = isEmpty(values.get('realtimeReportName')) && 'Please enter a realtime report name';
+  validation.historicalCatalogName =
+    isEmpty(values.get('historicalCatalogName')) && 'Please enter an historical catalog name';
+
+  const { dashboards, folders } = props;
+  const standardReports = [
+    'Agent Details',
+    'Agent State',
+    'Interactions Dashboard',
+    'Interactions Completed',
+    'Interactions in Conversation',
+    'Interactions in Queue',
+    'Interactions in IVR',
+    'Overview Dashboard',
+    'Queues Dashboard',
+    'Queue Details',
+    'Resources Dashboard'
+  ];
+
+  if (values.get('reportType') === 'realtime') {
+    if (values.get('realtimeReportType') === 'standard') {
+      validation.realtimeReportName =
+        !standardReports.includes(values.get('realtimeReportName')) && 'Please enter a valid realtime report name';
+    } else {
+      validation.realtimeReportName =
+        !dashboards.includes(values.get('realtimeReportName')) && 'Please enter a valid realtime report name';
+    }
+  }
+
+  if (values.get('reportType') === 'historical') {
+    validation.historicalCatalogName =
+      !folders.includes(values.get('historicalCatalogName')) && 'Please enter a valid historical catalog name';
+  }
+
+  return validation;
+};

@@ -7,6 +7,25 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
   <DetailHeader
     text="Details"
   />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-data-access-reports-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="frm-data-access-reports-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Report"
+  />
   <RadioGroupField
     disabled={false}
     id="frm-data-access-reports-report-type"
@@ -51,6 +70,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
       id="frm-data-access-reports-realtime-report-name"
       label="Realtime Report *"
       name="realtimeReportName"
+      placeholder="Search..."
       suggestions={
         Array [
           "Agent Details",
@@ -68,6 +88,16 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
       }
     />
   </React.Fragment>
+</form>
+`;
+
+exports[`<DataAccessReportsForm /> renders create form with historical type 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
   <InputField
     componentType="input"
     disabled={false}
@@ -84,15 +114,8 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
     label="Description"
     name="description"
   />
-</form>
-`;
-
-exports[`<DataAccessReportsForm /> renders create form with historical type 1`] = `
-<form
-  onSubmit={[Function]}
->
   <DetailHeader
-    text="Details"
+    text="Report"
   />
   <RadioGroupField
     disabled={false}
@@ -118,23 +141,8 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
     id="frm-data-access-reports-historical-catalog-name"
     label="Folder *"
     name="historicalCatalogName"
+    placeholder="Search..."
     suggestions={Array []}
-  />
-  <InputField
-    componentType="input"
-    disabled={false}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    disabled={false}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
   />
 </form>
 `;
@@ -146,6 +154,25 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
   <DetailHeader
     text="Details"
   />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-data-access-reports-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="frm-data-access-reports-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Report"
+  />
   <RadioGroupField
     disabled={false}
     id="frm-data-access-reports-report-type"
@@ -190,6 +217,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
       id="frm-data-access-reports-realtime-report-name"
       label="Realtime Report *"
       name="realtimeReportName"
+      placeholder="Search..."
       suggestions={
         Array [
           "Agent Details",
@@ -207,6 +235,16 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
       }
     />
   </React.Fragment>
+</form>
+`;
+
+exports[`<DataAccessReportsForm /> renders update form with custom realtime type 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
   <InputField
     componentType="input"
     disabled={false}
@@ -223,15 +261,8 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
     label="Description"
     name="description"
   />
-</form>
-`;
-
-exports[`<DataAccessReportsForm /> renders update form with custom realtime type 1`] = `
-<form
-  onSubmit={[Function]}
->
   <DetailHeader
-    text="Details"
+    text="Report"
   />
   <RadioGroupField
     disabled={false}
@@ -277,9 +308,20 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
       id="frm-data-access-reports-realtime-report-name"
       label="Realtime Report *"
       name="realtimeReportName"
+      placeholder="Search..."
       suggestions={Array []}
     />
   </React.Fragment>
+</form>
+`;
+
+exports[`<DataAccessReportsForm /> renders update form with historical type 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
   <InputField
     componentType="input"
     disabled={false}
@@ -296,15 +338,8 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
     label="Description"
     name="description"
   />
-</form>
-`;
-
-exports[`<DataAccessReportsForm /> renders update form with historical type 1`] = `
-<form
-  onSubmit={[Function]}
->
   <DetailHeader
-    text="Details"
+    text="Report"
   />
   <RadioGroupField
     disabled={false}
@@ -330,23 +365,8 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
     id="frm-data-access-reports-historical-catalog-name"
     label="Folder *"
     name="historicalCatalogName"
+    placeholder="Search..."
     suggestions={Array []}
-  />
-  <InputField
-    componentType="input"
-    disabled={false}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    disabled={false}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
   />
 </form>
 `;
@@ -358,6 +378,25 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
   <DetailHeader
     text="Details"
   />
+  <InputField
+    componentType="input"
+    disabled={true}
+    id="frm-data-access-reports-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    id="frm-data-access-reports-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Report"
+  />
   <RadioGroupField
     disabled={true}
     id="frm-data-access-reports-report-type"
@@ -382,23 +421,8 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
     id="frm-data-access-reports-historical-catalog-name"
     label="Folder *"
     name="historicalCatalogName"
+    placeholder="Search..."
     suggestions={Array []}
-  />
-  <InputField
-    componentType="input"
-    disabled={true}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    disabled={true}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
   />
 </form>
 `;

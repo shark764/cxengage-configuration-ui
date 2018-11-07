@@ -26,6 +26,23 @@ export default function DataAccessReportsForm({
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
+      <InputField
+        name="name"
+        label="Name *"
+        id="frm-data-access-reports-name"
+        componentType="input"
+        inputType="text"
+        disabled={isSaving || inherited || !userHasUpdatePermission}
+      />
+      <InputField
+        name="description"
+        label="Description"
+        id="frm-data-access-reports-description"
+        componentType="textarea"
+        inputType="text"
+        disabled={isSaving || inherited || !userHasUpdatePermission}
+      />
+      <DetailHeader text="Report" />
       <RadioGroupField
         name="reportType"
         label="Type *"
@@ -62,56 +79,44 @@ export default function DataAccessReportsForm({
             ]}
             required
           />
-          <AutoCompleteField
-            name="realtimeReportName"
-            label="Realtime Report *"
-            suggestions={
-              realtimeReportType === 'custom'
-                ? dashboards
-                : [
-                    'Agent Details',
-                    'Agent State',
-                    'Interactions Dashboard',
-                    'Interactions Completed',
-                    'Interactions in Conversation',
-                    'Interactions in Queue',
-                    'Interactions in IVR',
-                    'Overview Dashboard',
-                    'Queues Dashboard',
-                    'Queue Details',
-                    'Resources Dashboard'
-                  ]
-            }
-            id="frm-data-access-reports-realtime-report-name"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
-          />
+          {realtimeReportType && (
+            <AutoCompleteField
+              name="realtimeReportName"
+              label="Realtime Report *"
+              placeholder="Search..."
+              suggestions={
+                realtimeReportType === 'custom'
+                  ? dashboards
+                  : [
+                      'Agent Details',
+                      'Agent State',
+                      'Interactions Dashboard',
+                      'Interactions Completed',
+                      'Interactions in Conversation',
+                      'Interactions in Queue',
+                      'Interactions in IVR',
+                      'Overview Dashboard',
+                      'Queues Dashboard',
+                      'Queue Details',
+                      'Resources Dashboard'
+                    ]
+              }
+              id="frm-data-access-reports-realtime-report-name"
+              disabled={isSaving || inherited || !userHasUpdatePermission}
+            />
+          )}
         </Fragment>
       )}
       {reportType === 'historical' && (
         <AutoCompleteField
           name="historicalCatalogName"
           label="Folder *"
+          placeholder="Search..."
           suggestions={folders}
           id="frm-data-access-reports-historical-catalog-name"
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
       )}
-      <InputField
-        name="name"
-        label="Name *"
-        id="frm-data-access-reports-name"
-        componentType="input"
-        inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
-      />
-      <InputField
-        name="description"
-        label="Description"
-        id="frm-data-access-reports-description"
-        componentType="textarea"
-        inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
-      />
     </form>
   );
 }

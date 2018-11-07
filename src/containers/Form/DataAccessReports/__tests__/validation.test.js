@@ -2,24 +2,31 @@ import { formValidation } from '../validation';
 import { Map } from 'immutable';
 
 describe('formValidation', () => {
+  let props;
+  beforeEach(() => {
+    props = {
+      dashboards: ['mockRealtimeReportName'],
+      folders: ['mockHistoricalCatalogName']
+    };
+  });
   it('returns proper object when required fields are provided', () => {
     const values = new Map({
       name: 'mockName',
       description: 'mockDescription',
       reportType: 'realtime',
       realtimeReportType: 'standard',
-      realtimeReportName: 'mockRealtimeReportName',
+      realtimeReportName: 'mockRealtimeReportName'
     });
-    expect(formValidation(values)).toMatchSnapshot();
+    expect(formValidation(values, props)).toMatchSnapshot();
   });
   it('returns proper object when required fields are provided with historical type', () => {
     const values = new Map({
       name: 'mockName',
       description: 'mockDescription',
       reportType: 'historical',
-      historicalCatalogName: 'mockHistoricalCatalogName',
+      historicalCatalogName: 'mockHistoricalCatalogName'
     });
-    expect(formValidation(values)).toMatchSnapshot();
+    expect(formValidation(values, props)).toMatchSnapshot();
   });
   it('returns proper object (errors) when required fields are not provided', () => {
     const values = new Map({
@@ -28,9 +35,9 @@ describe('formValidation', () => {
       reportType: '',
       realtimeReportType: '',
       realtimeReportName: '',
-      historicalCatalogName: '',
+      historicalCatalogName: ''
     });
-    expect(formValidation(values)).toMatchSnapshot();
+    expect(formValidation(values, props)).toMatchSnapshot();
   });
   it('returns proper object (errors) when wrong values are provided', () => {
     const values = new Map({
@@ -39,8 +46,8 @@ describe('formValidation', () => {
       reportType: null,
       realtimeReportType: null,
       realtimeReportName: undefined,
-      historicalCatalogName: undefined,
+      historicalCatalogName: undefined
     });
-    expect(formValidation(values)).toMatchSnapshot();
+    expect(formValidation(values, props)).toMatchSnapshot();
   });
 });
