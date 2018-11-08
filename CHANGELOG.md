@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.5] - 2018-11-08
+### Fixed
+- Can now see the whole drop down of report lists when creating data access control
+
 ## [0.37.4] - 2018-11-08
 ### Changed
 - Version bump compnent library to 0.29.3

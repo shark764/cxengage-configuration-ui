@@ -158,9 +158,9 @@ const createFormRoutes = [
   {
     path: '/configuration/dataAccessReports',
     component: () => (
-      <DetailsPanel>
+      <NoScrollDetailsPanel>
         <DataAccessReportsForm />
-      </DetailsPanel>
+      </NoScrollDetailsPanel>
     )
   }
   //hygen-inject-before1
