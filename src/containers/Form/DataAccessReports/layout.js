@@ -14,6 +14,7 @@ import { DetailHeader, InputField, RadioGroupField, AutoCompleteField } from 'cx
 
 export default function DataAccessReportsForm({
   handleSubmit,
+  standardReports,
   dashboards,
   folders,
   reportType,
@@ -84,23 +85,7 @@ export default function DataAccessReportsForm({
               name="realtimeReportName"
               label="Realtime Report *"
               placeholder="Search..."
-              suggestions={
-                realtimeReportType === 'custom'
-                  ? dashboards
-                  : [
-                      'Agent Details',
-                      'Agent State',
-                      'Interactions Dashboard',
-                      'Interactions Completed',
-                      'Interactions in Conversation',
-                      'Interactions in Queue',
-                      'Interactions in IVR',
-                      'Overview Dashboard',
-                      'Queues Dashboard',
-                      'Queue Details',
-                      'Resources Dashboard'
-                    ]
-              }
+              suggestions={realtimeReportType === 'custom' ? dashboards : standardReports}
               id="frm-data-access-reports-realtime-report-name"
               disabled={isSaving || inherited || !userHasUpdatePermission}
             />
@@ -127,6 +112,7 @@ DataAccessReportsForm.propTypes = {
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
+  standardReports: PropTypes.array,
   dashboards: PropTypes.array,
   folders: PropTypes.array,
   reportType: PropTypes.string,
@@ -134,6 +120,7 @@ DataAccessReportsForm.propTypes = {
 };
 
 DataAccessReportsForm.defaultProps = {
+  standardReports: [],
   dashboards: [],
   folders: []
 };

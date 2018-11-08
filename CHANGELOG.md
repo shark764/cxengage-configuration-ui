@@ -18,6 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.6] - 2018-11-08
+### Changed
+- CXV1-15995 - Help link for Access Control is pointing to correct documentation link.
+
+### Fixed
+- CXV1-15972 - Members for Access Control and Roles were updating wrong with full form.
+- Added a debounceTime for Access Control and Roles to avoid double call to SDK on double click.
+
 ## [0.37.5] - 2018-11-08
 ### Fixed
 - Can now see the whole drop down of report lists when creating data access control

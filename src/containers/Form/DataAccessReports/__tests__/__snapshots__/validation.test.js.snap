@@ -24,7 +24,17 @@ exports[`formValidation returns proper object when required fields are provided 
 Object {
   "historicalCatalogName": "Please enter an historical catalog name",
   "name": false,
-  "realtimeReportName": "Please enter a valid realtime report name",
+  "realtimeReportName": false,
+  "realtimeReportType": false,
+  "reportType": false,
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided with custom realtimeReportType 1`] = `
+Object {
+  "historicalCatalogName": "Please enter an historical catalog name",
+  "name": false,
+  "realtimeReportName": false,
   "realtimeReportType": false,
   "reportType": false,
 }

@@ -71,21 +71,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
       label="Realtime Report *"
       name="realtimeReportName"
       placeholder="Search..."
-      suggestions={
-        Array [
-          "Agent Details",
-          "Agent State",
-          "Interactions Dashboard",
-          "Interactions Completed",
-          "Interactions in Conversation",
-          "Interactions in Queue",
-          "Interactions in IVR",
-          "Overview Dashboard",
-          "Queues Dashboard",
-          "Queue Details",
-          "Resources Dashboard",
-        ]
-      }
+      suggestions={Array []}
     />
   </React.Fragment>
 </form>
@@ -218,21 +204,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
       label="Realtime Report *"
       name="realtimeReportName"
       placeholder="Search..."
-      suggestions={
-        Array [
-          "Agent Details",
-          "Agent State",
-          "Interactions Dashboard",
-          "Interactions Completed",
-          "Interactions in Conversation",
-          "Interactions in Queue",
-          "Interactions in IVR",
-          "Overview Dashboard",
-          "Queues Dashboard",
-          "Queue Details",
-          "Resources Dashboard",
-        ]
-      }
+      suggestions={Array []}
     />
   </React.Fragment>
 </form>

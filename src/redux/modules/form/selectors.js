@@ -12,6 +12,8 @@ import {
 } from '../entities/selectors';
 import { onFormSubmit, onSubEntityFormSubmit } from '../entities';
 
+import { entitiesMetaData } from '../entities/metaData';
+
 export const getCurrentForm = state =>
   state.getIn(['form', `${getCurrentEntity(state)}:${getSelectedEntityId(state)}`]);
 
@@ -30,15 +32,11 @@ export const selectFormInitialValues = state => {
   } else if (getSelectedEntity(state) === undefined) {
     return new Map({ active: true });
   } else {
-    // Since active is handled by toggle in header
-    // we don't need to add it in form submission
-    // if we don't remove active from map, it gets
-    // toggled automatically on every submit
-    if (getSelectedEntity(state).has('active')) {
-      // Returns new Map without "active" key
-      return getSelectedEntity(state).delete('active');
-    }
-    return getSelectedEntity(state);
+    // Members and active are not handled in the same Update
+    // as the rest of values, so not need to be set in form
+    return getSelectedEntity(state)
+      .delete('active')
+      .delete(entitiesMetaData[getCurrentEntity(state)].dependentEntity);
   }
 };
 
@@ -46,4 +44,6 @@ export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit
 
 export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onSubEntityFormSubmit(values, props));
 
-export const createFormName = state => ({ form: `${getCurrentEntity(state)}:${getSelectedEntityId(state)}` });
+export const createFormName = state => ({
+  form: `${getCurrentEntity(state)}:${getSelectedEntityId(state)}`
+});

@@ -362,7 +362,7 @@ export const RemoveListItem = (action$, store) =>
 export const AddListItem = (action$, store) =>
   action$
     .ofType('ADD_LIST_ITEM')
-    .debounceTime(200)
+    .debounceTime(300)
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),
@@ -386,6 +386,7 @@ export const AddListItem = (action$, store) =>
 export const AddingListItems = (action$, store) =>
   action$
     .ofType('ADD_LIST_ITEM')
+    .debounceTime(300)
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),

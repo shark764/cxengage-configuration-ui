@@ -13,20 +13,7 @@ export const formValidation = (values, props) => {
   validation.historicalCatalogName =
     isEmpty(values.get('historicalCatalogName')) && 'Please enter an historical catalog name';
 
-  const { dashboards, folders } = props;
-  const standardReports = [
-    'Agent Details',
-    'Agent State',
-    'Interactions Dashboard',
-    'Interactions Completed',
-    'Interactions in Conversation',
-    'Interactions in Queue',
-    'Interactions in IVR',
-    'Overview Dashboard',
-    'Queues Dashboard',
-    'Queue Details',
-    'Resources Dashboard'
-  ];
+  const { dashboards, folders, standardReports } = props;
 
   if (values.get('reportType') === 'realtime') {
     if (values.get('realtimeReportType') === 'standard') {

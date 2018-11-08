@@ -20,6 +20,7 @@ import {
 } from '../../../redux/modules/entities/dataAccessReports/selectors';
 import { selectDashboards } from '../../../redux/modules/entities/dashboards/selectors';
 import { selectHistoricalReportFolders } from '../../../redux/modules/entities/historicalReportFolders/selectors';
+import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
 const CreateDataAccessReportsForm = compose(
   connect(createFormName),
@@ -34,6 +35,7 @@ export function mapStateToProps(state) {
   return {
     reportType: getReportTypeFormValue(state),
     realtimeReportType: getRealtimeReportTypeFormValue(state),
+    standardReports: entitiesMetaData['dataAccessReports'].standardReports,
     dashboards: selectDashboards(state),
     folders: selectHistoricalReportFolders(state),
     initialValues: selectFormInitialValues(state),

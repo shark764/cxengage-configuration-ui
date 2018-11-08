@@ -5,6 +5,7 @@ describe('formValidation', () => {
   let props;
   beforeEach(() => {
     props = {
+      standardReports: ['mockRealtimeReportName'],
       dashboards: ['mockRealtimeReportName'],
       folders: ['mockHistoricalCatalogName']
     };
@@ -15,6 +16,16 @@ describe('formValidation', () => {
       description: 'mockDescription',
       reportType: 'realtime',
       realtimeReportType: 'standard',
+      realtimeReportName: 'mockRealtimeReportName'
+    });
+    expect(formValidation(values, props)).toMatchSnapshot();
+  });
+  it('returns proper object when required fields are provided with custom realtimeReportType', () => {
+    const values = new Map({
+      name: 'mockName',
+      description: 'mockDescription',
+      reportType: 'realtime',
+      realtimeReportType: 'custom',
       realtimeReportName: 'mockRealtimeReportName'
     });
     expect(formValidation(values, props)).toMatchSnapshot();

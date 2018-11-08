@@ -274,7 +274,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Reporting/Access_Controlled_Reports/Create.htm",
     "modalListTableFields": Array [
       Object {
         "label": "First Name",
@@ -307,6 +307,19 @@ Object {
         "label": "Email",
         "name": "email",
       },
+    ],
+    "standardReports": Array [
+      "Agent Details",
+      "Agent State",
+      "Interactions Dashboard",
+      "Interactions Completed",
+      "Interactions in Conversation",
+      "Interactions in Queue",
+      "Interactions in IVR",
+      "Overview Dashboard",
+      "Queues Dashboard",
+      "Queue Details",
+      "Resources Dashboard",
     ],
     "subEntityName": "",
     "updateFormDependencies": Array [
