@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.7] - 2018-11-08
+### Changed
+- Version bump compnent library to 0.29.4
+
 ## [0.37.6] - 2018-11-08
 ### Changed
 - CXV1-15995 - Help link for Access Control is pointing to correct documentation link.
