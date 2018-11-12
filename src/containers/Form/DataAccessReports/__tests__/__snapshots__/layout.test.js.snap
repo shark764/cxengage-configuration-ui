@@ -125,7 +125,7 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
   <AutoCompleteField
     disabled={false}
     id="frm-data-access-reports-historical-catalog-name"
-    label="Folder *"
+    label="Historical Reports Folder *"
     name="historicalCatalogName"
     placeholder="Search..."
     suggestions={Array []}
@@ -335,7 +335,7 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
   <AutoCompleteField
     disabled={false}
     id="frm-data-access-reports-historical-catalog-name"
-    label="Folder *"
+    label="Historical Reports Folder *"
     name="historicalCatalogName"
     placeholder="Search..."
     suggestions={Array []}
@@ -391,7 +391,7 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
   <AutoCompleteField
     disabled={true}
     id="frm-data-access-reports-historical-catalog-name"
-    label="Folder *"
+    label="Historical Reports Folder *"
     name="historicalCatalogName"
     placeholder="Search..."
     suggestions={Array []}

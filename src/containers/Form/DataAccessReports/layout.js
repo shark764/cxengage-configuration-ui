@@ -95,7 +95,7 @@ export default function DataAccessReportsForm({
       {reportType === 'historical' && (
         <AutoCompleteField
           name="historicalCatalogName"
-          label="Folder *"
+          label="Historical Reports Folder *"
           placeholder="Search..."
           suggestions={folders}
           id="frm-data-access-reports-historical-catalog-name"
