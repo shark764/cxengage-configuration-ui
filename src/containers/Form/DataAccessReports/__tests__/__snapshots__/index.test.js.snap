@@ -17,7 +17,6 @@ exports[`DataAccessReports Renders renders 1`] = `
       },
     ]
   }
-  inherited={false}
   initialValues={
     Object {
       "active": true,
@@ -88,7 +87,6 @@ Object {
       "name": "mockName",
     },
   ],
-  "inherited": false,
   "initialValues": Object {
     "active": true,
   },

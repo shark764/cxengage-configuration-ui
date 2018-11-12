@@ -3,6 +3,7 @@
  */
 import { createSelector } from 'reselect';
 import { getCurrentForm } from '../../form/selectors';
+import { getEntityListMembers, availableEntityMembersForList } from '../../entities/listItemSelectors';
 
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
@@ -37,3 +38,15 @@ export const getInvitationScenario = state => {
   }
   return 'update';
 };
+
+export const selectEntityListMembers = state =>
+  getEntityListMembers(state).map(user => ({
+    ...user,
+    name: getDisplay(user)
+  }));
+
+export const selectAvailableEntityMembersForList = (state, dependentEntity, currentEntity) =>
+  availableEntityMembersForList(state, dependentEntity, currentEntity).map(user => ({
+    ...user,
+    name: getDisplay(user)
+  }));

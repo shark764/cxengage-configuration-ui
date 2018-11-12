@@ -18,13 +18,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.9] - 2018-11-13
+### Changed
+- Version bump component library to 0.29.6
+- Version bump SDK to 8.31.1
+
+### Fixed
+- CXV1-16020 - Mouse over add/remove sidePanel buttons was showing undefined for users name.
+
 ## [0.37.8] - 2018-11-12
 ### Fixed
 - Fixed label for Historical Reports Folder in DAC
 
 ## [0.37.7] - 2018-11-08
 ### Changed
-- Version bump compnent library to 0.29.4
+- Version bump component library to 0.29.4
 
 ## [0.37.6] - 2018-11-08
 ### Changed
@@ -40,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.37.4] - 2018-11-08
 ### Changed
-- Version bump compnent library to 0.29.3
+- Version bump component library to 0.29.3
 
 ## [0.37.3] - 2018-11-07
 ### Fixed

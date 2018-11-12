@@ -59,6 +59,9 @@ export const errorLabel = error => {
   ) {
     let { code, message } = error.data.apiResponse.apiResponse.response.error;
     errorDetails = ` ${code}: ${message}`;
+    if (code === undefined || message === undefined) {
+      errorDetails = ` ${error.data.apiResponse.status}: ${error.data.apiResponse.apiResponse.response.error}`;
+    }
   }
   return `${error.message} ${errorDetails ? errorDetails : ''}`;
 };

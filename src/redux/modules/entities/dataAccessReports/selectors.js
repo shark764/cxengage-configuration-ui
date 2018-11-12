@@ -10,9 +10,7 @@ export const getDataAccessReports = state => {
 };
 
 export const getReportTypeFormValue = state =>
-  getCurrentForm(state) &&
-  getCurrentForm(state).getIn(['values', 'reportType']);
+  getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'reportType']);
 
 export const getRealtimeReportTypeFormValue = state =>
-  getCurrentForm(state) &&
-  getCurrentForm(state).getIn(['values', 'realtimeReportType']);
+  getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'realtimeReportType']);

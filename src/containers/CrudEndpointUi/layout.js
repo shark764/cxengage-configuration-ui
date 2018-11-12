@@ -34,7 +34,7 @@ import DataAccessReportsForm from '../Form/DataAccessReports';
 
 // AddMembersToList table modal
 import AddMembersToList from '../AddMembersToList';
-import AddMembersToListEntitys from '../AddMembersToList/Entities';
+import AddMembersToListEntities from '../AddMembersToList/Entities';
 
 // Side Panels
 import ListsDetailsPanel from '../SidePanelDetails/Lists';
@@ -338,15 +338,15 @@ const updateSubEntityFormRoutes = [
   },
   {
     path: '/configuration/skills',
-    component: AddMembersToListEntitys
+    component: AddMembersToListEntities
   },
   {
     path: '/configuration/groups',
-    component: AddMembersToListEntitys
+    component: AddMembersToListEntities
   },
   {
     path: '/configuration/users',
-    component: AddMembersToListEntitys
+    component: AddMembersToListEntities
   },
   {
     path: '/configuration/dataAccessReports',
