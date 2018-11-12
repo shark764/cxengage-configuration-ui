@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.8] - 2018-11-12
+### Fixed
+- Fixed label for Historical Reports Folder in DAC
+
 ## [0.37.7] - 2018-11-08
 ### Changed
 - Version bump compnent library to 0.29.4
