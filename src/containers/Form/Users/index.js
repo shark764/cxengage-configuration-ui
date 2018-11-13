@@ -13,14 +13,17 @@ import {
   isCreating,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import { onFormSubmit } from '../../../redux/modules/entities';
+import { selectFormInitialValues, createFormName } from '../../../redux/modules/form/selectors';
 import { getUserTenantStatus, getInvitationScenario } from '../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../redux/modules/entities/roles/selectors';
 
 const CreateUsersForm = compose(
   connect(createFormName),
   reduxForm({
-    onSubmit: formSubmission,
+    onSubmit: (values, dispatch, props) => {
+      return dispatch(onFormSubmit(values, props)) 
+    },
     validate: formValidation,
     destroyOnUnmount: true
   })

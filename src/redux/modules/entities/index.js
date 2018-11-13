@@ -307,6 +307,7 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_DATA_REJECTED': {
       return state.setIn([action.entityName, 'data'], new List());
     }
+    case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {
       const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === action.id);
       if (entityIndex !== -1) {
