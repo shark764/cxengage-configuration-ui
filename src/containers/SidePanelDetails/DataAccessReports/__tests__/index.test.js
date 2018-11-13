@@ -11,17 +11,10 @@ import {
   getSelectedEntity,
   getCurrentEntity,
   userHasUpdatePermission,
-  isInherited,
   isSaving
 } from '../../../../redux/modules/entities/selectors';
-import {
-  getEntityListMembers,
-  getListSize
-} from '../../../../redux/modules/entities/listItemSelectors';
-import {
-  setSelectedSubEntityId,
-  removeListItem
-} from '../../../../redux/modules/entities';
+import { selectEntityListMembers } from '../../../../redux/modules/entities/users/selectors';
+import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntity.mockImplementation(
@@ -43,12 +36,10 @@ getSelectedEntity.mockImplementation(
 );
 getCurrentEntity.mockImplementation(() => 'dataAccessReports');
 userHasUpdatePermission.mockImplementation(() => true);
-isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
 
-jest.mock('../../../../redux/modules/entities/listItemSelectors');
-getEntityListMembers.mockImplementation(() => ['mockListMembers']);
-getListSize.mockImplementation(() => 0);
+jest.mock('../../../../redux/modules/entities/users/selectors');
+selectEntityListMembers.mockImplementation(() => ['mockListMembers']);
 
 jest.mock('../../../../redux/modules/entities');
 removeListItem.mockImplementation(() => 'mockId');
@@ -58,11 +49,7 @@ describe('DataAccessReportsDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
     expect(
-      shallow(
-        <DataAccessReportsDetailsPanel store={store}>
-          Child
-        </DataAccessReportsDetailsPanel>
-      )
+      shallow(<DataAccessReportsDetailsPanel store={store}>Child</DataAccessReportsDetailsPanel>)
     ).toMatchSnapshot();
   });
 });

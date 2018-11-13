@@ -7,26 +7,23 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
   Mock Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined Member(s)"
+    text=" Member(s)"
     userHasUpdatePermission={true}
   />
   <_class
-    userHasUpdatePermission={true}
-  />
-</styled.div>
-`;
-
-exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPanel with historical type 1`] = `
-<styled.div
-  id="dtpanel-data-access-reports"
->
-  Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    text="undefined Member(s)"
-    userHasUpdatePermission={true}
-  />
-  <_class
+    deleteSubEntity={[Function]}
+    fields={Array []}
+    items={
+      Array [
+        Object {
+          "firstName": "mockFirstName",
+          "id": "mockId",
+          "lastName": "mockLastName",
+          "name": "mockName",
+          "status": "enabled",
+        },
+      ]
+    }
     userHasUpdatePermission={true}
   />
 </styled.div>
@@ -39,27 +36,24 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
   Mock Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined Member(s)"
+    text=" Member(s)"
     userHasUpdatePermission={false}
   />
   <_class
+    deleteSubEntity={[Function]}
+    fields={Array []}
+    items={
+      Array [
+        Object {
+          "firstName": "mockFirstName",
+          "id": "mockId",
+          "lastName": "mockLastName",
+          "name": "mockName",
+          "status": "enabled",
+        },
+      ]
+    }
     userHasUpdatePermission={false}
-  />
-</styled.div>
-`;
-
-exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPanel with status disabled 1`] = `
-<styled.div
-  id="dtpanel-data-access-reports"
->
-  Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    text="undefined Member(s)"
-    userHasUpdatePermission={true}
-  />
-  <_class
-    userHasUpdatePermission={true}
   />
 </styled.div>
 `;

@@ -24,9 +24,9 @@ const WrappedDetailHeader = styled(DetailHeader)`
   margin-left: 35px;
 `;
 
-export default function UsersDetailsPanel({ 
+export default function UsersDetailsPanel({
   children,
-  userHasUpdatePermission, 
+  userHasUpdatePermission,
   skillsItems,
   skillsFields,
   groupsItems,
@@ -40,18 +40,17 @@ export default function UsersDetailsPanel({
   messageTemplatesItems,
   messageTemplatesFields,
   removeListItem,
-  inherited, 
-  setSelectedSubEntityId  
+  inherited,
+  setSelectedSubEntityId
 }) {
-  return <Wrapper id="dtpanel-users">
-  {children}
-  
+  return (
+    <Wrapper id="dtpanel-users">
+      {children}
+
       <DetailWrapper open={false} contains="skills">
         <WrappedDetailHeader
           userHasUpdatePermission={userHasUpdatePermission}
-          text={`${
-            skillsItems.length > 1 ? skillsItems.length : ''
-          } Skills`}
+          text={`${skillsItems.length > 1 ? skillsItems.length : ''} Skills`}
           onActionButtonClick={() => setSelectedSubEntityId('skills')}
           inherited={inherited}
         />
@@ -68,9 +67,7 @@ export default function UsersDetailsPanel({
       <DetailWrapper open={false} contains="groups">
         <WrappedDetailHeader
           userHasUpdatePermission={userHasUpdatePermission}
-          text={`${
-            groupsItems.length > 1 ? groupsItems.length : ''
-          } Groups`}
+          text={`${groupsItems.length > 1 ? groupsItems.length : ''} Groups`}
           onActionButtonClick={() => setSelectedSubEntityId('groups')}
           inherited={inherited}
         />
@@ -104,9 +101,7 @@ export default function UsersDetailsPanel({
       <DetailWrapper open={false} contains="messageTemplates">
         <WrappedDetailHeader
           userHasUpdatePermission={userHasUpdatePermission}
-          text={`${
-            messageTemplatesItems.length > 1 ? messageTemplatesItems.length : ''
-          } Message Templates`}
+          text={`${messageTemplatesItems.length > 1 ? messageTemplatesItems.length : ''} Message Templates`}
           onActionButtonClick={() => setSelectedSubEntityId('messageTemplates')}
           inherited={inherited}
         />
@@ -123,9 +118,7 @@ export default function UsersDetailsPanel({
       <DetailWrapper open={false} contains="transferLists">
         <WrappedDetailHeader
           userHasUpdatePermission={userHasUpdatePermission}
-          text={`${
-            transferListsItems.length > 1 ? transferListsItems.length : ''
-          } Transfer Lists`}
+          text={`${transferListsItems.length > 1 ? transferListsItems.length : ''} Transfer Lists`}
           onActionButtonClick={() => setSelectedSubEntityId('transferLists')}
           inherited={inherited}
         />
@@ -157,9 +150,8 @@ export default function UsersDetailsPanel({
           fields={outboundIdentifierListsFields}
         />
       </DetailWrapper>
-
-
-  </Wrapper>;
+    </Wrapper>
+  );
 }
 
 UsersDetailsPanel.propTypes = {
@@ -179,5 +171,5 @@ UsersDetailsPanel.propTypes = {
   outboundIdentifierListsItems: PropTypes.array,
   outboundIdentifierListsFields: PropTypes.array,
   removeListItem: PropTypes.func,
-  setSelectedSubEntityId: PropTypes.func,
+  setSelectedSubEntityId: PropTypes.func
 };

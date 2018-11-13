@@ -7,12 +7,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import DataAccessReportsForm from './layout';
 import { formValidation } from './validation';
-import {
-  getSelectedEntityId,
-  isInherited,
-  isCreating,
-  userHasUpdatePermission
-} from '../../../redux/modules/entities/selectors';
+import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import {
   getReportTypeFormValue,
@@ -40,7 +35,7 @@ export function mapStateToProps(state) {
     folders: selectHistoricalReportFolders(state),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
-    inherited: isInherited(state),
+
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state)
   };

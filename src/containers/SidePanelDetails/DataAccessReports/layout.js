@@ -22,12 +22,10 @@ const Wrapper = styled.div`
 export default function DataAccessReportsDetailsPanel({
   children,
   userHasUpdatePermission,
-  inherited,
   tableItems,
   tableFields,
   removeListItem,
-  setSelectedSubEntityId,
-  listSize
+  setSelectedSubEntityId
 }) {
   return (
     <Wrapper id="dtpanel-data-access-reports">
@@ -35,15 +33,13 @@ export default function DataAccessReportsDetailsPanel({
 
       <DetailHeader
         userHasUpdatePermission={userHasUpdatePermission}
-        text={`${listSize} Member(s)`}
+        text={`${tableItems.length > 1 ? tableItems.length : ''} Member(s)`}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
-        inherited={inherited}
       />
       <SidePanelTable
         userHasUpdatePermission={userHasUpdatePermission}
         deleteSubEntity={removeListItem}
         items={tableItems}
-        inherited={inherited}
         fields={tableFields}
       />
     </Wrapper>
@@ -57,6 +53,5 @@ DataAccessReportsDetailsPanel.propTypes = {
   tableItems: PropTypes.array,
   tableFields: PropTypes.array,
   removeListItem: PropTypes.func,
-  setSelectedSubEntityId: PropTypes.func,
-  listSize: PropTypes.number
+  setSelectedSubEntityId: PropTypes.func
 };

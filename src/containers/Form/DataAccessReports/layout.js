@@ -20,7 +20,6 @@ export default function DataAccessReportsForm({
   reportType,
   realtimeReportType,
   isSaving,
-  inherited,
   userHasUpdatePermission,
   key
 }) {
@@ -33,7 +32,7 @@ export default function DataAccessReportsForm({
         id="frm-data-access-reports-name"
         componentType="input"
         inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        disabled={isSaving || !userHasUpdatePermission}
       />
       <InputField
         name="description"
@@ -41,14 +40,14 @@ export default function DataAccessReportsForm({
         id="frm-data-access-reports-description"
         componentType="textarea"
         inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        disabled={isSaving || !userHasUpdatePermission}
       />
       <DetailHeader text="Report" />
       <RadioGroupField
         name="reportType"
         label="Type *"
         id="frm-data-access-reports-report-type"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        disabled={isSaving || !userHasUpdatePermission}
         options={[
           {
             label: 'Realtime',
@@ -67,7 +66,7 @@ export default function DataAccessReportsForm({
             name="realtimeReportType"
             label="Realtime Report Type *"
             id="frm-data-access-reports-realtime-report-type"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
+            disabled={isSaving || !userHasUpdatePermission}
             options={[
               {
                 label: 'Standard',
@@ -87,7 +86,7 @@ export default function DataAccessReportsForm({
               placeholder="Search..."
               suggestions={realtimeReportType === 'custom' ? dashboards : standardReports}
               id="frm-data-access-reports-realtime-report-name"
-              disabled={isSaving || inherited || !userHasUpdatePermission}
+              disabled={isSaving || !userHasUpdatePermission}
             />
           )}
         </Fragment>
@@ -99,7 +98,7 @@ export default function DataAccessReportsForm({
           placeholder="Search..."
           suggestions={folders}
           id="frm-data-access-reports-historical-catalog-name"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          disabled={isSaving || !userHasUpdatePermission}
         />
       )}
     </form>
@@ -110,7 +109,6 @@ DataAccessReportsForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
   standardReports: PropTypes.array,
   dashboards: PropTypes.array,

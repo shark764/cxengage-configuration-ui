@@ -16,7 +16,6 @@ import {
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 import { selectDashboards } from '../../../../redux/modules/entities/dashboards/selectors';
 import { selectHistoricalReportFolders } from '../../../../redux/modules/entities/historicalReportFolders/selectors';
-import { selectNonDisabledUsers } from '../../../../redux/modules/entities/users/selectors';
 import { getReportTypeFormValue } from '../../../../redux/modules/entities/dataAccessReports/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -32,8 +31,6 @@ jest.mock('../../../../redux/modules/entities/dashboards/selectors');
 selectDashboards.mockImplementation(() => [{ name: 'mockName' }]);
 jest.mock('../../../../redux/modules/entities/historicalReportFolders/selectors');
 selectHistoricalReportFolders.mockImplementation(() => [{ name: 'mockName' }]);
-jest.mock('../../../../redux/modules/entities/users/selectors');
-selectNonDisabledUsers.mockImplementation(() => [{ name: 'mockName' }]);
 
 describe('DataAccessReports Renders', () => {
   it('renders', () => {

@@ -2,8 +2,6 @@
 
 exports[`DataAccessReportsDetailsPanel Renders renders 1`] = `
 <DataAccessReportsDetailsPanel
-  inherited={false}
-  listSize={0}
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
   store={
@@ -64,8 +62,6 @@ exports[`DataAccessReportsDetailsPanel Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "inherited": false,
-  "listSize": 0,
   "tableFields": Array [
     Object {
       "label": "First Name",
