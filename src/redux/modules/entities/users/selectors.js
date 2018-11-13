@@ -42,11 +42,15 @@ export const getInvitationScenario = state => {
 export const selectEntityListMembers = state =>
   getEntityListMembers(state).map(user => ({
     ...user,
-    name: getDisplay(user)
+    name: getDisplay(user),
+    firstName: user.firstName !== null ? user.firstName : '',
+    lastName: user.lastName !== null ? user.lastName : ''
   }));
 
 export const selectAvailableEntityMembersForList = (state, dependentEntity, currentEntity) =>
   availableEntityMembersForList(state, dependentEntity, currentEntity).map(user => ({
     ...user,
-    name: getDisplay(user)
+    name: getDisplay(user),
+    firstName: user.firstName !== null ? user.firstName : '',
+    lastName: user.lastName !== null ? user.lastName : ''
   }));

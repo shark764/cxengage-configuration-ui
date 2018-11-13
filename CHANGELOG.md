@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.10] - 2018-11-13
+### Fixed
+- Fixed nulls in names for DAC, now it shows empty spaces.
+
 ## [0.37.9] - 2018-11-13
 ### Changed
 - Version bump component library to 0.29.6
