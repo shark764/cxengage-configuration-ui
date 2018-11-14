@@ -20,8 +20,10 @@ const CreateSkillsForm = compose(
 )(SkillsForm);
 
 export function mapStateToProps(state) {
+  const initialValues = selectFormInitialValues(state);
   return {
-    initialValues: selectFormInitialValues(state),
+    disableProficiency: initialValues.get('hasProficiency') && initialValues.get('id') !== undefined,
+    initialValues: initialValues.has('hasProficiency') ? initialValues : initialValues.set('hasProficiency', false),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     key: getSelectedEntityId(state)

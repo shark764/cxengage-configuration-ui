@@ -25,10 +25,11 @@ exports[`<SkillsForm /> renders create form 1`] = `
       name="description"
     />
     <ToggleField
-      disabled={false}
+      disabled={true}
       id="frm-skills-has-proficiency"
       label="Has Proficiency"
       name="hasProficiency"
+      title="You cannot update 'Has Proficiency' once is set to true"
     />
   </React.Fragment>
 </form>
@@ -63,6 +64,7 @@ exports[`<SkillsForm /> renders create form with no proficiency 1`] = `
       id="frm-skills-has-proficiency"
       label="Has Proficiency"
       name="hasProficiency"
+      title="Controls whether the skill needs a value specified"
     />
   </React.Fragment>
 </form>
@@ -93,10 +95,11 @@ exports[`<SkillsForm /> renders update form 1`] = `
       name="description"
     />
     <ToggleField
-      disabled={false}
+      disabled={true}
       id="frm-skills-has-proficiency"
       label="Has Proficiency"
       name="hasProficiency"
+      title="You cannot update 'Has Proficiency' once is set to true"
     />
   </React.Fragment>
 </form>
@@ -131,6 +134,7 @@ exports[`<SkillsForm /> renders update form with no proficiency 1`] = `
       id="frm-skills-has-proficiency"
       label="Has Proficiency"
       name="hasProficiency"
+      title="Controls whether the skill needs a value specified"
     />
   </React.Fragment>
 </form>

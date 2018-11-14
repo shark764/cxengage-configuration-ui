@@ -7,12 +7,7 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import DataAccessReportsForm, { mapStateToProps } from '../';
-import {
-  getSelectedEntityId,
-  isInherited,
-  isCreating,
-  userHasUpdatePermission
-} from '../../../../redux/modules/entities/selectors';
+import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 import { selectDashboards } from '../../../../redux/modules/entities/dashboards/selectors';
 import { selectHistoricalReportFolders } from '../../../../redux/modules/entities/historicalReportFolders/selectors';
@@ -22,7 +17,6 @@ jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
-isInherited.mockImplementation(() => false);
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));

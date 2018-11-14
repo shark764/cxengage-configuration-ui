@@ -18,6 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.11] - 2018-11-14
+### Changed
+- Version bump component library to 0.29.8
+
+### Fixed
+- CXV1-15957 - Has proficiency toggle had to be disabled once is set to true.
+- When creating a skill, couldn't save entity with hasProficiency set to true.
+
 ## [0.37.10] - 2018-11-13
 ### Fixed
 - Fixed nulls in names for DAC, now it shows empty spaces.
