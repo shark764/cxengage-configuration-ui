@@ -11,7 +11,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { DetailHeader, InputField, SelectField, Button } from 'cx-ui-components';
+import { DetailHeader, InputField, SelectField } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
 
 const Wrapper = styled.div`
@@ -23,16 +23,13 @@ const WrappedDetailHeader = styled(DetailHeader)`
   margin-left: 35px;
 `;
 
-const ButtonField = styled(Button)`
-margin: 10px 0px 25px 10px;
-`;
-
 export default function UsersForm({
   handleSubmit,
   platformRoles,
   tenantRoles,
   status,
   scenario,
+  tenantIdentityProviders,
   isSaving,
   userHasUpdatePermission,
   key
@@ -41,7 +38,7 @@ export default function UsersForm({
     <form onSubmit={handleSubmit} key={key}>
       <Wrapper>
         <DetailWrapper open={true}>
-          <WrappedDetailHeader text="Details" />
+          <WrappedDetailHeader text="Platform Details" />
           <InputField
             name="firstName"
             label="First Name"
@@ -66,6 +63,10 @@ export default function UsersForm({
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
+        </DetailWrapper>
+
+        <DetailWrapper open={true}>
+          <WrappedDetailHeader text="Tenant Details" />
           <InputField
             name="workStationId"
             label="Workstation ID"
@@ -74,28 +75,6 @@ export default function UsersForm({
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
-          <InputField
-            name="personalTelephone"
-            label="Personal Telephone"
-            id="frm-users-personal-telephone"
-            componentType="input"
-            inputType="text"
-            disabled={isSaving || !userHasUpdatePermission}
-          />
-        </DetailWrapper>
-
-        <DetailWrapper open={true}>
-          <WrappedDetailHeader text="Login" />
-          <InputField name="email" label="Email" id="frm-users-email" componentType="input" inputType="text" disabled />
-          <InputField name="platformStatus" label="Platform Status" id="frm-users-platform-status" componentType="input" inputType="text" disabled />
-          {/* <InputField name="roleName" label="Platform Role" id="frm-users-platform-role-id" componentType="input" inputType="text" disabled /> */}
-          {/* <SelectField
-            name="platformRoleId"
-            label="Platform Role"
-            id="frm-users-platform-role-id"
-            options={platformRoles}
-            disabled
-          /> */}
           <SelectField
             name="roleId"
             label="Tenant Role"
@@ -103,15 +82,28 @@ export default function UsersForm({
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantRoles}
           />
+        </DetailWrapper>
+
+        <DetailWrapper open={true}>
+          <WrappedDetailHeader text="Login Details" />
+          <InputField name="email" label="Email" id="frm-users-email" componentType="input" inputType="text" disabled />
+          <InputField
+            name="platformStatus"
+            label="Platform Status"
+            id="frm-users-platform-status"
+            componentType="input"
+            inputType="text"
+            disabled
+          />
           <SelectField
             name="noPassword"
             label="Platform Authentication"
             id="frm-users-no-password-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={[
-              {label: 'Use Tenant Default: Enabled', value: 'null'},
-              {label: 'Enabled', value: true},
-              {label: 'Disabled', value: false},
+              { label: 'Use Tenant Default: Enabled', value: 'null' },
+              { label: 'Enabled', value: true },
+              { label: 'Disabled', value: false }
             ]}
           />
           <SelectField
@@ -119,19 +111,8 @@ export default function UsersForm({
             label="Single Sign On Identitiy Provider"
             id="frm-users-default-identity-provider-id"
             disabled={isSaving || !userHasUpdatePermission}
-            options={tenantRoles}
+            options={tenantIdentityProviders}
           />
-          <ButtonField buttonType="secondary" onClick={() => alert('Password Reset Button clicked')}>
-            Password Reset
-          </ButtonField>
-          {/* {status !== 'invited' && (
-            <ToggleField
-              name="inviteNow"
-              label="Invite Now"
-              id="frm-users-invite-now"
-              disabled={isSaving || inherited || !userHasUpdatePermission}
-            />
-          )} */}
         </DetailWrapper>
       </Wrapper>
     </form>
@@ -148,6 +129,12 @@ UsersForm.propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string.isRequired
+    })
+  ),
+  tenantIdentityProviders: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string
     })
   ),
   tenantRoles: PropTypes.arrayOf(

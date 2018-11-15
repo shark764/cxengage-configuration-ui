@@ -11,6 +11,7 @@ Object {
   "platformRoles": Array [],
   "scenario": "update",
   "status": "enabled",
+  "tenantIdentityProviders": Array [],
   "tenantRoles": Array [],
   "userHasUpdatePermission": true,
 }
@@ -58,6 +59,7 @@ exports[`Users Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  tenantIdentityProviders={Array []}
   tenantRoles={Array []}
   userHasUpdatePermission={true}
 >

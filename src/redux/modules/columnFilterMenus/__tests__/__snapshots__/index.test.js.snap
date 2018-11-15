@@ -172,6 +172,10 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "identityProviders": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "flows": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],

@@ -135,6 +135,7 @@ export const listOfEntities = [
   'flows',
   'groups',
   'historicalReportFolders',
+  'identityProviders',
   'interactionMonitoring',
   'lists',
   'listTypes',
@@ -148,7 +149,7 @@ export const listOfEntities = [
   'roles',
   'skills',
   'transferLists',
-  'users',
+  'users'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -158,8 +159,8 @@ listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
 // Users
 entities.users.pageTitle = 'User Management';
 entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
-entities.users.createFormDependencies.push('roles', 'platformRoles');
-entities.users.updateFormDependencies.push('roles', 'platformRoles');
+entities.users.createFormDependencies.push('roles', 'platformRoles', 'identityProviders');
+entities.users.updateFormDependencies.push('roles', 'platformRoles', 'identityProviders');
 entities.users.memberListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },

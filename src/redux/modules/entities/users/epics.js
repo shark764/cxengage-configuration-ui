@@ -1,14 +1,8 @@
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import {
-  removeLastLetter,
-  camelCaseToRegularFormAndRemoveLastLetter,
-} from 'serenova-js-utils/strings';
+import { removeLastLetter, camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
-import {
-  getCurrentEntity,
-  getSelectedEntityId,
-} from '../selectors';
+import { getCurrentEntity, getSelectedEntityId, getSelectedEntity } from '../selectors';
 
 export const UpdateUserEntity = action$ =>
   action$
@@ -16,36 +10,25 @@ export const UpdateUserEntity = action$ =>
     .filter(({ entityName }) => entityName === 'users')
     .map(a => {
       a.sdkCall = {
-        command: "updateUser",
+        command: 'updateUser',
         data: {},
-        module: "entities",
-        topic: "cxengage/entities/update-user-response"
-      }
-      const filterValues = {...a.values};
-      delete filterValues.aliasTenantUserId;
-      delete filterValues.created;
-      delete filterValues.createdBy;
-      delete filterValues.email;
-      delete filterValues.externalId;
-      delete filterValues.firstName;
-      delete filterValues.groups;
-      delete filterValues.id;
-      delete filterValues.invitationStatus;
-      delete filterValues.lastName;
-      delete filterValues.personalTelephone;
-      delete filterValues.platformStatus;
-      delete filterValues.roleName;
-      delete filterValues.skills;
-      delete filterValues.state;
-      delete filterValues.updated;
+        module: 'entities',
+        topic: 'cxengage/entities/update-user-response'
+      };
+      const filterValues = {
+        workStationId: a.values.workStationId,
+        roleId: a.values.roleId,
+        noPassword: a.values.noPassword === 'null' ? null : a.values.noPassword,
+        defaultIdentityProvider: a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider
+      };
 
       a.sdkCall.data = {
         updateBody: {
-          ...filterValues,
+          ...filterValues
         },
         [removeLastLetter(a.entityName) + 'Id']: a.entityId
       };
-  
+
       return { ...a };
     })
     .concatMap(a =>
@@ -59,7 +42,6 @@ export const UpdateUserEntity = action$ =>
         )
         .catch(error => handleError(error, a))
     );
-
 
 export const UpdatePlatformUserEntity = action$ =>
   action$
@@ -67,70 +49,39 @@ export const UpdatePlatformUserEntity = action$ =>
     .filter(({ entityName }) => entityName === 'users')
     .map(a => {
       a.sdkCall = {
-        command: "updatePlatformUser",
+        command: 'updatePlatformUser',
         data: {},
-        module: "entities",
-        topic: "cxengage/entities/update-platform-user-response"
-      }
-      const filterValues = {...a.values};
-      delete filterValues.activeExtension;
-      delete filterValues.clientLogLevel;
-      delete filterValues.extensions;
-      delete filterValues.workStationId;
-      delete filterValues.roleId;
-      delete filterValues.aliasTenantUserId;
-      delete filterValues.created;
-      delete filterValues.createdBy;
-      delete filterValues.groups;
-      delete filterValues.id;
-      delete filterValues.invitationStatus;
-      delete filterValues.personalTelephone;
-      delete filterValues.platformStatus;
-      delete filterValues.roleName;
-      delete filterValues.skills;
-      delete filterValues.state;
-      delete filterValues.updated;
-      delete filterValues.updatedBy;
-      delete filterValues.email;
-      delete filterValues.noPassword;
+        module: 'entities',
+        topic: 'cxengage/entities/update-platform-user-response'
+      };
+      const filterValues = {
+        firstName: a.values.firstName,
+        lastName: a.values.lastName,
+        externalId: a.values.externalId,
+        personalTelephone: a.values.personalTelephone
+      };
 
-      if(filterValues.externalId === null) {
+      if (filterValues.externalId === null) {
         delete filterValues.externalId;
       }
 
-
-      // disabled', 'pending', 'enabled'"
-      // console.warn('status1', filterValues.status)
-      if(filterValues.status === 'accepted') {
-        delete filterValues.status;
-        // a.values.status = 'enabled'
-      } 
-      // else if(a.values.status === 'disabled') {
-      //   a.values.status = 'disabled'
-      // }
-      console.warn('filteredValues', filterValues)
-
       a.sdkCall.data = {
         updateBody: {
-          ...filterValues,
+          ...filterValues
         },
         [removeLastLetter(a.entityName) + 'Id']: a.entityId
       };
-  
+
       return { ...a };
     })
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response =>
-          handleSuccess(
-            response,
-            a,
-            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
-          )
-        )
+        .map(response => {
+          delete response.result.status;
+          return handleSuccess(response, a);
+        })
         .catch(error => handleError(error, a))
     );
-
 
 export const FetchSidePanelUserData = (action$, store) =>
   action$
@@ -138,25 +89,52 @@ export const FetchSidePanelUserData = (action$, store) =>
     .map(action => ({
       ...action,
       entityName: getCurrentEntity(store.getState()),
-      id: getSelectedEntityId(store.getState()),
+      id: getSelectedEntityId(store.getState())
     }))
     .filter(a => a.id !== 'create' && a.id !== '' && a.entityName === 'users')
     .map(a => ({
       sdkCall: {
-        command: "getUser",
-        data: {resourceId: a.id},
-        module: "entities",
-        topic: "cxengage/entities/get-user-response"
+        command: 'getUser',
+        data: { resourceId: a.id },
+        module: 'entities',
+        topic: 'cxengage/entities/get-user-response'
       },
       ...a
     }))
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
+    );
+
+export const ToggleUserEntity = (action$, store) =>
+  action$
+    .ofType('TOGGLE_ENTITY')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      id: getSelectedEntityId(store.getState()),
+      currentStatus: getSelectedEntity(store.getState()).get('status'),
+      sdkCall: {
+        command: 'updateUser',
+        data: {
+          userId: getSelectedEntityId(store.getState()),
+          status: getSelectedEntity(store.getState()).get('status') === 'accepted' ? 'disabled' : 'accepted'
+        },
+        module: 'entities',
+        topic: 'cxengage/entities/update-user-response'
+      }
+    }))
+    .filter(a => a.entityName === 'users')
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
           handleSuccess(
             response,
             a,
-            `User was retrieved successfully!`
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was ${
+              a.entityStatusActive ? 'disabled' : 'enabled'
+            } successfully!`
           )
         )
         .catch(error => handleError(error, a))

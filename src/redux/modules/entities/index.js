@@ -6,7 +6,7 @@ import { fromJS, List } from 'immutable';
 
 // Initial Sub State
 const defaultEntity = {
-  data: undefined,
+  data: [],
   selectedEntityId: '',
   sidePanelWidth: 550,
   confirmationDialogType: undefined
@@ -16,6 +16,9 @@ const initialState = fromJS({
   none: {},
   interactionMonitoring: {
     readPermission: ['MONITOR_ALL_CALLS']
+  },
+  identityProviders: {
+    ...defaultEntity
   },
   lists: {
     ...defaultEntity,
@@ -313,7 +316,7 @@ export default function reducer(state = initialState, action) {
       if (entityIndex !== -1) {
         return state.mergeIn(
           [action.entityName, 'data', entityIndex],
-          fromJS(Object.assign(action.response.result, { updating: false }))
+          fromJS({ ...action.response.result, updating: false })
         );
       } else {
         return state;
@@ -366,12 +369,11 @@ export default function reducer(state = initialState, action) {
     case 'UPDATE_ENTITY_FULFILLED':
     case 'BULK_ENTITY_UPDATE_FULFILLED': {
       const { result } = action.response;
-      const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === result.id);
+      const entityIndex = state
+        .getIn([action.entityName, 'data'])
+        .findIndex(entity => entity.get('id') === result.id || entity.get('id') === action.id);
       if (entityIndex !== -1) {
-        return state.mergeIn(
-          [action.entityName, 'data', entityIndex],
-          fromJS(Object.assign(result, { updating: false }))
-        );
+        return state.mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }));
       } else {
         return state;
       }

@@ -16,6 +16,10 @@ import {
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 import { getUserTenantStatus, getInvitationScenario } from '../../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../../redux/modules/entities/roles/selectors';
+import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
+
+jest.mock('../../../../redux/modules/entities/identityProviders/selectors');
+selectTenantIdentityProviders.mockImplementation(() => []);
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');

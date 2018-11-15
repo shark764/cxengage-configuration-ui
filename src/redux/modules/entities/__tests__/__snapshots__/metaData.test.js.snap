@@ -594,6 +594,56 @@ Object {
     "subEntityName": "",
     "updateFormDependencies": Array [],
   },
+  "identityProviders": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "dependentEntity": "",
+    "entityName": "identityProviders",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Identity Providers",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "updateFormDependencies": Array [],
+  },
   "interactionMonitoring": EntityMetaData {
     "betaFeature": true,
     "columns": Array [
@@ -1587,6 +1637,7 @@ Object {
     "createFormDependencies": Array [
       "roles",
       "platformRoles",
+      "identityProviders",
     ],
     "dependentEntity": "",
     "entityName": "users",
@@ -1644,6 +1695,7 @@ Object {
     "updateFormDependencies": Array [
       "roles",
       "platformRoles",
+      "identityProviders",
     ],
   },
 }

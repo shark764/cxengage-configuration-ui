@@ -293,6 +293,7 @@ export const ToggleEntity = (action$, store) =>
       selectedEntityId: getSelectedEntityId(store.getState()),
       entityStatusActive: getSelectedEntityStatus(store.getState())
     }))
+    .filter(a => a.entityName !== 'users')
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.sdkCall.data = {
@@ -517,7 +518,7 @@ export const FetchFormMetaData = (action$, store) =>
       ...a,
       currentEntityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState()),
-      isDefined: name => store.getState().getIn(['Entities', name, 'data']) === undefined
+      isDefined: name => store.getState().getIn(['Entities', name, 'data']).size === 0
     }))
     .switchMap(
       a =>
@@ -536,8 +537,7 @@ export const FetchSidePanelData = (action$, store) =>
     .map(action => ({
       ...action,
       currentEntityName: getCurrentEntity(store.getState()),
-      entityId: getSelectedEntityId(store.getState()),
-      isDefined: name => store.getState().getIn(['Entities', name, 'data']) !== undefined
+      entityId: getSelectedEntityId(store.getState())
     }))
     .filter(a => a.entityId !== 'create' && a.entityId !== '' && entitiesMetaData[a.currentEntityName].dependentEntity)
     .map(a => ({
