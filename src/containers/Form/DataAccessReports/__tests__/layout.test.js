@@ -20,7 +20,6 @@ describe('<DataAccessReportsForm />', () => {
         dashboards={[]}
         standardReports={[]}
         isSaving={false}
-        inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
@@ -38,7 +37,6 @@ describe('<DataAccessReportsForm />', () => {
         dashboards={[]}
         standardReports={[]}
         isSaving={false}
-        inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
@@ -58,7 +56,6 @@ describe('<DataAccessReportsForm />', () => {
         dashboards={[]}
         standardReports={[]}
         isSaving={false}
-        inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
@@ -78,7 +75,6 @@ describe('<DataAccessReportsForm />', () => {
         dashboards={[]}
         standardReports={[]}
         isSaving={false}
-        inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
@@ -97,7 +93,6 @@ describe('<DataAccessReportsForm />', () => {
         dashboards={[]}
         standardReports={[]}
         isSaving={false}
-        inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
@@ -116,7 +111,6 @@ describe('<DataAccessReportsForm />', () => {
         dashboards={[]}
         standardReports={[]}
         isSaving={false}
-        inherited={false}
         userHasUpdatePermission={false}
         handleSubmit={() => {}}
       />

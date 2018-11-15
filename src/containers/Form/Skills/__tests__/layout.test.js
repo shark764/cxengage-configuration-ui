@@ -16,6 +16,7 @@ describe('<SkillsForm />', () => {
         hasProficiency={true}
         isSaving={false}
         inherited={false}
+        disableProficiency={true}
         handleSubmit={() => {}}
       />
     );
@@ -29,6 +30,7 @@ describe('<SkillsForm />', () => {
         hasProficiency={false}
         isSaving={false}
         inherited={false}
+        disableProficiency={false}
         handleSubmit={() => {}}
       />
     );
@@ -43,6 +45,7 @@ describe('<SkillsForm />', () => {
         id="0000-0000-0000-0000-0000"
         isSaving={false}
         inherited={false}
+        disableProficiency={true}
         handleSubmit={() => {}}
       />
     );
@@ -57,6 +60,7 @@ describe('<SkillsForm />', () => {
         id="0000-0000-0000-0000-0000"
         isSaving={false}
         inherited={false}
+        disableProficiency={false}
         handleSubmit={() => {}}
       />
     );

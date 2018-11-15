@@ -10,11 +10,9 @@
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader } from 'cx-ui-components';
-import { InputField } from 'cx-ui-components';
-import { ToggleField } from 'cx-ui-components';
+import { DetailHeader, InputField, ToggleField } from 'cx-ui-components';
 
-export default function SkillsForm({ handleSubmit, isSaving, inherited, key }) {
+export default function SkillsForm({ handleSubmit, isSaving, inherited, key, disableProficiency }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
@@ -39,7 +37,12 @@ export default function SkillsForm({ handleSubmit, isSaving, inherited, key }) {
           name="hasProficiency"
           label="Has Proficiency"
           id="frm-skills-has-proficiency"
-          disabled={isSaving || inherited}
+          title={
+            disableProficiency
+              ? "You cannot update 'Has Proficiency' once is set to true"
+              : 'Controls whether the skill needs a value specified'
+          }
+          disabled={isSaving || inherited || disableProficiency}
         />
       </Fragment>
     </form>
@@ -50,5 +53,6 @@ SkillsForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool
+  inherited: PropTypes.bool,
+  disableProficiency: PropTypes.bool
 };

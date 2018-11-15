@@ -3,11 +3,17 @@
  */
 
 import React from 'react';
+import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import SkillsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isInherited, isCreating } from '../../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isInherited,
+  isCreating,
+  userHasUpdatePermission
+} from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -16,7 +22,16 @@ getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isInherited.mockImplementation(() => false);
 isCreating.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
+userHasUpdatePermission.mockImplementation(() => true);
+selectFormInitialValues.mockImplementation(
+  () =>
+    new Map({
+      id: 'mockId',
+      name: 'mockName',
+      active: true,
+      hasProficiency: false
+    })
+);
 
 describe('Skills Renders', () => {
   it('renders', () => {
