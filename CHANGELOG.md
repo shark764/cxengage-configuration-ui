@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.14] - 2018-11-16
+### Fixed
+- Users can be added to DAC only if they have ASSIGNED_REPORTS_READ permissions
+### Added
+- Function in Users selector, so you can pass an array of permissions to selectAvailableEntityMembersForList to get only the users that have one or more permissions.
+
 ## [0.37.13] - 2018-11-16
 ### Changed
 - Version bump component library to 0.29.9

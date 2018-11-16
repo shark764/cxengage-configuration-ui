@@ -401,7 +401,9 @@ entities.dataAccessReports.updateFormDependencies = [
   ...entities.dataAccessReports.updateFormDependencies,
   'users',
   'historicalReportFolders',
-  'dashboards'
+  'dashboards',
+  'roles',
+  'permissions'
 ];
 entities.dataAccessReports.dependentEntity = 'users';
 entities.dataAccessReports.modalListTableFields = [

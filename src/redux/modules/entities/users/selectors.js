@@ -3,6 +3,8 @@
  */
 import { createSelector } from 'reselect';
 import { getCurrentForm } from '../../form/selectors';
+import { getRoles } from '../roles/selectors';
+import { getAllPermissions } from '../permissions/selectors';
 import { getEntityListMembers, availableEntityMembersForList } from '../../entities/listItemSelectors';
 
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
@@ -18,6 +20,21 @@ export const selectNonDisabledUsers = createSelector([getUsers], users => {
         }))
     : undefined;
 });
+
+export const filterUsersByPermissions = (state, users, permissionNames) => {
+  const allRoles = getRoles(state)
+    .get('data')
+    .toJS();
+  const allPermissions = getAllPermissions(state).toJS();
+  const permissionIds = allPermissions.filter(perm => permissionNames.includes(perm.name)).map(item => item.id);
+
+  return users.filter(
+    user =>
+      allRoles[allRoles.findIndex(role => role.id === user.roleId)].permissions.filter(perm =>
+        permissionIds.includes(perm)
+      ).length === permissionIds.length
+  );
+};
 
 export const getDisplay = data => {
   if (data.firstName || data.lastName) {
@@ -47,10 +64,19 @@ export const selectEntityListMembers = state =>
     lastName: user.lastName !== null ? user.lastName : ''
   }));
 
-export const selectAvailableEntityMembersForList = (state, dependentEntity, currentEntity) =>
-  availableEntityMembersForList(state, dependentEntity, currentEntity).map(user => ({
+export const selectAvailableEntityMembersForList = (state, dependentEntity, currentEntity, permissions) => {
+  const usersMap =
+    permissions === undefined
+      ? availableEntityMembersForList(state, dependentEntity, currentEntity)
+      : filterUsersByPermissions(
+          state,
+          availableEntityMembersForList(state, dependentEntity, currentEntity),
+          permissions
+        );
+  return usersMap.map(user => ({
     ...user,
     name: getDisplay(user),
     firstName: user.firstName !== null ? user.firstName : '',
     lastName: user.lastName !== null ? user.lastName : ''
   }));
+};

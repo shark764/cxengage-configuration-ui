@@ -326,6 +326,8 @@ Object {
       "users",
       "historicalReportFolders",
       "dashboards",
+      "roles",
+      "permissions",
     ],
   },
   "emailTemplates": EntityMetaData {

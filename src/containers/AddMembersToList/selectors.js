@@ -22,7 +22,7 @@ export const selectSidePanelTableItems = (state, currentEntity) => {
       return availableEntityMembersForList(state, dependentEntity, currentEntity);
     }
     case 'dataAccessReports': {
-      return selectAvailableEntityMembersForList(state, dependentEntity, currentEntity);
+      return selectAvailableEntityMembersForList(state, dependentEntity, currentEntity, ['ASSIGNED_REPORTS_READ']);
     }
     default:
       break;
