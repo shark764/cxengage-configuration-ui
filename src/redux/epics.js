@@ -5,6 +5,7 @@ import * as columnFiltersEpics from './modules/columnFilterMenus/epics';
 import * as interactionMonitoringEpics from './modules/reporting/interactionMonitoring/epics';
 import * as supervisorToolbarEpics from './modules/supervisorToolbar/epics';
 import * as emailTemplatesEpics from './modules/entities/emailTemplates/epics';
+import * as usersEpics from './modules/entities/users/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -12,5 +13,6 @@ export const rootEpic = combineEpics(
   ...Object.values(entitiesEpics),
   ...Object.values(columnFiltersEpics),
   ...Object.values(supervisorToolbarEpics),
-  ...Object.values(emailTemplatesEpics)
+  ...Object.values(emailTemplatesEpics),
+  ...Object.values(usersEpics)
 );

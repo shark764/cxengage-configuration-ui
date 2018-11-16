@@ -2,12 +2,6 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "flowIds": Array [
-    Object {
-      "label": "mockLabel",
-      "value": "mockValue",
-    },
-  ],
   "initialValues": Object {
     "active": true,
   },

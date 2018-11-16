@@ -9,7 +9,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Details"
+        text="Platform Details"
       />
       <InputField
         componentType="input"
@@ -35,6 +35,13 @@ exports[`<UsersForm /> renders create user 1`] = `
         label="External ID"
         name="externalId"
       />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
       <InputField
         componentType="input"
         disabled={false}
@@ -43,12 +50,20 @@ exports[`<UsersForm /> renders create user 1`] = `
         label="Workstation ID"
         name="workStationId"
       />
+      <SelectField
+        disabled={false}
+        id="frm-users-role-id"
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
+      />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
     >
       <Styled(DetailHeader)
-        text="Login"
+        text="Login Details"
       />
       <InputField
         componentType="input"
@@ -58,27 +73,43 @@ exports[`<UsersForm /> renders create user 1`] = `
         label="Email"
         name="email"
       />
-      <SelectField
-        disabled={false}
-        id="frm-users-platform-role-id"
-        label="Platform Role *"
-        name="platformRoleId"
-        options={Array []}
-        required={true}
+      <InputField
+        componentType="input"
+        disabled={true}
+        id="frm-users-platform-status"
+        inputType="text"
+        label="Platform Status"
+        name="platformStatus"
       />
       <SelectField
         disabled={false}
-        id="frm-users-role-id"
-        label="Tenant Role *"
-        name="roleId"
-        options={Array []}
-        required={true}
+        id="frm-users-no-password-id"
+        label="Platform Authentication"
+        name="noPassword"
+        options={
+          Array [
+            Object {
+              "label": "Use Tenant Default: Enabled",
+              "value": "null",
+            },
+            Object {
+              "label": "Enabled",
+              "value": true,
+            },
+            Object {
+              "label": "Disabled",
+              "value": false,
+            },
+          ]
+        }
+        required={false}
       />
-      <ToggleField
+      <SelectField
         disabled={false}
-        id="frm-users-invite-now"
-        label="Invite Now"
-        name="inviteNow"
+        id="frm-users-default-identity-provider-id"
+        label="Single Sign On Identitiy Provider"
+        name="defaultIdentityProvider"
+        required={false}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -94,7 +125,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Details"
+        text="Platform Details"
       />
       <InputField
         componentType="input"
@@ -120,6 +151,13 @@ exports[`<UsersForm /> renders update user 1`] = `
         label="External ID"
         name="externalId"
       />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
       <InputField
         componentType="input"
         disabled={false}
@@ -128,12 +166,20 @@ exports[`<UsersForm /> renders update user 1`] = `
         label="Workstation ID"
         name="workStationId"
       />
+      <SelectField
+        disabled={false}
+        id="frm-users-role-id"
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
+      />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
     >
       <Styled(DetailHeader)
-        text="Login"
+        text="Login Details"
       />
       <InputField
         componentType="input"
@@ -143,27 +189,43 @@ exports[`<UsersForm /> renders update user 1`] = `
         label="Email"
         name="email"
       />
-      <SelectField
-        disabled={false}
-        id="frm-users-platform-role-id"
-        label="Platform Role *"
-        name="platformRoleId"
-        options={Array []}
-        required={true}
+      <InputField
+        componentType="input"
+        disabled={true}
+        id="frm-users-platform-status"
+        inputType="text"
+        label="Platform Status"
+        name="platformStatus"
       />
       <SelectField
         disabled={false}
-        id="frm-users-role-id"
-        label="Tenant Role *"
-        name="roleId"
-        options={Array []}
-        required={true}
+        id="frm-users-no-password-id"
+        label="Platform Authentication"
+        name="noPassword"
+        options={
+          Array [
+            Object {
+              "label": "Use Tenant Default: Enabled",
+              "value": "null",
+            },
+            Object {
+              "label": "Enabled",
+              "value": true,
+            },
+            Object {
+              "label": "Disabled",
+              "value": false,
+            },
+          ]
+        }
+        required={false}
       />
-      <ToggleField
+      <SelectField
         disabled={false}
-        id="frm-users-invite-now"
-        label="Invite Now"
-        name="inviteNow"
+        id="frm-users-default-identity-provider-id"
+        label="Single Sign On Identitiy Provider"
+        name="defaultIdentityProvider"
+        required={false}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -179,7 +241,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Details"
+        text="Platform Details"
       />
       <InputField
         componentType="input"
@@ -205,6 +267,13 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         label="External ID"
         name="externalId"
       />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
       <InputField
         componentType="input"
         disabled={true}
@@ -213,12 +282,20 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         label="Workstation ID"
         name="workStationId"
       />
+      <SelectField
+        disabled={true}
+        id="frm-users-role-id"
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
+      />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
     >
       <Styled(DetailHeader)
-        text="Login"
+        text="Login Details"
       />
       <InputField
         componentType="input"
@@ -228,27 +305,43 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         label="Email"
         name="email"
       />
-      <SelectField
+      <InputField
+        componentType="input"
         disabled={true}
-        id="frm-users-platform-role-id"
-        label="Platform Role *"
-        name="platformRoleId"
-        options={Array []}
-        required={true}
+        id="frm-users-platform-status"
+        inputType="text"
+        label="Platform Status"
+        name="platformStatus"
       />
       <SelectField
         disabled={true}
-        id="frm-users-role-id"
-        label="Tenant Role *"
-        name="roleId"
-        options={Array []}
-        required={true}
+        id="frm-users-no-password-id"
+        label="Platform Authentication"
+        name="noPassword"
+        options={
+          Array [
+            Object {
+              "label": "Use Tenant Default: Enabled",
+              "value": "null",
+            },
+            Object {
+              "label": "Enabled",
+              "value": true,
+            },
+            Object {
+              "label": "Disabled",
+              "value": false,
+            },
+          ]
+        }
+        required={false}
       />
-      <ToggleField
+      <SelectField
         disabled={true}
-        id="frm-users-invite-now"
-        label="Invite Now"
-        name="inviteNow"
+        id="frm-users-default-identity-provider-id"
+        label="Single Sign On Identitiy Provider"
+        name="defaultIdentityProvider"
+        required={false}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -264,7 +357,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Details"
+        text="Platform Details"
       />
       <InputField
         componentType="input"
@@ -290,6 +383,13 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         label="External ID"
         name="externalId"
       />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
       <InputField
         componentType="input"
         disabled={true}
@@ -298,12 +398,20 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         label="Workstation ID"
         name="workStationId"
       />
+      <SelectField
+        disabled={true}
+        id="frm-users-role-id"
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
+      />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
     >
       <Styled(DetailHeader)
-        text="Login"
+        text="Login Details"
       />
       <InputField
         componentType="input"
@@ -313,27 +421,43 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         label="Email"
         name="email"
       />
-      <SelectField
+      <InputField
+        componentType="input"
         disabled={true}
-        id="frm-users-platform-role-id"
-        label="Platform Role *"
-        name="platformRoleId"
-        options={Array []}
-        required={true}
+        id="frm-users-platform-status"
+        inputType="text"
+        label="Platform Status"
+        name="platformStatus"
       />
       <SelectField
         disabled={true}
-        id="frm-users-role-id"
-        label="Tenant Role *"
-        name="roleId"
-        options={Array []}
-        required={true}
+        id="frm-users-no-password-id"
+        label="Platform Authentication"
+        name="noPassword"
+        options={
+          Array [
+            Object {
+              "label": "Use Tenant Default: Enabled",
+              "value": "null",
+            },
+            Object {
+              "label": "Enabled",
+              "value": true,
+            },
+            Object {
+              "label": "Disabled",
+              "value": false,
+            },
+          ]
+        }
+        required={false}
       />
-      <ToggleField
+      <SelectField
         disabled={true}
-        id="frm-users-invite-now"
-        label="Invite Now"
-        name="inviteNow"
+        id="frm-users-default-identity-provider-id"
+        label="Single Sign On Identitiy Provider"
+        name="defaultIdentityProvider"
+        required={false}
       />
     </Connect(DetailWrapper)>
   </styled.div>

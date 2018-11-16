@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.12] - 2018-11-15
+### Fixed
+- Can now update all users fields in update users form
+- Can now toggle users tenant status on user update / create form
+
 ## [0.37.11] - 2018-11-14
 ### Changed
 - Version bump component library to 0.29.8

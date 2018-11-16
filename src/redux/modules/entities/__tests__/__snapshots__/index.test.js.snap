@@ -80,7 +80,10 @@ Immutable.Map {
     "data": Immutable.List [
       Immutable.Map {
         "id": "mockId",
-        undefined: undefined,
+        "0": Immutable.Map {
+          "mockEntityId": "mock entity id",
+        },
+        "updating": false,
       },
     ],
   },
@@ -279,7 +282,7 @@ Immutable.Map {
 exports[`entities reducer returns the correct initial state 1`] = `
 Immutable.Map {
   "skills": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -303,7 +306,7 @@ Immutable.Map {
     ],
   },
   "permissions": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -318,20 +321,26 @@ Immutable.Map {
       "MANAGE_TENANT_ENROLLMENT",
     ],
   },
+  "identityProviders": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+  },
   "flows": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
   },
   "historicalReportFolders": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
   },
   "users": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -356,13 +365,13 @@ Immutable.Map {
     ],
   },
   "platformRoles": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
   },
   "dataAccessReports": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -380,7 +389,7 @@ Immutable.Map {
     ],
   },
   "customMetrics": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -393,7 +402,7 @@ Immutable.Map {
     "createPermission": Immutable.List [],
   },
   "groups": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -424,7 +433,7 @@ Immutable.Map {
     "readPermission": Immutable.List [
       "VIEW_ALL_LISTS",
     ],
-    "data": undefined,
+    "data": Immutable.List [],
     "createPermission": Immutable.List [
       "MANAGE_ALL_LISTS",
     ],
@@ -440,7 +449,7 @@ Immutable.Map {
     "readPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_READ",
     ],
-    "data": undefined,
+    "data": Immutable.List [],
     "createPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_CREATE",
     ],
@@ -462,7 +471,7 @@ Immutable.Map {
     "readPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_READ",
     ],
-    "data": undefined,
+    "data": Immutable.List [],
     "createPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_CREATE",
     ],
@@ -485,7 +494,7 @@ Immutable.Map {
     ],
   },
   "listTypes": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -495,7 +504,7 @@ Immutable.Map {
     "readPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_READ",
     ],
-    "data": undefined,
+    "data": Immutable.List [],
     "createPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_CREATE",
     ],
@@ -516,7 +525,7 @@ Immutable.Map {
     ],
   },
   "roles": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -536,7 +545,7 @@ Immutable.Map {
     ],
   },
   "emailTemplates": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
@@ -549,7 +558,7 @@ Immutable.Map {
     ],
   },
   "dashboards": Immutable.Map {
-    "data": undefined,
+    "data": Immutable.List [],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,

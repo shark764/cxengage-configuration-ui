@@ -1,2 +1,2 @@
 export const hasCustomUpdateEntity = entityName =>
-  !['emailTemplates'].includes(entityName);
+  !['emailTemplates', 'users'].includes(entityName);

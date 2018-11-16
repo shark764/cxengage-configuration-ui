@@ -29,6 +29,7 @@ import RolesForm from '../Form/Roles';
 import SkillsForm from '../Form/Skills';
 import GroupsForm from '../Form/Groups';
 import UsersForm from '../Form/Users';
+import UsersCreateForm from '../Form/Users/Create';
 import DataAccessReportsForm from '../Form/DataAccessReports';
 //hygen-inject-before3
 
@@ -151,7 +152,7 @@ const createFormRoutes = [
     path: '/configuration/users',
     component: () => (
       <DetailsPanel>
-        <UsersForm />
+        <UsersCreateForm />
       </DetailsPanel>
     )
   },
