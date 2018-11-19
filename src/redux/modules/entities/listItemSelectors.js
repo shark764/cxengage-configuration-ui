@@ -22,9 +22,8 @@ export const getDependantEntityTableItems = state =>
     : [];
 
 export const getSidePanelTableItems = (state, entityName) => {
-  const requestedIds = getSelectedEntity(state)
-    .getIn([entityName], new List([]))
-    .toJS();
+  const selectedEntity = getSelectedEntity(state);
+  const requestedIds = selectedEntity && selectedEntity.getIn([entityName], new List([])).toJS();
   const requestedItems = state.getIn(['Entities', entityName, 'data'], new List([]));
   if (requestedItems !== undefined) {
     return requestedItems.toJS().filter(member => requestedIds.includes(member.id));

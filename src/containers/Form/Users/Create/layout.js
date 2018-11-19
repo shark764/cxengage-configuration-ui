@@ -28,8 +28,6 @@ export default function UsersForm({
   platformRoles,
   tenantRoles,
   tenantIdentityProviders,
-  status,
-  scenario,
   isSaving,
   userHasUpdatePermission,
   key
@@ -41,7 +39,7 @@ export default function UsersForm({
           <WrappedDetailHeader text="Platform Details" />
           <InputField
             name="firstName"
-            label="First Name *"
+            label="First Name"
             id="frm-users-first-name"
             componentType="input"
             inputType="text"
@@ -49,7 +47,7 @@ export default function UsersForm({
           />
           <InputField
             name="lastName"
-            label="Last Name *"
+            label="Last Name"
             id="frm-users-last-name"
             componentType="input"
             inputType="text"
@@ -82,19 +80,31 @@ export default function UsersForm({
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantRoles}
           />
-          {status !== 'invited' && (
-            <ToggleField
-              name="inviteNow"
-              label="Invite Now"
-              id="frm-users-invite-now"
-              disabled={isSaving || !userHasUpdatePermission}
-            />
-          )}
+          <ToggleField
+            name="inviteNow"
+            label="Invite Now"
+            id="frm-users-invite-now"
+            disabled={isSaving || !userHasUpdatePermission}
+          />
+          
         </DetailWrapper>
 
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Login Details" />
-          <InputField name="email" label="Email" id="frm-users-email" componentType="input" inputType="text" />
+          <InputField 
+            name="email"
+            label="Email *"
+            id="frm-users-email"
+            componentType="input"
+            inputType="text"
+          />
+          <SelectField
+            name="platformRoleId"
+            label="Platform Role *"
+            id="frm-users-platform-role-id"
+            disabled={isSaving || !userHasUpdatePermission}
+            options={platformRoles}
+          />
           <SelectField
             name="noPassword"
             label="Platform Authentication"
@@ -123,7 +133,6 @@ UsersForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
   platformRoles: PropTypes.arrayOf(
     PropTypes.shape({
@@ -142,7 +151,5 @@ UsersForm.propTypes = {
       label: PropTypes.string,
       value: PropTypes.string.isRequired
     })
-  ),
-  status: PropTypes.string,
-  scenario: PropTypes.string
+  )
 };

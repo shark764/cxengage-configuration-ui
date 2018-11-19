@@ -17,7 +17,6 @@ Immutable.Map {
         "mockData": Immutable.Map {},
       },
     ],
-    "selectedEntityId": undefined,
     "creating": false,
   },
 }

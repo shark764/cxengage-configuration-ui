@@ -191,6 +191,7 @@ export const getTenantPermissions = action$ =>
 export const CreateEntity = action$ =>
   action$
     .ofType('CREATE_ENTITY')
+    .filter(a => a.entityName !== 'users')
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
       a.sdkCall.data = a.values;
@@ -207,6 +208,14 @@ export const CreateEntity = action$ =>
         )
         .catch(error => handleError(error, a))
     );
+
+export const CreateEntityFullfilled = action$ =>
+  action$
+    .ofType('CREATE_ENTITY_FULFILLED','COPY_CURRENT_ENTITY_FULFILLED')
+    .map(a => ({
+      type: 'SET_SELECTED_ENTITY_ID',
+      entityId:  a.response.result.id || a.response.result.userId
+    }));
 
 export const CopyEntity = (action$, store) =>
   action$

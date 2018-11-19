@@ -3,6 +3,7 @@ import { removeLastLetter, camelCaseToRegularFormAndRemoveLastLetter } from 'ser
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity } from '../selectors';
+import { entitiesMetaData } from '../metaData';
 
 export const UpdateUserEntity = action$ =>
   action$
@@ -58,7 +59,6 @@ export const UpdatePlatformUserEntity = action$ =>
         firstName: a.values.firstName,
         lastName: a.values.lastName,
         externalId: a.values.externalId,
-        personalTelephone: a.values.personalTelephone
       };
 
       if (filterValues.externalId === null) {
@@ -139,3 +139,53 @@ export const ToggleUserEntity = (action$, store) =>
         )
         .catch(error => handleError(error, a))
     );
+
+
+export const CreateEntity = action$ =>
+  action$
+    .ofType('CREATE_ENTITY')
+    .filter(a => a.entityName === 'users')
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
+      const filteredValues =  {
+        firsName: a.values.firstName,
+        lastName: a.values.lastName,
+        externalId: a.values.externalId,
+        workStationId: a.values.workStationId,
+        roleId: a.values.roleId,
+        platformRoleId: a.values.platformRoleId,
+        inviteNow: a.values.inviteNow,
+        email: a.values.email,
+        noPassword: a.values.noPassword === 'null' ? null : a.values.noPassword,
+        defaultIdentityProvider: a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider
+      }
+      a.sdkCall.data = filteredValues;
+      return { ...a };
+    })
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`
+          )
+        )
+        .catch(error => handleError(error, a))
+    );
+
+
+export const ConvertNullsForSelectFields = action$ =>
+  action$
+    .ofType('SET_SELECTED_ENTITY_ID_FULFILLED')
+    .filter(a => a.entityName === 'users')
+    .map(a => {
+      if(a.response.result.noPassword === null) {
+        a.response.result.noPassword = 'null'
+      }
+      if(a.response.result.defaultIdentityProvider === null) {
+        a.response.result.defaultIdentityProvider = 'null'
+      }
+      a.type = 'CONVERT_NULLS_FOR_SELECT_FIELDS';
+      return {...a};
+    })

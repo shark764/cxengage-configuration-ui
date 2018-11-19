@@ -310,6 +310,7 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_DATA_REJECTED': {
       return state.setIn([action.entityName, 'data'], new List());
     }
+    case 'CONVERT_NULLS_FOR_SELECT_FIELDS':
     case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {
       const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === action.id);
@@ -334,8 +335,8 @@ export default function reducer(state = initialState, action) {
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ bulkChangeItem: action.bool }))
           .setIn([action.entityName, 'selectedEntityId'], 'bulk');
       } else if (entityIndex !== -1) {
-        return state
-          .mergeIn(
+        return state  
+        .mergeIn(
             [action.entityName, 'data', entityIndex],
             fromJS({
               bulkChangeItem: !state.getIn([action.entityName, 'data', entityIndex, 'bulkChangeItem'], false)
@@ -355,7 +356,6 @@ export default function reducer(state = initialState, action) {
       return state.update(action.entityName, entityStore =>
         entityStore
           .update('data', data => data.push(fromJS(result)))
-          .set('selectedEntityId', result.id)
           .set('creating', false)
       );
     }

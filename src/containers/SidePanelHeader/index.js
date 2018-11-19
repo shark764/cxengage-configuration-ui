@@ -50,7 +50,7 @@ export function mapStateToProps(state) {
     const dateCreated = moment(selectedEntity.get('created')).format('lll');
     const dateUpdated = moment(selectedEntity.get('updated')).format('lll');
     return {
-      title: selectedEntity.get('name') || `${selectedEntity.get('firstName')} ${selectedEntity.get('lastName')}`,
+      title: selectedEntity.get('name') || selectedEntity.get('firstName')? `${selectedEntity.get('firstName')} ${selectedEntity.get('lastName')}` : selectedEntity.get('email'),
       createdAt: `Created on ${dateCreated}`,
       updatedAt: `Updated on ${dateUpdated}`,
       // We convert both values to boolean since each entity could have
