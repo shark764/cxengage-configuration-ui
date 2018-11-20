@@ -20,6 +20,7 @@ import {
   isInherited,
   getSelectedEntityBulkChangeItems
 } from '../../redux/modules/entities/selectors';
+import { getDisplay } from '../../redux/modules/entities/users/selectors';
 
 export function mapDispatchToProps(dispatch, ownProps) {
   let actions = {};
@@ -50,7 +51,7 @@ export function mapStateToProps(state) {
     const dateCreated = moment(selectedEntity.get('created')).format('lll');
     const dateUpdated = moment(selectedEntity.get('updated')).format('lll');
     return {
-      title: selectedEntity.get('name') || selectedEntity.get('firstName')? `${selectedEntity.get('firstName')} ${selectedEntity.get('lastName')}` : selectedEntity.get('email'),
+      title: selectedEntity.get('name') || getDisplay(selectedEntity.toJS()),
       createdAt: `Created on ${dateCreated}`,
       updatedAt: `Updated on ${dateUpdated}`,
       // We convert both values to boolean since each entity could have
