@@ -9,13 +9,11 @@ import UsersForm from './layout';
 import { formValidation } from '../validation';
 import {
   getSelectedEntityId,
-  isInherited,
   isCreating,
   userHasUpdatePermission
 } from '../../../../redux/modules/entities/selectors';
 import { onFormSubmit } from '../../../../redux/modules/entities';
 import { selectFormInitialValues, createFormName } from '../../../../redux/modules/form/selectors';
-import { getUserTenantStatus, getInvitationScenario } from '../../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
 
@@ -35,11 +33,8 @@ export function mapStateToProps(state) {
     platformRoles: selectPlatformRoles(state),
     tenantRoles: selectTenantRoles(state),
     tenantIdentityProviders: selectTenantIdentityProviders(state),
-    status: getUserTenantStatus(state),
-    scenario: getInvitationScenario(state),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
-    inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state)
   };

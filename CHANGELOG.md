@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.15] - 2018-11-20
+### Fixed
+- Create user form page bugs.
+
 ## [0.37.14] - 2018-11-16
 ### Fixed
 - Users can be added to DAC only if they have ASSIGNED_REPORTS_READ permissions
