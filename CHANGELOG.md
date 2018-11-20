@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.16] - 2018-11-20
+### Fixed
+- Name of entity displayed on header was showing undefined.
+
 ## [0.37.15] - 2018-11-20
 ### Fixed
 - Create user form page bugs.
