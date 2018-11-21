@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.37.17] - 2018-11-21
+### Fixed
+- CXV1-16120 - Upgrading immutable to 4.0.0 was breaking TemplateTextEditorField component.
+
 ## [0.37.16] - 2018-11-20
 ### Fixed
 - Name of entity displayed on header was showing undefined.

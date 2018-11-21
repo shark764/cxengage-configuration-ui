@@ -7,9 +7,7 @@ import UsersDetailsPanel from './layout';
 
 import { userHasUpdatePermission, isInherited } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
-import {
-  getSidePanelTableItems
-} from '../../../redux/modules/entities/listItemSelectors';
+import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
 export function mapStateToProps(state, props) {
@@ -19,7 +17,7 @@ export function mapStateToProps(state, props) {
     skillsItems: getSidePanelTableItems(state, 'skills'),
     skillsFields: entitiesMetaData.skills.memberListTableFields,
     groupsItems: getSidePanelTableItems(state, 'groups'),
-    groupsFields: entitiesMetaData.skills.memberListTableFields,
+    groupsFields: entitiesMetaData.groups.memberListTableFields,
     outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
     outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
     reasonListsItems: getSidePanelTableItems(state, 'reasonLists'),
@@ -36,4 +34,4 @@ export const actions = {
   setSelectedSubEntityId
 };
 
-export default connect(mapStateToProps,actions)(UsersDetailsPanel);
+export default connect(mapStateToProps, actions)(UsersDetailsPanel);
