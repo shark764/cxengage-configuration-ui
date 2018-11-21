@@ -13,10 +13,7 @@ import {
   getReportTypeFormValue,
   getRealtimeReportTypeFormValue
 } from '../../../redux/modules/entities/dataAccessReports/selectors';
-import {
-  selectDashboards
-  // selectStandardDashboards
-} from '../../../redux/modules/entities/dashboards/selectors';
+import { selectDashboards, selectStandardDashboards } from '../../../redux/modules/entities/dashboards/selectors';
 import { selectHistoricalReportFolders } from '../../../redux/modules/entities/historicalReportFolders/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
@@ -33,8 +30,7 @@ export function mapStateToProps(state) {
   return {
     reportType: getReportTypeFormValue(state),
     realtimeReportType: getRealtimeReportTypeFormValue(state),
-    standardReports: entitiesMetaData['dataAccessReports'].standardReports,
-    // standardReports: selectStandardDashboards(state),
+    standardReports: selectStandardDashboards(state),
     dashboards: selectDashboards(state),
     folders: selectHistoricalReportFolders(state),
     initialValues: selectFormInitialValues(state),

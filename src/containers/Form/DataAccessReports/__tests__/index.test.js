@@ -9,10 +9,7 @@ import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import DataAccessReportsForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
-import {
-  selectDashboards
-  // selectStandardDashboards
-} from '../../../../redux/modules/entities/dashboards/selectors';
+import { selectDashboards, selectStandardDashboards } from '../../../../redux/modules/entities/dashboards/selectors';
 import { selectHistoricalReportFolders } from '../../../../redux/modules/entities/historicalReportFolders/selectors';
 import { getReportTypeFormValue } from '../../../../redux/modules/entities/dataAccessReports/selectors';
 
@@ -26,7 +23,7 @@ selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 jest.mock('../../../../redux/modules/entities/dashboards/selectors');
 selectDashboards.mockImplementation(() => ['mockName', 'mockName1', 'mockName2']);
-// selectStandardDashboards.mockImplementation(() => ['mockName', 'mockName1', 'mockName2']);
+selectStandardDashboards.mockImplementation(() => ['mockName', 'mockName1', 'mockName2']);
 jest.mock('../../../../redux/modules/entities/historicalReportFolders/selectors');
 selectHistoricalReportFolders.mockImplementation(() => [{ name: 'mockName' }]);
 

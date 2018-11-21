@@ -34,10 +34,11 @@ export const getCustomDashboardByName = (state, reportName) =>
 // Not existing yet, is goint to work when API for
 // standardDashboards is done
 // Required for https://liveops.atlassian.net/browse/CXV1-16111
-export const selectStandardDashboards = createSelector([getStandardDashboards], dashboards =>
-  // dashboards.toJS().map(dashboard => dashboard.name)
-  dashboards.toJS().map(dashboard => dashboard.label)
-);
+// export const selectStandardDashboards = createSelector([getStandardDashboards], dashboards =>
+//   dashboards.toJS().map(dashboard => dashboard.name)
+// );
+export const selectStandardDashboards = state =>
+  entitiesMetaData.dataAccessReports.standardDashboards.map(dashboard => dashboard.label);
 
 // getStandardDashboards is goint to work when API for
 // standardDashboards is done
