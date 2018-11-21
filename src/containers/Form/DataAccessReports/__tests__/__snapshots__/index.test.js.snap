@@ -4,9 +4,9 @@ exports[`DataAccessReports Renders renders 1`] = `
 <Connect(ReduxForm)
   dashboards={
     Array [
-      Object {
-        "name": "mockName",
-      },
+      "mockName",
+      "mockName1",
+      "mockName2",
     ]
   }
   dispatch={[Function]}
@@ -78,9 +78,9 @@ exports[`DataAccessReports Renders renders 1`] = `
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "dashboards": Array [
-    Object {
-      "name": "mockName",
-    },
+    "mockName",
+    "mockName1",
+    "mockName2",
   ],
   "folders": Array [
     Object {

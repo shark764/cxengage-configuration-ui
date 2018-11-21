@@ -6,6 +6,7 @@ import * as interactionMonitoringEpics from './modules/reporting/interactionMoni
 import * as supervisorToolbarEpics from './modules/supervisorToolbar/epics';
 import * as emailTemplatesEpics from './modules/entities/emailTemplates/epics';
 import * as usersEpics from './modules/entities/users/epics';
+import * as dataAccessReportsEpics from './modules/entities/dataAccessReports/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -14,5 +15,6 @@ export const rootEpic = combineEpics(
   ...Object.values(columnFiltersEpics),
   ...Object.values(supervisorToolbarEpics),
   ...Object.values(emailTemplatesEpics),
-  ...Object.values(usersEpics)
+  ...Object.values(usersEpics),
+  ...Object.values(dataAccessReportsEpics)
 );

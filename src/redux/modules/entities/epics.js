@@ -39,7 +39,7 @@ import {
 
 import { entitiesMetaData } from './metaData';
 
-import { hasCustomUpdateEntity } from './config';
+import { hasCustomCreateEntity, hasCustomUpdateEntity } from './config';
 
 import { downloadFile } from 'serenova-js-utils/browser';
 import {
@@ -97,18 +97,6 @@ export const ClearCustomMetricsFormFields = action$ =>
     .ofType('@@redux-form/UNREGISTER_FIELD')
     .filter(a => a.meta.form.includes('customMetrics'))
     .filter(a => a.payload.name.includes('slaAbandonThreshold'))
-    .map(a => clearFields(a.meta.form, false, false, a.payload.name));
-
-export const ClearDataAccessReportsFormFields = action$ =>
-  action$
-    .ofType('@@redux-form/UNREGISTER_FIELD')
-    .filter(a => a.meta.form.includes('dataAccessReports'))
-    .filter(
-      a =>
-        a.payload.name.includes('realtimeReportType') ||
-        a.payload.name.includes('realtimeReportName') ||
-        a.payload.name.includes('historicalCatalogName')
-    )
     .map(a => clearFields(a.meta.form, false, false, a.payload.name));
 
 export const FormSubmission = (action$, store) =>
@@ -188,10 +176,10 @@ export const getTenantPermissions = action$ =>
       }))
     );
 
-export const CreateEntity = action$ =>
+export const CreateEntity = (action$, store) =>
   action$
     .ofType('CREATE_ENTITY')
-    .filter(a => a.entityName !== 'users')
+    .filter(({ entityName }) => hasCustomCreateEntity(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
       a.sdkCall.data = a.values;
@@ -210,12 +198,10 @@ export const CreateEntity = action$ =>
     );
 
 export const CreateEntityFullfilled = action$ =>
-  action$
-    .ofType('CREATE_ENTITY_FULFILLED','COPY_CURRENT_ENTITY_FULFILLED')
-    .map(a => ({
-      type: 'SET_SELECTED_ENTITY_ID',
-      entityId:  a.response.result.id || a.response.result.userId
-    }));
+  action$.ofType('CREATE_ENTITY_FULFILLED', 'COPY_CURRENT_ENTITY_FULFILLED').map(a => ({
+    type: 'SET_SELECTED_ENTITY_ID',
+    entityId: a.response.result.id || a.response.result.userId
+  }));
 
 export const CopyEntity = (action$, store) =>
   action$

@@ -514,6 +514,10 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "standardDashboards": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "outboundIdentifierLists": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [

@@ -499,6 +499,12 @@ Immutable.Map {
     "confirmationDialogType": undefined,
   },
   "currentEntity": "none",
+  "standardDashboards": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+  },
   "outboundIdentifierLists": Immutable.Map {
     "readPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_READ",

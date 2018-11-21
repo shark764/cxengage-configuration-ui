@@ -9,26 +9,21 @@ export const getRoles = state => {
   return state.getIn(['Entities', 'roles'], new Map([]));
 };
 
-export const selectTenantRoles = createSelector([getRoles], roles => {
-  return roles.get('data') !== undefined
-    ? roles
-        .get('data')
-        .toJS()
-        .map(role => ({
-          value: role.id,
-          label: role.name
-        }))
-    : undefined;
-});
+export const selectTenantRoles = createSelector([getRoles], roles =>
+  roles
+    .get('data')
+    .toJS()
+    .map(role => ({
+      value: role.id,
+      label: role.name
+    }))
+);
 
-const getPlatformRoles = state =>
-  state.getIn(['Entities', 'platformRoles', 'data']);
+const getPlatformRoles = state => state.getIn(['Entities', 'platformRoles', 'data']);
 
-export const selectPlatformRoles = createSelector([getPlatformRoles], roles => {
-  return roles !== undefined
-    ? roles.toJS().map(role => ({
-        value: role.id,
-        label: role.name
-      }))
-    : undefined;
-});
+export const selectPlatformRoles = createSelector([getPlatformRoles], roles =>
+  roles.toJS().map(role => ({
+    value: role.id,
+    label: role.name
+  }))
+);
