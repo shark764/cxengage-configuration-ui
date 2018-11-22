@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpdateDataAccessReport dataAccessReports entity sdk promise fails calls toastr error 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "mock error",
+    ],
+  ],
+}
+`;
+
+exports[`UpdateDataAccessReport dataAccessReports entity sdk promise fails returns updateEntityRejected 1`] = `
+Array [
+  Object {
+    "entityId": "mock entity id",
+    "entityName": "dataAccessReports",
+    "sdkCall": Object {
+      "command": "updateDataAccessReport",
+      "data": Object {
+        "dataAccessReportId": "mock entity id",
+        "name": "mockName",
+        "reportType": "mockReportType",
+      },
+      "module": "entities",
+      "topic": "cxengage/entities/update-data-access-report-response",
+    },
+    "type": "UPDATE_ENTITY_REJECTED",
+    "values": Object {
+      "name": "mockName",
+      "reportType": "mockReportType",
+    },
+  },
+]
+`;
+
+exports[`UpdateDataAccessReport dataAccessReports entity update entity calls the correct sdk function 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "command": "updateDataAccessReport",
+        "data": Object {
+          "dataAccessReportId": "mock entity id",
+          "name": "mockName",
+          "reportType": "mockReportType",
+        },
+        "module": "entities",
+        "topic": "cxengage/entities/update-data-access-report-response",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`UpdateDataAccessReport dataAccessReports entity update entity calls toastr success 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "Data Access Report was updated successfully!",
+    ],
+  ],
+}
+`;
+
+exports[`UpdateDataAccessReport dataAccessReports entity update entity returns updateEntityFulfilled 1`] = `
+Array [
+  Object {
+    "entityId": "mock entity id",
+    "entityName": "dataAccessReports",
+    "response": "mock response",
+    "sdkCall": Object {
+      "command": "updateDataAccessReport",
+      "data": Object {
+        "dataAccessReportId": "mock entity id",
+        "name": "mockName",
+        "reportType": "mockReportType",
+      },
+      "module": "entities",
+      "topic": "cxengage/entities/update-data-access-report-response",
+    },
+    "type": "UPDATE_ENTITY_FULFILLED",
+    "values": Object {
+      "name": "mockName",
+      "reportType": "mockReportType",
+    },
+  },
+]
+`;

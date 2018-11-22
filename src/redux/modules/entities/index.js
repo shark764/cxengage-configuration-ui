@@ -164,6 +164,9 @@ const initialState = fromJS({
   dashboards: {
     ...defaultEntity
   },
+  standardDashboards: {
+    ...defaultEntity
+  },
   historicalReportFolders: {
     ...defaultEntity
   },
@@ -335,8 +338,8 @@ export default function reducer(state = initialState, action) {
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ bulkChangeItem: action.bool }))
           .setIn([action.entityName, 'selectedEntityId'], 'bulk');
       } else if (entityIndex !== -1) {
-        return state  
-        .mergeIn(
+        return state
+          .mergeIn(
             [action.entityName, 'data', entityIndex],
             fromJS({
               bulkChangeItem: !state.getIn([action.entityName, 'data', entityIndex, 'bulkChangeItem'], false)
@@ -354,9 +357,7 @@ export default function reducer(state = initialState, action) {
     case 'CREATE_ENTITY_FULFILLED': {
       const { result } = action.response;
       return state.update(action.entityName, entityStore =>
-        entityStore
-          .update('data', data => data.push(fromJS(result)))
-          .set('creating', false)
+        entityStore.update('data', data => data.push(fromJS(result))).set('creating', false)
       );
     }
     case 'CREATE_ENTITY_REJECTED': {

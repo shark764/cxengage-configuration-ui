@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.38.0] - 2018-11-21
+### Changed
+- Adding realtimeReportId to SDK call for Data Access Control
+- Version bump SDK to 8.33.0
+
 ## [0.37.17] - 2018-11-21
 ### Fixed
 - CXV1-16120 - Upgrading immutable to 4.0.0 was breaking TemplateTextEditorField component.
