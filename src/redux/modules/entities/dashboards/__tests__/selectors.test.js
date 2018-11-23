@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 import {
   selectDashboards,
   getCustomDashboardByName,
-  selectStandardDashboards,
+  // selectStandardDashboards,
   getStandardDashboardByName
 } from '../selectors';
 
@@ -95,23 +95,23 @@ describe('getCustomDashboardByName', () => {
   });
 });
 
-describe('selectStandardDashboards', () => {
-  it('should get standard dashboards, then return it mapped and filtered', () => {
-    expect(selectStandardDashboards(initialState)).toEqual([
-      'Agent Details',
-      'Agent State',
-      'Interactions Dashboard',
-      'Interactions Completed',
-      'Interactions in Conversation',
-      'Interactions in Queue',
-      'Interactions in IVR',
-      'Overview Dashboard',
-      'Queues Dashboard',
-      'Queue Details',
-      'Resources Dashboard'
-    ]);
-  });
-});
+// describe('selectStandardDashboards', () => {
+//   it('should get standard dashboards, then return it mapped and filtered', () => {
+//     expect(selectStandardDashboards(initialState)).toEqual([
+//       'Agent Details',
+//       'Agent State',
+//       'Interactions Dashboard',
+//       'Interactions Completed',
+//       'Interactions in Conversation',
+//       'Interactions in Queue',
+//       'Interactions in IVR',
+//       'Overview Dashboard',
+//       'Queues Dashboard',
+//       'Queue Details',
+//       'Resources Dashboard'
+//     ]);
+//   });
+// });
 
 describe('getStandardDashboardByName', () => {
   it('returns standard dashboard id by name given', () => {

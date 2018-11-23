@@ -25,11 +25,19 @@ exports[`DataAccessReports Renders renders 1`] = `
   isSaving={true}
   key="mockId"
   reportType="realtime"
-  standardReports={
+  standardDashboards={
     Array [
-      "mockName",
-      "mockName1",
-      "mockName2",
+      "Agent Details",
+      "Agent State",
+      "Interactions Dashboard",
+      "Interactions Completed",
+      "Interactions in Conversation",
+      "Interactions in Queue",
+      "Interactions in IVR",
+      "Overview Dashboard",
+      "Queues Dashboard",
+      "Queue Details",
+      "Resources Dashboard",
     ]
   }
   store={
@@ -86,10 +94,18 @@ Object {
   "key": "mockId",
   "realtimeReportType": undefined,
   "reportType": "realtime",
-  "standardReports": Array [
-    "mockName",
-    "mockName1",
-    "mockName2",
+  "standardDashboards": Array [
+    "Agent Details",
+    "Agent State",
+    "Interactions Dashboard",
+    "Interactions Completed",
+    "Interactions in Conversation",
+    "Interactions in Queue",
+    "Interactions in IVR",
+    "Overview Dashboard",
+    "Queues Dashboard",
+    "Queue Details",
+    "Resources Dashboard",
   ],
   "userHasUpdatePermission": true,
 }

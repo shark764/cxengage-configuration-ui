@@ -18,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.38.1] - 2018-11-23
+### Fixed
+- realtimeReportId was sending nil value to SDK.
+
+### Changed
+- Getting standardDashboards data was moved to selectors.
+
 ## [0.38.0] - 2018-11-21
 ### Changed
 - Adding realtimeReportId to SDK call for Data Access Control

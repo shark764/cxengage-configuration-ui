@@ -37,8 +37,6 @@ export const getCustomDashboardByName = (state, reportName) =>
 // export const selectStandardDashboards = createSelector([getStandardDashboards], dashboards =>
 //   dashboards.toJS().map(dashboard => dashboard.name)
 // );
-export const selectStandardDashboards = state =>
-  entitiesMetaData.dataAccessReports.standardDashboards.map(dashboard => dashboard.label);
 
 // getStandardDashboards is goint to work when API for
 // standardDashboards is done
