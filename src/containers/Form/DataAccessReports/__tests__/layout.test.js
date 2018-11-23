@@ -18,7 +18,7 @@ describe('<DataAccessReportsForm />', () => {
         realtimeReportName="IVR Interactions"
         folders={[]}
         dashboards={[]}
-        standardReports={[]}
+        standardDashboards={[]}
         isSaving={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
@@ -35,7 +35,7 @@ describe('<DataAccessReportsForm />', () => {
         historicalCatalogName="Visualizations"
         folders={[]}
         dashboards={[]}
-        standardReports={[]}
+        standardDashboards={[]}
         isSaving={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
@@ -54,7 +54,7 @@ describe('<DataAccessReportsForm />', () => {
         id="0000-0000-0000-0000-0000"
         folders={[]}
         dashboards={[]}
-        standardReports={[]}
+        standardDashboards={[]}
         isSaving={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
@@ -73,7 +73,7 @@ describe('<DataAccessReportsForm />', () => {
         id="0000-0000-0000-0000-0000"
         folders={[]}
         dashboards={[]}
-        standardReports={[]}
+        standardDashboards={[]}
         isSaving={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
@@ -91,7 +91,7 @@ describe('<DataAccessReportsForm />', () => {
         id="0000-0000-0000-0000-0000"
         folders={[]}
         dashboards={[]}
-        standardReports={[]}
+        standardDashboards={[]}
         isSaving={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
@@ -109,7 +109,7 @@ describe('<DataAccessReportsForm />', () => {
         id="0000-0000-0000-0000-0000"
         folders={[]}
         dashboards={[]}
-        standardReports={[]}
+        standardDashboards={[]}
         isSaving={false}
         userHasUpdatePermission={false}
         handleSubmit={() => {}}

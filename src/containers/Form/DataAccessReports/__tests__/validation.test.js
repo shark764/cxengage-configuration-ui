@@ -5,7 +5,7 @@ describe('formValidation', () => {
   let props;
   beforeEach(() => {
     props = {
-      standardReports: ['mockRealtimeReportName'],
+      standardDashboards: ['mockRealtimeReportName'],
       dashboards: ['mockRealtimeReportName'],
       folders: ['mockHistoricalCatalogName']
     };

@@ -13,12 +13,12 @@ export const formValidation = (values, props) => {
   validation.historicalCatalogName =
     isEmpty(values.get('historicalCatalogName')) && 'Please enter an historical catalog name';
 
-  const { dashboards, folders, standardReports } = props;
+  const { dashboards, folders, standardDashboards } = props;
 
   if (values.get('reportType') === 'realtime') {
     if (values.get('realtimeReportType') === 'standard') {
       validation.realtimeReportName =
-        !standardReports.includes(values.get('realtimeReportName')) && 'Please enter a valid realtime report name';
+        !standardDashboards.includes(values.get('realtimeReportName')) && 'Please enter a valid realtime report name';
     } else {
       validation.realtimeReportName =
         !dashboards.includes(values.get('realtimeReportName')) && 'Please enter a valid realtime report name';

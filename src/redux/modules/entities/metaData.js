@@ -432,22 +432,6 @@ entities.dataAccessReports.columns = [
 // TODO: Remove this array since this data is going to be
 // retrieved from API.
 // Required for https://liveops.atlassian.net/browse/CXV1-16111
-entities.dataAccessReports.standardReports = [
-  'Agent Details',
-  'Agent State',
-  'Interactions Dashboard',
-  'Interactions Completed',
-  'Interactions in Conversation',
-  'Interactions in Queue',
-  'Interactions in IVR',
-  'Overview Dashboard',
-  'Queues Dashboard',
-  'Queue Details',
-  'Resources Dashboard'
-];
-// TODO: Remove this array since this data is going to be
-// retrieved from API.
-// Required for https://liveops.atlassian.net/browse/CXV1-16111
 entities.dataAccessReports.standardDashboards = [
   { label: 'Agent Details', value: '8e7c8f83-4ed4-4ab9-942e-dbc66bdb016b' },
   { label: 'Agent State', value: 'b7486897-337d-4e1b-a3c9-1353ce6a4738' },

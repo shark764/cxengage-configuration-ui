@@ -15,6 +15,7 @@ export const ClearDataAccessReportsFormFields = action$ =>
     .filter(
       a =>
         a.payload.name.includes('realtimeReportType') ||
+        a.payload.name.includes('realtimeReportId') ||
         a.payload.name.includes('realtimeReportName') ||
         a.payload.name.includes('historicalCatalogName')
     )
@@ -31,6 +32,8 @@ export const CreateDataAccessReport = (action$, store) =>
         a.values.realtimeReportId = getStandardDashboardByName(store.getState(), realtimeReportName);
       } else if (realtimeReportType === 'custom') {
         a.values.realtimeReportId = getCustomDashboardByName(store.getState(), realtimeReportName);
+      } else {
+        delete a.values.realtimeReportId;
       }
       a.sdkCall.data = a.values;
       return { ...a };
@@ -58,6 +61,8 @@ export const UpdateDataAccessReport = (action$, store) =>
         a.values.realtimeReportId = getStandardDashboardByName(store.getState(), realtimeReportName);
       } else if (realtimeReportType === 'custom') {
         a.values.realtimeReportId = getCustomDashboardByName(store.getState(), realtimeReportName);
+      } else {
+        delete a.values.realtimeReportId;
       }
       a.sdkCall.data = {
         ...a.values,

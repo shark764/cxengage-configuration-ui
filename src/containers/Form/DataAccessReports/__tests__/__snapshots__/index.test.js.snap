@@ -25,7 +25,7 @@ exports[`DataAccessReports Renders renders 1`] = `
   isSaving={true}
   key="mockId"
   reportType="realtime"
-  standardReports={
+  standardDashboards={
     Array [
       "Agent Details",
       "Agent State",
@@ -94,7 +94,7 @@ Object {
   "key": "mockId",
   "realtimeReportType": undefined,
   "reportType": "realtime",
-  "standardReports": Array [
+  "standardDashboards": Array [
     "Agent Details",
     "Agent State",
     "Interactions Dashboard",

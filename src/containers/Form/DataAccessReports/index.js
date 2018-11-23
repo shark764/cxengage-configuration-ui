@@ -33,8 +33,7 @@ export function mapStateToProps(state) {
   return {
     reportType: getReportTypeFormValue(state),
     realtimeReportType: getRealtimeReportTypeFormValue(state),
-    standardReports: entitiesMetaData['dataAccessReports'].standardReports,
-    // standardReports: selectStandardDashboards(state),
+    standardDashboards: entitiesMetaData.dataAccessReports.standardDashboards.map(dashboard => dashboard.label),
     dashboards: selectDashboards(state),
     folders: selectHistoricalReportFolders(state),
     initialValues: selectFormInitialValues(state),
