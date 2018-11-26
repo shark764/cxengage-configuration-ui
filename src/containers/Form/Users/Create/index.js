@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import UsersForm from './layout';
-import { formValidation } from '../validation';
 import {
   getSelectedEntityId,
   isCreating,
@@ -23,7 +22,6 @@ const CreateUsersForm = compose(
     onSubmit: (values, dispatch, props) => {
       return dispatch(onFormSubmit(values, props));
     },
-    validate: formValidation,
     destroyOnUnmount: true
   })
 )(UsersForm);

@@ -1,5 +1,6 @@
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { removeLastLetter, camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
+import { generateUUID } from 'serenova-js-utils/uuid';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity } from '../selectors';
@@ -22,6 +23,23 @@ export const UpdateUserEntity = action$ =>
         noPassword: a.values.noPassword === 'null' ? null : a.values.noPassword,
         defaultIdentityProvider: a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider
       };
+
+      // Users Extensions
+      const modifiedExtensions = [...a.values.extensions];
+      modifiedExtensions.splice(-1, 1);
+      /**
+        1. remove the fake uuid we attached from before
+        2. remove any empty values except description
+        3. return the modified extension
+      **/
+      modifiedExtensions.map(
+        extension =>
+          delete extension.id &&
+          Object.keys(extension).map(key => extension[key] || key === 'description' || delete extension[key]) && {
+            ...extension
+          }
+      );
+      filterValues.extensions = modifiedExtensions;
 
       a.sdkCall.data = {
         updateBody: {
@@ -58,7 +76,7 @@ export const UpdatePlatformUserEntity = action$ =>
       const filterValues = {
         firstName: a.values.firstName,
         lastName: a.values.lastName,
-        externalId: a.values.externalId,
+        externalId: a.values.externalId
       };
 
       if (filterValues.externalId === null) {
@@ -140,14 +158,13 @@ export const ToggleUserEntity = (action$, store) =>
         .catch(error => handleError(error, a))
     );
 
-
 export const CreateEntity = action$ =>
   action$
     .ofType('CREATE_ENTITY')
     .filter(a => a.entityName === 'users')
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
-      const filteredValues =  {
+      const filteredValues = {
         firsName: a.values.firstName,
         lastName: a.values.lastName,
         externalId: a.values.externalId,
@@ -158,7 +175,7 @@ export const CreateEntity = action$ =>
         email: a.values.email,
         noPassword: a.values.noPassword === 'null' ? null : a.values.noPassword,
         defaultIdentityProvider: a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider
-      }
+      };
       a.sdkCall.data = filteredValues;
       return { ...a };
     })
@@ -174,18 +191,29 @@ export const CreateEntity = action$ =>
         .catch(error => handleError(error, a))
     );
 
-
 export const ConvertNullsForSelectFields = action$ =>
   action$
     .ofType('SET_SELECTED_ENTITY_ID_FULFILLED')
     .filter(a => a.entityName === 'users')
     .map(a => {
-      if(a.response.result.noPassword === null) {
-        a.response.result.noPassword = 'null'
+      const emptyListItem = () => ({
+        type: 'pstn',
+        value: '',
+        provider: '',
+        region: '',
+        description: '',
+        id: generateUUID()
+      });
+      a.response.result.extensions = [
+        ...a.response.result.extensions.map(item => ({ ...item, id: generateUUID() })),
+        emptyListItem()
+      ];
+      if (a.response.result.noPassword === null) {
+        a.response.result.noPassword = 'null';
       }
-      if(a.response.result.defaultIdentityProvider === null) {
-        a.response.result.defaultIdentityProvider = 'null'
+      if (a.response.result.defaultIdentityProvider === null) {
+        a.response.result.defaultIdentityProvider = 'null';
       }
       a.type = 'CONVERT_NULLS_FOR_SELECT_FIELDS';
-      return {...a};
-    })
+      return { ...a };
+    });

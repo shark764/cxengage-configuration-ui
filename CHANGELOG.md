@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.39.0] - 2018-11-28
+### Added
+- Ability to create/update/remove users extensions from the users page
+
 ## [0.38.4] - 2018-11-28
 ### Changed
 - Version bump component library to 0.29.10.
