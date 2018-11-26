@@ -9,7 +9,7 @@ import { SidePanelHeader } from 'cx-ui-components';
 
 import * as MODALS from '../ConfirmationDialog/constants.js';
 
-import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
+import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 
 import { unsetSelectedEntityId, setConfirmationDialog, copyCurrentEntity } from '../../redux/modules/entities';
 import {
@@ -39,7 +39,7 @@ export function mapStateToProps(state) {
   const selectedEntityId = getSelectedEntityId(state);
   if (selectedEntityId && selectedEntityId === 'create') {
     return {
-      title: `Creating New ${capitalizeFirstLetter(getCurrentEntity(state)).slice(0, -1)}`
+      title: `Creating New ${entitiesMetaData[getCurrentEntity(state)].title}`
     };
   } else if (selectedEntityId && selectedEntityId === 'bulk') {
     return {

@@ -23,11 +23,11 @@ const initialState = fromJS({
       data: [
         { label: 'Agent Details Table', value: '8e7c8f83-4ed4-4ab9-942e-dbc66bdb016b' },
         { label: 'Agent State Table', value: 'b7486897-337d-4e1b-a3c9-1353ce6a4738' },
-        { label: 'Interactions Dashboard', value: '26a076ea-7dd7-4a61-bbdf-f2734a7a3b28' },
         { label: 'Interactions Completed Table', value: 'e19680cb-bee2-422b-961d-09a5479ec466' },
+        { label: 'Interactions Dashboard', value: '26a076ea-7dd7-4a61-bbdf-f2734a7a3b28' },
         { label: 'Interactions In Conversation Table', value: '5bceb39e-a4f9-41f1-b56f-8ecf0daf2844' },
-        { label: 'Interactions In Queue Table', value: 'b00de9cc-645e-48c1-9248-2270224fc054' },
         { label: 'Interactions In IVR Table', value: 'bed51612-8168-4488-99df-2100d66f8095' },
+        { label: 'Interactions In Queue Table', value: 'b00de9cc-645e-48c1-9248-2270224fc054' },
         { label: 'Overview Dashboard', value: '1a861841-628b-4e4b-892c-5fbb178dfd3a' },
         { label: 'Queues Dashboard', value: '5f08bfde-3a79-4aa3-8586-42a1a03ffa90' },
         { label: 'Queue Details Table', value: '1c6a29a9-6020-4543-82f8-490728e53876' },
