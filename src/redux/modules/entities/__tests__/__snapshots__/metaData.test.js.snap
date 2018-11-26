@@ -50,6 +50,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Brandin",
     "updateFormDependencies": Array [],
   },
   "chatWidgets": EntityMetaData {
@@ -113,6 +114,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Chat Widget",
     "updateFormDependencies": Array [],
   },
   "customMetrics": EntityMetaData {
@@ -180,6 +182,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Custom Metric",
     "updateFormDependencies": Array [],
   },
   "dashboards": EntityMetaData {
@@ -230,6 +233,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Dashboard",
     "updateFormDependencies": Array [],
   },
   "dataAccessReports": EntityMetaData {
@@ -318,24 +322,24 @@ Object {
         "value": "b7486897-337d-4e1b-a3c9-1353ce6a4738",
       },
       Object {
-        "label": "Interactions Dashboard",
-        "value": "26a076ea-7dd7-4a61-bbdf-f2734a7a3b28",
-      },
-      Object {
         "label": "Interactions Completed Table",
         "value": "e19680cb-bee2-422b-961d-09a5479ec466",
+      },
+      Object {
+        "label": "Interactions Dashboard",
+        "value": "26a076ea-7dd7-4a61-bbdf-f2734a7a3b28",
       },
       Object {
         "label": "Interactions In Conversation Table",
         "value": "5bceb39e-a4f9-41f1-b56f-8ecf0daf2844",
       },
       Object {
-        "label": "Interactions In Queue Table",
-        "value": "b00de9cc-645e-48c1-9248-2270224fc054",
-      },
-      Object {
         "label": "Interactions In IVR Table",
         "value": "bed51612-8168-4488-99df-2100d66f8095",
+      },
+      Object {
+        "label": "Interactions In Queue Table",
+        "value": "b00de9cc-645e-48c1-9248-2270224fc054",
       },
       Object {
         "label": "Overview Dashboard",
@@ -355,6 +359,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Access Controlled Report",
     "updateFormDependencies": Array [
       "users",
       "historicalReportFolders",
@@ -420,6 +425,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Email Template",
     "updateFormDependencies": Array [],
   },
   "flows": EntityMetaData {
@@ -470,6 +476,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Flow",
     "updateFormDependencies": Array [],
   },
   "groups": EntityMetaData {
@@ -575,6 +582,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Group",
     "updateFormDependencies": Array [
       "users",
     ],
@@ -627,6 +635,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Historical Report Folder",
     "updateFormDependencies": Array [],
   },
   "identityProviders": EntityMetaData {
@@ -677,6 +686,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Identity Provider",
     "updateFormDependencies": Array [],
   },
   "interactionMonitoring": EntityMetaData {
@@ -784,6 +794,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Interaction Monitorin",
     "updateFormDependencies": Array [],
   },
   "listTypes": EntityMetaData {
@@ -834,6 +845,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "List Type",
     "updateFormDependencies": Array [],
   },
   "lists": EntityMetaData {
@@ -899,6 +911,7 @@ Object {
       },
     ],
     "subEntityName": "listItems",
+    "title": "List",
     "updateFormDependencies": Array [],
   },
   "messageTemplates": EntityMetaData {
@@ -980,6 +993,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Message Template",
     "updateFormDependencies": Array [],
   },
   "outboundIdentifierLists": EntityMetaData {
@@ -1065,6 +1079,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Outbound Identifier List",
     "updateFormDependencies": Array [
       "outboundIdentifiers",
     ],
@@ -1140,6 +1155,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Outbound Identifier",
     "updateFormDependencies": Array [
       "flows",
     ],
@@ -1192,6 +1208,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Permission",
     "updateFormDependencies": Array [],
   },
   "platformRoles": EntityMetaData {
@@ -1242,6 +1259,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Platform Role",
     "updateFormDependencies": Array [],
   },
   "protectedBranding": EntityMetaData {
@@ -1292,6 +1310,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Protected Brandin",
     "updateFormDependencies": Array [],
   },
   "reasonLists": EntityMetaData {
@@ -1365,6 +1384,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Reason List",
     "updateFormDependencies": Array [],
   },
   "roles": EntityMetaData {
@@ -1428,6 +1448,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Role",
     "updateFormDependencies": Array [
       "permissions",
     ],
@@ -1525,6 +1546,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Skill",
     "updateFormDependencies": Array [
       "users",
     ],
@@ -1577,6 +1599,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Standard Dashboard",
     "updateFormDependencies": Array [],
   },
   "transferLists": EntityMetaData {
@@ -1650,6 +1673,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "Transfer List",
     "updateFormDependencies": Array [],
   },
   "users": EntityMetaData {
@@ -1777,6 +1801,7 @@ Object {
       },
     ],
     "subEntityName": "",
+    "title": "User",
     "updateFormDependencies": Array [
       "roles",
       "platformRoles",
