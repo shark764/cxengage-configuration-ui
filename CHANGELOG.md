@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.38.2] - 2018-11-26
+### Fixed
+- Names for Standard Dashboards were not matching RTD names.
+
 ## [0.38.1] - 2018-11-23
 ### Fixed
 - realtimeReportId was sending nil value to SDK.
