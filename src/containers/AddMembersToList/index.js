@@ -21,7 +21,8 @@ export function mapStateToProps(state) {
     listName: getSelectedEntityName(state),
     entityName: currentEntity,
     fields: entitiesMetaData[currentEntity].modalListTableFields,
-    tableItems: selectSidePanelTableItems(state, currentEntity)
+    tableItems: selectSidePanelTableItems(state, currentEntity),
+    defaultFilters: entitiesMetaData[currentEntity].defaultFilters
   };
 }
 

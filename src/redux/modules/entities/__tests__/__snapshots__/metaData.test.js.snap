@@ -11,6 +11,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "branding",
     "entityTableFields": Array [
@@ -75,6 +76,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "chatWidgets",
     "entityTableFields": Array [
@@ -143,6 +145,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "customMetrics",
     "entityTableFields": Array [
@@ -194,6 +197,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "dashboards",
     "entityTableFields": Array [
@@ -266,6 +270,12 @@ Object {
       "historicalReportFolders",
       "dashboards",
     ],
+    "defaultFilters": Array [
+      Object {
+        "id": "invitationStatus",
+        "value": "enabled",
+      },
+    ],
     "dependentEntity": "users",
     "entityName": "dataAccessReports",
     "entityTableFields": Array [
@@ -291,6 +301,19 @@ Object {
       Object {
         "label": "Email",
         "name": "email",
+      },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Platform Status",
+        "name": "invitationStatus",
+        "type": "select",
       },
     ],
     "pageTitle": "Access Controlled Reports",
@@ -386,6 +409,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "emailTemplates",
     "entityTableFields": Array [
@@ -437,6 +461,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "flows",
     "entityTableFields": Array [
@@ -515,6 +540,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "users",
     "entityName": "groups",
     "entityTableFields": Array [
@@ -596,6 +622,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "historicalReportFolders",
     "entityTableFields": Array [
@@ -647,6 +674,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "identityProviders",
     "entityTableFields": Array [
@@ -755,6 +783,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "interactionMonitoring",
     "entityTableFields": Array [
@@ -806,6 +835,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "listTypes",
     "entityTableFields": Array [
@@ -872,6 +902,7 @@ Object {
     "createFormDependencies": Array [
       "listTypes",
     ],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "lists",
     "entityTableFields": Array [
@@ -944,6 +975,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "messageTemplates",
     "entityTableFields": Array [
@@ -1014,6 +1046,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "outboundIdentifiers",
     "entityName": "outboundIdentifierLists",
     "entityTableFields": Array [
@@ -1116,6 +1149,7 @@ Object {
     "createFormDependencies": Array [
       "flows",
     ],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "outboundIdentifiers",
     "entityTableFields": Array [
@@ -1169,6 +1203,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "permissions",
     "entityTableFields": Array [
@@ -1220,6 +1255,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "platformRoles",
     "entityTableFields": Array [
@@ -1271,6 +1307,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "protectedBranding",
     "entityTableFields": Array [
@@ -1335,6 +1372,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "reasonLists",
     "entityTableFields": Array [
@@ -1409,6 +1447,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "permissions",
     "entityName": "roles",
     "entityTableFields": Array [
@@ -1489,6 +1528,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "users",
     "entityName": "skills",
     "entityTableFields": Array [
@@ -1560,6 +1600,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "standardDashboards",
     "entityTableFields": Array [
@@ -1624,6 +1665,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "transferLists",
     "entityTableFields": Array [
@@ -1748,6 +1790,7 @@ Object {
       "platformRoles",
       "identityProviders",
     ],
+    "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "users",
     "entityTableFields": Array [

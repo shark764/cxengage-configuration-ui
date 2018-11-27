@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.39.1] - 2018-11-28
+### Changed
+- CXV1-16066 - Added Platform Status column and filter using combobox type.
+- Version bump component library to 0.31.0
+
 ## [0.39.0] - 2018-11-28
 ### Added
 - Ability to create/update/remove users extensions from the users page

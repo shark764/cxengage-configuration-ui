@@ -50,6 +50,7 @@ export default function AddMemberToList(props) {
         </CloseButtonWrapper>
       </div>
       <SidePanelTable
+        tableType={'modal'}
         contains={props.contains}
         userHasUpdatePermission={props.userHasUpdatePermission}
         addSubEntity={props.addListItem}
@@ -60,6 +61,7 @@ export default function AddMemberToList(props) {
         }
         items={props.tableItems}
         fields={props.fields}
+        filtered={props.defaultFilters}
       />
     </Fragment>
   );

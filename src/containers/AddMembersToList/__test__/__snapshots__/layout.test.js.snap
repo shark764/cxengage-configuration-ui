@@ -16,6 +16,7 @@ exports[`AddMemberToListLayout Layout renders the AddMemberToListLayout 1`] = `
     </styled.div>
   </div>
   <_class
+    tableType="modal"
     userHasUpdatePermission={true}
   />
 </React.Fragment>

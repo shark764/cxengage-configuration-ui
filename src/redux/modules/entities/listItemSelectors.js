@@ -76,7 +76,7 @@ export const selectedEntityIndex = state =>
 export const availableEntityMembersForList = state => {
   const dependentEntity = entitiesMetaData[getCurrentEntity(state)].dependentEntity;
   const currentListMembers = getCurrentEntityStore(state)
-    .getIn(['data', selectedEntityIndex(state), dependentEntity])
+    .getIn(['data', selectedEntityIndex(state), dependentEntity], new List([]))
     .toOrderedSet();
   const allListOptions =
     state.getIn(['Entities', dependentEntity, 'data']) !== undefined

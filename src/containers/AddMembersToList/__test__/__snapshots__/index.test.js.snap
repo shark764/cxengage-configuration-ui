@@ -3,6 +3,7 @@
 exports[`AddMemberToListLayout Renders renders 1`] = `
 <AddMemberToList
   addListItem={[Function]}
+  defaultFilters={Array []}
   entityName="skills"
   fields={
     Array [
@@ -58,6 +59,7 @@ exports[`AddMemberToListLayout Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "defaultFilters": Array [],
   "entityName": "skills",
   "fields": Array [
     Object {

@@ -47,6 +47,7 @@ export class EntityMetaData {
     this.entityTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.defaultFilters = [];
     this.sdkCall = {
       module: 'entities',
       data: {}
@@ -418,8 +419,15 @@ entities.dataAccessReports.dependentEntity = 'users';
 entities.dataAccessReports.modalListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
-  { label: 'Email', name: 'email' }
+  { label: 'Email', name: 'email' },
+  {
+    label: 'Platform Status',
+    name: 'invitationStatus',
+    type: 'select',
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
+  }
 ];
+entities.dataAccessReports.defaultFilters = [{ id: 'invitationStatus', value: 'enabled' }];
 entities.dataAccessReports.sidePanelListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
