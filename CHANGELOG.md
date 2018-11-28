@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.38.4] - 2018-11-28
+### Changed
+- Version bump component library to 0.29.10.
+
 ## [0.38.3] - 2018-11-26
 ### Fixed
 - CXV1-16255 - SidePanelHeader and ConfirmationDialog were showing non-formatted name for entity.
