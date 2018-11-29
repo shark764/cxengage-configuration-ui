@@ -11,7 +11,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { DetailHeader, InputField, SelectField } from 'cx-ui-components';
+import { DetailHeader, InputField, SelectField, ExtensionListField } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
 
 const Wrapper = styled.div`
@@ -113,6 +113,11 @@ export default function UsersForm({
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantIdentityProviders}
           />
+        </DetailWrapper>
+
+        <DetailWrapper open={true}>
+          <WrappedDetailHeader text="Extensions" />
+          <ExtensionListField className="users-extensions" name="extensions" label="Inputs" />
         </DetailWrapper>
       </Wrapper>
     </form>

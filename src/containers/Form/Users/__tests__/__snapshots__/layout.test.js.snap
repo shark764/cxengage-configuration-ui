@@ -112,6 +112,19 @@ exports[`<UsersForm /> renders create user 1`] = `
         required={false}
       />
     </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Extensions"
+      />
+      <ExtensionListField
+        className="users-extensions"
+        disabled={false}
+        label="Inputs"
+        name="extensions"
+      />
+    </Connect(DetailWrapper)>
   </styled.div>
 </form>
 `;
@@ -226,6 +239,19 @@ exports[`<UsersForm /> renders update user 1`] = `
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
         required={false}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Extensions"
+      />
+      <ExtensionListField
+        className="users-extensions"
+        disabled={false}
+        label="Inputs"
+        name="extensions"
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -344,6 +370,19 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         required={false}
       />
     </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Extensions"
+      />
+      <ExtensionListField
+        className="users-extensions"
+        disabled={false}
+        label="Inputs"
+        name="extensions"
+      />
+    </Connect(DetailWrapper)>
   </styled.div>
 </form>
 `;
@@ -458,6 +497,19 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
         required={false}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Extensions"
+      />
+      <ExtensionListField
+        className="users-extensions"
+        disabled={false}
+        label="Inputs"
+        name="extensions"
       />
     </Connect(DetailWrapper)>
   </styled.div>

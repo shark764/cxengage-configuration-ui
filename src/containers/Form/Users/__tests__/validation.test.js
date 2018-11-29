@@ -10,7 +10,11 @@ describe('formValidation', () => {
       firstName: 'mockFirstName',
       lastName: 'mockLastName',
       externalId: '1234',
-      workStationId: '1234'
+      workStationId: '1234',
+      extensions: [
+        { type: 'pstn', value: '15067994185' },
+        { type: 'sip', value: 'sip:01633973283@ns.subdomain.company.com' }
+      ]
     });
     expect(formValidation(values)).toMatchSnapshot();
   });
@@ -22,7 +26,11 @@ describe('formValidation', () => {
       firstName: 'mockFirstName',
       lastName: 'mockLastName',
       externalId: '1234',
-      workStationId: '1234'
+      workStationId: '1234',
+      extensions: [
+        { type: 'pstn', value: '15067994185' },
+        { type: 'sip', value: 'sip:01633973283@ns.subdomain.company.com' }
+      ]
     });
     expect(formValidation(values)).toMatchSnapshot();
   });
@@ -34,7 +42,8 @@ describe('formValidation', () => {
       firstName: undefined,
       lastName: undefined,
       externalId: undefined,
-      workStationId: undefined
+      workStationId: undefined,
+      extensions: [{ type: 'pstn', value: 'rafggfdg' }, { type: 'sip', value: 'asdasd' }]
     });
     expect(formValidation(values)).toMatchSnapshot();
   });
