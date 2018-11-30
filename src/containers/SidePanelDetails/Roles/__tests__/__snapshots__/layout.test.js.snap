@@ -10,7 +10,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel 1`] = `
     text="undefined Permission(s)"
     userHasUpdatePermission={true}
   />
-  <_class
+  <_class2
     userHasUpdatePermission={true}
   />
 </styled.div>
@@ -35,7 +35,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with no update permisi
     text="undefined Permission(s)"
     userHasUpdatePermission={false}
   />
-  <_class
+  <_class2
     userHasUpdatePermission={false}
   />
 </styled.div>
@@ -51,7 +51,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with status disabled 1
     text="undefined Permission(s)"
     userHasUpdatePermission={true}
   />
-  <_class
+  <_class2
     userHasUpdatePermission={true}
   />
 </styled.div>

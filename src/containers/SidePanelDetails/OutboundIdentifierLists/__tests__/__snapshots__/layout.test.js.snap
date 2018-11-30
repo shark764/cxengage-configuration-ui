@@ -14,7 +14,7 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
     text="undefined List Item(s)"
     userHasUpdatePermission={true}
   />
-  <_class
+  <_class2
     userHasUpdatePermission={true}
   />
 </styled.div>
@@ -43,7 +43,7 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders without update perm
     text="undefined List Item(s)"
     userHasUpdatePermission={false}
   />
-  <_class
+  <_class2
     userHasUpdatePermission={false}
   />
 </styled.div>

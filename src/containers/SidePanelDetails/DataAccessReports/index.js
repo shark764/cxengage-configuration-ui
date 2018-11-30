@@ -15,7 +15,8 @@ export function mapStateToProps(state, props) {
   return {
     userHasUpdatePermission: userHasUpdatePermission(state),
     tableItems: selectEntityListMembers(state),
-    tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields
+    tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
+    defaultFilters: entitiesMetaData[currentEntity].defaultFilters
   };
 }
 

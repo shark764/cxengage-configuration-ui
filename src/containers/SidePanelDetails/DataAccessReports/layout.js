@@ -24,6 +24,7 @@ export default function DataAccessReportsDetailsPanel({
   userHasUpdatePermission,
   tableItems,
   tableFields,
+  defaultFilters,
   removeListItem,
   setSelectedSubEntityId
 }) {
@@ -37,10 +38,12 @@ export default function DataAccessReportsDetailsPanel({
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
       />
       <SidePanelTable
+        tableType={'sidePanel'}
         userHasUpdatePermission={userHasUpdatePermission}
         deleteSubEntity={removeListItem}
         items={tableItems}
         fields={tableFields}
+        filtered={defaultFilters}
       />
     </Wrapper>
   );
@@ -53,5 +56,6 @@ DataAccessReportsDetailsPanel.propTypes = {
   tableItems: PropTypes.array,
   tableFields: PropTypes.array,
   removeListItem: PropTypes.func,
-  setSelectedSubEntityId: PropTypes.func
+  setSelectedSubEntityId: PropTypes.func,
+  defaultFilters: PropTypes.array
 };

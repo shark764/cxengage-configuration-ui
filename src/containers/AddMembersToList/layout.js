@@ -76,5 +76,6 @@ AddMemberToList.propTypes = {
   toggleEntityListItemActive: PropTypes.func,
   userHasUpdatePermission: PropTypes.bool.isRequired,
   tableItems: PropTypes.array,
-  fields: PropTypes.array
+  fields: PropTypes.array,
+  defaultFilters: PropTypes.array
 };

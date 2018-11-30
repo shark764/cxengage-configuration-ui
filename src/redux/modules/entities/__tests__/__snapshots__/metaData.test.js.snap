@@ -275,6 +275,10 @@ Object {
         "id": "invitationStatus",
         "value": "enabled",
       },
+      Object {
+        "id": "status",
+        "value": "accepted",
+      },
     ],
     "dependentEntity": "users",
     "entityName": "dataAccessReports",
@@ -301,6 +305,17 @@ Object {
       Object {
         "label": "Email",
         "name": "email",
+      },
+      Object {
+        "filterOptions": Array [
+          "accepted",
+          "pending",
+          "invited",
+          "disabled",
+        ],
+        "label": "Tenant Status",
+        "name": "status",
+        "type": "select",
       },
       Object {
         "filterOptions": Array [
@@ -333,6 +348,30 @@ Object {
       Object {
         "label": "Email",
         "name": "email",
+      },
+      Object {
+        "filterOptions": Array [
+          "accepted",
+          "pending",
+          "invited",
+          "disabled",
+        ],
+        "label": "Tenant Status",
+        "name": "status",
+        "type": "select",
+      },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Platform Status",
+        "name": "invitationStatus",
+        "type": "select",
       },
     ],
     "standardDashboards": Array [
