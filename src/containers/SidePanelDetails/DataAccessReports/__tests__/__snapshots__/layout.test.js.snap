@@ -10,7 +10,7 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
     text=" Member(s)"
     userHasUpdatePermission={true}
   />
-  <_class
+  <_class2
     deleteSubEntity={[Function]}
     fields={Array []}
     items={
@@ -24,6 +24,7 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
         },
       ]
     }
+    tableType="sidePanel"
     userHasUpdatePermission={true}
   />
 </styled.div>
@@ -39,7 +40,7 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
     text=" Member(s)"
     userHasUpdatePermission={false}
   />
-  <_class
+  <_class2
     deleteSubEntity={[Function]}
     fields={Array []}
     items={
@@ -53,6 +54,7 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
         },
       ]
     }
+    tableType="sidePanel"
     userHasUpdatePermission={false}
   />
 </styled.div>

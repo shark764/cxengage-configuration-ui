@@ -13,7 +13,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
       text=" Users"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="users"
       items={Array []}
       userHasUpdatePermission={true}
@@ -28,7 +28,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={true}
@@ -50,7 +50,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no proficiency 
       text=" Users"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="users"
       items={Array []}
       userHasUpdatePermission={true}
@@ -65,7 +65,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no proficiency 
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={true}
@@ -104,7 +104,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permi
       text=" Users"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="users"
       items={Array []}
       userHasUpdatePermission={false}
@@ -119,7 +119,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permi
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={false}
@@ -141,7 +141,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled
       text=" Users"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="users"
       items={Array []}
       userHasUpdatePermission={true}
@@ -156,7 +156,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={true}

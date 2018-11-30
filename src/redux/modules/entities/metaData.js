@@ -421,17 +421,38 @@ entities.dataAccessReports.modalListTableFields = [
   { label: 'Last Name', name: 'lastName' },
   { label: 'Email', name: 'email' },
   {
+    label: 'Tenant Status',
+    name: 'status',
+    type: 'select',
+    filterOptions: ['accepted', 'pending', 'invited', 'disabled']
+  },
+  {
     label: 'Platform Status',
     name: 'invitationStatus',
     type: 'select',
     filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
   }
 ];
-entities.dataAccessReports.defaultFilters = [{ id: 'invitationStatus', value: 'enabled' }];
+entities.dataAccessReports.defaultFilters = [
+  { id: 'invitationStatus', value: 'enabled' },
+  { id: 'status', value: 'accepted' }
+];
 entities.dataAccessReports.sidePanelListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
-  { label: 'Email', name: 'email' }
+  { label: 'Email', name: 'email' },
+  {
+    label: 'Tenant Status',
+    name: 'status',
+    type: 'select',
+    filterOptions: ['accepted', 'pending', 'invited', 'disabled']
+  },
+  {
+    label: 'Platform Status',
+    name: 'invitationStatus',
+    type: 'select',
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
+  }
 ];
 entities.dataAccessReports.columns = [
   { name: 'Name', active: true },

@@ -13,7 +13,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
       text=" Users"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="users"
       items={Array []}
       userHasUpdatePermission={true}
@@ -28,7 +28,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={true}
@@ -43,7 +43,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
       text=" Presence Reason Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="reasonLists"
       items={Array []}
       userHasUpdatePermission={true}
@@ -78,7 +78,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
       text=" Users"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="users"
       items={Array []}
       userHasUpdatePermission={false}
@@ -93,7 +93,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={false}
@@ -108,7 +108,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
       text=" Presence Reason Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="reasonLists"
       items={Array []}
       userHasUpdatePermission={false}
@@ -130,7 +130,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
       text=" Users"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="users"
       items={Array []}
       userHasUpdatePermission={true}
@@ -145,7 +145,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={true}
@@ -160,7 +160,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
       text=" Presence Reason Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="reasonLists"
       items={Array []}
       userHasUpdatePermission={true}

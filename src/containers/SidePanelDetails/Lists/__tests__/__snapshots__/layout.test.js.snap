@@ -19,7 +19,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel 1`] = `
     text="List Item(s)"
     userHasUpdatePermission={true}
   />
-  <_class
+  <_class2
     deleteSubEntity={[Function]}
     fields={
       Array [
@@ -100,7 +100,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel not inherited 1`] = `
     text="List Item(s)"
     userHasUpdatePermission={true}
   />
-  <_class
+  <_class2
     deleteSubEntity={[Function]}
     fields={
       Array [
@@ -169,7 +169,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel with alert message 1`]
     text="List Item(s)"
     userHasUpdatePermission={true}
   />
-  <_class
+  <_class2
     deleteSubEntity={[Function]}
     fields={
       Array [

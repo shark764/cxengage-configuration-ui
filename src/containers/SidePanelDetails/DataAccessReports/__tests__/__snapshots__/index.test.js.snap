@@ -2,6 +2,18 @@
 
 exports[`DataAccessReportsDetailsPanel Renders renders 1`] = `
 <DataAccessReportsDetailsPanel
+  defaultFilters={
+    Array [
+      Object {
+        "id": "invitationStatus",
+        "value": "enabled",
+      },
+      Object {
+        "id": "status",
+        "value": "accepted",
+      },
+    ]
+  }
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
   store={
@@ -47,6 +59,30 @@ exports[`DataAccessReportsDetailsPanel Renders renders 1`] = `
         "label": "Email",
         "name": "email",
       },
+      Object {
+        "filterOptions": Array [
+          "accepted",
+          "pending",
+          "invited",
+          "disabled",
+        ],
+        "label": "Tenant Status",
+        "name": "status",
+        "type": "select",
+      },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Platform Status",
+        "name": "invitationStatus",
+        "type": "select",
+      },
     ]
   }
   tableItems={
@@ -62,6 +98,16 @@ exports[`DataAccessReportsDetailsPanel Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "defaultFilters": Array [
+    Object {
+      "id": "invitationStatus",
+      "value": "enabled",
+    },
+    Object {
+      "id": "status",
+      "value": "accepted",
+    },
+  ],
   "tableFields": Array [
     Object {
       "label": "First Name",
@@ -74,6 +120,30 @@ Object {
     Object {
       "label": "Email",
       "name": "email",
+    },
+    Object {
+      "filterOptions": Array [
+        "accepted",
+        "pending",
+        "invited",
+        "disabled",
+      ],
+      "label": "Tenant Status",
+      "name": "status",
+      "type": "select",
+    },
+    Object {
+      "filterOptions": Array [
+        "pending",
+        "invited",
+        "expired",
+        "enabled",
+        "disabled",
+        "sso-only",
+      ],
+      "label": "Platform Status",
+      "name": "invitationStatus",
+      "type": "select",
     },
   ],
   "tableItems": Array [

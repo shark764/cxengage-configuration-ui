@@ -14,7 +14,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
       text=" Skills"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="skills"
       items={Array []}
       userHasUpdatePermission={true}
@@ -29,7 +29,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
       text=" Groups"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="groups"
       items={Array []}
       userHasUpdatePermission={true}
@@ -44,7 +44,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
       text=" Presence Reason Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="reasonLists"
       items={Array []}
       userHasUpdatePermission={true}
@@ -59,7 +59,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
       text=" Message Templates"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="messageTemplates"
       items={Array []}
       userHasUpdatePermission={true}
@@ -74,7 +74,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
       text=" Transfer Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="transferLists"
       items={Array []}
       userHasUpdatePermission={true}
@@ -89,7 +89,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={true}
@@ -112,7 +112,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Skills"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="skills"
       items={Array []}
       userHasUpdatePermission={false}
@@ -127,7 +127,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Groups"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="groups"
       items={Array []}
       userHasUpdatePermission={false}
@@ -142,7 +142,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Presence Reason Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="reasonLists"
       items={Array []}
       userHasUpdatePermission={false}
@@ -157,7 +157,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Message Templates"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="messageTemplates"
       items={Array []}
       userHasUpdatePermission={false}
@@ -172,7 +172,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Transfer Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="transferLists"
       items={Array []}
       userHasUpdatePermission={false}
@@ -187,7 +187,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={false}
@@ -210,7 +210,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Skills"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="skills"
       items={Array []}
       userHasUpdatePermission={false}
@@ -225,7 +225,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Groups"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="groups"
       items={Array []}
       userHasUpdatePermission={false}
@@ -240,7 +240,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Presence Reason Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="reasonLists"
       items={Array []}
       userHasUpdatePermission={false}
@@ -255,7 +255,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Message Templates"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="messageTemplates"
       items={Array []}
       userHasUpdatePermission={false}
@@ -270,7 +270,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Transfer Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="transferLists"
       items={Array []}
       userHasUpdatePermission={false}
@@ -285,7 +285,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={false}
     />
-    <_class
+    <_class2
       contains="outboundIdentifierLists"
       items={Array []}
       userHasUpdatePermission={false}
