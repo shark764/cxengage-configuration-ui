@@ -13,7 +13,6 @@ Object {
     },
   ],
   "groupsItems": Array [],
-  "inherited": false,
   "messageTemplatesFields": Array [
     Object {
       "label": "Name",
@@ -88,7 +87,6 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
     ]
   }
   groupsItems={Array []}
-  inherited={false}
   messageTemplatesFields={
     Array [
       Object {

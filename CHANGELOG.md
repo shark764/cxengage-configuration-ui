@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.39.3] - 2018-12-01
+### Changed
+- Added default filter for status columns in entity table.
+- Version bump component library to 0.31.2.
+
 ## [0.39.2] - 2018-11-30
 ### Changed
 - CXV1-16066 - Added default filter for columns in sidePanel and modal table.

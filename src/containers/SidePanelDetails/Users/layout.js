@@ -40,7 +40,6 @@ export default function UsersDetailsPanel({
   messageTemplatesItems,
   messageTemplatesFields,
   removeListItem,
-  inherited,
   setSelectedSubEntityId
 }) {
   return (
@@ -52,14 +51,12 @@ export default function UsersDetailsPanel({
           userHasUpdatePermission={userHasUpdatePermission}
           text={`${skillsItems.length > 1 ? skillsItems.length : ''} Skills`}
           onActionButtonClick={() => setSelectedSubEntityId('skills')}
-          inherited={inherited}
         />
         <SidePanelTable
           contains="skills"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={skillsItems}
-          inherited={inherited}
           fields={skillsFields}
         />
       </DetailWrapper>
@@ -69,14 +66,12 @@ export default function UsersDetailsPanel({
           userHasUpdatePermission={userHasUpdatePermission}
           text={`${groupsItems.length > 1 ? groupsItems.length : ''} Groups`}
           onActionButtonClick={() => setSelectedSubEntityId('groups')}
-          inherited={inherited}
         />
         <SidePanelTable
           contains="groups"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={groupsItems}
-          inherited={inherited}
           fields={groupsFields}
         />
       </DetailWrapper>
@@ -86,14 +81,12 @@ export default function UsersDetailsPanel({
           userHasUpdatePermission={userHasUpdatePermission}
           text={`${reasonListsItems.length > 1 ? reasonListsItems.length : ''} Presence Reason Lists`}
           onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
-          inherited={inherited}
         />
         <SidePanelTable
           contains="reasonLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={reasonListsItems}
-          inherited={inherited}
           fields={reasonListsFields}
         />
       </DetailWrapper>
@@ -103,14 +96,12 @@ export default function UsersDetailsPanel({
           userHasUpdatePermission={userHasUpdatePermission}
           text={`${messageTemplatesItems.length > 1 ? messageTemplatesItems.length : ''} Message Templates`}
           onActionButtonClick={() => setSelectedSubEntityId('messageTemplates')}
-          inherited={inherited}
         />
         <SidePanelTable
           contains="messageTemplates"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={messageTemplatesItems}
-          inherited={inherited}
           fields={messageTemplatesFields}
         />
       </DetailWrapper>
@@ -120,14 +111,12 @@ export default function UsersDetailsPanel({
           userHasUpdatePermission={userHasUpdatePermission}
           text={`${transferListsItems.length > 1 ? transferListsItems.length : ''} Transfer Lists`}
           onActionButtonClick={() => setSelectedSubEntityId('transferLists')}
-          inherited={inherited}
         />
         <SidePanelTable
           contains="transferLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={transferListsItems}
-          inherited={inherited}
           fields={transferListsFields}
         />
       </DetailWrapper>
@@ -139,14 +128,12 @@ export default function UsersDetailsPanel({
             outboundIdentifierListsItems.length > 1 ? outboundIdentifierListsItems.length : ''
           } Outbound Identifier Lists`}
           onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
-          inherited={inherited}
         />
         <SidePanelTable
           contains="outboundIdentifierLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={outboundIdentifierListsItems}
-          inherited={inherited}
           fields={outboundIdentifierListsFields}
         />
       </DetailWrapper>
@@ -155,7 +142,6 @@ export default function UsersDetailsPanel({
 }
 
 UsersDetailsPanel.propTypes = {
-  inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
   skillsItems: PropTypes.array,

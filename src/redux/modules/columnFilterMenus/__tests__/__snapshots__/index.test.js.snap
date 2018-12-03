@@ -212,11 +212,11 @@ Immutable.Map {
         "active": true,
       },
       Immutable.Map {
-        "name": "Invitation Status",
+        "name": "Platform Status",
         "active": true,
       },
       Immutable.Map {
-        "name": "Platform Status",
+        "name": "Tenant Status",
         "active": true,
       },
     ],

@@ -37,9 +37,10 @@ export function mapDispatchToProps(dispatch, ownProps) {
 
 export function mapStateToProps(state) {
   const selectedEntityId = getSelectedEntityId(state);
+  const currentEntity = getCurrentEntity(state);
   if (selectedEntityId && selectedEntityId === 'create') {
     return {
-      title: `Creating New ${entitiesMetaData[getCurrentEntity(state)].title}`
+      title: `Creating New ${entitiesMetaData[currentEntity].title}`
     };
   } else if (selectedEntityId && selectedEntityId === 'bulk') {
     return {
@@ -56,7 +57,7 @@ export function mapStateToProps(state) {
       updatedAt: `Updated on ${dateUpdated}`,
       // We convert both values to boolean since each entity could have
       // any of them, this way we avoid getting undefined instead of true/false
-      toggleStatus: Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted',
+      toggleStatus: currentEntity !== 'roles'? (Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted') : false,
       userHasUpdatePermission: userHasUpdatePermission(state),
       inherited: isInherited(state)
     };

@@ -579,7 +579,12 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
-    "defaultFilters": Array [],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
     "dependentEntity": "users",
     "entityName": "groups",
     "entityTableFields": Array [
@@ -1567,7 +1572,12 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
-    "defaultFilters": Array [],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
     "dependentEntity": "users",
     "entityName": "skills",
     "entityTableFields": Array [
@@ -1812,11 +1822,11 @@ Object {
       },
       Object {
         "active": true,
-        "name": "Invitation Status",
+        "name": "Platform Status",
       },
       Object {
         "active": true,
-        "name": "Platform Status",
+        "name": "Tenant Status",
       },
     ],
     "confirmationDialog": Object {
@@ -1829,7 +1839,16 @@ Object {
       "platformRoles",
       "identityProviders",
     ],
-    "defaultFilters": Array [],
+    "defaultFilters": Array [
+      Object {
+        "id": "status",
+        "value": "accepted",
+      },
+      Object {
+        "id": "invitationStatus",
+        "value": "enabled",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "users",
     "entityTableFields": Array [
