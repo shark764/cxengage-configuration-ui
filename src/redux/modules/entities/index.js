@@ -308,7 +308,11 @@ export default function reducer(state = initialState, action) {
       return state.setIn([state.get('currentEntity'), 'selectedEntityId'], action.entityId);
     }
     case 'FETCH_DATA_FULFILLED': {
-      return state.setIn([action.entityName, 'data'], fromJS(action.response.result));
+      if (action.response.result.constructor === Array && action.response.result.length === 0) {
+        return state.setIn([action.entityName, 'data'], undefined);
+      } else {
+        return state.setIn([action.entityName, 'data'], fromJS(action.response.result));
+      }
     }
     case 'FETCH_DATA_REJECTED': {
       return state.setIn([action.entityName, 'data'], new List());

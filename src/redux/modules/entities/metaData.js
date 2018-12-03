@@ -187,9 +187,10 @@ entities.users.columns = [
   // {name: 'Groups', active: true},
   { name: 'Role', active: true },
   { name: 'Presence', active: true },
-  { name: 'Invitation Status', active: true },
-  { name: 'Platform Status', active: true }
+  { name: 'Platform Status', active: true },
+  { name: 'Tenant Status', active: true }
 ];
+entities.users.defaultFilters = [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }];
 
 // Skills
 entities.skills.pageTitle = 'Skill Management';
@@ -220,6 +221,7 @@ entities.skills.columns = [
   { name: 'Has Proficiency', active: true },
   { name: 'Status', active: true }
 ];
+entities.skills.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
 // Groups
 entities.groups.pageTitle = 'Group Management';
@@ -249,12 +251,12 @@ entities.groups.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' }
 ];
-
 entities.groups.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Status', active: true }
 ];
+entities.groups.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
 // Generic Lists
 entities.lists.createFormDependencies.push('listTypes');

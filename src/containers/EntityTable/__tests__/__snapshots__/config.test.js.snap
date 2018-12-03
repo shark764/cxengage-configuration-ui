@@ -32,7 +32,7 @@ Array [
     </span>,
     "accessor": [Function],
     "filterMethod": [Function],
-    "id": "status",
+    "id": "active",
   },
   Object {
     "Cell": [Function],
@@ -130,13 +130,15 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Platform Status"
     >
       Platform Status
     </span>,
-    "accessor": "platformStatus",
-    "id": "platformStatus",
+    "accessor": [Function],
+    "filterMethod": [Function],
+    "id": "invitationStatus",
   },
   Object {
     "Cell": [Function],
@@ -178,16 +180,7 @@ Array [
     "accessor": "externalId",
     "id": "externalId",
   },
-  Object {
-    "Cell": [Function],
-    "Header": <span
-      title="Invitation Status"
-    >
-      Invitation Status
-    </span>,
-    "accessor": "invitationStatus",
-    "id": "invitationStatus",
-  },
+  undefined,
   Object {
     "Cell": [Function],
     "Header": <span
@@ -244,7 +237,7 @@ Array [
     </span>,
     "accessor": [Function],
     "filterMethod": [Function],
-    "id": "status",
+    "id": "active",
   },
   Object {
     "Cell": [Function],

@@ -24,11 +24,13 @@ export const getDependantEntityTableItems = state =>
 export const getSidePanelTableItems = (state, entityName) => {
   const selectedEntity = getSelectedEntity(state);
   const requestedIds = selectedEntity && selectedEntity.getIn([entityName], new List([])).toJS();
-  const requestedItems = state.getIn(['Entities', entityName, 'data'], new List([]));
+  const requestedItems = state.getIn(['Entities', entityName, 'data']);
   if (requestedItems !== undefined) {
     return requestedItems.toJS().filter(member => requestedIds.includes(member.id));
   } else {
-    return [];
+    const returnedvalue = [];
+    returnedvalue.noData = true;
+    return returnedvalue;
   }
 };
 
@@ -37,8 +39,12 @@ export const getModalTableItems = (state, entityName) => {
     .getIn([entityName], new List([]))
     .toJS();
   const requestedItems = state.getIn(['Entities', entityName, 'data'], new List([]));
-  if (requestedItems !== undefined) {
+  if (requestedItems && entityName !== 'reasonLists') {
     return requestedItems.toJS().filter(member => !requestedIds.includes(member.id));
+  } else if (requestedItems && entityName === 'reasonLists') {
+    return requestedItems
+      .toJS()
+      .filter(member => !requestedIds.includes(member.id) && !member.isDefault && !member.inherited);
   } else {
     return [];
   }

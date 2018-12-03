@@ -1,37 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`statusColumn Filter renders correctly 1`] = `
-<select
-  className="entity-table-filter-column-status"
-  onChange={[Function]}
-  style={
-    Object {
-      "width": "100%",
-    }
-  }
-  value="all"
->
-  <option
-    className="entity-table-filter-status-option-all"
-    value="all"
-  >
-    All
-  </option>
-  <option
-    className="entity-table-filter-status-option-enabled"
-    value="enabled"
-  >
-    View Enabled
-  </option>
-  <option
-    className="entity-table-filter-status-option-disabled"
-    value="disabled"
-  >
-    View Disabled
-  </option>
-</select>
-`;
-
 exports[`statusColumn is configured correctly 1`] = `
 Object {
   "Filter": [Function],
@@ -42,6 +10,6 @@ Object {
   </span>,
   "accessor": [Function],
   "filterMethod": [Function],
-  "id": "status",
+  "id": "active",
 }
 `;

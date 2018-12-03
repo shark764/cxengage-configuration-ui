@@ -14,8 +14,9 @@ import { getHelpLink, getAllEntities } from './selectors';
 import { getTableColumns } from './config';
 
 export function mapStateToProps(state, props) {
-  let entity = entitiesMetaData[getCurrentEntity(state)];
-  let entityName = entity ? entity.entityName : 'none';
+  const entity = entitiesMetaData[getCurrentEntity(state)];
+  const entityName = entity ? entity.entityName : 'none';
+  const defaultFilters = entity? entity.defaultFilters : [];
   return {
     pageTitle: entity ? entity.pageTitle : '',
     pageHelpLink: getHelpLink(state),
@@ -25,6 +26,7 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     entityMetadata: entity,
     currentVisibleSubMenu: selectVisibleSubMenu(state, props),
+    filtered: defaultFilters,
   };
 }
 

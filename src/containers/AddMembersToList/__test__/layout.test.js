@@ -7,10 +7,7 @@ describe('AddMemberToListLayout Layout', () => {
 
   it('renders the AddMemberToListLayout', () => {
     const rendered = shallow(
-      <AddMemberToListLayout
-        onCancel={() => {}}
-        userHasUpdatePermission={true}
-      />
+      <AddMemberToListLayout onCancel={() => {}} userHasUpdatePermission={true} listName="mockEntity" />
     );
     expect(rendered).toMatchSnapshot();
   });

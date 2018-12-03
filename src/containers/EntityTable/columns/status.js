@@ -4,37 +4,29 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FilterSelect } from 'cx-ui-components';
 
 export const statusColumn = {
-  id: 'status',
+  id: 'active',
   Header: <span title="Status">Status</span>,
-  accessor: list => (list.active ? 'Enabled' : 'Disabled'),
+  accessor: list => list.active? 'Enabled' : 'Disabled',
   filterMethod: (filter, row) => {
-    if (filter.value === 'all') {
-      return true;
-    }
     if (filter.value === 'enabled') {
       return row[filter.id] === 'Enabled';
     }
-    return row[filter.id] === 'Disabled';
+    if (filter.value === 'disabled') {
+      return row[filter.id] === 'Disabled';
+    }
+    return true;
   },
   Filter: ({ filter, onChange }) => (
-    <select
+    <FilterSelect
+      tableType="modal"
       className="entity-table-filter-column-status"
       onChange={event => onChange(event.target.value)}
-      style={{ width: '100%' }}
       value={filter ? filter.value : 'all'}
-    >
-      <option value="all" className="entity-table-filter-status-option-all">
-        All
-      </option>
-      <option value="enabled" className="entity-table-filter-status-option-enabled">
-        View Enabled
-      </option>
-      <option value="disabled" className="entity-table-filter-status-option-disabled">
-        View Disabled
-      </option>
-    </select>
+      options={['all','enabled','disabled']}
+    />
   )
 };
 

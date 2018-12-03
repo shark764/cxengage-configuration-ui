@@ -6,6 +6,7 @@ export const selectTenantIdentityProviders = state => [
   ...state
     .getIn(['Entities', 'identityProviders', 'data'])
     .toJS()
+    .filter(provider => provider.active)
     .map(provider => ({
       value: provider.id,
       label: provider.name
