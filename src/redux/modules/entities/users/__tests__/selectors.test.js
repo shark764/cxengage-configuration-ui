@@ -3,13 +3,22 @@
  */
 
 import { fromJS } from 'immutable';
-import { selectNonDisabledUsers, getDisplay, getInvitationScenario, getUserTenantStatus } from '../selectors';
+import { getCurrentEntity, getSelectedEntity } from '../../selectors';
+import { listMemberObjects, getEntityListMembers } from '../../listItemSelectors';
+import {
+  selectNonDisabledUsers,
+  getDisplay,
+  getInvitationScenario,
+  getUserTenantStatus,
+  selectEntityListMembers
+} from '../selectors';
 
 const initialState = fromJS({
   Entities: {
     users: {
       data: [
         {
+          id: '1',
           email: 'mockEmail 1',
           firstName: 'mockFirstName 1',
           lastName: 'mockLastName 1',
@@ -17,6 +26,7 @@ const initialState = fromJS({
           status: 'enabled'
         },
         {
+          id: '2',
           email: 'mockEmail 2',
           firstName: 'mockFirstName 2',
           lastName: 'mockLastName 2',
@@ -24,6 +34,7 @@ const initialState = fromJS({
           status: 'disabled'
         },
         {
+          id: '3',
           email: 'mockEmail 3',
           firstName: 'mockFirstName 3',
           lastName: 'mockLastName 3',
@@ -34,6 +45,72 @@ const initialState = fromJS({
     }
   }
 });
+
+const mockSelectedEntity = fromJS({
+  name: 'mockName',
+  reportType: 'realtime',
+  users: [
+    {
+      id: '1',
+      email: 'mockEmail 1',
+      firstName: 'mockFirstName 1',
+      lastName: 'mockLastName 1',
+      platformStatus: 'enabled',
+      status: 'enabled'
+    },
+    {
+      id: '2',
+      email: 'mockEmail 2',
+      firstName: 'mockFirstName 2',
+      lastName: 'mockLastName 2',
+      platformStatus: 'enabled',
+      status: 'disabled'
+    },
+    {
+      id: '3',
+      email: 'mockEmail 3',
+      firstName: 'mockFirstName 3',
+      lastName: 'mockLastName 3',
+      platformStatus: 'disabled',
+      status: 'enabled'
+    }
+  ]
+});
+
+const listMembers = [
+  {
+    id: '1',
+    email: 'mockEmail 1',
+    firstName: 'mockFirstName 1',
+    lastName: 'mockLastName 1',
+    platformStatus: 'enabled',
+    status: 'enabled'
+  },
+  {
+    id: '2',
+    email: 'mockEmail 2',
+    firstName: 'mockFirstName 2',
+    lastName: 'mockLastName 2',
+    platformStatus: 'enabled',
+    status: 'disabled'
+  },
+  {
+    id: '3',
+    email: 'mockEmail 3',
+    firstName: 'mockFirstName 3',
+    lastName: 'mockLastName 3',
+    platformStatus: 'disabled',
+    status: 'enabled'
+  }
+];
+
+jest.mock('../../listItemSelectors');
+listMemberObjects.mockImplementation(() => fromJS(listMembers));
+
+jest.mock('../../selectors');
+getEntityListMembers.mockImplementation(() => listMembers);
+getCurrentEntity.mockImplementation(() => 'dataAccessReports');
+getSelectedEntity.mockImplementation(() => mockSelectedEntity);
 
 const mockCurrentForm = fromJS({
   values: {
@@ -81,6 +158,7 @@ describe('selectNonDisabledUsers', () => {
   it('should get users, then return it mapped with new data and filtered', () => {
     expect(selectNonDisabledUsers(initialState)).toEqual([
       {
+        id: '1',
         name: 'mockFirstName 1 mockLastName 1',
         email: 'mockEmail 1',
         firstName: 'mockFirstName 1',
@@ -142,5 +220,39 @@ describe('getInvitationScenario', () => {
       }
     });
     expect(getInvitationScenario(mockForm)).toEqual('invite:new:user');
+  });
+});
+
+describe('selectEntityListMembers', () => {
+  it('should get users with the whole name on it', () => {
+    expect(selectEntityListMembers(initialState)).toEqual([
+      {
+        id: '1',
+        name: 'mockFirstName 1 mockLastName 1',
+        email: 'mockEmail 1',
+        firstName: 'mockFirstName 1',
+        lastName: 'mockLastName 1',
+        platformStatus: 'enabled',
+        status: 'enabled'
+      },
+      {
+        id: '2',
+        name: 'mockFirstName 2 mockLastName 2',
+        email: 'mockEmail 2',
+        firstName: 'mockFirstName 2',
+        lastName: 'mockLastName 2',
+        platformStatus: 'enabled',
+        status: 'disabled'
+      },
+      {
+        id: '3',
+        name: 'mockFirstName 3 mockLastName 3',
+        email: 'mockEmail 3',
+        firstName: 'mockFirstName 3',
+        lastName: 'mockLastName 3',
+        platformStatus: 'disabled',
+        status: 'enabled'
+      }
+    ]);
   });
 });

@@ -3,8 +3,8 @@
  */
 import { createSelector } from 'reselect';
 import { getCurrentForm } from '../../form/selectors';
-import { getRoles } from '../roles/selectors';
-import { getAllPermissions } from '../permissions/selectors';
+import { convertRoles } from '../roles/selectors';
+import { convertPermissions } from '../permissions/selectors';
 import { getEntityListMembers, availableEntityMembersForList } from '../../entities/listItemSelectors';
 
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
@@ -22,10 +22,8 @@ export const selectNonDisabledUsers = createSelector([getUsers], users => {
 });
 
 export const filterUsersByPermissions = (state, users, permissionNames) => {
-  const allRoles = getRoles(state)
-    .get('data')
-    .toJS();
-  const allPermissions = getAllPermissions(state).toJS();
+  const allRoles = convertRoles(state);
+  const allPermissions = convertPermissions(state);
   const permissionIds = allPermissions.filter(perm => permissionNames.includes(perm.name)).map(item => item.id);
 
   return users.filter(
@@ -64,15 +62,18 @@ export const selectEntityListMembers = state =>
     lastName: user.lastName !== null ? user.lastName : ''
   }));
 
-export const selectAvailableEntityMembersForList = (state, dependentEntity, currentEntity, permissions) => {
-  const usersMap =
-    permissions === undefined
-      ? availableEntityMembersForList(state, dependentEntity, currentEntity)
-      : filterUsersByPermissions(
-          state,
-          availableEntityMembersForList(state, dependentEntity, currentEntity),
-          permissions
-        );
+/*
+- Send permissions as empty array in case you don't want to filter the users by one or more permissions.
+*/
+export const selectAvailableEntityMembersForList = (state, permissions = []) => {
+  let usersMap = null;
+  //check if permissions is an actual array, if not then do a regular Entity Member call for this table, regardless of permissions
+  if (Array.isArray(permissions) && permissions.length > 0) {
+    //permissions is an array, so let's use all permissions a user should have to be used on this list.
+    usersMap = filterUsersByPermissions(state, availableEntityMembersForList(state), permissions);
+  } else {
+    usersMap = availableEntityMembersForList(state);
+  }
   return usersMap.map(user => ({
     ...user,
     name: getDisplay(user),

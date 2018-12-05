@@ -13,7 +13,7 @@ import {
   userHasUpdatePermission,
   isSaving
 } from '../../../../redux/modules/entities/selectors';
-import { selectEntityListMembers } from '../../../../redux/modules/entities/users/selectors';
+import { selectEntityListMembers, filterUsersByPermissions } from '../../../../redux/modules/entities/users/selectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -40,6 +40,7 @@ isSaving.mockImplementation(() => false);
 
 jest.mock('../../../../redux/modules/entities/users/selectors');
 selectEntityListMembers.mockImplementation(() => ['mockListMembers']);
+filterUsersByPermissions.mockImplementation(() => ['mockListMembers']);
 
 jest.mock('../../../../redux/modules/entities');
 removeListItem.mockImplementation(() => 'mockId');
