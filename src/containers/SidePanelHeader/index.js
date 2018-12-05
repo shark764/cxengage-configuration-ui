@@ -57,7 +57,10 @@ export function mapStateToProps(state) {
       updatedAt: `Updated on ${dateUpdated}`,
       // We convert both values to boolean since each entity could have
       // any of them, this way we avoid getting undefined instead of true/false
-      toggleStatus: currentEntity !== 'roles'? (Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted') : false,
+      toggleStatus:
+        currentEntity !== 'roles'
+          ? Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted'
+          : undefined,
       userHasUpdatePermission: userHasUpdatePermission(state),
       inherited: isInherited(state)
     };

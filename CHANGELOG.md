@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.39.5] - 2018-12-05
+### Fixed
+- Formated modal titles for entities
+- Hid roles entity toggle
+
 ## [0.39.4] - 2018-11-29
 ### Fixed
 - Array filtering for Permissions, this update will allow the users to be displayed to use a single, multiple or no permission at all to bring users for display.

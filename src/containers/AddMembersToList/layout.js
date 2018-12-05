@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SidePanelTable } from 'cx-ui-components';
 import { CloseIconSVG } from 'cx-ui-components';
+import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
 
 const Header = styled.h3`
   font-size: 28px;
@@ -44,7 +45,7 @@ export default function AddMemberToList(props) {
     <Fragment>
       <div>
         <Header>Add list items : </Header>
-        <Item title={props.listName}>{props.listName}</Item>
+        <Item title={camelCaseToRegularForm(props.listName)}>{camelCaseToRegularForm(props.listName)}</Item>
         <CloseButtonWrapper>
           <CloseIconSVG onClick={props.onCancel} size={18} closeIconType="secondary" />
         </CloseButtonWrapper>

@@ -7,9 +7,9 @@ exports[`AddMemberToListLayout Layout renders the AddMemberToListLayout 1`] = `
       Add list items : 
     </styled.h3>
     <styled.h3
-      title="mockEntity"
+      title="Mock Entity"
     >
-      mockEntity
+      Mock Entity
     </styled.h3>
     <styled.div>
       <CloseIconSVG

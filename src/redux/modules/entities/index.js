@@ -307,11 +307,32 @@ export default function reducer(state = initialState, action) {
     case 'SET_SELECTED_ENTITY_ID': {
       return state.setIn([state.get('currentEntity'), 'selectedEntityId'], action.entityId);
     }
+    case 'UPDATE_USER_PERMISSIONS': {
+      const { tenantId } = action.tenantInfo;
+      return state.set('currentTenantId', tenantId);
+    }
     case 'FETCH_DATA_FULFILLED': {
-      if (action.response.result.constructor === Array && action.response.result.length === 0) {
-        return state.setIn([action.entityName, 'data'], undefined);
-      } else {
-        return state.setIn([action.entityName, 'data'], fromJS(action.response.result));
+      // As we recieve the data we tag on the items that are considered inherited
+      // or system default as the api does not provide us with this info directly
+      const { entityName, response: { result } } = action;
+      switch (entityName) {
+        case 'roles': {
+          const newResult = result.map(entity => ({ ...entity, inherited: entity.type === 'system' }));
+          return state.setIn([entityName, 'data'], fromJS(newResult));
+        }
+        case 'reasonLists': {
+          const newResult = result.map(entity => ({
+            ...entity,
+            inherited: entity.tenantId !== state.get('currentTenantId')
+          }));
+          return state.setIn([entityName, 'data'], fromJS(newResult));
+        }
+        case 'groups': {
+          const newResult = result.map(entity => ({ ...entity, inherited: entity.name === 'everyone' }));
+          return state.setIn([entityName, 'data'], fromJS(newResult));
+        }
+        default:
+          return state.setIn([entityName, 'data'], fromJS(result));
       }
     }
     case 'FETCH_DATA_REJECTED': {
