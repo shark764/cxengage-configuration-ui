@@ -10,6 +10,7 @@ import GroupsDetailsPanel from '../layout';
 describe('<GroupsDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
+  let defaultFilters;
   beforeEach(() => {
     customItem = {
       id: 'mockId',
@@ -25,6 +26,11 @@ describe('<GroupsDetailsPanel />', () => {
       active: false,
       hasProficiency: true
     };
+    defaultFilters = {
+      users: [],
+      outboundIdentifierLists: [],
+      reasonLists: []
+    };
   });
   it('renders Groups detailsPanel', () => {
     const rendered = shallow(
@@ -38,6 +44,7 @@ describe('<GroupsDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         setSelectedSubEntityId={() => {}}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -54,6 +61,7 @@ describe('<GroupsDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItemDisabled}
         setSelectedSubEntityId={() => {}}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -70,6 +78,7 @@ describe('<GroupsDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         setSelectedSubEntityId={() => {}}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();

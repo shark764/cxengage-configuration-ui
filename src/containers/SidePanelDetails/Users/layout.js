@@ -40,7 +40,8 @@ export default function UsersDetailsPanel({
   messageTemplatesItems,
   messageTemplatesFields,
   removeListItem,
-  setSelectedSubEntityId
+  setSelectedSubEntityId,
+  defaultFilters
 }) {
   return (
     <Wrapper id="dtpanel-users">
@@ -53,11 +54,13 @@ export default function UsersDetailsPanel({
           onActionButtonClick={() => setSelectedSubEntityId('skills')}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="skills"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={skillsItems}
           fields={skillsFields}
+          filtered={defaultFilters.skills}
         />
       </DetailWrapper>
 
@@ -68,11 +71,13 @@ export default function UsersDetailsPanel({
           onActionButtonClick={() => setSelectedSubEntityId('groups')}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="groups"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={groupsItems}
           fields={groupsFields}
+          filtered={defaultFilters.groups}
         />
       </DetailWrapper>
 
@@ -83,11 +88,13 @@ export default function UsersDetailsPanel({
           onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="reasonLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={reasonListsItems}
           fields={reasonListsFields}
+          filtered={defaultFilters.reasonLists}
         />
       </DetailWrapper>
 
@@ -98,11 +105,13 @@ export default function UsersDetailsPanel({
           onActionButtonClick={() => setSelectedSubEntityId('messageTemplates')}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="messageTemplates"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={messageTemplatesItems}
           fields={messageTemplatesFields}
+          filtered={defaultFilters.messageTemplates}
         />
       </DetailWrapper>
 
@@ -113,11 +122,13 @@ export default function UsersDetailsPanel({
           onActionButtonClick={() => setSelectedSubEntityId('transferLists')}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="transferLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={transferListsItems}
           fields={transferListsFields}
+          filtered={defaultFilters.transferLists}
         />
       </DetailWrapper>
 
@@ -130,11 +141,13 @@ export default function UsersDetailsPanel({
           onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="outboundIdentifierLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={outboundIdentifierListsItems}
           fields={outboundIdentifierListsFields}
+          filtered={defaultFilters.outboundIdentifierLists}
         />
       </DetailWrapper>
     </Wrapper>
@@ -157,5 +170,6 @@ UsersDetailsPanel.propTypes = {
   outboundIdentifierListsItems: PropTypes.array,
   outboundIdentifierListsFields: PropTypes.array,
   removeListItem: PropTypes.func,
-  setSelectedSubEntityId: PropTypes.func
+  setSelectedSubEntityId: PropTypes.func,
+  defaultFilters: PropTypes.object
 };

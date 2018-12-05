@@ -52,6 +52,7 @@ export default function OutboundIdentifierListsDetailsPanel({
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
       />
       <SidePanelTable
+        tableType={'sidePanel'}
         userHasUpdatePermission={userHasUpdatePermission}
         deleteSubEntity={removeListItem}
         toggleSubEntityActive={toggleEntityListItemActive}

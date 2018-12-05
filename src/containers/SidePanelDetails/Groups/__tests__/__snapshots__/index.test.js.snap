@@ -2,6 +2,32 @@
 
 exports[`GroupsDetailsPanel Renders renders 1`] = `
 <GroupsDetailsPanel
+  defaultFilters={
+    Object {
+      "outboundIdentifierLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "reasonLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "users": Array [
+        Object {
+          "id": "status",
+          "value": "accepted",
+        },
+        Object {
+          "id": "invitationStatus",
+          "value": "enabled",
+        },
+      ],
+    }
+  }
   inherited={false}
   item={
     Object {
@@ -26,6 +52,15 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
         "label": "Description",
         "name": "description",
       },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
+      },
     ]
   }
   reasonListsFields={
@@ -37,6 +72,15 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ]
   }
@@ -86,6 +130,30 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
         "label": "Email",
         "name": "email",
       },
+      Object {
+        "filterOptions": Array [
+          "accepted",
+          "pending",
+          "invited",
+          "disabled",
+        ],
+        "label": "Tenant Status",
+        "name": "status",
+        "type": "select",
+      },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Platform Status",
+        "name": "invitationStatus",
+        "type": "select",
+      },
     ]
   }
   usersItems={
@@ -100,6 +168,30 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "defaultFilters": Object {
+    "outboundIdentifierLists": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "reasonLists": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "users": Array [
+      Object {
+        "id": "status",
+        "value": "accepted",
+      },
+      Object {
+        "id": "invitationStatus",
+        "value": "enabled",
+      },
+    ],
+  },
   "inherited": false,
   "item": Object {
     "active": true,
@@ -121,6 +213,15 @@ Object {
       "label": "Description",
       "name": "description",
     },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
+    },
   ],
   "outboundIdentifierListsItems": undefined,
   "reasonListsFields": Array [
@@ -131,6 +232,15 @@ Object {
     Object {
       "label": "Description",
       "name": "description",
+    },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
     },
   ],
   "reasonListsItems": undefined,
@@ -147,6 +257,30 @@ Object {
     Object {
       "label": "Email",
       "name": "email",
+    },
+    Object {
+      "filterOptions": Array [
+        "accepted",
+        "pending",
+        "invited",
+        "disabled",
+      ],
+      "label": "Tenant Status",
+      "name": "status",
+      "type": "select",
+    },
+    Object {
+      "filterOptions": Array [
+        "pending",
+        "invited",
+        "expired",
+        "enabled",
+        "disabled",
+        "sso-only",
+      ],
+      "label": "Platform Status",
+      "name": "invitationStatus",
+      "type": "select",
     },
   ],
   "usersItems": Array [

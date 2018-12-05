@@ -2,7 +2,6 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
-import { shallow } from 'enzyme';
 import { statusColumn } from '../status';
 
 describe('statusColumn', () => {
@@ -22,12 +21,12 @@ describe('statusColumn', () => {
       expect(statusColumn.filterMethod({ value: 'all' })).toBe(true);
     });
     it('compares filter id to "Enabled" when filter value is "enabled"', () => {
-      expect(statusColumn.filterMethod({ value: 'enabled', id: 'status' }, { status: 'Enabled' })).toBe(true);
-      expect(statusColumn.filterMethod({ value: 'enabled', id: 'status' }, { status: 'Disabled' })).toBe(false);
+      expect(statusColumn.filterMethod({ value: 'Enabled', id: 'status' }, { status: 'Enabled' })).toBe(true);
+      expect(statusColumn.filterMethod({ value: 'Enabled', id: 'status' }, { status: 'Disabled' })).toBe(false);
     });
     it('compares filter id to "Disabled" when filter value is "disabled"', () => {
-      expect(statusColumn.filterMethod({ value: 'disabled', id: 'status' }, { status: 'Disabled' })).toBe(true);
-      expect(statusColumn.filterMethod({ value: 'disabled', id: 'status' }, { status: 'Enabled' })).toBe(false);
+      expect(statusColumn.filterMethod({ value: 'Disabled', id: 'status' }, { status: 'Disabled' })).toBe(true);
+      expect(statusColumn.filterMethod({ value: 'Disabled', id: 'status' }, { status: 'Enabled' })).toBe(false);
     });
   });
 });

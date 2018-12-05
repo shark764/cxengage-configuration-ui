@@ -15,7 +15,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
     />
     <_class2
       contains="users"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -30,7 +32,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
     />
     <_class2
       contains="outboundIdentifierLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -52,7 +56,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no proficiency 
     />
     <_class2
       contains="users"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -67,7 +73,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no proficiency 
     />
     <_class2
       contains="outboundIdentifierLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -106,7 +114,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permi
     />
     <_class2
       contains="users"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={false}
     />
   </Connect(DetailWrapper)>
@@ -121,7 +131,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permi
     />
     <_class2
       contains="outboundIdentifierLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={false}
     />
   </Connect(DetailWrapper)>
@@ -143,7 +155,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled
     />
     <_class2
       contains="users"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -158,7 +172,9 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled
     />
     <_class2
       contains="outboundIdentifierLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>

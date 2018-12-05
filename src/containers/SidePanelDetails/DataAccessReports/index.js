@@ -17,7 +17,8 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     tableItems: filterUsersByPermissions(state, listMembers, ['ASSIGNED_REPORTS_READ']),
     tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
-    defaultFilters: entitiesMetaData[currentEntity].defaultFilters
+    defaultFilters:
+      entitiesMetaData[currentEntity].defaultDependentEntityFilters
   };
 }
 

@@ -4,8 +4,14 @@
 
 import { connect } from 'react-redux';
 import SkillsDetailsPanel from './layout';
-import { userHasUpdatePermission, getSelectedEntity } from '../../../redux/modules/entities/selectors';
-import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
+import {
+  userHasUpdatePermission,
+  getSelectedEntity
+} from '../../../redux/modules/entities/selectors';
+import {
+  setSelectedSubEntityId,
+  toggleListItemEntity
+} from '../../../redux/modules/entities';
 import {
   getDependantEntityTableItems,
   getSidePanelTableItems
@@ -18,8 +24,13 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     usersItems: getDependantEntityTableItems(state),
     usersFields: entitiesMetaData.users.memberListTableFields,
-    outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
-    outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields
+    outboundIdentifierListsItems: getSidePanelTableItems(
+      state,
+      'outboundIdentifierLists'
+    ),
+    outboundIdentifierListsFields:
+      entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    defaultFilters: entitiesMetaData.skills.defaultAssociationFilters
   };
 }
 

@@ -10,6 +10,7 @@ import UsersDetailsPanel from '../layout';
 describe('<UsersDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
+  let defaultFilters;
   beforeEach(() => {
     customItem = {
       email: 'mockEmail',
@@ -31,6 +32,14 @@ describe('<UsersDetailsPanel />', () => {
       externalId: '1234',
       workStationId: '1234'
     };
+    defaultFilters = {
+      skills: [],
+      groups: [],
+      reasonLists: [],
+      messageTemplates: [],
+      transferLists: [],
+      outboundIdentifierLists: []
+    };
   });
   it('renders users detailsPanel', () => {
     const rendered = shallow(
@@ -46,6 +55,7 @@ describe('<UsersDetailsPanel />', () => {
         messageTemplatesItems={[]}
         children={'Mock Child'}
         item={customItem}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -64,6 +74,7 @@ describe('<UsersDetailsPanel />', () => {
         messageTemplatesItems={[]}
         children={'Mock Child'}
         item={customItem}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -83,6 +94,7 @@ describe('<UsersDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItemDisabled}
         active={false}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();

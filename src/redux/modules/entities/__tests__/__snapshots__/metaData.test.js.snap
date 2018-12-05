@@ -11,6 +11,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "branding",
@@ -76,6 +78,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "chatWidgets",
@@ -145,6 +149,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "customMetrics",
@@ -197,6 +203,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "dashboards",
@@ -270,7 +278,8 @@ Object {
       "historicalReportFolders",
       "dashboards",
     ],
-    "defaultFilters": Array [
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [
       Object {
         "id": "invitationStatus",
         "value": "enabled",
@@ -278,6 +287,12 @@ Object {
       Object {
         "id": "status",
         "value": "accepted",
+      },
+    ],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
       },
     ],
     "dependentEntity": "users",
@@ -448,6 +463,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "emailTemplates",
@@ -500,6 +517,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "flows",
@@ -579,6 +598,31 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Object {
+      "outboundIdentifierLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "reasonLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "users": Array [
+        Object {
+          "id": "status",
+          "value": "accepted",
+        },
+        Object {
+          "id": "invitationStatus",
+          "value": "enabled",
+        },
+      ],
+    },
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [
       Object {
         "id": "active",
@@ -606,6 +650,15 @@ Object {
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ],
     "modalListTableFields": Array [
@@ -666,6 +719,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "historicalReportFolders",
@@ -718,6 +773,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "identityProviders",
@@ -827,6 +884,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "interactionMonitoring",
@@ -879,6 +938,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "listTypes",
@@ -946,6 +1007,8 @@ Object {
     "createFormDependencies": Array [
       "listTypes",
     ],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "lists",
@@ -1019,6 +1082,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "messageTemplates",
@@ -1090,6 +1155,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "outboundIdentifiers",
     "entityName": "outboundIdentifierLists",
@@ -1112,6 +1179,15 @@ Object {
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ],
     "modalListTableFields": Array [
@@ -1193,6 +1269,8 @@ Object {
     "createFormDependencies": Array [
       "flows",
     ],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "outboundIdentifiers",
@@ -1247,6 +1325,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "permissions",
@@ -1299,6 +1379,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "platformRoles",
@@ -1351,6 +1433,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "protectedBranding",
@@ -1416,6 +1500,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "reasonLists",
@@ -1438,6 +1524,15 @@ Object {
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ],
     "modalListTableFields": Array [
@@ -1491,6 +1586,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "permissions",
     "entityName": "roles",
@@ -1572,6 +1669,25 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Object {
+      "outboundIdentifierLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "users": Array [
+        Object {
+          "id": "status",
+          "value": "accepted",
+        },
+        Object {
+          "id": "invitationStatus",
+          "value": "enabled",
+        },
+      ],
+    },
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [
       Object {
         "id": "active",
@@ -1599,6 +1715,15 @@ Object {
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ],
     "modalListTableFields": Array [
@@ -1649,6 +1774,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "standardDashboards",
@@ -1714,6 +1841,8 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
     "dependentEntity": "",
     "entityName": "transferLists",
@@ -1736,6 +1865,15 @@ Object {
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ],
     "modalListTableFields": Array [
@@ -1839,6 +1977,45 @@ Object {
       "platformRoles",
       "identityProviders",
     ],
+    "defaultAssociationFilters": Object {
+      "groups": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "messageTemplates": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "outboundIdentifierLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "reasonLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "skills": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "transferLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+    },
+    "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [
       Object {
         "id": "status",
@@ -1874,6 +2051,30 @@ Object {
       Object {
         "label": "Email",
         "name": "email",
+      },
+      Object {
+        "filterOptions": Array [
+          "accepted",
+          "pending",
+          "invited",
+          "disabled",
+        ],
+        "label": "Tenant Status",
+        "name": "status",
+        "type": "select",
+      },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Platform Status",
+        "name": "invitationStatus",
+        "type": "select",
       },
     ],
     "modalListTableFields": Array [

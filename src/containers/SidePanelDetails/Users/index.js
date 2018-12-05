@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 import UsersDetailsPanel from './layout';
 
 import { userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
-import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
+import {
+  setSelectedSubEntityId,
+  toggleListItemEntity
+} from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
@@ -17,14 +20,20 @@ export function mapStateToProps(state, props) {
     skillsFields: entitiesMetaData.skills.memberListTableFields,
     groupsItems: getSidePanelTableItems(state, 'groups'),
     groupsFields: entitiesMetaData.groups.memberListTableFields,
-    outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
-    outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    outboundIdentifierListsItems: getSidePanelTableItems(
+      state,
+      'outboundIdentifierLists'
+    ),
+    outboundIdentifierListsFields:
+      entitiesMetaData.outboundIdentifierLists.memberListTableFields,
     reasonListsItems: getSidePanelTableItems(state, 'reasonLists'),
     reasonListsFields: entitiesMetaData.reasonLists.memberListTableFields,
     transferListsItems: getSidePanelTableItems(state, 'transferLists'),
     transferListsFields: entitiesMetaData.transferLists.memberListTableFields,
     messageTemplatesItems: getSidePanelTableItems(state, 'messageTemplates'),
-    messageTemplatesFields: entitiesMetaData.messageTemplates.memberListTableFields
+    messageTemplatesFields:
+      entitiesMetaData.messageTemplates.memberListTableFields,
+    defaultFilters: entitiesMetaData.users.defaultAssociationFilters
   };
 }
 

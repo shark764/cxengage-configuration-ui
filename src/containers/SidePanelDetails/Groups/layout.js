@@ -36,7 +36,8 @@ export default function GroupsDetailsPanel({
   removeListItem,
   setSelectedSubEntityId,
   inherited,
-  item: { name, description, active }
+  item: { name, description, active },
+  defaultFilters
 }) {
   return (
     <Wrapper id="dtpanel-groups">
@@ -58,11 +59,13 @@ export default function GroupsDetailsPanel({
           inherited={inherited}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="users"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={usersItems}
           fields={usersFields}
+          filtered={defaultFilters.users}
         />
       </DetailWrapper>
       <DetailWrapper open={false} contains="outboundIdentifierLists">
@@ -75,12 +78,14 @@ export default function GroupsDetailsPanel({
           inherited={inherited}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="outboundIdentifierLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={outboundIdentifierListsItems}
           inherited={inherited}
           fields={outboundIdentifierListsFields}
+          filtered={defaultFilters.outboundIdentifierLists}
         />
       </DetailWrapper>
       <DetailWrapper open={false} contains="reasonLists">
@@ -91,12 +96,14 @@ export default function GroupsDetailsPanel({
           inherited={inherited}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="reasonLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={reasonListsItems}
           inherited={inherited}
           fields={reasonListsFields}
+          filtered={defaultFilters.reasonLists}
         />
       </DetailWrapper>
     </Wrapper>
@@ -120,5 +127,6 @@ GroupsDetailsPanel.propTypes = {
   outboundIdentifierListsFields: PropTypes.array,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
-  listSize: PropTypes.number
+  listSize: PropTypes.number,
+  defaultFilters: PropTypes.object
 };

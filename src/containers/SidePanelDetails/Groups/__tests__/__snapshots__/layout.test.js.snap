@@ -15,7 +15,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
     />
     <_class2
       contains="users"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -30,7 +32,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
     />
     <_class2
       contains="outboundIdentifierLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -45,7 +49,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
     />
     <_class2
       contains="reasonLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -80,7 +86,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
     />
     <_class2
       contains="users"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={false}
     />
   </Connect(DetailWrapper)>
@@ -95,7 +103,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
     />
     <_class2
       contains="outboundIdentifierLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={false}
     />
   </Connect(DetailWrapper)>
@@ -110,7 +120,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
     />
     <_class2
       contains="reasonLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={false}
     />
   </Connect(DetailWrapper)>
@@ -132,7 +144,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
     />
     <_class2
       contains="users"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -147,7 +161,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
     />
     <_class2
       contains="outboundIdentifierLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>
@@ -162,7 +178,9 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
     />
     <_class2
       contains="reasonLists"
+      filtered={Array []}
       items={Array []}
+      tableType="sidePanel"
       userHasUpdatePermission={true}
     />
   </Connect(DetailWrapper)>

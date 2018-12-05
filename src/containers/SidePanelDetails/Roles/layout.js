@@ -49,6 +49,7 @@ export function RolesDetailsPanel({
         inherited={inherited}
       />
       <SidePanelTable
+        tableType={'sidePanel'}
         userHasUpdatePermission={userHasUpdatePermission}
         deleteSubEntity={removeListItem}
         items={tableItems}

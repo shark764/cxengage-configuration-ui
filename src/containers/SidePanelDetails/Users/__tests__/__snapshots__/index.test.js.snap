@@ -2,6 +2,44 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "defaultFilters": Object {
+    "groups": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "messageTemplates": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "outboundIdentifierLists": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "reasonLists": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "skills": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "transferLists": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+  },
   "groupsFields": Array [
     Object {
       "label": "Name",
@@ -10,6 +48,15 @@ Object {
     Object {
       "label": "Description",
       "name": "description",
+    },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
     },
   ],
   "groupsItems": Array [],
@@ -33,6 +80,15 @@ Object {
       "label": "Description",
       "name": "description",
     },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
+    },
   ],
   "outboundIdentifierListsItems": Array [],
   "reasonListsFields": Array [
@@ -43,6 +99,15 @@ Object {
     Object {
       "label": "Description",
       "name": "description",
+    },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
     },
   ],
   "reasonListsItems": Array [],
@@ -55,6 +120,15 @@ Object {
       "label": "Description",
       "name": "description",
     },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
+    },
   ],
   "skillsItems": Array [],
   "transferListsFields": Array [
@@ -66,6 +140,15 @@ Object {
       "label": "Description",
       "name": "description",
     },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
+    },
   ],
   "transferListsItems": Array [],
   "userHasUpdatePermission": true,
@@ -74,6 +157,46 @@ Object {
 
 exports[`UsersDetailsPanel Renders renders 1`] = `
 <UsersDetailsPanel
+  defaultFilters={
+    Object {
+      "groups": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "messageTemplates": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "outboundIdentifierLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "reasonLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "skills": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "transferLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+    }
+  }
   groupsFields={
     Array [
       Object {
@@ -83,6 +206,15 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ]
   }
@@ -110,6 +242,15 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
         "label": "Description",
         "name": "description",
       },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
+      },
     ]
   }
   outboundIdentifierListsItems={Array []}
@@ -122,6 +263,15 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ]
   }
@@ -137,6 +287,15 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ]
   }
@@ -179,6 +338,15 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ]
   }

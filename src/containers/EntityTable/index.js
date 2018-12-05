@@ -6,9 +6,20 @@ import { connect } from 'react-redux';
 
 import { EntityTable } from 'cx-ui-components';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
-import { setSelectedEntityCreate, setSelectedEntityId, toggleBulkEntityChange } from '../../redux/modules/entities';
-import { getCurrentEntity, userHasCreatePermission, userHasUpdatePermission } from '../../redux/modules/entities/selectors';
-import { selectVisibleSubMenu, selectTableColumns } from '../../redux/modules/columnFilterMenus/selectors';
+import {
+  setSelectedEntityCreate,
+  setSelectedEntityId,
+  toggleBulkEntityChange
+} from '../../redux/modules/entities';
+import {
+  getCurrentEntity,
+  userHasCreatePermission,
+  userHasUpdatePermission
+} from '../../redux/modules/entities/selectors';
+import {
+  selectVisibleSubMenu,
+  selectTableColumns
+} from '../../redux/modules/columnFilterMenus/selectors';
 import { setVisibleMenu } from '../../redux/modules/columnFilterMenus';
 import { getHelpLink, getAllEntities } from './selectors';
 import { getTableColumns } from './config';
@@ -16,7 +27,7 @@ import { getTableColumns } from './config';
 export function mapStateToProps(state, props) {
   const entity = entitiesMetaData[getCurrentEntity(state)];
   const entityName = entity ? entity.entityName : 'none';
-  const defaultFilters = entity? entity.defaultFilters : [];
+  const defaultFilters = entity ? entity.defaultFilters : [];
   return {
     pageTitle: entity ? entity.pageTitle : '',
     pageHelpLink: getHelpLink(state),
@@ -26,7 +37,7 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     entityMetadata: entity,
     currentVisibleSubMenu: selectVisibleSubMenu(state, props),
-    filtered: defaultFilters,
+    filtered: defaultFilters
   };
 }
 

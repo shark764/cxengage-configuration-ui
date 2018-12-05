@@ -15,6 +15,7 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
     userHasUpdatePermission={true}
   />
   <_class2
+    tableType="sidePanel"
     userHasUpdatePermission={true}
   />
 </styled.div>
@@ -44,6 +45,7 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders without update perm
     userHasUpdatePermission={false}
   />
   <_class2
+    tableType="sidePanel"
     userHasUpdatePermission={false}
   />
 </styled.div>

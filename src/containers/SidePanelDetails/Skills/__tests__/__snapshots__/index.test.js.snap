@@ -2,6 +2,24 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "defaultFilters": Object {
+    "outboundIdentifierLists": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "users": Array [
+      Object {
+        "id": "status",
+        "value": "accepted",
+      },
+      Object {
+        "id": "invitationStatus",
+        "value": "enabled",
+      },
+    ],
+  },
   "item": Object {
     "active": true,
     "description": "mockDescription",
@@ -23,6 +41,15 @@ Object {
       "label": "Description",
       "name": "description",
     },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
+    },
   ],
   "outboundIdentifierListsItems": undefined,
   "userHasUpdatePermission": true,
@@ -39,6 +66,30 @@ Object {
       "label": "Email",
       "name": "email",
     },
+    Object {
+      "filterOptions": Array [
+        "accepted",
+        "pending",
+        "invited",
+        "disabled",
+      ],
+      "label": "Tenant Status",
+      "name": "status",
+      "type": "select",
+    },
+    Object {
+      "filterOptions": Array [
+        "pending",
+        "invited",
+        "expired",
+        "enabled",
+        "disabled",
+        "sso-only",
+      ],
+      "label": "Platform Status",
+      "name": "invitationStatus",
+      "type": "select",
+    },
   ],
   "usersItems": Array [
     "mockListMembers",
@@ -48,6 +99,26 @@ Object {
 
 exports[`SkillsDetailsPanel Renders renders 1`] = `
 <SkillsDetailsPanel
+  defaultFilters={
+    Object {
+      "outboundIdentifierLists": Array [
+        Object {
+          "id": "active",
+          "value": "enabled",
+        },
+      ],
+      "users": Array [
+        Object {
+          "id": "status",
+          "value": "accepted",
+        },
+        Object {
+          "id": "invitationStatus",
+          "value": "enabled",
+        },
+      ],
+    }
+  }
   item={
     Object {
       "active": true,
@@ -71,6 +142,15 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ]
   }
@@ -119,6 +199,30 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Email",
         "name": "email",
+      },
+      Object {
+        "filterOptions": Array [
+          "accepted",
+          "pending",
+          "invited",
+          "disabled",
+        ],
+        "label": "Tenant Status",
+        "name": "status",
+        "type": "select",
+      },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Platform Status",
+        "name": "invitationStatus",
+        "type": "select",
       },
     ]
   }

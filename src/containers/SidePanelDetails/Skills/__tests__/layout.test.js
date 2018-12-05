@@ -11,6 +11,7 @@ describe('<SkillsDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
   let customItemNoProficiency;
+  let defaultFilters;
   beforeEach(() => {
     customItem = {
       id: 'mockId',
@@ -33,6 +34,10 @@ describe('<SkillsDetailsPanel />', () => {
       active: false,
       hasProficiency: false
     };
+    defaultFilters = {
+      users: [],
+      outboundIdentifierLists: []
+    };
   });
   it('renders Skills detailsPanel', () => {
     const rendered = shallow(
@@ -45,6 +50,7 @@ describe('<SkillsDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         setSelectedSubEntityId={() => {}}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -60,6 +66,7 @@ describe('<SkillsDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItemDisabled}
         setSelectedSubEntityId={() => {}}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -75,6 +82,7 @@ describe('<SkillsDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItemNoProficiency}
         setSelectedSubEntityId={() => {}}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -90,6 +98,7 @@ describe('<SkillsDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         setSelectedSubEntityId={() => {}}
+        defaultFilters={defaultFilters}
       />
     );
     expect(rendered).toMatchSnapshot();

@@ -11,6 +11,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel 1`] = `
     userHasUpdatePermission={true}
   />
   <_class2
+    tableType="sidePanel"
     userHasUpdatePermission={true}
   />
 </styled.div>
@@ -36,6 +37,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with no update permisi
     userHasUpdatePermission={false}
   />
   <_class2
+    tableType="sidePanel"
     userHasUpdatePermission={false}
   />
 </styled.div>
@@ -52,6 +54,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with status disabled 1
     userHasUpdatePermission={true}
   />
   <_class2
+    tableType="sidePanel"
     userHasUpdatePermission={true}
   />
 </styled.div>

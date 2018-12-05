@@ -5,12 +5,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
-import { FilterSelect, filterSelectMethod } from 'cx-ui-components';
+import { FilterSelect, filterSelectMethod, columnAccessor } from 'cx-ui-components';
 
 export const platformStatusColumn = {
   id: 'invitationStatus',
   Header: <span title="Platform Status">Platform Status</span>,
-  accessor: list => list.invitationStatus,
+  accessor: list => columnAccessor({ name: 'invitationStatus' }, list),
   Cell: ({ row }) => (
     <span title={camelCaseToRegularForm(row['invitationStatus'])}>
       {camelCaseToRegularForm(row['invitationStatus'])}
@@ -28,6 +28,9 @@ export const platformStatusColumn = {
   )
 };
 
+platformStatusColumn.Cell.propTypes = {
+  row: PropTypes.any
+};
 platformStatusColumn.Filter.propTypes = {
   filter: PropTypes.func,
   onChange: PropTypes.func

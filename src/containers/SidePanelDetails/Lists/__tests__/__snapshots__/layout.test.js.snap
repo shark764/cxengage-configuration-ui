@@ -60,6 +60,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel 1`] = `
         },
       ]
     }
+    tableType="sidePanel"
     updateSubEntity={[Function]}
     userHasUpdatePermission={true}
   />
@@ -141,6 +142,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel not inherited 1`] = `
         },
       ]
     }
+    tableType="sidePanel"
     updateSubEntity={[Function]}
     userHasUpdatePermission={true}
   />
@@ -210,6 +212,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel with alert message 1`]
         },
       ]
     }
+    tableType="sidePanel"
     updateSubEntity={[Function]}
     userHasUpdatePermission={true}
   />

@@ -44,6 +44,7 @@ function ListsDetailsPanel(props) {
         inherited={props.inherited}
       />
       <SidePanelTable
+        tableType={'sidePanel'}
         userHasUpdatePermission={props.userHasUpdatePermission}
         items={props.tableItems}
         fields={props.tableFields}

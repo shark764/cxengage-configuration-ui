@@ -33,7 +33,8 @@ export default function SkillsDetailsPanel({
   outboundIdentifierListsFields,
   removeListItem,
   setSelectedSubEntityId,
-  item: { name, description, active, hasProficiency }
+  item: { name, description, active, hasProficiency },
+  defaultFilters
 }) {
   return (
     <Wrapper id="dtpanel-skills">
@@ -54,11 +55,13 @@ export default function SkillsDetailsPanel({
           onActionButtonClick={() => setSelectedSubEntityId('users')}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="users"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={usersItems}
           fields={usersFields}
+          filtered={defaultFilters.users}
         />
       </DetailWrapper>
       <DetailWrapper open={false} contains="outboundIdentifierLists">
@@ -70,11 +73,13 @@ export default function SkillsDetailsPanel({
           onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
         />
         <SidePanelTable
+          tableType={'sidePanel'}
           contains="outboundIdentifierLists"
           userHasUpdatePermission={userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={outboundIdentifierListsItems}
           fields={outboundIdentifierListsFields}
+          filtered={defaultFilters.outboundIdentifierLists}
         />
       </DetailWrapper>
     </Wrapper>
@@ -96,5 +101,6 @@ SkillsDetailsPanel.propTypes = {
   outboundIdentifierListsFields: PropTypes.array,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
-  listSize: PropTypes.number
+  listSize: PropTypes.number,
+  defaultFilters: PropTypes.object
 };

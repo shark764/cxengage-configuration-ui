@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.40.0] - 2018-12-05
+### Added
+- CXV1-16353 - Status column to Groups / Skills / Users Pages.
+
 ## [0.39.5] - 2018-12-05
 ### Fixed
 - Formated modal titles for entities

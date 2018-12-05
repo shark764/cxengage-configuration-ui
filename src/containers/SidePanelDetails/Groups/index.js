@@ -4,8 +4,15 @@
 
 import { connect } from 'react-redux';
 import GroupsDetailsPanel from './layout';
-import { userHasUpdatePermission, getSelectedEntity, isInherited } from '../../../redux/modules/entities/selectors';
-import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
+import {
+  userHasUpdatePermission,
+  getSelectedEntity,
+  isInherited
+} from '../../../redux/modules/entities/selectors';
+import {
+  setSelectedSubEntityId,
+  toggleListItemEntity
+} from '../../../redux/modules/entities';
 import {
   getDependantEntityTableItems,
   getSidePanelTableItems
@@ -19,10 +26,15 @@ export function mapStateToProps(state, props) {
     inherited: isInherited(state),
     usersItems: getDependantEntityTableItems(state),
     usersFields: entitiesMetaData.users.memberListTableFields,
-    outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
-    outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    outboundIdentifierListsItems: getSidePanelTableItems(
+      state,
+      'outboundIdentifierLists'
+    ),
+    outboundIdentifierListsFields:
+      entitiesMetaData.outboundIdentifierLists.memberListTableFields,
     reasonListsItems: getSidePanelTableItems(state, 'reasonLists'),
-    reasonListsFields: entitiesMetaData.reasonLists.memberListTableFields
+    reasonListsFields: entitiesMetaData.reasonLists.memberListTableFields,
+    defaultFilters: entitiesMetaData.groups.defaultAssociationFilters
   };
 }
 
