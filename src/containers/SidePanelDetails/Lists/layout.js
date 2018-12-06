@@ -42,6 +42,7 @@ function ListsDetailsPanel(props) {
         text="List Item(s)"
         onActionButtonClick={props.openCreateListItemModal}
         inherited={props.inherited}
+        open
       />
       <SidePanelTable
         tableType={'sidePanel'}

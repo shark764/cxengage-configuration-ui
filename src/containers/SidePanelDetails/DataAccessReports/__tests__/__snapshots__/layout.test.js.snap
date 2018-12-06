@@ -7,7 +7,8 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
   Mock Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text=" Member(s)"
+    open={true}
+    text=" Users"
     userHasUpdatePermission={true}
   />
   <_class2
@@ -37,7 +38,8 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
   Mock Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text=" Member(s)"
+    open={true}
+    text=" Users"
     userHasUpdatePermission={false}
   />
   <_class2

@@ -34,7 +34,6 @@ export default function OutboundIdentifierListsDetailsPanel({
   toggleEntityListItemActive,
   removeListItem,
   setSelectedSubEntityId,
-  listSize,
   item: { name, description }
 }) {
   return (

@@ -16,6 +16,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel 1`] = `
   <DetailHeader
     inherited={true}
     onActionButtonClick={[Function]}
+    open={true}
     text="List Item(s)"
     userHasUpdatePermission={true}
   />
@@ -98,6 +99,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel not inherited 1`] = `
   <DetailHeader
     inherited={false}
     onActionButtonClick={[Function]}
+    open={true}
     text="List Item(s)"
     userHasUpdatePermission={true}
   />
@@ -168,6 +170,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel with alert message 1`]
   <DetailHeader
     inherited={true}
     onActionButtonClick={[Function]}
+    open={true}
     text="List Item(s)"
     userHasUpdatePermission={true}
   />
