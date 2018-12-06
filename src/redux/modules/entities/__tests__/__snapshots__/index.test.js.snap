@@ -283,7 +283,7 @@ Immutable.Map {
   "skills": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 750,
     "confirmationDialogType": undefined,
     "metaData": Immutable.Map {
       "listDependency": "users",
@@ -372,7 +372,7 @@ Immutable.Map {
   "dataAccessReports": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 750,
     "confirmationDialogType": undefined,
     "metaData": Immutable.Map {
       "listDependency": "users",
@@ -403,7 +403,7 @@ Immutable.Map {
   "groups": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 750,
     "confirmationDialogType": undefined,
     "metaData": Immutable.Map {
       "listDependency": "users",
@@ -441,7 +441,7 @@ Immutable.Map {
       "MANAGE_ALL_LISTS",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 750,
     "subEntitySaving": false,
   },
   "chatWidgets": Immutable.Map {
@@ -524,7 +524,7 @@ Immutable.Map {
       "OUTBOUND_IDENTIFIER_MODIFY",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 750,
     "assignPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_ASSIGN",
     ],
@@ -552,7 +552,7 @@ Immutable.Map {
   "emailTemplates": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 750,
     "confirmationDialogType": undefined,
     "readPermission": Immutable.List [
       "USER_MANAGEMENT_EMAIL_READ",

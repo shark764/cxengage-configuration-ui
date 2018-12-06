@@ -17,10 +17,10 @@ export function messageObservable() {
         .map(mm => {
           mm.preventDefault();
           const left = window.innerWidth - mm.clientX;
-          if (left > 550 && left < window.innerWidth) {
+          if (left > 550 && left < (window.innerWidth - 500)) {
             return { left: left };
-          } else if (left > window.innerWidth) {
-            return { left: window.innerWidth };
+          } else if (left > (window.innerWidth - 500)) {
+            return { left: (window.innerWidth - 500) };
           } else {
             return { left: 550 };
           }

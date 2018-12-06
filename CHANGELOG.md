@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.40.3] - 2018-12-06
+### Fixed
+- Set side panel widths to individual pages
+
 ## [0.40.2] - 2018-12-06
 ### Fixed
 - Issues with default table filters

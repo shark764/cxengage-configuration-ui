@@ -14,6 +14,7 @@ import {
   getConfirmationDialogType,
   getCurrentEntity,
   getSelectedEntityBulkChangeItems,
+  getSidePanelWidth,
 } from '../../redux/modules/entities/selectors';
 import { selectVisibleSubMenu } from '../../redux/modules/columnFilterMenus/selectors';
 
@@ -27,6 +28,7 @@ function mapStateToProps(state, props) {
     currentVisibleSubMenu: selectVisibleSubMenu(state, props),
     tableType: getCurrentEntity(state),
     bulkSelectedTotal: getSelectedEntityBulkChangeItems(state),
+    slidingWidth: getSidePanelWidth(state),
   };
 }
 

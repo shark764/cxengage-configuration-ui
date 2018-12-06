@@ -22,6 +22,7 @@ const initialState = fromJS({
   },
   lists: {
     ...defaultEntity,
+    sidePanelWidth: 750,
     subEntity: 'listItems',
     selectedSubEntityId: undefined,
     subEntitySaving: false,
@@ -45,6 +46,7 @@ const initialState = fromJS({
   },
   emailTemplates: {
     ...defaultEntity,
+    sidePanelWidth: 750,
     readPermission: ['USER_MANAGEMENT_EMAIL_READ'],
     updatePermission: ['USER_MANAGEMENT_EMAIL_UPDATE', 'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE']
   },
@@ -53,6 +55,7 @@ const initialState = fromJS({
     metaData: {
       listDependency: 'outboundIdentifiers'
     },
+    sidePanelWidth: 750,
     readPermission: ['OUTBOUND_IDENTIFIER_READ'],
     updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
     createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
@@ -126,6 +129,7 @@ const initialState = fromJS({
     metaData: {
       listDependency: 'users'
     },
+    sidePanelWidth: 750,
     readPermission: ['VIEW_ALL_SKILLS'],
     updatePermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
@@ -145,6 +149,7 @@ const initialState = fromJS({
     metaData: {
       listDependency: 'users'
     },
+    sidePanelWidth: 750,
     readPermission: ['VIEW_ALL_GROUPS'],
     updatePermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
@@ -175,6 +180,7 @@ const initialState = fromJS({
     metaData: {
       listDependency: 'users'
     },
+    sidePanelWidth: 750,
     readPermission: ['CUSTOM_STATS_READ'],
     updatePermission: ['CUSTOM_STATS_UPDATE'],
     createPermission: ['CUSTOM_STATS_CREATE']

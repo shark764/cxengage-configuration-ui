@@ -54,11 +54,11 @@ import DataAccessReportsDetailsPanel from '../SidePanelDetails/DataAccessReports
 const Wrapper = styled.div`
   height: 100vh;
   display: grid;
-
+  
   ${props =>
     props.isSidePanelOpen
       ? `
-    grid-template-columns: 1fr 550px;
+    grid-template-columns: 1fr ${props.slidingWidth}px;
     grid-template-areas:
       "table sidePanel";
   `
@@ -379,7 +379,7 @@ export default class CrudEndpointUiLayout extends Component {
 
   render() {
     return (
-      <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''}>
+      <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''} slidingWidth={this.props.slidingWidth}>
         <Table tableType={this.props.match.params.entityName}>
           <InlineCheckboxFilterMenu
             type="secondary"
