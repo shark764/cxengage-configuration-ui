@@ -2,14 +2,18 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
-export const selectTenantIdentityProviders = state => [
-  ...state
-    .getIn(['Entities', 'identityProviders', 'data'])
-    .toJS()
-    .filter(provider => provider.active)
-    .map(provider => ({
-      value: provider.id,
-      label: provider.name
-    })),
-  { value: 'null', label: 'Use Tenant Default: Enabled' }
-];
+export const selectTenantIdentityProviders = state => {
+  const providerData = state.getIn(['Entities', 'identityProviders', 'data']);
+  return [
+    ...(providerData
+      ? providerData
+          .toJS()
+          .filter(provider => provider.active)
+          .map(provider => ({
+            value: provider.id,
+            label: provider.name
+          }))
+      : []),
+    { value: 'null', label: 'Use Tenant Default: Enabled' }
+  ];
+};
