@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { CaretIconSVG } from 'cx-ui-components';
 import { fetchListItems } from '../../redux/modules/entities';
-import { getCurrentEntity } from '../../redux/modules/entities/selectors';
+import { getCurrentEntity, getSelectedEntityId } from '../../redux/modules/entities/selectors';
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -21,6 +21,11 @@ class DetailWrapper extends Component {
       open: props.open
     };
   }
+  componentDidUpdate({entityId}) {
+    if(entityId !== this.props.entityId) {
+      this.setState({open: false})
+    }
+  }
   toggle = () => {
     this.setState({ open: !this.state.open });
     if (this.props.contains) {
@@ -34,7 +39,11 @@ class DetailWrapper extends Component {
           <CaretIconSVG size={15} direction={this.state.open ? 'up' : 'down'} />
         </Wrapper>
         {!this.state.open && this.props.children[0]}
-        {this.state.open && this.props.children}
+        {this.state.open &&
+          React.Children.map(this.props.children, (child,index) =>
+            index === 0? React.cloneElement(child, { open: this.state.open }) : child)
+        }
+
       </span>
     );
   }
@@ -42,7 +51,8 @@ class DetailWrapper extends Component {
 
 export function mapStateToProps(state, props) {
   return {
-    entityName: getCurrentEntity(state)
+    entityName: getCurrentEntity(state),
+    entityId: getSelectedEntityId(state),
   };
 }
 
@@ -55,7 +65,7 @@ DetailWrapper.propTypes = {
   children: PropTypes.any,
   fetchListItems: PropTypes.func,
   entityName: PropTypes.string,
-  contains: PropTypes.string
+  entityId: PropTypes.string
 };
 
 export default connect(mapStateToProps, actions)(DetailWrapper);

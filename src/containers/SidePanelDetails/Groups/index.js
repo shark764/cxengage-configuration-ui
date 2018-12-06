@@ -7,7 +7,8 @@ import GroupsDetailsPanel from './layout';
 import {
   userHasUpdatePermission,
   getSelectedEntity,
-  isInherited
+  isInherited,
+  isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 import {
   setSelectedSubEntityId,
@@ -26,14 +27,13 @@ export function mapStateToProps(state, props) {
     inherited: isInherited(state),
     usersItems: getDependantEntityTableItems(state),
     usersFields: entitiesMetaData.users.memberListTableFields,
-    outboundIdentifierListsItems: getSidePanelTableItems(
-      state,
-      'outboundIdentifierLists'
-    ),
-    outboundIdentifierListsFields:
-      entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    usersFetching: isEntityFetching(state, 'users'),
+    outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
+    outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    outboundIdentifierListsFetching: isEntityFetching(state, 'outboundIdentifierLists'),
     reasonListsItems: getSidePanelTableItems(state, 'reasonLists'),
     reasonListsFields: entitiesMetaData.reasonLists.memberListTableFields,
+    reasonListsFetching: isEntityFetching(state, 'reasonLists'),
     defaultFilters: entitiesMetaData.groups.defaultAssociationFilters
   };
 }

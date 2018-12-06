@@ -14,6 +14,7 @@ import styled from 'styled-components';
 
 import { Detail, SidePanelTable, DetailHeader } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
+import { detailHeadertext } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,8 +30,10 @@ export default function SkillsDetailsPanel({
   userHasUpdatePermission,
   usersItems,
   usersFields,
+  usersFetching,
   outboundIdentifierListsItems,
   outboundIdentifierListsFields,
+  outboundIdentifierListsFetching,
   removeListItem,
   setSelectedSubEntityId,
   item: { name, description, active, hasProficiency },
@@ -50,7 +53,7 @@ export default function SkillsDetailsPanel({
       )}
       <DetailWrapper open={true}>
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
+          userHasUpdatePermission={!usersFetching && userHasUpdatePermission}
           text={`${usersItems.length > 1 ? usersItems.length : ''} Users`}
           onActionButtonClick={() => setSelectedSubEntityId('users')}
         />
@@ -62,14 +65,13 @@ export default function SkillsDetailsPanel({
           items={usersItems}
           fields={usersFields}
           filtered={defaultFilters.users}
+          fetching={usersFetching}
         />
       </DetailWrapper>
       <DetailWrapper open={false} contains="outboundIdentifierLists">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${
-            outboundIdentifierListsItems.length > 1 ? outboundIdentifierListsItems.length : ''
-          } Outbound Identifier Lists`}
+          userHasUpdatePermission={!outboundIdentifierListsFetching && userHasUpdatePermission}
+          text={detailHeadertext(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
           onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
         />
         <SidePanelTable
@@ -80,6 +82,7 @@ export default function SkillsDetailsPanel({
           items={outboundIdentifierListsItems}
           fields={outboundIdentifierListsFields}
           filtered={defaultFilters.outboundIdentifierLists}
+          fetching={outboundIdentifierListsFetching}
         />
       </DetailWrapper>
     </Wrapper>
@@ -97,10 +100,12 @@ SkillsDetailsPanel.propTypes = {
   children: PropTypes.any,
   usersItems: PropTypes.array,
   usersFields: PropTypes.array,
+  usersFetching: PropTypes.bool,
   outboundIdentifierListsItems: PropTypes.array,
   outboundIdentifierListsFields: PropTypes.array,
+  outboundIdentifierListsFetching: PropTypes.bool,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
-  listSize: PropTypes.number,
   defaultFilters: PropTypes.object
+
 };

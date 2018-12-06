@@ -4,8 +4,7 @@
 
 import { connect } from 'react-redux';
 import UsersDetailsPanel from './layout';
-
-import { userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import { userHasUpdatePermission, isEntityFetching } from '../../../redux/modules/entities/selectors';
 import {
   setSelectedSubEntityId,
   toggleListItemEntity
@@ -18,21 +17,22 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     skillsItems: getSidePanelTableItems(state, 'skills'),
     skillsFields: entitiesMetaData.skills.memberListTableFields,
+    skillsFetching: isEntityFetching(state, 'skills'),
     groupsItems: getSidePanelTableItems(state, 'groups'),
     groupsFields: entitiesMetaData.groups.memberListTableFields,
-    outboundIdentifierListsItems: getSidePanelTableItems(
-      state,
-      'outboundIdentifierLists'
-    ),
-    outboundIdentifierListsFields:
-      entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    groupsFetching: isEntityFetching(state, 'groups'),
+    outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
+    outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    outboundIdentifierListsFetching: isEntityFetching(state, 'outboundIdentifierLists'),
     reasonListsItems: getSidePanelTableItems(state, 'reasonLists'),
     reasonListsFields: entitiesMetaData.reasonLists.memberListTableFields,
+    reasonListsFetching: isEntityFetching(state, 'reasonLists'),
     transferListsItems: getSidePanelTableItems(state, 'transferLists'),
     transferListsFields: entitiesMetaData.transferLists.memberListTableFields,
+    transferListsFetching: isEntityFetching(state, 'transferLists'),
     messageTemplatesItems: getSidePanelTableItems(state, 'messageTemplates'),
-    messageTemplatesFields:
-      entitiesMetaData.messageTemplates.memberListTableFields,
+    messageTemplatesFields: entitiesMetaData.messageTemplates.memberListTableFields,
+    messageTemplatesFetching: isEntityFetching(state, 'messageTemplates'),
     defaultFilters: entitiesMetaData.users.defaultAssociationFilters
   };
 }

@@ -14,6 +14,7 @@ import styled from 'styled-components';
 
 import { Detail, SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
+import { detailHeadertext } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,10 +30,13 @@ export default function GroupsDetailsPanel({
   userHasUpdatePermission,
   usersItems,
   usersFields,
+  usersFetching,
   outboundIdentifierListsItems,
   outboundIdentifierListsFields,
+  outboundIdentifierListsFetching,
   reasonListsItems,
   reasonListsFields,
+  reasonListsFetching,
   removeListItem,
   setSelectedSubEntityId,
   inherited,
@@ -53,8 +57,8 @@ export default function GroupsDetailsPanel({
       )}
       <DetailWrapper open={true}>
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${usersItems.length > 1 ? usersItems.length : ''} Users`}
+          userHasUpdatePermission={!usersFetching && userHasUpdatePermission}
+          text={detailHeadertext(usersItems, 'Users')}
           onActionButtonClick={() => setSelectedSubEntityId('users')}
           inherited={inherited}
         />
@@ -66,14 +70,13 @@ export default function GroupsDetailsPanel({
           items={usersItems}
           fields={usersFields}
           filtered={defaultFilters.users}
+          fetching={usersFetching}
         />
       </DetailWrapper>
       <DetailWrapper open={false} contains="outboundIdentifierLists">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${
-            outboundIdentifierListsItems.length > 1 ? outboundIdentifierListsItems.length : ''
-          } Outbound Identifier Lists`}
+          userHasUpdatePermission={!outboundIdentifierListsFetching && userHasUpdatePermission}
+          text={detailHeadertext(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
           onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
           inherited={inherited}
         />
@@ -86,12 +89,13 @@ export default function GroupsDetailsPanel({
           inherited={inherited}
           fields={outboundIdentifierListsFields}
           filtered={defaultFilters.outboundIdentifierLists}
+          fetching={outboundIdentifierListsFetching}
         />
       </DetailWrapper>
       <DetailWrapper open={false} contains="reasonLists">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${reasonListsItems.length > 1 ? reasonListsItems.length : ''} Presence Reason Lists`}
+          userHasUpdatePermission={!reasonListsFetching && userHasUpdatePermission}
+          text={detailHeadertext(reasonListsItems, 'Presence Reason Lists')}
           onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
           inherited={inherited}
         />
@@ -104,6 +108,7 @@ export default function GroupsDetailsPanel({
           inherited={inherited}
           fields={reasonListsFields}
           filtered={defaultFilters.reasonLists}
+          fetching={reasonListsFetching}
         />
       </DetailWrapper>
     </Wrapper>
@@ -121,12 +126,14 @@ GroupsDetailsPanel.propTypes = {
   children: PropTypes.any,
   usersItems: PropTypes.array,
   usersFields: PropTypes.array,
+  usersFetching: PropTypes.bool,
   reasonListsItems: PropTypes.array,
   reasonListsFields: PropTypes.array,
+  reasonListsFetching: PropTypes.bool,
   outboundIdentifierListsItems: PropTypes.array,
   outboundIdentifierListsFields: PropTypes.array,
+  outboundIdentifierListsFetching: PropTypes.bool,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
-  listSize: PropTypes.number,
   defaultFilters: PropTypes.object
 };

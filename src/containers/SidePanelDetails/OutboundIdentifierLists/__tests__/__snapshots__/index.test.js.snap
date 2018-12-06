@@ -13,7 +13,7 @@ Object {
     ],
     "name": "mockName",
   },
-  "listSize": 0,
+  "outboundIdentifiersFetching": undefined,
   "tableFields": Array [
     Object {
       "label": "First Name",
@@ -50,7 +50,6 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
       "name": "mockName",
     }
   }
-  listSize={0}
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
   store={

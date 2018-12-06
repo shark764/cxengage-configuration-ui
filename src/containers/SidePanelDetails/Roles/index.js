@@ -9,7 +9,8 @@ import {
   userHasUpdatePermission,
   getSelectedEntity,
   getCurrentEntity,
-  isInherited
+  isInherited,
+  isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 
 import {
@@ -31,6 +32,7 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     tableItems: getEntityListMembers(state),
     tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
+    rolesFetching: isEntityFetching(state, 'roles'),
     listSize: getListSize(state),
     inherited: isInherited(state)
   };

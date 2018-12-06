@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import { Detail } from 'cx-ui-components';
 import { DetailHeader } from 'cx-ui-components';
 import { SidePanelTable } from 'cx-ui-components';
+import { detailHeadertext } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ export default function OutboundIdentifierListsDetailsPanel({
   className,
   tableItems,
   tableFields,
+  outboundIdentifiersFetching,
   toggleEntityListItemActive,
   removeListItem,
   setSelectedSubEntityId,
@@ -47,9 +49,10 @@ export default function OutboundIdentifierListsDetailsPanel({
         </Fragment>
       )}
       <DetailHeader
-        userHasUpdatePermission={userHasUpdatePermission}
-        text={`${listSize} List Item(s)`}
+        userHasUpdatePermission={!outboundIdentifiersFetching && userHasUpdatePermission}
+        text={detailHeadertext(tableItems, 'Outbound Identifiers')}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
+        open
       />
       <SidePanelTable
         tableType={'sidePanel'}
@@ -58,6 +61,7 @@ export default function OutboundIdentifierListsDetailsPanel({
         toggleSubEntityActive={toggleEntityListItemActive}
         items={tableItems}
         fields={tableFields}
+        fetching={outboundIdentifiersFetching}
       />
     </Wrapper>
   );
@@ -74,8 +78,8 @@ OutboundIdentifierListsDetailsPanel.propTypes = {
   children: PropTypes.any,
   tableItems: PropTypes.array,
   tableFields: PropTypes.array,
+  outboundIdentifiersFetching: PropTypes.bool,
   toggleEntityListItemActive: PropTypes.func,
   removeListItem: PropTypes.func,
-  setSelectedSubEntityId: PropTypes.func,
-  listSize: PropTypes.number
+  setSelectedSubEntityId: PropTypes.func
 };

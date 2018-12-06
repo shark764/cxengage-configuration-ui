@@ -14,12 +14,14 @@ import {
 import {
   getCurrentEntity,
   userHasCreatePermission,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  isEntityFetching,
 } from '../../redux/modules/entities/selectors';
 import {
   selectVisibleSubMenu,
   selectTableColumns
 } from '../../redux/modules/columnFilterMenus/selectors';
+
 import { setVisibleMenu } from '../../redux/modules/columnFilterMenus';
 import { getHelpLink, getAllEntities } from './selectors';
 import { getTableColumns } from './config';
@@ -37,7 +39,8 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     entityMetadata: entity,
     currentVisibleSubMenu: selectVisibleSubMenu(state, props),
-    filtered: defaultFilters
+    filtered: defaultFilters,
+    fetching: isEntityFetching(state)
   };
 }
 

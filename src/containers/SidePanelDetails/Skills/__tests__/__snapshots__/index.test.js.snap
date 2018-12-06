@@ -32,6 +32,7 @@ Object {
       },
     ],
   },
+  "outboundIdentifierListsFetching": undefined,
   "outboundIdentifierListsFields": Array [
     Object {
       "label": "Name",
@@ -53,6 +54,7 @@ Object {
   ],
   "outboundIdentifierListsItems": undefined,
   "userHasUpdatePermission": true,
+  "usersFetching": undefined,
   "usersFields": Array [
     Object {
       "label": "First Name",

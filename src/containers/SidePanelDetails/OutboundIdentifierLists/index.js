@@ -10,7 +10,7 @@ import {
   getSelectedEntity,
   getCurrentEntity,
   getEntityListMembers,
-  getListSize
+  isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 
 import { toggleEntityListItemActive, setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
@@ -23,7 +23,7 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     tableItems: getEntityListMembers(state),
     tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
-    listSize: getListSize(state)
+    outboundIdentifiersFetching: isEntityFetching(state, 'outboundIdentifiers'),
   };
 }
 

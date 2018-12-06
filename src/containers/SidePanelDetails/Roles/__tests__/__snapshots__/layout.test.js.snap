@@ -7,7 +7,8 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel 1`] = `
   Mock Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined Permission(s)"
+    open={true}
+    text="undefined Permissions"
     userHasUpdatePermission={true}
   />
   <_class2
@@ -33,7 +34,8 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with no update permisi
   </React.Fragment>
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined Permission(s)"
+    open={true}
+    text="undefined Permissions"
     userHasUpdatePermission={false}
   />
   <_class2
@@ -50,7 +52,8 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with status disabled 1
   Mock Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined Permission(s)"
+    open={true}
+    text="undefined Permissions"
     userHasUpdatePermission={true}
   />
   <_class2

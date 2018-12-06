@@ -11,7 +11,8 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
   Child
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined List Item(s)"
+    open={true}
+    text="Outbound Identifiers"
     userHasUpdatePermission={true}
   />
   <_class2
@@ -41,7 +42,8 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders without update perm
   </React.Fragment>
   <DetailHeader
     onActionButtonClick={[Function]}
-    text="undefined List Item(s)"
+    open={true}
+    text="Outbound Identifiers"
     userHasUpdatePermission={false}
   />
   <_class2

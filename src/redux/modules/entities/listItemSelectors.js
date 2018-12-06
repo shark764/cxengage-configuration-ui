@@ -25,12 +25,10 @@ export const getSidePanelTableItems = (state, entityName) => {
   const selectedEntity = getSelectedEntity(state);
   const requestedIds = selectedEntity && selectedEntity.getIn([entityName], new List([])).toJS();
   const requestedItems = state.getIn(['Entities', entityName, 'data']);
-  if (requestedItems !== undefined) {
+  if (requestedItems) {
     return requestedItems.toJS().filter(member => requestedIds.includes(member.id));
   } else {
-    const returnedvalue = [];
-    returnedvalue.noData = true;
-    return returnedvalue;
+    return requestedItems;
   }
 };
 

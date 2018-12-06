@@ -30,6 +30,14 @@ export const getConfirmationDialogMetaData = state => getCurrentEntityStore(stat
 
 export const getAllEntities = state => getCurrentEntityStore(state).get('data');
 
+export const isEntityFetching = (state, entityName) => {
+  if(entityName) {
+    return getEntities(state).getIn([entityName,'fetching'])
+  } else {
+    return getCurrentEntityStore(state).get('fetching');
+  }
+}
+
 export const getSelectedEntity = createSelector(
   [getCurrentEntity, getAllEntities, getSelectedEntityId],
   (currentEntity, allEntities, selectedEntityId) =>

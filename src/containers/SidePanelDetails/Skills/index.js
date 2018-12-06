@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import SkillsDetailsPanel from './layout';
 import {
   userHasUpdatePermission,
-  getSelectedEntity
+  getSelectedEntity,
+  isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 import {
   setSelectedSubEntityId,
@@ -24,12 +25,10 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     usersItems: getDependantEntityTableItems(state),
     usersFields: entitiesMetaData.users.memberListTableFields,
-    outboundIdentifierListsItems: getSidePanelTableItems(
-      state,
-      'outboundIdentifierLists'
-    ),
-    outboundIdentifierListsFields:
-      entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    usersFetching: isEntityFetching(state, 'users'),
+    outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
+    outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
+    outboundIdentifierListsFetching: isEntityFetching(state, 'outboundIdentifierLists'),
     defaultFilters: entitiesMetaData.skills.defaultAssociationFilters
   };
 }

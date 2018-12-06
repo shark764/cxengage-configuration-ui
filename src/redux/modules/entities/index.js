@@ -311,6 +311,9 @@ export default function reducer(state = initialState, action) {
       const { tenantId } = action.tenantInfo;
       return state.set('currentTenantId', tenantId);
     }
+    case 'FETCH_DATA': {
+      return state.setIn([action.entityName, 'fetching'], true);
+    }
     case 'FETCH_DATA_FULFILLED': {
       // As we recieve the data we tag on the items that are considered inherited
       // or system default as the api does not provide us with this info directly
@@ -325,14 +328,14 @@ export default function reducer(state = initialState, action) {
             ...entity,
             inherited: entity.tenantId !== state.get('currentTenantId')
           }));
-          return state.setIn([entityName, 'data'], fromJS(newResult));
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName,'fetching']);
         }
         case 'groups': {
           const newResult = result.map(entity => ({ ...entity, inherited: entity.name === 'everyone' }));
-          return state.setIn([entityName, 'data'], fromJS(newResult));
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName,'fetching']);
         }
         default:
-          return state.setIn([entityName, 'data'], fromJS(result));
+          return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName,'fetching']);
       }
     }
     case 'FETCH_DATA_REJECTED': {

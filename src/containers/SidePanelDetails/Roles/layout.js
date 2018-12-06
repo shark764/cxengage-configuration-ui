@@ -24,6 +24,7 @@ export function RolesDetailsPanel({
   userHasUpdatePermission,
   tableItems,
   tableFields,
+  rolesFetching,
   inherited,
   removeListItem,
   setSelectedSubEntityId,
@@ -44,9 +45,10 @@ export function RolesDetailsPanel({
 
       <DetailHeader
         userHasUpdatePermission={userHasUpdatePermission}
-        text={`${listSize} Permission(s)`}
+        text={`${listSize} Permissions`}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
         inherited={inherited}
+        open
       />
       <SidePanelTable
         tableType={'sidePanel'}
@@ -55,6 +57,7 @@ export function RolesDetailsPanel({
         items={tableItems}
         inherited={inherited}
         fields={tableFields}
+        fetching={rolesFetching}
       />
     </Wrapper>
   );
@@ -65,6 +68,7 @@ RolesDetailsPanel.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string
   }),
+  rolesFetching: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
   tableItems: PropTypes.array,

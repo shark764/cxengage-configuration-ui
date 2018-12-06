@@ -204,6 +204,7 @@ Object {
       },
     ],
   },
+  "outboundIdentifierListsFetching": undefined,
   "outboundIdentifierListsFields": Array [
     Object {
       "label": "Name",
@@ -224,6 +225,7 @@ Object {
     },
   ],
   "outboundIdentifierListsItems": undefined,
+  "reasonListsFetching": undefined,
   "reasonListsFields": Array [
     Object {
       "label": "Name",
@@ -245,6 +247,7 @@ Object {
   ],
   "reasonListsItems": undefined,
   "userHasUpdatePermission": true,
+  "usersFetching": undefined,
   "usersFields": Array [
     Object {
       "label": "First Name",

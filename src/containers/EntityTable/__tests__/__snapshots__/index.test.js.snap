@@ -16,6 +16,7 @@ Object {
   ],
   "currentVisibleSubMenu": "none",
   "entityMetadata": undefined,
+  "fetching": false,
   "filtered": Array [],
   "items": Array [
     "mock all entities",

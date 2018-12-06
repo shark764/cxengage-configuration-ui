@@ -40,6 +40,7 @@ Object {
       },
     ],
   },
+  "groupsFetching": undefined,
   "groupsFields": Array [
     Object {
       "label": "Name",
@@ -60,6 +61,7 @@ Object {
     },
   ],
   "groupsItems": Array [],
+  "messageTemplatesFetching": undefined,
   "messageTemplatesFields": Array [
     Object {
       "label": "Name",
@@ -71,6 +73,7 @@ Object {
     },
   ],
   "messageTemplatesItems": Array [],
+  "outboundIdentifierListsFetching": undefined,
   "outboundIdentifierListsFields": Array [
     Object {
       "label": "Name",
@@ -91,6 +94,7 @@ Object {
     },
   ],
   "outboundIdentifierListsItems": Array [],
+  "reasonListsFetching": undefined,
   "reasonListsFields": Array [
     Object {
       "label": "Name",
@@ -111,6 +115,7 @@ Object {
     },
   ],
   "reasonListsItems": Array [],
+  "skillsFetching": undefined,
   "skillsFields": Array [
     Object {
       "label": "Name",
@@ -131,6 +136,7 @@ Object {
     },
   ],
   "skillsItems": Array [],
+  "transferListsFetching": undefined,
   "transferListsFields": Array [
     Object {
       "label": "Name",

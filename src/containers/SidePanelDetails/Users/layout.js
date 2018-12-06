@@ -14,6 +14,7 @@ import styled from 'styled-components';
 
 import { SidePanelTable, DetailHeader } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
+import { detailHeadertext } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,16 +30,22 @@ export default function UsersDetailsPanel({
   userHasUpdatePermission,
   skillsItems,
   skillsFields,
+  skillsFetching,
   groupsItems,
   groupsFields,
+  groupsFetching,
   reasonListsItems,
   reasonListsFields,
+  reasonListsFetching,
   outboundIdentifierListsItems,
   outboundIdentifierListsFields,
+  outboundIdentifierListsFetching,
   transferListsItems,
   transferListsFields,
+  transferListsFetching,
   messageTemplatesItems,
   messageTemplatesFields,
+  messageTemplatesFetching,
   removeListItem,
   setSelectedSubEntityId,
   defaultFilters
@@ -49,59 +56,62 @@ export default function UsersDetailsPanel({
 
       <DetailWrapper open={false} contains="skills">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${skillsItems.length > 1 ? skillsItems.length : ''} Skills`}
+          userHasUpdatePermission={!skillsFetching && userHasUpdatePermission}
+          text={detailHeadertext(skillsItems, 'Skills')}
           onActionButtonClick={() => setSelectedSubEntityId('skills')}
         />
         <SidePanelTable
           tableType={'sidePanel'}
           contains="skills"
-          userHasUpdatePermission={userHasUpdatePermission}
+          userHasUpdatePermission={!skillsFetching && userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={skillsItems}
           fields={skillsFields}
           filtered={defaultFilters.skills}
+          fetching={skillsFetching}
         />
       </DetailWrapper>
 
       <DetailWrapper open={false} contains="groups">
         <WrappedDetailHeader
           userHasUpdatePermission={userHasUpdatePermission}
-          text={`${groupsItems.length > 1 ? groupsItems.length : ''} Groups`}
+          text={detailHeadertext(groupsItems, 'Groups')}
           onActionButtonClick={() => setSelectedSubEntityId('groups')}
         />
         <SidePanelTable
           tableType={'sidePanel'}
           contains="groups"
-          userHasUpdatePermission={userHasUpdatePermission}
+          userHasUpdatePermission={!groupsFetching && userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={groupsItems}
           fields={groupsFields}
           filtered={defaultFilters.groups}
+          fetching={groupsFetching}
         />
       </DetailWrapper>
 
       <DetailWrapper open={false} contains="reasonLists">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${reasonListsItems.length > 1 ? reasonListsItems.length : ''} Presence Reason Lists`}
+          userHasUpdatePermission={!reasonListsFetching && userHasUpdatePermission}
+          text={detailHeadertext(reasonListsItems, 'Presence Reason Lists')}
           onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
         />
         <SidePanelTable
           tableType={'sidePanel'}
           contains="reasonLists"
-          userHasUpdatePermission={userHasUpdatePermission}
+          userHasUpdatePermission={!reasonListsFetching && userHasUpdatePermission}
           deleteSubEntity={removeListItem}
           items={reasonListsItems}
           fields={reasonListsFields}
           filtered={defaultFilters.reasonLists}
+          fetching={reasonListsFetching}
         />
       </DetailWrapper>
 
       <DetailWrapper open={false} contains="messageTemplates">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${messageTemplatesItems.length > 1 ? messageTemplatesItems.length : ''} Message Templates`}
+          userHasUpdatePermission={!messageTemplatesFetching && userHasUpdatePermission}
+          text={detailHeadertext(messageTemplatesItems, 'Message Templates')}
           onActionButtonClick={() => setSelectedSubEntityId('messageTemplates')}
         />
         <SidePanelTable
@@ -112,13 +122,14 @@ export default function UsersDetailsPanel({
           items={messageTemplatesItems}
           fields={messageTemplatesFields}
           filtered={defaultFilters.messageTemplates}
+          fetching={messageTemplatesFetching}
         />
       </DetailWrapper>
 
       <DetailWrapper open={false} contains="transferLists">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${transferListsItems.length > 1 ? transferListsItems.length : ''} Transfer Lists`}
+          userHasUpdatePermission={!transferListsFetching && userHasUpdatePermission}
+          text={detailHeadertext(transferListsItems, 'Transfer Lists')}
           onActionButtonClick={() => setSelectedSubEntityId('transferLists')}
         />
         <SidePanelTable
@@ -129,15 +140,14 @@ export default function UsersDetailsPanel({
           items={transferListsItems}
           fields={transferListsFields}
           filtered={defaultFilters.transferLists}
+          fetching={transferListsFetching}
         />
       </DetailWrapper>
 
       <DetailWrapper open={false} contains="outboundIdentifierLists">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
-          text={`${
-            outboundIdentifierListsItems.length > 1 ? outboundIdentifierListsItems.length : ''
-          } Outbound Identifier Lists`}
+          userHasUpdatePermission={!outboundIdentifierListsFetching && userHasUpdatePermission}
+          text={detailHeadertext(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
           onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
         />
         <SidePanelTable
@@ -148,6 +158,7 @@ export default function UsersDetailsPanel({
           items={outboundIdentifierListsItems}
           fields={outboundIdentifierListsFields}
           filtered={defaultFilters.outboundIdentifierLists}
+          fetching={outboundIdentifierListsFetching}
         />
       </DetailWrapper>
     </Wrapper>
@@ -159,16 +170,22 @@ UsersDetailsPanel.propTypes = {
   children: PropTypes.any,
   skillsItems: PropTypes.array,
   skillsFields: PropTypes.array,
+  skillsFetching: PropTypes.bool,
   groupsItems: PropTypes.array,
   groupsFields: PropTypes.array,
+  groupsFetching: PropTypes.bool,
   reasonListsItems: PropTypes.array,
   reasonListsFields: PropTypes.array,
+  reasonListsFetching: PropTypes.bool,
   messageTemplatesItems: PropTypes.array,
   messageTemplatesFields: PropTypes.array,
+  messageTemplatesFetching: PropTypes.bool,
   transferListsItems: PropTypes.array,
   transferListsFields: PropTypes.array,
+  transferListsFetching: PropTypes.bool,
   outboundIdentifierListsItems: PropTypes.array,
   outboundIdentifierListsFields: PropTypes.array,
+  outboundIdentifierListsFetching: PropTypes.bool,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.object
