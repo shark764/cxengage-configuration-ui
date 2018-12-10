@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.40.6] - 2018-12-12
+### Added
+- CXV1-16327 - Users form validation
+
 ## [0.40.5] - 2018-12-12
 ### Added
 - CXV1-15514 - ability to change users capacity rule

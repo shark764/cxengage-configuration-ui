@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "email": "Please enter an email",
+  "platformRoleId": "Please select a Platform Role",
+  "roleId": "Please select a Tenant Role",
+}
+`;
+
+exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
+Object {
+  "email": "Please enter an email",
+  "platformRoleId": "Please select a Platform Role",
+  "roleId": "Please select a Tenant Role",
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "email": false,
+  "platformRoleId": false,
+  "roleId": false,
+}
+`;
