@@ -56,6 +56,60 @@ Object {
     "title": "Brandin",
     "updateFormDependencies": Array [],
   },
+  "capacityRules": EntityMetaData {
+    "betaFeature": false,
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "dependentEntity": "",
+    "entityName": "capacityRules",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Capacity Rules",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Capacity Rule",
+    "updateFormDependencies": Array [],
+  },
   "chatWidgets": EntityMetaData {
     "betaFeature": false,
     "columns": Array [
@@ -2108,6 +2162,7 @@ Object {
       "roles",
       "platformRoles",
       "identityProviders",
+      "capacityRules",
     ],
   },
 }

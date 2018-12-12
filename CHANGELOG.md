@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.40.5] - 2018-12-12
+### Added
+- CXV1-15514 - ability to change users capacity rule
+
 ## [0.40.4] - 2018-12-06
 ### Fixed
 - CXV1-16385 - Fixed error that broke users page when they did not have IDP's.

@@ -44,18 +44,9 @@ export class EntityMetaData {
      */
     this.createFormDependencies = [];
     this.updateFormDependencies = [];
-    this.entityTableFields = [
-      { label: 'Name', name: 'name' },
-      { label: 'Description', name: 'description' }
-    ];
-    this.sidePanelListTableFields = [
-      { label: 'Name', name: 'name' },
-      { label: 'Description', name: 'description' }
-    ];
-    this.modalListTableFields = [
-      { label: 'Name', name: 'name' },
-      { label: 'Description', name: 'description' }
-    ];
+    this.entityTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.defaultFilters = [];
     this.defaultDependentEntityFilters = [];
     this.defaultAssociationFilters = [];
@@ -71,23 +62,15 @@ export class EntityMetaData {
    * @param {string} entityType inidcate if this is a 'mainEntity' , a singleMainEntity, or a 'subEntity'
    */
   entityApiRequest(apiMethod, entityType) {
-    const mainEntityCommand = `${apiMethod}${capitalizeFirstLetter(
-      this.entityName
-    )}`;
-    const mainEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
-      this.entityName
-    )}-response`;
+    const mainEntityCommand = `${apiMethod}${capitalizeFirstLetter(this.entityName)}`;
+    const mainEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(this.entityName)}-response`;
 
-    const singleEntityCommand = `${apiMethod}${capitalizeFirstLetter(
-      removeLastLetter(this.entityName)
-    )}`;
+    const singleEntityCommand = `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.entityName))}`;
     const singleEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
       removeLastLetter(this.entityName)
     )}-response`;
 
-    const subEntityCommand = `${apiMethod}${capitalizeFirstLetter(
-      removeLastLetter(this.subEntityName)
-    )}`;
+    const subEntityCommand = `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.subEntityName))}`;
     const subEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
       removeLastLetter(this.subEntityName)
     )}-response`;
@@ -122,19 +105,13 @@ export class EntityMetaData {
     if (apiMethod === 'update') {
       return {
         ...this.sdkCall,
-        command: `${apiMethod}${capitalizeFirstLetter(
-          removeLastLetter(this.dependentEntity)
-        )}`,
-        topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
-          removeLastLetter(this.dependentEntity)
-        )}-response`
+        command: `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.dependentEntity))}`,
+        topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(removeLastLetter(this.dependentEntity))}-response`
       };
     } else {
       return {
         ...this.sdkCall,
-        command: `${apiMethod}${capitalizeFirstLetter(
-          removeLastLetter(this.dependentEntity)
-        )}ListMember`,
+        command: `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.dependentEntity))}ListMember`,
         topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
           removeLastLetter(this.dependentEntity)
         )}-list-member-response`
@@ -142,11 +119,7 @@ export class EntityMetaData {
     }
   }
   bulkEditsAvailable() {
-    return (
-      this.entityName !== 'emailTemplates' &&
-      this.entityName !== 'roles' &&
-      location.hash.includes('alpha')
-    );
+    return this.entityName !== 'emailTemplates' && this.entityName !== 'roles' && location.hash.includes('alpha');
   }
 }
 
@@ -158,6 +131,7 @@ export class EntityMetaData {
 
 export const listOfEntities = [
   'branding',
+  'capacityRules',
   'chatWidgets',
   'customMetrics',
   'dashboards',
@@ -191,16 +165,8 @@ listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
 // Users
 entities.users.pageTitle = 'User Management';
 entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
-entities.users.createFormDependencies.push(
-  'roles',
-  'platformRoles',
-  'identityProviders'
-);
-entities.users.updateFormDependencies.push(
-  'roles',
-  'platformRoles',
-  'identityProviders'
-);
+entities.users.createFormDependencies.push('roles', 'platformRoles', 'identityProviders');
+entities.users.updateFormDependencies.push('roles', 'platformRoles', 'identityProviders', 'capacityRules');
 entities.users.memberListTableFields = [
   { label: 'First Name', name: 'firstName' },
   { label: 'Last Name', name: 'lastName' },
@@ -215,14 +181,7 @@ entities.users.memberListTableFields = [
     label: 'Platform Status',
     name: 'invitationStatus',
     type: 'select',
-    filterOptions: [
-      'pending',
-      'invited',
-      'expired',
-      'enabled',
-      'disabled',
-      'sso-only'
-    ]
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
   }
 ];
 entities.users.associations = {
@@ -246,10 +205,7 @@ entities.users.columns = [
   { name: 'Platform Status', active: true },
   { name: 'Tenant Status', active: true }
 ];
-entities.users.defaultFilters = [
-  { id: 'status', value: 'accepted' },
-  { id: 'invitationStatus', value: 'enabled' }
-];
+entities.users.defaultFilters = [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }];
 entities.users.defaultAssociationFilters = {
   skills: [{ id: 'active', value: 'enabled' }],
   groups: [{ id: 'active', value: 'enabled' }],
@@ -296,10 +252,7 @@ entities.skills.columns = [
 ];
 entities.skills.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.skills.defaultAssociationFilters = {
-  users: [
-    { id: 'status', value: 'accepted' },
-    { id: 'invitationStatus', value: 'enabled' }
-  ],
+  users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }]
 };
 
@@ -344,10 +297,7 @@ entities.groups.columns = [
 ];
 entities.groups.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.groups.defaultAssociationFilters = {
-  users: [
-    { id: 'status', value: 'accepted' },
-    { id: 'invitationStatus', value: 'enabled' }
-  ],
+  users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }],
   reasonLists: [{ id: 'active', value: 'enabled' }]
 };
@@ -374,9 +324,7 @@ entities.outboundIdentifiers.columns = [
 ];
 
 // Outbound Identifiers Lists
-entities.outboundIdentifierLists.updateFormDependencies.push(
-  'outboundIdentifiers'
-);
+entities.outboundIdentifierLists.updateFormDependencies.push('outboundIdentifiers');
 entities.outboundIdentifierLists.dependentEntity = 'outboundIdentifiers';
 entities.outboundIdentifierLists.modalListTableFields = [
   { label: 'Name', name: 'name' },
@@ -400,10 +348,7 @@ entities.outboundIdentifierLists.sidePanelListTableFields = [
   { label: 'Channel Type', name: 'channelType' },
   { label: 'Description', name: 'description' }
 ];
-entities.outboundIdentifierLists.columns = [
-  { name: 'Name', active: true },
-  { name: 'Description', active: true }
-];
+entities.outboundIdentifierLists.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Roles
 entities.roles.pageTitle = 'Role Management';
@@ -438,8 +383,7 @@ entities.interactionMonitoring.columns = [
 
 // Custom Metrics
 entities.customMetrics.pageTitle = 'Statistics Management';
-entities.customMetrics.helpLink =
-  '/Help/Content/Configuration/Statistics_Management/About_Statistics_Management.htm';
+entities.customMetrics.helpLink = '/Help/Content/Configuration/Statistics_Management/About_Statistics_Management.htm';
 entities.customMetrics.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -448,12 +392,8 @@ entities.customMetrics.columns = [
 ];
 
 // Email Templates
-entities.emailTemplates.helpLink =
-  '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
-entities.emailTemplates.columns = [
-  { name: 'Name', active: true },
-  { name: 'Description', active: true }
-];
+entities.emailTemplates.helpLink = '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
+entities.emailTemplates.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Chat Widgets
 entities.chatWidgets.columns = [
@@ -464,8 +404,7 @@ entities.chatWidgets.columns = [
 
 // Presence Reasons Lists
 entities.reasonLists.pageTitle = 'Reason List Management';
-entities.reasonLists.helpLink =
-  '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
+entities.reasonLists.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
 entities.reasonLists.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -484,8 +423,7 @@ entities.reasonLists.memberListTableFields = [
 
 // Message Templates
 entities.messageTemplates.pageTitle = 'Message Templates';
-entities.messageTemplates.helpLink =
-  '/Help/Content/Configuration/Messaging_Templates/Creating_Messaging_Templates.htm';
+entities.messageTemplates.helpLink = '/Help/Content/Configuration/Messaging_Templates/Creating_Messaging_Templates.htm';
 entities.messageTemplates.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -500,8 +438,7 @@ entities.messageTemplates.memberListTableFields = [
 
 // Transfer Lists
 entities.transferLists.pageTitle = 'Transfer Lists';
-entities.transferLists.helpLink =
-  '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
+entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
 entities.transferLists.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -521,8 +458,7 @@ entities.transferLists.memberListTableFields = [
 // Data Access Report
 entities.dataAccessReports.title = 'Access Controlled Report';
 entities.dataAccessReports.pageTitle = 'Access Controlled Reports';
-entities.dataAccessReports.helpLink =
-  '/Help/Content/Reporting/Access_Controlled_Reports/Create.htm';
+entities.dataAccessReports.helpLink = '/Help/Content/Reporting/Access_Controlled_Reports/Create.htm';
 entities.dataAccessReports.createFormDependencies = [
   ...entities.dataAccessReports.createFormDependencies,
   'users',
@@ -558,19 +494,10 @@ entities.dataAccessReports.modalListTableFields = [
     label: 'Platform Status',
     name: 'invitationStatus',
     type: 'select',
-    filterOptions: [
-      'pending',
-      'invited',
-      'expired',
-      'enabled',
-      'disabled',
-      'sso-only'
-    ]
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
   }
 ];
-entities.dataAccessReports.defaultFilters = [
-  { id: 'active', value: 'enabled' }
-];
+entities.dataAccessReports.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.dataAccessReports.defaultDependentEntityFilters = [
   { id: 'invitationStatus', value: 'enabled' },
   { id: 'status', value: 'accepted' }
@@ -589,14 +516,7 @@ entities.dataAccessReports.sidePanelListTableFields = [
     label: 'Platform Status',
     name: 'invitationStatus',
     type: 'select',
-    filterOptions: [
-      'pending',
-      'invited',
-      'expired',
-      'enabled',
-      'disabled',
-      'sso-only'
-    ]
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
   }
 ];
 entities.dataAccessReports.columns = [

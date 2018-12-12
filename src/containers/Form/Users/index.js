@@ -18,6 +18,7 @@ import { selectFormInitialValues, createFormName } from '../../../redux/modules/
 import { getUserTenantStatus, getInvitationScenario } from '../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../redux/modules/entities/identityProviders/selectors';
+import { getCapacityRulesSelector } from '../../../redux/modules/entities/capacityRules/selectors';
 
 const CreateUsersForm = compose(
   connect(createFormName),
@@ -36,6 +37,7 @@ export function mapStateToProps(state) {
   return {
     platformRoles: selectPlatformRoles(state),
     tenantRoles: selectTenantRoles(state),
+    capacityRules: getCapacityRulesSelector(state),
     tenantIdentityProviders: selectTenantIdentityProviders(state),
     status: getUserTenantStatus(state),
     scenario: getInvitationScenario(state),

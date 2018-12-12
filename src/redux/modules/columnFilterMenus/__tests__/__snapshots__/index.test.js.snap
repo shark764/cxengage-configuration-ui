@@ -531,6 +531,10 @@ Immutable.Map {
       },
     ],
   },
+  "capacityRules": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "roles": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [
