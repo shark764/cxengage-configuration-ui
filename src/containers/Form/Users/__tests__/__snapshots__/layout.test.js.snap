@@ -102,14 +102,14 @@ exports[`<UsersForm /> renders create user 1`] = `
             },
           ]
         }
-        required={false}
+        required={true}
       />
       <SelectField
         disabled={false}
         id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
-        required={false}
+        required={true}
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
@@ -123,6 +123,20 @@ exports[`<UsersForm /> renders create user 1`] = `
         disabled={false}
         label="Inputs"
         name="extensions"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Capacity"
+      />
+      <SelectField
+        disabled={false}
+        id="frm-users-capacity-rule"
+        label="Capacity Rule"
+        name="effectiveCapacityRule"
+        required={true}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -231,14 +245,14 @@ exports[`<UsersForm /> renders update user 1`] = `
             },
           ]
         }
-        required={false}
+        required={true}
       />
       <SelectField
         disabled={false}
         id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
-        required={false}
+        required={true}
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
@@ -252,6 +266,20 @@ exports[`<UsersForm /> renders update user 1`] = `
         disabled={false}
         label="Inputs"
         name="extensions"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Capacity"
+      />
+      <SelectField
+        disabled={false}
+        id="frm-users-capacity-rule"
+        label="Capacity Rule"
+        name="effectiveCapacityRule"
+        required={true}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -360,14 +388,14 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
             },
           ]
         }
-        required={false}
+        required={true}
       />
       <SelectField
         disabled={true}
         id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
-        required={false}
+        required={true}
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
@@ -381,6 +409,20 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         disabled={false}
         label="Inputs"
         name="extensions"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Capacity"
+      />
+      <SelectField
+        disabled={true}
+        id="frm-users-capacity-rule"
+        label="Capacity Rule"
+        name="effectiveCapacityRule"
+        required={true}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -489,14 +531,14 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
             },
           ]
         }
-        required={false}
+        required={true}
       />
       <SelectField
         disabled={true}
         id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
-        required={false}
+        required={true}
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
@@ -510,6 +552,20 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         disabled={false}
         label="Inputs"
         name="extensions"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Capacity"
+      />
+      <SelectField
+        disabled={true}
+        id="frm-users-capacity-rule"
+        label="Capacity Rule"
+        name="effectiveCapacityRule"
+        required={true}
       />
     </Connect(DetailWrapper)>
   </styled.div>

@@ -32,6 +32,7 @@ export default function UsersForm({
   tenantIdentityProviders,
   isSaving,
   userHasUpdatePermission,
+  capacityRules,
   key
 }) {
   return (
@@ -105,6 +106,7 @@ export default function UsersForm({
               { label: 'Enabled', value: true },
               { label: 'Disabled', value: false }
             ]}
+            required
           />
           <SelectField
             name="defaultIdentityProvider"
@@ -112,12 +114,25 @@ export default function UsersForm({
             id="frm-users-default-identity-provider-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantIdentityProviders}
+            required
           />
         </DetailWrapper>
 
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Extensions" />
           <ExtensionListField className="users-extensions" name="extensions" label="Inputs" />
+        </DetailWrapper>
+
+        <DetailWrapper open={true}>
+          <WrappedDetailHeader text="Capacity" />
+          <SelectField
+            name="effectiveCapacityRule"
+            label="Capacity Rule"
+            id="frm-users-capacity-rule"
+            disabled={isSaving || !userHasUpdatePermission}
+            options={capacityRules}
+            required
+          />
         </DetailWrapper>
       </Wrapper>
     </form>
@@ -146,6 +161,12 @@ UsersForm.propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string.isRequired
+    })
+  ),
+  capacityRules: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string
     })
   ),
   status: PropTypes.string,

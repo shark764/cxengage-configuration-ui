@@ -529,6 +529,12 @@ Immutable.Map {
       "OUTBOUND_IDENTIFIER_ASSIGN",
     ],
   },
+  "capacityRules": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+  },
   "roles": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",

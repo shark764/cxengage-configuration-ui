@@ -1,10 +1,13 @@
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { from } from 'rxjs/observable/from';
 import { removeLastLetter, camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
 import { generateUUID } from 'serenova-js-utils/uuid';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity } from '../selectors';
 import { entitiesMetaData } from '../metaData';
+import { Toast } from 'cx-ui-components';
 
 export const UpdateUserEntity = action$ =>
   action$
@@ -48,18 +51,33 @@ export const UpdateUserEntity = action$ =>
         [removeLastLetter(a.entityName) + 'Id']: a.entityId
       };
 
+      // Changing users capacity
+      a.sdkCall2 = {
+        command: 'updateUsersCapacityRule',
+        data: {
+          userId: a.values.id,
+          capacityRuleId: a.values.effectiveCapacityRule === 'null' ? null : a.values.effectiveCapacityRule
+        },
+        module: 'entities',
+        topic: 'cxengage/entities/update-users-capacity-rule-response'
+      };
+
+      a.allSdkCalls = [a.sdkCall, a.sdkCall2];
       return { ...a };
     })
-    .concatMap(a =>
-      fromPromise(sdkPromise(a.sdkCall))
-        .map(response =>
-          handleSuccess(
-            response,
-            a,
-            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
+    .mergeMap(a =>
+      forkJoin(
+        a.allSdkCalls.map(apiCall =>
+          from(
+            sdkPromise(apiCall).catch(error => ({
+              error: error,
+              id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
+            }))
           )
         )
-        .catch(error => handleError(error, a))
+      )
+        .do(allResult => Toast.success(`User updated successfully`))
+        .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
     );
 
 export const UpdatePlatformUserEntity = action$ =>

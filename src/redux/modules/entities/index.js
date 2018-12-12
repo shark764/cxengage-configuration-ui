@@ -175,6 +175,9 @@ const initialState = fromJS({
   historicalReportFolders: {
     ...defaultEntity
   },
+  capacityRules: {
+    ...defaultEntity
+  },
   dataAccessReports: {
     ...defaultEntity,
     metaData: {
@@ -334,14 +337,14 @@ export default function reducer(state = initialState, action) {
             ...entity,
             inherited: entity.tenantId !== state.get('currentTenantId')
           }));
-          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName,'fetching']);
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'groups': {
           const newResult = result.map(entity => ({ ...entity, inherited: entity.name === 'everyone' }));
-          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName,'fetching']);
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         default:
-          return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName,'fetching']);
+          return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName, 'fetching']);
       }
     }
     case 'FETCH_DATA_REJECTED': {
