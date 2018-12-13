@@ -433,7 +433,13 @@ entities.messageTemplates.columns = [
 ];
 entities.messageTemplates.memberListTableFields = [
   { label: 'Name', name: 'name' },
-  { label: 'Description', name: 'description' }
+  { label: 'Description', name: 'description' },
+  {
+    label: 'Status',
+    name: 'active',
+    type: 'select',
+    filterOptions: ['enabled', 'disabled']
+  }
 ];
 
 // Transfer Lists

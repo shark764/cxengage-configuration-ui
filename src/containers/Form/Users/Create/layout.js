@@ -79,6 +79,7 @@ export default function UsersForm({
             id="frm-users-role-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantRoles}
+            required
           />
           <ToggleField
             name="inviteNow"
@@ -86,7 +87,7 @@ export default function UsersForm({
             id="frm-users-invite-now"
             disabled={isSaving || !userHasUpdatePermission}
           />
-          
+
         </DetailWrapper>
 
         <DetailWrapper open={true}>
@@ -104,6 +105,7 @@ export default function UsersForm({
             id="frm-users-platform-role-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={platformRoles}
+            required
           />
           <SelectField
             name="noPassword"
@@ -115,6 +117,7 @@ export default function UsersForm({
               { label: 'Enabled', value: true },
               { label: 'Disabled', value: false }
             ]}
+            required
           />
           <SelectField
             name="defaultIdentityProvider"
@@ -122,6 +125,7 @@ export default function UsersForm({
             id="frm-users-default-identity-provider-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantIdentityProviders}
+            required
           />
         </DetailWrapper>
       </Wrapper>

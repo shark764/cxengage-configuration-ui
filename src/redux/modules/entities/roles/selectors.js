@@ -11,15 +11,27 @@ export const getRoles = state => {
 
 export const convertRoles = createSelector([getRoles], roles => roles.get('data').toJS());
 
-export const selectTenantRoles = createSelector([getRoles], roles =>
-  roles
-    .get('data')
-    .toJS()
-    .map(role => ({
-      value: role.id,
-      label: role.name
-    }))
+export const selectTenantRoles = createSelector([getRoles], roles => {
+  const rolesArray = roles
+  .get('data')
+  .toJS()
+  .map(role => ({
+    value: role.id,
+    label: role.name
+  }));
+  if(rolesArray.length > 0) {
+    rolesArray.splice(0, 0, rolesArray[2]);
+    rolesArray.splice(3,1);
+  }
+  return rolesArray;
+}
 );
+export const selectFirstTenantRoleValue = state => {
+  const roles = selectTenantRoles(state);
+  if(roles && roles.length > 0) {
+    return roles[0].value
+  }
+}
 
 export const getPlatformRoles = state => state.getIn(['Entities', 'platformRoles', 'data']);
 
@@ -27,5 +39,12 @@ export const selectPlatformRoles = createSelector([getPlatformRoles], roles =>
   roles.toJS().map(role => ({
     value: role.id,
     label: role.name
-  }))
+  })).reverse()
 );
+
+export const selectFirstPlatformRoleValue = state => {
+  const roles = selectPlatformRoles(state);
+  if(roles && roles.length > 0) {
+    return roles[0].value
+  }
+}

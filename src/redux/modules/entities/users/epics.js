@@ -194,6 +194,11 @@ export const CreateEntity = action$ =>
         noPassword: a.values.noPassword === 'null' ? null : a.values.noPassword,
         defaultIdentityProvider: a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider
       };
+      if(filteredValues.noPassword === 'true') {
+        filteredValues.noPassword = true;
+      } else if(filteredValues.noPassword === 'false') {
+        filteredValues.noPassword = false;
+      }
       a.sdkCall.data = filteredValues;
       return { ...a };
     })

@@ -36,16 +36,7 @@ const initialState = fromJS({
 
 describe('selectTenantRoles', () => {
   it('should get roles, then return it mapped and filtered', () => {
-    expect(selectTenantRoles(initialState)).toEqual([
-      {
-        value: 'mockId',
-        label: 'Role Mock 1'
-      },
-      {
-        value: 'mockId2',
-        label: 'Role Mock 2'
-      }
-    ]);
+    expect(selectTenantRoles(initialState)).toMatchSnapshot();
   });
   it('returns empty array when no data is found', () => {
     const initialStateNoData = fromJS({
@@ -61,16 +52,7 @@ describe('selectTenantRoles', () => {
 
 describe('selectPlatformRoles', () => {
   it('should get standard roles, then return it mapped and filtered', () => {
-    expect(selectPlatformRoles(initialState)).toEqual([
-      {
-        value: 'mockId',
-        label: 'Role Mock 1'
-      },
-      {
-        value: 'mockId2',
-        label: 'Role Mock 2'
-      }
-    ]);
+    expect(selectPlatformRoles(initialState)).toMatchSnapshot();
   });
   it('returns empty array when no data is found', () => {
     const initialStateNoData = fromJS({

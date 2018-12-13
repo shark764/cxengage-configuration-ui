@@ -3,6 +3,7 @@
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "capacityRules": undefined,
+  "currentAgentId": "0000-0000-0000-0000",
   "inherited": false,
   "initialValues": Object {
     "active": true,
@@ -20,6 +21,7 @@ Object {
 
 exports[`Users Renders renders 1`] = `
 <Connect(ReduxForm)
+  currentAgentId="0000-0000-0000-0000"
   dispatch={[Function]}
   inherited={false}
   initialValues={

@@ -13,6 +13,7 @@ import {
   isCreating,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
+import { getCurrentAgentId } from '../../../redux/modules/userData/selectors';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { selectFormInitialValues, createFormName } from '../../../redux/modules/form/selectors';
 import { getUserTenantStatus, getInvitationScenario } from '../../../redux/modules/entities/users/selectors';
@@ -45,7 +46,8 @@ export function mapStateToProps(state) {
     isSaving: isCreating(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
-    key: getSelectedEntityId(state)
+    key: getSelectedEntityId(state),
+    currentAgentId : getCurrentAgentId(state),
   };
 }
 

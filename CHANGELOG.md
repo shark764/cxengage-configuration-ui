@@ -18,6 +18,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.40.7] - 2018-12-12
+### Fixed
+- Fixed issues with re-ordering users extensions
+- Consolidated users page default initial form values
+### Added
+- Better extensions validation , description is now required
+- Status column to the message templates tables on users page
+
+
 ## [0.40.6] - 2018-12-12
 ### Added
 - CXV1-16327 - Users form validation

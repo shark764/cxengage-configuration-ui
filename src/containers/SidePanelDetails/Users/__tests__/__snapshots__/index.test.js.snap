@@ -71,6 +71,15 @@ Object {
       "label": "Description",
       "name": "description",
     },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
+    },
   ],
   "messageTemplatesItems": Array [],
   "outboundIdentifierListsFetching": undefined,
@@ -234,6 +243,15 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ]
   }

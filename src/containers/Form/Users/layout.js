@@ -29,11 +29,13 @@ export default function UsersForm({
   tenantRoles,
   status,
   scenario,
+  initialValues,
   tenantIdentityProviders,
   isSaving,
   userHasUpdatePermission,
   capacityRules,
-  key
+  key,
+  currentAgentId,
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -80,7 +82,7 @@ export default function UsersForm({
             name="roleId"
             label="Tenant Role"
             id="frm-users-role-id"
-            disabled={isSaving || !userHasUpdatePermission}
+            disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
             options={tenantRoles}
           />
         </DetailWrapper>
@@ -100,7 +102,7 @@ export default function UsersForm({
             name="noPassword"
             label="Platform Authentication"
             id="frm-users-no-password-id"
-            disabled={isSaving || !userHasUpdatePermission}
+            disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
             options={[
               { label: 'Use Tenant Default: Enabled', value: 'null' },
               { label: 'Enabled', value: true },
@@ -145,6 +147,8 @@ UsersForm.propTypes = {
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
+  currentAgentId: PropTypes.string,
+  initialValues: PropTypes.object,
   platformRoles: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,

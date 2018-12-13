@@ -7,6 +7,10 @@ import { shallow } from 'enzyme';
 
 import UsersForm from '../layout';
 
+const initialValues = {
+  get: () => {}
+};
+
 describe('<UsersForm />', () => {
   it('renders create user', () => {
     const rendered = shallow(
@@ -27,6 +31,7 @@ describe('<UsersForm />', () => {
         inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
+        initialValues={initialValues}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -51,6 +56,7 @@ describe('<UsersForm />', () => {
         inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
+        initialValues={initialValues}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -75,6 +81,7 @@ describe('<UsersForm />', () => {
         inherited={true}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
+        initialValues={initialValues}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -99,6 +106,7 @@ describe('<UsersForm />', () => {
         inherited={false}
         userHasUpdatePermission={false}
         handleSubmit={() => {}}
+        initialValues={initialValues}
       />
     );
     expect(rendered).toMatchSnapshot();

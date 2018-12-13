@@ -1161,6 +1161,15 @@ Object {
         "label": "Description",
         "name": "description",
       },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
+      },
     ],
     "modalListTableFields": Array [
       Object {

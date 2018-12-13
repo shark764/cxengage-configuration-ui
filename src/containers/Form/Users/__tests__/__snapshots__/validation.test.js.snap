@@ -3,8 +3,8 @@
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
   "extensions": Array [
-    "Invalid Phone Number",
-    true,
+    "Label is required",
+    false,
   ],
 }
 `;
@@ -12,8 +12,8 @@ Object {
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
   "extensions": Array [
-    "Invalid Phone Number",
-    "Invalid sip address",
+    "Label is required",
+    false,
   ],
 }
 `;
@@ -21,8 +21,8 @@ Object {
 exports[`formValidation returns proper object when required fields are provided 1`] = `
 Object {
   "extensions": Array [
-    "Invalid Phone Number",
-    true,
+    "Label is required",
+    false,
   ],
 }
 `;

@@ -51,7 +51,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         name="workStationId"
       />
       <SelectField
-        disabled={false}
+        disabled={true}
         id="frm-users-role-id"
         label="Tenant Role"
         name="roleId"
@@ -82,7 +82,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         name="platformStatus"
       />
       <SelectField
-        disabled={false}
+        disabled={true}
         id="frm-users-no-password-id"
         label="Platform Authentication"
         name="noPassword"
@@ -194,7 +194,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         name="workStationId"
       />
       <SelectField
-        disabled={false}
+        disabled={true}
         id="frm-users-role-id"
         label="Tenant Role"
         name="roleId"
@@ -225,7 +225,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         name="platformStatus"
       />
       <SelectField
-        disabled={false}
+        disabled={true}
         id="frm-users-no-password-id"
         label="Platform Authentication"
         name="noPassword"

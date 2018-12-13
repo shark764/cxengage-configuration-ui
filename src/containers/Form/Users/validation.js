@@ -11,15 +11,20 @@ const isWebRtc = type => type === 'webrtc';
 const errorMessage = type => (type === 'pstn' ? 'Invalid Phone Number' : 'Invalid sip address');
 
 export const formValidation = values => {
+  const formValidation = {};
   const newValues = values.toJS();
+  const lastIndex = newValues.extensions.length - 1;
   const extensions = newValues.extensions.map(
-    (ext, i) => !ext.value || isWebRtc(ext.type) || validateValue(ext.value, ext.type) || errorMessage(ext.type)
+    (ext,i) => i !== lastIndex && (!ext.value || isWebRtc(ext.type) || validateValue(ext.value, ext.type) || errorMessage(ext.type))
+  );
+  const labels = newValues.extensions.map(
+    (ext,i) => i !== lastIndex && (Boolean(ext.description) || 'Label is required')
   );
   if (extensions.some(err => typeof err === 'string')) {
-    return {
-      extensions
-    };
-  } else {
-    return {};
+    formValidation.extensions = extensions;
   }
+  if (labels.some(err => typeof err === 'string')) {
+    formValidation.extensions = labels;
+  }
+  return formValidation;
 };

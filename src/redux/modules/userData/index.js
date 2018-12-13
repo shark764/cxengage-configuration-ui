@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action) {
         .set('permissions', fromJS(tenantPermissions))
         .set('currentTenantId', tenantId)
         .set('currentTenantName', tenantName)
-        .set('agentId', action.userId);
+        .set('agentId', action.agentId);
     }
     case 'TOGGLE_USER_AUTH': {
       return state.set('userIsAuthed', !state.get('userIsAuthed'));
