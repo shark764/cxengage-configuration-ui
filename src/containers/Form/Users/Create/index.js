@@ -6,12 +6,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import UsersForm from './layout';
-import {
-  getSelectedEntityId,
-  isCreating,
-  userHasUpdatePermission
-} from '../../../../redux/modules/entities/selectors';
-import { formValidation } from './validation'
+import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import { formValidation } from './validation';
 import { onFormSubmit } from '../../../../redux/modules/entities';
 import { selectCreateUserFormInitialValues, createFormName } from '../../../../redux/modules/form/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../../redux/modules/entities/roles/selectors';

@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 describe('formValidation', () => {
   it('returns proper object when required fields are provided', () => {
     const values = new Map({
-      email: 'mockEmail',
+      email: 'mockEmail@email.com',
       platformRoleId: 'mockPlatformRoleId',
       roleId: 'mockRoleId'
     });

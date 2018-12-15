@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.41.1] - 2018-12-18
+### Fixed
+- CXV1-16327 - Fixed issue with email validation, also if there is a duplicate email in the tenant.
+
 ## [0.41.0] - 2018-12-18
 ### Added
 - Ability to change skill proficiency on users page

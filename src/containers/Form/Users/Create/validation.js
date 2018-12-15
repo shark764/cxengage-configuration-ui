@@ -3,9 +3,22 @@
  */
 
 import { isEmpty } from 'serenova-js-utils/strings';
+import { validateEmail } from 'serenova-js-utils/validation';
 
-export const formValidation = values => ({
-  roleId: !values.get('roleId') && 'Please select a Tenant Role',
-  email: isEmpty(values.get('email')) && 'Please enter an email',
-  platformRoleId: !values.get('platformRoleId') && 'Please select a Platform Role'
-});
+const emailValidation = email => {
+  if (isEmpty(email)) {
+    return 'Please enter an email';
+  } else if (!validateEmail(email)) {
+    return 'Please enter a valid email address';
+  } else {
+    return false;
+  }
+};
+
+export const formValidation = values => {
+  return {
+    roleId: !values.get('roleId') && 'Please select a Tenant Role',
+    email: emailValidation(values.get('email')),
+    platformRoleId: !values.get('platformRoleId') && 'Please select a Platform Role'
+  };
+};
