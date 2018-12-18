@@ -135,16 +135,16 @@ Object {
       "name": "description",
     },
     Object {
-      "filterOptions": Array [
-        "enabled",
-        "disabled",
-      ],
-      "label": "Status",
-      "name": "active",
-      "type": "select",
+      "actions": Object {
+        "onChange": [Function],
+      },
+      "editable": true,
+      "filterable": false,
+      "label": "Proficiency",
+      "name": "proficiency",
     },
   ],
-  "skillsItems": Array [],
+  "skillsItems": undefined,
   "transferListsFetching": undefined,
   "transferListsFields": Array [
     Object {
@@ -313,17 +313,16 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
         "name": "description",
       },
       Object {
-        "filterOptions": Array [
-          "enabled",
-          "disabled",
-        ],
-        "label": "Status",
-        "name": "active",
-        "type": "select",
+        "actions": Object {
+          "onChange": [Function],
+        },
+        "editable": true,
+        "filterable": false,
+        "label": "Proficiency",
+        "name": "proficiency",
       },
     ]
   }
-  skillsItems={Array []}
   store={
     Object {
       "dispatch": [Function],

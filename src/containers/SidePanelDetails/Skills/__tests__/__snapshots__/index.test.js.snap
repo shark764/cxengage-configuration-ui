@@ -52,7 +52,9 @@ Object {
       "type": "select",
     },
   ],
-  "outboundIdentifierListsItems": undefined,
+  "outboundIdentifierListsItems": Array [
+    "mockListMembers",
+  ],
   "userHasUpdatePermission": true,
   "usersFetching": undefined,
   "usersFields": Array [
@@ -91,6 +93,15 @@ Object {
       "label": "Platform Status",
       "name": "invitationStatus",
       "type": "select",
+    },
+    Object {
+      "actions": Object {
+        "onChange": [Function],
+      },
+      "editable": true,
+      "filterable": false,
+      "label": "Proficiency",
+      "name": "proficiency",
     },
   ],
   "usersItems": Array [
@@ -154,6 +165,11 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
         "name": "active",
         "type": "select",
       },
+    ]
+  }
+  outboundIdentifierListsItems={
+    Array [
+      "mockListMembers",
     ]
   }
   removeListItem={[Function]}
@@ -225,6 +241,15 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
         "label": "Platform Status",
         "name": "invitationStatus",
         "type": "select",
+      },
+      Object {
+        "actions": Object {
+          "onChange": [Function],
+        },
+        "editable": true,
+        "filterable": false,
+        "label": "Proficiency",
+        "name": "proficiency",
       },
     ]
   }

@@ -54,7 +54,7 @@ export default function UsersDetailsPanel({
     <Wrapper id="dtpanel-users">
       {children}
 
-      <DetailWrapper open={false} contains="skills">
+      <DetailWrapper open={true} contains="skills">
         <WrappedDetailHeader
           userHasUpdatePermission={!skillsFetching && userHasUpdatePermission}
           text={detailHeadertext(skillsItems, 'Skills')}

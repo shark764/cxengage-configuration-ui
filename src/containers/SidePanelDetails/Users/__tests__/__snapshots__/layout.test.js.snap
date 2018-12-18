@@ -7,7 +7,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
   Mock Child
   <Connect(DetailWrapper)
     contains="skills"
-    open={false}
+    open={true}
   >
     <Styled(DetailHeader)
       onActionButtonClick={[Function]}
@@ -117,7 +117,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   Mock Child
   <Connect(DetailWrapper)
     contains="skills"
-    open={false}
+    open={true}
   >
     <Styled(DetailHeader)
       onActionButtonClick={[Function]}
@@ -227,7 +227,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   Mock Child
   <Connect(DetailWrapper)
     contains="skills"
-    open={false}
+    open={true}
   >
     <Styled(DetailHeader)
       onActionButtonClick={[Function]}

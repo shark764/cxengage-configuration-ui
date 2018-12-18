@@ -1,6 +1,6 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.40.7",
+  "version": "0.41.0",
   "description": "CxEngage Configuration and Reporting",
   "repository": {
     "type": "git",
@@ -36,9 +36,9 @@
     "coverageThreshold": {
       "global": {
         "branches": 62,
-        "functions": 54,
-        "lines": 60,
-        "statements": 60
+        "functions": 53,
+        "lines": 59,
+        "statements": 59
       }
     },
     "collectCoverageFrom": [
@@ -118,7 +118,7 @@
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.11",
     "cx-automation-utils": "^1.0.9",
-    "cx-ui-components": "^0.32.3",
+    "cx-ui-components": "^0.32.4",
     "draft-js": "^0.10.5",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",

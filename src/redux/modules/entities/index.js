@@ -245,7 +245,11 @@ export const removeListItem = listItemId => ({
   type: 'REMOVE_LIST_ITEM',
   listItemId
 });
-
+export const updateProficiency = (id, newValue) => ({
+  type: 'UPDATE_PROFICIENCY',
+  id,
+  newValue
+});
 export const setConfirmationDialog = (modalType, metaData) => ({
   type: 'SET_CONIFIRMATION_DIALOG',
   modalType,
@@ -402,6 +406,38 @@ export default function reducer(state = initialState, action) {
     }
     case 'UPDATE_ENTITY': {
       return exports.setEntityUpdatingHelper(state, action, true);
+    }
+    case 'UPDATE_PROFICIENCY': {
+      const currentEntity = state.get('currentEntity');
+      const skillId = currentEntity === 'skills' ? state.getIn([currentEntity, 'selectedEntityId']) : action.id;
+      const userId = currentEntity === 'skills' ? action.id : state.getIn([currentEntity, 'selectedEntityId']);
+
+      if (currentEntity === 'skills') {
+        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === userId);
+        const skillIndex = state
+          .getIn(['users', 'data', userIndex, 'skills'])
+          .findIndex(entity => entity.get('id') === skillId);
+        if (userIndex !== -1) {
+          return state.setIn(['users', 'data', userIndex, 'skills', skillIndex, 'proficiency'], action.newValue);
+        } else {
+          return state;
+        }
+      } else if (currentEntity === 'users') {
+        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === userId);
+        const skillIndex = state
+          .getIn(['users', 'data', userIndex, 'skillsWithProficiency'])
+          .findIndex(entity => entity.get('skillId') === skillId);
+        if (userIndex !== -1) {
+          return state.setIn(
+            ['users', 'data', userIndex, 'skillsWithProficiency', skillIndex, 'proficiency'],
+            action.newValue
+          );
+        } else {
+          return state;
+        }
+      } else {
+        return state;
+      }
     }
     case 'TOGGLE_ENTITY_FULFILLED':
     case 'UPDATE_ENTITY_FULFILLED':

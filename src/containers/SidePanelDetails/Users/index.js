@@ -5,18 +5,37 @@
 import { connect } from 'react-redux';
 import UsersDetailsPanel from './layout';
 import { userHasUpdatePermission, isEntityFetching } from '../../../redux/modules/entities/selectors';
+import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
 import {
-  setSelectedSubEntityId,
-  toggleListItemEntity
-} from '../../../redux/modules/entities';
-import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
+  getSidePanelTableItems,
+  getSkillsWithProficiencyTableItems
+} from '../../../redux/modules/entities/listItemSelectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
+import store from '../../../redux/store';
 
 export function mapStateToProps(state, props) {
   return {
     userHasUpdatePermission: userHasUpdatePermission(state),
-    skillsItems: getSidePanelTableItems(state, 'skills'),
-    skillsFields: entitiesMetaData.skills.memberListTableFields,
+    skillsItems: getSkillsWithProficiencyTableItems(state),
+    skillsFields: [
+      {
+        label: 'Name',
+        name: 'name'
+      },
+      {
+        label: 'Description',
+        name: 'description'
+      },
+      {
+        label: 'Proficiency',
+        name: 'proficiency',
+        editable: userHasUpdatePermission(state),
+        filterable: false,
+        actions: {
+          onChange: (id, newValue) => store.dispatch(updateProficiency(id, newValue))
+        }
+      }
+    ],
     skillsFetching: isEntityFetching(state, 'skills'),
     groupsItems: getSidePanelTableItems(state, 'groups'),
     groupsFields: entitiesMetaData.groups.memberListTableFields,

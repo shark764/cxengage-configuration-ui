@@ -21,6 +21,11 @@ export const getDependantEntityTableItems = state =>
         .filter(member => listMemberIds(state).includes(member.id))
     : [];
 
+/**
+ *
+ * This selector is used when the members that are associated to the entity
+ * are provided by the api as an array of ids
+ */
 export const getSidePanelTableItems = (state, entityName) => {
   const selectedEntity = getSelectedEntity(state);
   const requestedIds = selectedEntity && selectedEntity.getIn([entityName], new List([])).toJS();
@@ -30,6 +35,14 @@ export const getSidePanelTableItems = (state, entityName) => {
   } else {
     return requestedItems;
   }
+};
+
+export const getSkillsWithProficiencyTableItems = state => {
+  const selectedEntity = getSelectedEntity(state);
+  if (!selectedEntity) {
+    return;
+  }
+  return selectedEntity.getIn(['skillsWithProficiency'], new List([])).toJS();
 };
 
 export const getModalTableItems = (state, entityName) => {

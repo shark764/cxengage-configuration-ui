@@ -1,6 +1,7 @@
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { from } from 'rxjs/observable/from';
+import { of } from 'rxjs/observable/of';
 import { removeLastLetter, camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
 import { generateUUID } from 'serenova-js-utils/uuid';
 import { sdkPromise } from '../../../../utils/sdk';
@@ -194,9 +195,9 @@ export const CreateEntity = action$ =>
         noPassword: a.values.noPassword === 'null' ? null : a.values.noPassword,
         defaultIdentityProvider: a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider
       };
-      if(filteredValues.noPassword === 'true') {
+      if (filteredValues.noPassword === 'true') {
         filteredValues.noPassword = true;
-      } else if(filteredValues.noPassword === 'false') {
+      } else if (filteredValues.noPassword === 'false') {
         filteredValues.noPassword = false;
       }
       a.sdkCall.data = filteredValues;
@@ -240,3 +241,43 @@ export const ConvertNullsForSelectFields = action$ =>
       a.type = 'CONVERT_NULLS_FOR_SELECT_FIELDS';
       return { ...a };
     });
+
+export const UpdateSkillProficiency = (action$, store) =>
+  action$
+    .ofType('UPDATE_PROFICIENCY')
+    .map(a => ({
+      ...a,
+      currentEntity: getCurrentEntity(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState()),
+      proficiency: parseInt(a.newValue)
+    }))
+    .filter(a => a.currentEntity === 'skills' || a.currentEntity === 'users')
+    .debounceTime(600)
+    .map(a => ({
+      ...a,
+      sdkCall: {
+        command: 'updateUserSkillMember',
+        data: {
+          userId: a.currentEntity === 'skills' ? a.id : a.selectedEntityId,
+          skillId: a.currentEntity === 'skills' ? a.selectedEntityId : a.id,
+          proficiency: a.proficiency
+        },
+        module: 'entities',
+        topic: 'cxengage/entities/update-user-skill-member-response'
+      }
+    }))
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a, `Proficiency was updated successfully!`))
+        .catch(error => {
+          if (error && a.proficiency < 1) {
+            Toast.error('Min value is 1');
+            return of({ type: 'MIN_VALUE_EXCEEDED_' });
+          } else if (error && a.proficiency > 100) {
+            Toast.error('Max value is 100');
+            return of({ type: 'MAX_VALUE_EXCEEDED_' });
+          } else {
+            return handleError(error, a);
+          }
+        })
+    );

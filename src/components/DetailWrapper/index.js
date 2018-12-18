@@ -21,9 +21,9 @@ class DetailWrapper extends Component {
       open: props.open
     };
   }
-  componentDidUpdate({entityId}) {
-    if(entityId !== this.props.entityId) {
-      this.setState({open: false})
+  componentDidUpdate({ entityId }) {
+    if (entityId !== this.props.entityId) {
+      this.setState({ open: false });
     }
   }
   toggle = () => {
@@ -40,10 +40,10 @@ class DetailWrapper extends Component {
         </Wrapper>
         {!this.state.open && this.props.children[0]}
         {this.state.open &&
-          React.Children.map(this.props.children, (child,index) =>
-            index === 0? React.cloneElement(child, { open: this.state.open }) : child)
-        }
-
+          React.Children.map(
+            this.props.children,
+            (child, index) => (index === 0 ? React.cloneElement(child, { open: this.state.open }) : child)
+          )}
       </span>
     );
   }
@@ -52,7 +52,7 @@ class DetailWrapper extends Component {
 export function mapStateToProps(state, props) {
   return {
     entityName: getCurrentEntity(state),
-    entityId: getSelectedEntityId(state),
+    entityId: getSelectedEntityId(state)
   };
 }
 
@@ -65,7 +65,8 @@ DetailWrapper.propTypes = {
   children: PropTypes.any,
   fetchListItems: PropTypes.func,
   entityName: PropTypes.string,
-  entityId: PropTypes.string
+  entityId: PropTypes.string,
+  contains: PropTypes.string
 };
 
 export default connect(mapStateToProps, actions)(DetailWrapper);

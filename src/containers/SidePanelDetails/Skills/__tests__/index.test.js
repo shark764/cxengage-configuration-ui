@@ -15,11 +15,13 @@ import {
   isSaving
 } from '../../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
-import { getDependantEntityTableItems, getListSize } from '../../../../redux/modules/entities/listItemSelectors';
-
+import { getSidePanelTableItems } from '../../../../redux/modules/entities/listItemSelectors';
+import { getSkillMemberSidePanelTableItems } from '../../../../redux/modules/entities/skills/selectors';
+jest.mock('../../../../redux/store.js', () => jest.fn());
 jest.mock('../../../../redux/modules/entities');
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/entities/listItemSelectors');
+jest.mock('../../../../redux/modules/entities/skills/selectors');
 getSelectedEntity.mockImplementation(
   () =>
     new Map({
@@ -36,8 +38,8 @@ getSelectedEntity.mockImplementation(
     })
 );
 getCurrentEntity.mockImplementation(() => 'skills');
-getDependantEntityTableItems.mockImplementation(() => ['mockListMembers']);
-getListSize.mockImplementation(() => 0);
+getSidePanelTableItems.mockImplementation(() => ['mockListMembers']);
+getSkillMemberSidePanelTableItems.mockImplementation(() => ['mockListMembers']);
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);

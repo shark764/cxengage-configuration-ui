@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.41.0] - 2018-12-18
+### Added
+- Ability to change skill proficiency on users page
+- Ability to change skill proficiency on skills page
+
 ## [0.40.7] - 2018-12-12
 ### Fixed
 - Fixed issues with re-ordering users extensions
