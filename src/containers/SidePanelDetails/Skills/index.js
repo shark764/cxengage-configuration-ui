@@ -11,7 +11,10 @@ import {
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
-import { getSkillMemberSidePanelTableItems } from '../../../redux/modules/entities/skills/selectors';
+import {
+  getSkillMemberSidePanelTableItems,
+  getHasProficiencyFormValue
+} from '../../../redux/modules/entities/skills/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 import store from '../../../redux/store';
 
@@ -20,18 +23,20 @@ export function mapStateToProps(state) {
     item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state),
     usersItems: getSkillMemberSidePanelTableItems(state),
-    usersFields: [
-      ...entitiesMetaData.users.memberListTableFields,
-      {
-        label: 'Proficiency',
-        name: 'proficiency',
-        editable: userHasUpdatePermission(state),
-        filterable: false,
-        actions: {
-          onChange: (id, newValue) => store.dispatch(updateProficiency(id, newValue))
-        }
-      }
-    ],
+    usersFields: getHasProficiencyFormValue(state)
+      ? [
+          ...entitiesMetaData.users.memberListTableFields,
+          {
+            label: 'Proficiency',
+            name: 'proficiency',
+            editable: userHasUpdatePermission(state),
+            filterable: false,
+            actions: {
+              onChange: (id, newValue) => store.dispatch(updateProficiency(id, newValue))
+            }
+          }
+        ]
+      : entitiesMetaData.users.memberListTableFields,
     usersFetching: isEntityFetching(state, 'users'),
     outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
     outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
