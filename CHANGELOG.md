@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.41.2] - 2019-01-07
+### Fixed
+- CXV1-16600 - Removing proficiency value on Skills page now throws correct error message.
+- CXV1-16599 - Proficiency column now is shown only when Skill has proficiency toggle on.
+
 ## [0.41.1] - 2018-12-18
 ### Fixed
 - CXV1-16327 - Fixed issue with email validation, also if there is a duplicate email in the tenant.

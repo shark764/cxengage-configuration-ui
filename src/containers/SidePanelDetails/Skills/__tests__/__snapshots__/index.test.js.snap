@@ -94,15 +94,6 @@ Object {
       "name": "invitationStatus",
       "type": "select",
     },
-    Object {
-      "actions": Object {
-        "onChange": [Function],
-      },
-      "editable": true,
-      "filterable": false,
-      "label": "Proficiency",
-      "name": "proficiency",
-    },
   ],
   "usersItems": Array [
     "mockListMembers",
@@ -241,15 +232,6 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
         "label": "Platform Status",
         "name": "invitationStatus",
         "type": "select",
-      },
-      Object {
-        "actions": Object {
-          "onChange": [Function],
-        },
-        "editable": true,
-        "filterable": false,
-        "label": "Proficiency",
-        "name": "proficiency",
       },
     ]
   }

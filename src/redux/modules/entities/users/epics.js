@@ -270,7 +270,7 @@ export const UpdateSkillProficiency = (action$, store) =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response => handleSuccess(response, a, `Proficiency was updated successfully!`))
         .catch(error => {
-          if (error && a.proficiency < 1) {
+          if (error && (a.proficiency < 1 || isNaN(a.proficiency))) {
             Toast.error('Min value is 1');
             return of({ type: 'MIN_VALUE_EXCEEDED_' });
           } else if (error && a.proficiency > 100) {
