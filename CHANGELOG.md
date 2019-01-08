@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - Interaction Monitoring
 
+## [0.41.3] - 2019-01-07
+### Changed
+- SDK Version Bump 8.37.1
+- Utils Version bump to 1.6.2
+
 ## [0.41.2] - 2019-01-07
 ### Fixed
 - CXV1-16600 - Removing proficiency value on Skills page now throws correct error message.
