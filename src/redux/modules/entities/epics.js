@@ -23,6 +23,7 @@ import { entityAddedToList, entityRemovedFromList } from '../../modules/entities
 
 import { uploadCsv, setEntityUpdating } from './index';
 import { isInIframe } from 'serenova-js-utils/browser';
+import { generateUUID } from 'serenova-js-utils/uuid';
 
 import {
   getCurrentEntity,
@@ -78,6 +79,14 @@ export const reInitForm = action$ =>
     // when modifying entity membersList
     // values just contains the dependentEntity as key
     .filter(a => a.values.id !== undefined)
+    .map(a => {
+      if (a.entityName && a.entityName === 'users') {
+        a.values.extensions.forEach(ext => (ext.id = generateUUID()));
+        return a;
+      } else {
+        return a;
+      }
+    })
     .map(a => ({
       type: '@@redux-form/INITIALIZE',
       meta: {

@@ -6,17 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Alpha User Acceptance Testing]
 - Bulk actions
-- Roles (permissions)
-- Outbound Identifiers / Outbound Identifier Lists
-- Beta UAT page
 - Chat Widgets
+
+## [Beta User Acceptance Testing]
 - Skills
 - Groups
 - Users
-- Data Access Control
-
-## [Beta User Acceptance Testing]
 - Interaction Monitoring
+- Outbound Identifiers / Outbound Identifier Lists
+- Roles (permissions)
+
+## [0.41.4] - 2019-01-09
+### Fixed
+- CXV1-15509 - Fixed multiple issues with the users extensions form field
+### Changed
+- Updated beta features page disclaimer and style
 
 ## [0.41.3] - 2019-01-07
 ### Changed

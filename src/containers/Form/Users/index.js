@@ -28,8 +28,6 @@ const CreateUsersForm = compose(
       return dispatch(onFormSubmit(values, props));
     },
     validate: formValidation,
-    enableReinitialize: true,
-    keepDirtyOnReinitialize: true,
     destroyOnUnmount: true
   })
 )(UsersForm);
@@ -47,7 +45,7 @@ export function mapStateToProps(state) {
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
-    currentAgentId : getCurrentAgentId(state),
+    currentAgentId: getCurrentAgentId(state)
   };
 }
 

@@ -543,7 +543,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Email Templates",
+    "pageTitle": "User Management Emails",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -631,7 +631,7 @@ Object {
         "users",
       ],
     },
-    "betaFeature": false,
+    "betaFeature": true,
     "columns": Array [
       Object {
         "active": true,
@@ -1201,7 +1201,7 @@ Object {
     "updateFormDependencies": Array [],
   },
   "outboundIdentifierLists": EntityMetaData {
-    "betaFeature": false,
+    "betaFeature": true,
     "columns": Array [
       Object {
         "active": true,
@@ -1301,7 +1301,7 @@ Object {
     ],
   },
   "outboundIdentifiers": EntityMetaData {
-    "betaFeature": false,
+    "betaFeature": true,
     "columns": Array [
       Object {
         "active": true,
@@ -1707,7 +1707,7 @@ Object {
         "skills",
       ],
     },
-    "betaFeature": false,
+    "betaFeature": true,
     "columns": Array [
       Object {
         "active": true,
@@ -1995,7 +1995,7 @@ Object {
         "transferLists",
       ],
     },
-    "betaFeature": false,
+    "betaFeature": true,
     "columns": Array [
       Object {
         "active": true,

@@ -163,6 +163,7 @@ const entities = {};
 listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
 
 // Users
+entities.users.betaFeature = true;
 entities.users.pageTitle = 'User Management';
 entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
 entities.users.createFormDependencies.push('roles', 'platformRoles', 'identityProviders');
@@ -216,6 +217,7 @@ entities.users.defaultAssociationFilters = {
 };
 
 // Skills
+entities.skills.betaFeature = true;
 entities.skills.pageTitle = 'Skill Management';
 entities.skills.helpLink = '/Help/Content/Managing%20Users/Creating_Skills.htm';
 entities.skills.updateFormDependencies.push('users');
@@ -257,6 +259,7 @@ entities.skills.defaultAssociationFilters = {
 };
 
 // Groups
+entities.groups.betaFeature = true;
 entities.groups.pageTitle = 'Group Management';
 entities.groups.helpLink = '/Help/Content/Managing%20Users/Creating_Groups.htm';
 entities.groups.updateFormDependencies.push('users');
@@ -313,6 +316,7 @@ entities.lists.columns = [
 ];
 
 // Outbound Identifiers
+entities.outboundIdentifiers.betaFeature = true;
 entities.outboundIdentifiers.createFormDependencies.push('flows');
 entities.outboundIdentifiers.updateFormDependencies.push('flows');
 entities.outboundIdentifiers.columns = [
@@ -324,6 +328,7 @@ entities.outboundIdentifiers.columns = [
 ];
 
 // Outbound Identifiers Lists
+entities.outboundIdentifierLists.betaFeature = true;
 entities.outboundIdentifierLists.updateFormDependencies.push('outboundIdentifiers');
 entities.outboundIdentifierLists.dependentEntity = 'outboundIdentifiers';
 entities.outboundIdentifierLists.modalListTableFields = [
@@ -351,11 +356,11 @@ entities.outboundIdentifierLists.sidePanelListTableFields = [
 entities.outboundIdentifierLists.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Roles
+entities.roles.betaFeature = true;
 entities.roles.pageTitle = 'Role Management';
 entities.roles.helpLink = '/Help/Content/Managing%20Users/Adding_roles.htm';
 entities.roles.updateFormDependencies.push('permissions');
 entities.roles.dependentEntity = 'permissions';
-entities.roles.betaFeature = true;
 entities.roles.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -392,6 +397,7 @@ entities.customMetrics.columns = [
 ];
 
 // Email Templates
+entities.emailTemplates.pageTitle = 'User Management Emails';
 entities.emailTemplates.helpLink = '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
 entities.emailTemplates.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 

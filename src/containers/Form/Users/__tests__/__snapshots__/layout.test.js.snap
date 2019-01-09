@@ -116,7 +116,9 @@ exports[`<UsersForm /> renders create user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
         text="Extensions"
+        userHasUpdatePermission={true}
       />
       <ExtensionListField
         className="users-extensions"
@@ -259,7 +261,9 @@ exports[`<UsersForm /> renders update user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
         text="Extensions"
+        userHasUpdatePermission={true}
       />
       <ExtensionListField
         className="users-extensions"
@@ -402,7 +406,9 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
         text="Extensions"
+        userHasUpdatePermission={true}
       />
       <ExtensionListField
         className="users-extensions"
@@ -545,7 +551,9 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
         text="Extensions"
+        userHasUpdatePermission={false}
       />
       <ExtensionListField
         className="users-extensions"

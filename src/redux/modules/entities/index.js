@@ -3,6 +3,7 @@
  */
 
 import { fromJS, List } from 'immutable';
+import { generateUUID } from 'serenova-js-utils/uuid';
 
 // Initial Sub State
 const defaultEntity = {
@@ -347,6 +348,14 @@ export default function reducer(state = initialState, action) {
           const newResult = result.map(entity => ({ ...entity, inherited: entity.name === 'everyone' }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
+        case 'users': {
+          const newResult = result.map(entity => {
+            let newEntity = { ...entity };
+            newEntity.extensions.forEach(ext => (ext.id = generateUUID()));
+            return newEntity;
+          });
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
+        }
         default:
           return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName, 'fetching']);
       }
@@ -354,7 +363,6 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_DATA_REJECTED': {
       return state.setIn([action.entityName, 'data'], new List());
     }
-    case 'CONVERT_NULLS_FOR_SELECT_FIELDS':
     case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {
       const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === action.id);

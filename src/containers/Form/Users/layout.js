@@ -9,10 +9,13 @@
  */
 
 import React from 'react';
+import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { DetailHeader, InputField, SelectField, ExtensionListField } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
+import store from '../../../redux/store';
+import { generateUUID } from 'serenova-js-utils/uuid';
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,7 +38,7 @@ export default function UsersForm({
   userHasUpdatePermission,
   capacityRules,
   key,
-  currentAgentId,
+  currentAgentId
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -121,7 +124,36 @@ export default function UsersForm({
         </DetailWrapper>
 
         <DetailWrapper open={true}>
-          <WrappedDetailHeader text="Extensions" />
+          <WrappedDetailHeader
+            text="Extensions"
+            userHasUpdatePermission={userHasUpdatePermission}
+            onActionButtonClick={() => {
+              let id = store.getState().getIn(['Entities', 'users', 'selectedEntityId']);
+              let extensions = store
+                .getState()
+                .getIn(['form', `users:${id}`, 'values', 'extensions'])
+                .push(
+                  fromJS({
+                    type: 'pstn',
+                    value: '',
+                    provider: '',
+                    region: '',
+                    description: '',
+                    id: generateUUID()
+                  })
+                );
+              store.dispatch({
+                type: '@@redux-form/CHANGE',
+                meta: {
+                  form: `users:${id}`,
+                  field: 'extensions',
+                  touch: false,
+                  persistentSubmitErrors: false
+                },
+                payload: extensions
+              });
+            }}
+          />
           <ExtensionListField className="users-extensions" name="extensions" label="Inputs" />
         </DetailWrapper>
 

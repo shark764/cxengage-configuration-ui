@@ -4,7 +4,7 @@ exports[`formValidation returns proper object (errors) when required fields are 
 Object {
   "extensions": Array [
     "Label is required",
-    false,
+    "Label is required",
   ],
 }
 `;
@@ -13,7 +13,7 @@ exports[`formValidation returns proper object (errors) when wrong values are pro
 Object {
   "extensions": Array [
     "Label is required",
-    false,
+    "Label is required",
   ],
 }
 `;
@@ -22,7 +22,7 @@ exports[`formValidation returns proper object when required fields are provided 
 Object {
   "extensions": Array [
     "Label is required",
-    false,
+    "Label is required",
   ],
 }
 `;

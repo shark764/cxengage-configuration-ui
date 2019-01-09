@@ -13,13 +13,10 @@ const errorMessage = type => (type === 'pstn' ? 'Invalid Phone Number' : 'Invali
 export const formValidation = values => {
   const formValidation = {};
   const newValues = values.toJS();
-  const lastIndex = newValues.extensions.length - 1;
   const extensions = newValues.extensions.map(
-    (ext,i) => i !== lastIndex && (!ext.value || isWebRtc(ext.type) || validateValue(ext.value, ext.type) || errorMessage(ext.type))
+    ext => !ext.value || isWebRtc(ext.type) || validateValue(ext.value, ext.type) || errorMessage(ext.type)
   );
-  const labels = newValues.extensions.map(
-    (ext,i) => i !== lastIndex && (Boolean(ext.description) || 'Label is required')
-  );
+  const labels = newValues.extensions.map(ext => Boolean(ext.description) || 'Label is required');
   if (extensions.some(err => typeof err === 'string')) {
     formValidation.extensions = extensions;
   }

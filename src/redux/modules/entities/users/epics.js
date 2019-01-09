@@ -30,7 +30,6 @@ export const UpdateUserEntity = action$ =>
 
       // Users Extensions
       const modifiedExtensions = [...a.values.extensions];
-      modifiedExtensions.splice(-1, 1);
       /**
         1. remove the fake uuid we attached from before
         2. remove any empty values except description
@@ -78,7 +77,16 @@ export const UpdateUserEntity = action$ =>
         )
       )
         .do(allResult => Toast.success(`User updated successfully`))
-        .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+        .mergeMap(result =>
+          from(result).map(response => {
+            if (response.result && response.result.extensions) {
+              response.result.extensions = [
+                ...response.result.extensions.map(item => ({ ...item, id: generateUUID() }))
+              ];
+            }
+            return handleSuccess(response, a);
+          })
+        )
     );
 
 export const UpdatePlatformUserEntity = action$ =>
@@ -115,6 +123,9 @@ export const UpdatePlatformUserEntity = action$ =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response => {
           delete response.result.status;
+          if (response.result.extensions) {
+            response.result.extensions = [...response.result.extensions.map(item => ({ ...item, id: generateUUID() }))];
+          }
           return handleSuccess(response, a);
         })
         .catch(error => handleError(error, a))
@@ -140,7 +151,10 @@ export const FetchSidePanelUserData = (action$, store) =>
     }))
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a))
+        .map(response => {
+          delete response.result.extensions;
+          return handleSuccess(response, a);
+        })
         .catch(error => handleError(error, a))
     );
 
@@ -214,33 +228,6 @@ export const CreateEntity = action$ =>
         )
         .catch(error => handleError(error, a))
     );
-
-export const ConvertNullsForSelectFields = action$ =>
-  action$
-    .ofType('SET_SELECTED_ENTITY_ID_FULFILLED')
-    .filter(a => a.entityName === 'users')
-    .map(a => {
-      const emptyListItem = () => ({
-        type: 'pstn',
-        value: '',
-        provider: '',
-        region: '',
-        description: '',
-        id: generateUUID()
-      });
-      a.response.result.extensions = [
-        ...a.response.result.extensions.map(item => ({ ...item, id: generateUUID() })),
-        emptyListItem()
-      ];
-      if (a.response.result.noPassword === null) {
-        a.response.result.noPassword = 'null';
-      }
-      if (a.response.result.defaultIdentityProvider === null) {
-        a.response.result.defaultIdentityProvider = 'null';
-      }
-      a.type = 'CONVERT_NULLS_FOR_SELECT_FIELDS';
-      return { ...a };
-    });
 
 export const UpdateSkillProficiency = (action$, store) =>
   action$
