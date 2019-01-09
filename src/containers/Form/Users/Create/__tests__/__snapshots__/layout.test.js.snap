@@ -9,37 +9,6 @@ exports[`<UsersForm /> renders create user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Platform Details"
-      />
-      <InputField
-        componentType="input"
-        disabled={false}
-        id="frm-users-first-name"
-        inputType="text"
-        label="First Name"
-        name="firstName"
-      />
-      <InputField
-        componentType="input"
-        disabled={false}
-        id="frm-users-last-name"
-        inputType="text"
-        label="Last Name"
-        name="lastName"
-      />
-      <InputField
-        componentType="input"
-        disabled={false}
-        id="frm-users-external-id"
-        inputType="text"
-        label="External ID"
-        name="externalId"
-      />
-    </Connect(DetailWrapper)>
-    <Connect(DetailWrapper)
-      open={true}
-    >
-      <Styled(DetailHeader)
         text="Tenant Details"
       />
       <InputField
@@ -131,37 +100,6 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Platform Details"
-      />
-      <InputField
-        componentType="input"
-        disabled={true}
-        id="frm-users-first-name"
-        inputType="text"
-        label="First Name"
-        name="firstName"
-      />
-      <InputField
-        componentType="input"
-        disabled={true}
-        id="frm-users-last-name"
-        inputType="text"
-        label="Last Name"
-        name="lastName"
-      />
-      <InputField
-        componentType="input"
-        disabled={true}
-        id="frm-users-external-id"
-        inputType="text"
-        label="External ID"
-        name="externalId"
-      />
-    </Connect(DetailWrapper)>
-    <Connect(DetailWrapper)
-      open={true}
-    >
-      <Styled(DetailHeader)
         text="Tenant Details"
       />
       <InputField
@@ -249,37 +187,6 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
   onSubmit={[Function]}
 >
   <styled.div>
-    <Connect(DetailWrapper)
-      open={true}
-    >
-      <Styled(DetailHeader)
-        text="Platform Details"
-      />
-      <InputField
-        componentType="input"
-        disabled={true}
-        id="frm-users-first-name"
-        inputType="text"
-        label="First Name"
-        name="firstName"
-      />
-      <InputField
-        componentType="input"
-        disabled={true}
-        id="frm-users-last-name"
-        inputType="text"
-        label="Last Name"
-        name="lastName"
-      />
-      <InputField
-        componentType="input"
-        disabled={true}
-        id="frm-users-external-id"
-        inputType="text"
-        label="External ID"
-        name="externalId"
-      />
-    </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
     >

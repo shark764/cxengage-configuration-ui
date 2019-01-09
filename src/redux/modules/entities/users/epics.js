@@ -106,8 +106,10 @@ export const UpdatePlatformUserEntity = action$ =>
         externalId: a.values.externalId
       };
 
-      if (filterValues.externalId === null) {
-        delete filterValues.externalId;
+      // Setting externalId to null if value is not set
+      // since this is the default API accepts
+      if (!filterValues.externalId) {
+        filterValues.externalId = null;
       }
 
       a.sdkCall.data = {
@@ -198,9 +200,6 @@ export const CreateEntity = action$ =>
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
       const filteredValues = {
-        firsName: a.values.firstName,
-        lastName: a.values.lastName,
-        externalId: a.values.externalId,
         workStationId: a.values.workStationId,
         roleId: a.values.roleId,
         platformRoleId: a.values.platformRoleId,
@@ -258,10 +257,10 @@ export const UpdateSkillProficiency = (action$, store) =>
         .map(response => handleSuccess(response, a, `Proficiency was updated successfully!`))
         .catch(error => {
           if (error && (a.proficiency < 1 || isNaN(a.proficiency))) {
-            Toast.error('Min value is 1');
+            Toast.error('User requires a skill level that is greater than 0');
             return of({ type: 'MIN_VALUE_EXCEEDED_' });
           } else if (error && a.proficiency > 100) {
-            Toast.error('Max value is 100');
+            Toast.error('User requires a skill level that is less than 100');
             return of({ type: 'MAX_VALUE_EXCEEDED_' });
           } else {
             return handleError(error, a);

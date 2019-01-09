@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.41.5] - 2019-01-09
+### Fixed
+- CXV1-16611 - Users page now is sending null when externalId is empty.
+- Platform details are not shown on creating user.
+### Changed
+- CXV1-16600 - Errors when proficiency is set to values out of range are more descriptive.
+
 ## [0.41.4] - 2019-01-09
 ### Fixed
 - CXV1-15509 - Fixed multiple issues with the users extensions form field

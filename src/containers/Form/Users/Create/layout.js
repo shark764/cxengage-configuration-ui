@@ -36,34 +36,6 @@ export default function UsersForm({
     <form onSubmit={handleSubmit} key={key}>
       <Wrapper>
         <DetailWrapper open={true}>
-          <WrappedDetailHeader text="Platform Details" />
-          <InputField
-            name="firstName"
-            label="First Name"
-            id="frm-users-first-name"
-            componentType="input"
-            inputType="text"
-            disabled={isSaving || !userHasUpdatePermission}
-          />
-          <InputField
-            name="lastName"
-            label="Last Name"
-            id="frm-users-last-name"
-            componentType="input"
-            inputType="text"
-            disabled={isSaving || !userHasUpdatePermission}
-          />
-          <InputField
-            name="externalId"
-            label="External ID"
-            id="frm-users-external-id"
-            componentType="input"
-            inputType="text"
-            disabled={isSaving || !userHasUpdatePermission}
-          />
-        </DetailWrapper>
-
-        <DetailWrapper open={true}>
           <WrappedDetailHeader text="Tenant Details" />
           <InputField
             name="workStationId"
@@ -87,18 +59,11 @@ export default function UsersForm({
             id="frm-users-invite-now"
             disabled={isSaving || !userHasUpdatePermission}
           />
-
         </DetailWrapper>
 
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Login Details" />
-          <InputField 
-            name="email"
-            label="Email *"
-            id="frm-users-email"
-            componentType="input"
-            inputType="text"
-          />
+          <InputField name="email" label="Email *" id="frm-users-email" componentType="input" inputType="text" />
           <SelectField
             name="platformRoleId"
             label="Platform Role *"

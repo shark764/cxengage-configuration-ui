@@ -14,7 +14,7 @@ import {
   isInherited,
   isSaving
 } from '../../../../redux/modules/entities/selectors';
-import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
+import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../../redux/modules/entities/listItemSelectors';
 import { getSkillMemberSidePanelTableItems } from '../../../../redux/modules/entities/skills/selectors';
 jest.mock('../../../../redux/store.js', () => jest.fn());
@@ -43,8 +43,9 @@ getSkillMemberSidePanelTableItems.mockImplementation(() => ['mockListMembers']);
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
-removeListItem.mockImplementation(() => 'mockId');
+toggleListItemEntity.mockImplementation(() => 'mockId');
 setSelectedSubEntityId.mockImplementation(() => 'mockId');
+updateProficiency.mockImplementation(() => 'mockId');
 
 describe('SkillsDetailsPanel Renders', () => {
   it('renders', () => {
