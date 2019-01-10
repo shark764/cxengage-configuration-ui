@@ -54,7 +54,7 @@ export default function UsersDetailsPanel({
     <Wrapper id="dtpanel-users">
       {children}
 
-      <DetailWrapper open={true} contains="skills">
+      <DetailWrapper open={false} contains="skills">
         <WrappedDetailHeader
           userHasUpdatePermission={!skillsFetching && userHasUpdatePermission}
           text={detailHeadertext(skillsItems, 'Skills')}
@@ -74,7 +74,7 @@ export default function UsersDetailsPanel({
 
       <DetailWrapper open={false} contains="groups">
         <WrappedDetailHeader
-          userHasUpdatePermission={userHasUpdatePermission}
+          userHasUpdatePermission={!groupsFetching && userHasUpdatePermission}
           text={detailHeadertext(groupsItems, 'Groups')}
           onActionButtonClick={() => setSelectedSubEntityId('groups')}
         />

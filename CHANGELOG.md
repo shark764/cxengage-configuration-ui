@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.41.7] - 2019-01-10
+### Fixed
+- CXV1-16698 - Skills section was closed by default on Users page to avoid empty table when a user is selected.
+
 ## [0.41.6] - 2019-01-10
 ### Changed
 - CXV1-16664 - Status column for Skills section has been added again to Users page.
