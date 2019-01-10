@@ -59,12 +59,8 @@ Object {
   "usersFetching": undefined,
   "usersFields": Array [
     Object {
-      "label": "First Name",
-      "name": "firstName",
-    },
-    Object {
-      "label": "Last Name",
-      "name": "lastName",
+      "label": "Name",
+      "name": "name",
     },
     Object {
       "label": "Email",
@@ -198,12 +194,8 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
   usersFields={
     Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",

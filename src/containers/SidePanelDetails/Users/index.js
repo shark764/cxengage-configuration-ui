@@ -18,14 +18,7 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     skillsItems: getSkillsWithProficiencyTableItems(state),
     skillsFields: [
-      {
-        label: 'Name',
-        name: 'name'
-      },
-      {
-        label: 'Description',
-        name: 'description'
-      },
+      ...entitiesMetaData.skills.memberListTableFields,
       {
         label: 'Proficiency',
         name: 'proficiency',

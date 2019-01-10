@@ -135,6 +135,15 @@ Object {
       "name": "description",
     },
     Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
+    },
+    Object {
       "actions": Object {
         "onChange": [Function],
       },
@@ -311,6 +320,15 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
       Object {
         "actions": Object {

@@ -364,12 +364,8 @@ Object {
     "helpLink": "/Help/Content/Reporting/Access_Controlled_Reports/Create.htm",
     "modalListTableFields": Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
@@ -407,12 +403,8 @@ Object {
     },
     "sidePanelListTableFields": Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
@@ -717,12 +709,8 @@ Object {
     ],
     "modalListTableFields": Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
@@ -746,12 +734,8 @@ Object {
     },
     "sidePanelListTableFields": Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
@@ -1791,12 +1775,8 @@ Object {
     ],
     "modalListTableFields": Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
@@ -1810,12 +1790,8 @@ Object {
     },
     "sidePanelListTableFields": Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
@@ -2104,12 +2080,8 @@ Object {
     "helpLink": "/Help/Content/Managing%20Users/Adding_users.htm",
     "memberListTableFields": Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",

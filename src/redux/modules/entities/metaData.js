@@ -169,8 +169,7 @@ entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
 entities.users.createFormDependencies.push('roles', 'platformRoles', 'identityProviders');
 entities.users.updateFormDependencies.push('roles', 'platformRoles', 'identityProviders', 'capacityRules');
 entities.users.memberListTableFields = [
-  { label: 'First Name', name: 'firstName' },
-  { label: 'Last Name', name: 'lastName' },
+  { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' },
   {
     label: 'Tenant Status',
@@ -227,8 +226,7 @@ entities.skills.associations = {
   outboundIdentifierLists: ['skills', 'outboundIdentifierLists']
 };
 entities.skills.modalListTableFields = [
-  { label: 'First Name', name: 'firstName' },
-  { label: 'Last Name', name: 'lastName' },
+  { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' }
 ];
 entities.skills.memberListTableFields = [
@@ -242,8 +240,7 @@ entities.skills.memberListTableFields = [
   }
 ];
 entities.skills.sidePanelListTableFields = [
-  { label: 'First Name', name: 'firstName' },
-  { label: 'Last Name', name: 'lastName' },
+  { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' }
 ];
 entities.skills.columns = [
@@ -270,8 +267,7 @@ entities.groups.associations = {
   reasonLists: ['groups', 'reasonLists']
 };
 entities.groups.modalListTableFields = [
-  { label: 'First Name', name: 'firstName' },
-  { label: 'Last Name', name: 'lastName' },
+  { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' }
 ];
 entities.groups.outboundIdentifiersFields = [
@@ -279,8 +275,7 @@ entities.groups.outboundIdentifiersFields = [
   { label: 'Description', name: 'description' }
 ];
 entities.groups.sidePanelListTableFields = [
-  { label: 'First Name', name: 'firstName' },
-  { label: 'Last Name', name: 'lastName' },
+  { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' }
 ];
 entities.groups.memberListTableFields = [
@@ -493,8 +488,7 @@ entities.dataAccessReports.updateFormDependencies = [
 ];
 entities.dataAccessReports.dependentEntity = 'users';
 entities.dataAccessReports.modalListTableFields = [
-  { label: 'First Name', name: 'firstName' },
-  { label: 'Last Name', name: 'lastName' },
+  { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' },
   {
     label: 'Tenant Status',
@@ -515,8 +509,7 @@ entities.dataAccessReports.defaultDependentEntityFilters = [
   { id: 'status', value: 'accepted' }
 ];
 entities.dataAccessReports.sidePanelListTableFields = [
-  { label: 'First Name', name: 'firstName' },
-  { label: 'Last Name', name: 'lastName' },
+  { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' },
   {
     label: 'Tenant Status',

@@ -63,6 +63,7 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       },
     ]
   }
+  outboundIdentifierListsItems={Array []}
   reasonListsFields={
     Array [
       Object {
@@ -84,6 +85,7 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       },
     ]
   }
+  reasonListsItems={Array []}
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
   store={
@@ -119,12 +121,8 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
   usersFields={
     Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
@@ -156,11 +154,7 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       },
     ]
   }
-  usersItems={
-    Array [
-      "mockListMembers",
-    ]
-  }
+  usersItems={Array []}
 >
   Child
 </GroupsDetailsPanel>
@@ -224,7 +218,7 @@ Object {
       "type": "select",
     },
   ],
-  "outboundIdentifierListsItems": undefined,
+  "outboundIdentifierListsItems": Array [],
   "reasonListsFetching": undefined,
   "reasonListsFields": Array [
     Object {
@@ -245,17 +239,13 @@ Object {
       "type": "select",
     },
   ],
-  "reasonListsItems": undefined,
+  "reasonListsItems": Array [],
   "userHasUpdatePermission": true,
   "usersFetching": undefined,
   "usersFields": Array [
     Object {
-      "label": "First Name",
-      "name": "firstName",
-    },
-    Object {
-      "label": "Last Name",
-      "name": "lastName",
+      "label": "Name",
+      "name": "name",
     },
     Object {
       "label": "Email",
@@ -286,8 +276,6 @@ Object {
       "type": "select",
     },
   ],
-  "usersItems": Array [
-    "mockListMembers",
-  ],
+  "usersItems": Array [],
 }
 `;

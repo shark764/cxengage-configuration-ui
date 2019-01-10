@@ -10,14 +10,9 @@ import {
   isInherited,
   isEntityFetching
 } from '../../../redux/modules/entities/selectors';
-import {
-  setSelectedSubEntityId,
-  toggleListItemEntity
-} from '../../../redux/modules/entities';
-import {
-  getDependantEntityTableItems,
-  getSidePanelTableItems
-} from '../../../redux/modules/entities/listItemSelectors';
+import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
+import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
+import { getGroupsDependantEntityTableItems } from '../../../redux/modules/entities/groups/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
 export function mapStateToProps(state, props) {
@@ -25,7 +20,7 @@ export function mapStateToProps(state, props) {
     item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state),
     inherited: isInherited(state),
-    usersItems: getDependantEntityTableItems(state),
+    usersItems: getGroupsDependantEntityTableItems(state),
     usersFields: entitiesMetaData.users.memberListTableFields,
     usersFetching: isEntityFetching(state, 'users'),
     outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),

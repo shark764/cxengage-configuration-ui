@@ -8,12 +8,8 @@ exports[`AddMemberToListLayout Renders renders 1`] = `
   fields={
     Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
@@ -63,12 +59,8 @@ Object {
   "entityName": "skills",
   "fields": Array [
     Object {
-      "label": "First Name",
-      "name": "firstName",
-    },
-    Object {
-      "label": "Last Name",
-      "name": "lastName",
+      "label": "Name",
+      "name": "name",
     },
     Object {
       "label": "Email",

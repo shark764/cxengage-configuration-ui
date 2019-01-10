@@ -14,11 +14,12 @@ import {
   isInherited,
   isSaving
 } from '../../../../redux/modules/entities/selectors';
-import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
-import { getDependantEntityTableItems, getListSize } from '../../../../redux/modules/entities/listItemSelectors';
+import { setSelectedSubEntityId, toggleListItemEntity } from '../../../../redux/modules/entities';
+import { getSidePanelTableItems } from '../../../../redux/modules/entities/listItemSelectors';
+import { getGroupsDependantEntityTableItems } from '../../../../redux/modules/entities/groups/selectors';
 
 jest.mock('../../../../redux/modules/entities/listItemSelectors');
-
+jest.mock('../../../../redux/modules/entities/groups/selectors');
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntity.mockImplementation(
   () =>
@@ -35,14 +36,14 @@ getSelectedEntity.mockImplementation(
     })
 );
 getCurrentEntity.mockImplementation(() => 'groups');
-getDependantEntityTableItems.mockImplementation(() => ['mockListMembers']);
-getListSize.mockImplementation(() => 0);
+getSidePanelTableItems.mockImplementation(() => []);
+getGroupsDependantEntityTableItems.mockImplementation(() => []);
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
 
 jest.mock('../../../../redux/modules/entities');
-removeListItem.mockImplementation(() => 'mockId');
+toggleListItemEntity.mockImplementation(() => 'mockId');
 setSelectedSubEntityId.mockImplementation(() => 'mockId');
 
 describe('GroupsDetailsPanel Renders', () => {

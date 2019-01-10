@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.41.6] - 2019-01-10
+### Changed
+- CXV1-16664 - Status column for Skills section has been added again to Users page.
+- User name was changed to firstName and lastName concatenated into a single column for entity dependent items.
+### Fixed
+- CXV1-16665 - Items available for Groups and Skills pages are no longer showing "undefined" on title
+
 ## [0.41.5] - 2019-01-09
 ### Fixed
 - CXV1-16611 - Users page now is sending null when externalId is empty.

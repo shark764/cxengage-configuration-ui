@@ -16,12 +16,8 @@ Object {
   "outboundIdentifiersFetching": undefined,
   "tableFields": Array [
     Object {
-      "label": "First Name",
-      "name": "firstName",
-    },
-    Object {
-      "label": "Last Name",
-      "name": "lastName",
+      "label": "Name",
+      "name": "name",
     },
     Object {
       "label": "Email",
@@ -84,12 +80,8 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
   tableFields={
     Array [
       Object {
-        "label": "First Name",
-        "name": "firstName",
-      },
-      Object {
-        "label": "Last Name",
-        "name": "lastName",
+        "label": "Name",
+        "name": "name",
       },
       Object {
         "label": "Email",
