@@ -7,6 +7,8 @@ import { generateUUID } from 'serenova-js-utils/uuid';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity } from '../selectors';
+import { initialize } from 'redux-form/immutable';
+import { selectFormInitialValues } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
 import { Toast } from 'cx-ui-components';
 
@@ -159,6 +161,25 @@ export const FetchSidePanelUserData = (action$, store) =>
         })
         .catch(error => handleError(error, a))
     );
+
+export const FetchSidePanelUserDataFulfilled = (action$, store) =>
+  action$
+    .ofType('SET_SELECTED_ENTITY_ID_FULFILLED')
+    .map(action => ({
+      ...action,
+      entityName: getCurrentEntity(store.getState()),
+      id: getSelectedEntityId(store.getState())
+    }))
+    .filter(a => a.id !== 'create' && a.id !== '' && a.entityName === 'users')
+    .map(a => ({
+      type: '@@redux-form/INITIALIZE',
+      meta: {
+        form: `users:${a.id}`,
+        keepDirty: false,
+        updateUnregisteredFields: false
+      },
+      payload: selectFormInitialValues(store.getState())
+    }))
 
 export const ToggleUserEntity = (action$, store) =>
   action$

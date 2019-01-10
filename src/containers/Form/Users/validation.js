@@ -8,13 +8,13 @@ const validateValue = (value, type) =>
 
 const isWebRtc = type => type === 'webrtc';
 
-const errorMessage = type => (type === 'pstn' ? 'Invalid Phone Number' : 'Invalid sip address');
+const errorMessage = type => (type === 'pstn' ? 'Valid Phone Number Required' : 'Valid Sip Address Required');
 
 export const formValidation = values => {
   const formValidation = {};
   const newValues = values.toJS();
   const extensions = newValues.extensions.map(
-    ext => !ext.value || isWebRtc(ext.type) || validateValue(ext.value, ext.type) || errorMessage(ext.type)
+    ext => isWebRtc(ext.type) || validateValue(ext.value, ext.type) || errorMessage(ext.type)
   );
   const labels = newValues.extensions.map(ext => Boolean(ext.description) || 'Label is required');
   if (extensions.some(err => typeof err === 'string')) {

@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.42.1] - 2019-01-10
+### Fixed
+- Re-init users form properly on fetching user data
+- Made it so empty phone or sip fails validation
+
 ## [0.42.0] - 2019-01-10
 ### Added
 - Users page reset password button
