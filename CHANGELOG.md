@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.42.0] - 2019-01-10
+### Added
+- Users page reset password button
+- Users page resend invite button
+- Users page cancel invite button
+
 ## [0.41.7] - 2019-01-10
 ### Fixed
 - CXV1-16698 - Skills section was closed by default on Users page to avoid empty table when a user is selected.

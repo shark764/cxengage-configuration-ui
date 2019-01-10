@@ -37,8 +37,6 @@ userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 jest.mock('../../../../redux/modules/entities/users/selectors');
-getUserTenantStatus.mockImplementation(() => 'enabled');
-getInvitationScenario.mockImplementation(() => 'update');
 
 jest.mock('../../../../redux/modules/entities/roles/selectors');
 selectTenantRoles.mockImplementation(() => []);

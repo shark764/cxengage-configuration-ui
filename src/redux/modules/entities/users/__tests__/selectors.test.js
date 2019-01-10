@@ -5,13 +5,7 @@
 import { fromJS } from 'immutable';
 import { getCurrentEntity, getSelectedEntity } from '../../selectors';
 import { listMemberObjects, getEntityListMembers } from '../../listItemSelectors';
-import {
-  selectNonDisabledUsers,
-  getDisplay,
-  getInvitationScenario,
-  getUserTenantStatus,
-  selectEntityListMembers
-} from '../selectors';
+import { selectNonDisabledUsers, getDisplay, selectEntityListMembers } from '../selectors';
 
 const initialState = fromJS({
   Entities: {
@@ -123,12 +117,6 @@ jest.mock('../../../form/selectors', () => ({
   getCurrentForm: () => mockCurrentForm
 }));
 
-describe('getUserTenantStatus', () => {
-  it("returns the current form's tenant status value", () => {
-    expect(getUserTenantStatus()).toEqual('disabled');
-  });
-});
-
 describe('getDisplay', () => {
   it('gets the whole name of the user', () => {
     expect(
@@ -177,49 +165,6 @@ describe('selectNonDisabledUsers', () => {
       }
     });
     expect(selectNonDisabledUsers(initialStateNoData)).toEqual(undefined);
-  });
-});
-
-describe('getInvitationScenario', () => {
-  it('should get invitation scenario based on data', () => {
-    const mockForm = fromJS({
-      form: {
-        values: {
-          email: 'mockEmail 1',
-          firstName: 'mockFirstName 1',
-          lastName: 'mockLastName 1'
-        }
-      }
-    });
-    expect(getInvitationScenario(mockForm)).toEqual('invite:new:user');
-  });
-  it('should get invitation scenario for existing user based on data', () => {
-    const mockForm = fromJS({
-      form: {
-        values: {
-          id: 'mockId',
-          email: 'mockEmail 1',
-          firstName: 'mockFirstName 1',
-          lastName: 'mockLastName 1',
-          invitationStatus: 'pending'
-        }
-      }
-    });
-    expect(getInvitationScenario(mockForm)).toEqual('invite:new:user');
-  });
-  it('should get non invitation required based on data', () => {
-    const mockForm = fromJS({
-      form: {
-        values: {
-          id: 'mockId',
-          email: 'mockEmail 1',
-          firstName: 'mockFirstName 1',
-          lastName: 'mockLastName 1',
-          invitationStatus: 'enabled'
-        }
-      }
-    });
-    expect(getInvitationScenario(mockForm)).toEqual('invite:new:user');
   });
 });
 

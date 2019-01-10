@@ -267,3 +267,69 @@ export const UpdateSkillProficiency = (action$, store) =>
           }
         })
     );
+
+export const ChangeUsersInviteStatus = action$ =>
+  action$
+    .ofType('CHANGE_USER_INVITE_STATUS')
+    .map(a => {
+      a.id = a.userId;
+      a.entityName = 'users';
+      if (a.toStatus === 'passwordReset') {
+        a.sdkCall = {
+          command: 'updatePlatformUser',
+          data: {
+            userId: a.userId,
+            updateBody: {
+              resetPassword: true
+            }
+          },
+          module: 'entities',
+          topic: 'cxengage/entities/update-platform-user-response'
+        };
+      } else {
+        a.sdkCall = {
+          command: 'updateUser',
+          data: {
+            userId: a.userId,
+            updateBody: {
+              status: a.toStatus
+            }
+          },
+          module: 'entities',
+          topic: 'cxengage/entities/update-user-response'
+        };
+      }
+      return { ...a };
+    })
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => {
+          let msg = '';
+          if (response.result && response.result.invitationStatus && a.toStatus === 'invited') {
+            msg = 'User Invited';
+            response = {
+              result: {
+                id: response.result.id,
+                invitationStatus: 'invited'
+              }
+            };
+          } else if (response.result && response.result.invitationStatus && a.toStatus === 'pending') {
+            msg = 'Invitation Canceled';
+            response = {
+              result: {
+                id: response.result.id,
+                invitationStatus: 'pending'
+              }
+            };
+          } else if (response.result && a.toStatus === 'passwordReset') {
+            msg = 'Password Reset Requested';
+            response = {
+              result: {
+                id: response.result.id
+              }
+            };
+          }
+          return handleSuccess(response, a, msg);
+        })
+        .catch(error => handleError(error, a))
+    );

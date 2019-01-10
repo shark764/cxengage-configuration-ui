@@ -11,8 +11,7 @@ Object {
   "isSaving": undefined,
   "key": "mockId",
   "platformRoles": Array [],
-  "scenario": "update",
-  "status": "enabled",
+  "status": undefined,
   "tenantIdentityProviders": Array [],
   "tenantRoles": Array [],
   "userHasUpdatePermission": true,
@@ -21,8 +20,8 @@ Object {
 
 exports[`Users Renders renders 1`] = `
 <Connect(ReduxForm)
+  changeUserInviteStatus={[Function]}
   currentAgentId="0000-0000-0000-0000"
-  dispatch={[Function]}
   inherited={false}
   initialValues={
     Object {
@@ -31,8 +30,6 @@ exports[`Users Renders renders 1`] = `
   }
   key="mockId"
   platformRoles={Array []}
-  scenario="update"
-  status="enabled"
   store={
     Object {
       "dispatch": [Function],

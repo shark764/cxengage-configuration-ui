@@ -14,9 +14,9 @@ import {
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
 import { getCurrentAgentId } from '../../../redux/modules/userData/selectors';
-import { onFormSubmit } from '../../../redux/modules/entities';
+import { onFormSubmit, changeUserInviteStatus } from '../../../redux/modules/entities';
 import { selectFormInitialValues, createFormName } from '../../../redux/modules/form/selectors';
-import { getUserTenantStatus, getInvitationScenario } from '../../../redux/modules/entities/users/selectors';
+import { getUserInvitationStatus } from '../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../redux/modules/entities/identityProviders/selectors';
 import { getCapacityRulesSelector } from '../../../redux/modules/entities/capacityRules/selectors';
@@ -38,8 +38,7 @@ export function mapStateToProps(state) {
     tenantRoles: selectTenantRoles(state),
     capacityRules: getCapacityRulesSelector(state),
     tenantIdentityProviders: selectTenantIdentityProviders(state),
-    status: getUserTenantStatus(state),
-    scenario: getInvitationScenario(state),
+    status: getUserInvitationStatus(state),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
@@ -48,5 +47,6 @@ export function mapStateToProps(state) {
     currentAgentId: getCurrentAgentId(state)
   };
 }
+const actions = { changeUserInviteStatus };
 
-export default connect(mapStateToProps)(CreateUsersForm);
+export default connect(mapStateToProps, actions)(CreateUsersForm);

@@ -307,6 +307,8 @@ export const downloadCsv = () => ({ type: 'DOWNLOAD_CSV' });
 
 export const uploadCsv = target => ({ type: 'UPLOAD_CSV', target });
 
+export const changeUserInviteStatus = (toStatus, userId) => ({ type: 'CHANGE_USER_INVITE_STATUS', toStatus, userId });
+
 // Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -449,6 +451,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'TOGGLE_ENTITY_FULFILLED':
     case 'UPDATE_ENTITY_FULFILLED':
+    case 'CHANGE_USER_INVITE_STATUS_FULFILLED':
     case 'BULK_ENTITY_UPDATE_FULFILLED': {
       const { result } = action.response;
       const entityIndex = state

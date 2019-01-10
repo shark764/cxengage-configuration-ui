@@ -8,11 +8,11 @@
  *
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { DetailHeader, InputField, SelectField, ExtensionListField } from 'cx-ui-components';
+import { DetailHeader, InputField, SelectField, ExtensionListField, Button } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
 import store from '../../../redux/store';
 import { generateUUID } from 'serenova-js-utils/uuid';
@@ -24,6 +24,10 @@ const Wrapper = styled.div`
 
 const WrappedDetailHeader = styled(DetailHeader)`
   margin-left: 35px;
+`;
+
+const InviteButtons = styled(Button)`
+  margin: 10px;
 `;
 
 export default function UsersForm({
@@ -38,7 +42,8 @@ export default function UsersForm({
   userHasUpdatePermission,
   capacityRules,
   key,
-  currentAgentId
+  currentAgentId,
+  changeUserInviteStatus
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -121,6 +126,49 @@ export default function UsersForm({
             options={tenantIdentityProviders}
             required
           />
+
+          {status === 'pending' && (
+            <InviteButtons
+              type="button"
+              buttonType="secondary"
+              onClick={() => changeUserInviteStatus('invited', initialValues.get('id'))}
+              className="invite-now-button"
+            >
+              Send Invitation
+            </InviteButtons>
+          )}
+
+          {status === 'invited' && (
+            <Fragment>
+              <InviteButtons
+                type="button"
+                buttonType="secondary"
+                onClick={() => changeUserInviteStatus('invited', initialValues.get('id'))}
+                className="resend-invite-button"
+              >
+                Resend Invitation
+              </InviteButtons>
+
+              <InviteButtons
+                type="button"
+                buttonType="secondary"
+                onClick={() => changeUserInviteStatus('pending', initialValues.get('id'))}
+                className="reset-password-button"
+              >
+                Cancel Invitation
+              </InviteButtons>
+            </Fragment>
+          )}
+
+          {status === 'enabled' && (
+            <InviteButtons
+              type="button"
+              buttonType="secondary"
+              onClick={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
+            >
+              Reset Password
+            </InviteButtons>
+          )}
         </DetailWrapper>
 
         <DetailWrapper open={true}>
@@ -206,5 +254,6 @@ UsersForm.propTypes = {
     })
   ),
   status: PropTypes.string,
-  scenario: PropTypes.string
+  scenario: PropTypes.string,
+  changeUserInviteStatus: PropTypes.func.isRequired
 };
