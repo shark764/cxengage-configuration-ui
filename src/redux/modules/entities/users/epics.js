@@ -268,7 +268,7 @@ export const UpdateSkillProficiency = (action$, store) =>
       ...a,
       currentEntity: getCurrentEntity(store.getState()),
       selectedEntityId: getSelectedEntityId(store.getState()),
-      proficiency: parseInt(a.newValue)
+      proficiency: parseInt(a.newValue, 10)
     }))
     .filter(a => a.currentEntity === 'skills' || a.currentEntity === 'users')
     .debounceTime(600)

@@ -44,7 +44,8 @@ export default function UsersForm({
   capacityRules,
   key,
   currentAgentId,
-  changeUserInviteStatus
+  changeUserInviteStatus,
+  displayResetPassword
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -172,16 +173,17 @@ export default function UsersForm({
             </Fragment>
           )}
 
-          {status === 'enabled' && (
-            <ConfirmationWrapper
-              confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
-              mainText={`Are you sure you want to send a password reset email to ${initialValues.get('email')}?`}
-            >
-              <InviteButtons type="button" buttonType="secondary" className="reset-password-button">
-                Reset Password
-              </InviteButtons>
-            </ConfirmationWrapper>
-          )}
+          {displayResetPassword &&
+            status === 'enabled' && (
+              <ConfirmationWrapper
+                confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
+                mainText={`Are you sure you want to send a password reset email to ${initialValues.get('email')}?`}
+              >
+                <InviteButtons type="button" buttonType="secondary" className="reset-password-button">
+                  Reset Password
+                </InviteButtons>
+              </ConfirmationWrapper>
+            )}
         </DetailWrapper>
 
         <DetailWrapper open={true}>
@@ -268,5 +270,6 @@ UsersForm.propTypes = {
   ),
   status: PropTypes.string,
   scenario: PropTypes.string,
-  changeUserInviteStatus: PropTypes.func.isRequired
+  changeUserInviteStatus: PropTypes.func.isRequired,
+  displayResetPassword: PropTypes.bool
 };

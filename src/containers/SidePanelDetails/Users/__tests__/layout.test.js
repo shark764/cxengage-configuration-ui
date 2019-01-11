@@ -11,6 +11,7 @@ describe('<UsersDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
   let defaultFilters;
+  let sidePanelPermissions;
   beforeEach(() => {
     customItem = {
       email: 'mockEmail',
@@ -40,6 +41,14 @@ describe('<UsersDetailsPanel />', () => {
       transferLists: [],
       outboundIdentifierLists: []
     };
+    sidePanelPermissions = {
+      skills: true,
+      groups: true,
+      reasonLists: true,
+      messageTemplates: true,
+      transferLists: true,
+      outboundIdentifierLists: true
+    };
   });
   it('renders users detailsPanel', () => {
     const rendered = shallow(
@@ -56,6 +65,7 @@ describe('<UsersDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         defaultFilters={defaultFilters}
+        sidePanelPermissions={sidePanelPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -75,6 +85,7 @@ describe('<UsersDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         defaultFilters={defaultFilters}
+        sidePanelPermissions={sidePanelPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -95,6 +106,7 @@ describe('<UsersDetailsPanel />', () => {
         item={customItemDisabled}
         active={false}
         defaultFilters={defaultFilters}
+        sidePanelPermissions={sidePanelPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();

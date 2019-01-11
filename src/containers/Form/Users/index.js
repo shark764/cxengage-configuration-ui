@@ -11,7 +11,8 @@ import {
   getSelectedEntityId,
   isInherited,
   isCreating,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  userHasPermissions
 } from '../../../redux/modules/entities/selectors';
 import { getCurrentAgentId } from '../../../redux/modules/userData/selectors';
 import { onFormSubmit, changeUserInviteStatus } from '../../../redux/modules/entities';
@@ -44,7 +45,8 @@ export function mapStateToProps(state) {
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
-    currentAgentId: getCurrentAgentId(state)
+    currentAgentId: getCurrentAgentId(state),
+    displayResetPassword: userHasPermissions(state, ['MANAGE_ALL_USER_PASSWORDS'])
   };
 }
 const actions = { changeUserInviteStatus };

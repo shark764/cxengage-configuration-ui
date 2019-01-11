@@ -4,6 +4,7 @@ exports[`Maps state to props only using selectors validates object created from 
 Object {
   "capacityRules": undefined,
   "currentAgentId": "0000-0000-0000-0000",
+  "displayResetPassword": undefined,
   "inherited": false,
   "initialValues": Object {
     "active": true,

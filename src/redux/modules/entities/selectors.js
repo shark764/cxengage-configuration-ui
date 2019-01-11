@@ -60,6 +60,8 @@ export const userHasUpdatePermission = state =>
 export const userHasCreatePermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('createPermission'));
 
+export const userHasPermissions = (state, permissions) => hasPermission(getCurrentPermissions(state), permissions);
+
 export const hasPermission = (userPermissions, permissionsNeeded) => {
   if (permissionsNeeded !== undefined) {
     // Return true if they have at least one of the permissions

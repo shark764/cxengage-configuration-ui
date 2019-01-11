@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.43.0] - 2019-01-15
+### Added
+- CXV1-16706 - Function to determine if user is a platform administrator.
+- CXV1-16713 - Sidepanel contents now has read-only and manage view according to association permissions.
+### Changed
+- CXV1-16706 - Reset password button now is visible only if user has MANAGE_ALL_USER_PASSWORDS permission.
+
 ## [0.42.9] - 2019-01-15
 ### Changed
 - CXV1-16737 - Updated user invite confirm boxes to match config1

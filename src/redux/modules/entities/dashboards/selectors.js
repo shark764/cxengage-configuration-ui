@@ -7,10 +7,10 @@ import { entitiesMetaData } from '../metaData';
 
 const getDashboards = state => state.getIn(['Entities', 'dashboards', 'data']);
 
-// Not existing yet, is goint to work when API for
+// Not existing yet, is going to work when API for
 // standardDashboards is done
 // Required for https://liveops.atlassian.net/browse/CXV1-16111
-const getStandardDashboards = state => state.getIn(['Entities', 'standardDashboards', 'data']);
+// const getStandardDashboards = state => state.getIn(['Entities', 'standardDashboards', 'data']);
 
 export const selectDashboards = createSelector([getDashboards, getCurrentTenantId], (dashboards, currentTenantId) =>
   dashboards

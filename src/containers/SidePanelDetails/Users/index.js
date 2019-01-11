@@ -4,7 +4,11 @@
 
 import { connect } from 'react-redux';
 import UsersDetailsPanel from './layout';
-import { userHasUpdatePermission, isEntityFetching } from '../../../redux/modules/entities/selectors';
+import {
+  userHasUpdatePermission,
+  isEntityFetching,
+  userHasPermissions
+} from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
 import {
   getSidePanelTableItems,
@@ -45,7 +49,15 @@ export function mapStateToProps(state, props) {
     messageTemplatesItems: getSidePanelTableItems(state, 'messageTemplates'),
     messageTemplatesFields: entitiesMetaData.messageTemplates.memberListTableFields,
     messageTemplatesFetching: isEntityFetching(state, 'messageTemplates'),
-    defaultFilters: entitiesMetaData.users.defaultAssociationFilters
+    defaultFilters: entitiesMetaData.users.defaultAssociationFilters,
+    sidePanelPermissions: {
+      skills: userHasPermissions(state, ['MANAGE_ALL_USER_SKILLS']),
+      groups: userHasPermissions(state, ['MANAGE_ALL_GROUP_USERS']),
+      reasonLists: userHasPermissions(state, ['MANAGE_ALL_USER_REASON_LISTS']),
+      messageTemplates: userHasPermissions(state, ['MANAGE_ALL_MESSAGE_TEMPLATES']),
+      transferLists: userHasPermissions(state, ['MANAGE_ALL_TRANSFER_LISTS']),
+      outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_ASSIGN'])
+    }
   };
 }
 

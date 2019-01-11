@@ -32,6 +32,7 @@ describe('<UsersForm />', () => {
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
         initialValues={initialValues}
+        displayResetPassword={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -57,6 +58,7 @@ describe('<UsersForm />', () => {
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
         initialValues={initialValues}
+        displayResetPassword={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -82,6 +84,7 @@ describe('<UsersForm />', () => {
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
         initialValues={initialValues}
+        displayResetPassword={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -107,6 +110,7 @@ describe('<UsersForm />', () => {
         userHasUpdatePermission={false}
         handleSubmit={() => {}}
         initialValues={initialValues}
+        displayResetPassword={false}
       />
     );
     expect(rendered).toMatchSnapshot();

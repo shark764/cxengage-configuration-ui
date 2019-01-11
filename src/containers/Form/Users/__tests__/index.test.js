@@ -14,7 +14,6 @@ import {
   userHasUpdatePermission
 } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
-import { getUserTenantStatus, getInvitationScenario } from '../../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
 import { getCapacityRules } from '../../../../redux/modules/entities/capacityRules/selectors';

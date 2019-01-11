@@ -3,7 +3,7 @@
  */
 import { createSelector } from 'reselect';
 import { getSelectedEntity } from '../selectors';
-import { convertRoles } from '../roles/selectors';
+import { convertRoles, selectPlatformRoles } from '../roles/selectors';
 import { convertPermissions } from '../permissions/selectors';
 import {
   getEntityListMembers,
@@ -78,4 +78,11 @@ export const getModalTableUserItems = (state, entityName) => {
     ...user,
     name: getDisplay(user)
   }));
+};
+
+export const isUserPlatformAdmin = state => {
+  // Platform admin is allowed to view all platformRoles
+  // otherwise, user is allowed to just view "Platform User"
+  // and "Platform User Password Restricted"
+  return selectPlatformRoles(state).filter(role => 'Platform Administrator' === role.label).length !== 0;
 };
