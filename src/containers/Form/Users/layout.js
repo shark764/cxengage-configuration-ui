@@ -116,7 +116,7 @@ export default function UsersForm({
               { label: 'Use Tenant Default: Enabled', value: 'null' },
               { label: 'Enabled', value: false },
               { label: 'Disabled', value: true }
-            ]}
+            ].filter(val => (currentAgentId === initialValues.get('id') ? val.value !== 'null' : val))}
             required
           />
           <SelectField

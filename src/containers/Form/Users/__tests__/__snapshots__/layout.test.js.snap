@@ -89,10 +89,6 @@ exports[`<UsersForm /> renders create user 1`] = `
         options={
           Array [
             Object {
-              "label": "Use Tenant Default: Enabled",
-              "value": "null",
-            },
-            Object {
               "label": "Enabled",
               "value": false,
             },
@@ -245,10 +241,6 @@ exports[`<UsersForm /> renders update user 1`] = `
         name="noPassword"
         options={
           Array [
-            Object {
-              "label": "Use Tenant Default: Enabled",
-              "value": "null",
-            },
             Object {
               "label": "Enabled",
               "value": false,
@@ -403,10 +395,6 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         options={
           Array [
             Object {
-              "label": "Use Tenant Default: Enabled",
-              "value": "null",
-            },
-            Object {
               "label": "Enabled",
               "value": false,
             },
@@ -559,10 +547,6 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         name="noPassword"
         options={
           Array [
-            Object {
-              "label": "Use Tenant Default: Enabled",
-              "value": "null",
-            },
             Object {
               "label": "Enabled",
               "value": false,
