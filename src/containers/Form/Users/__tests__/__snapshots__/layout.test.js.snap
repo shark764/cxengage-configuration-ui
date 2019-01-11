@@ -79,7 +79,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         id="frm-users-platform-status"
         inputType="text"
         label="Platform Status"
-        name="platformStatus"
+        name="invitationStatus"
       />
       <SelectField
         disabled={true}
@@ -94,11 +94,11 @@ exports[`<UsersForm /> renders create user 1`] = `
             },
             Object {
               "label": "Enabled",
-              "value": true,
+              "value": false,
             },
             Object {
               "label": "Disabled",
-              "value": false,
+              "value": true,
             },
           ]
         }
@@ -231,7 +231,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         id="frm-users-platform-status"
         inputType="text"
         label="Platform Status"
-        name="platformStatus"
+        name="invitationStatus"
       />
       <SelectField
         disabled={true}
@@ -246,11 +246,11 @@ exports[`<UsersForm /> renders update user 1`] = `
             },
             Object {
               "label": "Enabled",
-              "value": true,
+              "value": false,
             },
             Object {
               "label": "Disabled",
-              "value": false,
+              "value": true,
             },
           ]
         }
@@ -383,7 +383,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         id="frm-users-platform-status"
         inputType="text"
         label="Platform Status"
-        name="platformStatus"
+        name="invitationStatus"
       />
       <SelectField
         disabled={true}
@@ -398,11 +398,11 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
             },
             Object {
               "label": "Enabled",
-              "value": true,
+              "value": false,
             },
             Object {
               "label": "Disabled",
-              "value": false,
+              "value": true,
             },
           ]
         }
@@ -535,7 +535,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         id="frm-users-platform-status"
         inputType="text"
         label="Platform Status"
-        name="platformStatus"
+        name="invitationStatus"
       />
       <SelectField
         disabled={true}
@@ -550,11 +550,11 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
             },
             Object {
               "label": "Enabled",
-              "value": true,
+              "value": false,
             },
             Object {
               "label": "Disabled",
-              "value": false,
+              "value": true,
             },
           ]
         }

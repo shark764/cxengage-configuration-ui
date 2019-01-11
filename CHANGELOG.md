@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.42.2] - 2019-01-11
+### Fixed
+- Platform status on users page side panel now reflects the users invitation status
+- Changing users platform authentication now reflects proper values for noPassword field
+
 ## [0.42.1] - 2019-01-10
 ### Fixed
 - Re-init users form properly on fetching user data

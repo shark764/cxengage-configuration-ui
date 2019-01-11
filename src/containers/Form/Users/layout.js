@@ -99,7 +99,7 @@ export default function UsersForm({
           <WrappedDetailHeader text="Login Details" />
           <InputField name="email" label="Email" id="frm-users-email" componentType="input" inputType="text" disabled />
           <InputField
-            name="platformStatus"
+            name="invitationStatus"
             label="Platform Status"
             id="frm-users-platform-status"
             componentType="input"
@@ -113,8 +113,8 @@ export default function UsersForm({
             disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
             options={[
               { label: 'Use Tenant Default: Enabled', value: 'null' },
-              { label: 'Enabled', value: true },
-              { label: 'Disabled', value: false }
+              { label: 'Enabled', value: false },
+              { label: 'Disabled', value: true }
             ]}
             required
           />
