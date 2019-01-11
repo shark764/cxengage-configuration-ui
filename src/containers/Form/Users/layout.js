@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { DetailHeader, InputField, SelectField, ExtensionListField, Button } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
+import ConfirmationWrapper from '../../../components/ConfirmationWrapper';
 import store from '../../../redux/store';
 import { generateUUID } from 'serenova-js-utils/uuid';
 
@@ -128,46 +129,47 @@ export default function UsersForm({
           />
 
           {status === 'pending' && (
-            <InviteButtons
-              type="button"
-              buttonType="secondary"
-              onClick={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-              className="invite-now-button"
+            <ConfirmationWrapper
+              confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
+              mainText="This will send an invitation email to the user."
             >
-              Send Invitation
-            </InviteButtons>
+              <InviteButtons type="button" buttonType="secondary" className="invite-now-button">
+                Send Invitation
+              </InviteButtons>
+            </ConfirmationWrapper>
           )}
 
           {status === 'invited' && (
             <Fragment>
-              <InviteButtons
-                type="button"
-                buttonType="secondary"
-                onClick={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-                className="resend-invite-button"
+              <ConfirmationWrapper
+                confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
+                mainText="This will resend an invitation email to the user."
               >
-                Resend Invitation
-              </InviteButtons>
+                <InviteButtons type="button" buttonType="secondary" className="resend-invite-button">
+                  Resend Invitation
+                </InviteButtons>
+              </ConfirmationWrapper>
 
-              <InviteButtons
-                type="button"
-                buttonType="secondary"
-                onClick={() => changeUserInviteStatus('pending', initialValues.get('id'))}
-                className="reset-password-button"
+              <ConfirmationWrapper
+                confirmBtnCallback={() => changeUserInviteStatus('pending', initialValues.get('id'))}
+                mainText="This will prevent the user from accepting the invitation."
               >
-                Cancel Invitation
-              </InviteButtons>
+                <InviteButtons type="button" buttonType="secondary" className="cancel-invite-button">
+                  Cancel Invitation
+                </InviteButtons>
+              </ConfirmationWrapper>
             </Fragment>
           )}
 
           {status === 'enabled' && (
-            <InviteButtons
-              type="button"
-              buttonType="secondary"
-              onClick={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
+            <ConfirmationWrapper
+              confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
+              mainText="This will send a password reset email to the user."
             >
-              Reset Password
-            </InviteButtons>
+              <InviteButtons type="button" buttonType="secondary" className="reset-password-button">
+                Reset Password
+              </InviteButtons>
+            </ConfirmationWrapper>
           )}
         </DetailWrapper>
 

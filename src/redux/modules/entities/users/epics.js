@@ -7,10 +7,10 @@ import { generateUUID } from 'serenova-js-utils/uuid';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity } from '../selectors';
-import { initialize } from 'redux-form/immutable';
 import { selectFormInitialValues } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
 import { Toast } from 'cx-ui-components';
+import { changeUserInviteStatus } from '../../entities';
 
 export const UpdateUserEntity = action$ =>
   action$
@@ -179,7 +179,18 @@ export const FetchSidePanelUserDataFulfilled = (action$, store) =>
         updateUnregisteredFields: false
       },
       payload: selectFormInitialValues(store.getState())
+    }));
+
+export const InviteNewUser = (action$, store) =>
+  action$
+    .ofType('CREATE_ENTITY_FULFILLED')
+    .map(action => ({
+      ...action,
+      entityName: getCurrentEntity(store.getState()),
+      id: getSelectedEntityId(store.getState())
     }))
+    .filter(a => a.id !== 'create' && a.id !== '' && a.entityName === 'users' && a.values.inviteNow === true)
+    .map(a => changeUserInviteStatus('invited', a.id));
 
 export const ToggleUserEntity = (action$, store) =>
   action$
