@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.42.9] - 2019-01-15
+### Changed
+- CXV1-16737 - Updated user invite confirm boxes to match config1
+### Added
+- Added resend invite to expired users
+
 ## [0.42.8] - 2019-01-15
 ### Fixed
 - CXV1-16081 - fixed option for Platform Authentication, it is back as "Use Tenant Default: Enabled"
