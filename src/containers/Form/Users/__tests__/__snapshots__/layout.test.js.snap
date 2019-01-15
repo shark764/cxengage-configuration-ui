@@ -109,7 +109,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <Connect(ConfirmationWrapper)
         confirmBtnCallback={[Function]}
-        mainText="This will send a password reset email to the user."
+        mainText="Are you sure you want to send a password reset email to undefined?"
       >
         <Styled(Button)
           buttonType="secondary"
@@ -262,7 +262,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
       <Connect(ConfirmationWrapper)
         confirmBtnCallback={[Function]}
-        mainText="This will send a password reset email to the user."
+        mainText="Are you sure you want to send a password reset email to undefined?"
       >
         <Styled(Button)
           buttonType="secondary"
@@ -415,7 +415,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
       <Connect(ConfirmationWrapper)
         confirmBtnCallback={[Function]}
-        mainText="This will send a password reset email to the user."
+        mainText="Are you sure you want to send a password reset email to undefined?"
       >
         <Styled(Button)
           buttonType="secondary"
@@ -568,7 +568,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
       <Connect(ConfirmationWrapper)
         confirmBtnCallback={[Function]}
-        mainText="This will send a password reset email to the user."
+        mainText="Are you sure you want to send a password reset email to undefined?"
       >
         <Styled(Button)
           buttonType="secondary"

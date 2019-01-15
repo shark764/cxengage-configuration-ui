@@ -131,10 +131,21 @@ export default function UsersForm({
           {status === 'pending' && (
             <ConfirmationWrapper
               confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-              mainText="This will send an invitation email to the user."
+              mainText={`This will send an email invitation to ${initialValues.get('email')}.`}
             >
               <InviteButtons type="button" buttonType="secondary" className="invite-now-button">
                 Send Invitation
+              </InviteButtons>
+            </ConfirmationWrapper>
+          )}
+
+          {status === 'expired' && (
+            <ConfirmationWrapper
+              confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
+              mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
+            >
+              <InviteButtons type="button" buttonType="secondary" className="resend-invite-button">
+                Resend Invitation
               </InviteButtons>
             </ConfirmationWrapper>
           )}
@@ -143,7 +154,7 @@ export default function UsersForm({
             <Fragment>
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-                mainText="This will resend an invitation email to the user."
+                mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
               >
                 <InviteButtons type="button" buttonType="secondary" className="resend-invite-button">
                   Resend Invitation
@@ -152,7 +163,7 @@ export default function UsersForm({
 
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('pending', initialValues.get('id'))}
-                mainText="This will prevent the user from accepting the invitation."
+                mainText={`This will prevent the user ${initialValues.get('email')} from accepting the invitation.`}
               >
                 <InviteButtons type="button" buttonType="secondary" className="cancel-invite-button">
                   Cancel Invitation
@@ -164,7 +175,7 @@ export default function UsersForm({
           {status === 'enabled' && (
             <ConfirmationWrapper
               confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
-              mainText="This will send a password reset email to the user."
+              mainText={`Are you sure you want to send a password reset email to ${initialValues.get('email')}?`}
             >
               <InviteButtons type="button" buttonType="secondary" className="reset-password-button">
                 Reset Password
