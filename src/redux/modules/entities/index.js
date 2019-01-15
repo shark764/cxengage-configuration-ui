@@ -81,6 +81,7 @@ const initialState = fromJS({
   },
   users: {
     ...defaultEntity,
+    sidePanelWidth: 600,
     readPermission: ['VIEW_ALL_USERS'],
     updatePermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
@@ -464,11 +465,34 @@ export default function reducer(state = initialState, action) {
       }
     }
     case 'TOGGLE_LIST_ITEM_ENTITY_FULFILLED': {
-      const { actionType, entityName, entityId, name, id } = action;
+      const { actionType, entityName, entityId, name, id, response } = action;
       const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === entityId);
       const currentList = state.getIn([entityName, 'data', entityIndex, name]);
       const modifiedList = actionType === 'associate' ? currentList.push(id) : currentList.filter(x => x !== id);
-      if (entityIndex !== -1) {
+      if (entityIndex !== -1 && name === 'skills') {
+        return state
+          .setIn([entityName, 'data', entityIndex, name], modifiedList)
+          .updateIn([entityName, 'data', entityIndex, 'skillsWithProficiency'], list => {
+            if (actionType === 'associate') {
+              return list.push(fromJS(response.result));
+            } else {
+              const itemIndex = list.findIndex(item => item.get('skillId') === id);
+              return list.delete(itemIndex);
+            }
+          });
+      } else if (entityIndex !== -1 && name === 'users') {
+        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === id);
+        return state
+          .setIn([entityName, 'data', entityIndex, name], modifiedList)
+          .updateIn(['users', 'data', userIndex, 'skills'], list => {
+            if (actionType === 'associate') {
+              return list.push(fromJS({ id: response.result.skillId, proficiency: response.result.proficiency }));
+            } else {
+              const itemIndex = list.findIndex(item => item.get('id') === entityId);
+              return list.delete(itemIndex);
+            }
+          });
+      } else if (entityIndex !== -1) {
         return state.setIn([entityName, 'data', entityIndex, name], modifiedList);
       } else {
         return state;

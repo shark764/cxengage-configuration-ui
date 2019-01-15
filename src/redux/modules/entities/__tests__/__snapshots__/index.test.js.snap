@@ -341,7 +341,7 @@ Immutable.Map {
   "users": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 600,
     "confirmationDialogType": undefined,
     "readPermission": Immutable.List [
       "VIEW_ALL_USERS",
