@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.42.7] - 2019-01-15
+### Fixed
+- CXV1-16736 - Now users table on groups and skills doesn't auto close by default
+- Added missing inheritance to groups page users table
+
 ## [0.42.6] - 2019-01-15
 ### Fixed
 - CXV1-16667 - Fixed issues with adding and removing skills with proficiency values

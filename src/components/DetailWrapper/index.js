@@ -22,7 +22,7 @@ class DetailWrapper extends Component {
     };
   }
   componentDidUpdate({ entityId }) {
-    if (entityId !== this.props.entityId) {
+    if (entityId !== this.props.entityId && !this.props.autoCloseOverride) {
       this.setState({ open: false });
     }
   }
@@ -66,7 +66,8 @@ DetailWrapper.propTypes = {
   fetchListItems: PropTypes.func,
   entityName: PropTypes.string,
   entityId: PropTypes.string,
-  contains: PropTypes.string
+  contains: PropTypes.string,
+  autoCloseOverride: PropTypes.bool
 };
 
 export default connect(mapStateToProps, actions)(DetailWrapper);

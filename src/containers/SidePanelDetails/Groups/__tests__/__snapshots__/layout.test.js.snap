@@ -6,6 +6,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
 >
   Mock Child
   <Connect(DetailWrapper)
+    autoCloseOverride={true}
     open={true}
   >
     <Styled(DetailHeader)
@@ -77,6 +78,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
     />
   </React.Fragment>
   <Connect(DetailWrapper)
+    autoCloseOverride={true}
     open={true}
   >
     <Styled(DetailHeader)
@@ -135,6 +137,7 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
 >
   Mock Child
   <Connect(DetailWrapper)
+    autoCloseOverride={true}
     open={true}
   >
     <Styled(DetailHeader)

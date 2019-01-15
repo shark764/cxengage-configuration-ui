@@ -51,7 +51,7 @@ export default function SkillsDetailsPanel({
           <Detail label="Status" value={active ? 'Enabled' : 'Disabled'} />
         </Fragment>
       )}
-      <DetailWrapper open={true}>
+      <DetailWrapper open={true} autoCloseOverride>
         <WrappedDetailHeader
           userHasUpdatePermission={!usersFetching && userHasUpdatePermission}
           text={`${usersItems.length > 1 ? usersItems.length : ''} Users`}
@@ -107,5 +107,4 @@ SkillsDetailsPanel.propTypes = {
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.object
-
 };

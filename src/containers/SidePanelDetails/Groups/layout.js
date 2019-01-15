@@ -55,7 +55,7 @@ export default function GroupsDetailsPanel({
           <Detail label="Status" value={active ? 'Enabled' : 'Disabled'} />
         </Fragment>
       )}
-      <DetailWrapper open={true}>
+      <DetailWrapper open={true} autoCloseOverride>
         <WrappedDetailHeader
           userHasUpdatePermission={!usersFetching && userHasUpdatePermission}
           text={detailHeadertext(usersItems, 'Users')}
@@ -71,6 +71,7 @@ export default function GroupsDetailsPanel({
           fields={usersFields}
           filtered={defaultFilters.users}
           fetching={usersFetching}
+          inherited={inherited}
         />
       </DetailWrapper>
       <DetailWrapper open={false} contains="outboundIdentifierLists">
