@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.42.8] - 2019-01-15
+### Fixed
+- CXV1-16081 - fixed option for Platform Authentication, it is back as "Use Tenant Default: Enabled"
+
 ## [0.42.7] - 2019-01-15
 ### Fixed
 - CXV1-16736 - Now users table on groups and skills doesn't auto close by default
