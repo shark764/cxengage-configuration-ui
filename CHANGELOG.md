@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.42.5] - 2019-01-11
+### Fixed
+- Email validation for Create User
+- If the email entered in the form exists in the tenant, side panel changes to Update state automatically.
+- It shows a banner when the email exists in the platform but is not on the tenant, just like Config-UI
+
 ## [0.42.4] - 2019-01-11
 ### Fixed
 - Platform authentication field reflects proper value for logged in user

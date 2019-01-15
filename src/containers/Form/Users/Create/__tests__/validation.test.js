@@ -1,5 +1,15 @@
 import { formValidation } from '../validation';
 import { Map } from 'immutable';
+import { fromJS } from 'immutable';
+
+const props = {
+  tenantUsers:fromJS([
+  {
+    email: "mockEmail@email.com"
+  }
+]),
+setSelectedEntityId: id => true
+};
 
 describe('formValidation', () => {
   it('returns proper object when required fields are provided', () => {
@@ -8,7 +18,7 @@ describe('formValidation', () => {
       platformRoleId: 'mockPlatformRoleId',
       roleId: 'mockRoleId'
     });
-    expect(formValidation(values)).toMatchSnapshot();
+    expect(formValidation(values,props)).toMatchSnapshot();
   });
   it('returns proper object (errors) when required fields are not provided', () => {
     const values = new Map({
@@ -16,7 +26,7 @@ describe('formValidation', () => {
       platformRoleId: '',
       roleId: ''
     });
-    expect(formValidation(values)).toMatchSnapshot();
+    expect(formValidation(values, props)).toMatchSnapshot();
   });
   it('returns proper object (errors) when wrong values are provided', () => {
     const values = new Map({
@@ -24,6 +34,6 @@ describe('formValidation', () => {
       platformRoleId: null,
       roleId: null
     });
-    expect(formValidation(values)).toMatchSnapshot();
+    expect(formValidation(values,props)).toMatchSnapshot();
   });
 });

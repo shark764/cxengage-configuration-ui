@@ -4,7 +4,7 @@ import { Toast } from 'cx-ui-components';
 import { of } from 'rxjs/observable/of';
 
 export function handleError(error, a) {
-  if (!isIgnoredToast(a.type, a.entityName)) {
+  if (!isIgnoredToast(a.type, a.entityName) && a.type !== '@@redux-form/CHANGE') {
     Toast.error(errorLabel(error));
   }
   a.type = `${a.type}_REJECTED`;

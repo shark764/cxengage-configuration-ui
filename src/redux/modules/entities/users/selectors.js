@@ -3,7 +3,6 @@
  */
 import { createSelector } from 'reselect';
 import { getSelectedEntity } from '../selectors';
-import { getCurrentForm } from '../../form/selectors';
 import { convertRoles } from '../roles/selectors';
 import { convertPermissions } from '../permissions/selectors';
 import {
@@ -13,6 +12,8 @@ import {
 } from '../../entities/listItemSelectors';
 
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
+
+export const existsPlatformUserByEmail = state => state.getIn(['Entities', 'users', 'userExistInPlatform'], false);
 
 export const selectNonDisabledUsers = createSelector([getUsers], users => {
   return users !== undefined

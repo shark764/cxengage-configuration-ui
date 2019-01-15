@@ -4,8 +4,14 @@
 
 import { fromJS } from 'immutable';
 import { getCurrentEntity, getSelectedEntity } from '../../selectors';
-import { listMemberObjects, getEntityListMembers } from '../../listItemSelectors';
-import { selectNonDisabledUsers, getDisplay, selectEntityListMembers } from '../selectors';
+import { listMemberObjects, getEntityListMembers, availableEntityMembersForList } from '../../listItemSelectors';
+import {
+  selectNonDisabledUsers,
+  getDisplay,
+  selectEntityListMembers,
+  existsPlatformUserByEmail,
+  selectAvailableEntityMembersForList
+} from '../selectors';
 
 const initialState = fromJS({
   Entities: {
@@ -35,7 +41,8 @@ const initialState = fromJS({
           platformStatus: 'disabled',
           status: 'enabled'
         }
-      ]
+      ],
+      userExistInPlatform: true
     }
   }
 });
@@ -100,6 +107,7 @@ const listMembers = [
 
 jest.mock('../../listItemSelectors');
 listMemberObjects.mockImplementation(() => fromJS(listMembers));
+availableEntityMembersForList.mockImplementation(() => listMembers);
 
 jest.mock('../../selectors');
 getEntityListMembers.mockImplementation(() => listMembers);
@@ -199,5 +207,28 @@ describe('selectEntityListMembers', () => {
         status: 'enabled'
       }
     ]);
+  });
+});
+
+describe('existsPlatformUserByEmail', () => {
+  it('should return true when the user exist on platform', () => {
+    expect(existsPlatformUserByEmail(initialState)).toMatchSnapshot();
+  });
+
+  it('should return false when the user does not exist on platform', () => {
+    const modState = fromJS({
+      Entities: {
+        users: {
+          userExistInPlatform: false
+        }
+      }
+    });
+    expect(existsPlatformUserByEmail(modState)).toMatchSnapshot();
+  });
+});
+
+describe('selectAvailableEntityMembersForList', () => {
+  it('should return a member list', () => {
+    expect(selectAvailableEntityMembersForList(initialState)).toMatchSnapshot();
   });
 });

@@ -11,6 +11,7 @@ import { selectFormInitialValues } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
 import { Toast } from 'cx-ui-components';
 import { changeUserInviteStatus } from '../../entities';
+import { validateEmail } from 'serenova-js-utils/validation';
 
 export const UpdateUserEntity = action$ =>
   action$
@@ -363,5 +364,26 @@ export const ChangeUsersInviteStatus = action$ =>
           }
           return handleSuccess(response, a, msg);
         })
+        .catch(error => handleError(error, a))
+    );
+
+export const CheckIfEmailExists = action$ =>
+  action$
+    .ofType('@@redux-form/CHANGE')
+    .filter(a => a.meta.form === 'users:create' && a.meta.field === 'email' && (validateEmail(a.payload) || !a.payload))
+    .map(a => ({
+      sdkCall: {
+        command: 'getPlatformUserEmail',
+        data: {
+          email: a.payload
+        },
+        module: 'entities',
+        topic: 'cxengage/entities/get-platform-user-email-response'
+      },
+      ...a
+    }))
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a))
         .catch(error => handleError(error, a))
     );

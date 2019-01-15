@@ -15,7 +15,13 @@ const emailValidation = email => {
   }
 };
 
-export const formValidation = values => {
+export const formValidation = (values, props) => {
+  const allUsers = props.tenantUsers.toJS();
+  const userIndex = allUsers.findIndex(element => element.email === values.get('email'));
+
+  if (userIndex !== -1) {
+    props.setSelectedEntityId(allUsers[userIndex].id);
+  }
   return {
     roleId: !values.get('roleId') && 'Please select a Tenant Role',
     email: emailValidation(values.get('email')),

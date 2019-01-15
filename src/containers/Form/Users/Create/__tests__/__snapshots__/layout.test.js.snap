@@ -64,7 +64,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         options={
           Array [
             Object {
-              "label": "Use Tenant Default: Enabled",
+              "label": "Use Tenant Default",
               "value": "null",
             },
             Object {
@@ -155,7 +155,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
         options={
           Array [
             Object {
-              "label": "Use Tenant Default: Enabled",
+              "label": "Use Tenant Default",
               "value": "null",
             },
             Object {
@@ -246,7 +246,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
         options={
           Array [
             Object {
-              "label": "Use Tenant Default: Enabled",
+              "label": "Use Tenant Default",
               "value": "null",
             },
             Object {

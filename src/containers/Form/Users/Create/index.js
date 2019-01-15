@@ -7,8 +7,9 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import UsersForm from './layout';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import { getUsers, existsPlatformUserByEmail } from '../../../../redux/modules/entities/users/selectors';
 import { formValidation } from './validation';
-import { onFormSubmit } from '../../../../redux/modules/entities';
+import { onFormSubmit, setSelectedEntityId } from '../../../../redux/modules/entities';
 import { selectCreateUserFormInitialValues, createFormName } from '../../../../redux/modules/form/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
@@ -34,8 +35,14 @@ export function mapStateToProps(state) {
     initialValues: selectCreateUserFormInitialValues(state),
     isSaving: isCreating(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
-    key: getSelectedEntityId(state)
+    key: getSelectedEntityId(state),
+    tenantUsers: getUsers(state),
+    checkPlatformUser: existsPlatformUserByEmail(state)
   };
 }
 
-export default connect(mapStateToProps)(CreateUsersForm);
+export const actions = {
+  setSelectedEntityId
+};
+
+export default connect(mapStateToProps, actions)(CreateUsersForm);

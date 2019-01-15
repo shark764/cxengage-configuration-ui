@@ -640,12 +640,29 @@ export default function reducer(state = initialState, action) {
     case 'DELETE_SUB_ENTITY_REJECTED': {
       return setSubEntityDeleting(state, action, false);
     }
+    case '@@redux-form/CHANGE_FULFILLED':
+    case '@@redux-form/CHANGE_REJECTED':
+    case '@@redux-form/DESTROY': {
+      return setUserExistsInPlatform(state, action);
+    }
     default:
       return state;
   }
 }
 
 // Reducer helper functions
+
+export const setUserExistsInPlatform = (state, action) => {
+  if (
+    action.meta.form === 'users:create' &&
+    action.meta.field === 'email' &&
+    action.type === '@@redux-form/CHANGE_FULFILLED'
+  ) {
+    return state.setIn([state.get('currentEntity'), 'userExistInPlatform'], true);
+  } else {
+    return state.setIn([state.get('currentEntity'), 'userExistInPlatform'], false);
+  }
+};
 
 export const setEntityUpdatingHelper = (state, { entityName, entityId }, updating) => {
   const entityIndex = state.getIn([entityName, 'data']).findIndex(entity => entity.get('id') === entityId);

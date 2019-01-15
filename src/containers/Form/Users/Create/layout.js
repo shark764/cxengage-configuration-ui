@@ -11,7 +11,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { DetailHeader, InputField, SelectField, ToggleField } from 'cx-ui-components';
+import { DetailHeader, InputField, SelectField, ToggleField, DetailsPanelAlert } from 'cx-ui-components';
 import DetailWrapper from '../../../../components/DetailWrapper';
 
 const Wrapper = styled.div`
@@ -30,11 +30,15 @@ export default function UsersForm({
   tenantIdentityProviders,
   isSaving,
   userHasUpdatePermission,
-  key
+  key,
+  checkPlatformUser
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <Wrapper>
+        {checkPlatformUser && (
+          <DetailsPanelAlert text="This user already exists on the platform and it will be added to the tenant upon clicking “Submit”" />
+        )}
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Tenant Details" />
           <InputField
@@ -78,7 +82,7 @@ export default function UsersForm({
             id="frm-users-no-password-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={[
-              { label: 'Use Tenant Default: Enabled', value: 'null' },
+              { label: 'Use Tenant Default', value: 'null' },
               { label: 'Enabled', value: true },
               { label: 'Disabled', value: false }
             ]}
@@ -103,6 +107,7 @@ UsersForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
+  checkPlatformUser: PropTypes.bool,
   platformRoles: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,

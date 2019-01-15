@@ -8,7 +8,7 @@ const validateValue = (value, type) =>
 
 const isWebRtc = type => type === 'webrtc';
 
-const errorMessage = type => (type === 'pstn' ? 'Valid Phone Number Required' : 'Valid Sip Address Required');
+const errorMessage = type => (type === 'pstn' ? 'Valid Phone Number Required' : 'Valid SIP Address Required');
 
 export const formValidation = values => {
   const formValidation = {};

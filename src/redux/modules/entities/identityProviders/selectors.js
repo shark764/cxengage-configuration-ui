@@ -5,7 +5,7 @@
 export const selectTenantIdentityProviders = state => {
   const providerData = state.getIn(['Entities', 'identityProviders', 'data']);
   return [
-    { value: 'null', label: 'Use Tenant Default: Enabled' },
+    { value: 'null', label: 'Use Tenant Default' },
     ...(providerData
       ? providerData
           .toJS()
