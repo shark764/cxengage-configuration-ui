@@ -35,15 +35,13 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 60,
-        "functions": 51,
+        "branches": 44,
+        "functions": 46,
         "lines": 58,
-        "statements": 58
+        "statements": 57
       }
     },
     "collectCoverageFrom": [
-      "src/containers/**/*.{js}",
-      "src/components/**/*.{js}",
       "src/redux/modules/**/*.{js}",
       "src/utils/*.{js}",
       "!src/utils/cxSdk.js"
