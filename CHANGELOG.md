@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.44.0] - 2019-01-16
+### Added
+- CXV1-16769 - New filters "All active" and "All non-active" were added to Platform Status column on Users page.
+### Fixed
+- CXV1-16774 - Toggling user status on Users page now shows correct message.
+
 ## [0.43.1] - 2019-01-16
 ### Changed
 - SDK Version Bump 8.37.2

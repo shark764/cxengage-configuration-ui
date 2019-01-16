@@ -205,7 +205,7 @@ entities.users.columns = [
   { name: 'Platform Status', active: true },
   { name: 'Tenant Status', active: true }
 ];
-entities.users.defaultFilters = [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }];
+entities.users.defaultFilters = [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'all active' }];
 entities.users.defaultAssociationFilters = {
   skills: [{ id: 'active', value: 'enabled' }],
   groups: [{ id: 'active', value: 'enabled' }],
@@ -225,10 +225,7 @@ entities.skills.associations = {
   users: ['users', 'skills'],
   outboundIdentifierLists: ['skills', 'outboundIdentifierLists']
 };
-entities.skills.modalListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' }
-];
+entities.skills.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.skills.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' },
@@ -239,10 +236,7 @@ entities.skills.memberListTableFields = [
     filterOptions: ['enabled', 'disabled']
   }
 ];
-entities.skills.sidePanelListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' }
-];
+entities.skills.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.skills.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -266,18 +260,12 @@ entities.groups.associations = {
   outboundIdentifierLists: ['groups', 'outboundIdentifierLists'],
   reasonLists: ['groups', 'reasonLists']
 };
-entities.groups.modalListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' }
-];
+entities.groups.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.groups.outboundIdentifiersFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' }
 ];
-entities.groups.sidePanelListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' }
-];
+entities.groups.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.groups.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' },

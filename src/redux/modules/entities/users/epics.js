@@ -84,7 +84,10 @@ export const UpdateUserEntity = action$ =>
           from(result).map(response => {
             if (response.result && response.result.extensions) {
               response.result.extensions = [
-                ...response.result.extensions.map(item => ({ ...item, id: generateUUID() }))
+                ...response.result.extensions.map(item => ({
+                  ...item,
+                  id: generateUUID()
+                }))
               ];
             }
             return handleSuccess(response, a);
@@ -129,7 +132,12 @@ export const UpdatePlatformUserEntity = action$ =>
         .map(response => {
           delete response.result.status;
           if (response.result.extensions) {
-            response.result.extensions = [...response.result.extensions.map(item => ({ ...item, id: generateUUID() }))];
+            response.result.extensions = [
+              ...response.result.extensions.map(item => ({
+                ...item,
+                id: generateUUID()
+              }))
+            ];
           }
           return handleSuccess(response, a);
         })
@@ -219,7 +227,7 @@ export const ToggleUserEntity = (action$, store) =>
             response,
             a,
             `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was ${
-              a.entityStatusActive ? 'disabled' : 'enabled'
+              a.currentStatus !== 'disabled' ? 'disabled' : 'enabled'
             } successfully!`
           )
         )

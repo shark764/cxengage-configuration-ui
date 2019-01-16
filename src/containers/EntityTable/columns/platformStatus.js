@@ -5,7 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
-import { FilterSelect, filterSelectMethod, columnAccessor } from 'cx-ui-components';
+import { FilterSelect, columnAccessor } from 'cx-ui-components';
 
 export const platformStatusColumn = {
   id: 'invitationStatus',
@@ -16,14 +16,39 @@ export const platformStatusColumn = {
       {camelCaseToRegularForm(row['invitationStatus'])}
     </span>
   ),
-  filterMethod: (filter, row) => filterSelectMethod(filter, row),
+  filterMethod: (filter, row) => {
+    // Show all items on 'All'
+    // Show 'pending', 'invited', 'expired', 'enabled', 'sso-only' items on 'All Active'
+    // Check match otherwise
+    // We remove white spaces since camelCaseToRegularForm adds
+    // empty space at beginning when string has capital letter
+    if (filter.value === 'all') {
+      return true;
+    } else if (filter.value === 'all active') {
+      return ['pending', 'invited', 'expired', 'enabled', 'sso-only'].includes(row['_original'][filter.id]);
+    } else if (filter.value === 'all non-active') {
+      return ['disabled'].includes(row['_original'][filter.id]);
+    } else {
+      return camelCaseToRegularForm(row[filter.id]).trim() === camelCaseToRegularForm(filter.value).trim();
+    }
+  },
   Filter: ({ filter, onChange }) => (
     <FilterSelect
       tableType="modal"
       className="entity-table-filter-column-platform-status"
       onChange={event => onChange(event.target.value)}
-      value={filter ? filter.value : 'all'}
-      options={['all', 'pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']}
+      value={filter ? filter.value : 'all active'}
+      options={[
+        'all',
+        'all active',
+        'all non-active',
+        'pending',
+        'invited',
+        'expired',
+        'enabled',
+        'disabled',
+        'sso-only'
+      ]}
     />
   )
 };
