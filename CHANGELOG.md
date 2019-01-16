@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.43.1] - 2019-01-16
+### Changed
+- SDK Version Bump 8.37.2
+
 ## [0.43.0] - 2019-01-15
 ### Added
 - CXV1-16706 - Function to determine if user is a platform administrator.
