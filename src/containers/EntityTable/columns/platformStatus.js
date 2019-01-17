@@ -18,16 +18,14 @@ export const platformStatusColumn = {
   ),
   filterMethod: (filter, row) => {
     // Show all items on 'All'
-    // Show 'pending', 'invited', 'expired', 'enabled', 'sso-only' items on 'All Active'
+    // Show 'pending', 'invited', 'expired', 'enabled', 'sso-only' items on 'All non-disabled'
     // Check match otherwise
     // We remove white spaces since camelCaseToRegularForm adds
     // empty space at beginning when string has capital letter
     if (filter.value === 'all') {
       return true;
-    } else if (filter.value === 'all active') {
+    } else if (filter.value === 'all non-disabled') {
       return ['pending', 'invited', 'expired', 'enabled', 'sso-only'].includes(row['_original'][filter.id]);
-    } else if (filter.value === 'all non-active') {
-      return ['disabled'].includes(row['_original'][filter.id]);
     } else {
       return camelCaseToRegularForm(row[filter.id]).trim() === camelCaseToRegularForm(filter.value).trim();
     }
@@ -37,18 +35,8 @@ export const platformStatusColumn = {
       tableType="modal"
       className="entity-table-filter-column-platform-status"
       onChange={event => onChange(event.target.value)}
-      value={filter ? filter.value : 'all active'}
-      options={[
-        'all',
-        'all active',
-        'all non-active',
-        'pending',
-        'invited',
-        'expired',
-        'enabled',
-        'disabled',
-        'sso-only'
-      ]}
+      value={filter ? filter.value : 'all non-disabled'}
+      options={['all', 'all non-disabled', 'pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']}
     />
   )
 };

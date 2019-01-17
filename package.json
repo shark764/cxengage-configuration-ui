@@ -35,7 +35,7 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 44,
+        "branches": 43,
         "functions": 46,
         "lines": 58,
         "statements": 57
@@ -116,7 +116,7 @@
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.11",
     "cx-automation-utils": "^1.0.9",
-    "cx-ui-components": "^0.32.6",
+    "cx-ui-components": "^0.32.7",
     "draft-js": "^0.10.5",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",

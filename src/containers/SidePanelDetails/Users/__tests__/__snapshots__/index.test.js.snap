@@ -161,7 +161,7 @@ Object {
       "name": "proficiency",
     },
   ],
-  "skillsItems": undefined,
+  "skillsItems": Array [],
   "transferListsFetching": undefined,
   "transferListsFields": Array [
     Object {
@@ -359,6 +359,7 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
       },
     ]
   }
+  skillsItems={Array []}
   store={
     Object {
       "dispatch": [Function],

@@ -205,7 +205,10 @@ entities.users.columns = [
   { name: 'Platform Status', active: true },
   { name: 'Tenant Status', active: true }
 ];
-entities.users.defaultFilters = [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'all active' }];
+entities.users.defaultFilters = [
+  { id: 'status', value: 'accepted' },
+  { id: 'invitationStatus', value: 'all non-disabled' }
+];
 entities.users.defaultAssociationFilters = {
   skills: [{ id: 'active', value: 'enabled' }],
   groups: [{ id: 'active', value: 'enabled' }],

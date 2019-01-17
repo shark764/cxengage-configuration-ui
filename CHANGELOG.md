@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.44.2] - 2019-01-17
+### Changed
+- CXV1-16769 - "All active" filter option on Users page was changed to "All non-disabled".
+- Version bump component library to 0.32.7.
+### Fixed
+- CXV1-16776 - Proficiency column now shows editable input only if skill needs a value.
+
 ## [0.44.1] - 2019-01-16
 ### Fixed
 - CXV1-16081 - Updated "Use Tenant Default: Enabled" option for Create User form.

@@ -37,21 +37,6 @@ export const getSidePanelTableItems = (state, entityName) => {
   }
 };
 
-export const getSkillsWithProficiencyTableItems = state => {
-  const selectedEntity = getSelectedEntity(state);
-  if (!selectedEntity) {
-    return;
-  }
-  const skillsWithProficiency = selectedEntity.getIn(['skillsWithProficiency'], new List([])).toJS();
-
-  return getSidePanelTableItems(state, 'skills').map(skill => ({
-    ...skill,
-    proficiency: skillsWithProficiency
-      .filter(skillWP => skill.id === skillWP.skillId)
-      .map(skillWP => skillWP.proficiency)[0]
-  }));
-};
-
 export const getModalTableItems = (state, entityName) => {
   const requestedIds = getSelectedEntity(state)
     .getIn([entityName], new List([]))

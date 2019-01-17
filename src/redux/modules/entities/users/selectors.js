@@ -1,6 +1,7 @@
 /*
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
+import { List } from 'immutable';
 import { createSelector } from 'reselect';
 import { getSelectedEntity } from '../selectors';
 import { convertRoles, selectPlatformRoles } from '../roles/selectors';
@@ -8,7 +9,8 @@ import { convertPermissions } from '../permissions/selectors';
 import {
   getEntityListMembers,
   availableEntityMembersForList,
-  getModalTableItems
+  getModalTableItems,
+  getSidePanelTableItems
 } from '../../entities/listItemSelectors';
 
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
@@ -77,6 +79,20 @@ export const getModalTableUserItems = (state, entityName) => {
   return getModalTableItems(state, entityName).map(user => ({
     ...user,
     name: getDisplay(user)
+  }));
+};
+
+export const getSkillsWithProficiencyTableItems = state => {
+  const selectedEntity = getSelectedEntity(state);
+  if (!selectedEntity) {
+    return;
+  }
+  const skillsWithProficiency = selectedEntity.getIn(['skillsWithProficiency'], new List([])).toJS();
+  return getSidePanelTableItems(state, 'skills').map(skill => ({
+    ...skill,
+    proficiency: skill.hasProficiency
+      ? skillsWithProficiency.filter(skillWP => skill.id === skillWP.skillId).map(skillWP => skillWP.proficiency)[0]
+      : null
   }));
 };
 

@@ -14,10 +14,13 @@ import {
   isSaving
 } from '../../../../redux/modules/entities/selectors';
 import { getSidePanelTableItems } from '../../../../redux/modules/entities/listItemSelectors';
+import { getSkillsWithProficiencyTableItems } from '../../../../redux/modules/entities/users/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/entities/listItemSelectors');
+jest.mock('../../../../redux/modules/entities/users/selectors');
 getSidePanelTableItems.mockImplementation(() => []);
+getSkillsWithProficiencyTableItems.mockImplementation(() => []);
 getSelectedEntity.mockImplementation(
   () =>
     new Map({

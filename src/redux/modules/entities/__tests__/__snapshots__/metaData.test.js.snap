@@ -2062,7 +2062,7 @@ Object {
       },
       Object {
         "id": "invitationStatus",
-        "value": "all active",
+        "value": "all non-disabled",
       },
     ],
     "dependentEntity": "",

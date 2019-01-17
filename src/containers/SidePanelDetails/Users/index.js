@@ -10,10 +10,8 @@ import {
   userHasPermissions
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
-import {
-  getSidePanelTableItems,
-  getSkillsWithProficiencyTableItems
-} from '../../../redux/modules/entities/listItemSelectors';
+import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
+import { getSkillsWithProficiencyTableItems } from '../../../redux/modules/entities/users/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 import store from '../../../redux/store';
 
