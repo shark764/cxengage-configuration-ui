@@ -82,7 +82,7 @@ export default function UsersForm({
             id="frm-users-no-password-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={[
-              { label: 'Use Tenant Default', value: 'null' },
+              { label: 'Use Tenant Default: Enabled', value: 'null' },
               { label: 'Enabled', value: true },
               { label: 'Disabled', value: false }
             ]}
