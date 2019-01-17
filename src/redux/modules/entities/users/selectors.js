@@ -1,7 +1,6 @@
 /*
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
-import { List } from 'immutable';
 import { createSelector } from 'reselect';
 import { getSelectedEntity } from '../selectors';
 import { convertRoles, selectPlatformRoles } from '../roles/selectors';
@@ -82,19 +81,19 @@ export const getModalTableUserItems = (state, entityName) => {
   }));
 };
 
-export const getSkillsWithProficiencyTableItems = state => {
-  const selectedEntity = getSelectedEntity(state);
-  if (!selectedEntity) {
-    return;
-  }
-  const skillsWithProficiency = selectedEntity.getIn(['skillsWithProficiency'], new List([])).toJS();
-  return getSidePanelTableItems(state, 'skills').map(skill => ({
+export const getSkillsWithProficiencyTableItems = state =>
+  getSkillsWithProficiency(getSelectedEntity(state), getSidePanelTableItems(state, 'skills'));
+
+export const getSkillsWithProficiency = (selectedEntity, sidePanelTableItems) =>
+  sidePanelTableItems.map(skill => ({
     ...skill,
-    proficiency: skill.hasProficiency
-      ? skillsWithProficiency.filter(skillWP => skill.id === skillWP.skillId).map(skillWP => skillWP.proficiency)[0]
-      : null
+    proficiency:
+      skill.hasProficiency &&
+      selectedEntity
+        .get('skillsWithProficiency')
+        .find(skillWP => skillWP.get('skillId') === skill.id)
+        .get('proficiency')
   }));
-};
 
 export const isUserPlatformAdmin = state => {
   // Platform admin is allowed to view all platformRoles

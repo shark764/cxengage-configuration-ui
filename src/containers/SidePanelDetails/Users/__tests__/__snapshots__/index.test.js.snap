@@ -155,7 +155,7 @@ Object {
       "actions": Object {
         "onChange": [Function],
       },
-      "editable": true,
+      "editable": undefined,
       "filterable": false,
       "label": "Proficiency",
       "name": "proficiency",
@@ -352,7 +352,7 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
         "actions": Object {
           "onChange": [Function],
         },
-        "editable": true,
+        "editable": undefined,
         "filterable": false,
         "label": "Proficiency",
         "name": "proficiency",

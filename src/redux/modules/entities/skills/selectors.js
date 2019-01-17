@@ -10,15 +10,13 @@ import { getDisplay } from '../users/selectors';
 export const getHasProficiencyFormValue = state =>
   getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'hasProficiency']);
 
-export const getSkillMemberSidePanelTableItems = state => {
-  const selectedEntityId = getSelectedEntityId(state);
-  const hasProficiency = getHasProficiencyFormValue(state);
-  return getDependantEntityTableItems(state).map(user => ({
+export const getSkillMemberSidePanelTableItems = state =>
+  getSkillMembers(getSelectedEntityId(state), getDependantEntityTableItems(state));
+
+export const getSkillMembers = (selectedEntityId, dependantEntityTableItems) => {
+  return dependantEntityTableItems.map(user => ({
     ...user,
     name: getDisplay(user),
-    hasProficiency,
-    proficiency: hasProficiency
-      ? user.skills.filter(skill => selectedEntityId === skill.id).map(skill => skill.proficiency)[0]
-      : null
+    proficiency: user.skills.find(skill => selectedEntityId === skill.id).proficiency
   }));
 };

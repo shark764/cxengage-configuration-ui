@@ -19,9 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.44.2] - 2019-01-17
 ### Changed
 - CXV1-16769 - "All active" filter option on Users page was changed to "All non-disabled".
-- Version bump component library to 0.32.7.
+- Version bump component library to 0.32.9.
 ### Fixed
-- CXV1-16776 - Proficiency column now shows editable input only if skill needs a value.
+- CXV1-16776, CXV1-16713 - Proficiency column now shows editable input only if skill needs a value and logged in user has permission.
 
 ## [0.44.1] - 2019-01-16
 ### Fixed
