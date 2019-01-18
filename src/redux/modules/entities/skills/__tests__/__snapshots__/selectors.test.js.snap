@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getSkillMemberSidePanelTableItems Get the members 1`] = `
+Array [
+  Object {
+    "email": "mockEmail 1",
+    "firstName": "mockFirstName 1",
+    "hasProficiency": true,
+    "id": "1",
+    "lastName": "mockLastName 1",
+    "name": "mockFirstName 1 mockLastName 1",
+    "platformStatus": "enabled",
+    "proficiency": undefined,
+    "skills": Array [
+      Object {
+        "id": "mockEntityId",
+        "proficiency": undefined,
+      },
+    ],
+    "status": "enabled",
+  },
+  Object {
+    "email": "mockEmail 2",
+    "firstName": "mockFirstName 2",
+    "hasProficiency": true,
+    "id": "2",
+    "lastName": "mockLastName 2",
+    "name": "mockFirstName 2 mockLastName 2",
+    "platformStatus": "enabled",
+    "proficiency": undefined,
+    "skills": Array [
+      Object {
+        "id": "mockEntityId",
+        "proficiency": undefined,
+      },
+    ],
+    "status": "disabled",
+  },
+]
+`;
+
+exports[`getSkillMembers Get just the skill members 1`] = `
+Array [
+  Object {
+    "email": "mockEmail 1",
+    "firstName": "mockFirstName 1",
+    "hasProficiency": true,
+    "id": "1",
+    "lastName": "mockLastName 1",
+    "name": "mockFirstName 1 mockLastName 1",
+    "platformStatus": "enabled",
+    "proficiency": undefined,
+    "skills": Array [
+      Object {
+        "id": "mockEntityId",
+        "proficiency": undefined,
+      },
+    ],
+    "status": "enabled",
+  },
+  Object {
+    "email": "mockEmail 2",
+    "firstName": "mockFirstName 2",
+    "hasProficiency": true,
+    "id": "2",
+    "lastName": "mockLastName 2",
+    "name": "mockFirstName 2 mockLastName 2",
+    "platformStatus": "enabled",
+    "proficiency": undefined,
+    "skills": Array [
+      Object {
+        "id": "mockEntityId",
+        "proficiency": undefined,
+      },
+    ],
+    "status": "disabled",
+  },
+]
+`;
