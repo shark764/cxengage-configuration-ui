@@ -2,7 +2,7 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
-import { getSelectedEntityId } from '../selectors';
+import { getSelectedEntity } from '../selectors';
 import { getDependantEntityTableItems } from '../listItemSelectors';
 import { getCurrentForm } from '../../form/selectors';
 import { getDisplay } from '../users/selectors';
@@ -11,12 +11,13 @@ export const getHasProficiencyFormValue = state =>
   getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'hasProficiency']);
 
 export const getSkillMemberSidePanelTableItems = state =>
-  getSkillMembers(getSelectedEntityId(state), getDependantEntityTableItems(state));
+  getSkillMembers(getSelectedEntity(state), getDependantEntityTableItems(state));
 
-export const getSkillMembers = (selectedEntityId, dependantEntityTableItems) => {
+export const getSkillMembers = (selectedEntity, dependantEntityTableItems) => {
   return dependantEntityTableItems.map(user => ({
     ...user,
     name: getDisplay(user),
-    proficiency: user.skills.find(skill => selectedEntityId === skill.id).proficiency
+    proficiency: user.skills.find(skill => selectedEntity.get('id') === skill.id).proficiency,
+    hasProficiency: selectedEntity.get('hasProficiency')
   }));
 };

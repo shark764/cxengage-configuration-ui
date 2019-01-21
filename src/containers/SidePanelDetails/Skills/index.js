@@ -7,7 +7,8 @@ import SkillsDetailsPanel from './layout';
 import {
   userHasUpdatePermission,
   getSelectedEntity,
-  isEntityFetching
+  isEntityFetching,
+  userHasPermissions
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
@@ -29,7 +30,7 @@ export function mapStateToProps(state) {
           {
             label: 'Proficiency',
             name: 'proficiency',
-            editable: userHasUpdatePermission(state),
+            isColumnEditable: userHasUpdatePermission(state) && userHasPermissions(state, ['MANAGE_ALL_USER_SKILLS']),
             filterable: false,
             actions: {
               onChange: (id, newValue) => store.dispatch(updateProficiency(id, newValue))

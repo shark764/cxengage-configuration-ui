@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.44.3] - 2019-01-21
+### Fixed
+- CXV1-16776 - Editable input is not disappearing if value is removed for proficiency column. 
+### Changed
+- Version bump component library to 0.32.10.
+
 ## [0.44.2] - 2019-01-17
 ### Changed
 - CXV1-16769 - "All active" filter option on Users page was changed to "All non-disabled".

@@ -24,7 +24,7 @@ export function mapStateToProps(state, props) {
       {
         label: 'Proficiency',
         name: 'proficiency',
-        editable: userHasUpdatePermission(state) && userHasPermissions(state, ['MANAGE_ALL_USER_SKILLS']),
+        isColumnEditable: userHasUpdatePermission(state) && userHasPermissions(state, ['MANAGE_ALL_USER_SKILLS']),
         filterable: false,
         actions: {
           onChange: (id, newValue) => store.dispatch(updateProficiency(id, newValue))
