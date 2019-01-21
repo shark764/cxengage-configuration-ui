@@ -33,9 +33,10 @@ function mapStateToProps(state) {
 
   switch (modalType) {
     case MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE:
-      mainText = getSelectedEntity(state).get('active')
-        ? `This will disable this ${currentEntity}. Do you want to continue?`
-        : `This will enable this ${currentEntity}. Do you want to continue?`;
+      mainText =
+        getSelectedEntity(state).get('active') || getSelectedEntity(state).get('status') === 'accepted'
+          ? `This will disable this ${currentEntity}. Do you want to continue?`
+          : `This will enable this ${currentEntity}. Do you want to continue?`;
       break;
     case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
       mainText = `Are you sure you want to override this ${currentEntity}?`;

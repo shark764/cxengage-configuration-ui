@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.44.4] - 2019-01-21
+### Fixed
+- CXV1-16774 - ConfirmationDialog shows correct message on disabling user status.
+### Changed
+- Version bump component library to 0.32.11.
+- SDK Version Bump 8.38.2.
+
 ## [0.44.3] - 2019-01-21
 ### Fixed
 - CXV1-16776 - Editable input is not disappearing if value is removed for proficiency column. 
