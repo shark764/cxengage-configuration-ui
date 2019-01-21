@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.46.0] - 2019-01-21
+### Added
+- CXV1-16684 - Value is now validated against channel type on outbound identifiers page.
+
 ## [0.45.0] - 2019-01-21
 ### Fixed
 - CXV1-16750 - Changed beta features to only change on submit instead of one at a time
@@ -341,9 +345,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.36.0] - 2018-11-05
 ### Added
-- Users page.. ability to add and remove
-  outbound identifier lists,
-  message templates,
+- Users page.. ability to add and remove 
+  outbound identifier lists, 
+  message templates, 
   skills,
   groups,
   transfer lists,

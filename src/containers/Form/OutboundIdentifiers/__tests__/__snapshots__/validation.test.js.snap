@@ -5,7 +5,7 @@ Object {
   "channelType": "Please select a channel type",
   "flowId": "Please select a flow",
   "name": "Please enter a name",
-  "value": "Please enter a value",
+  "value": "Please enter an e.164 formatted number",
 }
 `;
 
@@ -14,6 +14,6 @@ Object {
   "channelType": false,
   "flowId": false,
   "name": false,
-  "value": false,
+  "value": "Please enter a valid e.164 formatted number",
 }
 `;

@@ -2,6 +2,7 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "channelType": "email",
   "flowIds": Array [
     Object {
       "label": "mockLabel",
@@ -18,6 +19,7 @@ Object {
 
 exports[`OutboundIdentifiersForm Renders renders 1`] = `
 <Connect(ReduxForm)
+  channelType="email"
   dispatch={[Function]}
   flowIds={
     Array [

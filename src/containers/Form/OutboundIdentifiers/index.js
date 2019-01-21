@@ -9,6 +9,7 @@ import OutboundIdentifiersForm from './layout';
 import { formValidation } from './validation';
 import { getSelectedEntityId, isCreating } from '../../../redux/modules/entities/selectors';
 import { selectFlowIds } from '../../../redux/modules/entities/flows/selectors';
+import { getChannelTypeFormValue } from '../../../redux/modules/entities/outboundIdentifiers/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
 const CreateOutboundIdentifiersForm = compose(
@@ -23,6 +24,7 @@ const CreateOutboundIdentifiersForm = compose(
 export function mapStateToProps(state) {
   return {
     flowIds: selectFlowIds(state),
+    channelType: getChannelTypeFormValue(state),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
     key: getSelectedEntityId(state)

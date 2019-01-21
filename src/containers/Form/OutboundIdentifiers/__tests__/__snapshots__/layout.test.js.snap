@@ -12,31 +12,6 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
       label="Name *"
       name="name"
     />
-    <InputField
-      componentType="input"
-      disabled={false}
-      inputType="text"
-      label="Value *"
-      name="value"
-    />
-    <SelectField
-      disabled={false}
-      label="Flow Id *"
-      name="flowId"
-      options={
-        Array [
-          Object {
-            "label": "Outbound Identifier Label Test 1",
-            "value": "Outbound Identifier Value Test 1",
-          },
-          Object {
-            "label": "Outbound Identifier Label Test 2",
-            "value": "Outbound Identifier Value Test 2",
-          },
-        ]
-      }
-      required={false}
-    />
     <SelectField
       disabled={false}
       label="Channel Type *"
@@ -57,7 +32,33 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
           },
         ]
       }
-      required={false}
+      required={true}
+    />
+    <InputField
+      componentType="input"
+      disabled={false}
+      inputType="text"
+      label="Value *"
+      name="value"
+      placeholder="Enter a e.164 formatted number"
+    />
+    <SelectField
+      disabled={false}
+      label="Flow Id *"
+      name="flowId"
+      options={
+        Array [
+          Object {
+            "label": "Outbound Identifier Label Test 1",
+            "value": "Outbound Identifier Value Test 1",
+          },
+          Object {
+            "label": "Outbound Identifier Label Test 2",
+            "value": "Outbound Identifier Value Test 2",
+          },
+        ]
+      }
+      required={true}
     />
     <InputField
       componentType="textarea"

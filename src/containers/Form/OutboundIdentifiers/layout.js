@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { InputField } from 'cx-ui-components';
 import { SelectField } from 'cx-ui-components';
 
-export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inherited, flowIds, key }) {
+export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inherited, channelType, flowIds, key }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <div>
@@ -24,14 +24,6 @@ export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inheri
           inputType="text"
           disabled={isSaving || inherited}
         />
-        <InputField
-          name="value"
-          label="Value *"
-          componentType="input"
-          inputType="text"
-          disabled={isSaving || inherited}
-        />
-        <SelectField name="flowId" label="Flow Id *" options={flowIds} disabled={isSaving || inherited} />
         <SelectField
           name="channelType"
           label="Channel Type *"
@@ -41,7 +33,19 @@ export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inheri
             { value: 'email', label: 'Email' }
           ]}
           disabled={isSaving || inherited}
+          required
         />
+        {channelType && (
+          <InputField
+            name="value"
+            label="Value *"
+            componentType="input"
+            inputType="text"
+            placeholder={`Enter${channelType === 'email' ? ' an email address' : ' a e.164 formatted number'}`}
+            disabled={isSaving || inherited}
+          />
+        )}
+        <SelectField name="flowId" label="Flow Id *" options={flowIds} disabled={isSaving || inherited} required />
         <InputField
           name="description"
           label="Description"
@@ -64,7 +68,8 @@ OutboundIdentifiersForm.propTypes = {
       label: PropTypes.string,
       value: PropTypes.string.isRequired
     })
-  )
+  ),
+  channelType: PropTypes.string
 };
 
 OutboundIdentifiersForm.defaultProps = {
