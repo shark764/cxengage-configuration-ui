@@ -104,6 +104,7 @@ Object {
       "value": "accepted",
     },
   ],
+  "itemApiPending": undefined,
   "tableFields": Array [
     Object {
       "label": "Name",

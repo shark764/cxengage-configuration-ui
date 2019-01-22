@@ -27,7 +27,8 @@ export default function DataAccessReportsDetailsPanel({
   tableFields,
   defaultFilters,
   removeListItem,
-  setSelectedSubEntityId
+  setSelectedSubEntityId,
+  itemApiPending
 }) {
   return (
     <Wrapper id="dtpanel-data-access-reports">
@@ -46,6 +47,7 @@ export default function DataAccessReportsDetailsPanel({
         items={tableItems}
         fields={tableFields}
         filtered={defaultFilters}
+        itemApiPending={itemApiPending}
       />
     </Wrapper>
   );
@@ -59,5 +61,6 @@ DataAccessReportsDetailsPanel.propTypes = {
   tableFields: PropTypes.array,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
-  defaultFilters: PropTypes.array
+  defaultFilters: PropTypes.array,
+  itemApiPending: PropTypes.string
 };

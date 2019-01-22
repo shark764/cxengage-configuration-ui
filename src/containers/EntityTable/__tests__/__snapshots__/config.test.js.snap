@@ -15,6 +15,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Description"
     >
@@ -68,6 +69,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Value"
     >
@@ -78,6 +80,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Channel Type"
     >
@@ -88,6 +91,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Flow Id"
     >
@@ -110,6 +114,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="First Name"
     >
@@ -120,6 +125,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Last Name"
     >
@@ -142,6 +148,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Role Name"
     >
@@ -152,6 +159,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Email"
     >
@@ -162,6 +170,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="State"
     >
@@ -172,6 +181,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="External Id"
     >
@@ -183,6 +193,7 @@ Array [
   undefined,
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Proficiency"
     >
@@ -220,6 +231,7 @@ Array [
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Description"
     >

@@ -8,6 +8,7 @@ import LoginLayout from './layout';
 import { authenticatedAndBrandingReady } from '../../redux/modules/userData/selectors';
 import { toggleUserAuthed } from '../../redux/modules/userData';
 import { fetchBranding } from '../../redux/modules/entities/branding/actions';
+import { updateUserPermissions } from '../../redux/modules/userData';
 
 export function mapStateToProps(state) {
   return {
@@ -17,7 +18,8 @@ export function mapStateToProps(state) {
 
 export const actions = {
   toggleUserAuthed,
-  fetchBranding
+  fetchBranding,
+  updateUserPermissions
 };
 
 export default connect(mapStateToProps, actions)(LoginLayout);

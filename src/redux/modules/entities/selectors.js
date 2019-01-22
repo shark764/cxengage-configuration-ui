@@ -17,6 +17,8 @@ export const getSidePanelWidth = state => getCurrentEntityStore(state).get('side
 
 export const getSelectedEntityId = state => getCurrentEntityStore(state).get('selectedEntityId');
 
+export const itemApiPending = state => state.getIn(['Entities', 'loading']);
+
 export const getSelectedEntityBulkChangeItems = state =>
   getCurrentEntityStore(state).get('data') &&
   getCurrentEntityStore(state)

@@ -4,7 +4,7 @@
 
 import { connect } from 'react-redux';
 import DataAccessReportsDetailsPanel from './layout';
-import { userHasUpdatePermission, getCurrentEntity } from '../../../redux/modules/entities/selectors';
+import { userHasUpdatePermission, getCurrentEntity, itemApiPending } from '../../../redux/modules/entities/selectors';
 
 import { selectEntityListMembers, filterUsersByPermissions } from '../../../redux/modules/entities/users/selectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
@@ -17,8 +17,8 @@ export function mapStateToProps(state, props) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     tableItems: filterUsersByPermissions(state, listMembers, ['ASSIGNED_REPORTS_READ']),
     tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
-    defaultFilters:
-      entitiesMetaData[currentEntity].defaultDependentEntityFilters
+    itemApiPending: itemApiPending(state),
+    defaultFilters: entitiesMetaData[currentEntity].defaultDependentEntityFilters
   };
 }
 

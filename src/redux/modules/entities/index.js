@@ -586,19 +586,33 @@ export default function reducer(state = initialState, action) {
           item.merge(fromJS(result))
         );
     }
+    case 'REMOVE_LIST_ITEM': {
+      return state.set('loading', action.listItemId);
+    }
+    case 'REMOVE_LIST_ITEM_REJECTED': {
+      return state.remove('loading');
+    }
     case 'REMOVE_LIST_ITEM_FULFILLED': {
       const entity = selectedEntity(state);
       const filteredListMembers = state
         .getIn([entity.type, 'data', entity.index, 'members'])
         .filterNot(member => member.get('id') === action.listItemId);
-      return state.setIn([entity.type, 'data', entity.index, 'members'], filteredListMembers);
+      return state.remove('loading').setIn([entity.type, 'data', entity.index, 'members'], filteredListMembers);
+    }
+    case 'ADD_LIST_ITEM': {
+      return state.set('loading', action.listItemId);
+    }
+    case 'ADD_LIST_ITEM_REJECTED': {
+      return state.remove('loading');
     }
     case 'ADD_LIST_ITEM_FULFILLED': {
       const entity = selectedEntity(state);
       const entityToAdd = state
         .getIn([entity.dependency, 'data'])
         .find(entity => entity.get('id') === action.listItemId);
-      return state.updateIn([entity.type, 'data', entity.index, 'members'], members => members.push(entityToAdd));
+      return state
+        .remove('loading')
+        .updateIn([entity.type, 'data', entity.index, 'members'], members => members.push(entityToAdd));
     }
     case 'UPDATE_SUB_ENTITY_FULFILLED': {
       const entityIndex = state

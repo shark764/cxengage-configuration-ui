@@ -4,7 +4,8 @@ import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/mod
 import {
   userHasUpdatePermission,
   getCurrentEntity,
-  getSelectedSubEntityId
+  getSelectedSubEntityId,
+  itemApiPending
 } from '../../../redux/modules/entities/selectors';
 import { selectModalTableItems } from './selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
@@ -17,6 +18,7 @@ export function mapStateToProps(state) {
     entityName: currentEntity,
     fields: entitiesMetaData[getSelectedSubEntityId(state)].memberListTableFields,
     tableItems: selectModalTableItems(state, getSelectedSubEntityId(state)),
+    itemApiPending: itemApiPending(state),
     defaultFilters: entitiesMetaData[currentEntity].defaultAssociationFilters[getSelectedSubEntityId(state)],
     contains: getSelectedSubEntityId(state)
   };

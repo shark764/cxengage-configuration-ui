@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { LoadingSpinnerSVG } from 'cx-ui-components';
 
 import { cxSetTenant, cxLogin, cxInit } from '../../utils/cxSdk';
-import { updateUserPermissions } from '../../redux/modules/userData';
 
 const Loading = styled(LoadingSpinnerSVG)`
   position: absolute;
@@ -38,7 +37,7 @@ export default class Login extends Component {
       const { tenantId, tenantPermissions, tenantName } = response.tenants.filter(
         tenant => tenant.tenantId === response.defaultTenant
       )[0];
-      updateUserPermissions({ tenantId, tenantName, tenantPermissions, userId });
+      this.props.updateUserPermissions(tenantId, tenantName, tenantPermissions, userId);
 
       cxSetTenant(defaultTenant, () => {
         this.props.toggleUserAuthed();
@@ -77,13 +76,28 @@ export default class Login extends Component {
     if (isInIframe() && !this.props.hasStarted) {
       return (
         <Fragment>
-          <input placeholder="Username" type="email" onChange={this.setUsername} value={this.state.username} />
+          <input
+            className="username"
+            placeholder="Username"
+            type="email"
+            onChange={this.setUsername}
+            value={this.state.username}
+          />
           <br />
-          <input placeholder="Password" type="password" onChange={this.setPassword} value={this.state.password} />
+          <input
+            className="password"
+            placeholder="Password"
+            type="password"
+            onChange={this.setPassword}
+            value={this.state.password}
+          />
           <br />
-          <button onClick={this.login}>Sign In</button>
+          <button className="sign-in-button" onClick={this.login}>
+            Sign In
+          </button>
           <br />
           <select
+            className="tenant-select"
             onChange={this.setTenant}
             defaultValue={this.state.tenants.length > 0 ? this.state.tenants[0].tenantId : null}
           >
@@ -92,13 +106,17 @@ export default class Login extends Component {
             ))}
           </select>
           <br />
-          <button disabled={this.state.selectedTenant === ''} onClick={this.chooseTenant}>
+          <button
+            className="choose-tenant-button"
+            disabled={this.state.selectedTenant === ''}
+            onClick={this.chooseTenant}
+          >
             Choose Tenant
           </button>
         </Fragment>
       );
     } else {
-      return this.props.hasStarted ? this.props.children : <Loading size={120} />;
+      return this.props.hasStarted ? this.props.children : <Loading className="loading" size={120} />;
     }
   }
 }
@@ -107,5 +125,6 @@ Login.propTypes = {
   toggleUserAuthed: PropTypes.func.isRequired,
   fetchBranding: PropTypes.func.isRequired,
   hasStarted: PropTypes.bool.isRequired,
-  children: PropTypes.any
+  children: PropTypes.any,
+  updateUserPermissions: PropTypes.func.isRequired
 };

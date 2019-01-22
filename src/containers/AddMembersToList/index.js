@@ -3,7 +3,8 @@ import AddMemberToListLayout from './layout';
 import {
   getSelectedEntityName,
   userHasUpdatePermission,
-  getCurrentEntity
+  getCurrentEntity,
+  itemApiPending
 } from '../../redux/modules/entities/selectors';
 import {
   setSelectedSubEntityId,
@@ -22,8 +23,8 @@ export function mapStateToProps(state) {
     entityName: currentEntity,
     fields: entitiesMetaData[currentEntity].modalListTableFields,
     tableItems: selectSidePanelTableItems(state, currentEntity),
-    defaultFilters:
-      entitiesMetaData[currentEntity].defaultDependentEntityFilters
+    itemApiPending: itemApiPending(state),
+    defaultFilters: entitiesMetaData[currentEntity].defaultDependentEntityFilters
   };
 }
 

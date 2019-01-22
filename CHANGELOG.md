@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.45.0] - 2019-01-21
+### Fixed
+- CXV1-16750 - Changed beta features to only change on submit instead of one at a time
+### Added
+- CXV1-16398 - Added loading state for sidepanel table actions
+- Added the beginning of the users page automation directly through config 2
+
 ## [0.44.4] - 2019-01-21
 ### Fixed
 - CXV1-16774 - ConfirmationDialog shows correct message on disabling user status.
@@ -25,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.44.3] - 2019-01-21
 ### Fixed
-- CXV1-16776 - Editable input is not disappearing if value is removed for proficiency column. 
+- CXV1-16776 - Editable input is not disappearing if value is removed for proficiency column.
 ### Changed
 - Version bump component library to 0.32.10.
 
@@ -334,9 +341,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.36.0] - 2018-11-05
 ### Added
-- Users page.. ability to add and remove 
-  outbound identifier lists, 
-  message templates, 
+- Users page.. ability to add and remove
+  outbound identifier lists,
+  message templates,
   skills,
   groups,
   transfer lists,

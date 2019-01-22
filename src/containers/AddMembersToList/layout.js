@@ -63,6 +63,7 @@ export default function AddMemberToList(props) {
         items={props.tableItems}
         fields={props.fields}
         filtered={props.defaultFilters}
+        itemApiPending={props.itemApiPending}
       />
     </Fragment>
   );
@@ -78,5 +79,6 @@ AddMemberToList.propTypes = {
   userHasUpdatePermission: PropTypes.bool.isRequired,
   tableItems: PropTypes.array,
   fields: PropTypes.array,
-  defaultFilters: PropTypes.array
+  defaultFilters: PropTypes.array,
+  itemApiPending: PropTypes.string,
 };

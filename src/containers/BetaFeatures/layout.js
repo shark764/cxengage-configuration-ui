@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Toggle, PageHeader } from 'cx-ui-components';
+import { Toggle, PageHeader, Button } from 'cx-ui-components';
 import { sdkCall } from '../../utils/sdk';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 
@@ -22,17 +23,16 @@ const Features = styled.div`
   display: inline-block;
   width: 35%;
   border: 1px solid #80808047;
-  border-radius: 15px;
+  border-radius: 10px;
 `;
 const FeaturesTitle = styled.div`
   font-size: 21px;
   font-weight: bold;
   text-align: center;
   padding: 20px;
-  background: #161e5d;
-  margin-top: -1px;
-  border-radius: 15px 15px 0px 0px;
-  color: #bebfc4;
+  ${props => `background: ${props.background || '#161e5d'};`} margin-top: -1px;
+  border-radius: 10px 10px 0px 0px;
+  ${props => `color: ${props.accent || '#bebfc4'};`};
 `;
 const Feature = styled.div`
   padding: 20px 50px;
@@ -53,6 +53,13 @@ const Feedback = styled.div`
   width: 40%;
 `;
 
+const Submit = styled(Button)`
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
 const getinitialStateFromLocalStorage = () => {
   let initState = {};
   Object.keys(entitiesMetaData).forEach(entity => {
@@ -67,9 +74,19 @@ export default class BetaFeatures extends Component {
     this.state = getinitialStateFromLocalStorage();
   }
 
-  saveInLocalStorage = (e, feature) => {
-    localStorage.setItem(feature, `${!this.state[feature]}`);
-    sdkCall({ module: 'setLocalStorage', data: { key: feature, value: !this.state[feature] } });
+  updateList = feature => this.setState(prevState => ({ [feature]: !prevState[feature] }));
+
+  saveInLocalStorage = () => {
+    // This is how config 2 knows what features are on
+    Object.keys(this.state).forEach(feature => {
+      if (this.state[feature]) {
+        localStorage.setItem(feature, 'true');
+      } else {
+        localStorage.removeItem(feature);
+      }
+    });
+    // This is how config 1 knows what features are on
+    sdkCall({ module: 'setBetaFeatures', data: this.state });
   };
 
   render() {
@@ -90,20 +107,22 @@ export default class BetaFeatures extends Component {
           regarding the Beta Features.
         </Explanation>
         <Features>
-          <FeaturesTitle>Beta Features / Pages</FeaturesTitle>
+          <FeaturesTitle background={this.props.theme.navbar} accent={this.props.theme.navbarText}>
+            Beta Features / Pages
+          </FeaturesTitle>
           {Object.keys(entitiesMetaData).map(
             entityName =>
-              this.props[entityName] &&
+              this.props.entities[entityName] &&
               entitiesMetaData[entityName].betaFeature && (
-                <Feature key={entityName} onClick={() => this.saveInLocalStorage(event, entityName)}>
+                <Feature key={entityName} onClick={() => this.updateList(entityName)}>
                   <span>{entitiesMetaData[entityName].pageTitle}</span>
-                  <ToggleWrapper
-                    onChange={() => this.saveInLocalStorage(event, entityName)}
-                    value={this.state[entityName]}
-                  />
+                  <ToggleWrapper onChange={() => this.updateList(entityName)} value={this.state[entityName]} />
                 </Feature>
               )
           )}
+          <Submit buttonType="primary" onClick={this.saveInLocalStorage}>
+            Apply Changes
+          </Submit>
         </Features>
         <Feedback data-pp-cfpw-widget="e9b5dd7a-0329-11e9-811a-0abbec7104a5" data-env="prod" data-static="false" />
         {(function(d, id) {
@@ -119,3 +138,8 @@ export default class BetaFeatures extends Component {
     );
   }
 }
+
+BetaFeatures.propTypes = {
+  entities: PropTypes.object,
+  theme: PropTypes.string
+};

@@ -67,6 +67,7 @@ Object {
       "name": "email",
     },
   ],
+  "itemApiPending": undefined,
   "listName": undefined,
   "tableItems": Array [],
   "userHasUpdatePermission": true,

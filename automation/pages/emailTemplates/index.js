@@ -39,7 +39,7 @@ const { Element, Brow } = require('cx-automation-utils/pageObject'),
    emailOptionCustom: new Element('option[value="custom"]'),
    emailOptionDefault: new Element('option[value="default"]'),
 
-   // Default side panel page elements 
+   // Default side panel page elements
    subjectDefaultInput: new Element('.//span[text()="Welcome to CxEngage"]'),
    subjectDefaultPasswordInput: new Element('.//span[text()="CxEngage password change request"]'),
    subjectDefaultLabel: new Element('.//span[text()="Subject"]'),
@@ -130,7 +130,7 @@ const { Element, Brow } = require('cx-automation-utils/pageObject'),
          }
          this.subjectDefaultLabel.validateElementsState('isExisting', false);
          this.bodyDefaultLabel.validateElementsState('isExisting', false);
-         
+
       }
    },
 
@@ -182,4 +182,4 @@ const { Element, Brow } = require('cx-automation-utils/pageObject'),
    },
  };
 
- module.exports = EmailPage; 
+ module.exports = EmailPage;
