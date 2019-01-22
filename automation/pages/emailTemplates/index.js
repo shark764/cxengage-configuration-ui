@@ -4,7 +4,7 @@ const { Element, Brow } = require('cx-automation-utils/pageObject'),
     MainPage = require('../main/index.js');
 
  const EmailPage = {
-   //iframes & links
+   // iframes & links
    iframe: new Element('iframe[src="https://dev-config2.cxengagelabs.net/#/configuration/emailTemplates"]'),
    linkToListsDocs: new Element('a[href="https://docs.cxengage.net/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm"]'),
    emailLink: new Element('li[id="emailTemplates-configuration-link"]'),
@@ -15,7 +15,16 @@ const { Element, Brow } = require('cx-automation-utils/pageObject'),
    nameSearchInput: new Element('input[class="entity-table-filter-column-name"]'),
    descriptionSearchInput: new Element('input[type="text"]'), //maybe fix this
    variablesNameInput: new Element('input[class*="subentity-filter-column-name"]'),
-   variablesDescriptionInput: new Element('input[class*="subentity-filter-column-description"]'),
+    variablesDescriptionInput: new Element('input[class*="subentity-filter-column-description"]'),
+
+   // find an element
+   $: (searchTerm, elementType) => {
+      if (searchTerm.charAt(0) === '.' ||  searchTerm.charAt(0) === '#') {
+         return new Element(`${searchTerm}`);
+      } else {
+         return new Element(`${elementType}[title="${searchTerm}"]`);
+      }
+   },
 
    // Email template options
    inviteExistingSSOTemplate: new Element('span[title="invite-existing-user-by-sso"]'),

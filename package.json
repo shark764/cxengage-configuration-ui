@@ -25,9 +25,10 @@
     "test:coverage": "npm run test -- --coverage",
     "test:auto": "node ./node_modules/cx-automation-utils | wdio ./automation/wdio.conf.js --suite \"inProgress\"",
     "test:all": "wdio ./automation/wdio.conf.js --suite \"inProgress\"",
-    "test:preMerge": "node ./node_modules/cx-automation-utils | wdio ./automation/wdio.conf.js --suite \"users\"",
+    "test:preMerge": "wdio ./automation/wdio.conf.js --suite \"users\"",
     "lint": "eslint src/",
-    "precommit": "npm run lint && lint-staged && npm run test:coverage"
+    "precommit": "npm run lint && lint-staged && npm run test:coverage",
+    "serve": "http-server ./build -p 3000"
   },
   "jest": {
     "reporters": [
@@ -130,6 +131,7 @@
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.6.0",
     "html-webpack-plugin": "3.0.7",
+    "http-server": "^0.11.1",
     "husky": "0.14.3",
     "immutable": "^3.8.2",
     "jest": "22.4.3",

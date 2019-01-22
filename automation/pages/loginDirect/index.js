@@ -10,7 +10,7 @@ const uiLoginPage = {
   chooseTenantButton: new Element('.choose-tenant-button'),
 
 	login: function(username, password, entity) {
-		Brow.url(`http://localhost:3000/#/configuration/${entity}`);
+		Brow.url(`${process.env.URL}configuration/${entity}`);
 		// Brow.pause(5000); //added to fix issue with getting another tenants list items.
 		this.username.waitForVisible(60000);
 		this.username.setValue(username);

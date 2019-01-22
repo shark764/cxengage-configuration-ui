@@ -3,7 +3,6 @@
 
 import common
 import git
-import hipchat
 import node
 import frontend
 
@@ -11,7 +10,6 @@ def service = 'cxengage-configuration-ui'
 def docker_tag = BUILD_TAG.toLowerCase()
 def pr = env.CHANGE_ID
 def c = new common()
-def h = new hipchat()
 def n = new node()
 def f = new frontend()
 
@@ -46,26 +44,6 @@ pipeline {
     stage ('Testing') {
       when { changeRequest() }
       parallel {
-        stage('Automated Tests') {
-          steps {
-            sh 'echo "Stage Description: Runs automation tests and fails if any single test fails"'
-            script {
-              try {
-                sh "docker exec ${docker_tag} npm run test:all"
-              } catch (e) {
-                hipchatSend(color: 'YELLOW',
-                    credentialId: 'HipChat-API-Token',
-                    message: "<b>${service} PR${pr}</b> <br/>Automated tests Failing!<br/><a href=\"http://jenkins.cxengagelabs.net/blue/organizations/jenkins/Serenova%2F${service}/activity\">Build Activity</a><br/><a href=\"https://github.com/SerenovaLLC/${service}/pull/${pr}\">Pull Request</a>",
-                    notify: true,
-                    room: 'Admin/Supervisor Experience',
-                    sendAs: 'Jenkins',
-                    server: 'api.hipchat.com',
-                    textFormat: false,
-                    v2enabled: false)
-              }
-            }
-          }
-        }
         stage('Lint for errors') {
             steps {
                 sh 'echo "Stage Description: Lints the project for common js errors and formatting"'
@@ -87,6 +65,22 @@ pipeline {
         sh 'echo "Stage Description: Builds the production version of the app"'
         sh "docker exec ${docker_tag} npm run build"
         sh "docker cp ${docker_tag}:/home/node/app/build build"
+      }
+    }
+    stage ('Preview PR (dev)') {
+      when { changeRequest() }
+      steps {
+        sh "echo 'Stage Description: Creates a temp build of the site in dev to review the changes, PR: ${pr}'"
+        sh "aws s3 rm s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --recursive"
+        sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --delete"
+        script {
+          f.invalidate("E23K7T1ARU8K88")
+        }
+      }
+    }
+    stage ('Run regression tests') {
+      steps {
+        sh "docker exec --env URL=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ ${docker_tag} npm run test:preMerge"
       }
     }
     stage ('Github tagged release') {
@@ -167,49 +161,6 @@ pipeline {
       sh "docker rmi ${docker_tag} --force"
       script {
         c.cleanup()
-      }
-    }
-    success {
-      script {
-        def jobType = 'hipchat message goes here based on jenkins job type'
-        def notifyPpl = 'ppl to @ in hipchat that should action this notification'
-        if (env.BRANCH_NAME == "master") {
-          jobType = "Merged PR successfully built and deployed to dev, ready to be tested"
-          notifyPpl = "@JWilliams @RDominguez"
-        } else {
-          jobType = "PR was linted, unit tested, built and is ready for code review"
-          notifyPpl = "@nick @DHernandez @mjones @RandhalRamirez  ^^^^"
-        }
-        hipchatSend(color: 'GREEN',
-                    credentialId: 'HipChat-API-Token',
-                    message: "<b>${service} PR${pr} | ${jobType}</b><br/><a href=\"http://jenkins.cxengagelabs.net/blue/organizations/jenkins/Serenova%2F${service}/activity\">Build Activity</a><br/><a href=\"https://github.com/SerenovaLLC/${service}/pull/${pr}\">Pull Request</a>",
-                    notify: true,
-                    room: 'Admin/Supervisor Experience',
-                    sendAs: 'Jenkins',
-                    server: 'api.hipchat.com',
-                    textFormat: false,
-                    v2enabled: false)
-        hipchatSend(credentialId: 'HipChat-API-Token',
-                    message: "${notifyPpl}",
-                    notify: true,
-                    room: 'Admin/Supervisor Experience',
-                    sendAs: 'Jenkins',
-                    server: 'api.hipchat.com',
-                    textFormat: true,
-                    v2enabled: false)
-      }
-    }
-    failure {
-      script {
-        hipchatSend(color: 'RED',
-                    credentialId: 'HipChat-API-Token',
-                    message: "<b>${service}#${pr} - Failed! </b><br/><a href=\"http://jenkins.cxengagelabs.net/blue/organizations/jenkins/Serenova%2F${service}/activity\">Build Activity</a>",
-                    notify: true,
-                    room: 'Admin/Supervisor Experience',
-                    sendAs: 'Jenkins',
-                    server: 'api.hipchat.com',
-                    textFormat: false,
-                    v2enabled: false)
       }
     }
     unstable {

@@ -1,5 +1,10 @@
 const { config } = require('cx-automation-utils/wdioConf');
 
+config.host = 'resources-selenium.cxengagelabs.net';
+config.maxInstances = 10;
+
+process.env.URL = process.env.URL || 'http://localhost:3000/';
+
 config.suites = {
     "inProgress": ["./automation/specs/inProgress/*.spec.js"],
     "all": ["./automation/specs/**/*.spec.js"],
@@ -12,7 +17,7 @@ config.suites = {
 
     // Configurable SLA
     "configurableSLA": ["./automation/specs/SLA/configurableSLA.spec.js"],
-  
+
     // Users
     "users": ["./automation/specs/users/*.spec.js"],
 

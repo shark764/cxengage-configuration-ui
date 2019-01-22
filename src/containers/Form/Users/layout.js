@@ -53,25 +53,25 @@ export default function UsersForm({
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Platform Details" />
           <InputField
+            className="user-form-firstname"
             name="firstName"
             label="First Name"
-            id="frm-users-first-name"
             componentType="input"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
           <InputField
+            className="user-form-lastname"
             name="lastName"
             label="Last Name"
-            id="frm-users-last-name"
             componentType="input"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
           <InputField
+            className="user-form-external-id"
             name="externalId"
             label="External ID"
-            id="frm-users-external-id"
             componentType="input"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
@@ -81,17 +81,17 @@ export default function UsersForm({
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Tenant Details" />
           <InputField
+            className="user-form-workstation-id"
             name="workStationId"
             label="Workstation ID"
-            id="frm-users-work-station-id"
             componentType="input"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
           <SelectField
+            className="user-form-role-id"
             name="roleId"
             label="Tenant Role"
-            id="frm-users-role-id"
             disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
             options={tenantRoles}
           />
@@ -99,19 +99,19 @@ export default function UsersForm({
 
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Login Details" />
-          <InputField name="email" label="Email" id="frm-users-email" componentType="input" inputType="text" disabled />
+          <InputField name="email" label="Email" className="frm-users-email" componentType="input" inputType="text" disabled />
           <InputField
+            className="user-form-invitation-status"
             name="invitationStatus"
             label="Platform Status"
-            id="frm-users-platform-status"
             componentType="input"
             inputType="text"
             disabled
           />
           <SelectField
+            className="user-form-platform-authentication"
             name="noPassword"
             label="Platform Authentication"
-            id="frm-users-no-password-id"
             disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
             options={[
               { label: 'Use Tenant Default: Enabled', value: 'null' },
@@ -121,9 +121,9 @@ export default function UsersForm({
             required
           />
           <SelectField
+            className="user-form-default-sso-provider"
             name="defaultIdentityProvider"
             label="Single Sign On Identitiy Provider"
-            id="frm-users-default-identity-provider-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantIdentityProviders}
             required
@@ -223,9 +223,9 @@ export default function UsersForm({
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Capacity" />
           <SelectField
+            className="users-form-capacity-rule"
             name="effectiveCapacityRule"
             label="Capacity Rule"
-            id="frm-users-capacity-rule"
             disabled={isSaving || !userHasUpdatePermission}
             options={capacityRules}
             required

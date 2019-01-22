@@ -12,25 +12,25 @@ exports[`<UsersForm /> renders create user 1`] = `
         text="Platform Details"
       />
       <InputField
+        className="user-form-firstname"
         componentType="input"
         disabled={false}
-        id="frm-users-first-name"
         inputType="text"
         label="First Name"
         name="firstName"
       />
       <InputField
+        className="user-form-lastname"
         componentType="input"
         disabled={false}
-        id="frm-users-last-name"
         inputType="text"
         label="Last Name"
         name="lastName"
       />
       <InputField
+        className="user-form-external-id"
         componentType="input"
         disabled={false}
-        id="frm-users-external-id"
         inputType="text"
         label="External ID"
         name="externalId"
@@ -43,16 +43,16 @@ exports[`<UsersForm /> renders create user 1`] = `
         text="Tenant Details"
       />
       <InputField
+        className="user-form-workstation-id"
         componentType="input"
         disabled={false}
-        id="frm-users-work-station-id"
         inputType="text"
         label="Workstation ID"
         name="workStationId"
       />
       <SelectField
+        className="user-form-role-id"
         disabled={true}
-        id="frm-users-role-id"
         label="Tenant Role"
         name="roleId"
         options={Array []}
@@ -66,24 +66,24 @@ exports[`<UsersForm /> renders create user 1`] = `
         text="Login Details"
       />
       <InputField
+        className="frm-users-email"
         componentType="input"
         disabled={true}
-        id="frm-users-email"
         inputType="text"
         label="Email"
         name="email"
       />
       <InputField
+        className="user-form-invitation-status"
         componentType="input"
         disabled={true}
-        id="frm-users-platform-status"
         inputType="text"
         label="Platform Status"
         name="invitationStatus"
       />
       <SelectField
+        className="user-form-platform-authentication"
         disabled={true}
-        id="frm-users-no-password-id"
         label="Platform Authentication"
         name="noPassword"
         options={
@@ -101,8 +101,8 @@ exports[`<UsersForm /> renders create user 1`] = `
         required={true}
       />
       <SelectField
+        className="user-form-default-sso-provider"
         disabled={false}
-        id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
         required={true}
@@ -142,8 +142,8 @@ exports[`<UsersForm /> renders create user 1`] = `
         text="Capacity"
       />
       <SelectField
+        className="users-form-capacity-rule"
         disabled={false}
-        id="frm-users-capacity-rule"
         label="Capacity Rule"
         name="effectiveCapacityRule"
         required={true}
@@ -165,25 +165,25 @@ exports[`<UsersForm /> renders update user 1`] = `
         text="Platform Details"
       />
       <InputField
+        className="user-form-firstname"
         componentType="input"
         disabled={false}
-        id="frm-users-first-name"
         inputType="text"
         label="First Name"
         name="firstName"
       />
       <InputField
+        className="user-form-lastname"
         componentType="input"
         disabled={false}
-        id="frm-users-last-name"
         inputType="text"
         label="Last Name"
         name="lastName"
       />
       <InputField
+        className="user-form-external-id"
         componentType="input"
         disabled={false}
-        id="frm-users-external-id"
         inputType="text"
         label="External ID"
         name="externalId"
@@ -196,16 +196,16 @@ exports[`<UsersForm /> renders update user 1`] = `
         text="Tenant Details"
       />
       <InputField
+        className="user-form-workstation-id"
         componentType="input"
         disabled={false}
-        id="frm-users-work-station-id"
         inputType="text"
         label="Workstation ID"
         name="workStationId"
       />
       <SelectField
+        className="user-form-role-id"
         disabled={true}
-        id="frm-users-role-id"
         label="Tenant Role"
         name="roleId"
         options={Array []}
@@ -219,24 +219,24 @@ exports[`<UsersForm /> renders update user 1`] = `
         text="Login Details"
       />
       <InputField
+        className="frm-users-email"
         componentType="input"
         disabled={true}
-        id="frm-users-email"
         inputType="text"
         label="Email"
         name="email"
       />
       <InputField
+        className="user-form-invitation-status"
         componentType="input"
         disabled={true}
-        id="frm-users-platform-status"
         inputType="text"
         label="Platform Status"
         name="invitationStatus"
       />
       <SelectField
+        className="user-form-platform-authentication"
         disabled={true}
-        id="frm-users-no-password-id"
         label="Platform Authentication"
         name="noPassword"
         options={
@@ -254,8 +254,8 @@ exports[`<UsersForm /> renders update user 1`] = `
         required={true}
       />
       <SelectField
+        className="user-form-default-sso-provider"
         disabled={false}
-        id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
         required={true}
@@ -295,8 +295,8 @@ exports[`<UsersForm /> renders update user 1`] = `
         text="Capacity"
       />
       <SelectField
+        className="users-form-capacity-rule"
         disabled={false}
-        id="frm-users-capacity-rule"
         label="Capacity Rule"
         name="effectiveCapacityRule"
         required={true}
@@ -318,25 +318,25 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         text="Platform Details"
       />
       <InputField
+        className="user-form-firstname"
         componentType="input"
         disabled={true}
-        id="frm-users-first-name"
         inputType="text"
         label="First Name"
         name="firstName"
       />
       <InputField
+        className="user-form-lastname"
         componentType="input"
         disabled={true}
-        id="frm-users-last-name"
         inputType="text"
         label="Last Name"
         name="lastName"
       />
       <InputField
+        className="user-form-external-id"
         componentType="input"
         disabled={true}
-        id="frm-users-external-id"
         inputType="text"
         label="External ID"
         name="externalId"
@@ -349,16 +349,16 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         text="Tenant Details"
       />
       <InputField
+        className="user-form-workstation-id"
         componentType="input"
         disabled={true}
-        id="frm-users-work-station-id"
         inputType="text"
         label="Workstation ID"
         name="workStationId"
       />
       <SelectField
+        className="user-form-role-id"
         disabled={true}
-        id="frm-users-role-id"
         label="Tenant Role"
         name="roleId"
         options={Array []}
@@ -372,24 +372,24 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         text="Login Details"
       />
       <InputField
+        className="frm-users-email"
         componentType="input"
         disabled={true}
-        id="frm-users-email"
         inputType="text"
         label="Email"
         name="email"
       />
       <InputField
+        className="user-form-invitation-status"
         componentType="input"
         disabled={true}
-        id="frm-users-platform-status"
         inputType="text"
         label="Platform Status"
         name="invitationStatus"
       />
       <SelectField
+        className="user-form-platform-authentication"
         disabled={true}
-        id="frm-users-no-password-id"
         label="Platform Authentication"
         name="noPassword"
         options={
@@ -407,8 +407,8 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         required={true}
       />
       <SelectField
+        className="user-form-default-sso-provider"
         disabled={true}
-        id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
         required={true}
@@ -448,8 +448,8 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         text="Capacity"
       />
       <SelectField
+        className="users-form-capacity-rule"
         disabled={true}
-        id="frm-users-capacity-rule"
         label="Capacity Rule"
         name="effectiveCapacityRule"
         required={true}
@@ -471,25 +471,25 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         text="Platform Details"
       />
       <InputField
+        className="user-form-firstname"
         componentType="input"
         disabled={true}
-        id="frm-users-first-name"
         inputType="text"
         label="First Name"
         name="firstName"
       />
       <InputField
+        className="user-form-lastname"
         componentType="input"
         disabled={true}
-        id="frm-users-last-name"
         inputType="text"
         label="Last Name"
         name="lastName"
       />
       <InputField
+        className="user-form-external-id"
         componentType="input"
         disabled={true}
-        id="frm-users-external-id"
         inputType="text"
         label="External ID"
         name="externalId"
@@ -502,16 +502,16 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         text="Tenant Details"
       />
       <InputField
+        className="user-form-workstation-id"
         componentType="input"
         disabled={true}
-        id="frm-users-work-station-id"
         inputType="text"
         label="Workstation ID"
         name="workStationId"
       />
       <SelectField
+        className="user-form-role-id"
         disabled={true}
-        id="frm-users-role-id"
         label="Tenant Role"
         name="roleId"
         options={Array []}
@@ -525,24 +525,24 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         text="Login Details"
       />
       <InputField
+        className="frm-users-email"
         componentType="input"
         disabled={true}
-        id="frm-users-email"
         inputType="text"
         label="Email"
         name="email"
       />
       <InputField
+        className="user-form-invitation-status"
         componentType="input"
         disabled={true}
-        id="frm-users-platform-status"
         inputType="text"
         label="Platform Status"
         name="invitationStatus"
       />
       <SelectField
+        className="user-form-platform-authentication"
         disabled={true}
-        id="frm-users-no-password-id"
         label="Platform Authentication"
         name="noPassword"
         options={
@@ -560,8 +560,8 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         required={true}
       />
       <SelectField
+        className="user-form-default-sso-provider"
         disabled={true}
-        id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
         required={true}
@@ -589,8 +589,8 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         text="Capacity"
       />
       <SelectField
+        className="users-form-capacity-rule"
         disabled={true}
-        id="frm-users-capacity-rule"
         label="Capacity Rule"
         name="effectiveCapacityRule"
         required={true}
