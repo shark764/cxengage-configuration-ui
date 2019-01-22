@@ -6,9 +6,13 @@ config.suites = {
     "allEmailTemplates": ["./automation/specs/emailTemplates/*.spec.js"],
     "allGenericLists": ["./automation/specs/genericLists/*.spec.js"],
     "preMerge": ["./automation/specs/users/*.spec.js"],
+    "allSLA": ["./automation/specs/SLA/*.spec.js"],
 
     // individual specs here
 
+    // Configurable SLA
+    "configurableSLA": ["./automation/specs/SLA/configurableSLA.spec.js"],
+  
     // Users
     "users": ["./automation/specs/users/*.spec.js"],
 
