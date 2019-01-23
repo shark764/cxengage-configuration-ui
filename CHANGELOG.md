@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.47.2] - 2019-01-23
+### Fixed
+- Jenkins - Regression only happens on pull request
+
 ## [0.47.1] - 2019-01-23
 ### Fixed
 - CXV1-15327 - Hide monitor call button if user doesnt have permissions
