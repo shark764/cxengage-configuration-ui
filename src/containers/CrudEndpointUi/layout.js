@@ -31,6 +31,7 @@ import GroupsForm from '../Form/Groups';
 import UsersForm from '../Form/Users';
 import UsersCreateForm from '../Form/Users/Create';
 import DataAccessReportsForm from '../Form/DataAccessReports';
+import ReasonsForm from '../Form/Reasons';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -49,12 +50,13 @@ import SkillsDetailsPanel from '../SidePanelDetails/Skills';
 import GroupsDetailsPanel from '../SidePanelDetails/Groups';
 import UsersDetailsPanel from '../SidePanelDetails/Users';
 import DataAccessReportsDetailsPanel from '../SidePanelDetails/DataAccessReports';
+import ReasonsDetailsPanel from '../SidePanelDetails/Reasons';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
   height: 100vh;
   display: grid;
-  
+
   ${props =>
     props.isSidePanelOpen
       ? `
@@ -162,6 +164,14 @@ const createFormRoutes = [
       <NoScrollDetailsPanel>
         <DataAccessReportsForm />
       </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/reasons',
+    component: () => (
+      <DetailsPanel>
+        <ReasonsForm />
+      </DetailsPanel>
     )
   }
   //hygen-inject-before1
@@ -276,6 +286,16 @@ const detailsPanelRoutes = [
           <DataAccessReportsForm />
         </DataAccessReportsDetailsPanel>
       </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/reasons',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <ReasonsDetailsPanel>
+          <ReasonsForm />
+        </ReasonsDetailsPanel>
+      </NoScrollDetailsPanel>
     )
   }
   //hygen-inject-before2

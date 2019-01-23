@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.47.0] - 2019-01-22
+### Added
+- CXV1-16502 - Presence Reasons Page.
+
 ## [0.46.0] - 2019-01-21
 ### Added
 - CXV1-16684 - Value is now validated against channel type on outbound identifiers page.

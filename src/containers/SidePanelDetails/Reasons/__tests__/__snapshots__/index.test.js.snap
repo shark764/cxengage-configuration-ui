@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": false,
+  "item": Object {
+    "id": "mockId",
+    "name": "mockName",
+    "type": "mockType",
+  },
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`reasonsDetailsPanel Renders renders 1`] = `
+<reasonsDetailsPanel
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  Child
+</reasonsDetailsPanel>
+`;

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<reasonsForm /> renders create form 1`] = `
+<reasonsForm
+  active={true}
+  description="mockDescription"
+  externalId="mockExternalId"
+  handleSubmit={[Function]}
+  inherited={false}
+  isSaving={false}
+  name="mockName"
+  shared={false}
+/>
+`;
+
+exports[`<reasonsForm /> renders update form 1`] = `
+<reasonsForm
+  active={true}
+  description="mockDescription"
+  externalId="mockExternalId"
+  handleSubmit={[Function]}
+  id="0000-0000-0000-0000-0000"
+  inherited={false}
+  isSaving={false}
+  name="mockName"
+  shared={false}
+/>
+`;

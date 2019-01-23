@@ -246,6 +246,31 @@ Immutable.Map {
       },
     ],
   },
+  "reasons": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "External Id",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Shared",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
   "dataAccessReports": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [

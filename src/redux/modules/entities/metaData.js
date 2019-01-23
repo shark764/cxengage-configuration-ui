@@ -155,7 +155,8 @@ export const listOfEntities = [
   'skills',
   'standardDashboards',
   'transferLists',
-  'users'
+  'users',
+  'reasons'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -538,6 +539,16 @@ entities.dataAccessReports.standardDashboards = [
   { label: 'Resources Dashboard', value: '0ad70ddc-d3d4-458e-8019-20fc46122a52' }
 ];
 
+// Reasons
+entities.reasons.pageTitle = 'Presence Reasons';
+entities.reasons.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Presence_Reasons.htm';
+entities.reasons.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'External Id', active: true },
+  { name: 'Shared', active: true },
+  { name: 'Status', active: true }
+];
 //Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

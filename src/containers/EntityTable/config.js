@@ -20,29 +20,30 @@ export function getTableColumns(columns) {
    * @param {array} columns is an array of predefined columns from redux fetched from a selector
    */
   const columnMap = {
-    'Name': nameColumn,
+    Name: nameColumn,
     'First Name': constructGeneralTextColumn('firstName'),
     'Last Name': constructGeneralTextColumn('lastName'),
-    'Role': constructGeneralTextColumn('roleName'),
-    'Email': constructGeneralTextColumn('email'),
-    'Presence': constructGeneralTextColumn('state'),
+    Role: constructGeneralTextColumn('roleName'),
+    Email: constructGeneralTextColumn('email'),
+    Presence: constructGeneralTextColumn('state'),
     // TODO: Skills and Groups require a special column to work
     // 'Skills': constructGeneralTextColumn('skills'),
     // 'Groups': constructGeneralTextColumn('groups'),
     'External Id': constructGeneralTextColumn('externalId'),
-    'Description': constructGeneralTextColumn('description'),
-    'Status': statusColumn,
+    Description: constructGeneralTextColumn('description'),
+    Status: statusColumn,
     'List Type': listTypeColumn,
-    'Permissions': permissionsColumn,
+    Permissions: permissionsColumn,
     'Metric Type': metricTypeColumn,
-    'Value': constructGeneralTextColumn('value'),
-    'channelType': constructGeneralTextColumn('channelType'),
-    'flowId': constructGeneralTextColumn('flowId'),
-    'Proficiency': constructGeneralTextColumn('proficiency'),
+    Value: constructGeneralTextColumn('value'),
+    channelType: constructGeneralTextColumn('channelType'),
+    flowId: constructGeneralTextColumn('flowId'),
+    Proficiency: constructGeneralTextColumn('proficiency'),
     'Has Proficiency': constructGeneralBooleanColumn('hasProficiency'),
     'Report Type': reportTypeColumn,
     'Platform Status': platformStatusColumn,
     'Tenant Status': tenantStatusColumn,
+    Shared: constructGeneralBooleanColumn('shared')
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

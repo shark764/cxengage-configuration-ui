@@ -189,6 +189,14 @@ const initialState = fromJS({
     readPermission: ['CUSTOM_STATS_READ'],
     updatePermission: ['CUSTOM_STATS_UPDATE'],
     createPermission: ['CUSTOM_STATS_CREATE']
+  },
+  reasons: {
+    ...defaultEntity,
+    sidePanelWidth: 750,
+    readPermission: ['READ_PRESENCE_REASONS'],
+    updatePermission: ['UPDATE_PRESENCE_REASONS'],
+    createPermission: ['CREATE_PRESENCE_REASONS'],
+    sharePermission: ['SHARE_PRESENCE_REASONS']
   }
   //hygen-inject-before
 });

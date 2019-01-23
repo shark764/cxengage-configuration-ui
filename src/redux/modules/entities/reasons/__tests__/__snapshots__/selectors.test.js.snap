@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCurrentSharedValue returns the current form's getCurrentSharedValue value 1`] = `false`;

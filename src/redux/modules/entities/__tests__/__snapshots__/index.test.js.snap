@@ -369,6 +369,24 @@ Immutable.Map {
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
   },
+  "reasons": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 750,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "READ_PRESENCE_REASONS",
+    ],
+    "updatePermission": Immutable.List [
+      "UPDATE_PRESENCE_REASONS",
+    ],
+    "createPermission": Immutable.List [
+      "CREATE_PRESENCE_REASONS",
+    ],
+    "sharePermission": Immutable.List [
+      "SHARE_PRESENCE_REASONS",
+    ],
+  },
   "dataAccessReports": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
