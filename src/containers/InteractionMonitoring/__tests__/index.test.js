@@ -15,19 +15,16 @@ jest.mock('../../../redux/modules/columnFilterMenus/selectors', () => ({
   selectTimeFormat: () => true,
   totalRatio: () => []
 }));
-jest.mock(
-  '../../../redux/modules/reporting/interactionMonitoring/selectors',
-  () => ({
-    selectInteractionMonitoringTableData: () => ({ item1: '', item2: '' }),
-    selectInteractionMonitoringSorted: () => true,
-    selectInteractionMonitoringExpanded: () => ({}),
-    selectInteractionMonitoringSelected: () => 'conected',
-    userHasViewAllMonitoredCallsPermission: () => true
-  })
-);
+jest.mock('../../../redux/modules/reporting/interactionMonitoring/selectors', () => ({
+  selectInteractionMonitoringTableData: () => ({ item1: '', item2: '' }),
+  selectInteractionMonitoringSorted: () => true,
+  selectInteractionMonitoringExpanded: () => ({}),
+  selectInteractionMonitoringSelected: () => 'conected',
+  userHasViewAllMonitoredCallsPermission: () => true,
+  userHasMonitorAllCallsPermission: () => true
+}));
 jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
-  selectSupervisorToolbarSilentMonitoringInteractionId: () =>
-    '0000-0000-0000-0000',
+  selectSupervisorToolbarSilentMonitoringInteractionId: () => '0000-0000-0000-0000',
   selectSupervisorToolbarSilentMonitoringStatus: () => 'mockStatus'
 }));
 jest.mock('../../../redux/modules/userData/selectors', () => ({

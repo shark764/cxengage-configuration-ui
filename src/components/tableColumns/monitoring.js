@@ -44,8 +44,7 @@ const FillerSpaceIcon = styled.div`
 
 export const helperFunctions = {
   implicitDisable: (row, agentId) =>
-    row.monitoring.filter(x => x.agentId === agentId && x.endTimestamp === null)
-      .length === 1,
+    row.monitoring.filter(x => x.agentId === agentId && x.endTimestamp === null).length === 1,
   accessor: d => d.monitors,
   monitoringFilterMethod: (filter, row) => {
     if (filter.value === 'All') {
@@ -56,10 +55,8 @@ export const helperFunctions = {
     }
     return row[filter.id].length === 0;
   },
-  monitorFilter: (tableType, onChange) => (
-    <MonitorFilter tableType={tableType} onChange={onChange} />
-  ),
-  Cell: function(value, row, monitoredId, monitoringStatus, agentId) {
+  monitorFilter: (tableType, onChange) => <MonitorFilter tableType={tableType} onChange={onChange} />,
+  Cell: function(value, row, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission) {
     let activeMonitors = 0;
     let previousMonitors = 0;
     row.monitoring.forEach(monitor => {
@@ -78,18 +75,13 @@ export const helperFunctions = {
         monitoredId={monitoredId}
         monitoringStatus={monitoringStatus}
         implicitDisable={this.implicitDisable(row, agentId)}
+        userHasMonitorAllCallsPermission={userHasMonitorAllCallsPermission}
       />
     );
   }
 };
 
-export default function(
-  value,
-  tableType,
-  monitoredId,
-  monitoringStatus,
-  agentId
-) {
+export default function(value, tableType, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission) {
   return {
     Header: 'Monitoring',
     show: value,
@@ -98,9 +90,8 @@ export default function(
     resizable: false,
     accessor: d => helperFunctions.accessor(d),
     Cell: ({ value, row }) =>
-      helperFunctions.Cell(value, row, monitoredId, monitoringStatus, agentId),
-    filterMethod: (filter, row) =>
-      helperFunctions.monitoringFilterMethod(filter, row),
+      helperFunctions.Cell(value, row, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission),
+    filterMethod: (filter, row) => helperFunctions.monitoringFilterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.monitorFilter(tableType, onChange)
   };
 }
@@ -122,9 +113,7 @@ export class MonitorFilter extends Component {
 
 export class MonitoringCell extends Component {
   monitorInteractionRequestor = e =>
-    store.dispatch(
-      monitorInteractionInitialization(this.props.interactionId)
-    ) && e.stopPropagation();
+    store.dispatch(monitorInteractionInitialization(this.props.interactionId)) && e.stopPropagation();
   render() {
     return (
       <div>
@@ -140,19 +129,21 @@ export class MonitoringCell extends Component {
             ) : (
               <FillerSpaceIcon />
             )}
-            <MonitorCallButton
-              type="secondary"
-              id={'monitorCallButton'}
-              className="monitorCall"
-              disabled={
-                this.props.monitoringStatus !== 'offline' ||
-                this.props.implicitDisable ||
-                this.props.monitoringStatus === 'sqsShutDown'
-              }
-              onClick={this.monitorInteractionRequestor}
-            >
-              Monitor
-            </MonitorCallButton>
+            {this.props.userHasMonitorAllCallsPermission && (
+              <MonitorCallButton
+                type="secondary"
+                id={'monitorCallButton'}
+                className="monitorCall"
+                disabled={
+                  this.props.monitoringStatus !== 'offline' ||
+                  this.props.implicitDisable ||
+                  this.props.monitoringStatus === 'sqsShutDown'
+                }
+                onClick={this.monitorInteractionRequestor}
+              >
+                Monitor
+              </MonitorCallButton>
+            )}
           </Fragment>
         )}
       </div>
@@ -167,7 +158,8 @@ MonitoringCell.propTypes = {
   monitoredId: PropTypes.string,
   interactionId: PropTypes.string,
   monitoringStatus: PropTypes.string,
-  implicitDisable: PropTypes.bool
+  implicitDisable: PropTypes.bool,
+  userHasMonitorAllCallsPermission: PropTypes.bool
 };
 MonitorFilter.propTypes = {
   tableType: PropTypes.string,

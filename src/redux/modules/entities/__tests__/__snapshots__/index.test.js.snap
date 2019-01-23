@@ -507,7 +507,7 @@ Immutable.Map {
   },
   "interactionMonitoring": Immutable.Map {
     "readPermission": Immutable.List [
-      "MONITOR_ALL_CALLS",
+      "VIEW_ALL_MONITORED_CALLS",
     ],
   },
   "listTypes": Immutable.Map {

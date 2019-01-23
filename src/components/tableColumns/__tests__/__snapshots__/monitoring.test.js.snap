@@ -18,15 +18,6 @@ exports[`monitoringColumn Cell renders 1 person is activly monitoring the call 1
     <styled.div>
       1
     </styled.div>
-    <Styled(Button)
-      className="monitorCall"
-      disabled={true}
-      id="monitorCallButton"
-      onClick={[Function]}
-      type="secondary"
-    >
-      Monitor
-    </Styled(Button)>
   </React.Fragment>
 </div>
 `;
@@ -38,15 +29,6 @@ exports[`monitoringColumn Cell renders 1 person previously monitored the call 1`
       1
     </styled.div>
     <styled.div />
-    <Styled(Button)
-      className="monitorCall"
-      disabled={false}
-      id="monitorCallButton"
-      onClick={[Function]}
-      type="secondary"
-    >
-      Monitor
-    </Styled(Button)>
   </React.Fragment>
 </div>
 `;
@@ -60,15 +42,6 @@ exports[`monitoringColumn Cell renders monitor button is disabled when monitorin
       1
     </styled.div>
     <styled.div />
-    <Styled(Button)
-      className="monitorCall"
-      disabled={false}
-      id="monitorCallButton"
-      onClick={[Function]}
-      type="secondary"
-    >
-      Monitor
-    </Styled(Button)>
   </React.Fragment>
 </div>
 `;
@@ -80,15 +53,6 @@ exports[`monitoringColumn Cell renders monitor button is disabled when monitorin
       1
     </styled.div>
     <styled.div />
-    <Styled(Button)
-      className="monitorCall"
-      disabled={true}
-      id="monitorCallButton"
-      onClick={[Function]}
-      type="secondary"
-    >
-      Monitor
-    </Styled(Button)>
   </React.Fragment>
 </div>
 `;

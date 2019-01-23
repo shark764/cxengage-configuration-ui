@@ -18,6 +18,7 @@ Object {
   },
   "totalRatio": Array [],
   "twelveHourFormat": true,
+  "userHasMonitorAllCallsPermission": true,
   "userHasViewAllMonitoredCallsPermission": true,
 }
 `;

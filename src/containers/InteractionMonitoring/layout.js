@@ -181,7 +181,8 @@ export default class InteractionMonitoring extends Component {
                 'interactionMonitoring',
                 this.props.monitoredId,
                 this.props.monitoringStatus,
-                this.props.getCurrentAgentId
+                this.props.getCurrentAgentId,
+                this.props.userHasMonitorAllCallsPermission
               ),
               groupsColumn(this.props.activeColumns[12], 'interactionMonitoring'),
               skillsColumn(this.props.activeColumns[13], 'interactionMonitoring')
@@ -216,5 +217,6 @@ InteractionMonitoring.propTypes = {
   setCurrentEntity: PropTypes.func,
   fetchData: PropTypes.func,
   startInteractionMonitoring: PropTypes.func,
-  userHasViewAllMonitoredCallsPermission: PropTypes.bool.isRequired
+  userHasViewAllMonitoredCallsPermission: PropTypes.bool.isRequired,
+  userHasMonitorAllCallsPermission: PropTypes.bool
 };

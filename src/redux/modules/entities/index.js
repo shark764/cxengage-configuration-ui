@@ -16,7 +16,7 @@ const initialState = fromJS({
   currentEntity: 'none',
   none: {},
   interactionMonitoring: {
-    readPermission: ['MONITOR_ALL_CALLS']
+    readPermission: ['VIEW_ALL_MONITORED_CALLS']
   },
   identityProviders: {
     ...defaultEntity
