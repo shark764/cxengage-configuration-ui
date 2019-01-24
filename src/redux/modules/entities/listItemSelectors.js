@@ -97,27 +97,20 @@ export const availableEntityMembersForList = state => {
 
 export const entityRemovedFromList = (state, itemId) => {
   const currentListMembers = getCurrentEntityStore(state)
-    .getIn(['data', selectedEntityIndex(state), entitiesMetaData[getCurrentEntity(state)].dependentEntity])
+    .getIn(
+      ['data', selectedEntityIndex(state), entitiesMetaData[getCurrentEntity(state)].dependentEntity],
+      new List([])
+    )
     .toOrderedSet();
   const newMembers = currentListMembers.filter(item => item !== itemId);
   return newMembers.toJS();
 };
 
 export const entityAddedToList = (state, itemId) => {
-  const currentListMembers = getCurrentEntityStore(state).getIn([
-    'data',
-    selectedEntityIndex(state),
-    entitiesMetaData[getCurrentEntity(state)].dependentEntity
-  ]);
+  const currentListMembers = getCurrentEntityStore(state).getIn(
+    ['data', selectedEntityIndex(state), entitiesMetaData[getCurrentEntity(state)].dependentEntity],
+    new List([])
+  );
   const newMembers = currentListMembers.toJS();
   return [itemId, ...newMembers];
-};
-
-export const entitiesMembers = state => {
-  const currentListMembers = getCurrentEntityStore(state).getIn([
-    'data',
-    selectedEntityIndex(state),
-    entitiesMetaData[getCurrentEntity(state)].dependentEntity
-  ]);
-  return currentListMembers.toJS();
 };

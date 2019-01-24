@@ -121,9 +121,9 @@ export const availableEntitiesForList = state => {
     .get('data')
     .findIndex(entity => entity.get('id') === getCurrentEntityStore(state).get('selectedEntityId'));
   const currentListMembers = getCurrentEntityStore(state)
-    .getIn(['data', entityIndex, 'members'])
+    .getIn(['data', entityIndex, 'members'], new List([]))
     .toOrderedSet();
-  const allListOptions = state.getIn(['Entities', getListDependency(state), 'data']).toOrderedSet();
+  const allListOptions = state.getIn(['Entities', getListDependency(state), 'data'], new List([])).toOrderedSet();
   const availableOptions = allListOptions.subtract(currentListMembers);
   return availableOptions.toJS();
 };

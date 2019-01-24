@@ -12,7 +12,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { from } from 'rxjs/observable/from';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Toast } from 'cx-ui-components';
-import { clearFields } from 'redux-form';
+import { clearFields, touch } from 'redux-form';
 
 import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
 
@@ -107,6 +107,17 @@ export const ClearCustomMetricsFormFields = action$ =>
     .filter(a => a.meta.form.includes('customMetrics'))
     .filter(a => a.payload.name.includes('slaAbandonThreshold'))
     .map(a => clearFields(a.meta.form, false, false, a.payload.name));
+
+export const FocusOutboundIdentifiersValueFormField = (action$, store) =>
+  action$
+    .ofType('@@redux-form/CHANGE')
+    .filter(
+      a =>
+        a.meta.form.includes('outboundIdentifiers') &&
+        a.meta.field.includes('channelType') &&
+        getSelectedEntity(store.getState()) !== undefined
+    )
+    .map(a => touch(a.meta.form, 'value'));
 
 export const FormSubmission = (action$, store) =>
   action$

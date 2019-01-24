@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.47.3] - 2019-01-23
+### Changed
+- CXV1-16684 - Value field validation is triggered when channelType is changed.
+- SDK Version Bump 8.39.0.
+
 ## [0.47.2] - 2019-01-23
 ### Fixed
 - Jenkins - Regression only happens on pull request
@@ -357,9 +362,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.36.0] - 2018-11-05
 ### Added
-- Users page.. ability to add and remove
-  outbound identifier lists,
-  message templates,
+- Users page.. ability to add and remove 
+  outbound identifier lists, 
+  message templates, 
   skills,
   groups,
   transfer lists,
