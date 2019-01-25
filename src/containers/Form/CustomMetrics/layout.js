@@ -26,7 +26,7 @@ export default function CustomMetricsForm({
       <InputField
         name="name"
         label="Name *"
-        id="frm-Custom-metrics-name"
+        id="frm-custom-metrics-name"
         componentType="input"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -34,7 +34,7 @@ export default function CustomMetricsForm({
       <InputField
         name="description"
         label="Description"
-        id="frm-Custom-metrics-description"
+        id="frm-custom-metrics-description"
         componentType="textarea"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -43,7 +43,7 @@ export default function CustomMetricsForm({
       <InputField
         name="slaThreshold"
         label="SLA Threshold"
-        id="frm-Custom-metrics-sla-threshold"
+        id="frm-custom-metrics-sla-threshold"
         labelHelpText="(seconds)"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -53,7 +53,7 @@ export default function CustomMetricsForm({
       <RadioGroupField
         name="slaAbandonType"
         label="SLA Abandon Type"
-        id="frm-Custom-metrics-sla-abandon-type"
+        id="frm-custom-metrics-sla-abandon-type"
         disabled={isSaving || inherited || !userHasUpdatePermission}
         options={[
           {
@@ -73,7 +73,7 @@ export default function CustomMetricsForm({
         <InputField
           name="slaAbandonThreshold"
           label="Abandon Threshold"
-          id="frm-Custom-metrics-sla-abandon-threshold"
+          id="frm-custom-metrics-sla-abandon-threshold"
           labelHelpText="(seconds)"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}

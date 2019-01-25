@@ -1,23 +1,21 @@
 ---
-to: src/containers/Form/<%= name %>/layout.js
+to: src/containers/Form/<%= Name %>/layout.js
 ---
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
 /**
  *
- * <%= name %>Form
+ * <%= Name %>Form
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader } from 'cx-ui-components';
-import { InputField } from 'cx-ui-components';
-import { SelectField } from 'cx-ui-components';
+import { DetailHeader, InputField, SelectField } from 'cx-ui-components';
 
-export default function <%= name %>Form({ handleSubmit, isSaving, inherited, key }) {
+export default function <%= Name %>Form({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
@@ -26,35 +24,40 @@ export default function <%= name %>Form({ handleSubmit, isSaving, inherited, key
         label="Name *"
         componentType="input"
         inputType="text"
-        disabled={isSaving || inherited}
+        placeholder="You are using Hygen!"
+        className="frm-<%= kebabName %>-name"
+        disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
         name="description"
         label="Description"
         componentType="textarea"
         inputType="text"
-        disabled={isSaving || inherited}
+        className="frm-<%= kebabName %>-description"
+        disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <DetailHeader text="Properties" />
       <SelectField
         name="type"
         label="Type *"
-        disabled={isSaving || inherited}
+        disabled={isSaving || inherited || !userHasUpdatePermission}
         options={[
           {
             label: 'custom label',
             value: 'custom value'
           }
         ]}
+        className="frm-<%= kebabName %>-type"
         required
       />
     </form>
   );
 }
 
-<%= name %>Form.propTypes = {
+<%= Name %>Form.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool
+  inherited: PropTypes.bool,
+  userHasUpdatePermission: PropTypes.bool
 };

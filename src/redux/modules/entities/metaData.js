@@ -551,6 +551,7 @@ entities.reasons.columns = [
   { name: 'Shared', active: true },
   { name: 'Status', active: true }
 ];
+
 // Queues
 entities.queues.pageTitle = 'Queue Management';
 entities.queues.helpLink = '/Help/Content/Managing%20Flows/Create_queue.htm';
@@ -560,6 +561,7 @@ entities.queues.columns = [
   { name: 'Active Queue', active: true },
   { name: 'Status', active: true }
 ];
+
 // Flows
 entities.flows.pageTitle = 'Flow Management';
 entities.flows.helpLink = '/Help/Content/Managing%20Flows/Flow_overview.htm';
@@ -569,6 +571,7 @@ entities.flows.columns = [
   { name: 'Active Flow', active: true },
   { name: 'Status', active: true }
 ];
+
 //Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

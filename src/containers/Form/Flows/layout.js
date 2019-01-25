@@ -18,7 +18,13 @@ export default function FlowsForm({ handleSubmit, isSaving, userHasUpdatePermiss
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
-      <InputField name="name" label="Name *" componentType="input" inputType="text" disabled={isSaving || !userHasUpdatePermission} />
+      <InputField
+        name="name"
+        label="Name *"
+        componentType="input"
+        inputType="text"
+        disabled={isSaving || !userHasUpdatePermission}
+      />
       <InputField
         name="description"
         label="Description"
@@ -55,5 +61,5 @@ FlowsForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool,
+  userHasUpdatePermission: PropTypes.bool
 };

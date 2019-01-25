@@ -4,7 +4,7 @@
 
 /**
  *
- * flowsDetailsPanel
+ * QueuesDetailsPanel
  *
  */
 
@@ -17,14 +17,10 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function FlowsDetailsPanel({ children }) {
-  return (
-    <Wrapper className="dtpanel-entity-flows">
-      {children}
-    </Wrapper>
-  );
+export default function QueuesDetailsPanel({ children }) {
+  return <Wrapper className="dtpanel-entity-queues">{children}</Wrapper>;
 }
 
-FlowsDetailsPanel.propTypes = {
+QueuesDetailsPanel.propTypes = {
   children: PropTypes.any
 };

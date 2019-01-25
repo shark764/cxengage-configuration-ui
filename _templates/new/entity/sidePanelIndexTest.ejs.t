@@ -1,15 +1,15 @@
 ---
-to: src/containers/SidePanelDetails/<%= name %>/__tests__/index.test.js
+to: src/containers/SidePanelDetails/<%= Name %>/__tests__/index.test.js
 ---
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
 import React from 'react';
 import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import <%= name %>DetailsPanel, { mapStateToProps } from '../';
+import <%= Name %>DetailsPanel, { mapStateToProps } from '../';
 import {
   getSelectedEntity,
   userHasUpdatePermission,
@@ -30,14 +30,14 @@ userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
 
-describe('<%= name %>DetailsPanel Renders', () => {
+describe('<%= Name %>DetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
     expect(
       shallow(
-        <<%= name %>DetailsPanel store={store}>
+        <<%= Name %>DetailsPanel store={store}>
           Child
-        </<%= name %>DetailsPanel>
+        </<%= Name %>DetailsPanel>
       )
     ).toMatchSnapshot();
   });

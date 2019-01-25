@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
+<styled.div
+  className="dtpanel-entity-flows"
+>
+  Mock Child
+</styled.div>
+`;
+
+exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permision 1`] = `
+<styled.div
+  className="dtpanel-entity-flows"
+>
+  Mock Child
+</styled.div>
+`;

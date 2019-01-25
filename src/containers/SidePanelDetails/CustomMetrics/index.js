@@ -5,8 +5,4 @@
 import { connect } from 'react-redux';
 import CustomMetricsDetailsPanel from './layout';
 
-export function mapStateToProps(state) {
-  return {};
-}
-
-export default connect(mapStateToProps)(CustomMetricsDetailsPanel);
+export default connect()(CustomMetricsDetailsPanel);

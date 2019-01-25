@@ -1,8 +1,8 @@
 ---
-to: src/containers/Form/<%= name %>/validation.js
+to: src/containers/Form/<%= Name %>/validation.js
 ---
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
 import { isEmpty } from 'serenova-js-utils/strings';

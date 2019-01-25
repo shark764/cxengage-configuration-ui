@@ -29,13 +29,13 @@ const {Element, Brow} = require('cx-automation-utils/pageObject');
 
     //side panel
     submitButton: new Element('button[id="sdpanel-submit"]'),
-    slaName: new Element('input[id="frm-Custom-metrics-name"]'),
+    slaName: new Element('input[id="frm-custom-metrics-name"]'),
     newSLANameSidePanel: (randomNum) => new Element(`input[value="${randomNum}"]`),
-    slaDescription: new Element('textarea[id="frm-Custom-metrics-description"]'),
+    slaDescription: new Element('textarea[id="frm-custom-metrics-description"]'),
     newSLADescriptionSidePanel: (randomNum2) => new Element(`.//textarea[text()="${randomNum2}"]`),
     ignoreAbandonsThresSidePanel: (thresholdValue) => new Element(`input[value="${thresholdValue}"]`),
-    abandonThr: new Element('input[id="frm-Custom-metrics-sla-abandon-threshold"]'),
-    slaThr: new Element('input[id="frm-Custom-metrics-sla-threshold"]'),
+    abandonThr: new Element('input[id="frm-custom-metrics-sla-abandon-threshold"]'),
+    slaThr: new Element('input[id="frm-custom-metrics-sla-threshold"]'),
     ignoreAbandons: new Element('input[value="ignored-abandoned-calls"]'),
     countAganistSLA: new Element('input[value="count-against-sla"]'),
     abandonThresholdlabel: new Element('label[for="slaAbandonThreshold"]'),

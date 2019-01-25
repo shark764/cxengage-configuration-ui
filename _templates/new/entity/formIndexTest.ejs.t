@@ -1,22 +1,16 @@
 ---
-to: src/containers/Form/<%= name %>/__tests__/index.test.js
+to: src/containers/Form/<%= Name %>/__tests__/index.test.js
 ---
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
-import <%= name %>Form, {
-  mapStateToProps
-} from '../';
-import {
-  getSelectedEntityId,
-  isInherited,
-  isCreating
-} from '../../../../redux/modules/entities/selectors';
+import <%= Name %>Form, { mapStateToProps } from '../';
+import { getSelectedEntityId, isInherited, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues,formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -24,14 +18,15 @@ jest.mock('../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
+userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
-describe('<%= name %> Renders', () => {
+describe('<%= Name %> Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
     expect(
       shallow(
-        <<%= name %>Form store={store}>Child</<%= name %>Form>
+        <<%= Name %>Form store={store}>Child</<%= Name %>Form>
       )
     ).toMatchSnapshot();
   });
@@ -53,6 +48,7 @@ describe('formSubmission', () => {
   // Change values to match the form your making
   // If you see this in a PR the unit tests may not have been completed
   // const values = { name: 'mockName', value: 'mockValue' };
+  // ERASE THIS COMMENTS AFTER YOUR ENTITY IS GENERATED
   const values = {
     id: 'mockId',
     name: 'mockName',

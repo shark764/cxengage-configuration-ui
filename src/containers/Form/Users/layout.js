@@ -53,7 +53,7 @@ export default function UsersForm({
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Platform Details" />
           <InputField
-            className="user-form-firstname"
+            className="frm-users-firstname"
             name="firstName"
             label="First Name"
             componentType="input"
@@ -61,7 +61,7 @@ export default function UsersForm({
             disabled={isSaving || !userHasUpdatePermission}
           />
           <InputField
-            className="user-form-lastname"
+            className="frm-users-lastname"
             name="lastName"
             label="Last Name"
             componentType="input"
@@ -69,7 +69,7 @@ export default function UsersForm({
             disabled={isSaving || !userHasUpdatePermission}
           />
           <InputField
-            className="user-form-external-id"
+            className="frm-users-external-id"
             name="externalId"
             label="External ID"
             componentType="input"
@@ -81,7 +81,7 @@ export default function UsersForm({
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Tenant Details" />
           <InputField
-            className="user-form-workstation-id"
+            className="frm-users-workstation-id"
             name="workStationId"
             label="Workstation ID"
             componentType="input"
@@ -89,7 +89,7 @@ export default function UsersForm({
             disabled={isSaving || !userHasUpdatePermission}
           />
           <SelectField
-            className="user-form-role-id"
+            className="frm-users-role-id"
             name="roleId"
             label="Tenant Role"
             disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
@@ -99,9 +99,16 @@ export default function UsersForm({
 
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Login Details" />
-          <InputField name="email" label="Email" className="frm-users-email" componentType="input" inputType="text" disabled />
           <InputField
-            className="user-form-invitation-status"
+            name="email"
+            label="Email"
+            className="frm-users-email"
+            componentType="input"
+            inputType="text"
+            disabled
+          />
+          <InputField
+            className="frm-users-invitation-status"
             name="invitationStatus"
             label="Platform Status"
             componentType="input"
@@ -109,7 +116,7 @@ export default function UsersForm({
             disabled
           />
           <SelectField
-            className="user-form-platform-authentication"
+            className="frm-users-platform-authentication"
             name="noPassword"
             label="Platform Authentication"
             disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
@@ -121,7 +128,7 @@ export default function UsersForm({
             required
           />
           <SelectField
-            className="user-form-default-sso-provider"
+            className="frm-users-default-sso-provider"
             name="defaultIdentityProvider"
             label="Single Sign On Identitiy Provider"
             disabled={isSaving || !userHasUpdatePermission}

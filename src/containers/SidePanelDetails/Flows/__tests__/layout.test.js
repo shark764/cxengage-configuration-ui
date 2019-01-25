@@ -5,19 +5,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import QueuesDetailsPanel from '../layout';
+import FlowsDetailsPanel from '../layout';
 
-describe('<queuesDetailsPanel />', () => {
+describe('<FlowsDetailsPanel />', () => {
   let customItem;
   beforeEach(() => {
     customItem = {
       name: 'Test',
-      description: 'Test'
+      description: 'Test',
+      type: 'Test'
     };
   });
-  it('renders queues detailsPanel', () => {
+  it('renders flows detailsPanel', () => {
     const rendered = shallow(
-      <QueuesDetailsPanel
+      <FlowsDetailsPanel
         id="0000-0000-0000-0000-0000"
         className="details-panel"
         userHasUpdatePermission={true}
@@ -27,9 +28,9 @@ describe('<queuesDetailsPanel />', () => {
     );
     expect(rendered).toMatchSnapshot();
   });
-  it('renders queues detailsPanel with no update permision', () => {
+  it('renders flows detailsPanel with no update permision', () => {
     const rendered = shallow(
-      <QueuesDetailsPanel
+      <FlowsDetailsPanel
         id="0000-0000-0000-0000-0000"
         className="details-panel"
         userHasUpdatePermission={false}

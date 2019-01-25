@@ -1,5 +1,5 @@
 ---
-to: src/containers/Form/<%= name %>/__tests__/validation.test.js
+to: src/containers/Form/<%= Name %>/__tests__/validation.test.js
 ---
 import { formValidation } from '../validation';
 import { Map } from 'immutable';

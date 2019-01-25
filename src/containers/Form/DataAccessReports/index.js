@@ -38,7 +38,6 @@ export function mapStateToProps(state) {
     folders: selectHistoricalReportFolders(state),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
-
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state)
   };

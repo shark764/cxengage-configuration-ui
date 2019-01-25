@@ -6,7 +6,7 @@ import React from 'react';
 import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import QueuesDetailsPanel from '../';
+import FlowsDetailsPanel from '../';
 import {
   getSelectedEntity,
   userHasUpdatePermission,
@@ -27,10 +27,9 @@ userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
 
-describe('QueuesDetailsPanel Renders', () => {
+describe('FlowsDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(shallow(<QueuesDetailsPanel store={store}>Child</QueuesDetailsPanel>)).toMatchSnapshot();
+    expect(shallow(<FlowsDetailsPanel store={store}>Child</FlowsDetailsPanel>)).toMatchSnapshot();
   });
 });
-

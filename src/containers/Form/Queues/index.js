@@ -24,7 +24,7 @@ export function mapStateToProps(state) {
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
     key: getSelectedEntityId(state),
-    userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }
 

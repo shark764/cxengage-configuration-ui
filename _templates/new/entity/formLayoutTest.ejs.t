@@ -1,33 +1,25 @@
 ---
-to: src/containers/Form/<%= name %>/__tests__/layout.test.js
+to: src/containers/Form/<%= Name %>/__tests__/layout.test.js
 ---
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import <%= name %>Form from '../layout';
+import <%= Name %>Form from '../layout';
 
-describe('<<%= name %>Form />', () => {
-  let testTypes;
-  beforeEach(() => {
-    testTypes = [
-      {
-        label: 'custom label',
-        value: 'custom value'
-      },
-    ];
-  });
+describe('<<%= Name %>Form />', () => {
   it('renders create form', () => {
     const rendered = shallow(
-      <<%= name %>Form
+      <<%= Name %>Form
         name="mockName"
         description="mockDescription"
-        type={testTypes}
+        type"mockType"
         isSaving={false}
         inherited={false}
+        userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
     );
@@ -35,13 +27,14 @@ describe('<<%= name %>Form />', () => {
   });
   it('renders update form', () => {
     const rendered = shallow(
-      <<%= name %>Form
+      <<%= Name %>Form
         name="mockName"
         description="mockDescription"
-        type={testTypes}
+        type"mockType"
         id="0000-0000-0000-0000-0000"
         isSaving={false}
         inherited={false}
+        userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
     );

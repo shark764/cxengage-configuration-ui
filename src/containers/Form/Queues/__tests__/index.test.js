@@ -6,7 +6,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
-import { mapStateToProps } from '../';
+import QueuesForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
 
@@ -20,7 +20,7 @@ selectFormInitialValues.mockImplementation(() => ({ active: true }));
 describe('queues Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(shallow(<queuesForm store={store}>Child</queuesForm>)).toMatchSnapshot();
+    expect(shallow(<QueuesForm store={store}>Child</QueuesForm>)).toMatchSnapshot();
   });
 });
 

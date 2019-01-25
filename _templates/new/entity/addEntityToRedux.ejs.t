@@ -6,9 +6,9 @@ before: //hygen-inject-before
   ,
   <%= name %>: {
     ...defaultEntity,
-    readPermission: [],
-    updatePermission: [],
-    createPermission: [],
-    disablePermission: [],
-    assignPermission: [],
+    readPermission: ['VIEW_ALL_<%= NAME %>'],
+    updatePermission: ['MANAGE_ALL_<%= NAME %>'],
+    createPermission: ['MANAGE_ALL_<%= NAME %>'],
+    disablePermission: ['MANAGE_ALL_<%= NAME %>'],
+    assignPermission: ['MANAGE_ALL_<%= NAME %>']
   }

@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`flowsDetailsPanel Renders renders 1`] = `
-<flowsDetailsPanel
+exports[`FlowsDetailsPanel Renders renders 1`] = `
+<FlowsDetailsPanel
+  dispatch={[Function]}
   store={
     Object {
       "dispatch": [Function],
@@ -13,5 +14,5 @@ exports[`flowsDetailsPanel Renders renders 1`] = `
   }
 >
   Child
-</flowsDetailsPanel>
+</FlowsDetailsPanel>
 `;

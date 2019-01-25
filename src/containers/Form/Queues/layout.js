@@ -16,7 +16,13 @@ export default function QueuesForm({ handleSubmit, isSaving, userHasUpdatePermis
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
-      <InputField name="name" label="Name *" componentType="input" inputType="text" disabled={isSaving || !userHasUpdatePermission} />
+      <InputField
+        name="name"
+        label="Name *"
+        componentType="input"
+        inputType="text"
+        disabled={isSaving || !userHasUpdatePermission}
+      />
       <InputField
         name="description"
         label="Description"
