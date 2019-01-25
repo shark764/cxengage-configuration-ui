@@ -168,6 +168,27 @@ Immutable.Map {
       },
     ],
   },
+  "queues": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Active Queue",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
   "permissions": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
@@ -178,7 +199,24 @@ Immutable.Map {
   },
   "flows": Immutable.Map {
     "visibleMenu": "none",
-    "Columns": Immutable.List [],
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Active Flow",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
   },
   "historicalReportFolders": Immutable.Map {
     "visibleMenu": "none",

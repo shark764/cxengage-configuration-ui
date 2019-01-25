@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FlowsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <SelectField
+    disabled={true}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "customer",
+          "value": "customer",
+        },
+        Object {
+          "label": "resource",
+          "value": "resource",
+        },
+        Object {
+          "label": "reusable",
+          "value": "reusable",
+        },
+      ]
+    }
+    required={true}
+  />
+</form>
+`;
+
+exports[`<FlowsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <SelectField
+    disabled={true}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "customer",
+          "value": "customer",
+        },
+        Object {
+          "label": "resource",
+          "value": "resource",
+        },
+        Object {
+          "label": "reusable",
+          "value": "reusable",
+        },
+      ]
+    }
+    required={true}
+  />
+</form>
+`;

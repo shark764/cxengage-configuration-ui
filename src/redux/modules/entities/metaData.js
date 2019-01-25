@@ -156,7 +156,9 @@ export const listOfEntities = [
   'standardDashboards',
   'transferLists',
   'users',
-  'reasons'
+  'reasons',
+  'queues',
+  'flows'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -547,6 +549,24 @@ entities.reasons.columns = [
   { name: 'Description', active: true },
   { name: 'External Id', active: true },
   { name: 'Shared', active: true },
+  { name: 'Status', active: true }
+];
+// Queues
+entities.queues.pageTitle = 'Queue Management';
+entities.queues.helpLink = '/Help/Content/Managing%20Flows/Create_queue.htm';
+entities.queues.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Active Queue', active: true },
+  { name: 'Status', active: true }
+];
+// Flows
+entities.flows.pageTitle = 'Flow Management';
+entities.flows.helpLink = '/Help/Content/Managing%20Flows/Flow_overview.htm';
+entities.flows.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Active Flow', active: true },
   { name: 'Status', active: true }
 ];
 //Hygen-insert-new-entity-configuration

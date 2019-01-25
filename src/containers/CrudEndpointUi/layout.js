@@ -32,6 +32,8 @@ import UsersForm from '../Form/Users';
 import UsersCreateForm from '../Form/Users/Create';
 import DataAccessReportsForm from '../Form/DataAccessReports';
 import ReasonsForm from '../Form/Reasons';
+import QueuesForm from '../Form/Queues';
+import FlowsForm from '../Form/Flows';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -51,6 +53,8 @@ import GroupsDetailsPanel from '../SidePanelDetails/Groups';
 import UsersDetailsPanel from '../SidePanelDetails/Users';
 import DataAccessReportsDetailsPanel from '../SidePanelDetails/DataAccessReports';
 import ReasonsDetailsPanel from '../SidePanelDetails/Reasons';
+import QueuesDetailsPanel from '../SidePanelDetails/Queues';
+import FlowsDetailsPanel from '../SidePanelDetails/Flows';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -171,6 +175,22 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <ReasonsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/queues',
+    component: () => (
+      <DetailsPanel>
+        <QueuesForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/flows',
+    component: () => (
+      <DetailsPanel>
+        <FlowsForm />
       </DetailsPanel>
     )
   }
@@ -295,6 +315,26 @@ const detailsPanelRoutes = [
         <ReasonsDetailsPanel>
           <ReasonsForm />
         </ReasonsDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/queues',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <QueuesDetailsPanel>
+          <QueuesForm />
+        </QueuesDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/flows',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <FlowsDetailsPanel>
+          <FlowsForm />
+        </FlowsDetailsPanel>
       </NoScrollDetailsPanel>
     )
   }

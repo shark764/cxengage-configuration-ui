@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Alpha User Acceptance Testing]
 - Bulk actions
 - Chat Widgets
+- Flows
+- Queues
 
 ## [Beta User Acceptance Testing]
 - Skills
@@ -15,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Interaction Monitoring
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
+
+## [0.48.0] - 2019-01-25
+### Added
+- Main Queues entity page
+- Main Flows entity page
 
 ## [0.47.3] - 2019-01-23
 ### Changed
@@ -362,9 +369,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.36.0] - 2018-11-05
 ### Added
-- Users page.. ability to add and remove 
-  outbound identifier lists, 
-  message templates, 
+- Users page.. ability to add and remove
+  outbound identifier lists,
+  message templates,
   skills,
   groups,
   transfer lists,

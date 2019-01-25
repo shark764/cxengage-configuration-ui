@@ -12,6 +12,8 @@ import { constructGeneralTextColumn } from './columns/genericTextColumn';
 import { constructGeneralBooleanColumn } from './columns/genericBooleanColumn';
 import { tenantStatusColumn } from './columns/tenantStatus';
 import { platformStatusColumn } from './columns/platformStatus';
+import { activeQueueColumn } from './columns/activeQueue';
+import { activeFlowColumn } from './columns/activeFlow';
 
 export function getTableColumns(columns) {
   /**
@@ -43,7 +45,9 @@ export function getTableColumns(columns) {
     'Report Type': reportTypeColumn,
     'Platform Status': platformStatusColumn,
     'Tenant Status': tenantStatusColumn,
-    Shared: constructGeneralBooleanColumn('shared')
+    Shared: constructGeneralBooleanColumn('shared'),
+    'Active Queue': activeQueueColumn,
+    'Active Flow': activeFlowColumn
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

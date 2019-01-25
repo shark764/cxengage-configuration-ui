@@ -32,7 +32,12 @@ const initialState = fromJS({
     createPermission: ['MANAGE_ALL_LISTS']
   },
   flows: {
-    ...defaultEntity
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_FLOWS'],
+    updatePermission: ['MANAGE_ALL_FLOWS'],
+    createPermission: ['MANAGE_ALL_FLOWS'],
+    disablePermission: ['MANAGE_ALL_FLOWS'],
+    assignPermission: ['MANAGE_ALL_FLOWS']
   },
   listTypes: {
     ...defaultEntity
@@ -197,6 +202,14 @@ const initialState = fromJS({
     updatePermission: ['UPDATE_PRESENCE_REASONS'],
     createPermission: ['CREATE_PRESENCE_REASONS'],
     sharePermission: ['SHARE_PRESENCE_REASONS']
+  },
+  queues: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_QUEUES'],
+    updatePermission: ['MANAGE_ALL_QUEUES'],
+    createPermission: ['MANAGE_ALL_QUEUES'],
+    disablePermission: ['MANAGE_ALL_QUEUES'],
+    assignPermission: ['MANAGE_ALL_QUEUES']
   }
   //hygen-inject-before
 });

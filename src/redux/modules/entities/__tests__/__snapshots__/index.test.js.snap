@@ -304,6 +304,27 @@ Immutable.Map {
       "MANAGE_TENANT_ENROLLMENT",
     ],
   },
+  "queues": Immutable.Map {
+    "readPermission": Immutable.List [
+      "VIEW_ALL_QUEUES",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_QUEUES",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "MANAGE_ALL_QUEUES",
+    ],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_QUEUES",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [
+      "MANAGE_ALL_QUEUES",
+    ],
+  },
   "permissions": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
@@ -327,10 +348,25 @@ Immutable.Map {
     "confirmationDialogType": undefined,
   },
   "flows": Immutable.Map {
+    "readPermission": Immutable.List [
+      "VIEW_ALL_FLOWS",
+    ],
     "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_FLOWS",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "MANAGE_ALL_FLOWS",
+    ],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_FLOWS",
+    ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
-    "confirmationDialogType": undefined,
+    "assignPermission": Immutable.List [
+      "MANAGE_ALL_FLOWS",
+    ],
   },
   "historicalReportFolders": Immutable.Map {
     "data": Immutable.List [],

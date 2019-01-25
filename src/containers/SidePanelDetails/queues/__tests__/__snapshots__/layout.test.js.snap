@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<queuesDetailsPanel /> renders queues detailsPanel 1`] = `
+<styled.div
+  className="dtpanel-entity-queues"
+>
+  Mock Child
+</styled.div>
+`;
+
+exports[`<queuesDetailsPanel /> renders queues detailsPanel with no update permision 1`] = `
+<styled.div
+  className="dtpanel-entity-queues"
+>
+  Mock Child
+</styled.div>
+`;
