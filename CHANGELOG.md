@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.48.2] - 2019-01-25
+### Fixed
+- Fixed loading state on data access controls
+
 ## [0.48.1] - 2019-01-25
 ### Changed
 - Hygen templates updates to match new entities structure.

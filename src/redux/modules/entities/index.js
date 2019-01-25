@@ -480,7 +480,8 @@ export default function reducer(state = initialState, action) {
         .getIn([action.entityName, 'data'])
         .findIndex(entity => entity.get('id') === result.id || entity.get('id') === action.id);
       if (entityIndex !== -1) {
-        return state.mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }));
+        return state.remove('loading')
+              .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }));
       } else {
         return state;
       }
