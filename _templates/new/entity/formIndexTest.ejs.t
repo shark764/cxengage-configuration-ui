@@ -1,5 +1,5 @@
 ---
-to: src/containers/Form/<%= Name %>/__tests__/index.test.js
+to: src/containers/Form/<%= className %>/__tests__/index.test.js
 ---
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
@@ -9,7 +9,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
-import <%= Name %>Form, { mapStateToProps } from '../';
+import <%= className %>Form, { mapStateToProps } from '../';
 import { getSelectedEntityId, isInherited, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues,formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
 
@@ -21,12 +21,12 @@ isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
-describe('<%= Name %> Renders', () => {
+describe('<%= className %> Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
     expect(
       shallow(
-        <<%= Name %>Form store={store}>Child</<%= Name %>Form>
+        <<%= className %>Form store={store}>Child</<%= className %>Form>
       )
     ).toMatchSnapshot();
   });

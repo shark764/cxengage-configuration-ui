@@ -8,9 +8,9 @@ before: //hygen-inject-before2
     path: '/configuration/<%= name %>',
     component: () => (
       <NoScrollDetailsPanel>
-        <<%= Name %>DetailsPanel>
-          <<%= Name %>Form />
-        </<%= Name %>DetailsPanel>
+        <<%= className %>DetailsPanel>
+          <<%= className %>Form />
+        </<%= className %>DetailsPanel>
       </NoScrollDetailsPanel>
     )
   },

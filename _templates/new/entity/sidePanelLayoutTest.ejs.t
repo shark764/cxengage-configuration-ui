@@ -1,5 +1,5 @@
 ---
-to: src/containers/SidePanelDetails/<%= Name %>/__tests__/layout.test.js
+to: src/containers/SidePanelDetails/<%= className %>/__tests__/layout.test.js
 ---
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
@@ -8,12 +8,12 @@ to: src/containers/SidePanelDetails/<%= Name %>/__tests__/layout.test.js
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import <%= Name %>DetailsPanel from '../layout';
+import <%= className %>DetailsPanel from '../layout';
 
-describe('<<%= Name %>DetailsPanel />', () => {
+describe('<<%= className %>DetailsPanel />', () => {
   it('renders <%= name %> detailsPanel', () => {
     const rendered = shallow(
-      <<%= Name %>DetailsPanel
+      <<%= className %>DetailsPanel
         className="details-panel"
         children={'Mock Child'}
       />

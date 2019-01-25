@@ -1,5 +1,5 @@
 ---
-to: src/containers/SidePanelDetails/<%= Name %>/layout.js
+to: src/containers/SidePanelDetails/<%= className %>/layout.js
 ---
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
@@ -7,7 +7,7 @@ to: src/containers/SidePanelDetails/<%= Name %>/layout.js
 
 /**
  *
- * <%= Name %>DetailsPanel
+ * <%= className %>DetailsPanel
  *
  */
 
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
  
-export default function <%= Name %>DetailsPanel({
+export default function <%= className %>DetailsPanel({
   children
 }) {
   return (
@@ -30,6 +30,6 @@ export default function <%= Name %>DetailsPanel({
   );
 }
 
-<%= Name %>DetailsPanel.propTypes = {
+<%= className %>DetailsPanel.propTypes = {
   children: PropTypes.any
 };

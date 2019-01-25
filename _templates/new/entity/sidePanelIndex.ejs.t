@@ -1,12 +1,12 @@
 ---
-to: src/containers/SidePanelDetails/<%= Name %>/index.js
+to: src/containers/SidePanelDetails/<%= className %>/index.js
 ---
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
 import { connect } from 'react-redux';
-import <%= Name %>DetailsPanel from './layout';
+import <%= className %>DetailsPanel from './layout';
 
 //
 // Erase 'mapStateToProps' if no custom props are needed
@@ -18,4 +18,4 @@ import <%= Name %>DetailsPanel from './layout';
 //   };
 // }
 
-export default connect(/*mapStateToProps*/)(<%= Name %>DetailsPanel);
+export default connect(/*mapStateToProps*/)(<%= className %>DetailsPanel);

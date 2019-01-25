@@ -1,5 +1,5 @@
 ---
-to: src/containers/Form/<%= Name %>/__tests__/layout.test.js
+to: src/containers/Form/<%= className %>/__tests__/layout.test.js
 ---
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
@@ -8,12 +8,12 @@ to: src/containers/Form/<%= Name %>/__tests__/layout.test.js
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import <%= Name %>Form from '../layout';
+import <%= className %>Form from '../layout';
 
-describe('<<%= Name %>Form />', () => {
+describe('<<%= className %>Form />', () => {
   it('renders create form', () => {
     const rendered = shallow(
-      <<%= Name %>Form
+      <<%= className %>Form
         name="mockName"
         description="mockDescription"
         type"mockType"
@@ -27,7 +27,7 @@ describe('<<%= Name %>Form />', () => {
   });
   it('renders update form', () => {
     const rendered = shallow(
-      <<%= Name %>Form
+      <<%= className %>Form
         name="mockName"
         description="mockDescription"
         type"mockType"

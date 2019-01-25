@@ -1,5 +1,5 @@
 ---
-to: src/containers/Form/<%= Name %>/index.js
+to: src/containers/Form/<%= className %>/index.js
 ---
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
@@ -8,20 +8,20 @@ to: src/containers/Form/<%= Name %>/index.js
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
-import <%= Name %>Form from './layout';
+import <%= className %>Form from './layout';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { formValidation } from './validation';
 import { getSelectedEntityId, isInherited, isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
-const Create<%= Name %>Form = compose(
+const Create<%= className %>Form = compose(
   connect((state) => createFormName(state)),
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
     destroyOnUnmount: true
   })
-)(<%= Name %>Form);
+)(<%= className %>Form);
 
 export function mapStateToProps(state) {
   return {
@@ -33,4 +33,4 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Create<%= Name %>Form);
+export default connect(mapStateToProps)(Create<%= className %>Form);

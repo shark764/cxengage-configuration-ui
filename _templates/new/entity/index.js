@@ -11,7 +11,7 @@ module.exports = {
       ])
       .then(answers => ({
         ...answers,
-        Name: strings.capitalizeFirstLetter(answers.name),
+        className: strings.capitalizeFirstLetter(answers.name),
         NAME: answers.name.toUpperCase(),
         kebabName: strings.camelCaseToKebabCase(answers.name),
         normalName: strings.camelCaseToRegularForm(answers.name).toLowerCase(),

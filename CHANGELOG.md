@@ -18,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.48.3] - 2019-01-25
+### Changed
+- CXV1-16862 - Updated help link for Outbound Identifier page.
+- CXV1-16863 - Updated help link for Outbound Identifier List page.
+### Fixed
+- Hygen templates using entityName correctly camelCase format.
+
 ## [0.48.2] - 2019-01-25
 ### Fixed
 - Fixed loading state on data access controls

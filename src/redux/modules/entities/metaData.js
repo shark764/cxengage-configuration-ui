@@ -306,6 +306,8 @@ entities.lists.columns = [
 
 // Outbound Identifiers
 entities.outboundIdentifiers.betaFeature = true;
+entities.outboundIdentifiers.helpLink =
+  '/Help/Content/Configuration/Outbound-Identifiers/Create-Outbound-Identifiers.htm';
 entities.outboundIdentifiers.createFormDependencies.push('flows');
 entities.outboundIdentifiers.updateFormDependencies.push('flows');
 entities.outboundIdentifiers.columns = [
@@ -318,6 +320,7 @@ entities.outboundIdentifiers.columns = [
 
 // Outbound Identifiers Lists
 entities.outboundIdentifierLists.betaFeature = true;
+entities.outboundIdentifierLists.helpLink = '/Help/Content/Configuration/Outbound-Identifiers/Create-List.htm';
 entities.outboundIdentifierLists.updateFormDependencies.push('outboundIdentifiers');
 entities.outboundIdentifierLists.dependentEntity = 'outboundIdentifiers';
 entities.outboundIdentifierLists.modalListTableFields = [

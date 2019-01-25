@@ -1,5 +1,5 @@
 ---
-to: src/containers/Form/<%= Name %>/layout.js
+to: src/containers/Form/<%= className %>/layout.js
 ---
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
@@ -7,7 +7,7 @@ to: src/containers/Form/<%= Name %>/layout.js
 
 /**
  *
- * <%= Name %>Form
+ * <%= className %>Form
  *
  */
 
@@ -15,7 +15,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, InputField, SelectField } from 'cx-ui-components';
 
-export default function <%= Name %>Form({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key }) {
+export default function <%= className %>Form({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
@@ -54,7 +54,7 @@ export default function <%= Name %>Form({ handleSubmit, isSaving, inherited, use
   );
 }
 
-<%= Name %>Form.propTypes = {
+<%= className %>Form.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,

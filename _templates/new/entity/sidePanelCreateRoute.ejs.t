@@ -8,7 +8,7 @@ before: //hygen-inject-before1
     path: '/configuration/<%= name %>',
     component: () => (
       <DetailsPanel>
-        <<%= Name %>Form />
+        <<%= className %>Form />
       </DetailsPanel>
     )
   },

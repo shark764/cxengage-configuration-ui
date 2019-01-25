@@ -1,5 +1,5 @@
 ---
-to: src/containers/Form/<%= Name %>/validation.js
+to: src/containers/Form/<%= className %>/validation.js
 ---
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.

@@ -5,7 +5,7 @@ before: //Hygen-insert-new-entity-configuration
 ---
 // <%= NormalName %>
 entities.<%= name %>.pageTitle = '<%= NormalName %> Management';
-entities.<%= name %>.helpLink = '/Help/Content/Managing%20<%= Name %>/Creating_<%= Name %>.htm';
+entities.<%= name %>.helpLink = '/Help/Content/Managing%20<%= className %>/Creating_<%= className %>.htm';
 entities.<%= name %>.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
