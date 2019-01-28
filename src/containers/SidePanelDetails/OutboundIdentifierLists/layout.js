@@ -8,13 +8,11 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Detail } from 'cx-ui-components';
-import { DetailHeader } from 'cx-ui-components';
-import { SidePanelTable } from 'cx-ui-components';
+import { DetailHeader, SidePanelTable } from 'cx-ui-components';
 import { detailHeadertext } from '../../../utils';
 
 const Wrapper = styled.div`
@@ -34,19 +32,14 @@ export default function OutboundIdentifierListsDetailsPanel({
   toggleEntityListItemActive,
   removeListItem,
   setSelectedSubEntityId,
-  item: { name, description }
+  defaultFilters,
+  itemApiPending
 }) {
   return (
     <Wrapper id={id} className={className}>
       <DetailHeader text="Details" />
-      {userHasUpdatePermission ? (
-        children
-      ) : (
-        <Fragment>
-          <Detail label="Name" value={name} />
-          <Detail label="Description" value={description} />
-        </Fragment>
-      )}
+      {children}
+
       <DetailHeader
         userHasUpdatePermission={!outboundIdentifiersFetching && userHasUpdatePermission}
         text={detailHeadertext(tableItems, 'Outbound Identifiers')}
@@ -61,6 +54,8 @@ export default function OutboundIdentifierListsDetailsPanel({
         items={tableItems}
         fields={tableFields}
         fetching={outboundIdentifiersFetching}
+        filtered={defaultFilters}
+        itemApiPending={itemApiPending}
       />
     </Wrapper>
   );
@@ -69,10 +64,6 @@ export default function OutboundIdentifierListsDetailsPanel({
 OutboundIdentifierListsDetailsPanel.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
-  item: PropTypes.shape({
-    name: PropTypes.string,
-    description: PropTypes.string
-  }),
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
   tableItems: PropTypes.array,
@@ -80,5 +71,7 @@ OutboundIdentifierListsDetailsPanel.propTypes = {
   outboundIdentifiersFetching: PropTypes.bool,
   toggleEntityListItemActive: PropTypes.func,
   removeListItem: PropTypes.func,
-  setSelectedSubEntityId: PropTypes.func
+  setSelectedSubEntityId: PropTypes.func,
+  defaultFilters: PropTypes.array,
+  itemApiPending: PropTypes.string
 };

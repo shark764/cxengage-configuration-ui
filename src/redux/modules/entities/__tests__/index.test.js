@@ -42,7 +42,7 @@ describe('entities reducer', () => {
     });
   });
 
-  describe('SET_CONIFIRMATION_DIALOG', () => {
+  describe('SET_CONFIRMATION_DIALOG', () => {
     it('sets the confirmation dialog', () => {
       const initialState = fromJS({ currentEntity: 'mockEntity', mockEntity: {} });
       expect(

@@ -5,4 +5,4 @@
 import { getCurrentForm } from '../../form/selectors';
 
 export const getChannelTypeFormValue = state =>
-  getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'channelType'], 'voice');
+  getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'channelType'], undefined);

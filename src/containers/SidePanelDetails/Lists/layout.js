@@ -11,12 +11,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Detail } from 'cx-ui-components';
-import { DetailHeader } from 'cx-ui-components';
-import { DetailsPanelAlert } from 'cx-ui-components';
-import { FileUpload } from 'cx-ui-components';
-import { FileDownload } from 'cx-ui-components';
-import { SidePanelTable } from 'cx-ui-components';
+import { Detail, DetailHeader, DetailsPanelAlert, FileUpload, FileDownload, SidePanelTable } from 'cx-ui-components';
 
 function ListsDetailsPanel(props) {
   return (

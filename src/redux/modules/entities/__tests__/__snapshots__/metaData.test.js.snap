@@ -1212,6 +1212,10 @@ Object {
         "active": true,
         "name": "Description",
       },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
     ],
     "confirmationDialog": Object {
       "falseButtonText": "",
@@ -1220,8 +1224,18 @@ Object {
     },
     "createFormDependencies": Array [],
     "defaultAssociationFilters": Array [],
-    "defaultDependentEntityFilters": Array [],
-    "defaultFilters": Array [],
+    "defaultDependentEntityFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
     "dependentEntity": "outboundIdentifiers",
     "entityName": "outboundIdentifierLists",
     "entityTableFields": Array [
@@ -1271,6 +1285,15 @@ Object {
         "label": "Description",
         "name": "description",
       },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
+      },
     ],
     "pageTitle": "Outbound Identifier Lists",
     "sdkCall": Object {
@@ -1293,6 +1316,15 @@ Object {
       Object {
         "label": "Description",
         "name": "description",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
       },
     ],
     "subEntityName": "",
@@ -1324,6 +1356,10 @@ Object {
         "active": false,
         "name": "flowId",
       },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
     ],
     "confirmationDialog": Object {
       "falseButtonText": "",
@@ -1335,7 +1371,12 @@ Object {
     ],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
-    "defaultFilters": Array [],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "outboundIdentifiers",
     "entityTableFields": Array [

@@ -10,9 +10,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputField } from 'cx-ui-components';
-import { SelectField } from 'cx-ui-components';
-import { ToggleField } from 'cx-ui-components';
+import { InputField, SelectField, ToggleField } from 'cx-ui-components';
 
 export default function ListsForm(props) {
   return (

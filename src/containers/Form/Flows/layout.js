@@ -10,9 +10,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader } from 'cx-ui-components';
-import { InputField } from 'cx-ui-components';
-import { SelectField } from 'cx-ui-components';
+import { DetailHeader, InputField, SelectField } from 'cx-ui-components';
 
 export default function FlowsForm({ handleSubmit, isSaving, userHasUpdatePermission, key }) {
   return (

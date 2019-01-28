@@ -3,7 +3,7 @@
  */
 
 import { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating } from '../../../../redux/modules/entities/selectors';
+import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 import { selectFlowIds } from '../../../../redux/modules/entities/flows/selectors';
 
@@ -12,6 +12,7 @@ jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => false);
+userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 selectFlowIds.mockImplementation(() => [{ value: 'mockValue', label: 'mockLabel' }]);
 

@@ -12,9 +12,15 @@ import React, { Fragment } from 'react';
 import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { DetailHeader, InputField, SelectField, ExtensionListField, Button } from 'cx-ui-components';
+import {
+  DetailHeader,
+  InputField,
+  SelectField,
+  ExtensionListField,
+  Button,
+  ConfirmationWrapper
+} from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
-import ConfirmationWrapper from '../../../components/ConfirmationWrapper';
 import store from '../../../redux/store';
 import { generateUUID } from 'serenova-js-utils/uuid';
 
@@ -92,7 +98,11 @@ export default function UsersForm({
             className="frm-users-role-id"
             name="roleId"
             label="Tenant Role"
-            disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
+            disabled={
+              isSaving ||
+              !userHasUpdatePermission ||
+              currentAgentId === initialValues.get('id')
+            }
             options={tenantRoles}
           />
         </DetailWrapper>
@@ -119,12 +129,21 @@ export default function UsersForm({
             className="frm-users-platform-authentication"
             name="noPassword"
             label="Platform Authentication"
-            disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
+            disabled={
+              isSaving ||
+              !userHasUpdatePermission ||
+              currentAgentId === initialValues.get('id')
+            }
             options={[
               { label: 'Use Tenant Default: Enabled', value: 'null' },
               { label: 'Enabled', value: false },
               { label: 'Disabled', value: true }
-            ].filter(val => (currentAgentId === initialValues.get('id') ? val.value !== 'null' : val))}
+            ].filter(
+              val =>
+                currentAgentId === initialValues.get('id')
+                  ? val.value !== 'null'
+                  : val
+            )}
             required
           />
           <SelectField
@@ -138,10 +157,18 @@ export default function UsersForm({
 
           {status === 'pending' && (
             <ConfirmationWrapper
-              confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-              mainText={`This will send an email invitation to ${initialValues.get('email')}.`}
+              confirmBtnCallback={() =>
+                changeUserInviteStatus('invited', initialValues.get('id'))
+              }
+              mainText={`This will send an email invitation to ${initialValues.get(
+                'email'
+              )}.`}
             >
-              <InviteButtons type="button" buttonType="secondary" className="invite-now-button">
+              <InviteButtons
+                type="button"
+                buttonType="secondary"
+                className="invite-now-button"
+              >
                 Send Invitation
               </InviteButtons>
             </ConfirmationWrapper>
@@ -149,10 +176,18 @@ export default function UsersForm({
 
           {status === 'expired' && (
             <ConfirmationWrapper
-              confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-              mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
+              confirmBtnCallback={() =>
+                changeUserInviteStatus('invited', initialValues.get('id'))
+              }
+              mainText={`Are you sure you want to resend an email invitation to ${initialValues.get(
+                'email'
+              )}?`}
             >
-              <InviteButtons type="button" buttonType="secondary" className="resend-invite-button">
+              <InviteButtons
+                type="button"
+                buttonType="secondary"
+                className="resend-invite-button"
+              >
                 Resend Invitation
               </InviteButtons>
             </ConfirmationWrapper>
@@ -161,19 +196,35 @@ export default function UsersForm({
           {status === 'invited' && (
             <Fragment>
               <ConfirmationWrapper
-                confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-                mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
+                confirmBtnCallback={() =>
+                  changeUserInviteStatus('invited', initialValues.get('id'))
+                }
+                mainText={`Are you sure you want to resend an email invitation to ${initialValues.get(
+                  'email'
+                )}?`}
               >
-                <InviteButtons type="button" buttonType="secondary" className="resend-invite-button">
+                <InviteButtons
+                  type="button"
+                  buttonType="secondary"
+                  className="resend-invite-button"
+                >
                   Resend Invitation
                 </InviteButtons>
               </ConfirmationWrapper>
 
               <ConfirmationWrapper
-                confirmBtnCallback={() => changeUserInviteStatus('pending', initialValues.get('id'))}
-                mainText={`This will prevent the user ${initialValues.get('email')} from accepting the invitation.`}
+                confirmBtnCallback={() =>
+                  changeUserInviteStatus('pending', initialValues.get('id'))
+                }
+                mainText={`This will prevent the user ${initialValues.get(
+                  'email'
+                )} from accepting the invitation.`}
               >
-                <InviteButtons type="button" buttonType="secondary" className="cancel-invite-button">
+                <InviteButtons
+                  type="button"
+                  buttonType="secondary"
+                  className="cancel-invite-button"
+                >
                   Cancel Invitation
                 </InviteButtons>
               </ConfirmationWrapper>
@@ -183,10 +234,21 @@ export default function UsersForm({
           {displayResetPassword &&
             status === 'enabled' && (
               <ConfirmationWrapper
-                confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
-                mainText={`Are you sure you want to send a password reset email to ${initialValues.get('email')}?`}
+                confirmBtnCallback={() =>
+                  changeUserInviteStatus(
+                    'passwordReset',
+                    initialValues.get('id')
+                  )
+                }
+                mainText={`Are you sure you want to send a password reset email to ${initialValues.get(
+                  'email'
+                )}?`}
               >
-                <InviteButtons type="button" buttonType="secondary" className="reset-password-button">
+                <InviteButtons
+                  type="button"
+                  buttonType="secondary"
+                  className="reset-password-button"
+                >
                   Reset Password
                 </InviteButtons>
               </ConfirmationWrapper>
@@ -198,7 +260,9 @@ export default function UsersForm({
             text="Extensions"
             userHasUpdatePermission={userHasUpdatePermission}
             onActionButtonClick={() => {
-              let id = store.getState().getIn(['Entities', 'users', 'selectedEntityId']);
+              let id = store
+                .getState()
+                .getIn(['Entities', 'users', 'selectedEntityId']);
               let extensions = store
                 .getState()
                 .getIn(['form', `users:${id}`, 'values', 'extensions'])
@@ -224,7 +288,11 @@ export default function UsersForm({
               });
             }}
           />
-          <ExtensionListField className="users-extensions" name="extensions" label="Inputs" />
+          <ExtensionListField
+            className="users-extensions"
+            name="extensions"
+            label="Inputs"
+          />
         </DetailWrapper>
 
         <DetailWrapper open={true}>

@@ -10,10 +10,8 @@
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { InputField } from 'cx-ui-components';
-import { SelectField } from 'cx-ui-components';
+import { InputField, SelectField, SidePanelActions } from 'cx-ui-components';
 import styled from 'styled-components';
-import { SidePanelActions } from 'cx-ui-components';
 
 const Header = styled.h3`
   font-size: 28px;

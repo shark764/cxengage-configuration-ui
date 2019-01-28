@@ -30,16 +30,7 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders without update perm
   <DetailHeader
     text="Details"
   />
-  <React.Fragment>
-    <Detail
-      label="Name"
-      value="mockName"
-    />
-    <Detail
-      label="Description"
-      value="mockDescription"
-    />
-  </React.Fragment>
+  Child
   <DetailHeader
     onActionButtonClick={[Function]}
     open={true}
