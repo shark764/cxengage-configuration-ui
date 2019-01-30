@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handleBulkSuccess no toast notiication 1`] = `undefined`;
+
+exports[`handleBulkSuccess response contained an error object fire "_rejected" action 1`] = `undefined`;
+
+exports[`handleBulkSuccess returns an observable with type _FULFILLED appended 1`] = `undefined`;
+
+exports[`handleError no toast notification 1`] = `
+ScalarObservable {
+  "_isScalar": true,
+  "scheduler": null,
+  "value": Object {
+    "entityName": "MOCK_ENTITY",
+    "type": "@@redux-form/CHANGE_REJECTED",
+  },
+}
+`;
+
+exports[`handleError returns an observable with type REJECTED appended 1`] = `
+ScalarObservable {
+  "_isScalar": true,
+  "scheduler": null,
+  "value": Object {
+    "entityName": "MOCK_ENTITY",
+    "type": "MOCK_ACTION_REJECTED",
+  },
+}
+`;
+
+exports[`handleSuccess no toast notiication 1`] = `
+Object {
+  "entityName": "MOCK_ENTITY",
+  "response": Object {
+    "data": "",
+  },
+  "type": "MOCK_ACTION_FULFILLED",
+}
+`;
+
+exports[`handleSuccess response contained an error object fire "_rejected" action 1`] = `
+Object {
+  "error": "error message",
+  "type": "MOCK_ACTION_rejected",
+}
+`;
+
+exports[`handleSuccess returns an observable with type _FULFILLED appended 1`] = `
+Object {
+  "entityName": "MOCK_ENTITY",
+  "response": Object {
+    "data": "",
+  },
+  "type": "MOCK_ACTION_FULFILLED",
+}
+`;
