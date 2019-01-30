@@ -18,6 +18,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.49.0] - 2019-01-28
+### Added
+- CXV1-16867 - Status column for Outbound Identifier page.
+- CXV1-16866 - Status column for Outbound Identifier List page.
+- Confirmation dialog when toggling item status on sidePanel and modal.
+- CXV1-16775 - Coverage of 100% of Unit Test for selectors and listItemSelectors files.
+### Changed
+- Version bump component library to 0.32.13.
+- SDK Version Bump 8.42.0.
+### Fixed
+- Outbound Identifier validation is asking for channelType and flowId instead of default values.
+
 ## [0.48.3] - 2019-01-25
 ### Changed
 - CXV1-16862 - Updated help link for Outbound Identifier page.

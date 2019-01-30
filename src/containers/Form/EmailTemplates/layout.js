@@ -10,9 +10,7 @@
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { SelectField } from 'cx-ui-components';
-import { ToggleField } from 'cx-ui-components';
-import { TemplateTextEditorField } from 'cx-ui-components';
+import { SelectField, ToggleField, TemplateTextEditorField } from 'cx-ui-components';
 
 export default function EmailTemplatesForm(props) {
   return (

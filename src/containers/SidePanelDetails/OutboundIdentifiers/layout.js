@@ -12,8 +12,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Detail } from 'cx-ui-components';
-import { DetailHeader } from 'cx-ui-components';
+import { Detail, DetailHeader } from 'cx-ui-components';
 
 const Wrapper = styled.div`
   display: flex;

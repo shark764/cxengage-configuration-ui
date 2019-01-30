@@ -315,8 +315,10 @@ entities.outboundIdentifiers.columns = [
   { name: 'Description', active: true },
   { name: 'Value', active: true },
   { name: 'channelType', active: true },
-  { name: 'flowId', active: false }
+  { name: 'flowId', active: false },
+  { name: 'Status', active: true }
 ];
+entities.outboundIdentifiers.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
 // Outbound Identifiers Lists
 entities.outboundIdentifierLists.betaFeature = true;
@@ -327,7 +329,13 @@ entities.outboundIdentifierLists.modalListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Value', name: 'value' },
   { label: 'Channel Type', name: 'channelType' },
-  { label: 'Description', name: 'description' }
+  { label: 'Description', name: 'description' },
+  {
+    label: 'Status',
+    name: 'active',
+    type: 'select',
+    filterOptions: ['enabled', 'disabled']
+  }
 ];
 entities.outboundIdentifierLists.memberListTableFields = [
   { label: 'Name', name: 'name' },
@@ -343,9 +351,21 @@ entities.outboundIdentifierLists.sidePanelListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Value', name: 'value' },
   { label: 'Channel Type', name: 'channelType' },
-  { label: 'Description', name: 'description' }
+  { label: 'Description', name: 'description' },
+  {
+    label: 'Status',
+    name: 'active',
+    type: 'select',
+    filterOptions: ['enabled', 'disabled']
+  }
 ];
-entities.outboundIdentifierLists.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
+entities.outboundIdentifierLists.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true }
+];
+entities.outboundIdentifierLists.defaultFilters = [{ id: 'active', value: 'enabled' }];
+entities.outboundIdentifierLists.defaultDependentEntityFilters = [{ id: 'active', value: 'enabled' }];
 
 // Roles
 entities.roles.betaFeature = true;

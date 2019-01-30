@@ -472,6 +472,10 @@ Immutable.Map {
         "name": "flowId",
         "active": false,
       },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
     ],
   },
   "interactionMonitoring": Immutable.Map {
@@ -590,6 +594,10 @@ Immutable.Map {
       },
       Immutable.Map {
         "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
         "active": true,
       },
     ],

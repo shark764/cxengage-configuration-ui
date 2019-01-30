@@ -10,8 +10,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputField } from 'cx-ui-components';
-import { SelectField } from 'cx-ui-components';
+import { InputField, SelectField } from 'cx-ui-components';
 
 export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inherited, channelType, flowIds, key }) {
   return (
@@ -33,7 +32,6 @@ export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inheri
             { value: 'email', label: 'Email' }
           ]}
           disabled={isSaving || inherited}
-          required
         />
         {channelType && (
           <InputField
@@ -45,7 +43,7 @@ export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inheri
             disabled={isSaving || inherited}
           />
         )}
-        <SelectField name="flowId" label="Flow Id *" options={flowIds} disabled={isSaving || inherited} required />
+        <SelectField name="flowId" label="Flow Id *" options={flowIds} disabled={isSaving || inherited} />
         <InputField
           name="description"
           label="Description"

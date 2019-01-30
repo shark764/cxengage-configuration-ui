@@ -112,7 +112,7 @@ Immutable.Map {
 }
 `;
 
-exports[`entities reducer SET_CONIFIRMATION_DIALOG sets the confirmation dialog 1`] = `
+exports[`entities reducer SET_CONFIRMATION_DIALOG sets the confirmation dialog 1`] = `
 Immutable.Map {
   "currentEntity": "mockEntity",
   "mockEntity": Immutable.Map {

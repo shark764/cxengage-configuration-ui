@@ -10,8 +10,7 @@
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader } from 'cx-ui-components';
-import { InputField } from 'cx-ui-components';
+import { DetailHeader, InputField } from 'cx-ui-components';
 
 export default function GroupsForm({ handleSubmit, isSaving, inherited, key }) {
   return (

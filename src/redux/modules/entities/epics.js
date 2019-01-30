@@ -684,7 +684,7 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
             type: 'TOGGLE_ENTITY'
           },
           {
-            type: 'SET_CONIFIRMATION_DIALOG',
+            type: 'SET_CONFIRMATION_DIALOG',
             modalType: undefined
           }
         ];
@@ -693,7 +693,7 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
           uploadCsv(metaData),
           setEntityUpdating(getCurrentEntity(store.getState()), getSelectedEntityId(store.getState()), true),
           {
-            type: 'SET_CONIFIRMATION_DIALOG',
+            type: 'SET_CONFIRMATION_DIALOG',
             modalType: undefined,
             metaData: undefined
           }

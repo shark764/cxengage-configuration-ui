@@ -32,7 +32,7 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
           },
         ]
       }
-      required={true}
+      required={false}
     />
     <InputField
       componentType="input"
@@ -58,7 +58,7 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
           },
         ]
       }
-      required={true}
+      required={false}
     />
     <InputField
       componentType="textarea"

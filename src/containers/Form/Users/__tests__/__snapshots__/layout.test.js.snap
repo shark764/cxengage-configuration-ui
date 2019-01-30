@@ -107,7 +107,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         name="defaultIdentityProvider"
         required={true}
       />
-      <Connect(ConfirmationWrapper)
+      <ConfirmationWrapper
         confirmBtnCallback={[Function]}
         mainText="Are you sure you want to send a password reset email to undefined?"
       >
@@ -118,7 +118,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         >
           Reset Password
         </Styled(Button)>
-      </Connect(ConfirmationWrapper)>
+      </ConfirmationWrapper>
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
@@ -260,7 +260,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         name="defaultIdentityProvider"
         required={true}
       />
-      <Connect(ConfirmationWrapper)
+      <ConfirmationWrapper
         confirmBtnCallback={[Function]}
         mainText="Are you sure you want to send a password reset email to undefined?"
       >
@@ -271,7 +271,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         >
           Reset Password
         </Styled(Button)>
-      </Connect(ConfirmationWrapper)>
+      </ConfirmationWrapper>
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
@@ -413,7 +413,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         name="defaultIdentityProvider"
         required={true}
       />
-      <Connect(ConfirmationWrapper)
+      <ConfirmationWrapper
         confirmBtnCallback={[Function]}
         mainText="Are you sure you want to send a password reset email to undefined?"
       >
@@ -424,7 +424,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         >
           Reset Password
         </Styled(Button)>
-      </Connect(ConfirmationWrapper)>
+      </ConfirmationWrapper>
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}

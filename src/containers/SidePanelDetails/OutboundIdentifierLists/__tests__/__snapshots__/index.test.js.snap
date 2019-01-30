@@ -2,6 +2,7 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "defaultFilters": Array [],
   "item": Object {
     "active": true,
     "description": "mockDescription",
@@ -13,6 +14,7 @@ Object {
     ],
     "name": "mockName",
   },
+  "itemApiPending": undefined,
   "outboundIdentifiersFetching": undefined,
   "tableFields": Array [
     Object {
@@ -33,6 +35,7 @@ Object {
 
 exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
 <OutboundIdentifierListsDetailsPanel
+  defaultFilters={Array []}
   item={
     Object {
       "active": true,
