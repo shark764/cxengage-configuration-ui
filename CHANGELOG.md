@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.50.0] - 2019-02-04
+### Added
+- CXV1-16818 - Added Presence Reason List Page
+
 ## [0.49.1] - 2019-02-01
 ### Changed
 - Added confirmation dialog when changing hasProficiency on Skills page.

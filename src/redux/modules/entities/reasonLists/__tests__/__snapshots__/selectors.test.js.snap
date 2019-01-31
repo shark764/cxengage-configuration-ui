@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`checkDisableShared check if shared is disabled and id DOES NOT exists 1`] = `false`;
+
+exports[`checkDisableShared check if shared is disabled and id exists 1`] = `false`;
+
+exports[`reasonListsInitialValues Return the initial Reason List Values, all values NOT provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "shared": false,
+  "isDefault": false,
+  "reasons": Array [],
+}
+`;
+
+exports[`reasonListsInitialValues Return the initial Reason List Values, all values provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "shared": false,
+  "isDefault": false,
+  "reasons": Array [],
+}
+`;

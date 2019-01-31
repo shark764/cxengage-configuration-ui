@@ -423,9 +423,14 @@ entities.chatWidgets.columns = [
 // Presence Reasons Lists
 entities.reasonLists.pageTitle = 'Reason List Management';
 entities.reasonLists.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
+entities.reasonLists.dependentEntity = 'reasons';
+entities.reasonLists.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.reasonLists.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
+  { name: 'External Id', active: true },
+  { name: 'Shared', active: true },
+  { name: 'Is Default', active: true },
   { name: 'Status', active: true }
 ];
 entities.reasonLists.memberListTableFields = [
@@ -566,7 +571,7 @@ entities.dataAccessReports.standardDashboards = [
 
 // Reasons
 entities.reasons.pageTitle = 'Presence Reasons';
-entities.reasons.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Presence_Reasons.htm';
+entities.reasons.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Reasons.htm';
 entities.reasons.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },

@@ -56,6 +56,8 @@ import {
   camelCaseToKebabCase
 } from 'serenova-js-utils/strings';
 
+import { getCurrentSharedValue } from './reasons/selectors';
+
 /**
  * Note: When you see the variable 'a' shorthand being used
  * it represents the keyword 'action'
@@ -167,6 +169,11 @@ export const FormSubmission = (action$, store) =>
         };
       }
     });
+
+export const ToggleSharedFormField = (action$, store) =>
+  action$
+    .ofType('TOGGLE_SHARED')
+    .map(a => change(getSelectedEntityFormId(store.getState()), 'shared', !getCurrentSharedValue(store.getState())));
 
 export const FetchData = action$ =>
   action$.ofType('FETCH_DATA').mergeMap(a =>

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "disableShared": false,
+  "inherited": undefined,
+  "initialValues": Immutable.Map {
+    "active": true,
+    "isDefault": false,
+    "shared": false,
+    "reasons": Array [],
+  },
+  "isSaving": true,
+  "key": "mockId",
+  "sharedFormValue": true,
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `undefined`;
+
+exports[`formSubmission returns proper values 1`] = `undefined`;
+
+exports[`reasonLists Renders renders 1`] = `
+<reasonListsForm
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  Child
+</reasonListsForm>
+`;

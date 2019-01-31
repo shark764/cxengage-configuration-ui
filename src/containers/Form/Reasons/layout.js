@@ -27,7 +27,7 @@ export default function reasonsForm({
       {sharedFormValue &&
         !disableShared &&
         !inherited && (
-          <DetailsPanelAlert text="You have set shared to 'Yes' for this Presence Reason. Once a Presence Reason is set and saved as shared, it cannot be reverted as not shared." />
+          <DetailsPanelAlert text="You have set shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted." />
         )}
       <DetailHeader text="Details" />
       <InputField

@@ -46,6 +46,7 @@ export function getTableColumns(columns) {
     'Platform Status': platformStatusColumn,
     'Tenant Status': tenantStatusColumn,
     Shared: constructGeneralBooleanColumn('shared'),
+    'Is Default': constructGeneralBooleanColumn('isDefault'),
     'Active Queue': activeQueueColumn,
     'Active Flow': activeFlowColumn
   };

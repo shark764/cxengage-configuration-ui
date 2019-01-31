@@ -342,6 +342,18 @@ Immutable.Map {
         "active": true,
       },
       Immutable.Map {
+        "name": "External Id",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Shared",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Is Default",
+        "active": true,
+      },
+      Immutable.Map {
         "name": "Status",
         "active": true,
       },

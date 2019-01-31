@@ -441,6 +441,21 @@ Immutable.Map {
       "CUSTOM_STATS_CREATE",
     ],
   },
+  "reasonLists": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 750,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "READ_REASON_LIST",
+    ],
+    "updatePermission": Immutable.List [
+      "UPDATE_REASON_LIST",
+    ],
+    "createPermission": Immutable.List [
+      "CREATE_REASON_LIST",
+    ],
+  },
   "customMetrics": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",

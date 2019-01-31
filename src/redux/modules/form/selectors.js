@@ -54,12 +54,12 @@ export const selectFormInitialValues = state => {
 };
 
 export const selectCreateUserFormInitialValues = state => {
-  return new Map({ 
+  return new Map({
     inviteNow: true,
     roleId: selectFirstTenantRoleValue(state),
-    platformRoleId: selectFirstPlatformRoleValue(state),
+    platformRoleId: selectFirstPlatformRoleValue(state)
   });
-}
+};
 
 export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit(values, props));
 

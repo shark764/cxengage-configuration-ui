@@ -18,7 +18,8 @@ import {
   getSelectedEntity,
   userHasUpdatePermission,
   isInherited,
-  getSelectedEntityBulkChangeItems
+  getSelectedEntityBulkChangeItems,
+  shouldDisableField
 } from '../../redux/modules/entities/selectors';
 import { getDisplay } from '../../redux/modules/entities/users/selectors';
 
@@ -62,7 +63,8 @@ export function mapStateToProps(state) {
           ? Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted'
           : undefined,
       userHasUpdatePermission: userHasUpdatePermission(state),
-      inherited: isInherited(state)
+      inherited: isInherited(state),
+      disabled: shouldDisableField(state)
     };
   }
   return {};

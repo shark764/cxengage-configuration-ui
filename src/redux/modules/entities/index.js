@@ -54,10 +54,7 @@ const initialState = fromJS({
     ...defaultEntity,
     sidePanelWidth: 750,
     readPermission: ['USER_MANAGEMENT_EMAIL_READ'],
-    updatePermission: [
-      'USER_MANAGEMENT_EMAIL_UPDATE',
-      'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE'
-    ]
+    updatePermission: ['USER_MANAGEMENT_EMAIL_UPDATE', 'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE']
   },
   outboundIdentifierLists: {
     ...defaultEntity,
@@ -206,6 +203,13 @@ const initialState = fromJS({
     createPermission: ['CREATE_PRESENCE_REASONS'],
     sharePermission: ['SHARE_PRESENCE_REASONS']
   },
+  reasonLists: {
+    ...defaultEntity,
+    sidePanelWidth: 750,
+    readPermission: ['READ_REASON_LIST'],
+    updatePermission: ['UPDATE_REASON_LIST'],
+    createPermission: ['CREATE_REASON_LIST']
+  },
   queues: {
     ...defaultEntity,
     readPermission: ['VIEW_ALL_QUEUES'],
@@ -341,6 +345,10 @@ export const changeUserInviteStatus = (toStatus, userId) => ({
   userId
 });
 
+export const toggleShared = () => ({
+  type: 'TOGGLE_SHARED'
+});
+
 // Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -349,16 +357,11 @@ export default function reducer(state = initialState, action) {
     }
     case 'SET_CONFIRMATION_DIALOG': {
       return state.update(state.get('currentEntity'), entityStore =>
-        entityStore
-          .set('confirmationDialogType', action.modalType)
-          .set('confirmationDialogMetaData', action.metaData)
+        entityStore.set('confirmationDialogType', action.modalType).set('confirmationDialogMetaData', action.metaData)
       );
     }
     case 'SET_SELECTED_ENTITY_ID': {
-      return state.setIn(
-        [state.get('currentEntity'), 'selectedEntityId'],
-        action.entityId
-      );
+      return state.setIn([state.get('currentEntity'), 'selectedEntityId'], action.entityId);
     }
     case 'UPDATE_USER_PERMISSIONS': {
       const { tenantId } = action.tenantInfo;
@@ -384,18 +387,14 @@ export default function reducer(state = initialState, action) {
             ...entity,
             inherited: entity.tenantId !== state.get('currentTenantId')
           }));
-          return state
-            .setIn([entityName, 'data'], fromJS(newResult))
-            .deleteIn([action.entityName, 'fetching']);
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'groups': {
           const newResult = result.map(entity => ({
             ...entity,
             inherited: entity.name === 'everyone'
           }));
-          return state
-            .setIn([entityName, 'data'], fromJS(newResult))
-            .deleteIn([action.entityName, 'fetching']);
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'users': {
           const newResult = result.map(entity => {
@@ -403,14 +402,10 @@ export default function reducer(state = initialState, action) {
             newEntity.extensions.forEach(ext => (ext.id = generateUUID()));
             return newEntity;
           });
-          return state
-            .setIn([entityName, 'data'], fromJS(newResult))
-            .deleteIn([action.entityName, 'fetching']);
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         default:
-          return state
-            .setIn([entityName, 'data'], fromJS(result))
-            .deleteIn([action.entityName, 'fetching']);
+          return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName, 'fetching']);
       }
     }
     case 'FETCH_DATA_REJECTED': {
@@ -418,9 +413,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.id);
+      const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === action.id);
       if (entityIndex !== -1) {
         return state.mergeIn(
           [action.entityName, 'data', entityIndex],
@@ -439,20 +432,14 @@ export default function reducer(state = initialState, action) {
         .findIndex(entity => entity.get('id') === action.entityId);
       if (entityIndex !== -1 && action.bool !== undefined) {
         return state
-          .mergeIn(
-            [action.entityName, 'data', entityIndex],
-            fromJS({ bulkChangeItem: action.bool })
-          )
+          .mergeIn([action.entityName, 'data', entityIndex], fromJS({ bulkChangeItem: action.bool }))
           .setIn([action.entityName, 'selectedEntityId'], 'bulk');
       } else if (entityIndex !== -1) {
         return state
           .mergeIn(
             [action.entityName, 'data', entityIndex],
             fromJS({
-              bulkChangeItem: !state.getIn(
-                [action.entityName, 'data', entityIndex, 'bulkChangeItem'],
-                false
-              )
+              bulkChangeItem: !state.getIn([action.entityName, 'data', entityIndex, 'bulkChangeItem'], false)
             })
           )
           .setIn([action.entityName, 'selectedEntityId'], 'bulk');
@@ -467,9 +454,7 @@ export default function reducer(state = initialState, action) {
     case 'CREATE_ENTITY_FULFILLED': {
       const { result } = action.response;
       return state.update(action.entityName, entityStore =>
-        entityStore
-          .update('data', data => data.push(fromJS(result)))
-          .set('creating', false)
+        entityStore.update('data', data => data.push(fromJS(result))).set('creating', false)
       );
     }
     case 'CREATE_ENTITY_REJECTED': {
@@ -480,47 +465,27 @@ export default function reducer(state = initialState, action) {
     }
     case 'UPDATE_PROFICIENCY': {
       const currentEntity = state.get('currentEntity');
-      const skillId =
-        currentEntity === 'skills'
-          ? state.getIn([currentEntity, 'selectedEntityId'])
-          : action.id;
-      const userId =
-        currentEntity === 'skills'
-          ? action.id
-          : state.getIn([currentEntity, 'selectedEntityId']);
+      const skillId = currentEntity === 'skills' ? state.getIn([currentEntity, 'selectedEntityId']) : action.id;
+      const userId = currentEntity === 'skills' ? action.id : state.getIn([currentEntity, 'selectedEntityId']);
 
       if (currentEntity === 'skills') {
-        const userIndex = state
-          .getIn(['users', 'data'])
-          .findIndex(entity => entity.get('id') === userId);
+        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === userId);
         const skillIndex = state
           .getIn(['users', 'data', userIndex, 'skills'])
           .findIndex(entity => entity.get('id') === skillId);
         if (userIndex !== -1) {
-          return state.setIn(
-            ['users', 'data', userIndex, 'skills', skillIndex, 'proficiency'],
-            action.newValue
-          );
+          return state.setIn(['users', 'data', userIndex, 'skills', skillIndex, 'proficiency'], action.newValue);
         } else {
           return state;
         }
       } else if (currentEntity === 'users') {
-        const userIndex = state
-          .getIn(['users', 'data'])
-          .findIndex(entity => entity.get('id') === userId);
+        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === userId);
         const skillIndex = state
           .getIn(['users', 'data', userIndex, 'skillsWithProficiency'])
           .findIndex(entity => entity.get('skillId') === skillId);
         if (userIndex !== -1) {
           return state.setIn(
-            [
-              'users',
-              'data',
-              userIndex,
-              'skillsWithProficiency',
-              skillIndex,
-              'proficiency'
-            ],
+            ['users', 'data', userIndex, 'skillsWithProficiency', skillIndex, 'proficiency'],
             action.newValue
           );
         } else {
@@ -537,51 +502,33 @@ export default function reducer(state = initialState, action) {
       const { result } = action.response;
       const entityIndex = state
         .getIn([action.entityName, 'data'])
-        .findIndex(
-          entity =>
-            entity.get('id') === result.id || entity.get('id') === action.id
-        );
+        .findIndex(entity => entity.get('id') === result.id || entity.get('id') === action.id);
       if (entityIndex !== -1) {
         return state
           .remove('loading')
-          .mergeIn(
-            [action.entityName, 'data', entityIndex],
-            fromJS({ ...result, updating: false })
-          );
+          .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }));
       } else {
         return state;
       }
     }
     case 'TOGGLE_LIST_ITEM_ENTITY_FULFILLED': {
       const { actionType, entityName, entityId, name, id, response } = action;
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === entityId);
+      const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === entityId);
       const currentList = state.getIn([entityName, 'data', entityIndex, name]);
-      const modifiedList =
-        actionType === 'associate'
-          ? currentList.push(id)
-          : currentList.filter(x => x !== id);
+      const modifiedList = actionType === 'associate' ? currentList.push(id) : currentList.filter(x => x !== id);
       if (entityIndex !== -1 && name === 'skills') {
         return state
           .setIn([entityName, 'data', entityIndex, name], modifiedList)
-          .updateIn(
-            [entityName, 'data', entityIndex, 'skillsWithProficiency'],
-            list => {
-              if (actionType === 'associate') {
-                return list.push(fromJS(response.result));
-              } else {
-                const itemIndex = list.findIndex(
-                  item => item.get('skillId') === id
-                );
-                return list.delete(itemIndex);
-              }
+          .updateIn([entityName, 'data', entityIndex, 'skillsWithProficiency'], list => {
+            if (actionType === 'associate') {
+              return list.push(fromJS(response.result));
+            } else {
+              const itemIndex = list.findIndex(item => item.get('skillId') === id);
+              return list.delete(itemIndex);
             }
-          );
+          });
       } else if (entityIndex !== -1 && name === 'users') {
-        const userIndex = state
-          .getIn(['users', 'data'])
-          .findIndex(entity => entity.get('id') === id);
+        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === id);
         return state
           .setIn([entityName, 'data', entityIndex, name], modifiedList)
           .updateIn(['users', 'data', userIndex, 'skills'], list => {
@@ -593,17 +540,12 @@ export default function reducer(state = initialState, action) {
                 })
               );
             } else {
-              const itemIndex = list.findIndex(
-                item => item.get('id') === entityId
-              );
+              const itemIndex = list.findIndex(item => item.get('id') === entityId);
               return list.delete(itemIndex);
             }
           });
       } else if (entityIndex !== -1) {
-        return state.setIn(
-          [entityName, 'data', entityIndex, name],
-          modifiedList
-        );
+        return state.setIn([entityName, 'data', entityIndex, name], modifiedList);
       } else {
         return state;
       }
@@ -623,18 +565,12 @@ export default function reducer(state = initialState, action) {
           idType = 'id';
         }
       }
-      if (
-        action.associatedEntityName === 'outboundIdentifierLists' &&
-        action.entityName === 'users'
-      ) {
+      if (action.associatedEntityName === 'outboundIdentifierLists' && action.entityName === 'users') {
         response = action.response.result.assigned;
       } else {
         response = action.response.result;
       }
-      if (
-        action.associatedEntityName === 'outboundIdentifierLists' &&
-        action.entityName !== 'users'
-      ) {
+      if (action.associatedEntityName === 'outboundIdentifierLists' && action.entityName !== 'users') {
         idType = 'id';
       }
       const entityIndex = state
@@ -657,10 +593,7 @@ export default function reducer(state = initialState, action) {
       return exports.setEntityUpdatingHelper(state, action, action.updating);
     }
     case 'SET_SELECTED_SUB_ENTITY_ID': {
-      return state.setIn(
-        [state.get('currentEntity'), 'selectedSubEntityId'],
-        action.selectedSubEntityId
-      );
+      return state.setIn([state.get('currentEntity'), 'selectedSubEntityId'], action.selectedSubEntityId);
     }
     case 'CREATE_SUB_ENTITY':
     case 'UPDATE_SUB_ENTITY': {
@@ -693,22 +626,16 @@ export default function reducer(state = initialState, action) {
       const entity = selectedEntity(state);
       const { result } = action.response;
       return state
-        .updateIn(
-          [entity.type, 'data', entity.index, 'members'],
-          membersList => {
-            const memberIndex = membersList.findIndex(
-              member => member.get('id') === result.id
-            );
-            if (entity.index !== -1 && memberIndex !== -1) {
-              return membersList.setIn([memberIndex], fromJS(result));
-            } else {
-              return membersList;
-            }
+        .updateIn([entity.type, 'data', entity.index, 'members'], membersList => {
+          const memberIndex = membersList.findIndex(member => member.get('id') === result.id);
+          if (entity.index !== -1 && memberIndex !== -1) {
+            return membersList.setIn([memberIndex], fromJS(result));
+          } else {
+            return membersList;
           }
-        )
-        .updateIn(
-          [entity.dependency, 'data', entity.dependencyItemIndex(result.id)],
-          item => item.merge(fromJS(result))
+        })
+        .updateIn([entity.dependency, 'data', entity.dependencyItemIndex(result.id)], item =>
+          item.merge(fromJS(result))
         );
     }
     case 'REMOVE_LIST_ITEM': {
@@ -722,12 +649,7 @@ export default function reducer(state = initialState, action) {
       const filteredListMembers = state
         .getIn([entity.type, 'data', entity.index, 'members'])
         .filterNot(member => member.get('id') === action.listItemId);
-      return state
-        .remove('loading')
-        .setIn(
-          [entity.type, 'data', entity.index, 'members'],
-          filteredListMembers
-        );
+      return state.remove('loading').setIn([entity.type, 'data', entity.index, 'members'], filteredListMembers);
     }
     case 'ADD_LIST_ITEM': {
       return state.set('loading', action.listItemId);
@@ -742,9 +664,7 @@ export default function reducer(state = initialState, action) {
         .find(entity => entity.get('id') === action.listItemId);
       return state
         .remove('loading')
-        .updateIn([entity.type, 'data', entity.index, 'members'], members =>
-          members.push(entityToAdd)
-        );
+        .updateIn([entity.type, 'data', entity.index, 'members'], members => members.push(entityToAdd));
     }
     case 'UPDATE_SUB_ENTITY_FULFILLED': {
       const entityIndex = state
@@ -754,9 +674,7 @@ export default function reducer(state = initialState, action) {
         return state.update(action.entityName, entityStore =>
           entityStore
             .updateIn(['data', entityIndex, 'items'], subEntityList => {
-              const subEntityIndex = subEntityList.findIndex(
-                subEntity => subEntity.get('key') === action.subEntityId
-              );
+              const subEntityIndex = subEntityList.findIndex(subEntity => subEntity.get('key') === action.subEntityId);
               if (entityIndex !== -1) {
                 const { itemValue, key } = action.response.result;
                 return subEntityList.setIn(
@@ -782,10 +700,7 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'subEntitySaving'], false);
     }
     case 'UPDATE_SIDE_PANEL_WIDTH': {
-      return state.setIn(
-        [state.get('currentEntity'), 'sidePanelWidth'],
-        action.width
-      );
+      return state.setIn([state.get('currentEntity'), 'sidePanelWidth'], action.width);
     }
     case 'DELETE_SUB_ENTITY': {
       return setSubEntityDeleting(state, action, true);
@@ -798,9 +713,7 @@ export default function reducer(state = initialState, action) {
         return state.update(action.entityName, entityStore =>
           entityStore
             .updateIn(['data', entityIndex, 'items'], subEntityList => {
-              const subEntityIndex = subEntityList.findIndex(
-                subEntity => subEntity.get('key') === action.subEntityId
-              );
+              const subEntityIndex = subEntityList.findIndex(subEntity => subEntity.get('key') === action.subEntityId);
               if (entityIndex !== -1) {
                 return subEntityList.delete(subEntityIndex);
               } else {
@@ -835,26 +748,14 @@ export const setUserExistsInPlatform = (state, action) => {
     action.meta.field === 'email' &&
     action.type === '@@redux-form/CHANGE_FULFILLED'
   ) {
-    return state.setIn(
-      [state.get('currentEntity'), 'userExistInPlatform'],
-      true
-    );
+    return state.setIn([state.get('currentEntity'), 'userExistInPlatform'], true);
   } else {
-    return state.setIn(
-      [state.get('currentEntity'), 'userExistInPlatform'],
-      false
-    );
+    return state.setIn([state.get('currentEntity'), 'userExistInPlatform'], false);
   }
 };
 
-export const setEntityUpdatingHelper = (
-  state,
-  { entityName, entityId },
-  updating
-) => {
-  const entityIndex = state
-    .getIn([entityName, 'data'])
-    .findIndex(entity => entity.get('id') === entityId);
+export const setEntityUpdatingHelper = (state, { entityName, entityId }, updating) => {
+  const entityIndex = state.getIn([entityName, 'data']).findIndex(entity => entity.get('id') === entityId);
   if (entityIndex !== -1) {
     return state.setIn([entityName, 'data', entityIndex, 'updating'], updating);
   } else {
@@ -865,35 +766,25 @@ export const setEntityUpdatingHelper = (
 const setSubEntityDeleting = (state, { subEntityId }, deleting) => {
   const currentEntity = state.get('currentEntity');
   const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
-  const entityIndex = state
-    .getIn([currentEntity, 'data'])
-    .findIndex(entity => entity.get('id') === selectedEntityId);
+  const entityIndex = state.getIn([currentEntity, 'data']).findIndex(entity => entity.get('id') === selectedEntityId);
   const subEntityIndex = state
     .getIn([currentEntity, 'data', entityIndex, 'items'])
     .findIndex(subEntity => subEntity.get('key') === subEntityId);
-  return state.updateIn(
-    [currentEntity, 'data', entityIndex, 'items', subEntityIndex],
-    subEntity => subEntity.set('deleting', deleting)
+  return state.updateIn([currentEntity, 'data', entityIndex, 'items', subEntityIndex], subEntity =>
+    subEntity.set('deleting', deleting)
   );
 };
 
 export function selectedEntity(state) {
   const currentEntity = state.get('currentEntity');
-  const dependentEntity = state.getIn(
-    [currentEntity, 'metaData', 'listDependency'],
-    undefined
-  );
+  const dependentEntity = state.getIn([currentEntity, 'metaData', 'listDependency'], undefined);
   const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
   let context = {
-    index: state
-      .getIn([currentEntity, 'data'])
-      .findIndex(entity => entity.get('id') === selectedEntityId),
+    index: state.getIn([currentEntity, 'data']).findIndex(entity => entity.get('id') === selectedEntityId),
     type: currentEntity,
     dependency: dependentEntity,
     dependencyItemIndex: itemId =>
-      state
-        .getIn([dependentEntity, 'data'])
-        .findIndex(entity => entity.get('id') === itemId)
+      state.getIn([dependentEntity, 'data']).findIndex(entity => entity.get('id') === itemId)
   };
   return context;
 }

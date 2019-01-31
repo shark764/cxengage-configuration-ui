@@ -1667,6 +1667,18 @@ Object {
       },
       Object {
         "active": true,
+        "name": "External Id",
+      },
+      Object {
+        "active": true,
+        "name": "Shared",
+      },
+      Object {
+        "active": true,
+        "name": "Is Default",
+      },
+      Object {
+        "active": true,
         "name": "Status",
       },
     ],
@@ -1678,8 +1690,13 @@ Object {
     "createFormDependencies": Array [],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
-    "defaultFilters": Array [],
-    "dependentEntity": "",
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "dependentEntity": "reasons",
     "entityName": "reasonLists",
     "entityTableFields": Array [
       Object {
@@ -1785,7 +1802,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Managing%20Users/Presence%20Reasons/Presence_Reasons.htm",
+    "helpLink": "/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Reasons.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",
