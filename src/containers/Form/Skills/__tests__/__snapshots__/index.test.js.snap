@@ -3,6 +3,7 @@
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "disableProficiency": false,
+  "hasProficiency": true,
   "inherited": false,
   "initialValues": Immutable.Map {
     "id": "mockId",
@@ -18,7 +19,7 @@ Object {
 exports[`Skills Renders renders 1`] = `
 <Connect(ReduxForm)
   disableProficiency={false}
-  dispatch={[Function]}
+  hasProficiency={true}
   inherited={false}
   initialValues={
     Immutable.Map {
@@ -59,6 +60,7 @@ exports[`Skills Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  toggleProficiency={[Function]}
 >
   Child
 </Connect(ReduxForm)>

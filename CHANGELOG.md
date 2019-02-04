@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.49.1] - 2019-02-01
+### Changed
+- Added confirmation dialog when changing hasProficiency on Skills page.
+- Version bump component library to 0.32.15.
+- SDK Version Bump 8.42.1.
+
 ## [0.49.0] - 2019-01-28
 ### Added
 - CXV1-16867 - Status column for Outbound Identifier page.

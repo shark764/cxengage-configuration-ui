@@ -281,6 +281,9 @@ export const setConfirmationDialog = (modalType, metaData) => ({
   modalType,
   metaData
 });
+export const toggleProficiency = () => ({
+  type: 'TOGGLE_PROFICIENCY'
+});
 
 export const executeConfirmCallback = referenceData => ({
   type: 'EXECUTE_CONFIRM_CALLBACK',

@@ -7,8 +7,18 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import SkillsForm from './layout';
 import { formValidation } from './validation';
-import { getSelectedEntityId, isInherited, isCreating } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import {
+  getSelectedEntityId,
+  isInherited,
+  isCreating
+} from '../../../redux/modules/entities/selectors';
+import {
+  selectFormInitialValues,
+  formSubmission,
+  createFormName
+} from '../../../redux/modules/form/selectors';
+import { toggleProficiency } from '../../../redux/modules/entities';
+import { getHasProficiencyFormValue } from '../../../redux/modules/entities/skills/selectors';
 
 const CreateSkillsForm = compose(
   connect(createFormName),
@@ -22,12 +32,21 @@ const CreateSkillsForm = compose(
 export function mapStateToProps(state) {
   const initialValues = selectFormInitialValues(state);
   return {
-    disableProficiency: initialValues.get('hasProficiency') && initialValues.get('id') !== undefined,
-    initialValues: initialValues.has('hasProficiency') ? initialValues : initialValues.set('hasProficiency', false),
+    disableProficiency:
+      initialValues.get('hasProficiency') &&
+      initialValues.get('id') !== undefined,
+    initialValues: initialValues.has('hasProficiency')
+      ? initialValues
+      : initialValues.set('hasProficiency', false),
     isSaving: isCreating(state),
     inherited: isInherited(state),
-    key: getSelectedEntityId(state)
+    key: getSelectedEntityId(state),
+    hasProficiency: getHasProficiencyFormValue(state)
   };
 }
 
-export default connect(mapStateToProps)(CreateSkillsForm);
+export const actions = {
+  toggleProficiency
+};
+
+export default connect(mapStateToProps, actions)(CreateSkillsForm);

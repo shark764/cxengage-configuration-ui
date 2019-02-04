@@ -10,9 +10,17 @@
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, InputField, ToggleField } from 'cx-ui-components';
+import { DetailHeader, InputField, ToggleField, ConfirmationWrapper } from 'cx-ui-components';
 
-export default function SkillsForm({ handleSubmit, isSaving, inherited, key, disableProficiency }) {
+export default function SkillsForm({
+  handleSubmit,
+  isSaving,
+  inherited,
+  key,
+  disableProficiency,
+  toggleProficiency,
+  hasProficiency
+}) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
@@ -33,17 +41,23 @@ export default function SkillsForm({ handleSubmit, isSaving, inherited, key, dis
           inputType="text"
           disabled={isSaving || inherited}
         />
-        <ToggleField
-          name="hasProficiency"
-          label="Has Proficiency"
-          id="frm-skills-has-proficiency"
-          title={
-            disableProficiency
-              ? "You cannot update 'Has Proficiency' once is set to true"
-              : 'Controls whether the skill needs a value specified'
-          }
-          disabled={isSaving || inherited || disableProficiency}
-        />
+        <ConfirmationWrapper
+          confirmBtnCallback={!disableProficiency && !hasProficiency ? toggleProficiency : undefined}
+          mainText={`You cannot update 'Has Proficiency' once it's set to true.`}
+          secondaryText={'Are you sure you want to continue?'}
+        >
+          <ToggleField
+            name="hasProficiency"
+            label="Has Proficiency"
+            id="frm-skills-has-proficiency"
+            title={
+              disableProficiency
+                ? `You cannot update 'Has Proficiency' once it's set to true`
+                : 'Controls whether the skill needs a value specified'
+            }
+            disabled={isSaving || inherited || disableProficiency}
+          />
+        </ConfirmationWrapper>
       </Fragment>
     </form>
   );
@@ -54,5 +68,7 @@ SkillsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
-  disableProficiency: PropTypes.bool
+  disableProficiency: PropTypes.bool,
+  toggleProficiency: PropTypes.func,
+  hasProficiency: PropTypes.bool
 };

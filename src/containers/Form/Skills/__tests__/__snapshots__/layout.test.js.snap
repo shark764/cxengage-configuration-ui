@@ -24,13 +24,18 @@ exports[`<SkillsForm /> renders create form 1`] = `
       label="Description"
       name="description"
     />
-    <ToggleField
-      disabled={true}
-      id="frm-skills-has-proficiency"
-      label="Has Proficiency"
-      name="hasProficiency"
-      title="You cannot update 'Has Proficiency' once is set to true"
-    />
+    <ConfirmationWrapper
+      mainText="You cannot update 'Has Proficiency' once it's set to true."
+      secondaryText="Are you sure you want to continue?"
+    >
+      <ToggleField
+        disabled={true}
+        id="frm-skills-has-proficiency"
+        label="Has Proficiency"
+        name="hasProficiency"
+        title="You cannot update 'Has Proficiency' once it's set to true"
+      />
+    </ConfirmationWrapper>
   </React.Fragment>
 </form>
 `;
@@ -59,13 +64,18 @@ exports[`<SkillsForm /> renders create form with no proficiency 1`] = `
       label="Description"
       name="description"
     />
-    <ToggleField
-      disabled={false}
-      id="frm-skills-has-proficiency"
-      label="Has Proficiency"
-      name="hasProficiency"
-      title="Controls whether the skill needs a value specified"
-    />
+    <ConfirmationWrapper
+      mainText="You cannot update 'Has Proficiency' once it's set to true."
+      secondaryText="Are you sure you want to continue?"
+    >
+      <ToggleField
+        disabled={false}
+        id="frm-skills-has-proficiency"
+        label="Has Proficiency"
+        name="hasProficiency"
+        title="Controls whether the skill needs a value specified"
+      />
+    </ConfirmationWrapper>
   </React.Fragment>
 </form>
 `;
@@ -94,13 +104,18 @@ exports[`<SkillsForm /> renders update form 1`] = `
       label="Description"
       name="description"
     />
-    <ToggleField
-      disabled={true}
-      id="frm-skills-has-proficiency"
-      label="Has Proficiency"
-      name="hasProficiency"
-      title="You cannot update 'Has Proficiency' once is set to true"
-    />
+    <ConfirmationWrapper
+      mainText="You cannot update 'Has Proficiency' once it's set to true."
+      secondaryText="Are you sure you want to continue?"
+    >
+      <ToggleField
+        disabled={true}
+        id="frm-skills-has-proficiency"
+        label="Has Proficiency"
+        name="hasProficiency"
+        title="You cannot update 'Has Proficiency' once it's set to true"
+      />
+    </ConfirmationWrapper>
   </React.Fragment>
 </form>
 `;
@@ -129,13 +144,18 @@ exports[`<SkillsForm /> renders update form with no proficiency 1`] = `
       label="Description"
       name="description"
     />
-    <ToggleField
-      disabled={false}
-      id="frm-skills-has-proficiency"
-      label="Has Proficiency"
-      name="hasProficiency"
-      title="Controls whether the skill needs a value specified"
-    />
+    <ConfirmationWrapper
+      mainText="You cannot update 'Has Proficiency' once it's set to true."
+      secondaryText="Are you sure you want to continue?"
+    >
+      <ToggleField
+        disabled={false}
+        id="frm-skills-has-proficiency"
+        label="Has Proficiency"
+        name="hasProficiency"
+        title="Controls whether the skill needs a value specified"
+      />
+    </ConfirmationWrapper>
   </React.Fragment>
 </form>
 `;
