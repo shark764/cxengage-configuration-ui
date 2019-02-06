@@ -6,7 +6,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Map } from 'immutable';
 import { shallow } from 'enzyme';
-import reasonListsForm from '../layout';
+import ReasonListsForm from '../layout';
 import { getCurrentForm, createFormName, formSubmission } from '../../../../redux/modules/form/selectors';
 import { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
@@ -30,7 +30,7 @@ checkDisableShared.mockImplementation(() => false);
 describe('reasonLists Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(shallow(<reasonListsForm store={store}>Child</reasonListsForm>)).toMatchSnapshot();
+    expect(shallow(<ReasonListsForm store={store}>Child</ReasonListsForm>)).toMatchSnapshot();
   });
 });
 

@@ -5,12 +5,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import reasonListsForm from '../layout';
+import ReasonListsForm from '../layout';
 
-describe('<reasonListsForm />', () => {
+describe('<ReasonListsForm />', () => {
   it('renders create form', () => {
     const rendered = shallow(
-      <reasonListsForm
+      <ReasonListsForm
         name="mockName"
         description="mockDescription"
         externalId={'mockExternalId'}
@@ -27,7 +27,7 @@ describe('<reasonListsForm />', () => {
   });
   it('renders update form', () => {
     const rendered = shallow(
-      <reasonListsForm
+      <ReasonListsForm
         name="mockName"
         description="mockDescription"
         externalId={'mockExternalId'}

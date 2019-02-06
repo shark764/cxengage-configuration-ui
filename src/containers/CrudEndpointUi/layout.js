@@ -32,7 +32,7 @@ import UsersForm from '../Form/Users';
 import UsersCreateForm from '../Form/Users/Create';
 import DataAccessReportsForm from '../Form/DataAccessReports';
 import ReasonsForm from '../Form/Reasons';
-import ReasonlistsForm from '../Form/Reasonlists';
+import ReasonListsForm from '../Form/ReasonLists';
 import QueuesForm from '../Form/Queues';
 import FlowsForm from '../Form/Flows';
 //hygen-inject-before3
@@ -184,7 +184,7 @@ const createFormRoutes = [
     path: '/configuration/reasonLists',
     component: () => (
       <DetailsPanel>
-        <ReasonlistsForm />
+        <ReasonListsForm />
       </DetailsPanel>
     )
   },
@@ -333,7 +333,7 @@ const detailsPanelRoutes = [
     component: () => (
       <NoScrollDetailsPanel>
         <ReasonListsDetailsPanel>
-          <ReasonlistsForm />
+          <ReasonListsForm />
         </ReasonListsDetailsPanel>
       </NoScrollDetailsPanel>
     )
