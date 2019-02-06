@@ -49,131 +49,152 @@ export default function UsersDetailsPanel({
   removeListItem,
   setSelectedSubEntityId,
   defaultFilters,
-  sidePanelPermissions
+  sidePanelUpdatePermissions,
+  sidePanelReadPermissions
 }) {
   return (
     <Wrapper id="dtpanel-users">
       {children}
 
-      <DetailWrapper open={false} contains="skills">
-        <WrappedDetailHeader
-          userHasUpdatePermission={!skillsFetching && userHasUpdatePermission && sidePanelPermissions.skills}
-          text={detailHeadertext(skillsItems, 'Skills')}
-          onActionButtonClick={() => setSelectedSubEntityId('skills')}
-        />
-        <SidePanelTable
-          tableType={'sidePanel'}
-          contains="skills"
-          userHasUpdatePermission={!skillsFetching && userHasUpdatePermission && sidePanelPermissions.skills}
-          deleteSubEntity={removeListItem}
-          items={skillsItems}
-          fields={skillsFields}
-          filtered={defaultFilters.skills}
-          fetching={skillsFetching}
-        />
-      </DetailWrapper>
+      {sidePanelReadPermissions.skills && (
+        <DetailWrapper open={false} contains="skills">
+          <WrappedDetailHeader
+            userHasUpdatePermission={!skillsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.skills}
+            text={detailHeadertext(skillsItems, 'Skills')}
+            onActionButtonClick={() => setSelectedSubEntityId('skills')}
+          />
+          <SidePanelTable
+            tableType={'sidePanel'}
+            contains="skills"
+            userHasUpdatePermission={!skillsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.skills}
+            deleteSubEntity={removeListItem}
+            items={skillsItems}
+            fields={skillsFields}
+            filtered={defaultFilters.skills}
+            fetching={skillsFetching}
+          />
+        </DetailWrapper>
+      )}
 
-      <DetailWrapper open={false} contains="groups">
-        <WrappedDetailHeader
-          userHasUpdatePermission={!groupsFetching && userHasUpdatePermission && sidePanelPermissions.groups}
-          text={detailHeadertext(groupsItems, 'Groups')}
-          onActionButtonClick={() => setSelectedSubEntityId('groups')}
-        />
-        <SidePanelTable
-          tableType={'sidePanel'}
-          contains="groups"
-          userHasUpdatePermission={!groupsFetching && userHasUpdatePermission && sidePanelPermissions.groups}
-          deleteSubEntity={removeListItem}
-          items={groupsItems}
-          fields={groupsFields}
-          filtered={defaultFilters.groups}
-          fetching={groupsFetching}
-        />
-      </DetailWrapper>
+      {sidePanelReadPermissions.groups && (
+        <DetailWrapper open={false} contains="groups">
+          <WrappedDetailHeader
+            userHasUpdatePermission={!groupsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.groups}
+            text={detailHeadertext(groupsItems, 'Groups')}
+            onActionButtonClick={() => setSelectedSubEntityId('groups')}
+          />
+          <SidePanelTable
+            tableType={'sidePanel'}
+            contains="groups"
+            userHasUpdatePermission={!groupsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.groups}
+            deleteSubEntity={removeListItem}
+            items={groupsItems}
+            fields={groupsFields}
+            filtered={defaultFilters.groups}
+            fetching={groupsFetching}
+          />
+        </DetailWrapper>
+      )}
 
-      <DetailWrapper open={false} contains="reasonLists">
-        <WrappedDetailHeader
-          userHasUpdatePermission={!reasonListsFetching && userHasUpdatePermission && sidePanelPermissions.reasonLists}
-          text={detailHeadertext(reasonListsItems, 'Presence Reason Lists')}
-          onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
-        />
-        <SidePanelTable
-          tableType={'sidePanel'}
-          contains="reasonLists"
-          userHasUpdatePermission={!reasonListsFetching && userHasUpdatePermission && sidePanelPermissions.reasonLists}
-          deleteSubEntity={removeListItem}
-          items={reasonListsItems}
-          fields={reasonListsFields}
-          filtered={defaultFilters.reasonLists}
-          fetching={reasonListsFetching}
-        />
-      </DetailWrapper>
+      {sidePanelReadPermissions.reasonLists && (
+        <DetailWrapper open={false} contains="reasonLists">
+          <WrappedDetailHeader
+            userHasUpdatePermission={
+              !reasonListsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.reasonLists
+            }
+            text={detailHeadertext(reasonListsItems, 'Presence Reason Lists')}
+            onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
+          />
+          <SidePanelTable
+            tableType={'sidePanel'}
+            contains="reasonLists"
+            userHasUpdatePermission={
+              !reasonListsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.reasonLists
+            }
+            deleteSubEntity={removeListItem}
+            items={reasonListsItems}
+            fields={reasonListsFields}
+            filtered={defaultFilters.reasonLists}
+            fetching={reasonListsFetching}
+          />
+        </DetailWrapper>
+      )}
 
-      <DetailWrapper open={false} contains="messageTemplates">
-        <WrappedDetailHeader
-          userHasUpdatePermission={
-            !messageTemplatesFetching && userHasUpdatePermission && sidePanelPermissions.messageTemplates
-          }
-          text={detailHeadertext(messageTemplatesItems, 'Message Templates')}
-          onActionButtonClick={() => setSelectedSubEntityId('messageTemplates')}
-        />
-        <SidePanelTable
-          tableType={'sidePanel'}
-          contains="messageTemplates"
-          userHasUpdatePermission={
-            !messageTemplatesFetching && userHasUpdatePermission && sidePanelPermissions.messageTemplates
-          }
-          deleteSubEntity={removeListItem}
-          items={messageTemplatesItems}
-          fields={messageTemplatesFields}
-          filtered={defaultFilters.messageTemplates}
-          fetching={messageTemplatesFetching}
-        />
-      </DetailWrapper>
+      {sidePanelReadPermissions.messageTemplates && (
+        <DetailWrapper open={false} contains="messageTemplates">
+          <WrappedDetailHeader
+            userHasUpdatePermission={
+              !messageTemplatesFetching && userHasUpdatePermission && sidePanelUpdatePermissions.messageTemplates
+            }
+            text={detailHeadertext(messageTemplatesItems, 'Message Templates')}
+            onActionButtonClick={() => setSelectedSubEntityId('messageTemplates')}
+          />
+          <SidePanelTable
+            tableType={'sidePanel'}
+            contains="messageTemplates"
+            userHasUpdatePermission={
+              !messageTemplatesFetching && userHasUpdatePermission && sidePanelUpdatePermissions.messageTemplates
+            }
+            deleteSubEntity={removeListItem}
+            items={messageTemplatesItems}
+            fields={messageTemplatesFields}
+            filtered={defaultFilters.messageTemplates}
+            fetching={messageTemplatesFetching}
+          />
+        </DetailWrapper>
+      )}
 
-      <DetailWrapper open={false} contains="transferLists">
-        <WrappedDetailHeader
-          userHasUpdatePermission={
-            !transferListsFetching && userHasUpdatePermission && sidePanelPermissions.transferLists
-          }
-          text={detailHeadertext(transferListsItems, 'Transfer Lists')}
-          onActionButtonClick={() => setSelectedSubEntityId('transferLists')}
-        />
-        <SidePanelTable
-          tableType={'sidePanel'}
-          contains="transferLists"
-          userHasUpdatePermission={
-            !transferListsFetching && userHasUpdatePermission && sidePanelPermissions.transferLists
-          }
-          deleteSubEntity={removeListItem}
-          items={transferListsItems}
-          fields={transferListsFields}
-          filtered={defaultFilters.transferLists}
-          fetching={transferListsFetching}
-        />
-      </DetailWrapper>
+      {sidePanelReadPermissions.transferLists && (
+        <DetailWrapper open={false} contains="transferLists">
+          <WrappedDetailHeader
+            userHasUpdatePermission={
+              !transferListsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.transferLists
+            }
+            text={detailHeadertext(transferListsItems, 'Transfer Lists')}
+            onActionButtonClick={() => setSelectedSubEntityId('transferLists')}
+          />
+          <SidePanelTable
+            tableType={'sidePanel'}
+            contains="transferLists"
+            userHasUpdatePermission={
+              !transferListsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.transferLists
+            }
+            deleteSubEntity={removeListItem}
+            items={transferListsItems}
+            fields={transferListsFields}
+            filtered={defaultFilters.transferLists}
+            fetching={transferListsFetching}
+          />
+        </DetailWrapper>
+      )}
 
-      <DetailWrapper open={false} contains="outboundIdentifierLists">
-        <WrappedDetailHeader
-          userHasUpdatePermission={
-            !outboundIdentifierListsFetching && userHasUpdatePermission && sidePanelPermissions.outboundIdentifierLists
-          }
-          text={detailHeadertext(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
-          onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
-        />
-        <SidePanelTable
-          tableType={'sidePanel'}
-          contains="outboundIdentifierLists"
-          userHasUpdatePermission={
-            !outboundIdentifierListsFetching && userHasUpdatePermission && sidePanelPermissions.outboundIdentifierLists
-          }
-          deleteSubEntity={removeListItem}
-          items={outboundIdentifierListsItems}
-          fields={outboundIdentifierListsFields}
-          filtered={defaultFilters.outboundIdentifierLists}
-          fetching={outboundIdentifierListsFetching}
-        />
-      </DetailWrapper>
+      {sidePanelReadPermissions.outboundIdentifierLists && (
+        <DetailWrapper open={false} contains="outboundIdentifierLists">
+          <WrappedDetailHeader
+            userHasUpdatePermission={
+              !outboundIdentifierListsFetching &&
+              userHasUpdatePermission &&
+              sidePanelUpdatePermissions.outboundIdentifierLists
+            }
+            text={detailHeadertext(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
+            onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
+          />
+          <SidePanelTable
+            tableType={'sidePanel'}
+            contains="outboundIdentifierLists"
+            userHasUpdatePermission={
+              !outboundIdentifierListsFetching &&
+              userHasUpdatePermission &&
+              sidePanelUpdatePermissions.outboundIdentifierLists
+            }
+            deleteSubEntity={removeListItem}
+            items={outboundIdentifierListsItems}
+            fields={outboundIdentifierListsFields}
+            filtered={defaultFilters.outboundIdentifierLists}
+            fetching={outboundIdentifierListsFetching}
+          />
+        </DetailWrapper>
+      )}
     </Wrapper>
   );
 }
@@ -202,5 +223,6 @@ UsersDetailsPanel.propTypes = {
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.object,
-  sidePanelPermissions: PropTypes.object
+  sidePanelUpdatePermissions: PropTypes.object,
+  sidePanelReadPermissions: PropTypes.object
 };

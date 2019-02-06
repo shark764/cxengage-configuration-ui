@@ -11,7 +11,8 @@ describe('<UsersDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
   let defaultFilters;
-  let sidePanelPermissions;
+  let sidePanelUpdatePermissions;
+  let sidePanelReadPermissions;
   beforeEach(() => {
     customItem = {
       email: 'mockEmail',
@@ -41,7 +42,15 @@ describe('<UsersDetailsPanel />', () => {
       transferLists: [],
       outboundIdentifierLists: []
     };
-    sidePanelPermissions = {
+    sidePanelUpdatePermissions = {
+      skills: true,
+      groups: true,
+      reasonLists: true,
+      messageTemplates: true,
+      transferLists: true,
+      outboundIdentifierLists: true
+    };
+    sidePanelReadPermissions = {
       skills: true,
       groups: true,
       reasonLists: true,
@@ -65,7 +74,8 @@ describe('<UsersDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         defaultFilters={defaultFilters}
-        sidePanelPermissions={sidePanelPermissions}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -85,7 +95,8 @@ describe('<UsersDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         defaultFilters={defaultFilters}
-        sidePanelPermissions={sidePanelPermissions}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -106,7 +117,8 @@ describe('<UsersDetailsPanel />', () => {
         item={customItemDisabled}
         active={false}
         defaultFilters={defaultFilters}
-        sidePanelPermissions={sidePanelPermissions}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();

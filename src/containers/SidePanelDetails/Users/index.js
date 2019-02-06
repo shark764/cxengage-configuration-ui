@@ -48,13 +48,21 @@ export function mapStateToProps(state, props) {
     messageTemplatesFields: entitiesMetaData.messageTemplates.memberListTableFields,
     messageTemplatesFetching: isEntityFetching(state, 'messageTemplates'),
     defaultFilters: entitiesMetaData.users.defaultAssociationFilters,
-    sidePanelPermissions: {
+    sidePanelUpdatePermissions: {
       skills: userHasPermissions(state, ['MANAGE_ALL_USER_SKILLS']),
       groups: userHasPermissions(state, ['MANAGE_ALL_GROUP_USERS']),
       reasonLists: userHasPermissions(state, ['MANAGE_ALL_USER_REASON_LISTS']),
       messageTemplates: userHasPermissions(state, ['MANAGE_ALL_MESSAGE_TEMPLATES']),
       transferLists: userHasPermissions(state, ['MANAGE_ALL_TRANSFER_LISTS']),
       outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_ASSIGN'])
+    },
+    sidePanelReadPermissions: {
+      skills: userHasPermissions(state, ['VIEW_ALL_SKILLS']),
+      groups: userHasPermissions(state, ['VIEW_ALL_GROUPS']),
+      reasonLists: userHasPermissions(state, ['READ_PRESENCE_REASONS']),
+      messageTemplates: userHasPermissions(state, ['VIEW_ALL_MESSAGE_TEMPLATES']),
+      transferLists: userHasPermissions(state, ['VIEW_ALL_TRANSFER_LISTS']),
+      outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ'])
     }
   };
 }

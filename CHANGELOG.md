@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.51.0] - 2019-02-06
+### Added
+- CXV1-17031 - View permissions for users page side panel tables
+
 ## [0.50.1] - 2019-02-06
 ### Fixed
 - Issue with Presence Reason Lists folder names for build

@@ -124,7 +124,15 @@ Object {
     },
   ],
   "reasonListsItems": Array [],
-  "sidePanelPermissions": Object {
+  "sidePanelReadPermissions": Object {
+    "groups": undefined,
+    "messageTemplates": undefined,
+    "outboundIdentifierLists": undefined,
+    "reasonLists": undefined,
+    "skills": undefined,
+    "transferLists": undefined,
+  },
+  "sidePanelUpdatePermissions": Object {
     "groups": undefined,
     "messageTemplates": undefined,
     "outboundIdentifierLists": undefined,
@@ -319,7 +327,17 @@ exports[`UsersDetailsPanel Renders renders 1`] = `
   reasonListsItems={Array []}
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
-  sidePanelPermissions={
+  sidePanelReadPermissions={
+    Object {
+      "groups": undefined,
+      "messageTemplates": undefined,
+      "outboundIdentifierLists": undefined,
+      "reasonLists": undefined,
+      "skills": undefined,
+      "transferLists": undefined,
+    }
+  }
+  sidePanelUpdatePermissions={
     Object {
       "groups": undefined,
       "messageTemplates": undefined,
