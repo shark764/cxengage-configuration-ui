@@ -6,21 +6,14 @@ import { connect } from 'react-redux';
 
 import { EntityTable } from 'cx-ui-components';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
-import {
-  setSelectedEntityCreate,
-  setSelectedEntityId,
-  toggleBulkEntityChange
-} from '../../redux/modules/entities';
+import { setSelectedEntityCreate, setSelectedEntityId, toggleBulkEntityChange } from '../../redux/modules/entities';
 import {
   getCurrentEntity,
   userHasCreatePermission,
   userHasUpdatePermission,
-  isEntityFetching,
+  isEntityFetching
 } from '../../redux/modules/entities/selectors';
-import {
-  selectVisibleSubMenu,
-  selectTableColumns
-} from '../../redux/modules/columnFilterMenus/selectors';
+import { selectVisibleSubMenu, selectTableColumns } from '../../redux/modules/columnFilterMenus/selectors';
 
 import { setVisibleMenu } from '../../redux/modules/columnFilterMenus';
 import { getHelpLink, getAllEntities } from './selectors';
@@ -30,6 +23,7 @@ export function mapStateToProps(state, props) {
   const entity = entitiesMetaData[getCurrentEntity(state)];
   const entityName = entity ? entity.entityName : 'none';
   const defaultFilters = entity ? entity.defaultFilters : [];
+  const defaultSorted = entity ? entity.defaultSorted : [];
   return {
     pageTitle: entity ? entity.pageTitle : '',
     pageHelpLink: getHelpLink(state),
@@ -40,6 +34,7 @@ export function mapStateToProps(state, props) {
     entityMetadata: entity,
     currentVisibleSubMenu: selectVisibleSubMenu(state, props),
     filtered: defaultFilters,
+    sorted: defaultSorted,
     fetching: isEntityFetching(state)
   };
 }

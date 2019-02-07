@@ -5,9 +5,15 @@
 import React from 'react';
 import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
 import styled from 'styled-components';
+import { SearchIconSVG } from 'cx-ui-components';
 
 const Input = styled.input`
-width: 100%;
+  width: 100%;
+`;
+const SearchIcon = styled(SearchIconSVG)`
+  position: relative;
+  left: -17px;
+  opacity: 0.4;
 `;
 
 export function constructGeneralTextColumn(string) {
@@ -18,11 +24,14 @@ export function constructGeneralTextColumn(string) {
     accessor: string,
     Cell: ({ row }) => <span title={row[string]}>{row[string]}</span>,
     Filter: ({ filter, onChange }) => (
-      <Input
-        className={`${normalizedString}-filter-input`}
-        onChange={event => onChange(event.target.value)}
-        value={filter ? filter.value : ''}
-      />
+      <div>
+        <Input
+          className={`${normalizedString}-filter-input`}
+          onChange={event => onChange(event.target.value)}
+          value={filter ? filter.value : ''}
+        />
+        <SearchIcon searchIconType="primary" size={10} />
+      </div>
     )
   };
 }

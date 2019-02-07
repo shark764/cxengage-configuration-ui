@@ -10,7 +10,7 @@ Array [
     >
       Name
     </span>,
-    "accessor": "name",
+    "accessor": [Function],
     "id": "name",
   },
   Object {
@@ -47,18 +47,18 @@ Array [
     "id": "listType",
   },
   Object {
-    "Cell": [Function],
     "Filter": [Function],
     "Header": <span
       title="permissions"
     >
       Permissions
     </span>,
-    "accessor": "permissions",
+    "accessor": [Function],
     "id": "permissions",
   },
   Object {
     "Cell": [Function],
+    "Filter": [Function],
     "Header": <span
       title="Type"
     >
@@ -226,7 +226,7 @@ Array [
     >
       Name
     </span>,
-    "accessor": "name",
+    "accessor": [Function],
     "id": "name",
   },
   Object {

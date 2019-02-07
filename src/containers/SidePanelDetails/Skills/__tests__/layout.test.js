@@ -12,6 +12,7 @@ describe('<SkillsDetailsPanel />', () => {
   let customItemDisabled;
   let customItemNoProficiency;
   let defaultFilters;
+  let sidePanelReadPermissions;
   beforeEach(() => {
     customItem = {
       id: 'mockId',
@@ -38,6 +39,10 @@ describe('<SkillsDetailsPanel />', () => {
       users: [],
       outboundIdentifierLists: []
     };
+    sidePanelReadPermissions = {
+      skills: true,
+      outboundIdentifierLists: true
+    };
   });
   it('renders Skills detailsPanel', () => {
     const rendered = shallow(
@@ -51,6 +56,7 @@ describe('<SkillsDetailsPanel />', () => {
         item={customItem}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -67,6 +73,7 @@ describe('<SkillsDetailsPanel />', () => {
         item={customItemDisabled}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -83,6 +90,7 @@ describe('<SkillsDetailsPanel />', () => {
         item={customItemNoProficiency}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -99,6 +107,7 @@ describe('<SkillsDetailsPanel />', () => {
         item={customItem}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();

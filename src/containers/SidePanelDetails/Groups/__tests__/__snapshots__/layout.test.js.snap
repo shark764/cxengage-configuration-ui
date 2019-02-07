@@ -6,23 +6,6 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
 >
   Mock Child
   <Connect(DetailWrapper)
-    autoCloseOverride={true}
-    open={true}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Users"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="users"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-  <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
     open={false}
   >
@@ -78,23 +61,6 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permi
     />
   </React.Fragment>
   <Connect(DetailWrapper)
-    autoCloseOverride={true}
-    open={true}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Users"
-      userHasUpdatePermission={false}
-    />
-    <_class2
-      contains="users"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={false}
-    />
-  </Connect(DetailWrapper)>
-  <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
     open={false}
   >
@@ -136,23 +102,6 @@ exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled
   id="dtpanel-groups"
 >
   Mock Child
-  <Connect(DetailWrapper)
-    autoCloseOverride={true}
-    open={true}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Users"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="users"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
     open={false}

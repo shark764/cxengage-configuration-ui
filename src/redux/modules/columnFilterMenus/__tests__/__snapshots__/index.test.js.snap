@@ -226,11 +226,7 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [
       Immutable.Map {
-        "name": "First Name",
-        "active": true,
-      },
-      Immutable.Map {
-        "name": "Last Name",
+        "name": "Name",
         "active": true,
       },
       Immutable.Map {

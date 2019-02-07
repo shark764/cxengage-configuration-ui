@@ -18,6 +18,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.52.0] - 2019-02-07
+### Added
+- CXV1-17031 - View permissions for groups and skills side panel tables
+- CXV1-17026 - search icon now shows on text filter fields
+- CXV1-17026 - users page now has one column for name
+- CXV1-17026 - name columns default sort alphabetically
+#### Fixed
+- No Ticket - fixed issue with permissions column filter not working
+
 ## [0.51.0] - 2019-02-06
 ### Added
 - CXV1-17031 - View permissions for users page side panel tables

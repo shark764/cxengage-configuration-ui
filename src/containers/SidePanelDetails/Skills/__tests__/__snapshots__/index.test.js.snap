@@ -55,6 +55,10 @@ Object {
   "outboundIdentifierListsItems": Array [
     "mockListMembers",
   ],
+  "sidePanelReadPermissions": Object {
+    "outboundIdentifierLists": undefined,
+    "skills": undefined,
+  },
   "userHasUpdatePermission": true,
   "usersFetching": undefined,
   "usersFields": Array [
@@ -161,6 +165,12 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
   }
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
+  sidePanelReadPermissions={
+    Object {
+      "outboundIdentifierLists": undefined,
+      "skills": undefined,
+    }
+  }
   store={
     Object {
       "dispatch": [Function],

@@ -23,6 +23,7 @@ Object {
   ],
   "pageHelpLink": "mock help link",
   "pageTitle": "",
+  "sorted": Array [],
   "userHasCreatePermission": true,
   "userHasUpdatePermission": true,
 }

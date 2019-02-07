@@ -11,6 +11,7 @@ exports[`metricTypeColumn Cell renders correctly 1`] = `
 exports[`metricTypeColumn is configured correctly 1`] = `
 Object {
   "Cell": [Function],
+  "Filter": [Function],
   "Header": <span
     title="Type"
   >

@@ -88,6 +88,13 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
   reasonListsItems={Array []}
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
+  sidePanelReadPermissions={
+    Object {
+      "groups": undefined,
+      "outboundIdentifierLists": undefined,
+      "reasonLists": undefined,
+    }
+  }
   store={
     Object {
       "dispatch": [Function],
@@ -240,6 +247,11 @@ Object {
     },
   ],
   "reasonListsItems": Array [],
+  "sidePanelReadPermissions": Object {
+    "groups": undefined,
+    "outboundIdentifierLists": undefined,
+    "reasonLists": undefined,
+  },
   "userHasUpdatePermission": true,
   "usersFetching": undefined,
   "usersFields": Array [

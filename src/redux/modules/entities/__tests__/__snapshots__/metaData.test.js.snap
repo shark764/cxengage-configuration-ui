@@ -14,6 +14,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "branding",
     "entityTableFields": Array [
@@ -68,6 +69,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "capacityRules",
     "entityTableFields": Array [
@@ -135,6 +137,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "chatWidgets",
     "entityTableFields": Array [
@@ -206,6 +209,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "customMetrics",
     "entityTableFields": Array [
@@ -260,6 +269,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "dashboards",
     "entityTableFields": Array [
@@ -347,6 +357,12 @@ Object {
       Object {
         "id": "active",
         "value": "enabled",
+      },
+    ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
       },
     ],
     "dependentEntity": "users",
@@ -512,6 +528,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "emailTemplates",
     "entityTableFields": Array [
@@ -583,6 +600,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "flows",
     "entityTableFields": Array [
@@ -692,6 +715,12 @@ Object {
         "value": "enabled",
       },
     ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "users",
     "entityName": "groups",
     "entityTableFields": Array [
@@ -777,6 +806,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "historicalReportFolders",
     "entityTableFields": Array [
@@ -831,6 +861,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "identityProviders",
     "entityTableFields": Array [
@@ -942,6 +973,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "interactionMonitoring",
     "entityTableFields": Array [
@@ -996,6 +1028,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "listTypes",
     "entityTableFields": Array [
@@ -1065,6 +1098,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "lists",
     "entityTableFields": Array [
@@ -1140,6 +1179,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "messageTemplates",
     "entityTableFields": Array [
@@ -1234,6 +1274,12 @@ Object {
       Object {
         "id": "active",
         "value": "enabled",
+      },
+    ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
       },
     ],
     "dependentEntity": "outboundIdentifiers",
@@ -1377,6 +1423,12 @@ Object {
         "value": "enabled",
       },
     ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "outboundIdentifiers",
     "entityTableFields": Array [
@@ -1433,6 +1485,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "permissions",
     "entityTableFields": Array [
@@ -1487,6 +1540,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "platformRoles",
     "entityTableFields": Array [
@@ -1541,6 +1595,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "protectedBranding",
     "entityTableFields": Array [
@@ -1612,6 +1667,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "queues",
     "entityTableFields": Array [
@@ -1694,6 +1755,12 @@ Object {
       Object {
         "id": "active",
         "value": "enabled",
+      },
+    ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
       },
     ],
     "dependentEntity": "reasons",
@@ -1790,6 +1857,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "reasons",
     "entityTableFields": Array [
@@ -1857,6 +1930,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "permissions",
     "entityName": "roles",
     "entityTableFields": Array [
@@ -1962,6 +2036,12 @@ Object {
         "value": "enabled",
       },
     ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "users",
     "entityName": "skills",
     "entityTableFields": Array [
@@ -2037,6 +2117,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "standardDashboards",
     "entityTableFields": Array [
@@ -2104,6 +2185,7 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
+    "defaultSorted": Array [],
     "dependentEntity": "",
     "entityName": "transferLists",
     "entityTableFields": Array [
@@ -2196,11 +2278,7 @@ Object {
     "columns": Array [
       Object {
         "active": true,
-        "name": "First Name",
-      },
-      Object {
-        "active": true,
-        "name": "Last Name",
+        "name": "Name",
       },
       Object {
         "active": true,
@@ -2284,6 +2362,12 @@ Object {
       Object {
         "id": "invitationStatus",
         "value": "all non-disabled",
+      },
+    ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
       },
     ],
     "dependentEntity": "",

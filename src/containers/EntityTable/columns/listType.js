@@ -4,6 +4,18 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import { SearchIconSVG } from 'cx-ui-components';
+
+const Input = styled.input`
+  width: 100%;
+`;
+const SearchIcon = styled(SearchIconSVG)`
+  position: relative;
+  left: -17px;
+  opacity: 0.4;
+`;
 
 export const listTypeColumn = {
   id: 'listType',
@@ -11,12 +23,14 @@ export const listTypeColumn = {
   accessor: list => list.listType.name,
   Cell: ({ row }) => <span title={row.listType}>{row.listType}</span>,
   Filter: ({ filter, onChange }) => (
-    <input
-      className="entity-table-filter-column-list-type"
-      onChange={event => onChange(event.target.value)}
-      style={{ width: '100%' }}
-      value={filter ? filter.value : ''}
-    />
+    <div>
+      <Input
+        className={`entity-table-filter-column-list-type`}
+        onChange={event => onChange(event.target.value)}
+        value={filter ? filter.value : ''}
+      />
+      <SearchIcon searchIconType="primary" size={10} />
+    </div>
   )
 };
 

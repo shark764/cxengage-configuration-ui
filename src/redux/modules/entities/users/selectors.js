@@ -41,11 +41,14 @@ export const filterUsersByPermissions = (state, users, permissionNames) => {
   );
 };
 
-export const getDisplay = data => {
+export const getDisplay = (data, showBlankString) => {
   if (data.firstName || data.lastName) {
-    return ((data.firstName ? data.firstName : '') + ' ' + (data.lastName ? data.lastName : '')).trim();
+    return `${data.firstName || ''} ${data.lastName || ''}`.trim();
+  } else if (showBlankString) {
+    return '';
+  } else {
+    return data.email;
   }
-  return data.email;
 };
 
 export const getUserInvitationStatus = state => getSelectedEntity(state).get('invitationStatus');

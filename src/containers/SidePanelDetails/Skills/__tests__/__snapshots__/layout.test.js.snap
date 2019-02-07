@@ -6,23 +6,6 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
 >
   Mock Child
   <Connect(DetailWrapper)
-    autoCloseOverride={true}
-    open={true}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Users"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="users"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-  <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
     open={false}
   >
@@ -47,23 +30,6 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no proficiency 
   id="dtpanel-skills"
 >
   Mock Child
-  <Connect(DetailWrapper)
-    autoCloseOverride={true}
-    open={true}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Users"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="users"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
     open={false}
@@ -107,23 +73,6 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permi
     />
   </React.Fragment>
   <Connect(DetailWrapper)
-    autoCloseOverride={true}
-    open={true}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Users"
-      userHasUpdatePermission={false}
-    />
-    <_class2
-      contains="users"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={false}
-    />
-  </Connect(DetailWrapper)>
-  <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
     open={false}
   >
@@ -148,23 +97,6 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled
   id="dtpanel-skills"
 >
   Mock Child
-  <Connect(DetailWrapper)
-    autoCloseOverride={true}
-    open={true}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Users"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="users"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
     open={false}

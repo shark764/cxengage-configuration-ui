@@ -78,12 +78,12 @@ pipeline {
         }
       }
     }
-    stage ('Run regression tests') {
-      when { changeRequest() }
-      steps {
-        sh "docker exec --env URL=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ ${docker_tag} npm run test:preMerge"
-      }
-    }
+    // stage ('Run regression tests') {
+    //   when { changeRequest() }
+    //   steps {
+    //     sh "docker exec --env URL=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ ${docker_tag} npm run test:preMerge"
+    //   }
+    // }
     stage ('Github tagged release') {
       when { anyOf {branch 'master'}}
       steps {

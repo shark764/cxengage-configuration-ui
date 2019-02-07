@@ -42,7 +42,11 @@ export function mapStateToProps(state) {
     outboundIdentifierListsItems: getSidePanelTableItems(state, 'outboundIdentifierLists'),
     outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
     outboundIdentifierListsFetching: isEntityFetching(state, 'outboundIdentifierLists'),
-    defaultFilters: entitiesMetaData.skills.defaultAssociationFilters
+    defaultFilters: entitiesMetaData.skills.defaultAssociationFilters,
+    sidePanelReadPermissions: {
+      skills: userHasPermissions(state, ['VIEW_ALL_SKILLS']),
+      outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ'])
+    }
   };
 }
 

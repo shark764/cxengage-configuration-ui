@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import GroupsDetailsPanel from './layout';
 import {
   userHasUpdatePermission,
+  userHasPermissions,
   getSelectedEntity,
   isInherited,
   isEntityFetching
@@ -29,7 +30,12 @@ export function mapStateToProps(state, props) {
     reasonListsItems: getSidePanelTableItems(state, 'reasonLists'),
     reasonListsFields: entitiesMetaData.reasonLists.memberListTableFields,
     reasonListsFetching: isEntityFetching(state, 'reasonLists'),
-    defaultFilters: entitiesMetaData.groups.defaultAssociationFilters
+    defaultFilters: entitiesMetaData.groups.defaultAssociationFilters,
+    sidePanelReadPermissions: {
+      groups: userHasPermissions(state, ['VIEW_ALL_GROUPS']),
+      outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ']),
+      reasonLists: userHasPermissions(state, ['READ_PRESENCE_REASONS'])
+    }
   };
 }
 

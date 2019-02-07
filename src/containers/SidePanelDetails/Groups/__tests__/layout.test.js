@@ -11,6 +11,7 @@ describe('<GroupsDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
   let defaultFilters;
+  let sidePanelReadPermissions;
   beforeEach(() => {
     customItem = {
       id: 'mockId',
@@ -31,6 +32,11 @@ describe('<GroupsDetailsPanel />', () => {
       outboundIdentifierLists: [],
       reasonLists: []
     };
+    sidePanelReadPermissions = {
+      groups: true,
+      outboundIdentifierLists: true,
+      reasonLists: true
+    };
   });
   it('renders Groups detailsPanel', () => {
     const rendered = shallow(
@@ -45,6 +51,7 @@ describe('<GroupsDetailsPanel />', () => {
         item={customItem}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -62,6 +69,7 @@ describe('<GroupsDetailsPanel />', () => {
         item={customItemDisabled}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -79,6 +87,7 @@ describe('<GroupsDetailsPanel />', () => {
         item={customItem}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
+        sidePanelReadPermissions={sidePanelReadPermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
