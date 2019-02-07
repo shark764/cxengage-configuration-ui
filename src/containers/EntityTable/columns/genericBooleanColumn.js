@@ -3,11 +3,12 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
 
 export function constructGeneralBooleanColumn(string) {
   const normalizedString = camelCaseToRegularForm(string);
-  return {
+  const column = {
     id: string,
     Header: <span title={normalizedString}>{normalizedString}</span>,
     accessor: list => (list[string] ? 'Yes' : 'No'),
@@ -39,4 +40,11 @@ export function constructGeneralBooleanColumn(string) {
       </select>
     )
   };
+
+  column.Filter.propTypes = {
+    filter: PropTypes.func,
+    onChange: PropTypes.func
+  };
+
+  return column;
 }

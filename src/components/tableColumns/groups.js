@@ -3,10 +3,11 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import CheckboxFilterMenu from '../../containers/CheckboxFilterMenu';
 
 export default function(value, tableType) {
-  return {
+  const column = {
     Header: 'Groups',
     show: value,
     filterable: true,
@@ -27,16 +28,17 @@ export default function(value, tableType) {
     },
     Cell: ({ value }) => <span title={value}>{value}</span>
   };
+
+  column.Cell.propTypes = {
+    value: PropTypes.any
+  };
+
+  return column;
 }
 
 export function groupsFilter(tableType) {
   return (
-    <CheckboxFilterMenu
-      menuType="Groups"
-      tableType={tableType}
-      buttonType="columnFilter"
-      selectionType="checkbox"
-    >
+    <CheckboxFilterMenu menuType="Groups" tableType={tableType} buttonType="columnFilter" selectionType="checkbox">
       Groups
     </CheckboxFilterMenu>
   );

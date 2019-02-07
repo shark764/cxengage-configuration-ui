@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
 import styled from 'styled-components';
 import { SearchIconSVG } from 'cx-ui-components';
@@ -18,7 +19,7 @@ const SearchIcon = styled(SearchIconSVG)`
 
 export function constructGeneralTextColumn(string) {
   const normalizedString = camelCaseToRegularForm(string);
-  return {
+  const column = {
     id: string,
     Header: <span title={normalizedString}>{normalizedString}</span>,
     accessor: string,
@@ -34,4 +35,14 @@ export function constructGeneralTextColumn(string) {
       </div>
     )
   };
+
+  column.Cell.propTypes = {
+    row: PropTypes.any
+  };
+  column.Filter.propTypes = {
+    filter: PropTypes.func,
+    onChange: PropTypes.func
+  };
+
+  return column;
 }

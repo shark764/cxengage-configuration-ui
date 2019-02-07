@@ -20,18 +20,6 @@ Object {
       },
     ],
   },
-  "item": Object {
-    "active": true,
-    "description": "mockDescription",
-    "hasProficiency": true,
-    "id": "mockId",
-    "name": "mockName",
-    "users": Array [
-      Object {
-        "id": "mockSubEntityId",
-      },
-    ],
-  },
   "outboundIdentifierListsFetching": undefined,
   "outboundIdentifierListsFields": Array [
     Object {
@@ -119,20 +107,6 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
         Object {
           "id": "invitationStatus",
           "value": "enabled",
-        },
-      ],
-    }
-  }
-  item={
-    Object {
-      "active": true,
-      "description": "mockDescription",
-      "hasProficiency": true,
-      "id": "mockId",
-      "name": "mockName",
-      "users": Array [
-        Object {
-          "id": "mockSubEntityId",
         },
       ],
     }

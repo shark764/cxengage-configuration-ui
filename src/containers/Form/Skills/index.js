@@ -10,13 +10,10 @@ import { formValidation } from './validation';
 import {
   getSelectedEntityId,
   isInherited,
-  isCreating
+  isCreating,
+  userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
-import {
-  selectFormInitialValues,
-  formSubmission,
-  createFormName
-} from '../../../redux/modules/form/selectors';
+import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import { toggleProficiency } from '../../../redux/modules/entities';
 import { getHasProficiencyFormValue } from '../../../redux/modules/entities/skills/selectors';
 
@@ -32,14 +29,11 @@ const CreateSkillsForm = compose(
 export function mapStateToProps(state) {
   const initialValues = selectFormInitialValues(state);
   return {
-    disableProficiency:
-      initialValues.get('hasProficiency') &&
-      initialValues.get('id') !== undefined,
-    initialValues: initialValues.has('hasProficiency')
-      ? initialValues
-      : initialValues.set('hasProficiency', false),
+    disableProficiency: initialValues.get('hasProficiency') && initialValues.get('id') !== undefined,
+    initialValues: initialValues.has('hasProficiency') ? initialValues : initialValues.set('hasProficiency', false),
     isSaving: isCreating(state),
     inherited: isInherited(state),
+    userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
     hasProficiency: getHasProficiencyFormValue(state)
   };

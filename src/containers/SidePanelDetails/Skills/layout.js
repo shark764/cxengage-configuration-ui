@@ -8,13 +8,13 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Detail, SidePanelTable, DetailHeader } from 'cx-ui-components';
+import { SidePanelTable, DetailHeader } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
-import { detailHeadertext } from '../../../utils';
+import { detailHeaderText } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,22 +36,13 @@ export default function SkillsDetailsPanel({
   outboundIdentifierListsFetching,
   removeListItem,
   setSelectedSubEntityId,
-  item: { name, description, active, hasProficiency },
   defaultFilters,
   sidePanelReadPermissions
 }) {
   return (
     <Wrapper id="dtpanel-skills">
-      {userHasUpdatePermission ? (
-        children
-      ) : (
-        <Fragment>
-          <Detail label="Name" value={name} />
-          <Detail label="Description" value={description} />
-          <Detail label="Has Proficiency" value={hasProficiency ? 'Yes' : 'No'} />
-          <Detail label="Status" value={active ? 'Enabled' : 'Disabled'} />
-        </Fragment>
-      )}
+      {children}
+
       {sidePanelReadPermissions.users && (
         <DetailWrapper open={true} autoCloseOverride>
           <WrappedDetailHeader
@@ -75,7 +66,7 @@ export default function SkillsDetailsPanel({
         <DetailWrapper open={false} contains="outboundIdentifierLists">
           <WrappedDetailHeader
             userHasUpdatePermission={!outboundIdentifierListsFetching && userHasUpdatePermission}
-            text={detailHeadertext(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
+            text={detailHeaderText(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
           />
           <SidePanelTable
@@ -95,12 +86,6 @@ export default function SkillsDetailsPanel({
 }
 
 SkillsDetailsPanel.propTypes = {
-  item: PropTypes.shape({
-    name: PropTypes.string,
-    description: PropTypes.string,
-    hasProficiency: PropTypes.bool,
-    active: PropTypes.bool
-  }),
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
   usersItems: PropTypes.array,

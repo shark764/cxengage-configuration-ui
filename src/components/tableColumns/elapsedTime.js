@@ -26,52 +26,36 @@ const MinutesInput = styled.input`
 
 export const helperFunctions = {
   columnFilterOnChangeEvents: (filter, onChange, event, inputSource) => {
-    let filterArray = filter
-      ? filter.value.split(':')
-      : ['Greater Than', 0, 'Minutes'];
+    let filterArray = filter ? filter.value.split(':') : ['Greater Than', 0, 'Minutes'];
     switch (inputSource) {
       case 'greaterThanOrLessThan':
-        return onChange(
-          `${event.target.value}:${filterArray[1]}:${filterArray[2]}`
-        );
+        return onChange(`${event.target.value}:${filterArray[1]}:${filterArray[2]}`);
       case 'timeInput':
-        return onChange(
-          `${filterArray[0]}:${event.target.value}:${filterArray[2]}`
-        );
+        return onChange(`${filterArray[0]}:${event.target.value}:${filterArray[2]}`);
       case 'secondsOrMinutes':
-        return onChange(
-          `${filterArray[0]}:${filterArray[1]}:${event.target.value}`
-        );
+        return onChange(`${filterArray[0]}:${filterArray[1]}:${event.target.value}`);
       default:
         return filterArray;
     }
   },
   formatFilter: filter => {
     let facts = filter.split(':');
-    return `${facts[0] === 'Greater Than' ? ' + ' : ' - '} ${facts[1]} ${
-      facts[2] === 'Minutes' ? 'Min' : 'Sec'
-    }`;
+    return `${facts[0] === 'Greater Than' ? ' + ' : ' - '} ${facts[1]} ${facts[2] === 'Minutes' ? 'Min' : 'Sec'}`;
   },
   elapsedTimeFilter: (filter, onChange, tableType) => (
-    <ElapsedTimeFilter
-      filter={filter}
-      onChange={onChange}
-      tableType={tableType}
-    />
+    <ElapsedTimeFilter filter={filter} onChange={onChange} tableType={tableType} />
   )
 };
 
 export default function(value, tableType) {
-  return {
+  const column = {
     Header: 'Elapsed Time',
     show: value,
     id: 'elapsedTime',
     minWidth: 150,
     resizable: false,
     accessor: d => parseInt(d.currentStateDuration / 1000, 10),
-    Cell: ({ value }) => (
-      <span title={startOfDay(value)}>{startOfDay(value)}</span>
-    ),
+    Cell: ({ value }) => <span title={startOfDay(value)}>{startOfDay(value)}</span>,
     filterMethod: (filter, row) => {
       let filterArray = filter.value.split(':');
       let timeFilter = parseInt(filterArray[1], 10);
@@ -80,43 +64,31 @@ export default function(value, tableType) {
         return true;
       }
       if (filterArray[0] === 'Less Than') {
-        return (
-          row[filter.id] <
-          (filterArray[2] === 'Minutes' ? timeFilter * 60 : timeFilter)
-        );
+        return row[filter.id] < (filterArray[2] === 'Minutes' ? timeFilter * 60 : timeFilter);
       }
-      return (
-        row[filter.id] >
-        (filterArray[2] === 'Minutes' ? timeFilter * 60 : timeFilter)
-      );
+      return row[filter.id] > (filterArray[2] === 'Minutes' ? timeFilter * 60 : timeFilter);
     },
-    Filter: ({ filter, onChange }) =>
-      helperFunctions.elapsedTimeFilter(filter, onChange, tableType)
+    Filter: ({ filter, onChange }) => helperFunctions.elapsedTimeFilter(filter, onChange, tableType)
   };
+
+  column.Cell.propTypes = {
+    value: PropTypes.any
+  };
+  column.Filter.propTypes = {
+    filter: PropTypes.func,
+    onChange: PropTypes.func
+  };
+
+  return column;
 }
 
 export class ElapsedTimeFilter extends Component {
   greaterThanOnChange = event =>
-    helperFunctions.columnFilterOnChangeEvents(
-      this.props.filter,
-      this.props.onChange,
-      event,
-      'greaterThanOrLessThan'
-    );
+    helperFunctions.columnFilterOnChangeEvents(this.props.filter, this.props.onChange, event, 'greaterThanOrLessThan');
   minutesInputOnChange = event =>
-    helperFunctions.columnFilterOnChangeEvents(
-      this.props.filter,
-      this.props.onChange,
-      event,
-      'timeInput'
-    );
+    helperFunctions.columnFilterOnChangeEvents(this.props.filter, this.props.onChange, event, 'timeInput');
   timeToggleOnChange = event =>
-    helperFunctions.columnFilterOnChangeEvents(
-      this.props.filter,
-      this.props.onChange,
-      event,
-      'secondsOrMinutes'
-    );
+    helperFunctions.columnFilterOnChangeEvents(this.props.filter, this.props.onChange, event, 'secondsOrMinutes');
   render() {
     return (
       <CustomFilterMenu
@@ -125,38 +97,24 @@ export class ElapsedTimeFilter extends Component {
         buttonType="columnFilter"
         className="elapsedTime"
         updateFilter={this.props.onChange}
-        currentFilter={
-          this.props.filter
-            ? helperFunctions.formatFilter(this.props.filter.value)
-            : 'All Results'
-        }
+        currentFilter={this.props.filter ? helperFunctions.formatFilter(this.props.filter.value) : 'All Results'}
       >
         <CustomSubMenuWrapper>
           <FilterSelect
             onChange={this.greaterThanOnChange}
             options={['Greater Than', 'Less Than']}
-            defaultValue={
-              this.props.filter
-                ? this.props.filter.value.split(':')[0]
-                : 'Greater Than'
-            }
+            defaultValue={this.props.filter ? this.props.filter.value.split(':')[0] : 'Greater Than'}
           />
 
           <MinutesInput
-            value={
-              this.props.filter ? this.props.filter.value.split(':')[1] : 0
-            }
+            value={this.props.filter ? this.props.filter.value.split(':')[1] : 0}
             onChange={this.minutesInputOnChange}
           />
 
           <FilterSelect
             onChange={this.timeToggleOnChange}
             options={['Minutes', 'Seconds']}
-            defaultValue={
-              this.props.filter
-                ? this.props.filter.value.split(':')[2]
-                : 'Seconds'
-            }
+            defaultValue={this.props.filter ? this.props.filter.value.split(':')[2] : 'Seconds'}
           />
         </CustomSubMenuWrapper>
       </CustomFilterMenu>

@@ -24,6 +24,7 @@ import {
   userHasPermissions,
   hasPermission,
   isInherited,
+  shouldDisableField,
   isCreating,
   isUpdating,
   isSaving,
@@ -37,10 +38,7 @@ import {
   getEntityListMembers,
   getListSize
 } from '../selectors';
-import {
-  getCurrentPermissions,
-  getCurrentTenantId
-} from '../../userData/selectors';
+import { getCurrentPermissions, getCurrentTenantId } from '../../userData/selectors';
 import { EntityMetaData, entitiesMetaData } from '../metaData';
 
 entitiesMetaData.mockEntity = new EntityMetaData('mockEntity');
@@ -100,11 +98,7 @@ const initialState = fromJS({
 });
 
 jest.mock('../../userData/selectors');
-getCurrentPermissions.mockImplementation(() => [
-  'READ_ALL',
-  'UPDATE_ALL',
-  'MANAGE_ALL'
-]);
+getCurrentPermissions.mockImplementation(() => ['READ_ALL', 'UPDATE_ALL', 'MANAGE_ALL']);
 getCurrentTenantId.mockImplementation(() => '0000-0000');
 
 describe('getCurrentEntity', () => {
@@ -205,9 +199,7 @@ describe('getSelectedEntityBulkChangeItems', () => {
 
 describe('getConfirmationDialogType', () => {
   it('Returns dialog displayed type', () => {
-    expect(getConfirmationDialogType(initialState)).toEqual(
-      'CONFIRM_TOGGLE_ENTITY_LIST_ITEM_ACTIVE'
-    );
+    expect(getConfirmationDialogType(initialState)).toEqual('CONFIRM_TOGGLE_ENTITY_LIST_ITEM_ACTIVE');
   });
 });
 
@@ -296,9 +288,7 @@ describe('userHasReadPermission', () => {
 
 describe('userHasReadPermissionManual', () => {
   it('Returns if user has read permissions, manual method', () => {
-    expect(userHasReadPermissionManual(initialState, 'mockEntity')).toEqual(
-      true
-    );
+    expect(userHasReadPermissionManual(initialState, 'mockEntity')).toEqual(true);
   });
 });
 
@@ -316,17 +306,13 @@ describe('userHasCreatePermission', () => {
 
 describe('userHasPermissions', () => {
   it('Returns if user has given permissions', () => {
-    expect(
-      userHasPermissions(initialState, ['VIEW_ALL', 'UPDATE_ALL'])
-    ).toEqual(true);
+    expect(userHasPermissions(initialState, ['VIEW_ALL', 'UPDATE_ALL'])).toEqual(true);
   });
 });
 
 describe('hasPermission', () => {
   it('Returns if user permissions contain permissions given', () => {
-    expect(hasPermission(['VIEW_ALL', 'UPDATE_ALL'], ['VIEW_ALL'])).toEqual(
-      true
-    );
+    expect(hasPermission(['VIEW_ALL', 'UPDATE_ALL'], ['VIEW_ALL'])).toEqual(true);
   });
   it('Returns if user permissions if permissions given are undefined', () => {
     expect(hasPermission(['VIEW_ALL', 'UPDATE_ALL'], undefined)).toEqual(false);
@@ -407,6 +393,61 @@ describe('isInherited', () => {
   });
 });
 
+describe('shouldDisableField', () => {
+  it('Returns if selected entity field should be disabled', () => {
+    expect(shouldDisableField(initialState)).toEqual(false);
+  });
+  it('Returns if selected entity field should be disabled when selectedEntityId is "create"', () => {
+    expect(
+      shouldDisableField(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: 'create'
+            }
+          }
+        })
+      )
+    ).toEqual(false);
+  });
+  it('Returns if selected entity field should be disabled when currentEntity matches default', () => {
+    expect(
+      shouldDisableField(
+        fromJS({
+          Entities: {
+            currentEntity: 'users',
+            users: {
+              selectedEntityId: '0004'
+            }
+          }
+        })
+      )
+    ).toEqual(false);
+  });
+  it('Returns if selected entity is inherited when currentEntity matches reasonLists', () => {
+    expect(
+      shouldDisableField(
+        fromJS({
+          Entities: {
+            currentEntity: 'reasonLists',
+            reasonLists: {
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004',
+                  type: 'system',
+                  reasons: []
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual(true);
+  });
+});
+
 describe('isCreating', () => {
   it('Returns if instance of entity is being created', () => {
     expect(isCreating(initialState)).toEqual(true);
@@ -473,9 +514,7 @@ describe('getSelectedEntityFormId', () => {
 
 describe('availableEntitiesForList', () => {
   it('Returns available members for selected entity', () => {
-    expect(availableEntitiesForList(initialState)).toEqual([
-      { active: true, id: '0001', name: 'mockName' }
-    ]);
+    expect(availableEntitiesForList(initialState)).toEqual([{ active: true, id: '0001', name: 'mockName' }]);
   });
 });
 
@@ -487,11 +526,7 @@ describe('getListDependency', () => {
 
 describe('getEntityListMembers', () => {
   it('Returns members list for selected entity', () => {
-    expect(getEntityListMembers(initialState)).toEqual([
-      '0002',
-      '0003',
-      '0004'
-    ]);
+    expect(getEntityListMembers(initialState)).toEqual(['0002', '0003', '0004']);
   });
   it('Returns empty members list for selected entity if no members exist for currentEntity', () => {
     expect(

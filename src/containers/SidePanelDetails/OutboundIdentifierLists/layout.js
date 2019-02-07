@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { DetailHeader, SidePanelTable } from 'cx-ui-components';
-import { detailHeadertext } from '../../../utils';
+import { detailHeaderText } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ export default function OutboundIdentifierListsDetailsPanel({
 
       <DetailHeader
         userHasUpdatePermission={!outboundIdentifiersFetching && userHasUpdatePermission}
-        text={detailHeadertext(tableItems, 'Outbound Identifiers')}
+        text={detailHeaderText(tableItems, 'Outbound Identifiers')}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
         open
       />

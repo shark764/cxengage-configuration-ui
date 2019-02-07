@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import SkillsDetailsPanel from './layout';
 import {
   userHasUpdatePermission,
-  getSelectedEntity,
   isEntityFetching,
   userHasPermissions
 } from '../../../redux/modules/entities/selectors';
@@ -21,7 +20,6 @@ import store from '../../../redux/store';
 
 export function mapStateToProps(state) {
   return {
-    item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state),
     usersItems: getSkillMemberSidePanelTableItems(state),
     usersFields: getHasProficiencyFormValue(state)

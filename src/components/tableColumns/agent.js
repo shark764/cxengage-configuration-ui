@@ -3,13 +3,20 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function(agents) {
-  return {
+  const column = {
     Header: 'Agent',
     show: agents,
     id: 'agentName',
     accessor: d => d.agents.map(a => a.agentName).join(', '),
     Cell: ({ value }) => <span title={value}>{value}</span>
   };
+
+  column.Cell.propTypes = {
+    value: PropTypes.any
+  };
+
+  return column;
 }

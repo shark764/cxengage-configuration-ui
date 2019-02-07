@@ -14,7 +14,7 @@ import styled from 'styled-components';
 
 import { SidePanelTable, DetailHeader } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
-import { detailHeadertext } from '../../../utils';
+import { detailHeaderText } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,7 +60,7 @@ export default function UsersDetailsPanel({
         <DetailWrapper open={false} contains="skills">
           <WrappedDetailHeader
             userHasUpdatePermission={!skillsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.skills}
-            text={detailHeadertext(skillsItems, 'Skills')}
+            text={detailHeaderText(skillsItems, 'Skills')}
             onActionButtonClick={() => setSelectedSubEntityId('skills')}
           />
           <SidePanelTable
@@ -80,7 +80,7 @@ export default function UsersDetailsPanel({
         <DetailWrapper open={false} contains="groups">
           <WrappedDetailHeader
             userHasUpdatePermission={!groupsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.groups}
-            text={detailHeadertext(groupsItems, 'Groups')}
+            text={detailHeaderText(groupsItems, 'Groups')}
             onActionButtonClick={() => setSelectedSubEntityId('groups')}
           />
           <SidePanelTable
@@ -102,7 +102,7 @@ export default function UsersDetailsPanel({
             userHasUpdatePermission={
               !reasonListsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.reasonLists
             }
-            text={detailHeadertext(reasonListsItems, 'Presence Reason Lists')}
+            text={detailHeaderText(reasonListsItems, 'Presence Reason Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
           />
           <SidePanelTable
@@ -126,7 +126,7 @@ export default function UsersDetailsPanel({
             userHasUpdatePermission={
               !messageTemplatesFetching && userHasUpdatePermission && sidePanelUpdatePermissions.messageTemplates
             }
-            text={detailHeadertext(messageTemplatesItems, 'Message Templates')}
+            text={detailHeaderText(messageTemplatesItems, 'Message Templates')}
             onActionButtonClick={() => setSelectedSubEntityId('messageTemplates')}
           />
           <SidePanelTable
@@ -150,7 +150,7 @@ export default function UsersDetailsPanel({
             userHasUpdatePermission={
               !transferListsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.transferLists
             }
-            text={detailHeadertext(transferListsItems, 'Transfer Lists')}
+            text={detailHeaderText(transferListsItems, 'Transfer Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('transferLists')}
           />
           <SidePanelTable
@@ -176,7 +176,7 @@ export default function UsersDetailsPanel({
               userHasUpdatePermission &&
               sidePanelUpdatePermissions.outboundIdentifierLists
             }
-            text={detailHeadertext(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
+            text={detailHeaderText(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
           />
           <SidePanelTable

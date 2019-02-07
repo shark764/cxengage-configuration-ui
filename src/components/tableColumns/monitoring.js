@@ -82,7 +82,7 @@ export const helperFunctions = {
 };
 
 export default function(value, tableType, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission) {
-  return {
+  const column = {
     Header: 'Monitoring',
     show: value,
     id: 'monitoring',
@@ -94,6 +94,16 @@ export default function(value, tableType, monitoredId, monitoringStatus, agentId
     filterMethod: (filter, row) => helperFunctions.monitoringFilterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.monitorFilter(tableType, onChange)
   };
+
+  column.Cell.propTypes = {
+    value: PropTypes.any,
+    row: PropTypes.any
+  };
+  column.Filter.propTypes = {
+    onChange: PropTypes.func
+  };
+
+  return column;
 }
 export class MonitorFilter extends Component {
   render() {

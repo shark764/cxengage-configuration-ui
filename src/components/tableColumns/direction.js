@@ -3,11 +3,11 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import CheckboxFilterMenu from '../../containers/CheckboxFilterMenu';
 
 export const helperFunctions = {
-  directionFilter: (onChange, tableType) =>
-    directionFilter(onChange, tableType),
+  directionFilter: (onChange, tableType) => directionFilter(onChange, tableType),
   filterMethod: ({ value = 'All', id }, row) => {
     if (value === 'Inbound') {
       return row[id] === 'inbound';
@@ -22,7 +22,7 @@ export const helperFunctions = {
 };
 
 export default function(direction, tableType) {
-  return {
+  const column = {
     Header: 'Direction',
     width: 140,
     resizable: false,
@@ -31,9 +31,17 @@ export default function(direction, tableType) {
     accessor: 'direction',
     Cell: ({ value }) => <span title={value}>{value}</span>,
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row),
-    Filter: ({ onChange }) =>
-      helperFunctions.directionFilter(onChange, tableType)
+    Filter: ({ onChange }) => helperFunctions.directionFilter(onChange, tableType)
   };
+
+  column.Cell.propTypes = {
+    value: PropTypes.any
+  };
+  column.Filter.propTypes = {
+    onChange: PropTypes.func
+  };
+
+  return column;
 }
 
 function directionFilter(onChange, tableType) {

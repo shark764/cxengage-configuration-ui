@@ -8,33 +8,9 @@ import { shallow } from 'enzyme';
 import SkillsDetailsPanel from '../layout';
 
 describe('<SkillsDetailsPanel />', () => {
-  let customItem;
-  let customItemDisabled;
-  let customItemNoProficiency;
   let defaultFilters;
   let sidePanelReadPermissions;
   beforeEach(() => {
-    customItem = {
-      id: 'mockId',
-      name: 'mockName',
-      description: 'mockDescription',
-      active: true,
-      hasProficiency: true
-    };
-    customItemDisabled = {
-      id: 'mockId',
-      name: 'mockName',
-      description: 'mockDescription',
-      active: false,
-      hasProficiency: true
-    };
-    customItemNoProficiency = {
-      id: 'mockId',
-      name: 'mockName',
-      description: 'mockDescription',
-      active: false,
-      hasProficiency: false
-    };
     defaultFilters = {
       users: [],
       outboundIdentifierLists: []
@@ -53,7 +29,6 @@ describe('<SkillsDetailsPanel />', () => {
         usersItems={[]}
         outboundIdentifierListsItems={[]}
         children={'Mock Child'}
-        item={customItem}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
@@ -70,7 +45,6 @@ describe('<SkillsDetailsPanel />', () => {
         usersItems={[]}
         outboundIdentifierListsItems={[]}
         children={'Mock Child'}
-        item={customItemDisabled}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
@@ -87,7 +61,6 @@ describe('<SkillsDetailsPanel />', () => {
         usersItems={[]}
         outboundIdentifierListsItems={[]}
         children={'Mock Child'}
-        item={customItemNoProficiency}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
@@ -104,7 +77,6 @@ describe('<SkillsDetailsPanel />', () => {
         usersItems={[]}
         outboundIdentifierListsItems={[]}
         children={'Mock Child'}
-        item={customItem}
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}

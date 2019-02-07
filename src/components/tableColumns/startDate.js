@@ -19,16 +19,14 @@ const CustomSubMenuWrapper = styled.div`
 `;
 
 export default function(startDate, tableType) {
-  return {
+  const column = {
     Header: 'Start Date',
     minWidth: 210,
     resizable: false,
     show: startDate,
     id: 'startDateTimestamp',
     accessor: d => timeStampToSeconds(d.startTimestamp),
-    Cell: ({ value }) => (
-      <span title={fullDateString(value)}>{fullDateString(value)}</span>
-    ),
+    Cell: ({ value }) => <span title={fullDateString(value)}>{fullDateString(value)}</span>,
     filterMethod: (filter, row) => {
       const filterArray = filter.value.split(':');
       const beforeOrAfter = filterArray[0];
@@ -45,23 +43,24 @@ export default function(startDate, tableType) {
       }
       return row[filter.id] < filterTime;
     },
-    Filter: ({ filter, onChange }) => (
-      <StartDateFilter
-        filter={filter}
-        onChange={onChange}
-        tableType={tableType}
-      />
-    )
+    Filter: ({ filter, onChange }) => <StartDateFilter filter={filter} onChange={onChange} tableType={tableType} />
   };
+
+  column.Cell.propTypes = {
+    value: PropTypes.any
+  };
+  column.Filter.propTypes = {
+    filter: PropTypes.func,
+    onChange: PropTypes.func
+  };
+
+  return column;
 }
 
 export class StartDateFilter extends Component {
-  filterArray = () =>
-    this.props.filter ? this.props.filter.value.split(':') : ['After', ''];
-  changeAfterBefore = event =>
-    this.props.onChange(`${event.target.value}:${this.filterArray()[1]}`);
-  changeDateInput = event =>
-    this.props.onChange(`${this.filterArray()[0]}:${event.target.value}`);
+  filterArray = () => (this.props.filter ? this.props.filter.value.split(':') : ['After', '']);
+  changeAfterBefore = event => this.props.onChange(`${event.target.value}:${this.filterArray()[1]}`);
+  changeDateInput = event => this.props.onChange(`${this.filterArray()[0]}:${event.target.value}`);
   formatCurrentFilter = filter => {
     const beforeOrAfter = filter.value.split(':')[0];
     const dateArray = filter.value.split(':')[1].split('-');
@@ -79,21 +78,13 @@ export class StartDateFilter extends Component {
           className="startDate"
           buttonType="columnFilter"
           updateFilter={this.props.onChange}
-          currentFilter={
-            this.props.filter
-              ? this.formatCurrentFilter(this.props.filter)
-              : 'All Results'
-          }
+          currentFilter={this.props.filter ? this.formatCurrentFilter(this.props.filter) : 'All Results'}
         >
           <CustomSubMenuWrapper>
             <FilterSelect
               onChange={this.changeAfterBefore}
               options={['After', 'Before']}
-              defaultValue={
-                this.props.filter
-                  ? this.props.filter.value.split(':')[0]
-                  : 'After'
-              }
+              defaultValue={this.props.filter ? this.props.filter.value.split(':')[0] : 'After'}
               // The below style is required as styled component
               // doesn't like the type="date" input
               style={{ width: '160px' }}

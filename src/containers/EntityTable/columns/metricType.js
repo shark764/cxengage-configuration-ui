@@ -37,3 +37,7 @@ export const metricTypeColumn = {
 metricTypeColumn.Cell.propTypes = {
   row: PropTypes.any
 };
+metricTypeColumn.Filter.propTypes = {
+  filter: PropTypes.func,
+  onChange: PropTypes.func
+};

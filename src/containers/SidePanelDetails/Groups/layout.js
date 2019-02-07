@@ -14,7 +14,7 @@ import styled from 'styled-components';
 
 import { Detail, SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
-import { detailHeadertext } from '../../../utils';
+import { detailHeaderText } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,7 +60,7 @@ export default function GroupsDetailsPanel({
         <DetailWrapper open={true} autoCloseOverride>
           <WrappedDetailHeader
             userHasUpdatePermission={!usersFetching && userHasUpdatePermission}
-            text={detailHeadertext(usersItems, 'Users')}
+            text={detailHeaderText(usersItems, 'Users')}
             onActionButtonClick={() => setSelectedSubEntityId('users')}
             inherited={inherited}
           />
@@ -81,7 +81,7 @@ export default function GroupsDetailsPanel({
         <DetailWrapper open={false} contains="outboundIdentifierLists">
           <WrappedDetailHeader
             userHasUpdatePermission={!outboundIdentifierListsFetching && userHasUpdatePermission}
-            text={detailHeadertext(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
+            text={detailHeaderText(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
             inherited={inherited}
           />
@@ -102,7 +102,7 @@ export default function GroupsDetailsPanel({
         <DetailWrapper open={false} contains="reasonLists">
           <WrappedDetailHeader
             userHasUpdatePermission={!reasonListsFetching && userHasUpdatePermission}
-            text={detailHeadertext(reasonListsItems, 'Presence Reason Lists')}
+            text={detailHeaderText(reasonListsItems, 'Presence Reason Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
             inherited={inherited}
           />

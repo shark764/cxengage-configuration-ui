@@ -26,7 +26,7 @@ const TimeInput = styled.input`
 `;
 
 export default function(startTime, tableType, twelveHourFormat) {
-  return {
+  const column = {
     Header: 'Start Time',
     show: startTime,
     id: 'startTimestamp',
@@ -37,9 +37,7 @@ export default function(startTime, tableType, twelveHourFormat) {
       twelveHourFormat ? (
         <span title={twelveHourTime(value)}>{twelveHourTime(value)}</span>
       ) : (
-        <span title={twentyFourHourTime(value)}>
-          {twentyFourHourTime(value)}
-        </span>
+        <span title={twentyFourHourTime(value)}>{twentyFourHourTime(value)}</span>
       ),
     filterMethod: (filter, row) => {
       const filterArray = filter.value.split('-');
@@ -47,8 +45,7 @@ export default function(startTime, tableType, twelveHourFormat) {
       let hours = parseInt(filterArray[1].split(':')[0], 10);
       if (
         twelveHourFormat &&
-        ((filterArray[2] === 'PM' && hours !== 12) ||
-          (filterArray[2] === 'AM' && hours === 12))
+        ((filterArray[2] === 'PM' && hours !== 12) || (filterArray[2] === 'AM' && hours === 12))
       ) {
         hours += 12;
       }
@@ -72,9 +69,7 @@ export default function(startTime, tableType, twelveHourFormat) {
         return true;
       }
       const now = currentTime();
-      const filterString = `${now} ${hours === 0 ? '00' : hours}:${
-        mins === 0 ? '00' : mins
-      }`;
+      const filterString = `${now} ${hours === 0 ? '00' : hours}:${mins === 0 ? '00' : mins}`;
       const filterTime = timeStampToSeconds(filterString);
 
       if (beforeOrAfter === 'After') {
@@ -83,33 +78,29 @@ export default function(startTime, tableType, twelveHourFormat) {
       return row[filter.id] < filterTime;
     },
     Filter: ({ filter, onChange }) => (
-      <StartTimeFilter
-        filter={filter}
-        onChange={onChange}
-        tableType={tableType}
-        twelveHourFormat={twelveHourFormat}
-      />
+      <StartTimeFilter filter={filter} onChange={onChange} tableType={tableType} twelveHourFormat={twelveHourFormat} />
     )
   };
+
+  column.Cell.propTypes = {
+    value: PropTypes.any
+  };
+  column.Filter.propTypes = {
+    filter: PropTypes.func,
+    onChange: PropTypes.func
+  };
+
+  return column;
 }
 
 export class StartTimeFilter extends Component {
-  filterArray = () =>
-    this.props.filter
-      ? this.props.filter.value.split('-')
-      : ['After', '00:00', 'AM'];
+  filterArray = () => (this.props.filter ? this.props.filter.value.split('-') : ['After', '00:00', 'AM']);
   afterBeforeOnchange = event =>
-    this.props.onChange(
-      `${event.target.value}-${this.filterArray()[1]}-${this.filterArray()[2]}`
-    );
+    this.props.onChange(`${event.target.value}-${this.filterArray()[1]}-${this.filterArray()[2]}`);
   timeInputOnchange = event =>
-    this.props.onChange(
-      `${this.filterArray()[0]}-${event.target.value}-${this.filterArray()[2]}`
-    );
+    this.props.onChange(`${this.filterArray()[0]}-${event.target.value}-${this.filterArray()[2]}`);
   amPmOnChange = event =>
-    this.props.onChange(
-      `${this.filterArray()[0]}-${this.filterArray()[1]}-${event.target.value}`
-    );
+    this.props.onChange(`${this.filterArray()[0]}-${this.filterArray()[1]}-${event.target.value}`);
   currentFilterString = () => {
     if (this.props.filter) {
       const filter = this.props.filter.value.split('-');
@@ -138,19 +129,11 @@ export class StartTimeFilter extends Component {
             className="StartTimeFilter"
             onChange={this.afterBeforeOnchange}
             options={['After', 'Before']}
-            defaultValue={
-              this.props.filter
-                ? this.props.filter.value.split('-')[0]
-                : 'After'
-            }
+            defaultValue={this.props.filter ? this.props.filter.value.split('-')[0] : 'After'}
           />
 
           <TimeInput
-            value={
-              this.props.filter
-                ? this.props.filter.value.split('-')[1]
-                : '00:00'
-            }
+            value={this.props.filter ? this.props.filter.value.split('-')[1] : '00:00'}
             onChange={this.timeInputOnchange}
           />
 
@@ -158,9 +141,7 @@ export class StartTimeFilter extends Component {
             <FilterSelect
               onChange={this.amPmOnChange}
               options={['AM', 'PM']}
-              defaultValue={
-                this.props.filter ? this.props.filter.value.split('-')[2] : 'AM'
-              }
+              defaultValue={this.props.filter ? this.props.filter.value.split('-')[2] : 'AM'}
             />
           )}
         </CustomSubMenuWrapper>

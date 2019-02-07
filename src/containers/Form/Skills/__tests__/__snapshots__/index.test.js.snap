@@ -13,6 +13,7 @@ Object {
   },
   "isSaving": true,
   "key": "mockId",
+  "userHasUpdatePermission": true,
 }
 `;
 
@@ -61,6 +62,7 @@ exports[`Skills Renders renders 1`] = `
     }
   }
   toggleProficiency={[Function]}
+  userHasUpdatePermission={true}
 >
   Child
 </Connect(ReduxForm)>

@@ -517,5 +517,6 @@ CrudEndpointUiLayout.propTypes = {
   selectedEntityId: PropTypes.string,
   selectedSubEntityId: PropTypes.string,
   showConfirmationDialog: PropTypes.string,
-  setSelectedSubEntityId: PropTypes.func
+  setSelectedSubEntityId: PropTypes.func,
+  slidingWidth: PropTypes.number
 };

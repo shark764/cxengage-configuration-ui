@@ -6,7 +6,7 @@ import React from 'react';
 import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import reasonListsDetailsPanel, { mapStateToProps } from '../';
+import reasonListsDetailsPanel from '../';
 import {
   getSelectedEntity,
   userHasUpdatePermission,

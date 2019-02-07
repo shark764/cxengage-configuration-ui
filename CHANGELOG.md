@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.52.1] - 2019-02-07
+### Changed
+- Added Unit Tests for new functions in selectors file.
+### Fixed
+- PropTypes missing in columns definition were added to avoid warning messages.
+
 ## [0.52.0] - 2019-02-07
 ### Added
 - CXV1-17031 - View permissions for groups and skills side panel tables

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { DetailHeader, SidePanelTable } from 'cx-ui-components';
-import { detailHeadertext } from '../../../utils';
+import { detailHeaderText } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ export default function DataAccessReportsDetailsPanel({
 
       <DetailHeader
         userHasUpdatePermission={userHasUpdatePermission}
-        text={detailHeadertext(tableItems, 'Users')}
+        text={detailHeaderText(tableItems, 'Users')}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
         open
       />

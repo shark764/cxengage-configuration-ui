@@ -16,6 +16,7 @@ export default function SkillsForm({
   handleSubmit,
   isSaving,
   inherited,
+  userHasUpdatePermission,
   key,
   disableProficiency,
   toggleProficiency,
@@ -31,7 +32,7 @@ export default function SkillsForm({
           id="frm-skills-name"
           componentType="input"
           inputType="text"
-          disabled={isSaving || inherited}
+          disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         <InputField
           name="description"
@@ -39,7 +40,7 @@ export default function SkillsForm({
           id="frm-skills-description"
           componentType="textarea"
           inputType="text"
-          disabled={isSaving || inherited}
+          disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         <ConfirmationWrapper
           confirmBtnCallback={!disableProficiency && !hasProficiency ? toggleProficiency : undefined}
@@ -55,7 +56,7 @@ export default function SkillsForm({
                 ? `You cannot update 'Has Proficiency' once it's set to true`
                 : 'Controls whether the skill needs a value specified'
             }
-            disabled={isSaving || inherited || disableProficiency}
+            disabled={isSaving || inherited || !userHasUpdatePermission || disableProficiency}
           />
         </ConfirmationWrapper>
       </Fragment>
@@ -68,6 +69,7 @@ SkillsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
+  userHasUpdatePermission: PropTypes.bool,
   disableProficiency: PropTypes.bool,
   toggleProficiency: PropTypes.func,
   hasProficiency: PropTypes.bool
