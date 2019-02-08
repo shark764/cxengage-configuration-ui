@@ -1865,7 +1865,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Reason List Management",
+    "pageTitle": "Presence Reason List Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -1881,7 +1881,7 @@ Object {
       },
     ],
     "subEntityName": "",
-    "title": "Reason List",
+    "title": "Presence Reason List",
     "updateFormDependencies": Array [],
   },
   "reasons": EntityMetaData {
@@ -1962,7 +1962,7 @@ Object {
       },
     ],
     "subEntityName": "",
-    "title": "Reason",
+    "title": "Presence Reason",
     "updateFormDependencies": Array [],
   },
   "roles": EntityMetaData {

@@ -4,12 +4,40 @@ exports[`checkDisableShared check if shared is disabled and id DOES NOT exists 1
 
 exports[`checkDisableShared check if shared is disabled and id exists 1`] = `false`;
 
-exports[`reasonListsInitialValues Return the initial Reason List Values, all values NOT provided 1`] = `
+exports[`filterReasons Return Filtered Reasons, all values provided 1`] = `
+Immutable.Map {
+  "shared": true,
+  "isDefault": false,
+  "reasons": Immutable.List [
+    Immutable.Map {
+      "reasonId": "mockReasonId",
+      "sortOrder": "0",
+      "hierarchy": Immutable.List [],
+    },
+    Immutable.Map {
+      "reasonId": "mockReasonId2",
+      "sortOrder": "1",
+      "hierarchy": Immutable.List [],
+    },
+  ],
+}
+`;
+
+exports[`reasonListsInitialValues Empty Reason List, all values provided 1`] = `
 Immutable.Map {
   "id": "mockId",
   "shared": false,
   "isDefault": false,
-  "reasons": Array [],
+  "reasons": Immutable.List [],
+}
+`;
+
+exports[`reasonListsInitialValues Return the initial Reason List Values, all values NOT provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "reasons": Immutable.List [],
+  "shared": false,
+  "isDefault": false,
 }
 `;
 
@@ -18,6 +46,17 @@ Immutable.Map {
   "id": "mockId",
   "shared": false,
   "isDefault": false,
-  "reasons": Array [],
+  "reasons": Immutable.List [
+    Immutable.Map {
+      "reasonId": "mockReasonId",
+      "sortOrder": "0",
+      "hierarchy": Immutable.List [],
+    },
+    Immutable.Map {
+      "reasonId": "mockReasonId2",
+      "sortOrder": "1",
+      "hierarchy": Immutable.List [],
+    },
+  ],
 }
 `;

@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.52.3] - 2019-02-12
+### Added
+- CXV1-16818 - Added warning on Shared change to 'true', just like Presence Reason Lists
+### Fixed
+- CXV1-16878 - Issues saving a Reason List that actually contained Reasons, most likely done through ConfigUI, in which reasons were deleted on saved, making the Reason List to be disabled automatically. Added a little TODO so we can remove the initialization once the component for adding Reasons is completed.
+
 ## [0.52.2] - 2019-02-12
 ### Fixed
 - CXV1-17080 - Fixed permissions for assigning outbound identifiers to groups and skills

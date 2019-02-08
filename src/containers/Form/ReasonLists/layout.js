@@ -24,7 +24,7 @@ export default function ReasonListsForm({
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
-      {inherited && <DetailsPanelAlert text="This reason is inherited and cannot be edited" />}
+      {inherited && <DetailsPanelAlert text="This Presence Reason List is inherited and cannot be edited" />}
       {sharedFormValue &&
         !disableShared &&
         !inherited && (

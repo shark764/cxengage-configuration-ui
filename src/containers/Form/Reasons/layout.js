@@ -10,7 +10,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, DetailsPanelAlert, InputField, ToggleField } from 'cx-ui-components';
+import { DetailHeader, DetailsPanelAlert, InputField, ToggleField, ConfirmationWrapper } from 'cx-ui-components';
 
 export default function reasonsForm({
   handleSubmit,
@@ -19,11 +19,12 @@ export default function reasonsForm({
   key,
   disableShared,
   sharedFormValue,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  toggleShared
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
-      {inherited && <DetailsPanelAlert text="This reason is inherited and cannot be edited" />}
+      {inherited && <DetailsPanelAlert text="This Presence Reason is inherited and cannot be edited" />}
       {sharedFormValue &&
         !disableShared &&
         !inherited && (
@@ -54,17 +55,25 @@ export default function reasonsForm({
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
-      <ToggleField
-        id="frm-reasons-shared"
-        name="shared"
-        label="Shared"
-        title={
-          disableShared
-            ? "You cannot update 'Shared' once is set to true"
-            : 'Change "Shared" state for this Presence Reason'
+      <ConfirmationWrapper
+        confirmBtnCallback={!disableShared && !sharedFormValue ? toggleShared : undefined}
+        mainText={
+          "Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
         }
-        disabled={isSaving || inherited || disableShared || !userHasUpdatePermission}
-      />
+        secondaryText={'Are you sure you want to continue?'}
+      >
+        <ToggleField
+          id="frm-reason-shared"
+          name="shared"
+          label="Shared"
+          title={
+            disableShared
+              ? "You cannot update 'Shared' once it's set to true"
+              : 'Change "Shared" state for this Presence Reason'
+          }
+          disabled={isSaving || inherited || disableShared || !userHasUpdatePermission}
+        />
+      </ConfirmationWrapper>
     </form>
   );
 }
@@ -76,5 +85,6 @@ reasonsForm.propTypes = {
   inherited: PropTypes.bool,
   sharedFormValue: PropTypes.bool,
   disableShared: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool
+  userHasUpdatePermission: PropTypes.bool,
+  toggleShared: PropTypes.func
 };

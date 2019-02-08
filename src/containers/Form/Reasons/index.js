@@ -15,6 +15,7 @@ import {
 } from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import { getCurrentSharedValue } from '../../../redux/modules/entities/reasons/selectors';
+import { toggleShared } from '../../../redux/modules/entities';
 
 const CreatereasonsForm = compose(
   connect(state => createFormName(state)),
@@ -38,4 +39,8 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CreatereasonsForm);
+export const actions = {
+  toggleShared
+};
+
+export default connect(mapStateToProps, actions)(CreatereasonsForm);

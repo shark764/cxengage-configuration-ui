@@ -422,7 +422,8 @@ entities.chatWidgets.columns = [
 ];
 
 // Presence Reasons Lists
-entities.reasonLists.pageTitle = 'Reason List Management';
+entities.reasonLists.pageTitle = 'Presence Reason List Management';
+entities.reasonLists.title = 'Presence Reason List';
 entities.reasonLists.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
 entities.reasonLists.dependentEntity = 'reasons';
 entities.reasonLists.defaultFilters = [{ id: 'active', value: 'enabled' }];
@@ -572,6 +573,7 @@ entities.dataAccessReports.standardDashboards = [
 
 // Reasons
 entities.reasons.pageTitle = 'Presence Reasons';
+entities.reasons.title = 'Presence Reason';
 entities.reasons.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Reasons.htm';
 entities.reasons.columns = [
   { name: 'Name', active: true },
