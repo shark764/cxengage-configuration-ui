@@ -48,7 +48,7 @@ export class EntityMetaData {
     this.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.defaultFilters = [];
-    this.defaultSorted = [];
+    this.defaultSorted = [{ id: 'name', alpha: true }];
     this.defaultDependentEntityFilters = [];
     this.defaultAssociationFilters = [];
     this.sdkCall = {
@@ -208,7 +208,6 @@ entities.users.columns = [
   { name: 'Platform Status', active: true },
   { name: 'Tenant Status', active: true }
 ];
-entities.users.defaultSorted = [{ id: 'name', alpha: true }];
 entities.users.defaultFilters = [
   { id: 'status', value: 'accepted' },
   { id: 'invitationStatus', value: 'all non-disabled' }
@@ -251,7 +250,6 @@ entities.skills.columns = [
   { name: 'Status', active: true }
 ];
 entities.skills.defaultFilters = [{ id: 'active', value: 'enabled' }];
-entities.skills.defaultSorted = [{ id: 'name', alpha: true }];
 entities.skills.defaultAssociationFilters = {
   users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }]
@@ -290,7 +288,6 @@ entities.groups.columns = [
   { name: 'Status', active: true }
 ];
 entities.groups.defaultFilters = [{ id: 'active', value: 'enabled' }];
-entities.groups.defaultSorted = [{ id: 'name', alpha: true }];
 entities.groups.defaultAssociationFilters = {
   users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }],
@@ -301,7 +298,6 @@ entities.groups.defaultAssociationFilters = {
 entities.lists.createFormDependencies.push('listTypes');
 entities.lists.subEntityName = 'listItems';
 entities.lists.helpLink = '/Help/Content/Configuration/Lists/Lists.htm';
-entities.lists.defaultSorted = [{ id: 'name', alpha: true }];
 entities.lists.columns = [
   { name: 'Name', active: true },
   { name: 'List Type', active: true },
@@ -323,7 +319,6 @@ entities.outboundIdentifiers.columns = [
   { name: 'Status', active: true }
 ];
 entities.outboundIdentifiers.defaultFilters = [{ id: 'active', value: 'enabled' }];
-entities.outboundIdentifiers.defaultSorted = [{ id: 'name', alpha: true }];
 
 // Outbound Identifiers Lists
 entities.outboundIdentifierLists.betaFeature = true;
@@ -370,7 +365,6 @@ entities.outboundIdentifierLists.columns = [
   { name: 'Status', active: true }
 ];
 entities.outboundIdentifierLists.defaultFilters = [{ id: 'active', value: 'enabled' }];
-entities.outboundIdentifierLists.defaultSorted = [{ id: 'name', alpha: true }];
 entities.outboundIdentifierLists.defaultDependentEntityFilters = [{ id: 'active', value: 'enabled' }];
 
 // Roles
@@ -387,6 +381,7 @@ entities.roles.columns = [
 
 //Silent Monitoring
 entities.interactionMonitoring.betaFeature = true;
+entities.interactionMonitoring.defaultSorted = [];
 entities.interactionMonitoring.columns = [
   { name: 'InteractionId', active: true },
   { name: 'Agent', active: true },
@@ -407,7 +402,6 @@ entities.interactionMonitoring.columns = [
 // Custom Metrics
 entities.customMetrics.pageTitle = 'Statistics Management';
 entities.customMetrics.helpLink = '/Help/Content/Configuration/Statistics_Management/About_Statistics_Management.htm';
-entities.customMetrics.defaultSorted = [{ id: 'name', alpha: true }];
 entities.customMetrics.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -432,7 +426,6 @@ entities.reasonLists.pageTitle = 'Reason List Management';
 entities.reasonLists.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
 entities.reasonLists.dependentEntity = 'reasons';
 entities.reasonLists.defaultFilters = [{ id: 'active', value: 'enabled' }];
-entities.reasonLists.defaultSorted = [{ id: 'name', alpha: true }];
 entities.reasonLists.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -534,7 +527,6 @@ entities.dataAccessReports.modalListTableFields = [
   }
 ];
 entities.dataAccessReports.defaultFilters = [{ id: 'active', value: 'enabled' }];
-entities.dataAccessReports.defaultSorted = [{ id: 'name', alpha: true }];
 entities.dataAccessReports.defaultDependentEntityFilters = [
   { id: 'invitationStatus', value: 'enabled' },
   { id: 'status', value: 'accepted' }
@@ -581,7 +573,6 @@ entities.dataAccessReports.standardDashboards = [
 // Reasons
 entities.reasons.pageTitle = 'Presence Reasons';
 entities.reasons.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Reasons.htm';
-entities.reasons.defaultSorted = [{ id: 'name', alpha: true }];
 entities.reasons.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -593,7 +584,6 @@ entities.reasons.columns = [
 // Queues
 entities.queues.pageTitle = 'Queue Management';
 entities.queues.helpLink = '/Help/Content/Managing%20Flows/Create_queue.htm';
-entities.queues.defaultSorted = [{ id: 'name', alpha: true }];
 entities.queues.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -604,7 +594,6 @@ entities.queues.columns = [
 // Flows
 entities.flows.pageTitle = 'Flow Management';
 entities.flows.helpLink = '/Help/Content/Managing%20Flows/Flow_overview.htm';
-entities.flows.defaultSorted = [{ id: 'name', alpha: true }];
 entities.flows.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },

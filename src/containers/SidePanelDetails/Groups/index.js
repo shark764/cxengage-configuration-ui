@@ -35,6 +35,9 @@ export function mapStateToProps(state, props) {
       groups: userHasPermissions(state, ['VIEW_ALL_GROUPS']),
       outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ']),
       reasonLists: userHasPermissions(state, ['READ_PRESENCE_REASONS'])
+    },
+    sidePanelUpdatePermissions: {
+      outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_ASSIGN'])
     }
   };
 }

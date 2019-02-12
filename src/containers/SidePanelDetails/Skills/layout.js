@@ -37,7 +37,8 @@ export default function SkillsDetailsPanel({
   removeListItem,
   setSelectedSubEntityId,
   defaultFilters,
-  sidePanelReadPermissions
+  sidePanelReadPermissions,
+  sidePanelUpdatePermissions
 }) {
   return (
     <Wrapper id="dtpanel-skills">
@@ -65,14 +66,18 @@ export default function SkillsDetailsPanel({
       {sidePanelReadPermissions.outboundIdentifierLists && (
         <DetailWrapper open={false} contains="outboundIdentifierLists">
           <WrappedDetailHeader
-            userHasUpdatePermission={!outboundIdentifierListsFetching && userHasUpdatePermission}
+            userHasUpdatePermission={
+              !outboundIdentifierListsFetching &&
+              userHasUpdatePermission &&
+              sidePanelUpdatePermissions.outboundIdentifierLists
+            }
             text={detailHeaderText(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
           />
           <SidePanelTable
             tableType={'sidePanel'}
             contains="outboundIdentifierLists"
-            userHasUpdatePermission={userHasUpdatePermission}
+            userHasUpdatePermission={userHasUpdatePermission && sidePanelUpdatePermissions.outboundIdentifierLists}
             deleteSubEntity={removeListItem}
             items={outboundIdentifierListsItems}
             fields={outboundIdentifierListsFields}
@@ -97,5 +102,6 @@ SkillsDetailsPanel.propTypes = {
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.object,
-  sidePanelReadPermissions: PropTypes.object
+  sidePanelReadPermissions: PropTypes.object,
+  sidePanelUpdatePermissions: PropTypes.object
 };

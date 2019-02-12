@@ -95,6 +95,11 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       "reasonLists": undefined,
     }
   }
+  sidePanelUpdatePermissions={
+    Object {
+      "outboundIdentifierLists": undefined,
+    }
+  }
   store={
     Object {
       "dispatch": [Function],
@@ -251,6 +256,9 @@ Object {
     "groups": undefined,
     "outboundIdentifierLists": undefined,
     "reasonLists": undefined,
+  },
+  "sidePanelUpdatePermissions": Object {
+    "outboundIdentifierLists": undefined,
   },
   "userHasUpdatePermission": true,
   "usersFetching": undefined,

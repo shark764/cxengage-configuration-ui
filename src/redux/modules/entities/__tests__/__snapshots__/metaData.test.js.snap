@@ -14,7 +14,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "branding",
     "entityTableFields": Array [
@@ -69,7 +74,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "capacityRules",
     "entityTableFields": Array [
@@ -137,7 +147,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "chatWidgets",
     "entityTableFields": Array [
@@ -269,7 +284,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "dashboards",
     "entityTableFields": Array [
@@ -528,7 +548,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "emailTemplates",
     "entityTableFields": Array [
@@ -806,7 +831,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "historicalReportFolders",
     "entityTableFields": Array [
@@ -861,7 +891,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "identityProviders",
     "entityTableFields": Array [
@@ -1028,7 +1063,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "listTypes",
     "entityTableFields": Array [
@@ -1179,7 +1219,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "messageTemplates",
     "entityTableFields": Array [
@@ -1485,7 +1530,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "permissions",
     "entityTableFields": Array [
@@ -1540,7 +1590,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "platformRoles",
     "entityTableFields": Array [
@@ -1595,7 +1650,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "protectedBranding",
     "entityTableFields": Array [
@@ -1930,7 +1990,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "permissions",
     "entityName": "roles",
     "entityTableFields": Array [
@@ -2117,7 +2182,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "standardDashboards",
     "entityTableFields": Array [
@@ -2185,7 +2255,12 @@ Object {
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
-    "defaultSorted": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
     "dependentEntity": "",
     "entityName": "transferLists",
     "entityTableFields": Array [

@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 
+## [0.52.2] - 2019-02-12
+### Fixed
+- CXV1-17080 - Fixed permissions for assigning outbound identifiers to groups and skills
+- CXV1-17026 - Default sorted roles main table name column a-z
+
 ## [0.52.1] - 2019-02-07
 ### Changed
 - Added Unit Tests for new functions in selectors file.

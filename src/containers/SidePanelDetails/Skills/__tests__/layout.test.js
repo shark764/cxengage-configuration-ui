@@ -10,6 +10,7 @@ import SkillsDetailsPanel from '../layout';
 describe('<SkillsDetailsPanel />', () => {
   let defaultFilters;
   let sidePanelReadPermissions;
+  let sidePanelUpdatePermissions;
   beforeEach(() => {
     defaultFilters = {
       users: [],
@@ -17,6 +18,9 @@ describe('<SkillsDetailsPanel />', () => {
     };
     sidePanelReadPermissions = {
       skills: true,
+      outboundIdentifierLists: true
+    };
+    sidePanelUpdatePermissions = {
       outboundIdentifierLists: true
     };
   });
@@ -32,6 +36,7 @@ describe('<SkillsDetailsPanel />', () => {
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -48,6 +53,7 @@ describe('<SkillsDetailsPanel />', () => {
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -64,6 +70,7 @@ describe('<SkillsDetailsPanel />', () => {
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -80,6 +87,7 @@ describe('<SkillsDetailsPanel />', () => {
         setSelectedSubEntityId={() => {}}
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
       />
     );
     expect(rendered).toMatchSnapshot();

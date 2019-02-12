@@ -47,6 +47,9 @@ Object {
     "outboundIdentifierLists": undefined,
     "skills": undefined,
   },
+  "sidePanelUpdatePermissions": Object {
+    "outboundIdentifierLists": undefined,
+  },
   "userHasUpdatePermission": true,
   "usersFetching": undefined,
   "usersFields": Array [
@@ -143,6 +146,11 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
     Object {
       "outboundIdentifierLists": undefined,
       "skills": undefined,
+    }
+  }
+  sidePanelUpdatePermissions={
+    Object {
+      "outboundIdentifierLists": undefined,
     }
   }
   store={

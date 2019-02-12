@@ -42,7 +42,8 @@ export default function GroupsDetailsPanel({
   inherited,
   item: { name, description, active },
   defaultFilters,
-  sidePanelReadPermissions
+  sidePanelReadPermissions,
+  sidePanelUpdatePermissions
 }) {
   return (
     <Wrapper id="dtpanel-groups">
@@ -80,7 +81,11 @@ export default function GroupsDetailsPanel({
       {sidePanelReadPermissions.outboundIdentifierLists && (
         <DetailWrapper open={false} contains="outboundIdentifierLists">
           <WrappedDetailHeader
-            userHasUpdatePermission={!outboundIdentifierListsFetching && userHasUpdatePermission}
+            userHasUpdatePermission={
+              !outboundIdentifierListsFetching &&
+              userHasUpdatePermission &&
+              sidePanelUpdatePermissions.outboundIdentifierLists
+            }
             text={detailHeaderText(outboundIdentifierListsItems, 'Outbound Identifier Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('outboundIdentifierLists')}
             inherited={inherited}
@@ -88,7 +93,7 @@ export default function GroupsDetailsPanel({
           <SidePanelTable
             tableType={'sidePanel'}
             contains="outboundIdentifierLists"
-            userHasUpdatePermission={userHasUpdatePermission}
+            userHasUpdatePermission={userHasUpdatePermission && sidePanelUpdatePermissions.outboundIdentifierLists}
             deleteSubEntity={removeListItem}
             items={outboundIdentifierListsItems}
             inherited={inherited}
@@ -144,5 +149,6 @@ GroupsDetailsPanel.propTypes = {
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.object,
-  sidePanelReadPermissions: PropTypes.object
+  sidePanelReadPermissions: PropTypes.object,
+  sidePanelUpdatePermissions: PropTypes.object
 };

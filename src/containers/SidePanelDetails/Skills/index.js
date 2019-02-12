@@ -44,6 +44,9 @@ export function mapStateToProps(state) {
     sidePanelReadPermissions: {
       skills: userHasPermissions(state, ['VIEW_ALL_SKILLS']),
       outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ'])
+    },
+    sidePanelUpdatePermissions: {
+      outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_ASSIGN'])
     }
   };
 }
