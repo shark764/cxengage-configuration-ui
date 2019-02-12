@@ -79,6 +79,21 @@
     ]
   },
   "babel": {
+    "plugins": [
+      "transform-class-properties",
+      "transform-object-rest-spread",
+      "transform-react-remove-prop-types",
+      "syntax-dynamic-import",
+      [
+        "create-automation-page-objects",
+        {
+          "filePrefix": "const {Element} = require('cx-automation-utils/pageObject'); \nconst elements = { \n",
+          "elementTemplate": "ELEMENT: new Element('[automation=\"ELEMENT\"]'), \n",
+          "fileSuffix": "\n }; \n module.exports = elements;",
+          "saveFilePath": "automation/pages/index.js"
+        }
+      ]
+    ],
     "presets": [
       "react",
       [
@@ -91,12 +106,6 @@
           }
         }
       ]
-    ],
-    "plugins": [
-      "transform-class-properties",
-      "transform-object-rest-spread",
-      "transform-react-remove-prop-types",
-      "syntax-dynamic-import"
     ]
   },
   "author": "SerenovaLLC",
@@ -110,6 +119,7 @@
     "babel-eslint": "7.2.3",
     "babel-jest": "22.4.3",
     "babel-loader": "7.1.4",
+    "babel-plugin-create-automation-page-objects": "^1.0.0",
     "babel-plugin-syntax-dynamic-import": "6.18.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
@@ -117,7 +127,7 @@
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.11",
-    "cx-automation-utils": "^1.0.9",
+    "cx-automation-utils": "^1.1.0",
     "cx-ui-components": "^0.33.0",
     "draft-js": "^0.10.5",
     "enzyme": "3.3.0",

@@ -1,7 +1,5 @@
-//const Page = require('../../../resources/classes/pageObject').Element,
-//	Brow = new Page(),
-const {Element, Brow} = require('cx-automation-utils/pageObject'),
-	urls = require('../uiUrls/uiUrls.js');
+const {Element, Brow} = require('cx-automation-utils/pageObject');
+const urls = require('../uiUrls/uiUrls.js');
 
 const uiMainPage = {
 	tenantDropDown: new Element('dropdown[id="tenant-dropdown"]'),

@@ -1,9 +1,14 @@
 const { config } = require('cx-automation-utils/wdioConf');
 
-config.host = 'resources-selenium.cxengagelabs.net';
-config.maxInstances = 10;
+if(!process.env.URL) {
+  process.env.LOCALONLY = true;
+  process.env.URL = 'http://localhost:3000/#/';
+  config.maxInstances = 1;
+} else {
+  config.host = 'resources-selenium.cxengagelabs.net';
+  config.maxInstances = 10;
+}
 
-process.env.URL = process.env.URL || 'http://localhost:3000/';
 
 config.suites = {
     "inProgress": ["./automation/specs/inProgress/*.spec.js"],

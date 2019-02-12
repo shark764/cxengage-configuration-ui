@@ -77,7 +77,7 @@ export default class Login extends Component {
       return (
         <Fragment>
           <input
-            className="username"
+            automation="username"
             placeholder="Username"
             type="email"
             onChange={this.setUsername}
@@ -85,19 +85,19 @@ export default class Login extends Component {
           />
           <br />
           <input
-            className="password"
+            automation="password"
             placeholder="Password"
             type="password"
             onChange={this.setPassword}
             value={this.state.password}
           />
           <br />
-          <button className="sign-in-button" onClick={this.login}>
+          <button automation="signInButton" onClick={this.login}>
             Sign In
           </button>
           <br />
           <select
-            className="tenant-select"
+            automation="tenantSelect"
             onChange={this.setTenant}
             defaultValue={this.state.tenants.length > 0 ? this.state.tenants[0].tenantId : null}
           >
@@ -107,7 +107,7 @@ export default class Login extends Component {
           </select>
           <br />
           <button
-            className="choose-tenant-button"
+            automation="chooseTenantButton"
             disabled={this.state.selectedTenant === ''}
             onClick={this.chooseTenant}
           >
@@ -116,7 +116,7 @@ export default class Login extends Component {
         </Fragment>
       );
     } else {
-      return this.props.hasStarted ? this.props.children : <Loading className="loading" size={120} />;
+      return this.props.hasStarted ? this.props.children : <Loading automation="loading" size={120} />;
     }
   }
 }
