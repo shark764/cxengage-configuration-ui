@@ -2,7 +2,22 @@
 
 exports[`FlowsDetailsPanel Renders renders 1`] = `
 <FlowsDetailsPanel
-  dispatch={[Function]}
+  copyListItem={[Function]}
+  createDraftItem={[Function]}
+  draftsItems={
+    Array [
+      Object {
+        "id": "0001",
+        "name": "mockName1",
+      },
+      Object {
+        "id": "0002",
+        "name": "mockName2",
+      },
+    ]
+  }
+  openFlowDesigner={[Function]}
+  removeListItem={[Function]}
   store={
     Object {
       "dispatch": [Function],
@@ -11,6 +26,39 @@ exports[`FlowsDetailsPanel Renders renders 1`] = `
       "subscribe": [Function],
       Symbol(observable): [Function],
     }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  userHasUpdatePermission={true}
+  versionsItems={
+    Array [
+      Object {
+        "id": "0001",
+        "name": "mockName1",
+      },
+      Object {
+        "id": "0002",
+        "name": "mockName2",
+      },
+    ]
   }
 >
   Child

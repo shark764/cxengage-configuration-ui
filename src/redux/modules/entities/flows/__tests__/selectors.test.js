@@ -19,21 +19,18 @@ const initialState = fromJS({
         {
           active: true,
           id: 'flowMockId_1',
-          name: 'Flow Mock 1',
-          tenantId: 'mockTenantId'
+          name: 'Flow Mock 1'
         },
         {
           active: true,
           channelType: 'voice',
           id: 'flowMockId_2',
-          name: 'Flow Mock 2',
-          tenantId: 'mockPlatformId'
+          name: 'Flow Mock 2'
         },
         {
           active: false,
           id: 'flowMockId_3',
-          name: 'Flow Mock 3',
-          tenantId: 'mockTenantId'
+          name: 'Flow Mock 3'
         }
       ]
     }
@@ -45,7 +42,8 @@ describe('selectFlowIds', () => {
     // the initial state above has an extra item with a platform tenant id that should get filtered out
     // the initial state above has an extra item with a non active flow that should get filtered out
     expect(selectFlowIds(initialState)).toEqual([
-      { label: 'Flow Mock 1', value: 'flowMockId_1' }
+      { label: 'Flow Mock 1', value: 'flowMockId_1' },
+      { label: 'Flow Mock 2', value: 'flowMockId_2' }
     ]);
   });
   it('returns undefined when no data is available', () => {

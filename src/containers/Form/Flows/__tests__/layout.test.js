@@ -7,24 +7,20 @@ import { shallow } from 'enzyme';
 
 import FlowsForm from '../layout';
 
+const initialValues = {
+  get: () => {}
+};
+
 describe('<FlowsForm />', () => {
-  let testTypes;
-  beforeEach(() => {
-    testTypes = [
-      {
-        label: 'custom label',
-        value: 'custom value'
-      }
-    ];
-  });
   it('renders create form', () => {
     const rendered = shallow(
       <FlowsForm
         name="mockName"
         description="mockDescription"
-        type={testTypes}
+        type="mockType"
         isSaving={false}
         inherited={false}
+        initialValues={initialValues}
         handleSubmit={() => {}}
       />
     );
@@ -35,10 +31,11 @@ describe('<FlowsForm />', () => {
       <FlowsForm
         name="mockName"
         description="mockDescription"
-        type={testTypes}
+        type="mockType"
         id="0000-0000-0000-0000-0000"
         isSaving={false}
         inherited={false}
+        initialValues={initialValues}
         handleSubmit={() => {}}
       />
     );

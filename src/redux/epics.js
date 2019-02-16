@@ -8,6 +8,7 @@ import * as emailTemplatesEpics from './modules/entities/emailTemplates/epics';
 import * as usersEpics from './modules/entities/users/epics';
 import * as dataAccessReportsEpics from './modules/entities/dataAccessReports/epics';
 import * as reasonListsEpics from './modules/entities/reasonLists/epics';
+import * as flowsEpics from './modules/entities/flows/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -18,5 +19,6 @@ export const rootEpic = combineEpics(
   ...Object.values(emailTemplatesEpics),
   ...Object.values(usersEpics),
   ...Object.values(dataAccessReportsEpics),
-  ...Object.values(reasonListsEpics)
+  ...Object.values(reasonListsEpics),
+  ...Object.values(flowsEpics)
 );

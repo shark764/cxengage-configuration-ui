@@ -597,7 +597,7 @@ Object {
     "updateFormDependencies": Array [],
   },
   "flows": EntityMetaData {
-    "betaFeature": false,
+    "betaFeature": true,
     "columns": Array [
       Object {
         "active": true,
@@ -631,7 +631,7 @@ Object {
         "id": "name",
       },
     ],
-    "dependentEntity": "",
+    "dependentEntity": "drafts",
     "entityName": "flows",
     "entityTableFields": Array [
       Object {
@@ -644,6 +644,34 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Managing%20Flows/Flow_overview.htm",
+    "membersTableFields": Object {
+      "drafts": Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "format": "date",
+          "label": "Created On",
+          "name": "created",
+        },
+      ],
+      "versions": Array [
+        Object {
+          "label": "Version",
+          "name": "fakeVersion",
+        },
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "format": "date",
+          "label": "Created On",
+          "name": "created",
+        },
+      ],
+    },
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -671,7 +699,9 @@ Object {
     ],
     "subEntityName": "",
     "title": "Flow",
-    "updateFormDependencies": Array [],
+    "updateFormDependencies": Array [
+      "users",
+    ],
   },
   "groups": EntityMetaData {
     "associations": Object {

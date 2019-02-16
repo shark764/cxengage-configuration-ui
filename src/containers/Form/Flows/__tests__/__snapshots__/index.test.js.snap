@@ -7,7 +7,15 @@ Object {
   },
   "isSaving": true,
   "key": "mockId",
+  "names": Array [
+    "mockName1",
+    "mockName2",
+  ],
   "userHasUpdatePermission": undefined,
+  "versions": Object {
+    "label": "v1",
+    "value": "0001",
+  },
 }
 `;
 
@@ -23,6 +31,12 @@ exports[`flows Renders renders 1`] = `
   }
   isSaving={true}
   key="mockId"
+  names={
+    Array [
+      "mockName1",
+      "mockName2",
+    ]
+  }
   store={
     Object {
       "dispatch": [Function],
@@ -50,6 +64,12 @@ exports[`flows Renders renders 1`] = `
         Symbol(observable): [Function],
       },
       "unsubscribe": [Function],
+    }
+  }
+  versions={
+    Object {
+      "label": "v1",
+      "value": "0001",
     }
   }
 >

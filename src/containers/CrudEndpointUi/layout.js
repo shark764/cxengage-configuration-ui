@@ -35,6 +35,7 @@ import ReasonsForm from '../Form/Reasons';
 import ReasonListsForm from '../Form/ReasonLists';
 import QueuesForm from '../Form/Queues';
 import FlowsForm from '../Form/Flows';
+import CopyFlowForm from '../Form/Flows/Copy';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -351,11 +352,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/flows',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <FlowsDetailsPanel>
           <FlowsForm />
         </FlowsDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   }
   //hygen-inject-before2
@@ -432,6 +433,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/dataAccessReports',
     component: AddMembersToList
+  },
+  {
+    path: '/configuration/flows',
+    component: CopyFlowForm
   }
 ];
 

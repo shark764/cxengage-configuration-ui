@@ -5,6 +5,29 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
   className="dtpanel-entity-flows"
 >
   Mock Child
+  <DetailHeader
+    open={true}
+    text="Published Versions"
+    userHasUpdatePermission={true}
+  />
+  <_class2
+    contains="versions"
+    tableType="sidePanel"
+    updateSubEntity={[Function]}
+    userHasUpdatePermission={true}
+  />
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Drafts"
+    userHasUpdatePermission={true}
+  />
+  <_class2
+    confirmDeleteSubEntity={true}
+    contains="drafts"
+    tableType="sidePanel"
+    userHasUpdatePermission={true}
+  />
 </styled.div>
 `;
 
@@ -13,5 +36,28 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
   className="dtpanel-entity-flows"
 >
   Mock Child
+  <DetailHeader
+    open={true}
+    text="Published Versions"
+    userHasUpdatePermission={false}
+  />
+  <_class2
+    contains="versions"
+    tableType="sidePanel"
+    updateSubEntity={[Function]}
+    userHasUpdatePermission={false}
+  />
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Drafts"
+    userHasUpdatePermission={false}
+  />
+  <_class2
+    confirmDeleteSubEntity={true}
+    contains="drafts"
+    tableType="sidePanel"
+    userHasUpdatePermission={false}
+  />
 </styled.div>
 `;

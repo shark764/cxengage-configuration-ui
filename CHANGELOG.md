@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Alpha User Acceptance Testing]
 - Bulk actions
 - Chat Widgets
-- Flows
 - Queues
 
 ## [Beta User Acceptance Testing]
@@ -17,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Interaction Monitoring
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
+- Flows
+
+## [0.53.0] - 2019-02-13
+### Added
+- CXV1-16890 - New Sidepanel Table for published versions on Flows page.
+- CXV1-16891 - New Sidepanel Table for drafts on Flows page.
+#### Changed
+- SDK Version Bump 8.47.0.
+- Version bump component library to 0.36.0.
+- Making Flows page Beta Feature
 
 ## [0.52.3] - 2019-02-12
 ### Added

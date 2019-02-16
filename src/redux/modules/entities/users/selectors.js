@@ -42,7 +42,9 @@ export const filterUsersByPermissions = (state, users, permissionNames) => {
 };
 
 export const getDisplay = (data, showBlankString) => {
-  if (data.firstName || data.lastName) {
+  if (data === undefined) {
+    return '';
+  } else if (data.firstName || data.lastName) {
     return `${data.firstName || ''} ${data.lastName || ''}`.trim();
   } else if (showBlankString) {
     return '';

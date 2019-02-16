@@ -30,13 +30,16 @@ import {
   isSaving,
   getCurrentSubEntity,
   getSelectedSubEntityId,
+  getSelectedSubEntityName,
+  getSelectedSubEntityData,
   getSelectedSubEntity,
   isSubEntitySaving,
   getSelectedEntityFormId,
   availableEntitiesForList,
   getListDependency,
   getEntityListMembers,
-  getListSize
+  getListSize,
+  findEntityIndex
 } from '../selectors';
 import { getCurrentPermissions, getCurrentTenantId } from '../../userData/selectors';
 import { EntityMetaData, entitiesMetaData } from '../metaData';
@@ -65,6 +68,8 @@ const initialState = fromJS({
       updating: false,
       subEntity: 'mockDependentEntity',
       selectedSubEntityId: '0001',
+      selectedSubEntityName: 'mockDependentEntity',
+      selectedSubEntityData: {},
       subEntitySaving: false,
       metaData: { listDependency: 'mockDependentEntity' },
       data: [
@@ -128,6 +133,8 @@ describe('getCurrentEntityStore', () => {
         updating: false,
         subEntity: 'mockDependentEntity',
         selectedSubEntityId: '0001',
+        selectedSubEntityName: 'mockDependentEntity',
+        selectedSubEntityData: {},
         subEntitySaving: false,
         metaData: { listDependency: 'mockDependentEntity' },
         data: [
@@ -446,6 +453,27 @@ describe('shouldDisableField', () => {
       )
     ).toEqual(true);
   });
+  it('Returns if selected entity is inherited when currentEntity matches flows', () => {
+    expect(
+      shouldDisableField(
+        fromJS({
+          Entities: {
+            currentEntity: 'flows',
+            flows: {
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004',
+                  versions: [],
+                  drafts: []
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual(true);
+  });
 });
 
 describe('isCreating', () => {
@@ -491,6 +519,18 @@ describe('getCurrentSubEntity', () => {
 describe('getSelectedSubEntityId', () => {
   it('Returns current subentity ID', () => {
     expect(getSelectedSubEntityId(initialState)).toEqual('0001');
+  });
+});
+
+describe('getSelectedSubEntityName', () => {
+  it('Returns current subentity Name', () => {
+    expect(getSelectedSubEntityName(initialState)).toEqual('mockDependentEntity');
+  });
+});
+
+describe('getSelectedSubEntityData', () => {
+  it('Returns current subentity Data', () => {
+    expect(getSelectedSubEntityData(initialState)).toEqual(fromJS({}));
   });
 });
 
@@ -553,5 +593,29 @@ describe('getEntityListMembers', () => {
 describe('getListSize', () => {
   it('Returns size of members array for selected enitty', () => {
     expect(getListSize(initialState)).toEqual(3);
+  });
+});
+
+describe('findEntityIndex', () => {
+  it('Returns index of selected enitty', () => {
+    expect(
+      findEntityIndex(
+        fromJS({
+          mockEntity: {
+            selectedEntityId: '0000',
+            data: [
+              {
+                id: '0000'
+              }
+            ]
+          }
+        }),
+        'mockEntity',
+        '0000'
+      )
+    ).toEqual(0);
+  });
+  it('Returns index of selected enitty when state contains all Entities', () => {
+    expect(findEntityIndex(initialState, 'mockEntity', '0000')).toEqual(0);
   });
 });

@@ -99,6 +99,9 @@ export const shouldDisableField = state => {
       case 'reasonLists': {
         return getSelectedEntity(state).get('reasons').size === 0;
       }
+      case 'flows': {
+        return getSelectedEntity(state).has('versions') && getSelectedEntity(state).get('versions').size === 0;
+      }
       default:
         return false;
     }
@@ -116,6 +119,10 @@ export const isSaving = state => isCreating(state) || isUpdating(state);
 export const getCurrentSubEntity = state => getCurrentEntityStore(state).get('subEntity');
 
 export const getSelectedSubEntityId = state => getCurrentEntityStore(state).get('selectedSubEntityId');
+
+export const getSelectedSubEntityName = state => getCurrentEntityStore(state).get('selectedSubEntityName');
+
+export const getSelectedSubEntityData = state => getCurrentEntityStore(state).get('selectedSubEntityData');
 
 export const getSelectedSubEntity = createSelector(
   [getSelectedEntity, getCurrentSubEntity, getSelectedSubEntityId],
@@ -155,3 +162,10 @@ export const getListSize = state => {
     .findIndex(entity => entity.get('id') === getCurrentEntityStore(state).get('selectedEntityId'));
   return getCurrentEntityStore(state).getIn(['data', entityIndex, 'members'], new List([])).size;
 };
+
+export const findEntityIndex = (state, entityName, entityId) =>
+  state.get(entityName) !== undefined
+    ? state.getIn([entityName, 'data']).findIndex(entity => entity.get('id') === entityId)
+    : getEntities(state)
+        .getIn([entityName, 'data'])
+        .findIndex(entity => entity.get('id') === entityId);

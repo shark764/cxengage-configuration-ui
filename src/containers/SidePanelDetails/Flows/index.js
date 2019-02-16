@@ -4,5 +4,27 @@
 
 import { connect } from 'react-redux';
 import FlowsDetailsPanel from './layout';
+import { userHasUpdatePermission, isEntityFetching, itemApiPending } from '../../../redux/modules/entities/selectors';
+import { createDraftItem, openFlowDesigner, copyListItem, removeListItem } from '../../../redux/modules/entities';
+import { selectFlowItems, getFlowItemFields } from '../../../redux/modules/entities/flows/selectors';
 
-export default connect()(FlowsDetailsPanel);
+export function mapStateToProps(state) {
+  return {
+    userHasUpdatePermission: userHasUpdatePermission(state),
+    flowsFetching: isEntityFetching(state, 'flows'),
+    versionsItems: selectFlowItems(state, 'versions'),
+    versionsFields: getFlowItemFields(state, 'versions'),
+    draftsItems: selectFlowItems(state, 'drafts'),
+    draftsFields: getFlowItemFields(state, 'drafts'),
+    itemApiPending: itemApiPending(state)
+  };
+}
+
+export const actions = {
+  createDraftItem,
+  removeListItem,
+  openFlowDesigner,
+  copyListItem
+};
+
+export default connect(mapStateToProps, actions)(FlowsDetailsPanel);

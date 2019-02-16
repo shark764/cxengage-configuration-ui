@@ -363,7 +363,7 @@ Immutable.Map {
       "MANAGE_ALL_FLOWS",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 750,
     "assignPermission": Immutable.List [
       "MANAGE_ALL_FLOWS",
     ],

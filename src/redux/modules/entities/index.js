@@ -4,6 +4,7 @@
 
 import { fromJS, List } from 'immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
+import { findEntityIndex } from './selectors';
 
 // Initial Sub State
 const defaultEntity = {
@@ -30,14 +31,6 @@ const initialState = fromJS({
     readPermission: ['VIEW_ALL_LISTS'],
     updatePermission: ['MANAGE_ALL_LISTS'],
     createPermission: ['MANAGE_ALL_LISTS']
-  },
-  flows: {
-    ...defaultEntity,
-    readPermission: ['VIEW_ALL_FLOWS'],
-    updatePermission: ['MANAGE_ALL_FLOWS'],
-    createPermission: ['MANAGE_ALL_FLOWS'],
-    disablePermission: ['MANAGE_ALL_FLOWS'],
-    assignPermission: ['MANAGE_ALL_FLOWS']
   },
   listTypes: {
     ...defaultEntity
@@ -210,6 +203,15 @@ const initialState = fromJS({
     updatePermission: ['UPDATE_REASON_LIST'],
     createPermission: ['CREATE_REASON_LIST']
   },
+  flows: {
+    ...defaultEntity,
+    sidePanelWidth: 750,
+    readPermission: ['VIEW_ALL_FLOWS'],
+    updatePermission: ['MANAGE_ALL_FLOWS'],
+    createPermission: ['MANAGE_ALL_FLOWS'],
+    disablePermission: ['MANAGE_ALL_FLOWS'],
+    assignPermission: ['MANAGE_ALL_FLOWS']
+  },
   queues: {
     ...defaultEntity,
     readPermission: ['VIEW_ALL_QUEUES'],
@@ -271,9 +273,28 @@ export const toggleListItemEntity = (id, name, actionType) => ({
   name,
   actionType
 });
-export const removeListItem = listItemId => ({
+export const openFlowDesigner = (listItemId, row, subEntityName) => ({
+  type: 'OPEN_FLOW_DESIGNER',
+  listItemId,
+  row,
+  subEntityName
+});
+export const createDraftItem = (listItemId, row, subEntityName) => ({
+  type: 'CREATE_DRAFT_ITEM',
+  listItemId,
+  row,
+  subEntityName
+});
+export const copyListItem = (listItemId, row, subEntityName) => ({
+  type: 'COPY_LIST_ITEM',
+  listItemId,
+  row,
+  subEntityName
+});
+export const removeListItem = (listItemId, subEntityName) => ({
   type: 'REMOVE_LIST_ITEM',
-  listItemId
+  listItemId,
+  subEntityName
 });
 export const updateProficiency = (id, newValue) => ({
   type: 'UPDATE_PROFICIENCY',
@@ -311,6 +332,11 @@ export const setSelectedSubEntityId = selectedSubEntityId => ({
 
 export const onSubEntityFormSubmit = (values, { dirty }) => ({
   type: 'SUB_ENTITY_FORM_SUBMIT',
+  values,
+  dirty
+});
+export const onCopyListItemFormSubmit = (values, { dirty }) => ({
+  type: 'COPY_LIST_ITEM_FORM_SUBMIT',
   values,
   dirty
 });
@@ -413,7 +439,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {
-      const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === action.id);
+      const entityIndex = findEntityIndex(state, action.entityName, action.id);
       if (entityIndex !== -1) {
         return state.mergeIn(
           [action.entityName, 'data', entityIndex],
@@ -427,9 +453,7 @@ export default function reducer(state = initialState, action) {
       return exports.setEntityUpdatingHelper(state, action, false);
     }
     case 'TOGGLE_BULK_ENTITY_CHANGE': {
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.entityId);
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1 && action.bool !== undefined) {
         return state
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ bulkChangeItem: action.bool }))
@@ -500,9 +524,7 @@ export default function reducer(state = initialState, action) {
     case 'CHANGE_USER_INVITE_STATUS_FULFILLED':
     case 'BULK_ENTITY_UPDATE_FULFILLED': {
       const { result } = action.response;
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === result.id || entity.get('id') === action.id);
+      const entityIndex = findEntityIndex(state, action.entityName, result.id || action.id);
       if (entityIndex !== -1) {
         return state
           .remove('loading')
@@ -513,7 +535,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'TOGGLE_LIST_ITEM_ENTITY_FULFILLED': {
       const { actionType, entityName, entityId, name, id, response } = action;
-      const entityIndex = state.getIn([action.entityName, 'data']).findIndex(entity => entity.get('id') === entityId);
+      const entityIndex = findEntityIndex(state, action.entityName, entityId);
       const currentList = state.getIn([entityName, 'data', entityIndex, name]);
       const modifiedList = actionType === 'associate' ? currentList.push(id) : currentList.filter(x => x !== id);
       if (entityIndex !== -1 && name === 'skills') {
@@ -573,9 +595,7 @@ export default function reducer(state = initialState, action) {
       if (action.associatedEntityName === 'outboundIdentifierLists' && action.entityName !== 'users') {
         idType = 'id';
       }
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.entityId);
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {
         return state.setIn(
           [action.entityName, 'data', entityIndex, action.associatedEntityName],
@@ -595,14 +615,51 @@ export default function reducer(state = initialState, action) {
     case 'SET_SELECTED_SUB_ENTITY_ID': {
       return state.setIn([state.get('currentEntity'), 'selectedSubEntityId'], action.selectedSubEntityId);
     }
+    case 'CREATE_DRAFT_ITEM':
+    case 'COPY_LIST_ITEM': {
+      return state
+        .setIn([state.get('currentEntity'), 'selectedSubEntityId'], action.listItemId)
+        .setIn([state.get('currentEntity'), 'selectedSubEntityName'], action.subEntityName)
+        .setIn([state.get('currentEntity'), 'selectedSubEntityData'], action.row);
+    }
+    case 'CREATE_FLOW_VERSION_DRAFT_FULFILLED': {
+      if (action.selectedSubEntityId === 'drafts') {
+        const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
+        if (entityIndex !== -1) {
+          return state
+            .update(action.entityName, entityStore =>
+              entityStore
+                .updateIn(['data', entityIndex, 'drafts'], subEntityList =>
+                  subEntityList.push(
+                    fromJS({
+                      ...action.response.result
+                    })
+                  )
+                )
+                .set('selectedSubEntityId', undefined)
+                .set('subEntitySaving', false)
+            )
+            .setIn([state.get('currentEntity'), 'selectedSubEntityId'], undefined)
+            .deleteIn([state.get('currentEntity'), 'selectedSubEntityName'])
+            .deleteIn([state.get('currentEntity'), 'selectedSubEntityData']);
+        } else {
+          return state
+            .setIn([state.get('currentEntity'), 'selectedSubEntityId'], undefined)
+            .deleteIn([state.get('currentEntity'), 'selectedSubEntityName'])
+            .deleteIn([state.get('currentEntity'), 'selectedSubEntityData']);
+        }
+      }
+      return state
+        .setIn([state.get('currentEntity'), 'selectedSubEntityId'], undefined)
+        .deleteIn([state.get('currentEntity'), 'selectedSubEntityName'])
+        .deleteIn([state.get('currentEntity'), 'selectedSubEntityData']);
+    }
     case 'CREATE_SUB_ENTITY':
     case 'UPDATE_SUB_ENTITY': {
       return state.setIn([action.entityName, 'subEntitySaving'], true);
     }
     case 'CREATE_SUB_ENTITY_FULFILLED': {
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.entityId);
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {
         const { itemValue, key } = action.response.result;
         return state.update(action.entityName, entityStore =>
@@ -646,6 +703,12 @@ export default function reducer(state = initialState, action) {
     }
     case 'REMOVE_LIST_ITEM_FULFILLED': {
       const entity = selectedEntity(state);
+      if (action.entityName === 'flows') {
+        const filteredListMembers = state
+          .getIn([entity.type, 'data', entity.index, 'drafts'])
+          .filterNot(member => member.get('id') === action.listItemId);
+        return state.remove('loading').setIn([entity.type, 'data', entity.index, 'drafts'], filteredListMembers);
+      }
       const filteredListMembers = state
         .getIn([entity.type, 'data', entity.index, 'members'])
         .filterNot(member => member.get('id') === action.listItemId);
@@ -667,9 +730,7 @@ export default function reducer(state = initialState, action) {
         .updateIn([entity.type, 'data', entity.index, 'members'], members => members.push(entityToAdd));
     }
     case 'UPDATE_SUB_ENTITY_FULFILLED': {
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.entityId);
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {
         return state.update(action.entityName, entityStore =>
           entityStore
@@ -706,9 +767,7 @@ export default function reducer(state = initialState, action) {
       return setSubEntityDeleting(state, action, true);
     }
     case 'DELETE_SUB_ENTITY_FULFILLED': {
-      const entityIndex = state
-        .getIn([action.entityName, 'data'])
-        .findIndex(entity => entity.get('id') === action.entityId);
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {
         return state.update(action.entityName, entityStore =>
           entityStore
@@ -755,7 +814,7 @@ export const setUserExistsInPlatform = (state, action) => {
 };
 
 export const setEntityUpdatingHelper = (state, { entityName, entityId }, updating) => {
-  const entityIndex = state.getIn([entityName, 'data']).findIndex(entity => entity.get('id') === entityId);
+  const entityIndex = findEntityIndex(state, entityName, entityId);
   if (entityIndex !== -1) {
     return state.setIn([entityName, 'data', entityIndex, 'updating'], updating);
   } else {
@@ -766,7 +825,7 @@ export const setEntityUpdatingHelper = (state, { entityName, entityId }, updatin
 const setSubEntityDeleting = (state, { subEntityId }, deleting) => {
   const currentEntity = state.get('currentEntity');
   const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
-  const entityIndex = state.getIn([currentEntity, 'data']).findIndex(entity => entity.get('id') === selectedEntityId);
+  const entityIndex = findEntityIndex(state, currentEntity, selectedEntityId);
   const subEntityIndex = state
     .getIn([currentEntity, 'data', entityIndex, 'items'])
     .findIndex(subEntity => subEntity.get('key') === subEntityId);

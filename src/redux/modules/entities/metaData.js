@@ -138,7 +138,6 @@ export const listOfEntities = [
   'dashboards',
   'dataAccessReports',
   'emailTemplates',
-  'flows',
   'groups',
   'historicalReportFolders',
   'identityProviders',
@@ -594,14 +593,25 @@ entities.queues.columns = [
 ];
 
 // Flows
+entities.flows.betaFeature = true;
 entities.flows.pageTitle = 'Flow Management';
 entities.flows.helpLink = '/Help/Content/Managing%20Flows/Flow_overview.htm';
+entities.flows.dependentEntity = 'drafts';
+entities.flows.updateFormDependencies.push('users');
 entities.flows.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Active Flow', active: true },
   { name: 'Status', active: true }
 ];
+entities.flows.membersTableFields = {
+  versions: [
+    { label: 'Version', name: 'fakeVersion' },
+    { label: 'Name', name: 'name' },
+    { label: 'Created On', name: 'created', format: 'date' }
+  ],
+  drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'date' }]
+};
 
 //Hygen-insert-new-entity-configuration
 
