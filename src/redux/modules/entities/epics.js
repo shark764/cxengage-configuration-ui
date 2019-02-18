@@ -219,6 +219,7 @@ export const CreateEntity = (action$, store) =>
     .filter(({ entityName }) => hasCustomCreateEntity(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
+      a.sdkCall.path = [camelCaseToKebabCase(a.entityName)];
       a.sdkCall.data = a.values;
       return { ...a };
     })
@@ -268,6 +269,7 @@ export const UpdateEntity = (action$, store) =>
     .filter(({ entityName }) => hasCustomUpdateEntity(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
+      a.sdkCall.path = [camelCaseToKebabCase(a.entityName), a.entityId];
       a.sdkCall.data = {
         ...a.values,
         [removeLastLetter(a.entityName) + 'Id']: a.entityId

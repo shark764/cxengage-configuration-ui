@@ -6,6 +6,7 @@ exports[`FetchData calls the correct sdk function 1`] = `
     Array [
       Object {
         "command": "getMockEntity",
+        "crudAction": "read",
         "data": Object {},
         "module": "entities",
         "topic": "cxengage/entities/get-mock-entity-response",

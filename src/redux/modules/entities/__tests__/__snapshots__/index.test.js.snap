@@ -405,6 +405,27 @@ Immutable.Map {
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
   },
+  "transferLists": Immutable.Map {
+    "readPermission": Immutable.List [
+      "VIEW_ALL_TRANSFER_LISTS",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "VIEW_ALL_TRANSFER_LISTS",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "VIEW_ALL_TRANSFER_LISTS",
+    ],
+    "updatePermission": Immutable.List [
+      "VIEW_ALL_TRANSFER_LISTS",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [
+      "VIEW_ALL_TRANSFER_LISTS",
+    ],
+  },
   "reasons": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bulk actions
 - Chat Widgets
 - Queues
+- Transfer Lists
 
 ## [Beta User Acceptance Testing]
 - Skills
@@ -17,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 - Flows
+
+## [0.54.0] - 2019-02-18
+### Added
+- Basic Transfer Lists page in alpha phase
+### Changed
+- sdk bump to version 8.50.0
 
 ## [0.53.0] - 2019-02-13
 ### Added

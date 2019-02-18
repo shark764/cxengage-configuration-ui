@@ -4,6 +4,7 @@ import {
   removeLastLetter,
   camelCaseToRegularForm
 } from 'serenova-js-utils/strings';
+import { windowWhen } from 'rxjs/operator/windowWhen';
 
 /**
  * All the information about an entity that it does not provide about itself
@@ -76,23 +77,33 @@ export class EntityMetaData {
       removeLastLetter(this.subEntityName)
     )}-response`;
 
+    const crudActions = {
+      create: 'create',
+      get: 'read',
+      update: 'update',
+      delete: 'delete'
+    };
+
     if (entityType === 'subEntity') {
       return {
         ...this.sdkCall,
         command: subEntityCommand,
-        topic: subEntityTopic
+        topic: subEntityTopic,
+        crudAction: crudActions[apiMethod]
       };
     } else if (entityType === 'singleMainEntity') {
       return {
         ...this.sdkCall,
         command: singleEntityCommand,
-        topic: singleEntityTopic
+        topic: singleEntityTopic,
+        crudAction: crudActions[apiMethod]
       };
     } else {
       return {
         ...this.sdkCall,
         command: mainEntityCommand,
-        topic: mainEntityTopic
+        topic: mainEntityTopic,
+        crudAction: crudActions[apiMethod]
       };
     }
   }
@@ -158,7 +169,9 @@ export const listOfEntities = [
   'users',
   'reasons',
   'queues',
-  'flows'
+  'flows',
+  'transferLists'
+
   //Hygen-insert-at-end-of-list
 ];
 
@@ -613,6 +626,14 @@ entities.flows.membersTableFields = {
   drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'date' }]
 };
 
+// Transfer Lists
+entities.transferLists.pageTitle = 'Transfer Lists Management';
+entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
+entities.transferLists.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true }
+];
 //Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

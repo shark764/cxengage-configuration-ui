@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TransferListsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    automation="transferListsNameInput"
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    automation="transferListsDescriptionInput"
+    componentType="textarea"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;
+
+exports[`<TransferListsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    automation="transferListsNameInput"
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    automation="transferListsDescriptionInput"
+    componentType="textarea"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;

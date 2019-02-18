@@ -17,6 +17,7 @@ Array [
     "entityName": "dataAccessReports",
     "sdkCall": Object {
       "command": "updateDataAccessReport",
+      "crudAction": "update",
       "data": Object {
         "dataAccessReportId": "mock entity id",
         "name": "mockName",
@@ -40,6 +41,7 @@ exports[`UpdateDataAccessReport dataAccessReports entity update entity calls the
     Array [
       Object {
         "command": "updateDataAccessReport",
+        "crudAction": "update",
         "data": Object {
           "dataAccessReportId": "mock entity id",
           "name": "mockName",
@@ -71,6 +73,7 @@ Array [
     "response": "mock response",
     "sdkCall": Object {
       "command": "updateDataAccessReport",
+      "crudAction": "update",
       "data": Object {
         "dataAccessReportId": "mock entity id",
         "name": "mockName",

@@ -2333,7 +2333,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Transfer Lists",
+    "pageTitle": "Transfer Lists Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -2562,6 +2562,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in mainEntity as apiMethod 1`] = `
 Object {
   "command": "getMockEntity",
+  "crudAction": "read",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/get-mock-entity-response",
@@ -2571,6 +2572,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in mainEntity as apiMethod 2`] = `
 Object {
   "command": "createMockEntity",
+  "crudAction": "create",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/create-mock-entity-response",
@@ -2580,6 +2582,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in mainEntity as apiMethod 3`] = `
 Object {
   "command": "updateMockEntity",
+  "crudAction": "update",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/update-mock-entity-response",
@@ -2589,6 +2592,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in singleMainEntity as apiMethod 1`] = `
 Object {
   "command": "getMockEntit",
+  "crudAction": "read",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/get-mock-entit-response",
@@ -2598,6 +2602,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in singleMainEntity as apiMethod 2`] = `
 Object {
   "command": "createMockEntit",
+  "crudAction": "create",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/create-mock-entit-response",
@@ -2607,6 +2612,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in singleMainEntity as apiMethod 3`] = `
 Object {
   "command": "updateMockEntit",
+  "crudAction": "update",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/update-mock-entit-response",
@@ -2616,6 +2622,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in subEntity as apiMethod 1`] = `
 Object {
   "command": "get",
+  "crudAction": "read",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/get--response",
@@ -2625,6 +2632,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in subEntity as apiMethod 2`] = `
 Object {
   "command": "create",
+  "crudAction": "create",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/create--response",
@@ -2634,6 +2642,7 @@ Object {
 exports[`entitiesMetaData entityApiRequest, passing in subEntity as apiMethod 3`] = `
 Object {
   "command": "update",
+  "crudAction": "update",
   "data": Object {},
   "module": "entities",
   "topic": "cxengage/entities/update--response",

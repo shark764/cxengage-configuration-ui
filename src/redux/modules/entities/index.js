@@ -219,6 +219,14 @@ const initialState = fromJS({
     createPermission: ['MANAGE_ALL_QUEUES'],
     disablePermission: ['MANAGE_ALL_QUEUES'],
     assignPermission: ['MANAGE_ALL_QUEUES']
+  },
+  transferLists: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_TRANSFER_LISTS'],
+    updatePermission: ['VIEW_ALL_TRANSFER_LISTS'],
+    createPermission: ['VIEW_ALL_TRANSFER_LISTS'],
+    disablePermission: ['VIEW_ALL_TRANSFER_LISTS'],
+    assignPermission: ['VIEW_ALL_TRANSFER_LISTS']
   }
   //hygen-inject-before
 });
