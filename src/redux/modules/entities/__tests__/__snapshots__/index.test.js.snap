@@ -427,22 +427,25 @@ Immutable.Map {
     ],
   },
   "reasons": Immutable.Map {
-    "data": Immutable.List [],
-    "selectedEntityId": "",
-    "sidePanelWidth": 750,
-    "confirmationDialogType": undefined,
     "readPermission": Immutable.List [
       "READ_PRESENCE_REASONS",
     ],
-    "updatePermission": Immutable.List [
-      "UPDATE_PRESENCE_REASONS",
-    ],
+    "data": Immutable.List [],
     "createPermission": Immutable.List [
       "CREATE_PRESENCE_REASONS",
     ],
     "sharePermission": Immutable.List [
       "SHARE_PRESENCE_REASONS",
     ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "UPDATE_PRESENCE_REASONS",
+    ],
+    "updatePermission": Immutable.List [
+      "UPDATE_PRESENCE_REASONS",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 750,
   },
   "dataAccessReports": Immutable.Map {
     "data": Immutable.List [],
@@ -475,6 +478,9 @@ Immutable.Map {
     ],
     "createPermission": Immutable.List [
       "CREATE_REASON_LIST",
+    ],
+    "disablePermission": Immutable.List [
+      "UPDATE_REASON_LIST",
     ],
   },
   "customMetrics": Immutable.Map {
@@ -663,6 +669,30 @@ Immutable.Map {
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
+  },
+  "integrations": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+  },
+  "dispatchMappings": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "VIEW_ALL_CONTACT_POINTS",
+    ],
+    "updatePermission": Immutable.List [
+      "MAP_ALL_CONTACT_POINTS",
+    ],
+    "createPermission": Immutable.List [
+      "MAP_ALL_CONTACT_POINTS",
+    ],
+    "disablePermission": Immutable.List [
+      "MAP_ALL_CONTACT_POINTS",
+    ],
   },
 }
 `;

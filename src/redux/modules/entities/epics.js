@@ -124,6 +124,17 @@ export const FocusOutboundIdentifiersValueFormField = (action$, store) =>
     )
     .map(a => touch(a.meta.form, 'value'));
 
+export const ClearMappingValue = (action$, store) =>
+  action$
+    .ofType('@@redux-form/CHANGE')
+    .filter(
+      a =>
+        a.meta.form.includes('dispatchMappings') &&
+        a.meta.field.includes('interactionField') &&
+        getSelectedEntity(store.getState()) !== undefined
+    )
+    .map(a => touch(a.meta.form, 'value'));
+
 export const ToggleHasProficiencyFormField = (action$, store) =>
   action$
     .ofType('TOGGLE_PROFICIENCY')

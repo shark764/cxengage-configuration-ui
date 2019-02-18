@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.56.0] - 2019-02-27
+### Added
+CXV1-16883 - Added dispatch mappings page
+
 ## [0.55.0] - 2019-02-26
 ### Added
 - CXV1-15515 - Bulk actions added to Users page.

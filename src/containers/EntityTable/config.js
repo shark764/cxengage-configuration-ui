@@ -14,6 +14,7 @@ import { tenantStatusColumn } from './columns/tenantStatus';
 import { platformStatusColumn } from './columns/platformStatus';
 import { activeQueueColumn } from './columns/activeQueue';
 import { activeFlowColumn } from './columns/activeFlow';
+import { flowColumn } from './columns/flow';
 
 export function getTableColumns(columns) {
   /**
@@ -39,6 +40,7 @@ export function getTableColumns(columns) {
     'Metric Type': metricTypeColumn,
     Value: constructGeneralTextColumn('value'),
     channelType: constructGeneralTextColumn('channelType'),
+    'Channel Type': constructGeneralTextColumn('channelType'),
     flowId: constructGeneralTextColumn('flowId'),
     Proficiency: constructGeneralTextColumn('proficiency'),
     'Has Proficiency': constructGeneralBooleanColumn('hasProficiency'),
@@ -48,7 +50,9 @@ export function getTableColumns(columns) {
     Shared: constructGeneralBooleanColumn('shared'),
     'Is Default': constructGeneralBooleanColumn('isDefault'),
     'Active Queue': activeQueueColumn,
-    'Active Flow': activeFlowColumn
+    'Active Flow': activeFlowColumn,
+    'Interaction Field': constructGeneralTextColumn('interactionField'),
+    Flow: flowColumn,
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

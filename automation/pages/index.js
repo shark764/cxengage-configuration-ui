@@ -7,6 +7,12 @@ usersBulkActionsFormFieldCancelInvitation: new Element('[automation="usersBulkAc
 usersBulkActionsFormFieldPasswordReset: new Element('[automation="usersBulkActionsFormFieldPasswordReset"]'), 
 usersBulkActionsFormFieldNoPassword: new Element('[automation="usersBulkActionsFormFieldNoPassword"]'), 
 usersBulkActionsFormFieldDefaultIdentityProvider: new Element('[automation="usersBulkActionsFormFieldDefaultIdentityProvider"]'), 
+dispatchMappingsFormFieldName: new Element('[automation="dispatchMappingsFormFieldName"]'), 
+dispatchMappingsFormFieldDescription: new Element('[automation="dispatchMappingsFormFieldDescription"]'), 
+dispatchMappingsFormFieldChannelType: new Element('[automation="dispatchMappingsFormFieldChannelType"]'), 
+dispatchMappingsFormFieldInteractionField: new Element('[automation="dispatchMappingsFormFieldInteractionField"]'), 
+dispatchMappingsFormFieldValue: new Element('[automation="dispatchMappingsFormFieldValue"]'), 
+dispatchMappingsFormFieldFlowId: new Element('[automation="dispatchMappingsFormFieldFlowId"]'), 
 
  }; 
  module.exports = elements;

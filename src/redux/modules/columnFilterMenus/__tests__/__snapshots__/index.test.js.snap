@@ -648,5 +648,42 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "integrations": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
+  "dispatchMappings": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Value",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Interaction Field",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Channel Type",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Flow",
+        "active": true,
+      },
+    ],
+  },
 }
 `;

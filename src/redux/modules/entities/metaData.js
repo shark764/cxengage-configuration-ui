@@ -170,8 +170,9 @@ export const listOfEntities = [
   'reasons',
   'queues',
   'flows',
-  'transferLists'
-
+  'transferLists',
+  'dispatchMappings',
+  'integrations'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -635,6 +636,21 @@ entities.transferLists.columns = [
   { name: 'Description', active: true },
   { name: 'Status', active: true }
 ];
+// Dispatch Mappings
+entities.dispatchMappings.pageTitle = 'Dispatch Mappings Management';
+entities.dispatchMappings.helpLink = '/Help/Content/Managing%20Flows/Dispatch_mapping.htm';
+entities.dispatchMappings.updateFormDependencies.push('flows', 'integrations');
+entities.dispatchMappings.createFormDependencies.push('flows', 'integrations');
+entities.dispatchMappings.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Value', active: true },
+  { name: 'Interaction Field', active: true },
+  { name: 'Channel Type', active: true },
+  { name: 'Status', active: true },
+  { name: 'Flow', active: true },
+];
+entities.dispatchMappings.defaultFilters = [{ id: 'active', value: 'enabled' }];
 //Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

@@ -194,6 +194,7 @@ const initialState = fromJS({
     readPermission: ['READ_PRESENCE_REASONS'],
     updatePermission: ['UPDATE_PRESENCE_REASONS'],
     createPermission: ['CREATE_PRESENCE_REASONS'],
+    disablePermission: ['UPDATE_PRESENCE_REASONS'],
     sharePermission: ['SHARE_PRESENCE_REASONS']
   },
   reasonLists: {
@@ -201,7 +202,8 @@ const initialState = fromJS({
     sidePanelWidth: 750,
     readPermission: ['READ_REASON_LIST'],
     updatePermission: ['UPDATE_REASON_LIST'],
-    createPermission: ['CREATE_REASON_LIST']
+    createPermission: ['CREATE_REASON_LIST'],
+    disablePermission: ['UPDATE_REASON_LIST'],
   },
   flows: {
     ...defaultEntity,
@@ -228,6 +230,17 @@ const initialState = fromJS({
     disablePermission: ['VIEW_ALL_TRANSFER_LISTS'],
     assignPermission: ['VIEW_ALL_TRANSFER_LISTS']
   }
+  ,
+  dispatchMappings: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_CONTACT_POINTS'],
+    updatePermission: ['MAP_ALL_CONTACT_POINTS'],
+    createPermission: ['MAP_ALL_CONTACT_POINTS'],
+    disablePermission: ['MAP_ALL_CONTACT_POINTS'],
+  },
+  integrations: {
+    ...defaultEntity
+  },
   //hygen-inject-before
 });
 
@@ -491,6 +504,12 @@ export default function reducer(state = initialState, action) {
     case 'COPY_CURRENT_ENTITY_FULFILLED':
     case 'CREATE_ENTITY_FULFILLED': {
       const { result } = action.response;
+
+      if(action.entityName === 'dispatchMappings'){
+        const entityIndex = findEntityIndex(state, 'flows', result.flowId);
+        result.flow = {id: result.flowId, name : state.getIn(['flows', 'data',entityIndex]).get('name')} ;
+      }
+
       return state.update(action.entityName, entityStore =>
         entityStore.update('data', data => data.push(fromJS(result))).set('creating', false)
       );
@@ -540,10 +559,21 @@ export default function reducer(state = initialState, action) {
       const { result } = action.response;
       const entityIndex = findEntityIndex(state, action.entityName, result.id || action.id);
       if (entityIndex !== -1) {
+
+        if(action.entityName === 'dispatchMappings'){
+          const flowIndex = findEntityIndex(state, 'flows', result.flowId);
+          result.flow = {id: result.flowId, name : state.getIn(['flows', 'data',flowIndex]).get('name')};
+        }
+
         return state
           .remove('loading')
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }));
       } else {
+        if(action.entityName === 'dispatchMappings'){
+          const flowIndex = findEntityIndex(state, 'flows', result.flowId);
+          result.flow = {id: result.flowId, name : state.getIn(['flows', 'data',flowIndex]).get('name')};
+          state.getIn([action.entityName,'data',entityIndex,'flow'],result.flow);
+        }
         return state;
       }
     }

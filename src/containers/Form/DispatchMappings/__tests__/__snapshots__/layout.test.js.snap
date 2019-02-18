@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DispatchMappingsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    automation="dispatchMappingsFormFieldName"
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    automation="dispatchMappingsFormFieldDescription"
+    componentType="textarea"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <SelectField
+    automation="dispatchMappingsFormFieldChannelType"
+    disabled={false}
+    label="Interaction Type *"
+    name="channelType"
+    options={
+      Array [
+        Object {
+          "label": "Any",
+          "value": "any",
+        },
+        Object {
+          "label": "Voice",
+          "value": "voice",
+        },
+        Object {
+          "label": "Sms",
+          "value": "sms",
+        },
+        Object {
+          "label": "Email",
+          "value": "email",
+        },
+        Object {
+          "label": "Messaging",
+          "value": "messaging",
+        },
+        Object {
+          "label": "Work Item",
+          "value": "work-item",
+        },
+      ]
+    }
+    required={true}
+  />
+  <SelectField
+    automation="dispatchMappingsFormFieldInteractionField"
+    disabled={false}
+    label="Mapping *"
+    name="interactionField"
+    options={
+      Array [
+        Object {
+          "label": "Customer",
+          "value": "customer",
+        },
+        Object {
+          "label": "Contact Point",
+          "value": "contact-point",
+        },
+        Object {
+          "label": "Integration",
+          "value": "source",
+        },
+        Object {
+          "label": "Direction",
+          "value": "direction",
+        },
+      ]
+    }
+    required={true}
+  />
+  <SelectField
+    automation="dispatchMappingsFormFieldFlowId"
+    disabled={false}
+    label="Dispatch to flow *"
+    name="flowId"
+    required={true}
+  />
+</form>
+`;
+
+exports[`<DispatchMappingsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    automation="dispatchMappingsFormFieldName"
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    automation="dispatchMappingsFormFieldDescription"
+    componentType="textarea"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <SelectField
+    automation="dispatchMappingsFormFieldChannelType"
+    disabled={false}
+    label="Interaction Type *"
+    name="channelType"
+    options={
+      Array [
+        Object {
+          "label": "Any",
+          "value": "any",
+        },
+        Object {
+          "label": "Voice",
+          "value": "voice",
+        },
+        Object {
+          "label": "Sms",
+          "value": "sms",
+        },
+        Object {
+          "label": "Email",
+          "value": "email",
+        },
+        Object {
+          "label": "Messaging",
+          "value": "messaging",
+        },
+        Object {
+          "label": "Work Item",
+          "value": "work-item",
+        },
+      ]
+    }
+    required={true}
+  />
+  <SelectField
+    automation="dispatchMappingsFormFieldInteractionField"
+    disabled={false}
+    label="Mapping *"
+    name="interactionField"
+    options={
+      Array [
+        Object {
+          "label": "Customer",
+          "value": "customer",
+        },
+        Object {
+          "label": "Contact Point",
+          "value": "contact-point",
+        },
+        Object {
+          "label": "Integration",
+          "value": "source",
+        },
+        Object {
+          "label": "Direction",
+          "value": "direction",
+        },
+      ]
+    }
+    required={true}
+  />
+  <SelectField
+    automation="dispatchMappingsFormFieldFlowId"
+    disabled={false}
+    label="Dispatch to flow *"
+    name="flowId"
+    required={true}
+  />
+</form>
+`;

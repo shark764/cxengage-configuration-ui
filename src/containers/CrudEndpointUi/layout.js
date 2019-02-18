@@ -38,6 +38,7 @@ import QueuesForm from '../Form/Queues';
 import FlowsForm from '../Form/Flows';
 import CopyFlowForm from '../Form/Flows/Copy';
 import TransferListsForm from '../Form/TransferLists';
+import DispatchMappingsForm from '../Form/DispatchMappings';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -61,6 +62,7 @@ import ReasonListsDetailsPanel from '../SidePanelDetails/ReasonLists';
 import QueuesDetailsPanel from '../SidePanelDetails/Queues';
 import FlowsDetailsPanel from '../SidePanelDetails/Flows';
 import TransferListsDetailsPanel from '../SidePanelDetails/TransferLists';
+import DispatchMappingsDetailsPanel from '../SidePanelDetails/DispatchMappings';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -216,6 +218,15 @@ const createFormRoutes = [
       </DetailsPanel>
     )
   }
+  ,
+  {
+    path: '/configuration/dispatchMappings',
+    component: () => (
+      <DetailsPanel>
+        <DispatchMappingsForm />
+      </DetailsPanel>
+    )
+  },
   //hygen-inject-before1
 ];
 
@@ -380,6 +391,17 @@ const detailsPanelRoutes = [
       </NoScrollDetailsPanel>
     )
   }
+  ,
+  {
+    path: '/configuration/dispatchMappings',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <DispatchMappingsDetailsPanel>
+          <DispatchMappingsForm />
+        </DispatchMappingsDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
   //hygen-inject-before2
 ];
 
