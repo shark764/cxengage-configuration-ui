@@ -26,6 +26,7 @@ export default function DataAccessReportsDetailsPanel({
   tableItems,
   tableFields,
   defaultFilters,
+  usersFetching,
   removeListItem,
   setSelectedSubEntityId,
   itemApiPending
@@ -48,6 +49,7 @@ export default function DataAccessReportsDetailsPanel({
         fields={tableFields}
         filtered={defaultFilters}
         itemApiPending={itemApiPending}
+        fetching={usersFetching}
       />
     </Wrapper>
   );
@@ -59,6 +61,7 @@ DataAccessReportsDetailsPanel.propTypes = {
   children: PropTypes.any,
   tableItems: PropTypes.array,
   tableFields: PropTypes.array,
+  usersFetching: PropTypes.bool,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.array,

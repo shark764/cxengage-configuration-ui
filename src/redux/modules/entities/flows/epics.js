@@ -12,6 +12,8 @@ import {
   getSelectedSubEntityName,
   getSelectedSubEntityData
 } from '../selectors';
+import { change } from 'redux-form';
+import { getNewFlowDraftName } from './selectors';
 
 export const CreateFlow = (action$, store) =>
   action$
@@ -205,3 +207,9 @@ export const OpenFlowDesigner = (action$, store) =>
         .map(response => handleSuccess(response, a, `You will be redirected to ${a.row.name}`))
         .catch(error => handleError(error, a))
     );
+
+export const FocusCopyFlowDraftFormField = (action$, store) =>
+  action$
+    .ofType('@@redux-form/REGISTER_FIELD')
+    .filter(a => a.meta.form === 'copyFlow:create' && a.payload.name === 'name')
+    .map(a => change(a.meta.form, 'name', getNewFlowDraftName(store.getState())));

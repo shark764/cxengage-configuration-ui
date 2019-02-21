@@ -14,8 +14,8 @@ import {
 } from '../../../../redux/modules/entities/selectors';
 import {
   selectFlowNames,
-  subEntityFormSubmission,
-  getNewItemName
+  selectFlowDraftNames,
+  subEntityFormSubmission
 } from '../../../../redux/modules/entities/flows/selectors';
 import validate from './validation';
 
@@ -28,13 +28,13 @@ const CreateCopyFlowForm = reduxForm({
 export function mapStateToProps(state) {
   return {
     initialValues: new Map({
-      name: getNewItemName(state),
       description: getSelectedEntity(state).get('description')
     }),
     isSaving: isSubEntitySaving(state),
     subEntityId: getSelectedSubEntityId(state),
     flowName: getSelectedEntity(state).get('name'),
     names: selectFlowNames(state),
+    drafts: selectFlowDraftNames(state),
     key: 'create'
   };
 }

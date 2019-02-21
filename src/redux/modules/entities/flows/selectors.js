@@ -12,12 +12,12 @@ const getFlows = state => state.getIn(['Entities', 'flows', 'data']);
 export const selectFlowIds = createSelector(getFlows, flows => {
   return flows !== undefined
     ? flows
-        .toJS()
-        .filter(flow => flow.active)
+        .filter(flow => flow.get('active'))
         .map(flow => ({
-          value: flow.id,
-          label: flow.name
+          value: flow.get('id'),
+          label: flow.get('name')
         }))
+        .toJS()
     : undefined;
 });
 
@@ -29,16 +29,27 @@ const selectVersions = selectedEntity => {
   }
   const versions = selectedEntity.get('versions');
   return versions !== undefined
-    ? versions.toJS().map(version => ({
-        value: version.version,
-        label: version.name
-      }))
+    ? versions
+        .map(version => ({
+          value: version.get('version'),
+          label: version.get('name')
+        }))
+        .toJS()
     : undefined;
 };
 
-export const selectFlowNames = createSelector(getFlows, flows => {
-  return flows !== undefined ? flows.toJS().map(flow => flow.name) : [];
+export const selectFlowNames = state => getSelectedSubEntityId(state) !== 'drafts' && getFlowNames(state);
+
+export const getFlowNames = createSelector(getFlows, flows => {
+  return flows !== undefined ? flows.map(flow => flow.get('name')).toJS() : [];
 });
+
+export const selectFlowDraftNames = state => getSelectedSubEntityId(state) === 'drafts' && getFlowDraftNames(state);
+
+export const getFlowDraftNames = state => {
+  const drafts = getSelectedEntity(state).get('drafts');
+  return drafts !== undefined ? drafts.map(draft => draft.get('name')).toJS() : [];
+};
 
 export const selectFlowItems = (state, memberName) =>
   getFlowItems(
@@ -64,7 +75,7 @@ export const getFlowItems = (members, users, createdByColumnPermission) =>
 
 export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onCopyListItemFormSubmit(values, props));
 
-export const getNewItemName = state =>
+export const getNewFlowDraftName = state =>
   getSelectedSubEntityId(state) !== 'drafts'
     ? `Copy of ${getSelectedEntity(state).get('name')}`
     : `${

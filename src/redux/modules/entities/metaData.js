@@ -4,7 +4,6 @@ import {
   removeLastLetter,
   camelCaseToRegularForm
 } from 'serenova-js-utils/strings';
-import { windowWhen } from 'rxjs/operator/windowWhen';
 
 /**
  * All the information about an entity that it does not provide about itself
@@ -623,7 +622,7 @@ entities.flows.membersTableFields = {
     { label: 'Name', name: 'name' },
     { label: 'Created On', name: 'created', format: 'date' }
   ],
-  drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'date' }]
+  drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'datetime' }]
 };
 
 // Transfer Lists

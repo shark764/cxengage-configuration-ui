@@ -143,5 +143,6 @@ Object {
     "mockListMembers",
   ],
   "userHasUpdatePermission": true,
+  "usersFetching": undefined,
 }
 `;

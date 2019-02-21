@@ -445,14 +445,16 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_DATA_REJECTED': {
       return state.setIn([action.entityName, 'data'], new List());
     }
+    case 'FETCH_DATA_ITEM': {
+      return state.setIn([action.entityName, 'fetching'], true);
+    }
     case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {
       const entityIndex = findEntityIndex(state, action.entityName, action.id);
       if (entityIndex !== -1) {
-        return state.mergeIn(
-          [action.entityName, 'data', entityIndex],
-          fromJS({ ...action.response.result, updating: false })
-        );
+        return state
+          .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...action.response.result, updating: false }))
+          .deleteIn([action.entityName, 'fetching']);
       } else {
         return state;
       }

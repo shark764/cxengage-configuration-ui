@@ -651,7 +651,7 @@ Object {
           "name": "name",
         },
         Object {
-          "format": "date",
+          "format": "datetime",
           "label": "Created On",
           "name": "created",
         },

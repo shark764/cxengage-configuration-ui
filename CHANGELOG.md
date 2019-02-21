@@ -19,6 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.54.1] - 2019-02-21
+### Fixed
+- Copy flow and draft form now activate submit button if no error exists.
+- Created On column now shows date and time formatted.
+### Changed
+- Version bump component library to 0.36.1.
+
 ## [0.54.0] - 2019-02-18
 ### Added
 - Basic Transfer Lists page in alpha phase
