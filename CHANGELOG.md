@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.54.2] - 2019-02-21
+### Fixed
+- Edit version on Flows page shows just Name inputText. The rest of cases shows Name and Description inputTexts.
+
 ## [0.54.1] - 2019-02-21
 ### Fixed
 - Copy flow and draft form now activate submit button if no error exists.

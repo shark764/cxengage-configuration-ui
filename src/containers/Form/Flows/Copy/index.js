@@ -10,7 +10,8 @@ import { setSelectedSubEntityId } from '../../../../redux/modules/entities';
 import {
   getSelectedEntity,
   isSubEntitySaving,
-  getSelectedSubEntityId
+  getSelectedSubEntityId,
+  getSelectedSubEntityName
 } from '../../../../redux/modules/entities/selectors';
 import {
   selectFlowNames,
@@ -32,6 +33,7 @@ export function mapStateToProps(state) {
     }),
     isSaving: isSubEntitySaving(state),
     subEntityId: getSelectedSubEntityId(state),
+    subEntityName: getSelectedSubEntityName(state),
     flowName: getSelectedEntity(state).get('name'),
     names: selectFlowNames(state),
     drafts: selectFlowDraftNames(state),

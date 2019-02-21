@@ -56,14 +56,16 @@ export default function ListItemsForm(props) {
           automation="flowsCopyFormFieldName"
           disabled={props.isSaving}
         />
-        <InputField
-          name="description"
-          label="Description"
-          componentType="textarea"
-          inputType="text"
-          automation="flowsCopyFormFieldDescription"
-          disabled={props.isSaving}
-        />
+        {!(props.subEntityId === 'drafts' && props.subEntityName === 'versions') && (
+          <InputField
+            name="description"
+            label="Description"
+            componentType="textarea"
+            inputType="text"
+            automation="flowsCopyFormFieldDescription"
+            disabled={props.isSaving}
+          />
+        )}
       </Wrapper>
       <SidePanelActions
         onCancel={props.onCancel}
@@ -79,6 +81,7 @@ ListItemsForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   subEntityId: PropTypes.string,
+  subEntityName: PropTypes.string,
   flowName: PropTypes.string,
   initialValues: PropTypes.object,
   onCancel: PropTypes.func.isRequired,
