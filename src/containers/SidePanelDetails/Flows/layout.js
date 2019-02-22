@@ -52,6 +52,7 @@ export default function FlowsDetailsPanel({
         updateSubEntity={(listItemId, row, subEntityName) => createDraftItem('drafts', row, subEntityName)}
         items={versionsItems}
         fields={versionsFields}
+        defaultSorted={[{ id: 'fakeVersion', desc: true }]}
         fetching={flowsFetching && !versionsItems.length}
         itemApiPending={itemApiPending}
       />
@@ -72,6 +73,7 @@ export default function FlowsDetailsPanel({
         copySubEntity={copyListItem}
         items={draftsItems}
         fields={draftsFields}
+        defaultSorted={[{ id: 'created', desc: true }]}
         fetching={flowsFetching && !draftsItems.length}
         itemApiPending={itemApiPending}
       />

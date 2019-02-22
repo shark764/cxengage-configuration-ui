@@ -34,21 +34,21 @@ exports[`<FlowsForm /> renders create form 1`] = `
     options={
       Array [
         Object {
-          "label": "customer",
+          "label": "Customer",
           "value": "customer",
         },
         Object {
-          "label": "resource",
+          "label": "Resource",
           "value": "resource",
         },
         Object {
-          "label": "reusable",
+          "label": "Reusable",
           "value": "reusable",
         },
       ]
     }
     placeholder="Select a type..."
-    required={false}
+    required={true}
   />
 </form>
 `;
@@ -87,21 +87,21 @@ exports[`<FlowsForm /> renders update form 1`] = `
     options={
       Array [
         Object {
-          "label": "customer",
+          "label": "Customer",
           "value": "customer",
         },
         Object {
-          "label": "resource",
+          "label": "Resource",
           "value": "resource",
         },
         Object {
-          "label": "reusable",
+          "label": "Reusable",
           "value": "reusable",
         },
       ]
     }
     placeholder="Select a type..."
-    required={false}
+    required={true}
   />
 </form>
 `;

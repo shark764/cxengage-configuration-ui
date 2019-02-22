@@ -5,9 +5,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { SearchIconSVG } from 'cx-ui-components';
 
 const Input = styled.input`
   width: 100%;
+`;
+const SearchIcon = styled(SearchIconSVG)`
+  position: relative;
+  left: -17px;
+  opacity: 0.4;
 `;
 
 export const activeQueueColumn = {
@@ -16,11 +22,14 @@ export const activeQueueColumn = {
   accessor: queue => queue.activeQueue.name,
   Cell: ({ row }) => <span title={row.activeQueue}>{row.activeQueue}</span>,
   Filter: ({ filter, onChange }) => (
-    <Input
-      className="entity-table-filter-column-active-queue"
-      onChange={event => onChange(event.target.value)}
-      value={filter ? filter.value : ''}
-    />
+    <div>
+      <Input
+        className="entity-table-filter-column-active-queue"
+        onChange={event => onChange(event.target.value)}
+        value={filter ? filter.value : ''}
+      />
+      <SearchIcon searchIconType="primary" size={10} />
+    </div>
   )
 };
 

@@ -2,9 +2,7 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "initialValues": Object {
-    "active": true,
-  },
+  "initialValues": undefined,
   "isSaving": true,
   "key": "mockId",
   "names": Array [
@@ -24,11 +22,6 @@ exports[`createFormName returns proper values 1`] = `undefined`;
 exports[`flows Renders renders 1`] = `
 <Connect(ReduxForm)
   dispatch={[Function]}
-  initialValues={
-    Object {
-      "active": true,
-    }
-  }
   isSaving={true}
   key="mockId"
   names={

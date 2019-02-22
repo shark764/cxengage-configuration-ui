@@ -2,7 +2,7 @@
 
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
-  "activeVersion": "Please select a version to be the default actived",
+  "activeVersion": "Please select an active version to be associated to this flow.",
   "name": "Please enter a name",
   "type": "Please select a type",
 }
@@ -10,7 +10,7 @@ Object {
 
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
-  "activeVersion": "Please select a version to be the default actived",
+  "activeVersion": "Please select an active version to be associated to this flow.",
   "name": "Please enter a name",
   "type": "Please select a type",
 }

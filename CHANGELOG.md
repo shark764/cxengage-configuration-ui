@@ -19,6 +19,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.54.4] - 2019-02-22
+### Fixed
+- Active Flow column was changed to Active Version.
+- Active Version column now has search icon.
+- Required drop-down on Flows page don't have empty option anymore.
+- Validation message for Active Version on Flow form was changed.
+- Active Version field now shows number version.
+### Changed
+- Version bump component library to 0.36.2.
+
 ## [0.54.3] - 2019-02-22
 ### Fixed
 - Published versions sidepanel table now shows whole datetime format on Flows page.

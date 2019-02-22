@@ -20,7 +20,8 @@ export const formValidation = (values, props) => {
   }
 
   validation.type = !values.get('type') && 'Please select a type';
-  validation.activeVersion = !values.get('activeVersion') && 'Please select a version to be the default actived';
+  validation.activeVersion =
+    !values.get('activeVersion') && 'Please select an active version to be associated to this flow.';
 
   return validation;
 };

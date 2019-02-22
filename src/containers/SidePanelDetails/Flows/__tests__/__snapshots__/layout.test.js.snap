@@ -12,6 +12,14 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
   />
   <_class2
     contains="versions"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "fakeVersion",
+        },
+      ]
+    }
     tableType="sidePanel"
     updateSubEntity={[Function]}
     userHasUpdatePermission={true}
@@ -25,6 +33,14 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
   <_class2
     confirmDeleteSubEntity={true}
     contains="drafts"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "created",
+        },
+      ]
+    }
     tableType="sidePanel"
     userHasUpdatePermission={true}
   />
@@ -43,6 +59,14 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
   />
   <_class2
     contains="versions"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "fakeVersion",
+        },
+      ]
+    }
     tableType="sidePanel"
     updateSubEntity={[Function]}
     userHasUpdatePermission={false}
@@ -56,6 +80,14 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
   <_class2
     confirmDeleteSubEntity={true}
     contains="drafts"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "created",
+        },
+      ]
+    }
     tableType="sidePanel"
     userHasUpdatePermission={false}
   />

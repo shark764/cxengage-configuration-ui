@@ -43,27 +43,29 @@ export default function FlowsForm({ handleSubmit, initialValues, isSaving, userH
         automation="flowsFormFieldType"
         options={[
           {
-            label: 'customer',
+            label: 'Customer',
             value: 'customer'
           },
           {
-            label: 'resource',
+            label: 'Resource',
             value: 'resource'
           },
           {
-            label: 'reusable',
+            label: 'Reusable',
             value: 'reusable'
           }
         ]}
+        required
       />
       {initialValues.get('id') !== undefined && (
         <SelectField
           name="activeVersion"
-          label="Version *"
+          label="Active Version *"
           placeholder="Select a version..."
           options={versions}
           automation="flowsFormFieldActiveVersion"
           disabled={isSaving || versions.length === 0 || !userHasUpdatePermission}
+          required
         />
       )}
     </form>

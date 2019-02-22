@@ -1,8 +1,10 @@
 /*
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
+import { Map } from 'immutable';
 import { createSelector } from 'reselect';
 import { getSelectedEntity, userHasPermissions, getSelectedSubEntityId, getSelectedSubEntityData } from '../selectors';
+import { selectFormInitialValues } from '../../form/selectors';
 import { onCopyListItemFormSubmit } from '../';
 import { selectNonDisabledUsers, getDisplay } from '../users/selectors';
 import { entitiesMetaData } from '../metaData';
@@ -30,9 +32,9 @@ const selectVersions = selectedEntity => {
   const versions = selectedEntity.get('versions');
   return versions !== undefined
     ? versions
-        .map(version => ({
+        .map((version, index) => ({
           value: version.get('version'),
-          label: version.get('name')
+          label: `v${versions.size - index} - ${version.get('name')}`
         }))
         .toJS()
     : undefined;
@@ -100,3 +102,10 @@ export const getFlowItemFields = (state, memberName) =>
         }
       ]
     : entitiesMetaData.flows.membersTableFields[memberName];
+
+export const selectFlowFormInitialValues = state => {
+  if (getSelectedEntity(state) === undefined) {
+    return new Map({ active: true, type: 'customer' });
+  }
+  return selectFormInitialValues(state);
+};

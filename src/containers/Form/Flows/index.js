@@ -8,8 +8,12 @@ import { reduxForm } from 'redux-form/immutable';
 import FlowsForm from './layout';
 import { formValidation } from './validation';
 import { getSelectedEntityId, userHasUpdatePermission, isCreating } from '../../../redux/modules/entities/selectors';
-import { selectFlowVersions, selectFlowNames } from '../../../redux/modules/entities/flows/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import {
+  selectFlowVersions,
+  selectFlowNames,
+  selectFlowFormInitialValues
+} from '../../../redux/modules/entities/flows/selectors';
+import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
 const CreateFlowsForm = compose(
   connect(state => createFormName(state)),
@@ -22,7 +26,7 @@ const CreateFlowsForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    initialValues: selectFormInitialValues(state),
+    initialValues: selectFlowFormInitialValues(state),
     isSaving: isCreating(state),
     key: getSelectedEntityId(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
