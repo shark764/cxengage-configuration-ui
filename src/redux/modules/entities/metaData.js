@@ -620,7 +620,7 @@ entities.flows.membersTableFields = {
   versions: [
     { label: 'Version', name: 'fakeVersion' },
     { label: 'Name', name: 'name' },
-    { label: 'Created On', name: 'created', format: 'date' }
+    { label: 'Created On', name: 'created', format: 'datetime' }
   ],
   drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'datetime' }]
 };

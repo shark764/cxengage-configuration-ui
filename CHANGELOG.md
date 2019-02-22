@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.54.3] - 2019-02-22
+### Fixed
+- Published versions sidepanel table now shows whole datetime format on Flows page.
+
 ## [0.54.2] - 2019-02-21
 ### Fixed
 - Edit version on Flows page shows just Name inputText. The rest of cases shows Name and Description inputTexts.
