@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.54.5] - 2019-02-25
+### Changed
+- CXV1-17094 - Switched Login details with Tenant Details in create/update users page.
+
 ## [0.54.4] - 2019-02-22
 ### Fixed
 - Active Flow column was changed to Active Version.

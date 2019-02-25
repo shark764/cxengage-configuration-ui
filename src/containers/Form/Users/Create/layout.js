@@ -39,31 +39,6 @@ export default function UsersForm({
         {checkPlatformUser && (
           <DetailsPanelAlert text="This user already exists on the platform and it will be added to the tenant upon clicking “Submit”" />
         )}
-        <DetailWrapper open={true}>
-          <WrappedDetailHeader text="Tenant Details" />
-          <InputField
-            name="workStationId"
-            label="Workstation ID"
-            id="frm-users-work-station-id"
-            componentType="input"
-            inputType="text"
-            disabled={isSaving || !userHasUpdatePermission}
-          />
-          <SelectField
-            name="roleId"
-            label="Tenant Role *"
-            id="frm-users-role-id"
-            disabled={isSaving || !userHasUpdatePermission}
-            options={tenantRoles}
-            required
-          />
-          <ToggleField
-            name="inviteNow"
-            label="Invite Now"
-            id="frm-users-invite-now"
-            disabled={isSaving || !userHasUpdatePermission}
-          />
-        </DetailWrapper>
 
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Login Details" />
@@ -95,6 +70,32 @@ export default function UsersForm({
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantIdentityProviders}
             required
+          />
+        </DetailWrapper>
+
+        <DetailWrapper open={true}>
+          <WrappedDetailHeader text="Tenant Details" />
+          <InputField
+            name="workStationId"
+            label="Workstation ID"
+            id="frm-users-work-station-id"
+            componentType="input"
+            inputType="text"
+            disabled={isSaving || !userHasUpdatePermission}
+          />
+          <SelectField
+            name="roleId"
+            label="Tenant Role *"
+            id="frm-users-role-id"
+            disabled={isSaving || !userHasUpdatePermission}
+            options={tenantRoles}
+            required
+          />
+          <ToggleField
+            name="inviteNow"
+            label="Invite Now"
+            id="frm-users-invite-now"
+            disabled={isSaving || !userHasUpdatePermission}
           />
         </DetailWrapper>
       </Wrapper>

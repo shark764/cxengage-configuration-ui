@@ -40,29 +40,6 @@ exports[`<UsersForm /> renders create user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Tenant Details"
-      />
-      <InputField
-        className="frm-users-workstation-id"
-        componentType="input"
-        disabled={false}
-        inputType="text"
-        label="Workstation ID"
-        name="workStationId"
-      />
-      <SelectField
-        className="frm-users-role-id"
-        disabled={true}
-        label="Tenant Role"
-        name="roleId"
-        options={Array []}
-        required={false}
-      />
-    </Connect(DetailWrapper)>
-    <Connect(DetailWrapper)
-      open={true}
-    >
-      <Styled(DetailHeader)
         text="Login Details"
       />
       <InputField
@@ -119,6 +96,29 @@ exports[`<UsersForm /> renders create user 1`] = `
           Reset Password
         </Styled(Button)>
       </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
+      <InputField
+        className="frm-users-workstation-id"
+        componentType="input"
+        disabled={false}
+        inputType="text"
+        label="Workstation ID"
+        name="workStationId"
+      />
+      <SelectField
+        className="frm-users-role-id"
+        disabled={true}
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
+      />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
@@ -193,29 +193,6 @@ exports[`<UsersForm /> renders update user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Tenant Details"
-      />
-      <InputField
-        className="frm-users-workstation-id"
-        componentType="input"
-        disabled={false}
-        inputType="text"
-        label="Workstation ID"
-        name="workStationId"
-      />
-      <SelectField
-        className="frm-users-role-id"
-        disabled={true}
-        label="Tenant Role"
-        name="roleId"
-        options={Array []}
-        required={false}
-      />
-    </Connect(DetailWrapper)>
-    <Connect(DetailWrapper)
-      open={true}
-    >
-      <Styled(DetailHeader)
         text="Login Details"
       />
       <InputField
@@ -272,6 +249,29 @@ exports[`<UsersForm /> renders update user 1`] = `
           Reset Password
         </Styled(Button)>
       </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
+      <InputField
+        className="frm-users-workstation-id"
+        componentType="input"
+        disabled={false}
+        inputType="text"
+        label="Workstation ID"
+        name="workStationId"
+      />
+      <SelectField
+        className="frm-users-role-id"
+        disabled={true}
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
+      />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
@@ -346,29 +346,6 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Tenant Details"
-      />
-      <InputField
-        className="frm-users-workstation-id"
-        componentType="input"
-        disabled={true}
-        inputType="text"
-        label="Workstation ID"
-        name="workStationId"
-      />
-      <SelectField
-        className="frm-users-role-id"
-        disabled={true}
-        label="Tenant Role"
-        name="roleId"
-        options={Array []}
-        required={false}
-      />
-    </Connect(DetailWrapper)>
-    <Connect(DetailWrapper)
-      open={true}
-    >
-      <Styled(DetailHeader)
         text="Login Details"
       />
       <InputField
@@ -425,6 +402,29 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
           Reset Password
         </Styled(Button)>
       </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
+      <InputField
+        className="frm-users-workstation-id"
+        componentType="input"
+        disabled={true}
+        inputType="text"
+        label="Workstation ID"
+        name="workStationId"
+      />
+      <SelectField
+        className="frm-users-role-id"
+        disabled={true}
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
+      />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
       open={true}
@@ -499,29 +499,6 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Tenant Details"
-      />
-      <InputField
-        className="frm-users-workstation-id"
-        componentType="input"
-        disabled={true}
-        inputType="text"
-        label="Workstation ID"
-        name="workStationId"
-      />
-      <SelectField
-        className="frm-users-role-id"
-        disabled={true}
-        label="Tenant Role"
-        name="roleId"
-        options={Array []}
-        required={false}
-      />
-    </Connect(DetailWrapper)>
-    <Connect(DetailWrapper)
-      open={true}
-    >
-      <Styled(DetailHeader)
         text="Login Details"
       />
       <InputField
@@ -565,6 +542,29 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
         required={true}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
+      <InputField
+        className="frm-users-workstation-id"
+        componentType="input"
+        disabled={true}
+        inputType="text"
+        label="Workstation ID"
+        name="workStationId"
+      />
+      <SelectField
+        className="frm-users-role-id"
+        disabled={true}
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
