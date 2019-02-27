@@ -621,7 +621,18 @@ entities.flows.columns = [
 ];
 entities.flows.membersTableFields = {
   versions: [
-    { label: 'Version', name: 'fakeVersion' },
+    {
+      label: 'Version',
+      name: 'fakeVersion',
+      customSortMethod: function(a, b) {
+        a = parseInt(a, 10);
+        b = parseInt(b, 10);
+        if (a === b) {
+          return 0;
+        }
+        return a > b ? 1 : -1;
+      }
+    },
     { label: 'Name', name: 'name' },
     { label: 'Created On', name: 'created', format: 'datetime' }
   ],

@@ -535,6 +535,7 @@ Object {
   },
   "dispatchMappings": EntityMetaData {
     "betaFeature": false,
+    "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
         "active": true,
@@ -766,6 +767,7 @@ Object {
       ],
       "versions": Array [
         Object {
+          "customSortMethod": [Function],
           "label": "Version",
           "name": "fakeVersion",
         },
@@ -1082,6 +1084,7 @@ Object {
   },
   "integrations": EntityMetaData {
     "betaFeature": false,
+    "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
       "falseButtonText": "",
