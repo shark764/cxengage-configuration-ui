@@ -1,13 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`selectTenantIdentityProviders Does not get any IDPs from state 1`] = `
-Array [
-  Object {
-    "label": "Use Tenant Default",
-    "value": "null",
-  },
-]
-`;
+exports[`selectTenantIdentityProviders Does not get any IDPs from state 1`] = `Array []`;
 
 exports[`selectTenantIdentityProviders Gets the correct IDPs 1`] = `
 Array [

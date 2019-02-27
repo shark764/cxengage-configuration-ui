@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "defaultIdentityProvider": "Please select a value for Default Identity Provider",
+  "noPassword": "Please select a value for Platform Authentication",
+  "status": "Please select a status",
+}
+`;
+
+exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
+Object {
+  "defaultIdentityProvider": "Please select a value for Default Identity Provider",
+  "noPassword": "Please select a value for Platform Authentication",
+  "status": "Please select a status",
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "defaultIdentityProvider": false,
+  "noPassword": false,
+  "status": false,
+}
+`;

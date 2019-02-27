@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <styled.span>
+      <span>
+        Enable/Disable Users
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Send Invitation
+      </span>
+      <ConfirmationWrapper
+        mainText="This will send an email invitation to all users selected"
+        secondaryText="Are you sure you want to continue?"
+      >
+        <Styled(ToggleField)
+          automation="usersBulkActionsFormFieldInviteNow"
+          name="inviteNow"
+        />
+      </ConfirmationWrapper>
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Resend Invitation
+      </span>
+      <ConfirmationWrapper
+        mainText="This will resend an email invitation to all users selected"
+        secondaryText="Are you sure you want to continue?"
+      >
+        <Styled(ToggleField)
+          automation="usersBulkActionsFormFieldResendInvitation"
+          name="resendInvitation"
+        />
+      </ConfirmationWrapper>
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Cancel Invitation
+      </span>
+      <ConfirmationWrapper
+        mainText="This will prevent all selected users from accepting the invitation."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <Styled(ToggleField)
+          automation="usersBulkActionsFormFieldCancelInvitation"
+          name="cancelInvitation"
+        />
+      </ConfirmationWrapper>
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Reset Password
+      </span>
+      <ConfirmationWrapper
+        mainText="This will send a password reset email to all users selected"
+        secondaryText="Are you sure you want to continue?"
+      >
+        <Styled(ToggleField)
+          automation="usersBulkActionsFormFieldPasswordReset"
+          name="passwordReset"
+        />
+      </ConfirmationWrapper>
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Set Platform Authentication
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Set Default Identity Provider
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+      />
+    </styled.span>
+  </styled.div>
+</form>
+`;

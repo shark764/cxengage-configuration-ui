@@ -317,6 +317,10 @@ export const setConfirmationDialog = (modalType, metaData) => ({
 export const toggleProficiency = () => ({
   type: 'TOGGLE_PROFICIENCY'
 });
+export const toggleInvitationStatus = fieldToToggle => ({
+  type: 'TOGGLE_INVITATION_STATUS',
+  fieldToToggle
+});
 
 export const executeConfirmCallback = referenceData => ({
   type: 'EXECUTE_CONFIRM_CALLBACK',

@@ -291,6 +291,7 @@ export const UpdateEntity = (action$, store) =>
 export const BulkEntityUpdate = (action$, store) =>
   action$
     .ofType('BULK_ENTITY_UPDATE')
+    .filter(a => a.entityName !== 'users')
     .map(a => {
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
@@ -563,6 +564,21 @@ export const FetchFormMetaData = (action$, store) =>
           : from(entitiesMetaData[a.currentEntityName].updateFormDependencies)
               .filter(entityName => a.isDefined(entityName))
               .map(entityName => ({ type: 'FETCH_DATA', entityName }))
+    );
+
+export const FetchBulkFormMetaData = (action$, store) =>
+  action$
+    .ofType('TOGGLE_BULK_ENTITY_CHANGE')
+    .map(a => ({
+      ...a,
+      entityId: getSelectedEntityId(store.getState()),
+      isDefined: name => store.getState().getIn(['Entities', name, 'data']).size === 0
+    }))
+    .filter(a => a.entityId === 'bulk')
+    .switchMap(a =>
+      from(entitiesMetaData[a.entityName].bulkFormDependencies)
+        .filter(entityName => a.isDefined(entityName))
+        .map(entityName => ({ type: 'FETCH_DATA', entityName }))
     );
 
 export const FetchSidePanelData = (action$, store) =>

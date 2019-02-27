@@ -11,6 +11,7 @@ import {
   getModalTableItems,
   getSidePanelTableItems
 } from '../../entities/listItemSelectors';
+import { getCurrentForm } from '../../form/selectors';
 
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
@@ -106,3 +107,6 @@ export const isUserPlatformAdmin = state => {
   // and "Platform User Password Restricted"
   return selectPlatformRoles(state).filter(role => 'Platform Administrator' === role.label).length !== 0;
 };
+
+export const getCheckedBulkActionFormValue = (state, field) =>
+  getCurrentForm(state) && getCurrentForm(state).getIn(['values', field]);

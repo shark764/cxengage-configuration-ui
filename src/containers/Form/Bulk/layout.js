@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
 /**
@@ -8,23 +8,34 @@
  *
  */
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { RadioGroupField } from 'cx-ui-components';
+import { RadioGroupField, Toggle } from 'cx-ui-components';
 
-const ToggleList = styled.span`
-  display: flex;
-  margin-bottom: 50px;
-  justify-content: space-between;
+const Container = styled.div`
   border: 1px solid #e0cdcd;
   border-radius: 5px;
   padding: 20px;
+  margin-bottom: 0px;
+  margin-left: 0px;
 `;
 
-const StyledCheckbox = styled.input`
+const ToggleList = styled.span`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledToggle = styled(Toggle)`
   width: 15px;
   height: 15px;
+  margin-right: 25px;
+`;
+
+const Options = styled.div`
+  margin-top: 10px;
+  margin-bottom: -10px;
+  margin-left: 10px;
 `;
 
 export default class GenericBulkActionsForm extends Component {
@@ -43,31 +54,33 @@ export default class GenericBulkActionsForm extends Component {
 
   render() {
     return (
-      <Fragment>
-        <ToggleList>
-          <span>Active</span>
-          <StyledCheckbox type="checkbox" onChange={this.toggleField} value={this.state.visibleFields.active} />
-        </ToggleList>
-        <form onSubmit={this.props.handleSubmit} key={this.props.key}>
+      <form onSubmit={this.props.handleSubmit} key={this.props.key}>
+        <Container>
+          <ToggleList>
+            <span>Active</span>
+            <StyledToggle onChange={this.toggleField} value={this.state.visibleFields.active} />
+          </ToggleList>
           {this.state.visibleFields.active && (
-            <RadioGroupField
-              name="active"
-              label="Active"
-              disabled={this.props.isSaving || this.props.inherited}
-              options={[
-                {
-                  label: 'Enabled',
-                  value: 'true'
-                },
-                {
-                  label: 'Disabled',
-                  value: 'false'
-                }
-              ]}
-            />
+            <Options>
+              <RadioGroupField
+                name="active"
+                label="Active"
+                disabled={this.props.isSaving || this.props.inherited}
+                options={[
+                  {
+                    label: 'Enabled',
+                    value: true
+                  },
+                  {
+                    label: 'Disabled',
+                    value: false
+                  }
+                ]}
+              />
+            </Options>
           )}
-        </form>
-      </Fragment>
+        </Container>
+      </form>
     );
   }
 }

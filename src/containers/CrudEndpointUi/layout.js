@@ -29,6 +29,7 @@ import RolesForm from '../Form/Roles';
 import SkillsForm from '../Form/Skills';
 import GroupsForm from '../Form/Groups';
 import UsersForm from '../Form/Users';
+import UsersBulkActionsForm from '../Form/Users/Bulk';
 import UsersCreateForm from '../Form/Users/Create';
 import DataAccessReportsForm from '../Form/DataAccessReports';
 import ReasonsForm from '../Form/Reasons';
@@ -412,6 +413,14 @@ const bulkChangeFormRoutes = [
     component: () => (
       <DetailsPanel>
         <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/users',
+    component: () => (
+      <DetailsPanel>
+        <UsersBulkActionsForm />
       </DetailsPanel>
     )
   }

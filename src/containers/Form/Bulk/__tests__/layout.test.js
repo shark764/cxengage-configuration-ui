@@ -8,7 +8,7 @@ import { shallow } from 'enzyme';
 import GenericBulkItemsForm from '../layout';
 
 describe('<GenericBulkItemsForm />', () => {
-  it('renders create customMetric', () => {
+  it('renders generic bulk actions form', () => {
     const rendered = shallow(<GenericBulkItemsForm active={true} handleSubmit={() => {}} />);
     expect(rendered).toMatchSnapshot();
   });

@@ -44,6 +44,7 @@ export class EntityMetaData {
      */
     this.createFormDependencies = [];
     this.updateFormDependencies = [];
+    this.bulkFormDependencies = [];
     this.entityTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
@@ -183,6 +184,7 @@ entities.users.pageTitle = 'User Management';
 entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
 entities.users.createFormDependencies.push('roles', 'platformRoles', 'identityProviders');
 entities.users.updateFormDependencies.push('roles', 'platformRoles', 'identityProviders', 'capacityRules');
+entities.users.bulkFormDependencies.push('identityProviders');
 entities.users.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' },

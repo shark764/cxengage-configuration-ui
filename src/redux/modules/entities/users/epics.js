@@ -2,16 +2,24 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { from } from 'rxjs/observable/from';
 import { of } from 'rxjs/observable/of';
-import { removeLastLetter, camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
+import { camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
 import { generateUUID } from 'serenova-js-utils/uuid';
 import { sdkPromise } from '../../../../utils/sdk';
-import { handleSuccess, handleError } from '../handleResult';
-import { getCurrentEntity, getSelectedEntityId, getSelectedEntity } from '../selectors';
+import { handleSuccess, handleError, handleBulkSuccess } from '../handleResult';
+import {
+  getCurrentEntity,
+  getSelectedEntityId,
+  getSelectedEntity,
+  getSelectedEntityBulkChangeItems,
+  getSelectedEntityFormId
+} from '../selectors';
+import { getCheckedBulkActionFormValue } from './selectors';
 import { selectFormInitialValues } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
 import { Toast } from 'cx-ui-components';
 import { changeUserInviteStatus } from '../../entities';
 import { validateEmail } from 'serenova-js-utils/validation';
+import { change } from 'redux-form';
 
 export const UpdateUserEntity = action$ =>
   action$
@@ -51,7 +59,7 @@ export const UpdateUserEntity = action$ =>
         updateBody: {
           ...filterValues
         },
-        [removeLastLetter(a.entityName) + 'Id']: a.entityId
+        userId: a.entityId
       };
 
       // Changing users capacity
@@ -74,7 +82,7 @@ export const UpdateUserEntity = action$ =>
           from(
             sdkPromise(apiCall).catch(error => ({
               error: error,
-              id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
+              id: apiCall.data['userId']
             }))
           )
         )
@@ -122,7 +130,7 @@ export const UpdatePlatformUserEntity = action$ =>
         updateBody: {
           ...filterValues
         },
-        [removeLastLetter(a.entityName) + 'Id']: a.entityId
+        userId: a.entityId
       };
 
       return { ...a };
@@ -394,4 +402,129 @@ export const CheckIfEmailExists = action$ =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response => handleSuccess(response, a))
         .catch(error => handleError(error, a))
+    );
+
+export const BulkEntityUpdate = (action$, store) =>
+  action$
+    .ofType('BULK_ENTITY_UPDATE')
+    .filter(a => a.entityName === 'users')
+    .map(a => {
+      a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
+      a.allSdkCalls = [];
+      [...a.allIdsToProcess.toJS()].forEach(item => {
+        // Creating values to pass data to sdkCall, this data will be
+        // used for a single call to updateUser function
+        let sdkCallValues = {};
+        if (a.values.status !== undefined) {
+          sdkCallValues.status = a.values.status;
+        }
+        if (a.values.noPassword !== undefined) {
+          if (a.values.noPassword === 'null') {
+            sdkCallValues.noPassword = null;
+          } else {
+            sdkCallValues.noPassword = a.values.noPassword === 'true';
+          }
+        }
+        if (a.values.defaultIdentityProvider !== undefined) {
+          if (a.values.defaultIdentityProvider === 'null') {
+            sdkCallValues.defaultIdentityProvider = null;
+          } else {
+            sdkCallValues.defaultIdentityProvider = a.values.defaultIdentityProvider;
+          }
+        }
+        if (Object.keys(sdkCallValues).length) {
+          // Using the default sdkCall to update single entity data,
+          // by calling updateUser
+          a.allSdkCalls.push({
+            ...a.sdkCall,
+            data: {
+              ...sdkCallValues,
+              userId: item
+            }
+          });
+        }
+
+        if (a.values.passwordReset) {
+          // Reset password for all users if option was selected
+          a.allSdkCalls.push({
+            command: 'updatePlatformUser',
+            data: {
+              userId: item,
+              updateBody: {
+                resetPassword: true
+              }
+            },
+            module: 'entities',
+            topic: 'cxengage/entities/update-platform-user-response'
+          });
+        }
+        if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
+          // Change each user invitation status if any of these options
+          // are selected: inviteNow | resendInvitation | cancelInvitation
+          a.toStatus = a.values.cancelInvitation ? 'pending' : 'invited';
+          a.allSdkCalls.push({
+            command: 'updateUser',
+            data: {
+              userId: item,
+              updateBody: {
+                status: a.toStatus
+              }
+            },
+            module: 'entities',
+            topic: 'cxengage/entities/update-user-response'
+          });
+        }
+      });
+      return { ...a };
+    })
+    .mergeMap(a =>
+      forkJoin(
+        a.allSdkCalls.map(apiCall =>
+          from(
+            sdkPromise(apiCall).catch(error => ({
+              error: error,
+              id: apiCall.data['userId']
+            }))
+          )
+        )
+      )
+        .do(allResult => handleBulkSuccess(allResult))
+        .mergeMap(result =>
+          from(result).map(response => {
+            if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
+              return handleSuccess(
+                {
+                  result: {
+                    ...response.result,
+                    invitationStatus: a.toStatus
+                  }
+                },
+                a
+              );
+            }
+            return handleSuccess(response, a);
+          })
+        )
+    );
+
+export const FocusNoPasswordValueFormField = (action$, store) =>
+  action$
+    .ofType('@@redux-form/REGISTER_FIELD')
+    .filter(
+      a =>
+        a.meta.form === 'users:bulk' &&
+        (a.payload.name === 'noPassword' || a.payload.name === 'defaultIdentityProvider')
+    )
+    .map(a => change(a.meta.form, a.payload.name, 'null'));
+
+export const ToggleInvitationStatusFormField = (action$, store) =>
+  action$
+    .ofType('TOGGLE_INVITATION_STATUS')
+    .map(a =>
+      change(
+        getSelectedEntityFormId(store.getState()),
+        a.fieldToToggle,
+        !getCheckedBulkActionFormValue(store.getState(), a.fieldToToggle)
+      )
     );
