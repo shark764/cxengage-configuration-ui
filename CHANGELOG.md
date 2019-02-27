@@ -19,9 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.56.1] - 2019-02-27
+### Added
+- CXV1-13311 - Created and Updated now show by whom.
+
 ## [0.56.0] - 2019-02-27
 ### Added
-CXV1-16883 - Added dispatch mappings page
+- CXV1-16883 - Added dispatch mappings page
 
 ## [0.55.0] - 2019-02-26
 ### Added

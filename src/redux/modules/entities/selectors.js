@@ -4,8 +4,9 @@
 
 import { createSelector } from 'reselect';
 import { List } from 'immutable';
-
+import moment from 'moment';
 import { getCurrentPermissions, getCurrentTenantId } from '../userData/selectors';
+import { entitiesMetaData } from './metaData';
 
 const getEntities = state => state.get('Entities');
 
@@ -169,3 +170,47 @@ export const findEntityIndex = (state, entityName, entityId) =>
     : getEntities(state)
         .getIn([entityName, 'data'])
         .findIndex(entity => entity.get('id') === entityId);
+
+export const getSelectedEntityWithIndex = immutableEntitiesMap => {
+    const currentEntityName = immutableEntitiesMap.get('currentEntity');
+    const currentSelectedEntityId = immutableEntitiesMap.getIn([currentEntityName, 'selectedEntityId']);
+    const currentEntityList = immutableEntitiesMap.getIn([currentEntityName, 'data']);
+    const currentIndex = currentEntityList.findIndex(obj => obj.get('id') === currentSelectedEntityId);
+    
+    if(currentIndex !== -1) {
+      return currentEntityList.get(currentIndex)
+              .set('currentIndex', currentIndex)
+              .set('entityName', currentEntityName);
+    } else {
+      return undefined;
+    }
+}
+
+export const sidePanelHeader = state => {
+  const selectedEntityId = getSelectedEntityId(state);
+  const currentEntity = getCurrentEntity(state);
+  if (selectedEntityId === 'create') {
+    return {
+      title: `Creating New ${entitiesMetaData[currentEntity].title}`
+    };
+  } else if (selectedEntityId === 'bulk') {
+    return {
+      title: `Bulk Actions: ${getSelectedEntityBulkChangeItems(state).size} Selected`
+    };
+  } else if (selectedEntityId) {
+    const selectedEntity = getSelectedEntity(state);
+    const createdByName = getSelectedEntity(state).get('createdByName');
+    const updatedByName = getSelectedEntity(state).get('updatedByName')
+    return {
+      title: selectedEntity.get('name') || getDisplay(selectedEntity.toJS()),
+      createdAt: `Created on ${moment(selectedEntity.get('created')).format('lll')} ${createdByName? ` by ${createdByName}` : ''} `,
+      updatedAt: `Updated on ${moment(selectedEntity.get('updated')).format('lll')} ${updatedByName? ` by ${updatedByName}` : ''}`,
+      // We convert both values to boolean since each entity could have
+      // any of them, this way we avoid getting undefined instead of true/false
+      toggleStatus:
+      currentEntity !== 'roles'
+        ? Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted'
+        : undefined,
+    };
+  }
+}
