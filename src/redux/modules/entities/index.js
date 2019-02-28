@@ -4,7 +4,7 @@
 
 import { fromJS, List } from 'immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
-import { findEntityIndex,getSelectedEntityWithIndex } from './selectors';
+import { findEntityIndex, getSelectedEntityWithIndex } from './selectors';
 
 // Initial Sub State
 const defaultEntity = {
@@ -203,7 +203,7 @@ const initialState = fromJS({
     readPermission: ['READ_REASON_LIST'],
     updatePermission: ['UPDATE_REASON_LIST'],
     createPermission: ['CREATE_REASON_LIST'],
-    disablePermission: ['UPDATE_REASON_LIST'],
+    disablePermission: ['UPDATE_REASON_LIST']
   },
   flows: {
     ...defaultEntity,
@@ -229,18 +229,17 @@ const initialState = fromJS({
     createPermission: ['VIEW_ALL_TRANSFER_LISTS'],
     disablePermission: ['VIEW_ALL_TRANSFER_LISTS'],
     assignPermission: ['VIEW_ALL_TRANSFER_LISTS']
-  }
-  ,
+  },
   dispatchMappings: {
     ...defaultEntity,
     readPermission: ['VIEW_ALL_CONTACT_POINTS'],
     updatePermission: ['MAP_ALL_CONTACT_POINTS'],
     createPermission: ['MAP_ALL_CONTACT_POINTS'],
-    disablePermission: ['MAP_ALL_CONTACT_POINTS'],
+    disablePermission: ['MAP_ALL_CONTACT_POINTS']
   },
   integrations: {
     ...defaultEntity
-  },
+  }
   //hygen-inject-before
 });
 
@@ -467,12 +466,13 @@ export default function reducer(state = initialState, action) {
     }
     case 'CREATED_AND_UPDATED_BY_$': {
       const entity = getSelectedEntityWithIndex(state);
-      return state.mergeIn([entity.get('entityName'),'data',entity.get('currentIndex')], 
-                            {createdByName: entity.get('createdByName') || 
-                              (action.id === entity.get('createdBy'))? action.name : undefined})
-                  .mergeIn([entity.get('entityName'),'data',entity.get('currentIndex')], 
-                            {updatedByName: entity.get('updatedByName') || 
-                              (action.id === entity.get('updatedBy'))? action.name : undefined})
+      return state
+        .mergeIn([entity.get('entityName'), 'data', entity.get('currentIndex')], {
+          createdByName: action.createdByName || entity.get('createdByName')
+        })
+        .mergeIn([entity.get('entityName'), 'data', entity.get('currentIndex')], {
+          updatedByName: action.updatedByName || entity.get('updatedByName')
+        });
     }
     case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {
@@ -514,9 +514,9 @@ export default function reducer(state = initialState, action) {
     case 'CREATE_ENTITY_FULFILLED': {
       const { result } = action.response;
 
-      if(action.entityName === 'dispatchMappings'){
+      if (action.entityName === 'dispatchMappings') {
         const entityIndex = findEntityIndex(state, 'flows', result.flowId);
-        result.flow = {id: result.flowId, name : state.getIn(['flows', 'data',entityIndex]).get('name')} ;
+        result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', entityIndex]).get('name') };
       }
 
       return state.update(action.entityName, entityStore =>
@@ -568,20 +568,19 @@ export default function reducer(state = initialState, action) {
       const { result } = action.response;
       const entityIndex = findEntityIndex(state, action.entityName, result.id || action.id);
       if (entityIndex !== -1) {
-
-        if(action.entityName === 'dispatchMappings'){
+        if (action.entityName === 'dispatchMappings') {
           const flowIndex = findEntityIndex(state, 'flows', result.flowId);
-          result.flow = {id: result.flowId, name : state.getIn(['flows', 'data',flowIndex]).get('name')};
+          result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', flowIndex]).get('name') };
         }
 
         return state
           .remove('loading')
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }));
       } else {
-        if(action.entityName === 'dispatchMappings'){
+        if (action.entityName === 'dispatchMappings') {
           const flowIndex = findEntityIndex(state, 'flows', result.flowId);
-          result.flow = {id: result.flowId, name : state.getIn(['flows', 'data',flowIndex]).get('name')};
-          state.getIn([action.entityName,'data',entityIndex,'flow'],result.flow);
+          result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', flowIndex]).get('name') };
+          state.getIn([action.entityName, 'data', entityIndex, 'flow'], result.flow);
         }
         return state;
       }

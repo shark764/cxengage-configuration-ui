@@ -617,11 +617,10 @@ export const FetchSideCreatedAndUpdatedBy = (action$, store) =>
         ...action,
         entityId: getSelectedEntityId(store.getState()),
         createdById: getSelectedEntity(store.getState()).get('createdBy'),
-        updatedById: getSelectedEntity(store.getState()).get('updatedBy'),
+        updatedById: getSelectedEntity(store.getState()).get('updatedBy')
       };
     })
     .map(a => {
-      a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData['users'].entityApiRequest('get', 'singleMainEntity');
       a.allSdkCalls = [a.createdById, a.updatedById].map(id => ({
         ...a.sdkCall,
@@ -632,17 +631,14 @@ export const FetchSideCreatedAndUpdatedBy = (action$, store) =>
       return { ...a };
     })
     .mergeMap(a =>
-      forkJoin(
-        a.allSdkCalls.map(apiCall =>
-          from(sdkPromise(apiCall).catch(error => ({error: error})))
-        )
+      forkJoin(a.allSdkCalls.map(apiCall => from(sdkPromise(apiCall).catch(error => ({ error: error }))))).mergeMap(
+        result =>
+          from(result).map(r => ({
+            type: 'CREATED_AND_UPDATED_BY_$',
+            createdByName: r.result && r.result.id === a.createdById && getDisplay(r.result),
+            updatedByName: r.result && r.result.id === a.updatedById && getDisplay(r.result)
+          }))
       )
-      .mergeMap(result => from(result)
-      .map(a => ({
-        type: 'CREATED_AND_UPDATED_BY_$',
-        id: a.result && a.result.id,
-        name: getDisplay(a.result) 
-      })))
     );
 
 export const SubEntityFormSubmission = (action$, store) =>
