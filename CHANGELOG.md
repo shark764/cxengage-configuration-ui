@@ -19,6 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.56.6] - 2019-02-28
+### Fixed
+- CXV1-13311 - Updated by show correct user after update.
+- CXV1-17076 - Submit actions for sidePanel are shown on create and update.
+- CXV1-17275 - View Draft button was changed to Edit Draft.
+- CXV1-17076 - Outbound Identifiers is able to create new one with separated creating and updating permissions.
+### Changed
+- Version bump js-utils library to 1.6.3.
+
 ## [0.56.5] - 2019-02-28
 ### Fixed
 - CXV1-16883 - Fixed issue with validation, no duplicate names. Added filter to show non reusable flows only.

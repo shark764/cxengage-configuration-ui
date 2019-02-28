@@ -4,7 +4,7 @@
 
 import { fromJS, List } from 'immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
-import { findEntityIndex, getSelectedEntityWithIndex } from './selectors';
+import { findEntityIndex } from './selectors';
 
 // Initial Sub State
 const defaultEntity = {
@@ -463,16 +463,6 @@ export default function reducer(state = initialState, action) {
     }
     case 'FETCH_DATA_ITEM': {
       return state.setIn([action.entityName, 'fetching'], true);
-    }
-    case 'CREATED_AND_UPDATED_BY_$': {
-      const entity = getSelectedEntityWithIndex(state);
-      return state
-        .mergeIn([entity.get('entityName'), 'data', entity.get('currentIndex')], {
-          createdByName: action.createdByName || entity.get('createdByName')
-        })
-        .mergeIn([entity.get('entityName'), 'data', entity.get('currentIndex')], {
-          updatedByName: action.updatedByName || entity.get('updatedByName')
-        });
     }
     case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {

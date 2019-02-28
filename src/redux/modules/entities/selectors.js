@@ -8,6 +8,7 @@ import moment from 'moment';
 import { getCurrentPermissions, getCurrentTenantId } from '../userData/selectors';
 import { entitiesMetaData } from './metaData';
 import { getDisplay } from './users/selectors';
+import { getUserDisplayName } from '../userIdMap/selectors';
 
 const getEntities = state => state.get('Entities');
 
@@ -201,14 +202,14 @@ export const sidePanelHeader = state => {
     };
   } else if (selectedEntityId) {
     const selectedEntity = getSelectedEntity(state);
-    const createdByName = getSelectedEntity(state).get('createdByName');
-    const updatedByName = getSelectedEntity(state).get('updatedByName');
+    const createdByName = getUserDisplayName(state, selectedEntity.get('createdBy'));
+    const updatedByName = getUserDisplayName(state, selectedEntity.get('updatedBy'));
     return {
       title: selectedEntity.get('name') || getDisplay(selectedEntity.toJS()),
       createdAt: `Created on ${moment(selectedEntity.get('created')).format('lll')} ${
         createdByName ? ` by ${createdByName}` : ''
       } `,
-      updatedAt: `Updated on ${moment(selectedEntity.get('updated')).format('lll')} ${
+      updatedAt: `Last updated on ${moment(selectedEntity.get('updated')).format('lll')} ${
         updatedByName ? ` by ${updatedByName}` : ''
       }`,
       // We convert both values to boolean since each entity could have
@@ -220,3 +221,8 @@ export const sidePanelHeader = state => {
     };
   }
 };
+
+export const isUpdateForm = state => getSelectedEntity(state) !== undefined;
+
+export const userHasCurrentFormPermission = state =>
+  isUpdateForm(state) ? userHasUpdatePermission(state) : userHasCreatePermission(state);

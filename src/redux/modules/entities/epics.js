@@ -56,7 +56,6 @@ import {
 } from 'serenova-js-utils/strings';
 
 import { getCurrentSharedValue } from './reasons/selectors';
-import { getDisplay } from '../entities/users/selectors';
 
 /**
  * Note: When you see the variable 'a' shorthand being used
@@ -609,39 +608,6 @@ export const FetchSidePanelData = (action$, store) =>
       entityName: a.currentEntityName,
       id: a.entityId
     }));
-
-export const FetchSideCreatedAndUpdatedBy = (action$, store) =>
-  action$
-    .ofType('SET_SELECTED_ENTITY_ID')
-    .filter(a => a.entityId !== 'create' && a.entityId !== '')
-    .map(action => {
-      return {
-        ...action,
-        entityId: getSelectedEntityId(store.getState()),
-        createdById: getSelectedEntity(store.getState()).get('createdBy'),
-        updatedById: getSelectedEntity(store.getState()).get('updatedBy')
-      };
-    })
-    .map(a => {
-      a.sdkCall = entitiesMetaData['users'].entityApiRequest('get', 'singleMainEntity');
-      a.allSdkCalls = [a.createdById, a.updatedById].map(id => ({
-        ...a.sdkCall,
-        data: {
-          resourceId: id
-        }
-      }));
-      return { ...a };
-    })
-    .mergeMap(a =>
-      forkJoin(a.allSdkCalls.map(apiCall => from(sdkPromise(apiCall).catch(error => ({ error: error }))))).mergeMap(
-        result =>
-          from(result).map(r => ({
-            type: 'CREATED_AND_UPDATED_BY_$',
-            createdByName: r.result && r.result.id === a.createdById && getDisplay(r.result),
-            updatedByName: r.result && r.result.id === a.updatedById && getDisplay(r.result)
-          }))
-      )
-    );
 
 export const SubEntityFormSubmission = (action$, store) =>
   action$

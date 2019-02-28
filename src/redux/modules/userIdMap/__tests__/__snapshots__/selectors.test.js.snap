@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAllUsersIdMap Returns undefined if section is not in state 1`] = `undefined`;
+
+exports[`getAllUsersIdMap Returns users map 1`] = `
+Immutable.Map {
+  "0000": "Capricorn Shura",
+  "0001": "Aries Mu",
+  "0002": "Sagittarius Aioros",
+  "0003": "Gemini Saga",
+}
+`;
+
+exports[`getUserDisplayName Returns display name with given id 1`] = `"Gemini Saga"`;
+
+exports[`getUserDisplayName Returns undefined if given id is not in map 1`] = `undefined`;
+
+exports[`getUserDisplayName Returns undefined if section is not in state 1`] = `undefined`;
+
+exports[`getUserDisplayName Returns undefined if state section is undefined 1`] = `undefined`;

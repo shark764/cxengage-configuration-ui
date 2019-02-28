@@ -67,7 +67,7 @@ export default function FlowsDetailsPanel({
         tableType={'sidePanel'}
         contains="drafts"
         userHasUpdatePermission={userHasUpdatePermission}
-        viewSubEntity={openFlowDesigner}
+        updateSubEntity={openFlowDesigner}
         deleteSubEntity={removeListItem}
         confirmDeleteSubEntity={true}
         copySubEntity={copyListItem}

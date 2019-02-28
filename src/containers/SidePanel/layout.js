@@ -53,7 +53,7 @@ export default class SidePanelLayout extends Component {
         <SidePanelDiv slidingWidth={this.props.slidingWidth}>
           <SidePanelHeader />
           {this.props.children}
-          {this.props.userHasUpdatePermission && <SidePanelActions />}
+          {this.props.userHasCurrentFormPermission && <SidePanelActions />}
         </SidePanelDiv>
       </Fragment>
     );
@@ -65,6 +65,6 @@ SidePanelLayout.propTypes = {
   slidingWidth: number,
   children: PropTypes.any,
   onClick: PropTypes.func,
-  userHasUpdatePermission: PropTypes.bool,
+  userHasCurrentFormPermission: PropTypes.bool,
   updateSidePanelWidth: PropTypes.func
 };

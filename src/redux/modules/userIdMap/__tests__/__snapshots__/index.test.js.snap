@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserIdMap reducer snapshots dispatches ADD_USER_DATA_TO_MAP 1`] = `
+Immutable.Map {
+  "0000": "Capricorn Shura",
+  "0001": "Aries Mu",
+  "0002": "Sagittarius Aioros",
+  "0003": "Gemini Saga",
+  "0004": "Virgo Shaka",
+}
+`;
+
+exports[`UserIdMap reducer snapshots returns the correct initial state 1`] = `Immutable.Map {}`;

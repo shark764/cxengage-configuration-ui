@@ -9,18 +9,13 @@ import SidePanelLayout, { mapStateToProps } from '../';
 
 jest.mock('../../../redux/modules/entities/selectors', () => ({
   getSidePanelWidth: () => 50,
-  userHasUpdatePermission: () => true
+  userHasCurrentFormPermission: () => true
 }));
 
 describe('SidePanelLayout Renders', () => {
   it('renders', () => {
     const rendered = shallow(
-      <SidePanelLayout
-        store={mockStore}
-        menuType="mockMenu"
-        tableType="mockTable"
-        selectionType="checkbox"
-      />
+      <SidePanelLayout store={mockStore} menuType="mockMenu" tableType="mockTable" selectionType="checkbox" />
     );
     expect(rendered).toMatchSnapshot();
   });

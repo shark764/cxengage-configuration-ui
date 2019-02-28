@@ -3,7 +3,7 @@
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "slidingWidth": 50,
-  "userHasUpdatePermission": true,
+  "userHasCurrentFormPermission": true,
 }
 `;
 
@@ -43,6 +43,6 @@ exports[`SidePanelLayout Renders renders 1`] = `
     }
   }
   tableType="mockTable"
-  userHasUpdatePermission={true}
+  userHasCurrentFormPermission={true}
 />
 `;
