@@ -39,7 +39,9 @@ import {
   getListDependency,
   getEntityListMembers,
   getListSize,
-  findEntityIndex
+  findEntityIndex,
+  getSelectedEntityWithIndex,
+  sidePanelHeader
 } from '../selectors';
 import { getCurrentPermissions, getCurrentTenantId } from '../../userData/selectors';
 import { EntityMetaData, entitiesMetaData } from '../metaData';
@@ -78,6 +80,10 @@ const initialState = fromJS({
           name: 'mockName',
           active: true,
           tenantId: '0000-0000',
+          created: '2018-07-16T14:43:14Z',
+          createdByName: 'Jim Carrey',
+          updated: '2019-02-20T18:55:35Z',
+          updatedByName: 'John Frusciante',
           items: [{ key: '0001' }],
           members: ['0002', '0003', '0004'],
           mockDependentEntity: [
@@ -143,6 +149,10 @@ describe('getCurrentEntityStore', () => {
             name: 'mockName',
             active: true,
             tenantId: '0000-0000',
+            created: '2018-07-16T14:43:14Z',
+            createdByName: 'Jim Carrey',
+            updated: '2019-02-20T18:55:35Z',
+            updatedByName: 'John Frusciante',
             items: [{ key: '0001' }],
             members: ['0002', '0003', '0004'],
             mockDependentEntity: [
@@ -181,7 +191,6 @@ describe('getSelectedEntityBulkChangeItems', () => {
   it('Returns list of items selected for changes when there is no any selected', () => {
     expect(getSelectedEntityBulkChangeItems(initialState)).toEqual(List());
   });
-
   it('Returns list of items selected for changes', () => {
     expect(
       getSelectedEntityBulkChangeItems(
@@ -229,6 +238,10 @@ describe('getAllEntities', () => {
           name: 'mockName',
           active: true,
           tenantId: '0000-0000',
+          created: '2018-07-16T14:43:14Z',
+          createdByName: 'Jim Carrey',
+          updated: '2019-02-20T18:55:35Z',
+          updatedByName: 'John Frusciante',
           items: [{ key: '0001' }],
           members: ['0002', '0003', '0004'],
           mockDependentEntity: [
@@ -261,6 +274,10 @@ describe('getSelectedEntity', () => {
         name: 'mockName',
         active: true,
         tenantId: '0000-0000',
+        created: '2018-07-16T14:43:14Z',
+        createdByName: 'Jim Carrey',
+        updated: '2019-02-20T18:55:35Z',
+        updatedByName: 'John Frusciante',
         items: [{ key: '0001' }],
         members: ['0002', '0003', '0004'],
         mockDependentEntity: [
@@ -591,13 +608,13 @@ describe('getEntityListMembers', () => {
 });
 
 describe('getListSize', () => {
-  it('Returns size of members array for selected enitty', () => {
+  it('Returns size of members array for selected entity', () => {
     expect(getListSize(initialState)).toEqual(3);
   });
 });
 
 describe('findEntityIndex', () => {
-  it('Returns index of selected enitty', () => {
+  it('Returns index of selected entity', () => {
     expect(
       findEntityIndex(
         fromJS({
@@ -615,7 +632,259 @@ describe('findEntityIndex', () => {
       )
     ).toEqual(0);
   });
-  it('Returns index of selected enitty when state contains all Entities', () => {
+  it('Returns index of selected entity when state contains all Entities', () => {
     expect(findEntityIndex(initialState, 'mockEntity', '0000')).toEqual(0);
+  });
+});
+
+describe('getSelectedEntityWithIndex', () => {
+  it('Returns entity data with index given', () => {
+    expect(
+      getSelectedEntityWithIndex(
+        fromJS({
+          currentEntity: 'mockEntity',
+          mockEntity: {
+            selectedEntityId: '0000',
+            data: [
+              {
+                id: '0000'
+              }
+            ]
+          }
+        })
+      )
+    ).toEqual(fromJS({ id: '0000', currentIndex: 0, entityName: 'mockEntity' }));
+  });
+  it('Returns undefined when no result is found', () => {
+    expect(
+      getSelectedEntityWithIndex(
+        fromJS({
+          currentEntity: 'mockEntity',
+          mockEntity: {
+            selectedEntityId: '0000',
+            data: [
+              {
+                id: '0001'
+              }
+            ]
+          }
+        })
+      )
+    ).toEqual(undefined);
+  });
+});
+
+describe('sidePanelHeader', () => {
+  it('Returns metadata used for sidePanelHeader', () => {
+    expect(sidePanelHeader(initialState)).toEqual({
+      createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
+      title: 'mockName',
+      toggleStatus: true,
+      updatedAt: 'Updated on Feb 20, 2019 12:55 PM  by John Frusciante'
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when createdByName is not defined', () => {
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  name: 'mockName',
+                  active: true,
+                  created: '2018-07-16T14:43:14Z',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedByName: 'John Frusciante'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: 'Created on Jul 16, 2018 8:43 AM  ',
+      title: 'mockName',
+      toggleStatus: true,
+      updatedAt: 'Updated on Feb 20, 2019 12:55 PM  by John Frusciante'
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when updatedByName is not defined', () => {
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  name: 'mockName',
+                  active: true,
+                  created: '2018-07-16T14:43:14Z',
+                  createdByName: 'Jim Carrey',
+                  updated: '2019-02-20T18:55:35Z'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
+      title: 'mockName',
+      toggleStatus: true,
+      updatedAt: 'Updated on Feb 20, 2019 12:55 PM '
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when name is not defined but has email', () => {
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  email: 'mock@mock.com',
+                  active: true,
+                  created: '2018-07-16T14:43:14Z',
+                  createdByName: 'Jim Carrey',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedByName: 'John Frusciante'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
+      title: 'mock@mock.com',
+      toggleStatus: true,
+      updatedAt: 'Updated on Feb 20, 2019 12:55 PM  by John Frusciante'
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when active is not defined but has status', () => {
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  name: 'mockName',
+                  status: 'accepted',
+                  created: '2018-07-16T14:43:14Z',
+                  createdByName: 'Jim Carrey',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedByName: 'John Frusciante'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
+      title: 'mockName',
+      toggleStatus: true,
+      updatedAt: 'Updated on Feb 20, 2019 12:55 PM  by John Frusciante'
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when currentEntity equals roles', () => {
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'roles',
+            roles: {
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004',
+                  name: 'mockName',
+                  type: 'system',
+                  active: true,
+                  created: '2018-07-16T14:43:14Z',
+                  createdByName: 'Jim Carrey',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedByName: 'John Frusciante'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
+      title: 'mockName',
+      toggleStatus: undefined,
+      updatedAt: 'Updated on Feb 20, 2019 12:55 PM  by John Frusciante'
+    });
+  });
+  it('Returns just title if selectedEntityId equals create', () => {
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: 'create'
+            }
+          }
+        })
+      )
+    ).toEqual({ title: 'Creating New Mock Entit' });
+  });
+  it('Returns just title if selectedEntityId equals bulk', () => {
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: 'bulk',
+              data: [
+                {
+                  id: '0000',
+                  bulkChangeItem: true
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      title: 'Bulk Actions: 1 Selected'
+    });
+  });
+  it('Returns undefined if selectedEntityId is not defined', () => {
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: undefined,
+              data: [
+                {
+                  id: '0000'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual(undefined);
   });
 });

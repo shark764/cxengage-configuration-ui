@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.56.3] - 2019-02-28
+### Changed
+- Added unit-tests to general selectors file to cover 100%.
+
 ## [0.56.2] - 2019-02-27
 ### Changed
 - CXV1-16890 - Changing sort method for fakeVersion column on Flows page.
