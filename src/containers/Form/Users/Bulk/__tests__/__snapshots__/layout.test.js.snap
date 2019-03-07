@@ -11,6 +11,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         onChange={[Function]}
+        value={false}
       />
     </styled.span>
   </styled.div>
@@ -20,11 +21,13 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Send Invitation
       </span>
       <ConfirmationWrapper
+        confirmBtnCallback={[Function]}
         mainText="This will send an email invitation to all users selected"
         secondaryText="Are you sure you want to continue?"
       >
         <Styled(ToggleField)
           automation="usersBulkActionsFormFieldInviteNow"
+          label=""
           name="inviteNow"
         />
       </ConfirmationWrapper>
@@ -36,11 +39,13 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Resend Invitation
       </span>
       <ConfirmationWrapper
+        confirmBtnCallback={[Function]}
         mainText="This will resend an email invitation to all users selected"
         secondaryText="Are you sure you want to continue?"
       >
         <Styled(ToggleField)
           automation="usersBulkActionsFormFieldResendInvitation"
+          label=""
           name="resendInvitation"
         />
       </ConfirmationWrapper>
@@ -52,11 +57,13 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Cancel Invitation
       </span>
       <ConfirmationWrapper
+        confirmBtnCallback={[Function]}
         mainText="This will prevent all selected users from accepting the invitation."
         secondaryText="Are you sure you want to continue?"
       >
         <Styled(ToggleField)
           automation="usersBulkActionsFormFieldCancelInvitation"
+          label=""
           name="cancelInvitation"
         />
       </ConfirmationWrapper>
@@ -69,6 +76,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         onChange={[Function]}
+        value={false}
       />
     </styled.span>
   </styled.div>
@@ -79,6 +87,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         onChange={[Function]}
+        value={false}
       />
     </styled.span>
   </styled.div>
@@ -89,6 +98,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         onChange={[Function]}
+        value={false}
       />
     </styled.span>
   </styled.div>
@@ -99,6 +109,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         onChange={[Function]}
+        value={false}
       />
     </styled.span>
   </styled.div>
@@ -109,6 +120,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         onChange={[Function]}
+        value={false}
       />
     </styled.span>
   </styled.div>
@@ -119,6 +131,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         onChange={[Function]}
+        value={false}
       />
     </styled.span>
   </styled.div>

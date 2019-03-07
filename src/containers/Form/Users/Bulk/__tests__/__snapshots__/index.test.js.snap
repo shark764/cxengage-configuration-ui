@@ -3,6 +3,7 @@
 exports[`GenericBulkItems Renders renders 1`] = `
 <Connect(ReduxForm)
   cancelInvitationIsChecked={true}
+  groups={Immutable.Map {}}
   identityProviders={
     Object {
       "label": "idp1",
@@ -22,6 +23,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
   key="users:bulk"
   passwordResetIsChecked={true}
   resendInvitationIsChecked={true}
+  skills={Immutable.Map {}}
   store={
     Object {
       "dispatch": [Function],
@@ -51,10 +53,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
-  toggleCancelInvitation={[Function]}
-  toggleInviteNow={[Function]}
-  togglePasswordReset={[Function]}
-  toggleResendInvitation={[Function]}
+  toggleInvitationStatus={[Function]}
 >
   Child
 </Connect(ReduxForm)>
@@ -63,7 +62,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "cancelInvitationIsChecked": true,
-  "groups": undefined,
+  "groups": Immutable.Map {},
   "identityProviders": Object {
     "label": "idp1",
     "value": "0001",
@@ -80,7 +79,7 @@ Object {
   "key": "users:bulk",
   "passwordResetIsChecked": true,
   "resendInvitationIsChecked": true,
-  "skills": undefined,
+  "skills": Immutable.Map {},
 }
 `;
 

@@ -13,8 +13,7 @@ import {
   getSelectedEntityBulkChangeItems,
   getSelectedEntityFormId,
   findEntity,
-  getSingleUsersData,
-  getEntityData,
+  getEntityData
 } from '../selectors';
 import { getCheckedBulkActionFormValue } from './selectors';
 import { selectFormInitialValues } from '../../form/selectors';
@@ -421,8 +420,10 @@ export const BulkEntityUpdate = (action$, store) =>
         const skills = getEntityData(store.getState(), 'skills').toJS() || [];
         const groups = getEntityData(store.getState(), 'groups').toJS() || [];
 
-        const userDoesntHaveSkill = userData.skills.filter(skill => skill.name === (a.values.addSkill || a.values.removeSkill))[0] === undefined;
-        const userDoesntHaveGroup = userData.groups.filter(group => group.name === (a.values.addGroup || a.values.removeGroup))[0] === undefined;
+        const userDoesntHaveSkill =
+          userData.skills.filter(skill => skill.name === (a.values.addSkill || a.values.removeSkill))[0] === undefined;
+        const userDoesntHaveGroup =
+          userData.groups.filter(group => group.name === (a.values.addGroup || a.values.removeGroup))[0] === undefined;
         const addSkillId = a.values.addSkill && skills.filter(skill => skill.name === a.values.addSkill)[0].id;
         const removeSkillId = a.values.removeSkill && skills.filter(skill => skill.name === a.values.removeSkill)[0].id;
         const addGroupId = a.values.addGroup && groups.filter(group => group.name === a.values.addGroup)[0].id;
@@ -431,15 +432,15 @@ export const BulkEntityUpdate = (action$, store) =>
         // used for a single call to updateUser function
         let sdkCallValues = {
           updateBody: {},
-          userId: item,
+          userId: item
         };
 
-        if(a.values.addSkill) {     
-          if(userDoesntHaveSkill) {
+        if (a.values.addSkill) {
+          if (userDoesntHaveSkill) {
             console.warn(`Attempting to associate skill (${a.values.addSkill}) to user (${userData.email})`);
             a.allSdkCalls.push({
               module: 'entities',
-              data: { 
+              data: {
                 originEntity: {
                   name: 'users',
                   id: item
@@ -456,13 +457,13 @@ export const BulkEntityUpdate = (action$, store) =>
             console.warn(`Skill (${a.values.addSkill}) is allready associated with user (${userData.email})`);
             a.uneededCalls.push(`Skill (${a.values.addSkill}) is allready associated with user (${userData.email})`);
           }
-        } 
+        }
         if (a.values.removeSkill) {
-          if(!userDoesntHaveSkill ) {
+          if (!userDoesntHaveSkill) {
             console.warn(`Attempting to dissociate skill (${a.values.removeSkill}) from user (${userData.email})`);
             a.allSdkCalls.push({
               module: 'entities',
-              data: { 
+              data: {
                 originEntity: {
                   name: 'users',
                   id: item
@@ -477,15 +478,17 @@ export const BulkEntityUpdate = (action$, store) =>
             });
           } else {
             console.warn(`SKill (${a.values.removeSkill}) is allready not associated with user (${userData.email})`);
-            a.uneededCalls.push(`SKill (${a.values.removeSkill}) is allready not associated with user (${userData.email})`);
+            a.uneededCalls.push(
+              `SKill (${a.values.removeSkill}) is allready not associated with user (${userData.email})`
+            );
           }
         }
-        if(a.values.addGroup) {     
-          if(userDoesntHaveGroup) {
+        if (a.values.addGroup) {
+          if (userDoesntHaveGroup) {
             console.warn(`Attempting to associate group (${a.values.addGroup}) to user (${userData.email})`);
             a.allSdkCalls.push({
               module: 'entities',
-              data: { 
+              data: {
                 originEntity: {
                   name: 'groups',
                   id: addGroupId
@@ -502,13 +505,13 @@ export const BulkEntityUpdate = (action$, store) =>
             console.warn(`Group (${a.values.addGroup}) is allready associated with user (${userData.email})`);
             a.uneededCalls.push(`Group (${a.values.addGroup}) is allready associated with user (${userData.email})`);
           }
-        } 
+        }
         if (a.values.removeGroup) {
-          if(!userDoesntHaveGroup ) {
+          if (!userDoesntHaveGroup) {
             console.warn(`Attempting to dissociate group (${a.values.removeGroup}) from user (${userData.email})`);
             a.allSdkCalls.push({
               module: 'entities',
-              data: { 
+              data: {
                 originEntity: {
                   name: 'groups',
                   id: removeGroupId
@@ -523,33 +526,40 @@ export const BulkEntityUpdate = (action$, store) =>
             });
           } else {
             console.warn(`Group (${a.values.removeGroup}) is allready not associated with user (${userData.email})`);
-            a.uneededCalls.push(`Group (${a.values.removeGroup}) is allready not associated with user (${userData.email})`);
+            a.uneededCalls.push(
+              `Group (${a.values.removeGroup}) is allready not associated with user (${userData.email})`
+            );
           }
         }
-        
+
         if (a.values.status !== undefined) {
           sdkCallValues.updateBody.status = a.values.status;
         }
-        if(a.values.region !== undefined) {
+        if (a.values.region !== undefined) {
           // TODO: setting region isn't working due null extension issue coming from api
           const activeExtension = userData.activeExtension;
-          if(activeExtension) {
+          if (activeExtension) {
             activeExtension.region = a.values.region;
           }
-          const extensions =  userData.extensions;
+          const extensions = userData.extensions;
           extensions.forEach(ext => {
-            if(ext.provider && ext.provider === 'twilio') {
-              ext.region = a.values.region
+            if (ext.provider && ext.provider === 'twilio') {
+              ext.region = a.values.region;
             }
           });
           sdkCallValues.updateBody.activeExtension = activeExtension;
           sdkCallValues.updateBody.extensions = extensions;
         }
         if (a.values.noPassword !== undefined) {
-          sdkCallValues.updateBody.noPassword = a.values.noPassword === 'null'?  null : 'true';
+          if (a.values.noPassword === 'null') {
+            sdkCallValues.updateBody.noPassword = null;
+          } else {
+            sdkCallValues.updateBody.noPassword = a.values.noPassword === 'true';
+          }
         }
         if (a.values.defaultIdentityProvider !== undefined) {
-          sdkCallValues.updateBody.defaultIdentityProvider = a.values.defaultIdentityProvider === 'null'?  null : a.values.defaultIdentityProvider;
+          sdkCallValues.updateBody.defaultIdentityProvider =
+            a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider;
         }
 
         if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
@@ -558,13 +568,12 @@ export const BulkEntityUpdate = (action$, store) =>
           sdkCallValues.updateBody.status = a.values.cancelInvitation ? 'pending' : 'invited';
         }
 
-
         if (Object.keys(sdkCallValues.updateBody).length) {
           // Using the default sdkCall to update single entity data,
           // by calling updateUser
           a.allSdkCalls.push({
             ...a.sdkCall,
-            data: {...sdkCallValues}
+            data: { ...sdkCallValues }
           });
         }
         if (a.values.passwordReset) {
@@ -585,8 +594,8 @@ export const BulkEntityUpdate = (action$, store) =>
       return { ...a };
     })
     .do(a => {
-      if(a.uneededCalls.length > 0 && a.allSdkCalls.length === 0) {
-          handleBulkUneeded(a);
+      if (a.uneededCalls.length > 0 && a.allSdkCalls.length === 0) {
+        handleBulkUneeded(a);
       }
     })
     .mergeMap(a =>
@@ -636,6 +645,6 @@ export const ToggleInvitationStatusFormField = (action$, store) =>
       change(
         getSelectedEntityFormId(store.getState()),
         a.fieldToToggle,
-        !getCheckedBulkActionFormValue(store.getState(), a.fieldToToggle)
+        a.toValue !== undefined ? a.toValue : !getCheckedBulkActionFormValue(store.getState(), a.fieldToToggle)
       )
     );

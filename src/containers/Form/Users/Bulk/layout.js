@@ -11,7 +11,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { RadioGroupField, Toggle, ToggleField, SelectField, ConfirmationWrapper, AutoCompleteField } from 'cx-ui-components';
+import {
+  RadioGroupField,
+  Toggle,
+  ToggleField,
+  SelectField,
+  ConfirmationWrapper,
+  AutoCompleteField
+} from 'cx-ui-components';
 
 const Container = styled.div`
   border: 1px solid #e0cdcd;
@@ -47,59 +54,31 @@ const BulkActions = styled.div`
 export default class UsersBulkActionsForm extends Component {
   constructor() {
     super();
+    const visibleFields = {
+      status: false,
+      noPassword: false,
+      defaultIdentityProvider: false,
+      region: false,
+      addGroup: false,
+      removeGroup: false,
+      addSkill: false,
+      removeSkill: false
+    };
     this.state = {
-      visibleFields: {
-        status: false,
-        noPassword: false,
-        defaultIdentityProvider: false,
-        region: false,
-        addGroup: false,
-        removeGroup: false,
-        addSkill: false,
-        removeSkill: false,
-      }
+      visibleFields,
+      initialVisibleFields: visibleFields
     };
   }
 
-  toggleField = e => {
-    this.setState({
-      visibleFields: {
-        ...this.state.visibleFields,
-        status: !this.state.visibleFields.status
-      }
-    });
-  };
   toggleFormField = name => {
+    const _that = this;
+    ['inviteNow', 'resendInvitation', 'cancelInvitation', 'resetPassword'].forEach(function(el) {
+      _that.props.toggleInvitationStatus(el, el === name);
+    });
     this.setState({
       visibleFields: {
-        ...this.state.visibleFields,
+        ...this.state.initialVisibleFields,
         [name]: !this.state.visibleFields[name]
-      }
-    });
-  };
-
-  togglePlatformAuthentication = e => {
-    this.setState({
-      visibleFields: {
-        ...this.state.visibleFields,
-        noPassword: !this.state.visibleFields.noPassword
-      }
-    });
-  };
-
-  toggleDefaultIdentityProvider = e => {
-    this.setState({
-      visibleFields: {
-        ...this.state.visibleFields,
-        defaultIdentityProvider: !this.state.visibleFields.defaultIdentityProvider
-      }
-    });
-  };
-  toggleRegion = e => {
-    this.setState({
-      visibleFields: {
-        ...this.state.visibleFields,
-        region: !this.state.visibleFields.region
       }
     });
   };
@@ -110,7 +89,7 @@ export default class UsersBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Enable/Disable Users</span>
-            <StyledToggle onChange={this.toggleField} />
+            <StyledToggle onChange={() => this.toggleFormField('status')} value={this.state.visibleFields.status} />
           </ToggleList>
           {this.state.visibleFields.status && (
             <BulkActions>
@@ -137,12 +116,13 @@ export default class UsersBulkActionsForm extends Component {
           <ToggleList>
             <span>Send Invitation</span>
             <ConfirmationWrapper
-              confirmBtnCallback={!this.props.inviteNowIsChecked ? this.props.toggleInviteNow : undefined}
+              confirmBtnCallback={!this.props.inviteNowIsChecked ? () => this.toggleFormField('inviteNow') : undefined}
               mainText={`This will send an email invitation to all users selected`}
               secondaryText={'Are you sure you want to continue?'}
             >
               <StyledToggleField
                 name="inviteNow"
+                label=""
                 disabled={this.props.isSaving || this.props.inherited}
                 automation="usersBulkActionsFormFieldInviteNow"
               />
@@ -153,12 +133,15 @@ export default class UsersBulkActionsForm extends Component {
           <ToggleList>
             <span>Resend Invitation</span>
             <ConfirmationWrapper
-              confirmBtnCallback={!this.props.resendInvitationIsChecked ? this.props.toggleResendInvitation : undefined}
+              confirmBtnCallback={
+                !this.props.resendInvitationIsChecked ? () => this.toggleFormField('resendInvitation') : undefined
+              }
               mainText={`This will resend an email invitation to all users selected`}
               secondaryText={'Are you sure you want to continue?'}
             >
               <StyledToggleField
                 name="resendInvitation"
+                label=""
                 disabled={this.props.isSaving || this.props.inherited}
                 automation="usersBulkActionsFormFieldResendInvitation"
               />
@@ -169,38 +152,49 @@ export default class UsersBulkActionsForm extends Component {
           <ToggleList>
             <span>Cancel Invitation</span>
             <ConfirmationWrapper
-              confirmBtnCallback={!this.props.cancelInvitationIsChecked ? this.props.toggleCancelInvitation : undefined}
+              confirmBtnCallback={
+                !this.props.cancelInvitationIsChecked ? () => this.toggleFormField('cancelInvitation') : undefined
+              }
               mainText={`This will prevent all selected users from accepting the invitation.`}
               secondaryText={'Are you sure you want to continue?'}
             >
               <StyledToggleField
                 name="cancelInvitation"
+                label=""
                 disabled={this.props.isSaving || this.props.inherited}
                 automation="usersBulkActionsFormFieldCancelInvitation"
               />
             </ConfirmationWrapper>
           </ToggleList>
         </Container>
-        { this.props.isUserPlatformAdmin && <Container>
-          <ToggleList>
-            <span>Reset Password</span>
-            <ConfirmationWrapper
-              confirmBtnCallback={!this.props.passwordResetIsChecked ? this.props.togglePasswordReset : undefined}
-              mainText={`This will send a password reset email to all users selected`}
-              secondaryText={'Are you sure you want to continue?'}
-            >
-              <StyledToggleField
-                name="passwordReset"
-                disabled={this.props.isSaving || this.props.inherited}
-                automation="usersBulkActionsFormFieldPasswordReset"
-              />
-            </ConfirmationWrapper>
-          </ToggleList>
-        </Container>}
+        {this.props.isUserPlatformAdmin && (
+          <Container>
+            <ToggleList>
+              <span>Reset Password</span>
+              <ConfirmationWrapper
+                confirmBtnCallback={
+                  !this.props.passwordResetIsChecked ? () => this.toggleFormField('passwordReset') : undefined
+                }
+                mainText={`This will send a password reset email to all users selected`}
+                secondaryText={'Are you sure you want to continue?'}
+              >
+                <StyledToggleField
+                  name="passwordReset"
+                  label=""
+                  disabled={this.props.isSaving || this.props.inherited}
+                  automation="usersBulkActionsFormFieldPasswordReset"
+                />
+              </ConfirmationWrapper>
+            </ToggleList>
+          </Container>
+        )}
         <Container>
           <ToggleList>
             <span>Set Platform Authentication</span>
-            <StyledToggle onChange={this.togglePlatformAuthentication} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('noPassword')}
+              value={this.state.visibleFields.noPassword}
+            />
           </ToggleList>
           {this.state.visibleFields.noPassword && (
             <BulkActions>
@@ -231,7 +225,10 @@ export default class UsersBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Set Default Identity Provider</span>
-            <StyledToggle onChange={this.toggleDefaultIdentityProvider} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('defaultIdentityProvider')}
+              value={this.state.visibleFields.defaultIdentityProvider}
+            />
           </ToggleList>
           {this.state.visibleFields.defaultIdentityProvider && (
             <BulkActions>
@@ -249,7 +246,7 @@ export default class UsersBulkActionsForm extends Component {
         {/* <Container>
           <ToggleList>
             <span>Set Twilio Regions </span>
-            <StyledToggle onChange={this.toggleRegion} />
+            <StyledToggle onChange={() => this.toggleFormField('region')} value={this.state.visibleFields.region} />
           </ToggleList>
           {this.state.visibleFields.region && (
             <BulkActions>
@@ -302,7 +299,7 @@ export default class UsersBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Add Group</span>
-            <StyledToggle onChange={() => this.toggleFormField('addGroup')} />
+            <StyledToggle onChange={() => this.toggleFormField('addGroup')} value={this.state.visibleFields.addGroup} />
           </ToggleList>
           {this.state.visibleFields.addGroup && (
             <BulkActions>
@@ -310,7 +307,7 @@ export default class UsersBulkActionsForm extends Component {
                 name="addGroup"
                 label="Group"
                 placeholder="Search..."
-                suggestions={this.props.groups.toJS().reduce((acc, group) => {             
+                suggestions={this.props.groups.toJS().reduce((acc, group) => {
                   if (group.name !== 'everyone') {
                     acc.push(group.name);
                   }
@@ -324,15 +321,18 @@ export default class UsersBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Remove Group</span>
-            <StyledToggle onChange={() => this.toggleFormField('removeGroup')} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('removeGroup')}
+              value={this.state.visibleFields.removeGroup}
+            />
           </ToggleList>
           {this.state.visibleFields.removeGroup && (
             <BulkActions>
-             <AutoCompleteField
+              <AutoCompleteField
                 name="removeGroup"
                 label="Group"
                 placeholder="Search..."
-                suggestions={this.props.groups.toJS().reduce((acc, group) => {             
+                suggestions={this.props.groups.toJS().reduce((acc, group) => {
                   if (group.name !== 'everyone') {
                     acc.push(group.name);
                   }
@@ -346,7 +346,7 @@ export default class UsersBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Add Skill</span>
-            <StyledToggle onChange={() => this.toggleFormField('addSkill')} />
+            <StyledToggle onChange={() => this.toggleFormField('addSkill')} value={this.state.visibleFields.addSkill} />
           </ToggleList>
           {this.state.visibleFields.addSkill && (
             <BulkActions>
@@ -363,11 +363,14 @@ export default class UsersBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Remove Skill</span>
-            <StyledToggle onChange={() => this.toggleFormField('removeSkill')} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('removeSkill')}
+              value={this.state.visibleFields.removeSkill}
+            />
           </ToggleList>
           {this.state.visibleFields.removeSkill && (
             <BulkActions>
-            <AutoCompleteField
+              <AutoCompleteField
                 name="removeSkill"
                 label="Skill"
                 placeholder="Search..."
@@ -393,13 +396,12 @@ UsersBulkActionsForm.propTypes = {
     })
   ),
   inviteNowIsChecked: PropTypes.bool,
-  toggleInviteNow: PropTypes.func,
   resendInvitationIsChecked: PropTypes.bool,
-  toggleResendInvitation: PropTypes.func,
   cancelInvitationIsChecked: PropTypes.bool,
-  toggleCancelInvitation: PropTypes.func,
   passwordResetIsChecked: PropTypes.bool,
-  togglePasswordReset: PropTypes.func,
+  isUserPlatformAdmin: PropTypes.bool,
+  groups: PropTypes.object,
+  skills: PropTypes.object,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool
 };

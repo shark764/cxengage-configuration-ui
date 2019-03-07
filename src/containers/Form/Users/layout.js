@@ -168,7 +168,8 @@ export default function UsersForm({
             </Fragment>
           )}
 
-          {isUserPlatformAdmin && displayResetPassword &&
+          {isUserPlatformAdmin &&
+            displayResetPassword &&
             status === 'enabled' && (
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
@@ -285,5 +286,6 @@ UsersForm.propTypes = {
   status: PropTypes.string,
   scenario: PropTypes.string,
   changeUserInviteStatus: PropTypes.func.isRequired,
+  isUserPlatformAdmin: PropTypes.bool,
   displayResetPassword: PropTypes.bool
 };
