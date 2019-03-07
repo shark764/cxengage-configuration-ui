@@ -7,7 +7,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import DispatchMappingsForm from './layout';
 import { formValidation } from './validation';
-import { selectFlowIds } from '../../../redux/modules/entities/flows/selectors';
+import { selectNonReusableFlows } from '../../../redux/modules/entities/flows/selectors';
 import { selectIntegrations } from '../../../redux/modules/entities/integrations/selectors';
 import {
   currentMappingValue,
@@ -35,7 +35,7 @@ const CreateDispatchMappingsForm = compose(
 export function mapStateToProps(state) {
   return {
     mappingValue: currentMappingValue(state),
-    flowIds: selectFlowIds(state),
+    flowIds: selectNonReusableFlows(state),
     integrationElements: selectIntegrations(state),
     initialValues: selectDispatchMappingsFormInitialValues(state),
     isSaving: isCreating(state),

@@ -41,6 +41,8 @@ import {
 
 import { getHasProficiencyFormValue } from './skills/selectors';
 
+import { selectNonReusableFlows } from './flows/selectors';
+
 import { entitiesMetaData } from './metaData';
 
 import { hasCustomCreateEntity, hasCustomUpdateEntity, hasCustomRemoveSubEntity } from './config';
@@ -851,4 +853,23 @@ export const DownloadCsv = (action$, store) =>
           return handleSuccess(response, a, 'CSV Download Started');
         })
         .catch(error => handleError(error, a))
+    );
+
+export const changeDispatchMappingFlowId = (action$, store) =>
+  action$
+    .ofType('@@redux-form/REGISTER_FIELD', 'FETCH_DATA_FULFILLED')
+    .filter(
+      a =>
+        (a.meta !== undefined &&
+          a.meta.form === getSelectedEntityFormId(store.getState()) &&
+          a.payload.name === 'flowId' &&
+          selectNonReusableFlows(store.getState()).size) ||
+        (getCurrentEntity(store.getState()) === 'dispatchMappings' &&
+          a.entityName === 'flows' &&
+          getSelectedEntityId(store.getState()) === 'create')
+    )
+    .map(a =>
+      //This change action is required as sometimes the flowId field has not been loaded and the field is left not initialized.
+      // That would not allow the user to submit, so the 'change' function will leave the field as 'touched' to Redux Form
+      change(getSelectedEntityFormId(store.getState()), 'flowId', selectNonReusableFlows(store.getState()).get(0).value)
     );

@@ -3,7 +3,7 @@
  */
 
 import { fromJS } from 'immutable';
-import { selectFlowIds } from '../selectors';
+import { selectFlowIds, selectNonReusableFlows } from '../selectors';
 
 jest.mock('../../../userData/selectors', () => ({
   getCurrentTenantId: () => 'mockTenantId'
@@ -55,5 +55,51 @@ describe('selectFlowIds', () => {
       }
     });
     expect(selectFlowIds(initialStateNoData)).toEqual(undefined);
+  });
+});
+
+describe('selectNonReusableFlows', () => {
+  it('should get flows and filter out non current tenant, non active flows AND non Reusable Flows, then return it mapped to label and value', () => {
+    const nonReusableState = fromJS({
+      UserData: {
+        currentTenant: 'mockTenantId'
+      },
+      Entities: {
+        flows: {
+          data: [
+            {
+              active: true,
+              id: 'flowMockId_1',
+              name: 'Flow Mock 1',
+              type: 'customer'
+            },
+            {
+              active: true,
+              channelType: 'voice',
+              id: 'flowMockId_2',
+              name: 'Flow Mock 2',
+              type: 'reusable'
+            },
+            {
+              active: false,
+              id: 'flowMockId_3',
+              name: 'Flow Mock 3',
+              type: 'customer'
+            }
+          ]
+        }
+      }
+    });
+    expect(selectNonReusableFlows(nonReusableState)).toMatchSnapshot();
+  });
+  it('returns undefined when no data is available', () => {
+    const initialStateNoData = fromJS({
+      Entities: {
+        flows: {
+          data: undefined
+        }
+      }
+    });
+    expect(selectNonReusableFlows(initialStateNoData)).toMatchSnapshot();
   });
 });

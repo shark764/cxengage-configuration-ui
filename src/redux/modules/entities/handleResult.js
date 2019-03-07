@@ -1,11 +1,22 @@
 import { isIgnoredToast } from './errors';
-import { errorLabel } from '../../../utils/sdk';
+import { errorLabel, errorManager } from '../../../utils/sdk';
 import { Toast } from 'cx-ui-components';
 import { of } from 'rxjs/observable/of';
 
 export function handleError(error, a) {
-  if (!isIgnoredToast(a.type, a.entityName) && a.type !== '@@redux-form/CHANGE') {
+  if (
+    !isIgnoredToast(a.type, a.entityName) &&
+    a.entityName !== 'dispatchMappings' &&
+    a.type !== '@@redux-form/CHANGE'
+  ) {
     Toast.error(errorLabel(error));
+  } else if (a.entityName === 'dispatchMappings') {
+    let errorObject = errorManager(error);
+
+    Toast.error(errorObject.errorMessage);
+    a.type = `${a.type}_REJECTED`;
+    a.errorAttribute = errorObject.attribute;
+    return of(a);
   }
   a.type = `${a.type}_REJECTED`;
   return of(a);
@@ -16,7 +27,6 @@ export function handleSuccess(response, a, successMessage) {
     Toast.success(successMessage);
   }
   if (response !== null && response.error) {
-    console.warn(response.error);
     return { type: `${a.type}_rejected`, error: response.error };
   }
   return { ...a, type: `${a.type}_FULFILLED`, response };

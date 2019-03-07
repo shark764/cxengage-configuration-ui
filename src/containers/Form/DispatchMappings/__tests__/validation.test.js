@@ -18,11 +18,13 @@ const props = {
     {
       id: 'mockId1',
       value: 'mockValue',
+      interactionField: 'mockInteractionField1',
       channelType: 'mockChannelType'
     },
     {
       id: 'mockId2',
       value: 'mockValue2',
+      interactionField: 'mockInteractionField2',
       channelType: 'mockChannelType2'
     }
   ])
@@ -64,5 +66,51 @@ describe('formValidation', () => {
       flowId: null
     });
     expect(formValidation(values, props)).toMatchSnapshot();
+  });
+
+  it('returns errors when same name and interactionField/values are provided', () => {
+    const sameProps = {
+      dispatchValues: fromJS([
+        {
+          id: 'mockId',
+          name: 'mockValue',
+          value: 'mockValue',
+          channelType: 'mockChannelType',
+          interactionField: 'mockInteractionField1'
+        }
+      ]),
+      initialValues: fromJS({
+        name: 'mockValue',
+        value: 'mockValueUnique2',
+        channelType: 'mockChannelTypeUnique2',
+        interactionField: 'mockInteractionField1'
+      }),
+      allDispatchMappings: fromJS([
+        {
+          id: 'mockId1',
+          name: 'mockValue',
+          value: 'mockValue',
+          interactionField: 'mockInteractionField1',
+          channelType: 'mockChannelType'
+        },
+        {
+          id: 'mockId2',
+          name: 'mockValue2',
+          value: 'mockValue2',
+          interactionField: 'mockInteractionField2',
+          channelType: 'mockChannelType2'
+        }
+      ])
+    };
+
+    const values = fromJS({
+      name: 'mockValue',
+      description: 'MockDesc',
+      channelType: 'mockChannelTypeUnique22',
+      interactionField: 'mockInteractionField1',
+      value: 'mockValueUnique',
+      flowId: 'mockFlowId'
+    });
+    expect(formValidation(values, sameProps)).toMatchSnapshot();
   });
 });

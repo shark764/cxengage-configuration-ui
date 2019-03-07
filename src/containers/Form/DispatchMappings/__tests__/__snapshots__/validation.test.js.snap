@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`formValidation returns errors when same name and interactionField/values are provided 1`] = `
+Object {
+  "channelType": false,
+  "flowId": false,
+  "interactionField": false,
+  "name": false,
+  "value": false,
+}
+`;
+
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
   "channelType": "Please select a Interaction Type",

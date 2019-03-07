@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.56.5] - 2019-02-28
+### Fixed
+- CXV1-16883 - Fixed issue with validation, no duplicate names. Added filter to show non reusable flows only.
+
 ## [0.56.4] - 2019-02-28
 ### Fixed
 - CXV1-13311 - Created and Updated show each user name correctly.

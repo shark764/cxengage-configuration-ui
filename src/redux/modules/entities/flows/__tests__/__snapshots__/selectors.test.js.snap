@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectNonReusableFlows returns undefined when no data is available 1`] = `undefined`;
+
+exports[`selectNonReusableFlows should get flows and filter out non current tenant, non active flows AND non Reusable Flows, then return it mapped to label and value 1`] = `
+Immutable.List [
+  Object {
+    "label": "Flow Mock 1",
+    "value": "flowMockId_1",
+  },
+]
+`;

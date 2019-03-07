@@ -1,4 +1,5 @@
 import { isInIframe } from 'serenova-js-utils/browser';
+import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
 function guid() {
   function s4() {
@@ -64,4 +65,28 @@ export const errorLabel = error => {
     }
   }
   return `${error.message} ${errorDetails ? errorDetails : ''}`;
+};
+
+//errorManager
+
+export const errorManager = error => {
+  let errorDetails;
+  let attr;
+  if (
+    error.data &&
+    error.data.apiResponse &&
+    error.data.apiResponse.apiResponse &&
+    error.data.apiResponse.apiResponse.response &&
+    error.data.apiResponse.apiResponse.response.error
+  ) {
+    let { code, message, attribute } = error.data.apiResponse.apiResponse.response.error;
+    attr = Object.keys(attribute)[0];
+    errorDetails = attribute && ` ${capitalizeFirstLetter(attribute[Object.keys(attribute)[0]])}`;
+
+    if (code === undefined || message === undefined) {
+      errorDetails = ` ${error.data.apiResponse.status}: ${error.data.apiResponse.apiResponse.response.error}`;
+    }
+  }
+  //return `${errorDetails ? errorDetails : ''}`;
+  return { errorMessage: errorDetails ? errorDetails : '', attribute: attr };
 };

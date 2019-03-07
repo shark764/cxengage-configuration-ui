@@ -23,7 +23,7 @@ export const getDispatchMappingValue = state =>
 
 export const selectDispatchMappingsFormInitialValues = state => {
   if (getSelectedEntity(state) === undefined) {
-    return new Map({ active: true, interactionField: 'customer' });
+    return new Map({ active: true, interactionField: 'customer', channelType: 'any' });
   }
   return selectFormInitialValues(state);
 };

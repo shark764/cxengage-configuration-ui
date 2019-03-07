@@ -10,7 +10,7 @@ import DispatchMappingsForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
 import { currentMappingValue } from '../../../../redux/modules/entities/dispatchMappings/selectors';
-import { selectFlowIds } from '../../../../redux/modules/entities/flows/selectors';
+import { selectNonReusableFlows } from '../../../../redux/modules/entities/flows/selectors';
 import { selectIntegrations } from '../../../../redux/modules/entities/integrations/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -24,7 +24,7 @@ isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 currentMappingValue.mockImplementation(() => 'source');
-selectFlowIds.mockImplementation(() => ['mockId1', 'mockId2']);
+selectNonReusableFlows.mockImplementation(() => ['mockId1', 'mockId2']);
 selectIntegrations.mockImplementation(() => ['mockId1', 'mockId2']);
 
 describe('DispatchMappings Renders', () => {

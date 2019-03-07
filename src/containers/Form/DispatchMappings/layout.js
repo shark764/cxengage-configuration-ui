@@ -45,7 +45,7 @@ export default function DispatchMappingsForm({
         name="channelType"
         label="Interaction Type *"
         automation="dispatchMappingsFormFieldChannelType"
-        required={true}
+        required
         options={[
           { value: 'any', label: 'Any' },
           { value: 'voice', label: 'Voice' },
@@ -60,7 +60,7 @@ export default function DispatchMappingsForm({
         name="interactionField"
         label="Mapping *"
         automation="dispatchMappingsFormFieldInteractionField"
-        required={true}
+        required
         options={[
           { value: 'customer', label: 'Customer' },
           { value: 'contact-point', label: 'Contact Point' },
@@ -73,7 +73,7 @@ export default function DispatchMappingsForm({
         <SelectField
           name="value"
           automation="dispatchMappingsFormFieldValue"
-          required={true}
+          required
           label="Integration *"
           options={integrationElements}
           disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -85,7 +85,7 @@ export default function DispatchMappingsForm({
           name="value"
           automation="dispatchMappingsFormFieldValue"
           label="Direction *"
-          required={true}
+          required
           options={[
             { value: 'inbound', label: 'Inbound' },
             { value: 'outbound', label: 'Outbound' },
@@ -109,7 +109,7 @@ export default function DispatchMappingsForm({
       <SelectField
         name="flowId"
         label="Dispatch to flow *"
-        required={true}
+        required
         automation="dispatchMappingsFormFieldFlowId"
         options={flowIds}
         disabled={isSaving || inherited || !userHasUpdatePermission}

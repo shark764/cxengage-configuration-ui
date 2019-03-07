@@ -12,6 +12,7 @@ exports[`Retrieve Dispatch Mappings Initial Form Values from State Return regula
 Immutable.Map {
   "active": true,
   "interactionField": "customer",
+  "channelType": "any",
 }
 `;
 
