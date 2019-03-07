@@ -11,7 +11,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { RadioGroupField, Toggle, ToggleField, SelectField, ConfirmationWrapper } from 'cx-ui-components';
+import { RadioGroupField, Toggle, ToggleField, SelectField, ConfirmationWrapper, AutoCompleteField } from 'cx-ui-components';
 
 const Container = styled.div`
   border: 1px solid #e0cdcd;
@@ -51,7 +51,12 @@ export default class UsersBulkActionsForm extends Component {
       visibleFields: {
         status: false,
         noPassword: false,
-        defaultIdentityProvider: false
+        defaultIdentityProvider: false,
+        region: false,
+        addGroup: false,
+        removeGroup: false,
+        addSkill: false,
+        removeSkill: false,
       }
     };
   }
@@ -61,6 +66,14 @@ export default class UsersBulkActionsForm extends Component {
       visibleFields: {
         ...this.state.visibleFields,
         status: !this.state.visibleFields.status
+      }
+    });
+  };
+  toggleFormField = name => {
+    this.setState({
+      visibleFields: {
+        ...this.state.visibleFields,
+        [name]: !this.state.visibleFields[name]
       }
     });
   };
@@ -79,6 +92,14 @@ export default class UsersBulkActionsForm extends Component {
       visibleFields: {
         ...this.state.visibleFields,
         defaultIdentityProvider: !this.state.visibleFields.defaultIdentityProvider
+      }
+    });
+  };
+  toggleRegion = e => {
+    this.setState({
+      visibleFields: {
+        ...this.state.visibleFields,
+        region: !this.state.visibleFields.region
       }
     });
   };
@@ -160,7 +181,7 @@ export default class UsersBulkActionsForm extends Component {
             </ConfirmationWrapper>
           </ToggleList>
         </Container>
-        <Container>
+        { this.props.isUserPlatformAdmin && <Container>
           <ToggleList>
             <span>Reset Password</span>
             <ConfirmationWrapper
@@ -175,7 +196,7 @@ export default class UsersBulkActionsForm extends Component {
               />
             </ConfirmationWrapper>
           </ToggleList>
-        </Container>
+        </Container>}
         <Container>
           <ToggleList>
             <span>Set Platform Authentication</span>
@@ -221,6 +242,127 @@ export default class UsersBulkActionsForm extends Component {
                 options={this.props.identityProviders}
                 required
                 automation="usersBulkActionsFormFieldDefaultIdentityProvider"
+              />
+            </BulkActions>
+          )}
+        </Container>
+        {/* <Container>
+          <ToggleList>
+            <span>Set Twilio Regions </span>
+            <StyledToggle onChange={this.toggleRegion} />
+          </ToggleList>
+          {this.state.visibleFields.region && (
+            <BulkActions>
+              <SelectField
+                name="region"
+                label="Twilio Region"
+                disabled={this.props.isSaving || this.props.inherited}
+                options={[{
+                  value: 'default',
+                  label: 'Use Tenant Default'
+                }, {
+                  value: 'gll',
+                  label: 'Global Low Latency'
+                }, {
+                  value: 'au1',
+                  label: 'Australia'
+                }, {
+                  value: 'br1',
+                  label: 'Brazil'
+                }, {
+                  value: 'ie1',
+                  label: 'Ireland'
+                }, {
+                  value: 'jp1',
+                  label: 'Japan'
+                }, {
+                  value: 'sg1',
+                  label: 'Singapore'
+                }, {
+                  value: 'us1',
+                  label: 'US East Coast (Virginia)'
+                }, {
+                  value: 'us1-tnx',
+                  label: 'Virginia Interconnect'
+                }, {
+                  value: 'us2-tnx',
+                  label: 'Oregon Interconnect'
+                }, {
+                  value: 'de1',
+                  label: 'Germany Interconnect'
+                }, {
+                  value: 'ie1-tnx',
+                  label: 'Ireland Interconnect'
+                }]}
+                automation="usersBulkActionsFormFieldRegion"
+              />
+            </BulkActions>
+          )}
+        </Container> */}
+        <Container>
+          <ToggleList>
+            <span>Add Group</span>
+            <StyledToggle onChange={() => this.toggleFormField('addGroup')} />
+          </ToggleList>
+          {this.state.visibleFields.addGroup && (
+            <BulkActions>
+              <AutoCompleteField
+                name="addGroup"
+                label="Group"
+                placeholder="Search..."
+                suggestions={this.props.groups.toJS().map(group => group.name !== 'everyone' && group.name)}
+                automation="usersBulkActionsAddGroup"
+              />
+            </BulkActions>
+          )}
+        </Container>
+        <Container>
+          <ToggleList>
+            <span>Remove Group</span>
+            <StyledToggle onChange={() => this.toggleFormField('removeGroup')} />
+          </ToggleList>
+          {this.state.visibleFields.removeGroup && (
+            <BulkActions>
+             <AutoCompleteField
+                name="removeGroup"
+                label="Group"
+                placeholder="Search..."
+                suggestions={this.props.groups.toJS().map(group => group.name !== 'everyone' && group.name)}
+                automation="usersBulkActionsRemoveGroup"
+              />
+            </BulkActions>
+          )}
+        </Container>
+        <Container>
+          <ToggleList>
+            <span>Add Skill</span>
+            <StyledToggle onChange={() => this.toggleFormField('addSkill')} />
+          </ToggleList>
+          {this.state.visibleFields.addSkill && (
+            <BulkActions>
+              <AutoCompleteField
+                name="addSkill"
+                label="Skill"
+                placeholder="Search..."
+                suggestions={this.props.skills.toJS().map(skill => skill.name)}
+                automation="usersBulkActionsAddSkill"
+              />
+            </BulkActions>
+          )}
+        </Container>
+        <Container>
+          <ToggleList>
+            <span>Remove Skill</span>
+            <StyledToggle onChange={() => this.toggleFormField('removeSkill')} />
+          </ToggleList>
+          {this.state.visibleFields.removeSkill && (
+            <BulkActions>
+            <AutoCompleteField
+                name="removeSkill"
+                label="Skill"
+                placeholder="Search..."
+                suggestions={this.props.skills.toJS().map(skill => skill.name)}
+                automation="usersBulkActionsRemoveSkill"
               />
             </BulkActions>
           )}

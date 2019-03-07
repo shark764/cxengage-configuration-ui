@@ -131,7 +131,7 @@ export class EntityMetaData {
     }
   }
   bulkEditsAvailable() {
-    return this.entityName !== 'emailTemplates' && this.entityName !== 'roles' && location.hash.includes('alpha');
+    return this.entityName !== 'emailTemplates' && this.entityName !== 'roles' && this.entityName === 'users';
   }
 }
 
@@ -185,7 +185,7 @@ entities.users.pageTitle = 'User Management';
 entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
 entities.users.createFormDependencies.push('roles', 'platformRoles', 'identityProviders');
 entities.users.updateFormDependencies.push('roles', 'platformRoles', 'identityProviders', 'capacityRules');
-entities.users.bulkFormDependencies.push('identityProviders');
+entities.users.bulkFormDependencies.push('identityProviders','groups','skills');
 entities.users.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' },

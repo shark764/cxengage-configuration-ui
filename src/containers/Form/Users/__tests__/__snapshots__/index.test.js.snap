@@ -10,6 +10,7 @@ Object {
     "active": true,
   },
   "isSaving": undefined,
+  "isUserPlatformAdmin": undefined,
   "key": "mockId",
   "platformRoles": Array [],
   "status": undefined,

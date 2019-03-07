@@ -11,7 +11,10 @@ import {
   getSelectedEntityId,
   getSelectedEntity,
   getSelectedEntityBulkChangeItems,
-  getSelectedEntityFormId
+  getSelectedEntityFormId,
+  findEntity,
+  getSingleUsersData,
+  getEntityData,
 } from '../selectors';
 import { getCheckedBulkActionFormValue } from './selectors';
 import { selectFormInitialValues } from '../../form/selectors';
@@ -413,38 +416,152 @@ export const BulkEntityUpdate = (action$, store) =>
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.allSdkCalls = [];
       [...a.allIdsToProcess.toJS()].forEach(item => {
+        const userData = findEntity(store.getState(), 'users', item).toJS();
+        const skills = getEntityData(store.getState(), 'skills').toJS();
+        const groups = getEntityData(store.getState(), 'groups').toJS();
+
+        const userDoesntHaveSkill = userData.skills.filter(skill => skill.name === (a.values.addSkill || a.values.removeSkill))[0] === undefined;
+        const userDoesntHaveGroup = userData.groups.filter(group => group.name === (a.values.addGroup || a.values.removeGroup))[0] === undefined;
+        const addSkillId = a.values.addSkill && skills.filter(skill => skill.name === a.values.addSkill)[0].id;
+        const removeSkillId = a.values.removeSkill && skills.filter(skill => skill.name === a.values.removeSkill)[0].id;
+        const addGroupId = a.values.addGroup && groups.filter(group => group.name === a.values.addGroup)[0].id;
+        const removeGroupId = a.values.removeGroup && groups.filter(group => group.name === a.values.removeGroup)[0].id;
         // Creating values to pass data to sdkCall, this data will be
         // used for a single call to updateUser function
-        let sdkCallValues = {};
+        let sdkCallValues = {
+          updateBody: {},
+          userId: item,
+        };
+
+        if(a.values.addSkill) {     
+          if(userDoesntHaveSkill) {
+            console.warn(`Attempting to associate skill (${a.values.addSkill}) to user (${userData.email})`);
+            a.allSdkCalls.push({
+              module: 'entities',
+              data: { 
+                originEntity: {
+                  name: 'users',
+                  id: item
+                },
+                destinationEntity: {
+                  name: 'skills',
+                  id: addSkillId
+                }
+              },
+              command: 'associate',
+              topic: `cxengage/entities/associate-response`
+            });
+          } else {
+            console.warn(`Skill (${a.values.addSkill}) is allready associated with user (${userData.email})`);
+          }
+        } 
+        if (a.values.removeSkill) {
+          if(!userDoesntHaveSkill ) {
+            console.warn(`Attempting to dissociate skill (${a.values.removeSkill}) from user (${userData.email})`);
+            a.allSdkCalls.push({
+              module: 'entities',
+              data: { 
+                originEntity: {
+                  name: 'users',
+                  id: item
+                },
+                destinationEntity: {
+                  name: 'skills',
+                  id: removeSkillId
+                }
+              },
+              command: 'dissociate',
+              topic: `cxengage/entities/dissociate-response`
+            });
+          } else {
+            console.warn(`SKill (${a.values.removeSkill}) is allready associated with user (${userData.email})`);
+          }
+        }
+        if(a.values.addGroup) {     
+          if(userDoesntHaveGroup) {
+            console.warn(`Attempting to associate group (${a.values.addGroup}) to user (${userData.email})`);
+            a.allSdkCalls.push({
+              module: 'entities',
+              data: { 
+                originEntity: {
+                  name: 'groups',
+                  id: addGroupId
+                },
+                destinationEntity: {
+                  name: 'users',
+                  id: item
+                }
+              },
+              command: 'associate',
+              topic: `cxengage/entities/associate-response`
+            });
+          } else {
+            console.warn(`Group (${a.values.addGroup}) is allready associated with user (${userData.email})`);
+          }
+        } 
+        if (a.values.removeGroup) {
+          if(!userDoesntHaveGroup ) {
+            console.warn(`Attempting to dissociate group (${a.values.removeGroup}) from user (${userData.email})`);
+            a.allSdkCalls.push({
+              module: 'entities',
+              data: { 
+                originEntity: {
+                  name: 'groups',
+                  id: removeGroupId
+                },
+                destinationEntity: {
+                  name: 'users',
+                  id: item
+                }
+              },
+              command: 'dissociate',
+              topic: `cxengage/entities/dissociate-response`
+            });
+          } else {
+            console.warn(`Group (${a.values.removeGroup}) is allready associated with user (${userData.email})`);
+          }
+        }
+        
         if (a.values.status !== undefined) {
-          sdkCallValues.status = a.values.status;
+          sdkCallValues.updateBody.status = a.values.status;
+        }
+        if(a.values.region !== undefined) {
+          // TODO: setting region isn't working due null extension issue coming from api
+          const activeExtension = userData.activeExtension;
+          if(activeExtension) {
+            activeExtension.region = a.values.region;
+          }
+          const extensions =  userData.extensions;
+          extensions.forEach(ext => {
+            if(ext.provider && ext.provider === 'twilio') {
+              ext.region = a.values.region
+            }
+          });
+          sdkCallValues.updateBody.activeExtension = activeExtension;
+          sdkCallValues.updateBody.extensions = extensions;
         }
         if (a.values.noPassword !== undefined) {
-          if (a.values.noPassword === 'null') {
-            sdkCallValues.noPassword = null;
-          } else {
-            sdkCallValues.noPassword = a.values.noPassword === 'true';
-          }
+          sdkCallValues.updateBody.noPassword = a.values.noPassword === 'null'?  null : 'true';
         }
         if (a.values.defaultIdentityProvider !== undefined) {
-          if (a.values.defaultIdentityProvider === 'null') {
-            sdkCallValues.defaultIdentityProvider = null;
-          } else {
-            sdkCallValues.defaultIdentityProvider = a.values.defaultIdentityProvider;
-          }
+          sdkCallValues.updateBody.defaultIdentityProvider = a.values.defaultIdentityProvider === 'null'?  null : a.values.defaultIdentityProvider;
         }
-        if (Object.keys(sdkCallValues).length) {
+
+        if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
+          // Change each user invitation status if any of these options
+          // are selected: inviteNow | resendInvitation | cancelInvitation
+          sdkCallValues.updateBody.status = a.values.cancelInvitation ? 'pending' : 'invited';
+        }
+
+
+        if (Object.keys(sdkCallValues.updateBody).length) {
           // Using the default sdkCall to update single entity data,
           // by calling updateUser
           a.allSdkCalls.push({
             ...a.sdkCall,
-            data: {
-              ...sdkCallValues,
-              userId: item
-            }
+            data: {...sdkCallValues}
           });
         }
-
         if (a.values.passwordReset) {
           // Reset password for all users if option was selected
           a.allSdkCalls.push({
@@ -457,22 +574,6 @@ export const BulkEntityUpdate = (action$, store) =>
             },
             module: 'entities',
             topic: 'cxengage/entities/update-platform-user-response'
-          });
-        }
-        if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
-          // Change each user invitation status if any of these options
-          // are selected: inviteNow | resendInvitation | cancelInvitation
-          a.toStatus = a.values.cancelInvitation ? 'pending' : 'invited';
-          a.allSdkCalls.push({
-            command: 'updateUser',
-            data: {
-              userId: item,
-              updateBody: {
-                status: a.toStatus
-              }
-            },
-            module: 'entities',
-            topic: 'cxengage/entities/update-user-response'
           });
         }
       });

@@ -173,6 +173,20 @@ export const findEntityIndex = (state, entityName, entityId) =>
         .getIn([entityName, 'data'])
         .findIndex(entity => entity.get('id') === entityId);
 
+export const findEntity = (state, entityName, entityId) =>
+  state.get(entityName) !== undefined
+    ? state.getIn([entityName, 'data']).find(entity => entity.get('id') === entityId)
+    : getEntities(state)
+        .getIn([entityName, 'data'])
+        .find(entity => entity.get('id') === entityId);
+
+export const getEntityData = (state, entityName) =>
+  state.getIn(['Entities',entityName, 'data'])
+
+export const getSingleUsersData = (state, userId) =>
+state.getIn(['Entities','users', 'data', userId])
+
+
 export const getSelectedEntityWithIndex = immutableEntitiesMap => {
   const currentEntityName = immutableEntitiesMap.get('currentEntity');
   const currentSelectedEntityId = immutableEntitiesMap.getIn([currentEntityName, 'selectedEntityId']);

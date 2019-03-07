@@ -63,6 +63,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "cancelInvitationIsChecked": true,
+  "groups": undefined,
   "identityProviders": Object {
     "label": "idp1",
     "value": "0001",
@@ -75,9 +76,11 @@ Object {
   },
   "inviteNowIsChecked": true,
   "isSaving": true,
+  "isUserPlatformAdmin": undefined,
   "key": "users:bulk",
   "passwordResetIsChecked": true,
   "resendInvitationIsChecked": true,
+  "skills": undefined,
 }
 `;
 

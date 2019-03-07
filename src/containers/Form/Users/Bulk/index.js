@@ -8,11 +8,11 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import UsersBulkActionsFormLayout from './layout';
 import { formValidation } from './validation';
-import { isCreating, getCurrentEntity } from '../../../../redux/modules/entities/selectors';
+import { isCreating, getCurrentEntity,getEntityData } from '../../../../redux/modules/entities/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
 import { formSubmission } from '../../../../redux/modules/form/selectors';
-import { toggleInvitationStatus } from '../../../../redux/modules/entities';
-import { getCheckedBulkActionFormValue } from '../../../../redux/modules/entities/users/selectors';
+import { toggleInvitationStatus, toggleListItemEntity } from '../../../../redux/modules/entities';
+import { getCheckedBulkActionFormValue, isUserPlatformAdmin } from '../../../../redux/modules/entities/users/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
 
@@ -21,7 +21,7 @@ const UsersBulkActionsForm = compose(
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
-    destroyOnUnmount: true
+    destroyOnUnmount: true,
   })
 )(UsersBulkActionsFormLayout);
 
@@ -38,8 +38,11 @@ export function mapStateToProps(state) {
     resendInvitationIsChecked: getCheckedBulkActionFormValue(state, 'resendInvitation'),
     cancelInvitationIsChecked: getCheckedBulkActionFormValue(state, 'cancelInvitation'),
     passwordResetIsChecked: getCheckedBulkActionFormValue(state, 'passwordReset'),
+    groups: getEntityData(state, 'groups'),
+    skills: getEntityData(state, 'skills'),
     isSaving: isCreating(state),
-    key: `${getCurrentEntity(state)}:bulk`
+    key: `${getCurrentEntity(state)}:bulk`,
+    isUserPlatformAdmin: isUserPlatformAdmin(state),
   };
 }
 

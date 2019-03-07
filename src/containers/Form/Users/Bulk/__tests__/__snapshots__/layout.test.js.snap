@@ -65,22 +65,6 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
   <styled.div>
     <styled.span>
       <span>
-        Reset Password
-      </span>
-      <ConfirmationWrapper
-        mainText="This will send a password reset email to all users selected"
-        secondaryText="Are you sure you want to continue?"
-      >
-        <Styled(ToggleField)
-          automation="usersBulkActionsFormFieldPasswordReset"
-          name="passwordReset"
-        />
-      </ConfirmationWrapper>
-    </styled.span>
-  </styled.div>
-  <styled.div>
-    <styled.span>
-      <span>
         Set Platform Authentication
       </span>
       <Styled(Toggle)
@@ -92,6 +76,46 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
     <styled.span>
       <span>
         Set Default Identity Provider
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Add Group
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Remove Group
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Add Skill
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Remove Skill
       </span>
       <Styled(Toggle)
         onChange={[Function]}

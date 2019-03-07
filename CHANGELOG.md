@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.57.0] - 2019-02-28
+### Added
+- users page bulk actions to add and remove groups and skills
+
 ## [0.56.6] - 2019-02-28
 ### Fixed
 - CXV1-13311 - Updated by show correct user after update.

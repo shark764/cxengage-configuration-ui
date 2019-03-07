@@ -43,6 +43,7 @@ export default function UsersForm({
   tenantRoles,
   status,
   scenario,
+  isUserPlatformAdmin,
   initialValues,
   tenantIdentityProviders,
   isSaving,
@@ -167,7 +168,7 @@ export default function UsersForm({
             </Fragment>
           )}
 
-          {displayResetPassword &&
+          {isUserPlatformAdmin && displayResetPassword &&
             status === 'enabled' && (
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}

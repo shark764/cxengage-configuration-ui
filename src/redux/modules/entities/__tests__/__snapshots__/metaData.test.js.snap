@@ -2572,6 +2572,8 @@ Object {
     "betaFeature": true,
     "bulkFormDependencies": Array [
       "identityProviders",
+      "groups",
+      "skills",
     ],
     "columns": Array [
       Object {

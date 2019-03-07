@@ -17,7 +17,7 @@ import {
 import { getCurrentAgentId } from '../../../redux/modules/userData/selectors';
 import { onFormSubmit, changeUserInviteStatus } from '../../../redux/modules/entities';
 import { selectFormInitialValues, createFormName } from '../../../redux/modules/form/selectors';
-import { getUserInvitationStatus } from '../../../redux/modules/entities/users/selectors';
+import { getUserInvitationStatus, isUserPlatformAdmin } from '../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../redux/modules/entities/identityProviders/selectors';
 import { getCapacityRulesSelector } from '../../../redux/modules/entities/capacityRules/selectors';
@@ -46,7 +46,8 @@ export function mapStateToProps(state) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
     currentAgentId: getCurrentAgentId(state),
-    displayResetPassword: userHasPermissions(state, ['MANAGE_ALL_USER_PASSWORDS'])
+    displayResetPassword: userHasPermissions(state, ['MANAGE_ALL_USER_PASSWORDS']),
+    isUserPlatformAdmin: isUserPlatformAdmin(state),
   };
 }
 const actions = { changeUserInviteStatus };
