@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.58.2] - 2019-03-11
+### fixed
+- CXV1-17194 - users outbound identifier list fixed when deleted.
+
 ## [0.58.1] - 2019-03-08
 ### Changed
 - CXV1-15515 - Users page bulk actions now allows to make just one action at a time.
