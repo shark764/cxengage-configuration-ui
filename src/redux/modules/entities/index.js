@@ -557,6 +557,29 @@ export default function reducer(state = initialState, action) {
     case 'BULK_ENTITY_UPDATE_FULFILLED': {
       const { result } = action.response;
       const entityIndex = findEntityIndex(state, action.entityName, result.id || action.id);
+
+      if(action.type === 'BULK_ENTITY_UPDATE_FULFILLED' && 
+        action.entityName === 'users' && 
+        (action.values.addSkill || 
+          action.values.removeSkill || 
+          action.values.addGroup || 
+          action.values.removeGroup)) {
+        const userEntityIndex = findEntityIndex(state, 'users', action.response.result.userId);
+        if(action.values.addSkill) {
+          const newSkill = state.getIn(['skills','data']).find(skill => skill.get('name') === action.values.addSkill);
+          return state.updateIn(['users','data',userEntityIndex,'skills'], skills => skills.push(newSkill));
+        } else if(action.values.removeSkill) {
+          const skillIndex = state.getIn(['users','data',userEntityIndex,'skills']).findIndex(skill => skill.get('name') === action.values.removeSkill);
+          return state.deleteIn(['users','data',userEntityIndex,'skills',skillIndex]);
+        } else if(action.values.addGroup) {
+          const newGroup = state.getIn(['groups','data']).find(group => group.get('name') === action.values.addGroup);
+          return state.updateIn(['users','data',userEntityIndex,'groups'], groups => groups.push(newGroup));
+        } else if(action.values.removeGroup) {
+          const groupIndex = state.getIn(['users','data',userEntityIndex,'groups']).findIndex(group => group.get('name') === action.values.removeGroup);
+          return state.deleteIn(['users','data',userEntityIndex,'groups',groupIndex]);
+        }
+      }
+      
       if (entityIndex !== -1) {
         if (action.entityName === 'dispatchMappings') {
           const flowIndex = findEntityIndex(state, 'flows', result.flowId);

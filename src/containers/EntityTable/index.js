@@ -35,7 +35,8 @@ export function mapStateToProps(state, props) {
     currentVisibleSubMenu: selectVisibleSubMenu(state, props),
     filtered: defaultFilters,
     sorted: defaultSorted,
-    fetching: isEntityFetching(state)
+    fetching: isEntityFetching(state),
+    showBulkActionsMenu: entity && entity.bulkEditsAvailable,
   };
 }
 

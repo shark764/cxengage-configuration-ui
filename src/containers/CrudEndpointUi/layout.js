@@ -445,7 +445,23 @@ const bulkChangeFormRoutes = [
         <UsersBulkActionsForm />
       </DetailsPanel>
     )
-  }
+  },
+  {
+    path: '/configuration/groups',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/skills',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
   //hygen-inject-before3
 ];
 

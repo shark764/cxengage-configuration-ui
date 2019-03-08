@@ -4,6 +4,7 @@ exports[`entitiesMetaData creates all metaData info 1`] = `
 Object {
   "branding": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -65,6 +66,7 @@ Object {
   },
   "capacityRules": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -126,6 +128,7 @@ Object {
   },
   "chatWidgets": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -200,6 +203,7 @@ Object {
   },
   "customMetrics": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -278,6 +282,7 @@ Object {
   },
   "dashboards": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -339,6 +344,7 @@ Object {
   },
   "dataAccessReports": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -535,6 +541,7 @@ Object {
   },
   "dispatchMappings": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -636,6 +643,7 @@ Object {
   },
   "emailTemplates": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -706,6 +714,7 @@ Object {
   },
   "flows": EntityMetaData {
     "betaFeature": true,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -829,6 +838,7 @@ Object {
       ],
     },
     "betaFeature": true,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -962,6 +972,7 @@ Object {
   },
   "historicalReportFolders": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -1023,6 +1034,7 @@ Object {
   },
   "identityProviders": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -1084,6 +1096,7 @@ Object {
   },
   "integrations": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -1145,6 +1158,7 @@ Object {
   },
   "interactionMonitoring": EntityMetaData {
     "betaFeature": true,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -1258,6 +1272,7 @@ Object {
   },
   "listTypes": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -1319,6 +1334,7 @@ Object {
   },
   "lists": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -1395,6 +1411,7 @@ Object {
   },
   "messageTemplates": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -1496,6 +1513,7 @@ Object {
   },
   "outboundIdentifierLists": EntityMetaData {
     "betaFeature": true,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -1635,6 +1653,7 @@ Object {
   },
   "outboundIdentifiers": EntityMetaData {
     "betaFeature": true,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -1730,6 +1749,7 @@ Object {
   },
   "permissions": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -1791,6 +1811,7 @@ Object {
   },
   "platformRoles": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -1852,6 +1873,7 @@ Object {
   },
   "protectedBranding": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -1913,6 +1935,7 @@ Object {
   },
   "queues": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -1991,6 +2014,7 @@ Object {
   },
   "reasonLists": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -2101,6 +2125,7 @@ Object {
   },
   "reasons": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -2183,6 +2208,7 @@ Object {
   },
   "roles": EntityMetaData {
     "betaFeature": true,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -2269,6 +2295,7 @@ Object {
       ],
     },
     "betaFeature": true,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -2390,6 +2417,7 @@ Object {
   },
   "standardDashboards": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [],
     "confirmationDialog": Object {
@@ -2451,6 +2479,7 @@ Object {
   },
   "transferLists": EntityMetaData {
     "betaFeature": false,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -2570,6 +2599,7 @@ Object {
       ],
     },
     "betaFeature": true,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [
       "identityProviders",
       "groups",

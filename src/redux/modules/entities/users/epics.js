@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
 import { generateUUID } from 'serenova-js-utils/uuid';
 import { sdkPromise } from '../../../../utils/sdk';
-import { handleSuccess, handleError, handleBulkSuccess } from '../handleResult';
+import { handleSuccess, handleError, handleBulkSuccess, handleBulkUneeded } from '../handleResult';
 import {
   getCurrentEntity,
   getSelectedEntityId,
@@ -414,11 +414,12 @@ export const BulkEntityUpdate = (action$, store) =>
     .map(a => {
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
+      a.uneededCalls = [];
       a.allSdkCalls = [];
       [...a.allIdsToProcess.toJS()].forEach(item => {
         const userData = findEntity(store.getState(), 'users', item).toJS();
-        const skills = getEntityData(store.getState(), 'skills').toJS();
-        const groups = getEntityData(store.getState(), 'groups').toJS();
+        const skills = getEntityData(store.getState(), 'skills').toJS() || [];
+        const groups = getEntityData(store.getState(), 'groups').toJS() || [];
 
         const userDoesntHaveSkill = userData.skills.filter(skill => skill.name === (a.values.addSkill || a.values.removeSkill))[0] === undefined;
         const userDoesntHaveGroup = userData.groups.filter(group => group.name === (a.values.addGroup || a.values.removeGroup))[0] === undefined;
@@ -453,6 +454,7 @@ export const BulkEntityUpdate = (action$, store) =>
             });
           } else {
             console.warn(`Skill (${a.values.addSkill}) is allready associated with user (${userData.email})`);
+            a.uneededCalls.push(`Skill (${a.values.addSkill}) is allready associated with user (${userData.email})`);
           }
         } 
         if (a.values.removeSkill) {
@@ -474,7 +476,8 @@ export const BulkEntityUpdate = (action$, store) =>
               topic: `cxengage/entities/dissociate-response`
             });
           } else {
-            console.warn(`SKill (${a.values.removeSkill}) is allready associated with user (${userData.email})`);
+            console.warn(`SKill (${a.values.removeSkill}) is allready not associated with user (${userData.email})`);
+            a.uneededCalls.push(`SKill (${a.values.removeSkill}) is allready not associated with user (${userData.email})`);
           }
         }
         if(a.values.addGroup) {     
@@ -497,6 +500,7 @@ export const BulkEntityUpdate = (action$, store) =>
             });
           } else {
             console.warn(`Group (${a.values.addGroup}) is allready associated with user (${userData.email})`);
+            a.uneededCalls.push(`Group (${a.values.addGroup}) is allready associated with user (${userData.email})`);
           }
         } 
         if (a.values.removeGroup) {
@@ -518,7 +522,8 @@ export const BulkEntityUpdate = (action$, store) =>
               topic: `cxengage/entities/dissociate-response`
             });
           } else {
-            console.warn(`Group (${a.values.removeGroup}) is allready associated with user (${userData.email})`);
+            console.warn(`Group (${a.values.removeGroup}) is allready not associated with user (${userData.email})`);
+            a.uneededCalls.push(`Group (${a.values.removeGroup}) is allready not associated with user (${userData.email})`);
           }
         }
         
@@ -579,6 +584,11 @@ export const BulkEntityUpdate = (action$, store) =>
       });
       return { ...a };
     })
+    .do(a => {
+      if(a.uneededCalls.length > 0 && a.allSdkCalls.length === 0) {
+          handleBulkUneeded(a);
+      }
+    })
     .mergeMap(a =>
       forkJoin(
         a.allSdkCalls.map(apiCall =>
@@ -590,7 +600,7 @@ export const BulkEntityUpdate = (action$, store) =>
           )
         )
       )
-        .do(allResult => handleBulkSuccess(allResult))
+        .do(allResult => handleBulkSuccess(allResult, a))
         .mergeMap(result =>
           from(result).map(response => {
             if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {

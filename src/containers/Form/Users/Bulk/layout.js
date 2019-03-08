@@ -310,7 +310,12 @@ export default class UsersBulkActionsForm extends Component {
                 name="addGroup"
                 label="Group"
                 placeholder="Search..."
-                suggestions={this.props.groups.toJS().map(group => group.name !== 'everyone' && group.name)}
+                suggestions={this.props.groups.toJS().reduce((acc, group) => {             
+                  if (group.name !== 'everyone') {
+                    acc.push(group.name);
+                  }
+                  return acc;
+                }, [])}
                 automation="usersBulkActionsAddGroup"
               />
             </BulkActions>
@@ -327,7 +332,12 @@ export default class UsersBulkActionsForm extends Component {
                 name="removeGroup"
                 label="Group"
                 placeholder="Search..."
-                suggestions={this.props.groups.toJS().map(group => group.name !== 'everyone' && group.name)}
+                suggestions={this.props.groups.toJS().reduce((acc, group) => {             
+                  if (group.name !== 'everyone') {
+                    acc.push(group.name);
+                  }
+                  return acc;
+                }, [])}
                 automation="usersBulkActionsRemoveGroup"
               />
             </BulkActions>

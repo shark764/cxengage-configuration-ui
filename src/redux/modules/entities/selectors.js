@@ -77,7 +77,7 @@ export const hasPermission = (userPermissions, permissionsNeeded) => {
 };
 
 export const isInherited = state => {
-  if (getSelectedEntityId(state) !== 'create') {
+  if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
     switch (getCurrentEntity(state)) {
       case 'roles': {
         return getSelectedEntity(state).get('type') === 'system';

@@ -32,13 +32,20 @@ export function handleSuccess(response, a, successMessage) {
   return { ...a, type: `${a.type}_FULFILLED`, response };
 }
 
-export function handleBulkSuccess(response) {
+export function handleBulkUneeded(a) {
+  Toast.success(`Entitys already have this modification`);
+}
+
+export function handleBulkSuccess(response, a) {
+  
   const successCalls = response.filter(item => item.error === undefined);
   const failedCalls = response.filter(item => item.error !== undefined);
-
-  Toast.success(`
-  ${successCalls.length} items updated successfully.
-  `);
+  
+  if(a && a.uneededCalls && a.uneededCalls.length > 0) {
+    Toast.success(`${a.uneededCalls.length} items allready have this modification.`);
+  }
+  
+  Toast.success(`${successCalls.length} items updated successfully.`);
   if (failedCalls.length > 0) {
     Toast.error(`
     ${failedCalls.length} items failed to update.

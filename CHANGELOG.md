@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.57.1] - 2019-02-28
+### Fixed
+- Groups and Skills bulk actions for users page improvments
+
 ## [0.57.0] - 2019-02-28
 ### Added
 - users page bulk actions to add and remove groups and skills

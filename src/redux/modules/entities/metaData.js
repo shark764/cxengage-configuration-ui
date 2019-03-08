@@ -27,6 +27,7 @@ export class EntityMetaData {
     this.entityName = entityName;
     this.dependentEntity = '';
     this.subEntityName = '';
+    this.bulkEditsAvailable = true;
     this.title = camelCaseToRegularForm(removeLastLetter(entityName));
     this.pageTitle = camelCaseToRegularForm(entityName);
     this.helpLink = '/Help/Content/Home.htm';
@@ -129,9 +130,6 @@ export class EntityMetaData {
         )}-list-member-response`
       };
     }
-  }
-  bulkEditsAvailable() {
-    return this.entityName !== 'emailTemplates' && this.entityName !== 'roles' && this.entityName === 'users';
   }
 }
 
@@ -309,6 +307,7 @@ entities.groups.defaultAssociationFilters = {
 };
 
 // Generic Lists
+entities.lists.bulkEditsAvailable = false;
 entities.lists.createFormDependencies.push('listTypes');
 entities.lists.subEntityName = 'listItems';
 entities.lists.helpLink = '/Help/Content/Configuration/Lists/Lists.htm';
@@ -382,6 +381,7 @@ entities.outboundIdentifierLists.defaultFilters = [{ id: 'active', value: 'enabl
 entities.outboundIdentifierLists.defaultDependentEntityFilters = [{ id: 'active', value: 'enabled' }];
 
 // Roles
+entities.roles.bulkEditsAvailable = false;
 entities.roles.betaFeature = true;
 entities.roles.pageTitle = 'Role Management';
 entities.roles.helpLink = '/Help/Content/Managing%20Users/Adding_roles.htm';
@@ -394,6 +394,7 @@ entities.roles.columns = [
 ];
 
 //Silent Monitoring
+entities.interactionMonitoring.bulkEditsAvailable = false;
 entities.interactionMonitoring.betaFeature = true;
 entities.interactionMonitoring.defaultSorted = [];
 entities.interactionMonitoring.columns = [
@@ -414,6 +415,7 @@ entities.interactionMonitoring.columns = [
 ];
 
 // Custom Metrics
+entities.customMetrics.bulkEditsAvailable = false;
 entities.customMetrics.pageTitle = 'Statistics Management';
 entities.customMetrics.helpLink = '/Help/Content/Configuration/Statistics_Management/About_Statistics_Management.htm';
 entities.customMetrics.columns = [
@@ -424,11 +426,13 @@ entities.customMetrics.columns = [
 ];
 
 // Email Templates
+entities.emailTemplates.bulkEditsAvailable = false;
 entities.emailTemplates.pageTitle = 'User Management Emails';
 entities.emailTemplates.helpLink = '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
 entities.emailTemplates.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Chat Widgets
+entities.chatWidgets.bulkEditsAvailable = false;
 entities.chatWidgets.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -436,6 +440,7 @@ entities.chatWidgets.columns = [
 ];
 
 // Presence Reasons Lists
+entities.reasonLists.bulkEditsAvailable = false;
 entities.reasonLists.pageTitle = 'Presence Reason List Management';
 entities.reasonLists.title = 'Presence Reason List';
 entities.reasonLists.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
@@ -461,6 +466,7 @@ entities.reasonLists.memberListTableFields = [
 ];
 
 // Message Templates
+entities.messageTemplates.bulkEditsAvailable = false;
 entities.messageTemplates.pageTitle = 'Message Templates';
 entities.messageTemplates.helpLink = '/Help/Content/Configuration/Messaging_Templates/Creating_Messaging_Templates.htm';
 entities.messageTemplates.columns = [
@@ -482,6 +488,7 @@ entities.messageTemplates.memberListTableFields = [
 ];
 
 // Transfer Lists
+entities.transferLists.bulkEditsAvailable = false;
 entities.transferLists.pageTitle = 'Transfer Lists';
 entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
 entities.transferLists.columns = [
@@ -501,6 +508,7 @@ entities.transferLists.memberListTableFields = [
 ];
 
 // Data Access Report
+entities.dataAccessReports.bulkEditsAvailable = false;
 entities.dataAccessReports.title = 'Access Controlled Report';
 entities.dataAccessReports.pageTitle = 'Access Controlled Reports';
 entities.dataAccessReports.helpLink = '/Help/Content/Reporting/Access_Controlled_Reports/Create.htm';
@@ -586,6 +594,7 @@ entities.dataAccessReports.standardDashboards = [
 ];
 
 // Reasons
+entities.reasons.bulkEditsAvailable = false;
 entities.reasons.pageTitle = 'Presence Reasons';
 entities.reasons.title = 'Presence Reason';
 entities.reasons.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Reasons.htm';
@@ -598,6 +607,7 @@ entities.reasons.columns = [
 ];
 
 // Queues
+entities.queues.bulkEditsAvailable = false;
 entities.queues.pageTitle = 'Queue Management';
 entities.queues.helpLink = '/Help/Content/Managing%20Flows/Create_queue.htm';
 entities.queues.columns = [
@@ -608,6 +618,7 @@ entities.queues.columns = [
 ];
 
 // Flows
+entities.flows.bulkEditsAvailable = false;
 entities.flows.betaFeature = true;
 entities.flows.pageTitle = 'Flow Management';
 entities.flows.helpLink = '/Help/Content/Managing%20Flows/Flow_overview.htm';
@@ -640,6 +651,7 @@ entities.flows.membersTableFields = {
 };
 
 // Transfer Lists
+entities.transferLists.bulkEditsAvailable = false;
 entities.transferLists.pageTitle = 'Transfer Lists Management';
 entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
 entities.transferLists.columns = [
@@ -648,6 +660,7 @@ entities.transferLists.columns = [
   { name: 'Status', active: true }
 ];
 // Dispatch Mappings
+entities.dispatchMappings.bulkEditsAvailable = false;
 entities.dispatchMappings.pageTitle = 'Dispatch Mappings Management';
 entities.dispatchMappings.helpLink = '/Help/Content/Managing%20Flows/Dispatch_mapping.htm';
 entities.dispatchMappings.updateFormDependencies.push('flows', 'integrations');
