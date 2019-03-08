@@ -4,7 +4,7 @@
 import { Map } from 'immutable';
 import { createSelector } from 'reselect';
 import { getSelectedEntity, userHasPermissions, getSelectedSubEntityId, getSelectedSubEntityData } from '../selectors';
-import { selectFormInitialValues } from '../../form/selectors';
+import { selectFormInitialValues, getCurrentForm } from '../../form/selectors';
 import { onCopyListItemFormSubmit } from '../';
 import { selectNonDisabledUsers, getDisplay } from '../users/selectors';
 import { entitiesMetaData } from '../metaData';
@@ -32,6 +32,14 @@ export const selectNonReusableFlows = createSelector(getFlows, flows => {
     }))
   );
 });
+
+export const getFlowIdFormValue = state => getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'flowId']);
+
+export const selectVersionsFromFlow = state => getVersionsFromFlow(state);
+
+export const getVersionsFromFlow = createSelector([getFlows, getFlowIdFormValue], (flows, flowId) =>
+  selectVersions(flows.find(flow => flow.get('id') === flowId))
+);
 
 export const selectFlowVersions = state => selectVersions(getSelectedEntity(state));
 

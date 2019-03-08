@@ -70,6 +70,7 @@ Object {
   "isSaving": true,
   "key": "mockId",
   "mappingValue": "source",
+  "selectVersionsForSelectedFlow": undefined,
   "userHasUpdatePermission": true,
 }
 `;

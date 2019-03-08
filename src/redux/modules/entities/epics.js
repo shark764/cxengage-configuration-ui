@@ -41,7 +41,7 @@ import {
 
 import { getHasProficiencyFormValue } from './skills/selectors';
 
-import { selectNonReusableFlows } from './flows/selectors';
+import { selectNonReusableFlows, getFlowIdFormValue, selectVersionsFromFlow } from './flows/selectors';
 
 import { entitiesMetaData } from './metaData';
 
@@ -137,6 +137,16 @@ export const ClearMappingValue = (action$, store) =>
     )
     .map(a => touch(a.meta.form, 'value'));
 
+export const TriggerFlowFetch = (action$, store) =>
+  action$
+    .ofType('@@redux-form/CHANGE')
+    .filter(a => a.meta.form.includes('dispatchMappings') && a.meta.field.includes('flowId'))
+    .map(a => ({
+      type: 'FETCH_DATA_FLOW',
+      entityName: 'flows',
+      id: a.payload
+    }));
+
 export const ToggleHasProficiencyFormField = (action$, store) =>
   action$
     .ofType('TOGGLE_PROFICIENCY')
@@ -190,7 +200,7 @@ export const FetchData = action$ =>
 
 export const FetchDataItem = action$ =>
   action$
-    .ofType('FETCH_DATA_ITEM')
+    .ofType('FETCH_DATA_ITEM', 'FETCH_DATA_FLOW')
     .debounceTime(300)
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('get', 'singleMainEntity');
@@ -829,7 +839,8 @@ export const changeDispatchMappingFlowId = (action$, store) =>
         (a.meta !== undefined &&
           a.meta.form === getSelectedEntityFormId(store.getState()) &&
           a.payload.name === 'flowId' &&
-          selectNonReusableFlows(store.getState()).size) ||
+          selectNonReusableFlows(store.getState()).size &&
+          getSelectedEntityId(store.getState()) === 'create') ||
         (getCurrentEntity(store.getState()) === 'dispatchMappings' &&
           a.entityName === 'flows' &&
           getSelectedEntityId(store.getState()) === 'create')
@@ -839,3 +850,26 @@ export const changeDispatchMappingFlowId = (action$, store) =>
       // That would not allow the user to submit, so the 'change' function will leave the field as 'touched' to Redux Form
       change(getSelectedEntityFormId(store.getState()), 'flowId', selectNonReusableFlows(store.getState()).get(0).value)
     );
+
+export const activateVersionsFromFlow = (action$, store) =>
+  action$
+    .ofType('@@redux-form/REGISTER_FIELD', 'FETCH_DATA_FULFILLED')
+    //We want to fetch the versions for the currently selected flow, but only if it has not been done before
+    .filter(
+      a =>
+        (a.meta !== undefined &&
+          a.meta.form === getSelectedEntityFormId(store.getState()) &&
+          a.payload.name === 'flowId' &&
+          selectNonReusableFlows(store.getState()).size &&
+          getSelectedEntityId(store.getState()) !== 'create' &&
+          !selectVersionsFromFlow(store.getState())) ||
+        (getCurrentEntity(store.getState()) === 'dispatchMappings' &&
+          a.entityName === 'flows' &&
+          getSelectedEntityId(store.getState()) !== 'create' &&
+          !selectVersionsFromFlow(store.getState()))
+    )
+    .map(a => ({
+      type: 'FETCH_DATA_FLOW',
+      entityName: 'flows',
+      id: getFlowIdFormValue(store.getState())
+    }));

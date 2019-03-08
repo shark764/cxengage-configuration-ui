@@ -92,6 +92,13 @@ exports[`<DispatchMappingsForm /> renders create form 1`] = `
     name="flowId"
     required={true}
   />
+  <SelectField
+    automation="dispatchMappingsFormFieldVersion"
+    disabled={false}
+    label="Flow Version *"
+    name="version"
+    required={true}
+  />
 </form>
 `;
 
@@ -185,6 +192,13 @@ exports[`<DispatchMappingsForm /> renders update form 1`] = `
     disabled={false}
     label="Dispatch to flow *"
     name="flowId"
+    required={true}
+  />
+  <SelectField
+    automation="dispatchMappingsFormFieldVersion"
+    disabled={false}
+    label="Flow Version *"
+    name="version"
     required={true}
   />
 </form>

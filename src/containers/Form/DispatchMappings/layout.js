@@ -20,7 +20,8 @@ export default function DispatchMappingsForm({
   isSaving,
   inherited,
   userHasUpdatePermission,
-  key
+  key,
+  selectVersionsForSelectedFlow
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -114,6 +115,14 @@ export default function DispatchMappingsForm({
         options={flowIds}
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
+      <SelectField
+        name="version"
+        label="Flow Version *"
+        required
+        automation="dispatchMappingsFormFieldVersion"
+        options={selectVersionsForSelectedFlow}
+        disabled={isSaving || inherited || !userHasUpdatePermission}
+      />
     </form>
   );
 }
@@ -131,6 +140,12 @@ DispatchMappingsForm.propTypes = {
     })
   ),
   integrationElements: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string.isRequired
+    })
+  ),
+  selectVersionsForSelectedFlow: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string.isRequired

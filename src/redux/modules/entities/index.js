@@ -475,6 +475,14 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'FETCH_DATA_FLOW_FULFILLED': {
+      const entityIndex = findEntityIndex(state, action.entityName, action.id);
+      if (entityIndex !== -1) {
+        return state.mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...action.response.result }));
+      } else {
+        return state;
+      }
+    }
     case 'FETCH_DATA_ITEM_REJECTED': {
       return exports.setEntityUpdatingHelper(state, action, false);
     }

@@ -7,7 +7,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import DispatchMappingsForm from './layout';
 import { formValidation } from './validation';
-import { selectNonReusableFlows } from '../../../redux/modules/entities/flows/selectors';
+import { selectNonReusableFlows, selectVersionsFromFlow } from '../../../redux/modules/entities/flows/selectors';
 import { selectIntegrations } from '../../../redux/modules/entities/integrations/selectors';
 import {
   currentMappingValue,
@@ -43,7 +43,8 @@ export function mapStateToProps(state) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
     dispatchValues: getDispatchMappingValue(state),
-    allDispatchMappings: getDispatchMappings(state)
+    allDispatchMappings: getDispatchMappings(state),
+    selectVersionsForSelectedFlow: selectVersionsFromFlow(state)
   };
 }
 
