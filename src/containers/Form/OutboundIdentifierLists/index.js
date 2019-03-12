@@ -7,7 +7,11 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import OutboundIdentifierListsForm from './layout';
 import { formValidation } from './validation';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isCreating,
+  userHasCurrentFormPermission
+} from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
 const CreateOutboundIdentifierListsForm = compose(
@@ -23,7 +27,7 @@ export function mapStateToProps(state) {
   return {
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
-    userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasCurrentFormPermission: userHasCurrentFormPermission(state),
     key: getSelectedEntityId(state)
   };
 }

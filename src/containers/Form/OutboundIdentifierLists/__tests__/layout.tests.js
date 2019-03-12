@@ -9,7 +9,7 @@ describe('OutboundIdentifierListsForm', () => {
         handleSubmit={() => 'mockFunctionReturn'}
         isSaving={false}
         inherited={false}
-        userHasUpdatePermission={true}
+        userHasCurrentFormPermission={true}
         flowIds={[]}
       />
     );
@@ -21,7 +21,7 @@ describe('OutboundIdentifierListsForm', () => {
         handleSubmit={() => 'mockFunctionReturn'}
         isSaving={true}
         inherited={false}
-        userHasUpdatePermission={true}
+        userHasCurrentFormPermission={true}
         flowIds={[]}
       />
     );
@@ -33,7 +33,7 @@ describe('OutboundIdentifierListsForm', () => {
         handleSubmit={() => 'mockFunctionReturn'}
         isSaving={false}
         inherited={true}
-        userHasUpdatePermission={true}
+        userHasCurrentFormPermission={true}
         flowIds={[]}
       />
     );

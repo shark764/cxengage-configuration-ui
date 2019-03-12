@@ -7,6 +7,6 @@ Object {
   },
   "isSaving": false,
   "key": "mockId",
-  "userHasUpdatePermission": true,
+  "userHasCurrentFormPermission": true,
 }
 `;

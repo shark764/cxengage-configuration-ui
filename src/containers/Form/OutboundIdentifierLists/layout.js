@@ -16,7 +16,7 @@ export default function OutboundIdentifierListsForm({
   handleSubmit,
   isSaving,
   inherited,
-  userHasUpdatePermission,
+  userHasCurrentFormPermission,
   key
 }) {
   return (
@@ -26,14 +26,14 @@ export default function OutboundIdentifierListsForm({
         label="Name *"
         componentType="input"
         inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        disabled={isSaving || inherited || !userHasCurrentFormPermission}
       />
       <InputField
         name="description"
         label="Description"
         componentType="textarea"
         inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        disabled={isSaving || inherited || !userHasCurrentFormPermission}
       />
     </form>
   );
@@ -44,5 +44,5 @@ OutboundIdentifierListsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool
+  userHasCurrentFormPermission: PropTypes.bool
 };

@@ -33,18 +33,17 @@ export function handleSuccess(response, a, successMessage) {
 }
 
 export function handleBulkUneeded(a) {
-  Toast.success(`Entitys already have this modification`);
+  Toast.warning(`${a.uneededCalls[0].replace('USERS_AFFECTED', a.uneededCalls.length)}`);
 }
 
 export function handleBulkSuccess(response, a) {
-  
   const successCalls = response.filter(item => item.error === undefined);
   const failedCalls = response.filter(item => item.error !== undefined);
-  
-  if(a && a.uneededCalls && a.uneededCalls.length > 0) {
-    Toast.success(`${a.uneededCalls.length} items allready have this modification.`);
+
+  if (a && a.uneededCalls && a.uneededCalls.length > 0) {
+    Toast.warning(`${a.uneededCalls[0].replace('USERS_AFFECTED', a.uneededCalls.length)}`);
   }
-  
+
   Toast.success(`${successCalls.length} items updated successfully.`);
   if (failedCalls.length > 0) {
     Toast.error(`

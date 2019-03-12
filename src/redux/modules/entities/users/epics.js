@@ -562,7 +562,22 @@ export const BulkEntityUpdate = (action$, store) =>
             a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider;
         }
 
-        if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
+        if (a.values.inviteNow && ['invited', 'expired', 'enabled', 'disabled'].includes(userData.invitationStatus)) {
+          a.uneededCalls.push(
+            `Cannot send email invitation to Tenant for USERS_AFFECTED Users while are on states: "Invited", "Expired Invitation", "Enabled" or "Disabled".`
+          );
+        } else if (a.values.resendInvitation && ['enabled', 'disabled'].includes(userData.invitationStatus)) {
+          a.uneededCalls.push(
+            `Cannot resend an email invitation to Tenant for USERS_AFFECTED Users while are on states: "Enabled" or "Disabled".`
+          );
+        } else if (
+          a.values.cancelInvitation &&
+          ['pending', 'expired', 'enabled', 'disabled'].includes(userData.invitationStatus)
+        ) {
+          a.uneededCalls.push(
+            `Cannot cancel email invitation to Tenant for USERS_AFFECTED Users while are on states: "Pending Invitation", "Expired Invitation", "Enabled" or "Disabled".`
+          );
+        } else if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
           // Change each user invitation status if any of these options
           // are selected: inviteNow | resendInvitation | cancelInvitation
           sdkCallValues.updateBody.status = a.values.cancelInvitation ? 'pending' : 'invited';
@@ -576,19 +591,30 @@ export const BulkEntityUpdate = (action$, store) =>
             data: { ...sdkCallValues }
           });
         }
+
         if (a.values.passwordReset) {
-          // Reset password for all users if option was selected
-          a.allSdkCalls.push({
-            command: 'updatePlatformUser',
-            data: {
-              userId: item,
-              updateBody: {
-                resetPassword: true
-              }
-            },
-            module: 'entities',
-            topic: 'cxengage/entities/update-platform-user-response'
-          });
+          if (
+            !userData.firstName ||
+            !userData.lastName ||
+            ['invited', 'pending', 'expired'].includes(userData.invitationStatus)
+          ) {
+            a.uneededCalls.push(
+              `Cannot send a password reset email to USERS_AFFECTED Users while are on states: "Invited", "Pending Invitation", "Expired Invitation" or they don't have firstName and lastName set.`
+            );
+          } else {
+            // Reset password for all users if option was selected
+            a.allSdkCalls.push({
+              command: 'updatePlatformUser',
+              data: {
+                userId: item,
+                updateBody: {
+                  resetPassword: true
+                }
+              },
+              module: 'entities',
+              topic: 'cxengage/entities/update-platform-user-response'
+            });
+          }
         }
       });
       return { ...a };

@@ -3,6 +3,7 @@
  */
 
 import { fromJS, List } from 'immutable';
+import moment from 'moment';
 import {
   getCurrentEntity,
   getCurrentEntityStore,
@@ -681,176 +682,171 @@ describe('getSelectedEntityWithIndex', () => {
 });
 
 describe('sidePanelHeader', () => {
-  /////////////////////////////////////////////
-  // COMENTED UNTIL WE FIGURE OUT HOW TO HANDLE MOMENT()
-  // ON JENKINS TO AVOID BUILDS FAILING
-  /////////////////////////////////////////////
-
-  // it('Returns metadata used for sidePanelHeader', () => {
-  //   getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
-  //   expect(sidePanelHeader(initialState)).toEqual({
-  //     createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
-  //     title: 'mockName',
-  //     toggleStatus: true,
-  //     updatedAt: 'Last updated on Feb 20, 2019 12:55 PM  by John Frusciante'
-  //   });
-  // });
-  // it('Returns metadata used for sidePanelHeader when createdByName is not defined', () => {
-  //   getUserDisplayName.mockImplementationOnce(() => undefined).mockImplementationOnce(() => 'John Frusciante');
-  //   expect(
-  //     sidePanelHeader(
-  //       fromJS({
-  //         Entities: {
-  //           currentEntity: 'mockEntity',
-  //           mockEntity: {
-  //             selectedEntityId: '0000',
-  //             data: [
-  //               {
-  //                 id: '0000',
-  //                 name: 'mockName',
-  //                 active: true,
-  //                 created: '2018-07-16T14:43:14Z',
-  //                 createdBy: '1000-0000',
-  //                 updated: '2019-02-20T18:55:35Z',
-  //                 updatedBy: '1001-0000'
-  //               }
-  //             ]
-  //           }
-  //         }
-  //       })
-  //     )
-  //   ).toEqual({
-  //     createdAt: 'Created on Jul 16, 2018 8:43 AM  ',
-  //     title: 'mockName',
-  //     toggleStatus: true,
-  //     updatedAt: 'Last updated on Feb 20, 2019 12:55 PM  by John Frusciante'
-  //   });
-  // });
-  // it('Returns metadata used for sidePanelHeader when updatedByName is not defined', () => {
-  //   getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => undefined);
-  //   expect(
-  //     sidePanelHeader(
-  //       fromJS({
-  //         Entities: {
-  //           currentEntity: 'mockEntity',
-  //           mockEntity: {
-  //             selectedEntityId: '0000',
-  //             data: [
-  //               {
-  //                 id: '0000',
-  //                 name: 'mockName',
-  //                 active: true,
-  //                 created: '2018-07-16T14:43:14Z',
-  //                 createdBy: '1000-0000',
-  //                 updated: '2019-02-20T18:55:35Z',
-  //                 updatedBy: '1001-0000'
-  //               }
-  //             ]
-  //           }
-  //         }
-  //       })
-  //     )
-  //   ).toEqual({
-  //     createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
-  //     title: 'mockName',
-  //     toggleStatus: true,
-  //     updatedAt: 'Last updated on Feb 20, 2019 12:55 PM '
-  //   });
-  // });
-  // it('Returns metadata used for sidePanelHeader when name is not defined but has email', () => {
-  //   getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
-  //   expect(
-  //     sidePanelHeader(
-  //       fromJS({
-  //         Entities: {
-  //           currentEntity: 'mockEntity',
-  //           mockEntity: {
-  //             selectedEntityId: '0000',
-  //             data: [
-  //               {
-  //                 id: '0000',
-  //                 email: 'mock@mock.com',
-  //                 active: true,
-  //                 created: '2018-07-16T14:43:14Z',
-  //                 createdBy: '1000-0000',
-  //                 updated: '2019-02-20T18:55:35Z',
-  //                 updatedBy: '1001-0000'
-  //               }
-  //             ]
-  //           }
-  //         }
-  //       })
-  //     )
-  //   ).toEqual({
-  //     createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
-  //     title: 'mock@mock.com',
-  //     toggleStatus: true,
-  //     updatedAt: 'Last updated on Feb 20, 2019 12:55 PM  by John Frusciante'
-  //   });
-  // });
-  // it('Returns metadata used for sidePanelHeader when active is not defined but has status', () => {
-  //   getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
-  //   expect(
-  //     sidePanelHeader(
-  //       fromJS({
-  //         Entities: {
-  //           currentEntity: 'mockEntity',
-  //           mockEntity: {
-  //             selectedEntityId: '0000',
-  //             data: [
-  //               {
-  //                 id: '0000',
-  //                 name: 'mockName',
-  //                 status: 'accepted',
-  //                 created: '2018-07-16T14:43:14Z',
-  //                 createdBy: '1000-0000',
-  //                 updated: '2019-02-20T18:55:35Z',
-  //                 updatedBy: '1001-0000'
-  //               }
-  //             ]
-  //           }
-  //         }
-  //       })
-  //     )
-  //   ).toEqual({
-  //     createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
-  //     title: 'mockName',
-  //     toggleStatus: true,
-  //     updatedAt: 'Last updated on Feb 20, 2019 12:55 PM  by John Frusciante'
-  //   });
-  // });
-  // it('Returns metadata used for sidePanelHeader when currentEntity equals roles', () => {
-  //   getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
-  //   expect(
-  //     sidePanelHeader(
-  //       fromJS({
-  //         Entities: {
-  //           currentEntity: 'roles',
-  //           roles: {
-  //             selectedEntityId: '0004',
-  //             data: [
-  //               {
-  //                 id: '0004',
-  //                 name: 'mockName',
-  //                 type: 'system',
-  //                 active: true,
-  //                 created: '2018-07-16T14:43:14Z',
-  //                 createdBy: '1000-0000',
-  //                 updated: '2019-02-20T18:55:35Z',
-  //                 updatedBy: '1001-0000'
-  //               }
-  //             ]
-  //           }
-  //         }
-  //       })
-  //     )
-  //   ).toEqual({
-  //     createdAt: 'Created on Jul 16, 2018 8:43 AM  by Jim Carrey ',
-  //     title: 'mockName',
-  //     toggleStatus: undefined,
-  //     updatedAt: 'Last updated on Feb 20, 2019 12:55 PM  by John Frusciante'
-  //   });
-  // });
+  it('Returns metadata used for sidePanelHeader', () => {
+    getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
+    expect(sidePanelHeader(initialState)).toEqual({
+      createdAt: `Created on ${moment('2018-07-16T14:43:14Z').format('lll')}  by Jim Carrey `,
+      title: 'mockName',
+      toggleStatus: true,
+      updatedAt: `Last updated on ${moment('2019-02-20T18:55:35Z').format('lll')}  by John Frusciante`
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when createdByName is not defined', () => {
+    getUserDisplayName.mockImplementationOnce(() => undefined).mockImplementationOnce(() => 'John Frusciante');
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  name: 'mockName',
+                  active: true,
+                  created: '2018-07-16T14:43:14Z',
+                  createdBy: '1000-0000',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedBy: '1001-0000'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: `Created on ${moment('2018-07-16T14:43:14Z').format('lll')}  `,
+      title: 'mockName',
+      toggleStatus: true,
+      updatedAt: `Last updated on ${moment('2019-02-20T18:55:35Z').format('lll')}  by John Frusciante`
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when updatedByName is not defined', () => {
+    getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => undefined);
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  name: 'mockName',
+                  active: true,
+                  created: '2018-07-16T14:43:14Z',
+                  createdBy: '1000-0000',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedBy: '1001-0000'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: `Created on ${moment('2018-07-16T14:43:14Z').format('lll')}  by Jim Carrey `,
+      title: 'mockName',
+      toggleStatus: true,
+      updatedAt: `Last updated on ${moment('2019-02-20T18:55:35Z').format('lll')} `
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when name is not defined but has email', () => {
+    getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  email: 'mock@mock.com',
+                  active: true,
+                  created: '2018-07-16T14:43:14Z',
+                  createdBy: '1000-0000',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedBy: '1001-0000'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: `Created on ${moment('2018-07-16T14:43:14Z').format('lll')}  by Jim Carrey `,
+      title: 'mock@mock.com',
+      toggleStatus: true,
+      updatedAt: `Last updated on ${moment('2019-02-20T18:55:35Z').format('lll')}  by John Frusciante`
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when active is not defined but has status', () => {
+    getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  name: 'mockName',
+                  status: 'accepted',
+                  created: '2018-07-16T14:43:14Z',
+                  createdBy: '1000-0000',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedBy: '1001-0000'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: `Created on ${moment('2018-07-16T14:43:14Z').format('lll')}  by Jim Carrey `,
+      title: 'mockName',
+      toggleStatus: true,
+      updatedAt: `Last updated on ${moment('2019-02-20T18:55:35Z').format('lll')}  by John Frusciante`
+    });
+  });
+  it('Returns metadata used for sidePanelHeader when currentEntity equals roles', () => {
+    getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
+    expect(
+      sidePanelHeader(
+        fromJS({
+          Entities: {
+            currentEntity: 'roles',
+            roles: {
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004',
+                  name: 'mockName',
+                  type: 'system',
+                  active: true,
+                  created: '2018-07-16T14:43:14Z',
+                  createdBy: '1000-0000',
+                  updated: '2019-02-20T18:55:35Z',
+                  updatedBy: '1001-0000'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual({
+      createdAt: `Created on ${moment('2018-07-16T14:43:14Z').format('lll')}  by Jim Carrey `,
+      title: 'mockName',
+      toggleStatus: undefined,
+      updatedAt: `Last updated on ${moment('2019-02-20T18:55:35Z').format('lll')}  by John Frusciante`
+    });
+  });
   it('Returns just title if selectedEntityId equals create', () => {
     expect(
       sidePanelHeader(

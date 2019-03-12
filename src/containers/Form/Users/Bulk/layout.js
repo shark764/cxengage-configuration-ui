@@ -72,7 +72,7 @@ export default class UsersBulkActionsForm extends Component {
 
   toggleFormField = name => {
     const _that = this;
-    ['inviteNow', 'resendInvitation', 'cancelInvitation', 'resetPassword'].forEach(function(el) {
+    ['inviteNow', 'resendInvitation', 'cancelInvitation', 'passwordReset'].forEach(function(el) {
       _that.props.toggleInvitationStatus(el, el === name);
     });
     this.setState({

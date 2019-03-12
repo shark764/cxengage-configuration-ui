@@ -19,9 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.58.3] - 2019-03-11
+### Changed
+- CXV1-15515 - Users page bulk actions restricts sending emails depending on invitation status.
+- CXV1-17076 - Outbound Identifier List allows creating form without update permissions but with create ones.
+
 ## [0.58.2] - 2019-03-11
-### fixed
-- CXV1-17194 - users outbound identifier list fixed when deleted.
+### Fixed
+- CXV1-17194 - Users outbound identifier list fixed when deleting member.
 
 ## [0.58.1] - 2019-03-08
 ### Changed
