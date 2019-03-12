@@ -5,7 +5,9 @@ password: new Element('[automation="password"]'),
 signInButton: new Element('[automation="signInButton"]'), 
 tenantSelect: new Element('[automation="tenantSelect"]'), 
 chooseTenantButton: new Element('[automation="chooseTenantButton"]'), 
-loading: new Element('[automation="loading"]'), 
+loading: new Element('[automation="loading"]'),
+transferListsNameInput: new Element('[automation="transferListsNameInput"]'), 
+transferListsDescriptionInput: new Element('[automation="transferListsDescriptionInput"]'), 
 usersBulkActionsFormFieldStatus: new Element('[automation="usersBulkActionsFormFieldStatus"]'), 
 usersBulkActionsFormFieldInviteNow: new Element('[automation="usersBulkActionsFormFieldInviteNow"]'), 
 usersBulkActionsFormFieldResendInvitation: new Element('[automation="usersBulkActionsFormFieldResendInvitation"]'), 
@@ -30,8 +32,5 @@ dispatchMappingsFormFieldInteractionField: new Element('[automation="dispatchMap
 dispatchMappingsFormFieldValue: new Element('[automation="dispatchMappingsFormFieldValue"]'), 
 dispatchMappingsFormFieldFlowId: new Element('[automation="dispatchMappingsFormFieldFlowId"]'), 
 dispatchMappingsFormFieldVersion: new Element('[automation="dispatchMappingsFormFieldVersion"]'), 
-transferListsNameInput: new Element('[automation="transferListsNameInput"]'), 
-transferListsDescriptionInput: new Element('[automation="transferListsDescriptionInput"]'), 
-
  }; 
  module.exports = elements;

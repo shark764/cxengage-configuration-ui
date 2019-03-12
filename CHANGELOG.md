@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+
+## [0.58.4] - 2019-03-11
+### Changed
+- SDK version bump to 8.50.2
+- Inherited banner for Dispatch Mappings
+
 ## [0.58.3] - 2019-03-11
 ### Changed
 - CXV1-15515 - Users page bulk actions restricts sending emails depending on invitation status.
@@ -27,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.58.2] - 2019-03-11
 ### Fixed
 - CXV1-17194 - Users outbound identifier list fixed when deleting member.
+
 
 ## [0.58.1] - 2019-03-08
 ### Changed

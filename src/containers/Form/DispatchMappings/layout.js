@@ -10,7 +10,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, InputField, SelectField } from 'cx-ui-components';
+import { DetailHeader, InputField, SelectField, DetailsPanelAlert } from 'cx-ui-components';
 
 export default function DispatchMappingsForm({
   mappingValue,
@@ -25,6 +25,7 @@ export default function DispatchMappingsForm({
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
+      {inherited && <DetailsPanelAlert text="This Dispatch Mapping is inherited and cannot be edited" />}
       <DetailHeader text="Details" />
       <InputField
         name="name"
