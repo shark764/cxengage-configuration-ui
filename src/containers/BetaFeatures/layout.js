@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Toggle, PageHeader, Button } from 'cx-ui-components';
 import { sdkCall } from '../../utils/sdk';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
+import {updateBetaFeatures, readBetaFeatures} from '../../utils/apiCall';
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -60,33 +61,30 @@ const Submit = styled(Button)`
   margin-bottom: 20px;
 `;
 
-const getinitialStateFromLocalStorage = () => {
-  let initState = {};
-  Object.keys(entitiesMetaData).forEach(entity => {
-    initState[entity] = JSON.parse(localStorage.getItem(entity));
-  });
-  return initState;
-};
-
 export default class BetaFeatures extends Component {
   constructor() {
     super();
-    this.state = getinitialStateFromLocalStorage();
+    this.state = {
+      users: false,
+      groups: false,
+      skills: false,
+      outboundIdentifiers: false,
+      outboundIdentifierLists: false,
+      roles: false,
+      flows: false,
+      dispatchMappings: false,
+    };
+  }
+  componentDidMount() {
+    readBetaFeatures().then(r => {
+      this.setState(r.result);
+    })
   }
 
-  updateList = feature => this.setState(prevState => ({ [feature]: !prevState[feature] }));
-
-  saveInLocalStorage = () => {
-    // This is how config 2 knows what features are on
-    Object.keys(this.state).forEach(feature => {
-      if (this.state[feature]) {
-        localStorage.setItem(feature, 'true');
-      } else {
-        localStorage.removeItem(feature);
-      }
+  saveBetaFeaturePrefs = features => {
+    updateBetaFeatures(features).then(r => {
+      this.setState(r.result);
     });
-    // This is how config 1 knows what features are on
-    sdkCall({ module: 'setBetaFeatures', data: this.state });
   };
 
   render() {
@@ -114,13 +112,35 @@ export default class BetaFeatures extends Component {
             entityName =>
               this.props.entities[entityName] &&
               entitiesMetaData[entityName].betaFeature && (
-                <Feature key={entityName} onClick={() => this.updateList(entityName)}>
+                <Feature key={entityName} >
                   <span>{entitiesMetaData[entityName].pageTitle}</span>
-                  <ToggleWrapper onChange={() => this.updateList(entityName)} value={this.state[entityName]} />
+                  <ToggleWrapper onChange={() => {
+                      if((entityName === 'outboundIdentifiers' && !this.state.outboundIdentifiers) || 
+                        (entityName === 'outboundIdentifierLists' && !this.state.outboundIdentifierLists)) {
+                        this.saveBetaFeaturePrefs({
+                          ...this.state, 
+                          users: true,
+                          groups: true,
+                          skills: true,
+                          outboundIdentifiers: true,
+                          outboundIdentifierLists: true
+                        });
+                        alert('Users, Groups, and Skills are dependencies of the outbound identifiers feature and toggled automatically.')
+                      } else {
+                        const features = {
+                          ...this.state, 
+                          [entityName]: !this.state[entityName], 
+                        };
+                        this.saveBetaFeaturePrefs(features);
+                      } 
+                    }
+                  }
+                  value={this.state[entityName]}
+                  />
                 </Feature>
               )
           )}
-          <Submit buttonType="primary" onClick={this.saveInLocalStorage}>
+          <Submit buttonType="primary" onClick={() => sdkCall({ module: 'setBetaFeatures', data: this.state })}>
             Apply Changes
           </Submit>
         </Features>

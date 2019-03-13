@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 
 
+## [0.59.0] - 2019-03-13
+### Changed
+- CXV1-17383 - Updated beta features page to use new api route instead of localstorage
+
 ## [0.58.5] - 2019-03-12
 ### Changed
 - CXV1-16902 - Added 'Use active version' as an option for Dispatch Mapping
