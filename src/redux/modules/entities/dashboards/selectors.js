@@ -18,7 +18,7 @@ export const selectDashboards = createSelector([getDashboards, getCurrentTenantI
     .filter(
       dashboard =>
         dashboard.tenantId === currentTenantId &&
-        dashboard.active !== null &&
+        dashboard.active &&
         dashboard.activeDashboard !== null &&
         dashboard.activeVersion !== null
     )
