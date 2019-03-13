@@ -4,7 +4,7 @@ exports[`UpdateEmailTemplate emailTemplates entity sdk promise fails calls toast
 [MockFunction] {
   "calls": Array [
     Array [
-      "mock error",
+      undefined,
     ],
   ],
 }

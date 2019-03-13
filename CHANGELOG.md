@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.59.1] - 2019-03-13
+### Changed
+- CXV1-16819 - Notifications for Users page bulk actions were updated to show numbers of users affected.
+- CXV1-17190 - Skills page show proper notification for duplicated names.
+- CXV1-17189 - Groups page show proper notification for duplicated names.
+- CXV1-17046 - Entity Pages show proper message from API when duplicating values.
 
 ## [0.59.0] - 2019-03-13
 ### Changed
@@ -27,7 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.58.5] - 2019-03-12
 ### Changed
 - CXV1-16902 - Added 'Use active version' as an option for Dispatch Mapping
-
 
 ## [0.58.4] - 2019-03-11
 ### Changed
@@ -42,7 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.58.2] - 2019-03-11
 ### Fixed
 - CXV1-17194 - Users outbound identifier list fixed when deleting member.
-
 
 ## [0.58.1] - 2019-03-08
 ### Changed

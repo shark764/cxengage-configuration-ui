@@ -1,22 +1,11 @@
 import { isIgnoredToast } from './errors';
-import { errorLabel, errorManager } from '../../../utils/sdk';
+import { errorManager } from '../../../utils/sdk';
 import { Toast } from 'cx-ui-components';
 import { of } from 'rxjs/observable/of';
 
 export function handleError(error, a) {
-  if (
-    !isIgnoredToast(a.type, a.entityName) &&
-    a.entityName !== 'dispatchMappings' &&
-    a.type !== '@@redux-form/CHANGE'
-  ) {
-    Toast.error(errorLabel(error));
-  } else if (a.entityName === 'dispatchMappings') {
-    let errorObject = errorManager(error);
-
-    Toast.error(errorObject.errorMessage);
-    a.type = `${a.type}_REJECTED`;
-    a.errorAttribute = errorObject.attribute;
-    return of(a);
+  if (!isIgnoredToast(a.type, a.entityName) && a.type !== '@@redux-form/CHANGE') {
+    Toast.error(errorManager(error).errorMessage);
   }
   a.type = `${a.type}_REJECTED`;
   return of(a);
@@ -33,7 +22,7 @@ export function handleSuccess(response, a, successMessage) {
 }
 
 export function handleBulkUneeded(a) {
-  Toast.warning(`${a.uneededCalls[0].replace('USERS_AFFECTED', a.uneededCalls.length)}`);
+  Toast.warning(`${a.uneededCalls[0].replace('BULKED_ITEMS_AFFECTED', a.uneededCalls.length)}`);
 }
 
 export function handleBulkSuccess(response, a) {
@@ -41,7 +30,7 @@ export function handleBulkSuccess(response, a) {
   const failedCalls = response.filter(item => item.error !== undefined);
 
   if (a && a.uneededCalls && a.uneededCalls.length > 0) {
-    Toast.warning(`${a.uneededCalls[0].replace('USERS_AFFECTED', a.uneededCalls.length)}`);
+    Toast.warning(`${a.uneededCalls[0].replace('BULKED_ITEMS_AFFECTED', a.uneededCalls.length)}`);
   }
 
   Toast.success(`${successCalls.length} items updated successfully.`);

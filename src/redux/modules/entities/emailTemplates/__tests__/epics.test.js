@@ -3,7 +3,7 @@ import { UpdateEmailTemplate } from '../epics';
 import { mockStore } from '../../../../../utils/testUtils';
 import { updateEntity } from '../../';
 
-import { sdkPromise, errorLabel } from '../../../../../utils/sdk';
+import { sdkPromise, errorLabel, errorManager } from '../../../../../utils/sdk';
 import { getSelectedEntityId } from '../../selectors';
 import { getCurrentFormInitialValues } from '../../../form/selectors';
 import toastr from 'toastr';
@@ -14,15 +14,14 @@ jest.mock('../../../form/selectors');
 jest.mock('toastr');
 
 errorLabel.mockReturnValue('mock error');
+errorManager.mockReturnValue('mock error manager');
 getSelectedEntityId.mockReturnValue('mock selected entity id');
 
 describe('UpdateEmailTemplate', () => {
   let action;
   describe('emailTemplates entity', () => {
     beforeEach(() => {
-      sdkPromise.mockReturnValue(
-        new Promise(resolve => resolve('mock response'))
-      );
+      sdkPromise.mockReturnValue(new Promise(resolve => resolve('mock response')));
       getCurrentFormInitialValues.mockReturnValue({ email: 'custom' });
     });
     afterEach(() => {
@@ -121,9 +120,7 @@ describe('UpdateEmailTemplate', () => {
 
     describe('sdk promise fails', () => {
       beforeEach(() => {
-        sdkPromise.mockReturnValue(
-          new Promise((resolve, reject) => reject('mock error'))
-        );
+        sdkPromise.mockReturnValue(new Promise((resolve, reject) => reject('mock error')));
       });
       it('calls toastr error', done => {
         UpdateEmailTemplate(action, mockStore).subscribe(() => {

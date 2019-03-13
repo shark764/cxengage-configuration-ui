@@ -4,7 +4,11 @@ exports[`handleBulkSuccess no toast notiication 1`] = `undefined`;
 
 exports[`handleBulkSuccess response contained an error object fire "_rejected" action 1`] = `undefined`;
 
+exports[`handleBulkSuccess response contained uneeded calls 1`] = `undefined`;
+
 exports[`handleBulkSuccess returns an observable with type _FULFILLED appended 1`] = `undefined`;
+
+exports[`handleBulkUneeded Throws a notification with number of entity items affected 1`] = `undefined`;
 
 exports[`handleError no toast notification 1`] = `
 ScalarObservable {

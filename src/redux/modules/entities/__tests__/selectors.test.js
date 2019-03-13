@@ -41,6 +41,7 @@ import {
   getEntityListMembers,
   getListSize,
   findEntityIndex,
+  findEntity,
   getSelectedEntityWithIndex,
   sidePanelHeader,
   isUpdateForm,
@@ -368,6 +369,20 @@ describe('isInherited', () => {
       )
     ).toEqual(false);
   });
+  it('Returns if selected entity is inherited when selectedEntityId is "bulk"', () => {
+    expect(
+      isInherited(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: 'bulk'
+            }
+          }
+        })
+      )
+    ).toEqual(false);
+  });
   it('Returns if selected entity is inherited when currentEntity does not match default', () => {
     expect(
       isInherited(
@@ -641,6 +656,54 @@ describe('findEntityIndex', () => {
   });
   it('Returns index of selected entity when state contains all Entities', () => {
     expect(findEntityIndex(initialState, 'mockEntity', '0000')).toEqual(0);
+  });
+});
+
+describe('findEntity', () => {
+  it('Returns entity by given entityName and id', () => {
+    expect(
+      findEntity(
+        fromJS({
+          mockEntity: {
+            selectedEntityId: '0000',
+            data: [
+              {
+                id: '0000'
+              }
+            ]
+          }
+        }),
+        'mockEntity',
+        '0000'
+      )
+    ).toEqual(
+      fromJS({
+        id: '0000'
+      })
+    );
+  });
+  it('Returns index of selected entity when state contains all Entities', () => {
+    expect(findEntity(initialState, 'mockEntity', '0000')).toEqual(
+      fromJS({
+        id: '0000',
+        name: 'mockName',
+        active: true,
+        tenantId: '0000-0000',
+        created: '2018-07-16T14:43:14Z',
+        createdBy: '1000-0000',
+        updated: '2019-02-20T18:55:35Z',
+        updatedBy: '1001-0000',
+        items: [{ key: '0001' }],
+        members: ['0002', '0003', '0004'],
+        mockDependentEntity: [
+          {
+            id: '0001',
+            name: 'mockName',
+            active: true
+          }
+        ]
+      })
+    );
   });
 });
 

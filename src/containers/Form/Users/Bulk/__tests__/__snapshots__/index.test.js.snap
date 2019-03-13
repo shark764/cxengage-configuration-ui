@@ -15,7 +15,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
       "inviteNow": false,
       "resendInvitation": false,
       "cancelInvitation": false,
-      "resetPassword": false,
+      "passwordReset": false,
     }
   }
   inviteNowIsChecked={true}
@@ -71,7 +71,7 @@ Object {
     "inviteNow": false,
     "resendInvitation": false,
     "cancelInvitation": false,
-    "resetPassword": false,
+    "passwordReset": false,
   },
   "inviteNowIsChecked": true,
   "isSaving": true,

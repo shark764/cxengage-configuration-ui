@@ -68,7 +68,6 @@ export const errorLabel = error => {
 };
 
 //errorManager
-
 export const errorManager = error => {
   let errorDetails;
   let attr;
@@ -81,12 +80,14 @@ export const errorManager = error => {
   ) {
     let { code, message, attribute } = error.data.apiResponse.apiResponse.response.error;
     attr = Object.keys(attribute)[0];
-    errorDetails = attribute && ` ${capitalizeFirstLetter(attribute[Object.keys(attribute)[0]])}`;
-
-    if (code === undefined || message === undefined) {
+    errorDetails = ` ${code}: ${message}`;
+    if (attribute && typeof attribute === 'object') {
+      errorDetails = ` ${capitalizeFirstLetter(attribute[attr])}`;
+    } else if (attribute && message) {
+      errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(message)}.`;
+    } else if (code === undefined || message === undefined) {
       errorDetails = ` ${error.data.apiResponse.status}: ${error.data.apiResponse.apiResponse.response.error}`;
     }
   }
-  //return `${errorDetails ? errorDetails : ''}`;
   return { errorMessage: errorDetails ? errorDetails : '', attribute: attr };
 };

@@ -3,7 +3,7 @@ import { UpdateDataAccessReport } from '../epics';
 import { mockStore } from '../../../../../utils/testUtils';
 import { updateEntity } from '../../';
 
-import { sdkPromise, errorLabel } from '../../../../../utils/sdk';
+import { sdkPromise, errorLabel, errorManager } from '../../../../../utils/sdk';
 import { getSelectedEntityId } from '../../selectors';
 import { getCurrentFormInitialValues } from '../../../form/selectors';
 import toastr from 'toastr';
@@ -14,6 +14,7 @@ jest.mock('../../../form/selectors');
 jest.mock('toastr');
 
 errorLabel.mockReturnValue('mock error');
+errorManager.mockReturnValue('mock error manager');
 getSelectedEntityId.mockReturnValue('mock selected entity id');
 
 describe('UpdateDataAccessReport', () => {

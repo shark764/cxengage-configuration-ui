@@ -4,7 +4,7 @@ exports[`UpdateDataAccessReport dataAccessReports entity sdk promise fails calls
 [MockFunction] {
   "calls": Array [
     Array [
-      "mock error",
+      undefined,
     ],
   ],
 }

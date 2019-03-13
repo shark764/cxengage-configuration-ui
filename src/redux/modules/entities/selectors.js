@@ -180,12 +180,9 @@ export const findEntity = (state, entityName, entityId) =>
         .getIn([entityName, 'data'])
         .find(entity => entity.get('id') === entityId);
 
-export const getEntityData = (state, entityName) =>
-  state.getIn(['Entities',entityName, 'data'])
+export const getEntityData = (state, entityName) => state.getIn(['Entities', entityName, 'data']);
 
-export const getSingleUsersData = (state, userId) =>
-state.getIn(['Entities','users', 'data', userId])
-
+export const getSingleUsersData = (state, userId) => state.getIn(['Entities', 'users', 'data', userId]);
 
 export const getSelectedEntityWithIndex = immutableEntitiesMap => {
   const currentEntityName = immutableEntitiesMap.get('currentEntity');

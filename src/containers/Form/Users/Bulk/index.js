@@ -31,7 +31,7 @@ export function mapStateToProps(state) {
       inviteNow: false,
       resendInvitation: false,
       cancelInvitation: false,
-      resetPassword: false
+      passwordReset: false
     }),
     identityProviders: selectTenantIdentityProviders(state),
     inviteNowIsChecked: getCheckedBulkActionFormValue(state, 'inviteNow'),
