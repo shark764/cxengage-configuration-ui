@@ -35,7 +35,11 @@ export const selectNonReusableFlows = createSelector(getFlows, flows => {
 
 export const getFlowIdFormValue = state => getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'flowId']);
 
-export const selectVersionsFromFlow = state => getVersionsFromFlow(state);
+export const selectVersionsFromFlow = state => {
+  const versions = getVersionsFromFlow(state);
+
+  return versions.length > 0 ? [{ value: 'null', label: 'Use Active Version' }, ...versions] : undefined;
+};
 
 export const getVersionsFromFlow = createSelector([getFlows, getFlowIdFormValue], (flows, flowId) =>
   selectVersions(flows.find(flow => flow.get('id') === flowId))
@@ -45,7 +49,7 @@ export const selectFlowVersions = state => selectVersions(getSelectedEntity(stat
 
 const selectVersions = selectedEntity => {
   if (!selectedEntity) {
-    return undefined;
+    return [];
   }
   const versions = selectedEntity.get('versions');
   return versions !== undefined
@@ -55,7 +59,7 @@ const selectVersions = selectedEntity => {
           label: `v${versions.size - index} - ${version.get('name')}`
         }))
         .toJS()
-    : undefined;
+    : [];
 };
 
 export const selectFlowNames = state => getSelectedSubEntityId(state) !== 'drafts' && getFlowNames(state);

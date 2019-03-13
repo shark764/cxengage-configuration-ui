@@ -851,6 +851,27 @@ export const changeDispatchMappingFlowId = (action$, store) =>
       change(getSelectedEntityFormId(store.getState()), 'flowId', selectNonReusableFlows(store.getState()).get(0).value)
     );
 
+export const changeDispatchMappingVersion = (action$, store) =>
+  action$
+    .ofType('@@redux-form/REGISTER_FIELD', 'FETCH_DATA_FLOW_FULFILLED')
+    .filter(
+      a =>
+        (a.meta !== undefined &&
+          a.meta.form === getSelectedEntityFormId(store.getState()) &&
+          a.payload.name === 'version' &&
+          selectVersionsFromFlow(store.getState()) &&
+          selectVersionsFromFlow(store.getState()).length > 1 &&
+          getSelectedEntityId(store.getState()) === 'create') ||
+        (getCurrentEntity(store.getState()) === 'dispatchMappings' &&
+          a.entityName === 'flows' &&
+          getSelectedEntityId(store.getState()) === 'create')
+    )
+    .map(a =>
+      //This change action is required as sometimes the flowId field has not been loaded and the field is left not initialized.
+      // That would not allow the user to submit, so the 'change' function will leave the field as 'touched' to Redux Form
+      change(getSelectedEntityFormId(store.getState()), 'version', selectVersionsFromFlow(store.getState())[0].value)
+    );
+
 export const activateVersionsFromFlow = (action$, store) =>
   action$
     .ofType('@@redux-form/REGISTER_FIELD', 'FETCH_DATA_FULFILLED')

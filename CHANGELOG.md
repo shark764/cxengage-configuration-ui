@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 
 
+## [0.58.5] - 2019-03-12
+### Changed
+- CXV1-16902 - Added 'Use active version' as an option for Dispatch Mapping
+
+
 ## [0.58.4] - 2019-03-11
 ### Changed
 - SDK version bump to 8.50.2
