@@ -6,8 +6,8 @@ export function apiCall(urlSuffix, method = 'GET', data) {
     command: `updateLocalStorage`,
     data: 'updateLocalStorage',
     topic: 'updateLocalStorage'
-  }).then(({tenant: {tenantId}, token}) => {
-    const url = `https://${'dev'}-api.cxengagelabs.net/v1/tenants/${tenantId}/${urlSuffix}`
+  }).then(({tenant: {tenantId}, token, baseUrl}) => {
+    const url = `${baseUrl}/v1/tenants/${tenantId}/${urlSuffix}`;
     const requestParams =  {
       mode: "cors", // no-cors, cors, *same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -25,17 +25,17 @@ export function apiCall(urlSuffix, method = 'GET', data) {
     if(data) {
       requestParams.body = JSON.stringify(data);
     }
-    return fetch(url, requestParams)
-    .then(response => {
-      
-      if(response.status === 401) {
-        return 'Unauthorized';
-      } else if ( response.status >= 300) {
-        return;
-      } else {
-        return response.json();
-      }
-    });
+      return fetch(url, requestParams)
+      .then(response => {
+        
+        if(response.status === 401) {
+          return 'Unauthorized';
+        } else if ( response.status >= 300) {
+          return;
+        } else {
+          return response.json();
+        }
+      });
 
   });
 }

@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.59.3] - 2019-03-13
+### Fixed
+- updated api call to support different base urls
+
 ## [0.59.2] - 2019-03-13
 ### Fixed
 - CXV1-16027 - Data Access Reports form allows only select active custom dashboards.
