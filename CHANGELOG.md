@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.59.5] - 2019-03-15
+### Fixed
+- CXV1-17046 - Notification messages for duplicate values are being handled properly.
+- CXV1-17397 - DAC is handling messages from API correctly.
+
 ## [0.59.4] - 2019-03-15
 ### Fixed
 - CXV1-16819 - Users page Bulk actions handles state changes on users selected members.

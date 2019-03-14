@@ -58,10 +58,11 @@ export const errorLabel = error => {
     error.data.apiResponse.apiResponse.response &&
     error.data.apiResponse.apiResponse.response.error
   ) {
-    let { code, message } = error.data.apiResponse.apiResponse.response.error;
+    let responseError = error.data.apiResponse.apiResponse.response.error;
+    let { code, message } = responseError;
     errorDetails = ` ${code}: ${message}`;
     if (code === undefined || message === undefined) {
-      errorDetails = ` ${error.data.apiResponse.status}: ${error.data.apiResponse.apiResponse.response.error}`;
+      errorDetails = ` ${error.data.apiResponse.status}: ${responseError}`;
     }
   }
   return `${error.message} ${errorDetails ? errorDetails : ''}`;
@@ -69,6 +70,7 @@ export const errorLabel = error => {
 
 //errorManager
 export const errorManager = error => {
+  let messageFromAPI;
   let errorDetails;
   let attr;
   if (
@@ -78,16 +80,39 @@ export const errorManager = error => {
     error.data.apiResponse.apiResponse.response &&
     error.data.apiResponse.apiResponse.response.error
   ) {
-    let { code, message, attribute } = error.data.apiResponse.apiResponse.response.error;
-    attr = Object.keys(attribute)[0];
-    errorDetails = ` ${code}: ${message}`;
-    if (attribute && typeof attribute === 'object') {
-      errorDetails = ` ${capitalizeFirstLetter(attribute[attr])}`;
-    } else if (attribute && message) {
-      errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(message)}.`;
-    } else if (code === undefined || message === undefined) {
-      errorDetails = ` ${error.data.apiResponse.status}: ${error.data.apiResponse.apiResponse.response.error}`;
+    let code = error.data.apiResponse.status;
+    let responseError = error.data.apiResponse.apiResponse.response.error;
+
+    if (responseError instanceof Array) {
+      messageFromAPI = responseError[0];
+    } else if (typeof responseError === 'object') {
+      let { code, message, attribute } = responseError;
+      attr = Object.keys(attribute)[0];
+      errorDetails = ` ${code}: ${message}`;
+
+      if (attribute && typeof attribute === 'object') {
+        messageFromAPI = attribute[attr];
+        errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(attribute[attr])}`;
+      } else if (attribute && message) {
+        messageFromAPI = message;
+        errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(message)}.`;
+      } else if (code === undefined || message === undefined) {
+        errorDetails = ` ${error.data.apiResponse.status}: ${responseError}`;
+      }
+    }
+
+    if (
+      ['same value', 'already exist', 'already registered', 'duplicate found'].some(function(keyword) {
+        // checks whether a keyword exist in the API message
+        return messageFromAPI.includes(keyword);
+      }) &&
+      // The only entity that has its own messages is DispatchMappings
+      !messageFromAPI.includes('channel type')
+    ) {
+      errorDetails = ` ${
+        error.message
+      } ${code}: Resource with the same name or value already exists in the system, please enter a different value.`;
     }
   }
-  return { errorMessage: errorDetails ? errorDetails : '', attribute: attr };
+  return { errorMessage: errorDetails ? errorDetails : 'An error has ocurred.', attribute: attr };
 };
