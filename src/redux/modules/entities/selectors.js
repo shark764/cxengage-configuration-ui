@@ -237,3 +237,10 @@ export const isUpdateForm = state => getSelectedEntity(state) !== undefined;
 
 export const userHasCurrentFormPermission = state =>
   isUpdateForm(state) ? userHasUpdatePermission(state) : userHasCreatePermission(state);
+
+export const findEntityByProperty = (state, entityName, entityProperty, value) =>
+  state.get(entityName) !== undefined
+    ? state.getIn([entityName, 'data']).find(entity => entity.get(entityProperty) === value)
+    : getEntities(state)
+        .getIn([entityName, 'data'])
+        .find(entity => entity.has(entityProperty) && entity.get(entityProperty) === value);

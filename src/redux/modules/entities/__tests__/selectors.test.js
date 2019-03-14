@@ -42,6 +42,7 @@ import {
   getListSize,
   findEntityIndex,
   findEntity,
+  findEntityByProperty,
   getSelectedEntityWithIndex,
   sidePanelHeader,
   isUpdateForm,
@@ -1050,5 +1051,56 @@ describe('userHasCurrentFormPermission', () => {
         })
       )
     ).toEqual(false);
+  });
+});
+
+describe('findEntityByProperty', () => {
+  it('Returns entity by given entityName, propertyName and value', () => {
+    expect(
+      findEntityByProperty(
+        fromJS({
+          mockEntity: {
+            selectedEntityId: '0000',
+            data: [
+              {
+                id: '0000',
+                name: 'mockName'
+              }
+            ]
+          }
+        }),
+        'mockEntity',
+        'name',
+        'mockName'
+      )
+    ).toEqual(
+      fromJS({
+        id: '0000',
+        name: 'mockName'
+      })
+    );
+  });
+  it('Returns index of selected entity when state contains all Entities', () => {
+    expect(findEntityByProperty(initialState, 'mockEntity', 'name', 'mockName')).toEqual(
+      fromJS({
+        id: '0000',
+        name: 'mockName',
+        active: true,
+        tenantId: '0000-0000',
+        created: '2018-07-16T14:43:14Z',
+        createdBy: '1000-0000',
+        updated: '2019-02-20T18:55:35Z',
+        updatedBy: '1001-0000',
+        items: [{ key: '0001' }],
+        members: ['0002', '0003', '0004'],
+        mockDependentEntity: [
+          {
+            id: '0001',
+            name: 'mockName',
+            active: true
+          }
+        ]
+      })
+    );
   });
 });

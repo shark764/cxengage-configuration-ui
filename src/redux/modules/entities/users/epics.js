@@ -13,7 +13,7 @@ import {
   getSelectedEntityBulkChangeItems,
   getSelectedEntityFormId,
   findEntity,
-  getEntityData
+  findEntityByProperty
 } from '../selectors';
 import { getCheckedBulkActionFormValue } from './selectors';
 import { selectFormInitialValues } from '../../form/selectors';
@@ -417,17 +417,7 @@ export const BulkEntityUpdate = (action$, store) =>
       a.allSdkCalls = [];
       [...a.allIdsToProcess.toJS()].forEach(item => {
         const userData = findEntity(store.getState(), 'users', item).toJS();
-        const skills = getEntityData(store.getState(), 'skills').toJS() || [];
-        const groups = getEntityData(store.getState(), 'groups').toJS() || [];
 
-        const userDoesntHaveSkill =
-          userData.skills.filter(skill => skill.name === (a.values.addSkill || a.values.removeSkill))[0] === undefined;
-        const userDoesntHaveGroup =
-          userData.groups.filter(group => group.name === (a.values.addGroup || a.values.removeGroup))[0] === undefined;
-        const addSkillId = a.values.addSkill && skills.filter(skill => skill.name === a.values.addSkill)[0].id;
-        const removeSkillId = a.values.removeSkill && skills.filter(skill => skill.name === a.values.removeSkill)[0].id;
-        const addGroupId = a.values.addGroup && groups.filter(group => group.name === a.values.addGroup)[0].id;
-        const removeGroupId = a.values.removeGroup && groups.filter(group => group.name === a.values.removeGroup)[0].id;
         // Creating values to pass data to sdkCall, this data will be
         // used for a single call to updateUser function
         let sdkCallValues = {
@@ -435,100 +425,126 @@ export const BulkEntityUpdate = (action$, store) =>
           userId: item
         };
 
-        if (a.values.addSkill) {
-          if (userDoesntHaveSkill) {
-            console.warn(`Attempting to associate skill (${a.values.addSkill}) to user (${userData.email})`);
-            a.allSdkCalls.push({
-              module: 'entities',
-              data: {
-                originEntity: {
-                  name: 'users',
-                  id: item
+        if (a.values.addSkill || a.values.removeSkill) {
+          const addOrRemoveSkillData =
+            (a.values.addSkill || a.values.removeSkill) &&
+            findEntityByProperty(store.getState(), 'skills', 'name', a.values.addSkill || a.values.removeSkill);
+          const userDoesntHaveSkill =
+            userData.skills.filter(
+              skill => addOrRemoveSkillData.get('id') === (skill.skillId || skill.id || skill)
+            )[0] === undefined;
+          a.values.addSkillId = a.values.addSkill && addOrRemoveSkillData.get('id');
+          a.values.removeSkillId = a.values.removeSkill && addOrRemoveSkillData.get('id');
+          if (a.values.addSkill) {
+            if (userDoesntHaveSkill) {
+              console.warn(`Attempting to associate skill (${a.values.addSkill}) to user (${userData.email})`);
+              a.allSdkCalls.push({
+                module: 'entities',
+                data: {
+                  originEntity: {
+                    name: 'users',
+                    id: item
+                  },
+                  destinationEntity: {
+                    name: 'skills',
+                    id: a.values.addSkillId
+                  }
                 },
-                destinationEntity: {
-                  name: 'skills',
-                  id: addSkillId
-                }
-              },
-              command: 'associate',
-              topic: `cxengage/entities/associate-response`
-            });
-          } else {
-            console.warn(`Skill (${a.values.addSkill}) is already associated with user (${userData.email})`);
-            a.uneededCalls.push(`Skill (${a.values.addSkill}) is already associated to BULKED_ITEMS_AFFECTED User(s)`);
+                command: 'associate',
+                topic: `cxengage/entities/associate-response`
+              });
+            } else {
+              console.warn(`Skill (${a.values.addSkill}) is already associated with user (${userData.email})`);
+              a.uneededCalls.push(
+                `Skill (${a.values.addSkill}) is already associated to BULKED_ITEMS_AFFECTED User(s)`
+              );
+            }
+          }
+          if (a.values.removeSkill) {
+            if (!userDoesntHaveSkill) {
+              console.warn(`Attempting to dissociate skill (${a.values.removeSkill}) from user (${userData.email})`);
+              a.allSdkCalls.push({
+                module: 'entities',
+                data: {
+                  originEntity: {
+                    name: 'users',
+                    id: item
+                  },
+                  destinationEntity: {
+                    name: 'skills',
+                    id: a.values.removeSkillId
+                  }
+                },
+                command: 'dissociate',
+                topic: `cxengage/entities/dissociate-response`
+              });
+            } else {
+              console.warn(`SKill (${a.values.removeSkill}) is already not associated with user (${userData.email})`);
+              a.uneededCalls.push(
+                `SKill (${a.values.removeSkill}) is already not associated to BULKED_ITEMS_AFFECTED User(s)`
+              );
+            }
           }
         }
-        if (a.values.removeSkill) {
-          if (!userDoesntHaveSkill) {
-            console.warn(`Attempting to dissociate skill (${a.values.removeSkill}) from user (${userData.email})`);
-            a.allSdkCalls.push({
-              module: 'entities',
-              data: {
-                originEntity: {
-                  name: 'users',
-                  id: item
+        if (a.values.addGroup || a.values.removeGroup) {
+          const addOrRemoveGroupData =
+            (a.values.addGroup || a.values.removeGroup) &&
+            findEntityByProperty(store.getState(), 'groups', 'name', a.values.addGroup || a.values.removeGroup);
+          const userDoesntHaveGroup =
+            userData.groups.filter(
+              group => addOrRemoveGroupData.get('id') === (group.groupId || group.id || group)
+            )[0] === undefined;
+          a.values.addGroupId = a.values.addGroup && addOrRemoveGroupData.get('id');
+          a.values.removeGroupId = a.values.removeGroup && addOrRemoveGroupData.get('id');
+          if (a.values.addGroup) {
+            if (userDoesntHaveGroup) {
+              console.warn(`Attempting to associate group (${a.values.addGroup}) to user (${userData.email})`);
+              a.allSdkCalls.push({
+                module: 'entities',
+                data: {
+                  originEntity: {
+                    name: 'groups',
+                    id: a.values.addGroupId
+                  },
+                  destinationEntity: {
+                    name: 'users',
+                    id: item
+                  }
                 },
-                destinationEntity: {
-                  name: 'skills',
-                  id: removeSkillId
-                }
-              },
-              command: 'dissociate',
-              topic: `cxengage/entities/dissociate-response`
-            });
-          } else {
-            console.warn(`SKill (${a.values.removeSkill}) is already not associated with user (${userData.email})`);
-            a.uneededCalls.push(
-              `SKill (${a.values.removeSkill}) is already not associated to BULKED_ITEMS_AFFECTED User(s)`
-            );
+                command: 'associate',
+                topic: `cxengage/entities/associate-response`
+              });
+            } else {
+              console.warn(`Group (${a.values.addGroup}) is already associated with user (${userData.email})`);
+              a.uneededCalls.push(
+                `Group (${a.values.addGroup}) is already associated to BULKED_ITEMS_AFFECTED User(s)`
+              );
+            }
           }
-        }
-        if (a.values.addGroup) {
-          if (userDoesntHaveGroup) {
-            console.warn(`Attempting to associate group (${a.values.addGroup}) to user (${userData.email})`);
-            a.allSdkCalls.push({
-              module: 'entities',
-              data: {
-                originEntity: {
-                  name: 'groups',
-                  id: addGroupId
+          if (a.values.removeGroup) {
+            if (!userDoesntHaveGroup) {
+              console.warn(`Attempting to dissociate group (${a.values.removeGroup}) from user (${userData.email})`);
+              a.allSdkCalls.push({
+                module: 'entities',
+                data: {
+                  originEntity: {
+                    name: 'groups',
+                    id: a.values.removeGroupId
+                  },
+                  destinationEntity: {
+                    name: 'users',
+                    id: item
+                  }
                 },
-                destinationEntity: {
-                  name: 'users',
-                  id: item
-                }
-              },
-              command: 'associate',
-              topic: `cxengage/entities/associate-response`
-            });
-          } else {
-            console.warn(`Group (${a.values.addGroup}) is already associated with user (${userData.email})`);
-            a.uneededCalls.push(`Group (${a.values.addGroup}) is already associated to BULKED_ITEMS_AFFECTED User(s)`);
-          }
-        }
-        if (a.values.removeGroup) {
-          if (!userDoesntHaveGroup) {
-            console.warn(`Attempting to dissociate group (${a.values.removeGroup}) from user (${userData.email})`);
-            a.allSdkCalls.push({
-              module: 'entities',
-              data: {
-                originEntity: {
-                  name: 'groups',
-                  id: removeGroupId
-                },
-                destinationEntity: {
-                  name: 'users',
-                  id: item
-                }
-              },
-              command: 'dissociate',
-              topic: `cxengage/entities/dissociate-response`
-            });
-          } else {
-            console.warn(`Group (${a.values.removeGroup}) is already not associated with user (${userData.email})`);
-            a.uneededCalls.push(
-              `Group (${a.values.removeGroup}) is already not associated to BULKED_ITEMS_AFFECTED User(s)`
-            );
+                command: 'dissociate',
+                topic: `cxengage/entities/dissociate-response`
+              });
+            } else {
+              console.warn(`Group (${a.values.removeGroup}) is already not associated with user (${userData.email})`);
+              a.uneededCalls.push(
+                `Group (${a.values.removeGroup}) is already not associated to BULKED_ITEMS_AFFECTED User(s)`
+              );
+            }
           }
         }
 

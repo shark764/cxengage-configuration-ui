@@ -19,6 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
+## [0.59.4] - 2019-03-15
+### Fixed
+- CXV1-16819 - Users page Bulk actions handles state changes on users selected members.
+### Changed
+- SDK version bump to 8.51.0
+- Version bump js-utils library to 1.6.5.
+- Version bump component library to 0.37.1.
+
 ## [0.59.3] - 2019-03-13
 ### Fixed
 - updated api call to support different base urls
