@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Toggle, PageHeader, Button } from 'cx-ui-components';
 import { sdkCall } from '../../utils/sdk';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
-import {updateBetaFeatures, readBetaFeatures} from '../../utils/apiCall';
+import { updateBetaFeatures, readBetaFeatures } from '../../utils/apiCall';
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -72,13 +72,19 @@ export default class BetaFeatures extends Component {
       outboundIdentifierLists: false,
       roles: false,
       flows: false,
-      dispatchMappings: false,
+      dispatchMappings: false
     };
   }
   componentDidMount() {
     readBetaFeatures().then(r => {
+      // remove previous beta features
+      Object.keys(r.result).forEach(feature => {
+        if (this.state[feature] === undefined) {
+          delete r.result[feature];
+        }
+      });
       this.setState(r.result);
-    })
+    });
   }
 
   saveBetaFeaturePrefs = features => {
@@ -108,38 +114,38 @@ export default class BetaFeatures extends Component {
           <FeaturesTitle background={this.props.theme.navbar} accent={this.props.theme.navbarText}>
             Beta Features / Pages
           </FeaturesTitle>
-          {Object.keys(entitiesMetaData).map(
-            entityName =>
-              this.props.entities[entityName] &&
-              entitiesMetaData[entityName].betaFeature && (
-                <Feature key={entityName} >
-                  <span>{entitiesMetaData[entityName].pageTitle}</span>
-                  <ToggleWrapper onChange={() => {
-                      if((entityName === 'outboundIdentifiers' && !this.state.outboundIdentifiers) || 
-                        (entityName === 'outboundIdentifierLists' && !this.state.outboundIdentifierLists)) {
-                        this.saveBetaFeaturePrefs({
-                          ...this.state, 
-                          users: true,
-                          groups: true,
-                          skills: true,
-                          outboundIdentifiers: true,
-                          outboundIdentifierLists: true
-                        });
-                        alert('Users, Groups, and Skills are dependencies of the outbound identifiers feature and toggled automatically.')
-                      } else {
-                        const features = {
-                          ...this.state, 
-                          [entityName]: !this.state[entityName], 
-                        };
-                        this.saveBetaFeaturePrefs(features);
-                      } 
-                    }
+          {Object.keys(this.state).map(entityName => (
+            <Feature key={entityName}>
+              <span>{entitiesMetaData[entityName].pageTitle}</span>
+              <ToggleWrapper
+                onChange={() => {
+                  if (
+                    (entityName === 'outboundIdentifiers' && !this.state.outboundIdentifiers) ||
+                    (entityName === 'outboundIdentifierLists' && !this.state.outboundIdentifierLists)
+                  ) {
+                    this.saveBetaFeaturePrefs({
+                      ...this.state,
+                      users: true,
+                      groups: true,
+                      skills: true,
+                      outboundIdentifiers: true,
+                      outboundIdentifierLists: true
+                    });
+                    alert(
+                      'Users, Groups, and Skills are dependencies of the outbound identifiers feature and toggled automatically.'
+                    );
+                  } else {
+                    const features = {
+                      ...this.state,
+                      [entityName]: !this.state[entityName]
+                    };
+                    this.saveBetaFeaturePrefs(features);
                   }
-                  value={this.state[entityName]}
-                  />
-                </Feature>
-              )
-          )}
+                }}
+                value={this.state[entityName]}
+              />
+            </Feature>
+          ))}
           <Submit buttonType="primary" onClick={() => sdkCall({ module: 'setBetaFeatures', data: this.state })}>
             Apply Changes
           </Submit>

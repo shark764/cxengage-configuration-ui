@@ -14,10 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skills
 - Groups
 - Users
-- Interaction Monitoring
+- Dispatch Mappings
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 - Flows
+
+## [0.59.6] - 2019-03-18
+### Fixed
+- CXV1-17383 - added flag to remove expired betaFeatures and added dispatch mappings to beta
 
 ## [0.59.5] - 2019-03-15
 ### Fixed
