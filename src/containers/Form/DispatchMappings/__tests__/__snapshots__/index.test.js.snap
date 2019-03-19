@@ -57,10 +57,13 @@ exports[`Maps state to props only using selectors validates object created from 
 Object {
   "allDispatchMappings": undefined,
   "dispatchValues": undefined,
+  "flowId": undefined,
   "flowIds": Array [
     "mockId1",
     "mockId2",
   ],
+  "flowVersions": undefined,
+  "flowsFetching": undefined,
   "inherited": undefined,
   "initialValues": undefined,
   "integrationElements": Array [
@@ -70,7 +73,7 @@ Object {
   "isSaving": true,
   "key": "mockId",
   "mappingValue": "source",
-  "selectVersionsForSelectedFlow": undefined,
+  "mappingValueMessage": undefined,
   "userHasUpdatePermission": true,
 }
 `;

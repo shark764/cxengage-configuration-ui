@@ -75,3 +75,6 @@ export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onS
 export const createFormName = state => ({
   form: `${getCurrentEntity(state)}:${getSelectedEntityId(state)}`
 });
+
+export const getCurrentFormValueByFieldName = (state, fieldName) =>
+  getCurrentForm(state) && getCurrentForm(state).getIn(['values', fieldName]);

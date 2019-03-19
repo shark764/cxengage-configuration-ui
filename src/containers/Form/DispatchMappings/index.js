@@ -7,19 +7,25 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import DispatchMappingsForm from './layout';
 import { formValidation } from './validation';
-import { selectNonReusableFlows, selectVersionsFromFlow } from '../../../redux/modules/entities/flows/selectors';
+import {
+  selectNonReusableFlows,
+  selectVersionsFromFlow,
+  getFlowIdFormValue
+} from '../../../redux/modules/entities/flows/selectors';
 import { selectIntegrations } from '../../../redux/modules/entities/integrations/selectors';
 import {
   currentMappingValue,
   getDispatchMappingValue,
   getDispatchMappings,
-  selectDispatchMappingsFormInitialValues
+  selectDispatchMappingsFormInitialValues,
+  getMappingValueMessage
 } from '../../../redux/modules/entities/dispatchMappings/selectors';
 import {
   getSelectedEntityId,
   isInherited,
   isCreating,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
@@ -44,7 +50,10 @@ export function mapStateToProps(state) {
     key: getSelectedEntityId(state),
     dispatchValues: getDispatchMappingValue(state),
     allDispatchMappings: getDispatchMappings(state),
-    selectVersionsForSelectedFlow: selectVersionsFromFlow(state)
+    flowVersions: selectVersionsFromFlow(state),
+    flowsFetching: isEntityFetching(state, 'flows'),
+    flowId: getFlowIdFormValue(state),
+    mappingValueMessage: getMappingValueMessage(state)
   };
 }
 

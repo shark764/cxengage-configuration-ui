@@ -7,6 +7,10 @@ import { shallow } from 'enzyme';
 
 import DispatchMappingsForm from '../layout';
 
+const initialValues = {
+  get: () => {}
+};
+
 describe('<DispatchMappingsForm />', () => {
   it('renders create form', () => {
     const rendered = shallow(
@@ -17,6 +21,7 @@ describe('<DispatchMappingsForm />', () => {
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
+        initialValues={initialValues}
         handleSubmit={() => {}}
       />
     );
@@ -32,6 +37,7 @@ describe('<DispatchMappingsForm />', () => {
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
+        initialValues={initialValues}
         handleSubmit={() => {}}
       />
     );

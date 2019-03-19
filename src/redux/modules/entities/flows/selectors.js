@@ -26,10 +26,12 @@ export const selectFlowIds = createSelector(getFlows, flows => {
 export const selectNonReusableFlows = createSelector(getFlows, flows => {
   return (
     flows &&
-    flows.filter(flow => flow.get('active') && flow.get('type') !== 'reusable').map(flow => ({
-      value: flow.get('id'),
-      label: flow.get('name')
-    }))
+    flows
+      .filter(flow => flow.get('active') && flow.get('activeVersion') && flow.get('type') !== 'reusable')
+      .map(flow => ({
+        value: flow.get('id'),
+        label: flow.get('name')
+      }))
   );
 });
 

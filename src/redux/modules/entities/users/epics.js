@@ -578,35 +578,41 @@ export const BulkEntityUpdate = (action$, store) =>
             a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider;
         }
 
-        if (a.values.inviteNow && ['invited', 'expired', 'enabled', 'disabled'].includes(userData.invitationStatus)) {
+        if (
+          a.values.inviteNow &&
+          ['invited', 'expired', 'enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
+        ) {
           console.warn(
-            `Cannot send email invitation to Tenant for User (${
+            `Cannot send email invitation for User (${
               userData.email
-            }) while is on states: "Invited", "Expired Invitation", "Enabled" or "Disabled".`
+            }) as he/she is in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
-            `Cannot send email invitation to Tenant for BULKED_ITEMS_AFFECTED User(s) while are on states: "Invited", "Expired Invitation", "Enabled" or "Disabled".`
+            `Cannot send email invitation for BULKED_ITEMS_AFFECTED User(s) as they are in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
-        } else if (a.values.resendInvitation && ['enabled', 'disabled'].includes(userData.invitationStatus)) {
+        } else if (
+          a.values.resendInvitation &&
+          ['enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
+        ) {
           console.warn(
-            `Cannot resend an email invitation to Tenant for User (${
+            `Cannot resend an email invitation for User (${
               userData.email
-            }) while is on states: "Enabled" or "Disabled".`
+            }) as he/she is in one of the following states: "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
-            `Cannot resend an email invitation to Tenant for BULKED_ITEMS_AFFECTED User(s) while are on states: "Enabled" or "Disabled".`
+            `Cannot resend an email invitation for BULKED_ITEMS_AFFECTED User(s) as they are in one of the following states: "Enabled", "Disabled" or "SSO Only".`
           );
         } else if (
           a.values.cancelInvitation &&
-          ['pending', 'expired', 'enabled', 'disabled'].includes(userData.invitationStatus)
+          ['pending', 'expired', 'enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
         ) {
           console.warn(
-            `Cannot cancel email invitation to Tenant for User (${
+            `Cannot cancel email invitation for User (${
               userData.email
-            }) while is on states: "Pending Invitation", "Expired Invitation", "Enabled" or "Disabled".`
+            }) as he/she is in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
-            `Cannot cancel email invitation to Tenant for BULKED_ITEMS_AFFECTED User(s) while are on states: "Pending Invitation", "Expired Invitation", "Enabled" or "Disabled".`
+            `Cannot cancel email invitation for BULKED_ITEMS_AFFECTED User(s) as they are in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
         } else if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
           // Change each user invitation status if any of these options
@@ -632,10 +638,10 @@ export const BulkEntityUpdate = (action$, store) =>
             console.warn(
               `Cannot send a password reset email to User (${
                 userData.email
-              }) while is on states: "Invited", "Pending Invitation", "Expired Invitation" or doesn't have firstName and lastName set.`
+              }) as he/she is in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or doesn't have firstName and lastName set.`
             );
             a.uneededCalls.push(
-              `Cannot send a password reset email to BULKED_ITEMS_AFFECTED User(s) while are on states: "Invited", "Pending Invitation", "Expired Invitation" or they don't have firstName and lastName set.`
+              `Cannot send a password reset email to BULKED_ITEMS_AFFECTED User(s) as they are in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or they don't have firstName and lastName set.`
             );
           } else {
             // Reset password for all users if option was selected

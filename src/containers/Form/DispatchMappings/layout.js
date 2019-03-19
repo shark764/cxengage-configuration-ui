@@ -21,7 +21,11 @@ export default function DispatchMappingsForm({
   inherited,
   userHasUpdatePermission,
   key,
-  selectVersionsForSelectedFlow
+  flowVersions,
+  flowsFetching,
+  initialValues,
+  flowId,
+  mappingValueMessage
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -106,23 +110,24 @@ export default function DispatchMappingsForm({
           inputType="text"
           className="frm-dispatch-mappings-name"
           disabled={isSaving || inherited || !userHasUpdatePermission}
+          placeholder={mappingValueMessage}
         />
       )}
       <SelectField
         name="flowId"
         label="Dispatch to flow *"
-        required
+        required={initialValues.get('id') !== undefined}
         automation="dispatchMappingsFormFieldFlowId"
-        options={flowIds}
+        options={!flowsFetching && flowIds}
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <SelectField
         name="version"
         label="Flow Version *"
-        required
+        required={initialValues.get('id') !== undefined}
         automation="dispatchMappingsFormFieldVersion"
-        options={selectVersionsForSelectedFlow}
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        options={!flowsFetching && flowVersions}
+        disabled={isSaving || inherited || !userHasUpdatePermission || flowsFetching || !flowId}
       />
     </form>
   );
@@ -146,11 +151,15 @@ DispatchMappingsForm.propTypes = {
       value: PropTypes.string.isRequired
     })
   ),
-  selectVersionsForSelectedFlow: PropTypes.arrayOf(
+  flowVersions: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string.isRequired
     })
   ),
-  mappingValue: PropTypes.string
+  mappingValue: PropTypes.string,
+  flowsFetching: PropTypes.bool,
+  initialValues: PropTypes.object,
+  flowId: PropTypes.string,
+  mappingValueMessage: PropTypes.string
 };

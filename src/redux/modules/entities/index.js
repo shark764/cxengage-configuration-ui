@@ -476,10 +476,15 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'FETCH_DATA_FLOW': {
+      return state.setIn([action.entityName, 'fetching'], true);
+    }
     case 'FETCH_DATA_FLOW_FULFILLED': {
       const entityIndex = findEntityIndex(state, action.entityName, action.id);
       if (entityIndex !== -1) {
-        return state.mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...action.response.result }));
+        return state
+          .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...action.response.result }))
+          .deleteIn([action.entityName, 'fetching']);
       } else {
         return state;
       }

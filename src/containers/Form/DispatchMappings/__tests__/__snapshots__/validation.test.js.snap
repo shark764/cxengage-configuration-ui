@@ -17,7 +17,7 @@ Object {
   "flowId": "Please select a flow",
   "interactionField": "Please select a Mapping",
   "name": "Please enter a name",
-  "value": "Please set a mapping value.",
+  "value": "Please set a mapping value",
   "version": "Please select a flow version",
 }
 `;
@@ -28,7 +28,7 @@ Object {
   "flowId": "Please select a flow",
   "interactionField": "Please select a Mapping",
   "name": "Please enter a name",
-  "value": "Please set a mapping value.",
+  "value": "Please set a mapping value",
   "version": "Please select a flow version",
 }
 `;

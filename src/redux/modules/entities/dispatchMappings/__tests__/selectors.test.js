@@ -20,17 +20,25 @@ const initialState = fromJS({
         {
           id: '1',
           value: 'zendesk',
-          channelType: 'voice'
+          channelType: 'voice',
+          version: null
         },
         {
           id: '2',
           value: 'zendesk',
-          channelType: 'voice'
+          channelType: 'voice',
+          version: '0000'
         }
       ],
       userExistInPlatform: true
     }
   }
+});
+const mockInitialValues = fromJS({
+  id: '2',
+  value: 'zendesk',
+  channelType: 'voice',
+  version: '0000'
 });
 
 const mockCurrentForm = fromJS({
@@ -46,7 +54,7 @@ const mockCurrentForm = fromJS({
 
 jest.mock('../../../form/selectors', () => ({
   getCurrentForm: () => mockCurrentForm,
-  selectFormInitialValues: () => 'mockResult'
+  selectFormInitialValues: () => mockInitialValues
 }));
 jest.mock('../../selectors');
 

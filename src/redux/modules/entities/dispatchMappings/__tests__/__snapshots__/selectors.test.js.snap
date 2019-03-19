@@ -6,13 +6,21 @@ exports[`Current Form Values returns the current form's mapping value, also know
 
 exports[`Current Form Values returns the current form's mapping, also known as interaction field 1`] = `"source"`;
 
-exports[`Retrieve Dispatch Mappings Initial Form Values from State Return Custom Made initial values 1`] = `"mockResult"`;
+exports[`Retrieve Dispatch Mappings Initial Form Values from State Return Custom Made initial values 1`] = `
+Immutable.Map {
+  "id": "2",
+  "value": "zendesk",
+  "channelType": "voice",
+  "version": "0000",
+}
+`;
 
 exports[`Retrieve Dispatch Mappings Initial Form Values from State Return regular initial values 1`] = `
 Immutable.Map {
   "active": true,
   "interactionField": "customer",
   "channelType": "any",
+  "version": "null",
 }
 `;
 
@@ -21,6 +29,7 @@ Immutable.Map {
   "id": "1",
   "value": "zendesk",
   "channelType": "voice",
+  "version": null,
 }
 `;
 
@@ -30,11 +39,13 @@ Immutable.List [
     "id": "1",
     "value": "zendesk",
     "channelType": "voice",
+    "version": null,
   },
   Immutable.Map {
     "id": "2",
     "value": "zendesk",
     "channelType": "voice",
+    "version": "0000",
   },
 ]
 `;

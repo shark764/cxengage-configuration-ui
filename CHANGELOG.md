@@ -20,13 +20,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reporting
 
+## [0.60.1] - 2019-03-19
+### Fixed
+- CXV1-16902 - Versions from selected flow block submit until they get fetched on Dispatch mappings page.
+- CXV1-15515 - Notifications for bulk actions on Users page are more descriptive.
+- CXV1-17476 - Dispatch mappings page is no longer setting a flow and populating versions on creating.
+
 ## [0.60.0] - 2019-03-19
 ### Added
 - added logi reporting to beta features
 
 ## [0.59.6] - 2019-03-18
 ### Fixed
-- CXV1-17383 - added flag to remove expired betaFeatures and added dispatch mappings to beta
+- CXV1-17383 - Added flag to remove expired betaFeatures and added dispatch mappings to beta
 
 ## [0.59.5] - 2019-03-15
 ### Fixed
