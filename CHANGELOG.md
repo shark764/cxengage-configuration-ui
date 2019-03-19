@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 - Flows
+- Logi reporting
+
+## [0.60.0] - 2019-03-19
+### Added
+- added logi reporting to beta features
 
 ## [0.59.6] - 2019-03-18
 ### Fixed

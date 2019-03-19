@@ -170,12 +170,15 @@ export const listOfEntities = [
   'flows',
   'transferLists',
   'dispatchMappings',
-  'integrations'
+  'integrations',
+  'logi',
   //Hygen-insert-at-end-of-list
 ];
 
 const entities = {};
 listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
+
+entities.logi.pageTitle = 'New Historical';
 
 // Users
 entities.users.betaFeature = true;

@@ -72,7 +72,8 @@ export default class BetaFeatures extends Component {
       outboundIdentifierLists: false,
       roles: false,
       flows: false,
-      dispatchMappings: false
+      dispatchMappings: false,
+      logi: false,
     };
   }
   componentDidMount() {

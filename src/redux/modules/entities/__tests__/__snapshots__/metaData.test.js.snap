@@ -1409,6 +1409,68 @@ Object {
     "title": "List",
     "updateFormDependencies": Array [],
   },
+  "logi": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "logi",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "New Historical",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Log",
+    "updateFormDependencies": Array [],
+  },
   "messageTemplates": EntityMetaData {
     "betaFeature": false,
     "bulkEditsAvailable": false,
