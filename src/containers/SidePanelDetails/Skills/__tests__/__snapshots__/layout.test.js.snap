@@ -1,101 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
-<styled.div
-  id="dtpanel-skills"
->
-  Mock Child
-  <Connect(DetailWrapper)
-    contains="outboundIdentifierLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Outbound Identifier Lists"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="outboundIdentifierLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no proficiency 1`] = `
-<styled.div
-  id="dtpanel-skills"
->
-  Mock Child
-  <Connect(DetailWrapper)
-    contains="outboundIdentifierLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Outbound Identifier Lists"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="outboundIdentifierLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permision 1`] = `
-<styled.div
-  id="dtpanel-skills"
->
-  Mock Child
-  <Connect(DetailWrapper)
-    contains="outboundIdentifierLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Outbound Identifier Lists"
-      userHasUpdatePermission={false}
-    />
-    <_class2
-      contains="outboundIdentifierLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={false}
-    />
-  </Connect(DetailWrapper)>
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled 1`] = `
-<styled.div
-  id="dtpanel-skills"
->
-  Mock Child
-  <Connect(DetailWrapper)
-    contains="outboundIdentifierLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Outbound Identifier Lists"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="outboundIdentifierLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

@@ -5,21 +5,26 @@
 import { connect } from 'react-redux';
 import LoginLayout from './layout';
 
-import { authenticatedAndBrandingReady } from '../../redux/modules/userData/selectors';
-import { toggleUserAuthed } from '../../redux/modules/userData';
+import { authenticatedAndBrandingReady, userIsAuthed, platformViewOnlyMode } from '../../redux/modules/userData/selectors';
+import { toggleUserAuthed, updateTenantsList, togglePlatformViewOnlyMode, updatePlatformPermissions } from '../../redux/modules/userData';
 import { fetchBranding } from '../../redux/modules/entities/branding/actions';
 import { updateUserPermissions } from '../../redux/modules/userData';
 
 export function mapStateToProps(state) {
   return {
-    hasStarted: authenticatedAndBrandingReady(state)
+    hasStarted: authenticatedAndBrandingReady(state),
+    authenticated: userIsAuthed(state),
+    platformViewOnlyMode: platformViewOnlyMode(state),
   };
 }
 
 export const actions = {
   toggleUserAuthed,
   fetchBranding,
-  updateUserPermissions
+  updateTenantsList,
+  updateUserPermissions,
+  togglePlatformViewOnlyMode,
+  updatePlatformPermissions,
 };
 
 export default connect(mapStateToProps, actions)(LoginLayout);

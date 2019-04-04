@@ -10,5 +10,11 @@ exports[`Observable Test chaneges in localStorage to dispatched actions updates 
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;

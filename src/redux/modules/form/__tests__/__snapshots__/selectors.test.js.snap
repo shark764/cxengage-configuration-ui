@@ -30,6 +30,12 @@ exports[`isFormInvalid correctly calls redux-form's 'isInvalid' method 1`] = `
       "mock current entity form id",
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": [Function],
+    },
+  ],
 }
 `;
 
@@ -39,6 +45,12 @@ exports[`isFormPristine correctly calls redux-form's 'isPristine' method 1`] = `
     Array [
       "mock current entity form id",
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": [Function],
+    },
   ],
 }
 `;

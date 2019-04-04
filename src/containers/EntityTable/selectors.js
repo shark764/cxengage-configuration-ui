@@ -19,7 +19,7 @@ export const getHelpLink = state => {
   }
   // Looking for custom domain to add value to
   // URL to redirect user to proper page
-  const customDomain = getProtectedBranding(state).find(
+  const customDomain = getProtectedBranding(state) && getProtectedBranding(state).find(
     protectedBranding => protectedBranding.get('key') === 'customDomain'
   );
   const helpURL = `https://${customDomain ? `${customDomain.get('value')}-` : ''}docs.cxengage.net`;

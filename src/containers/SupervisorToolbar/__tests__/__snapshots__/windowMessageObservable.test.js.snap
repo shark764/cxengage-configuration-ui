@@ -10,6 +10,12 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -22,6 +28,12 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
         "type": "cxengage/interactions/voice/silent-monitor-end",
       },
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;
@@ -36,6 +48,12 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -48,6 +66,12 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
         "type": "cxengage/interactions/voice/unmute-acknowledged",
       },
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;
@@ -62,6 +86,12 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -75,6 +105,12 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -87,6 +123,12 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
         "type": "cxengage/twilio/device-ready",
       },
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;
@@ -102,6 +144,12 @@ exports[`Observable Test Mapping topics to dispatched actions can call monitorCa
         "type": "REQUESTING_MONITOR_CALL",
       },
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;

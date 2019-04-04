@@ -1,5 +1,6 @@
 import { isInIframe } from 'serenova-js-utils/browser';
 import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
+import store from '../redux/store';
 
 function guid() {
   function s4() {
@@ -17,6 +18,10 @@ export const sdkPromise = sdkCall => {
       CxEngage[sdkCall.module][sdkCall.command](sdkCall.data, function(error, topic, response) {
         console.log('[SDK] SDK sending back:', error, topic, response);
         if (error) {
+          console.warn('ERROR',error)
+          if(error.data && error.data.apiResponse && error.data.apiResponse.status) {
+            store.dispatch({type: 'TOGGLE_USER_AUTH' });
+          }
           reject(error);
         } else {
           resolve(response);

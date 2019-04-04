@@ -1,95 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
-<styled.div
-  className="dtpanel-entity-flows"
->
-  Mock Child
-  <DetailHeader
-    open={true}
-    text="Published Versions"
-    userHasUpdatePermission={true}
-  />
-  <_class2
-    contains="versions"
-    defaultSorted={
-      Array [
-        Object {
-          "desc": true,
-          "id": "fakeVersion",
-        },
-      ]
-    }
-    tableType="sidePanel"
-    updateSubEntity={[Function]}
-    userHasUpdatePermission={true}
-  />
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="Drafts"
-    userHasUpdatePermission={true}
-  />
-  <_class2
-    confirmDeleteSubEntity={true}
-    contains="drafts"
-    defaultSorted={
-      Array [
-        Object {
-          "desc": true,
-          "id": "created",
-        },
-      ]
-    }
-    tableType="sidePanel"
-    userHasUpdatePermission={true}
-  />
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permision 1`] = `
-<styled.div
-  className="dtpanel-entity-flows"
->
-  Mock Child
-  <DetailHeader
-    open={true}
-    text="Published Versions"
-    userHasUpdatePermission={false}
-  />
-  <_class2
-    contains="versions"
-    defaultSorted={
-      Array [
-        Object {
-          "desc": true,
-          "id": "fakeVersion",
-        },
-      ]
-    }
-    tableType="sidePanel"
-    updateSubEntity={[Function]}
-    userHasUpdatePermission={false}
-  />
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="Drafts"
-    userHasUpdatePermission={false}
-  />
-  <_class2
-    confirmDeleteSubEntity={true}
-    contains="drafts"
-    defaultSorted={
-      Array [
-        Object {
-          "desc": true,
-          "id": "created",
-        },
-      ]
-    }
-    tableType="sidePanel"
-    userHasUpdatePermission={false}
-  />
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

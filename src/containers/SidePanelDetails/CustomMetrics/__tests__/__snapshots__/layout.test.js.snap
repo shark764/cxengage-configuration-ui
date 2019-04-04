@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CustomMetricsDetailsPanel /> renders customMetrics detailsPanel 1`] = `
-<styled.div
-  id="dtpanel-custom-metrics"
->
-  Mock Child
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

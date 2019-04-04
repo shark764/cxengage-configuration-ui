@@ -1,78 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataAccessReports Renders renders 1`] = `
-<Connect(ReduxForm)
-  dashboards={
-    Array [
-      "mockName",
-      "mockName1",
-      "mockName2",
-    ]
-  }
-  dispatch={[Function]}
-  folders={
-    Array [
-      Object {
-        "name": "mockName",
-      },
-    ]
-  }
-  initialValues={
-    Object {
-      "active": true,
-    }
-  }
-  isSaving={true}
-  key="mockId"
-  reportType="realtime"
-  standardDashboards={
-    Array [
-      "Agent Details Table",
-      "Agent State Table",
-      "Interactions Completed Table",
-      "Interactions Dashboard",
-      "Interactions In Conversation Table",
-      "Interactions In IVR Table",
-      "Interactions In Queue Table",
-      "Overview Dashboard",
-      "Queues Dashboard",
-      "Queue Details Table",
-      "Resources Dashboard",
-    ]
-  }
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
-  storeSubscription={
-    Subscription {
-      "listeners": Object {
-        "clear": [Function],
-        "get": [Function],
-        "notify": [Function],
-        "subscribe": [Function],
-      },
-      "onStateChange": [Function],
-      "parentSub": undefined,
-      "store": Object {
-        "dispatch": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-        Symbol(observable): [Function],
-      },
-      "unsubscribe": [Function],
-    }
-  }
-  userHasUpdatePermission={true}
->
-  Child
-</Connect(ReduxForm)>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `

@@ -3,7 +3,7 @@
  */
 
 import { List } from 'immutable';
-import { getCurrentEntity, getSelectedEntity, getCurrentEntityStore } from './selectors';
+import { getCurrentEntity, getSelectedEntity, getCurrentEntityStore, getSelectedEntityId } from './selectors';
 import { entitiesMetaData } from './metaData';
 
 export const listMemberIds = state =>
@@ -80,7 +80,7 @@ export const getEntityListMembers = state => {
 export const selectedEntityIndex = state =>
   getCurrentEntityStore(state)
     .get('data')
-    .findIndex(entity => entity.get('id') === getCurrentEntityStore(state).get('selectedEntityId'));
+    .findIndex(entity => entity.get('id') === getSelectedEntityId(state));
 
 export const availableEntityMembersForList = state => {
   const dependentEntity = entitiesMetaData[getCurrentEntity(state)].dependentEntity;

@@ -14,5 +14,11 @@ exports[`Observable Test Mapping topics to dispatched actions Observable map dis
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;

@@ -32,7 +32,7 @@ export const menuItemsJs = createSelector([menuItems], menuItems => {
 });
 
 const menu = (state, props) => {
-  if (props.tableType) {
+  if (props.tableType && props.tableType !== undefined) {
     return state.get('ColumnFilterMenus').get(props.tableType);
   } else {
     return new List();

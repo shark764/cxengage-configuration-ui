@@ -514,7 +514,13 @@ export default class CrudEndpointUiLayout extends Component {
     this.props.fetchData(entityName);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, nextProps) {
+    if(this.props.entityName !== prevProps.entityName) {
+      this.props.setCurrentEntity(this.props.match.params.entityName);
+      this.props.fetchData(this.props.match.params.entityName);
+    }
+    
+    
     /**
      * if we go from haveing selected items
      * to no selected items , close the side panel
@@ -527,6 +533,10 @@ export default class CrudEndpointUiLayout extends Component {
     ) {
       this.props.setSelectedEntityId('');
     }
+    if(prevProps.currentTenantId !== this.props.currentTenantId) {
+      this.props.fetchData(this.props.match.params.entityName);
+    }
+
   }
 
   render() {

@@ -1,161 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SkillsForm /> renders create form 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      disabled={true}
-      id="frm-skills-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={true}
-      id="frm-skills-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <ConfirmationWrapper
-      mainText="You cannot update 'Has Proficiency' once it's set to true."
-      secondaryText="Are you sure you want to continue?"
-    >
-      <ToggleField
-        disabled={true}
-        id="frm-skills-has-proficiency"
-        label="Has Proficiency"
-        name="hasProficiency"
-        title="You cannot update 'Has Proficiency' once it's set to true"
-      />
-    </ConfirmationWrapper>
-  </React.Fragment>
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<SkillsForm /> renders create form with no proficiency 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      disabled={true}
-      id="frm-skills-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={true}
-      id="frm-skills-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <ConfirmationWrapper
-      mainText="You cannot update 'Has Proficiency' once it's set to true."
-      secondaryText="Are you sure you want to continue?"
-    >
-      <ToggleField
-        disabled={true}
-        id="frm-skills-has-proficiency"
-        label="Has Proficiency"
-        name="hasProficiency"
-        title="Controls whether the skill needs a value specified"
-      />
-    </ConfirmationWrapper>
-  </React.Fragment>
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<SkillsForm /> renders update form 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      disabled={true}
-      id="frm-skills-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={true}
-      id="frm-skills-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <ConfirmationWrapper
-      mainText="You cannot update 'Has Proficiency' once it's set to true."
-      secondaryText="Are you sure you want to continue?"
-    >
-      <ToggleField
-        disabled={true}
-        id="frm-skills-has-proficiency"
-        label="Has Proficiency"
-        name="hasProficiency"
-        title="You cannot update 'Has Proficiency' once it's set to true"
-      />
-    </ConfirmationWrapper>
-  </React.Fragment>
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<SkillsForm /> renders update form with no proficiency 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      disabled={true}
-      id="frm-skills-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      disabled={true}
-      id="frm-skills-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <ConfirmationWrapper
-      mainText="You cannot update 'Has Proficiency' once it's set to true."
-      secondaryText="Are you sure you want to continue?"
-    >
-      <ToggleField
-        disabled={true}
-        id="frm-skills-has-proficiency"
-        label="Has Proficiency"
-        name="hasProficiency"
-        title="Controls whether the skill needs a value specified"
-      />
-    </ConfirmationWrapper>
-  </React.Fragment>
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;

@@ -15,106 +15,19 @@ Object {
 `;
 
 exports[`startDate Filter renders properly renders the After filter 1`] = `
-<div>
-  <Connect(CustomDropdownMenu)
-    buttonType="columnFilter"
-    className="startDate"
-    currentFilter="After mm/dd/yyyy"
-    menuType="Start Date"
-    tableType="mockTableType"
-    updateFilter={[Function]}
-  >
-    <styled.div>
-      <FilterSelect
-        defaultValue="After"
-        onChange={[Function]}
-        options={
-          Array [
-            "After",
-            "Before",
-          ]
-        }
-        style={
-          Object {
-            "width": "160px",
-          }
-        }
-      />
-      <input
-        onChange={[Function]}
-        type="date"
-      />
-    </styled.div>
-  </Connect(CustomDropdownMenu)>
-</div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`startDate Filter renders properly renders the Before filter 1`] = `
-<div>
-  <Connect(CustomDropdownMenu)
-    buttonType="columnFilter"
-    className="startDate"
-    currentFilter="Before mm/dd/yyyy"
-    menuType="Start Date"
-    tableType="mockTableType"
-    updateFilter={[Function]}
-  >
-    <styled.div>
-      <FilterSelect
-        defaultValue="Before"
-        onChange={[Function]}
-        options={
-          Array [
-            "After",
-            "Before",
-          ]
-        }
-        style={
-          Object {
-            "width": "160px",
-          }
-        }
-      />
-      <input
-        onChange={[Function]}
-        type="date"
-      />
-    </styled.div>
-  </Connect(CustomDropdownMenu)>
-</div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`startDate Filter renders properly renders the default filter 1`] = `
-<div>
-  <Connect(CustomDropdownMenu)
-    buttonType="columnFilter"
-    className="startDate"
-    currentFilter="All Results"
-    menuType="Start Date"
-    tableType="mockTableType"
-    updateFilter={[Function]}
-  >
-    <styled.div>
-      <FilterSelect
-        defaultValue="After"
-        onChange={[Function]}
-        options={
-          Array [
-            "After",
-            "Before",
-          ]
-        }
-        style={
-          Object {
-            "width": "160px",
-          }
-        }
-      />
-      <input
-        onChange={[Function]}
-        type="date"
-      />
-    </styled.div>
-  </Connect(CustomDropdownMenu)>
-</div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

@@ -9,7 +9,13 @@ const getUserData = state => state.get('UserData');
 
 export const getCurrentTenantName = state => state.get('UserData').get('currentTenantName');
 
+export const currentTenantId = state => state.getIn(['UserData', 'currentTenantId']);
+
 export const userIsAuthed = state => state.get('UserData').get('userIsAuthed');
+
+export const platformViewOnlyMode = state => state.get('UserData').get('platformViewOnlyMode');
+
+export const availableTenants = state => state.get('UserData').get('tenants').toJS();
 
 export const getCurrentAgentId = state => state.get('UserData').get('agentId');
 

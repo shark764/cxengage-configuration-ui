@@ -4,7 +4,7 @@
 
 import { ActionsObservable } from 'redux-observable';
 import 'rxjs/add/operator/take';
-import { mockStore, supervisorToolbarMockStore } from 'TestUtils';
+import { mockStore, supervisorToolbarMockStore } from '../../../../utils/testUtils';
 import { sdkPromise, sdkCall } from '../../../../utils/sdk';
 import {
   StartBatchRequest,

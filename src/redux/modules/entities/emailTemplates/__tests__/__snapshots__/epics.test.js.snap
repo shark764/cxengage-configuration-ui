@@ -7,6 +7,12 @@ exports[`UpdateEmailTemplate emailTemplates entity sdk promise fails calls toast
       undefined,
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -32,6 +38,12 @@ exports[`UpdateEmailTemplate emailTemplates entity unchanged default email calls
     Array [
       "\\"Default Email\\" is unchanged. Nothing to submit.",
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;
@@ -63,6 +75,12 @@ exports[`UpdateEmailTemplate emailTemplates entity with custom email calls the c
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
 }
 `;
 
@@ -72,6 +90,12 @@ exports[`UpdateEmailTemplate emailTemplates entity with custom email calls toast
     Array [
       "Email template was updated successfully!",
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;
@@ -109,6 +133,12 @@ exports[`UpdateEmailTemplate emailTemplates entity with default email calls the 
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
 }
 `;
 
@@ -118,6 +148,12 @@ exports[`UpdateEmailTemplate emailTemplates entity with default email calls toas
     Array [
       "Email template was updated successfully!",
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;

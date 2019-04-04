@@ -15,6 +15,12 @@ exports[`startBatchRequest calls the correct sdk function 1`] = `
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
 }
 `;
 
@@ -34,6 +40,12 @@ exports[`startBatchSubscription calls the correct sdk function 1`] = `
         "topic": "cxengage/reporting/batch-response",
       },
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
   ],
 }
 `;

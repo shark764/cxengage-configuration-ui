@@ -7,6 +7,12 @@ exports[`UpdateDataAccessReport dataAccessReports entity sdk promise fails calls
       undefined,
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -52,6 +58,12 @@ exports[`UpdateDataAccessReport dataAccessReports entity update entity calls the
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
 }
 `;
 
@@ -61,6 +73,12 @@ exports[`UpdateDataAccessReport dataAccessReports entity update entity calls toa
     Array [
       "Data Access Report was updated successfully!",
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;

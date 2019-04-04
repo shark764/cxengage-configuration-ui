@@ -1,149 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`startTimeColumn Filter renders properly 24 hour format, with default filter 1`] = `
-<Connect(CustomDropdownMenu)
-  buttonType="columnFilter"
-  className="startTime"
-  currentFilter="All Results"
-  menuType="Start Time"
-  tableType="mockTableType"
-  updateFilter={[Function]}
->
-  <styled.div>
-    <FilterSelect
-      className="StartTimeFilter"
-      defaultValue="After"
-      onChange={[Function]}
-      options={
-        Array [
-          "After",
-          "Before",
-        ]
-      }
-    />
-    <styled.input
-      onChange={[Function]}
-      value="00:00"
-    />
-  </styled.div>
-</Connect(CustomDropdownMenu)>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`startTimeColumn Filter renders properly tweleve hour format , with default filter 1`] = `
-<Connect(CustomDropdownMenu)
-  buttonType="columnFilter"
-  className="startTime"
-  currentFilter="All Results"
-  menuType="Start Time"
-  tableType="mockTableType"
-  updateFilter={[Function]}
->
-  <styled.div>
-    <FilterSelect
-      className="StartTimeFilter"
-      defaultValue="After"
-      onChange={[Function]}
-      options={
-        Array [
-          "After",
-          "Before",
-        ]
-      }
-    />
-    <styled.input
-      onChange={[Function]}
-      value="00:00"
-    />
-    <FilterSelect
-      defaultValue="AM"
-      onChange={[Function]}
-      options={
-        Array [
-          "AM",
-          "PM",
-        ]
-      }
-    />
-  </styled.div>
-</Connect(CustomDropdownMenu)>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`startTimeColumn Filter renders properly tweleve hour format , with filter 1`] = `
-<Connect(CustomDropdownMenu)
-  buttonType="columnFilter"
-  className="startTime"
-  currentFilter="Before 12:12 PM"
-  menuType="Start Time"
-  tableType="mockTableType"
-  updateFilter={[Function]}
->
-  <styled.div>
-    <FilterSelect
-      className="StartTimeFilter"
-      defaultValue="Before"
-      onChange={[Function]}
-      options={
-        Array [
-          "After",
-          "Before",
-        ]
-      }
-    />
-    <styled.input
-      onChange={[Function]}
-      value="12:12"
-    />
-    <FilterSelect
-      defaultValue="PM"
-      onChange={[Function]}
-      options={
-        Array [
-          "AM",
-          "PM",
-        ]
-      }
-    />
-  </styled.div>
-</Connect(CustomDropdownMenu)>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`startTimeColumn Filter renders properly tweleve hour format , with no filter 1`] = `
-<Connect(CustomDropdownMenu)
-  buttonType="columnFilter"
-  className="startTime"
-  currentFilter="All Results"
-  menuType="Start Time"
-  tableType="mockTableType"
-  updateFilter={[Function]}
->
-  <styled.div>
-    <FilterSelect
-      className="StartTimeFilter"
-      defaultValue="After"
-      onChange={[Function]}
-      options={
-        Array [
-          "After",
-          "Before",
-        ]
-      }
-    />
-    <styled.input
-      onChange={[Function]}
-      value="00:00"
-    />
-    <FilterSelect
-      defaultValue="AM"
-      onChange={[Function]}
-      options={
-        Array [
-          "AM",
-          "PM",
-        ]
-      }
-    />
-  </styled.div>
-</Connect(CustomDropdownMenu)>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`startTimeColumn configuration object Cell 1`] = `

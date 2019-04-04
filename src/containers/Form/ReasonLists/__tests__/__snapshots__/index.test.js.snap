@@ -22,56 +22,7 @@ exports[`createFormName returns proper values 1`] = `undefined`;
 exports[`formSubmission returns proper values 1`] = `undefined`;
 
 exports[`reasonLists Renders renders 1`] = `
-<form>
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    disabled={true}
-    id="frm-reason-list-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="input"
-    disabled={true}
-    id="frm-reason-list-external-id"
-    inputType="text"
-    label="External Id"
-    name="externalId"
-  />
-  <InputField
-    componentType="textarea"
-    disabled={true}
-    id="frm-reason-list-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <ConfirmationWrapper
-    mainText="Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
-    secondaryText="Are you sure you want to continue?"
-  >
-    <ToggleField
-      disabled={true}
-      id="frm-reason-list-shared"
-      label="Shared"
-      name="shared"
-      title="Change \\"Shared\\" state for this Presence Reason List"
-    />
-  </ConfirmationWrapper>
-  <ToggleField
-    disabled={true}
-    id="frm-reason-list-is-default"
-    label="Tenant Default?"
-    name="isDefault"
-    onChange={[Function]}
-    title="Assigns list to all users on tenant"
-  />
-  <DetailHeader
-    text="Reasons"
-  />
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;

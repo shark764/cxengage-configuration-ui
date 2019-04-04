@@ -10,7 +10,9 @@ export const initialState = fromJS({
   userIsAuthed: !isInIframe(),
   permissions: '',
   currentTenantName: '',
-  currentTenantId: ''
+  currentTenantId: '',
+  tenants: [],
+  platformViewOnlyMode: false,
 });
 
 // Actions
@@ -23,7 +25,20 @@ export const updateUserPermissions = (tenantId, tenantName, tenantPermissions, u
   },
   userId
 });
+export const updateTenantsList = tenants => ({
+  type: 'UPDATE_TENANTS_LIST',
+  tenants
+});
+export const togglePlatformViewOnlyMode = () => ({
+  type: 'TOGGLE_PLATFORM_VIEW_ONLY_MODE'
+});
+export const updatePlatformPermissions = permissions => ({
+  type: 'UPDATE_PLATFORM_PERMISSIONS',
+  permissions
+});
 export const toggleUserAuthed = () => ({ type: 'TOGGLE_USER_AUTH' });
+
+export const switchTenant = tenantId => ({ type: 'SWITCH_TENANT', tenantId });
 
 // Reducer
 export default function reducer(state = initialState, action) {
@@ -36,8 +51,31 @@ export default function reducer(state = initialState, action) {
         .set('currentTenantName', tenantName)
         .set('agentId', action.agentId);
     }
+    case 'UPDATE_PLATFORM_PERMISSIONS': {
+      return state
+        .set('platformPermissions', fromJS(action.permissions))
+    }
+    case 'UPDATE_TENANTS_LIST': {
+      return state
+        .set('tenants', fromJS(action.tenants))
+    }
     case 'TOGGLE_USER_AUTH': {
       return state.set('userIsAuthed', !state.get('userIsAuthed'));
+    }
+    case 'TOGGLE_PLATFORM_VIEW_ONLY_MODE': {
+      return state.set('platformViewOnlyMode', !state.get('platformViewOnlyMode'));
+    }
+    case 'SWITCH_TENANT': {
+      const tenantIndex = state.get('tenants').findIndex(tenant => tenant.get('tenantId') === action.tenantId);
+      if (tenantIndex !== -1) {
+        const {tenantPermissions,tenantId, tenantName} = state.getIn(['tenants', tenantIndex]).toJS();
+        return state
+        .set('permissions', fromJS(tenantPermissions))
+        .set('currentTenantId', tenantId)
+        .set('currentTenantName', tenantName);
+      } else {
+        return state;
+      }
     }
     default:
       return state;

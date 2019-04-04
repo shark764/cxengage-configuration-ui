@@ -73,7 +73,7 @@ export default class BetaFeatures extends Component {
       roles: false,
       flows: false,
       dispatchMappings: false,
-      logi: false,
+      // logi: false,
     };
   }
   componentDidMount() {
@@ -168,5 +168,5 @@ export default class BetaFeatures extends Component {
 
 BetaFeatures.propTypes = {
   entities: PropTypes.object,
-  theme: PropTypes.string
+  theme: PropTypes.any
 };

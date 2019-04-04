@@ -1,49 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QueuesForm /> renders create form 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    disabled={true}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    disabled={true}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<QueuesForm /> renders update form 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    disabled={true}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    disabled={true}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;

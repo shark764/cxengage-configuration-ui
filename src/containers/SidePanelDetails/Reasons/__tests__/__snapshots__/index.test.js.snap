@@ -13,17 +13,7 @@ Object {
 `;
 
 exports[`reasonsDetailsPanel Renders renders 1`] = `
-<reasonsDetailsPanel
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
->
-  Child
-</reasonsDetailsPanel>
+ShallowWrapper {
+  "length": 1,
+}
 `;

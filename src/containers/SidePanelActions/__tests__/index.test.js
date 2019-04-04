@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { mockStore } from 'TestUtils';
+import { mockStore } from '../../../utils/testUtils';
 import SidePanelActions, { mapStateToProps, actions } from '../';
 
 jest.mock('../../../redux/modules/entities');

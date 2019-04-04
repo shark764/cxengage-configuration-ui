@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TransferListsDetailsPanel /> renders transferLists detailsPanel 1`] = `
-<styled.div
-  className="dtpanel-entity-transfer-lists"
->
-  Mock Child
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

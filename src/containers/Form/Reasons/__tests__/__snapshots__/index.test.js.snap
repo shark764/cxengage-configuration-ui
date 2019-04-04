@@ -20,17 +20,7 @@ exports[`createFormName returns proper values 1`] = `undefined`;
 exports[`formSubmission returns proper values 1`] = `undefined`;
 
 exports[`reasons Renders renders 1`] = `
-<reasonsForm
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
->
-  Child
-</reasonsForm>
+ShallowWrapper {
+  "length": 1,
+}
 `;

@@ -18,7 +18,7 @@ export const getCurrentEntityStore = state => getEntities(state).get(getCurrentE
 
 export const getSidePanelWidth = state => getCurrentEntityStore(state).get('sidePanelWidth');
 
-export const getSelectedEntityId = state => getCurrentEntityStore(state).get('selectedEntityId');
+export const getSelectedEntityId = state => getCurrentEntityStore(state) && getCurrentEntityStore(state).get('selectedEntityId');
 
 export const itemApiPending = state => state.getIn(['Entities', 'loading']);
 
@@ -70,7 +70,7 @@ export const userHasPermissions = (state, permissions) => hasPermission(getCurre
 export const hasPermission = (userPermissions, permissionsNeeded) => {
   if (permissionsNeeded !== undefined) {
     // Return true if they have at least one of the permissions
-    return permissionsNeeded.some(permissionNeeded => userPermissions.includes(permissionNeeded));
+    return permissionsNeeded.some(permissionNeeded => userPermissions && userPermissions.includes(permissionNeeded));
   } else {
     return false;
   }
@@ -143,7 +143,7 @@ export const getSelectedEntityFormId = createSelector(
 export const availableEntitiesForList = state => {
   const entityIndex = getCurrentEntityStore(state)
     .get('data')
-    .findIndex(entity => entity.get('id') === getCurrentEntityStore(state).get('selectedEntityId'));
+    .findIndex(entity => entity.get('id') === getSelectedEntityId(state));
   const currentListMembers = getCurrentEntityStore(state)
     .getIn(['data', entityIndex, 'members'], new List([]))
     .toOrderedSet();
@@ -162,7 +162,7 @@ export const getEntityListMembers = state =>
 export const getListSize = state => {
   const entityIndex = getCurrentEntityStore(state)
     .get('data')
-    .findIndex(entity => entity.get('id') === getCurrentEntityStore(state).get('selectedEntityId'));
+    .findIndex(entity => entity.get('id') === getSelectedEntityId(state));
   return getCurrentEntityStore(state).getIn(['data', entityIndex, 'members'], new List([])).size;
 };
 

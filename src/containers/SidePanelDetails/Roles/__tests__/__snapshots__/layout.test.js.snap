@@ -1,64 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RolesDetailsPanel /> renders Roles detailsPanel 1`] = `
-<styled.div
-  id="dtpanel-roles"
->
-  Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="undefined Permissions"
-    userHasUpdatePermission={true}
-  />
-  <_class2
-    tableType="sidePanel"
-    userHasUpdatePermission={true}
-  />
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<RolesDetailsPanel /> renders Roles detailsPanel with no update permision 1`] = `
-<styled.div
-  id="dtpanel-roles"
->
-  <React.Fragment>
-    <Detail
-      label="Name"
-      value="mockName"
-    />
-    <Detail
-      label="Description"
-      value="mockDescription"
-    />
-  </React.Fragment>
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="undefined Permissions"
-    userHasUpdatePermission={false}
-  />
-  <_class2
-    tableType="sidePanel"
-    userHasUpdatePermission={false}
-  />
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<RolesDetailsPanel /> renders Roles detailsPanel with status disabled 1`] = `
-<styled.div
-  id="dtpanel-roles"
->
-  Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="undefined Permissions"
-    userHasUpdatePermission={true}
-  />
-  <_class2
-    tableType="sidePanel"
-    userHasUpdatePermission={true}
-  />
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

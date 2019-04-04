@@ -101,6 +101,12 @@ exports[`entities reducer FETCH_DATA_ITEM_REJECTED calls setEntityUpdatingHelper
       false,
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -139,6 +145,12 @@ exports[`entities reducer SET_ENTITY_UPDATING calls setEntityUpdatingHelper corr
       },
       undefined,
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;
@@ -207,6 +219,12 @@ exports[`entities reducer UPDATE_ENTITY calls setEntityUpdatingHelper correctly 
       true,
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -237,6 +255,12 @@ exports[`entities reducer UPDATE_ENTITY_REJECTED calls setEntityUpdatingHelper c
       false,
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -261,6 +285,12 @@ exports[`entities reducer UPLOAD_CSV_REJECTED calls setEntityUpdatingHelper corr
       },
       false,
     ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
   ],
 }
 `;

@@ -1,65 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Supervisor Toolbar Layout does not render the unmute button when userHasBargeAllCallsPermission is false 1`] = `
-<div
-  id="SupervisorToolbar"
->
-  <styled.div>
-    <Styled(HangUpIconSVG)
-      className="HangUpIconSVG"
-      id="hangUpButton"
-      loading={false}
-      onClick={[Function]}
-      size={40}
-    />
-  </styled.div>
-</div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`Supervisor Toolbar Layout renders an empty div when monitoringStatus is "offline" 1`] = `
-<div
-  id="SupervisorToolbar"
-/>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`Supervisor Toolbar Layout renders the hang up and mute buttons when monitoringStatus is "connected" and muted is false 1`] = `
-<div
-  id="SupervisorToolbar"
->
-  <styled.div>
-    <Styled(HangUpIconSVG)
-      className="HangUpIconSVG"
-      id="hangUpButton"
-      loading={false}
-      onClick={[Function]}
-      size={40}
-    />
-    <UnMutedIconSVG
-      id="muteButton"
-      onClick={[Function]}
-      size={40}
-    />
-  </styled.div>
-</div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`Supervisor Toolbar Layout renders the hang up and unmute buttons when monitoringStatus is "connected" and muted is true 1`] = `
-<div
-  id="SupervisorToolbar"
->
-  <styled.div>
-    <Styled(HangUpIconSVG)
-      className="HangUpIconSVG"
-      id="hangUpButton"
-      loading={false}
-      onClick={[Function]}
-      size={40}
-    />
-    <MutedIconSVG
-      id="unmuteButton"
-      onClick={[Function]}
-      size={40}
-    />
-  </styled.div>
-</div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

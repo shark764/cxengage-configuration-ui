@@ -31,10 +31,26 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: {
-          loader: "babel-loader",
-          query: {compact: false}
-        }
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env','@babel/react'],
+              "plugins": [
+                "@babel/plugin-proposal-class-properties",
+                [
+                  "create-automation-page-objects",
+                  {
+                    "filePrefix": "const {Element} = require('cx-automation-utils/pageObject'); \nconst elements = { \n",
+                    "elementTemplate": "ELEMENT: new Element('[automation=\"ELEMENT\"]'), \n",
+                    "fileSuffix": "\n }; \n module.exports = elements;",
+                    "saveFilePath": "automation/pages/index.js"
+                  }
+                ]
+              ]
+            }
+          }
+        ],
       },
       {
         test: /\.css$/,

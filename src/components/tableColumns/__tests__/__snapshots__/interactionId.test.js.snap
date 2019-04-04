@@ -5,8 +5,6 @@ exports[`InteractionId column calling the columns Cell method with a value prop 
   title="0000-0000-0000-0003"
 >
   <CopyToClipboard
-    onCopy={undefined}
-    options={undefined}
     text="0000-0000-0000-0003"
   >
     <styled.div>
@@ -21,8 +19,6 @@ exports[`InteractionId column renders the cell properly given a value 1`] = `
   title="0000-0000-0000-0002"
 >
   <CopyToClipboard
-    onCopy={undefined}
-    options={undefined}
     text="0000-0000-0000-0002"
   >
     <styled.div>

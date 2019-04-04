@@ -13,6 +13,12 @@ exports[`FetchData calls the correct sdk function 1`] = `
       },
     ],
   ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
 }
 `;
 

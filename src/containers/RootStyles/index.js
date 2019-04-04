@@ -14,6 +14,4 @@ function mapStateToProps(state) {
   };
 }
 
-const RootStylesContainer = connect(mapStateToProps)(RootStyles);
-
-export default RootStylesContainer;
+export default connect(mapStateToProps)(RootStyles);

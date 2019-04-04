@@ -1,107 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FlowsForm /> renders create form 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    automation="flowsFormFieldName"
-    componentType="input"
-    disabled={true}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    automation="flowsFormFieldDescription"
-    componentType="textarea"
-    disabled={true}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Properties"
-  />
-  <SelectField
-    automation="flowsFormFieldType"
-    disabled={true}
-    label="Type *"
-    name="type"
-    options={
-      Array [
-        Object {
-          "label": "Customer",
-          "value": "customer",
-        },
-        Object {
-          "label": "Resource",
-          "value": "resource",
-        },
-        Object {
-          "label": "Reusable",
-          "value": "reusable",
-        },
-      ]
-    }
-    placeholder="Select a type..."
-    required={true}
-  />
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<FlowsForm /> renders update form 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    automation="flowsFormFieldName"
-    componentType="input"
-    disabled={true}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    automation="flowsFormFieldDescription"
-    componentType="textarea"
-    disabled={true}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Properties"
-  />
-  <SelectField
-    automation="flowsFormFieldType"
-    disabled={true}
-    label="Type *"
-    name="type"
-    options={
-      Array [
-        Object {
-          "label": "Customer",
-          "value": "customer",
-        },
-        Object {
-          "label": "Resource",
-          "value": "resource",
-        },
-        Object {
-          "label": "Reusable",
-          "value": "reusable",
-        },
-      ]
-    }
-    placeholder="Select a type..."
-    required={true}
-  />
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;

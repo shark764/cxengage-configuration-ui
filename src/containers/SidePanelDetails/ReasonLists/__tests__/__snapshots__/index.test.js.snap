@@ -1,17 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`reasonListsDetailsPanel Renders renders 1`] = `
-<reasonListsDetailsPanel
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
->
-  Child
-</reasonListsDetailsPanel>
+ShallowWrapper {
+  "length": 1,
+}
 `;

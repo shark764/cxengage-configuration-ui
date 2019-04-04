@@ -1,19 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GenericBulkItemsForm /> renders generic bulk actions form 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <styled.div>
-    <styled.span>
-      <span>
-        Active
-      </span>
-      <Styled(Toggle)
-        onChange={[Function]}
-        value={false}
-      />
-    </styled.span>
-  </styled.div>
-</form>
+ShallowWrapper {
+  "length": 1,
+}
 `;

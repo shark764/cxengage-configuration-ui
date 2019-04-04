@@ -16,5 +16,7 @@ Immutable.Map {
   "permissions": "",
   "currentTenantName": "",
   "currentTenantId": "",
+  "tenants": Immutable.List [],
+  "platformViewOnlyMode": false,
 }
 `;

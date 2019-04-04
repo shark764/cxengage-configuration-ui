@@ -1,45 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
-<styled.div
-  className="mockClassName"
-  id="mockId"
->
-  <DetailHeader
-    text="Details"
-  />
-  Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="Outbound Identifiers"
-    userHasUpdatePermission={true}
-  />
-  <_class2
-    tableType="sidePanel"
-    userHasUpdatePermission={true}
-  />
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`OutboundIdentifierListsDetailsPanel Renders renders without update permissions 1`] = `
-<styled.div
-  className="mockClassName"
-  id="mockId"
->
-  <DetailHeader
-    text="Details"
-  />
-  Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="Outbound Identifiers"
-    userHasUpdatePermission={false}
-  />
-  <_class2
-    tableType="sidePanel"
-    userHasUpdatePermission={false}
-  />
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

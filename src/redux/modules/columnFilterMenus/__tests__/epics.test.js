@@ -3,7 +3,7 @@
 //  */
 
 import { ActionsObservable } from 'redux-observable';
-import { mockStore } from 'TestUtils';
+import { mockStore } from '../../../../utils/testUtils';
 import { sdkPromise } from '../../../../utils/sdk';
 
 import {

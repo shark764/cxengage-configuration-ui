@@ -1,62 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GenericBulkItems Renders renders 1`] = `
-<Connect(ReduxForm)
-  cancelInvitationIsChecked={true}
-  groups={Immutable.Map {}}
-  identityProviders={
-    Object {
-      "label": "idp1",
-      "value": "0001",
-    }
-  }
-  initialValues={
-    Immutable.Map {
-      "inviteNow": false,
-      "resendInvitation": false,
-      "cancelInvitation": false,
-      "passwordReset": false,
-    }
-  }
-  inviteNowIsChecked={true}
-  isSaving={true}
-  key="users:bulk"
-  passwordResetIsChecked={true}
-  resendInvitationIsChecked={true}
-  skills={Immutable.Map {}}
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
-  storeSubscription={
-    Subscription {
-      "listeners": Object {
-        "clear": [Function],
-        "get": [Function],
-        "notify": [Function],
-        "subscribe": [Function],
-      },
-      "onStateChange": [Function],
-      "parentSub": undefined,
-      "store": Object {
-        "dispatch": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-        Symbol(observable): [Function],
-      },
-      "unsubscribe": [Function],
-    }
-  }
-  toggleInvitationStatus={[Function]}
->
-  Child
-</Connect(ReduxForm)>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `

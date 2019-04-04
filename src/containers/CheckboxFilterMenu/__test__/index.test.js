@@ -5,7 +5,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CheckboxFilterMenu, { mapStateToProps, actions } from '../';
-import { mockStore } from 'TestUtils';
+import { mockStore } from '../../../utils/testUtils';
 
 jest.mock('../../../redux/modules/columnFilterMenus/selectors', () => ({
   menuItemsJs: () => [],

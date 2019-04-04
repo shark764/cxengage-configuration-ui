@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { mockStore } from 'TestUtils';
+import { mockStore } from '../../../utils/testUtils';
 import { getCurrentEntity, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
 import AddMemberToListLayout, { mapStateToProps, actions } from '../';
 import { selectSidePanelTableItems } from '../selectors';

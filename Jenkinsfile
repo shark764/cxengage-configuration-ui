@@ -54,8 +54,6 @@ pipeline {
             steps {
                 sh 'echo "Stage Description: Runs unit tests and fails if they do not meet coverage expectations"'
                 sh "docker exec ${docker_tag} npm run test:coverage"
-                sh "docker cp ${docker_tag}:/home/node/app/junit.xml build"
-                junit 'build/junit.xml'
             }
         }
       }
@@ -76,12 +74,6 @@ pipeline {
         script {
           f.invalidate("E23K7T1ARU8K88")
         }
-      }
-    }
-    stage ('Run regression tests') {
-      when { changeRequest() }
-      steps {
-        sh "docker exec --env URL=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ ${docker_tag} npm run test:preMerge"
       }
     }
     stage ('Github tagged release') {

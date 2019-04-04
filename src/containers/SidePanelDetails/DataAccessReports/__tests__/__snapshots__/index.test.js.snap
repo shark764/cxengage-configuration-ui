@@ -1,95 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataAccessReportsDetailsPanel Renders renders 1`] = `
-<DataAccessReportsDetailsPanel
-  defaultFilters={
-    Array [
-      Object {
-        "id": "invitationStatus",
-        "value": "enabled",
-      },
-      Object {
-        "id": "status",
-        "value": "accepted",
-      },
-    ]
-  }
-  removeListItem={[Function]}
-  setSelectedSubEntityId={[Function]}
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
-  storeSubscription={
-    Subscription {
-      "listeners": Object {
-        "clear": [Function],
-        "get": [Function],
-        "notify": [Function],
-        "subscribe": [Function],
-      },
-      "onStateChange": [Function],
-      "parentSub": undefined,
-      "store": Object {
-        "dispatch": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-        Symbol(observable): [Function],
-      },
-      "unsubscribe": [Function],
-    }
-  }
-  tableFields={
-    Array [
-      Object {
-        "label": "Name",
-        "name": "name",
-      },
-      Object {
-        "label": "Email",
-        "name": "email",
-      },
-      Object {
-        "filterOptions": Array [
-          "accepted",
-          "pending",
-          "invited",
-          "disabled",
-        ],
-        "label": "Tenant Status",
-        "name": "status",
-        "type": "select",
-      },
-      Object {
-        "filterOptions": Array [
-          "pending",
-          "invited",
-          "expired",
-          "enabled",
-          "disabled",
-          "sso-only",
-        ],
-        "label": "Platform Status",
-        "name": "invitationStatus",
-        "type": "select",
-      },
-    ]
-  }
-  tableItems={
-    Array [
-      "mockListMembers",
-    ]
-  }
-  userHasUpdatePermission={true}
->
-  Child
-</DataAccessReportsDetailsPanel>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `

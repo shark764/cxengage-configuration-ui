@@ -1,140 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
-<styled.div
-  id="dtpanel-groups"
->
-  Mock Child
-  <Connect(DetailWrapper)
-    contains="outboundIdentifierLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Outbound Identifier Lists"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="outboundIdentifierLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-  <Connect(DetailWrapper)
-    contains="reasonLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Presence Reason Lists"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="reasonLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permision 1`] = `
-<styled.div
-  id="dtpanel-groups"
->
-  <React.Fragment>
-    <Detail
-      label="Name"
-      value="mockName"
-    />
-    <Detail
-      label="Description"
-      value="mockDescription"
-    />
-    <Detail
-      label="Status"
-      value="Enabled"
-    />
-  </React.Fragment>
-  <Connect(DetailWrapper)
-    contains="outboundIdentifierLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Outbound Identifier Lists"
-      userHasUpdatePermission={false}
-    />
-    <_class2
-      contains="outboundIdentifierLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={false}
-    />
-  </Connect(DetailWrapper)>
-  <Connect(DetailWrapper)
-    contains="reasonLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Presence Reason Lists"
-      userHasUpdatePermission={false}
-    />
-    <_class2
-      contains="reasonLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={false}
-    />
-  </Connect(DetailWrapper)>
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled 1`] = `
-<styled.div
-  id="dtpanel-groups"
->
-  Mock Child
-  <Connect(DetailWrapper)
-    contains="outboundIdentifierLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Outbound Identifier Lists"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="outboundIdentifierLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-  <Connect(DetailWrapper)
-    contains="reasonLists"
-    open={false}
-  >
-    <Styled(DetailHeader)
-      onActionButtonClick={[Function]}
-      text=" Presence Reason Lists"
-      userHasUpdatePermission={true}
-    />
-    <_class2
-      contains="reasonLists"
-      filtered={Array []}
-      items={Array []}
-      tableType="sidePanel"
-      userHasUpdatePermission={true}
-    />
-  </Connect(DetailWrapper)>
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

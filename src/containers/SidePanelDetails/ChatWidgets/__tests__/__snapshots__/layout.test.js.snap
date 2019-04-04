@@ -1,30 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ChatWidgetsDetailsPanel /> renders chatWidgets detailsPanel 1`] = `
-<styled.div
-  className="details-panel"
-  id="details-panel-id"
->
-  <DetailHeader
-    text="Details"
-  />
-  Mock Child
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<ChatWidgetsDetailsPanel /> renders chatWidgets detailsPanel with no update permision 1`] = `
-<styled.div
-  className="details-panel"
-  id="details-panel-id"
->
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <Detail
-      label="Name"
-      value="mockName"
-    />
-  </React.Fragment>
-</styled.div>
+ShallowWrapper {
+  "length": 1,
+}
 `;

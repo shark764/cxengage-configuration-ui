@@ -1,35 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<reasonsDetailsPanel /> renders reasons detailsPanel 1`] = `
-<reasonsDetailsPanel
-  className="details-panel"
-  id="0000-0000-0000-0000-0000"
-  item={
-    Object {
-      "description": "Test",
-      "name": "Test",
-      "type": "Test",
-    }
-  }
-  userHasUpdatePermission={true}
->
-  Mock Child
-</reasonsDetailsPanel>
+ShallowWrapper {
+  "length": 1,
+}
 `;
 
 exports[`<reasonsDetailsPanel /> renders reasons detailsPanel with no update permision 1`] = `
-<reasonsDetailsPanel
-  className="details-panel"
-  id="0000-0000-0000-0000-0000"
-  item={
-    Object {
-      "description": "Test",
-      "name": "Test",
-      "type": "Test",
-    }
-  }
-  userHasUpdatePermission={false}
->
-  Mock Child
-</reasonsDetailsPanel>
+ShallowWrapper {
+  "length": 1,
+}
 `;
