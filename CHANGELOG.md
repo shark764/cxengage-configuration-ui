@@ -20,13 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reporting
 
-## [0.60.1-develop]
-### Fixed
-- Hide new historical from betaFeatures
-- Ability for user to login directly with no default tenant set.
-### Added
-- Added ability to login to config 2 directly
-
 ## [0.60.1] - 2019-03-19
 ### Fixed
 - CXV1-16902 - Versions from selected flow block submit until they get fetched on Dispatch mappings page.
