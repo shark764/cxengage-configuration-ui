@@ -222,39 +222,6 @@ Array [
     "Cell": [Function],
     "Filter": [Function],
     "Header": <span
-      title="Name"
-    >
-      Name
-    </span>,
-    "accessor": [Function],
-    "id": "name",
-  },
-  Object {
-    "Cell": [Function],
-    "Filter": [Function],
-    "Header": <span
-      title="Description"
-    >
-      Description
-    </span>,
-    "accessor": "description",
-    "id": "description",
-  },
-  Object {
-    "Filter": [Function],
-    "Header": <span
-      title="Status"
-    >
-      Status
-    </span>,
-    "accessor": [Function],
-    "filterMethod": [Function],
-    "id": "active",
-  },
-  Object {
-    "Cell": [Function],
-    "Filter": [Function],
-    "Header": <span
       title="List Type"
     >
       List Type

@@ -10,5 +10,5 @@ before: //hygen-inject-before
     updatePermission: ['MANAGE_ALL_<%= NAME %>'],
     createPermission: ['MANAGE_ALL_<%= NAME %>'],
     disablePermission: ['MANAGE_ALL_<%= NAME %>'],
-    assignPermission: ['MANAGE_ALL_<%= NAME %>']
+    assignPermission: ['MANAGE_ALL_<%= NAME %>_SUBENTITY']
   }

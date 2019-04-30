@@ -89,26 +89,7 @@ Immutable.Map {
 }
 `;
 
-exports[`entities reducer FETCH_DATA_ITEM_REJECTED calls setEntityUpdatingHelper correctly 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      "mock initial state",
-      Object {
-        "entityName": "mockEntity",
-        "type": "FETCH_DATA_ITEM_REJECTED",
-      },
-      false,
-    ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
-`;
+exports[`entities reducer FETCH_DATA_ITEM_REJECTED calls setEntityUpdatingHelper correctly 1`] = `[MockFunction]`;
 
 exports[`entities reducer FETCH_DATA_REJECTED sets the data to an empty List 1`] = `
 Immutable.Map {
@@ -134,26 +115,7 @@ Immutable.Map {
 }
 `;
 
-exports[`entities reducer SET_ENTITY_UPDATING calls setEntityUpdatingHelper correctly 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      "mock inital state",
-      Object {
-        "entityName": "mockEntity",
-        "type": "SET_ENTITY_UPDATING",
-      },
-      undefined,
-    ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
-`;
+exports[`entities reducer SET_ENTITY_UPDATING calls setEntityUpdatingHelper correctly 1`] = `[MockFunction]`;
 
 exports[`entities reducer SET_SELECTED_ENTITY_ID with setSelectedEntityCreate() sets the current entity's selected entity id to "create" 1`] = `
 Immutable.Map {
@@ -205,28 +167,7 @@ Immutable.Map {
 }
 `;
 
-exports[`entities reducer UPDATE_ENTITY calls setEntityUpdatingHelper correctly 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      "mock initial state",
-      Object {
-        "entityId": "mock entity id",
-        "entityName": "mock entity",
-        "type": "UPDATE_ENTITY",
-        "values": "mock values",
-      },
-      true,
-    ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
-`;
+exports[`entities reducer UPDATE_ENTITY calls setEntityUpdatingHelper correctly 1`] = `[MockFunction]`;
 
 exports[`entities reducer UPDATE_ENTITY_FULFILLED when the entity is present merges the result in and sets "updating" to false 1`] = `
 Immutable.Map {
@@ -242,27 +183,7 @@ Immutable.Map {
 }
 `;
 
-exports[`entities reducer UPDATE_ENTITY_REJECTED calls setEntityUpdatingHelper correctly 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      "mock inital state",
-      Object {
-        "entityId": "mock entity id",
-        "entityName": "mock entity",
-        "type": "UPDATE_ENTITY_REJECTED",
-      },
-      false,
-    ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
-`;
+exports[`entities reducer UPDATE_ENTITY_REJECTED calls setEntityUpdatingHelper correctly 1`] = `[MockFunction]`;
 
 exports[`entities reducer UPDATE_SUB_ENTITY sets subEntitySaving true on the current sub entity 1`] = `
 Immutable.Map {
@@ -273,27 +194,7 @@ Immutable.Map {
 }
 `;
 
-exports[`entities reducer UPLOAD_CSV_REJECTED calls setEntityUpdatingHelper correctly 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      "mock inital state",
-      Object {
-        "entityId": "mockId",
-        "entityName": "mockEntity",
-        "type": "UPLOAD_CSV_REJECTED",
-      },
-      false,
-    ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
-`;
+exports[`entities reducer UPLOAD_CSV_REJECTED calls setEntityUpdatingHelper correctly 1`] = `[MockFunction]`;
 
 exports[`entities reducer helper functions setEntityUpdatingHelper when the entity is present sets the entity's updated field 1`] = `
 Immutable.Map {
@@ -350,7 +251,7 @@ Immutable.Map {
       "MANAGE_ALL_QUEUES",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 550,
+    "sidePanelWidth": 750,
     "assignPermission": Immutable.List [
       "MANAGE_ALL_QUEUES",
     ],
@@ -407,7 +308,7 @@ Immutable.Map {
   "users": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 600,
+    "sidePanelWidth": 750,
     "confirmationDialogType": undefined,
     "readPermission": Immutable.List [
       "VIEW_ALL_USERS",
@@ -428,6 +329,12 @@ Immutable.Map {
       "MANAGE_ALL_USER_LOCATIONS",
       "MANAGE_TENANT_ENROLLMENT",
     ],
+  },
+  "tenants": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
   },
   "platformRoles": Immutable.Map {
     "data": Immutable.List [],
@@ -455,6 +362,23 @@ Immutable.Map {
     "assignPermission": Immutable.List [
       "VIEW_ALL_TRANSFER_LISTS",
     ],
+  },
+  "slas": Immutable.Map {
+    "readPermission": Immutable.List [
+      "CUSTOM_STATS_READ",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "CUSTOM_STATS_CREATE",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [],
+    "updatePermission": Immutable.List [
+      "CUSTOM_STATS_UPDATE",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 750,
+    "assignPermission": Immutable.List [],
   },
   "reasons": Immutable.Map {
     "readPermission": Immutable.List [
@@ -653,6 +577,21 @@ Immutable.Map {
     "sidePanelWidth": 750,
     "assignPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_ASSIGN",
+    ],
+  },
+  "dispositions": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "READ_DISPOSITIONS",
+    ],
+    "updatePermission": Immutable.List [
+      "UPDATE_DISPOSITIONS",
+    ],
+    "createPermission": Immutable.List [
+      "CREATE_DISPOSITIONS",
     ],
   },
   "capacityRules": Immutable.Map {

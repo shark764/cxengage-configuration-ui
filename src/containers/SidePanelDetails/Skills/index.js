@@ -7,7 +7,8 @@ import SkillsDetailsPanel from './layout';
 import {
   userHasUpdatePermission,
   isEntityFetching,
-  userHasPermissions
+  userHasPermissions,
+  itemApiPending
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
@@ -41,11 +42,13 @@ export function mapStateToProps(state) {
     outboundIdentifierListsFields: entitiesMetaData.outboundIdentifierLists.memberListTableFields,
     outboundIdentifierListsFetching: isEntityFetching(state, 'outboundIdentifierLists'),
     defaultFilters: entitiesMetaData.skills.defaultAssociationFilters,
+    itemApiPending: itemApiPending(state),
     sidePanelReadPermissions: {
-      skills: userHasPermissions(state, ['VIEW_ALL_SKILLS']),
+      users: userHasPermissions(state, ['VIEW_ALL_SKILLS']),
       outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ'])
     },
     sidePanelUpdatePermissions: {
+      users: userHasPermissions(state, ['MANAGE_ALL_USER_SKILLS']),
       outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_ASSIGN'])
     }
   };

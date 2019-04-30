@@ -38,7 +38,8 @@ export default function SkillsDetailsPanel({
   setSelectedSubEntityId,
   defaultFilters,
   sidePanelReadPermissions,
-  sidePanelUpdatePermissions
+  sidePanelUpdatePermissions,
+  itemApiPending
 }) {
   return (
     <Wrapper id="dtpanel-skills">
@@ -47,19 +48,20 @@ export default function SkillsDetailsPanel({
       {sidePanelReadPermissions.users && (
         <DetailWrapper open={true} autoCloseOverride>
           <WrappedDetailHeader
-            userHasUpdatePermission={!usersFetching && userHasUpdatePermission}
+            userHasUpdatePermission={!usersFetching && userHasUpdatePermission && sidePanelUpdatePermissions.users}
             text={`${usersItems.length > 1 ? usersItems.length : ''} Users`}
             onActionButtonClick={() => setSelectedSubEntityId('users')}
           />
           <SidePanelTable
             tableType={'sidePanel'}
             contains="users"
-            userHasUpdatePermission={userHasUpdatePermission}
+            userHasUpdatePermission={userHasUpdatePermission && sidePanelUpdatePermissions.users}
             deleteSubEntity={removeListItem}
             items={usersItems}
             fields={usersFields}
             filtered={defaultFilters.users}
             fetching={usersFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -83,6 +85,7 @@ export default function SkillsDetailsPanel({
             fields={outboundIdentifierListsFields}
             filtered={defaultFilters.outboundIdentifierLists}
             fetching={outboundIdentifierListsFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -103,5 +106,6 @@ SkillsDetailsPanel.propTypes = {
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.object,
   sidePanelReadPermissions: PropTypes.object,
-  sidePanelUpdatePermissions: PropTypes.object
+  sidePanelUpdatePermissions: PropTypes.object,
+  itemApiPending: PropTypes.string
 };

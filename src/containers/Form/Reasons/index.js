@@ -13,9 +13,10 @@ import {
   isCreating,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
-import { getCurrentSharedValue } from '../../../redux/modules/entities/reasons/selectors';
+import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { toggleShared } from '../../../redux/modules/entities';
+import { selectReasonsFormInitialValues } from '../../../redux/modules/entities/reasons/selectors';
+import { checkDisableShared } from '../../../redux/modules/entities/reasonLists/selectors';
 
 const CreatereasonsForm = compose(
   connect(state => createFormName(state)),
@@ -27,14 +28,13 @@ const CreatereasonsForm = compose(
 )(reasonsForm);
 
 export function mapStateToProps(state) {
-  const initialValues = selectFormInitialValues(state);
   return {
-    initialValues: initialValues.has('shared') ? initialValues : initialValues.set('shared', false),
+    initialValues: selectReasonsFormInitialValues(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     key: getSelectedEntityId(state),
-    disableShared: initialValues.get('shared') && initialValues.get('id') !== undefined,
-    sharedFormValue: getCurrentSharedValue(state),
+    disableShared: checkDisableShared(state),
+    sharedFormValue: getCurrentFormValueByFieldName(state, 'shared'),
     userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }

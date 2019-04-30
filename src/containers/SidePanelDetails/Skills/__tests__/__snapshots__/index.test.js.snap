@@ -20,6 +20,7 @@ Object {
       },
     ],
   },
+  "itemApiPending": undefined,
   "outboundIdentifierListsFetching": undefined,
   "outboundIdentifierListsFields": Array [
     Object {
@@ -45,10 +46,11 @@ Object {
   ],
   "sidePanelReadPermissions": Object {
     "outboundIdentifierLists": undefined,
-    "skills": undefined,
+    "users": undefined,
   },
   "sidePanelUpdatePermissions": Object {
     "outboundIdentifierLists": undefined,
+    "users": undefined,
   },
   "userHasUpdatePermission": true,
   "usersFetching": undefined,

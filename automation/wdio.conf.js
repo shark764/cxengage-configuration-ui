@@ -4,9 +4,21 @@ if(!process.env.URL) {
   process.env.LOCALONLY = true;
   process.env.URL = 'http://localhost:3000/#/';
   config.maxInstances = 1;
-} else {
+  process.env.REGIONVAR = "";
+  process.env.ENVIRONMENT = "";
+  process.env.TENANT = "";
+
+}
+
+else {
   config.host = 'resources-selenium.cxengagelabs.net';
   config.maxInstances = 10;
+  process.env.REGIONVAR = "";
+  process.env.ENVIRONMENT = "";
+  process.env.TENANT = "";
+  process.env.HEADLESS = true;
+
+  
 }
 
 

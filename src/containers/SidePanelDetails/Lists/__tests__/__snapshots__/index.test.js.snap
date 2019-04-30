@@ -12,6 +12,7 @@ Object {
   "id": "dtpanel-lists",
   "inherited": true,
   "isSaving": true,
+  "itemApiPending": "mockId",
   "listType": "mock list type name",
   "tableFields": Array [
     Object {

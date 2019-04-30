@@ -5,11 +5,7 @@ Object {
   "initialValues": undefined,
   "isSaving": true,
   "key": "mockId",
-  "names": Array [
-    "mockName1",
-    "mockName2",
-  ],
-  "userHasUpdatePermission": undefined,
+  "userHasUpdatePermission": true,
   "versions": Object {
     "label": "v1",
     "value": "0001",

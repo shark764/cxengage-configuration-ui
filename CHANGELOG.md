@@ -20,6 +20,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reporting
 
+## [0.61.0] - 2019-04-29
+### Added
+- CXV1-14833 - Added Enable/Disable functionality for roles
+- CXV1-14833 - Added Share/Unshare functionality button for roles
+- CXV1-14833 - Added Parent Tenant Name for inherited roles
+- CXV1-17410 - Allow Platform Admins change the default roles that come with the original tenant creation.
+- CXV1-16853 - New SLA page using new API endpoints. User is now able to create multiply SLA and their versions.
+- Added ability to login to config 2 directly
+### Changed
+- CXV1-16854 - Versions table in SLA page is showing a properly width for numeric version column.
+- CXV1-17978 - SLA form is setting new version as default is there is no a previous one.
+### Fixed
+- CXV1-18073 - Shared toggle on SLA page cannot be changed once is enabled and saved.
+- CXV1-18027 - Disabling a SLA will warn the user to update tenant and queue manually.
+- CXV1-18026 - Published versions for inherited SLA cannot be updated.
+- CXV1-18027 - Disabling a SLA warn the user that all related entities will use default tenant instead.
+- CXV1-17985 - The Tenant default SLA cannot be disabled.
+- CXV1-17979 - New version create in SLA page is immediately set as the active version.
+- Removing develop branch from stages that only apply for master branch.
+- Fixing Jenkinsfile to create builds correctly.
+- Fixing Jenkinsfile to stop previous jobs related to current PR.
+- Stages in Jenkinsfile are no longer skipping develop branch.
+- Jenkinsfile has been changed to cover more stages when working on develop branch.
+- CXV1-17539 - User's bulk actions: Reset password is shown on the first use of checkboxes, when platform admin privilege is available.
+- Ability for user to login directly with no default tenant set.
+- Hide new historical from betaFeatures
+- CXV1-16884 - Config 2 | Dispositions Page - Basic Structure
+- CXV1-17476 - Versions from selected flow shows error until it stops fetching.
+- CXV1-16819 - Removing skill or groups from users is not throwing errors anymore on Users page bulk actions.
+- CXV1-17474 - Removing transfer lists from users is not throwing errors anymore.
+- CXV1-17523 - Outbound Identifier page is no longer showing reusable flows or flows without active version.
+- Users with PLATFORM_VIEW_ALL permission are allowed to open flows versions.
+- CXV1-17579 - Roles page allows removing permissions from selected entity.
+- CXV1-17412 - Flows page handles duplication error messages from API like other entities.
+- CXV1-16902 - Dispatch to flow field is no longer throwing error on empty value selected.
+
 ## [0.60.1] - 2019-03-19
 ### Fixed
 - CXV1-16902 - Versions from selected flow block submit until they get fetched on Dispatch mappings page.

@@ -12,8 +12,10 @@ Object {
   "dispatchValues": undefined,
   "flowId": undefined,
   "flowIds": Array [
-    "mockId1",
-    "mockId2",
+    Object {
+      "label": "mockLabel",
+      "value": "mockValue",
+    },
   ],
   "flowVersions": undefined,
   "flowsFetching": undefined,

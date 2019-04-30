@@ -13,7 +13,10 @@ import {
   selectFormInitialValues,
   formSubmission,
   subEntityFormSubmission,
-  createFormName
+  createFormName,
+  getCurrentFormValueByFieldName,
+  getCurrentSubForm,
+  getCurrentSubFormValueByFieldName
 } from '../selectors';
 
 import {
@@ -128,5 +131,53 @@ describe('subEntityFormSubmission', () => {
   const props = { dirty: true };
   it('returns proper values', () => {
     expect(subEntityFormSubmission(values, dispatch, props)).toMatchSnapshot();
+  });
+});
+
+describe('getCurrentFormValueByFieldName', () => {
+  it('Returns proper value by field name given', () => {
+    const initalState = fromJS({
+      form: {
+        'mock current entity:mock current entity id': {
+          initial: {
+            mockProperty: 'mock value'
+          },
+          values: { field: 'mockValue' }
+        }
+      }
+    });
+    expect(getCurrentFormValueByFieldName(initalState, 'field')).toMatchSnapshot();
+  });
+});
+
+describe('getCurrentSubForm', () => {
+  it('Returns proper form map by given formId', () => {
+    const initalState = fromJS({
+      form: {
+        mockForm: {
+          initial: {
+            mockProperty: 'mock value'
+          },
+          values: { field: 'mockValue' }
+        }
+      }
+    });
+    expect(getCurrentSubForm(initalState, 'mockForm')).toMatchSnapshot();
+  });
+});
+
+describe('getCurrentSubFormValueByFieldName', () => {
+  it('Returns proper value by field name and formId given', () => {
+    const initalState = fromJS({
+      form: {
+        mockForm: {
+          initial: {
+            mockProperty: 'mock value'
+          },
+          values: { field: 'mockValue' }
+        }
+      }
+    });
+    expect(getCurrentSubFormValueByFieldName(initalState, 'mockForm', 'field')).toMatchSnapshot();
   });
 });

@@ -23,7 +23,7 @@ export default function FlowsForm({ handleSubmit, initialValues, isSaving, userH
         label="Name *"
         componentType="input"
         inputType="text"
-        automation="flowsFormFieldName"
+        data-automation="flowsFormFieldName"
         disabled={isSaving || !userHasUpdatePermission}
       />
       <InputField
@@ -31,7 +31,7 @@ export default function FlowsForm({ handleSubmit, initialValues, isSaving, userH
         label="Description"
         componentType="textarea"
         inputType="text"
-        automation="flowsFormFieldDescription"
+        data-automation="flowsFormFieldDescription"
         disabled={isSaving || !userHasUpdatePermission}
       />
       <DetailHeader text="Properties" />
@@ -40,7 +40,7 @@ export default function FlowsForm({ handleSubmit, initialValues, isSaving, userH
         label="Type *"
         placeholder="Select a type..."
         disabled={isSaving || !userHasUpdatePermission}
-        automation="flowsFormFieldType"
+        data-automation="flowsFormFieldType"
         options={[
           {
             label: 'Customer',
@@ -63,7 +63,7 @@ export default function FlowsForm({ handleSubmit, initialValues, isSaving, userH
           label="Active Version *"
           placeholder="Select a version..."
           options={versions}
-          automation="flowsFormFieldActiveVersion"
+          data-automation="flowsFormFieldActiveVersion"
           disabled={isSaving || versions.length === 0 || !userHasUpdatePermission}
           required
         />

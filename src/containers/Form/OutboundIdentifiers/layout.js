@@ -12,7 +12,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputField, SelectField } from 'cx-ui-components';
 
-export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inherited, channelType, flowIds, key }) {
+export default function OutboundIdentifiersForm({
+  handleSubmit,
+  isSaving,
+  inherited,
+  userHasUpdatePermission,
+  channelType,
+  flowIds,
+  flowsFetching,
+  initialValues,
+  key
+}) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <div>
@@ -21,7 +31,8 @@ export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inheri
           label="Name *"
           componentType="input"
           inputType="text"
-          disabled={isSaving || inherited}
+          automation="outboundIdentifiersFormFieldName"
+          disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         <SelectField
           name="channelType"
@@ -31,7 +42,8 @@ export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inheri
             { value: 'sms', label: 'Sms' },
             { value: 'email', label: 'Email' }
           ]}
-          disabled={isSaving || inherited}
+          automation="outboundIdentifiersFormFieldChannelType"
+          disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         {channelType && (
           <InputField
@@ -39,17 +51,26 @@ export default function OutboundIdentifiersForm({ handleSubmit, isSaving, inheri
             label="Value *"
             componentType="input"
             inputType="text"
+            automation="outboundIdentifiersFormFieldValue"
             placeholder={`Enter${channelType === 'email' ? ' an email address' : ' a e.164 formatted number'}`}
-            disabled={isSaving || inherited}
+            disabled={isSaving || inherited || !userHasUpdatePermission}
           />
         )}
-        <SelectField name="flowId" label="Flow Id *" options={flowIds} disabled={isSaving || inherited} />
+        <SelectField
+          name="flowId"
+          label="Flow Id *"
+          required={initialValues.get('id') !== undefined}
+          automation="outboundIdentifiersFormFieldFlowId"
+          options={!flowsFetching ? flowIds : undefined}
+          disabled={isSaving || inherited || !userHasUpdatePermission}
+        />
         <InputField
           name="description"
           label="Description"
           componentType="textarea"
+          automation="outboundIdentifiersFormFieldDescription"
           inputType="text"
-          disabled={isSaving || inherited}
+          disabled={isSaving || inherited || !userHasUpdatePermission}
         />
       </div>
     </form>
@@ -61,12 +82,18 @@ OutboundIdentifiersForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
-  flowIds: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string.isRequired
-    })
-  ),
+  userHasUpdatePermission: PropTypes.bool,
+  initialValues: PropTypes.object,
+  flowsFetching: PropTypes.bool,
+  flowIds: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.string.isRequired
+      })
+    ),
+    PropTypes.object
+  ]),
   channelType: PropTypes.string
 };
 

@@ -3,17 +3,9 @@
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "inherited": false,
-  "item": Object {
-    "description": "mockDescription",
-    "id": "mockId",
-    "name": "mockName",
-    "permissions": Array [
-      Object {
-        "id": "mockSubEntityId",
-      },
-    ],
-  },
+  "itemApiPending": undefined,
   "listSize": 0,
+  "parentTenantName": "ParentTenantName",
   "rolesFetching": undefined,
   "tableFields": Array [
     Object {

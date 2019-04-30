@@ -79,7 +79,7 @@ const initialState = fromJS({
   },
   users: {
     ...defaultEntity,
-    sidePanelWidth: 600,
+    sidePanelWidth: 750,
     readPermission: ['VIEW_ALL_USERS'],
     updatePermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
@@ -216,6 +216,7 @@ const initialState = fromJS({
   },
   queues: {
     ...defaultEntity,
+    sidePanelWidth: 750,
     readPermission: ['VIEW_ALL_QUEUES'],
     updatePermission: ['MANAGE_ALL_QUEUES'],
     createPermission: ['MANAGE_ALL_QUEUES'],
@@ -238,6 +239,24 @@ const initialState = fromJS({
     disablePermission: ['MAP_ALL_CONTACT_POINTS']
   },
   integrations: {
+    ...defaultEntity
+  },
+  dispositions: {
+    ...defaultEntity,
+    readPermission: ['READ_DISPOSITIONS'],
+    updatePermission: ['UPDATE_DISPOSITIONS'],
+    createPermission: ['CREATE_DISPOSITIONS']
+  },
+  slas: {
+    ...defaultEntity,
+    sidePanelWidth: 750,
+    readPermission: ['CUSTOM_STATS_READ'],
+    updatePermission: ['CUSTOM_STATS_UPDATE'],
+    createPermission: ['CUSTOM_STATS_CREATE'],
+    disablePermission: [],
+    assignPermission: []
+  },
+  tenants: {
     ...defaultEntity
   }
   //hygen-inject-before
@@ -365,6 +384,11 @@ export const onCopyListItemFormSubmit = (values, { dirty }) => ({
   values,
   dirty
 });
+export const onInitialVersionFormSubmit = (values, { dirty }) => ({
+  type: 'INITIAL_VERSION_FORM_SUBMIT',
+  values,
+  dirty
+});
 export const updateEntity = (entityName, entityId, values) => ({
   type: 'UPDATE_ENTITY',
   entityName,
@@ -423,13 +447,12 @@ export default function reducer(state = initialState, action) {
     }
     case 'FETCH_DATA_FULFILLED': {
       // As we recieve the data we tag on the items that are considered inherited
-      // or system default as the api does not provide us with this info directly
       const { entityName, response: { result } } = action;
       switch (entityName) {
         case 'roles': {
           const newResult = result.map(entity => ({
             ...entity,
-            inherited: entity.type === 'system'
+            inherited: entity.type === 'system' || entity.tenantId !== state.get('currentTenantId')
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult));
         }
@@ -490,7 +513,7 @@ export default function reducer(state = initialState, action) {
       }
     }
     case 'FETCH_DATA_ITEM_REJECTED': {
-      return exports.setEntityUpdatingHelper(state, action, false);
+      return setEntityUpdatingHelper(state, action, false);
     }
     case 'TOGGLE_BULK_ENTITY_CHANGE': {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
@@ -531,7 +554,7 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], false);
     }
     case 'UPDATE_ENTITY': {
-      return exports.setEntityUpdatingHelper(state, action, true);
+      return setEntityUpdatingHelper(state, action, true);
     }
     case 'UPDATE_PROFICIENCY': {
       const currentEntity = state.get('currentEntity');
@@ -581,16 +604,24 @@ export default function reducer(state = initialState, action) {
         if (action.values.addSkill) {
           return state.updateIn(['users', 'data', userEntityIndex, 'skills'], skills => skills.push(fromJS(result)));
         } else if (action.values.removeSkill) {
-          const skillIndex = state
-            .getIn(['users', 'data', userEntityIndex, 'skills'])
-            .findIndex(skill => (typeof skill === 'object' ? skill.get('id') : skill) === action.values.removeSkillId);
+          const skillIndex = state.getIn(['users', 'data', userEntityIndex, 'skills']).findIndex(skill => {
+            if (typeof skill === 'object') {
+              return action.values.removeSkillId === (skill.get('skillId') || skill.get('id'));
+            } else {
+              return action.values.removeSkillId === skill;
+            }
+          });
           return state.deleteIn(['users', 'data', userEntityIndex, 'skills', skillIndex]);
         } else if (action.values.addGroup) {
           return state.updateIn(['users', 'data', userEntityIndex, 'groups'], groups => groups.push(fromJS(result)));
         } else if (action.values.removeGroup) {
-          const groupIndex = state
-            .getIn(['users', 'data', userEntityIndex, 'groups'])
-            .findIndex(group => (typeof group === 'object' ? group.get('id') : group) === action.values.removeGroupId);
+          const groupIndex = state.getIn(['users', 'data', userEntityIndex, 'groups']).findIndex(group => {
+            if (typeof group === 'object') {
+              return action.values.removeGroupId === (group.get('groupId') || group.get('id'));
+            } else {
+              return action.values.removeGroupId === group;
+            }
+          });
           return state.deleteIn(['users', 'data', userEntityIndex, 'groups', groupIndex]);
         }
       }
@@ -613,6 +644,9 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'TOGGLE_LIST_ITEM_ENTITY': {
+      return state.set('loading', action.id);
+    }
     case 'TOGGLE_LIST_ITEM_ENTITY_FULFILLED': {
       const { actionType, entityName, entityId, name, id, response } = action;
       const entityIndex = findEntityIndex(state, action.entityName, entityId);
@@ -620,6 +654,7 @@ export default function reducer(state = initialState, action) {
       const modifiedList = actionType === 'associate' ? currentList.push(id) : currentList.filter(x => x !== id);
       if (entityIndex !== -1 && name === 'skills') {
         return state
+          .remove('loading')
           .setIn([entityName, 'data', entityIndex, name], modifiedList)
           .updateIn([entityName, 'data', entityIndex, 'skillsWithProficiency'], list => {
             if (actionType === 'associate') {
@@ -632,6 +667,7 @@ export default function reducer(state = initialState, action) {
       } else if (entityIndex !== -1 && name === 'users') {
         const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === id);
         return state
+          .remove('loading')
           .setIn([entityName, 'data', entityIndex, name], modifiedList)
           .updateIn(['users', 'data', userIndex, 'skills'], list => {
             if (actionType === 'associate') {
@@ -647,9 +683,9 @@ export default function reducer(state = initialState, action) {
             }
           });
       } else if (entityIndex !== -1) {
-        return state.setIn([entityName, 'data', entityIndex, name], modifiedList);
+        return state.remove('loading').setIn([entityName, 'data', entityIndex, name], modifiedList);
       } else {
-        return state;
+        return state.remove('loading');
       }
     }
     case 'FETCH_LIST_ITEMS_FULFILLED': {
@@ -687,10 +723,10 @@ export default function reducer(state = initialState, action) {
     }
     case 'UPDATE_ENTITY_REJECTED':
     case 'UPLOAD_CSV_REJECTED': {
-      return exports.setEntityUpdatingHelper(state, action, false);
+      return setEntityUpdatingHelper(state, action, false);
     }
     case 'SET_ENTITY_UPDATING': {
-      return exports.setEntityUpdatingHelper(state, action, action.updating);
+      return setEntityUpdatingHelper(state, action, action.updating);
     }
     case 'SET_SELECTED_SUB_ENTITY_ID': {
       return state.setIn([state.get('currentEntity'), 'selectedSubEntityId'], action.selectedSubEntityId);
@@ -733,6 +769,18 @@ export default function reducer(state = initialState, action) {
         .setIn([state.get('currentEntity'), 'selectedSubEntityId'], undefined)
         .deleteIn([state.get('currentEntity'), 'selectedSubEntityName'])
         .deleteIn([state.get('currentEntity'), 'selectedSubEntityData']);
+    }
+    case 'INITIAL_VERSION_FORM_SUBMIT_FULFILLED': {
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
+      if (entityIndex !== -1 && action.entityName === 'slas') {
+        // When creating a SLA version, we set it as the new default
+        return state
+          .remove('loading')
+          .setIn([action.entityName, 'selectedSubEntityId'], undefined)
+          .setIn([action.entityName, 'subEntitySaving'], false);
+      } else {
+        return state;
+      }
     }
     case 'CREATE_SUB_ENTITY':
     case 'UPDATE_SUB_ENTITY': {
@@ -868,6 +916,24 @@ export default function reducer(state = initialState, action) {
     }
     case 'DELETE_SUB_ENTITY_REJECTED': {
       return setSubEntityDeleting(state, action, false);
+    }
+    case 'FETCH_ROLE_PARENT_TENANT': {
+      const entityIndex = findEntityIndex(state, action.entityName, action.id);
+      if (entityIndex !== -1 && action.parentTenantName) {
+        return state.mergeIn(
+          [action.entityName, 'data', entityIndex],
+          fromJS({ parentTenantName: action.parentTenantName })
+        );
+      } else {
+        return state;
+      }
+    }
+    case 'FETCH_TENANT_DEFAULT_SLA': {
+      const { result } = action.response;
+
+      return state.update(action.entityName, entityStore =>
+        entityStore.update('data', data => data.push(fromJS(result)))
+      );
     }
     case '@@redux-form/CHANGE_FULFILLED':
     case '@@redux-form/CHANGE_REJECTED':

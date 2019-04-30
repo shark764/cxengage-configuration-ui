@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 
-import { change } from 'redux-form';
+import { change, touch } from 'redux-form';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
@@ -82,6 +82,17 @@ export const ClearMappingValue = (action$, store) =>
       change(a.meta.form, 'value', a.payload === 'direction' ? 'inbound' : a.payload === 'source' ? 'twilio' : null)
     );
 
+export const FocusMappingValue = (action$, store) =>
+  action$
+    .ofType('@@redux-form/CHANGE')
+    .filter(
+      a =>
+        a.meta.form.includes('dispatchMappings') &&
+        a.meta.field.includes('channelType') &&
+        getSelectedEntity(store.getState()) !== undefined
+    )
+    .map(a => touch(a.meta.form, 'value'));
+
 export const TriggerFlowFetch = (action$, store) =>
   action$
     .ofType('@@redux-form/CHANGE')
@@ -108,6 +119,7 @@ export const ChangeDispatchMappingVersion = (action$, store) =>
       ...a,
       flowVersions: selectVersionsFromFlow(store.getState()),
       selectedEntityId: getSelectedEntityId(store.getState()),
+      initialFlowId: getSelectedEntity(store.getState()) && getSelectedEntity(store.getState()).get('flowId'),
       initialVersion: getSelectedEntity(store.getState()) && getSelectedEntity(store.getState()).get('version')
     }))
     .filter(
@@ -123,12 +135,17 @@ export const ChangeDispatchMappingVersion = (action$, store) =>
             getCurrentEntity(store.getState()) === 'dispatchMappings' &&
             a.entityName === 'flows'))
     )
+    .map(a => ({
+      ...a,
+      newVersion:
+        a.initialVersion && a.initialFlowId === getFlowIdFormValue(store.getState()) ? a.initialVersion : 'null'
+    }))
     .map(a =>
       //This change action is required as sometimes the flowId field
       // has not been loaded and the field is left not initialized.
       // That would not allow the user to submit, so the 'change'
       // function will leave the field as 'touched' to Redux Form
-      change(getSelectedEntityFormId(store.getState()), 'version', a.initialVersion ? a.initialVersion : 'null')
+      change(getSelectedEntityFormId(store.getState()), 'version', a.newVersion)
     );
 
 export const ActivateVersionsFromFlow = (action$, store) =>
@@ -143,16 +160,14 @@ export const ActivateVersionsFromFlow = (action$, store) =>
     //but only if it has not been done before
     .filter(
       a =>
-        (a.meta !== undefined &&
+        getCurrentEntity(store.getState()) === 'dispatchMappings' &&
+        a.selectedEntityId !== 'create' &&
+        !a.flowVersions &&
+        ((a.meta !== undefined &&
           a.meta.form === getSelectedEntityFormId(store.getState()) &&
           a.payload.name === 'flowId' &&
-          selectNonReusableFlows(store.getState()).size &&
-          a.selectedEntityId !== 'create' &&
-          !a.flowVersions) ||
-        (getCurrentEntity(store.getState()) === 'dispatchMappings' &&
-          a.entityName === 'flows' &&
-          a.selectedEntityId !== 'create' &&
-          !a.flowVersions)
+          selectNonReusableFlows(store.getState()).size) ||
+          a.entityName === 'flows')
     )
     .map(a => ({
       type: 'FETCH_DATA_FLOW',

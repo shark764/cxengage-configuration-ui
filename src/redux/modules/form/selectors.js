@@ -78,3 +78,8 @@ export const createFormName = state => ({
 
 export const getCurrentFormValueByFieldName = (state, fieldName) =>
   getCurrentForm(state) && getCurrentForm(state).getIn(['values', fieldName]);
+
+export const getCurrentSubForm = (state, formId) => state.getIn(['form', formId]);
+
+export const getCurrentSubFormValueByFieldName = (state, formId, fieldName) =>
+  getCurrentSubForm(state, formId) && getCurrentSubForm(state, formId).getIn(['values', fieldName]);

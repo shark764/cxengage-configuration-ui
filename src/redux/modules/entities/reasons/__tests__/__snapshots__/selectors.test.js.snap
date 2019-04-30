@@ -1,3 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getCurrentSharedValue returns the current form's getCurrentSharedValue value 1`] = `false`;
+exports[`selectReasonsFormInitialValues Empty Reason, all values provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "shared": false,
+  "active": true,
+}
+`;
+
+exports[`selectReasonsFormInitialValues Return the initial Reason Values, all values NOT provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+}
+`;
+
+exports[`selectReasonsFormInitialValues Return the initial Reason Values, all values provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "shared": false,
+  "active": true,
+}
+`;

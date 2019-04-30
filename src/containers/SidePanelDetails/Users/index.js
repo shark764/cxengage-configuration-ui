@@ -7,7 +7,8 @@ import UsersDetailsPanel from './layout';
 import {
   userHasUpdatePermission,
   isEntityFetching,
-  userHasPermissions
+  userHasPermissions,
+  itemApiPending
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
@@ -48,6 +49,7 @@ export function mapStateToProps(state, props) {
     messageTemplatesFields: entitiesMetaData.messageTemplates.memberListTableFields,
     messageTemplatesFetching: isEntityFetching(state, 'messageTemplates'),
     defaultFilters: entitiesMetaData.users.defaultAssociationFilters,
+    itemApiPending: itemApiPending(state),
     sidePanelUpdatePermissions: {
       skills: userHasPermissions(state, ['MANAGE_ALL_USER_SKILLS']),
       groups: userHasPermissions(state, ['MANAGE_ALL_GROUP_USERS']),

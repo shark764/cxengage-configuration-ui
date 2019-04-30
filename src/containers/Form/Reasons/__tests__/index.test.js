@@ -6,11 +6,10 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { Map } from 'immutable';
-import { getCurrentForm } from '../../../../redux/modules/form/selectors';
+import { getCurrentForm, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 import { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, createFormName, formSubmission } from '../../../../redux/modules/form/selectors';
-import { getCurrentSharedValue } from '../../../../redux/modules/entities/reasons/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
@@ -19,7 +18,7 @@ getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => new Map({ active: true, shared: false }));
-getCurrentSharedValue.mockImplementation(() => true);
+getCurrentFormValueByFieldName.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 
 describe('reasons Renders', () => {

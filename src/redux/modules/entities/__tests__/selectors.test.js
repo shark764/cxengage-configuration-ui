@@ -51,6 +51,7 @@ import {
 import { EntityMetaData, entitiesMetaData } from '../metaData';
 import { getCurrentPermissions, getCurrentTenantId } from '../../userData/selectors';
 import { getUserDisplayName } from '../../userIdMap/selectors';
+import { isUserPlatformAdmin, getDisplay } from '../../entities/users/selectors';
 
 entitiesMetaData.mockEntity = new EntityMetaData('mockEntity');
 
@@ -114,6 +115,8 @@ const initialState = fromJS({
     }
   }
 });
+jest.mock('../../entities/users/selectors');
+isUserPlatformAdmin.mockImplementation(() => false);
 
 jest.mock('../../userData/selectors');
 getCurrentPermissions.mockImplementation(() => ['READ_ALL', 'UPDATE_ALL', 'MANAGE_ALL']);
@@ -819,6 +822,7 @@ describe('sidePanelHeader', () => {
   });
   it('Returns metadata used for sidePanelHeader when name is not defined but has email', () => {
     getUserDisplayName.mockImplementationOnce(() => 'Jim Carrey').mockImplementationOnce(() => 'John Frusciante');
+    getDisplay.mockImplementationOnce(() => 'mock@mock.com');
     expect(
       sidePanelHeader(
         fromJS({
@@ -907,7 +911,7 @@ describe('sidePanelHeader', () => {
     ).toEqual({
       createdAt: `Created on ${moment('2018-07-16T14:43:14Z').format('lll')}  by Jim Carrey `,
       title: 'mockName',
-      toggleStatus: undefined,
+      toggleStatus: true,
       updatedAt: `Last updated on ${moment('2019-02-20T18:55:35Z').format('lll')}  by John Frusciante`
     });
   });

@@ -172,6 +172,9 @@ export const listOfEntities = [
   'dispatchMappings',
   'integrations',
   'logi',
+  'dispositions',
+  'slas',
+  'tenants'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -186,7 +189,7 @@ entities.users.pageTitle = 'User Management';
 entities.users.helpLink = '/Help/Content/Managing%20Users/Adding_users.htm';
 entities.users.createFormDependencies.push('roles', 'platformRoles', 'identityProviders');
 entities.users.updateFormDependencies.push('roles', 'platformRoles', 'identityProviders', 'capacityRules');
-entities.users.bulkFormDependencies.push('identityProviders','groups','skills');
+entities.users.bulkFormDependencies.push('identityProviders', 'groups', 'skills', 'platformRoles');
 entities.users.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Email', name: 'email' },
@@ -388,7 +391,7 @@ entities.roles.bulkEditsAvailable = false;
 entities.roles.betaFeature = true;
 entities.roles.pageTitle = 'Role Management';
 entities.roles.helpLink = '/Help/Content/Managing%20Users/Adding_roles.htm';
-entities.roles.updateFormDependencies.push('permissions');
+entities.roles.updateFormDependencies.push('permissions', 'platformRoles');
 entities.roles.dependentEntity = 'permissions';
 entities.roles.columns = [
   { name: 'Name', active: true },
@@ -427,6 +430,7 @@ entities.customMetrics.columns = [
   { name: 'Metric Type', active: true },
   { name: 'Status', active: true }
 ];
+entities.customMetrics.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
 // Email Templates
 entities.emailTemplates.bulkEditsAvailable = false;
@@ -637,7 +641,7 @@ entities.flows.membersTableFields = {
   versions: [
     {
       label: 'Version',
-      name: 'fakeVersion',
+      name: 'numericOrderVersion',
       customSortMethod: function(a, b) {
         a = parseInt(a, 10);
         b = parseInt(b, 10);
@@ -645,7 +649,8 @@ entities.flows.membersTableFields = {
           return 0;
         }
         return a > b ? 1 : -1;
-      }
+      },
+      customWidth: 35
     },
     { label: 'Name', name: 'name' },
     { label: 'Created On', name: 'created', format: 'datetime' }
@@ -675,9 +680,55 @@ entities.dispatchMappings.columns = [
   { name: 'Interaction Field', active: true },
   { name: 'Channel Type', active: true },
   { name: 'Status', active: true },
-  { name: 'Flow', active: true },
+  { name: 'Flow', active: true }
 ];
 entities.dispatchMappings.defaultFilters = [{ id: 'active', value: 'enabled' }];
+
+// Dispositions
+entities.dispositions.pageTitle = 'Dispositions Management';
+entities.dispositions.helpLink = '/Help/Content/Managing%20Dispositions/Creating_Dispositions.htm';
+entities.dispositions.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'External Id', active: true },
+  { name: 'Shared', active: true },
+  { name: 'Status', active: true }
+];
+
+// Slas (Replacement for Custom-Metrics)
+entities.slas.bulkEditsAvailable = false;
+entities.slas.pageTitle = 'Statistics Management';
+entities.slas.title = 'SLA';
+entities.slas.helpLink = '/Help/Content/Configuration/Statistics_Management/About_Statistics_Management.htm';
+entities.slas.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Active Sla', active: true },
+  { name: 'Status', active: true }
+];
+entities.slas.dependentEntity = 'versions';
+entities.slas.membersTableFields = {
+  versions: [
+    {
+      label: 'Version',
+      name: 'numericOrderVersion',
+      customSortMethod: function(a, b) {
+        a = parseInt(a, 10);
+        b = parseInt(b, 10);
+        if (a === b) {
+          return 0;
+        }
+        return a > b ? 1 : -1;
+      },
+      customWidth: 35
+    },
+    { label: 'Name', name: 'versionName' },
+    { label: 'Description', name: 'description' },
+    { label: 'Created On', name: 'created', format: 'datetime' }
+  ]
+};
+entities.slas.defaultFilters = [{ id: 'active', value: 'enabled' }];
+
 //Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

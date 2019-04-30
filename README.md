@@ -47,3 +47,7 @@ Then head over to our existing [generators](docs/CODE_GENERATION.md) to supercha
 ### E2E Regression Test Automation
 `npm run test:auto` will run any tests specs inside ./automation./specs/inProgress
 [More Info Here.](automation/gettingStarted.md)
+
+### Debugging 
+This repo is configured to support the vscode extension "Debugger for Chrome"
+Once you have have the vscode extension installed you run the app using `npm start` and then click the debug icon in the left panel and click the play button at the top of the debug menu. It will open chrome and you can set breakpoints directly in your source code and other useful debugging features.

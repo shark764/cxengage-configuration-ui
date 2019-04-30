@@ -16,7 +16,7 @@ describe('<<%= className %>Form />', () => {
       <<%= className %>Form
         name="mockName"
         description="mockDescription"
-        type"mockType"
+        type="mockType"
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
@@ -30,7 +30,7 @@ describe('<<%= className %>Form />', () => {
       <<%= className %>Form
         name="mockName"
         description="mockDescription"
-        type"mockType"
+        type="mockType"
         id="0000-0000-0000-0000-0000"
         isSaving={false}
         inherited={false}

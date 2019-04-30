@@ -27,7 +27,8 @@ const props = {
       interactionField: 'mockInteractionField2',
       channelType: 'mockChannelType2'
     }
-  ])
+  ]),
+  flowsFetching: false
 };
 
 describe('formValidation', () => {
@@ -39,7 +40,8 @@ describe('formValidation', () => {
       channelType: 'mockChannelTypeUnique',
       interactionField: 'mockInteractionField',
       value: 'mockValueUnique',
-      flowId: 'mockFlowId'
+      flowId: 'mockFlowId',
+      version: 'mockVersion'
     });
     expect(formValidation(values, props)).toMatchSnapshot();
   });
@@ -51,7 +53,8 @@ describe('formValidation', () => {
       channelType: '',
       interactionField: '',
       value: '',
-      flowId: ''
+      flowId: '',
+      version: ''
     });
     expect(formValidation(values, props)).toMatchSnapshot();
   });
@@ -63,7 +66,8 @@ describe('formValidation', () => {
       channelType: null,
       interactionField: null,
       value: null,
-      flowId: null
+      flowId: null,
+      version: undefined
     });
     expect(formValidation(values, props)).toMatchSnapshot();
   });
@@ -100,7 +104,8 @@ describe('formValidation', () => {
           interactionField: 'mockInteractionField2',
           channelType: 'mockChannelType2'
         }
-      ])
+      ]),
+      flowsFetching: false
     };
 
     const values = fromJS({
@@ -109,7 +114,8 @@ describe('formValidation', () => {
       channelType: 'mockChannelTypeUnique22',
       interactionField: 'mockInteractionField1',
       value: 'mockValueUnique',
-      flowId: 'mockFlowId'
+      flowId: 'mockFlowId',
+      version: 'mockVersion'
     });
     expect(formValidation(values, sameProps)).toMatchSnapshot();
   });

@@ -9,6 +9,7 @@ import { getCurrentPermissions, getCurrentTenantId } from '../userData/selectors
 import { entitiesMetaData } from './metaData';
 import { getDisplay } from './users/selectors';
 import { getUserDisplayName } from '../userIdMap/selectors';
+import { isUserPlatformAdmin } from '../entities/users/selectors';
 
 const getEntities = state => state.get('Entities');
 
@@ -18,7 +19,8 @@ export const getCurrentEntityStore = state => getEntities(state).get(getCurrentE
 
 export const getSidePanelWidth = state => getCurrentEntityStore(state).get('sidePanelWidth');
 
-export const getSelectedEntityId = state => getCurrentEntityStore(state) && getCurrentEntityStore(state).get('selectedEntityId');
+export const getSelectedEntityId = state =>
+  getCurrentEntityStore(state) && getCurrentEntityStore(state).get('selectedEntityId');
 
 export const itemApiPending = state => state.getIn(['Entities', 'loading']);
 
@@ -80,7 +82,17 @@ export const isInherited = state => {
   if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
     switch (getCurrentEntity(state)) {
       case 'roles': {
-        return getSelectedEntity(state).get('type') === 'system';
+        if (isUserPlatformAdmin(state)) {
+          return (
+            getSelectedEntity(state).get('type') !== 'system' &&
+            getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state)
+          );
+        } else {
+          return (
+            getSelectedEntity(state).get('type') === 'system' ||
+            getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state)
+          );
+        }
       }
       case 'users': {
         return false;
@@ -102,8 +114,11 @@ export const shouldDisableField = state => {
       case 'reasonLists': {
         return getSelectedEntity(state).get('reasons').size === 0;
       }
-      case 'flows': {
-        return getSelectedEntity(state).has('versions') && getSelectedEntity(state).get('versions').size === 0;
+      case 'flows':
+      case 'slas': {
+        // Entity can have versions, but we'll allow to enable it
+        // until it has a version set as active.
+        return !getSelectedEntity(state).get('activeVersion');
       }
       default:
         return false;
@@ -213,8 +228,10 @@ export const sidePanelHeader = state => {
     };
   } else if (selectedEntityId) {
     const selectedEntity = getSelectedEntity(state);
-    const createdByName = getUserDisplayName(state, selectedEntity.get('createdBy'));
-    const updatedByName = getUserDisplayName(state, selectedEntity.get('updatedBy'));
+    const createdByName =
+      selectedEntity.get('createdByName') || getUserDisplayName(state, selectedEntity.get('createdBy'));
+    const updatedByName =
+      selectedEntity.get('updatedByName') || getUserDisplayName(state, selectedEntity.get('updatedBy'));
     return {
       title: selectedEntity.get('name') || getDisplay(selectedEntity.toJS()),
       createdAt: `Created on ${moment(selectedEntity.get('created')).format('lll')} ${
@@ -223,12 +240,7 @@ export const sidePanelHeader = state => {
       updatedAt: `Last updated on ${moment(selectedEntity.get('updated')).format('lll')} ${
         updatedByName ? ` by ${updatedByName}` : ''
       }`,
-      // We convert both values to boolean since each entity could have
-      // any of them, this way we avoid getting undefined instead of true/false
-      toggleStatus:
-        currentEntity !== 'roles'
-          ? Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted'
-          : undefined
+      toggleStatus: Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted'
     };
   }
 };

@@ -33,7 +33,8 @@ jest.mock('../../../../redux/modules/entities/selectors', () => ({
   getSelectedEntity: () => mockSelectedEntity,
   userHasUpdatePermission: () => true,
   isInherited: () => true,
-  isSubEntitySaving: () => true
+  isSubEntitySaving: () => true,
+  itemApiPending: () => 'mockId'
 }));
 
 jest.mock('../../../../redux/modules/entities', () => ({

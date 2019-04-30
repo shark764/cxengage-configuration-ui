@@ -7,8 +7,18 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import RolesForm from './layout';
 import { formValidation } from './validation';
-import { getSelectedEntityId, isInherited, isCreating } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import {
+  getSelectedEntityId,
+  isInherited,
+  isCreating,
+  userHasUpdatePermission
+} from '../../../redux/modules/entities/selectors';
+import { toggleShared } from '../../../redux/modules/entities';
+import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
+import {
+  selectRolesFormInitialValues,
+  selectRolesDisableShared
+} from '../../../redux/modules/entities/roles/selectors';
 
 const CreateRolesForm = compose(
   connect(createFormName),
@@ -21,11 +31,18 @@ const CreateRolesForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    initialValues: selectFormInitialValues(state),
+    initialValues: selectRolesFormInitialValues(state),
+    userHasUpdatePermission: userHasUpdatePermission(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
-    key: getSelectedEntityId(state)
+    key: getSelectedEntityId(state),
+    disableShared: selectRolesDisableShared(state),
+    sharedFormValue: getCurrentFormValueByFieldName(state, 'shared')
   };
 }
 
-export default connect(mapStateToProps)(CreateRolesForm);
+export const actions = {
+  toggleShared
+};
+
+export default connect(mapStateToProps, actions)(CreateRolesForm);

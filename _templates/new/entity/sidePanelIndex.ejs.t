@@ -17,5 +17,6 @@ import <%= className %>DetailsPanel from './layout';
 //     anyUsedProp: anySelector(state),
 //   };
 // }
+//
 
 export default connect(/*mapStateToProps*/)(<%= className %>DetailsPanel);

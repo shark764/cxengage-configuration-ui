@@ -50,7 +50,8 @@ export default function UsersDetailsPanel({
   setSelectedSubEntityId,
   defaultFilters,
   sidePanelUpdatePermissions,
-  sidePanelReadPermissions
+  sidePanelReadPermissions,
+  itemApiPending
 }) {
   return (
     <Wrapper id="dtpanel-users">
@@ -72,6 +73,7 @@ export default function UsersDetailsPanel({
             fields={skillsFields}
             filtered={defaultFilters.skills}
             fetching={skillsFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -92,6 +94,7 @@ export default function UsersDetailsPanel({
             fields={groupsFields}
             filtered={defaultFilters.groups}
             fetching={groupsFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -116,6 +119,7 @@ export default function UsersDetailsPanel({
             fields={reasonListsFields}
             filtered={defaultFilters.reasonLists}
             fetching={reasonListsFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -140,6 +144,7 @@ export default function UsersDetailsPanel({
             fields={messageTemplatesFields}
             filtered={defaultFilters.messageTemplates}
             fetching={messageTemplatesFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -164,6 +169,7 @@ export default function UsersDetailsPanel({
             fields={transferListsFields}
             filtered={defaultFilters.transferLists}
             fetching={transferListsFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -192,6 +198,7 @@ export default function UsersDetailsPanel({
             fields={outboundIdentifierListsFields}
             filtered={defaultFilters.outboundIdentifierLists}
             fetching={outboundIdentifierListsFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -224,5 +231,6 @@ UsersDetailsPanel.propTypes = {
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.object,
   sidePanelUpdatePermissions: PropTypes.object,
-  sidePanelReadPermissions: PropTypes.object
+  sidePanelReadPermissions: PropTypes.object,
+  itemApiPending: PropTypes.string
 };

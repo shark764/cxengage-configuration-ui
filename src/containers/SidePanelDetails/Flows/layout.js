@@ -23,6 +23,7 @@ const Wrapper = styled.div`
 export default function FlowsDetailsPanel({
   children,
   userHasUpdatePermission,
+  userHasViewPermission,
   flowsFetching,
   versionsItems,
   versionsFields,
@@ -47,12 +48,13 @@ export default function FlowsDetailsPanel({
         tableType={'sidePanel'}
         contains="versions"
         userHasUpdatePermission={userHasUpdatePermission}
+        userHasViewPermission={userHasViewPermission}
         viewSubEntity={openFlowDesigner}
         copySubEntity={copyListItem}
         updateSubEntity={(listItemId, row, subEntityName) => createDraftItem('drafts', row, subEntityName)}
         items={versionsItems}
         fields={versionsFields}
-        defaultSorted={[{ id: 'fakeVersion', desc: true }]}
+        defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
         fetching={flowsFetching && !versionsItems.length}
         itemApiPending={itemApiPending}
       />
@@ -83,6 +85,7 @@ export default function FlowsDetailsPanel({
 
 FlowsDetailsPanel.propTypes = {
   userHasUpdatePermission: PropTypes.bool,
+  userHasViewPermission: PropTypes.bool,
   children: PropTypes.any,
   flowsFetching: PropTypes.bool,
   versionsItems: PropTypes.array,

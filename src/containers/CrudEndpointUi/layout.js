@@ -39,6 +39,9 @@ import FlowsForm from '../Form/Flows';
 import CopyFlowForm from '../Form/Flows/Copy';
 import TransferListsForm from '../Form/TransferLists';
 import DispatchMappingsForm from '../Form/DispatchMappings';
+import DispositionsForm from '../Form/Dispositions';
+import SlasForm from '../Form/Slas';
+import InitialSlaVersionForm from '../Form/Slas/Version';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -63,6 +66,8 @@ import QueuesDetailsPanel from '../SidePanelDetails/Queues';
 import FlowsDetailsPanel from '../SidePanelDetails/Flows';
 import TransferListsDetailsPanel from '../SidePanelDetails/TransferLists';
 import DispatchMappingsDetailsPanel from '../SidePanelDetails/DispatchMappings';
+import DispositionsDetailsPanel from '../SidePanelDetails/Dispositions';
+import SlasDetailsPanel from '../SidePanelDetails/Slas';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -217,8 +222,7 @@ const createFormRoutes = [
         <TransferListsForm />
       </DetailsPanel>
     )
-  }
-  ,
+  },
   {
     path: '/configuration/dispatchMappings',
     component: () => (
@@ -227,6 +231,22 @@ const createFormRoutes = [
       </DetailsPanel>
     )
   },
+  {
+    path: '/configuration/dispositions',
+    component: () => (
+      <DetailsPanel>
+        <DispositionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/slas',
+    component: () => (
+      <DetailsPanel>
+        <SlasForm />
+      </DetailsPanel>
+    )
+  }
   //hygen-inject-before1
 ];
 
@@ -390,8 +410,7 @@ const detailsPanelRoutes = [
         </TransferListsDetailsPanel>
       </NoScrollDetailsPanel>
     )
-  }
-  ,
+  },
   {
     path: '/configuration/dispatchMappings',
     component: () => (
@@ -402,6 +421,26 @@ const detailsPanelRoutes = [
       </NoScrollDetailsPanel>
     )
   },
+  {
+    path: '/configuration/dispositions',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <DispositionsDetailsPanel>
+          <DispositionsForm />
+        </DispositionsDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/slas',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <SlasDetailsPanel>
+          <SlasForm />
+        </SlasDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  }
   //hygen-inject-before2
 ];
 
@@ -461,7 +500,7 @@ const bulkChangeFormRoutes = [
         <GenericBulkActionsForm />
       </DetailsPanel>
     )
-  },
+  }
   //hygen-inject-before3
 ];
 
@@ -504,6 +543,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/flows',
     component: CopyFlowForm
+  },
+  {
+    path: '/configuration/slas',
+    component: InitialSlaVersionForm
   }
 ];
 
@@ -515,14 +558,13 @@ export default class CrudEndpointUiLayout extends Component {
   }
 
   componentDidUpdate(prevProps, nextProps) {
-    if(this.props.entityName !== prevProps.entityName) {
+    if (this.props.entityName !== prevProps.entityName) {
       this.props.setCurrentEntity(this.props.match.params.entityName);
       this.props.fetchData(this.props.match.params.entityName);
     }
-    
-    
+
     /**
-     * if we go from haveing selected items
+     * If we go from having selected items
      * to no selected items , close the side panel
      */
     if (
@@ -533,10 +575,9 @@ export default class CrudEndpointUiLayout extends Component {
     ) {
       this.props.setSelectedEntityId('');
     }
-    if(prevProps.currentTenantId !== this.props.currentTenantId) {
+    if (prevProps.currentTenantId !== this.props.currentTenantId) {
       this.props.fetchData(this.props.match.params.entityName);
     }
-
   }
 
   render() {
@@ -600,5 +641,7 @@ CrudEndpointUiLayout.propTypes = {
   selectedSubEntityId: PropTypes.string,
   showConfirmationDialog: PropTypes.string,
   setSelectedSubEntityId: PropTypes.func,
-  slidingWidth: PropTypes.number
+  slidingWidth: PropTypes.number,
+  entityName: PropTypes.string,
+  currentTenantId: PropTypes.string
 };

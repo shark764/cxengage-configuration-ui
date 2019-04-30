@@ -282,6 +282,7 @@ export const CreateEntity = action$ =>
 export const UpdateSkillProficiency = (action$, store) =>
   action$
     .ofType('UPDATE_PROFICIENCY')
+    .debounceTime(300)
     .map(a => ({
       ...a,
       currentEntity: getCurrentEntity(store.getState()),
@@ -454,10 +455,8 @@ export const BulkEntityUpdate = (action$, store) =>
                 topic: `cxengage/entities/associate-response`
               });
             } else {
-              console.warn(`Skill (${a.values.addSkill}) is already associated with user (${userData.email})`);
-              a.uneededCalls.push(
-                `Skill (${a.values.addSkill}) is already associated to BULKED_ITEMS_AFFECTED User(s)`
-              );
+              console.warn(`"${a.values.addSkill}" is already associated with user (${userData.email})`);
+              a.uneededCalls.push(`"${a.values.addSkill}" is already associated to BULKED_ITEMS_AFFECTED user(s)`);
             }
           }
           if (a.values.removeSkill) {
@@ -479,9 +478,9 @@ export const BulkEntityUpdate = (action$, store) =>
                 topic: `cxengage/entities/dissociate-response`
               });
             } else {
-              console.warn(`SKill (${a.values.removeSkill}) is already not associated with user (${userData.email})`);
+              console.warn(`"${a.values.removeSkill}" is already not associated with user (${userData.email})`);
               a.uneededCalls.push(
-                `SKill (${a.values.removeSkill}) is already not associated to BULKED_ITEMS_AFFECTED User(s)`
+                `"${a.values.removeSkill}" is already not associated to BULKED_ITEMS_AFFECTED user(s)`
               );
             }
           }
@@ -515,10 +514,8 @@ export const BulkEntityUpdate = (action$, store) =>
                 topic: `cxengage/entities/associate-response`
               });
             } else {
-              console.warn(`Group (${a.values.addGroup}) is already associated with user (${userData.email})`);
-              a.uneededCalls.push(
-                `Group (${a.values.addGroup}) is already associated to BULKED_ITEMS_AFFECTED User(s)`
-              );
+              console.warn(`"${a.values.addGroup}" is already associated with user (${userData.email})`);
+              a.uneededCalls.push(`"${a.values.addGroup}" is already associated to BULKED_ITEMS_AFFECTED user(s)`);
             }
           }
           if (a.values.removeGroup) {
@@ -540,9 +537,9 @@ export const BulkEntityUpdate = (action$, store) =>
                 topic: `cxengage/entities/dissociate-response`
               });
             } else {
-              console.warn(`Group (${a.values.removeGroup}) is already not associated with user (${userData.email})`);
+              console.warn(`"${a.values.removeGroup}" is already not associated with user (${userData.email})`);
               a.uneededCalls.push(
-                `Group (${a.values.removeGroup}) is already not associated to BULKED_ITEMS_AFFECTED User(s)`
+                `"${a.values.removeGroup}" is already not associated to BULKED_ITEMS_AFFECTED user(s)`
               );
             }
           }
@@ -588,7 +585,7 @@ export const BulkEntityUpdate = (action$, store) =>
             }) as he/she is in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
-            `Cannot send email invitation for BULKED_ITEMS_AFFECTED User(s) as they are in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
+            `Cannot send email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
         } else if (
           a.values.resendInvitation &&
@@ -600,7 +597,7 @@ export const BulkEntityUpdate = (action$, store) =>
             }) as he/she is in one of the following states: "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
-            `Cannot resend an email invitation for BULKED_ITEMS_AFFECTED User(s) as they are in one of the following states: "Enabled", "Disabled" or "SSO Only".`
+            `Cannot resend an email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Enabled", "Disabled" or "SSO Only".`
           );
         } else if (
           a.values.cancelInvitation &&
@@ -612,7 +609,7 @@ export const BulkEntityUpdate = (action$, store) =>
             }) as he/she is in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
-            `Cannot cancel email invitation for BULKED_ITEMS_AFFECTED User(s) as they are in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
+            `Cannot cancel email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
         } else if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
           // Change each user invitation status if any of these options
@@ -641,7 +638,7 @@ export const BulkEntityUpdate = (action$, store) =>
               }) as he/she is in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or doesn't have firstName and lastName set.`
             );
             a.uneededCalls.push(
-              `Cannot send a password reset email to BULKED_ITEMS_AFFECTED User(s) as they are in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or they don't have firstName and lastName set.`
+              `Cannot send a password reset email to BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or they don't have firstName and lastName set.`
             );
           } else {
             // Reset password for all users if option was selected

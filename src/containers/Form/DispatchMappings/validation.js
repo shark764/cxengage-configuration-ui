@@ -25,23 +25,25 @@ const phoneNumberValidation = phoneNumber => {
   }
 };
 
-export const formValidation = values => {
+export const formValidation = (values, props) => {
   let validation = {};
   validation.name = isEmpty(values.get('name')) && 'Please enter a name';
   validation.channelType = !values.get('channelType') && 'Please select a Interaction Type';
   validation.interactionField = !values.get('interactionField') && 'Please select a Mapping';
   validation.flowId = !values.get('flowId') && 'Please select a flow';
-  validation.version = !values.get('version') && 'Please select a flow version';
+  validation.version =
+    ((!props.flowsFetching && values.get('version') === '') ||
+      (props.flowsFetching && (!values.get('version') || values.get('version') === 'null'))) &&
+    'Please select a flow version';
 
   validation.value = !values.get('value') && 'Please set a mapping value';
-  if (
-    ['voice', 'sms', 'messaging'].includes(values.get('channelType')) &&
-    values.get('interactionField') === 'contact-point'
-  ) {
-    validation.value = phoneNumberValidation(values.get('value'));
-  }
-  if (values.get('channelType') === 'email' && values.get('interactionField') === 'contact-point') {
-    validation.value = emailValidation(values.get('value'));
+  if (values.get('interactionField') === 'contact-point') {
+    if (['voice', 'sms'].includes(values.get('channelType'))) {
+      validation.value = phoneNumberValidation(values.get('value'));
+    }
+    if (values.get('channelType') === 'email') {
+      validation.value = emailValidation(values.get('value'));
+    }
   }
 
   return validation;

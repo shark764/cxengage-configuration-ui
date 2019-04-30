@@ -260,7 +260,7 @@ export default class Login extends Component {
                 <div>
                   <SignInTitle>Sign in to CxEngage</SignInTitle>
                   <LoginInput
-                    automation="username"
+                    data-automation="username"
                     placeholder="Username"
                     type="email"
                     onChange={this.setUsername}
@@ -268,7 +268,7 @@ export default class Login extends Component {
                   />
                   {!this.state.loginPrefrences.sso && (
                     <LoginInput
-                      automation="password"
+                      data-automation="password"
                       placeholder="Password"
                       type="password"
                       onChange={this.setPassword}
@@ -279,7 +279,7 @@ export default class Login extends Component {
                   <Prefrences>
                     <Checkbox
                       type="checkbox"
-                      automation="remember"
+                      data-automation="remember"
                       name="remember"
                       onChange={this.lgoinPrefrences}
                       value={this.state.loginPrefrences.remember}
@@ -288,7 +288,7 @@ export default class Login extends Component {
                     <CheckboxLabel for="remember">Remember Me</CheckboxLabel> <br />
                     <Checkbox
                       type="checkbox"
-                      automation="sso"
+                      data-automation="sso"
                       name="sso"
                       onChange={this.lgoinPrefrences}
                       value={this.state.loginPrefrences.sso}
@@ -297,7 +297,7 @@ export default class Login extends Component {
                     <CheckboxLabel for="sso">Sign in with SSO</CheckboxLabel> <br />
                   </Prefrences>
 
-                  <LoginButton automation="signInButton" onClick={() => this.login()}>
+                  <LoginButton data-automation="signInButton" onClick={() => this.login()}>
                     Sign In
                   </LoginButton>
                 </div>
@@ -306,7 +306,7 @@ export default class Login extends Component {
               {this.props.authenticated && (
                 <div>
                   <SignInTitle>Select a tenant</SignInTitle>
-                  <Selector automation="tenantSelect" onChange={this.setTenant} value={this.state.selectedTenant}>
+                  <Selector data-automation="tenantSelect" onChange={this.setTenant} value={this.state.selectedTenant}>
                     {this.state.tenants.map(({ tenantName, tenantId }) => (
                       <option label={tenantName} value={tenantId} key={tenantId} />
                     ))}
@@ -314,7 +314,7 @@ export default class Login extends Component {
                   <Prefrences>
                     <Checkbox
                       type="checkbox"
-                      automation="platform"
+                      data-automation="platform"
                       name="platform"
                       onChange={this.lgoinPrefrences}
                       value={this.state.loginPrefrences.platform}
@@ -322,7 +322,7 @@ export default class Login extends Component {
                     <CheckboxLabel for="platform">Platform admin view-only mode</CheckboxLabel> <br />
                   </Prefrences>
                   <LoginButton
-                    automation="chooseTenantButton"
+                    data-automation="chooseTenantButton"
                     disabled={this.state.selectedTenant === ''}
                     onClick={this.chooseTenant}
                   >
@@ -348,5 +348,6 @@ Login.propTypes = {
   updateUserPermissions: PropTypes.func.isRequired,
   hasStarted: PropTypes.bool.isRequired,
   children: PropTypes.any,
-  updateUserPermissions: PropTypes.func.isRequired
+  authenticated: PropTypes.bool,
+  updatePlatformPermissions: PropTypes.func
 };

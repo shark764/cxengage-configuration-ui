@@ -61,6 +61,7 @@ Object {
     },
   ],
   "groupsItems": Array [],
+  "itemApiPending": undefined,
   "messageTemplatesFetching": undefined,
   "messageTemplatesFields": Array [
     Object {

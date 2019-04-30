@@ -7,7 +7,12 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import GroupsForm from './layout';
 import { formValidation } from './validation';
-import { getSelectedEntityId, isInherited, isCreating } from '../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  userHasUpdatePermission,
+  isInherited,
+  isCreating
+} from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
 const CreateGroupsForm = compose(
@@ -22,6 +27,7 @@ const CreateGroupsForm = compose(
 export function mapStateToProps(state) {
   return {
     initialValues: selectFormInitialValues(state),
+    userHasUpdatePermission: userHasUpdatePermission(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     key: getSelectedEntityId(state)

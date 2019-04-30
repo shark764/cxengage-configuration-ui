@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": false,
+  "itemApiPending": undefined,
+  "slasFetching": undefined,
+  "userHasUpdatePermission": true,
+  "userHasViewPermission": undefined,
+  "versionsFields": Array [
+    Object {
+      "customSortMethod": [Function],
+      "customWidth": 35,
+      "label": "Version",
+      "name": "numericOrderVersion",
+    },
+    Object {
+      "label": "Name",
+      "name": "versionName",
+    },
+    Object {
+      "label": "Description",
+      "name": "description",
+    },
+    Object {
+      "format": "datetime",
+      "label": "Created On",
+      "name": "created",
+    },
+  ],
+  "versionsItems": Array [],
+}
+`;
+
+exports[`SlasDetailsPanel Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;

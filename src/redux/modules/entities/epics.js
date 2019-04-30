@@ -53,7 +53,7 @@ import {
   camelCaseToKebabCase
 } from 'serenova-js-utils/strings';
 
-import { getCurrentSharedValue } from './reasons/selectors';
+import { getCurrentFormValueByFieldName } from '../form/selectors';
 
 /**
  * Note: When you see the variable 'a' shorthand being used
@@ -166,7 +166,13 @@ export const FormSubmission = (action$, store) =>
 export const ToggleSharedFormField = (action$, store) =>
   action$
     .ofType('TOGGLE_SHARED')
-    .map(a => change(getSelectedEntityFormId(store.getState()), 'shared', !getCurrentSharedValue(store.getState())));
+    .map(a =>
+      change(
+        getSelectedEntityFormId(store.getState()),
+        'shared',
+        !getCurrentFormValueByFieldName(store.getState(), 'shared')
+      )
+    );
 
 export const FetchData = action$ =>
   action$.ofType('FETCH_DATA').mergeMap(a =>
@@ -354,6 +360,7 @@ export const ToggleEntity = (action$, store) =>
 export const ToggleEntityListItem = (action$, store) =>
   action$
     .ofType('TOGGLE_ENTITY_LIST_ITEM')
+    .debounceTime(300)
     .map(action => ({
       ...action,
       entityName: getCurrentEntity(store.getState())
@@ -375,6 +382,7 @@ export const ToggleEntityListItem = (action$, store) =>
 export const RemoveListItem = (action$, store) =>
   action$
     .ofType('REMOVE_LIST_ITEM')
+    .debounceTime(300)
     .map(action => ({
       ...action,
       entityName: getCurrentEntity(store.getState()),
@@ -525,6 +533,7 @@ export const fetchEntityListItemDependency = (action$, store) =>
 export const RemovingListItems = (action$, store) =>
   action$
     .ofType('REMOVE_LIST_ITEM')
+    .debounceTime(300)
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),
@@ -682,6 +691,7 @@ export const UpdateSubEntity = (action$, store) =>
 export const DeleteSubEntity = (action$, store) =>
   action$
     .ofType('DELETE_SUB_ENTITY')
+    .debounceTime(300)
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),

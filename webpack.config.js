@@ -26,7 +26,7 @@ module.exports = {
     // }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
-
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -41,10 +41,7 @@ module.exports = {
                 [
                   "create-automation-page-objects",
                   {
-                    "filePrefix": "const {Element} = require('cx-automation-utils/pageObject'); \nconst elements = { \n",
-                    "elementTemplate": "ELEMENT: new Element('[automation=\"ELEMENT\"]'), \n",
-                    "fileSuffix": "\n }; \n module.exports = elements;",
-                    "saveFilePath": "automation/pages/index.js"
+                    "saveFilePath": "automation/behavior/pageObjects.json"
                   }
                 ]
               ]

@@ -24,7 +24,7 @@ export default function <%= className %>DetailsPanel({
   children
 }) {
   return (
-    <Wrapper className="dtpanel-entity-<%= kebabName %>">
+    <Wrapper>
       {children}
     </Wrapper>
   );

@@ -7,7 +7,7 @@ Object {
   "interactionField": false,
   "name": false,
   "value": false,
-  "version": "Please select a flow version",
+  "version": false,
 }
 `;
 
@@ -29,7 +29,7 @@ Object {
   "interactionField": "Please select a Mapping",
   "name": "Please enter a name",
   "value": "Please set a mapping value",
-  "version": "Please select a flow version",
+  "version": false,
 }
 `;
 
@@ -40,6 +40,6 @@ Object {
   "interactionField": false,
   "name": false,
   "value": false,
-  "version": "Please select a flow version",
+  "version": false,
 }
 `;

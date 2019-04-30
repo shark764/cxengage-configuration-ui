@@ -107,7 +107,7 @@ export default class UsersBulkActionsForm extends Component {
                     value: 'disabled'
                   }
                 ]}
-                automation="usersBulkActionsFormFieldStatus"
+                data-automation="usersBulkActionsFormFieldStatus"
               />
             </BulkActions>
           )}
@@ -124,7 +124,7 @@ export default class UsersBulkActionsForm extends Component {
                 name="inviteNow"
                 label=""
                 disabled={this.props.isSaving || this.props.inherited}
-                automation="usersBulkActionsFormFieldInviteNow"
+                data-automation="usersBulkActionsFormFieldInviteNow"
               />
             </ConfirmationWrapper>
           </ToggleList>
@@ -143,7 +143,7 @@ export default class UsersBulkActionsForm extends Component {
                 name="resendInvitation"
                 label=""
                 disabled={this.props.isSaving || this.props.inherited}
-                automation="usersBulkActionsFormFieldResendInvitation"
+                data-automation="usersBulkActionsFormFieldResendInvitation"
               />
             </ConfirmationWrapper>
           </ToggleList>
@@ -162,7 +162,7 @@ export default class UsersBulkActionsForm extends Component {
                 name="cancelInvitation"
                 label=""
                 disabled={this.props.isSaving || this.props.inherited}
-                automation="usersBulkActionsFormFieldCancelInvitation"
+                data-automation="usersBulkActionsFormFieldCancelInvitation"
               />
             </ConfirmationWrapper>
           </ToggleList>
@@ -182,7 +182,7 @@ export default class UsersBulkActionsForm extends Component {
                   name="passwordReset"
                   label=""
                   disabled={this.props.isSaving || this.props.inherited}
-                  automation="usersBulkActionsFormFieldPasswordReset"
+                  data-automation="usersBulkActionsFormFieldPasswordReset"
                 />
               </ConfirmationWrapper>
             </ToggleList>
@@ -217,7 +217,7 @@ export default class UsersBulkActionsForm extends Component {
                   }
                 ]}
                 required
-                automation="usersBulkActionsFormFieldNoPassword"
+                data-automation="usersBulkActionsFormFieldNoPassword"
               />
             </BulkActions>
           )}
@@ -238,7 +238,7 @@ export default class UsersBulkActionsForm extends Component {
                 disabled={this.props.isSaving || this.props.inherited}
                 options={this.props.identityProviders}
                 required
-                automation="usersBulkActionsFormFieldDefaultIdentityProvider"
+                data-automation="usersBulkActionsFormFieldDefaultIdentityProvider"
               />
             </BulkActions>
           )}
@@ -291,7 +291,7 @@ export default class UsersBulkActionsForm extends Component {
                   value: 'ie1-tnx',
                   label: 'Ireland Interconnect'
                 }]}
-                automation="usersBulkActionsFormFieldRegion"
+                data-automation="usersBulkActionsFormFieldRegion"
               />
             </BulkActions>
           )}
@@ -313,7 +313,7 @@ export default class UsersBulkActionsForm extends Component {
                   }
                   return acc;
                 }, [])}
-                automation="usersBulkActionsAddGroup"
+                data-automation="usersBulkActionsAddGroup"
               />
             </BulkActions>
           )}
@@ -338,7 +338,7 @@ export default class UsersBulkActionsForm extends Component {
                   }
                   return acc;
                 }, [])}
-                automation="usersBulkActionsRemoveGroup"
+                data-automation="usersBulkActionsRemoveGroup"
               />
             </BulkActions>
           )}
@@ -355,7 +355,7 @@ export default class UsersBulkActionsForm extends Component {
                 label="Skill"
                 placeholder="Search..."
                 suggestions={this.props.skills.toJS().map(skill => skill.name)}
-                automation="usersBulkActionsAddSkill"
+                data-automation="usersBulkActionsAddSkill"
               />
             </BulkActions>
           )}
@@ -375,7 +375,7 @@ export default class UsersBulkActionsForm extends Component {
                 label="Skill"
                 placeholder="Search..."
                 suggestions={this.props.skills.toJS().map(skill => skill.name)}
-                automation="usersBulkActionsRemoveSkill"
+                data-automation="usersBulkActionsRemoveSkill"
               />
             </BulkActions>
           )}

@@ -32,11 +32,11 @@ export default function DataAccessReportsDetailsPanel({
   itemApiPending
 }) {
   return (
-    <Wrapper id="dtpanel-data-access-reports">
+    <Wrapper automation="dtPanelEntityDataAccessReports">
       {children}
 
       <DetailHeader
-        userHasUpdatePermission={userHasUpdatePermission}
+        userHasUpdatePermission={!usersFetching && userHasUpdatePermission}
         text={detailHeaderText(tableItems, 'Users')}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
         open

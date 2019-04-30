@@ -5,18 +5,29 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { getCurrentForm } from '../../../../redux/modules/form/selectors';
+import { Map } from 'immutable';
+import {
+  getCurrentForm,
+  selectFormInitialValues,
+  getCurrentFormValueByFieldName
+} from '../../../../redux/modules/form/selectors';
 import RolesForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isInherited, isCreating } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
+import {
+  getSelectedEntityId,
+  isInherited,
+  isCreating,
+  userHasUpdatePermission
+} from '../../../../redux/modules/entities/selectors';
 
-jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
+jest.mock('../../../../redux/modules/entities/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isInherited.mockImplementation(() => false);
 isCreating.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
+userHasUpdatePermission.mockImplementation(() => true);
+selectFormInitialValues.mockImplementation(() => new Map({ active: true, shared: false }));
+getCurrentFormValueByFieldName.mockImplementation(() => true);
 
 describe('Roles Renders', () => {
   it('renders', () => {

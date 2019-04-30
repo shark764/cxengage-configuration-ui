@@ -7,6 +7,10 @@ import { shallow } from 'enzyme';
 
 import OutboundIdentifiersForm from '../layout';
 
+const initialValues = {
+  get: () => {}
+};
+
 describe('<OutboundIdentifiersForm />', () => {
   let customFlowIds;
   beforeEach(() => {
@@ -32,6 +36,7 @@ describe('<OutboundIdentifiersForm />', () => {
         isSaving={false}
         inherited={false}
         flowIds={customFlowIds}
+        initialValues={initialValues}
         handleSubmit={() => {}}
       />
     );

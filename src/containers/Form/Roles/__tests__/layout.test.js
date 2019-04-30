@@ -15,6 +15,7 @@ describe('<RolesForm />', () => {
         description="mockDescription"
         isSaving={false}
         inherited={false}
+        userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
     );
@@ -28,6 +29,7 @@ describe('<RolesForm />', () => {
         id="0000-0000-0000-0000-0000"
         isSaving={false}
         inherited={false}
+        userHasUpdatePermission={true}
         handleSubmit={() => {}}
       />
     );

@@ -181,8 +181,13 @@ describe('entities reducer', () => {
 
   describe('FETCH_DATA_ITEM_REJECTED', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
+      const initialState = fromJS({
+        mockEntity: {
+          data: []
+        }
+      });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
-      entitiesReducer('mock initial state', { type: 'FETCH_DATA_ITEM_REJECTED', entityName: 'mockEntity' });
+      entitiesReducer(initialState, { type: 'FETCH_DATA_ITEM_REJECTED', entityName: 'mockEntity' });
       expect(spy).toMatchSnapshot();
       spy.mockRestore();
     });
@@ -203,10 +208,17 @@ describe('entities reducer', () => {
 
   describe('UPDATE_ENTITY', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
+      const initialState = fromJS({
+        Entities: {
+          mockEntity: {
+            data: []
+          }
+        }
+      });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
       entitiesReducer(
-        'mock initial state',
-        entitiesReducerFunctions.updateEntity('mock entity', 'mock entity id', 'mock values')
+        initialState,
+        entitiesReducerFunctions.updateEntity('mockEntity', 'mock entity id', 'mock values')
       );
       expect(spy).toMatchSnapshot();
       spy.mockRestore();
@@ -301,11 +313,15 @@ describe('entities reducer', () => {
 
   describe('UPDATE_ENTITY_REJECTED', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
+      const initialState = fromJS({
+        Entities: {
+          mockEntity: {
+            data: []
+          }
+        }
+      });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
-      entitiesReducer(
-        'mock inital state',
-        entitiesReducerFunctions.updateEntityRejected('mock entity', 'mock entity id')
-      );
+      entitiesReducer(initialState, entitiesReducerFunctions.updateEntityRejected('mockEntity', 'mock entity id'));
       expect(spy).toMatchSnapshot();
       spy.mockRestore();
     });
@@ -313,8 +329,13 @@ describe('entities reducer', () => {
 
   describe('UPLOAD_CSV_REJECTED', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
+      const initialState = fromJS({
+        mockEntity: {
+          data: []
+        }
+      });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
-      entitiesReducer('mock inital state', {
+      entitiesReducer(initialState, {
         type: 'UPLOAD_CSV_REJECTED',
         entityName: 'mockEntity',
         entityId: 'mockId'
@@ -326,8 +347,13 @@ describe('entities reducer', () => {
 
   describe('SET_ENTITY_UPDATING', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
+      const initialState = fromJS({
+        mockEntity: {
+          data: []
+        }
+      });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
-      entitiesReducer('mock inital state', { type: 'SET_ENTITY_UPDATING', entityName: 'mockEntity' });
+      entitiesReducer(initialState, { type: 'SET_ENTITY_UPDATING', entityName: 'mockEntity' });
       expect(spy).toMatchSnapshot();
       spy.mockRestore();
     });
@@ -407,15 +433,13 @@ describe('CREATE_ENTITY_FULFILLED', () => {
 
 describe('CREATE_ENTITY_REJECTED', () => {
   it('calls setEntityUpdatingHelper correctly', () => {
+    const initialState = fromJS({
+      mockEntity: {
+        data: []
+      }
+    });
     const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
-    entitiesReducer(
-      fromJS({
-        mockEntity: {
-          data: []
-        }
-      }),
-      { type: 'CREATE_ENTITY_REJECTED', entityName: 'mockEntity' }
-    );
+    entitiesReducer(initialState, { type: 'CREATE_ENTITY_REJECTED', entityName: 'mockEntity' });
     expect(spy).toMatchSnapshot();
     spy.mockRestore();
   });

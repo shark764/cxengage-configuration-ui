@@ -47,6 +47,7 @@ function ListsDetailsPanel(props) {
         updateSubEntity={props.updateSubEntity}
         deleteSubEntity={props.deleteSubEntity}
         inherited={props.inherited}
+        itemApiPending={props.itemApiPending}
       />
     </div>
   );
@@ -68,7 +69,8 @@ ListsDetailsPanel.propTypes = {
   inherited: PropTypes.bool,
   isSaving: PropTypes.bool,
   downloadCsv: PropTypes.func,
-  uploadCsv: PropTypes.func
+  uploadCsv: PropTypes.func,
+  itemApiPending: PropTypes.string
 };
 
 export default ListsDetailsPanel;

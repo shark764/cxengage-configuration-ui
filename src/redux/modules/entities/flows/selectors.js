@@ -95,7 +95,7 @@ export const getFlowItems = (members, users, createdByColumnPermission) =>
     members.toJS().map((member, index) => ({
       ...member,
       createdByName: createdByColumnPermission && getDisplay(users.find(user => member.createdBy === user.id), true),
-      fakeVersion: member.version && `v${members.size - index}`
+      numericOrderVersion: member.version && `v${members.size - index}`
     }))) ||
   [];
 

@@ -1,8 +1,14 @@
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
-import { getCurrentForm } from '../../form/selectors';
+import { selectFormInitialValues } from '../../form/selectors';
+import { getSelectedEntity } from '../selectors';
+import { Map } from 'immutable';
 
-export const getCurrentSharedValue = state =>
-  getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'shared']);
+export const selectReasonsFormInitialValues = state => {
+  if (getSelectedEntity(state) === undefined) {
+    return new Map({ active: true, shared: false });
+  }
+  return selectFormInitialValues(state);
+};

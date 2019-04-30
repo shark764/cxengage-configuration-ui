@@ -1,4 +1,11 @@
-import 'rxjs';
+/*
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
+ */
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/catch';
+
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';

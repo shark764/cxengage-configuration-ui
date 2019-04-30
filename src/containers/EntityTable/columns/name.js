@@ -39,6 +39,7 @@ export const nameColumn = {
     <div>
       <Input
         className={`name-filter-input`}
+        data-automation="searchNameColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
       />

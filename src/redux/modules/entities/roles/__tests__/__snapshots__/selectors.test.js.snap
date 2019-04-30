@@ -13,16 +13,4 @@ Array [
 ]
 `;
 
-exports[`selectTenantRoles should get roles, then return it mapped and filtered 1`] = `
-Array [
-  undefined,
-  Object {
-    "label": "Role Mock 1",
-    "value": "mockId",
-  },
-  Object {
-    "label": "Role Mock 2",
-    "value": "mockId2",
-  },
-]
-`;
+exports[`selectTenantRoles should get roles, then return it mapped and filtered 1`] = `Array []`;

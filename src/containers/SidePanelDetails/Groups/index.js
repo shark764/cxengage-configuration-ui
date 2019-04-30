@@ -9,7 +9,8 @@ import {
   userHasPermissions,
   getSelectedEntity,
   isInherited,
-  isEntityFetching
+  isEntityFetching,
+  itemApiPending
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
@@ -31,6 +32,7 @@ export function mapStateToProps(state, props) {
     reasonListsFields: entitiesMetaData.reasonLists.memberListTableFields,
     reasonListsFetching: isEntityFetching(state, 'reasonLists'),
     defaultFilters: entitiesMetaData.groups.defaultAssociationFilters,
+    itemApiPending: itemApiPending(state),
     sidePanelReadPermissions: {
       groups: userHasPermissions(state, ['VIEW_ALL_GROUPS']),
       outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ']),

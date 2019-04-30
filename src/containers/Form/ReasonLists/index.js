@@ -13,10 +13,8 @@ import {
   isCreating,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
-import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
-import { getCurrentSharedValue } from '../../../redux/modules/entities/reasons/selectors';
+import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { toggleShared } from '../../../redux/modules/entities';
-
 import { reasonListsInitialValues, checkDisableShared } from '../../../redux/modules/entities/reasonLists/selectors';
 
 const CreateReasonListsForm = compose(
@@ -36,7 +34,7 @@ export function mapStateToProps(state) {
     key: getSelectedEntityId(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     disableShared: checkDisableShared(state),
-    sharedFormValue: getCurrentSharedValue(state)
+    sharedFormValue: getCurrentFormValueByFieldName(state, 'shared')
   };
 }
 

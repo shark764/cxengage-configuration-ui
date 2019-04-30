@@ -8,11 +8,11 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Detail, SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
+import { SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
 import { detailHeaderText } from '../../../utils';
 
@@ -40,23 +40,16 @@ export default function GroupsDetailsPanel({
   removeListItem,
   setSelectedSubEntityId,
   inherited,
-  item: { name, description, active },
   defaultFilters,
   sidePanelReadPermissions,
-  sidePanelUpdatePermissions
+  sidePanelUpdatePermissions,
+  itemApiPending
 }) {
   return (
     <Wrapper id="dtpanel-groups">
       {inherited && <DetailsPanelAlert text="This group is inherited and cannot be edited" />}
-      {!inherited && userHasUpdatePermission ? (
-        children
-      ) : (
-        <Fragment>
-          <Detail label="Name" value={name} />
-          <Detail label="Description" value={description} />
-          <Detail label="Status" value={active ? 'Enabled' : 'Disabled'} />
-        </Fragment>
-      )}
+      {children}
+
       {sidePanelReadPermissions.users && (
         <DetailWrapper open={true} autoCloseOverride>
           <WrappedDetailHeader
@@ -75,6 +68,7 @@ export default function GroupsDetailsPanel({
             filtered={defaultFilters.users}
             fetching={usersFetching}
             inherited={inherited}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -100,6 +94,7 @@ export default function GroupsDetailsPanel({
             fields={outboundIdentifierListsFields}
             filtered={defaultFilters.outboundIdentifierLists}
             fetching={outboundIdentifierListsFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -121,6 +116,7 @@ export default function GroupsDetailsPanel({
             fields={reasonListsFields}
             filtered={defaultFilters.reasonLists}
             fetching={reasonListsFetching}
+            itemApiPending={itemApiPending}
           />
         </DetailWrapper>
       )}
@@ -129,11 +125,6 @@ export default function GroupsDetailsPanel({
 }
 
 GroupsDetailsPanel.propTypes = {
-  item: PropTypes.shape({
-    name: PropTypes.string,
-    description: PropTypes.string,
-    active: PropTypes.bool
-  }),
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
@@ -150,5 +141,6 @@ GroupsDetailsPanel.propTypes = {
   setSelectedSubEntityId: PropTypes.func,
   defaultFilters: PropTypes.object,
   sidePanelReadPermissions: PropTypes.object,
-  sidePanelUpdatePermissions: PropTypes.object
+  sidePanelUpdatePermissions: PropTypes.object,
+  itemApiPending: PropTypes.string
 };

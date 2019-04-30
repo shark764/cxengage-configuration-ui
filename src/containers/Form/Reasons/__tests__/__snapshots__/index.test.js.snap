@@ -4,10 +4,7 @@ exports[`Maps state to props only using selectors validates object created from 
 Object {
   "disableShared": false,
   "inherited": undefined,
-  "initialValues": Immutable.Map {
-    "active": true,
-    "shared": false,
-  },
+  "initialValues": undefined,
   "isSaving": true,
   "key": "mockId",
   "sharedFormValue": true,

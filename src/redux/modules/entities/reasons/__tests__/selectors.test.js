@@ -3,22 +3,43 @@
  */
 
 import { fromJS } from 'immutable';
-import { getCurrentSharedValue } from '../selectors';
+import { selectReasonsFormInitialValues } from '../selectors';
+import { getSelectedEntity, getSelectedEntityId } from '../../selectors';
+import { selectFormInitialValues } from '../../../form/selectors';
 
-const mockCurrentForm = fromJS({
-  values: {
-    shared: false
-  },
-  initial: {
-    shared: false
-  }
-});
-jest.mock('../../../form/selectors', () => ({
-  getCurrentForm: () => mockCurrentForm
-}));
+jest.mock('../../../form/selectors');
+jest.mock('../../selectors');
 
-describe('getCurrentSharedValue', () => {
-  it("returns the current form's getCurrentSharedValue value", () => {
-    expect(getCurrentSharedValue()).toMatchSnapshot();
+describe('selectReasonsFormInitialValues', () => {
+  it('Return the initial Reason Values, all values provided', () => {
+    const initialState = fromJS({
+      id: 'mockId',
+      shared: false,
+      active: true
+    });
+    selectFormInitialValues.mockImplementation(() => initialState);
+    getSelectedEntity.mockImplementation(() => initialState);
+    getSelectedEntityId.mockImplementation(() => 'mockId');
+    expect(selectReasonsFormInitialValues()).toMatchSnapshot();
+  });
+
+  it('Empty Reason, all values provided', () => {
+    const initialState = fromJS({
+      id: 'mockId',
+      shared: false,
+      active: true
+    });
+    selectFormInitialValues.mockImplementation(() => initialState);
+    getSelectedEntity.mockImplementation(() => initialState);
+    getSelectedEntityId.mockImplementation(() => 'mockId');
+    expect(selectReasonsFormInitialValues()).toMatchSnapshot();
+  });
+
+  it('Return the initial Reason Values, all values NOT provided', () => {
+    const initialState = fromJS({
+      id: 'mockId'
+    });
+    selectFormInitialValues.mockImplementation(() => initialState);
+    expect(selectReasonsFormInitialValues()).toMatchSnapshot();
   });
 });

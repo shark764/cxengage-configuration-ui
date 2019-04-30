@@ -18,12 +18,12 @@ import {
   selectFlowDraftNames,
   subEntityFormSubmission
 } from '../../../../redux/modules/entities/flows/selectors';
-import validate from './validation';
+import { formValidation } from './validation';
 
 const CreateCopyFlowForm = reduxForm({
   form: 'copyFlow:create',
   onSubmit: subEntityFormSubmission,
-  validate
+  validate: formValidation
 })(CopyFlowForm);
 
 export function mapStateToProps(state) {

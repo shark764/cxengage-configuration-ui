@@ -6,11 +6,14 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Map } from 'immutable';
 import { shallow } from 'enzyme';
-import ReasonListsForm from '../layout';
-import { getCurrentForm, createFormName, formSubmission } from '../../../../redux/modules/form/selectors';
-import { mapStateToProps } from '../';
+import {
+  getCurrentForm,
+  createFormName,
+  formSubmission,
+  getCurrentFormValueByFieldName
+} from '../../../../redux/modules/form/selectors';
+import ReasonListsForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
-import { getCurrentSharedValue } from '../../../../redux/modules/entities/reasons/selectors';
 import { reasonListsInitialValues, checkDisableShared } from '../../../../redux/modules/entities/reasonLists/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -23,7 +26,7 @@ isCreating.mockImplementation(() => true);
 reasonListsInitialValues.mockImplementation(
   () => new Map({ active: true, isDefault: false, shared: false, reasons: [] })
 );
-getCurrentSharedValue.mockImplementation(() => true);
+getCurrentFormValueByFieldName.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 checkDisableShared.mockImplementation(() => false);
 

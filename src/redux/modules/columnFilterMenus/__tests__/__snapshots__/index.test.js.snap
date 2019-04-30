@@ -263,6 +263,10 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "tenants": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "platformRoles": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
@@ -276,6 +280,27 @@ Immutable.Map {
       },
       Immutable.Map {
         "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
+  "slas": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Active Sla",
         "active": true,
       },
       Immutable.Map {
@@ -606,6 +631,31 @@ Immutable.Map {
       },
       Immutable.Map {
         "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
+  "dispositions": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "External Id",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Shared",
         "active": true,
       },
       Immutable.Map {

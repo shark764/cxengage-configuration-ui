@@ -33,6 +33,7 @@ describe('<UsersForm />', () => {
         handleSubmit={() => {}}
         initialValues={initialValues}
         displayResetPassword={true}
+        changeUserInviteStatus={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -59,6 +60,7 @@ describe('<UsersForm />', () => {
         handleSubmit={() => {}}
         initialValues={initialValues}
         displayResetPassword={true}
+        changeUserInviteStatus={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -85,6 +87,7 @@ describe('<UsersForm />', () => {
         handleSubmit={() => {}}
         initialValues={initialValues}
         displayResetPassword={true}
+        changeUserInviteStatus={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -111,6 +114,7 @@ describe('<UsersForm />', () => {
         handleSubmit={() => {}}
         initialValues={initialValues}
         displayResetPassword={false}
+        changeUserInviteStatus={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();

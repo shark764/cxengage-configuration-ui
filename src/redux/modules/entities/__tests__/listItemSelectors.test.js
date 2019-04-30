@@ -3,7 +3,7 @@
  */
 
 import { fromJS } from 'immutable';
-import { getCurrentEntity, getSelectedEntity, getCurrentEntityStore } from '../selectors';
+import { getCurrentEntity, getSelectedEntity, getCurrentEntityStore, getSelectedEntityId } from '../selectors';
 import {
   listMemberIds,
   listMemberObjects,
@@ -33,7 +33,8 @@ const initialState = fromJS({
           active: true,
           mockDependentEntity: ['0001']
         }
-      ]
+      ],
+      selectedEntityId: '0000'
     },
     mockDependentEntity: {
       data: [
@@ -70,6 +71,7 @@ jest.mock('../selectors');
 getCurrentEntity.mockImplementation(() => 'mockEntity');
 getSelectedEntity.mockImplementation(() => mockSelectedEntity);
 getCurrentEntityStore.mockImplementation(() => mockCurrentEntityStore);
+getSelectedEntityId.mockImplementation(() => '0000');
 
 describe('listMemberIds', () => {
   it('should get dependentEntity, then return it as javascript collection', () => {

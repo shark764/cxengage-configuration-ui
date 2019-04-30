@@ -21,7 +21,7 @@ export default function TransferListsForm({ handleSubmit, isSaving, userHasUpdat
         label="Name *"
         componentType="input"
         inputType="text"
-        automation="transferListsNameInput"
+        data-automation="transferListsNameInput"
         disabled={isSaving || !userHasUpdatePermission}
       />
       <InputField
@@ -29,7 +29,7 @@ export default function TransferListsForm({ handleSubmit, isSaving, userHasUpdat
         label="Description"
         componentType="textarea"
         inputType="text"
-        automation="transferListsDescriptionInput"
+        data-automation="transferListsDescriptionInput"
         disabled={isSaving || !userHasUpdatePermission}
       />
     </form>

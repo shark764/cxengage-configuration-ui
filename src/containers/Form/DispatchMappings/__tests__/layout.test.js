@@ -23,6 +23,7 @@ describe('<DispatchMappingsForm />', () => {
         userHasUpdatePermission={true}
         initialValues={initialValues}
         handleSubmit={() => {}}
+        flowId="mockFlowId"
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -39,6 +40,7 @@ describe('<DispatchMappingsForm />', () => {
         userHasUpdatePermission={true}
         initialValues={initialValues}
         handleSubmit={() => {}}
+        flowId="mockFlowId"
       />
     );
     expect(rendered).toMatchSnapshot();

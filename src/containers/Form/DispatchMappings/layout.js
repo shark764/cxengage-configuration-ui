@@ -36,7 +36,7 @@ export default function DispatchMappingsForm({
         label="Name *"
         componentType="input"
         inputType="text"
-        automation="dispatchMappingsFormFieldName"
+        data-automation="dispatchMappingsFormFieldName"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
@@ -44,13 +44,13 @@ export default function DispatchMappingsForm({
         label="Description"
         componentType="textarea"
         inputType="text"
-        automation="dispatchMappingsFormFieldDescription"
+        data-automation="dispatchMappingsFormFieldDescription"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <SelectField
         name="channelType"
         label="Interaction Type *"
-        automation="dispatchMappingsFormFieldChannelType"
+        data-automation="dispatchMappingsFormFieldChannelType"
         required
         options={[
           { value: 'any', label: 'Any' },
@@ -65,7 +65,7 @@ export default function DispatchMappingsForm({
       <SelectField
         name="interactionField"
         label="Mapping *"
-        automation="dispatchMappingsFormFieldInteractionField"
+        data-automation="dispatchMappingsFormFieldInteractionField"
         required
         options={[
           { value: 'customer', label: 'Customer' },
@@ -78,7 +78,7 @@ export default function DispatchMappingsForm({
       {mappingValue === 'source' && (
         <SelectField
           name="value"
-          automation="dispatchMappingsFormFieldValue"
+          data-automation="dispatchMappingsFormFieldValue"
           required
           label="Integration *"
           options={integrationElements}
@@ -89,7 +89,7 @@ export default function DispatchMappingsForm({
       {mappingValue === 'direction' && (
         <SelectField
           name="value"
-          automation="dispatchMappingsFormFieldValue"
+          data-automation="dispatchMappingsFormFieldValue"
           label="Direction *"
           required
           options={[
@@ -105,7 +105,7 @@ export default function DispatchMappingsForm({
         <InputField
           name="value"
           label="Mapping Value *"
-          automation="dispatchMappingsFormFieldValue"
+          data-automation="dispatchMappingsFormFieldValue"
           componentType="input"
           inputType="text"
           className="frm-dispatch-mappings-name"
@@ -118,17 +118,19 @@ export default function DispatchMappingsForm({
         label="Dispatch to flow *"
         required={initialValues.get('id') !== undefined}
         automation="dispatchMappingsFormFieldFlowId"
-        options={!flowsFetching && flowIds}
+        options={!flowsFetching ? flowIds : undefined}
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
-      <SelectField
-        name="version"
-        label="Flow Version *"
-        required={initialValues.get('id') !== undefined}
-        automation="dispatchMappingsFormFieldVersion"
-        options={!flowsFetching && flowVersions}
-        disabled={isSaving || inherited || !userHasUpdatePermission || flowsFetching || !flowId}
-      />
+      {flowId && (
+        <SelectField
+          name="version"
+          label="Flow Version *"
+          required={initialValues.get('id') !== undefined}
+          data-automation="dispatchMappingsFormFieldVersion"
+          options={!flowsFetching ? flowVersions : undefined}
+          disabled={isSaving || inherited || !userHasUpdatePermission || flowsFetching || !flowId}
+        />
+      )}
     </form>
   );
 }
@@ -139,24 +141,30 @@ DispatchMappingsForm.propTypes = {
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
-  flowIds: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string.isRequired
-    })
-  ),
+  flowIds: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.string.isRequired
+      })
+    ),
+    PropTypes.object
+  ]),
   integrationElements: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string.isRequired
     })
   ),
-  flowVersions: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string.isRequired
-    })
-  ),
+  flowVersions: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.string.isRequired
+      })
+    ),
+    PropTypes.object
+  ]),
   mappingValue: PropTypes.string,
   flowsFetching: PropTypes.bool,
   initialValues: PropTypes.object,

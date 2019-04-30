@@ -5,22 +5,26 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { getCurrentForm } from '../../../../redux/modules/form/selectors';
+import {
+  selectFormInitialValues,
+  getCurrentForm,
+  createFormName,
+  formSubmission
+} from '../../../../redux/modules/form/selectors';
 import FlowsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating } from '../../../../redux/modules/entities/selectors';
-import { selectFlowVersions, selectFlowNames } from '../../../../redux/modules/entities/flows/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
+import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import { selectFlowVersions } from '../../../../redux/modules/entities/flows/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
+userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 jest.mock('../../../../redux/modules/entities/flows/selectors');
 selectFlowVersions.mockImplementation(() => ({ label: 'v1', value: '0001' }));
-selectFlowNames.mockImplementation(() => ['mockName1', 'mockName2']);
 
 describe('flows Renders', () => {
   it('renders', () => {

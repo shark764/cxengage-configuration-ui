@@ -13,6 +13,27 @@ def c = new common()
 def n = new node()
 def f = new frontend()
 
+@NonCPS
+def stop_previous_builds(job_name, build_num) {
+  def job = Jenkins.instance.getItemByFullName(job_name)
+  def new_builds = job.getNewBuilds()
+
+  for (int i = 0; i < new_builds.size(); i++) {
+    def build = new_builds.get(i);
+    if (build.getNumber().toInteger() != build_num) {
+      if (build.isBuilding()) {
+        build.doStop()
+      }
+    }
+  }
+}
+
+try {
+  stop_previous_builds(env.JOB_NAME, env.BUILD_NUMBER.toInteger())
+} catch (Exception e) {
+  sh "echo ${e}"
+}
+
 node(){
   pwd = pwd()
 }
@@ -34,7 +55,7 @@ pipeline {
           stage ('Setup Docker') {
             steps {
               sh 'echo "Stage Description: Sets up docker image for use in the next stages"'
-              sh "mkdir build -p"
+              sh "rm -rf build; mkdir build -p"
               sh "docker build -t ${docker_tag} -f Dockerfile ."
               sh "docker run --rm -t -d --name=${docker_tag} ${docker_tag}"
             }
@@ -77,7 +98,7 @@ pipeline {
       }
     }
     stage ('Github tagged release') {
-      when { anyOf {branch 'master'}}
+      when { anyOf {branch 'master'; branch 'develop'}}
       steps {
         sh 'echo "Makes a github tagged release under a new branch with the same name as the tag version"'
         git url: "git@github.com:SerenovaLLC/${service}"
@@ -91,8 +112,24 @@ pipeline {
         sh "git push origin ${build_version}"
       }
     }
-    stage ('Save and Publish') {
+    stage ('Create dev build') {
       when { anyOf {branch 'master'}}
+      steps {
+        sh 'echo "Stage Description: Pushes built app to S3"'
+        sh "cp config/dev/config.json build"
+        sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/dev/builds/config2/${build_version}/ --delete"
+      }
+    }
+    stage ('Create qe build') {
+      when { anyOf {branch 'master'}}
+      steps {
+        sh 'echo "Stage Description: Pushes built app to S3"'
+        sh "cp config/qe/config.json build"
+        sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/qe/builds/config2/${build_version}/ --delete"
+      }
+    }
+    stage ('Save and Publish') {
+      when { anyOf {branch 'master'; branch 'develop'}}
       parallel {
         stage ('Publish specs to npm') {
           steps {
@@ -109,7 +146,7 @@ pipeline {
       }
     }
     stage ('Deploy to Dev') {
-      when { anyOf {branch 'master'}}
+      when { anyOf {branch 'master'; branch 'develop'}}
       steps {
         build(
         job: 'Deploy - Front-End',

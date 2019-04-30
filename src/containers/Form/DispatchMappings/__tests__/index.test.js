@@ -24,7 +24,7 @@ isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 currentMappingValue.mockImplementation(() => 'source');
-selectNonReusableFlows.mockImplementation(() => ['mockId1', 'mockId2']);
+selectNonReusableFlows.mockImplementation(() => [{ value: 'mockValue', label: 'mockLabel' }]);
 selectIntegrations.mockImplementation(() => ['mockId1', 'mockId2']);
 
 describe('DispatchMappings Renders', () => {

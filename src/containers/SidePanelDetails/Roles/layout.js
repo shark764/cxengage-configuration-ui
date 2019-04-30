@@ -8,10 +8,10 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Detail, SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
+import { SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,19 +29,17 @@ export function RolesDetailsPanel({
   removeListItem,
   setSelectedSubEntityId,
   listSize,
-  item: { name, description }
+  itemApiPending,
+  parentTenantName
 }) {
   return (
     <Wrapper id="dtpanel-roles">
-      {inherited && <DetailsPanelAlert text="This role is inherited and cannot be edited" />}
-      {!inherited && userHasUpdatePermission ? (
-        children
-      ) : (
-        <Fragment>
-          <Detail label="Name" value={name} />
-          <Detail label="Description" value={description} />
-        </Fragment>
+      {inherited && (
+        <DetailsPanelAlert
+          text={`This role is inherited ${parentTenantName ? `from ${parentTenantName}` : ''} and cannot be edited.`}
+        />
       )}
+      {children}
 
       <DetailHeader
         userHasUpdatePermission={userHasUpdatePermission}
@@ -58,16 +56,13 @@ export function RolesDetailsPanel({
         inherited={inherited}
         fields={tableFields}
         fetching={rolesFetching}
+        itemApiPending={itemApiPending}
       />
     </Wrapper>
   );
 }
 
 RolesDetailsPanel.propTypes = {
-  item: PropTypes.shape({
-    name: PropTypes.string,
-    description: PropTypes.string
-  }),
   rolesFetching: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
@@ -76,5 +71,7 @@ RolesDetailsPanel.propTypes = {
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
   listSize: PropTypes.number,
-  inherited: PropTypes.bool
+  inherited: PropTypes.bool,
+  itemApiPending: PropTypes.string,
+  parentTenantName: PropTypes.string
 };

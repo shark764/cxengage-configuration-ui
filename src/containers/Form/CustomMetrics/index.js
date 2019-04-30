@@ -13,8 +13,12 @@ import {
   isCreating,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
-import { getAbandonTypeFormValue } from '../../../redux/modules/entities/customMetrics/selectors';
+import {
+  selectFormInitialValues,
+  formSubmission,
+  createFormName,
+  getCurrentFormValueByFieldName
+} from '../../../redux/modules/form/selectors';
 
 const CreateCustomMetricsForm = compose(
   connect(createFormName),
@@ -27,7 +31,7 @@ const CreateCustomMetricsForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    slaAbandonType: getAbandonTypeFormValue(state),
+    slaAbandonType: getCurrentFormValueByFieldName(state, 'slaAbandonType'),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),

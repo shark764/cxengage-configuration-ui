@@ -19,7 +19,8 @@ import {
   getSelectedEntity,
   userHasUpdatePermission,
   isInherited,
-  isSubEntitySaving
+  isSubEntitySaving,
+  itemApiPending
 } from '../../../redux/modules/entities/selectors';
 
 export function mapDispatchToProps(dispatch) {
@@ -51,6 +52,7 @@ export function mapStateToProps(state) {
       tableFields: selectedEntity.getIn(['listType', 'fields']).toJS(),
       inherited,
       alertMessage,
+      itemApiPending: itemApiPending(state),
       isSaving: isSubEntitySaving(state)
     };
   }

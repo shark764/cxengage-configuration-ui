@@ -42,8 +42,12 @@ export const FetchSideCreatedAndUpdatedBy = (action$, store) =>
         createdById: getSelectedEntity(store.getState()).get('createdBy'),
         updatedById: getSelectedEntity(store.getState()).get('updatedBy')
       };
-      newAction.createdByName = getUserDisplayName(store.getState(), newAction.createdById);
-      newAction.updatedByName = getUserDisplayName(store.getState(), newAction.updatedById);
+      newAction.createdByName =
+        getSelectedEntity(store.getState()).get('createdByName') ||
+        getUserDisplayName(store.getState(), newAction.createdById);
+      newAction.updatedByName =
+        getSelectedEntity(store.getState()).get('updatedByName') ||
+        getUserDisplayName(store.getState(), newAction.updatedById);
       return newAction;
     })
     .filter(a => a.createdByName === undefined || a.updatedByName === undefined)
@@ -76,7 +80,9 @@ export const FetchUpdatedByAfterUpdate = (action$, store) =>
         createdById: getSelectedEntity(store.getState()).get('createdBy'),
         updatedById: getSelectedEntity(store.getState()).get('updatedBy')
       };
-      newAction.updatedByName = getUserDisplayName(store.getState(), newAction.updatedById);
+      newAction.updatedByName =
+        getSelectedEntity(store.getState()).get('updatedByName') ||
+        getUserDisplayName(store.getState(), newAction.updatedById);
       // We don't get username from session, since UserData state section replaces
       // User name by Tenant Name when changing tenant selected.
       return newAction;

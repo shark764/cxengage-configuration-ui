@@ -7,34 +7,28 @@ import { RolesDetailsPanel } from './layout.js';
 
 import {
   userHasUpdatePermission,
-  getSelectedEntity,
-  getCurrentEntity,
   isInherited,
-  isEntityFetching
+  isEntityFetching,
+  itemApiPending
 } from '../../../redux/modules/entities/selectors';
 
-import {
-  getEntityListMembers,
-  getListSize
-} from '../../../redux/modules/entities/listItemSelectors';
+import { getEntityListMembers, getListSize } from '../../../redux/modules/entities/listItemSelectors';
 
-import {
-  setSelectedSubEntityId,
-  removeListItem
-} from '../../../redux/modules/entities';
+import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
 
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
+import { getRoleParentTenantName } from '../../../redux/modules/entities/roles/selectors';
 
 export function mapStateToProps(state, props) {
-  const currentEntity = getCurrentEntity(state);
   return {
-    item: getSelectedEntity(state).toJS(),
     userHasUpdatePermission: userHasUpdatePermission(state),
     tableItems: getEntityListMembers(state),
-    tableFields: entitiesMetaData[currentEntity].sidePanelListTableFields,
+    tableFields: entitiesMetaData.roles.sidePanelListTableFields,
     rolesFetching: isEntityFetching(state, 'roles'),
+    itemApiPending: itemApiPending(state),
     listSize: getListSize(state),
-    inherited: isInherited(state)
+    inherited: isInherited(state),
+    parentTenantName: getRoleParentTenantName(state)
   };
 }
 

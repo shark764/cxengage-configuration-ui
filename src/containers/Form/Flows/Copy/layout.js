@@ -42,7 +42,7 @@ const Wrapper = styled.div`
 
 export default function ListItemsForm(props) {
   return (
-    <form onSubmit={props.handleSubmit} key={props.key} id="frm-copy-flow">
+    <form onSubmit={props.handleSubmit} key={props.key}>
       <Fragment>
         <Header>{`${props.subEntityId === 'drafts' ? 'Creating new Draft for' : 'Copying Flow'}: `}</Header>
         <Item title={props.flowName}>{props.flowName}</Item>
@@ -53,7 +53,7 @@ export default function ListItemsForm(props) {
           label="Name *"
           componentType="input"
           inputType="text"
-          automation="flowsCopyFormFieldName"
+          data-automation="flowsCopyFormFieldName"
           disabled={props.isSaving}
         />
         {!(props.subEntityId === 'drafts' && props.subEntityName === 'versions') && (
@@ -62,7 +62,7 @@ export default function ListItemsForm(props) {
             label="Description"
             componentType="textarea"
             inputType="text"
-            automation="flowsCopyFormFieldDescription"
+            data-automation="flowsCopyFormFieldDescription"
             disabled={props.isSaving}
           />
         )}

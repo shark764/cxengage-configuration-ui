@@ -23,6 +23,21 @@ Object {
 }
 `;
 
+exports[`getCurrentFormValueByFieldName Returns proper value by field name given 1`] = `"mockValue"`;
+
+exports[`getCurrentSubForm Returns proper form map by given formId 1`] = `
+Immutable.Map {
+  "initial": Immutable.Map {
+    "mockProperty": "mock value",
+  },
+  "values": Immutable.Map {
+    "field": "mockValue",
+  },
+}
+`;
+
+exports[`getCurrentSubFormValueByFieldName Returns proper value by field name and formId given 1`] = `"mockValue"`;
+
 exports[`isFormInvalid correctly calls redux-form's 'isInvalid' method 1`] = `
 [MockFunction] {
   "calls": Array [

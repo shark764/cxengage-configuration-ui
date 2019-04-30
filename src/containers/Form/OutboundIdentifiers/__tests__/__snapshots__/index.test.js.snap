@@ -9,11 +9,13 @@ Object {
       "value": "mockValue",
     },
   ],
+  "flowsFetching": undefined,
   "initialValues": Object {
     "active": true,
   },
   "isSaving": false,
   "key": "mockId",
+  "userHasUpdatePermission": undefined,
 }
 `;
 

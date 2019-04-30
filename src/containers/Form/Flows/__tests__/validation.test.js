@@ -2,13 +2,6 @@ import { formValidation } from '../validation';
 import { Map } from 'immutable';
 
 describe('formValidation', () => {
-  let props;
-  beforeEach(() => {
-    props = {
-      names: ['mockName1', 'mockName2'],
-      initialValues: new Map({ name: 'mockName' })
-    };
-  });
   it('returns proper object when required fields are provided', () => {
     const values = new Map({
       name: 'mockName',
@@ -16,7 +9,7 @@ describe('formValidation', () => {
       type: 'mockType',
       activeVersion: '0001'
     });
-    expect(formValidation(values, props)).toMatchSnapshot();
+    expect(formValidation(values)).toMatchSnapshot();
   });
   it('returns proper object (errors) when required fields are not provided', () => {
     const values = new Map({
@@ -25,7 +18,7 @@ describe('formValidation', () => {
       type: '',
       activeVersion: ''
     });
-    expect(formValidation(values, props)).toMatchSnapshot();
+    expect(formValidation(values)).toMatchSnapshot();
   });
   it('returns proper object (errors) when wrong values are provided', () => {
     const values = new Map({
@@ -34,6 +27,6 @@ describe('formValidation', () => {
       type: null,
       activeVersion: null
     });
-    expect(formValidation(values, props)).toMatchSnapshot();
+    expect(formValidation(values)).toMatchSnapshot();
   });
 });

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DispositionsForm /> renders create form 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`<DispositionsForm /> renders update form 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;

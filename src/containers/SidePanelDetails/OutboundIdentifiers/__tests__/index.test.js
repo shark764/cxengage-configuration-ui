@@ -3,22 +3,9 @@
  */
 
 import React from 'react';
-import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import OutboundIdentifiersDetailsPanel, { mapStateToProps } from '../';
-import { getSelectedEntity, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
-
-jest.mock('../../../../redux/modules/entities/selectors');
-getSelectedEntity.mockImplementation(
-  () =>
-    new Map({
-      id: 'mockId',
-      name: 'mockName',
-      active: true
-    })
-);
-userHasUpdatePermission.mockImplementation(() => true);
+import OutboundIdentifiersDetailsPanel from '../';
 
 describe('OutboundIdentifiersDetailsPanel Renders', () => {
   it('renders', () => {
@@ -26,11 +13,5 @@ describe('OutboundIdentifiersDetailsPanel Renders', () => {
     expect(
       shallow(<OutboundIdentifiersDetailsPanel store={store}>Child</OutboundIdentifiersDetailsPanel>)
     ).toMatchSnapshot();
-  });
-});
-
-describe('Maps state to props only using selectors', () => {
-  it('validates object created from mapStateToProps', () => {
-    expect(mapStateToProps()).toMatchSnapshot();
   });
 });

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "disableShared": false,
+  "inherited": false,
+  "initialValues": Object {
+    "active": true,
+    "shared": false,
+  },
+  "isSaving": true,
+  "isSlaTenantDefault": false,
+  "key": "mockId",
+  "sharedFormValue": "ignore-abandons",
+  "slaAbandonType": "ignore-abandons",
+  "userHasUpdatePermission": true,
+  "versions": Array [],
+}
+`;
+
+exports[`Slas Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `undefined`;
+
+exports[`formSubmission returns proper values 1`] = `undefined`;

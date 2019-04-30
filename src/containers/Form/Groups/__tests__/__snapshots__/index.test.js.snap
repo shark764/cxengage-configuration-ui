@@ -14,5 +14,6 @@ Object {
   },
   "isSaving": true,
   "key": "mockId",
+  "userHasUpdatePermission": true,
 }
 `;

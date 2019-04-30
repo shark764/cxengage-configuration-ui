@@ -13,8 +13,7 @@ import {
   isUpdating,
   userHasUpdatePermission
 } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
-import { getAbandonTypeFormValue } from '../../../../redux/modules/entities/customMetrics/selectors';
+import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
@@ -24,6 +23,7 @@ isInherited.mockImplementation(() => false);
 isUpdating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
+getCurrentFormValueByFieldName.mockImplementation(() => 'ignored-abandoned-calls');
 
 describe('CustomMetrics Renders', () => {
   it('renders', () => {
@@ -31,9 +31,6 @@ describe('CustomMetrics Renders', () => {
     expect(shallow(<CustomMetricsForm store={store}>Child</CustomMetricsForm>)).toMatchSnapshot();
   });
 });
-
-jest.mock('../../../../redux/modules/entities/customMetrics/selectors');
-getAbandonTypeFormValue.mockImplementation(() => 'ignored-abandoned-calls');
 
 describe('Maps state to props only using selectors', () => {
   it('validates object created from mapStateToProps', () => {

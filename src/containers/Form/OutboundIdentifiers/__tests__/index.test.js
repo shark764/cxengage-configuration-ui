@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import OutboundIdentifiersForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating } from '../../../../redux/modules/entities/selectors';
-import { selectFlowIds } from '../../../../redux/modules/entities/flows/selectors';
+import { selectNonReusableFlows } from '../../../../redux/modules/entities/flows/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 import { getChannelTypeFormValue } from '../../../../redux/modules/entities/outboundIdentifiers/selectors';
 
@@ -17,7 +17,7 @@ jest.mock('../../../../redux/modules/form/selectors');
 jest.mock('../../../../redux/modules/entities/outboundIdentifiers/selectors');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => false);
-selectFlowIds.mockImplementation(() => [{ value: 'mockValue', label: 'mockLabel' }]);
+selectNonReusableFlows.mockImplementation(() => [{ value: 'mockValue', label: 'mockLabel' }]);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 getChannelTypeFormValue.mockImplementation(() => 'email');
 
