@@ -93,7 +93,7 @@ export default class SlasForm extends Component {
           confirmBtnCallback={
             !this.props.disableShared && !this.props.sharedFormValue ? this.props.toggleShared : undefined
           }
-          mainText={`Setting shared to "enabled" for this SLA. Once a SLA is shared and saved, it cannot be reverted.`}
+          mainText={`Setting shared to "enabled" for this SLA. Once an SLA is shared and saved, it cannot be reverted.`}
           secondaryText={'Are you sure you want to continue?'}
         >
           <ToggleField
