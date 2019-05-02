@@ -36,7 +36,9 @@ export function RolesDetailsPanel({
     <Wrapper id="dtpanel-roles">
       {inherited && (
         <DetailsPanelAlert
-          text={`This role is inherited ${parentTenantName ? `from ${parentTenantName}` : ''} and cannot be edited.`}
+          text={`This role is inherited ${
+            parentTenantName && location.hash.includes('alpha') ? `from ${parentTenantName}` : ''
+          } and cannot be edited.`}
         />
       )}
       {children}

@@ -12,7 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { SidePanelTable, DetailHeader } from 'cx-ui-components';
+import { SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
 import { detailHeaderText } from '../../../utils';
 
 const Wrapper = styled.div`
@@ -33,12 +33,14 @@ export default function SlasDetailsPanel({
 }) {
   return (
     <Wrapper className="dtpanel-entity-slas">
+      {inherited && <DetailsPanelAlert text={`This SLA is inherited and cannot be edited.`} />}
       {children}
 
       <DetailHeader
         userHasUpdatePermission={!slasFetching && !inherited && userHasUpdatePermission}
         text={detailHeaderText(versionsItems, 'Published Versions')}
         onActionButtonClick={() => setSelectedSubEntityId('versions')}
+        inherited={inherited}
         open
       />
       <SidePanelTable

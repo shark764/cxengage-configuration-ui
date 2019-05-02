@@ -12,10 +12,10 @@ import {
   getCurrentEntity,
   userHasUpdatePermission,
   isInherited,
-  isSaving
+  isSaving,
+  getEntityParentTenantName
 } from '../../../../redux/modules/entities/selectors';
 import { getEntityListMembers, getListSize } from '../../../../redux/modules/entities/listItemSelectors';
-import { getRoleParentTenantName } from '../../../../redux/modules/entities/roles/selectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -36,9 +36,7 @@ getCurrentEntity.mockImplementation(() => 'roles');
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
-
-jest.mock('../../../../redux/modules/entities/roles/selectors');
-getRoleParentTenantName.mockImplementation(() => 'ParentTenantName');
+getEntityParentTenantName.mockImplementation(() => 'ParentTenantName');
 
 jest.mock('../../../../redux/modules/entities/listItemSelectors');
 getEntityListMembers.mockImplementation(() => ['mockListMembers']);

@@ -11,8 +11,6 @@ export const getRoles = state => {
   return state.getIn(['Entities', 'roles'], new Map([]));
 };
 
-export const getRoleParentTenantName = state => getSelectedEntity(state).get('parentTenantName') || '';
-
 export const convertRoles = createSelector([getRoles], roles => roles.get('data').toJS());
 
 export const selectTenantRoles = createSelector([getRoles], roles => {

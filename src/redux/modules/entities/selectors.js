@@ -256,3 +256,5 @@ export const findEntityByProperty = (state, entityName, entityProperty, value) =
     : getEntities(state)
         .getIn([entityName, 'data'])
         .find(entity => entity.has(entityProperty) && entity.get(entityProperty) === value);
+
+export const getEntityParentTenantName = state => getSelectedEntity(state).get('parentTenantName') || '';

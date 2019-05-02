@@ -9,7 +9,8 @@ import {
   userHasUpdatePermission,
   isInherited,
   isEntityFetching,
-  itemApiPending
+  itemApiPending,
+  getEntityParentTenantName
 } from '../../../redux/modules/entities/selectors';
 
 import { getEntityListMembers, getListSize } from '../../../redux/modules/entities/listItemSelectors';
@@ -17,7 +18,6 @@ import { getEntityListMembers, getListSize } from '../../../redux/modules/entiti
 import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
 
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
-import { getRoleParentTenantName } from '../../../redux/modules/entities/roles/selectors';
 
 export function mapStateToProps(state, props) {
   return {
@@ -28,7 +28,7 @@ export function mapStateToProps(state, props) {
     itemApiPending: itemApiPending(state),
     listSize: getListSize(state),
     inherited: isInherited(state),
-    parentTenantName: getRoleParentTenantName(state)
+    parentTenantName: getEntityParentTenantName(state)
   };
 }
 

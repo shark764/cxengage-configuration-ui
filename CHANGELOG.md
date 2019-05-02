@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reporting
 
+## [0.61.2] - 2019-05-02
+### Changed
+- CXV1-18119 - Added banner message on inherited SLA.
+- Showing parent tenant name on inherited roles has been moved to Alpha.
+
 ## [0.61.1] - 2019-04-29
 ### Fixed
 - CXV1-18073 - Changing warning message when shared toggle is enabled.

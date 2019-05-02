@@ -6,7 +6,7 @@ import { isInherited } from '../selectors';
 export const UpdatePlatformRoleEntity = (action$, store) =>
   action$
     .ofType('FETCH_DATA_ITEM_FULFILLED')
-    .filter(a => a.entityName === 'roles' && isInherited(store.getState()))
+    .filter(a => a.entityName === 'roles' && isInherited(store.getState()) && location.hash.includes('alpha'))
     .map(a => {
       a.sdkCall = {
         command: 'getTenant',
