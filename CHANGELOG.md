@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reporting
 
+## [0.61.3] - 2019-05-02
+### Fixed
+- Updating package-lock file to fix conflicts in Jenkins.
+
 ## [0.61.2] - 2019-05-02
 ### Changed
 - CXV1-18119 - Added banner message on inherited SLA.

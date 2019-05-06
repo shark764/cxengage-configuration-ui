@@ -97,6 +97,11 @@ export const ReInitForm = action$ =>
     .filter(a => a.entityName === 'slas')
     // Used to re-initialize SLA form after the version
     // is created. Is the easiest way to update the whole form
+    .map(a => {
+      delete a.response.result.active;
+      delete a.response.result.versions;
+      return a;
+    })
     .map(a => ({
       type: '@@redux-form/INITIALIZE',
       meta: {
