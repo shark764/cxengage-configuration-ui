@@ -19,7 +19,7 @@ import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
 import { sdkPromise } from '../../../utils/sdk';
 import { handleError, handleSuccess, handleBulkSuccess } from './handleResult';
 
-import { entityAddedToList, entityRemovedFromList } from '../../modules/entities/listItemSelectors';
+import { entityAddedToList, entityRemovedFromList } from './listItemSelectors';
 
 import { uploadCsv, setEntityUpdating } from './index';
 import { isInIframe } from 'serenova-js-utils/browser';
@@ -38,8 +38,6 @@ import {
   getSelectedEntityBulkChangeItems,
   getSelectedEntityFormId
 } from './selectors';
-
-import { getHasProficiencyFormValue } from './skills/selectors';
 
 import { entitiesMetaData } from './metaData';
 
@@ -83,7 +81,7 @@ export const reInitForm = action$ =>
     // This filter prevents entity form from reinitializing
     // when modifying entity membersList
     // values just contains the dependentEntity as key
-    .filter(a => a.values.id !== undefined)
+    .filter(a => a.values.id !== undefined && a.entityName !== 'transferLists')
     .map(a => {
       if (a.entityName && a.entityName === 'users') {
         a.values.extensions.forEach(ext => (ext.id = generateUUID()));
@@ -106,13 +104,6 @@ export const ClearBulkFormFields = action$ =>
     .filter(a => a.meta.form.includes('bulk'))
     .map(a => clearFields(a.meta.form, false, false, a.payload.name));
 
-export const ClearCustomMetricsFormFields = action$ =>
-  action$
-    .ofType('@@redux-form/UNREGISTER_FIELD')
-    .filter(a => a.meta.form.includes('customMetrics'))
-    .filter(a => a.payload.name.includes('slaAbandonThreshold'))
-    .map(a => clearFields(a.meta.form, false, false, a.payload.name));
-
 export const FocusOutboundIdentifiersValueFormField = (action$, store) =>
   action$
     .ofType('@@redux-form/CHANGE')
@@ -128,7 +119,11 @@ export const ToggleHasProficiencyFormField = (action$, store) =>
   action$
     .ofType('TOGGLE_PROFICIENCY')
     .map(a =>
-      change(getSelectedEntityFormId(store.getState()), 'hasProficiency', !getHasProficiencyFormValue(store.getState()))
+      change(
+        getSelectedEntityFormId(store.getState()),
+        'hasProficiency',
+        !getCurrentFormValueByFieldName(store.getState(), 'hasProficiency')
+      )
     );
 
 export const FormSubmission = (action$, store) =>
@@ -140,6 +135,20 @@ export const FormSubmission = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       selectedEntityId: getSelectedEntityId(store.getState())
     }))
+    .map(a => {
+      if (a.entityName === 'transferLists') {
+        a.values = a.values.update('endpoints', endpoints =>
+          endpoints.map(endpoint =>
+            endpoint
+              .delete('draggableUUID')
+              .delete('endpointUUID')
+              .delete('droppableUUID')
+              .delete('categoryUUID')
+          )
+        );
+      }
+      return a;
+    })
     .map(a => {
       if (a.selectedEntityId === 'create') {
         return {
@@ -208,15 +217,18 @@ export const getTenantPermissions = action$ =>
           data: 'updateLocalStorage',
           topic: 'updateLocalStorage'
         })
-      ).map(response => ({
-        type: 'UPDATE_USER_PERMISSIONS',
-        tenantInfo: {
-          tenantId: response.tenant.tenantId,
-          tenantName: response.tenant.tenantName,
-          tenantPermissions: response.tenant.tenantPermissions
-        },
-        agentId: response.agentId
-      }))
+      ).map(response => {
+        return {
+          type: 'UPDATE_USER_PERMISSIONS',
+          tenantInfo: {
+            tenantId: response.tenant.tenantId,
+            tenantName: response.tenant.tenantName,
+            tenantPermissions: response.tenant.tenantPermissions
+          },
+          tenants: response.tenants,
+          agentId: response.agentId
+        };
+      })
     );
 
 export const CreateEntity = (action$, store) =>
@@ -443,14 +455,16 @@ export const AddingListItems = (action$, store) =>
         [entitiesMetaData[getCurrentEntity(store.getState())].dependentEntity]: entityAddedToList(
           store.getState(),
           a.listItemId
-        )
+        ),
+        tenantId: getSelectedEntity(store.getState()).get('tenantId')
       }
     }))
     .map(a => ({
       type: 'UPDATE_ENTITY',
       values: a.values,
       entityName: a.entityName,
-      entityId: a.entityId
+      entityId: a.entityId,
+      addListItemId: a.listItemId
     }));
 
 export const addAndRemoveListItemEntities = (action$, store) =>
@@ -546,14 +560,16 @@ export const RemovingListItems = (action$, store) =>
         [entitiesMetaData[getCurrentEntity(store.getState())].dependentEntity]: entityRemovedFromList(
           store.getState(),
           a.listItemId
-        )
+        ),
+        tenantId: getSelectedEntity(store.getState()).get('tenantId')
       }
     }))
     .map(a => ({
       type: 'UPDATE_ENTITY',
       values: a.values,
       entityName: a.entityName,
-      entityId: a.entityId
+      entityId: a.entityId,
+      removeListItemId: a.listItemId
     }));
 
 export const FetchFormMetaData = (action$, store) =>
@@ -618,6 +634,7 @@ export const SubEntityFormSubmission = (action$, store) =>
       selectedSubEntityId: getSelectedSubEntityId(store.getState())
     }))
     .filter(({ selectedSubEntityId }) => selectedSubEntityId)
+    .filter(({ entityName }) => entityName !== 'transferLists')
     .map(
       a =>
         a.selectedSubEntityId === 'create'

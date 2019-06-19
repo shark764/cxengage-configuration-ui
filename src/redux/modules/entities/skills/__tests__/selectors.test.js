@@ -3,7 +3,7 @@
  */
 
 import { fromJS } from 'immutable';
-import { getHasProficiencyFormValue, getSkillMemberSidePanelTableItems, getSkillMembers } from '../selectors';
+import { getSkillMemberSidePanelTableItems, getSkillMembers } from '../selectors';
 import { getSelectedEntity, getSelectedEntityId } from '../../selectors';
 
 const mockCurrentForm = fromJS({
@@ -121,12 +121,6 @@ jest.mock('../../listItemSelectors', () => ({
 jest.mock('../../selectors');
 getSelectedEntity.mockImplementation(() => fromJS({ id: 'mockEntityId', hasProficiency: true }));
 getSelectedEntityId.mockImplementation(() => 'mockEntityId');
-
-describe('getHasProficiencyFormValue', () => {
-  it("returns the current form's hasProficiency value", () => {
-    expect(getHasProficiencyFormValue()).toEqual('mock hasProficiency value');
-  });
-});
 
 describe('getSkillMemberSidePanelTableItems', () => {
   it('Get the members', () => {

@@ -14,16 +14,14 @@ import {
   isCreating,
   userHasUpdatePermission
 } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
-import { getHasProficiencyFormValue } from '../../../../redux/modules/entities/skills/selectors';
+import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
-jest.mock('../../../../redux/modules/entities/skills/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isInherited.mockImplementation(() => false);
-getHasProficiencyFormValue.mockImplementation(() => true);
+getCurrentFormValueByFieldName.mockImplementation(() => true);
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(

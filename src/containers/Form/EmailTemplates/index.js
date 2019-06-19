@@ -8,12 +8,8 @@ import { reduxForm } from 'redux-form/immutable';
 import EmailTemplatesForm from './layout';
 import { validate } from './validation';
 import { getSelectedEntityId, isUpdating } from '../../../redux/modules/entities/selectors';
-import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
-import {
-  getInitialFormValues,
-  getEmailTemplateFormValue,
-  getTemplates
-} from '../../../redux/modules/entities/emailTemplates/selectors';
+import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
+import { getInitialFormValues, getTemplates } from '../../../redux/modules/entities/emailTemplates/selectors';
 
 const UpdateEmailTemplateForm = compose(
   connect(createFormName),
@@ -28,7 +24,7 @@ export function mapStateToProps(state) {
   return {
     initialValues: getInitialFormValues(state),
     isSaving: isUpdating(state),
-    email: getEmailTemplateFormValue(state),
+    email: getCurrentFormValueByFieldName(state, 'email'),
     templates: getTemplates(state),
     key: getSelectedEntityId(state)
   };

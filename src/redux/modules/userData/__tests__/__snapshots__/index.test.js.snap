@@ -6,6 +6,7 @@ Immutable.Map {
   "currentTenantName": "tenantName",
   "currentTenantId": "tenantId",
   "agentId": undefined,
+  "tenantRoleId": undefined,
 }
 `;
 

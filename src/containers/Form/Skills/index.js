@@ -13,9 +13,13 @@ import {
   isCreating,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import {
+  selectFormInitialValues,
+  formSubmission,
+  createFormName,
+  getCurrentFormValueByFieldName
+} from '../../../redux/modules/form/selectors';
 import { toggleProficiency } from '../../../redux/modules/entities';
-import { getHasProficiencyFormValue } from '../../../redux/modules/entities/skills/selectors';
 
 const CreateSkillsForm = compose(
   connect(createFormName),
@@ -35,7 +39,7 @@ export function mapStateToProps(state) {
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
-    hasProficiency: getHasProficiencyFormValue(state)
+    hasProficiency: getCurrentFormValueByFieldName(state, 'hasProficiency')
   };
 }
 

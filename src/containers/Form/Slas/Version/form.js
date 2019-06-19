@@ -18,7 +18,7 @@ export default function InitialVersionForm(props) {
       <InputField
         name="versionName"
         label="Name *"
-        automation="slasFormFieldVersionName"
+        data-automation="slasFormFieldVersionName"
         componentType="input"
         inputType="text"
         disabled={props.isSaving || props.viewOnly}
@@ -26,7 +26,7 @@ export default function InitialVersionForm(props) {
       <InputField
         name="versionDescription"
         label="Description"
-        automation="slasFormFieldVersionDescription"
+        data-automation="slasFormFieldVersionDescription"
         componentType="textarea"
         inputType="text"
         disabled={props.isSaving || props.viewOnly}
@@ -34,7 +34,7 @@ export default function InitialVersionForm(props) {
       <InputField
         name="slaThreshold"
         label="SLA Threshold"
-        automation="slasFormFieldSlaThreshold"
+        data-automation="slasFormFieldSlaThreshold"
         labelHelpText="(seconds)"
         inputType="text"
         disabled={props.isSaving || props.viewOnly}
@@ -44,7 +44,7 @@ export default function InitialVersionForm(props) {
       <RadioGroupField
         name="abandonType"
         label="SLA Abandon Type"
-        automation="slasFormFieldSlaAbandonType"
+        data-automation="slasFormFieldSlaAbandonType"
         disabled={props.isSaving || props.viewOnly}
         options={[
           {
@@ -64,7 +64,7 @@ export default function InitialVersionForm(props) {
         <InputField
           name="abandonThreshold"
           label="Abandon Threshold"
-          automation="slasFormFieldSlaAbandonThreshold"
+          data-automation="slasFormFieldSlaAbandonThreshold"
           labelHelpText="(seconds)"
           inputType="text"
           disabled={props.isSaving || props.viewOnly}

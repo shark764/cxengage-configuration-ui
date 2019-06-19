@@ -28,7 +28,7 @@ class DetailWrapper extends Component {
   }
   toggle = () => {
     this.setState({ open: !this.state.open });
-    if (this.props.contains) {
+    if (this.props.contains && !this.state.open) {
       this.props.fetchListItems(this.props.entityName, this.props.contains);
     }
   };

@@ -15,8 +15,8 @@ import {
   findEntity,
   findEntityByProperty
 } from '../selectors';
-import { getCheckedBulkActionFormValue } from './selectors';
-import { selectFormInitialValues } from '../../form/selectors';
+import { getDisplay } from './selectors';
+import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
 import { Toast } from 'cx-ui-components';
 import { changeUserInviteStatus } from '../../entities';
@@ -710,6 +710,29 @@ export const ToggleInvitationStatusFormField = (action$, store) =>
       change(
         getSelectedEntityFormId(store.getState()),
         a.fieldToToggle,
-        a.toValue !== undefined ? a.toValue : !getCheckedBulkActionFormValue(store.getState(), a.fieldToToggle)
+        a.toValue !== undefined ? a.toValue : !getCurrentFormValueByFieldName(store.getState(), a.fieldToToggle)
       )
+    );
+
+export const OpenAdvancedReports = (action$, store) =>
+  action$
+    .ofType('SET_TENANT_USER_AS_IMPERSONATED')
+    .map(a => ({
+      ...a,
+      sdkCall: {
+        module: 'Logi.impersonateTenantUser',
+        data: {
+          id: getSelectedEntityId(store.getState()),
+          displayName: getDisplay({
+            firstName: getSelectedEntity(store.getState()).get('firstName'),
+            lastName: getSelectedEntity(store.getState()).get('lastName'),
+            email: getSelectedEntity(store.getState()).get('email')
+          })
+        }
+      }
+    }))
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a, `You will be redirected to Advanced Reports`))
+        .catch(error => handleError(error, a))
     );

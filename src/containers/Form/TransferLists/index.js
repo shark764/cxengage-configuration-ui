@@ -7,29 +7,39 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import TransferListsForm from './layout';
 import { formValidation } from './validation';
+import { setSelectedSubEntityId, removeTransferListItem } from '../../../redux/modules/entities';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import { createFormName, formSubmission } from '../../../redux/modules/form/selectors';
 import {
-  selectTransferListsCreateFormInitialValues,
-  formSubmission,
-  createFormName
-} from '../../../redux/modules/form/selectors';
+  selectEndpointHeaders,
+  transferListsFormInitialValues
+} from '../../../redux/modules/entities/transferLists/selectors';
 
 const CreateTransferListsForm = compose(
-  connect(state => createFormName(state)),
+  connect(createFormName),
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
-    destroyOnUnmount: true
+    destroyOnUnmount: true,
+    enableReinitialize: true,
+    keepDirtyOnReinitialize: true
   })
 )(TransferListsForm);
 
-export function mapStateToProps(state) {
-  return {
-    initialValues: selectTransferListsCreateFormInitialValues(state),
-    isSaving: isCreating(state),
-    userHasUpdatePermission: userHasUpdatePermission(state),
-    key: getSelectedEntityId(state)
-  };
-}
+export const mapStateToProps = state => ({
+  isSaving: isCreating(state),
+  key: getSelectedEntityId(state),
+  selectedEntityId: getSelectedEntityId(state),
+  initialValues: transferListsFormInitialValues(state),
+  endpointHeaders: selectEndpointHeaders(state),
+  userHasUpdatePermission: userHasUpdatePermission(state)
+});
 
-export default connect(mapStateToProps)(CreateTransferListsForm);
+export const mapDispatchToProps = dispatch => ({
+  setSelectedSubEntityId: subEntityId => dispatch(setSelectedSubEntityId(subEntityId)),
+  removeTransferListItem: transferListItemId =>
+    dispatch(removeTransferListItem('transferListItem', transferListItemId)),
+  removeCategoryItems: transferListItemId => dispatch(removeTransferListItem('categoryItems', transferListItemId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTransferListsForm);

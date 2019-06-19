@@ -86,12 +86,13 @@ pipeline {
         sh "docker cp ${docker_tag}:/home/node/app/build build"
       }
     }
-    stage ('Preview PR (dev)') {
+    stage ('Preview PR (dev) and Automation Tests') {
       when { changeRequest() }
       steps {
         sh "echo 'Stage Description: Creates a temp build of the site in dev to review the changes, PR: ${pr}'"
         sh "aws s3 rm s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --recursive"
         sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --delete"
+        sh "docker exec ${docker_tag} /bin/bash -c 'export URI=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ && npm run test:preMerge'"
         script {
           f.invalidate("E23K7T1ARU8K88")
         }

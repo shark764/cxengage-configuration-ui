@@ -4,7 +4,7 @@
 
 import { connect } from 'react-redux';
 import BetaFeaturesLayout from './layout';
-import { userHasReadPermissionManual } from '../../redux/modules/entities/selectors';
+import { userHasReadPermissionManual, userHasPermissions } from '../../redux/modules/entities/selectors';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 import { getCustomTheme } from '../../redux/modules/entities/branding/selectors';
 
@@ -21,7 +21,19 @@ const entitiesWithViewPermissions = state => {
 export function mapStateToProps(state) {
   return {
     theme: getCustomTheme(state),
-    entities: entitiesWithViewPermissions(state)
+    entities: entitiesWithViewPermissions(state),
+    disabledFeatures: {
+      users: false,
+      groups: false,
+      skills: false,
+      outboundIdentifiers: false,
+      outboundIdentifierLists: false,
+      roles: false,
+      flows: false,
+      dispatchMappings: false,
+      logiStandard: !userHasPermissions(state, ['CONFIG_REPORTING_BI_VIEW']),
+      logiAdvanced: !userHasPermissions(state, ['CONFIG_REPORTING_BI_VIEW'])
+    }
   };
 }
 

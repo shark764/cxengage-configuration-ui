@@ -6,7 +6,6 @@ import { nameColumn } from './columns/name';
 import { statusColumn } from './columns/status';
 import { listTypeColumn } from './columns/listType';
 import { permissionsColumn } from './columns/permissions';
-import { metricTypeColumn } from './columns/metricType';
 import { reportTypeColumn } from './columns/reportType';
 import { constructGeneralTextColumn } from './columns/genericTextColumn';
 import { constructGeneralBooleanColumn } from './columns/genericBooleanColumn';
@@ -38,7 +37,6 @@ export function getTableColumns(columns) {
     Status: statusColumn,
     'List Type': listTypeColumn,
     Permissions: permissionsColumn,
-    'Metric Type': metricTypeColumn,
     Value: constructGeneralTextColumn('value'),
     channelType: constructGeneralTextColumn('channelType'),
     'Channel Type': constructGeneralTextColumn('channelType'),

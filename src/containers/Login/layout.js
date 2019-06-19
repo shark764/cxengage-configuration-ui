@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { isInIframe } from 'serenova-js-utils/browser';
 import styled from 'styled-components';
 import { LoadingSpinnerSVG } from 'cx-ui-components';
 import * as Cx from 'cx-js-sdk';
+import { Logo } from 'cx-ui-components';
+import { LegalCopyright, Typeahead } from 'cx-ui-components';
 
 import { cxSetTenant, cxLogin, cxTokenLogin } from '../../utils/cxSdk';
+import messages from './messages';
 
 const Loading = styled(LoadingSpinnerSVG)`
   position: absolute;
@@ -35,16 +37,18 @@ const SignInTitle = styled.div`
 `;
 const LoginFormWrapper = styled.div`
   position: relative;
-  top: 150px;
+  top: 100px;
 `;
 const LoginBox = styled.div`
   width: 540px;
-  height: 540px;
+  height: 560px;
   margin: 0px auto;
   margin-top: calc(50vh - 270px);
   border-radius: 3px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.09) 0px 0px 6px 0px;
+  position: relative;
+  z-index: 1;
 `;
 const LoginInput = styled.input`
   width: 282px;
@@ -79,14 +83,10 @@ const LoginButton = styled.button`
   display: block;
   margin: 10px auto;
 `;
-const Selector = styled.select`
-  height: 44px;
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(151, 151, 151);
-  border-radius: 2px;
-  width: 282px;
-  display: block;
+const Selector = styled(Typeahead)`
   margin: 10px auto;
+  display: block;
+  height: 44px;
 `;
 
 const Prefrences = styled.div`
@@ -106,6 +106,17 @@ const CheckboxLabel = styled.label`
   color: rgb(73, 73, 73);
   font-size: 16px;
 `;
+const Privacy = styled.a`
+  color: white;
+  float: right;
+  font-size: 16px;
+  margin-right: 10px;
+  margin-top: -15px;
+  display: inline-block;
+`;
+const LegalPolicy = styled.div`
+  margin-top: 8em;
+`;
 
 export default class Login extends Component {
   constructor() {
@@ -115,7 +126,7 @@ export default class Login extends Component {
       username: this.rememberedEmail(),
       password: '',
       tenants: [],
-      selectedTenant: '',
+      selectedTenant: null,
       token: undefined,
       platformViewOnlyCapable: false,
       loginPrefrences:
@@ -162,7 +173,7 @@ export default class Login extends Component {
       return alert('Wrong username or password , or logged out due to inactivity.');
     }
     let defaultTenantObject;
-    const { userId, defaultTenant, tenants, platformPermissions } = response;
+    const { defaultTenant, tenants, platformPermissions, userId } = response;
     // Users do not have a 'default tenant' by default
     if (defaultTenant) {
       defaultTenantObject = response.tenants.filter(tenant => tenant.tenantId === response.defaultTenant)[0];
@@ -184,7 +195,10 @@ export default class Login extends Component {
 
     this.setState({
       initalAuth: true,
-      selectedTenant: defaultTenantObject.tenantId,
+      selectedTenant: {
+        label: defaultTenantObject.tenantName,
+        value: defaultTenantObject.tenantId
+      },
       platformViewOnlyCapable: isPlatformViewCapable,
       tenants: response.tenants.map(x => ({
         tenantId: x.tenantId,
@@ -218,7 +232,8 @@ export default class Login extends Component {
   };
 
   chooseTenant = () => {
-    cxSetTenant(this.state.selectedTenant, () => {
+    cxSetTenant(this.state.selectedTenant.value, response => {
+      this.props.switchTenant(response.tenantId);
       this.props.fetchBranding();
     });
   };
@@ -232,9 +247,9 @@ export default class Login extends Component {
     this.setState({
       password: e.target.value
     });
-  setTenant = e =>
+  setTenant = selectedOption =>
     this.setState({
-      selectedTenant: e.target.value
+      selectedTenant: selectedOption
     });
 
   lgoinPrefrences = ({ target: { name, checked } }) => {
@@ -250,12 +265,15 @@ export default class Login extends Component {
     }
   };
 
+  onEnterKey = ({ key }) => (key === 'Enter' ? this.login() : undefined);
+
   render() {
-    if (isInIframe() && !this.props.hasStarted) {
+    if (!this.props.insideIframe && !this.props.hasStarted) {
       return (
         <Fragment>
           <LoginBox>
             <LoginFormWrapper>
+              <Logo />
               {!this.props.authenticated && (
                 <div>
                   <SignInTitle>Sign in to CxEngage</SignInTitle>
@@ -273,6 +291,7 @@ export default class Login extends Component {
                       type="password"
                       onChange={this.setPassword}
                       value={this.state.password}
+                      onKeyDown={this.onEnterKey}
                     />
                   )}
 
@@ -306,11 +325,20 @@ export default class Login extends Component {
               {this.props.authenticated && (
                 <div>
                   <SignInTitle>Select a tenant</SignInTitle>
-                  <Selector data-automation="tenantSelect" onChange={this.setTenant} value={this.state.selectedTenant}>
-                    {this.state.tenants.map(({ tenantName, tenantId }) => (
-                      <option label={tenantName} value={tenantId} key={tenantId} />
-                    ))}
-                  </Selector>
+                  <Selector
+                    data-automation="tenantSelect"
+                    placeholder="Select a tenant"
+                    options={this.state.tenants.map(({ tenantName, tenantId }) => ({
+                      label: tenantName,
+                      value: tenantId
+                    }))}
+                    listWidth={282}
+                    listHeight={250}
+                    noSuggestionsMessage="No Options"
+                    onSelectedOptionChange={this.setTenant}
+                    selectedOption={this.state.selectedTenant}
+                    noBackground={false}
+                  />
                   <Prefrences>
                     <Checkbox
                       type="checkbox"
@@ -323,7 +351,7 @@ export default class Login extends Component {
                   </Prefrences>
                   <LoginButton
                     data-automation="chooseTenantButton"
-                    disabled={this.state.selectedTenant === ''}
+                    disabled={!this.state.selectedTenant}
                     onClick={this.chooseTenant}
                   >
                     Select
@@ -332,22 +360,32 @@ export default class Login extends Component {
               )}
             </LoginFormWrapper>
           </LoginBox>
+          <LegalPolicy>
+            <LegalCopyright />
+          </LegalPolicy>
+          <Privacy target="blank" href={messages.privacyLink.defaultMessage}>
+            <a> {messages.privacy.defaultMessage} </a>
+          </Privacy>
           <TempBackground />
         </Fragment>
       );
+    } else if (!this.props.insideIframe && this.props.hasStarted) {
+      return <Redirect to="/configuration/users" />;
     } else {
-      return this.props.hasStarted ? <Redirect to="/configuration/users" /> : <Loading size={120} />;
+      return <Loading size={120} />;
     }
   }
 }
 
 Login.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
   toggleUserAuthed: PropTypes.func.isRequired,
   fetchBranding: PropTypes.func.isRequired,
   updateTenantsList: PropTypes.func.isRequired,
   updateUserPermissions: PropTypes.func.isRequired,
   hasStarted: PropTypes.bool.isRequired,
   children: PropTypes.any,
-  authenticated: PropTypes.bool,
-  updatePlatformPermissions: PropTypes.func
+  insideIframe: PropTypes.bool.isRequired,
+  updatePlatformPermissions: PropTypes.func,
+  switchTenant: PropTypes.func.isRequired
 };

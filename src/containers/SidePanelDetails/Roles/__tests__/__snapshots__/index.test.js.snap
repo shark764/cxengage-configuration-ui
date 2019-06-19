@@ -3,6 +3,8 @@
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "inherited": false,
+  "isSystemRole": true,
+  "isUserPlatformAdmin": false,
   "itemApiPending": undefined,
   "listSize": 0,
   "parentTenantName": "ParentTenantName",

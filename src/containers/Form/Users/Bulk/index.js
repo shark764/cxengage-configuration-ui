@@ -10,9 +10,9 @@ import UsersBulkActionsFormLayout from './layout';
 import { formValidation } from './validation';
 import { isCreating, getCurrentEntity, getEntityData } from '../../../../redux/modules/entities/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
-import { formSubmission } from '../../../../redux/modules/form/selectors';
+import { formSubmission, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 import { toggleInvitationStatus } from '../../../../redux/modules/entities';
-import { getCheckedBulkActionFormValue, isUserPlatformAdmin } from '../../../../redux/modules/entities/users/selectors';
+import { isUserPlatformAdmin } from '../../../../redux/modules/entities/users/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
 
@@ -34,10 +34,10 @@ export function mapStateToProps(state) {
       passwordReset: false
     }),
     identityProviders: selectTenantIdentityProviders(state),
-    inviteNowIsChecked: getCheckedBulkActionFormValue(state, 'inviteNow'),
-    resendInvitationIsChecked: getCheckedBulkActionFormValue(state, 'resendInvitation'),
-    cancelInvitationIsChecked: getCheckedBulkActionFormValue(state, 'cancelInvitation'),
-    passwordResetIsChecked: getCheckedBulkActionFormValue(state, 'passwordReset'),
+    inviteNowIsChecked: getCurrentFormValueByFieldName(state, 'inviteNow'),
+    resendInvitationIsChecked: getCurrentFormValueByFieldName(state, 'resendInvitation'),
+    cancelInvitationIsChecked: getCurrentFormValueByFieldName(state, 'cancelInvitation'),
+    passwordResetIsChecked: getCurrentFormValueByFieldName(state, 'passwordReset'),
     groups: getEntityData(state, 'groups'),
     skills: getEntityData(state, 'skills'),
     isSaving: isCreating(state),

@@ -23,7 +23,7 @@ Object {
   },
   "isSaving": true,
   "key": "mockId",
-  "realtimeReportType": undefined,
+  "realtimeReportType": "realtime",
   "reportType": "realtime",
   "standardDashboards": Array [
     "Agent Details Table",

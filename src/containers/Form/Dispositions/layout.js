@@ -22,14 +22,14 @@ export default function DispositionsForm({ handleSubmit, isSaving, inherited, us
         componentType="input"
         inputType="text"
         placeholder="Please enter a name.."
-        automation="dispositionsName"
+        data-automation="dispositionsName"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
         name="externalid"
         label="External ID"
         componentType="input"
-        automation="dispositionExternalid"
+        data-automation="dispositionExternalid"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
@@ -37,14 +37,14 @@ export default function DispositionsForm({ handleSubmit, isSaving, inherited, us
         label="Description"
         componentType="textarea"
         inputType="text"
-        automation="dispositionsDescription"
+        data-automation="dispositionsDescription"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <ToggleField
         name="shared"
         label="Shared"
         id="frm-lists-shared"
-        automation="dispositionToggleField"
+        data-automation="dispositionToggleField"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
     </form>

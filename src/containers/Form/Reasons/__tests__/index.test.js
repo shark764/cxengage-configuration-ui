@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { Map } from 'immutable';
 import { getCurrentForm, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
-import { mapStateToProps } from '../';
+import ReasonsForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, createFormName, formSubmission } from '../../../../redux/modules/form/selectors';
 
@@ -24,7 +24,7 @@ userHasUpdatePermission.mockImplementation(() => true);
 describe('reasons Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(shallow(<reasonsForm store={store}>Child</reasonsForm>)).toMatchSnapshot();
+    expect(shallow(<ReasonsForm store={store}>Child</ReasonsForm>)).toMatchSnapshot();
   });
 });
 

@@ -201,90 +201,6 @@ Object {
     "title": "Chat Widget",
     "updateFormDependencies": Array [],
   },
-  "customMetrics": EntityMetaData {
-    "betaFeature": false,
-    "bulkEditsAvailable": false,
-    "bulkFormDependencies": Array [],
-    "columns": Array [
-      Object {
-        "active": true,
-        "name": "Name",
-      },
-      Object {
-        "active": true,
-        "name": "Description",
-      },
-      Object {
-        "active": true,
-        "name": "Metric Type",
-      },
-      Object {
-        "active": true,
-        "name": "Status",
-      },
-    ],
-    "confirmationDialog": Object {
-      "falseButtonText": "",
-      "message": "",
-      "trueButtonText": "",
-    },
-    "createFormDependencies": Array [],
-    "defaultAssociationFilters": Array [],
-    "defaultDependentEntityFilters": Array [],
-    "defaultFilters": Array [
-      Object {
-        "id": "active",
-        "value": "enabled",
-      },
-    ],
-    "defaultSorted": Array [
-      Object {
-        "alpha": true,
-        "id": "name",
-      },
-    ],
-    "dependentEntity": "",
-    "entityName": "customMetrics",
-    "entityTableFields": Array [
-      Object {
-        "label": "Name",
-        "name": "name",
-      },
-      Object {
-        "label": "Description",
-        "name": "description",
-      },
-    ],
-    "helpLink": "/Help/Content/Configuration/Statistics_Management/About_Statistics_Management.htm",
-    "modalListTableFields": Array [
-      Object {
-        "label": "Name",
-        "name": "name",
-      },
-      Object {
-        "label": "Description",
-        "name": "description",
-      },
-    ],
-    "pageTitle": "Statistics Management",
-    "sdkCall": Object {
-      "data": Object {},
-      "module": "entities",
-    },
-    "sidePanelListTableFields": Array [
-      Object {
-        "label": "Name",
-        "name": "name",
-      },
-      Object {
-        "label": "Description",
-        "name": "description",
-      },
-    ],
-    "subEntityName": "",
-    "title": "Custom Metric",
-    "updateFormDependencies": Array [],
-  },
   "dashboards": EntityMetaData {
     "betaFeature": false,
     "bulkEditsAvailable": true,
@@ -2831,7 +2747,7 @@ Object {
         "id": "name",
       },
     ],
-    "dependentEntity": "",
+    "dependentEntity": "queues",
     "entityName": "transferLists",
     "entityTableFields": Array [
       Object {

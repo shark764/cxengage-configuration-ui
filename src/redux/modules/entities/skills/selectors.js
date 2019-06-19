@@ -4,11 +4,7 @@
 
 import { getSelectedEntity } from '../selectors';
 import { getDependantEntityTableItems } from '../listItemSelectors';
-import { getCurrentForm } from '../../form/selectors';
 import { getDisplay } from '../users/selectors';
-
-export const getHasProficiencyFormValue = state =>
-  getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'hasProficiency']);
 
 export const getSkillMemberSidePanelTableItems = state =>
   getSkillMembers(getSelectedEntity(state), getDependantEntityTableItems(state));

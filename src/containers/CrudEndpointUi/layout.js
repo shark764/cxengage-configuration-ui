@@ -23,7 +23,6 @@ import EmailTemplatesForm from '../Form/EmailTemplates';
 import OutboundIdentifiersForm from '../Form/OutboundIdentifiers';
 import GenericBulkActionsForm from '../Form/Bulk';
 import OutboundIdentifierListsForm from '../Form/OutboundIdentifierLists';
-import CustomMetricsForm from '../Form/CustomMetrics';
 import ChatWidgetsForm from '../Form/ChatWidgets';
 import RolesForm from '../Form/Roles';
 import SkillsForm from '../Form/Skills';
@@ -38,6 +37,8 @@ import QueuesForm from '../Form/Queues';
 import FlowsForm from '../Form/Flows';
 import CopyFlowForm from '../Form/Flows/Copy';
 import TransferListsForm from '../Form/TransferLists';
+import CreateTransferListItemsForm from '../Form/TransferListItems/Create';
+import UpdateTransferListItemsForm from '../Form/TransferListItems/Update';
 import DispatchMappingsForm from '../Form/DispatchMappings';
 import DispositionsForm from '../Form/Dispositions';
 import SlasForm from '../Form/Slas';
@@ -53,7 +54,6 @@ import ListsDetailsPanel from '../SidePanelDetails/Lists';
 import EmailTemplatesDetailsPanel from '../SidePanelDetails/EmailTemplates';
 import OutboundIdentifiersDetailsPanel from '../SidePanelDetails/OutboundIdentifiers';
 import OutboundIdentifierListsPanelContainer from '../SidePanelDetails/OutboundIdentifierLists';
-import CustomMetricsDetailsPanel from '../SidePanelDetails/CustomMetrics';
 import ChatWidgetsDetailsPanel from '../SidePanelDetails/ChatWidgets';
 import RolesDetailsPanel from '../SidePanelDetails/Roles';
 import SkillsDetailsPanel from '../SidePanelDetails/Skills';
@@ -292,16 +292,6 @@ const detailsPanelRoutes = [
     )
   },
   {
-    path: '/configuration/customMetrics',
-    component: () => (
-      <DetailsPanel>
-        <CustomMetricsDetailsPanel>
-          <CustomMetricsForm />
-        </CustomMetricsDetailsPanel>
-      </DetailsPanel>
-    )
-  },
-  {
     path: '/configuration/chatWidgets',
     component: () => (
       <DetailsPanel>
@@ -404,11 +394,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/transferLists',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <TransferListsDetailsPanel>
           <TransferListsForm />
         </TransferListsDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {
@@ -508,6 +498,10 @@ const createSubEntityFormRoutes = [
   {
     path: '/configuration/lists',
     component: CreateListItemForm
+  },
+  {
+    path: '/configuration/transferLists',
+    component: CreateTransferListItemsForm
   }
 ];
 
@@ -547,6 +541,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/slas',
     component: InitialSlaVersionForm
+  },
+  {
+    path: '/configuration/transferLists',
+    component: UpdateTransferListItemsForm
   }
 ];
 

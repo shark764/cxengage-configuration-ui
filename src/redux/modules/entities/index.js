@@ -61,14 +61,6 @@ const initialState = fromJS({
     disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
     assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
   },
-  customMetrics: {
-    ...defaultEntity,
-    readPermission: ['CUSTOM_STATS_READ'],
-    updatePermission: ['CUSTOM_STATS_UPDATE'],
-    // removing create permission 'CUSTOM_STATS_CREATE' until
-    // we have the ability to create more than one sla
-    createPermission: []
-  },
   chatWidgets: {
     ...defaultEntity,
     readPermission: ['OUTBOUND_IDENTIFIER_READ'],
@@ -225,6 +217,7 @@ const initialState = fromJS({
   },
   transferLists: {
     ...defaultEntity,
+    sidePanelWidth: 750,
     readPermission: ['VIEW_ALL_TRANSFER_LISTS'],
     updatePermission: ['VIEW_ALL_TRANSFER_LISTS'],
     createPermission: ['VIEW_ALL_TRANSFER_LISTS'],
@@ -424,6 +417,24 @@ export const toggleShared = () => ({
   type: 'TOGGLE_SHARED'
 });
 
+export const setTenantUserAsImpersonated = () => ({
+  type: 'SET_TENANT_USER_AS_IMPERSONATED'
+});
+
+export const removeTransferListItem = (type, deleteEntityId) => {
+  if (type === 'transferListItem') {
+    return {
+      type: 'REMOVE_TRANSFER_LIST_ITEM',
+      transferListItemId: deleteEntityId
+    };
+  } else if (type === 'categoryItems') {
+    return {
+      type: 'REMOVE_TRANSFER_LIST_ITEM',
+      categoryId: deleteEntityId
+    };
+  }
+};
+
 // Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -554,6 +565,9 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], false);
     }
     case 'UPDATE_ENTITY': {
+      if (action.entityName === 'transferLists') {
+        return setEntityUpdatingHelper(state, action, true).deleteIn([action.entityName, 'selectedSubEntityId']);
+      }
       return setEntityUpdatingHelper(state, action, true);
     }
     case 'UPDATE_PROFICIENCY': {
@@ -917,23 +931,22 @@ export default function reducer(state = initialState, action) {
     case 'DELETE_SUB_ENTITY_REJECTED': {
       return setSubEntityDeleting(state, action, false);
     }
-    case 'FETCH_ROLE_PARENT_TENANT': {
-      const entityIndex = findEntityIndex(state, action.entityName, action.id);
-      if (entityIndex !== -1 && action.parentTenantName) {
-        return state.mergeIn(
-          [action.entityName, 'data', entityIndex],
-          fromJS({ parentTenantName: action.parentTenantName })
-        );
-      } else {
-        return state;
-      }
-    }
     case 'FETCH_TENANT_DEFAULT_SLA': {
       const { result } = action.response;
 
       return state.update(action.entityName, entityStore =>
         entityStore.update('data', data => data.push(fromJS(result)))
       );
+    }
+    case '@@redux-form/INITIALIZE':
+    case '@@redux-form/CHANGE': {
+      if (
+        action.entityName === 'transferLists' &&
+        state.getIn([action.entityName, 'selectedSubEntityId']) !== undefined
+      ) {
+        return state.deleteIn([action.entityName, 'selectedSubEntityId']);
+      }
+      return state;
     }
     case '@@redux-form/CHANGE_FULFILLED':
     case '@@redux-form/CHANGE_REJECTED':

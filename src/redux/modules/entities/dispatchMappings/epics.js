@@ -13,7 +13,8 @@ import { handleSuccess, handleError } from '../handleResult';
 import { entitiesMetaData } from '../metaData';
 import { camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity, getSelectedEntityFormId } from '../selectors';
-import { selectNonReusableFlows, getFlowIdFormValue, selectVersionsFromFlow } from '../flows/selectors';
+import { selectNonReusableFlows, selectVersionsFromFlow } from '../flows/selectors';
+import { getCurrentFormValueByFieldName } from '../../form/selectors';
 
 export const UpdateDispatchMapping = action$ =>
   action$
@@ -138,7 +139,9 @@ export const ChangeDispatchMappingVersion = (action$, store) =>
     .map(a => ({
       ...a,
       newVersion:
-        a.initialVersion && a.initialFlowId === getFlowIdFormValue(store.getState()) ? a.initialVersion : 'null'
+        a.initialVersion && a.initialFlowId === getCurrentFormValueByFieldName(store.getState(), 'flowId')
+          ? a.initialVersion
+          : 'null'
     }))
     .map(a =>
       //This change action is required as sometimes the flowId field
@@ -172,5 +175,5 @@ export const ActivateVersionsFromFlow = (action$, store) =>
     .map(a => ({
       type: 'FETCH_DATA_FLOW',
       entityName: 'flows',
-      id: getFlowIdFormValue(store.getState())
+      id: getCurrentFormValueByFieldName(store.getState(), 'flowId')
     }));

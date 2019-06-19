@@ -22,7 +22,7 @@ Object {
   },
   "inviteNowIsChecked": true,
   "isSaving": true,
-  "isUserPlatformAdmin": undefined,
+  "isUserPlatformAdmin": true,
   "key": "users:bulk",
   "passwordResetIsChecked": true,
   "resendInvitationIsChecked": true,

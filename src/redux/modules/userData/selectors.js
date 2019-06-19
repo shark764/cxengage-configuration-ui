@@ -15,12 +15,19 @@ export const userIsAuthed = state => state.get('UserData').get('userIsAuthed');
 
 export const platformViewOnlyMode = state => state.get('UserData').get('platformViewOnlyMode');
 
-export const availableTenants = state => state.get('UserData').get('tenants').toJS();
+export const availableTenants = state => state.get('UserData').get('tenants');
+
+export const getAvailableTenants = createSelector([availableTenants], availableTenants => availableTenants.toJS());
 
 export const getCurrentAgentId = state => state.get('UserData').get('agentId');
 
 export const getCurrentTenantId = state => state.get('UserData').get('currentTenantId');
 
+export const getAgentTenantRoleId = state => state.get('UserData').get('tenantRoleId');
+
 export const getCurrentPermissions = createSelector([getUserData], userData => userData.get('permissions'));
 
 export const authenticatedAndBrandingReady = state => hasAllBranding(state) && userIsAuthed(state);
+
+export const isTenantSetForReadAllMode = state =>
+  availableTenants(state).find(tenant => tenant.get('tenantId') === getCurrentTenantId(state)) === undefined;

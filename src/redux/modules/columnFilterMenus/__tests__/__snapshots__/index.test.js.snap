@@ -384,27 +384,6 @@ Immutable.Map {
       },
     ],
   },
-  "customMetrics": Immutable.Map {
-    "visibleMenu": "none",
-    "Columns": Immutable.List [
-      Immutable.Map {
-        "name": "Name",
-        "active": true,
-      },
-      Immutable.Map {
-        "name": "Description",
-        "active": true,
-      },
-      Immutable.Map {
-        "name": "Metric Type",
-        "active": true,
-      },
-      Immutable.Map {
-        "name": "Status",
-        "active": true,
-      },
-    ],
-  },
   "messageTemplates": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [

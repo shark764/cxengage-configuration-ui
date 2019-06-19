@@ -3,21 +3,24 @@ export function cxInit() {
 }
 
 export function cxLogin(username, password, callback) {
-  CxEngage.authentication.login({ 
-    username: username, 
-    password: password,
-    // ttl is good to comment out to be able to test what 
-    // happens when authentication expires...
-    // ttl in seconds 
-    // ttl: 60 
-  }, (err, topic, response) => {
-    if (err) {
-      console.warn('ERROR WITH LOGIN', err);
-      return callback(err);
-    } else {
-      return callback(response);
+  CxEngage.authentication.login(
+    {
+      username: username,
+      password: password
+      // ttl is good to comment out to be able to test what
+      // happens when authentication expires...
+      // ttl in seconds
+      // ttl: 60
+    },
+    (err, topic, response) => {
+      if (err) {
+        console.warn('ERROR WITH LOGIN', err);
+        return callback(err);
+      } else {
+        return callback(response);
+      }
     }
-  });
+  );
 }
 
 export function cxTokenLogin(token, callback) {

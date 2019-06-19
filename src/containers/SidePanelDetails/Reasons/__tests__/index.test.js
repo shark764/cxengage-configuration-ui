@@ -6,7 +6,7 @@ import React from 'react';
 import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import reasonsDetailsPanel, { mapStateToProps } from '../';
+import ReasonsDetailsPanel from '../';
 import {
   getSelectedEntity,
   userHasUpdatePermission,
@@ -27,15 +27,9 @@ userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
 
-describe('reasonsDetailsPanel Renders', () => {
+describe('ReasonsDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore(state => state);
-    expect(shallow(<reasonsDetailsPanel store={store}>Child</reasonsDetailsPanel>)).toMatchSnapshot();
-  });
-});
-
-describe('Maps state to props only using selectors', () => {
-  it('validates object created from mapStateToProps', () => {
-    expect(mapStateToProps()).toMatchSnapshot();
+    expect(shallow(<ReasonsDetailsPanel store={store}>Child</ReasonsDetailsPanel>)).toMatchSnapshot();
   });
 });

@@ -60,17 +60,6 @@ Array [
     "Cell": [Function],
     "Filter": [Function],
     "Header": <span
-      title="Type"
-    >
-      Type
-    </span>,
-    "accessor": "customMetricsType",
-    "id": "metricType",
-  },
-  Object {
-    "Cell": [Function],
-    "Filter": [Function],
-    "Header": <span
       title="Value"
     >
       Value

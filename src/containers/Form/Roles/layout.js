@@ -20,7 +20,8 @@ export default function RolesForm({
   key,
   disableShared,
   sharedFormValue,
-  toggleShared
+  toggleShared,
+  isSystemRole
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -28,18 +29,18 @@ export default function RolesForm({
       <InputField
         name="name"
         label="Name *"
-        id="frm-roles-name"
+        data-automation="rolesFormFieldName"
         componentType="input"
         inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole}
       />
       <InputField
         name="description"
         label="Description"
-        id="frm-roles-description"
+        data-automation="rolesFormFieldDescription"
         componentType="textarea"
         inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole}
       />
 
       <ConfirmationWrapper
@@ -50,11 +51,11 @@ export default function RolesForm({
         secondaryText={'Are you sure you want to continue?'}
       >
         <ToggleField
-          automation="rolesFormFieldShared"
+          data-automation="rolesFormFieldShared"
           name="shared"
           label="Shared"
-          title="Change &quot;Shared&quot; state for this Role"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          title={`Change "Shared" state for this Role`}
+          disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole}
         />
       </ConfirmationWrapper>
     </form>
@@ -69,5 +70,6 @@ RolesForm.propTypes = {
   inherited: PropTypes.bool,
   sharedFormValue: PropTypes.bool,
   disableShared: PropTypes.bool,
-  toggleShared: PropTypes.func
+  toggleShared: PropTypes.func,
+  isSystemRole: PropTypes.bool
 };

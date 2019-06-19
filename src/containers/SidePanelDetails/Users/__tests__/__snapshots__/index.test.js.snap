@@ -192,6 +192,8 @@ Object {
     },
   ],
   "transferListsItems": Array [],
+  "userDisplay": undefined,
+  "userHasLogiImpersonatePermissions": undefined,
   "userHasUpdatePermission": true,
 }
 `;

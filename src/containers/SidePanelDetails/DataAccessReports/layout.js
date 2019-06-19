@@ -32,7 +32,7 @@ export default function DataAccessReportsDetailsPanel({
   itemApiPending
 }) {
   return (
-    <Wrapper automation="dtPanelEntityDataAccessReports">
+    <Wrapper data-automation="dtPanelEntityDataAccessReports">
       {children}
 
       <DetailHeader

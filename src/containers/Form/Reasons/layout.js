@@ -4,7 +4,7 @@
 
 /**
  *
- * reasonsForm
+ * ReasonsForm
  *
  */
 
@@ -12,7 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, DetailsPanelAlert, InputField, ToggleField, ConfirmationWrapper } from 'cx-ui-components';
 
-export default function reasonsForm({
+export default function ReasonsForm({
   handleSubmit,
   isSaving,
   inherited,
@@ -78,7 +78,7 @@ export default function reasonsForm({
   );
 }
 
-reasonsForm.propTypes = {
+ReasonsForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,

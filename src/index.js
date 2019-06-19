@@ -26,15 +26,15 @@ ReactDOM.render(
       <Switch>
         {/* Branding is not required for SupervisorToolbar and we do not want to display the loading spinner for it */}
         <Route path="/supervisorToolbar" component={SupervisorToolbar} />
-          <RootStyles>
-            <Fragment>
-              <Navigation />
-              <Route exact path="/" component={Login} />
-              <Route path="/interactionMonitoring" component={PrivateRoute(InteractionMonitoring)} />
-              <Route path="/betaFeatures" component={PrivateRoute(BetaFeatures)} />
-              <Route path="/configuration/:entityName" component={PrivateRoute(CrudEndpointUi)} />
-            </Fragment>
-          </RootStyles>
+        <RootStyles>
+          <Fragment>
+            <Navigation />
+            <Route exact path="/" component={Login} />
+            <Route path="/interactionMonitoring" component={PrivateRoute(InteractionMonitoring)} />
+            <Route path="/betaFeatures" component={PrivateRoute(BetaFeatures)} />
+            <Route path="/configuration/:entityName" component={PrivateRoute(CrudEndpointUi)} />
+          </Fragment>
+        </RootStyles>
       </Switch>
     </Router>
   </Provider>,

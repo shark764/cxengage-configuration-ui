@@ -12,7 +12,7 @@ export const initialState = fromJS({
   currentTenantName: '',
   currentTenantId: '',
   tenants: [],
-  platformViewOnlyMode: false,
+  platformViewOnlyMode: false
 });
 
 // Actions
@@ -45,19 +45,29 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_USER_PERMISSIONS': {
       const { tenantPermissions, tenantId, tenantName } = action.tenantInfo;
+
+      if (!localStorage.getItem('LIVEOPS-PREFERENCE-KEY')) {
+        //Update localStorage if tenant info is not set
+        localStorage.setItem(
+          'LIVEOPS-PREFERENCE-KEY',
+          JSON.stringify({
+            tenant: action.tenantInfo
+          })
+        );
+      }
+
       return state
         .set('permissions', fromJS(tenantPermissions))
         .set('currentTenantId', tenantId)
         .set('currentTenantName', tenantName)
-        .set('agentId', action.agentId);
+        .set('agentId', action.agentId)
+        .set('tenantRoleId', action.tenantRoleId || state.get('tenantRoleId'));
     }
     case 'UPDATE_PLATFORM_PERMISSIONS': {
-      return state
-        .set('platformPermissions', fromJS(action.permissions))
+      return state.set('platformPermissions', fromJS(action.permissions));
     }
     case 'UPDATE_TENANTS_LIST': {
-      return state
-        .set('tenants', fromJS(action.tenants))
+      return state.set('tenants', fromJS(action.tenants));
     }
     case 'TOGGLE_USER_AUTH': {
       return state.set('userIsAuthed', !state.get('userIsAuthed'));
@@ -68,11 +78,12 @@ export default function reducer(state = initialState, action) {
     case 'SWITCH_TENANT': {
       const tenantIndex = state.get('tenants').findIndex(tenant => tenant.get('tenantId') === action.tenantId);
       if (tenantIndex !== -1) {
-        const {tenantPermissions,tenantId, tenantName} = state.getIn(['tenants', tenantIndex]).toJS();
+        const { tenantPermissions, tenantId, tenantName } = state.getIn(['tenants', tenantIndex]).toJS();
         return state
-        .set('permissions', fromJS(tenantPermissions))
-        .set('currentTenantId', tenantId)
-        .set('currentTenantName', tenantName);
+          .set('permissions', fromJS(tenantPermissions))
+          .set('currentTenantId', tenantId)
+          .set('currentTenantName', tenantName)
+          .set('tenantRoleId', undefined);
       } else {
         return state;
       }

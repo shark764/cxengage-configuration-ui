@@ -18,6 +18,7 @@ const Explanation = styled.div`
   line-height: 19pt;
   border-radius: 5px;
   border: 1px solid #8080803b;
+  text-align: justify;
 `;
 const Features = styled.div`
   margin: 67px 5% 0px 10%;
@@ -64,7 +65,7 @@ const Submit = styled(Button)`
 export default class BetaFeatures extends Component {
   constructor() {
     super();
-    this.state = {
+    const features = {
       users: false,
       groups: false,
       skills: false,
@@ -72,25 +73,41 @@ export default class BetaFeatures extends Component {
       outboundIdentifierLists: false,
       roles: false,
       flows: false,
-      dispatchMappings: false,
-      // logi: false,
+      dispatchMappings: false
+      // logiStandard: false,
+      // logiAdvanced: false
     };
+    const pageTitles = {};
+    Object.keys(features).forEach(entityName => {
+      if (entityName === 'logiStandard') {
+        pageTitles[entityName] = 'Standard Reports';
+      } else if (entityName === 'logiAdvanced') {
+        pageTitles[entityName] = 'Advanced Reports';
+      } else {
+        pageTitles[entityName] = entitiesMetaData[entityName].pageTitle;
+      }
+    });
+
+    this.state = { features, pageTitles };
   }
   componentDidMount() {
     readBetaFeatures().then(r => {
       // remove previous beta features
+      const features = this.state.features;
       Object.keys(r.result).forEach(feature => {
-        if (this.state[feature] === undefined) {
-          delete r.result[feature];
+        if (features[feature] === undefined) {
+          delete features[feature];
+        } else {
+          features[feature] = r.result[feature];
         }
       });
-      this.setState(r.result);
+      this.setState({ features });
     });
   }
 
   saveBetaFeaturePrefs = features => {
     updateBetaFeatures(features).then(r => {
-      this.setState(r.result);
+      this.setState({ features });
     });
   };
 
@@ -115,17 +132,17 @@ export default class BetaFeatures extends Component {
           <FeaturesTitle background={this.props.theme.navbar} accent={this.props.theme.navbarText}>
             Beta Features / Pages
           </FeaturesTitle>
-          {Object.keys(this.state).map(entityName => (
+          {Object.keys(this.state.features).map(entityName => (
             <Feature key={entityName}>
-              <span>{entitiesMetaData[entityName].pageTitle}</span>
+              <span>{this.state.pageTitles[entityName]}</span>
               <ToggleWrapper
                 onChange={() => {
                   if (
-                    (entityName === 'outboundIdentifiers' && !this.state.outboundIdentifiers) ||
-                    (entityName === 'outboundIdentifierLists' && !this.state.outboundIdentifierLists)
+                    (entityName === 'outboundIdentifiers' && !this.state.features.outboundIdentifiers) ||
+                    (entityName === 'outboundIdentifierLists' && !this.state.features.outboundIdentifierLists)
                   ) {
                     this.saveBetaFeaturePrefs({
-                      ...this.state,
+                      ...this.state.features,
                       users: true,
                       groups: true,
                       skills: true,
@@ -137,17 +154,21 @@ export default class BetaFeatures extends Component {
                     );
                   } else {
                     const features = {
-                      ...this.state,
-                      [entityName]: !this.state[entityName]
+                      ...this.state.features,
+                      [entityName]: !this.state.features[entityName]
                     };
                     this.saveBetaFeaturePrefs(features);
                   }
                 }}
-                value={this.state[entityName]}
+                value={this.state.features[entityName]}
+                disabled={this.props.disabledFeatures[entityName]}
               />
             </Feature>
           ))}
-          <Submit buttonType="primary" onClick={() => sdkCall({ module: 'setBetaFeatures', data: this.state })}>
+          <Submit
+            buttonType="primary"
+            onClick={() => sdkCall({ module: 'setBetaFeatures', data: this.state.features })}
+          >
             Apply Changes
           </Submit>
         </Features>
@@ -168,5 +189,6 @@ export default class BetaFeatures extends Component {
 
 BetaFeatures.propTypes = {
   entities: PropTypes.object,
-  theme: PropTypes.any
+  theme: PropTypes.any,
+  disabledFeatures: PropTypes.object
 };

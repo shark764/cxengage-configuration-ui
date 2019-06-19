@@ -14,15 +14,15 @@ import {
   getTemplateEmail,
   getTemplateShared,
   getTemplateSubject,
-  getTemplateBody,
-  getEmailTemplateFormValue
+  getTemplateBody
 } from '../../../redux/modules/entities/emailTemplates/selectors';
+import { getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 
 export function mapStateToProps(state) {
   return {
     variables: getVariables(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
-    emailFormValue: getEmailTemplateFormValue(state),
+    emailFormValue: getCurrentFormValueByFieldName(state, 'email'),
     inheritedSubject: getInheritedSubject(state),
     inheritedBody: getInheritedBody(state),
     templateEmail: getTemplateEmail(state),

@@ -25,7 +25,7 @@ export default function <%= className %>Form({ handleSubmit, isSaving, inherited
         componentType="input"
         inputType="text"
         placeholder="You are using Hygen!"
-        automation="<%= className %>FormFieldName"
+        data-automation="<%= className %>FormFieldName"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
@@ -33,7 +33,7 @@ export default function <%= className %>Form({ handleSubmit, isSaving, inherited
         label="Description"
         componentType="textarea"
         inputType="text"
-        automation="<%= className %>FormFieldDescription"
+        data-automation="<%= className %>FormFieldDescription"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <DetailHeader text="Properties" />
@@ -47,7 +47,7 @@ export default function <%= className %>Form({ handleSubmit, isSaving, inherited
             value: 'custom value'
           }
         ]}
-        automation="<%= className %>FormFieldType"
+        data-automation="<%= className %>FormFieldType"
         required
       />
     </form>

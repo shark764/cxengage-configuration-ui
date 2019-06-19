@@ -24,6 +24,8 @@ import {
   userHasCreatePermission,
   userHasPermissions,
   hasPermission,
+  userHasEveryPermissions,
+  hasEveryPermission,
   isInherited,
   shouldDisableField,
   isCreating,
@@ -350,8 +352,23 @@ describe('hasPermission', () => {
   it('Returns if user permissions contain permissions given', () => {
     expect(hasPermission(['VIEW_ALL', 'UPDATE_ALL'], ['VIEW_ALL'])).toEqual(true);
   });
-  it('Returns if user permissions if permissions given are undefined', () => {
+  it('Returns if permissions given are undefined', () => {
     expect(hasPermission(['VIEW_ALL', 'UPDATE_ALL'], undefined)).toEqual(false);
+  });
+});
+
+describe('userHasEveryPermissions', () => {
+  it('Returns if user has given permissions', () => {
+    expect(userHasEveryPermissions(initialState, ['READ_ALL', 'UPDATE_ALL'])).toEqual(true);
+  });
+});
+
+describe('hasEveryPermission', () => {
+  it('Returns if user permissions contain all permissions given', () => {
+    expect(hasEveryPermission(['VIEW_ALL', 'UPDATE_ALL', 'DELETE_ALL'], ['VIEW_ALL', 'UPDATE_ALL'])).toEqual(true);
+  });
+  it('Returns if permissions given are undefined', () => {
+    expect(hasEveryPermission(['VIEW_ALL', 'UPDATE_ALL'], undefined)).toEqual(false);
   });
 });
 
@@ -419,7 +436,7 @@ describe('isInherited', () => {
           }
         })
       )
-    ).toEqual(true);
+    ).toEqual(false);
   });
   it('Returns if selected entity is inherited when currentEntity matches groups', () => {
     expect(

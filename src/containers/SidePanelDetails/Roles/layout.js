@@ -30,11 +30,13 @@ export function RolesDetailsPanel({
   setSelectedSubEntityId,
   listSize,
   itemApiPending,
-  parentTenantName
+  parentTenantName,
+  isUserPlatformAdmin,
+  isSystemRole
 }) {
   return (
     <Wrapper id="dtpanel-roles">
-      {inherited && (
+      {(isSystemRole || inherited) && (
         <DetailsPanelAlert
           text={`This role is inherited ${
             parentTenantName && location.hash.includes('alpha') ? `from ${parentTenantName}` : ''
@@ -44,18 +46,23 @@ export function RolesDetailsPanel({
       {children}
 
       <DetailHeader
-        userHasUpdatePermission={userHasUpdatePermission}
+        userHasUpdatePermission={
+          (!isSystemRole && userHasUpdatePermission && !inherited) || (isUserPlatformAdmin && isSystemRole)
+        }
         text={`${listSize} Permissions`}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
-        inherited={inherited}
         open
       />
       <SidePanelTable
         tableType={'sidePanel'}
         userHasUpdatePermission={userHasUpdatePermission}
-        deleteSubEntity={removeListItem}
-        items={tableItems}
+        deleteSubEntity={
+          !inherited && userHasUpdatePermission && !isSystemRole
+            ? (listItemId, subEntityName) => removeListItem(listItemId, subEntityName)
+            : undefined
+        }
         inherited={inherited}
+        items={tableItems}
         fields={tableFields}
         fetching={rolesFetching}
         itemApiPending={itemApiPending}
@@ -75,5 +82,7 @@ RolesDetailsPanel.propTypes = {
   listSize: PropTypes.number,
   inherited: PropTypes.bool,
   itemApiPending: PropTypes.string,
-  parentTenantName: PropTypes.string
+  parentTenantName: PropTypes.string,
+  isUserPlatformAdmin: PropTypes.bool,
+  isSystemRole: PropTypes.bool
 };

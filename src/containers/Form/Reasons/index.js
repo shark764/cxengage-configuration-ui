@@ -5,7 +5,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
-import reasonsForm from './layout';
+import ReasonsForm from './layout';
 import { formValidation } from './validation';
 import {
   getSelectedEntityId,
@@ -18,14 +18,14 @@ import { toggleShared } from '../../../redux/modules/entities';
 import { selectReasonsFormInitialValues } from '../../../redux/modules/entities/reasons/selectors';
 import { checkDisableShared } from '../../../redux/modules/entities/reasonLists/selectors';
 
-const CreatereasonsForm = compose(
+const CreateReasonsForm = compose(
   connect(state => createFormName(state)),
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
     destroyOnUnmount: true
   })
-)(reasonsForm);
+)(ReasonsForm);
 
 export function mapStateToProps(state) {
   return {
@@ -43,4 +43,4 @@ export const actions = {
   toggleShared
 };
 
-export default connect(mapStateToProps, actions)(CreatereasonsForm);
+export default connect(mapStateToProps, actions)(CreateReasonsForm);

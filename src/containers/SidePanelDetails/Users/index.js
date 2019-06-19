@@ -8,11 +8,21 @@ import {
   userHasUpdatePermission,
   isEntityFetching,
   userHasPermissions,
-  itemApiPending
+  itemApiPending,
+  getSelectedEntity
 } from '../../../redux/modules/entities/selectors';
-import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
+import {
+  setSelectedSubEntityId,
+  toggleListItemEntity,
+  updateProficiency,
+  setTenantUserAsImpersonated
+} from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
-import { getSkillsWithProficiencyTableItems } from '../../../redux/modules/entities/users/selectors';
+import {
+  getSkillsWithProficiencyTableItems,
+  getDisplay,
+  userHasLogiImpersonatePermissions
+} from '../../../redux/modules/entities/users/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 import store from '../../../redux/store';
 
@@ -65,13 +75,20 @@ export function mapStateToProps(state, props) {
       messageTemplates: userHasPermissions(state, ['VIEW_ALL_MESSAGE_TEMPLATES']),
       transferLists: userHasPermissions(state, ['VIEW_ALL_TRANSFER_LISTS']),
       outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ'])
-    }
+    },
+    userDisplay: getDisplay({
+      firstName: getSelectedEntity(state).get('firstName'),
+      lastName: getSelectedEntity(state).get('lastName'),
+      email: getSelectedEntity(state).get('email')
+    }),
+    userHasLogiImpersonatePermissions: userHasLogiImpersonatePermissions(state)
   };
 }
 
 export const actions = {
   removeListItem: toggleListItemEntity,
-  setSelectedSubEntityId
+  setSelectedSubEntityId,
+  setTenantUserAsImpersonated
 };
 
 export default connect(mapStateToProps, actions)(UsersDetailsPanel);

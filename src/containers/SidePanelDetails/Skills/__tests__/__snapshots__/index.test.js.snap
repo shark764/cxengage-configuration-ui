@@ -87,6 +87,15 @@ Object {
       "name": "invitationStatus",
       "type": "select",
     },
+    Object {
+      "actions": Object {
+        "onChange": [Function],
+      },
+      "filterable": false,
+      "isColumnEditable": undefined,
+      "label": "Proficiency",
+      "name": "proficiency",
+    },
   ],
   "usersItems": Array [
     "mockListMembers",

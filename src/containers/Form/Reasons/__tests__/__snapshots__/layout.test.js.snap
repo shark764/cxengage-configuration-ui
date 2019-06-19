@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<reasonsForm /> renders create form 1`] = `
+exports[`<ReasonsForm /> renders create form 1`] = `
 ShallowWrapper {
   "length": 1,
 }
 `;
 
-exports[`<reasonsForm /> renders update form 1`] = `
+exports[`<ReasonsForm /> renders update form 1`] = `
 ShallowWrapper {
   "length": 1,
 }

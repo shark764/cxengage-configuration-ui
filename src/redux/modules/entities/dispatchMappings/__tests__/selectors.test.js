@@ -3,14 +3,7 @@
  */
 
 import { fromJS } from 'immutable';
-import {
-  currentMappingValue,
-  currentValue,
-  currentChannelType,
-  getDispatchMappings,
-  getDispatchMappingValue,
-  selectDispatchMappingsFormInitialValues
-} from '../selectors';
+import { selectDispatchMappingsFormInitialValues } from '../selectors';
 import { getSelectedEntity } from '../../selectors';
 
 const initialState = fromJS({
@@ -54,30 +47,10 @@ const mockCurrentForm = fromJS({
 
 jest.mock('../../../form/selectors', () => ({
   getCurrentForm: () => mockCurrentForm,
-  selectFormInitialValues: () => mockInitialValues
+  selectFormInitialValues: () => mockInitialValues,
+  getCurrentFormValueByFieldName: () => 'voice'
 }));
 jest.mock('../../selectors');
-
-describe('Current Form Values', () => {
-  it("returns the current form's mapping, also known as interaction field", () => {
-    expect(currentMappingValue()).toMatchSnapshot();
-  });
-  it("returns the current form's mapping value, also known just as value", () => {
-    expect(currentValue()).toMatchSnapshot();
-  });
-  it("returns the current form's Interaction Type, also known just as Channel Type", () => {
-    expect(currentChannelType()).toMatchSnapshot();
-  });
-});
-
-describe('Retrieve Dispatch values from State', () => {
-  it('Return Dispatch Mappings from state', () => {
-    expect(getDispatchMappings(initialState)).toMatchSnapshot();
-  });
-  it('Compare values from state with current form, interaction type and channel', () => {
-    expect(getDispatchMappingValue(initialState)).toMatchSnapshot();
-  });
-});
 
 describe('Retrieve Dispatch Mappings Initial Form Values from State', () => {
   it('Return regular initial values', () => {

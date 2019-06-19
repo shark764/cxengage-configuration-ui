@@ -4,7 +4,7 @@
 
 /**
  *
- * reasonsDetailsPanel
+ * ReasonsDetailsPanel
  *
  */
 
@@ -17,10 +17,10 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function reasonsDetailsPanel({ children }) {
+export default function ReasonsDetailsPanel({ children }) {
   return <Wrapper className="dtpanel-entity-reasons">{children}</Wrapper>;
 }
 
-reasonsDetailsPanel.propTypes = {
+ReasonsDetailsPanel.propTypes = {
   children: PropTypes.any
 };

@@ -7,16 +7,9 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import DispatchMappingsForm from './layout';
 import { formValidation } from './validation';
-import {
-  selectNonReusableFlows,
-  selectVersionsFromFlow,
-  getFlowIdFormValue
-} from '../../../redux/modules/entities/flows/selectors';
+import { selectNonReusableFlows, selectVersionsFromFlow } from '../../../redux/modules/entities/flows/selectors';
 import { selectIntegrations } from '../../../redux/modules/entities/integrations/selectors';
 import {
-  currentMappingValue,
-  getDispatchMappingValue,
-  getDispatchMappings,
   selectDispatchMappingsFormInitialValues,
   getMappingValueMessage
 } from '../../../redux/modules/entities/dispatchMappings/selectors';
@@ -27,7 +20,7 @@ import {
   userHasUpdatePermission,
   isEntityFetching
 } from '../../../redux/modules/entities/selectors';
-import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 
 const CreateDispatchMappingsForm = compose(
   connect(state => createFormName(state)),
@@ -40,7 +33,7 @@ const CreateDispatchMappingsForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    mappingValue: currentMappingValue(state),
+    mappingValue: getCurrentFormValueByFieldName(state, 'interactionField'),
     flowIds: selectNonReusableFlows(state),
     integrationElements: selectIntegrations(state),
     initialValues: selectDispatchMappingsFormInitialValues(state),
@@ -48,11 +41,9 @@ export function mapStateToProps(state) {
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
-    dispatchValues: getDispatchMappingValue(state),
-    allDispatchMappings: getDispatchMappings(state),
     flowVersions: selectVersionsFromFlow(state),
     flowsFetching: isEntityFetching(state, 'flows'),
-    flowId: getFlowIdFormValue(state),
+    flowId: getCurrentFormValueByFieldName(state, 'flowId'),
     mappingValueMessage: getMappingValueMessage(state)
   };
 }

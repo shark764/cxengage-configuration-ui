@@ -3,15 +3,6 @@
  */
 
 import { connect } from 'react-redux';
-import reasonsDetailsPanel from './layout';
-import { userHasUpdatePermission, getSelectedEntity, isInherited } from '../../../redux/modules/entities/selectors';
+import ReasonsDetailsPanel from './layout';
 
-export function mapStateToProps(state) {
-  return {
-    item: getSelectedEntity(state).toJS(),
-    userHasUpdatePermission: userHasUpdatePermission(state),
-    inherited: isInherited(state)
-  };
-}
-
-export default connect(mapStateToProps)(reasonsDetailsPanel);
+export default connect()(ReasonsDetailsPanel);

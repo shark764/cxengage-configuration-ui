@@ -9,7 +9,6 @@ import { getCurrentPermissions, getCurrentTenantId } from '../userData/selectors
 import { entitiesMetaData } from './metaData';
 import { getDisplay } from './users/selectors';
 import { getUserDisplayName } from '../userIdMap/selectors';
-import { isUserPlatformAdmin } from '../entities/users/selectors';
 
 const getEntities = state => state.get('Entities');
 
@@ -53,7 +52,7 @@ export const getSelectedEntity = createSelector(
 
 export const getSelectedEntityName = state => getSelectedEntity(state).get('name');
 
-export const getSelectedEntityStatus = state => getSelectedEntity(state).get('active');
+export const getSelectedEntityStatus = state => getSelectedEntity(state) && getSelectedEntity(state).get('active');
 
 export const userHasReadPermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('readPermission'));
@@ -78,21 +77,26 @@ export const hasPermission = (userPermissions, permissionsNeeded) => {
   }
 };
 
+export const userHasEveryPermissions = (state, permissions) =>
+  hasEveryPermission(getCurrentPermissions(state), permissions);
+
+export const hasEveryPermission = (userPermissions, permissionsNeeded) => {
+  if (permissionsNeeded !== undefined) {
+    // Return true if they have at least one of the permissions
+    return permissionsNeeded.every(permissionNeeded => userPermissions && userPermissions.includes(permissionNeeded));
+  } else {
+    return false;
+  }
+};
+
 export const isInherited = state => {
   if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
     switch (getCurrentEntity(state)) {
       case 'roles': {
-        if (isUserPlatformAdmin(state)) {
-          return (
-            getSelectedEntity(state).get('type') !== 'system' &&
-            getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state)
-          );
-        } else {
-          return (
-            getSelectedEntity(state).get('type') === 'system' ||
-            getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state)
-          );
-        }
+        return (
+          getSelectedEntity(state).get('type') !== 'system' &&
+          getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state)
+        );
       }
       case 'users': {
         return false;
@@ -103,6 +107,14 @@ export const isInherited = state => {
       default:
         return getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
     }
+  } else {
+    return false;
+  }
+};
+
+export const isSystemRole = state => {
+  if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
+    return getSelectedEntity(state).get('type') === 'system';
   } else {
     return false;
   }
@@ -119,6 +131,9 @@ export const shouldDisableField = state => {
         // Entity can have versions, but we'll allow to enable it
         // until it has a version set as active.
         return !getSelectedEntity(state).get('activeVersion');
+      }
+      case 'roles': {
+        return getSelectedEntity(state).get('type') === 'system';
       }
       default:
         return false;
@@ -257,4 +272,4 @@ export const findEntityByProperty = (state, entityName, entityProperty, value) =
         .getIn([entityName, 'data'])
         .find(entity => entity.has(entityProperty) && entity.get(entityProperty) === value);
 
-export const getEntityParentTenantName = state => getSelectedEntity(state).get('parentTenantName') || '';
+export const getEntityParentTenantName = state => getSelectedEntity(state).get('tenantName') || '';

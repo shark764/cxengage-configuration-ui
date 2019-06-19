@@ -5,21 +5,18 @@ describe('formValidation', () => {
   it('returns proper object when required fields are provided', () => {
     const values = new Map({
       name: 'mockName',
-      description: 'mockDescription'
+      endpoints: 'mockDescription'
     });
     expect(formValidation(values)).toMatchSnapshot();
   });
   it('returns proper object (errors) when required fields are not provided', () => {
-    const values = new Map({
-      name: '',
-      description: ''
-    });
+    const values = new Map({});
     expect(formValidation(values)).toMatchSnapshot();
   });
   it('returns proper object (errors) when wrong values are provided', () => {
     const values = new Map({
       name: undefined,
-      description: undefined
+      endpoints: undefined
     });
     expect(formValidation(values)).toMatchSnapshot();
   });

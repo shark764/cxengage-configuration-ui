@@ -31,7 +31,7 @@ export default function OutboundIdentifiersForm({
           label="Name *"
           componentType="input"
           inputType="text"
-          automation="outboundIdentifiersFormFieldName"
+          data-automation="outboundIdentifiersFormFieldName"
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         <SelectField
@@ -42,7 +42,7 @@ export default function OutboundIdentifiersForm({
             { value: 'sms', label: 'Sms' },
             { value: 'email', label: 'Email' }
           ]}
-          automation="outboundIdentifiersFormFieldChannelType"
+          data-automation="outboundIdentifiersFormFieldChannelType"
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         {channelType && (
@@ -51,7 +51,7 @@ export default function OutboundIdentifiersForm({
             label="Value *"
             componentType="input"
             inputType="text"
-            automation="outboundIdentifiersFormFieldValue"
+            data-automation="outboundIdentifiersFormFieldValue"
             placeholder={`Enter${channelType === 'email' ? ' an email address' : ' a e.164 formatted number'}`}
             disabled={isSaving || inherited || !userHasUpdatePermission}
           />
@@ -60,7 +60,7 @@ export default function OutboundIdentifiersForm({
           name="flowId"
           label="Flow Id *"
           required={initialValues.get('id') !== undefined}
-          automation="outboundIdentifiersFormFieldFlowId"
+          data-automation="outboundIdentifiersFormFieldFlowId"
           options={!flowsFetching ? flowIds : undefined}
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
@@ -68,7 +68,7 @@ export default function OutboundIdentifiersForm({
           name="description"
           label="Description"
           componentType="textarea"
-          automation="outboundIdentifiersFormFieldDescription"
+          data-automation="outboundIdentifiersFormFieldDescription"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />

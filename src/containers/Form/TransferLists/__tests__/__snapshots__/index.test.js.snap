@@ -2,9 +2,11 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "endpointHeaders": undefined,
   "initialValues": undefined,
   "isSaving": true,
   "key": "mockId",
+  "selectedEntityId": "mockId",
   "userHasUpdatePermission": true,
 }
 `;

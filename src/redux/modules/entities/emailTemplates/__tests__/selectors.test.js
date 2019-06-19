@@ -4,7 +4,6 @@
 
 import { fromJS } from 'immutable';
 import {
-  getEmailTemplateFormValue,
   getInitialFormValues,
   getTemplates,
   getVariables,
@@ -48,16 +47,8 @@ describe('getInitialFormValues', () => {
     expect(getInitialFormValues()).toMatchSnapshot();
   });
   it('gets the inherited email values when the tenantIds are the same', () => {
-    getSelectedEntity.mockImplementation(() =>
-      mockSelectedEntity.setIn(['inherited', 'tenantId'], 'mock tenant id 2')
-    );
+    getSelectedEntity.mockImplementation(() => mockSelectedEntity.setIn(['inherited', 'tenantId'], 'mock tenant id 2'));
     expect(getInitialFormValues()).toMatchSnapshot();
-  });
-});
-
-describe('getEmailTemplateFormValue', () => {
-  it("returns the current form's email value", () => {
-    expect(getEmailTemplateFormValue()).toEqual('mock email value');
   });
 });
 
@@ -87,15 +78,11 @@ describe('getInheritedBody', () => {
 
 describe('getTemplateEmail', () => {
   it('returns "Custom" when the inherited and template emails have different tenantIds', () => {
-    getSelectedEntity.mockImplementation(() =>
-      mockSelectedEntity.setIn(['template', 'tenantId'], 'mock tenant id 2')
-    );
+    getSelectedEntity.mockImplementation(() => mockSelectedEntity.setIn(['template', 'tenantId'], 'mock tenant id 2'));
     expect(getTemplateEmail()).toEqual('Custom');
   });
   it('returns "Default" when the inherited and template emails have the same tenantId', () => {
-    getSelectedEntity.mockImplementation(() =>
-      mockSelectedEntity.setIn(['template', 'tenantId'], 'mock tenant id 1')
-    );
+    getSelectedEntity.mockImplementation(() => mockSelectedEntity.setIn(['template', 'tenantId'], 'mock tenant id 1'));
     expect(getTemplateEmail()).toEqual('Default');
   });
 });
@@ -105,9 +92,7 @@ describe('getTemplateShared', () => {
     expect(getTemplateShared()).toEqual('Yes');
   });
   it('returns "No" when the template is not shared', () => {
-    getSelectedEntity.mockImplementation(() =>
-      mockSelectedEntity.setIn(['template', 'shared'], false)
-    );
+    getSelectedEntity.mockImplementation(() => mockSelectedEntity.setIn(['template', 'shared'], false));
     expect(getTemplateShared()).toEqual('No');
   });
 });

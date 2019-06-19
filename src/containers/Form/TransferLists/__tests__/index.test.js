@@ -12,6 +12,7 @@ import { selectFormInitialValues, formSubmission, createFormName } from '../../.
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
+jest.mock('../../../../redux/modules/entities/transferLists/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);

@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 `;
 
 export default function DispositionsDetailsPanel({ children }) {
-  return <Wrapper automation="entityDispositions">{children}</Wrapper>;
+  return <Wrapper data-automation="entityDispositions">{children}</Wrapper>;
 }
 
 DispositionsDetailsPanel.propTypes = {

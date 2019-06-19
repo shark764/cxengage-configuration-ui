@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { cxSetTenant } from '../../utils/cxSdk';
+import { isInIframe } from 'serenova-js-utils/browser';
+import { Typeahead } from 'cx-ui-components';
 
 const NavBar = styled.div`
   background: #00487e;
-  height: 50px;
+  ${props => props.theme.navbar && `background: ${props.theme.navbar};`} height: 50px;
 `;
-const Selector = styled.select`
-  color: #ccc;
-  font-size: 12pt;
-  background: none;
-  border-radius: 5px;
+const Selector = styled(Typeahead)`
   height: 40px;
-  width: 200px;
   margin-left: 30px;
+  display: inline-block;
+  position: relative;
+  bottom: 9px;
 `;
 const Divider = styled.div`
   display: inline-block;
@@ -26,13 +26,10 @@ const Divider = styled.div`
   background-color: #ccc;
   margin-left: 30px;
 `;
-const StyledOption = styled.option`
-  color: #483737;
-  font-weight: 12pt;
-`;
+
 const NavbarMenu = styled.div`
   color: #ccc;
-  display: inline-block;
+  ${props => props.theme.navbarText && `color: ${props.theme.navbarText};`} display: inline-block;
   margin-left: 30px;
   cursor: pointer;
   font-size: 12pt;
@@ -61,7 +58,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-class Navigation extends Component {
+export default class Navigation extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -76,99 +73,111 @@ class Navigation extends Component {
 
   render() {
     return (
-      this.props.authenticatedAndBrandingReady && (
-        <NavBar>
+      this.props.authenticatedAndBrandingReady &&
+      isInIframe() && (
+        <NavBar theme={this.props.theme}>
           <Selector
-            value={this.props.currentTenantId}
-            onChange={e => {
-              cxSetTenant(e.target.value, response => {
-                this.props.switchTenant(response.tenantId);
-              });
+            placeholder="Select a tenant"
+            options={this.props.tenants.filter(tenant => tenant.tenantActive).map(({ tenantName, tenantId }) => ({
+              label: tenantName,
+              value: tenantId
+            }))}
+            listWidth={200}
+            listHeight={250}
+            noSuggestionsMessage="No Options"
+            onSelectedOptionChange={({ value }) => {
+              if (value !== this.props.currentTenantId) {
+                cxSetTenant(value, response => {
+                  this.props.switchTenant(response.tenantId);
+                });
+              }
             }}
-          >
-            {this.props.tenants.filter(tenant => tenant.tenantActive).map(tenant => (
-              <StyledOption value={tenant.tenantId} key={tenant.tenantId}>
-                {tenant.tenantName}
-              </StyledOption>
-            ))}
-          </Selector>
+            selectedOption={{
+              label: this.props.currentTenantName,
+              value: this.props.currentTenantId
+            }}
+            noBackground={true}
+          />
 
           <Divider />
 
-          <NavbarMenu data-automation="userManagementMenu" onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} onClick={this.setVisibleMenu}>
             User Management
             {this.state.visibleMenu === 'User Management' && (
               <SubMenu>
-                <StyledLink data-automation="navigationLinkUsers" to="/configuration/users">
+                <StyledLink data-automation="navigation-link-users" to="/configuration/users">
                   Users
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkGroups" to="/configuration/groups">
+                <StyledLink data-automation="navigation-link-groups" to="/configuration/groups">
                   Groups
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkSkills" to="/configuration/skills">
+                <StyledLink data-automation="navigation-link-skills" to="/configuration/skills">
                   Skills
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkRoles" to="/configuration/roles">
+                <StyledLink data-automation="navigation-link-roles" to="/configuration/roles">
                   Roles
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
 
-          <NavbarMenu data-automation="configurationtMenu" onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} onClick={this.setVisibleMenu}>
             Configuration
             {this.state.visibleMenu === 'Configuration' && (
               <SubMenu>
-                <StyledLink data-automation="navigationLinkLists" to="/configuration/lists">
+                <StyledLink data-automation="navigation-link-lists" to="/configuration/lists">
                   Lists
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkStatistics" to="/configuration/customMetrics">
+                <StyledLink data-automation="navigation-link-slas" to="/configuration/slas">
                   Statistics
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkEmailTemplates" to="/configuration/emailTemplates">
+                <StyledLink data-automation="navigation-link-emailTemplates" to="/configuration/emailTemplates">
                   User Management Emails
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkOutboundIdentifiers" to="/configuration/outboundIdentifiers">
+                <StyledLink
+                  data-automation="navigation-link-outboundIdentifiers"
+                  to="/configuration/outboundIdentifiers"
+                >
                   Outbound Identifiers
                 </StyledLink>
                 <StyledLink
-                  data-automation="navigationLinkOutboundIdentifierLists"
+                  data-automation="navigation-link-outboundIdentifierLists"
                   to="/configuration/outboundIdentifierLists"
                 >
                   Outbound Identifier Lists
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkChatWidgets" to="/configuration/chatWidgets">
+                <StyledLink data-automation="navigation-link-chatWidgets" to="/configuration/chatWidgets">
                   Chat Widgets
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkChatWidgets" to="/configuration/dispositionLists">
-                  dfgdfgf
+                <StyledLink data-automation="navigation-link-transferLists" to="/configuration/transferLists">
+                  Transfer Lists
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
 
-          <NavbarMenu data-automation="flowsMenu" onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} onClick={this.setVisibleMenu}>
             Flows
             {this.state.visibleMenu === 'Flows' && (
               <SubMenu>
-                <StyledLink data-automation="navigationLinkFlows" to="/configuration/flows">
+                <StyledLink data-automation="navigation-link-flows" to="/configuration/flows">
                   Flows
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkDispatchMappings" to="/configuration/dispatchMappings">
+                <StyledLink data-automation="navigation-link-dispatchMappings" to="/configuration/dispatchMappings">
                   Dispatch Mappings
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
 
-          <NavbarMenu data-automation="reportingMenu" onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} onClick={this.setVisibleMenu}>
             Reporting
             {this.state.visibleMenu === 'Reporting' && (
               <SubMenu>
-                <StyledLink data-automation="navigationLinkDataAccessReports" to="/configuration/dataAccessReports">
+                <StyledLink data-automation="navigation-link-dataAccessReports" to="/configuration/dataAccessReports">
                   Access Controlled Reports
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkInteractionMonitoring" to="/interactionMonitoring">
+                <StyledLink data-automation="navigation-link-interactionMonitoring" to="/interactionMonitoring">
                   Interaction Monitoring
                 </StyledLink>
               </SubMenu>
@@ -180,11 +189,11 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
-
 Navigation.propTypes = {
-  authenticatedAndBrandingReady: PropTypes.bool,
-  currentTenantId: PropTypes.string,
-  switchTenant: PropTypes.func,
-  tenants: PropTypes.instanceOf(Array)
+  authenticatedAndBrandingReady: PropTypes.bool.isRequired,
+  currentTenantId: PropTypes.string.isRequired,
+  currentTenantName: PropTypes.string.isRequired,
+  switchTenant: PropTypes.func.isRequired,
+  tenants: PropTypes.array.isRequired,
+  theme: PropTypes.object
 };

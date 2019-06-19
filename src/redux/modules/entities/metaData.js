@@ -143,7 +143,6 @@ export const listOfEntities = [
   'branding',
   'capacityRules',
   'chatWidgets',
-  'customMetrics',
   'dashboards',
   'dataAccessReports',
   'emailTemplates',
@@ -420,18 +419,6 @@ entities.interactionMonitoring.columns = [
   { name: 'Skills', active: false }
 ];
 
-// Custom Metrics
-entities.customMetrics.bulkEditsAvailable = false;
-entities.customMetrics.pageTitle = 'Statistics Management';
-entities.customMetrics.helpLink = '/Help/Content/Configuration/Statistics_Management/About_Statistics_Management.htm';
-entities.customMetrics.columns = [
-  { name: 'Name', active: true },
-  { name: 'Description', active: true },
-  { name: 'Metric Type', active: true },
-  { name: 'Status', active: true }
-];
-entities.customMetrics.defaultFilters = [{ id: 'active', value: 'enabled' }];
-
 // Email Templates
 entities.emailTemplates.bulkEditsAvailable = false;
 entities.emailTemplates.pageTitle = 'User Management Emails';
@@ -496,7 +483,7 @@ entities.messageTemplates.memberListTableFields = [
 
 // Transfer Lists
 entities.transferLists.bulkEditsAvailable = false;
-entities.transferLists.pageTitle = 'Transfer Lists';
+entities.transferLists.pageTitle = 'Transfer Lists Management';
 entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
 entities.transferLists.columns = [
   { name: 'Name', active: true },
@@ -513,6 +500,7 @@ entities.transferLists.memberListTableFields = [
     filterOptions: ['enabled', 'disabled']
   }
 ];
+entities.transferLists.dependentEntity = 'queues';
 
 // Data Access Report
 entities.dataAccessReports.bulkEditsAvailable = false;
@@ -658,15 +646,6 @@ entities.flows.membersTableFields = {
   drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'datetime' }]
 };
 
-// Transfer Lists
-entities.transferLists.bulkEditsAvailable = false;
-entities.transferLists.pageTitle = 'Transfer Lists Management';
-entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
-entities.transferLists.columns = [
-  { name: 'Name', active: true },
-  { name: 'Description', active: true },
-  { name: 'Status', active: true }
-];
 // Dispatch Mappings
 entities.dispatchMappings.bulkEditsAvailable = false;
 entities.dispatchMappings.pageTitle = 'Dispatch Mappings Management';

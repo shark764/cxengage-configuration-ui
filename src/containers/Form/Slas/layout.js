@@ -62,7 +62,7 @@ export default class SlasForm extends Component {
           label="Name *"
           componentType="input"
           inputType="text"
-          automation="slasFormFieldName"
+          data-automation="slasFormFieldName"
           disabled={this.props.isSaving || this.props.inherited || !this.props.userHasUpdatePermission}
         />
         <InputField
@@ -70,7 +70,7 @@ export default class SlasForm extends Component {
           label="Description"
           componentType="textarea"
           inputType="text"
-          automation="slasFormFieldDescription"
+          data-automation="slasFormFieldDescription"
           disabled={this.props.isSaving || this.props.inherited || !this.props.userHasUpdatePermission}
         />
         {this.props.initialValues.get('id') !== undefined && (
@@ -79,7 +79,7 @@ export default class SlasForm extends Component {
             label="Active Version *"
             placeholder="Select a version..."
             options={this.props.versions}
-            automation="slasFormFieldActiveVersion"
+            data-automation="slasFormFieldActiveVersion"
             disabled={
               this.props.isSaving ||
               this.props.inherited ||
@@ -105,7 +105,7 @@ export default class SlasForm extends Component {
                 : `Change "Shared" state for this SLA`
             }
             onChange={() => {}}
-            automation="slasFormFieldShared"
+            data-automation="slasFormFieldShared"
             disabled={
               this.props.isSaving ||
               this.props.inherited ||
@@ -133,7 +133,7 @@ export default class SlasForm extends Component {
                 <CancelInitialVersionButton
                   type="button"
                   buttonType="secondary"
-                  automation="slasFormFieldAddInitialVersion"
+                  data-automation="slasFormFieldAddInitialVersion"
                   onClick={() => this.addInitialVersion(false)}
                 >
                   Cancel

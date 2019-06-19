@@ -17,11 +17,13 @@ import {
 import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../../redux/modules/entities/listItemSelectors';
 import { getSkillMemberSidePanelTableItems } from '../../../../redux/modules/entities/skills/selectors';
+import { getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 jest.mock('../../../../redux/store.js', () => jest.fn());
 jest.mock('../../../../redux/modules/entities');
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/entities/listItemSelectors');
 jest.mock('../../../../redux/modules/entities/skills/selectors');
+jest.mock('../../../../redux/modules/form/selectors');
 getSelectedEntity.mockImplementation(
   () =>
     new Map({
@@ -46,6 +48,7 @@ isSaving.mockImplementation(() => false);
 toggleListItemEntity.mockImplementation(() => 'mockId');
 setSelectedSubEntityId.mockImplementation(() => 'mockId');
 updateProficiency.mockImplementation(() => 'mockId');
+getCurrentFormValueByFieldName.mockImplementation(() => true);
 
 describe('SkillsDetailsPanel Renders', () => {
   it('renders', () => {

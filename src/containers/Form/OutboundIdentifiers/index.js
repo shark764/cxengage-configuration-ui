@@ -14,8 +14,12 @@ import {
   isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 import { selectNonReusableFlows } from '../../../redux/modules/entities/flows/selectors';
-import { getChannelTypeFormValue } from '../../../redux/modules/entities/outboundIdentifiers/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import {
+  selectFormInitialValues,
+  formSubmission,
+  createFormName,
+  getCurrentFormValueByFieldName
+} from '../../../redux/modules/form/selectors';
 
 const CreateOutboundIdentifiersForm = compose(
   connect(createFormName),
@@ -29,7 +33,7 @@ const CreateOutboundIdentifiersForm = compose(
 export function mapStateToProps(state) {
   return {
     flowIds: selectNonReusableFlows(state),
-    channelType: getChannelTypeFormValue(state),
+    channelType: getCurrentFormValueByFieldName(state, 'channelType'),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
     userHasUpdatePermission: userHasUpdatePermission(state),

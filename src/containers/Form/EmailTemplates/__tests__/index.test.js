@@ -7,17 +7,17 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import UpdateEmailTemplateForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
+import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => false);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
+getCurrentFormValueByFieldName.mockImplementation(() => 'mock email template form value');
 
 jest.mock('../../../../redux/modules/entities/emailTemplates/selectors', () => ({
   getInitialFormValues: () => 'mock initial values',
-  getEmailTemplateFormValue: () => 'mock email template form value',
   getTemplates: () => 'mock templates'
 }));
 

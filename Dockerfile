@@ -1,4 +1,4 @@
-FROM node:8.11.3
+FROM node:10.15.3
 
 RUN mkdir /home/node/.npm-global
 ENV PATH=/home/node/.npm-global/bin:$PATH

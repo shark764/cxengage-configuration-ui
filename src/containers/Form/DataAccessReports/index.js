@@ -8,11 +8,12 @@ import { reduxForm } from 'redux-form/immutable';
 import DataAccessReportsForm from './layout';
 import { formValidation } from './validation';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import {
-  getReportTypeFormValue,
-  getRealtimeReportTypeFormValue
-} from '../../../redux/modules/entities/dataAccessReports/selectors';
+  selectFormInitialValues,
+  formSubmission,
+  createFormName,
+  getCurrentFormValueByFieldName
+} from '../../../redux/modules/form/selectors';
 import {
   selectDashboards
   // selectStandardDashboards
@@ -31,8 +32,8 @@ const CreateDataAccessReportsForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    reportType: getReportTypeFormValue(state),
-    realtimeReportType: getRealtimeReportTypeFormValue(state),
+    reportType: getCurrentFormValueByFieldName(state, 'reportType'),
+    realtimeReportType: getCurrentFormValueByFieldName(state, 'realtimeReportType'),
     standardDashboards: entitiesMetaData.dataAccessReports.standardDashboards.map(dashboard => dashboard.label),
     dashboards: selectDashboards(state),
     folders: selectHistoricalReportFolders(state),

@@ -4,6 +4,8 @@
 
 import { connect } from 'react-redux';
 import { RolesDetailsPanel } from './layout.js';
+import { isUserPlatformAdmin } from '../../../redux/modules/entities/users/selectors';
+import { isSystemRole } from '../../../redux/modules/entities/selectors';
 
 import {
   userHasUpdatePermission,
@@ -28,7 +30,9 @@ export function mapStateToProps(state, props) {
     itemApiPending: itemApiPending(state),
     listSize: getListSize(state),
     inherited: isInherited(state),
-    parentTenantName: getEntityParentTenantName(state)
+    parentTenantName: getEntityParentTenantName(state),
+    isUserPlatformAdmin: isUserPlatformAdmin(state),
+    isSystemRole: isSystemRole(state)
   };
 }
 

@@ -12,18 +12,16 @@ import {
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity, updateProficiency } from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
-import {
-  getSkillMemberSidePanelTableItems,
-  getHasProficiencyFormValue
-} from '../../../redux/modules/entities/skills/selectors';
+import { getSkillMemberSidePanelTableItems } from '../../../redux/modules/entities/skills/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 import store from '../../../redux/store';
+import { getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 
 export function mapStateToProps(state) {
   return {
     userHasUpdatePermission: userHasUpdatePermission(state),
     usersItems: getSkillMemberSidePanelTableItems(state),
-    usersFields: getHasProficiencyFormValue(state)
+    usersFields: getCurrentFormValueByFieldName(state, 'hasProficiency')
       ? [
           ...entitiesMetaData.users.memberListTableFields,
           {

@@ -9,6 +9,7 @@ Object {
     "shared": false,
   },
   "isSaving": true,
+  "isSystemRole": true,
   "key": "mockId",
   "sharedFormValue": true,
   "userHasUpdatePermission": true,

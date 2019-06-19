@@ -16,6 +16,9 @@ describe('<TransferListsForm />', () => {
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
+        setSelectedSubEntityId={() => {}}
+        removeTransferListItem={() => {}}
+        removeCategoryItems={() => {}}
         handleSubmit={() => {}}
       />
     );
@@ -30,6 +33,9 @@ describe('<TransferListsForm />', () => {
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
+        setSelectedSubEntityId={() => {}}
+        removeTransferListItem={() => {}}
+        removeCategoryItems={() => {}}
         handleSubmit={() => {}}
       />
     );

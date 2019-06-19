@@ -1,6 +1,5 @@
 import { Map } from 'immutable';
 import { getSelectedEntity } from '../selectors';
-import { getCurrentForm } from '../../form/selectors';
 
 export const getInitialFormValues = state => {
   const selectedEntity = getSelectedEntity(state);
@@ -25,9 +24,6 @@ export const getInitialFormValues = state => {
   return new Map(initialValues);
 };
 
-export const getEmailTemplateFormValue = state =>
-  getCurrentForm(state) && getCurrentForm(state).getIn(['values', 'email']);
-
 export const getTemplates = state =>
   getSelectedEntity(state)
     .get('variables')
@@ -48,12 +44,9 @@ export const getInheritedBody = state => getInherited(state).get('body');
 const getTemplate = state => getSelectedEntity(state).get('template');
 
 export const getTemplateEmail = state =>
-  getTemplate(state).get('tenantId') === getInherited(state).get('tenantId')
-    ? 'Default'
-    : 'Custom';
+  getTemplate(state).get('tenantId') === getInherited(state).get('tenantId') ? 'Default' : 'Custom';
 
-export const getTemplateShared = state =>
-  getTemplate(state).get('shared') ? 'Yes' : 'No';
+export const getTemplateShared = state => (getTemplate(state).get('shared') ? 'Yes' : 'No');
 
 export const getTemplateSubject = state => getTemplate(state).get('subject');
 

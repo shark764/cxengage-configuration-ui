@@ -17,10 +17,12 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function TransferListsDetailsPanel({ children }) {
+function TransferListsDetailsPanel({ children }) {
   return <Wrapper className="dtpanel-entity-transfer-lists">{children}</Wrapper>;
 }
 
 TransferListsDetailsPanel.propTypes = {
   children: PropTypes.any
 };
+
+export default TransferListsDetailsPanel;

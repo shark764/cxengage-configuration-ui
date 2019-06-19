@@ -2,7 +2,7 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 import { createSelector } from 'reselect';
-import { getSelectedEntity } from '../selectors';
+import { getSelectedEntity, userHasPermissions, userHasEveryPermissions } from '../selectors';
 import { convertRoles, selectPlatformRoles } from '../roles/selectors';
 import { convertPermissions } from '../permissions/selectors';
 import {
@@ -10,8 +10,8 @@ import {
   availableEntityMembersForList,
   getModalTableItems,
   getSidePanelTableItems
-} from '../../entities/listItemSelectors';
-import { getCurrentForm } from '../../form/selectors';
+} from '../listItemSelectors';
+import { isTenantSetForReadAllMode } from '../../userData/selectors';
 
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
@@ -108,5 +108,18 @@ export const isUserPlatformAdmin = state => {
   return selectPlatformRoles(state).filter(role => 'Platform Administrator' === role.label).length !== 0;
 };
 
-export const getCheckedBulkActionFormValue = (state, field) =>
-  getCurrentForm(state) && getCurrentForm(state).getIn(['values', field]);
+//
+// Condition whether user belongs to tenant or
+// non-active tenant has been set as active
+//
+export const userHasLogiImpersonatePermissions = state =>
+  (!isTenantSetForReadAllMode(state) &&
+    (userHasPermissions(state, ['PLATFORM_IMPERSONATE_REPORTING_USERS']) ||
+      userHasEveryPermissions(state, ['IMPERSONATE_REPORTING_USERS', 'VIEW_ALL_USERS']))) ||
+  (isTenantSetForReadAllMode(state) &&
+    userHasEveryPermissions(state, [
+      'PLATFORM_IMPERSONATE_REPORTING_USERS',
+      'PLATFORM_VIEW_ALL_TENANTS',
+      'PLATFORM_VIEW_ALL_USERS',
+      'PLATFORM_CONFIG_USERS_VIEW'
+    ]));

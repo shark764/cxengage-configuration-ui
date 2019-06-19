@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<reasonsDetailsPanel /> renders reasons detailsPanel 1`] = `
+exports[`<ReasonsDetailsPanel /> renders reasons detailsPanel 1`] = `
 ShallowWrapper {
   "length": 1,
 }
 `;
 
-exports[`<reasonsDetailsPanel /> renders reasons detailsPanel with no update permision 1`] = `
+exports[`<ReasonsDetailsPanel /> renders reasons detailsPanel with no update permision 1`] = `
 ShallowWrapper {
   "length": 1,
 }

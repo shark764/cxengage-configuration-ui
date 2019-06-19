@@ -12,7 +12,8 @@ import * as reasonListsEpics from './modules/entities/reasonLists/epics';
 import * as flowsEpics from './modules/entities/flows/epics';
 import * as dispatchMappingsEpics from './modules/entities/dispatchMappings/epics';
 import * as slasEpics from './modules/entities/slas/epics';
-import * as rolesEpics from './modules/entities/roles/epics';
+import * as userDataEpics from './modules/userData/epics';
+import * as transferListsEpics from './modules/entities/transferLists/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -28,5 +29,6 @@ export const rootEpic = combineEpics(
   ...Object.values(flowsEpics),
   ...Object.values(dispatchMappingsEpics),
   ...Object.values(slasEpics),
-  ...Object.values(rolesEpics)
+  ...Object.values(userDataEpics),
+  ...Object.values(transferListsEpics)
 );

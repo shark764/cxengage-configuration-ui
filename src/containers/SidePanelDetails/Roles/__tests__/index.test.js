@@ -13,10 +13,12 @@ import {
   userHasUpdatePermission,
   isInherited,
   isSaving,
-  getEntityParentTenantName
+  getEntityParentTenantName,
+  isSystemRole
 } from '../../../../redux/modules/entities/selectors';
 import { getEntityListMembers, getListSize } from '../../../../redux/modules/entities/listItemSelectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
+import { isUserPlatformAdmin } from '../../../../redux/modules/entities/users/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntity.mockImplementation(
@@ -37,6 +39,9 @@ userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
 getEntityParentTenantName.mockImplementation(() => 'ParentTenantName');
+isSystemRole.mockImplementation(() => true);
+jest.mock('../../../../redux/modules/entities/users/selectors');
+isUserPlatformAdmin.mockImplementation(() => false);
 
 jest.mock('../../../../redux/modules/entities/listItemSelectors');
 getEntityListMembers.mockImplementation(() => ['mockListMembers']);

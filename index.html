@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   </head>
   <body>
-
     <div id="root"></div>
-    <script src="https://sdk.cxengage.net/js/agent/8.53.0/main.js" type="text/javascript"></script>
+    <script src="https://sdk.cxengage.net/js/agent/8.54.6/main.js" type="text/javascript"></script>
     <script>
-      if(window.self === window.top) {
+      if (window.self === window.top) {
         CxEngage.initialize({
-          "environment": "dev",
-          "baseUrl": "https://dev-api.cxengagelabs.net/v1/",
-          "logLevel": "debug",
-          "blastSqsOutput": true,
-          "reportingRefreshRate": 10000,
-          "supervisorMode": true
-        })
+          environment: 'dev',
+          baseUrl: 'https://dev-api.cxengagelabs.net/v1/',
+          logLevel: 'debug',
+          blastSqsOutput: true,
+          reportingRefreshRate: 10000,
+          supervisorMode: true
+        });
       }
     </script>
-</body>
+  </body>
 </html>

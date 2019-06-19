@@ -5,25 +5,27 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import DispatchMappingsForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
-import { currentMappingValue } from '../../../../redux/modules/entities/dispatchMappings/selectors';
+import {
+  selectFormInitialValues,
+  formSubmission,
+  createFormName,
+  getCurrentFormValueByFieldName
+} from '../../../../redux/modules/form/selectors';
 import { selectNonReusableFlows } from '../../../../redux/modules/entities/flows/selectors';
 import { selectIntegrations } from '../../../../redux/modules/entities/integrations/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
-jest.mock('../../../../redux/modules/entities/dispatchMappings/selectors');
 jest.mock('../../../../redux/modules/entities/flows/selectors');
 jest.mock('../../../../redux/modules/entities/integrations/selectors');
-getCurrentForm.mockImplementation(() => 'gets form from state');
+jest.mock('../../../../redux/modules/entities/dispatchMappings/selectors');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
-currentMappingValue.mockImplementation(() => 'source');
+getCurrentFormValueByFieldName.mockImplementation(() => 'source');
 selectNonReusableFlows.mockImplementation(() => [{ value: 'mockValue', label: 'mockLabel' }]);
 selectIntegrations.mockImplementation(() => ['mockId1', 'mockId2']);
 

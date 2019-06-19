@@ -5,9 +5,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import reasonsDetailsPanel from '../layout';
+import ReasonsDetailsPanel from '../layout';
 
-describe('<reasonsDetailsPanel />', () => {
+describe('<ReasonsDetailsPanel />', () => {
   let customItem;
   beforeEach(() => {
     customItem = {
@@ -18,7 +18,7 @@ describe('<reasonsDetailsPanel />', () => {
   });
   it('renders reasons detailsPanel', () => {
     const rendered = shallow(
-      <reasonsDetailsPanel
+      <ReasonsDetailsPanel
         id="0000-0000-0000-0000-0000"
         className="details-panel"
         userHasUpdatePermission={true}
@@ -30,7 +30,7 @@ describe('<reasonsDetailsPanel />', () => {
   });
   it('renders reasons detailsPanel with no update permision', () => {
     const rendered = shallow(
-      <reasonsDetailsPanel
+      <ReasonsDetailsPanel
         id="0000-0000-0000-0000-0000"
         className="details-panel"
         userHasUpdatePermission={false}

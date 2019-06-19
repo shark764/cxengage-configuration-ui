@@ -8,9 +8,7 @@ ShallowWrapper {
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "allDispatchMappings": undefined,
-  "dispatchValues": undefined,
-  "flowId": undefined,
+  "flowId": "source",
   "flowIds": Array [
     Object {
       "label": "mockLabel",

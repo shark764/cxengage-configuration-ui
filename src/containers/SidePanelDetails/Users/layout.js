@@ -8,11 +8,11 @@
  *
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { SidePanelTable, DetailHeader } from 'cx-ui-components';
+import { SidePanelTable, DetailHeader, ConfirmationWrapper, Button } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
 import { detailHeaderText } from '../../../utils';
 
@@ -23,6 +23,10 @@ const Wrapper = styled.div`
 
 const WrappedDetailHeader = styled(DetailHeader)`
   margin-left: 35px;
+`;
+
+const ImpersonateButton = styled(Button)`
+  margin: 10px;
 `;
 
 export default function UsersDetailsPanel({
@@ -51,7 +55,10 @@ export default function UsersDetailsPanel({
   defaultFilters,
   sidePanelUpdatePermissions,
   sidePanelReadPermissions,
-  itemApiPending
+  itemApiPending,
+  setTenantUserAsImpersonated,
+  userDisplay,
+  userHasLogiImpersonatePermissions
 }) {
   return (
     <Wrapper id="dtpanel-users">
@@ -202,6 +209,25 @@ export default function UsersDetailsPanel({
           />
         </DetailWrapper>
       )}
+
+      {/*
+        TODO: Impersonating user for Logi Reports
+        will be released on Q3
+        */}
+      {/* {userHasLogiImpersonatePermissions && (
+        <Fragment>
+          <DetailHeader text="Reporting Settings" />
+          <ConfirmationWrapper
+            confirmBtnCallback={setTenantUserAsImpersonated}
+            mainText={`This will set tenant user "${userDisplay}" as impersonated for advanced reports. You can stop impersonating by ending session or switching to another tenant.`}
+            secondaryText={'Are you sure you want to continue?'}
+          >
+            <ImpersonateButton type="button" buttonType="primary">
+              Manage reports on behalf of this user
+            </ImpersonateButton>
+          </ConfirmationWrapper>
+        </Fragment>
+      )} */}
     </Wrapper>
   );
 }
@@ -232,5 +258,8 @@ UsersDetailsPanel.propTypes = {
   defaultFilters: PropTypes.object,
   sidePanelUpdatePermissions: PropTypes.object,
   sidePanelReadPermissions: PropTypes.object,
-  itemApiPending: PropTypes.string
+  itemApiPending: PropTypes.string,
+  setTenantUserAsImpersonated: PropTypes.func,
+  userDisplay: PropTypes.string,
+  userHasLogiImpersonatePermissions: PropTypes.bool
 };
