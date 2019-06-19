@@ -19,27 +19,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 
-## [0.62.0] - 2019-06-18
+## [0.62.1] - 2019-06-19
 ### Added
 - CXV1-18288 - Include Tenant Name in Role Inheritance page.
 - CXV1-17166 - Added Transfer Lists Component.
 - CXV1-16902 - Fixing validation on Versions field on Dispatch Mappings page.
 - CXV1-17286 - Implementing typeahead component on config-ui 2
-- Merging recent master changes to develop.
 ### Changed
 - Version bump component library to 0.40.2.
 - SDK version bump to 8.54.6.
 ### Fixed
-- CXV1-18608 - Revert of Platform admins users are unable to add/remove permissions to a shared role when in a child tenant on config-ui 2.
-- CXV1-18608 - Platform admins users are unable to add/remove permissions to a shared role when in a child tenant on config-ui 2.
 - CXV1-17410 - Update Roles page to allow Platform Admins to modify standard seeded Tenant Roles.
 - Login directly into Config-UI2 was failing due to data expected from Config-UI1.
 - CXV1-16902 - Issue in validation in Dispatch Mappings where submit button was no enabled after second submitting.
 - CXV1-17286 - Issues with typeahead component being extremely slow when changin tenant once logged in.
 - Avoid fetching members in sidepanel table when closing the wrapper.
 - Fixed a styling issue on login page.
-- CXV1-17408 - User tenant permissions are gotten from Config-UI1 instead of Config-UI2.
-- CXV1-17408 - Beta pages are no longer showing loading icon forever if localStorage is cleared.
+- User tenant permissions are gotten from Config-UI1 instead of Config-UI2.
+- Beta pages are no longer showing loading icon forever if localStorage is cleared.
 - CXV1-17408 - Beta features page allows toggling standard and advanced reports with proper permission.
 - Changing all 'automation' attributes of form fields to 'data-automation'
 - Removing custom-metrics from entities.

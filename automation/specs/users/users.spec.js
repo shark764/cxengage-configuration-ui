@@ -14,7 +14,6 @@ describe('Config-UI Users Page', () => {
   // it('Click on the create button', () => {
   //   clickCreate.CreateNewLine('AnyValue','navigationLinkGroups');
   // });
-
   // it('Click on the create button', () => {
   //   Elem.createButton.waitAndClick(3000);
   //   Brow.pause(8000);
