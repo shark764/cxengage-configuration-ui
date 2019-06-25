@@ -83,3 +83,14 @@ export const getCurrentSubForm = (state, formId) => state.getIn(['form', formId]
 
 export const getCurrentSubFormValueByFieldName = (state, formId, fieldName) =>
   getCurrentSubForm(state, formId) && getCurrentSubForm(state, formId).getIn(['values', fieldName]);
+
+export const getCurrentSubmittingFormProps = (state, props) => props;
+
+export const getCurrentSubmittingFormValues = (state, props) =>
+  props.values.map(value => {
+    if (typeof value === 'string') {
+      return value.trim();
+    } else {
+      return value;
+    }
+  });

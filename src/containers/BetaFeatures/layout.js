@@ -73,9 +73,9 @@ export default class BetaFeatures extends Component {
       outboundIdentifierLists: false,
       roles: false,
       flows: false,
-      dispatchMappings: false
-      // logiStandard: false,
-      // logiAdvanced: false
+      dispatchMappings: false,
+      logiStandard: false,
+      logiAdvanced: false
     };
     const pageTitles = {};
     Object.keys(features).forEach(entityName => {

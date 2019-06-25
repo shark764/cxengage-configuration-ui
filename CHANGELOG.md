@@ -18,9 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Outbound Identifiers / Outbound Identifier Lists
 - Roles (permissions)
 - Flows
+- Logi reportings
 
-## [0.62.1] - 2019-06-19
+## [0.62.2] - 2019-06-19
 ### Added
+- CXV1-18400- Transfer Lists Component Unit tests.
+- CXV1-18258 - Add method to impersonate a CxEngage Reporting user and launch into new BI reporting experience.
+- CXV1-17687 - Adding Logi Reporting to Beta Features Configuration page.
 - CXV1-18288 - Include Tenant Name in Role Inheritance page.
 - CXV1-17166 - Added Transfer Lists Component.
 - CXV1-16902 - Fixing validation on Versions field on Dispatch Mappings page.
@@ -103,7 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.60.0] - 2019-03-19
 ### Added
-- added logi reporting to beta features
+- Added logi reporting to beta features
 
 ## [0.59.6] - 2019-03-18
 ### Fixed

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { List, fromJS } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
 import {
   getEntityData,
@@ -7,19 +7,24 @@ import {
   getSelectedEntity,
   getSelectedSubEntityId
 } from '../../entities/selectors';
-import { getCurrentFormValueByFieldName, getCurrentSubFormValueByFieldName } from '../../form/selectors';
+import {
+  getCurrentFormValueByFieldName,
+  getCurrentSubFormValueByFieldName,
+  getCurrentSubmittingFormProps,
+  getCurrentSubmittingFormValues
+} from '../../form/selectors';
 
 // TransferList form selectors:
 
 export const transferListsFormInitialValues = state => {
-  let initialValues;
   if (getSelectedEntityId(state) !== 'create') {
-    initialValues = {
+    return Map({
       name: getSelectedEntity(state).get('name'),
       description: getSelectedEntity(state).get('description')
-    };
+    });
+  } else {
+    return Map({ active: true });
   }
-  return initialValues;
 };
 
 export const currentFormEndpoints = state => getCurrentFormValueByFieldName(state, 'endpoints');
@@ -47,19 +52,8 @@ export const endpointFieldValue = state => {
 
 // Currently submitting sub-entity form values:
 
-export const currentSubmittingFormProps = (state, props) => props;
-
-export const currentSubmittingFormValues = (state, props) =>
-  props.values.map(value => {
-    if (typeof value === 'string') {
-      return value.trim();
-    } else {
-      return value;
-    }
-  });
-
 export const currentSubFormEndpointFieldValue = createSelector(
-  currentSubmittingFormProps,
+  getCurrentSubmittingFormProps,
   props => props.values.get('endpoint') && props.values.get('endpoint').trim()
 );
 
@@ -127,12 +121,12 @@ export const getSelectedTransferListItemValues = createSelector(
 // TransferList Item Create Selectors:
 
 // When creating a new transferList, transferListItems should contain UUID's for the drag and drop component to work or else the UI breaks:
-export const selectEndpointUUIDS = createSelector(currentSubmittingFormValues, values =>
+export const selectEndpointUUIDS = createSelector(getCurrentSubmittingFormValues, values =>
   values
     .set('draggableUUID', generateUUID())
     .set('endpointUUID', generateUUID())
-    .set('droppableUUID', generateUUID())
     .set('categoryUUID', generateUUID())
+    .set('droppableUUID', generateUUID())
     .delete('newCategory')
 );
 
@@ -142,25 +136,32 @@ export const transferListItemCreateValues = createSelector(
   (values, existingEndpoints, queueId) => {
     // converts queueName to queueId
     values = values.get('contactType') === 'queue' ? values.set('endpoint', queueId) : values;
-
     if (existingEndpoints !== undefined) {
       const hierarchyExists = existingEndpoints.find(endpoint => endpoint.get('hierarchy') === values.get('hierarchy'));
       if (!hierarchyExists) {
-        values = existingEndpoints.push(values);
+        // If a transferListItem is being created under new hierarchy:
+        const updatedValues = existingEndpoints.push(values);
+        return updatedValues;
       } else {
-        values = existingEndpoints.push(values.delete('droppableUUID').delete('categoryUUID'));
+        // If a transferListItem is being created under an existing hierarchy:
+        const updatedValues = existingEndpoints.push(
+          values
+            .set('categoryUUID', hierarchyExists.get('categoryUUID'))
+            .set('droppableUUID', hierarchyExists.get('droppableUUID'))
+        );
+        return updatedValues;
       }
     } else {
-      values = fromJS([values]);
+      // If there are no existing transferListItems in the transferList:
+      const updatedValues = fromJS([values]);
+      return updatedValues;
     }
-    return values;
   }
 );
 
 // TransferList Item update Selector:
-
 export const transferListItemUpdateValues = createSelector(
-  [getSelectedSubEntityId, currentFormEndpoints, currentSubmittingFormProps, selectActiveQueueId],
+  [getSelectedSubEntityId, currentFormEndpoints, getCurrentSubmittingFormProps, selectActiveQueueId],
   (selectedSubEntityId, existingEndpoints, props, queueId) => {
     // coverts queueName to queueId:
     props.values = props.values.get('contactType') === 'queue' ? props.values.set('endpoint', queueId) : props.values;
@@ -186,19 +187,16 @@ export const transferListItemUpdateValues = createSelector(
 // Groups transferListItems based on the category they belong to:
 export const selectEndpointHeaders = createSelector(currentFormEndpoints, endpoints => {
   if (endpoints && endpoints.size > 0) {
-    const categoryItems = endpoints.filter(endpoint => endpoint.get('categoryUUID') !== undefined);
-
     // Finds the first transferListItem in each category, so that rest of the items can be grouped under them:
     return endpoints.reduce((accumlator, currentVal) => {
       const hierarchyExists = accumlator.find(val => val.get('hierarchy') === currentVal.get('hierarchy'));
-      const item = categoryItems.find(val => val.get('hierarchy') === currentVal.get('hierarchy'));
-      if (!hierarchyExists && item !== undefined) {
+      if (!hierarchyExists) {
         return accumlator.push(
           fromJS({
-            name: item.get('name'),
-            hierarchy: item.get('hierarchy'),
-            categoryUUID: item.get('categoryUUID'),
-            droppableUUID: item.get('droppableUUID')
+            name: currentVal.get('name'),
+            hierarchy: currentVal.get('hierarchy'),
+            categoryUUID: currentVal.get('categoryUUID'),
+            droppableUUID: currentVal.get('droppableUUID')
           })
         );
       }

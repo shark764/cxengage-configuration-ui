@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "endpointFieldValue": "mockEndpointValue",
+  "existingCategories": "mockExistingCategories",
+  "hierarchyInputText": "mockHierarchyInputValue",
+  "isSaving": true,
+  "isUserCreatingNewCategory": true,
+  "key": "create",
+  "selectActiveQueueNames": "mockActiveQueueNames",
+  "selectedContactType": "mockSelectedContactType",
+  "selectedEntityId": "mockId",
+  "selectedSubEntityId": "mockSelectedSubEntityId",
+  "transferListName": "mockTransferListName",
+}
+`;
+
+exports[`TransferLists Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`formSubmission returns proper values 1`] = `
+Object {
+  "dirty": true,
+  "type": "SUB_ENTITY_FORM_SUBMIT",
+  "values": Array [
+    "mockEndpoint1",
+    "mockEndpoint2",
+  ],
+}
+`;

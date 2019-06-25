@@ -7,17 +7,22 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import TransferListsForm, { mapStateToProps } from '../';
+import { createFormName, formSubmission } from '../../../../redux/modules/form/selectors';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
+import {
+  selectEndpointHeaders,
+  transferListsFormInitialValues
+} from '../../../../redux/modules/entities/transferLists/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 jest.mock('../../../../redux/modules/entities/transferLists/selectors');
-getCurrentForm.mockImplementation(() => 'gets form from state');
-getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
+getSelectedEntityId.mockImplementation(() => 'mockId');
+transferListsFormInitialValues.mockImplementation(() => 'mock transferList initial values');
+selectEndpointHeaders.mockImplementation(() => 'mockEndpointHeaders');
+getCurrentForm.mockImplementation(() => 'gets form from state');
 userHasUpdatePermission.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 describe('TransferLists Renders', () => {
   it('renders', () => {
@@ -40,9 +45,9 @@ describe('createFormName', () => {
 
 describe('formSubmission', () => {
   const values = {
-    id: 'mockId',
     name: 'mockName',
-    description: 'mockDescription'
+    description: 'mockDescription',
+    endpoints: 'mockEndpoints'
   };
   const dispatch = action => action;
   const props = { dirty: true };

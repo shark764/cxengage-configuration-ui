@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransferListsForm selectors Gets all of the transferListItem values to display in the respective fields while updating a transferListItem 1`] = `
+Immutable.Map {
+  "hierarchy": "mockHierarchy1",
+  "categoryUUID": "mockCategoryUUID1",
+  "name": "mockContactName1",
+  "contactType": "queue",
+  "endpoint": "mockQueueName1",
+  "endpointUUID": "mockEndpointUUID1",
+  "droppableUUID": "mockDroppableUUID1",
+}
+`;
+
+exports[`TransferListsForm selectors Gets category header value to display in the categoryName field while updating category header 1`] = `
+Immutable.Map {
+  "hierarchy": "mockHierarchy1",
+}
+`;
+
+exports[`TransferListsForm selectors Gets currently selected trasnferList endpoints 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": "mockHierarchy1",
+    "categoryUUID": "mockCategoryUUID1",
+    "name": "mockContactName1",
+    "contactType": "queue",
+    "endpoint": "mockQueueId1",
+    "endpointUUID": "mockEndpointUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+  },
+  Immutable.Map {
+    "hierarchy": "mockHierarchy1",
+    "name": "mockContactName2",
+    "contactType": "pstn",
+    "endpoint": "mockQueueId2",
+    "endpointUUID": "mockEndpointUUID2",
+    "droppableUUID": "mockDroppableUUID2",
+  },
+  Immutable.Map {
+    "hierarchy": "mockHierarchy2",
+    "categoryUUID": "mockCategoryUUID2",
+    "name": "mockContactName3",
+    "contactType": "sip",
+    "endpoint": "mockSipAddress",
+    "endpointUUID": "mockEndpointUUID3",
+    "droppableUUID": "mockDroppableUUID3",
+  },
+]
+`;
+
+exports[`TransferListsForm selectors Gets endpoint field value from currently submiting transferListItem form values 1`] = `"updatedMockQueueName"`;
+
+exports[`TransferListsForm selectors Gets initial values when an existing transferList is selected 1`] = `
+Immutable.Map {
+  "name": "mockTransferListName1",
+  "description": "mockTransferListDescription1",
+}
+`;
+
+exports[`TransferListsForm selectors Gets initial values while creating a new transferList 1`] = `
+Immutable.Map {
+  "active": true,
+}
+`;
+
+exports[`TransferListsForm selectors Selects active queue names from the tenant 1`] = `
+Array [
+  "mockQueueName1",
+  "updatedMockQueueName",
+]
+`;
+
+exports[`TransferListsForm selectors adds UUIDS to the transferListItem that is going to be added to the transferList 1`] = `
+Immutable.Map {
+  "hierarchy": "mockHierarchy1",
+  "endpoint": " mockQueueName1",
+  "contactType": "queue",
+  "draggableUUID": "mockGenerateUUID",
+  "endpointUUID": "mockGenerateUUID",
+  "categoryUUID": "mockGenerateUUID",
+  "droppableUUID": "mockGenerateUUID",
+}
+`;
+
+exports[`TransferListsForm selectors converts queueName to queueId when the transferListItem contactType is queue 1`] = `"updatedMockQueueId"`;
+
+exports[`TransferListsForm selectors select endpoints that only contians categoryHeaders 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "name": "mockContactName1",
+    "hierarchy": "mockHierarchy1",
+    "categoryUUID": "mockCategoryUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+  },
+  Immutable.Map {
+    "name": "mockContactName3",
+    "hierarchy": "mockHierarchy2",
+    "categoryUUID": "mockCategoryUUID2",
+    "droppableUUID": "mockDroppableUUID3",
+  },
+]
+`;
+
+exports[`TransferListsForm selectors updates transferList endpoints (mainEntityForm values) when adding transferListItem to a new transferList 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": " updateMockHierarchy ",
+    "endpoint": "updatedMockQueueId",
+    "contactType": "queue",
+    "endpointUUID": "mockGenerateUUID",
+    "draggableUUID": "mockGenerateUUID",
+    "categoryUUID": "mockGenerateUUID",
+    "droppableUUID": "mockGenerateUUID",
+  },
+]
+`;
+
+exports[`TransferListsForm selectors updates transferList endpoints (mainEntityForm values) when adding transferListItem to an existing transferList 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": "mockHierarchy1",
+    "categoryUUID": "mockCategoryUUID1",
+    "name": "mockContactName1",
+    "contactType": "queue",
+    "endpoint": "mockQueueId1",
+    "endpointUUID": "mockEndpointUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+  },
+  Immutable.Map {
+    "hierarchy": "mockHierarchy1",
+    "name": "mockContactName2",
+    "contactType": "pstn",
+    "endpoint": "mockQueueId2",
+    "endpointUUID": "mockEndpointUUID2",
+    "droppableUUID": "mockDroppableUUID2",
+  },
+  Immutable.Map {
+    "hierarchy": "mockHierarchy2",
+    "categoryUUID": "mockCategoryUUID2",
+    "name": "mockContactName3",
+    "contactType": "sip",
+    "endpoint": "mockSipAddress",
+    "endpointUUID": "mockEndpointUUID3",
+    "droppableUUID": "mockDroppableUUID3",
+  },
+  Immutable.Map {
+    "hierarchy": " updateMockHierarchy ",
+    "endpoint": "updatedMockQueueId",
+    "contactType": "queue",
+    "endpointUUID": "mockGenerateUUID",
+    "draggableUUID": "mockGenerateUUID",
+    "categoryUUID": "mockGenerateUUID",
+    "droppableUUID": "mockGenerateUUID",
+  },
+]
+`;
+
+exports[`TransferListsForm selectors updates transferList endpoints (mainEntityForm values) when updating one of its transferListItem category header 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": " updateMockHierarchy ",
+    "categoryUUID": "mockCategoryUUID1",
+    "name": "mockContactName1",
+    "contactType": "queue",
+    "endpoint": "mockQueueId1",
+    "endpointUUID": "mockEndpointUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+  },
+  Immutable.Map {
+    "hierarchy": " updateMockHierarchy ",
+    "name": "mockContactName2",
+    "contactType": "pstn",
+    "endpoint": "mockQueueId2",
+    "endpointUUID": "mockEndpointUUID2",
+    "droppableUUID": "mockDroppableUUID2",
+  },
+  Immutable.Map {
+    "hierarchy": "mockHierarchy2",
+    "categoryUUID": "mockCategoryUUID2",
+    "name": "mockContactName3",
+    "contactType": "sip",
+    "endpoint": "mockSipAddress",
+    "endpointUUID": "mockEndpointUUID3",
+    "droppableUUID": "mockDroppableUUID3",
+  },
+]
+`;
+
+exports[`TransferListsForm selectors updates transferList endpoints (mainEntityForm values) when updating one of its transferListItem values 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": " updateMockHierarchy ",
+    "endpoint": "updatedMockQueueId",
+    "contactType": "queue",
+    "endpointUUID": "mockEndpointUUID1",
+  },
+  Immutable.Map {
+    "hierarchy": "mockHierarchy1",
+    "name": "mockContactName2",
+    "contactType": "pstn",
+    "endpoint": "mockQueueId2",
+    "endpointUUID": "mockEndpointUUID2",
+    "droppableUUID": "mockDroppableUUID2",
+  },
+  Immutable.Map {
+    "hierarchy": "mockHierarchy2",
+    "categoryUUID": "mockCategoryUUID2",
+    "name": "mockContactName3",
+    "contactType": "sip",
+    "endpoint": "mockSipAddress",
+    "endpointUUID": "mockEndpointUUID3",
+    "droppableUUID": "mockDroppableUUID3",
+  },
+]
+`;
+
+exports[`TransferListsForm selectors user should be able to select one of the existing category names while creating a transferListItem 1`] = `
+Array [
+  "mockHierarchy1",
+  "mockHierarchy2",
+]
+`;

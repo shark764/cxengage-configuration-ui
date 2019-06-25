@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formvalidation returns error object while updating category header with a wrong value provided in the required field  1`] = `
+Object {
+  "hierarchy": "Please enter a contact name.",
+}
+`;
+
+exports[`formvalidation returns error object while updating category header with required field provided not provided 1`] = `
+Object {
+  "hierarchy": "Please enter a contact name.",
+}
+`;
+
+exports[`formvalidation returns proper errors when creating a transferListItem under a new category without providing required fields 1`] = `
+Object {
+  "coldTransfer": "Please select warm/cold transfer.",
+  "contactType": "Please select a contact type.",
+  "endpoint": "Valid Endpoint Required.",
+  "hierarchy": "Valid Category from the list is Required",
+  "name": "Please enter a contact name.",
+  "transferType": "Please select a transfer type.",
+  "warmTransfer": "Please select warm/cold transfer.",
+}
+`;
+
+exports[`formvalidation returns proper errors when creating a transferListItem under an existing category without providing required fields 1`] = `
+Object {
+  "coldTransfer": "Please select warm/cold transfer.",
+  "contactType": "Please select a contact type.",
+  "endpoint": "Valid Endpoint Required.",
+  "hierarchy": "Please enter a category name.",
+  "name": "Please enter a contact name.",
+  "transferType": "Please select a transfer type.",
+  "warmTransfer": "Please select warm/cold transfer.",
+}
+`;
+
+exports[`formvalidation returns proper errors when creating a transferListItem with contactType PSTN 1`] = `
+Object {
+  "coldTransfer": "Please select warm/cold transfer.",
+  "contactType": false,
+  "endpoint": "Valid Phone Number Required",
+  "hierarchy": "Valid Category from the list is Required",
+  "name": "Please enter a contact name.",
+  "transferType": "Please select a transfer type.",
+  "warmTransfer": "Please select warm/cold transfer.",
+}
+`;
+
+exports[`formvalidation returns proper errors when creating a transferListItem with contactType SIP 1`] = `
+Object {
+  "coldTransfer": "Please select warm/cold transfer.",
+  "contactType": false,
+  "endpoint": "Valid SIP Address Required",
+  "hierarchy": "Valid Category from the list is Required",
+  "name": "Please enter a contact name.",
+  "transferType": "Please select a transfer type.",
+  "warmTransfer": "Please select warm/cold transfer.",
+}
+`;
+
+exports[`formvalidation returns proper errors when creating a transferListItem with contactType queue 1`] = `
+Object {
+  "coldTransfer": "Please select warm/cold transfer.",
+  "contactType": false,
+  "endpoint": "Valid Queue form the list is required.",
+  "hierarchy": "Valid Category from the list is Required",
+  "name": "Please enter a contact name.",
+  "transferType": "Please select a transfer type.",
+  "warmTransfer": "Please select warm/cold transfer.",
+}
+`;
+
+exports[`formvalidation returns proper object when creating a transferListItem with PSTN as a contact type 1`] = `
+Object {
+  "coldTransfer": false,
+  "contactType": false,
+  "endpoint": false,
+  "hierarchy": false,
+  "name": false,
+  "transferType": false,
+  "warmTransfer": false,
+}
+`;
+
+exports[`formvalidation returns proper object when creating a transferListItem with SIP as a contact type 1`] = `
+Object {
+  "coldTransfer": false,
+  "contactType": false,
+  "endpoint": false,
+  "hierarchy": false,
+  "name": false,
+  "transferType": false,
+  "warmTransfer": false,
+}
+`;
+
+exports[`formvalidation returns proper object when creating a transferListItem with queue as a contact type 1`] = `
+Object {
+  "coldTransfer": false,
+  "contactType": false,
+  "endpoint": false,
+  "hierarchy": false,
+  "name": false,
+  "transferType": false,
+  "warmTransfer": false,
+}
+`;
+
+exports[`formvalidation returns proper object while updating category header with required field provided 1`] = `
+Object {
+  "hierarchy": false,
+}
+`;

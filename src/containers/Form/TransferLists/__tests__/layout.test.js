@@ -6,20 +6,21 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import TransferListsForm from '../layout';
+import { List } from 'immutable';
 
 describe('<TransferListsForm />', () => {
   it('renders create form', () => {
     const rendered = shallow(
       <TransferListsForm
         name="mockName"
-        description="mockDescription"
         isSaving={false}
-        inherited={false}
-        userHasUpdatePermission={true}
-        setSelectedSubEntityId={() => {}}
-        removeTransferListItem={() => {}}
-        removeCategoryItems={() => {}}
         handleSubmit={() => {}}
+        endpointHeaders={List([{ a: 'mockEndpointheaders' }])}
+        selectedEntityId="mockEntitiyId"
+        userHasUpdatePermission={true}
+        removeCategoryItems={() => {}}
+        removeTransferListItem={() => {}}
+        setSelectedSubEntityId={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -28,15 +29,14 @@ describe('<TransferListsForm />', () => {
     const rendered = shallow(
       <TransferListsForm
         name="mockName"
-        description="mockDescription"
-        id="0000-0000-0000-0000-0000"
         isSaving={false}
-        inherited={false}
-        userHasUpdatePermission={true}
-        setSelectedSubEntityId={() => {}}
-        removeTransferListItem={() => {}}
-        removeCategoryItems={() => {}}
         handleSubmit={() => {}}
+        endpointHeaders={List([{ a: 'mockEndpointheaders' }])}
+        selectedEntityId="mockEntitiyId"
+        userHasUpdatePermission={true}
+        removeCategoryItems={() => {}}
+        removeTransferListItem={() => {}}
+        setSelectedSubEntityId={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();

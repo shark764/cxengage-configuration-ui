@@ -35,7 +35,13 @@ export const InitTransferListsForm = action$ =>
           });
           return updatedEndpoints;
         } else {
-          updatedEndpoints.push({ ...currentEndpoint, draggableUUID: generateUUID(), endpointUUID: generateUUID() });
+          updatedEndpoints.push({
+            ...currentEndpoint,
+            draggableUUID: generateUUID(),
+            endpointUUID: generateUUID(),
+            categoryUUID: categoryExists.categoryUUID,
+            droppableUUID: categoryExists.droppableUUID
+          });
           return updatedEndpoints;
         }
       }, []);
@@ -120,7 +126,13 @@ export const ReInitTransferListsForm = action$ =>
           });
           return updatedEndpoints;
         } else {
-          updatedEndpoints.push({ ...currentEndpoint, draggableUUID: generateUUID(), endpointUUID: generateUUID() });
+          updatedEndpoints.push({
+            ...currentEndpoint,
+            draggableUUID: generateUUID(),
+            endpointUUID: generateUUID(),
+            categoryUUID: categoryExists.categoryUUID,
+            droppableUUID: categoryExists.droppableUUID
+          });
           return updatedEndpoints;
         }
       }, []);
@@ -158,10 +170,7 @@ export const DeleteTransferListItem = (action$, store) =>
           );
       } else if (a.categoryId) {
         updatedEndpoints = getCurrentFormValueByFieldName(store.getState(), 'endpoints')
-          .filter(
-            endpoint =>
-              endpoint.get('hierarchy') && endpoint.get('hierarchy').trim() !== a.categoryId && a.categoryId.trim()
-          )
+          .filter(endpoint => endpoint.get('categoryUUID') !== a.categoryId)
           .map(endpoint =>
             endpoint
               .delete('endpointUUID')
@@ -212,14 +221,13 @@ export const RemoveTransferListItem = (action$, store) =>
         );
       } else if (a.categoryId) {
         updatedEndpoints = getCurrentFormValueByFieldName(store.getState(), 'endpoints').filter(
-          endpoint =>
-            endpoint.get('hierarchy') && endpoint.get('hierarchy').trim() !== a.categoryId && a.categoryId.trim()
+          endpoint => endpoint.get('categoryUUID') !== a.categoryId
         );
       }
       return { ...a, updatedEndpoints };
     })
     .map(a => {
-      if (a.updatedEndpoints.size > 0) {
+      if (a.updatedEndpoints && a.updatedEndpoints.size > 0) {
         return {
           type: '@@redux-form/CHANGE',
           entityName: a.entityName,

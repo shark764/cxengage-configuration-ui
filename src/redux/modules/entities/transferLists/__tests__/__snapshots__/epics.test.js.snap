@@ -1,0 +1,299 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransferLists Epics Creating transferListItem in an existing transferList 1`] = `
+Object {
+  "entityId": "mockTransferListId",
+  "entityName": "transferLists",
+  "type": "UPDATE_ENTITY",
+  "values": Object {
+    "active": true,
+    "description": "mockTransferListDescription",
+    "endpoints": Array [
+      Object {
+        "hierarchy": "mockHierarchy1",
+        "name": "mockContactName1",
+      },
+      Object {
+        "hierarchy": "mockHierarchy1",
+        "name": "mockContactName2",
+      },
+      Object {
+        "hierarchy": "mockHierarchy3",
+        "name": "mockContactName3",
+      },
+    ],
+    "name": "mockTransferListName",
+  },
+}
+`;
+
+exports[`TransferLists Epics Deletes a transferListItem from an existing transferList 1`] = `
+Object {
+  "entityId": "mockTransferListId",
+  "entityName": "transferLists",
+  "type": "UPDATE_ENTITY",
+  "values": Object {
+    "active": true,
+    "description": "mockDescription",
+    "endpoints": Array [
+      Object {
+        "hierarchy": "mockHierarchy1",
+        "name": "mockContactName1",
+      },
+      Object {
+        "hierarchy": "mockHierarchy3",
+        "name": "mockContactName3",
+      },
+    ],
+    "name": "mockTransferListName",
+  },
+}
+`;
+
+exports[`TransferLists Epics Deletes group of transferListItems that belong to a category from an existing transferList  1`] = `
+Object {
+  "entityId": "mockTransferListId",
+  "entityName": "transferLists",
+  "type": "UPDATE_ENTITY",
+  "values": Object {
+    "active": true,
+    "description": "mockDescription",
+    "endpoints": Array [
+      Object {
+        "hierarchy": "mockHierarchy3",
+        "name": "mockContactName3",
+      },
+    ],
+    "name": "mockTransferListName",
+  },
+}
+`;
+
+exports[`TransferLists Epics InitTransferListsForm 1`] = `
+Object {
+  "meta": Object {
+    "form": "transferLists:mockTransferListId",
+  },
+  "payload": Object {
+    "description": "mockTransferListDescription",
+    "endpoints": Array [
+      Object {
+        "categoryUUID": "mockGenerateUUID",
+        "draggableUUID": "mockGenerateUUID",
+        "droppableUUID": "mockGenerateUUID",
+        "endpointUUID": "mockGenerateUUID",
+        "hierarchy": "mockHierarchy1",
+        "name": "mockContactName1",
+      },
+      Object {
+        "categoryUUID": "mockGenerateUUID",
+        "draggableUUID": "mockGenerateUUID",
+        "droppableUUID": "mockGenerateUUID",
+        "endpointUUID": "mockGenerateUUID",
+        "hierarchy": "mockHierarchy1",
+        "name": "mockContactName2",
+      },
+      Object {
+        "categoryUUID": "mockGenerateUUID",
+        "draggableUUID": "mockGenerateUUID",
+        "droppableUUID": "mockGenerateUUID",
+        "endpointUUID": "mockGenerateUUID",
+        "hierarchy": "mockHierarchy3",
+        "name": "mockContactName3",
+      },
+    ],
+    "name": "mockTransferListName",
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`TransferLists Epics ReInitTransferListsForm 1`] = `
+Object {
+  "meta": Object {
+    "form": "transferLists:mockTransferListId",
+  },
+  "payload": Object {
+    "endpoints": Array [
+      Object {
+        "categoryUUID": "mockGenerateUUID",
+        "draggableUUID": "mockGenerateUUID",
+        "droppableUUID": "mockGenerateUUID",
+        "endpointUUID": "mockGenerateUUID",
+        "hierarchy": "mockHierarchy1",
+        "name": "mockContactName1",
+      },
+      Object {
+        "categoryUUID": "mockGenerateUUID",
+        "draggableUUID": "mockGenerateUUID",
+        "droppableUUID": "mockGenerateUUID",
+        "endpointUUID": "mockGenerateUUID",
+        "hierarchy": "mockHierarchy2",
+        "name": "mockContactName2",
+      },
+      Object {
+        "categoryUUID": "mockGenerateUUID",
+        "draggableUUID": "mockGenerateUUID",
+        "droppableUUID": "mockGenerateUUID",
+        "endpointUUID": "mockGenerateUUID",
+        "hierarchy": "mockHierarchy1",
+        "name": "mockContactName3",
+      },
+    ],
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`TransferLists Epics creating transferListItem in a new transferList 1`] = `
+Object {
+  "entityId": "create",
+  "entityName": "transferLists",
+  "meta": Object {
+    "field": "endpoints",
+    "form": "transferLists:create",
+    "persistentSubmitErrors": false,
+    "touch": false,
+  },
+  "payload": "mockTransferListValues",
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
+exports[`TransferLists Epics getQueuesAfterFetchingTransferLists 1`] = `
+Object {
+  "entityName": "queues",
+  "type": "FETCH_DATA",
+}
+`;
+
+exports[`TransferLists Epics should initialize TransferListForm when transferListItems belong to the same group are removed from an unsaved transferList 1`] = `
+Object {
+  "entityId": "create",
+  "entityName": "transferLists",
+  "meta": Object {
+    "form": "transferLists:create",
+  },
+  "payload": Object {
+    "description": "mockDescription",
+    "name": "mockTransferListName",
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`TransferLists Epics should register transferType checkboxes in the transferListItem form when creating a new transferListItem 1`] = `
+Object {
+  "meta": Object {
+    "form": "transferListItems:create",
+  },
+  "payload": Object {
+    "name": "warmTransfer",
+    "type": "Field",
+  },
+  "type": "@@redux-form/REGISTER_FIELD",
+}
+`;
+
+exports[`TransferLists Epics should register transferType checkboxes in the transferListItem form when creating a new transferListItem 2`] = `
+Object {
+  "meta": Object {
+    "form": "transferListItems:create",
+  },
+  "payload": Object {
+    "name": "coldTransfer",
+    "type": "Field",
+  },
+  "type": "@@redux-form/REGISTER_FIELD",
+}
+`;
+
+exports[`TransferLists Epics should register transferType checkboxes in the transferListItem form when updating a transferListItem 1`] = `
+Object {
+  "meta": Object {
+    "form": "transferListItems:updateTransferListItem:mockTransferListId",
+  },
+  "payload": Object {
+    "name": "warmTransfer",
+    "type": "Field",
+  },
+  "type": "@@redux-form/REGISTER_FIELD",
+}
+`;
+
+exports[`TransferLists Epics should register transferType checkboxes in the transferListItem form when updating a transferListItem 2`] = `
+Object {
+  "meta": Object {
+    "form": "transferListItems:updateTransferListItem:mockTransferListId",
+  },
+  "payload": Object {
+    "name": "coldTransfer",
+    "type": "Field",
+  },
+  "type": "@@redux-form/REGISTER_FIELD",
+}
+`;
+
+exports[`TransferLists Epics should update TransferListForm when a transferListItem is removed from an unsaved transferList 1`] = `
+Object {
+  "entityId": "create",
+  "entityName": "transferLists",
+  "meta": Object {
+    "field": "endpoints",
+    "form": "transferLists:create",
+    "persistentSubmitErrors": false,
+    "touch": false,
+  },
+  "payload": Immutable.List [
+    Immutable.Map {
+      "hierarchy": "mockHierarchy1",
+      "name": "mockContactName2",
+      "categoryUUID": "mockCategoryUUID1",
+      "droppableUUID": "mockDroppableUUID1",
+      "draggableUUID": "mockDraggableUUID2",
+      "endpointUUID": "mockEndpointUUID2",
+    },
+    Immutable.Map {
+      "hierarchy": "mockHierarchy3",
+      "name": "mockContactName3",
+      "categoryUUID": "mockCategoryUUID3",
+      "droppableUUID": "mockDroppableUUID3",
+      "draggableUUID": "mockDraggableUUID3",
+      "endpointUUID": "mockEndpointUUID3",
+    },
+  ],
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
+exports[`TransferLists Epics should update TransferListForm when transferListItems belong to the same group are removed from an unsaved transferList 1`] = `
+Object {
+  "entityId": "create",
+  "entityName": "transferLists",
+  "meta": Object {
+    "field": "endpoints",
+    "form": "transferLists:create",
+    "persistentSubmitErrors": false,
+    "touch": false,
+  },
+  "payload": Immutable.List [
+    Immutable.Map {
+      "hierarchy": "mockHierarchy3",
+      "name": "mockContactName3",
+      "categoryUUID": "mockCategoryUUID3",
+      "droppableUUID": "mockDroppableUUID3",
+      "draggableUUID": "mockDraggableUUID3",
+      "endpointUUID": "mockEndpointUUID3",
+    },
+  ],
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
+exports[`TransferLists Epics transferList should contain atleast one transferListItem in it 1`] = `
+Object {
+  "entityId": "mockTransferListId",
+  "entityName": "transferLists",
+  "type": "TRANSFER_LIST_CANNOT_BE_EMPTY",
+}
+`;

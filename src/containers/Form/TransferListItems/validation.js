@@ -20,6 +20,8 @@ const validateEndpoint = (value, type) => {
     return !Boolean(validatePhoneNumber(value)) && 'Valid Phone Number Required';
   } else if (type === 'SIP') {
     return !Boolean(validateSip(value)) && 'Valid SIP Address Required';
+  } else {
+    return !value && 'Valid Endpoint Required.';
   }
 };
 
@@ -37,8 +39,8 @@ export const formValidation = (values, props) => {
       transferType:
         (!values.get('transferType') || values.get('transferType') === 'selectTransferType') &&
         'Please select a transfer type.',
-      warmTransfer: !values.get('warmTransfer') && !values.get('coldTransfer'),
-      coldTransfer: !values.get('coldTransfer') && !values.get('warmTransfer'),
+      warmTransfer: !values.get('warmTransfer') && !values.get('coldTransfer') && 'Please select warm/cold transfer.',
+      coldTransfer: !values.get('coldTransfer') && !values.get('warmTransfer') && 'Please select warm/cold transfer.',
       endpoint: validateEndpoint(values.get('endpoint'), values.get('contactType'))
     };
   } else {

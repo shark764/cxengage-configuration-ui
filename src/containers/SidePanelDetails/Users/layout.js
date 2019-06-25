@@ -210,11 +210,7 @@ export default function UsersDetailsPanel({
         </DetailWrapper>
       )}
 
-      {/*
-        TODO: Impersonating user for Logi Reports
-        will be released on Q3
-        */}
-      {/* {userHasLogiImpersonatePermissions && (
+      {userHasLogiImpersonatePermissions && (
         <Fragment>
           <DetailHeader text="Reporting Settings" />
           <ConfirmationWrapper
@@ -227,7 +223,7 @@ export default function UsersDetailsPanel({
             </ImpersonateButton>
           </ConfirmationWrapper>
         </Fragment>
-      )} */}
+      )}
     </Wrapper>
   );
 }
