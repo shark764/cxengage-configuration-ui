@@ -13,7 +13,7 @@ import {
   isUpdating,
   userHasUpdatePermission
 } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
+import { selectUsersFormInitialValues } from '../../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
 import { getCapacityRules } from '../../../../redux/modules/entities/capacityRules/selectors';
@@ -33,9 +33,9 @@ getCapacityRules.mockImplementation(() => [{ label: 'mockLabel', value: 'mockVal
 isInherited.mockImplementation(() => false);
 isUpdating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 jest.mock('../../../../redux/modules/entities/users/selectors');
+selectUsersFormInitialValues.mockImplementation(() => ({ active: true }));
 
 jest.mock('../../../../redux/modules/entities/roles/selectors');
 selectTenantRoles.mockImplementation(() => []);

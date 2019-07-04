@@ -662,6 +662,10 @@ Immutable.Map {
         "name": "Permissions",
         "active": true,
       },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
     ],
   },
   "emailTemplates": Immutable.Map {

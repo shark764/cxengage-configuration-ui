@@ -6,6 +6,7 @@ Object {
     "Label is required",
     "Label is required",
   ],
+  "roleId": "Please select a Tenant Role",
 }
 `;
 
@@ -15,6 +16,7 @@ Object {
     "Label is required",
     "Label is required",
   ],
+  "roleId": "Please select a Tenant Role",
 }
 `;
 
@@ -24,5 +26,6 @@ Object {
     "Label is required",
     "Label is required",
   ],
+  "roleId": false,
 }
 `;

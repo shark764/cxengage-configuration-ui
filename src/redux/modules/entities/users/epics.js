@@ -15,6 +15,7 @@ import {
   findEntity,
   findEntityByProperty
 } from '../selectors';
+import { selectTenantRoles } from '../roles/selectors';
 import { getDisplay } from './selectors';
 import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
@@ -184,12 +185,20 @@ export const FetchSidePanelUserData = (action$, store) =>
 export const FetchSidePanelUserDataFulfilled = (action$, store) =>
   action$
     .ofType('SET_SELECTED_ENTITY_ID_FULFILLED')
-    .map(action => ({
-      ...action,
+    .map(a => ({
+      ...a,
       entityName: getCurrentEntity(store.getState()),
       id: getSelectedEntityId(store.getState())
     }))
     .filter(a => a.id !== 'create' && a.id !== '' && a.entityName === 'users')
+    .map(a => {
+      const roles = selectTenantRoles(store.getState());
+      const initialValues = selectFormInitialValues(store.getState());
+      a.payloadValues = roles.find(role => role.value === initialValues.roleId)
+        ? initialValues
+        : { ...initialValues, roleId: null };
+      return { ...a };
+    })
     .map(a => ({
       type: '@@redux-form/INITIALIZE',
       meta: {
@@ -197,7 +206,7 @@ export const FetchSidePanelUserDataFulfilled = (action$, store) =>
         keepDirty: false,
         updateUnregisteredFields: false
       },
-      payload: selectFormInitialValues(store.getState())
+      payload: a.payloadValues
     }));
 
 export const InviteNewUser = (action$, store) =>

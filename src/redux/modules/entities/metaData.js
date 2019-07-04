@@ -395,7 +395,8 @@ entities.roles.dependentEntity = 'permissions';
 entities.roles.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Permissions', active: true }
+  { name: 'Permissions', active: true },
+  { name: 'Status', active: true }
 ];
 
 //Silent Monitoring

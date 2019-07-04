@@ -24,4 +24,9 @@ describe('Config-UI Users Page', () => {
   //updateGroupLine.UpdateGroupName('updated','noone');
   //updateGroupLine.UpdateGroupDescription('noone','12334');
   //});
+
+  //it('update a group line', () => {
+  //updateGroupLine.UpdateGroupName('updated','noone');
+  //updateGroupLine.UpdateGroupDescription('noone','12334');
+  //});
 });

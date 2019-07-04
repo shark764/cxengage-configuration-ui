@@ -11,7 +11,6 @@ import {
   getSelectedEntityFormId
 } from '../entities/selectors';
 import { onFormSubmit, onSubEntityFormSubmit } from '../entities';
-import { selectFirstTenantRoleValue, selectFirstPlatformRoleValue } from '../entities/roles/selectors';
 
 import { entitiesMetaData } from '../entities/metaData';
 
@@ -54,11 +53,7 @@ export const selectFormInitialValues = state => {
 };
 
 export const selectCreateUserFormInitialValues = state => {
-  return new Map({
-    inviteNow: true,
-    roleId: selectFirstTenantRoleValue(state),
-    platformRoleId: selectFirstPlatformRoleValue(state)
-  });
+  return new Map({ inviteNow: true });
 };
 
 export const selectTransferListsCreateFormInitialValues = state => {

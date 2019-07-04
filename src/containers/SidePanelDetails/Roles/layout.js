@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
 
+/*  TODO - CXV1-17410 */
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,23 +32,22 @@ export function RolesDetailsPanel({
   listSize,
   itemApiPending,
   parentTenantName,
-  isUserPlatformAdmin,
+  //  isUserPlatformAdmin,
   isSystemRole
 }) {
   return (
-    <Wrapper id="dtpanel-roles">
-      {(isSystemRole || inherited) && (
+    <Wrapper id='dtpanel-roles'>
+      {inherited && (
         <DetailsPanelAlert
-          text={`This role is inherited ${
-            parentTenantName && location.hash.includes('alpha') ? `from ${parentTenantName}` : ''
-          } and cannot be edited.`}
+          text={`This role is inherited ${parentTenantName && `from ${parentTenantName}`} and cannot be edited.`}
         />
       )}
+      {isSystemRole && <DetailsPanelAlert text={`This is a system role and cannot be edited.`} />}
       {children}
 
       <DetailHeader
         userHasUpdatePermission={
-          (!isSystemRole && userHasUpdatePermission && !inherited) || (isUserPlatformAdmin && isSystemRole)
+          !isSystemRole && userHasUpdatePermission && !inherited // || (isUserPlatformAdmin && isSystemRole
         }
         text={`${listSize} Permissions`}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
@@ -83,6 +83,6 @@ RolesDetailsPanel.propTypes = {
   inherited: PropTypes.bool,
   itemApiPending: PropTypes.string,
   parentTenantName: PropTypes.string,
-  isUserPlatformAdmin: PropTypes.bool,
+  //  isUserPlatformAdmin: PropTypes.bool,
   isSystemRole: PropTypes.bool
 };

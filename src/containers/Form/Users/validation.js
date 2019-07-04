@@ -23,5 +23,6 @@ export const formValidation = values => {
   if (labels.some(err => typeof err === 'string')) {
     formValidation.extensions = labels;
   }
+  formValidation.roleId = !values.get('roleId') && 'Please select a Tenant Role';
   return formValidation;
 };

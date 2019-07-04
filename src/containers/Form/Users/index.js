@@ -12,12 +12,17 @@ import {
   isInherited,
   isCreating,
   userHasUpdatePermission,
-  userHasPermissions
+  userHasPermissions,
+  isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 import { getCurrentAgentId } from '../../../redux/modules/userData/selectors';
 import { onFormSubmit, changeUserInviteStatus } from '../../../redux/modules/entities';
-import { selectFormInitialValues, createFormName } from '../../../redux/modules/form/selectors';
-import { getUserInvitationStatus, isUserPlatformAdmin } from '../../../redux/modules/entities/users/selectors';
+import { createFormName } from '../../../redux/modules/form/selectors';
+import {
+  selectUsersFormInitialValues,
+  getUserInvitationStatus,
+  isUserPlatformAdmin
+} from '../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../redux/modules/entities/identityProviders/selectors';
 import { getCapacityRulesSelector } from '../../../redux/modules/entities/capacityRules/selectors';
@@ -40,7 +45,7 @@ export function mapStateToProps(state) {
     capacityRules: getCapacityRulesSelector(state),
     tenantIdentityProviders: selectTenantIdentityProviders(state),
     status: getUserInvitationStatus(state),
-    initialValues: selectFormInitialValues(state),
+    initialValues: selectUsersFormInitialValues(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
@@ -48,6 +53,7 @@ export function mapStateToProps(state) {
     currentAgentId: getCurrentAgentId(state),
     displayResetPassword: userHasPermissions(state, ['MANAGE_ALL_USER_PASSWORDS']),
     isUserPlatformAdmin: isUserPlatformAdmin(state),
+    usersFetching: isEntityFetching(state, 'users')
   };
 }
 const actions = { changeUserInviteStatus };

@@ -52,7 +52,8 @@ export default function UsersForm({
   key,
   currentAgentId,
   changeUserInviteStatus,
-  displayResetPassword
+  displayResetPassword,
+  usersFetching
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -192,13 +193,16 @@ export default function UsersForm({
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
-          <SelectField
-            className="frm-users-role-id"
-            name="roleId"
-            label="Tenant Role"
-            disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
-            options={tenantRoles}
-          />
+          {tenantRoles &&
+            !usersFetching && (
+              <SelectField
+                className="frm-users-role-id"
+                name="roleId"
+                label="Tenant Role"
+                disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
+                options={tenantRoles}
+              />
+            )}
         </DetailWrapper>
 
         <DetailWrapper open={true}>
@@ -287,5 +291,6 @@ UsersForm.propTypes = {
   scenario: PropTypes.string,
   changeUserInviteStatus: PropTypes.func.isRequired,
   isUserPlatformAdmin: PropTypes.bool,
-  displayResetPassword: PropTypes.bool
+  displayResetPassword: PropTypes.bool,
+  usersFetching: PropTypes.bool
 };

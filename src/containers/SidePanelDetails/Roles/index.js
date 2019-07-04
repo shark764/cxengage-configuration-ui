@@ -4,7 +4,7 @@
 
 import { connect } from 'react-redux';
 import { RolesDetailsPanel } from './layout.js';
-import { isUserPlatformAdmin } from '../../../redux/modules/entities/users/selectors';
+//  import { isUserPlatformAdmin } from '../../../redux/modules/entities/users/selectors';
 import { isSystemRole } from '../../../redux/modules/entities/selectors';
 
 import {
@@ -21,6 +21,7 @@ import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/e
 
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
+/*  TODO - CXV1-17410 */
 export function mapStateToProps(state, props) {
   return {
     userHasUpdatePermission: userHasUpdatePermission(state),
@@ -31,14 +32,14 @@ export function mapStateToProps(state, props) {
     listSize: getListSize(state),
     inherited: isInherited(state),
     parentTenantName: getEntityParentTenantName(state),
-    isUserPlatformAdmin: isUserPlatformAdmin(state),
+    //  isUserPlatformAdmin: isUserPlatformAdmin(state),
     isSystemRole: isSystemRole(state)
   };
 }
 
-export const actions = {
-  removeListItem,
-  setSelectedSubEntityId
-};
+export const actions = { removeListItem, setSelectedSubEntityId };
 
-export default connect(mapStateToProps, actions)(RolesDetailsPanel);
+export default connect(
+  mapStateToProps,
+  actions
+)(RolesDetailsPanel);

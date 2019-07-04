@@ -49,7 +49,6 @@ export default function UsersForm({
             id="frm-users-platform-role-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={platformRoles}
-            required
           />
           <SelectField
             name="noPassword"
@@ -89,7 +88,6 @@ export default function UsersForm({
             id="frm-users-role-id"
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantRoles}
-            required
           />
           <ToggleField
             name="inviteNow"

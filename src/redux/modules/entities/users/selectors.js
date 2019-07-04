@@ -3,8 +3,9 @@
  */
 import { createSelector } from 'reselect';
 import { getSelectedEntity, userHasPermissions, userHasEveryPermissions } from '../selectors';
-import { convertRoles, selectPlatformRoles } from '../roles/selectors';
+import { convertRoles, selectPlatformRoles, getRoles } from '../roles/selectors';
 import { convertPermissions } from '../permissions/selectors';
+import { selectFormInitialValues } from '../../form/selectors';
 import {
   getEntityListMembers,
   availableEntityMembersForList,
@@ -17,17 +18,20 @@ export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
 export const existsPlatformUserByEmail = state => state.getIn(['Entities', 'users', 'userExistInPlatform'], false);
 
-export const selectNonDisabledUsers = createSelector([getUsers], users => {
-  return users !== undefined
-    ? users
-        .toJS()
-        .filter(user => user.platformStatus !== 'disabled' && user.status !== 'disabled')
-        .map(user => ({
-          ...user,
-          name: getDisplay(user)
-        }))
-    : undefined;
-});
+export const selectNonDisabledUsers = createSelector(
+  [getUsers],
+  users => {
+    return users !== undefined
+      ? users
+          .toJS()
+          .filter(user => user.platformStatus !== 'disabled' && user.status !== 'disabled')
+          .map(user => ({
+            ...user,
+            name: getDisplay(user)
+          }))
+      : undefined;
+  }
+);
 
 export const filterUsersByPermissions = (state, users, permissionNames) => {
   const allRoles = convertRoles(state);
@@ -123,3 +127,13 @@ export const userHasLogiImpersonatePermissions = state =>
       'PLATFORM_VIEW_ALL_USERS',
       'PLATFORM_CONFIG_USERS_VIEW'
     ]));
+
+// This two new arrow const are needed in order
+// to pass unit test for reselect "createSelector"
+const getInitialValues = state => selectFormInitialValues(state);
+const getAllRoles = state => getRoles(state);
+
+export const selectUsersFormInitialValues = createSelector(
+  [getAllRoles, getInitialValues],
+  (roles, initialValues) => (roles.size === 0 ? { ...initialValues, roleId: null } : initialValues)
+);

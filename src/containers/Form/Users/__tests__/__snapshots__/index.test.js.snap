@@ -17,6 +17,7 @@ Object {
   "tenantIdentityProviders": Array [],
   "tenantRoles": Array [],
   "userHasUpdatePermission": true,
+  "usersFetching": undefined,
 }
 `;
 

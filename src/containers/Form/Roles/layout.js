@@ -44,7 +44,7 @@ export default function RolesForm({
       />
 
       <ConfirmationWrapper
-        confirmBtnCallback={!inherited && disableShared && sharedFormValue ? toggleShared : undefined}
+        confirmBtnCallback={!inherited && !isSystemRole && disableShared && sharedFormValue ? toggleShared : undefined}
         mainText={
           'If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role.'
         }

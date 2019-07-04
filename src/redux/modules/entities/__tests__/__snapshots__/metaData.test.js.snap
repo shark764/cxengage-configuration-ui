@@ -2290,6 +2290,10 @@ Object {
         "active": true,
         "name": "Permissions",
       },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
     ],
     "confirmationDialog": Object {
       "falseButtonText": "",

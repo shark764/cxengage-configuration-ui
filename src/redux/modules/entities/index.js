@@ -447,6 +447,11 @@ export default function reducer(state = initialState, action) {
       );
     }
     case 'SET_SELECTED_ENTITY_ID': {
+      if (state.get('currentEntity') === 'users') {
+        return state
+          .setIn([state.get('currentEntity'), 'fetching'], true)
+          .setIn([state.get('currentEntity'), 'selectedEntityId'], action.entityId);
+      }
       return state.setIn([state.get('currentEntity'), 'selectedEntityId'], action.entityId);
     }
     case 'UPDATE_USER_PERMISSIONS': {
