@@ -308,10 +308,13 @@ Immutable.Map {
   "users": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 600,
     "confirmationDialogType": undefined,
     "readPermission": Immutable.List [
       "VIEW_ALL_USERS",
+      "PLATFORM_VIEW_ALL_USERS",
+      "CONFIG_USERS_VIEW",
+      "PLATFORM_CONFIG_USERS_VIEW",
     ],
     "updatePermission": Immutable.List [
       "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",

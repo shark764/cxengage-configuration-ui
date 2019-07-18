@@ -34,7 +34,7 @@ export default function PrivateRoute(WrappedComponent) {
         return this.props.userIsAuthed === true ? (
           <WrappedComponent {...this.props} entityName={this.props.match.params.entityName} />
         ) : (
-          <Redirect to='/' />
+          <Redirect to="/" />
         );
       }
     }

@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
-## [0.62.3] - 2019-07-04
+## [0.62.4] - 2019-07-18
 ### Added
 - CXV1-18400- Transfer Lists Component Unit tests.
 - CXV1-18258 - Add method to impersonate a CxEngage Reporting user and launch into new BI reporting experience.
@@ -30,10 +30,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CXV1-16902 - Fixing validation on Versions field on Dispatch Mappings page.
 - CXV1-17286 - Implementing typeahead component on config-ui 2
 ### Changed
-- <no-ticket> - Removed alpha flag from roles page
-- Version bump component library to 0.40.3.
+- Version bump utils library to 1.6.13.
+- Version bump component library to 0.41.0.
 - SDK version bump to 8.55.0.
+- CXV1-19058 - Allow Platform View Only user to see a list of users for the Set As Active Tenant.
+- <no-ticket> - Removed alpha flag from roles page
 ### Fixed
+- CXV1-16880 - Loading states for removal of generic list subitems.
+- Tenant role showing wrong value on Users page.
+- Adding PLATFORM_VIEW_ALL_USERS permission to allow platform view only to see users page.
 - CXV1-18788 - Tenant Role showing disabled roles in Config 1 and incorrect value in Config 2 on Users page.
 - Fixing issues with message showing system roles as inherited roles when they cannot be edited and being able to unshared the **Access Controlled Supervisor** role
 - CXV1-17410 - Update Roles page to allow Platform Admins to modify standard seeded Tenant Roles.

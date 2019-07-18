@@ -71,8 +71,8 @@ const initialState = fromJS({
   },
   users: {
     ...defaultEntity,
-    sidePanelWidth: 750,
-    readPermission: ['VIEW_ALL_USERS'],
+    sidePanelWidth: 600,
+    readPermission: ['VIEW_ALL_USERS', 'PLATFORM_VIEW_ALL_USERS', 'CONFIG_USERS_VIEW', 'PLATFORM_CONFIG_USERS_VIEW'],
     updatePermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
       'MANAGE_ALL_USER_EXTENSIONS',
@@ -911,30 +911,34 @@ export default function reducer(state = initialState, action) {
       return state.setIn([state.get('currentEntity'), 'sidePanelWidth'], action.width);
     }
     case 'DELETE_SUB_ENTITY': {
-      return setSubEntityDeleting(state, action, true);
+      return setSubEntityDeleting(state.set('loading', action.subEntityId), action, true);
     }
     case 'DELETE_SUB_ENTITY_FULFILLED': {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {
-        return state.update(action.entityName, entityStore =>
-          entityStore
-            .updateIn(['data', entityIndex, 'items'], subEntityList => {
-              const subEntityIndex = subEntityList.findIndex(subEntity => subEntity.get('key') === action.subEntityId);
-              if (entityIndex !== -1) {
-                return subEntityList.delete(subEntityIndex);
-              } else {
-                return subEntityList;
-              }
-            })
-            .set('selectedSubEntityId', undefined)
-            .set('subEntitySaving', false)
-        );
+        return state
+          .update(action.entityName, entityStore =>
+            entityStore
+              .updateIn(['data', entityIndex, 'items'], subEntityList => {
+                const subEntityIndex = subEntityList.findIndex(
+                  subEntity => subEntity.get('key') === action.subEntityId
+                );
+                if (entityIndex !== -1) {
+                  return subEntityList.delete(subEntityIndex);
+                } else {
+                  return subEntityList;
+                }
+              })
+              .set('selectedSubEntityId', undefined)
+              .set('subEntitySaving', false)
+          )
+          .remove('loading');
       } else {
         return state;
       }
     }
     case 'DELETE_SUB_ENTITY_REJECTED': {
-      return setSubEntityDeleting(state, action, false);
+      return state.remove('loading');
     }
     case 'FETCH_TENANT_DEFAULT_SLA': {
       const { result } = action.response;

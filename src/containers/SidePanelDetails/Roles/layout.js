@@ -36,7 +36,7 @@ export function RolesDetailsPanel({
   isSystemRole
 }) {
   return (
-    <Wrapper id='dtpanel-roles'>
+    <Wrapper id="dtpanel-roles">
       {inherited && (
         <DetailsPanelAlert
           text={`This role is inherited ${parentTenantName && `from ${parentTenantName}`} and cannot be edited.`}
