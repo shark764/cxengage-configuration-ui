@@ -22,7 +22,7 @@ jest.mock('../../../redux/modules/columnFilterMenus/selectors', () => ({
 }));
 
 jest.mock('../selectors', () => ({
-  getAllEntities: () => ['mock all entities'],
+  getAllEntitiesTableData: () => ['mock all entities'],
   getHelpLink: () => 'mock help link'
 }));
 

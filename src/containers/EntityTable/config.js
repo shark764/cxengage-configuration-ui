@@ -15,6 +15,8 @@ import { activeQueueColumn } from './columns/activeQueue';
 import { activeFlowColumn } from './columns/activeFlow';
 import { flowColumn } from './columns/flow';
 import { activeSlaColumn } from './columns/activeSla';
+import { apiKeyStatusColumn } from './columns/apiKeyStatus';
+import { timezoneColumn } from './columns/timezone';
 
 export function getTableColumns(columns) {
   /**
@@ -52,7 +54,9 @@ export function getTableColumns(columns) {
     'Active Flow': activeFlowColumn,
     'Interaction Field': constructGeneralTextColumn('interactionField'),
     Flow: flowColumn,
-    'Active Sla': activeSlaColumn
+    'Active Sla': activeSlaColumn,
+    'ApiKey Status': apiKeyStatusColumn,
+    Timezone: timezoneColumn
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

@@ -48,7 +48,7 @@ export default function SlasDetailsPanel({
         contains="versions"
         userHasUpdatePermission={userHasUpdatePermission}
         userHasViewPermission={userHasViewPermission}
-        viewSubEntity={(listItemId, row, subEntityName) => setSelectedSubEntityId(row.versionId)}
+        viewSubEntity={(listItemId, row) => setSelectedSubEntityId(row.versionId)}
         items={versionsItems}
         fields={versionsFields}
         defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}

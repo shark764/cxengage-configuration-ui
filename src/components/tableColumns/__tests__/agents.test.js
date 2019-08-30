@@ -1,4 +1,4 @@
-import agent from '../agent';
+import agent from '../agents';
 
 describe('agent table column', () => {
   it('function returns correct object', () => {
@@ -16,9 +16,7 @@ describe('agent table column', () => {
     ).toMatchSnapshot();
   });
   it('accessor returns single agents name with no comma', () => {
-    expect(
-      agent().accessor({ agents: [{ agentName: 'firstName1 lastName1' }] })
-    ).toMatchSnapshot();
+    expect(agent().accessor({ agents: [{ agentName: 'firstName1 lastName1' }] })).toMatchSnapshot();
   });
   it('Cell returns the value wrapped in a span', () => {
     expect(agent().Cell({ value: 'mockValue' })).toMatchSnapshot();

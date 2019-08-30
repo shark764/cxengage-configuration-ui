@@ -17,6 +17,7 @@ import Login from './containers/Login';
 import Navigation from './containers/Navigation';
 import SupervisorToolbar from './containers/SupervisorToolbar';
 import InteractionMonitoring from './containers/InteractionMonitoring';
+import AgentStateMonitoring from './containers/AgentStateMonitoring';
 import BetaFeatures from './containers/BetaFeatures';
 import CrudEndpointUi from './containers/CrudEndpointUi';
 
@@ -31,6 +32,7 @@ ReactDOM.render(
             <Navigation />
             <Route exact path="/" component={Login} />
             <Route path="/interactionMonitoring" component={PrivateRoute(InteractionMonitoring)} />
+            <Route path="/agentStateMonitoring" component={PrivateRoute(AgentStateMonitoring)} />
             <Route path="/betaFeatures" component={PrivateRoute(BetaFeatures)} />
             <Route path="/configuration/:entityName" component={PrivateRoute(CrudEndpointUi)} />
           </Fragment>

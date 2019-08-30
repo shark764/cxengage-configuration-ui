@@ -25,7 +25,7 @@ export function handleBulkUneeded(a) {
   Toast.warning(`${a.uneededCalls[0].replace('BULKED_ITEMS_AFFECTED', a.uneededCalls.length)}`);
 }
 
-export function handleBulkSuccess(response, a) {
+export function handleBulkSuccess(response, a, successMessage = null, errorMessage = null, notAffectedMessage = null) {
   const successCalls = response.filter(item => item.error === undefined);
   const failedCalls = response.filter(item => item.error !== undefined);
 
@@ -33,10 +33,16 @@ export function handleBulkSuccess(response, a) {
     Toast.warning(`${a.uneededCalls[0].replace('BULKED_ITEMS_AFFECTED', a.uneededCalls.length)}`);
   }
 
-  Toast.success(`${successCalls.length} items updated successfully.`);
-  if (failedCalls.length > 0) {
+  if (successMessage && successCalls.length > 0) {
+    Toast.success(successMessage.replace('BULKED_ITEMS_AFFECTED', successCalls.length));
+  } else if (successCalls.length > 0) {
+    Toast.success(`${successCalls.length} item(s) updated successfully.`);
+  }
+  if (errorMessage && failedCalls.length > 0) {
+    Toast.error(errorMessage.replace('BULKED_ITEMS_AFFECTED', failedCalls.length));
+  } else if (failedCalls.length > 0) {
     Toast.error(`
-    ${failedCalls.length} items failed to update.
+    ${failedCalls.length} item(s) failed to update.
     ${failedCalls.map(
       call => `<br/></br>
       ${call.id}<br/>
@@ -44,5 +50,16 @@ export function handleBulkSuccess(response, a) {
       `
     )}
     `);
+  }
+
+  if (a && a.bulkNotAffected) {
+    const notAffectedLength = a.bulkNotAffected.length || Object.keys(a.bulkNotAffected).length;
+    if (notAffectedLength > 0) {
+      if (notAffectedMessage) {
+        Toast.warning(notAffectedMessage.replace('BULKED_ITEMS_AFFECTED', notAffectedLength));
+      } else {
+        Toast.warning(`${notAffectedLength} item(s) not affected.`);
+      }
+    }
   }
 }

@@ -25,8 +25,9 @@ export const constructInitialState = () => {
   Object.keys(entitiesMetaData).forEach(entityName => {
     initialState[entityName] = {
       visibleMenu: 'none'
-    }
-    initialState[entityName].Columns = JSON.parse( window.localStorage.getItem(`${entityName}Columns`)) || entitiesMetaData[entityName].columns;
+    };
+    initialState[entityName].Columns =
+      JSON.parse(window.localStorage.getItem(`${entityName}Columns`)) || entitiesMetaData[entityName].columns;
   });
   /**
    * Add entities custom menus
@@ -46,8 +47,32 @@ export const constructInitialState = () => {
     { name: 'Not Monitored', active: false }
   ];
 
+  initialState.agentStateMonitoring.Groups = [];
+  initialState.agentStateMonitoring.Skills = [];
+  initialState.agentStateMonitoring.ReasonLists = [];
+  initialState.agentStateMonitoring.Direction = [
+    { name: 'All', active: true },
+    { name: 'Inbound', active: false },
+    { name: 'Outbound', active: false },
+    { name: 'Do Not Disturb Outbound', active: false }
+  ];
+  initialState.agentStateMonitoring.PresenceState = [
+    { name: 'All', active: true },
+    { name: 'Idle', active: false },
+    { name: 'Busy', active: false },
+    { name: 'Away', active: false },
+    { name: 'Offline', active: false }
+  ];
+  initialState.agentStateMonitoring.ChannelType = [
+    { name: 'Voice', active: true },
+    { name: 'Messaging', active: true },
+    { name: 'Email', active: true },
+    { name: 'SMS', active: true },
+    { name: 'Work Item', active: true }
+  ];
+
   return fromJS(initialState);
-}
+};
 
 // Actions
 export const toggleMenuItems = (itemName, menuType, tableType) => ({
@@ -70,6 +95,11 @@ export const updateGroupsColumnFilter = (arrayOfGroupData, tableType) => ({
 export const updateSkillsColumnFilter = (arrayOfSkillData, tableType) => ({
   type: 'SET_SKILLS_DATA',
   arrayOfSkillData,
+  tableType
+});
+export const updateReasonListsColumnFilter = (arrayOfReasonListData, tableType) => ({
+  type: 'SET_REASON_LISTS_DATA',
+  arrayOfReasonListData,
   tableType
 });
 export const setVisibleMenu = (menuType, tableType) => ({
@@ -98,19 +128,50 @@ export const toggleTimeFormat = () => ({ type: 'TOGGLE_TIME_FORMAT' });
 export default function ColumnsMenu(state = constructInitialState(), action) {
   switch (action.type) {
     case 'SET_VISIBLE_MENU':
-      return state.setIn(
-        [fromJS(action.tableType), 'visibleMenu'],
-        fromJS(action.menuType)
-      );
+      return state.setIn([fromJS(action.tableType), 'visibleMenu'], fromJS(action.menuType));
     case 'SET_GROUPS_DATA':
       return state.setIn(
         [action.tableType, 'Groups'],
-        fromJS(action.arrayOfGroupData).filter(x => x.get('active'))
+        fromJS(
+          action.arrayOfGroupData.reduce(
+            (allGroups, group) =>
+              group.active ? [...allGroups, { id: group.id, name: group.name, active: group.active }] : allGroups,
+            []
+          )
+        )
       );
     case 'SET_SKILLS_DATA':
       return state.setIn(
         [action.tableType, 'Skills'],
-        fromJS(action.arrayOfSkillData).filter(x => x.get('active'))
+        fromJS(
+          action.arrayOfSkillData.reduce(
+            (allSkills, skill) =>
+              skill.active ? [...allSkills, { id: skill.id, name: skill.name, active: skill.active }] : allSkills,
+            []
+          )
+        )
+      );
+    case 'SET_REASON_LISTS_DATA':
+      return state.setIn(
+        [action.tableType, 'ReasonLists'],
+        fromJS(
+          action.arrayOfReasonListData.reduce(
+            (allReasons, reason) =>
+              reason.active
+                ? [
+                    ...allReasons,
+                    ...reason.reasons.reduce(
+                      (prev, curr) =>
+                        curr.active && !allReasons.find(r => r.id === curr.reasonId)
+                          ? [...prev, { id: curr.reasonId, name: curr.name, active: curr.active }]
+                          : prev,
+                      []
+                    )
+                  ]
+                : allReasons,
+            []
+          )
+        )
       );
     case 'TOGGLE_INVERSE_MENUITEMS':
       return state.updateIn([action.tableType, action.menuType], columns =>

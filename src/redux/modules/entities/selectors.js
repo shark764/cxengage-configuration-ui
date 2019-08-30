@@ -9,6 +9,7 @@ import { getCurrentPermissions, getCurrentTenantId } from '../userData/selectors
 import { entitiesMetaData } from './metaData';
 import { getDisplay } from './users/selectors';
 import { getUserDisplayName } from '../userIdMap/selectors';
+import { getSelectedSidePanelId, getSelectedAgentsBulkChangeItems } from '../reporting/agentStateMonitoring/selectors';
 
 const getEntities = state => state.get('Entities');
 
@@ -104,6 +105,8 @@ export const isInherited = state => {
       case 'groups': {
         return getSelectedEntity(state).get('name') === 'everyone';
       }
+      case 'agentStateMonitoring':
+        return false;
       default:
         return getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
     }
@@ -231,8 +234,13 @@ export const getSelectedEntityWithIndex = immutableEntitiesMap => {
 };
 
 export const sidePanelHeader = state => {
-  const selectedEntityId = getSelectedEntityId(state);
   const currentEntity = getCurrentEntity(state);
+  if (currentEntity === 'agentStateMonitoring') {
+    if (getSelectedSidePanelId(state) === 'bulk') {
+      return { title: `Bulk Actions: ${getSelectedAgentsBulkChangeItems(state).size} Selected` };
+    }
+  }
+  const selectedEntityId = getSelectedEntityId(state);
   if (selectedEntityId === 'create') {
     return {
       title: `Creating New ${entitiesMetaData[currentEntity].title}`

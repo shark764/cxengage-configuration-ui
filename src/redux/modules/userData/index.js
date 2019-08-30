@@ -57,6 +57,7 @@ export default function reducer(state = initialState, action) {
       }
 
       return state
+        .set('platformPermissions', fromJS(action.platformPermissions))
         .set('permissions', fromJS(tenantPermissions))
         .set('currentTenantId', tenantId)
         .set('currentTenantName', tenantName)

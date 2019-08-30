@@ -6,17 +6,11 @@ import { ActionsObservable } from 'redux-observable';
 import { mockStore } from '../../../../utils/testUtils';
 import { sdkPromise } from '../../../../utils/sdk';
 
-import {
-  SaveColumnsToLocalStorage,
-  UpdateStatSubscriptionFilters,
-  UpdateSkillsAndGroupsFilter
-} from '../epics';
+import { SaveColumnsToLocalStorage, UpdateStatSubscriptionFilters, UpdateSkillsAndGroupsFilter } from '../epics';
 
-import {
-  selectInteractionMonitoringColumns,
-  selectGroups,
-  selectSkills
-} from '../selectors';
+import { selectInteractionMonitoringColumns, selectGroups, selectSkills } from '../selectors';
+
+import { getCurrentEntity } from '../../entities/selectors';
 
 jest.mock('../../../../utils/sdk');
 jest.mock('../selectors');
@@ -31,6 +25,8 @@ selectGroups.mockReturnValue([
   { active: true, groupId: '002' },
   { active: false, groupId: '003' }
 ]);
+jest.mock('../../entities/selectors');
+getCurrentEntity.mockReturnValue('InteractionMonitoring');
 
 describe('SaveColumnsToLocalStorage', () => {
   it('localstorage is updated on column changes', done => {
@@ -38,12 +34,10 @@ describe('SaveColumnsToLocalStorage', () => {
       type: 'TOGGLE_MENUITEMS',
       menuType: 'Columns'
     });
-    SaveColumnsToLocalStorage(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    SaveColumnsToLocalStorage(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
 });
 
@@ -55,12 +49,10 @@ describe('UpdateSkillsAndGroupsFilter', () => {
       response: { result: 'results' },
       tableType: 'mockTableSkills'
     });
-    UpdateSkillsAndGroupsFilter(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    UpdateSkillsAndGroupsFilter(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
   it('localstorage is updated on groups column changes', done => {
     const action = ActionsObservable.of({
@@ -69,12 +61,10 @@ describe('UpdateSkillsAndGroupsFilter', () => {
       response: { result: 'results' },
       tableType: 'mockTableGroups'
     });
-    UpdateSkillsAndGroupsFilter(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    UpdateSkillsAndGroupsFilter(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
 });
 
@@ -85,95 +75,71 @@ describe('UpdateStatSubscriptionFilters', () => {
   it('dispatch the proper action on success: skills / empty array', done => {
     selectSkills.mockReturnValueOnce([]);
     selectGroups.mockReturnValueOnce([]);
-    sdkPromise.mockReturnValue(
-      new Promise(resolve => resolve('mock response'))
-    );
+    sdkPromise.mockReturnValue(new Promise(resolve => resolve('mock response')));
     const action = ActionsObservable.of({
       type: 'TOGGLE_ALL_MENUITEMS_OFF',
       menuType: 'Skills'
     });
-    UpdateStatSubscriptionFilters(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    UpdateStatSubscriptionFilters(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
   it('dispatch the proper action on success: groups / empty array', done => {
     selectSkills.mockReturnValueOnce([]);
     selectGroups.mockReturnValueOnce([]);
-    sdkPromise.mockReturnValue(
-      new Promise(resolve => resolve('mock response'))
-    );
+    sdkPromise.mockReturnValue(new Promise(resolve => resolve('mock response')));
     const action = ActionsObservable.of({
       type: 'TOGGLE_ALL_MENUITEMS_OFF',
       menuType: 'Groups'
     });
-    UpdateStatSubscriptionFilters(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    UpdateStatSubscriptionFilters(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
   it('dispatch the proper action on success: skills', done => {
-    sdkPromise.mockReturnValue(
-      new Promise(resolve => resolve('mock response'))
-    );
+    sdkPromise.mockReturnValue(new Promise(resolve => resolve('mock response')));
     const action = ActionsObservable.of({
       type: 'TOGGLE_ALL_MENUITEMS_OFF',
       menuType: 'Skills'
     });
-    UpdateStatSubscriptionFilters(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    UpdateStatSubscriptionFilters(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
   it('dispatch the proper action on success: groups', done => {
-    sdkPromise.mockReturnValue(
-      new Promise(resolve => resolve('mock response'))
-    );
+    sdkPromise.mockReturnValue(new Promise(resolve => resolve('mock response')));
     const action = ActionsObservable.of({
       type: 'TOGGLE_ALL_MENUITEMS_OFF',
       menuType: 'Groups'
     });
-    UpdateStatSubscriptionFilters(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    UpdateStatSubscriptionFilters(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
   it('dispatch the proper action on failure: skills', done => {
-    sdkPromise.mockReturnValue(
-      new Promise((resolve, reject) => reject(new Error()))
-    );
+    sdkPromise.mockReturnValue(new Promise((resolve, reject) => reject(new Error())));
     const action = ActionsObservable.of({
       type: 'TOGGLE_ALL_MENUITEMS_OFF',
       menuType: 'Skills'
     });
-    UpdateStatSubscriptionFilters(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    UpdateStatSubscriptionFilters(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
   it('dispatch the proper action on failure: groups', done => {
-    sdkPromise.mockReturnValue(
-      new Promise((resolve, reject) => reject(new Error()))
-    );
+    sdkPromise.mockReturnValue(new Promise((resolve, reject) => reject(new Error())));
     const action = ActionsObservable.of({
       type: 'TOGGLE_ALL_MENUITEMS_OFF',
       menuType: 'Groups'
     });
-    UpdateStatSubscriptionFilters(action, mockStore).subscribe(
-      actualOutputActions => {
-        expect(actualOutputActions).toMatchSnapshot();
-        done();
-      }
-    );
+    UpdateStatSubscriptionFilters(action, mockStore).subscribe(actualOutputActions => {
+      expect(actualOutputActions).toMatchSnapshot();
+      done();
+    });
   });
 });

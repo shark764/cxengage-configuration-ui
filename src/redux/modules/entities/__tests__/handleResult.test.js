@@ -50,7 +50,7 @@ describe('handleBulkSuccess', () => {
   it('response contained uneeded calls', () => {
     expect(
       handleBulkSuccess([{ ok: '', ok2: '', ok3: '' }], {
-        uneededCalls: ['Error ocurred. BULKED_ITEMS_AFFECTED affected']
+        uneededCalls: ['Error occurred. BULKED_ITEMS_AFFECTED affected']
       })
     ).toMatchSnapshot();
   });
@@ -58,6 +58,6 @@ describe('handleBulkSuccess', () => {
 
 describe('handleBulkUneeded', () => {
   it('Throws a notification with number of entity items affected', () => {
-    expect(handleBulkUneeded({ uneededCalls: ['Error ocurred. BULKED_ITEMS_AFFECTED affected'] })).toMatchSnapshot();
+    expect(handleBulkUneeded({ uneededCalls: ['Error occurred. BULKED_ITEMS_AFFECTED affected'] })).toMatchSnapshot();
   });
 });

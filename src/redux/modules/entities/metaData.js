@@ -150,6 +150,7 @@ export const listOfEntities = [
   'historicalReportFolders',
   'identityProviders',
   'interactionMonitoring',
+  'agentStateMonitoring',
   'lists',
   'listTypes',
   'messageTemplates',
@@ -173,7 +174,11 @@ export const listOfEntities = [
   'logi',
   'dispositions',
   'slas',
-  'tenants'
+  'tenants',
+  'flowDebugger',
+  'apiKeys',
+  'businessHours'
+
   //Hygen-insert-at-end-of-list
 ];
 
@@ -418,6 +423,30 @@ entities.interactionMonitoring.columns = [
   { name: 'Monitoring', active: true },
   { name: 'Groups', active: false },
   { name: 'Skills', active: false }
+];
+
+//Agent State Monitoring
+entities.agentStateMonitoring.bulkEditsAvailable = true;
+entities.agentStateMonitoring.betaFeature = true;
+entities.agentStateMonitoring.pageTitle = 'Agent State Monitoring';
+entities.agentStateMonitoring.helpLink =
+  '/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring';
+entities.agentStateMonitoring.defaultSorted = [];
+entities.agentStateMonitoring.columns = [
+  { name: 'Channel', active: true },
+  { name: 'Agent', active: true },
+  { name: 'Groups', active: false },
+  { name: 'Skills', active: false },
+  { name: 'Direction', active: true },
+  { name: 'Presence State', active: true },
+  { name: 'Reason Code', active: false },
+  { name: 'Time in Presence State', active: true },
+  { name: 'Offered', active: false },
+  { name: 'Accepted', active: false },
+  { name: 'Rejected', active: false },
+  { name: 'Accepted Rate', active: false },
+  { name: 'Away Time', active: false },
+  { name: 'Away Rate', active: false }
 ];
 
 // Email Templates
@@ -709,6 +738,32 @@ entities.slas.membersTableFields = {
 };
 entities.slas.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
+//  flowDebugger
+entities.flowDebugger.pageTitle = 'Flow Debug Logs';
+
+// Api Key
+entities.apiKeys.pageTitle = 'Api Key Management';
+entities.apiKeys.helpLink = '/Help/Content/Managing%20ApiKeys/Creating_ApiKeys.htm';
+//entities.apiKeys.dependentEntity = 'dependentEntity';
+entities.apiKeys.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'ApiKey Status', active: true },
+  { name: 'Role', active: true }
+];
+entities.apiKeys.defaultFilters = [{ id: 'active', value: 'enabled' }];
+
+// Business Hours
+entities.businessHours.pageTitle = 'Business Hours Management';
+entities.businessHours.helpLink = '/Help/Content/Configuration/Business%20Hours/Business_Hours.htm';
+entities.businessHours.dependentEntity = 'dependentEntity';
+entities.businessHours.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true },
+  { name: 'Timezone', active: true }
+];
+entities.businessHours.defaultFilters = [{ id: 'active', value: 'enabled' }];
 //Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

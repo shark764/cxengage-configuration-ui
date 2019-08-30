@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { CaretIconSVG } from 'cx-ui-components';
+import { SimpleCaretIconSVG } from 'cx-ui-components';
 import { fetchListItems } from '../../redux/modules/entities';
 import { getCurrentEntity, getSelectedEntityId } from '../../redux/modules/entities/selectors';
 
@@ -12,6 +12,11 @@ const Wrapper = styled.div`
   left: 5px;
   margin-top: 12px;
   cursor: pointer;
+`;
+
+const CaretIcon = styled(SimpleCaretIconSVG)`
+  display: inline-block;
+  margin-left: 15px;
 `;
 
 class DetailWrapper extends Component {
@@ -36,7 +41,7 @@ class DetailWrapper extends Component {
     return (
       <span>
         <Wrapper onClick={this.toggle}>
-          <CaretIconSVG size={15} direction={this.state.open ? 'up' : 'down'} />
+          <CaretIcon size={15} direction={this.state.open ? 'up' : 'down'} />
         </Wrapper>
         {!this.state.open && this.props.children[0]}
         {this.state.open &&

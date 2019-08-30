@@ -43,6 +43,8 @@ import DispatchMappingsForm from '../Form/DispatchMappings';
 import DispositionsForm from '../Form/Dispositions';
 import SlasForm from '../Form/Slas';
 import InitialSlaVersionForm from '../Form/Slas/Version';
+import ApiKeysForm from '../Form/ApiKeys';
+import BusinessHoursForm from '../Form/BusinessHours';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -68,6 +70,8 @@ import TransferListsDetailsPanel from '../SidePanelDetails/TransferLists';
 import DispatchMappingsDetailsPanel from '../SidePanelDetails/DispatchMappings';
 import DispositionsDetailsPanel from '../SidePanelDetails/Dispositions';
 import SlasDetailsPanel from '../SidePanelDetails/Slas';
+import ApiKeysDetailsPanel from '../SidePanelDetails/ApiKeys';
+import BusinessHoursDetailsPanel from '../SidePanelDetails/BusinessHours';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -244,6 +248,22 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <SlasForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/apiKeys',
+    component: () => (
+      <DetailsPanel>
+        <ApiKeysForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/businessHours',
+    component: () => (
+      <DetailsPanel>
+        <BusinessHoursForm />
       </DetailsPanel>
     )
   }
@@ -428,6 +448,26 @@ const detailsPanelRoutes = [
         <SlasDetailsPanel>
           <SlasForm />
         </SlasDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/apiKeys',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <ApiKeysDetailsPanel>
+          <ApiKeysForm />
+        </ApiKeysDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/businessHours',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <BusinessHoursDetailsPanel>
+          <BusinessHoursForm />
+        </BusinessHoursDetailsPanel>
       </NoScrollDetailsPanel>
     )
   }

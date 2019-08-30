@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Chat Widgets
 - Queues
 - Transfer Lists
+- Agent State Monitoring
+- Business Hours
+- API Keys
+- Flow Debugger
 
 ## [Beta User Acceptance Testing]
 - Skills
@@ -19,6 +23,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 - Logi reportings
+
+## [0.63.0] - 2019-08-30
+### Added
+- CXV1-19199 - Change presence state when Agent is bussy to a 'pending' state.
+- CXV1-18948 - Filters for Channel Types, Skills, Groups and Reasons columns.
+- CXV1-18944 - Adding unit-test to agents table components.
+- CXV1-18910 - Bulk actions for Agent State Monitoring page.
+- CXV1-18907 - Channel column and channel-types component.
+- CXV1-18908 - Direction column and change-direction component.
+- CXV1-18909 - Presence State column and change-state component.
+- Updated UPDATE_USER_PERMISSIONS event to also pull in Platform Permissions
+- getCurrentPermissions function now includes platform permissions.
+- CXV1-18905 - Main Agent State Monitoring Table.
+- CXV1-18732 - Added flows debug logs page to configUI-2.
+### Changed
+- Version bump component library to 0.49.3.
+- Version bump js-utils library to 1.6.18.
+- SDK version bump to 8.61.1.
+- <no-jira> - Adding tenant default reason lists to presence state menu in agent monitoring table.
+- CXV1-18910 - Bulk actions for agents in busy state case.
+- CXV1-19767 - Pagination of entity , sidepanel and monitoring tables has been changed to custom.
+### Fixed
+- CXV1-19698 - Clicking Filter option name should select filter option.
+- CXV1-19714 - Users with MANAGE_ALL_USER_STATE and/or MANAGE_ALL_USERS_DIRECTION are the only ones allowed to open Agent Monitoring page.
+- Adding PLATFORM_VIEW_ALL_USERS permission to allow platform view only to see users page.
+- CXV1-16880 - Loading states for removal of generic list subitems.
+- <no-jira> - Removed alpha flag from roles page
+- Tenant role showing wrong value on Users page.
+- CXV1-18788 - Tenant Role showing disabled roles in Config 1 and incorrect value in Config 2 on Users page.
+- CXV1-17410 - Fixing issues with message showing system roles as inherited roles when they cannot be edited and being able to unshared the **Access Controlled Supervisor** role
+- CXV1-18608 - Revert of Platform admins users are unable to add/remove permissions to a shared role when in a child tenant on config-ui 2.
 
 ## [0.62.4] - 2019-07-18
 ### Added

@@ -5,11 +5,11 @@ import 'rxjs/add/operator/map';
 import { messageSubscribe, messageUnsubscribe } from './windowMessageObservable';
 import { localStorageSubscribe, localStorageUnsubscribe } from './localStorageObservable';
 import CheckboxFilterMenu from '../CheckboxFilterMenu';
-import { Button, PageHeader, InteractionDetails } from 'cx-ui-components';
+import { Button, PageHeader, InteractionDetails, Pagination } from 'cx-ui-components';
 import ReactTable from 'react-table';
 import interactionIdColumn from '../../components/tableColumns/interactionId';
 import expanderColumn from '../../components/tableColumns/expander';
-import agentColumn from '../../components/tableColumns/agent';
+import agentsColumn from '../../components/tableColumns/agents';
 import customerColumn from '../../components/tableColumns/customer';
 import contactPointColumn from '../../components/tableColumns/contactPoint';
 import flowColumn from '../../components/tableColumns/flow';
@@ -147,6 +147,7 @@ export default class InteractionMonitoring extends Component {
 
         {!this.props.areAllColNotActive && (
           <ReactTable
+            PaginationComponent={Pagination}
             defaultPageSize={this.state.defaultRowsNumber}
             pageSizeOptions={[this.state.defaultRowsNumber, 20, 50, 100]}
             className="InteractionMonitoringTable -striped -highlight"
@@ -166,7 +167,7 @@ export default class InteractionMonitoring extends Component {
             columns={[
               expanderColumn(),
               interactionIdColumn(this.props.activeColumns[0]),
-              agentColumn(this.props.activeColumns[1]),
+              agentsColumn(this.props.activeColumns[1]),
               customerColumn(this.props.activeColumns[2]),
               contactPointColumn(this.props.activeColumns[3]),
               flowColumn(this.props.activeColumns[4]),

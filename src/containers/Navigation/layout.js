@@ -152,6 +152,12 @@ export default class Navigation extends Component {
                 <StyledLink data-automation="navigation-link-transferLists" to="/configuration/transferLists">
                   Transfer Lists
                 </StyledLink>
+                <StyledLink data-automation="navigation-link-apiKeys" to="/configuration/apiKeys">
+                  Api Keys
+                </StyledLink>
+                <StyledLink data-automation="navigation-link-businessHours" to="/configuration/businessHours">
+                  Business Hours
+                </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
@@ -162,6 +168,9 @@ export default class Navigation extends Component {
               <SubMenu>
                 <StyledLink data-automation="navigation-link-flows" to="/configuration/flows">
                   Flows
+                </StyledLink>
+                <StyledLink data-automation="navigation-link-flowDebugger" to="/configuration/flowDebugger">
+                  Flow Debug Logs
                 </StyledLink>
                 <StyledLink data-automation="navigation-link-dispatchMappings" to="/configuration/dispatchMappings">
                   Dispatch Mappings

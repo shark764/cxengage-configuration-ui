@@ -9,6 +9,7 @@ import Entities from './modules/entities';
 import UserData from './modules/userData';
 import SupervisorToolbar from './modules/supervisorToolbar';
 import InteractionMonitoring from './modules/reporting/interactionMonitoring';
+import AgentStateMonitoring from './modules/reporting/agentStateMonitoring';
 import ColumnFilterMenus from './modules/columnFilterMenus';
 import UserIdMap from './modules/userIdMap';
 
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   form,
   SupervisorToolbar,
   InteractionMonitoring,
+  AgentStateMonitoring,
   ColumnFilterMenus,
   UserIdMap
 });

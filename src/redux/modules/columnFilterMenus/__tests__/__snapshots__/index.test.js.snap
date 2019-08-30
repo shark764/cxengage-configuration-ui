@@ -124,7 +124,8 @@ Immutable.Map {
   "mockTable": Immutable.Map {
     "Groups": Immutable.List [
       Immutable.Map {
-        "mockItem": "",
+        "id": undefined,
+        "name": undefined,
         "active": true,
       },
     ],
@@ -137,7 +138,8 @@ Immutable.Map {
   "mockTable": Immutable.Map {
     "Skills": Immutable.List [
       Immutable.Map {
-        "mockItem": "",
+        "id": undefined,
+        "name": undefined,
         "active": true,
       },
     ],
@@ -309,6 +311,27 @@ Immutable.Map {
       },
     ],
   },
+  "apiKeys": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "ApiKey Status",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Role",
+        "active": true,
+      },
+    ],
+  },
   "reasons": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [
@@ -333,6 +356,31 @@ Immutable.Map {
         "active": true,
       },
     ],
+  },
+  "businessHours": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Timezone",
+        "active": true,
+      },
+    ],
+  },
+  "flowDebugger": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
   },
   "dataAccessReports": Immutable.Map {
     "visibleMenu": "none",
@@ -422,6 +470,132 @@ Immutable.Map {
       },
       Immutable.Map {
         "name": "Status",
+        "active": true,
+      },
+    ],
+  },
+  "agentStateMonitoring": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Channel",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Agent",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Groups",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Skills",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Direction",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Presence State",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Reason Code",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Time in Presence State",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Offered",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Accepted",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Rejected",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Accepted Rate",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Away Time",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Away Rate",
+        "active": false,
+      },
+    ],
+    "Groups": Immutable.List [],
+    "Skills": Immutable.List [],
+    "ReasonLists": Immutable.List [],
+    "Direction": Immutable.List [
+      Immutable.Map {
+        "name": "All",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Inbound",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Outbound",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Do Not Disturb Outbound",
+        "active": false,
+      },
+    ],
+    "PresenceState": Immutable.List [
+      Immutable.Map {
+        "name": "All",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Idle",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Busy",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Away",
+        "active": false,
+      },
+      Immutable.Map {
+        "name": "Offline",
+        "active": false,
+      },
+    ],
+    "ChannelType": Immutable.List [
+      Immutable.Map {
+        "name": "Voice",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Messaging",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Email",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "SMS",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Work Item",
         "active": true,
       },
     ],

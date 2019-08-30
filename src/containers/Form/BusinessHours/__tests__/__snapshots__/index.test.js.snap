@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BusinessHours Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "businessHoursType": undefined,
+  "inherited": undefined,
+  "initialValues": Immutable.Map {
+    "sunEndTimeMinutes": 0,
+    "monEndTimeMinutes": 0,
+    "wedStartTimeMinutes": 0,
+    "active": true,
+    "businessHoursType": "24/7",
+    "wedEndTimeMinutes": 0,
+    "friStartTimeMinutes": 0,
+    "thuStartTimeMinutes": 0,
+    "tueStartTimeMinutes": 0,
+    "friEndTimeMinutes": 0,
+    "satStartTimeMinutes": 0,
+    "thuEndTimeMinutes": 0,
+    "timezone": "Etc/GMT+12",
+    "tueEndTimeMinutes": 0,
+    "sunStartTimeMinutes": 0,
+    "monStartTimeMinutes": 0,
+    "satEndTimeMinutes": 0,
+  },
+  "isSaving": true,
+  "key": "mockId",
+  "timezones": Array [],
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `undefined`;
+
+exports[`formSubmission returns proper values 1`] = `undefined`;

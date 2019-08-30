@@ -2,6 +2,204 @@
 
 exports[`entitiesMetaData creates all metaData info 1`] = `
 Object {
+  "agentStateMonitoring": EntityMetaData {
+    "betaFeature": true,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Channel",
+      },
+      Object {
+        "active": true,
+        "name": "Agent",
+      },
+      Object {
+        "active": false,
+        "name": "Groups",
+      },
+      Object {
+        "active": false,
+        "name": "Skills",
+      },
+      Object {
+        "active": true,
+        "name": "Direction",
+      },
+      Object {
+        "active": true,
+        "name": "Presence State",
+      },
+      Object {
+        "active": false,
+        "name": "Reason Code",
+      },
+      Object {
+        "active": true,
+        "name": "Time in Presence State",
+      },
+      Object {
+        "active": false,
+        "name": "Offered",
+      },
+      Object {
+        "active": false,
+        "name": "Accepted",
+      },
+      Object {
+        "active": false,
+        "name": "Rejected",
+      },
+      Object {
+        "active": false,
+        "name": "Accepted Rate",
+      },
+      Object {
+        "active": false,
+        "name": "Away Time",
+      },
+      Object {
+        "active": false,
+        "name": "Away Rate",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [],
+    "dependentEntity": "",
+    "entityName": "agentStateMonitoring",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Agent State Monitoring",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Agent State Monitorin",
+    "updateFormDependencies": Array [],
+  },
+  "apiKeys": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "ApiKey Status",
+      },
+      Object {
+        "active": true,
+        "name": "Role",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "apiKeys",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Managing%20ApiKeys/Creating_ApiKeys.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Api Key Management",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Api Key",
+    "updateFormDependencies": Array [],
+  },
   "branding": EntityMetaData {
     "betaFeature": false,
     "bulkEditsAvailable": true,
@@ -62,6 +260,90 @@ Object {
     ],
     "subEntityName": "",
     "title": "Brandin",
+    "updateFormDependencies": Array [],
+  },
+  "businessHours": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+      Object {
+        "active": true,
+        "name": "Timezone",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "dependentEntity",
+    "entityName": "businessHours",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Configuration/Business%20Hours/Business_Hours.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Business Hours Management",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Business Hour",
     "updateFormDependencies": Array [],
   },
   "capacityRules": EntityMetaData {
@@ -714,6 +996,68 @@ Object {
     ],
     "subEntityName": "",
     "title": "Email Template",
+    "updateFormDependencies": Array [],
+  },
+  "flowDebugger": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "flowDebugger",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Flow Debug Logs",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Flow Debugge",
     "updateFormDependencies": Array [],
   },
   "flows": EntityMetaData {

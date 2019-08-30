@@ -14,7 +14,7 @@ import {
   getConfirmationDialogType,
   getCurrentEntity,
   getSelectedEntityBulkChangeItems,
-  getSidePanelWidth,
+  getSidePanelWidth
 } from '../../redux/modules/entities/selectors';
 import { selectVisibleSubMenu } from '../../redux/modules/columnFilterMenus/selectors';
 import { currentTenantId } from '../../redux/modules/userData/selectors';
@@ -30,7 +30,7 @@ function mapStateToProps(state, props) {
     tableType: getCurrentEntity(state),
     bulkSelectedTotal: getSelectedEntityBulkChangeItems(state),
     slidingWidth: getSidePanelWidth(state),
-    currentTenantId: currentTenantId(state),
+    currentTenantId: currentTenantId(state)
   };
 }
 
@@ -38,7 +38,7 @@ export const actions = {
   setCurrentEntity,
   fetchData,
   setSelectedSubEntityId: setSelectedSubEntityId(undefined),
-  setSelectedEntityId,
+  setSelectedEntityId
 };
 
 export default connect(mapStateToProps, actions)(Layout);

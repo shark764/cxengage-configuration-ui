@@ -41,10 +41,7 @@ import {
 
 function handleError(error, state) {
   Toast.error(errorLabel(error));
-  localStorage.setItem(
-    'SupervisorToolbar',
-    JSON.stringify(state.get('SupervisorToolbar').toJS())
-  );
+  localStorage.setItem('SupervisorToolbar', JSON.stringify(state.get('SupervisorToolbar').toJS()));
   sdkCall({ module: 'session', command: 'clearMonitoredInteraction' });
   return of({ type: 'cxengage/interactions/voice/silent-monitor-end' });
 }
@@ -66,9 +63,9 @@ export const StartBatchRequest = (action$, store) =>
         'cxengage/interactions/voice/mute-acknowledged',
         'cxengage/session/sqs-shut-down'
       ]).mergeMap(subscription =>
-        fromPromise(
-          sdkCall({ module: 'subscribe', command: subscription })
-        ).mapTo(supervisorSubscriptionsAdded(subscription))
+        fromPromise(sdkCall({ module: 'subscribe', command: subscription })).mapTo(
+          supervisorSubscriptionsAdded(subscription)
+        )
       )
     );
 
@@ -78,13 +75,11 @@ export const MonitorInteractionInitialization = (action$, store) =>
     .throttleTime(4000)
     .switchMap(({ interactionId }) =>
       fromPromise(
-        sdkPromise(
-          {
-            module: 'monitorCall',
-            data: { interactionId },
-            topic: 'monitorCall'
-          }
-        )
+        sdkPromise({
+          module: 'monitorCall',
+          data: { interactionId },
+          topic: 'monitorCall'
+        })
       )
         .filter(response => response !== 'cancelled')
         .mapTo(monitorInteractionInitializationCompleted())
@@ -107,20 +102,12 @@ export const MonitorInteraction = (action$, store) =>
             action$.ofType('cxengage/session/started').take(1)
           ).mapTo(a);
         } else if (!a.twilioEnabled && a.sessionIsActive) {
-          return zip(
-            action$.ofType('cxengage/twilio/device-ready').take(1)
-          ).mapTo(a);
+          return zip(action$.ofType('cxengage/twilio/device-ready').take(1)).mapTo(a);
         } else if (a.twilioEnabled && !a.sessionIsActive) {
-          return zip(action$.ofType('cxengage/session/started').take(1)).mapTo(
-            a
-          );
+          return zip(action$.ofType('cxengage/session/started').take(1)).mapTo(a);
         } else if (a.twilioEnabled && a.sessionIsActive) {
           if (a.transitionCall) {
-            return zip(
-              action$
-                .ofType('cxengage/interactions/voice/silent-monitor-end')
-                .take(1)
-            ).mapTo(a);
+            return zip(action$.ofType('cxengage/interactions/voice/silent-monitor-end').take(1)).mapTo(a);
           } else {
             return from([a]);
           }
@@ -128,11 +115,7 @@ export const MonitorInteraction = (action$, store) =>
       } else if (!a.sessionIsActive) {
         return zip(action$.ofType('cxengage/session/started').take(1)).mapTo(a);
       } else if (a.transitionCall) {
-        return zip(
-          action$
-            .ofType('cxengage/interactions/voice/silent-monitor-end')
-            .take(1)
-        ).mapTo(a);
+        return zip(action$.ofType('cxengage/interactions/voice/silent-monitor-end').take(1)).mapTo(a);
       } else {
         return from([a]);
       }
@@ -157,22 +140,18 @@ export const HangUpEpic = (action$, store) =>
     .ofType('REQUESTING_HANG_UP')
     .map(action => ({
       ...action,
-      interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(
-        store.getState()
-      ),
+      interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(store.getState()),
       status: selectSupervisorToolbarSilentMonitoringStatus(store.getState())
     }))
     .filter(({ status }) => status === 'connected')
     .mergeMap(a => {
       return fromPromise(
-        sdkPromise(
-          {
-            module: 'comfirmPrompt',
-            command: `Stop monitoring Interaction? ${a.interactionId}`,
-            data: { interactionId: a.interactionId },
-            topic: 'comfirmPrompt'
-          }
-        )
+        sdkPromise({
+          module: 'comfirmPrompt',
+          command: `Stop monitoring Interaction? ${a.interactionId}`,
+          data: { interactionId: a.interactionId },
+          topic: 'comfirmPrompt'
+        })
       ).map(response => ({
         ...a,
         confirmationResponse: response
@@ -183,14 +162,12 @@ export const HangUpEpic = (action$, store) =>
       concat(
         of(a).mapTo(transitionCallEnding()),
         fromPromise(
-          sdkPromise(
-            {
-              module: 'interactions.voice',
-              command: 'resourceRemove',
-              data: { interactionId: a.interactionId },
-              topic: 'cxengage/interactions/voice/resource-removed-acknowledged'
-            }
-          )
+          sdkPromise({
+            module: 'interactions.voice',
+            command: 'resourceRemove',
+            data: { interactionId: a.interactionId },
+            topic: 'cxengage/interactions/voice/resource-removed-acknowledged'
+          })
         )
           .mapTo(hangUpRequested())
           .catch(error => handleError(error, store.getState()))
@@ -202,25 +179,21 @@ export const ToggleMuteEpic = (action$, store) =>
     .ofType('REQUESTING_TOGGLE_MUTE')
     .map(action => ({
       ...action,
-      interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(
-        store.getState()
-      ),
+      interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(store.getState()),
       status: selectSupervisorToolbarSilentMonitoringStatus(store.getState()),
       muted: selectSupervisorToolbarMuted(store.getState())
     }))
     .filter(({ status }) => status === 'connected')
     .switchMap(a =>
       fromPromise(
-        sdkPromise(
-          {
-            module: 'interactions.voice',
-            command: a.muted ? 'unmute' : 'mute',
-            data: { interactionId: a.interactionId },
-            topic: a.muted
+        sdkPromise({
+          module: 'interactions.voice',
+          command: a.muted ? 'unmute' : 'mute',
+          data: { interactionId: a.interactionId },
+          topic: a.muted
             ? 'cxengage/interactions/voice/unmute-acknowledged'
             : 'cxengage/interactions/voice/mute-acknowledged'
-          }
-        )
+        })
       )
         .mapTo(toggleMuteRequested())
         .catch(error => handleError(error, store.getState()))
@@ -230,8 +203,6 @@ export const SqsSessionLost = action$ =>
   action$
     .ofType('cxengage/session/sqs-shut-down')
     .do(a => {
-      alert(
-        'Session was lost or expired please refresh to monitor interactions.'
-      );
+      alert('Session was lost or expired please refresh to monitor interactions.');
     })
     .mapTo({ type: 'SQS_SHUT_DOWN_ALERTED_$' });

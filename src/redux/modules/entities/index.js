@@ -19,6 +19,10 @@ const initialState = fromJS({
   interactionMonitoring: {
     readPermission: ['VIEW_ALL_MONITORED_CALLS']
   },
+  agentStateMonitoring: {
+    ...defaultEntity,
+    readPermission: ['MANAGE_ALL_USER_STATE', 'MANAGE_ALL_USERS_DIRECTION']
+  },
   identityProviders: {
     ...defaultEntity
   },
@@ -251,6 +255,25 @@ const initialState = fromJS({
   },
   tenants: {
     ...defaultEntity
+  },
+  flowDebugger: {
+    ...defaultEntity
+  },
+  apiKeys: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_APIKEY'],
+    updatePermission: ['MANAGE_ALL_APIKEY'],
+    createPermission: ['MANAGE_ALL_APIKEY'],
+    disablePermission: [],
+    assignPermission: []
+  },
+  businessHours: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_BUSINESS_HOURS'],
+    updatePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
+    createPermission: ['MANAGE_ALL_BUSINESS_HOURS'],
+    disablePermission: [],
+    assignPermission: []
   }
   //hygen-inject-before
 });
@@ -494,6 +517,17 @@ export default function reducer(state = initialState, action) {
           });
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
+        case 'businessHours': {
+          const newResult = result.map(entity => ({
+            ...entity,
+            businessHoursType: Object.entries(entity)
+              .filter(([key, value]) => key.includes('TimeMinutes'))
+              .every(([key, value]) => value <= 0)
+              ? '24/7'
+              : 'scheduledHours'
+          }));
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([entityName, 'fetching']);
+        }
         default:
           return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName, 'fetching']);
       }
@@ -560,6 +594,12 @@ export default function reducer(state = initialState, action) {
       if (action.entityName === 'dispatchMappings') {
         const entityIndex = findEntityIndex(state, 'flows', result.flowId);
         result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', entityIndex]).get('name') };
+      } else if (action.entityName === 'businessHours') {
+        result.businessHoursType = Object.entries(result)
+          .filter(([key, value]) => key.includes('TimeMinutes'))
+          .every(([key, value]) => value <= 0)
+          ? '24/7'
+          : 'scheduledHours';
       }
 
       return state.update(action.entityName, entityStore =>
@@ -946,6 +986,9 @@ export default function reducer(state = initialState, action) {
       return state.update(action.entityName, entityStore =>
         entityStore.update('data', data => data.push(fromJS(result)))
       );
+    }
+    case 'SET_TIMEZONES': {
+      return state.setIn(['businessHours', 'timezones'], fromJS(action.timezones));
     }
     case '@@redux-form/INITIALIZE':
     case '@@redux-form/CHANGE': {

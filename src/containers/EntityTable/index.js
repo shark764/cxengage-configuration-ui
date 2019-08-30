@@ -16,7 +16,7 @@ import {
 import { selectVisibleSubMenu, selectTableColumns } from '../../redux/modules/columnFilterMenus/selectors';
 
 import { setVisibleMenu } from '../../redux/modules/columnFilterMenus';
-import { getHelpLink, getAllEntities } from './selectors';
+import { getHelpLink, getAllEntitiesTableData } from './selectors';
 import { getTableColumns } from './config';
 
 export function mapStateToProps(state, props) {
@@ -27,7 +27,7 @@ export function mapStateToProps(state, props) {
   return {
     pageTitle: entity ? entity.pageTitle : '',
     pageHelpLink: getHelpLink(state),
-    items: getAllEntities(state),
+    items: getAllEntitiesTableData(state),
     columns: getTableColumns(selectTableColumns(state, entityName)),
     userHasCreatePermission: userHasCreatePermission(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
@@ -36,7 +36,7 @@ export function mapStateToProps(state, props) {
     filtered: defaultFilters,
     sorted: defaultSorted,
     fetching: isEntityFetching(state),
-    showBulkActionsMenu: entity && entity.bulkEditsAvailable,
+    showBulkActionsMenu: entity && entity.bulkEditsAvailable
   };
 }
 

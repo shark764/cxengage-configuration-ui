@@ -21,36 +21,30 @@ export const UpdateEmailTemplate = (action$, store) =>
     }))
     .mergeMap(a => {
       // Don't submit the form if the user changes a custom email field, then changes email back to "default"
-      if (
-        !(a.initialValues.email === 'default' && a.values.email === 'default')
-      ) {
+      if (!(a.initialValues.email === 'default' && a.values.email === 'default')) {
         return fromPromise(
-          sdkPromise(
-            {
-              module: 'entities',
-              command:
-                a.values.email === 'custom'
-                  ? 'createEmailTemplate'
-                  : 'updateEmailTemplate',
-              data:
-                a.values.email === 'custom'
-                  ? {
-                      ...a.values,
-                      emailTypeId: a.entityId,
-                      active: true
-                    }
-                  : {
-                      emailTypeId: a.entityId,
-                      active: false
-                    },
-              topic: a.values.email === 'custom'
-              ? 'cxengage/entities/create-email-template-response'
-              : 'cxengage/entities/update-email-template-response',
-            }
-          )
+          sdkPromise({
+            module: 'entities',
+            command: a.values.email === 'custom' ? 'createEmailTemplate' : 'updateEmailTemplate',
+            data:
+              a.values.email === 'custom'
+                ? {
+                    ...a.values,
+                    emailTypeId: a.entityId,
+                    active: true
+                  }
+                : {
+                    emailTypeId: a.entityId,
+                    active: false
+                  },
+            topic:
+              a.values.email === 'custom'
+                ? 'cxengage/entities/create-email-template-response'
+                : 'cxengage/entities/update-email-template-response'
+          })
         )
-        .map(response => handleSuccess(response, a, 'Email template was updated successfully!'))
-        .catch(error => handleError(error, a));
+          .map(response => handleSuccess(response, a, 'Email template was updated successfully!'))
+          .catch(error => handleError(error, a));
       } else {
         Toast.info('"Default Email" is unchanged. Nothing to submit.');
         return of(updateEntityRejected(a.entityName, a.entityId));

@@ -18,9 +18,9 @@ export const sdkPromise = sdkCall => {
       CxEngage[sdkCall.module][sdkCall.command](sdkCall.data, function(error, topic, response) {
         console.log('[SDK] SDK sending back:', error, topic, response);
         if (error) {
-          console.warn('ERROR',error)
-          if(error.data && error.data.apiResponse && error.data.apiResponse.status) {
-            store.dispatch({type: 'TOGGLE_USER_AUTH' });
+          console.warn('ERROR', error);
+          if (error.data && error.data.apiResponse && error.data.apiResponse.status) {
+            store.dispatch({ type: 'TOGGLE_USER_AUTH' });
           }
           reject(error);
         } else {
@@ -119,5 +119,5 @@ export const errorManager = error => {
       } ${code}: Resource with the same name or value already exists in the system, please enter a different value.`;
     }
   }
-  return { errorMessage: errorDetails ? errorDetails : 'An error has ocurred.', attribute: attr };
+  return { errorMessage: errorDetails ? errorDetails : 'An error has occurred.', attribute: attr };
 };

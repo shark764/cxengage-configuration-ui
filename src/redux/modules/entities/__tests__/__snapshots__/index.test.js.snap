@@ -383,6 +383,23 @@ Immutable.Map {
     "sidePanelWidth": 750,
     "assignPermission": Immutable.List [],
   },
+  "apiKeys": Immutable.Map {
+    "readPermission": Immutable.List [
+      "VIEW_ALL_APIKEY",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_APIKEY",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_APIKEY",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [],
+  },
   "reasons": Immutable.Map {
     "readPermission": Immutable.List [
       "READ_PRESENCE_REASONS",
@@ -403,6 +420,29 @@ Immutable.Map {
     ],
     "selectedEntityId": "",
     "sidePanelWidth": 750,
+  },
+  "businessHours": Immutable.Map {
+    "readPermission": Immutable.List [
+      "VIEW_ALL_BUSINESS_HOURS",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [],
+  },
+  "flowDebugger": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
   },
   "dataAccessReports": Immutable.Map {
     "data": Immutable.List [],
@@ -464,6 +504,16 @@ Immutable.Map {
       "MANAGE_ALL_GROUP_USERS",
       "MANAGE_ALL_GROUP_OWNERS",
       "MANAGE_TENANT_ENROLLMENT",
+    ],
+  },
+  "agentStateMonitoring": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "MANAGE_ALL_USER_STATE",
+      "MANAGE_ALL_USERS_DIRECTION",
     ],
   },
   "lists": Immutable.Map {

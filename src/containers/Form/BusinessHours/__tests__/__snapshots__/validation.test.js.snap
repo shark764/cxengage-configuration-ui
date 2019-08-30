@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "friStartTimeMinutes": false,
+  "monStartTimeMinutes": false,
+  "name": "Please enter a name",
+  "satStartTimeMinutes": false,
+  "sunStartTimeMinutes": false,
+  "thuStartTimeMinutes": false,
+  "tueStartTimeMinutes": false,
+  "wedStartTimeMinutes": false,
+}
+`;
+
+exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
+Object {
+  "friStartTimeMinutes": false,
+  "monStartTimeMinutes": false,
+  "name": "Please enter a name",
+  "satStartTimeMinutes": false,
+  "sunStartTimeMinutes": false,
+  "thuStartTimeMinutes": false,
+  "tueStartTimeMinutes": false,
+  "wedStartTimeMinutes": false,
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "friStartTimeMinutes": false,
+  "monStartTimeMinutes": false,
+  "name": false,
+  "satStartTimeMinutes": false,
+  "sunStartTimeMinutes": false,
+  "thuStartTimeMinutes": false,
+  "tueStartTimeMinutes": false,
+  "wedStartTimeMinutes": false,
+}
+`;

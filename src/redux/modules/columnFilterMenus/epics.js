@@ -13,15 +13,12 @@ import 'rxjs/add/operator/ignoreElements';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 
-import {
-  selectTableColumns,
-  selectGroups,
-  selectSkills
-} from './selectors';
+import { selectTableColumns, selectGroups, selectSkills } from './selectors';
 
-import { updateGroupsColumnFilter, updateSkillsColumnFilter } from './index';
+import { updateGroupsColumnFilter, updateSkillsColumnFilter, updateReasonListsColumnFilter } from './index';
 
 import { sdkPromise } from '../../../utils/sdk';
+import { getCurrentEntity } from '../entities/selectors';
 
 const ColumnRelatedActions = [
   'TOGGLE_MENUITEMS',
@@ -37,13 +34,9 @@ export const SaveColumnsToLocalStorage = (action$, store) =>
     .filter(({ menuType }) => menuType === 'Columns')
     .map(action => ({
       ...action,
-      columnsData: JSON.stringify(
-        selectTableColumns(store.getState(), action.tableType)
-      )
+      columnsData: JSON.stringify(selectTableColumns(store.getState(), action.tableType))
     }))
-    .do(action =>
-      localStorage.setItem(`${action.tableType}Columns`, action.columnsData)
-    )
+    .do(action => localStorage.setItem(`${action.tableType}Columns`, action.columnsData))
     .map(action => ({
       type: 'COLUMNS_LOCALSTORAGE_UPDATED_$',
       columnsData: action.columnsData
@@ -52,7 +45,11 @@ export const SaveColumnsToLocalStorage = (action$, store) =>
 export const UpdateStatSubscriptionFilters = (action$, store) =>
   action$
     .ofType(...ColumnRelatedActions)
-    .filter(({ menuType }) => menuType === 'Skills' || menuType === 'Groups')
+    .filter(
+      ({ menuType }) =>
+        getCurrentEntity(store.getState()) === 'InteractionMonitoring' &&
+        (menuType === 'Skills' || menuType === 'Groups')
+    )
     .map(action => ({
       ...action,
       groupsArray: selectGroups(store.getState(), {
@@ -64,12 +61,8 @@ export const UpdateStatSubscriptionFilters = (action$, store) =>
     }))
     .map(action => ({
       ...action,
-      groupIds: Array.from(action.groupsArray, x => x.active && x.id).filter(
-        x => x
-      ),
-      skillIds: Array.from(action.skillsArray, x => x.active && x.id).filter(
-        x => x
-      )
+      groupIds: Array.from(action.groupsArray, x => x.active && x.id).filter(x => x),
+      skillIds: Array.from(action.skillsArray, x => x.active && x.id).filter(x => x)
     }))
     .map(action => {
       action.payload = {
@@ -92,23 +85,31 @@ export const UpdateStatSubscriptionFilters = (action$, store) =>
           data: action.payload
         })
       )
-      // TODO: sdkPromise requires a topic to get anything returned.. 
-      // so the below will never fire the way we have it now..
-      // either remove the mapTo and catch .. or make it so we will get the responses
-      .mapTo({ type: 'STATS_UPDATED_$' })
-      .catch(err => of({ type: 'STATS_NOT_UPDATED_$' }))
+        // TODO: sdkPromise requires a topic to get anything returned..
+        // so the below will never fire the way we have it now..
+        // either remove the mapTo and catch .. or make it so we will get the responses
+        .mapTo({ type: 'STATS_UPDATED_$' })
+        .catch(() => of({ type: 'STATS_NOT_UPDATED_$' }))
     );
 
 export const UpdateSkillsAndGroupsFilter = (action$, store) =>
   action$
     .ofType('FETCH_DATA_FULFILLED')
+    .map(a => ({
+      ...a,
+      currentEntity: getCurrentEntity(store.getState())
+    }))
     .filter(
-      ({ entityName }) => entityName === 'groups' || entityName === 'skills'
+      ({ entityName, currentEntity }) =>
+        (currentEntity === 'InteractionMonitoring' || currentEntity === 'agentStateMonitoring') &&
+        (entityName === 'groups' || entityName === 'skills' || entityName === 'reasonLists')
     )
     .map(a => {
       if (a.entityName === 'skills') {
         return updateSkillsColumnFilter(a.response.result, a.tableType);
-      } else {
+      } else if (a.entityName === 'groups') {
         return updateGroupsColumnFilter(a.response.result, a.tableType);
+      } else {
+        return updateReasonListsColumnFilter(a.response.result, a.tableType);
       }
     });

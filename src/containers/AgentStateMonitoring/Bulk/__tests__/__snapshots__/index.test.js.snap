@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AgentStateMonitoringBulkActionsForm Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "key": "agentStateMonitoring:bulk",
+  "reasonLists": Object {
+    "id": "0001",
+    "name": "reason-list1",
+  },
+  "supervisorUpdatePermissions": Object {
+    "direction": undefined,
+    "state": undefined,
+  },
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `
+Object {
+  "form": "agentStateMonitoring:bulk",
+}
+`;

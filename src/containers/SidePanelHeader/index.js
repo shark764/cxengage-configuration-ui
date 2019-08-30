@@ -12,7 +12,7 @@ import {
   sidePanelHeader,
   userHasUpdatePermission,
   isInherited,
-  shouldDisableField,
+  shouldDisableField
 } from '../../redux/modules/entities/selectors';
 
 export function mapDispatchToProps(dispatch) {
@@ -38,7 +38,6 @@ export function mapStateToProps(state) {
     inherited: isInherited(state),
     disabled: shouldDisableField(state)
   };
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidePanelHeader);

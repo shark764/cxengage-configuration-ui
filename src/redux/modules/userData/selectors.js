@@ -25,7 +25,12 @@ export const getCurrentTenantId = state => state.get('UserData').get('currentTen
 
 export const getAgentTenantRoleId = state => state.get('UserData').get('tenantRoleId');
 
-export const getCurrentPermissions = createSelector([getUserData], userData => userData.get('permissions'));
+export const getCurrentPermissions = createSelector([getUserData], function(userData) {
+  var tenantPermissions = userData.get('permissions') || [];
+  var platformPermissions = userData.get('platformPermissions') || [];
+
+  return tenantPermissions.concat(platformPermissions);
+});
 
 export const authenticatedAndBrandingReady = state => hasAllBranding(state) && userIsAuthed(state);
 

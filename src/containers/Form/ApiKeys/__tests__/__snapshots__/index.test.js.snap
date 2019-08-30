@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiKeys Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": undefined,
+  "initialValues": Object {
+    "active": true,
+  },
+  "isSaving": true,
+  "key": "mockId",
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `undefined`;
+
+exports[`formSubmission returns proper values 1`] = `undefined`;

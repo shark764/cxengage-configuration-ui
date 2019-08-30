@@ -225,6 +225,7 @@ export const getTenantPermissions = action$ =>
             tenantName: response.tenant.tenantName,
             tenantPermissions: response.tenant.tenantPermissions
           },
+          platformPermissions: response.platformPermissions,
           tenants: response.tenants,
           agentId: response.agentId
         };

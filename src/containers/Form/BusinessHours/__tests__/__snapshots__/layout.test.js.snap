@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BusinessHoursForm /> renders create form 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`<BusinessHoursForm /> renders update form 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;

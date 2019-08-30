@@ -3,6 +3,7 @@ import * as brandingEpics from './modules/entities/branding/epics';
 import * as entitiesEpics from './modules/entities/epics';
 import * as columnFiltersEpics from './modules/columnFilterMenus/epics';
 import * as interactionMonitoringEpics from './modules/reporting/interactionMonitoring/epics';
+import * as agentStateMonitoringEpics from './modules/reporting/agentStateMonitoring/epics';
 import * as supervisorToolbarEpics from './modules/supervisorToolbar/epics';
 import * as userIdMapEpics from './modules/userIdMap/epics';
 import * as emailTemplatesEpics from './modules/entities/emailTemplates/epics';
@@ -14,10 +15,14 @@ import * as dispatchMappingsEpics from './modules/entities/dispatchMappings/epic
 import * as slasEpics from './modules/entities/slas/epics';
 import * as userDataEpics from './modules/userData/epics';
 import * as transferListsEpics from './modules/entities/transferLists/epics';
+import * as apiKeysEpics from './modules/entities/apiKeys/epics';
+import * as timezoneEpics from './modules/entities/timezones/epics';
+import * as businessHoursEpics from './modules/entities/businessHours/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
   ...Object.values(interactionMonitoringEpics),
+  ...Object.values(agentStateMonitoringEpics),
   ...Object.values(entitiesEpics),
   ...Object.values(columnFiltersEpics),
   ...Object.values(supervisorToolbarEpics),
@@ -30,5 +35,8 @@ export const rootEpic = combineEpics(
   ...Object.values(dispatchMappingsEpics),
   ...Object.values(slasEpics),
   ...Object.values(userDataEpics),
-  ...Object.values(transferListsEpics)
+  ...Object.values(transferListsEpics),
+  ...Object.values(apiKeysEpics),
+  ...Object.values(timezoneEpics),
+  ...Object.values(businessHoursEpics)
 );
