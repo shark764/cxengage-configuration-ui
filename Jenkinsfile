@@ -13,29 +13,31 @@ def c = new common()
 def n = new node()
 def f = new frontend()
 
-@NonCPS
-def stop_previous_builds(job_name, build_num) {
-  def job = Jenkins.instance.getItemByFullName(job_name)
-  def new_builds = job.getNewBuilds()
+// @NonCPS
+// def stop_previous_builds(job_name, build_num) {
+//   def job = Jenkins.instance.getItemByFullName(job_name)
+//   def new_builds = job.getNewBuilds()
 
-  for (int i = 0; i < new_builds.size(); i++) {
-    def build = new_builds.get(i);
-    if (build.getNumber().toInteger() != build_num) {
-      if (build.isBuilding()) {
-        build.doStop()
-      }
-    }
-  }
-}
+//   for (int i = 0; i < new_builds.size(); i++) {
+//     def build = new_builds.get(i);
+//     if (build.getNumber().toInteger() != build_num) {
+//       if (build.isBuilding()) {
+//         build.doStop()
+//       }
+//     }
+//   }
+// }
 
 try {
-  stop_previous_builds(env.JOB_NAME, env.BUILD_NUMBER.toInteger())
+  // stop_previous_builds(env.JOB_NAME, env.BUILD_NUMBER.toInteger())
 } catch (Exception e) {
   sh "echo ${e}"
 }
 
 node(){
+
   pwd = pwd()
+
 }
 
 pipeline {
@@ -46,7 +48,8 @@ pipeline {
         stage ('Set build version') {
             steps {
               sh 'echo "Stage Description: Set build version from package.json"'
-              script {
+              script{
+                buildTool = c.getBuildTool()
                 props = c.exportProperties(buildTool)
                 build_version = props.POM_VERSION
                 service = props.POM_ARTIFACT_ID
