@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
+## [0.65.1-SNAPSHOT] - 2019-09-06
+### Added 
+-fixing jenkinsfile
+
 ## [0.65.0] - 2019-09-06
 ### Added 
 - CXV1-18681 - Config 2 | API Keys - Detail Panel

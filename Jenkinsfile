@@ -1,5 +1,5 @@
 #!groovy​
-@Library('sprockets@2.1.0') _
+@Library('sprockets@2.9.2') _
 
 import common
 import git
@@ -47,8 +47,9 @@ pipeline {
             steps {
               sh 'echo "Stage Description: Set build version from package.json"'
               script {
-                n.export()
-                build_version = readFile('version')
+                props = c.exportProperties(buildTool)
+                build_version = props.POM_VERSION
+                service = props.POM_ARTIFACT_ID
               }
             }
           }
