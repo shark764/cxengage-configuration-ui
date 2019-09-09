@@ -24,8 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
+## [0.65.1] - 2019-09-09
+### Fixed
+- <no-jira> - Creating tag for UAT testing.
+
 ## [0.65.0] - 2019-09-06
-### Added 
+### Added
 - CXV1-18681 - Config 2 | API Keys - Detail Panel
 - CXV1-16887 - Config 2 | Presence Reasons Lists - Nested list component
 - CXV1-18690 - Config 2 | Message Templates - Bulk Actions
