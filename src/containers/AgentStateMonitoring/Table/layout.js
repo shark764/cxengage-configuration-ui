@@ -112,12 +112,6 @@ export default class AgentStateMonitoringTable extends Component {
   unselectAllVisible = () => {
     this.selectToggle(this.getData('visible'), false, 'visible');
   };
-  selectAll = () => {
-    this.selectToggle(this.getData('all'), true, 'all');
-  };
-  unselectAll = () => {
-    this.selectToggle(this.getData('all'), false, 'all');
-  };
 
   highlightRow = ({ row: { _original: { agentId } } }) =>
     agentId === this.props.agentSelected || agentId === this.props.selected;
@@ -155,7 +149,6 @@ export default class AgentStateMonitoringTable extends Component {
   // }) => (
   //   <AgentStateDetails
   //     data={{ agentName, direction, channelTypes, state, presence, reasonName, currentStateDuration, groups, skills }}
-  //     twelveHourFormat={this.props.twelveHourFormat}
   //   />
   // );
 
@@ -165,15 +158,6 @@ export default class AgentStateMonitoringTable extends Component {
     return (
       <GridContainer id={this.props.id} className={this.props.className}>
         <Header text={this.props.pageTitle} helpLink={this.props.pageHelpLink}>
-          <ConverTimeButton
-            id="timeConversion"
-            type="secondary"
-            className="timeConversion"
-            onClick={this.toggleTimeFormat}
-          >
-            {this.props.twelveHourFormat ? '12h' : '24h'}
-          </ConverTimeButton>
-
           <ActionsMenu
             currentFilter="Actions"
             setVisibleMenu={this.props.setVisibleMenu}
@@ -196,20 +180,6 @@ export default class AgentStateMonitoringTable extends Component {
               onClick={this.unselectAllVisible}
             >
               Unselect All Visible
-            </ActionButton>
-            <ActionButton
-              buttonType="columnFilter"
-              data-automation="tableItemsActionsSelectAll"
-              onClick={this.selectAll}
-            >
-              Select All
-            </ActionButton>
-            <ActionButton
-              buttonType="columnFilter"
-              data-automation="tableItemsActionsUnselectAll"
-              onClick={this.unselectAll}
-            >
-              Unselect All
             </ActionButton>
           </ActionsMenu>
 
@@ -302,16 +272,12 @@ export default class AgentStateMonitoringTable extends Component {
                 this.props.filterValues.reasons,
                 this.props.allActive.reasons
               ),
-              presenceStateDurationColumn(
-                this.props.activeColumns[7],
-                'agentStateMonitoring',
-                this.props.twelveHourFormat
-              ),
+              presenceStateDurationColumn(this.props.activeColumns[7], 'agentStateMonitoring'),
               offeredColumn(this.props.activeColumns[8]),
               acceptedColumn(this.props.activeColumns[9]),
               rejectedColumn(this.props.activeColumns[10]),
               acceptedRateColumn(this.props.activeColumns[11]),
-              awayTimeColumn(this.props.activeColumns[12], 'agentStateMonitoring', this.props.twelveHourFormat),
+              awayTimeColumn(this.props.activeColumns[12], 'agentStateMonitoring'),
               awayRateColumn(this.props.activeColumns[13])
             ]}
           />
@@ -333,7 +299,6 @@ AgentStateMonitoringTable.propTypes = {
   setSelected: PropTypes.func.isRequired,
   setSorted: PropTypes.func.isRequired,
   removeSelected: PropTypes.func.isRequired,
-  twelveHourFormat: PropTypes.bool.isRequired,
   activeColumns: PropTypes.arrayOf(PropTypes.bool.isRequired),
   setAgentDirection: PropTypes.func,
   setAgentPresenceState: PropTypes.func,

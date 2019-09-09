@@ -223,10 +223,19 @@ const initialState = fromJS({
     ...defaultEntity,
     sidePanelWidth: 750,
     readPermission: ['VIEW_ALL_TRANSFER_LISTS'],
-    updatePermission: ['VIEW_ALL_TRANSFER_LISTS'],
-    createPermission: ['VIEW_ALL_TRANSFER_LISTS'],
-    disablePermission: ['VIEW_ALL_TRANSFER_LISTS'],
-    assignPermission: ['VIEW_ALL_TRANSFER_LISTS']
+    updatePermission: ['MANAGE_ALL_TRANSFER_LISTS'],
+    createPermission: ['MANAGE_ALL_TRANSFER_LISTS'],
+    disablePermission: ['MANAGE_ALL_TRANSFER_LISTS'],
+    assignPermission: ['MANAGE_ALL_TRANSFER_LISTS']
+  },
+  messageTemplates: {
+    ...defaultEntity,
+    sidePanelWidth: 750,
+    readPermission: ['VIEW_ALL_MESSAGE_TEMPLATES'],
+    updatePermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
+    createPermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
+    disablePermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
+    assignPermission: ['MANAGE_ALL_MESSAGE_TEMPLATES']
   },
   dispatchMappings: {
     ...defaultEntity,
@@ -261,9 +270,9 @@ const initialState = fromJS({
   },
   apiKeys: {
     ...defaultEntity,
-    readPermission: ['VIEW_ALL_APIKEY'],
-    updatePermission: ['MANAGE_ALL_APIKEY'],
-    createPermission: ['MANAGE_ALL_APIKEY'],
+    readPermission: ['MANAGE_ALL_APP_CREDENTIALS'],
+    updatePermission: ['MANAGE_ALL_APP_CREDENTIALS'],
+    createPermission: ['MANAGE_ALL_APP_CREDENTIALS'],
     disablePermission: [],
     assignPermission: []
   },
@@ -272,8 +281,8 @@ const initialState = fromJS({
     readPermission: ['VIEW_ALL_BUSINESS_HOURS'],
     updatePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
     createPermission: ['MANAGE_ALL_BUSINESS_HOURS'],
-    disablePermission: [],
-    assignPermission: []
+    disablePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
+    assignPermission: ['MANAGE_ALL_BUSINESS_HOURS']
   }
   //hygen-inject-before
 });
@@ -464,11 +473,53 @@ export const removeTransferListItem = (type, deleteEntityId) => {
   }
 };
 
+export const toggleMessageTemplateText = isDisplayContentInHtml => ({
+  type: 'TOGGLE_MESSAGE_TEMPLATE_TEXT_CONTENT',
+  isDisplayContentInHtml
+});
+export const removeReasonListItem = (type, deleteEntityId) => {
+  if (type === 'reasonListItem') {
+    return {
+      type: 'REMOVE_REASON_LIST_ITEM',
+      reasonListItemId: deleteEntityId
+    };
+  } else if (type === 'categoryItems') {
+    return {
+      type: 'REMOVE_REASON_LIST_ITEM',
+      categoryId: deleteEntityId
+    };
+  }
+};
+
+export const removeSecretApiKey = () => ({
+  type: 'REMOVE_SECRET_API_KEY'
+});
+
+export const deleteApiKey = () => ({
+  type: 'DELETE_API_KEY'
+});
+
 // Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case 'SET_CURRENT_ENTITY': {
       return state.set('currentEntity', action.entityName);
+    }
+    case 'REMOVE_SECRET_API_KEY': {
+      const entityIndex = findEntityIndex(state, 'apiKeys', state.getIn(['apiKeys', 'selectedEntityId']));
+      if (entityIndex !== -1) {
+        return state.deleteIn(['apiKeys', 'data', entityIndex, 'secret']);
+      } else {
+        return state;
+      }
+    }
+    case 'DELETE_API_KEY_FULFILLED': {
+      const entityIndex = findEntityIndex(state, 'apiKeys', action.sdkCall.data.apiKeyId);
+      if (entityIndex !== -1) {
+        return state.deleteIn(['apiKeys', 'data', entityIndex]).setIn(['apiKeys', 'selectedEntityId'], '');
+      } else {
+        return state;
+      }
     }
     case 'SET_CONFIRMATION_DIALOG': {
       return state.update(state.get('currentEntity'), entityStore =>
@@ -498,6 +549,13 @@ export default function reducer(state = initialState, action) {
           const newResult = result.map(entity => ({
             ...entity,
             inherited: entity.type === 'system' || entity.tenantId !== state.get('currentTenantId')
+          }));
+          return state.setIn([entityName, 'data'], fromJS(newResult));
+        }
+        case 'apiKeys': {
+          const newResult = result.map(entity => ({
+            ...entity,
+            active: entity.status === 'enabled'
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult));
         }
@@ -606,6 +664,8 @@ export default function reducer(state = initialState, action) {
           .every(([key, value]) => value <= 0)
           ? '24/7'
           : 'scheduledHours';
+      } else if (action.entityName === 'apiKeys') {
+        result.active = result.status === 'enabled';
       }
 
       return state.update(action.entityName, entityStore =>
@@ -616,7 +676,7 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], false);
     }
     case 'UPDATE_ENTITY': {
-      if (action.entityName === 'transferLists') {
+      if (action.entityName === 'transferLists' || action.entityName === 'reasonLists') {
         return setEntityUpdatingHelper(state, action, true).deleteIn([action.entityName, 'selectedSubEntityId']);
       }
       return setEntityUpdatingHelper(state, action, true);
@@ -695,6 +755,14 @@ export default function reducer(state = initialState, action) {
         if (action.entityName === 'dispatchMappings') {
           const flowIndex = findEntityIndex(state, 'flows', result.flowId);
           result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', flowIndex]).get('name') };
+        } else if (action.entityName === 'businessHours') {
+          result.businessHoursType = Object.entries(result)
+            .filter(([key, value]) => key.includes('TimeMinutes'))
+            .every(([key, value]) => value <= 0)
+            ? '24/7'
+            : 'scheduledHours';
+        } else if (action.entityName === 'apiKeys') {
+          result.active = result.status === 'enabled';
         }
 
         return state
@@ -838,6 +906,33 @@ export default function reducer(state = initialState, action) {
         .deleteIn([state.get('currentEntity'), 'selectedSubEntityName'])
         .deleteIn([state.get('currentEntity'), 'selectedSubEntityData']);
     }
+    case 'CREATE_EXCEPTION_FULFILLED': {
+      const entityIndex = findEntityIndex(state, 'businessHours', action.entityId);
+      if (entityIndex !== -1) {
+        return state
+          .update('businessHours', entityStore =>
+            entityStore
+              .updateIn(['data', entityIndex, 'exceptions'], exceptions =>
+                exceptions.push(
+                  fromJS({
+                    ...action.response.result
+                  })
+                )
+              )
+              .set('selectedSubEntityId', undefined)
+              .set('subEntitySaving', false)
+          )
+          .setIn([state.get('currentEntity'), 'selectedSubEntityId'], undefined);
+      }
+      return state.setIn([state.get('currentEntity'), 'selectedSubEntityId'], undefined);
+    }
+    case 'CREATE_EXCEPTION_REJECTED': {
+      const entityIndex = findEntityIndex(state, 'businessHours', action.entityId);
+      if (entityIndex !== -1) {
+        return state.setIn(['businessHours', 'subEntitySaving'], false);
+      }
+      return state.setIn([state.get('currentEntity'), 'selectedSubEntityId'], undefined);
+    }
     case 'INITIAL_VERSION_FORM_SUBMIT_FULFILLED': {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1 && action.entityName === 'slas') {
@@ -904,6 +999,11 @@ export default function reducer(state = initialState, action) {
           .getIn([entity.type, 'data', entity.index, 'drafts'])
           .filterNot(member => member.get('id') === action.listItemId);
         return state.remove('loading').setIn([entity.type, 'data', entity.index, 'drafts'], filteredListMembers);
+      } else if (action.entityName === 'businessHours') {
+        const filteredListMembers = state
+          .getIn([entity.type, 'data', entity.index, 'exceptions'])
+          .filterNot(member => member.get('id') === action.listItemId);
+        return state.remove('loading').setIn([entity.type, 'data', entity.index, 'exceptions'], filteredListMembers);
       }
       const filteredListMembers = state
         .getIn([entity.type, 'data', entity.index, 'members'])
@@ -1002,7 +1102,7 @@ export default function reducer(state = initialState, action) {
     case '@@redux-form/INITIALIZE':
     case '@@redux-form/CHANGE': {
       if (
-        action.entityName === 'transferLists' &&
+        (action.entityName === 'transferLists' || action.entityName === 'reasonLists') &&
         state.getIn([action.entityName, 'selectedSubEntityId']) !== undefined
       ) {
         return state.deleteIn([action.entityName, 'selectedSubEntityId']);
@@ -1012,7 +1112,13 @@ export default function reducer(state = initialState, action) {
     case '@@redux-form/CHANGE_FULFILLED':
     case '@@redux-form/CHANGE_REJECTED':
     case '@@redux-form/DESTROY': {
+      if (action.meta.form.includes('messageTemplates')) {
+        return state.deleteIn(['messageTemplates', 'isDisplayContentInHtml']);
+      }
       return setUserExistsInPlatform(state, action);
+    }
+    case 'TOGGLE_MESSAGE_TEMPLATE_TEXT_CONTENT': {
+      return state.setIn(['messageTemplates', 'isDisplayContentInHtml'], action.isDisplayContentInHtml);
     }
     default:
       return state;

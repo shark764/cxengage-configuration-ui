@@ -323,7 +323,7 @@ Immutable.Map {
         "active": true,
       },
       Immutable.Map {
-        "name": "ApiKey Status",
+        "name": "Status",
         "active": true,
       },
       Immutable.Map {

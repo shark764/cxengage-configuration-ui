@@ -15,16 +15,15 @@ jest.mock('../../../redux/modules/form/selectors', () => ({
 
 jest.mock('../../../redux/modules/entities/selectors', () => ({
   isSaving: () => true,
-  getSelectedEntityFormId: () => 'mock selected entity form id'
+  getSelectedEntityFormId: () => 'mock selected entity form id',
+  getSelectedEntity: () => 'mock selected entity',
+  getSelectedEntityId: () => 'mock selected entity id',
+  getCurrentEntityStore: () => undefined
 }));
 
 describe('SidePanelActions Renders', () => {
   it('renders', () => {
-    shallow(
-      <SidePanelActions
-        store={mockStore}
-      />
-    );
+    shallow(<SidePanelActions store={mockStore} />);
   });
 });
 

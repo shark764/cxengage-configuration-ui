@@ -56,7 +56,9 @@ export function getTableColumns(columns) {
     Flow: flowColumn,
     'Active Sla': activeSlaColumn,
     'ApiKey Status': apiKeyStatusColumn,
-    Timezone: timezoneColumn
+    Timezone: timezoneColumn,
+    Type: constructGeneralTextColumn('type'),
+    Channels: constructGeneralTextColumn('channels')
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

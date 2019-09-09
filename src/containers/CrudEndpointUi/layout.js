@@ -43,8 +43,13 @@ import DispatchMappingsForm from '../Form/DispatchMappings';
 import DispositionsForm from '../Form/Dispositions';
 import SlasForm from '../Form/Slas';
 import InitialSlaVersionForm from '../Form/Slas/Version';
-import ApiKeysForm from '../Form/ApiKeys';
+import CreateApiKeyForm from '../Form/ApiKeys/Create';
+import UpdateApiKeyForm from '../Form/ApiKeys/Update';
 import BusinessHoursForm from '../Form/BusinessHours';
+import MessageTemplatesForm from '../Form/MessageTemplates';
+import ExceptionsForm from '../Form/BusinessHours/Exception';
+import UpdateReasonListItemsForm from '../Form/ReasonListItems/Update';
+import CreateReasonListItemForm from '../Form/ReasonListItems/Create';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -72,6 +77,7 @@ import DispositionsDetailsPanel from '../SidePanelDetails/Dispositions';
 import SlasDetailsPanel from '../SidePanelDetails/Slas';
 import ApiKeysDetailsPanel from '../SidePanelDetails/ApiKeys';
 import BusinessHoursDetailsPanel from '../SidePanelDetails/BusinessHours';
+import MessageTemplatesDetailsPanel from '../SidePanelDetails/MessageTemplates';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -255,7 +261,7 @@ const createFormRoutes = [
     path: '/configuration/apiKeys',
     component: () => (
       <DetailsPanel>
-        <ApiKeysForm />
+        <CreateApiKeyForm />
       </DetailsPanel>
     )
   },
@@ -264,6 +270,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <BusinessHoursForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/messageTemplates',
+    component: () => (
+      <DetailsPanel>
+        <MessageTemplatesForm />
       </DetailsPanel>
     )
   }
@@ -384,11 +398,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/reasonLists',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <ReasonListsDetailsPanel>
           <ReasonListsForm />
         </ReasonListsDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {
@@ -456,7 +470,7 @@ const detailsPanelRoutes = [
     component: () => (
       <NoScrollDetailsPanel>
         <ApiKeysDetailsPanel>
-          <ApiKeysForm />
+          <UpdateApiKeyForm />
         </ApiKeysDetailsPanel>
       </NoScrollDetailsPanel>
     )
@@ -464,11 +478,21 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/businessHours',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <BusinessHoursDetailsPanel>
           <BusinessHoursForm />
         </BusinessHoursDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/messageTemplates',
+    component: () => (
+      <DetailsPanel>
+        <MessageTemplatesDetailsPanel>
+          <MessageTemplatesForm />
+        </MessageTemplatesDetailsPanel>
+      </DetailsPanel>
     )
   }
   //hygen-inject-before2
@@ -530,6 +554,30 @@ const bulkChangeFormRoutes = [
         <GenericBulkActionsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/businessHours',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/messageTemplates',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/apiKeys',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before3
 ];
@@ -542,6 +590,14 @@ const createSubEntityFormRoutes = [
   {
     path: '/configuration/transferLists',
     component: CreateTransferListItemsForm
+  },
+  {
+    path: '/configuration/businessHours',
+    component: ExceptionsForm
+  },
+  {
+    path: '/configuration/reasonLists',
+    component: CreateReasonListItemForm
   }
 ];
 
@@ -585,6 +641,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/transferLists',
     component: UpdateTransferListItemsForm
+  },
+  {
+    path: '/configuration/reasonLists',
+    component: UpdateReasonListItemsForm
   }
 ];
 

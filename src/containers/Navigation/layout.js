@@ -117,6 +117,12 @@ export default class Navigation extends Component {
                 <StyledLink data-automation="navigation-link-roles" to="/configuration/roles">
                   Roles
                 </StyledLink>
+                <StyledLink data-automation="navigation-link-reasons" to="/configuration/reasons">
+                  Presence Reasons
+                </StyledLink>
+                <StyledLink data-automation="navigation-link-reasons-list" to="/configuration/reasonLists">
+                  Presence Reasons Lists
+                </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
@@ -155,6 +161,9 @@ export default class Navigation extends Component {
                 <StyledLink data-automation="navigation-link-apiKeys" to="/configuration/apiKeys">
                   Api Keys
                 </StyledLink>
+                <StyledLink data-automation="navigation-link-messageTemplates" to="/configuration/messageTemplates">
+                  Message Templates
+                </StyledLink>
                 <StyledLink data-automation="navigation-link-businessHours" to="/configuration/businessHours">
                   Business Hours
                 </StyledLink>
@@ -188,6 +197,9 @@ export default class Navigation extends Component {
                 </StyledLink>
                 <StyledLink data-automation="navigation-link-interactionMonitoring" to="/interactionMonitoring">
                   Interaction Monitoring
+                </StyledLink>
+                <StyledLink data-automation="navigation-link-agentStateMonitoring" to="/agentStateMonitoring">
+                  Agent State Monitoring
                 </StyledLink>
               </SubMenu>
             )}

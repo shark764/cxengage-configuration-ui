@@ -7,7 +7,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
-
+import { fromJS, List } from 'immutable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { from } from 'rxjs/observable/from';
 import { forkJoin } from 'rxjs/observable/forkJoin';
@@ -41,7 +41,12 @@ import {
 
 import { entitiesMetaData } from './metaData';
 
-import { hasCustomCreateEntity, hasCustomUpdateEntity, hasCustomRemoveSubEntity } from './config';
+import {
+  hasCustomCreateEntity,
+  hasCustomUpdateEntity,
+  hasCustomRemoveSubEntity,
+  hasCustomCreateSubEntity
+} from './config';
 
 import { downloadFile } from 'serenova-js-utils/browser';
 import {
@@ -144,6 +149,30 @@ export const FormSubmission = (action$, store) =>
               .delete('endpointUUID')
               .delete('droppableUUID')
               .delete('categoryUUID')
+          )
+        );
+
+        // converts warmColdTransfer immutable List in to individual values(warmTransfer, coldTransfer):
+        a.values = a.values.update('endpoints', endpoint => {
+          return endpoint.reduce((accumVal, currentEndpoint) => {
+            if (List.isList(currentEndpoint.get('warmColdTransfer'))) {
+              const obj = {};
+              currentEndpoint.get('warmColdTransfer').forEach(transferType => {
+                obj[transferType] = true;
+              });
+              return accumVal.push(currentEndpoint.merge(fromJS(obj)).remove('warmColdTransfer'));
+            }
+            return accumVal.push(currentEndpoint.remove('warmColdTransfer'));
+          }, List());
+        });
+      } else if (a.entityName === 'reasonLists') {
+        a.values = a.values.update('reasons', reasons =>
+          reasons.map(reason =>
+            fromJS({
+              reasonId: reason.get('reasonId'),
+              sortOrder: reason.get('sortOrder'),
+              hierarchy: reason.get('hierarchy')
+            })
           )
         );
       }
@@ -635,7 +664,7 @@ export const SubEntityFormSubmission = (action$, store) =>
       selectedSubEntityId: getSelectedSubEntityId(store.getState())
     }))
     .filter(({ selectedSubEntityId }) => selectedSubEntityId)
-    .filter(({ entityName }) => entityName !== 'transferLists')
+    .filter(({ entityName }) => entityName !== 'transferLists' && entityName !== 'reasonLists')
     .map(
       a =>
         a.selectedSubEntityId === 'create'
@@ -663,6 +692,7 @@ export const CreateSubEntity = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState())
     }))
+    .filter(({ entityName }) => hasCustomCreateSubEntity(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'subEntity');
       a.sdkCall.data = {

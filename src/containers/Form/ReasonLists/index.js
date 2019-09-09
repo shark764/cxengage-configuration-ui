@@ -14,15 +14,21 @@ import {
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
-import { toggleShared } from '../../../redux/modules/entities';
-import { reasonListsInitialValues, checkDisableShared } from '../../../redux/modules/entities/reasonLists/selectors';
+import { setSelectedSubEntityId, removeReasonListItem } from '../../../redux/modules/entities';
+import {
+  reasonListsInitialValues,
+  checkDisableShared,
+  selectReasonHeaders
+} from '../../../redux/modules/entities/reasonLists/selectors';
 
 const CreateReasonListsForm = compose(
   connect(state => createFormName(state)),
   reduxForm({
     onSubmit: formSubmission,
     validate: formValidation,
-    destroyOnUnmount: true
+    destroyOnUnmount: true,
+    enableReinitialize: true,
+    keepDirtyOnReinitialize: true
   })
 )(ReasonListsForm);
 
@@ -34,12 +40,16 @@ export function mapStateToProps(state) {
     key: getSelectedEntityId(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     disableShared: checkDisableShared(state),
-    sharedFormValue: getCurrentFormValueByFieldName(state, 'shared')
+    sharedFormValue: getCurrentFormValueByFieldName(state, 'shared'),
+    selectedEntityId: getSelectedEntityId(state),
+    reasonHeaders: selectReasonHeaders(state)
   };
 }
 
-export const actions = {
-  toggleShared
-};
+export const mapDispatchToProps = dispatch => ({
+  setSelectedSubEntityId: subEntityId => dispatch(setSelectedSubEntityId(subEntityId)),
+  removeReasonListItem: reasonListItemId => dispatch(removeReasonListItem('reasonListItem', reasonListItemId)),
+  removeCategoryItems: reasonListItemId => dispatch(removeReasonListItem('categoryItems', reasonListItemId))
+});
 
-export default connect(mapStateToProps, actions)(CreateReasonListsForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateReasonListsForm);

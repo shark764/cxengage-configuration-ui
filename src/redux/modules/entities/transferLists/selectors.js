@@ -175,7 +175,7 @@ export const transferListItemUpdateValues = createSelector(
       );
       return updatedEndpoints;
     } else if (!selectedSubEntityId.includes('updateCategoryHeader')) {
-      // updates trasnferListItem:
+      // updates transferListItem:
       const updatedEndpoints = existingEndpoints.map(
         endpoint => (endpoint.get('endpointUUID') === props.values.get('endpointUUID') ? props.values : endpoint)
       );

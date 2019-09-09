@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import {
   selectAgentStateMonitoringActiveColumns,
   areAllColNotActive,
-  selectTimeFormat,
   selectVisibleSubMenu,
   menuItemsJs,
   areAllActive
@@ -58,7 +57,6 @@ export const mapStateToProps = (state, props) => ({
     groups: areAllActive(state, { menuType: 'Groups', tableType: 'agentStateMonitoring' }),
     reasons: areAllActive(state, { menuType: 'ReasonLists', tableType: 'agentStateMonitoring' })
   },
-  twelveHourFormat: selectTimeFormat(state, props),
   tableData: selectAgentStateMonitoringTableData(state, props),
   expanded: selectAgentStateMonitoringExpanded(state, props),
   selected: selectAgentStateMonitoringSelected(state, props),

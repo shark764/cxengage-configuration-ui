@@ -80,9 +80,9 @@ export default class BetaFeatures extends Component {
     const pageTitles = {};
     Object.keys(features).forEach(entityName => {
       if (entityName === 'logiStandard') {
-        pageTitles[entityName] = 'Standard Reports';
+        pageTitles[entityName] = '(Early Access) Standard Reports';
       } else if (entityName === 'logiAdvanced') {
-        pageTitles[entityName] = 'Advanced Reports';
+        pageTitles[entityName] = '(Early Access) Advanced Reports';
       } else {
         pageTitles[entityName] = entitiesMetaData[entityName].pageTitle;
       }

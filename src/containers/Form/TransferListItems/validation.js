@@ -39,8 +39,9 @@ export const formValidation = (values, props) => {
       transferType:
         (!values.get('transferType') || values.get('transferType') === 'selectTransferType') &&
         'Please select a transfer type.',
-      warmTransfer: !values.get('warmTransfer') && !values.get('coldTransfer') && 'Please select warm/cold transfer.',
-      coldTransfer: !values.get('coldTransfer') && !values.get('warmTransfer') && 'Please select warm/cold transfer.',
+      warmColdTransfer:
+        (!values.get('warmColdTransfer') || values.get('warmColdTransfer').size <= 0) &&
+        'Please select warm/cold transfer.',
       endpoint: validateEndpoint(values.get('endpoint'), values.get('contactType'))
     };
   } else {

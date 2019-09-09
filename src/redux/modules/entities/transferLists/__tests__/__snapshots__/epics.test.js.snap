@@ -182,58 +182,6 @@ Object {
 }
 `;
 
-exports[`TransferLists Epics should register transferType checkboxes in the transferListItem form when creating a new transferListItem 1`] = `
-Object {
-  "meta": Object {
-    "form": "transferListItems:create",
-  },
-  "payload": Object {
-    "name": "warmTransfer",
-    "type": "Field",
-  },
-  "type": "@@redux-form/REGISTER_FIELD",
-}
-`;
-
-exports[`TransferLists Epics should register transferType checkboxes in the transferListItem form when creating a new transferListItem 2`] = `
-Object {
-  "meta": Object {
-    "form": "transferListItems:create",
-  },
-  "payload": Object {
-    "name": "coldTransfer",
-    "type": "Field",
-  },
-  "type": "@@redux-form/REGISTER_FIELD",
-}
-`;
-
-exports[`TransferLists Epics should register transferType checkboxes in the transferListItem form when updating a transferListItem 1`] = `
-Object {
-  "meta": Object {
-    "form": "transferListItems:updateTransferListItem:mockTransferListId",
-  },
-  "payload": Object {
-    "name": "warmTransfer",
-    "type": "Field",
-  },
-  "type": "@@redux-form/REGISTER_FIELD",
-}
-`;
-
-exports[`TransferLists Epics should register transferType checkboxes in the transferListItem form when updating a transferListItem 2`] = `
-Object {
-  "meta": Object {
-    "form": "transferListItems:updateTransferListItem:mockTransferListId",
-  },
-  "payload": Object {
-    "name": "coldTransfer",
-    "type": "Field",
-  },
-  "type": "@@redux-form/REGISTER_FIELD",
-}
-`;
-
 exports[`TransferLists Epics should update TransferListForm when a transferListItem is removed from an unsaved transferList 1`] = `
 Object {
   "entityId": "create",

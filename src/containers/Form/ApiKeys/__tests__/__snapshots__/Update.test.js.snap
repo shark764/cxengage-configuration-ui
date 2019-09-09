@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": undefined,
+  "initialValues": "mock initial update form values",
+  "isSaving": false,
+  "key": "mockId",
+  "roles": "mock list roles options",
+  "update": true,
+}
+`;
+
+exports[`UpdateApiKeyForm Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;

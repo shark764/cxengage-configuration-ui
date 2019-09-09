@@ -21,6 +21,9 @@ describe('<ReasonListsForm />', () => {
         isDefault={false}
         reasons={[]}
         handleSubmit={() => {}}
+        removeReasonListItem={() => {}}
+        removeCategoryItems={() => {}}
+        setSelectedSubEntityId={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -39,6 +42,9 @@ describe('<ReasonListsForm />', () => {
         isDefault={false}
         reasons={[]}
         handleSubmit={() => {}}
+        removeReasonListItem={() => {}}
+        removeCategoryItems={() => {}}
+        setSelectedSubEntityId={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();

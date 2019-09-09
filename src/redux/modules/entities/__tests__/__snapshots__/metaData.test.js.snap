@@ -131,7 +131,7 @@ Object {
       },
       Object {
         "active": true,
-        "name": "ApiKey Status",
+        "name": "Status",
       },
       Object {
         "active": true,
@@ -290,6 +290,15 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "daysInitials": Array [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat",
+      "sun",
+    ],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [
@@ -304,7 +313,7 @@ Object {
         "id": "name",
       },
     ],
-    "dependentEntity": "dependentEntity",
+    "dependentEntity": "",
     "entityName": "businessHours",
     "entityTableFields": Array [
       Object {
@@ -317,6 +326,26 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Configuration/Business%20Hours/Business_Hours.htm",
+    "membersTableFields": Object {
+      "exceptions": Array [
+        Object {
+          "label": "Date",
+          "name": "date",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+        Object {
+          "label": "Start",
+          "name": "startTime",
+        },
+        Object {
+          "label": "End",
+          "name": "endTime",
+        },
+      ],
+    },
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -342,7 +371,7 @@ Object {
         "name": "description",
       },
     ],
-    "subEntityName": "",
+    "subEntityName": "exceptions",
     "title": "Business Hour",
     "updateFormDependencies": Array [],
   },
@@ -1822,7 +1851,7 @@ Object {
   },
   "messageTemplates": EntityMetaData {
     "betaFeature": false,
-    "bulkEditsAvailable": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -1861,7 +1890,7 @@ Object {
         "id": "name",
       },
     ],
-    "dependentEntity": "",
+    "dependentEntity": "messageTemplate",
     "entityName": "messageTemplates",
     "entityTableFields": Array [
       Object {
@@ -2461,12 +2490,7 @@ Object {
     "createFormDependencies": Array [],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
-    "defaultFilters": Array [
-      Object {
-        "id": "active",
-        "value": "enabled",
-      },
-    ],
+    "defaultFilters": Array [],
     "defaultSorted": Array [
       Object {
         "alpha": true,

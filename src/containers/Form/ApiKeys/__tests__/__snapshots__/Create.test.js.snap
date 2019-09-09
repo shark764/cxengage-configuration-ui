@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateApiKeysForm Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "initialValues": Immutable.Map {
+    "roleId": undefined,
+  },
+  "isSaving": false,
+  "key": "create",
+  "roles": "mock roles options",
+}
+`;

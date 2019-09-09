@@ -75,7 +75,3 @@ export const getAgentCurrentState = (state, agentId) =>
     .get('data')
     .find(agent => agent.get('agentId') === agentId)
     .get('state');
-
-export const getSelectedAgentsPendingAwayItems = createSelector(selectAgentStateMonitoringMap, agentMonitoring =>
-  agentMonitoring.get('PendingAway')
-);

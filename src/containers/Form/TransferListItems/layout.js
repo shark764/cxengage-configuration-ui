@@ -139,6 +139,7 @@ export default class TransferListItemsForm extends React.Component {
               required
             />
             <CheckboxField
+              name="warmColdTransfer"
               label="Warm/Cold Transfer *"
               dropDownText="Select warm/cold transfer..."
               data-automation="warmColdTransferDropDownBtn"

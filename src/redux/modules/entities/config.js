@@ -9,7 +9,10 @@ export const hasCustomUpdateEntity = entityName =>
     'reasonLists',
     'flows',
     'dispatchMappings',
-    'businessHours'
+    'businessHours',
+    'apiKeys'
   ].includes(entityName);
 
-export const hasCustomRemoveSubEntity = entityName => !['roles', 'dataAccessReports', 'flows'].includes(entityName);
+export const hasCustomCreateSubEntity = entityName => !['businessHours'].includes(entityName);
+export const hasCustomRemoveSubEntity = entityName =>
+  !['roles', 'dataAccessReports', 'flows', 'businessHours'].includes(entityName);

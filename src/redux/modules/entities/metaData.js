@@ -469,7 +469,7 @@ entities.reasonLists.pageTitle = 'Presence Reason List Management';
 entities.reasonLists.title = 'Presence Reason List';
 entities.reasonLists.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
 entities.reasonLists.dependentEntity = 'reasons';
-entities.reasonLists.defaultFilters = [{ id: 'active', value: 'enabled' }];
+entities.reasonLists.defaultFilters = [];
 entities.reasonLists.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -490,7 +490,7 @@ entities.reasonLists.memberListTableFields = [
 ];
 
 // Message Templates
-entities.messageTemplates.bulkEditsAvailable = false;
+entities.messageTemplates.bulkEditsAvailable = true;
 entities.messageTemplates.pageTitle = 'Message Templates';
 entities.messageTemplates.helpLink = '/Help/Content/Configuration/Messaging_Templates/Creating_Messaging_Templates.htm';
 entities.messageTemplates.columns = [
@@ -510,6 +510,7 @@ entities.messageTemplates.memberListTableFields = [
     filterOptions: ['enabled', 'disabled']
   }
 ];
+entities.messageTemplates.dependentEntity = 'messageTemplate';
 
 // Transfer Lists
 entities.transferLists.bulkEditsAvailable = false;
@@ -744,11 +745,11 @@ entities.flowDebugger.pageTitle = 'Flow Debug Logs';
 // Api Key
 entities.apiKeys.pageTitle = 'Api Key Management';
 entities.apiKeys.helpLink = '/Help/Content/Managing%20ApiKeys/Creating_ApiKeys.htm';
-//entities.apiKeys.dependentEntity = 'dependentEntity';
+entities.apiKeys.bulkEditsAvailable = true;
 entities.apiKeys.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'ApiKey Status', active: true },
+  { name: 'Status', active: true },
   { name: 'Role', active: true }
 ];
 entities.apiKeys.defaultFilters = [{ id: 'active', value: 'enabled' }];
@@ -756,13 +757,22 @@ entities.apiKeys.defaultFilters = [{ id: 'active', value: 'enabled' }];
 // Business Hours
 entities.businessHours.pageTitle = 'Business Hours Management';
 entities.businessHours.helpLink = '/Help/Content/Configuration/Business%20Hours/Business_Hours.htm';
-entities.businessHours.dependentEntity = 'dependentEntity';
+entities.businessHours.subEntityName = 'exceptions';
+entities.businessHours.daysInitials = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 entities.businessHours.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Status', active: true },
   { name: 'Timezone', active: true }
 ];
+entities.businessHours.membersTableFields = {
+  exceptions: [
+    { label: 'Date', name: 'date' },
+    { label: 'Description', name: 'description' },
+    { label: 'Start', name: 'startTime' },
+    { label: 'End', name: 'endTime' }
+  ]
+};
 entities.businessHours.defaultFilters = [{ id: 'active', value: 'enabled' }];
 //Hygen-insert-new-entity-configuration
 

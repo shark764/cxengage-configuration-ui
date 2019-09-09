@@ -11,6 +11,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, DetailsPanelAlert, InputField, ToggleField, ConfirmationWrapper } from 'cx-ui-components';
+import { NestedListField } from 'cx-ui-components';
 
 export default function ReasonListsForm({
   handleSubmit,
@@ -20,7 +21,12 @@ export default function ReasonListsForm({
   disableShared,
   sharedFormValue,
   userHasUpdatePermission,
-  toggleShared
+  toggleShared,
+  selectedEntityId,
+  reasonHeaders,
+  removeReasonListItem,
+  removeCategoryItems,
+  setSelectedSubEntityId
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -82,7 +88,22 @@ export default function ReasonListsForm({
         onChange={() => {}}
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
-      <DetailHeader text="Reasons" />
+      <DetailHeader
+        userHasUpdatePermission={userHasUpdatePermission && !inherited}
+        text="Reasons"
+        onActionButtonClick={() => setSelectedSubEntityId('create')}
+        open
+      />
+      <NestedListField
+        className="reason-list"
+        name="reasons"
+        reasonHeaders={reasonHeaders}
+        selectedEntityId={selectedEntityId}
+        setSelectedSubEntityId={setSelectedSubEntityId}
+        userHasUpdatePermission={userHasUpdatePermission && !inherited}
+        removeReasonListItem={removeReasonListItem}
+        removeCategoryItems={removeCategoryItems}
+      />
     </form>
   );
 }
@@ -95,5 +116,10 @@ ReasonListsForm.propTypes = {
   disableShared: PropTypes.bool,
   sharedFormValue: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
-  toggleShared: PropTypes.func
+  toggleShared: PropTypes.func,
+  reasonHeaders: PropTypes.object,
+  selectedEntityId: PropTypes.string,
+  removeReasonListItem: PropTypes.func.isRequired,
+  removeCategoryItems: PropTypes.func.isRequired,
+  setSelectedSubEntityId: PropTypes.func.isRequired
 };

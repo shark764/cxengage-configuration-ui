@@ -19,6 +19,10 @@ const PopoverMenu = styled(PopoverDialog)`
   padding-bottom: 15px;
 `;
 
+const CenterWrapper = styled.div`
+  text-align: center;
+`;
+
 export const helperFunctions = {
   directionFilter: (onChange, tableType) => directionFilter(onChange, tableType),
   filterMethod: ({ value = 'All', id }, row) => {
@@ -53,7 +57,7 @@ export default function(
     id: 'direction',
     accessor: 'direction',
     Cell: ({ value, row }) =>
-      supervisorHasUpdatePermission ? (
+      supervisorHasUpdatePermission && row._original.presence !== 'offline' ? (
         <DirectionCell
           row={row}
           currentDirection={value}
@@ -66,22 +70,14 @@ export default function(
           isUpdating={isUpdating}
         />
       ) : (
-        <div style={{ textAlign: 'center' }}>
+        <CenterWrapper>
           <DirectionIconSVG directionIconType="primary" directionMode={value} size={25} />
-        </div>
+        </CenterWrapper>
       ),
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.directionFilter(onChange, tableType),
-    getProps: (state, rowInfo, column) => {
-      return {
-        style: {
-          overflow: 'visible',
-          background:
-            menuOpen === 'direction' && rowInfo && rowInfo.row._original.agentId === agentSelected
-              ? 'rgba(253, 255, 50, 0.11)'
-              : null
-        }
-      };
+    getProps: () => {
+      return { style: { overflow: 'visible' } };
     }
   };
 
@@ -143,14 +139,14 @@ export class DirectionCell extends Component {
     ));
     return (
       <DirectionContainer>
-        <div style={{ textAlign: 'center' }}>
+        <CenterWrapper>
           <DirectionIconSVG
             directionIconType="primary"
             directionMode={this.props.currentDirection}
             size={25}
             onClick={e => this.showDirectionMenu(e, !this.state.showDirectionMenu)}
           />
-        </div>
+        </CenterWrapper>
         <PopoverMenu
           id="changeDirectionMenu"
           widthPx={200}
@@ -165,9 +161,9 @@ export class DirectionCell extends Component {
         >
           <FormattedTitle messageTitle="Change Work Mode" />
           {this.props.isUpdating && (
-            <div style={{ textAlign: 'center' }}>
+            <CenterWrapper>
               <LoadingSpinnerSVG size={28} color="white" />
-            </div>
+            </CenterWrapper>
           )}
           {!this.props.isUpdating && content}
         </PopoverMenu>

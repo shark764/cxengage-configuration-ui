@@ -12,6 +12,8 @@ Object {
   },
   "isSaving": true,
   "key": "mockId",
+  "reasonHeaders": undefined,
+  "selectedEntityId": "mockId",
   "sharedFormValue": true,
   "userHasUpdatePermission": true,
 }

@@ -56,13 +56,6 @@ export const selectCreateUserFormInitialValues = state => {
   return new Map({ inviteNow: true });
 };
 
-export const selectTransferListsCreateFormInitialValues = state => {
-  return new Map({
-    active: false,
-    endpoints: []
-  });
-};
-
 export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit(values, props));
 
 export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onSubEntityFormSubmit(values, props));

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper object (errors) when wrong values are provided in the required fields 1`] = `
+Object {
+  "channels": "Please select a channel type",
+  "name": "Please enter a name",
+  "template": "Please enter template text",
+  "templateTextType": false,
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "channels": false,
+  "name": false,
+  "template": "Please enter template text",
+  "templateTextType": false,
+}
+`;

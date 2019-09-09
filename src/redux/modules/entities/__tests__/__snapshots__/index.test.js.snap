@@ -351,19 +351,19 @@ Immutable.Map {
     ],
     "data": Immutable.List [],
     "createPermission": Immutable.List [
-      "VIEW_ALL_TRANSFER_LISTS",
+      "MANAGE_ALL_TRANSFER_LISTS",
     ],
     "confirmationDialogType": undefined,
     "disablePermission": Immutable.List [
-      "VIEW_ALL_TRANSFER_LISTS",
+      "MANAGE_ALL_TRANSFER_LISTS",
     ],
     "updatePermission": Immutable.List [
-      "VIEW_ALL_TRANSFER_LISTS",
+      "MANAGE_ALL_TRANSFER_LISTS",
     ],
     "selectedEntityId": "",
     "sidePanelWidth": 750,
     "assignPermission": Immutable.List [
-      "VIEW_ALL_TRANSFER_LISTS",
+      "MANAGE_ALL_TRANSFER_LISTS",
     ],
   },
   "slas": Immutable.Map {
@@ -385,16 +385,16 @@ Immutable.Map {
   },
   "apiKeys": Immutable.Map {
     "readPermission": Immutable.List [
-      "VIEW_ALL_APIKEY",
+      "MANAGE_ALL_APP_CREDENTIALS",
     ],
     "data": Immutable.List [],
     "createPermission": Immutable.List [
-      "MANAGE_ALL_APIKEY",
+      "MANAGE_ALL_APP_CREDENTIALS",
     ],
     "confirmationDialogType": undefined,
     "disablePermission": Immutable.List [],
     "updatePermission": Immutable.List [
-      "MANAGE_ALL_APIKEY",
+      "MANAGE_ALL_APP_CREDENTIALS",
     ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
@@ -430,13 +430,17 @@ Immutable.Map {
       "MANAGE_ALL_BUSINESS_HOURS",
     ],
     "confirmationDialogType": undefined,
-    "disablePermission": Immutable.List [],
+    "disablePermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
     "updatePermission": Immutable.List [
       "MANAGE_ALL_BUSINESS_HOURS",
     ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
-    "assignPermission": Immutable.List [],
+    "assignPermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
   },
   "flowDebugger": Immutable.Map {
     "data": Immutable.List [],
@@ -478,6 +482,27 @@ Immutable.Map {
     ],
     "disablePermission": Immutable.List [
       "UPDATE_REASON_LIST",
+    ],
+  },
+  "messageTemplates": Immutable.Map {
+    "readPermission": Immutable.List [
+      "VIEW_ALL_MESSAGE_TEMPLATES",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_MESSAGE_TEMPLATES",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "MANAGE_ALL_MESSAGE_TEMPLATES",
+    ],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_MESSAGE_TEMPLATES",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 750,
+    "assignPermission": Immutable.List [
+      "MANAGE_ALL_MESSAGE_TEMPLATES",
     ],
   },
   "groups": Immutable.Map {

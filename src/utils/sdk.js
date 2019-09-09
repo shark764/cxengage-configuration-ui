@@ -19,7 +19,7 @@ export const sdkPromise = sdkCall => {
         console.log('[SDK] SDK sending back:', error, topic, response);
         if (error) {
           console.warn('ERROR', error);
-          if (error.data && error.data.apiResponse && error.data.apiResponse.status) {
+          if (error.data && error.data.apiResponse && error.data.apiResponse.status === 401) {
             store.dispatch({ type: 'TOGGLE_USER_AUTH' });
           }
           reject(error);

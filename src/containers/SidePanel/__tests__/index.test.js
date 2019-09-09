@@ -9,7 +9,10 @@ import SidePanelLayout, { mapStateToProps } from '../';
 
 jest.mock('../../../redux/modules/entities/selectors', () => ({
   getSidePanelWidth: () => 50,
-  userHasCurrentFormPermission: () => true
+  userHasCurrentFormPermission: () => true,
+  getSelectedEntity: () => 'mock selected entity',
+  getSelectedEntityId: () => 'mock selected entity id',
+  getCurrentEntityStore: () => undefined
 }));
 
 describe('SidePanelLayout Renders', () => {

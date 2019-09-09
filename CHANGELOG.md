@@ -24,6 +24,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
+## [0.65.0] - 2019-09-06
+### Added 
+- CXV1-18681 - Config 2 | API Keys - Detail Panel
+- CXV1-16887 - Config 2 | Presence Reasons Lists - Nested list component
+- CXV1-18690 - Config 2 | Message Templates - Bulk Actions
+- CXV1-18499 - Config 2 | Business Hours - Exceptions Panel
+- CXV1-18515 - Config 2 | Business Hours - Bulk Actions
+- CXV1-18685 - Config 2 | Message Templates Component
+- <no-jira> - Adding Force Logout functionality to force disconnection of an agent session.
+### Changed
+- Version bump component library to 0.53.1.
+- SDK version bump to 8.64.3.
+- CXV1-19801 - Set agents to away before disconnet them when state is busy.
+- CXV1-19847 - Update wording on Beta Features Page
+- <no-jira> - Adding tenant default reason lists to presence state menu in agent monitoring table.
+### Fixed
+- <no-jira> - Fixing an issue when updating presence reason lists
+- <no-jira> - Fixed some issues when creating an exception
+- <no-jira> - ChannelType filter for Agent table was not working with SMS value.
+- <no-jira> - Reason code filter was showing agent in iddle state when filter by single reason.
+
 ## [0.64.0] - 2019-08-30
 ### Added
 - CXV1-15794 - Config 2 | Add Flow Debug Logs page

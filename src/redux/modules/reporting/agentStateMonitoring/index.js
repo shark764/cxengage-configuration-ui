@@ -3,6 +3,7 @@
  */
 
 import { fromJS } from 'immutable';
+import { getAgentCurrentState } from './selectors';
 
 // Initial Sub State
 export const initialState = fromJS({
@@ -16,7 +17,6 @@ export const initialState = fromJS({
   updating: false,
   ReasonLists: [],
   AgentReasons: {},
-  PendingAway: {},
   selectedSidePanelId: '',
   BulkSelection: {},
   monitorAllCallsPermission: ['MONITOR_ALL_CALLS'],
@@ -146,32 +146,29 @@ export default function AgentStateMonitoring(state = initialState, action) {
     case 'SET_AGENT_MONITORING_TABLE_MENU_OPEN':
       return state.set('menuOpen', action.menu);
     case 'SET_REASON_LISTS_DATA':
-    case 'SET_AGENT_REASON_LISTS_DATA': {
-      const categorizeReasons = action.arrayOfReasonListData.reduce((lists, reasonList) => {
-        if (reasonList.active) {
-          reasonList.reasons = categorizeItems(reasonList.reasons, 'reasons');
-          lists.push(reasonList);
-        }
-        return lists;
-      }, []);
-      if (action.agentId) {
-        return state.setIn(
-          ['AgentReasons', action.agentId],
-          fromJS(
-            [
-              ...categorizeReasons,
-              // We add default tenant reason lists to agent list,
-              // in order to match what is shown in Skylight to agent.
-              ...state
-                .get('ReasonLists')
-                .filter(rl => rl.get('isDefault') && categorizeReasons.find(ct => ct.id === rl.get('id')) === undefined)
-                .toJS()
-            ].sort((a, b) => (a.name > b.name ? 1 : -1))
+      return state.set(
+        'ReasonLists',
+        fromJS(
+          action.arrayOfReasonListData.reduce(
+            (lists, reasonList) =>
+              reasonList.active
+                ? [...lists, { ...reasonList, reasons: categorizeItems(reasonList.reasons, 'reasons') }]
+                : lists,
+            []
           )
-        );
-      }
-      return state.set('ReasonLists', fromJS(categorizeReasons));
-    }
+        )
+      );
+    case 'SET_AGENT_REASON_LISTS_DATA':
+      // We add default tenant reason lists to agent list,
+      // in order to match what is shown in Skylight to agent.
+      return state.setIn(
+        ['AgentReasons', action.agentId],
+        state
+          .get('ReasonLists')
+          .filter(
+            rl => rl.get('isDefault') || action.arrayOfReasonListData.find(arr => arr.id === rl.get('id')) !== undefined
+          )
+      );
     case 'SET_AGENT_SELECTED':
       return state.set('agentSelected', action.selected).set('menuOpen', action.menu);
     case 'REMOVE_AGENT_SELECTED':
@@ -188,7 +185,7 @@ export default function AgentStateMonitoring(state = initialState, action) {
       return state.set('updating', true);
     case 'SET_AGENT_PRESENCE_STATE_FULFILLED':
     case 'SET_BULK_AGENT_PRESENCE_STATE_FULFILLED': {
-      const { response, agentId } = action;
+      const { response, agentId, agentCurrentState } = action;
       let agentSelected = state.get('agentSelected');
       let menuOpen = state.get('menuOpen');
 
@@ -201,8 +198,12 @@ export default function AgentStateMonitoring(state = initialState, action) {
         if (response.reasonId) {
           response.reasonName = response.reason;
           delete response['reason'];
+          // We assume when changing state for a single
+          // agent, reason lists exist
           let reasonLists = state.getIn(['AgentReasons', agentId]);
           if (action.type === 'SET_BULK_AGENT_PRESENCE_STATE_FULFILLED') {
+            // In case we perform a bulk change of state,
+            // we get all reason lists
             reasonLists = state.get('ReasonLists');
           }
           // TODO
@@ -215,31 +216,39 @@ export default function AgentStateMonitoring(state = initialState, action) {
             .find(reasonList => reasonList.get('id') === response.reasonListId)
             .get('name');
         }
-      } else if (response.state === 'ready' || response.state === 'offline') {
-        response.presence = 'ready';
-        response.state = 'idle';
+      } else {
         response.reasonId = response.reasonName = response.reasonListId = response.reasonListName = null;
         delete response['reason'];
+        if (response.state === 'offline' || action.state === 'offline') {
+          response.presence = response.state = 'offline';
+          response.bulkChangeItem = false;
+          agentSelected = menuOpen = '';
+        } else {
+          response.presence = 'ready';
+          response.state = agentCurrentState === 'busy' ? 'busy' : 'idle';
+        }
       }
-      if (response.state === 'offline' || action.state === 'offline') {
-        response.presence = response.state = 'offline';
-        agentSelected = menuOpen = '';
-      }
+
       // We set new time in new presence state to 1s,
       // this value will be updated with next batch data
       response.currentStateDuration = 1000;
-      // We take agent out from "PendingAway" map
+      // We don't show Pending Away label
       // since we already changed state
-      response.pendingAway = false;
+      response.pendingAway = agentCurrentState === 'busy' && response.presence !== 'ready';
 
       const agentIndex = state.get('data').findIndex(row => row.get('agentId') === agentId);
 
-      return state
-        .updateIn(['data', agentIndex], item => item.merge(fromJS(response)))
-        .deleteIn(['PendingAway', agentId])
-        .set('updating', false)
-        .set('agentSelected', agentSelected)
-        .set('menuOpen', menuOpen);
+      return (
+        state
+          .updateIn(['data', agentIndex], item => item.merge(fromJS(response)))
+          // TODO:
+          // Remove row from bulk selection when setting
+          // agent as "offline"
+          // .deleteIn(['BulkSelection', !response.bulkChangeItem && agentId])
+          .set('updating', false)
+          .set('agentSelected', agentSelected)
+          .set('menuOpen', menuOpen)
+      );
     }
     case 'FORCE_LOGOUT_AGENT_FULFILLED': {
       const { response, agentId } = action;
@@ -249,41 +258,18 @@ export default function AgentStateMonitoring(state = initialState, action) {
       // We set new time in new presence state to 1s,
       // this value will be updated with next batch data
       response.currentStateDuration = 1000;
-      // We take agent out from "PendingAway" map
+      // We don't show Pending Away label
       // since we already changed state
       response.pendingAway = false;
+      // We remove row from bulk selected
+      response.bulkChangeItem = false;
       const agentIndex = state.get('data').findIndex(row => row.get('agentId') === agentId);
       return state
         .updateIn(['data', agentIndex], item => item.merge(fromJS(response)))
-        .deleteIn(['PendingAway', action.agentId])
+        .deleteIn(['BulkSelection', agentId])
         .set('updating', false)
         .set('agentSelected', '')
         .set('menuOpen', '');
-    }
-    case 'SET_AGENT_PENDING_AWAY': {
-      const { agentId, sessionId, reason, reasonId, reasonListId } = action;
-      const agentIndex = state.get('data').findIndex(row => row.get('agentId') === agentId);
-      if (agentIndex !== -1) {
-        return state
-          .setIn(['data', agentIndex, 'pendingAway'], true)
-          .setIn(
-            ['PendingAway', agentId],
-            fromJS({ agentId, sessionId, state: action.state, reason, reasonId, reasonListId })
-          );
-      }
-      // If agent is not in table data, then remove
-      // from pending state
-      return state.deleteIn(['PendingAway', action.agentId]);
-    }
-    case 'REMOVE_AGENT_PENDING_AWAY': {
-      const { agentId } = action;
-      const agentIndex = state.get('data').findIndex(row => row.get('agentId') === agentId);
-      if (agentIndex !== -1) {
-        return state.setIn(['data', agentIndex, 'pendingAway'], false).deleteIn(['PendingAway', action.agentId]);
-      }
-      // If agent is not in table data, then remove
-      // from pending state
-      return state.deleteIn(['PendingAway', action.agentId]);
     }
     case 'TOGGLE_BULK_AGENT_CHANGE': {
       const { agentId, sessionId } = action;
@@ -308,11 +294,9 @@ export default function AgentStateMonitoring(state = initialState, action) {
           .setIn(['BulkSelection', agentId], fromJS({ agentId, sessionId, checked: !checked }))
           .set('selectedSidePanelId', 'bulk');
       } else {
-        return state;
+        return state.deleteIn(['BulkSelection', agentId]);
       }
     }
-    case 'SET_BULK_AGENT_PENDING_AWAY':
-      return state.set('PendingAway', fromJS(action.agents));
     case 'SET_SELECTED_ENTITY_ID':
     case 'SET_SELECTED_SIDEPANEL_ID':
       return state.set('selectedSidePanelId', action.panelId).set('BulkSelection', fromJS({}));
@@ -324,13 +308,24 @@ export default function AgentStateMonitoring(state = initialState, action) {
 const getAgentMonitoringData = (state, realtimeStatistics) => {
   return realtimeStatistics.resources.reduce((newAgents, agent) => {
     const agentStates = realtimeStatistics.agentStates.filter(state => state.agentId === agent.agentId);
-    const currentAgentState = agentStates[0];
+    const currentAgentState = agentStates[0] || {};
+    const {
+      currentStateDuration,
+      offeredWorkOffers,
+      acceptedWorkOffers,
+      rejectedWorkOffers,
+      acceptedWorkOffersRate,
+      awayTime,
+      awayRate,
+      groups = [],
+      skills = []
+    } = currentAgentState;
 
     agent = {
       // Data for internal use
       id: agent.agentId,
       bulkChangeItem: state.getIn(['BulkSelection', agent.agentId, 'checked'], false),
-      pendingAway: state.getIn(['PendingAway', agent.agentId]) !== undefined,
+      pendingAway: agent.state === 'busy' && agent.presence === 'not-ready',
       // Agent data
       ...agent,
       channelTypes: agent.capacity
@@ -358,15 +353,15 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
             }
           )
         : [],
-      currentStateDuration: currentAgentState && currentAgentState.currentStateDuration,
-      offeredWorkOffers: currentAgentState && currentAgentState.offeredWorkOffers,
-      acceptedWorkOffers: currentAgentState && currentAgentState.acceptedWorkOffers,
-      rejectedWorkOffers: currentAgentState && currentAgentState.rejectedWorkOffers,
-      acceptedWorkOffersRate: currentAgentState && currentAgentState.acceptedWorkOffersRate,
-      awayTime: currentAgentState && currentAgentState.awayTime,
-      awayRate: currentAgentState && currentAgentState.awayRate,
-      groups: currentAgentState ? currentAgentState.groups : [],
-      skills: currentAgentState ? currentAgentState.skills : []
+      currentStateDuration,
+      offeredWorkOffers,
+      acceptedWorkOffers,
+      rejectedWorkOffers,
+      acceptedWorkOffersRate,
+      awayTime,
+      awayRate,
+      groups,
+      skills
     };
 
     newAgents.push(agent);

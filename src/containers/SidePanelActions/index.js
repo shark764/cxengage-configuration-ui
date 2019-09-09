@@ -4,17 +4,12 @@
 
 import { connect } from 'react-redux';
 import { SidePanelActions } from 'cx-ui-components';
+import { isDisplayContentInHtml } from '../../redux/modules/entities/messageTemplates/selectors';
 
-import {
-  onFormButtonSubmit,
-  unsetSelectedEntityId
-} from '../../redux/modules/entities';
+import { onFormButtonSubmit, unsetSelectedEntityId } from '../../redux/modules/entities';
 import { isSaving } from '../../redux/modules/entities/selectors';
 
-import {
-  isFormInvalid,
-  isFormPristine
-} from '../../redux/modules/form/selectors';
+import { isFormInvalid, isFormPristine } from '../../redux/modules/form/selectors';
 
 export const actions = {
   onSubmit: onFormButtonSubmit,
@@ -25,7 +20,7 @@ export function mapStateToProps(state) {
   return {
     isSaving: isSaving(state),
     pristine: isFormPristine(state),
-    invalid: isFormInvalid(state)
+    invalid: isFormInvalid(state) || isDisplayContentInHtml(state)
   };
 }
 

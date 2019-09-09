@@ -14,8 +14,7 @@ import {
   TransferListsSubEntityFormSubmission,
   ReInitTransferListsForm,
   DeleteTransferListItem,
-  RemoveTransferListItem,
-  RegisterTransferListCheckboxes
+  RemoveTransferListItem
 } from '../epics';
 import { fromJS } from 'immutable';
 
@@ -240,28 +239,6 @@ describe('TransferLists Epics', () => {
       .mockImplementationOnce(() => updatedMockState.get('name'))
       .mockImplementationOnce(() => updatedMockState.get('description'));
     RemoveTransferListItem(action, mockStore).subscribe(actualOutputActions => {
-      expect(actualOutputActions).toMatchSnapshot();
-      done();
-    });
-  });
-  it('should register transferType checkboxes in the transferListItem form when creating a new transferListItem', done => {
-    const action = ActionsObservable.of({
-      type: 'SET_SELECTED_SUB_ENTITY_ID',
-      selectedSubEntityId: 'create'
-    });
-    getSelectedEntityId.mockImplementation(() => 'create');
-    RegisterTransferListCheckboxes(action, mockStore).subscribe(actualOutputActions => {
-      expect(actualOutputActions).toMatchSnapshot();
-      done();
-    });
-  });
-  it('should register transferType checkboxes in the transferListItem form when updating a transferListItem', done => {
-    const action = ActionsObservable.of({
-      type: 'SET_SELECTED_SUB_ENTITY_ID',
-      selectedSubEntityId: 'updateTransferListItem:mockTransferListId'
-    });
-    getSelectedEntityId.mockImplementation(() => 'mockTransferListId');
-    RegisterTransferListCheckboxes(action, mockStore).subscribe(actualOutputActions => {
       expect(actualOutputActions).toMatchSnapshot();
       done();
     });

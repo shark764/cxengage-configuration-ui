@@ -7,7 +7,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
-
+import { fromJS, List } from 'immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
 import { getCurrentFormValueByFieldName } from '../../form/selectors';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity, getSelectedEntityStatus } from '../selectors';
@@ -23,6 +23,7 @@ export const InitTransferListsForm = action$ =>
     .ofType('FETCH_DATA_ITEM_FULFILLED')
     .filter(a => a.entityName === 'transferLists')
     .map(a => {
+      // draganddrop-beautiful-dnd library used in transferLists component needs UUIDS:
       a.response.result.endpoints = a.response.result.endpoints.reduce((updatedEndpoints, currentEndpoint) => {
         const categoryExists = updatedEndpoints.find(value => value.hierarchy === currentEndpoint.hierarchy);
         if (!categoryExists) {
@@ -45,6 +46,21 @@ export const InitTransferListsForm = action$ =>
           return updatedEndpoints;
         }
       }, []);
+
+      // CheckboxField collects it's values in an array, convert warmTansfer & coldTransfer checkbox values in to array(warmColdTransfer):
+      a.response.result.endpoints = a.response.result.endpoints.reduce((accumEndpoints, currentEndpoint) => {
+        const obj = {};
+        for (let key in currentEndpoint) {
+          if ((key === 'warmTransfer' || key === 'coldTransfer') && currentEndpoint[key]) {
+            !obj['warmColdTransfer'] ? (obj['warmColdTransfer'] = [key]) : obj['warmColdTransfer'].push(key);
+          } else if (key !== 'warmTransfer' && key !== 'coldTransfer') {
+            obj[key] = currentEndpoint[key];
+          }
+        }
+        accumEndpoints.push(obj);
+        return accumEndpoints;
+      }, []);
+
       a.response.result = {
         name: a.response.result.name,
         description: a.response.result.description,
@@ -85,20 +101,31 @@ export const TransferListsSubEntityFormSubmission = (action$, store) =>
           payload: a.values
         };
       } else {
-        const endpoints = a.values
-          .map(endpoint =>
-            endpoint
-              .delete('draggableUUID')
-              .delete('endpointUUID')
-              .delete('droppableUUID')
-              .delete('categoryUUID')
-          )
-          .toJS();
+        // Removes all the UUIDS that were to render the transferList dragAndDrop component:
+        let endpoints = a.values.map(endpoint =>
+          endpoint
+            .delete('draggableUUID')
+            .delete('endpointUUID')
+            .delete('droppableUUID')
+            .delete('categoryUUID')
+        );
+        // convert endpoint array values(warmColdTransfer) in to their own values (warmTransfer & coldTransfer):
+        endpoints = endpoints.reduce((accumVal, currentEndpoint) => {
+          if (List.isList(currentEndpoint.get('warmColdTransfer'))) {
+            const obj = {};
+            currentEndpoint.get('warmColdTransfer').forEach(transferType => {
+              obj[transferType] = true;
+            });
+            return accumVal.push(currentEndpoint.merge(fromJS(obj)).remove('warmColdTransfer'));
+          }
+          return accumVal.push(currentEndpoint.remove('warmColdTransfer'));
+        }, List());
+
         const values = {
           name: getCurrentFormValueByFieldName(store.getState(), 'name'),
           description: getCurrentFormValueByFieldName(store.getState(), 'description'),
           active: getSelectedEntityStatus(store.getState()),
-          endpoints: endpoints
+          endpoints: endpoints.toJS()
         };
         return {
           type: 'UPDATE_ENTITY',
@@ -114,6 +141,7 @@ export const ReInitTransferListsForm = action$ =>
     .ofType('UPDATE_ENTITY_FULFILLED')
     .filter(({ entityName }) => entityName === 'transferLists')
     .map(a => {
+      // Add UUIDS to the endpoints for the dragAndDrop library to work:
       a.values.endpoints = a.values.endpoints.reduce((updatedEndpoints, currentEndpoint) => {
         const categoryExists = updatedEndpoints.find(value => value.hierarchy === currentEndpoint.hierarchy);
         if (!categoryExists) {
@@ -136,6 +164,21 @@ export const ReInitTransferListsForm = action$ =>
           return updatedEndpoints;
         }
       }, []);
+
+      // CheckboxField collects it's values in an array, convert warmTansfer & coldTransfer checkbox values in to array(warmColdTransfer):
+      a.values.endpoints = a.values.endpoints.reduce((accumEndpoints, currentEndpoint) => {
+        const obj = {};
+        for (let key in currentEndpoint) {
+          if ((key === 'warmTransfer' || key === 'coldTransfer') && currentEndpoint[key]) {
+            !obj['warmColdTransfer'] ? (obj['warmColdTransfer'] = [key]) : obj['warmColdTransfer'].push(key);
+          } else if (key !== 'warmTransfer' && key !== 'coldTransfer') {
+            obj[key] = currentEndpoint[key];
+          }
+        }
+        accumEndpoints.push(obj);
+        return accumEndpoints;
+      }, []);
+
       return a;
     })
     .map(a => ({
@@ -159,6 +202,7 @@ export const DeleteTransferListItem = (action$, store) =>
     .map(a => {
       let updatedEndpoints;
       if (a.transferListItemId) {
+        // Deletes all the UUIDs:
         updatedEndpoints = getCurrentFormValueByFieldName(store.getState(), 'endpoints')
           .filter(endpoint => endpoint.get('endpointUUID') !== a.transferListItemId)
           .map(endpoint =>
@@ -179,6 +223,17 @@ export const DeleteTransferListItem = (action$, store) =>
               .delete('droppableUUID')
           );
       }
+      // convert endpoint array values(warmColdTransfer) in to their own values (warmTransfer & coldTransfer):
+      updatedEndpoints = updatedEndpoints.reduce((accumVal, currentEndpoint) => {
+        if (List.isList(currentEndpoint.get('warmColdTransfer'))) {
+          const obj = {};
+          currentEndpoint.get('warmColdTransfer').forEach(transferType => {
+            obj[transferType] = true;
+          });
+          return accumVal.push(currentEndpoint.merge(fromJS(obj)).remove('warmColdTransfer'));
+        }
+        return accumVal.push(currentEndpoint.remove('warmColdTransfer'));
+      }, List());
       return { ...a, updatedEndpoints };
     })
     .map(a => {
@@ -256,36 +311,3 @@ export const RemoveTransferListItem = (action$, store) =>
         };
       }
     });
-
-export const RegisterTransferListCheckboxes = (action$, store) =>
-  action$
-    .ofType('SET_SELECTED_SUB_ENTITY_ID')
-    .map(a => ({
-      ...a,
-      entityName: getCurrentEntity(store.getState()),
-      entityId: getSelectedEntityId(store.getState())
-    }))
-    .filter(({ entityName }) => entityName === 'transferLists')
-    .filter(
-      ({ selectedSubEntityId }) =>
-        selectedSubEntityId &&
-        (selectedSubEntityId === 'create' || selectedSubEntityId.includes('updateTransferListItem'))
-    )
-    .concatMap(a => [
-      {
-        type: '@@redux-form/REGISTER_FIELD',
-        meta: { form: `transferListItems:${a.selectedSubEntityId}` },
-        payload: {
-          name: 'warmTransfer',
-          type: 'Field'
-        }
-      },
-      {
-        type: '@@redux-form/REGISTER_FIELD',
-        meta: { form: `transferListItems:${a.selectedSubEntityId}` },
-        payload: {
-          name: 'coldTransfer',
-          type: 'Field'
-        }
-      }
-    ]);

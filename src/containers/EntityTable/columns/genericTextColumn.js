@@ -23,7 +23,13 @@ export function constructGeneralTextColumn(string) {
     id: string,
     Header: <span title={normalizedString}>{normalizedString}</span>,
     accessor: string,
-    Cell: ({ row }) => <span title={row[string]}>{row[string]}</span>,
+    Cell: ({ row }) => {
+      return Array.isArray(row[string]) ? (
+        <span title={row[string]}>{row[string].join(', ')}</span>
+      ) : (
+        <span title={row[string]}>{row[string]}</span>
+      );
+    },
     Filter: ({ filter, onChange }) => (
       <div>
         <Input

@@ -4,6 +4,11 @@
 
 import { isEmpty } from 'serenova-js-utils/strings';
 
-export const formValidation = values => ({
-  name: isEmpty(values.get('name')) && 'Please enter a name'
-});
+export const formValidation = values => {
+  return {
+    name: isEmpty(values.get('name')) && 'Please enter a name',
+    reasons:
+      (!values.get('reasons') || values.get('reasons').size === 0) &&
+      'ReasonList should contian at least one reason category.'
+  };
+};

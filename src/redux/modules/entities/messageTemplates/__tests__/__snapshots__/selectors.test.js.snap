@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageTemplateForm selectors initial values while creating a new messageTemplate 1`] = `
+Immutable.Map {
+  "active": true,
+  "templateTextType": "plaintext",
+}
+`;
+
+exports[`MessageTemplateForm selectors initial values while updating an existing messageTemplate 1`] = `
+Immutable.Map {
+  "id": "mockEntityId1",
+  "name": "mock Template Name",
+  "description": "mock description",
+  "channels": Immutable.List [
+    "sms",
+    "messaging",
+    "email",
+  ],
+  "templateTextType": "plaintext",
+  "template": "mock template text",
+}
+`;
+
+exports[`MessageTemplateForm selectors retrieves isDisplayContentInHtml from the state 1`] = `true`;

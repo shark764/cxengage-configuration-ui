@@ -49,12 +49,6 @@ const NotReadyState = styled.div`
   display: block;
   padding-top: 4px;
   line-height: 1.25;
-  ${props =>
-    props.statusLoading &&
-    css`
-      cursor: default;
-      color: #979797;
-    `};
 `;
 const ListTitle = styled.div`
   color: #979797;
@@ -63,6 +57,10 @@ const ListTitle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
+`;
+
+const CenterWrapper = styled.div`
+  text-align: center;
 `;
 
 export const helperFunctions = {
@@ -105,7 +103,7 @@ export default function(
     width: 140,
     resizable: false,
     Cell: ({ value, row }) =>
-      supervisorHasUpdatePermission ? (
+      supervisorHasUpdatePermission && row._original.presence !== 'offline' ? (
         <PresenceStateCell
           row={row}
           currentState={value}
@@ -136,15 +134,7 @@ export default function(
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.presenceStateFilter(onChange, tableType),
     getProps: (state, rowInfo) => {
-      return {
-        style: {
-          overflow: 'visible',
-          background:
-            menuOpen === 'state' && rowInfo && rowInfo.row._original.agentId === agentSelected
-              ? 'rgba(253, 255, 50, 0.11)'
-              : null
-        }
-      };
+      return { style: { overflow: 'visible' } };
     }
   };
 
@@ -188,9 +178,7 @@ export class PresenceStateCell extends Component {
     reasonId = null,
     reasonListId = null
   ) =>
-    (this.props.currentState === 'busy' && presenceState !== 'ready'
-      ? this.props.setAgentPendingAway(agentId, sessionId, presenceState, reason, reasonId, reasonListId)
-      : this.props.setAgentPresenceState(agentId, sessionId, presenceState, reason, reasonId, reasonListId)) &&
+    this.props.setAgentPresenceState(agentId, sessionId, presenceState, reason, reasonId, reasonListId) &&
     e.stopPropagation();
 
   // We force agent to logout under xtreme
@@ -200,7 +188,7 @@ export class PresenceStateCell extends Component {
     this.props.forceLogoutAgent(agentId, sessionId);
   };
 
-  showForceLogoutConfirmation = (e, show = true) => {
+  showForceLogout = (e, show = true) => {
     e.stopPropagation();
     this.setState({ showConfirmation: show });
   };
@@ -246,7 +234,6 @@ export class PresenceStateCell extends Component {
         rowText={includeSectionName === true ? `${reason.hierarchy[0]} - ${reason.name}` : reason.name}
         isSelected={isSelected}
         onSelect={selectReason}
-        disabled={this.state.statusLoading}
       />
     );
   };
@@ -313,23 +300,6 @@ export class PresenceStateCell extends Component {
         isSelectedPresenceState={presenceState === this.props.currentPresence.replace('-', '')}
       />
     ));
-    // //////////////////////////
-    // TODO:
-    // //////////////////////////
-    // We add a new option, "Force Logout",
-    // will help to disconnect the agent no matter
-    // the current presence or state
-    // if (this.props.currentState === 'busy') {
-    //   content = [
-    //     ...content,
-    //     <PresenceStateRow
-    //       key={'force-offline'}
-    //       presenceState="offline"
-    //       label="Force Logout"
-    //       onSelect={e => this.showForceLogoutConfirmation(e, !this.state.showConfirmation)}
-    //     />
-    //   ];
-    // }
     return (
       <PresenceStateContainer>
         <PresenceStateLink onClick={e => this.showPresenceStateMenu(e, !this.state.showMenu)}>
@@ -363,18 +333,33 @@ export class PresenceStateCell extends Component {
             onClick={e => this.showPresenceReasonMenu(e, !this.state.showReasons)}
           />
           {this.props.isUpdating ? (
-            <div style={{ textAlign: 'center' }}>
+            <CenterWrapper>
               <LoadingSpinnerSVG size={28} color="white" />
-            </div>
+            </CenterWrapper>
           ) : (
             <Fragment>
-              {!this.state.showReasons && content}
+              {!this.state.showReasons && [
+                // Content contains ready || away || offline
+                ...content,
+                // We add 'Force offline' to the rendered array
+                // using spread operator condition
+                this.props.currentState === 'busy' ? (
+                  <PresenceStateRow
+                    key={'force-offline'}
+                    presenceState="offline"
+                    label="Force Logout"
+                    onSelect={e => this.showForceLogout(e, !this.state.showConfirmation)}
+                  />
+                ) : (
+                  []
+                )
+              ]}
               {this.state.showReasons && (
-                <NotReadyState id="agentNotReadyState" statusLoading={this.state.statusLoading}>
+                <NotReadyState>
                   {this.props.selectedAgentReasonLists.length === 0 && (
-                    <div style={{ textAlign: 'center' }}>
+                    <CenterWrapper>
                       <LoadingSpinnerSVG size={28} color="white" />
-                    </div>
+                    </CenterWrapper>
                   )}
                   {this.props.selectedAgentReasonLists.map(this.renderList, this)}
                 </NotReadyState>
@@ -385,10 +370,10 @@ export class PresenceStateCell extends Component {
         {this.state.showConfirmation && (
           <Confirmation
             confirmBtnCallback={e => this.forceLogout(e, this.props.row)}
-            cancelBtnCallback={e => this.showForceLogoutConfirmation(e, false)}
+            cancelBtnCallback={e => this.showForceLogout(e, false)}
             mainText={`This will force the disconnection of the agent session while busy.`}
             secondaryText={'Are you sure you want to continue?'}
-            onMaskClick={e => this.showForceLogoutConfirmation(e, false)}
+            onMaskClick={e => this.showForceLogout(e, false)}
           />
         )}
       </PresenceStateContainer>
