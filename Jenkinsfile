@@ -1,5 +1,5 @@
 #!groovy​
-@Library('sprockets@2.9.2') _
+@Library('sprockets@2.1.0') _
 
 import common
 import git
@@ -12,27 +12,6 @@ def pr = env.CHANGE_ID
 def c = new common()
 def n = new node()
 def f = new frontend()
-
-// @NonCPS
-// def stop_previous_builds(job_name, build_num) {
-//   def job = Jenkins.instance.getItemByFullName(job_name)
-//   def new_builds = job.getNewBuilds()
-
-//   for (int i = 0; i < new_builds.size(); i++) {
-//     def build = new_builds.get(i);
-//     if (build.getNumber().toInteger() != build_num) {
-//       if (build.isBuilding()) {
-//         build.doStop()
-//       }
-//     }
-//   }
-// }
-
-try {
-  // stop_previous_builds(env.JOB_NAME, env.BUILD_NUMBER.toInteger())
-} catch (Exception e) {
-  sh "echo ${e}"
-}
 
 node(){
 
@@ -49,10 +28,8 @@ pipeline {
             steps {
               sh 'echo "Stage Description: Set build version from package.json"'
               script{
-                buildTool = c.getBuildTool()
-                props = c.exportProperties(buildTool)
-                build_version = props.POM_VERSION
-                service = props.POM_ARTIFACT_ID
+                n.export()
+                build_version = readFile('version')
               }
             }
           }
