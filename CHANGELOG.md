@@ -24,10 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
-## [0.65.1-SNAPSHOT] - 2019-09-06
-### Added 
--fixing jenkinsfile
-
 ## [0.65.0] - 2019-09-06
 ### Added 
 - CXV1-18681 - Config 2 | API Keys - Detail Panel
@@ -44,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CXV1-19847 - Update wording on Beta Features Page
 - <no-jira> - Adding tenant default reason lists to presence state menu in agent monitoring table.
 ### Fixed
+- <no-jira> - Fixing jenkinsfile
 - <no-jira> - Fixing an issue when updating presence reason lists
 - <no-jira> - Fixed some issues when creating an exception
 - <no-jira> - ChannelType filter for Agent table was not working with SMS value.
