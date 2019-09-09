@@ -169,7 +169,7 @@ export default class Navigation extends Component {
                 <StyledLink data-automation="navigation-link-flows" to="/configuration/flows">
                   Flows
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-flowDebugger" to="/configuration/flowDebugger">
+                <StyledLink data-automation="navigation-link-flowDebugger" to="/flowDebugLogs">
                   Flow Debug Logs
                 </StyledLink>
                 <StyledLink data-automation="navigation-link-dispatchMappings" to="/configuration/dispatchMappings">

@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
+## [0.64.0] - 2019-08-30
+### Added
+- CXV1-15794 - Config 2 | Add Flow Debug Logs page
+
 ## [0.63.0] - 2019-08-30
 ### Added
 - CXV1-19199 - Change presence state when Agent is bussy to a 'pending' state.

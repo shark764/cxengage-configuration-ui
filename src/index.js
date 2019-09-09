@@ -20,6 +20,7 @@ import InteractionMonitoring from './containers/InteractionMonitoring';
 import AgentStateMonitoring from './containers/AgentStateMonitoring';
 import BetaFeatures from './containers/BetaFeatures';
 import CrudEndpointUi from './containers/CrudEndpointUi';
+import FlowDebugLogs from './containers/FlowDebugLogs';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -35,6 +36,7 @@ ReactDOM.render(
             <Route path="/agentStateMonitoring" component={PrivateRoute(AgentStateMonitoring)} />
             <Route path="/betaFeatures" component={PrivateRoute(BetaFeatures)} />
             <Route path="/configuration/:entityName" component={PrivateRoute(CrudEndpointUi)} />
+            <Route path="/flowDebugLogs" component={PrivateRoute(FlowDebugLogs)} />
           </Fragment>
         </RootStyles>
       </Switch>

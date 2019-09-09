@@ -385,6 +385,12 @@ export const fetchListItems = (entityName, associatedEntityName) => ({
   entityName,
   associatedEntityName
 });
+
+export const fetchReportingEvents = interactionId => ({
+  type: 'FETCH_REPORTING_EVENTS',
+  interactionId
+});
+
 export const setSelectedSubEntityId = selectedSubEntityId => ({
   type: 'SET_SELECTED_SUB_ENTITY_ID',
   selectedSubEntityId
@@ -779,6 +785,9 @@ export default function reducer(state = initialState, action) {
       } else {
         return state;
       }
+    }
+    case 'FETCH_REPORTING_EVENTS_FULFILLED': {
+      return state.set('reportingEvents', action.response);
     }
     case 'UPDATE_ENTITY_REJECTED':
     case 'UPLOAD_CSV_REJECTED': {

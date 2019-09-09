@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlowDebugLayout Renders renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+}
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "reportingEvents": Object {
+    "eventId": "id",
+    "eventName": "event",
+  },
+  "reportingEventsString": "mock-string-data",
+}
+`;
