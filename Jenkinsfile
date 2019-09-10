@@ -1,5 +1,5 @@
 #!groovy​
-@Library('sprockets@2.1.0') _
+@Library('sprockets@2.9.4') _
 
 import common
 import git
@@ -14,10 +14,10 @@ def n = new node()
 def f = new frontend()
 
 node(){
-
   pwd = pwd()
-
 }
+//This will stop all old builds so that things are not running in parallel.
+c.stop_previous_builds(env.JOB_NAME, env.BUILD_NUMBER.toInteger())
 
 pipeline {
   agent any
@@ -28,7 +28,8 @@ pipeline {
             steps {
               sh 'echo "Stage Description: Set build version from package.json"'
               script{
-                n.export()
+                buildTool = c.getBuildTool()
+                props = c.exportProperties(buildTool)
                 build_version = readFile('version')
               }
             }

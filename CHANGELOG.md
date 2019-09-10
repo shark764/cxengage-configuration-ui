@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
+## [0.65.2] - 2019-09-09
+### Fixed
+- <no-jira> - Adding sprockets function to kill previous builds upon code change. 
+
 ## [0.65.1] - 2019-09-09
 ### Fixed
 - <no-jira> - Creating tag for UAT testing.
