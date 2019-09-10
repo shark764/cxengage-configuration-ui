@@ -3,12 +3,14 @@
  */
 
 import { createSelector } from 'reselect';
-import { hasPermission } from '../../entities/selectors';
-import { getCurrentPermissions } from '../../userData/selectors';
+import { fromJS } from 'immutable';
 
 const selectAgentStateMonitoringMap = state => state.get('AgentStateMonitoring');
 
 export const selectAgentStateMonitoringTableData = createSelector(selectAgentStateMonitoringMap, agentMonitoring =>
+  agentMonitoring.get('data')
+);
+export const selectAgentStateMonitoringTableDataJS = createSelector(selectAgentStateMonitoringMap, agentMonitoring =>
   agentMonitoring.get('data').toJS()
 );
 export const selectAgentStateMonitoringSorted = createSelector(selectAgentStateMonitoringMap, agentMonitoring =>
@@ -39,9 +41,6 @@ export const isUpdatingAgentData = createSelector(selectAgentStateMonitoringMap,
 export const getSelectedAgentsBulkChangeItems = createSelector(selectAgentStateMonitoringMap, agentMonitoring =>
   agentMonitoring.get('BulkSelection').filter(item => item.get('checked'))
 );
-
-export const userHasBargeAllCallsPermission = state =>
-  hasPermission(getCurrentPermissions(state), selectAgentStateMonitoringMap(state).get('bargeAllCallsPermission'));
 
 export const hasAgentReasonLists = createSelector(
   [selectAgentStateMonitoringMap, selectCurrentAgentSelected],
@@ -75,3 +74,15 @@ export const getAgentCurrentState = (state, agentId) =>
     .get('data')
     .find(agent => agent.get('agentId') === agentId)
     .get('state');
+
+export const getBulkSelectedBusyAgents = createSelector(
+  [selectAgentStateMonitoringTableData],
+  monitoringData =>
+    monitoringData
+      ? monitoringData.filter(item => item.get('bulkChangeItem') && item.get('state') === 'busy')
+      : fromJS([])
+);
+export const countBulkSelectedBusyAgents = createSelector(
+  [getBulkSelectedBusyAgents],
+  busyBulkSelected => busyBulkSelected.size
+);

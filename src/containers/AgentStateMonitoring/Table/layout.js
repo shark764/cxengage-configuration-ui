@@ -54,9 +54,6 @@ const InlineCheckboxFilterMenu = styled(CheckboxFilterMenu)`
   display: inline-block;
   margin-left: 5px;
 `;
-const ConverTimeButton = styled(Button)`
-  margin-right: 10px;
-`;
 
 injectGlobal`
   .AgentStateMonitoringTable .rt-tbody {
@@ -255,8 +252,6 @@ export default class AgentStateMonitoringTable extends Component {
                 this.props.activeColumns[5],
                 'agentStateMonitoring',
                 this.props.setAgentPresenceState,
-                this.props.setAgentPendingAway,
-                this.props.forceLogoutAgent,
                 this.props.setAgentSelected,
                 this.props.removeAgentSelected,
                 this.props.getAgentReasonLists,
@@ -302,8 +297,6 @@ AgentStateMonitoringTable.propTypes = {
   activeColumns: PropTypes.arrayOf(PropTypes.bool.isRequired),
   setAgentDirection: PropTypes.func,
   setAgentPresenceState: PropTypes.func,
-  setAgentPendingAway: PropTypes.func,
-  forceLogoutAgent: PropTypes.func,
   setAgentSelected: PropTypes.func,
   removeAgentSelected: PropTypes.func,
   getAgentReasonLists: PropTypes.func,

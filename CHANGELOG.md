@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Agent State Monitoring
 - Business Hours
 - API Keys
-- Flow Debugger
 
 ## [Beta User Acceptance Testing]
 - Skills
@@ -23,6 +22,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 - Logi reportings
+
+## [0.65.3] - 2019-09-10
+### Changed
+- CXV1-19880 - Agent Monitoring - Remove pending away state and warn the supervisor when disconnecting a busy agent.
+### Fixed
+- CXV1-19884 - Agent Monitoring - Filter on skills column doesn not have the same behavior for All option as checking all of them one by one
+- CXV1-19886 - Agent Monitoring - Bulk actions form does not get updated when a selected row is removed from table.
 
 ## [0.65.2] - 2019-09-09
 ### Fixed

@@ -5,7 +5,7 @@ import {
   getReportingEvents,
   getStringifyReportingEvents
 } from '../../../redux/modules/entities/reportingEvents/selectors';
-import FlowDebugLayout, { mapStateToProps, actions } from '../';
+import FlowDebugLayout, { mapStateToProps } from '../';
 
 jest.mock('../../../redux/modules/entities/reportingEvents/selectors');
 getReportingEvents.mockImplementation(() => {

@@ -11,7 +11,10 @@ import {
   setBulkAgentDirection,
   setBulkAgentPresenceState
 } from '../../../redux/modules/reporting/agentStateMonitoring';
-import { selectPresenceReasonLists } from '../../../redux/modules/reporting/agentStateMonitoring/selectors';
+import {
+  selectPresenceReasonLists,
+  countBulkSelectedBusyAgents
+} from '../../../redux/modules/reporting/agentStateMonitoring/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
 
@@ -29,6 +32,7 @@ export function mapStateToProps(state) {
       direction: userHasPermissions(state, ['MANAGE_ALL_USERS_DIRECTION']),
       state: userHasPermissions(state, ['MANAGE_ALL_USER_STATE'])
     },
+    countBusyAgentsSelected: countBulkSelectedBusyAgents(state),
     key: `${getCurrentEntity(state)}:bulk`
   };
 }

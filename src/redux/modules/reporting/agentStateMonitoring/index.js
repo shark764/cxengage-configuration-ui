@@ -3,7 +3,6 @@
  */
 
 import { fromJS } from 'immutable';
-import { getAgentCurrentState } from './selectors';
 
 // Initial Sub State
 export const initialState = fromJS({
@@ -68,31 +67,6 @@ export const getAgentReasonLists = agentId => ({ type: 'GET_AGENT_REASON_LISTS',
 export const setAgentSelected = (selected, menu = '') => ({ type: 'SET_AGENT_SELECTED', selected, menu });
 export const removeAgentSelected = () => ({ type: 'REMOVE_AGENT_SELECTED' });
 
-export const setAgentPendingAway = (
-  agentId,
-  sessionId,
-  state,
-  reason = null,
-  reasonId = null,
-  reasonListId = null
-) => ({
-  type: 'SET_AGENT_PENDING_AWAY',
-  agentId,
-  sessionId,
-  state,
-  reason,
-  reasonId,
-  reasonListId
-});
-export const removeAgentPendingAway = agentId => ({ type: 'REMOVE_AGENT_PENDING_AWAY', agentId });
-
-export const forceLogoutAgent = (agentId, sessionId, state = 'offline') => ({
-  type: 'FORCE_LOGOUT_AGENT',
-  agentId,
-  sessionId,
-  state
-});
-
 export const toggleBulkAgentChange = (agentId, sessionId, bool) => ({
   type: 'TOGGLE_BULK_AGENT_CHANGE',
   agentId,
@@ -107,14 +81,6 @@ export const setBulkAgentPresenceState = (state, reason = null, reasonId = null,
   reasonId,
   reasonListId
 });
-export const setBulkAgentPendingAway = (agents, state, reason = null, reasonId = null, reasonListId = null) => ({
-  type: 'SET_BULK_AGENT_PENDING_AWAY',
-  agents,
-  state,
-  reason,
-  reasonId,
-  reasonListId
-});
 export const setSelectedSidePanelId = panelId => ({ type: 'SET_SELECTED_SIDEPANEL_ID', panelId });
 export const unsetSelectedSidePanelId = () => setSelectedSidePanelId('');
 
@@ -123,10 +89,13 @@ export default function AgentStateMonitoring(state = initialState, action) {
   switch (action.type) {
     case 'SET_UPDATING_TABLE_DATA_STATUS_$':
       return state.set('status', 'loading');
-    case 'SET_AGENT_MONITORING_TABLE_DATA':
+    case 'SET_AGENT_MONITORING_TABLE_DATA': {
+      const { tableData, bulkSelection } = getAgentMonitoringData(state, action.realtimeStatistics);
       return state
-        .set('data', fromJS(getAgentMonitoringData(state, action.realtimeStatistics)))
+        .set('data', fromJS(tableData))
+        .set('BulkSelection', fromJS(bulkSelection))
         .set('status', 'loaded');
+    }
     case 'SET_AGENT_MONITORING_TABLE_ROW_SORTED':
       return state
         .set('sorted', action.sorted)
@@ -206,7 +175,7 @@ export default function AgentStateMonitoring(state = initialState, action) {
             // we get all reason lists
             reasonLists = state.get('ReasonLists');
           }
-          // TODO
+          // TODO:
           // When performing a bulk change for agents state
           // we could choose a reason not all the agents have
           // assigned, this won't throw an error but
@@ -232,44 +201,20 @@ export default function AgentStateMonitoring(state = initialState, action) {
       // We set new time in new presence state to 1s,
       // this value will be updated with next batch data
       response.currentStateDuration = 1000;
-      // We don't show Pending Away label
-      // since we already changed state
-      response.pendingAway = agentCurrentState === 'busy' && response.presence !== 'ready';
 
       const agentIndex = state.get('data').findIndex(row => row.get('agentId') === agentId);
 
       return (
         state
           .updateIn(['data', agentIndex], item => item.merge(fromJS(response)))
-          // TODO:
           // Remove row from bulk selection when setting
           // agent as "offline"
-          // .deleteIn(['BulkSelection', !response.bulkChangeItem && agentId])
+          .deleteIn(['BulkSelection', response.state === 'offline' ? agentId : ''])
+          // Stop spinner icon
           .set('updating', false)
           .set('agentSelected', agentSelected)
           .set('menuOpen', menuOpen)
       );
-    }
-    case 'FORCE_LOGOUT_AGENT_FULFILLED': {
-      const { response, agentId } = action;
-      // State of agent now is offline, and will be
-      // removed from table on next data update
-      response.presence = response.state = 'offline';
-      // We set new time in new presence state to 1s,
-      // this value will be updated with next batch data
-      response.currentStateDuration = 1000;
-      // We don't show Pending Away label
-      // since we already changed state
-      response.pendingAway = false;
-      // We remove row from bulk selected
-      response.bulkChangeItem = false;
-      const agentIndex = state.get('data').findIndex(row => row.get('agentId') === agentId);
-      return state
-        .updateIn(['data', agentIndex], item => item.merge(fromJS(response)))
-        .deleteIn(['BulkSelection', agentId])
-        .set('updating', false)
-        .set('agentSelected', '')
-        .set('menuOpen', '');
     }
     case 'TOGGLE_BULK_AGENT_CHANGE': {
       const { agentId, sessionId } = action;
@@ -306,7 +251,12 @@ export default function AgentStateMonitoring(state = initialState, action) {
 }
 
 const getAgentMonitoringData = (state, realtimeStatistics) => {
-  return realtimeStatistics.resources.reduce((newAgents, agent) => {
+  // We need to update bulk selection on
+  // every loop, to keep proper agents selected.
+  // This way we ensure we won't perform actions
+  // on agents that went offline.
+  const bulkSelection = {};
+  const tableData = realtimeStatistics.resources.reduce((newAgents, agent) => {
     const agentStates = realtimeStatistics.agentStates.filter(state => state.agentId === agent.agentId);
     const currentAgentState = agentStates[0] || {};
     const {
@@ -321,11 +271,16 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
       skills = []
     } = currentAgentState;
 
+    let bulkChecked = state.getIn(['BulkSelection', agent.agentId, 'checked'], false);
+    // If it was checked, then we add it to new
+    // map. Then we replace old selection.
+    if (bulkChecked) {
+      bulkSelection[agent.agentId] = { agentId: agent.agentId, sessionId: agent.sessionId, checked: true };
+    }
     agent = {
       // Data for internal use
       id: agent.agentId,
-      bulkChangeItem: state.getIn(['BulkSelection', agent.agentId, 'checked'], false),
-      pendingAway: agent.state === 'busy' && agent.presence === 'not-ready',
+      bulkChangeItem: bulkChecked,
       // Agent data
       ...agent,
       channelTypes: agent.capacity
@@ -367,6 +322,7 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
     newAgents.push(agent);
     return newAgents;
   }, []);
+  return { tableData, bulkSelection };
 };
 
 const categorizeItems = (rawItems, name) => {

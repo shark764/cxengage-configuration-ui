@@ -7,13 +7,17 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import AgentStateMonitoringBulkActionsForm, { mapStateToProps, createFormName } from '../';
 import { getCurrentEntity } from '../../../../redux/modules/entities/selectors';
-import { selectPresenceReasonLists } from '../../../../redux/modules/reporting/agentStateMonitoring/selectors';
+import {
+  selectPresenceReasonLists,
+  countBulkSelectedBusyAgents
+} from '../../../../redux/modules/reporting/agentStateMonitoring/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getCurrentEntity.mockImplementation(() => 'agentStateMonitoring');
 
 jest.mock('../../../../redux/modules/reporting/agentStateMonitoring/selectors');
 selectPresenceReasonLists.mockImplementation(() => ({ id: '0001', name: 'reason-list1' }));
+countBulkSelectedBusyAgents.mockImplementation(() => 1);
 
 describe('AgentStateMonitoringBulkActionsForm Renders', () => {
   it('renders', () => {

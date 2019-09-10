@@ -12,8 +12,6 @@ import {
   removeSelected,
   setAgentDirection,
   setAgentPresenceState,
-  setAgentPendingAway,
-  forceLogoutAgent,
   setAgentSelected,
   removeAgentSelected,
   getAgentReasonLists,
@@ -21,7 +19,7 @@ import {
 } from '../../../redux/modules/reporting/agentStateMonitoring';
 import { toggleTimeFormat, setVisibleMenu } from '../../../redux/modules/columnFilterMenus';
 import {
-  selectAgentStateMonitoringTableData,
+  selectAgentStateMonitoringTableDataJS,
   selectAgentStateMonitoringSorted,
   selectAgentStateMonitoringExpanded,
   selectAgentStateMonitoringSelected,
@@ -57,7 +55,7 @@ export const mapStateToProps = (state, props) => ({
     groups: areAllActive(state, { menuType: 'Groups', tableType: 'agentStateMonitoring' }),
     reasons: areAllActive(state, { menuType: 'ReasonLists', tableType: 'agentStateMonitoring' })
   },
-  tableData: selectAgentStateMonitoringTableData(state, props),
+  tableData: selectAgentStateMonitoringTableDataJS(state, props),
   expanded: selectAgentStateMonitoringExpanded(state, props),
   selected: selectAgentStateMonitoringSelected(state, props),
   sorted: selectAgentStateMonitoringSorted(state, props),
@@ -78,8 +76,6 @@ export const actions = {
   removeSelected,
   setAgentDirection,
   setAgentPresenceState,
-  setAgentPendingAway,
-  forceLogoutAgent,
   setAgentSelected,
   removeAgentSelected,
   getAgentReasonLists,

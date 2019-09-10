@@ -280,7 +280,11 @@ export default class AgentStateMonitoringBulkActionsForm extends Component {
                         <BulkConfirmationWrapper
                           key={presenceState}
                           confirmBtnCallback={e => this.changePresenceState(e, presenceState)}
-                          mainText={`This will change current state to "${warningMessage}" to all agents selected`}
+                          mainText={
+                            this.props.countBusyAgentsSelected > 0 && presenceState === 'offline'
+                              ? `One or more of the agents selected is in a busy state, any active interactions will be disconnected and lost.`
+                              : `This will change current state to "${warningMessage}" to all agents selected`
+                          }
                           secondaryText={'Are you sure you want to continue?'}
                         >
                           <BulkPresenceStateRow presenceState={presenceState} label={label} />
@@ -321,5 +325,6 @@ AgentStateMonitoringBulkActionsForm.propTypes = {
   setBulkAgentDirection: PropTypes.func,
   setBulkAgentPresenceState: PropTypes.func,
   reasonLists: PropTypes.array,
-  supervisorUpdatePermissions: PropTypes.object
+  supervisorUpdatePermissions: PropTypes.object,
+  countBusyAgentsSelected: PropTypes.number
 };

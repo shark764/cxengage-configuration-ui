@@ -63,7 +63,7 @@ export const SetAgentDirection = action$ =>
 
 export const SetAgentPresenceState = (action$, store) =>
   action$
-    .ofType('SET_AGENT_PRESENCE_STATE', 'FORCE_LOGOUT_AGENT')
+    .ofType('SET_AGENT_PRESENCE_STATE')
     .debounceTime(300)
     .map(a => ({ ...a, agentCurrentState: getAgentCurrentState(store.getState(), a.agentId) }))
     .concatMap(a =>
@@ -74,14 +74,7 @@ export const SetAgentPresenceState = (action$, store) =>
             agentId: a.agentId,
             sessionId: a.sessionId,
             state: a.state || 'offline',
-            ...(a.reasonId && { reasonId: a.reasonId, reason: a.reason, reasonListId: a.reasonListId }),
-            // If agent is busy, we set him to away first,
-            // then, we disconnect him from Skylight
-            ...(a.agentCurrentState === 'busy' &&
-              a.state === 'offline' &&
-              // We only disconnect agent when not busy, if
-              // force logout is asked, we disconnect inmediatly
-              a.type !== 'FORCE_LOGOUT_AGENT' && { state: 'notready', nextState: 'offline' })
+            ...(a.reasonId && { reasonId: a.reasonId, reason: a.reason, reasonListId: a.reasonListId })
           },
           module: 'session',
           topic: 'cxengage/session/set-presence-state-response'
@@ -174,11 +167,7 @@ export const SetBulkAgentPresenceState = (action$, store) =>
             data: {
               agentId: currentAgent.agentId,
               sessionId: currentAgent.sessionId,
-              ...bulkData,
-              // If agent is busy, we set him to away first,
-              // then, we disconnect him from Skylight
-              ...(getAgentCurrentState(store.getState(), currentAgent.agentId) === 'busy' &&
-                a.state === 'offline' && { state: 'notready', nextState: 'offline' })
+              ...bulkData
             }
           }
         ],

@@ -9,7 +9,7 @@ import CheckboxFilterMenu from '../../../containers/CheckboxFilterMenu';
 export const helperFunctions = {
   skillsFilter: (onChange, tableType) => skillsFilter(onChange, tableType),
   filterMethod: ({ value = 'All' }, { _original: { skills } }, filterValues, allActive) =>
-    value === 'All'
+    value === 'All' || allActive
       ? allActive
       : skills
           .map(skill => skill.skillName)

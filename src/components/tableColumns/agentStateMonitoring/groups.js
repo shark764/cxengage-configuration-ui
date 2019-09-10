@@ -9,7 +9,7 @@ import CheckboxFilterMenu from '../../../containers/CheckboxFilterMenu';
 export const helperFunctions = {
   groupsFilter: (onChange, tableType) => groupsFilter(onChange, tableType),
   filterMethod: ({ value = 'All' }, { _original: { groups } }, filterValues, allActive) =>
-    value === 'All'
+    value === 'All' || allActive
       ? allActive
       : groups
           .map(group => group.groupName)

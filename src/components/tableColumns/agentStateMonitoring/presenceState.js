@@ -4,7 +4,7 @@
 
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 import {
   PopoverDialog,
@@ -35,7 +35,7 @@ const PresenceStateLink = styled.span`
 `;
 const PopoverMenu = styled(PopoverDialog)`
   padding-bottom: 15px;
-  margin-top: ${props => (props.isPendingAway ? '10px' : '18px')};
+  margin-top: 10px;
   ${props => props.reasonsMenuVisible && `max-width: 300px;`};
 `;
 const NarrowDivider = styled.div`
@@ -84,8 +84,6 @@ export default function(
   presenceState,
   tableType,
   setAgentPresenceState,
-  setAgentPendingAway,
-  forceLogoutAgent,
   setAgentSelected,
   removeAgentSelected,
   getAgentReasonLists,
@@ -111,8 +109,6 @@ export default function(
           currentReason={row._original.reasonId}
           currentAgentId={row._original.agentId}
           setAgentPresenceState={setAgentPresenceState}
-          setAgentPendingAway={setAgentPendingAway}
-          forceLogoutAgent={forceLogoutAgent}
           setAgentSelected={setAgentSelected}
           removeAgentSelected={removeAgentSelected}
           getAgentReasonLists={getAgentReasonLists}
@@ -133,7 +129,7 @@ export default function(
       ),
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.presenceStateFilter(onChange, tableType),
-    getProps: (state, rowInfo) => {
+    getProps: () => {
       return { style: { overflow: 'visible' } };
     }
   };
@@ -165,7 +161,7 @@ export class PresenceStateCell extends Component {
     this.state = {
       showMenu: false,
       showReasons: false,
-      showConfirmation: false,
+      showLogoutWarning: false,
       expandedMenu: ''
     };
   }
@@ -181,16 +177,19 @@ export class PresenceStateCell extends Component {
     this.props.setAgentPresenceState(agentId, sessionId, presenceState, reason, reasonId, reasonListId) &&
     e.stopPropagation();
 
-  // We force agent to logout under xtreme
-  // circunstances, like being stuck in a failed call
-  forceLogout = (e, { _original: { agentId, sessionId } }) => {
+  showLogoutWarning = (e, show = true) => {
     e.stopPropagation();
-    this.props.forceLogoutAgent(agentId, sessionId);
+    this.setState({ showLogoutWarning: show });
   };
 
-  showForceLogout = (e, show = true) => {
-    e.stopPropagation();
-    this.setState({ showConfirmation: show });
+  selectPresenceState = (e, presenceState) => {
+    if (presenceState === 'notready') {
+      this.showPresenceReasonMenu(e, !this.state.showReasons);
+    } else if (presenceState === 'offline' && this.props.currentState === 'busy') {
+      this.showLogoutWarning(e, true);
+    } else {
+      this.changePresenceState(e, this.props.row, presenceState);
+    }
   };
 
   showPresenceStateMenu = (e, show = true) => {
@@ -281,7 +280,8 @@ export class PresenceStateCell extends Component {
   ];
 
   render() {
-    let content = [
+    const currentPresence = this.props.currentPresence.replace('-', '');
+    const content = [
       { presenceState: 'ready', label: 'Ready' },
       { presenceState: 'notready', label: 'Away' },
       { presenceState: 'offline', label: 'Logout' }
@@ -290,27 +290,17 @@ export class PresenceStateCell extends Component {
         key={presenceState}
         presenceState={presenceState}
         label={label}
-        onSelect={e =>
-          presenceState === 'notready'
-            ? this.showPresenceReasonMenu(e, !this.state.showReasons)
-            : this.changePresenceState(e, this.props.row, presenceState)
-        }
+        onSelect={e => this.selectPresenceState(e, presenceState)}
         // Presence state can be only "ready", "notready" and "offline"
         // Resources capacity statistics uses "not-ready"
-        isSelectedPresenceState={presenceState === this.props.currentPresence.replace('-', '')}
+        isSelectedPresenceState={presenceState === currentPresence}
       />
     ));
     return (
       <PresenceStateContainer>
         <PresenceStateLink onClick={e => this.showPresenceStateMenu(e, !this.state.showMenu)}>
-          {this.props.row._original.pendingAway ? (
-            <Fragment>
-              <PresenceStateIconSVG presenceStateIconType="notready" presenceStateMode="notready" size={25} />
-              {` Away (pending)`}
-            </Fragment>
-          ) : (
-            capitalizeFirstLetter(this.props.currentState)
-          )}
+          <PresenceStateIconSVG presenceStateIconType={currentPresence} presenceStateMode={currentPresence} size={25} />
+          {` ${capitalizeFirstLetter(this.props.currentState)}`}
         </PresenceStateLink>
         <PopoverMenu
           id="changePresenceStateMenu"
@@ -324,7 +314,6 @@ export class PresenceStateCell extends Component {
           // isVisible={this.state.showMenu}
           isVisible={this.props.currentAgentId === this.props.agentSelected && this.props.menuOpen === 'state'}
           reasonsMenuVisible={this.state.showReasons}
-          isPendingAway={this.props.row._original.pendingAway}
         >
           <FormattedTitle
             messageTitle="Change State"
@@ -338,22 +327,7 @@ export class PresenceStateCell extends Component {
             </CenterWrapper>
           ) : (
             <Fragment>
-              {!this.state.showReasons && [
-                // Content contains ready || away || offline
-                ...content,
-                // We add 'Force offline' to the rendered array
-                // using spread operator condition
-                this.props.currentState === 'busy' ? (
-                  <PresenceStateRow
-                    key={'force-offline'}
-                    presenceState="offline"
-                    label="Force Logout"
-                    onSelect={e => this.showForceLogout(e, !this.state.showConfirmation)}
-                  />
-                ) : (
-                  []
-                )
-              ]}
+              {!this.state.showReasons && content}
               {this.state.showReasons && (
                 <NotReadyState>
                   {this.props.selectedAgentReasonLists.length === 0 && (
@@ -367,13 +341,15 @@ export class PresenceStateCell extends Component {
             </Fragment>
           )}
         </PopoverMenu>
-        {this.state.showConfirmation && (
+        {this.state.showLogoutWarning && (
           <Confirmation
-            confirmBtnCallback={e => this.forceLogout(e, this.props.row)}
-            cancelBtnCallback={e => this.showForceLogout(e, false)}
-            mainText={`This will force the disconnection of the agent session while busy.`}
-            secondaryText={'Are you sure you want to continue?'}
-            onMaskClick={e => this.showForceLogout(e, false)}
+            confirmBtnCallback={e =>
+              this.changePresenceState(e, this.props.row, 'offline') && this.showLogoutWarning(e, false)
+            }
+            cancelBtnCallback={e => this.showLogoutWarning(e, false)}
+            mainText={`This agent is in a busy state, any active interactions will be disconnected and lost.`}
+            secondaryText={`Are you sure you want to continue?`}
+            onMaskClick={e => this.showLogoutWarning(e, false)}
           />
         )}
       </PresenceStateContainer>
@@ -387,8 +363,6 @@ PresenceStateCell.propTypes = {
   currentPresence: PropTypes.string,
   row: PropTypes.any,
   setAgentPresenceState: PropTypes.func,
-  setAgentPendingAway: PropTypes.func,
-  forceLogoutAgent: PropTypes.func,
   setAgentSelected: PropTypes.func,
   removeAgentSelected: PropTypes.func,
   getAgentReasonLists: PropTypes.func,

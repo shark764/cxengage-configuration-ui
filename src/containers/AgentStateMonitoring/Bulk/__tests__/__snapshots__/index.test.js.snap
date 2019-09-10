@@ -8,6 +8,7 @@ ShallowWrapper {
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "countBusyAgentsSelected": 1,
   "key": "agentStateMonitoring:bulk",
   "reasonLists": Object {
     "id": "0001",
