@@ -10,8 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Queues
 - Transfer Lists
 - Agent State Monitoring
-- Business Hours
-- API Keys
+- Flow Debugger
 
 ## [Beta User Acceptance Testing]
 - Skills
@@ -22,6 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles (permissions)
 - Flows
 - Logi reportings
+- Business Hours
+- API Keys
+- Message Templates
+
+## [0.65.6] - 2019-09-13
+- <no-jira> - Adding Business Hours, Api Keys and Message Templates page to beta features.
 
 ## [0.65.5] - 2019-09-13
 ### Fixed
