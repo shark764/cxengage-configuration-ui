@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
+## [0.65.5] - 2019-09-13
+### Fixed
+- CXV1-19951 - Bulk Action selection not disabled for users forced to log out.
+
 ## [0.65.4] - 2019-09-13
 ### Changed
 - CXV1-19909 - Suggestions for changing verbiage of Warning messages on the Agent State Monitoring page.

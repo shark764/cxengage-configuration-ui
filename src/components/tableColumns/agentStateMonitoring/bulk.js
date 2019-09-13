@@ -43,28 +43,28 @@ export default function(onBulkClick) {
     sortable: false,
     resizable: false,
     width: 40,
-    Cell: ({ row }) => (
-      <CheckboxWrapper
-        className="bulk-action-selector-toggle"
-        onClick={e => onBulkClick(row._original.agentId, row._original.sessionId) && e.stopPropagation()}
-      >
-        <RowCheckbox
-          type="checkbox"
-          checked={row._original.bulkChangeItem || false}
-          readOnly
-          title="Add or remove this from the bulk actions form"
-        />
-      </CheckboxWrapper>
-    )
+    Cell: ({ row }) =>
+      row._original.presence !== 'offline' ? (
+        <CheckboxWrapper
+          className="bulk-action-selector-toggle"
+          onClick={e => onBulkClick(row._original.agentId, row._original.sessionId) && e.stopPropagation()}
+        >
+          <RowCheckbox
+            type="checkbox"
+            checked={row._original.bulkChangeItem || false}
+            readOnly
+            title="Add or remove this from the bulk actions form"
+          />
+        </CheckboxWrapper>
+      ) : (
+        <div style={{ textAlign: 'center' }} title={`Not available`}>
+          <span>--</span>
+        </div>
+      )
   };
 
-  bulkColumn.Cell.propTypes = {
-    value: PropTypes.any,
-    row: PropTypes.any
-  };
-  bulkColumn.Filter.propTypes = {
-    onChange: PropTypes.func
-  };
+  bulkColumn.Cell.propTypes = { value: PropTypes.any, row: PropTypes.any };
+  bulkColumn.Filter.propTypes = { onChange: PropTypes.func };
 
   return bulkColumn;
 }
