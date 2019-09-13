@@ -347,7 +347,7 @@ export class PresenceStateCell extends Component {
               this.changePresenceState(e, this.props.row, 'offline') && this.showLogoutWarning(e, false)
             }
             cancelBtnCallback={e => this.showLogoutWarning(e, false)}
-            mainText={`This agent is in a busy state, any active interactions will be disconnected and lost.`}
+            mainText={`This agent is in a Busy state. Any active interactions will be disconnected and lost.`}
             secondaryText={`Are you sure you want to continue?`}
             onMaskClick={e => this.showLogoutWarning(e, false)}
           />

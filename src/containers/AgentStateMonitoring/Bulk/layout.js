@@ -167,7 +167,7 @@ export default class AgentStateMonitoringBulkActionsForm extends Component {
       <BulkConfirmationWrapper
         key={listId + reason.reasonId + this.state.clearHoverInt}
         confirmBtnCallback={selectReason}
-        mainText={`This will change current state to "Unavailable - (${reason.name})" to all agents selected`}
+        mainText={`This will change the current state to "Unavailable - (${reason.name})" for all selected agents`}
         secondaryText={'Are you sure you want to continue?'}
       >
         <BulkMenuRow
@@ -242,7 +242,7 @@ export default class AgentStateMonitoringBulkActionsForm extends Component {
                   <BulkConfirmationWrapper
                     key={direction}
                     confirmBtnCallback={e => this.changeDirection(e, direction)}
-                    mainText={`This will change current work mode to "${label}" to all agents selected`}
+                    mainText={`This will change the current work mode to "${label}" for all selected agents`}
                     secondaryText={'Are you sure you want to continue?'}
                   >
                     <BulkDirectionRow direction={direction} label={label} />
@@ -282,8 +282,8 @@ export default class AgentStateMonitoringBulkActionsForm extends Component {
                           confirmBtnCallback={e => this.changePresenceState(e, presenceState)}
                           mainText={
                             this.props.countBusyAgentsSelected > 0 && presenceState === 'offline'
-                              ? `One or more of the agents selected is in a busy state, any active interactions will be disconnected and lost.`
-                              : `This will change current state to "${warningMessage}" to all agents selected`
+                              ? `One or more of the selected agents are in a Busy state. Any active interactions will be disconnected and lost.`
+                              : `This will change the current state to "${warningMessage}" for all selected agents`
                           }
                           secondaryText={'Are you sure you want to continue?'}
                         >

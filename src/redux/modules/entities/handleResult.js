@@ -3,10 +3,15 @@ import { errorManager } from '../../../utils/sdk';
 import { Toast } from 'cx-ui-components';
 import { of } from 'rxjs/observable/of';
 
-export function handleError(error, a) {
+export function handleError(error, a, errorMessage = null) {
   if (!isIgnoredToast(a.type, a.entityName) && a.type !== '@@redux-form/CHANGE') {
-    Toast.error(errorManager(error).errorMessage);
+    if (errorMessage) {
+      Toast.error(errorMessage);
+    } else {
+      Toast.error(errorManager(error).errorMessage);
+    }
   }
+
   a.type = `${a.type}_REJECTED`;
   return of(a);
 }

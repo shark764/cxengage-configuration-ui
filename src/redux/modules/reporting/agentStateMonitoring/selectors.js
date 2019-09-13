@@ -69,11 +69,12 @@ export const selectAgentPresenceReasonLists = createSelector(
     agentReasons ? agentReasons.filter(list => list.get('name') !== 'System Presence Reasons').toJS() : []
 );
 
-export const getAgentCurrentState = (state, agentId) =>
-  selectAgentStateMonitoringMap(state)
+export const getAgentCurrentState = (state, agentId) => {
+  const agentData = selectAgentStateMonitoringMap(state)
     .get('data')
-    .find(agent => agent.get('agentId') === agentId)
-    .get('state');
+    .find(agent => agent.get('agentId') === agentId);
+  return agentData && agentData.get('state');
+};
 
 export const getBulkSelectedBusyAgents = createSelector(
   [selectAgentStateMonitoringTableData],

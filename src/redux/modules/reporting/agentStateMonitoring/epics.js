@@ -81,7 +81,9 @@ export const SetAgentPresenceState = (action$, store) =>
         })
       )
         .map(response => handleSuccess(response, a))
-        .catch(error => handleError(error, a))
+        .catch(error =>
+          handleError(error, a, 'A Presence State change is already in progress for this agent. Please try again.')
+        )
     );
 
 export const fetchAgentReasons = (action$, store) =>
@@ -186,7 +188,7 @@ export const SetBulkAgentPresenceState = (action$, store) =>
             allResult,
             a,
             `Presence state for BULKED_ITEMS_AFFECTED agent(s) was updated successfully.`,
-            `An error occurred when trying to update presence state for BULKED_ITEMS_AFFECTED agent(s).`
+            `A Presence State change is already in progress for BULKED_ITEMS_AFFECTED of the selected agents. Please try again.`
           )
         )
         .mergeMap(result =>

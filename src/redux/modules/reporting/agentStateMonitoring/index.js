@@ -18,9 +18,7 @@ export const initialState = fromJS({
   AgentReasons: {},
   selectedSidePanelId: '',
   BulkSelection: {},
-  monitorAllCallsPermission: ['MONITOR_ALL_CALLS'],
-  bargeAllCallsPermission: ['BARGE_ALL_CALLS'],
-  viewAllMonitoredCallsPermission: ['VIEW_ALL_MONITORED_CALLS']
+  PresenceStateUpdated: {}
 });
 
 // Actions
@@ -90,10 +88,16 @@ export default function AgentStateMonitoring(state = initialState, action) {
     case 'SET_UPDATING_TABLE_DATA_STATUS_$':
       return state.set('status', 'loading');
     case 'SET_AGENT_MONITORING_TABLE_DATA': {
-      const { tableData, bulkSelection } = getAgentMonitoringData(state, action.realtimeStatistics);
+      const { tableData, bulkSelection, presenceStateUpdated, selected } = getAgentMonitoringData(
+        state,
+        action.realtimeStatistics
+      );
       return state
         .set('data', fromJS(tableData))
         .set('BulkSelection', fromJS(bulkSelection))
+        .set('PresenceStateUpdated', fromJS(presenceStateUpdated))
+        .set('agentSelected', selected)
+        .set('menuOpen', selected ? state.get('menuOpen') : '')
         .set('status', 'loaded');
     }
     case 'SET_AGENT_MONITORING_TABLE_ROW_SORTED':
@@ -152,6 +156,14 @@ export default function AgentStateMonitoring(state = initialState, action) {
     case 'SET_AGENT_PRESENCE_STATE':
     case 'FORCE_LOGOUT_AGENT':
       return state.set('updating', true);
+    case 'SET_AGENT_DIRECTION_REJECTED':
+    case 'SET_BULK_AGENT_DIRECTION_REJECTED':
+    case 'SET_AGENT_PRESENCE_STATE_REJECTED':
+    case 'SET_BULK_AGENT_PRESENCE_STATE_REJECTED':
+      return state
+        .set('updating', false)
+        .set('agentSelected', '')
+        .set('menuOpen', '');
     case 'SET_AGENT_PRESENCE_STATE_FULFILLED':
     case 'SET_BULK_AGENT_PRESENCE_STATE_FULFILLED': {
       const { response, agentId, agentCurrentState } = action;
@@ -210,6 +222,26 @@ export default function AgentStateMonitoring(state = initialState, action) {
           // Remove row from bulk selection when setting
           // agent as "offline"
           .deleteIn(['BulkSelection', response.state === 'offline' ? agentId : ''])
+          // On every presene state change, we store
+          // new presence and state (with reason) until presence/state
+          // comming within batch data equals new ones.
+          // We do this since STAGING/PROD enviroments have the same polling
+          // rate, but has a delay for reporting statistics update.
+          .setIn(
+            ['PresenceStateUpdated', agentId],
+            fromJS({
+              presence: response.presence,
+              state: response.state,
+              reasonId: response.reasonId,
+              reasonName: response.reasonName,
+              reasonListId: response.reasonListId,
+              reasonListName: response.reasonListName,
+              // On every change, we initialize iterations cound to 0,
+              // we will increment this count on every data refresh
+              // until it reach two, then we removed from redux state.
+              iterations: 0
+            })
+          )
           // Stop spinner icon
           .set('updating', false)
           .set('agentSelected', agentSelected)
@@ -255,7 +287,9 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
   // every loop, to keep proper agents selected.
   // This way we ensure we won't perform actions
   // on agents that went offline.
-  const bulkSelection = {};
+  const bulkSelection = {},
+    presenceStateUpdated = {};
+  let selected = '';
   const tableData = realtimeStatistics.resources.reduce((newAgents, agent) => {
     const agentStates = realtimeStatistics.agentStates.filter(state => state.agentId === agent.agentId);
     const currentAgentState = agentStates[0] || {};
@@ -268,8 +302,44 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
       awayTime,
       awayRate,
       groups = [],
+      // Agents can have no skills assigned
       skills = []
     } = currentAgentState;
+
+    let agentSelected = state.get('agentSelected') === agent.agentId;
+    // Keeping old agent-selected the same if agent
+    // still exists within data.
+    if (agentSelected) {
+      selected = agent.agentId;
+    }
+
+    let agentPresenceStateUpdated = state.getIn(['PresenceStateUpdated', agent.agentId], undefined);
+    // If state has been stored less than two iterations
+    // then we apply this state.
+    // ////////////////////////////////////////
+    // NOTE: This solution is used due to reporting
+    // process delay, DEV/QE don't have any delay, but
+    // statistics in DEV/STAGING are not being updated
+    // inmediatly.
+    // ////////////////////////////////////////
+    if (agentPresenceStateUpdated && agentPresenceStateUpdated.get('iterations') < 2) {
+      // We keep state-updates List by counting iterations
+      // after change was applied, every state change has to remain
+      // for at least two data refresh.
+      // If count has reached two, then we don't included
+      // it in List for next data refresh.
+      presenceStateUpdated[agent.agentId] = {
+        presence: agentPresenceStateUpdated.get('presence'),
+        state: agentPresenceStateUpdated.get('state'),
+        reasonId: agentPresenceStateUpdated.get('reasonId'),
+        reasonName: agentPresenceStateUpdated.get('reasonName'),
+        reasonListId: agentPresenceStateUpdated.get('reasonListId'),
+        reasonListName: agentPresenceStateUpdated.get('reasonListName'),
+        // We increment iterations for this change, if count is two
+        // on next data refresh it won't be applied.
+        iterations: agentPresenceStateUpdated.get('iterations') + 1
+      };
+    }
 
     let bulkChecked = state.getIn(['BulkSelection', agent.agentId, 'checked'], false);
     // If it was checked, then we add it to new
@@ -280,9 +350,18 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
     agent = {
       // Data for internal use
       id: agent.agentId,
+      // We update new bulk-selection, to ensure we are
+      // not performing actions on agents who already went offline
       bulkChangeItem: bulkChecked,
+      // We need to ensure old agentSelected hasn't been removed
+      // from data due to agent going offline
+      agentSelected,
       // Agent data
       ...agent,
+      // We set stored presence and state (with reason) for
+      // at least two iterations, this way we ensure reporting
+      // statistics are updated properly after a state change.
+      ...(presenceStateUpdated[agent.agentId] && { ...presenceStateUpdated[agent.agentId] }),
       channelTypes: agent.capacity
         ? agent.capacity.reduce(
             (acc, item) => {
@@ -322,7 +401,7 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
     newAgents.push(agent);
     return newAgents;
   }, []);
-  return { tableData, bulkSelection };
+  return { tableData, bulkSelection, presenceStateUpdated, selected };
 };
 
 const categorizeItems = (rawItems, name) => {

@@ -429,8 +429,7 @@ entities.interactionMonitoring.columns = [
 entities.agentStateMonitoring.bulkEditsAvailable = true;
 entities.agentStateMonitoring.betaFeature = true;
 entities.agentStateMonitoring.pageTitle = 'Agent State Monitoring';
-entities.agentStateMonitoring.helpLink =
-  '/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring';
+entities.agentStateMonitoring.helpLink = '/Help/Content/Reporting/Realtime/Agent-State-Monitoring.htm';
 entities.agentStateMonitoring.defaultSorted = [];
 entities.agentStateMonitoring.columns = [
   { name: 'Channel', active: true },

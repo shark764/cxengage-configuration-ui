@@ -86,7 +86,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring",
+    "helpLink": "/Help/Content/Reporting/Realtime/Agent-State-Monitoring.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",

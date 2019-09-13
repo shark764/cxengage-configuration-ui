@@ -23,6 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flows
 - Logi reportings
 
+## [0.65.4] - 2019-09-13
+### Changed
+- CXV1-19909 - Suggestions for changing verbiage of Warning messages on the Agent State Monitoring page.
+### Fixed
+- CXV1-19919 - Agent Monitoring - Agent in force state change shows in old state after being placed offline during polling interval.
+- CXV1-19920 - Agent Monitoring - If presence returns a 404, you can no longer use the state change functionality until refreshing the page.
+
 ## [0.65.3] - 2019-09-10
 ### Changed
 - CXV1-19880 - Agent Monitoring - Remove pending away state and warn the supervisor when disconnecting a busy agent.

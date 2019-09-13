@@ -126,7 +126,10 @@ export default class AgentStateMonitoringTable extends Component {
           }
         },
         style: {
-          background: this.highlightRow(rowInfo) ? 'rgba(253, 255, 50, 0.17)' : null
+          background: this.highlightRow(rowInfo)
+            ? 'rgba(253, 255, 50, 0.17)'
+            : // We set a new color when agent goes offline
+              rowInfo.row._original.state === 'offline' ? 'rgba(108, 122, 137, 0.6)' : null
         }
       };
     } else {
