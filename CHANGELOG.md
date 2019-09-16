@@ -25,8 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.65.7]- 2019-09-12
+### Fixed
+-CXV1-19932 - Flow debug logs page - Fixed Text wrapping and also added space between the buttons and the display in pretty view.
+
 ## [0.65.6] - 2019-09-13
-- <no-jira> - Adding Business Hours, Api Keys and Message Templates page to beta features.
+- <no-jira> - Adding Business Hours, Api Keys and Message Templates page to beta features. 
 
 ## [0.65.5] - 2019-09-13
 ### Fixed
@@ -35,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.65.4] - 2019-09-13
 ### Changed
 - CXV1-19909 - Suggestions for changing verbiage of Warning messages on the Agent State Monitoring page.
+
 ### Fixed
 - CXV1-19919 - Agent Monitoring - Agent in force state change shows in old state after being placed offline during polling interval.
 - CXV1-19920 - Agent Monitoring - If presence returns a 404, you can no longer use the state change functionality until refreshing the page.
@@ -42,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.65.3] - 2019-09-10
 ### Changed
 - CXV1-19880 - Agent Monitoring - Remove pending away state and warn the supervisor when disconnecting a busy agent.
+
 ### Fixed
 - CXV1-19884 - Agent Monitoring - Filter on skills column doesn not have the same behavior for All option as checking all of them one by one
 - CXV1-19886 - Agent Monitoring - Bulk actions form does not get updated when a selected row is removed from table.

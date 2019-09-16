@@ -12,6 +12,7 @@ Object {
     "eventId": "id",
     "eventName": "event",
   },
+  "reportingEventsRawData": "mock-string-data",
   "reportingEventsString": "mock-string-data",
 }
 `;

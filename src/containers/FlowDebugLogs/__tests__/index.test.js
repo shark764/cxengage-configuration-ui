@@ -3,7 +3,8 @@ import { shallow } from 'enzyme';
 import { mockStore } from '../../../utils/testUtils';
 import {
   getReportingEvents,
-  getStringifyReportingEvents
+  getStringifyReportingEvents,
+  getStringifyReportingEventsRawData
 } from '../../../redux/modules/entities/reportingEvents/selectors';
 import FlowDebugLayout, { mapStateToProps } from '../';
 
@@ -12,6 +13,7 @@ getReportingEvents.mockImplementation(() => {
   return { eventName: 'event', eventId: 'id' };
 });
 getStringifyReportingEvents.mockImplementation(() => 'mock-string-data');
+getStringifyReportingEventsRawData.mockImplementation(() => 'mock-string-data');
 
 describe('FlowDebugLayout Renders', () => {
   it('renders', () => {

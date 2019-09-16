@@ -7,9 +7,9 @@ import { copyToClipboard, downloadFile } from 'serenova-js-utils/browser';
 
 const dataViewStyle = css`
   width: 90em;
-  margin: 15px 0 0 0;
   border: 1px solid #c8cacc;
-  height: 50em;
+  height: 40em;
+  over-flow: auto;
 `;
 
 const Wrapper = styled.div`
@@ -70,11 +70,12 @@ const WrapButton = styled.button`
   background-color: white;
   border: none;
   outline: none;
-  color: ${props => (props.prettyView ? 'orange;' : 'black;')};
+  color: ${props => (props.wordwrap ? 'orange;' : 'black;')};
 `;
 
 const ToggleButtons = styled.div`
   margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 const WordWrap = styled(WordWrapIconSVG)`
@@ -93,10 +94,6 @@ const Copy = styled.button`
   outline: none;
 `;
 
-const StyledReactJson = styled(ReactJson)`
-  ${dataViewStyle};
-`;
-
 const StyledTextArea = styled.textarea`
   ${dataViewStyle};
 `;
@@ -108,7 +105,8 @@ export default class FlowDebugLogs extends Component {
       value: '',
       copySuccess: '',
       showData: false,
-      prettyView: false
+      prettyView: false,
+      wordwrap: true
     };
   }
 
@@ -136,8 +134,8 @@ export default class FlowDebugLogs extends Component {
     this.setState({ prettyView: true });
   };
 
-  handleToggleView = () => {
-    this.setState({ prettyView: !this.state.prettyView });
+  handletoggleView = () => {
+    this.setState({ wordwrap: !this.state.wordwrap });
   };
 
   search = event => {
@@ -180,7 +178,7 @@ export default class FlowDebugLogs extends Component {
           <RawButton onClick={this.handleChangeRawData} prettyView={this.state.prettyView}>
             Raw
           </RawButton>
-          <WrapButton onClick={this.handletoggleView} prettyView={this.state.prettyView}>
+          <WrapButton onClick={this.handletoggleView} wordwrap={this.state.wordwrap}>
             <WordWrap wordWrapIconType="wordWrapOn" size={10} />
           </WrapButton>
           <Copy onClick={this.copyToClipboard}>
@@ -189,6 +187,7 @@ export default class FlowDebugLogs extends Component {
         </ToggleButtons>
 
         {!this.state.prettyView &&
+          this.state.wordwrap &&
           this.state.showData && (
             <StyledTextArea
               id="rawData"
@@ -197,8 +196,22 @@ export default class FlowDebugLogs extends Component {
               ref={textarea => (this.textArea = textarea)}
             />
           )}
+        {!this.state.prettyView &&
+          !this.state.wordwrap && (
+            <StyledTextArea
+              id="wrapRawData"
+              value={this.props.reportingEventsRawData}
+              ref={textarea => (this.textArea = textarea)}
+            />
+          )}
         {this.state.prettyView &&
-          this.state.showData && <StyledReactJson type="text" src={this.props.reportingEvents} />}
+          this.state.showData && (
+            <ReactJson
+              type="text"
+              src={this.props.reportingEvents}
+              style={{ border: '1px solid #c8cacc', height: '49em', width: '111em', overflow: 'auto' }}
+            />
+          )}
       </Wrapper>
     );
   }
