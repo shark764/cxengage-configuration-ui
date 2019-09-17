@@ -74,23 +74,14 @@ export default class BetaFeatures extends Component {
       roles: false,
       flows: false,
       dispatchMappings: false,
-      logiStandard: false,
-      logiAdvanced: false,
       businessHours: false,
       apiKeys: false,
       messageTemplates: false
     };
     const pageTitles = {};
     Object.keys(features).forEach(entityName => {
-      if (entityName === 'logiStandard') {
-        pageTitles[entityName] = '(Early Access) Standard Reports';
-      } else if (entityName === 'logiAdvanced') {
-        pageTitles[entityName] = '(Early Access) Advanced Reports';
-      } else {
-        pageTitles[entityName] = entitiesMetaData[entityName].pageTitle;
-      }
+      pageTitles[entityName] = entitiesMetaData[entityName].pageTitle;
     });
-
     this.state = { features, pageTitles };
   }
   componentDidMount() {

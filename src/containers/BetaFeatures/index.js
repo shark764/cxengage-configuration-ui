@@ -42,9 +42,7 @@ export function mapStateToProps(state) {
       outboundIdentifierLists: false,
       roles: false,
       flows: false,
-      dispatchMappings: false,
-      logiStandard: !userHasPermissions(state, ['CONFIG_REPORTING_BI_VIEW']),
-      logiAdvanced: !userHasPermissions(state, ['CONFIG_REPORTING_BI_VIEW'])
+      dispatchMappings: false
     }
   };
 }
