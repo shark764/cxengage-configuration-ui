@@ -1,13 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ReasonsForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    id="frm-reason-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    id="frm-reason-external-id"
+    inputType="text"
+    label="External Id"
+    name="externalId"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    id="frm-reason-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ConfirmationWrapper
+    mainText="Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      disabled={true}
+      id="frm-reason-shared"
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Presence Reason"
+    />
+  </ConfirmationWrapper>
+</form>
 `;
 
 exports[`<ReasonsForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    id="frm-reason-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="input"
+    disabled={true}
+    id="frm-reason-external-id"
+    inputType="text"
+    label="External Id"
+    name="externalId"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    id="frm-reason-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ConfirmationWrapper
+    mainText="Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      disabled={true}
+      id="frm-reason-shared"
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Presence Reason"
+    />
+  </ConfirmationWrapper>
+</form>
 `;

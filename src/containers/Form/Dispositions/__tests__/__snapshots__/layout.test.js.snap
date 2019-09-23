@@ -1,13 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DispositionsForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="dispositionsName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="Please enter a name.."
+  />
+  <InputField
+    componentType="input"
+    data-automation="dispositionExternalid"
+    disabled={false}
+    label="External ID"
+    name="externalid"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="dispositionsDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ToggleField
+    data-automation="dispositionToggleField"
+    disabled={false}
+    id="frm-lists-shared"
+    label="Shared"
+    name="shared"
+  />
+</form>
 `;
 
 exports[`<DispositionsForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="dispositionsName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="Please enter a name.."
+  />
+  <InputField
+    componentType="input"
+    data-automation="dispositionExternalid"
+    disabled={false}
+    label="External ID"
+    name="externalid"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="dispositionsDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ToggleField
+    data-automation="dispositionToggleField"
+    disabled={false}
+    id="frm-lists-shared"
+    label="Shared"
+    name="shared"
+  />
+</form>
 `;

@@ -1,7 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EmailTemplatesDetailsPanel /> renders emailTemplates detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-email-templates"
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    Mock Child
+    <React.Fragment>
+      <Detail
+        label="Subject"
+        value="Welcome to CxEngage"
+      />
+      <Detail
+        label="Body"
+        value="Hello {{{variable-test-1}}} {{{variable-test-2}}}! Welcome to The Serenova Team!"
+      />
+    </React.Fragment>
+  </React.Fragment>
+</styled.div>
 `;

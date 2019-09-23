@@ -1,7 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ReasonsDetailsPanel Renders renders 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<ReasonsDetailsPanel
+  dispatch={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  Child
+</ReasonsDetailsPanel>
 `;

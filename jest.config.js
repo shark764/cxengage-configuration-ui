@@ -9,5 +9,6 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|mjs)$': './config/jest/jest-transformer.js'
   },
-  transformIgnorePatterns: ['node_modules/(?!(cx-ui-components)/)', 'node_modules/sanitize.css/']
+  transformIgnorePatterns: ['node_modules/(?!(cx-ui-components)/)', 'node_modules/sanitize.css/'],
+  snapshotSerializers: ["enzyme-to-json/serializer"]
 };

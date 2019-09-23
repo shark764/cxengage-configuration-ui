@@ -1,13 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SlasForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="slasFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="slasFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ConfirmationWrapper
+    mainText="Setting shared to \\"enabled\\" for this SLA. Once an SLA is shared and saved, it cannot be reverted."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="slasFormFieldShared"
+      disabled={false}
+      label="Shared"
+      name="shared"
+      onChange={[Function]}
+      title="Change \\"Shared\\" state for this SLA"
+    />
+  </ConfirmationWrapper>
+  <React.Fragment>
+    <DetailHeader
+      onActionButtonClick={[Function]}
+      open={true}
+      text="Initial Version"
+      userHasUpdatePermission={true}
+    />
+  </React.Fragment>
+</form>
 `;
 
 exports[`<SlasForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="slasFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="slasFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ConfirmationWrapper
+    mainText="Setting shared to \\"enabled\\" for this SLA. Once an SLA is shared and saved, it cannot be reverted."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="slasFormFieldShared"
+      disabled={false}
+      label="Shared"
+      name="shared"
+      onChange={[Function]}
+      title="Change \\"Shared\\" state for this SLA"
+    />
+  </ConfirmationWrapper>
+  <React.Fragment>
+    <DetailHeader
+      onActionButtonClick={[Function]}
+      open={true}
+      text="Initial Version"
+      userHasUpdatePermission={true}
+    />
+  </React.Fragment>
+</form>
 `;

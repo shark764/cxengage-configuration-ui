@@ -1,7 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SlasDetailsPanel /> renders slas detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  className="dtpanel-entity-slas"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Published Versions"
+  />
+  <_temp
+    contains="versions"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "numericOrderVersion",
+        },
+      ]
+    }
+    tableType="sidePanel"
+    viewSubEntity={[Function]}
+  />
+</styled.div>
 `;

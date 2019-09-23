@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.65.9] - 2019-09-20
+### Changed
+- <no-jira> - Fixed snapshots of components
+
 ## [0.65.8] - 2019-09-16
 ### Changed
 - CXV1-19961 - To change the names in the UI for reporting.

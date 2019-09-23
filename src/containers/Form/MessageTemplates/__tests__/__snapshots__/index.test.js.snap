@@ -15,9 +15,48 @@ Object {
 `;
 
 exports[`TransferLists Renders renders 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<Connect(ReduxForm)
+  channels="mockData"
+  initialValues="mock messageTemplates initial values"
+  isSaving={true}
+  key="mockId"
+  selectedEntityId="mockId"
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  templateText="mockData"
+  templateTextType="mockData"
+  toggleMessageTemplateText={[Function]}
+  userHasUpdatePermission={true}
+>
+  Child
+</Connect(ReduxForm)>
 `;
 
 exports[`createFormName returns proper values 1`] = `undefined`;

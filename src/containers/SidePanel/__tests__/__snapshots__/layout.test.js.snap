@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SidePanel Layout renders the side panel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<React.Fragment>
+  <SliderExpander
+    id="SlidingResizer"
+    rightPageOffset={30}
+  />
+  <styled.div
+    slidingWidth={30}
+  >
+    <Styled(Connect(SidePanelHeader)) />
+    <Styled(Connect(SidePanelActions)) />
+  </styled.div>
+</React.Fragment>
 `;

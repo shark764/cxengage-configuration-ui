@@ -1,15 +1,476 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Interaction Monitoring Layout renders all columns , all columns are active  1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div>
+  <PageHeader
+    helpLink="https://docs.cxengage.net/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring"
+    text="Interaction Monitoring"
+  >
+    <div>
+      <Styled(Button)
+        className="timeConversion"
+        id="timeConversion"
+        onClick={[Function]}
+        type="secondary"
+      >
+        12h
+      </Styled(Button)>
+      <Styled(Connect(CheckboxMenu))
+        menuType="Columns"
+        selectionType="checkbox"
+        tableType="interactionMonitoring"
+        type="secondary"
+      >
+        Columns
+      </Styled(Connect(CheckboxMenu))>
+    </div>
+  </PageHeader>
+  <ReactTable
+    AggregatedComponent={[Function]}
+    ExpanderComponent={[Function]}
+    FilterComponent={[Function]}
+    LoadingComponent={[Function]}
+    NoDataComponent={[Function]}
+    PadRowComponent={[Function]}
+    PaginationComponent={[Function]}
+    PivotValueComponent={[Function]}
+    ResizerComponent={[Function]}
+    SubComponent={[Function]}
+    TableComponent={[Function]}
+    TbodyComponent={[Function]}
+    TdComponent={[Function]}
+    TfootComponent={[Function]}
+    ThComponent={[Function]}
+    TheadComponent={[Function]}
+    TrComponent={[Function]}
+    TrGroupComponent={[Function]}
+    aggregatedKey="_aggregated"
+    className="InteractionMonitoringTable -striped -highlight"
+    collapseOnDataChange={true}
+    collapseOnPageChange={true}
+    collapseOnSortingChange={true}
+    column={
+      Object {
+        "Aggregated": undefined,
+        "Cell": undefined,
+        "Expander": undefined,
+        "Filter": undefined,
+        "Footer": undefined,
+        "Header": undefined,
+        "Pivot": undefined,
+        "PivotValue": undefined,
+        "aggregate": undefined,
+        "className": "",
+        "filterAll": false,
+        "filterMethod": undefined,
+        "filterable": undefined,
+        "footerClassName": "",
+        "footerStyle": Object {},
+        "getFooterProps": [Function],
+        "getHeaderProps": [Function],
+        "getProps": [Function],
+        "headerClassName": "",
+        "headerStyle": Object {},
+        "minWidth": 100,
+        "resizable": undefined,
+        "show": true,
+        "sortMethod": undefined,
+        "sortable": undefined,
+        "style": Object {},
+      }
+    }
+    columns={
+      Array [
+        Object {
+          "Expander": [Function],
+          "expander": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Header": "Interaction Id",
+          "accessor": "interactionId",
+          "id": "interactionId",
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Header": "Agent",
+          "accessor": [Function],
+          "id": "agentName",
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Header": "Customer Id",
+          "accessor": "customer",
+          "id": "customer",
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Header": "Contact Point",
+          "accessor": "contactPoint",
+          "id": "contactPoint",
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Header": "Flow",
+          "accessor": "flowName",
+          "id": "flowName",
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Header": "Channel",
+          "accessor": "channelType",
+          "id": "channel",
+          "resizable": false,
+          "show": true,
+          "width": 140,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Direction",
+          "accessor": "direction",
+          "filterMethod": [Function],
+          "id": "direction",
+          "resizable": false,
+          "show": true,
+          "width": 140,
+        },
+        Object {
+          "Cell": [Function],
+          "Header": "Presence State",
+          "accessor": "state",
+          "id": "presenceState",
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Start Date",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "startDateTimestamp",
+          "minWidth": 210,
+          "resizable": false,
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Start Time",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "startTimestamp",
+          "minWidth": 190,
+          "resizable": false,
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Elapsed Time",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "elapsedTime",
+          "minWidth": 150,
+          "resizable": false,
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Monitoring",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "monitoring",
+          "minWidth": 180,
+          "resizable": false,
+          "show": true,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": <Connect(CheckboxMenu)
+            buttonType="columnFilter"
+            menuType="Groups"
+            selectionType="checkbox"
+            tableType="interactionMonitoring"
+          >
+            Groups
+          </Connect(CheckboxMenu)>,
+          "Header": "Groups",
+          "accessor": [Function],
+          "filterable": true,
+          "id": "groups",
+          "minWidth": 190,
+          "show": true,
+          "sortable": false,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": <Connect(CheckboxMenu)
+            buttonType="columnFilter"
+            menuType="Skills"
+            selectionType="checkbox"
+            tableType="interactionMonitoring"
+          >
+            Skills
+          </Connect(CheckboxMenu)>,
+          "Header": "Skills",
+          "accessor": [Function],
+          "filterable": true,
+          "id": "skills",
+          "minWidth": 190,
+          "show": true,
+          "sortable": false,
+        },
+      ]
+    }
+    data={
+      Array [
+        Object {
+          "agents": Array [
+            Object {
+              "agentId": "4c67ac60-16f9-11e7-9873-1b92cd79a0c3",
+              "agentName": "Nick Guimond",
+              "groups": Array [
+                Object {
+                  "groupId": "e2fc7760-163e-11e8-8039-827d48dc951b",
+                  "groupName": "HQ",
+                },
+                Object {
+                  "groupId": "e2458080-8801-11e7-b018-9a5ac3da6edd",
+                  "groupName": "everyone",
+                },
+              ],
+              "skills": Array [
+                Object {
+                  "skillId": "d5bce530-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Support Questions",
+                },
+                Object {
+                  "skillId": "d13f9a70-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Sales Questions",
+                },
+              ],
+            },
+            Object {
+              "agentName": "Alex Giordano",
+              "groups": Array [
+                Object {
+                  "groupId": "e2fc7760-163e-11e8-8039-827d48dc951b",
+                  "groupName": "HQ",
+                },
+                Object {
+                  "groupId": "e2458080-8801-11e7-b018-9a5ac3da6edd",
+                  "groupName": "everyone",
+                },
+              ],
+              "skills": Array [
+                Object {
+                  "skillId": "d5bce530-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Support Questions",
+                },
+                Object {
+                  "skillId": "d13f9a70-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Sales Questions",
+                },
+              ],
+            },
+            Object {
+              "agentName": "Doron Orenstein",
+              "groups": Array [
+                Object {
+                  "groupId": "e2fc7760-163e-11e8-8039-827d48dc951b",
+                  "groupName": "HQ",
+                },
+                Object {
+                  "groupId": "e2458080-8801-11e7-b018-9a5ac3da6edd",
+                  "groupName": "everyone",
+                },
+              ],
+              "skills": Array [
+                Object {
+                  "skillId": "d5bce530-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Support Questions",
+                },
+                Object {
+                  "skillId": "d13f9a70-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Sales Questions",
+                },
+              ],
+            },
+            Object {
+              "agentName": "Josh Clowater",
+              "groups": Array [
+                Object {
+                  "groupId": "e2fc7760-163e-11e8-8039-827d48dc951b",
+                  "groupName": "HQ",
+                },
+                Object {
+                  "groupId": "e2458080-8801-11e7-b018-9a5ac3da6edd",
+                  "groupName": "everyone",
+                },
+              ],
+              "skills": Array [
+                Object {
+                  "skillId": "d5bce530-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Support Questions",
+                },
+                Object {
+                  "skillId": "d13f9a70-163e-11e8-8039-827d48dc951b",
+                  "skillName": "Sales Questions",
+                },
+              ],
+            },
+          ],
+          "channelType": "sms",
+          "contactPoint": "+23334444",
+          "currentStateDuration": 500,
+          "customer": "+12223333",
+          "direction": "inbound",
+          "flowName": "Sales",
+          "interactionId": "0000-1111-2222-3333",
+          "monitors": Array [
+            Object {
+              "agentId": "4c67ac60-16f9-11e7-9873-1b92cd79a0c3",
+              "agentName": "Anil Reddy",
+              "bargedIn": true,
+              "endTimestamp": "2018-02-20T14:24:41.519Z",
+              "startTimestamp": "2018-02-20T14:07:41.519Z",
+            },
+            Object {
+              "agentId": "4c67ac60-16f9-11e7-9873-1b92cd79a0c3",
+              "agentName": "Josh Williams",
+              "bargedIn": false,
+              "endTimestamp": null,
+              "startTimestamp": "2018-02-20T14:07:41.519Z",
+            },
+          ],
+          "startTimestamp": "2018-02-20T14:24:41.519Z",
+          "state": "in-conversation",
+        },
+      ]
+    }
+    defaultExpanded={Object {}}
+    defaultFilterMethod={[Function]}
+    defaultFiltered={Array []}
+    defaultPageSize={16}
+    defaultResized={Array []}
+    defaultSortDesc={false}
+    defaultSortMethod={[Function]}
+    defaultSorted={Array []}
+    expanded={Object {}}
+    expanderDefaults={
+      Object {
+        "filterable": false,
+        "resizable": false,
+        "sortable": false,
+        "width": 35,
+      }
+    }
+    filterable={true}
+    filtered={
+      Array [
+        Object {
+          "id": "channel",
+          "value": "voice",
+        },
+      ]
+    }
+    freezeWhenExpanded={false}
+    getLoadingProps={[Function]}
+    getNoDataProps={[Function]}
+    getPaginationProps={[Function]}
+    getProps={[Function]}
+    getResizerProps={[Function]}
+    getTableProps={[Function]}
+    getTbodyProps={[Function]}
+    getTdProps={[Function]}
+    getTfootProps={[Function]}
+    getTfootTdProps={[Function]}
+    getTfootTrProps={[Function]}
+    getTheadFilterProps={[Function]}
+    getTheadFilterThProps={[Function]}
+    getTheadFilterTrProps={[Function]}
+    getTheadGroupProps={[Function]}
+    getTheadGroupThProps={[Function]}
+    getTheadGroupTrProps={[Function]}
+    getTheadProps={[Function]}
+    getTheadThProps={[Function]}
+    getTheadTrProps={[Function]}
+    getTrGroupProps={[Function]}
+    getTrProps={[Function]}
+    groupedByPivotKey="_groupedByPivot"
+    indexKey="_index"
+    loading={false}
+    loadingText="Loading..."
+    multiSort={true}
+    nestingLevelKey="_nestingLevel"
+    nextText="Next"
+    noDataText="No rows found"
+    ofText="of"
+    onFetchData={[Function]}
+    onFilteredChange={[Function]}
+    onSortedChange={[Function]}
+    originalKey="_original"
+    pageSizeOptions={
+      Array [
+        16,
+        20,
+        50,
+        100,
+      ]
+    }
+    pageText="Page"
+    pivotDefaults={Object {}}
+    pivotIDKey="_pivotID"
+    pivotValKey="_pivotVal"
+    previousText="Previous"
+    resizable={true}
+    rowsText="rows"
+    showPageJump={true}
+    showPageSizeOptions={true}
+    showPagination={true}
+    showPaginationBottom={true}
+    showPaginationTop={false}
+    sortable={true}
+    sorted={Object {}}
+    style={Object {}}
+    subRowsKey="_subRows"
+  />
+</styled.div>
 `;
 
 exports[`Interaction Monitoring Layout renders no columns , all columns are not active  1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div>
+  <PageHeader
+    helpLink="https://docs.cxengage.net/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring"
+    text="Interaction Monitoring"
+  >
+    <div>
+      <Styled(Button)
+        className="timeConversion"
+        id="timeConversion"
+        onClick={[Function]}
+        type="secondary"
+      >
+        24h
+      </Styled(Button)>
+      <Styled(Connect(CheckboxMenu))
+        menuType="Columns"
+        selectionType="checkbox"
+        tableType="interactionMonitoring"
+        type="secondary"
+      >
+        Columns
+      </Styled(Connect(CheckboxMenu))>
+    </div>
+  </PageHeader>
+</styled.div>
 `;
 
 exports[`Interaction monitoring methods SubComponent renders the sub compnent given the correct inputs 1`] = `

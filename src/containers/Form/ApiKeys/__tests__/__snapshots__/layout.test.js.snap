@@ -1,13 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ApiKeysForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  id="frm-apikey"
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="ApiKeysFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder=""
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="ApiKeysFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <SelectField
+    data-automation="ApiKeysFormFieldRoleId"
+    disabled={false}
+    label="Role *"
+    name="roleId"
+    placeholder="Select a role..."
+    required={true}
+  />
+</form>
 `;
 
 exports[`<ApiKeysForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  id="frm-apikey"
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="ApiKeysFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder=""
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="ApiKeysFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <SelectField
+    data-automation="ApiKeysFormFieldRoleId"
+    disabled={false}
+    label="Role *"
+    name="roleId"
+    placeholder="Select a role..."
+    required={true}
+  />
+</form>
 `;

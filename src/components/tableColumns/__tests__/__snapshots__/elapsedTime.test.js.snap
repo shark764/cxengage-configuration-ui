@@ -23,9 +23,41 @@ Object {
 `;
 
 exports[`ElapsedTimeFilter renders a default properly when no filter is passed in 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<Connect(CustomDropdownMenu)
+  buttonType="columnFilter"
+  className="elapsedTime"
+  currentFilter="All Results"
+  menuType="Elapsed Time"
+  tableType="mockTable"
+  updateFilter={[Function]}
+>
+  <styled.div>
+    <FilterSelect
+      defaultValue="Greater Than"
+      onChange={[Function]}
+      options={
+        Array [
+          "Greater Than",
+          "Less Than",
+        ]
+      }
+    />
+    <styled.input
+      onChange={[Function]}
+      value={0}
+    />
+    <FilterSelect
+      defaultValue="Seconds"
+      onChange={[Function]}
+      options={
+        Array [
+          "Minutes",
+          "Seconds",
+        ]
+      }
+    />
+  </styled.div>
+</Connect(CustomDropdownMenu)>
 `;
 
 exports[`Time filter sub menu renders the time filter menu with default values 1`] = `

@@ -20,7 +20,54 @@ Object {
 `;
 
 exports[`OutboundIdentifiersForm Renders renders 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<Connect(ReduxForm)
+  channelType="email"
+  dispatch={[Function]}
+  flowIds={
+    Array [
+      Object {
+        "label": "mockLabel",
+        "value": "mockValue",
+      },
+    ]
+  }
+  initialValues={
+    Object {
+      "active": true,
+    }
+  }
+  isSaving={false}
+  key="mockId"
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+>
+  Child
+</Connect(ReduxForm)>
 `;

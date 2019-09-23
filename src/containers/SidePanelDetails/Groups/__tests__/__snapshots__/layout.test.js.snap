@@ -1,19 +1,127 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GroupsDetailsPanel /> renders Groups detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-groups"
+>
+  Mock Child
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="outboundIdentifierLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="reasonLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+</styled.div>
 `;
 
 exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with no update permision 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-groups"
+>
+  Mock Child
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="outboundIdentifierLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="reasonLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+</styled.div>
 `;
 
 exports[`<GroupsDetailsPanel /> renders Groups detailsPanel with status disabled 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-groups"
+>
+  Mock Child
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="outboundIdentifierLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="reasonLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+</styled.div>
 `;

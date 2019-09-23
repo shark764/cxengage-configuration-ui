@@ -1,13 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GroupsForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <InputField
+      componentType="input"
+      data-automation="groupsName"
+      disabled={true}
+      id="frm-groups-name"
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="textarea"
+      data-automation="groupsDescription"
+      disabled={true}
+      id="frm-groups-description"
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+  </React.Fragment>
+</form>
 `;
 
 exports[`<GroupsForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <React.Fragment>
+    <InputField
+      componentType="input"
+      data-automation="groupsName"
+      disabled={true}
+      id="frm-groups-name"
+      inputType="text"
+      label="Name *"
+      name="name"
+    />
+    <InputField
+      componentType="textarea"
+      data-automation="groupsDescription"
+      disabled={true}
+      id="frm-groups-description"
+      inputType="text"
+      label="Description"
+      name="description"
+    />
+  </React.Fragment>
+</form>
 `;

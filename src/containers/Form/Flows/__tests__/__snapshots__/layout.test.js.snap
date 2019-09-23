@@ -1,13 +1,107 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FlowsForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="flowsFormFieldName"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="flowsFormFieldDescription"
+    disabled={true}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <SelectField
+    data-automation="flowsFormFieldType"
+    disabled={true}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "Customer",
+          "value": "customer",
+        },
+        Object {
+          "label": "Resource",
+          "value": "resource",
+        },
+        Object {
+          "label": "Reusable",
+          "value": "reusable",
+        },
+      ]
+    }
+    placeholder="Select a type..."
+    required={true}
+  />
+</form>
 `;
 
 exports[`<FlowsForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="flowsFormFieldName"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="flowsFormFieldDescription"
+    disabled={true}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <SelectField
+    data-automation="flowsFormFieldType"
+    disabled={true}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "Customer",
+          "value": "customer",
+        },
+        Object {
+          "label": "Resource",
+          "value": "resource",
+        },
+        Object {
+          "label": "Reusable",
+          "value": "reusable",
+        },
+      ]
+    }
+    placeholder="Select a type..."
+    required={true}
+  />
+</form>
 `;

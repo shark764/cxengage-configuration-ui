@@ -1,13 +1,149 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BusinessHoursForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <div>
+      <DetailHeader
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="BusinessHoursFormFieldName"
+        disabled={false}
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="BusinessHoursFormFieldDescription"
+        disabled={false}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <SelectField
+        data-automation="BusinessHoursFormFieldTimezone"
+        disabled={false}
+        label="Timezone"
+        name="timezone"
+        options={
+          Array [
+            Object {
+              "label": "(6) a",
+              "value": "a",
+            },
+            Object {
+              "label": "(7) b",
+              "value": "b",
+            },
+          ]
+        }
+        required={true}
+      />
+    </div>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Regular Hours"
+      />
+      <RadioGroupField
+        disabled={false}
+        label="Business Hours"
+        name="businessHoursType"
+        options={
+          Array [
+            Object {
+              "label": "24/7",
+              "value": "24/7",
+            },
+            Object {
+              "label": "Scheduled Hours",
+              "value": "scheduledHours",
+            },
+          ]
+        }
+        required={false}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
+</form>
 `;
 
 exports[`<BusinessHoursForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <div>
+      <DetailHeader
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="BusinessHoursFormFieldName"
+        disabled={false}
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="BusinessHoursFormFieldDescription"
+        disabled={false}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <SelectField
+        data-automation="BusinessHoursFormFieldTimezone"
+        disabled={false}
+        label="Timezone"
+        name="timezone"
+        options={
+          Array [
+            Object {
+              "label": "(6) a",
+              "value": "a",
+            },
+            Object {
+              "label": "(7) b",
+              "value": "b",
+            },
+          ]
+        }
+        required={true}
+      />
+    </div>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Regular Hours"
+      />
+      <RadioGroupField
+        disabled={false}
+        label="Business Hours"
+        name="businessHoursType"
+        options={
+          Array [
+            Object {
+              "label": "24/7",
+              "value": "24/7",
+            },
+            Object {
+              "label": "Scheduled Hours",
+              "value": "scheduledHours",
+            },
+          ]
+        }
+        required={false}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
+</form>
 `;

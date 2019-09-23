@@ -1,19 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RolesDetailsPanel /> renders Roles detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-roles"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="undefined Permissions"
+    userHasUpdatePermission={true}
+  />
+  <_temp
+    deleteSubEntity={[Function]}
+    tableType="sidePanel"
+    userHasUpdatePermission={true}
+  />
+</styled.div>
 `;
 
 exports[`<RolesDetailsPanel /> renders Roles detailsPanel with no update permision 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-roles"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="undefined Permissions"
+    userHasUpdatePermission={false}
+  />
+  <_temp
+    tableType="sidePanel"
+    userHasUpdatePermission={false}
+  />
+</styled.div>
 `;
 
 exports[`<RolesDetailsPanel /> renders Roles detailsPanel with status disabled 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-roles"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="undefined Permissions"
+    userHasUpdatePermission={true}
+  />
+  <_temp
+    deleteSubEntity={[Function]}
+    tableType="sidePanel"
+    userHasUpdatePermission={true}
+  />
+</styled.div>
 `;

@@ -1,19 +1,297 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TransferListItemsForm> renders create transfer list items form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <React.Fragment>
+    <styled.h3>
+      Creating
+       Transfer List Item for :
+    </styled.h3>
+    <styled.h3
+      title="mockTransferListName"
+    >
+      mockTransferListName
+    </styled.h3>
+    <Styled(ToggleField)
+      data-automation="newCategoryToggle"
+      disabled={false}
+      label="Create new category"
+      labelMargin="0px"
+      name="newCategory"
+    />
+    <InputField
+      componentType="input"
+      data-automation="categoryNameInput"
+      disabled={false}
+      inputType="text"
+      label="Category Name *"
+      name="hierarchy"
+    />
+    <InputField
+      componentType="input"
+      data-automation="contactNameInput"
+      disabled={false}
+      inputType="text"
+      label="Contact Name *"
+      name="name"
+    />
+    <SelectField
+      data-automation="contactTypeDropDownBtn"
+      disabled={false}
+      label="Contact Type *"
+      name="contactType"
+      options={
+        Array [
+          Object {
+            "label": "Select a contact type...",
+            "value": "selectContactType",
+          },
+          Object {
+            "label": "Queue",
+            "value": "queue",
+          },
+          Object {
+            "label": "PSTN",
+            "value": "PSTN",
+          },
+          Object {
+            "label": "SIP",
+            "value": "SIP",
+          },
+        ]
+      }
+      required={true}
+    />
+    <SelectField
+      data-automation="transferTypeDropDownBtn"
+      disabled={true}
+      label="Transfer Type *"
+      name="transferType"
+      options={
+        Array [
+          Object {
+            "label": "Select a transfer type...",
+            "value": "selectTransferType",
+          },
+          Object {
+            "label": "Internal",
+            "value": "internal",
+          },
+          Object {
+            "label": "External",
+            "value": "external",
+          },
+        ]
+      }
+      required={true}
+    />
+    <CheckboxField
+      buttonType="checkboxField"
+      data-automation="warmColdTransferDropDownBtn"
+      dropDownText="Select warm/cold transfer..."
+      items={
+        Array [
+          Object {
+            "label": "Warm Transfer",
+            "name": "warmTransfer",
+          },
+          Object {
+            "label": "Cold Transfer",
+            "name": "coldTransfer",
+          },
+        ]
+      }
+      label="Warm/Cold Transfer *"
+      name="warmColdTransfer"
+    />
+    <AutoCompleteField
+      data-automation="endpointAutoSelectInput"
+      disabled={false}
+      label="Endpoint *"
+      name="endpoint"
+      placeholder="Select a queue..."
+      suggestedDropDownWidth="100%"
+      suggestedDropdownStyle={
+        Object {
+          "overflowX": "hidden",
+          "whiteSpace": "nowrap",
+          "width": "100%",
+        }
+      }
+      suggestions={
+        Array [
+          "queue1",
+          "queue2",
+        ]
+      }
+    />
+  </React.Fragment>
+  <SidePanelActions
+    isSaving={false}
+    onCancel={[Function]}
+    save={false}
+  />
+</form>
 `;
 
 exports[`<TransferListItemsForm> renders update category header form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <React.Fragment>
+    <styled.h3>
+      Updating category name for :
+    </styled.h3>
+    <styled.h3
+      title="mockTransferListName"
+    >
+      mockTransferListName
+    </styled.h3>
+    <InputField
+      componentType="input"
+      data-automation="categoryNameInput"
+      disabled={false}
+      inputType="text"
+      label="Category Name *"
+      name="hierarchy"
+    />
+  </React.Fragment>
+  <SidePanelActions
+    isSaving={false}
+    onCancel={[Function]}
+    save={false}
+  />
+</form>
 `;
 
 exports[`<TransferListItemsForm> renders update transfer list items form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <React.Fragment>
+    <styled.h3>
+      Updating
+       Transfer List Item for :
+    </styled.h3>
+    <styled.h3
+      title="mockTransferListName"
+    >
+      mockTransferListName
+    </styled.h3>
+    <AutoCompleteField
+      data-automation="categoryNameAutoSelectInput"
+      disabled={false}
+      label="Category Name *"
+      name="hierarchy"
+      placeholder="Select a Category..."
+      required={true}
+      suggestedDropDownWidth="100%"
+      suggestedDropdownStyle={
+        Object {
+          "overflowX": "hidden",
+          "whiteSpace": "nowrap",
+          "width": "100%",
+        }
+      }
+      suggestions={
+        Array [
+          "category1",
+          "category2",
+        ]
+      }
+    />
+    <InputField
+      componentType="input"
+      data-automation="contactNameInput"
+      disabled={false}
+      inputType="text"
+      label="Contact Name *"
+      name="name"
+    />
+    <SelectField
+      data-automation="contactTypeDropDownBtn"
+      disabled={false}
+      label="Contact Type *"
+      name="contactType"
+      options={
+        Array [
+          Object {
+            "label": "Select a contact type...",
+            "value": "selectContactType",
+          },
+          Object {
+            "label": "Queue",
+            "value": "queue",
+          },
+          Object {
+            "label": "PSTN",
+            "value": "PSTN",
+          },
+          Object {
+            "label": "SIP",
+            "value": "SIP",
+          },
+        ]
+      }
+      required={true}
+    />
+    <SelectField
+      data-automation="transferTypeDropDownBtn"
+      disabled={false}
+      label="Transfer Type *"
+      name="transferType"
+      options={
+        Array [
+          Object {
+            "label": "Select a transfer type...",
+            "value": "selectTransferType",
+          },
+          Object {
+            "label": "Internal",
+            "value": "internal",
+          },
+          Object {
+            "label": "External",
+            "value": "external",
+          },
+        ]
+      }
+      required={true}
+    />
+    <CheckboxField
+      buttonType="checkboxField"
+      data-automation="warmColdTransferDropDownBtn"
+      dropDownText="Select warm/cold transfer..."
+      items={
+        Array [
+          Object {
+            "label": "Warm Transfer",
+            "name": "warmTransfer",
+          },
+          Object {
+            "label": "Cold Transfer",
+            "name": "coldTransfer",
+          },
+        ]
+      }
+      label="Warm/Cold Transfer *"
+      name="warmColdTransfer"
+    />
+    <InputField
+      componentType="input"
+      data-automation="endpointInput"
+      disabled={false}
+      inputType="text"
+      label="Endpoint *"
+      name="endpoint"
+    />
+  </React.Fragment>
+  <SidePanelActions
+    isSaving={false}
+    onCancel={[Function]}
+    save={false}
+  />
+</form>
 `;

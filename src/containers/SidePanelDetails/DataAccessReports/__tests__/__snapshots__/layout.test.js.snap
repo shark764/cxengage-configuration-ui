@@ -1,13 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  data-automation="dtPanelEntityDataAccessReports"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text=" Users"
+    userHasUpdatePermission={true}
+  />
+  <_temp
+    deleteSubEntity={[Function]}
+    fields={Array []}
+    items={
+      Array [
+        Object {
+          "firstName": "mockFirstName",
+          "id": "mockId",
+          "lastName": "mockLastName",
+          "name": "mockName",
+          "status": "enabled",
+        },
+      ]
+    }
+    tableType="sidePanel"
+    userHasUpdatePermission={true}
+  />
+</styled.div>
 `;
 
 exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPanel with no update permision 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  data-automation="dtPanelEntityDataAccessReports"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text=" Users"
+    userHasUpdatePermission={false}
+  />
+  <_temp
+    deleteSubEntity={[Function]}
+    fields={Array []}
+    items={
+      Array [
+        Object {
+          "firstName": "mockFirstName",
+          "id": "mockId",
+          "lastName": "mockLastName",
+          "name": "mockName",
+          "status": "enabled",
+        },
+      ]
+    }
+    tableType="sidePanel"
+    userHasUpdatePermission={false}
+  />
+</styled.div>
 `;

@@ -1,13 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<OutboundIdentifiersDetailsPanel /> renders outboundIdentifiers detailsPanel , no update permissions 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-outbound-identifiers"
+>
+  Mock Child
+</styled.div>
 `;
 
 exports[`<OutboundIdentifiersDetailsPanel /> renders outboundIdentifiers detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-outbound-identifiers"
+>
+  Mock Child
+</styled.div>
 `;

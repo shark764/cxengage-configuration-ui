@@ -1,13 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ListsForm /> renders create list 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  id="frm-lists"
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-lists-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <ToggleField
+    disabled={false}
+    id="frm-lists-shared"
+    label="Shared *"
+    name="shared"
+  />
+  <SelectField
+    disabled={false}
+    id="frm-lists-list-type-id"
+    label="List Type *"
+    name="listTypeId"
+    options={
+      Array [
+        Object {
+          "label": "Disposition Label",
+          "value": "Disposition Value",
+        },
+        Object {
+          "label": "Reason Label",
+          "value": "Reason Value",
+        },
+      ]
+    }
+    required={false}
+  />
+</form>
 `;
 
 exports[`<ListsForm /> renders update list 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  id="frm-lists"
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="frm-lists-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <ToggleField
+    disabled={false}
+    id="frm-lists-shared"
+    label="Shared *"
+    name="shared"
+  />
+</form>
 `;

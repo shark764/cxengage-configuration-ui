@@ -1,7 +1,139 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <styled.span>
+      <span>
+        Enable/Disable Users
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Send Invitation
+      </span>
+      <ConfirmationWrapper
+        confirmBtnCallback={[Function]}
+        mainText="This will send an email invitation to all users selected"
+        secondaryText="Are you sure you want to continue?"
+      >
+        <Styled(ToggleField)
+          data-automation="usersBulkActionsFormFieldInviteNow"
+          label=""
+          name="inviteNow"
+        />
+      </ConfirmationWrapper>
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Resend Invitation
+      </span>
+      <ConfirmationWrapper
+        confirmBtnCallback={[Function]}
+        mainText="This will resend an email invitation to all users selected"
+        secondaryText="Are you sure you want to continue?"
+      >
+        <Styled(ToggleField)
+          data-automation="usersBulkActionsFormFieldResendInvitation"
+          label=""
+          name="resendInvitation"
+        />
+      </ConfirmationWrapper>
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Cancel Invitation
+      </span>
+      <ConfirmationWrapper
+        confirmBtnCallback={[Function]}
+        mainText="This will prevent all selected users from accepting the invitation."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <Styled(ToggleField)
+          data-automation="usersBulkActionsFormFieldCancelInvitation"
+          label=""
+          name="cancelInvitation"
+        />
+      </ConfirmationWrapper>
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Set Platform Authentication
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Set Default Identity Provider
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Add Group
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Remove Group
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Add Skill
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Remove Skill
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+</form>
 `;

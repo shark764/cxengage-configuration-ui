@@ -1,9 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ListsDetailsPanel Renders renders 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<ListsDetailsPanel
+  alertMessage="This list is inherited and cannot be edited"
+  deleteSubEntity={[Function]}
+  downloadCsv={[Function]}
+  id="dtpanel-lists"
+  inherited={true}
+  isSaving={true}
+  itemApiPending="mockId"
+  listType="mock list type name"
+  openCreateListItemModal={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tableFields={
+    Array [
+      Object {
+        "label": "Reason Name",
+        "name": "reasonName",
+        "required": true,
+        "type": "string",
+      },
+    ]
+  }
+  tableItems={
+    Array [
+      Object {
+        "description": "Nothing",
+        "reasonCode": 101,
+        "reasonName": "Test 1",
+      },
+    ]
+  }
+  updateSubEntity={[Function]}
+  uploadCsv={[Function]}
+  userHasUpdatePermission={true}
+>
+  Child
+</ListsDetailsPanel>
 `;
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `

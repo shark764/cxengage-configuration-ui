@@ -1,7 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddMemberToListLayout Layout renders the AddMemberToListLayout 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<React.Fragment>
+  <div>
+    <styled.h3>
+      Add list items : 
+    </styled.h3>
+    <styled.h3
+      title="Mock Entity"
+    >
+      Mock Entity
+    </styled.h3>
+    <styled.div>
+      <CloseIconSVG
+        closeIconType="secondary"
+        onClick={[Function]}
+        size={18}
+      />
+    </styled.div>
+  </div>
+  <_temp
+    tableType="modal"
+    userHasUpdatePermission={true}
+  />
+</React.Fragment>
 `;

@@ -1,13 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EmailTemplatesForm /> renders custom email 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <SelectField
+    disabled={false}
+    label="Email"
+    name="email"
+    options={
+      Array [
+        Object {
+          "label": "Default Email",
+          "value": "default",
+        },
+        Object {
+          "label": "Custom Email",
+          "value": "custom",
+        },
+      ]
+    }
+    required={true}
+  />
+  <React.Fragment>
+    <ToggleField
+      disabled={false}
+      label="Shared"
+      name="shared"
+    />
+    <TemplateTextEditorField
+      disabled={false}
+      label="Subject"
+      name="subject"
+      templates={
+        Array [
+          "Hello {{{user-first-name}}} {{{user-last-name}}}:↵↵You've been invited to following tenant on {{{product-name}}}: {{{tenant-name}}}↵↵Simply log in with your existing {{{product-name}}} username, {{{username}}}.↵↵Please click the following link to get started on accepting this invitation using single sign on: {{{sso-config-login-url}}}↵↵Note that the link above will expire after 24 hours. If you have forgotten your password or have issues please contact your system administrator for assistance.↵↵Thank you,The Serenova Team!",
+        ]
+      }
+    />
+    <TemplateTextEditorField
+      disabled={false}
+      label="Body"
+      name="body"
+      templates={
+        Array [
+          "Hello {{{user-first-name}}} {{{user-last-name}}}:↵↵You've been invited to following tenant on {{{product-name}}}: {{{tenant-name}}}↵↵Simply log in with your existing {{{product-name}}} username, {{{username}}}.↵↵Please click the following link to get started on accepting this invitation using single sign on: {{{sso-config-login-url}}}↵↵Note that the link above will expire after 24 hours. If you have forgotten your password or have issues please contact your system administrator for assistance.↵↵Thank you,The Serenova Team!",
+        ]
+      }
+    />
+  </React.Fragment>
+</form>
 `;
 
 exports[`<EmailTemplatesForm /> renders default email 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <SelectField
+    disabled={false}
+    label="Email"
+    name="email"
+    options={
+      Array [
+        Object {
+          "label": "Default Email",
+          "value": "default",
+        },
+        Object {
+          "label": "Custom Email",
+          "value": "custom",
+        },
+      ]
+    }
+    required={true}
+  />
+</form>
 `;

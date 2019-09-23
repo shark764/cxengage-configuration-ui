@@ -1,19 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OutboundIdentifierListsForm renders regular form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
 `;
 
 exports[`OutboundIdentifierListsForm renders, inherited is true, fields should be disabled 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
 `;
 
 exports[`OutboundIdentifierListsForm renders, isSaving is true, fields should be disabled 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={true}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
 `;

@@ -1,13 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  className="dtpanel-entity-flows"
+>
+  Mock Child
+  <DetailHeader
+    open={true}
+    text="Published Versions"
+    userHasUpdatePermission={true}
+  />
+  <_temp
+    contains="versions"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "numericOrderVersion",
+        },
+      ]
+    }
+    tableType="sidePanel"
+    updateSubEntity={[Function]}
+    userHasUpdatePermission={true}
+  />
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Drafts"
+    userHasUpdatePermission={true}
+  />
+  <_temp
+    confirmDeleteSubEntity={true}
+    contains="drafts"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "created",
+        },
+      ]
+    }
+    tableType="sidePanel"
+    userHasUpdatePermission={true}
+  />
+</styled.div>
 `;
 
 exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permision 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  className="dtpanel-entity-flows"
+>
+  Mock Child
+  <DetailHeader
+    open={true}
+    text="Published Versions"
+    userHasUpdatePermission={false}
+  />
+  <_temp
+    contains="versions"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "numericOrderVersion",
+        },
+      ]
+    }
+    tableType="sidePanel"
+    updateSubEntity={[Function]}
+    userHasUpdatePermission={false}
+  />
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Drafts"
+    userHasUpdatePermission={false}
+  />
+  <_temp
+    confirmDeleteSubEntity={true}
+    contains="drafts"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "created",
+        },
+      ]
+    }
+    tableType="sidePanel"
+    userHasUpdatePermission={false}
+  />
+</styled.div>
 `;

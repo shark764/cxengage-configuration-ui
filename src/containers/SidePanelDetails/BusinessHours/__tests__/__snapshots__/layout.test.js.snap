@@ -1,7 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BusinessHoursDetailsPanel /> renders businessHours detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  className="dtpanel-entity-business-hours"
+>
+  Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Exceptions"
+  />
+  <_temp
+    confirmDeleteSubEntity={true}
+    contains="exceptions"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "date",
+        },
+      ]
+    }
+    fields={
+      Array [
+        Object {
+          "label": "Date",
+          "name": "date",
+        },
+        Object {
+          "label": "Description",
+          "name": "description",
+        },
+        Object {
+          "label": "Start",
+          "name": "startTime",
+        },
+        Object {
+          "label": "End",
+          "name": "endTime",
+        },
+      ]
+    }
+    tableType="sidePanel"
+  />
+</styled.div>
 `;

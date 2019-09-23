@@ -1,13 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RolesForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="rolesFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="rolesFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ConfirmationWrapper
+    mainText="If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="rolesFormFieldShared"
+      disabled={false}
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Role"
+    />
+  </ConfirmationWrapper>
+</form>
 `;
 
 exports[`<RolesForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="rolesFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="rolesFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ConfirmationWrapper
+    mainText="If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="rolesFormFieldShared"
+      disabled={false}
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Role"
+    />
+  </ConfirmationWrapper>
+</form>
 `;

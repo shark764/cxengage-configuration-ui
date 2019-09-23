@@ -1,19 +1,331 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-users"
+>
+  Mock Child
+  <Connect(DetailWrapper)
+    contains="skills"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Skills"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="skills"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="groups"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Groups"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="groups"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="reasonLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="messageTemplates"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Message Templates"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="messageTemplates"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="transferLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Transfer Lists"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="transferLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={true}
+    />
+    <_temp
+      contains="outboundIdentifierLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
+</styled.div>
 `;
 
 exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permision 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-users"
+>
+  Mock Child
+  <Connect(DetailWrapper)
+    contains="skills"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Skills"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="skills"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="groups"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Groups"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="groups"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="reasonLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="messageTemplates"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Message Templates"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="messageTemplates"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="transferLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Transfer Lists"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="transferLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="outboundIdentifierLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+</styled.div>
 `;
 
 exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permision and active disabled 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  id="dtpanel-users"
+>
+  Mock Child
+  <Connect(DetailWrapper)
+    contains="skills"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Skills"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="skills"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="groups"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Groups"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="groups"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="reasonLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Presence Reason Lists"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="reasonLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="messageTemplates"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Message Templates"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="messageTemplates"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="transferLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Transfer Lists"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="transferLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+  <Connect(DetailWrapper)
+    contains="outboundIdentifierLists"
+    open={false}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text=" Outbound Identifier Lists"
+      userHasUpdatePermission={false}
+    />
+    <_temp
+      contains="outboundIdentifierLists"
+      filtered={Array []}
+      items={Array []}
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
+</styled.div>
 `;

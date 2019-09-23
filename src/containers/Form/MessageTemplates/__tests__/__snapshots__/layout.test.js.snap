@@ -1,13 +1,148 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MessageTemplatesForm /> renders create form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    data-automation="messageTemplateNameInput"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="messageTemplateDescriptionInput"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <CheckboxField
+    buttonType="checkboxField"
+    data-automation="msgTemplateChannelTypeDropDownBtn"
+    disabled={false}
+    dropDownText="Select Channel Type..."
+    items={
+      Array [
+        Object {
+          "label": "SMS",
+          "name": "sms",
+        },
+        Object {
+          "label": "Messaging",
+          "name": "messaging",
+        },
+        Object {
+          "label": "Email",
+          "name": "email",
+        },
+      ]
+    }
+    label="Channels *"
+    name="channels"
+  />
+  <SelectField
+    data-automation="msgTemplateTextTypeDropDownBtn"
+    disabled={false}
+    label="Type *"
+    name="templateTextType"
+    options={
+      Array [
+        Object {
+          "label": "Plain Text",
+          "value": "plaintext",
+        },
+        Object {
+          "label": "Rich Text",
+          "value": "html",
+        },
+      ]
+    }
+    required={true}
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="messageTemplateInput"
+    disabled={false}
+    inputType="text"
+    label="Template *"
+    name="template"
+  />
+</form>
 `;
 
 exports[`<MessageTemplatesForm /> renders update form 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    data-automation="messageTemplateNameInput"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="messageTemplateDescriptionInput"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <CheckboxField
+    buttonType="checkboxField"
+    data-automation="msgTemplateChannelTypeDropDownBtn"
+    disabled={true}
+    dropDownText="Select Channel Type..."
+    items={
+      Array [
+        Object {
+          "label": "SMS",
+          "name": "sms",
+        },
+        Object {
+          "label": "Messaging",
+          "name": "messaging",
+        },
+        Object {
+          "label": "Email",
+          "name": "email",
+        },
+      ]
+    }
+    label="Channels *"
+    name="channels"
+  />
+  <SelectField
+    data-automation="msgTemplateTextTypeDropDownBtn"
+    disabled={false}
+    label="Type *"
+    name="templateTextType"
+    options={
+      Array [
+        Object {
+          "label": "Plain Text",
+          "value": "plaintext",
+        },
+        Object {
+          "label": "Rich Text",
+          "value": "html",
+        },
+      ]
+    }
+    required={true}
+  />
+  <RichTextEditorField
+    disabled={false}
+    label="Template *"
+    name="template"
+    templateText="mockTemplateText"
+    toggleMessageTemplateText={[Function]}
+  />
+</form>
 `;

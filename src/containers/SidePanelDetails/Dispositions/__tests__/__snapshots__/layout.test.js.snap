@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DispositionsDetailsPanel /> renders dispositions detailsPanel 1`] = `
-ShallowWrapper {
-  "length": 1,
-}
+<styled.div
+  data-automation="entityDispositions"
+>
+  Mock Child
+</styled.div>
 `;
