@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import 'rxjs/add/operator/map';
 import { messageSubscribe, messageUnsubscribe } from './windowMessageObservable';
-import { localStorageSubscribe, localStorageUnsubscribe } from './localStorageObservable';
 import SidePanel from '../../containers/SidePanel';
 import AgentStateMonitoringBulkActionsForm from './Bulk';
 import AgentStateMonitoringTable from './Table';
@@ -31,17 +30,15 @@ const DetailsPanel = styled.div`
 export default class AgentStateMonitoring extends Component {
   componentWillMount() {
     messageSubscribe();
-    localStorageSubscribe();
-    this.props.setCurrentEntity('agentStateMonitoring');
-    this.props.fetchData('groups', 'agentStateMonitoring');
-    this.props.fetchData('skills', 'agentStateMonitoring');
-    this.props.fetchData('reasonLists', 'agentStateMonitoring');
+    this.props.setCurrentEntity(this.props.tableType);
+    this.props.fetchData('groups', this.props.tableType);
+    this.props.fetchData('skills', this.props.tableType);
+    this.props.fetchData('reasonLists', this.props.tableType);
     this.props.startAgentStateMonitoring();
   }
 
   componentWillUnmount() {
     messageUnsubscribe();
-    localStorageUnsubscribe();
   }
 
   componentDidUpdate(prevProps, nextProps) {
@@ -62,7 +59,7 @@ export default class AgentStateMonitoring extends Component {
   render() {
     return (
       <Wrapper isSidePanelOpen={this.props.selectedSidePanelId !== ''} slidingWidth={this.props.slidingWidth}>
-        <AgentStateMonitoringTable tableType={`agentStateMonitoring`} />
+        <AgentStateMonitoringTable tableType={this.props.tableType} />
 
         {this.props.selectedSidePanelId && (
           <SidePanel>
@@ -79,6 +76,7 @@ export default class AgentStateMonitoring extends Component {
 }
 
 AgentStateMonitoring.propTypes = {
+  tableType: PropTypes.string,
   setCurrentEntity: PropTypes.func,
   fetchData: PropTypes.func,
   startAgentStateMonitoring: PropTypes.func,

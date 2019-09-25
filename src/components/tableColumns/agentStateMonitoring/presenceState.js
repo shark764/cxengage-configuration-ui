@@ -64,7 +64,8 @@ const CenterWrapper = styled.div`
 `;
 
 export const helperFunctions = {
-  presenceStateFilter: (onChange, tableType) => presenceStateFilter(onChange, tableType),
+  presenceStateFilter: (onChange, tableType, isAllOptionActive) =>
+    presenceStateFilter(onChange, tableType, isAllOptionActive),
   filterMethod: ({ value = 'All', id }, row) => {
     if (value === 'Idle') {
       return row[id] === 'idle';
@@ -91,7 +92,8 @@ export default function(
   agentSelected,
   menuOpen,
   isUpdating,
-  supervisorHasUpdatePermission
+  supervisorHasUpdatePermission,
+  isAllOptionActive
 ) {
   const presenceStateColumn = {
     Header: 'Presence State',
@@ -128,8 +130,10 @@ export default function(
         </Fragment>
       ),
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row),
-    Filter: ({ onChange }) => helperFunctions.presenceStateFilter(onChange, tableType),
+    Filter: ({ onChange }) => helperFunctions.presenceStateFilter(onChange, tableType, isAllOptionActive),
     getProps: () => {
+      // We add this property to ensure popup will
+      // be fully displayed on screen
       return { style: { overflow: 'visible' } };
     }
   };
@@ -140,7 +144,7 @@ export default function(
   return presenceStateColumn;
 }
 
-function presenceStateFilter(onChange, tableType) {
+function presenceStateFilter(onChange, tableType, isAllOptionActive) {
   return (
     <CheckboxFilterMenu
       menuType="PresenceState"
@@ -149,6 +153,7 @@ function presenceStateFilter(onChange, tableType) {
       buttonType="columnFilter"
       selectionType="select"
       updateFilter={onChange}
+      hasActiveFilter={!isAllOptionActive}
     >
       State
     </CheckboxFilterMenu>

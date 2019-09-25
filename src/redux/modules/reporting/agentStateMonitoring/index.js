@@ -8,7 +8,6 @@ import { fromJS } from 'immutable';
 export const initialState = fromJS({
   status: 'not-loaded',
   data: [],
-  sorted: [],
   expanded: {},
   selected: '',
   agentSelected: '',
@@ -33,7 +32,7 @@ export const setSelected = (selected, expanded, menu = '') => ({
   expanded,
   menu
 });
-export const setSorted = sorted => ({ type: 'SET_AGENT_MONITORING_TABLE_ROW_SORTED', sorted });
+export const setSorted = () => ({ type: 'SET_AGENT_MONITORING_TABLE_ROW_SORTED' });
 export const removeSelected = () => ({ type: 'REMOVE_AGENT_MONITORING_TABLE_ROW_SELECTED' });
 export const setMenuOpen = (menu = '') => ({ type: 'SET_AGENT_MONITORING_TABLE_MENU_OPEN', menu });
 export const startAgentStateMonitoring = () => ({ type: 'START_AGENT_MONITORING_REPORTING_BATCH_REQUEST_$' });
@@ -102,7 +101,6 @@ export default function AgentStateMonitoring(state = initialState, action) {
     }
     case 'SET_AGENT_MONITORING_TABLE_ROW_SORTED':
       return state
-        .set('sorted', action.sorted)
         .set('selected', '')
         .set('expanded', {})
         .set('menuOpen', '');
@@ -174,7 +172,9 @@ export default function AgentStateMonitoring(state = initialState, action) {
       // so we switch them and set the correct state value
       if (response.state === 'notready') {
         response.presence = 'not-ready';
-        response.state = 'away';
+        // If agent is already busy, we keep him busy,
+        // so all conditions remain the same when attempt to set him offline
+        response.state = agentCurrentState === 'busy' ? 'busy' : 'away';
         // If agent was set as "away", it has an "away-reason"
         if (response.reasonId) {
           response.reasonName = response.reason;
@@ -292,19 +292,8 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
   let selected = '';
   const tableData = realtimeStatistics.resources.reduce((newAgents, agent) => {
     const agentStates = realtimeStatistics.agentStates.filter(state => state.agentId === agent.agentId);
-    const currentAgentState = agentStates[0] || {};
-    const {
-      currentStateDuration,
-      offeredWorkOffers,
-      acceptedWorkOffers,
-      rejectedWorkOffers,
-      acceptedWorkOffersRate,
-      awayTime,
-      awayRate,
-      groups = [],
-      // Agents can have no skills assigned
-      skills = []
-    } = currentAgentState;
+    // Agents can have no skills or groups assigned
+    const currentAgentStateRealtimeData = agentStates[0] || { groups: [], groupIds: [], skills: [], skillIds: [] };
 
     let agentSelected = state.get('agentSelected') === agent.agentId;
     // Keeping old agent-selected the same if agent
@@ -341,23 +330,24 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
       };
     }
 
-    let bulkChecked = state.getIn(['BulkSelection', agent.agentId, 'checked'], false);
+    let bulkChangeItem = state.getIn(['BulkSelection', agent.agentId, 'checked'], false);
     // If it was checked, then we add it to new
     // map. Then we replace old selection.
-    if (bulkChecked) {
+    if (bulkChangeItem) {
       bulkSelection[agent.agentId] = { agentId: agent.agentId, sessionId: agent.sessionId, checked: true };
     }
     agent = {
+      // Agent data
+      ...agent,
+      ...currentAgentStateRealtimeData,
       // Data for internal use
       id: agent.agentId,
       // We update new bulk-selection, to ensure we are
       // not performing actions on agents who already went offline
-      bulkChangeItem: bulkChecked,
+      bulkChangeItem,
       // We need to ensure old agentSelected hasn't been removed
       // from data due to agent going offline
       agentSelected,
-      // Agent data
-      ...agent,
       // We set stored presence and state (with reason) for
       // at least two iterations, this way we ensure reporting
       // statistics are updated properly after a state change.
@@ -386,16 +376,7 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
               workItem: { active: 0, display: false }
             }
           )
-        : [],
-      currentStateDuration,
-      offeredWorkOffers,
-      acceptedWorkOffers,
-      rejectedWorkOffers,
-      acceptedWorkOffersRate,
-      awayTime,
-      awayRate,
-      groups,
-      skills
+        : []
     };
 
     newAgents.push(agent);

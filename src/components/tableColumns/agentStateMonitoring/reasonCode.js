@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import CheckboxFilterMenu from '../../../containers/CheckboxFilterMenu';
 
 export const helperFunctions = {
-  reasonsFilter: (onChange, tableType) => reasonsFilter(onChange, tableType),
+  reasonsFilter: (onChange, tableType, allActive) => reasonsFilter(onChange, tableType, allActive),
   filterMethod: ({ value = 'All' }, { _original: { reasonId } }, filterValues, allActive) => {
     if (value === 'All') {
       return allActive;
@@ -21,10 +21,10 @@ export default function(reasonCode, tableType, filterValues, allActive) {
     id: 'reasonCode',
     Header: 'Reason Code',
     show: reasonCode,
-    minWidth: 140,
+    minWidth: 150,
     accessor: 'reasonName',
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row, filterValues, allActive),
-    Filter: ({ onChange }) => helperFunctions.reasonsFilter(onChange, tableType),
+    Filter: ({ onChange }) => helperFunctions.reasonsFilter(onChange, tableType, allActive),
     Cell: ({ value }) =>
       value ? (
         <span title={value}>{value}</span>
@@ -40,7 +40,7 @@ export default function(reasonCode, tableType, filterValues, allActive) {
   return reasonCodeColumn;
 }
 
-export function reasonsFilter(onChange, tableType) {
+export function reasonsFilter(onChange, tableType, allActive) {
   return (
     <CheckboxFilterMenu
       menuType="ReasonLists"
@@ -48,6 +48,7 @@ export function reasonsFilter(onChange, tableType) {
       buttonType="columnFilter"
       selectionType="checkbox"
       updateFilter={onChange}
+      hasActiveFilter={!allActive}
     >
       Reasons
     </CheckboxFilterMenu>

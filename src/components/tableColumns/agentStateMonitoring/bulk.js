@@ -12,7 +12,7 @@ const CheckboxWrapper = styled.div`
   text-align: center;
 `;
 
-const FilterCheckbox = styled(Checkbox)`
+const HeaderCheckbox = styled(Checkbox)`
   width: 15px;
   height: 15px;
   margin: 5px;
@@ -24,24 +24,32 @@ const RowCheckbox = styled.input`
   margin-top: 2px;
 `;
 
-export default function(onBulkClick) {
+export const helperFunctions = {
+  header: (value, selectAllVisible, unselectAllVisible) => {
+    if (value === 'on') {
+      selectAllVisible();
+    } else if (value === 'off') {
+      unselectAllVisible();
+    }
+  }
+};
+
+export default function(tableType, onBulkClick, selectAllVisible, unselectAllVisible) {
   const bulkColumn = {
     id: 'bulkId',
-    accessor: 'bulkChangeItem',
-    filterMethod: ({ value, id }, rows) => {
-      if (value === 'on') {
-        return rows[id] === true;
-      } else if (value === 'off') {
-        return rows[id] === undefined;
-      } else {
-        return true;
-      }
-    },
-    Filter: ({ onChange }) => (
-      <FilterCheckbox className="bulk-action-filter-toggle" onChange={onChange} indeterminate="true" />
+    // Changing filter behavior for header toggle to
+    // Select/Unselect All Visible functionality.
+    // See CXV1-19967 for more details.
+    Header: (
+      <HeaderCheckbox
+        className="bulk-action-select-all-toggle"
+        onChange={value => helperFunctions.header(value, selectAllVisible, unselectAllVisible)}
+      />
     ),
+    accessor: 'bulkChangeItem',
     sortable: false,
     resizable: false,
+    filterable: false,
     width: 40,
     Cell: ({ row }) =>
       row._original.presence !== 'offline' ? (
@@ -64,7 +72,6 @@ export default function(onBulkClick) {
   };
 
   bulkColumn.Cell.propTypes = { value: PropTypes.any, row: PropTypes.any };
-  bulkColumn.Filter.propTypes = { onChange: PropTypes.func };
 
   return bulkColumn;
 }

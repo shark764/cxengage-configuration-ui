@@ -15,7 +15,7 @@ Object {
     "mock table columns",
   ],
   "currentVisibleSubMenu": "none",
-  "entityMetadata": undefined,
+  "entityMetadata": Object {},
   "fetching": false,
   "filtered": Array [],
   "items": Array [
@@ -23,7 +23,7 @@ Object {
   ],
   "pageHelpLink": "mock help link",
   "pageTitle": "",
-  "showBulkActionsMenu": undefined,
+  "showBulkActionsMenu": false,
   "sorted": Array [],
   "userHasCreatePermission": true,
   "userHasUpdatePermission": true,

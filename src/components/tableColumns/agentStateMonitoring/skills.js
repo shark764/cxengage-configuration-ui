@@ -7,15 +7,11 @@ import PropTypes from 'prop-types';
 import CheckboxFilterMenu from '../../../containers/CheckboxFilterMenu';
 
 export const helperFunctions = {
-  skillsFilter: (onChange, tableType) => skillsFilter(onChange, tableType),
-  filterMethod: ({ value = 'All' }, { _original: { skills } }, filterValues, allActive) =>
+  skillsFilter: (onChange, tableType, allActive) => skillsFilter(onChange, tableType, allActive),
+  filterMethod: ({ value = 'All' }, { _original: { skillIds } }, filterValues, allActive) =>
     value === 'All' || allActive
       ? allActive
-      : skills
-          .map(skill => skill.skillName)
-          .filter(value =>
-            filterValues.reduce((prev, curr) => (curr.active ? [...prev, curr.name] : prev), []).includes(value)
-          ).length > 0
+      : skillIds.filter(value => filterValues.map(({ id }) => id).includes(value)).length > 0
 };
 
 export default function(skills, tableType, filterValues, allActive) {
@@ -24,10 +20,10 @@ export default function(skills, tableType, filterValues, allActive) {
     Header: 'Skills',
     show: skills,
     sortable: false,
-    minWidth: 140,
+    minWidth: 130,
     accessor: d => d.skills.map(skill => skill.skillName).join(', '),
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row, filterValues, allActive),
-    Filter: ({ onChange }) => helperFunctions.skillsFilter(onChange, tableType),
+    Filter: ({ onChange }) => helperFunctions.skillsFilter(onChange, tableType, allActive),
     Cell: ({ value }) =>
       value ? (
         <span title={value}>{value}</span>
@@ -43,7 +39,7 @@ export default function(skills, tableType, filterValues, allActive) {
   return skillsColumn;
 }
 
-export function skillsFilter(onChange, tableType) {
+export function skillsFilter(onChange, tableType, allActive) {
   return (
     <CheckboxFilterMenu
       menuType="Skills"
@@ -51,6 +47,7 @@ export function skillsFilter(onChange, tableType) {
       buttonType="columnFilter"
       selectionType="checkbox"
       updateFilter={onChange}
+      hasActiveFilter={!allActive}
     >
       Skills
     </CheckboxFilterMenu>

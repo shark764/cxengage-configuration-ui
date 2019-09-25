@@ -1,6 +1,9 @@
 import { isInIframe } from 'serenova-js-utils/browser';
 import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 import store from '../redux/store';
+import { getCurrentEntity } from '../redux/modules/entities/selectors';
+import { updateRealtimeStatisticsBatchData } from '../redux/modules/reporting/agentStateMonitoring';
+import { updateTableData } from '../redux/modules/reporting/interactionMonitoring';
 
 function guid() {
   function s4() {
@@ -14,19 +17,44 @@ function guid() {
 export const sdkPromise = sdkCall => {
   if (isInIframe()) {
     return new Promise((resolve, reject) => {
-      /* istanbul ignore next */
-      CxEngage[sdkCall.module][sdkCall.command](sdkCall.data, function(error, topic, response) {
-        console.log('[SDK] SDK sending back:', error, topic, response);
-        if (error) {
-          console.warn('ERROR', error);
-          if (error.data && error.data.apiResponse && error.data.apiResponse.status === 401) {
-            store.dispatch({ type: 'TOGGLE_USER_AUTH' });
+      const currentEntity = getCurrentEntity(store.getState());
+      if (
+        sdkCall.module === 'subscribe' &&
+        (currentEntity === 'InteractionMonitoring' || currentEntity === 'agentStateMonitoring')
+      ) {
+        CxEngage.subscribe(sdkCall.command, function(error, topic, response) {
+          if (error) {
+            console.error('ERROR', error);
+            reject(error);
+          } else {
+            if (currentEntity === 'agentStateMonitoring') {
+              store.dispatch(
+                updateRealtimeStatisticsBatchData({
+                  resources: response.resourceCapacity.body.results.resourceCapacity,
+                  agentStates: response.resourceStateList.body.results.json
+                })
+              );
+            } else {
+              store.dispatch(updateTableData(response.interactionsInConversationList.body.results.interactions));
+            }
+            resolve(response);
           }
-          reject(error);
-        } else {
-          resolve(response);
-        }
-      });
+        });
+      } else {
+        /* istanbul ignore next */
+        CxEngage[sdkCall.module][sdkCall.command](sdkCall.data, function(error, topic, response) {
+          console.log('[SDK] SDK sending back:', error, topic, response);
+          if (error) {
+            console.warn('ERROR', error);
+            if (error.data && error.data.apiResponse && error.data.apiResponse.status === 401) {
+              store.dispatch({ type: 'TOGGLE_USER_AUTH' });
+            }
+            reject(error);
+          } else {
+            resolve(response);
+          }
+        });
+      }
     });
   } else {
     return new Promise((resolve, reject) => {

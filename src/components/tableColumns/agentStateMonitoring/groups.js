@@ -7,15 +7,11 @@ import PropTypes from 'prop-types';
 import CheckboxFilterMenu from '../../../containers/CheckboxFilterMenu';
 
 export const helperFunctions = {
-  groupsFilter: (onChange, tableType) => groupsFilter(onChange, tableType),
-  filterMethod: ({ value = 'All' }, { _original: { groups } }, filterValues, allActive) =>
+  groupsFilter: (onChange, tableType, allActive) => groupsFilter(onChange, tableType, allActive),
+  filterMethod: ({ value = 'All' }, { _original: { groupIds } }, filterValues, allActive) =>
     value === 'All' || allActive
       ? allActive
-      : groups
-          .map(group => group.groupName)
-          .filter(value =>
-            filterValues.reduce((prev, curr) => (curr.active ? [...prev, curr.name] : prev), []).includes(value)
-          ).length > 0
+      : groupIds.filter(value => filterValues.map(({ id }) => id).includes(value)).length > 0
 };
 
 export default function(groups, tableType, filterValues, allActive) {
@@ -27,7 +23,7 @@ export default function(groups, tableType, filterValues, allActive) {
     minWidth: 140,
     accessor: d => d.groups.map(group => group.groupName).join(', '),
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row, filterValues, allActive),
-    Filter: ({ onChange }) => helperFunctions.groupsFilter(onChange, tableType),
+    Filter: ({ onChange }) => helperFunctions.groupsFilter(onChange, tableType, allActive),
     Cell: ({ value }) =>
       value ? (
         <span title={value}>{value}</span>
@@ -43,7 +39,7 @@ export default function(groups, tableType, filterValues, allActive) {
   return groupsColumn;
 }
 
-export function groupsFilter(onChange, tableType) {
+export function groupsFilter(onChange, tableType, allActive) {
   return (
     <CheckboxFilterMenu
       menuType="Groups"
@@ -51,6 +47,7 @@ export function groupsFilter(onChange, tableType) {
       buttonType="columnFilter"
       selectionType="checkbox"
       updateFilter={onChange}
+      hasActiveFilter={!allActive}
     >
       Groups
     </CheckboxFilterMenu>

@@ -10,6 +10,7 @@ import { getSidePanelWidth } from '../../redux/modules/entities/selectors';
 import Layout from './layout';
 
 export const mapStateToProps = state => ({
+  tableType: 'agentStateMonitoring',
   selectedSidePanelId: getSelectedSidePanelId(state),
   slidingWidth: getSidePanelWidth(state),
   bulkSelectedTotal: getSelectedAgentsBulkChangeItems(state)

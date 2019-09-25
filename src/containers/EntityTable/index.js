@@ -20,12 +20,16 @@ import { getHelpLink, getAllEntitiesTableData } from './selectors';
 import { getTableColumns } from './config';
 
 export function mapStateToProps(state, props) {
-  const entity = entitiesMetaData[getCurrentEntity(state)];
-  const entityName = entity ? entity.entityName : 'none';
-  const defaultFilters = entity ? entity.defaultFilters : [];
-  const defaultSorted = entity ? entity.defaultSorted : [];
+  const entity = entitiesMetaData[getCurrentEntity(state)] || {};
+  const {
+    entityName = 'none',
+    pageTitle = '',
+    defaultFilters = [],
+    defaultSorted = [],
+    bulkEditsAvailable = false
+  } = entity;
   return {
-    pageTitle: entity ? entity.pageTitle : '',
+    pageTitle,
     pageHelpLink: getHelpLink(state),
     items: getAllEntitiesTableData(state),
     columns: getTableColumns(selectTableColumns(state, entityName)),
@@ -36,7 +40,7 @@ export function mapStateToProps(state, props) {
     filtered: defaultFilters,
     sorted: defaultSorted,
     fetching: isEntityFetching(state),
-    showBulkActionsMenu: entity && entity.bulkEditsAvailable
+    showBulkActionsMenu: bulkEditsAvailable
   };
 }
 

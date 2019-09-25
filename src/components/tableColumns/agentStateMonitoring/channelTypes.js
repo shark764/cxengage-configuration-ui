@@ -23,7 +23,7 @@ const FilterMenu = styled(CheckboxFilterMenu)`
 `;
 
 export const helperFunctions = {
-  channelTypesFilter: (onChange, tableType) => channelTypesFilter(onChange, tableType),
+  channelTypesFilter: (onChange, tableType, allActive) => channelTypesFilter(onChange, tableType, allActive),
   filterMethod: ({ value = 'All' }, { agentName, channelTypes }, filterValues, allActive) =>
     value === 'All'
       ? allActive
@@ -35,9 +35,7 @@ export const helperFunctions = {
                 : prev,
             []
           )
-          .filter(value =>
-            filterValues.reduce((prev, curr) => (curr.active ? [...prev, curr.name] : prev), []).includes(value)
-          ).length > 0
+          .filter(value => filterValues.map(({ name }) => name).includes(value)).length > 0
 };
 
 export default function channelTypesColumn(channelTypes, tableType, filterValues, allActive) {
@@ -47,9 +45,10 @@ export default function channelTypesColumn(channelTypes, tableType, filterValues
     id: 'channelTypes',
     width: 185,
     resizable: false,
+    sortable: false,
     accessor: 'channelTypes',
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row, filterValues, allActive),
-    Filter: ({ onChange }) => helperFunctions.channelTypesFilter(onChange, tableType),
+    Filter: ({ onChange }) => helperFunctions.channelTypesFilter(onChange, tableType, allActive),
     Cell: ({ value }) => (
       <div style={{ textAlign: 'center' }}>
         {Object.keys(value).reduce(
@@ -78,7 +77,7 @@ export default function channelTypesColumn(channelTypes, tableType, filterValues
   return channelTypesColumn;
 }
 
-export function channelTypesFilter(onChange, tableType) {
+export function channelTypesFilter(onChange, tableType, allActive) {
   return (
     <FilterMenu
       menuType="ChannelType"
@@ -86,6 +85,7 @@ export function channelTypesFilter(onChange, tableType) {
       buttonType="columnFilter"
       selectionType="checkbox"
       updateFilter={onChange}
+      hasActiveFilter={!allActive}
     >
       Channel
     </FilterMenu>

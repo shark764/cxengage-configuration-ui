@@ -79,14 +79,19 @@ export default class AgentStateMonitoringTable extends Component {
       .indexOf(value.toLowerCase()) > -1;
 
   selectToggle = (data, bool, visibleOrAll) => {
-    this.props.setVisibleMenu('none', 'agentStateMonitoring');
-    data.forEach(x =>
-      this.props.onBulkClick(
-        visibleOrAll === 'visible' ? x._original.agentId : x.id,
-        visibleOrAll === 'visible' ? x._original.sessionId : x.sessionId,
-        bool
-      )
-    );
+    this.props.setVisibleMenu('none', this.props.tableType);
+    for (let i = 0, len = data.length; i < len; i++) {
+      let x = data[i];
+      // Agents can be selected for bulk actions
+      // only if they haven't been disconnected.
+      if (x._original.presence !== 'offline') {
+        this.props.onBulkClick(
+          visibleOrAll === 'visible' ? x._original.agentId : x.id,
+          visibleOrAll === 'visible' ? x._original.sessionId : x.sessionId,
+          bool
+        );
+      }
+    }
   };
 
   getData = visibleOrAll => {
@@ -110,8 +115,19 @@ export default class AgentStateMonitoringTable extends Component {
     this.selectToggle(this.getData('visible'), false, 'visible');
   };
 
-  highlightRow = ({ row: { _original: { agentId } } }) =>
-    agentId === this.props.agentSelected || agentId === this.props.selected;
+  highlightRow = ({ row: { _original: { agentId, state, bulkChangeItem } } }) => {
+    if (agentId === this.props.agentSelected || agentId === this.props.selected) {
+      return 'rgba(253, 255, 50, 0.17)';
+    } else if (state === 'offline') {
+      // We set a new color when agent goes offline
+      return 'rgba(108, 122, 137, 0.6)';
+    } else if (bulkChangeItem) {
+      // New color to make bulk selected rows
+      // more visible.
+      return 'rgba(236, 240, 241, 1)';
+    }
+    return null;
+  };
 
   getTableRowProps = (state, rowInfo) => {
     if (rowInfo) {
@@ -127,9 +143,6 @@ export default class AgentStateMonitoringTable extends Component {
         },
         style: {
           background: this.highlightRow(rowInfo)
-            ? 'rgba(253, 255, 50, 0.17)'
-            : // We set a new color when agent goes offline
-              rowInfo.row._original.state === 'offline' ? 'rgba(108, 122, 137, 0.6)' : null
         }
       };
     } else {
@@ -138,7 +151,7 @@ export default class AgentStateMonitoringTable extends Component {
   };
   getTdProps = () => ({ style: { fontSize: '11.5pt' } });
   getTheadProps = () => ({ style: { color: 'grey' } });
-  onFilteredChange = filtered => this.setState({ filtered: filtered });
+  onFilteredChange = filtered => this.setState({ filtered });
   onSortedChange = sorted => this.props.setSorted(sorted);
 
   // TODO:
@@ -164,7 +177,7 @@ export default class AgentStateMonitoringTable extends Component {
             currentVisibleSubMenu={this.props.currentVisibleSubMenu}
             menuType="actionsMenu"
             buttonType="columnFilter"
-            tableType={`agentStateMonitoring`}
+            tableType={this.props.tableType}
             id="actions-button"
           >
             <ActionButton
@@ -186,7 +199,7 @@ export default class AgentStateMonitoringTable extends Component {
           <InlineCheckboxFilterMenu
             type="secondary"
             menuType="Columns"
-            tableType={`agentStateMonitoring`}
+            tableType={this.props.tableType}
             currentVisibleSubMenu={this.props.currentVisibleSubMenu}
             selectionType="checkbox"
           >
@@ -196,7 +209,7 @@ export default class AgentStateMonitoringTable extends Component {
 
         {!this.props.areAllColNotActive && (
           <GridTable
-            tableType="agentStateMonitoring"
+            tableType={this.props.tableType}
             innerRef={r => (this.selectTable = r)}
             PaginationComponent={Pagination}
             defaultPageSize={this.state.defaultRowsNumber}
@@ -207,7 +220,7 @@ export default class AgentStateMonitoringTable extends Component {
             filterable
             defaultFilterMethod={this.defaultFilterMethod}
             expanded={this.props.expanded}
-            sorted={this.props.sorted}
+            defaultSorted={[{ id: 'agentName', desc: false }]}
             filtered={this.state.filtered}
             onFilteredChange={this.onFilteredChange}
             onSortedChange={this.onSortedChange}
@@ -220,40 +233,41 @@ export default class AgentStateMonitoringTable extends Component {
             // SubComponent={this.SubComponent}
             columns={[
               // expanderColumn(),
-              bulkColumn(this.props.onBulkClick),
+              bulkColumn(this.props.tableType, this.props.onBulkClick, this.selectAllVisible, this.unselectAllVisible),
               channelTypesColumn(
                 this.props.activeColumns[0],
-                'agentStateMonitoring',
+                this.props.tableType,
                 this.props.filterValues.channelTypes,
                 this.props.allActive.channelTypes
               ),
               agentNameColumn(this.props.activeColumns[1]),
               groupsColumn(
                 this.props.activeColumns[2],
-                'agentStateMonitoring',
+                this.props.tableType,
                 this.props.filterValues.groups,
                 this.props.allActive.groups
               ),
               skillsColumn(
                 this.props.activeColumns[3],
-                'agentStateMonitoring',
+                this.props.tableType,
                 this.props.filterValues.skills,
                 this.props.allActive.skills
               ),
               directionColumn(
                 this.props.activeColumns[4],
-                'agentStateMonitoring',
+                this.props.tableType,
                 this.props.setAgentDirection,
                 this.props.setAgentSelected,
                 this.props.removeAgentSelected,
                 this.props.agentSelected,
                 this.props.menuOpen,
                 this.props.isUpdating,
-                this.props.supervisorUpdatePermissions.direction
+                this.props.supervisorUpdatePermissions.direction,
+                this.props.allActive.direction
               ),
               presenceStateColumn(
                 this.props.activeColumns[5],
-                'agentStateMonitoring',
+                this.props.tableType,
                 this.props.setAgentPresenceState,
                 this.props.setAgentSelected,
                 this.props.removeAgentSelected,
@@ -262,20 +276,21 @@ export default class AgentStateMonitoringTable extends Component {
                 this.props.agentSelected,
                 this.props.menuOpen,
                 this.props.isUpdating,
-                this.props.supervisorUpdatePermissions.state
+                this.props.supervisorUpdatePermissions.state,
+                this.props.allActive.state
               ),
               reasonCodeColumn(
                 this.props.activeColumns[6],
-                'agentStateMonitoring',
+                this.props.tableType,
                 this.props.filterValues.reasons,
                 this.props.allActive.reasons
               ),
-              presenceStateDurationColumn(this.props.activeColumns[7], 'agentStateMonitoring'),
+              presenceStateDurationColumn(this.props.activeColumns[7], this.props.tableType),
               offeredColumn(this.props.activeColumns[8]),
               acceptedColumn(this.props.activeColumns[9]),
               rejectedColumn(this.props.activeColumns[10]),
               acceptedRateColumn(this.props.activeColumns[11]),
-              awayTimeColumn(this.props.activeColumns[12], 'agentStateMonitoring'),
+              awayTimeColumn(this.props.activeColumns[12], this.props.tableType),
               awayRateColumn(this.props.activeColumns[13])
             ]}
           />
@@ -288,11 +303,11 @@ export default class AgentStateMonitoringTable extends Component {
 AgentStateMonitoringTable.propTypes = {
   pageTitle: PropTypes.string,
   pageHelpLink: PropTypes.string,
+  tableType: PropTypes.string,
   tableData: PropTypes.any,
   expanded: PropTypes.object.isRequired,
   selected: PropTypes.string.isRequired,
   areAllColNotActive: PropTypes.bool.isRequired,
-  sorted: PropTypes.any.isRequired,
   toggleTimeFormat: PropTypes.func.isRequired,
   setSelected: PropTypes.func.isRequired,
   setSorted: PropTypes.func.isRequired,

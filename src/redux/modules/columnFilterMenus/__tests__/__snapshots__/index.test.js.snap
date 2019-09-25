@@ -494,7 +494,7 @@ Immutable.Map {
         "active": false,
       },
       Immutable.Map {
-        "name": "Direction",
+        "name": "Work Mode",
         "active": true,
       },
       Immutable.Map {

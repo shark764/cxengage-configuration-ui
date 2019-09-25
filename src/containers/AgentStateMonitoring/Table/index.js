@@ -3,8 +3,9 @@ import {
   selectAgentStateMonitoringActiveColumns,
   areAllColNotActive,
   selectVisibleSubMenu,
-  menuItemsJs,
-  areAllActive
+  activeMenuItemsJs,
+  areAllActive,
+  isAllOptionActive
 } from '../../../redux/modules/columnFilterMenus/selectors';
 import {
   setSorted,
@@ -20,7 +21,6 @@ import {
 import { toggleTimeFormat, setVisibleMenu } from '../../../redux/modules/columnFilterMenus';
 import {
   selectAgentStateMonitoringTableDataJS,
-  selectAgentStateMonitoringSorted,
   selectAgentStateMonitoringExpanded,
   selectAgentStateMonitoringSelected,
   selectAgentPresenceReasonLists,
@@ -35,30 +35,28 @@ import { userHasPermissions } from '../../../redux/modules/entities/selectors';
 import Layout from './layout';
 
 export const mapStateToProps = (state, props) => ({
-  pageTitle: entitiesMetaData['agentStateMonitoring'] ? entitiesMetaData['agentStateMonitoring'].pageTitle : '',
+  pageTitle: entitiesMetaData[props.tableType] ? entitiesMetaData[props.tableType].pageTitle : '',
   pageHelpLink: getHelpLink(state),
-  areAllColNotActive: areAllColNotActive(state, {
-    menuType: 'Columns',
-    tableType: 'agentStateMonitoring'
-  }),
+  areAllColNotActive: areAllColNotActive(state, { ...props, menuType: 'Columns' }),
   activeColumns: selectAgentStateMonitoringActiveColumns(state, props),
   currentVisibleSubMenu: selectVisibleSubMenu(state, props),
   filterValues: {
-    channelTypes: menuItemsJs(state, { menuType: 'ChannelType', tableType: 'agentStateMonitoring' }),
-    skills: menuItemsJs(state, { menuType: 'Skills', tableType: 'agentStateMonitoring' }),
-    groups: menuItemsJs(state, { menuType: 'Groups', tableType: 'agentStateMonitoring' }),
-    reasons: menuItemsJs(state, { menuType: 'ReasonLists', tableType: 'agentStateMonitoring' })
+    channelTypes: activeMenuItemsJs(state, { ...props, menuType: 'ChannelType' }),
+    skills: activeMenuItemsJs(state, { ...props, menuType: 'Skills' }),
+    groups: activeMenuItemsJs(state, { ...props, menuType: 'Groups' }),
+    reasons: activeMenuItemsJs(state, { ...props, menuType: 'ReasonLists' })
   },
   allActive: {
-    channelTypes: areAllActive(state, { menuType: 'ChannelType', tableType: 'agentStateMonitoring' }),
-    skills: areAllActive(state, { menuType: 'Skills', tableType: 'agentStateMonitoring' }),
-    groups: areAllActive(state, { menuType: 'Groups', tableType: 'agentStateMonitoring' }),
-    reasons: areAllActive(state, { menuType: 'ReasonLists', tableType: 'agentStateMonitoring' })
+    channelTypes: areAllActive(state, { ...props, menuType: 'ChannelType' }),
+    skills: areAllActive(state, { ...props, menuType: 'Skills' }),
+    groups: areAllActive(state, { ...props, menuType: 'Groups' }),
+    reasons: areAllActive(state, { ...props, menuType: 'ReasonLists' }),
+    direction: isAllOptionActive(state, { ...props, menuType: 'Direction' }),
+    state: isAllOptionActive(state, { ...props, menuType: 'PresenceState' })
   },
   tableData: selectAgentStateMonitoringTableDataJS(state, props),
   expanded: selectAgentStateMonitoringExpanded(state, props),
   selected: selectAgentStateMonitoringSelected(state, props),
-  sorted: selectAgentStateMonitoringSorted(state, props),
   selectedAgentReasonLists: selectAgentPresenceReasonLists(state),
   agentSelected: selectCurrentAgentSelected(state),
   menuOpen: selectCurrentMenuOpen(state),

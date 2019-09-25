@@ -30,6 +30,10 @@ export const menuItemsJs = createSelector([menuItems], menuItems => {
   return menuItems.toJS();
 });
 
+export const activeMenuItemsJs = createSelector([menuItems], menuItems =>
+  menuItems.filter(item => item.get('active')).toJS()
+);
+
 const menu = (state, props) => {
   if (props.tableType && props.tableType !== undefined) {
     return state.get('ColumnFilterMenus').get(props.tableType);
@@ -40,11 +44,15 @@ const menu = (state, props) => {
 
 export const selectVisibleSubMenu = createSelector([menu], menu => menu.get('visibleMenu'));
 
-export const areAllActive = createSelector([menuItems], menuItems => {
-  let active = true;
-  menuItems.forEach(item => (!item.get('active') ? (active = false) : null));
-  return menuItems.size === 0 ? false : active;
-});
+export const areAllActive = createSelector(
+  [menuItems],
+  menuItems => (menuItems.size > 0 ? menuItems.filter(item => !item.get('active')).size === 0 : false)
+);
+
+export const isAllOptionActive = createSelector(
+  [menuItems],
+  menuItems => menuItems.filter(item => item.get('name') === 'All' && item.get('active')).size > 0
+);
 
 export const totalRatio = createSelector([menuItems], menuItems => {
   let activeAmount = 0;

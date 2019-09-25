@@ -436,7 +436,7 @@ entities.agentStateMonitoring.columns = [
   { name: 'Agent', active: true },
   { name: 'Groups', active: false },
   { name: 'Skills', active: false },
-  { name: 'Direction', active: true },
+  { name: 'Work Mode', active: true },
   { name: 'Presence State', active: true },
   { name: 'Reason Code', active: false },
   { name: 'Time in Presence State', active: true },

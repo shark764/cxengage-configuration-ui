@@ -25,6 +25,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.65.10] - 2019-09-25
+### Changed
+- Version bump component library to 0.54.0.
+- SDK version bump to 9.1.0.
+- CXV1-19971 - Agent State - List is unsorted by default.
+- CXV1-19972 - Agent State Monitoring - No visual feedback on when a filter is selected.
+### Fixed
+- CXV1-19962 - Frequent loss of Subscription ID for Agent State Table.
+- CXV1-19967 - Agent State - Bulk Action filter selection does not behave as expected.
+- CXV1-19974 - Agent State - Can bypass Busy disconnect warning by setting them away first.
+- CXV1-19978 - Agents on Offline state can be selected for bulk actions by using Select All Visible option.
+
 ## [0.65.9] - 2019-09-20
 ### Changed
 - <no-jira> - Fixed snapshots of components
