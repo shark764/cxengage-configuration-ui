@@ -58,7 +58,7 @@ export const SetAgentDirection = action$ =>
         })
       )
         .map(response => handleSuccess(response, a))
-        .catch(error => handleError(error, a))
+        .catch(error => handleError(error, a, 'Failed to update Work Mode for this agent. Please try again.'))
     );
 
 export const SetAgentPresenceState = (action$, store) =>
@@ -129,7 +129,12 @@ export const SetBulkAgentDirection = (action$, store) =>
         )
       )
         .do(allResult =>
-          handleBulkSuccess(allResult, null, `Direction for BULKED_ITEMS_AFFECTED agent(s) was updated successfully.`)
+          handleBulkSuccess(
+            allResult,
+            null,
+            `Work Mode for BULKED_ITEMS_AFFECTED agent(s) was updated successfully.`,
+            'Failed to update Work Mode for BULKED_ITEMS_AFFECTED agent(s). Please try again.'
+          )
         )
         .mergeMap(result =>
           from(result).map(response =>

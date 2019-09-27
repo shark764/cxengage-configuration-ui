@@ -14,9 +14,7 @@ describe('selectVisibleSubMenu selector', () => {
         }
       }
     });
-    expect(
-      sel.selectVisibleSubMenu(initialState, { tableType: 'mockTable' })
-    ).toEqual('mock visible sub menu');
+    expect(sel.selectVisibleSubMenu(initialState, { tableType: 'mockTable' })).toEqual('mock visible sub menu');
   });
   it('returns undefined when you dont pass the tableType prop in', () => {
     const initialState = fromJS({
@@ -70,7 +68,7 @@ describe('areAllActive selector', () => {
       })
     ).toEqual(false);
   });
-  it('returns false if you dont pass menuType or tableType props', () => {
+  it('returns true if you dont pass menuType or tableType props. It should show all rows if filter is empty.', () => {
     const initialState = fromJS({
       ColumnFilterMenus: {
         mockTable: {
@@ -83,7 +81,7 @@ describe('areAllActive selector', () => {
         }
       }
     });
-    expect(sel.areAllActive(initialState, {})).toEqual(false);
+    expect(sel.areAllActive(initialState, {})).toEqual(true);
   });
 });
 
@@ -253,17 +251,10 @@ describe('selectInteractionMonitoringActiveColumns selector', () => {
     const initialState = fromJS({
       ColumnFilterMenus: {
         interactionMonitoring: {
-          Columns: [
-            { active: true },
-            { active: false },
-            { active: true },
-            { active: true }
-          ]
+          Columns: [{ active: true }, { active: false }, { active: true }, { active: true }]
         }
       }
     });
-    expect(
-      sel.selectInteractionMonitoringActiveColumns(initialState)
-    ).toMatchSnapshot();
+    expect(sel.selectInteractionMonitoringActiveColumns(initialState)).toMatchSnapshot();
   });
 });
