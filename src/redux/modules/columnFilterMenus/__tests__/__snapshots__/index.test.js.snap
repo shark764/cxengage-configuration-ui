@@ -267,7 +267,28 @@ Immutable.Map {
   },
   "tenants": Immutable.Map {
     "visibleMenu": "none",
-    "Columns": Immutable.List [],
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Identifier",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Parent Tenant",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
   },
   "platformRoles": Immutable.Map {
     "visibleMenu": "none",

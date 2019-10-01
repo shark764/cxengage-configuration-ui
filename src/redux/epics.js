@@ -19,6 +19,7 @@ import * as apiKeysEpics from './modules/entities/apiKeys/epics';
 import * as timezoneEpics from './modules/entities/timezones/epics';
 import * as businessHoursEpics from './modules/entities/businessHours/epics';
 import * as fetchReportingEventsEpics from './modules/entities/reportingEvents/epics';
+import * as tenantsEpics from './modules/entities/tenants/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -40,5 +41,6 @@ export const rootEpic = combineEpics(
   ...Object.values(apiKeysEpics),
   ...Object.values(timezoneEpics),
   ...Object.values(businessHoursEpics),
-  ...Object.values(fetchReportingEventsEpics)
+  ...Object.values(fetchReportingEventsEpics),
+  ...Object.values(tenantsEpics)
 );

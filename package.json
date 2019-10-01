@@ -1,13 +1,16 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.65.11",
+  "version": "0.66.0",
   "description": "CxEngage Configuration and Reporting",
   "repository": {
     "type": "git",
     "url": "https://github.com/SerenovaLLC/cxengage-configuration-ui"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write --print-width 120", "git add"]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write --print-width 120",
+      "git add"
+    ]
   },
   "publishConfig": {
     "registry": "http://nexus.cxengagelabs.net/content/repositories/npm-internal/"
@@ -44,7 +47,7 @@
     "css-loader": "0.28.11",
     "cx-automation-utils": "^1.1.2",
     "cx-js-sdk": "^1.0.1",
-    "cx-ui-components": "^0.54.0",
+    "cx-ui-components": "^0.55.0",
     "draft-js": "^0.10.5",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",

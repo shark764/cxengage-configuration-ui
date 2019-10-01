@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchTenants user has no permission to fetch all tenants and to manage the tenant he's in returns FETCH_DATA_FULFILLED with the data as an empty array as the API result since it didn't make any API request 1`] = `
+Object {
+  "entityName": "tenants",
+  "response": Object {
+    "result": Array [],
+  },
+  "type": "FETCH_DATA_FULFILLED",
+}
+`;
+
+exports[`fetchTenants user has only permission to fetch the tenant he's in calls the sdk function to get info from the tenant the user is in 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "command": "getEntity",
+        "data": Object {
+          "customTopic": "cxengage/entities/get-tenant-response",
+          "path": "",
+        },
+        "module": "entities",
+        "topic": "cxengage/entities/get-tenant-response",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
+}
+`;
+
+exports[`fetchTenants user has only permission to fetch the tenant he's in returns FETCH_DATA_FULFILLED 1`] = `
+Object {
+  "entityName": "tenants",
+  "response": "mock response",
+  "tableType": undefined,
+  "type": "FETCH_DATA_FULFILLED",
+}
+`;
+
+exports[`fetchTenants user has permission to fetch all tenants on the platform calls the sdk function to get all tenants on Platform 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "command": "getTenants",
+        "crudAction": "read",
+        "data": Object {},
+        "module": "entities",
+        "topic": "cxengage/entities/get-tenants-response",
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {},
+    },
+  ],
+}
+`;
+
+exports[`fetchTenants user has permission to fetch all tenants on the platform returns FETCH_DATA_FULFILLED 1`] = `
+Object {
+  "entityName": "tenants",
+  "response": "mock response",
+  "tableType": undefined,
+  "type": "FETCH_DATA_FULFILLED",
+}
+`;

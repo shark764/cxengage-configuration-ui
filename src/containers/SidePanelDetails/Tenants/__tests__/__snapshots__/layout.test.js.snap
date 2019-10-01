@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TenantsDetailsPanel /> renders tenants detailsPanel 1`] = `
+<styled.div>
+  Mock Child
+</styled.div>
+`;

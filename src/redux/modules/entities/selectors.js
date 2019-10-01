@@ -99,13 +99,12 @@ export const isInherited = state => {
           getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state)
         );
       }
-      case 'users': {
-        return false;
-      }
       case 'groups': {
         return getSelectedEntity(state).get('name') === 'everyone';
       }
+      case 'users':
       case 'agentStateMonitoring':
+      case 'tenants':
         return false;
       default:
         return getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);

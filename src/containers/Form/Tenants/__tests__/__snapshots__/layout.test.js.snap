@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TenantsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="TenantsFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="You are using Hygen!"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="TenantsFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <SelectField
+    data-automation="TenantsFormFieldType"
+    disabled={false}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "custom label",
+          "value": "custom value",
+        },
+      ]
+    }
+    required={true}
+  />
+</form>
+`;
+
+exports[`<TenantsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="TenantsFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="You are using Hygen!"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="TenantsFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <SelectField
+    data-automation="TenantsFormFieldType"
+    disabled={false}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "custom label",
+          "value": "custom value",
+        },
+      ]
+    }
+    required={true}
+  />
+</form>
+`;

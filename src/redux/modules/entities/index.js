@@ -263,7 +263,19 @@ const initialState = fromJS({
     assignPermission: []
   },
   tenants: {
-    ...defaultEntity
+    ...defaultEntity,
+    readPermission: [
+      'PLATFORM_VIEW_ALL_TENANTS',
+      'PLATFORM_MANAGE_ALL_TENANTS',
+      'PLATFORM_CREATE_ALL_TENANTS',
+      'PLATFORM_CREATE_TENANT_ROLES',
+      'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
+      'MANAGE_TENANT'
+    ],
+    updatePermission: ['PLATFORM_MANAGE_ALL_TENANTS', 'MANAGE_TENANT'],
+    createPermission: ['CREATE_CHILD_TENANT'],
+    disablePermission: ['MANAGE_TENANT', 'PLATFORM_MANAGE_ALL_TENANTS'],
+    assignPermission: []
   },
   flowDebugger: {
     ...defaultEntity

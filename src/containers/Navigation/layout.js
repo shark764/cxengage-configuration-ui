@@ -131,6 +131,9 @@ export default class Navigation extends Component {
             Configuration
             {this.state.visibleMenu === 'Configuration' && (
               <SubMenu>
+                <StyledLink data-automation="navigation-link-tenants" to="/configuration/tenants">
+                  Tenants
+                </StyledLink>
                 <StyledLink data-automation="navigation-link-lists" to="/configuration/lists">
                   Lists
                 </StyledLink>

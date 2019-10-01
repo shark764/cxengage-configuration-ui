@@ -177,7 +177,8 @@ export const listOfEntities = [
   'tenants',
   'flowDebugger',
   'apiKeys',
-  'businessHours'
+  'businessHours',
+  'tenants'
 
   //Hygen-insert-at-end-of-list
 ];
@@ -773,6 +774,16 @@ entities.businessHours.membersTableFields = {
   ]
 };
 entities.businessHours.defaultFilters = [{ id: 'active', value: 'enabled' }];
+// Tenants
+entities.tenants.pageTitle = 'Tenants Management';
+entities.tenants.helpLink = '/Help/Content/Configuration/Creating_Tenants.htm';
+entities.tenants.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Identifier', active: true },
+  { name: 'Parent Tenant', active: true },
+  { name: 'Status', active: true }
+];
 //Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

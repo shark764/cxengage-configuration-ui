@@ -50,6 +50,7 @@ import MessageTemplatesForm from '../Form/MessageTemplates';
 import ExceptionsForm from '../Form/BusinessHours/Exception';
 import UpdateReasonListItemsForm from '../Form/ReasonListItems/Update';
 import CreateReasonListItemForm from '../Form/ReasonListItems/Create';
+import TenantsForm from '../Form/Tenants';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -78,6 +79,7 @@ import SlasDetailsPanel from '../SidePanelDetails/Slas';
 import ApiKeysDetailsPanel from '../SidePanelDetails/ApiKeys';
 import BusinessHoursDetailsPanel from '../SidePanelDetails/BusinessHours';
 import MessageTemplatesDetailsPanel from '../SidePanelDetails/MessageTemplates';
+import TenantsDetailsPanel from '../SidePanelDetails/Tenants';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -278,6 +280,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <MessageTemplatesForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/tenants',
+    component: () => (
+      <DetailsPanel>
+        <TenantsForm />
       </DetailsPanel>
     )
   }
@@ -493,6 +503,16 @@ const detailsPanelRoutes = [
           <MessageTemplatesForm />
         </MessageTemplatesDetailsPanel>
       </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/tenants',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <TenantsDetailsPanel>
+          <TenantsForm />
+        </TenantsDetailsPanel>
+      </NoScrollDetailsPanel>
     )
   }
   //hygen-inject-before2

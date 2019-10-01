@@ -17,6 +17,7 @@ import { flowColumn } from './columns/flow';
 import { activeSlaColumn } from './columns/activeSla';
 import { apiKeyStatusColumn } from './columns/apiKeyStatus';
 import { timezoneColumn } from './columns/timezone';
+import { parentTenantColumn } from './columns/parentTenant';
 
 export function getTableColumns(columns) {
   /**
@@ -58,7 +59,9 @@ export function getTableColumns(columns) {
     'ApiKey Status': apiKeyStatusColumn,
     Timezone: timezoneColumn,
     Type: constructGeneralTextColumn('type'),
-    Channels: constructGeneralTextColumn('channels')
+    Channels: constructGeneralTextColumn('channels'),
+    Identifier: constructGeneralTextColumn('id'),
+    'Parent Tenant': parentTenantColumn
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

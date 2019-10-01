@@ -334,10 +334,30 @@ Immutable.Map {
     ],
   },
   "tenants": Immutable.Map {
+    "readPermission": Immutable.List [
+      "PLATFORM_VIEW_ALL_TENANTS",
+      "PLATFORM_MANAGE_ALL_TENANTS",
+      "PLATFORM_CREATE_ALL_TENANTS",
+      "PLATFORM_CREATE_TENANT_ROLES",
+      "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",
+      "MANAGE_TENANT",
+    ],
     "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "CREATE_CHILD_TENANT",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "MANAGE_TENANT",
+      "PLATFORM_MANAGE_ALL_TENANTS",
+    ],
+    "updatePermission": Immutable.List [
+      "PLATFORM_MANAGE_ALL_TENANTS",
+      "MANAGE_TENANT",
+    ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
-    "confirmationDialogType": undefined,
+    "assignPermission": Immutable.List [],
   },
   "platformRoles": Immutable.Map {
     "data": Immutable.List [],

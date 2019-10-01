@@ -45,7 +45,8 @@ import {
   hasCustomCreateEntity,
   hasCustomUpdateEntity,
   hasCustomRemoveSubEntity,
-  hasCustomCreateSubEntity
+  hasCustomCreateSubEntity,
+  hasCustomFetchEntityData
 } from './config';
 
 import { downloadFile } from 'serenova-js-utils/browser';
@@ -212,12 +213,15 @@ export const ToggleSharedFormField = (action$, store) =>
       )
     );
 
-export const FetchData = action$ =>
-  action$.ofType('FETCH_DATA').mergeMap(a =>
-    fromPromise(sdkPromise(entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')))
-      .map(response => handleSuccess(response, a))
-      .catch(error => handleError(error, a))
-  );
+export const FetchData = (action$, store) =>
+  action$
+    .ofType('FETCH_DATA')
+    .filter(({ entityName }) => hasCustomFetchEntityData(entityName))
+    .mergeMap(a =>
+      fromPromise(sdkPromise(entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
+    );
 
 export const FetchDataItem = action$ =>
   action$
