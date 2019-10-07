@@ -10,7 +10,9 @@ describe('reportTypeColumn', () => {
   });
   describe('Cell', () => {
     it('renders correctly', () => {
-      expect(reportTypeColumn.Cell({ row: { reportType: 'mock report type' } })).toMatchSnapshot();
+      expect(
+        reportTypeColumn.Cell({ value: 'mock report type', row: { reportType: 'mock report type' } })
+      ).toMatchSnapshot();
     });
   });
 });

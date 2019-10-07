@@ -17,6 +17,7 @@ export const parentTenantColumn = {
   id: 'parentTenant',
   Header: <span title="parentTenant">Parent Tenant</span>,
   accessor: d => (d.parent && d.parent.name ? d.parent.name : ''),
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
@@ -30,6 +31,9 @@ export const parentTenantColumn = {
   )
 };
 
+parentTenantColumn.Cell.propTypes = {
+  value: PropTypes.any
+};
 parentTenantColumn.Filter.propTypes = {
   filter: PropTypes.func,
   onChange: PropTypes.func

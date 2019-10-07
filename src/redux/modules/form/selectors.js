@@ -2,7 +2,7 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 import { Map } from 'immutable';
-import { isPristine, isInvalid } from 'redux-form/immutable';
+import { isPristine, isDirty, isInvalid } from 'redux-form/immutable';
 
 import {
   getCurrentEntity,
@@ -23,7 +23,7 @@ export const getCurrentFormInitialValues = state =>
     .toJS();
 
 export const isFormInvalid = state => isInvalid(getSelectedEntityFormId(state))(state);
-
+export const isFormDirty = state => isDirty(getSelectedEntityFormId(state))(state);
 export const isFormPristine = state => isPristine(getSelectedEntityFormId(state))(state);
 
 export const selectFormInitialValues = state => {

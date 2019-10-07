@@ -10,6 +10,7 @@ export const apiKeyStatusColumn = {
   id: 'status',
   Header: <span title="Status">Status</span>,
   accessor: list => (list.status ? 'Enabled' : 'Disabled'),
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   filterMethod: (filter, row) => filterSelectMethod(filter, row),
   Filter: ({ filter, onChange }) => (
     <FilterSelect
@@ -22,6 +23,9 @@ export const apiKeyStatusColumn = {
   )
 };
 
+apiKeyStatusColumn.Cell.propTypes = {
+  value: PropTypes.any
+};
 apiKeyStatusColumn.Filter.propTypes = {
   filter: PropTypes.func,
   onChange: PropTypes.func

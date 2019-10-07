@@ -9,6 +9,7 @@ Object {
 
 exports[`mapStateToProps maps the selectors to the object correctly 1`] = `
 Object {
+  "dirty": true,
   "invalid": true,
   "isSaving": true,
   "pristine": false,

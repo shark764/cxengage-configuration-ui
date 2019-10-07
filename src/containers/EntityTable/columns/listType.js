@@ -21,7 +21,7 @@ export const listTypeColumn = {
   id: 'listType',
   Header: <span title="List Type">List Type</span>,
   accessor: list => list.listType.name,
-  Cell: ({ row }) => <span title={row.listType}>{row.listType}</span>,
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
@@ -35,7 +35,7 @@ export const listTypeColumn = {
 };
 
 listTypeColumn.Cell.propTypes = {
-  row: PropTypes.any
+  value: PropTypes.any
 };
 listTypeColumn.Filter.propTypes = {
   filter: PropTypes.func,

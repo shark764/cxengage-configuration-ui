@@ -28,13 +28,7 @@ export const nameColumn = {
       return getDisplay(d, true);
     }
   },
-  Cell: ({ row }) => {
-    if (row.name) {
-      return <span title={row.name}>{row.name}</span>;
-    } else {
-      return <span title={getDisplay(row._original, true)}>{getDisplay(row._original, true)}</span>;
-    }
-  },
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
@@ -49,7 +43,7 @@ export const nameColumn = {
 };
 
 nameColumn.Cell.propTypes = {
-  row: PropTypes.any
+  value: PropTypes.any
 };
 nameColumn.Filter.propTypes = {
   filter: PropTypes.func,

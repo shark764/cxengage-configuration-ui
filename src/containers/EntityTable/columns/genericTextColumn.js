@@ -25,7 +25,7 @@ export function constructGeneralTextColumn(string) {
     accessor: string,
     Cell: ({ row }) => {
       return Array.isArray(row[string]) ? (
-        <span title={row[string]}>{row[string].join(', ')}</span>
+        <span title={row[string].join(', ')}>{row[string].join(', ')}</span>
       ) : (
         <span title={row[string]}>{row[string]}</span>
       );

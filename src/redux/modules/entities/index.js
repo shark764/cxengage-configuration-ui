@@ -569,7 +569,7 @@ export default function reducer(state = initialState, action) {
             ...entity,
             active: entity.status === 'enabled'
           }));
-          return state.setIn([entityName, 'data'], fromJS(newResult));
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'reasonLists': {
           const newResult = result.map(entity => ({

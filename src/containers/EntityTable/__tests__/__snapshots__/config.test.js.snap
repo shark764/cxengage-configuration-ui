@@ -25,6 +25,7 @@ Array [
     "id": "description",
   },
   Object {
+    "Cell": [Function],
     "Filter": [Function],
     "Header": <span
       title="Status"
@@ -192,6 +193,7 @@ Array [
     "id": "proficiency",
   },
   Object {
+    "Cell": [Function],
     "Filter": [Function],
     "Header": <span
       title="Has Proficiency"

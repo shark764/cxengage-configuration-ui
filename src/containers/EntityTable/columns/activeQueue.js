@@ -19,8 +19,8 @@ const SearchIcon = styled(SearchIconSVG)`
 export const activeQueueColumn = {
   id: 'activeQueue',
   Header: <span title="Active Queue">Active Queue</span>,
-  accessor: queue => queue.activeQueue.name,
-  Cell: ({ row }) => <span title={row.activeQueue}>{row.activeQueue}</span>,
+  accessor: queue => queue.activeQueue && queue.activeQueue.name,
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
@@ -34,7 +34,7 @@ export const activeQueueColumn = {
 };
 
 activeQueueColumn.Cell.propTypes = {
-  row: PropTypes.any
+  value: PropTypes.any
 };
 activeQueueColumn.Filter.propTypes = {
   filter: PropTypes.func,

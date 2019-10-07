@@ -12,6 +12,7 @@ export function constructGeneralBooleanColumn(string) {
     id: string,
     Header: <span title={normalizedString}>{normalizedString}</span>,
     accessor: list => (list[string] ? 'Yes' : 'No'),
+    Cell: ({ value }) => <span title={value}>{value}</span>,
     filterMethod: (filter, row) => {
       if (filter.value === 'all') {
         return true;
@@ -41,6 +42,9 @@ export function constructGeneralBooleanColumn(string) {
     )
   };
 
+  column.Cell.propTypes = {
+    value: PropTypes.any
+  };
   column.Filter.propTypes = {
     filter: PropTypes.func,
     onChange: PropTypes.func

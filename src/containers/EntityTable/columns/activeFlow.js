@@ -20,7 +20,7 @@ export const activeFlowColumn = {
   id: 'activeFlow',
   Header: <span title="Active Flow">Active Version</span>,
   accessor: flow => flow.activeFlow && flow.activeFlow.name,
-  Cell: ({ row }) => <span title={row.activeFlow}>{row.activeFlow}</span>,
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
@@ -34,7 +34,7 @@ export const activeFlowColumn = {
 };
 
 activeFlowColumn.Cell.propTypes = {
-  row: PropTypes.any
+  value: PropTypes.any
 };
 activeFlowColumn.Filter.propTypes = {
   filter: PropTypes.func,

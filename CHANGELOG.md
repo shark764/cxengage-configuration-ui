@@ -25,6 +25,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.1] - 2019-10-04
+### Changed
+- Version bump component library to 0.55.1.
+### Fixed
+- CXV1-20194 - Missing hover labels on sidepanel table fields.
+- CXV1-20024 - Fixed loading spinning circle loops when no results are found.
+- <no-jira> - Adding bulk actions for Flows and Dispatch Mappings pages.
+
 ## [0.66.0] - 2019-10-01
 ### Added
 - CXV1-18407 - Config 2 | Tenants page - Main List

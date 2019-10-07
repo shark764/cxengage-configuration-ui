@@ -10,7 +10,7 @@ describe('nameColumn', () => {
   });
   describe('Cell', () => {
     it('renders correctly', () => {
-      expect(nameColumn.Cell({ row: { name: 'mock name' } })).toMatchSnapshot();
+      expect(nameColumn.Cell({ value: 'mock name', row: { name: 'mock name' } })).toMatchSnapshot();
     });
   });
 });

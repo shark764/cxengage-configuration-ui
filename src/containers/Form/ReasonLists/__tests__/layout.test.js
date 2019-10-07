@@ -20,6 +20,7 @@ describe('<ReasonListsForm />', () => {
         inherited={false}
         isDefault={false}
         reasons={[]}
+        selectedEntityId="0000-0000-0000-0000-0000"
         handleSubmit={() => {}}
         removeReasonListItem={() => {}}
         removeCategoryItems={() => {}}
@@ -41,6 +42,7 @@ describe('<ReasonListsForm />', () => {
         inherited={false}
         isDefault={false}
         reasons={[]}
+        selectedEntityId="0000-0000-0000-0000-0000"
         handleSubmit={() => {}}
         removeReasonListItem={() => {}}
         removeCategoryItems={() => {}}

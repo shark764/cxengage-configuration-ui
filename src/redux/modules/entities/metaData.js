@@ -644,7 +644,7 @@ entities.queues.columns = [
 ];
 
 // Flows
-entities.flows.bulkEditsAvailable = false;
+entities.flows.bulkEditsAvailable = true;
 entities.flows.betaFeature = true;
 entities.flows.pageTitle = 'Flow Management';
 entities.flows.helpLink = '/Help/Content/Managing%20Flows/Flow_overview.htm';
@@ -678,7 +678,7 @@ entities.flows.membersTableFields = {
 };
 
 // Dispatch Mappings
-entities.dispatchMappings.bulkEditsAvailable = false;
+entities.dispatchMappings.bulkEditsAvailable = true;
 entities.dispatchMappings.pageTitle = 'Dispatch Mappings Management';
 entities.dispatchMappings.helpLink = '/Help/Content/Managing%20Flows/Dispatch_mapping.htm';
 entities.dispatchMappings.updateFormDependencies.push('flows', 'integrations');

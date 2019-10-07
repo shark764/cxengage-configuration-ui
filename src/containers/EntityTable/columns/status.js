@@ -10,6 +10,7 @@ export const statusColumn = {
   id: 'active',
   Header: <span title="Status">Status</span>,
   accessor: list => (list.active ? 'Enabled' : 'Disabled'),
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   filterMethod: (filter, row) => filterSelectMethod(filter, row),
   Filter: ({ filter, onChange }) => (
     <FilterSelect
@@ -22,6 +23,9 @@ export const statusColumn = {
   )
 };
 
+statusColumn.Cell.propTypes = {
+  value: PropTypes.any
+};
 statusColumn.Filter.propTypes = {
   filter: PropTypes.func,
   onChange: PropTypes.func

@@ -9,7 +9,7 @@ import { isDisplayContentInHtml } from '../../redux/modules/entities/messageTemp
 import { onFormButtonSubmit, unsetSelectedEntityId } from '../../redux/modules/entities';
 import { isSaving } from '../../redux/modules/entities/selectors';
 
-import { isFormInvalid, isFormPristine } from '../../redux/modules/form/selectors';
+import { isFormInvalid, isFormPristine, isFormDirty } from '../../redux/modules/form/selectors';
 
 export const actions = {
   onSubmit: onFormButtonSubmit,
@@ -20,6 +20,7 @@ export function mapStateToProps(state) {
   return {
     isSaving: isSaving(state),
     pristine: isFormPristine(state),
+    dirty: isFormDirty(state),
     invalid: isFormInvalid(state) || isDisplayContentInHtml(state)
   };
 }

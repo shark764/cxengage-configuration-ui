@@ -15,7 +15,7 @@ export const reportTypeColumn = {
   id: 'reportType',
   Header: <span title="Type">Type</span>,
   accessor: 'reportType',
-  Cell: ({ row }) => <span title={row.reportType}>{camelCaseToRegularForm(row.reportType)}</span>,
+  Cell: ({ value }) => <span title={camelCaseToRegularForm(value)}>{camelCaseToRegularForm(value)}</span>,
   filterMethod: (filter, row) => {
     if (filter.value === 'all') {
       return true;
@@ -45,7 +45,7 @@ export const reportTypeColumn = {
 };
 
 reportTypeColumn.Cell.propTypes = {
-  row: PropTypes.any
+  value: PropTypes.any
 };
 reportTypeColumn.Filter.propTypes = {
   filter: PropTypes.func,

@@ -21,20 +21,13 @@ export const flowColumn = {
   id: 'flow',
   Header: <span title="Flow">Flow</span>,
   accessor: d => {
-    if(d.flow !== undefined && d.flow.name){
+    if (d.flow !== undefined && d.flow.name) {
       return d.flow.name;
     } else {
       return '';
     }
   },
-  Cell: ({ row }) => {
-    
-    if (row.flow) {
-      return <span title={row.flow}>{row.flow}</span>;
-    } else {
-      return <span title=''>{''}</span>;
-    }
-  },
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
@@ -48,7 +41,7 @@ export const flowColumn = {
 };
 
 flowColumn.Cell.propTypes = {
-  row: PropTypes.any
+  value: PropTypes.any
 };
 flowColumn.Filter.propTypes = {
   filter: PropTypes.func,

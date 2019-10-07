@@ -598,6 +598,22 @@ const bulkChangeFormRoutes = [
         <GenericBulkActionsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/flows',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/dispatchMappings',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before3
 ];

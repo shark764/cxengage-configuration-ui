@@ -10,7 +10,8 @@ import SidePanelActions, { mapStateToProps, actions } from '../';
 jest.mock('../../../redux/modules/entities');
 jest.mock('../../../redux/modules/form/selectors', () => ({
   isFormInvalid: () => true,
-  isFormPristine: () => false
+  isFormPristine: () => false,
+  isFormDirty: () => true
 }));
 
 jest.mock('../../../redux/modules/entities/selectors', () => ({

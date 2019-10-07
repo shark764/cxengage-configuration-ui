@@ -61,6 +61,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
     name="reasons"
     removeCategoryItems={[Function]}
     removeReasonListItem={[Function]}
+    selectedEntityId="0000-0000-0000-0000-0000"
     setSelectedSubEntityId={[Function]}
   />
 </form>
@@ -127,6 +128,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
     name="reasons"
     removeCategoryItems={[Function]}
     removeReasonListItem={[Function]}
+    selectedEntityId="0000-0000-0000-0000-0000"
     setSelectedSubEntityId={[Function]}
   />
 </form>

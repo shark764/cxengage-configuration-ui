@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`statusColumn Cell renders correctly 1`] = `
+<span
+  title="Enabled"
+>
+  Enabled
+</span>
+`;
+
 exports[`statusColumn is configured correctly 1`] = `
 Object {
+  "Cell": [Function],
   "Filter": [Function],
   "Header": <span
     title="Status"

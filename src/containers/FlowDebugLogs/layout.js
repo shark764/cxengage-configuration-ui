@@ -220,5 +220,6 @@ export default class FlowDebugLogs extends Component {
 FlowDebugLogs.propTypes = {
   fetchReportingEvents: PropTypes.func,
   reportingEvents: PropTypes.object,
-  reportingEventsString: PropTypes.string
+  reportingEventsString: PropTypes.string,
+  reportingEventsRawData: PropTypes.any
 };

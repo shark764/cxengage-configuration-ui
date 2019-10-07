@@ -773,7 +773,7 @@ Object {
   },
   "dispatchMappings": EntityMetaData {
     "betaFeature": false,
-    "bulkEditsAvailable": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -1091,7 +1091,7 @@ Object {
   },
   "flows": EntityMetaData {
     "betaFeature": true,
-    "bulkEditsAvailable": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {

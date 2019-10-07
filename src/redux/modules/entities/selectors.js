@@ -123,7 +123,7 @@ export const isSystemRole = state => {
 };
 
 export const shouldDisableField = state => {
-  if (getSelectedEntityId(state) !== 'create') {
+  if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
     switch (getCurrentEntity(state)) {
       case 'reasonLists': {
         return getSelectedEntity(state).get('reasons').size === 0;

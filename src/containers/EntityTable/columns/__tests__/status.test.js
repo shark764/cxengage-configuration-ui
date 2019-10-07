@@ -16,6 +16,11 @@ describe('statusColumn', () => {
       expect(statusColumn.accessor({ active: false })).toEqual('Disabled');
     });
   });
+  describe('Cell', () => {
+    it('renders correctly', () => {
+      expect(statusColumn.Cell({ value: 'Enabled', row: { active: true } })).toMatchSnapshot();
+    });
+  });
   describe('filterMethod', () => {
     it('returns true when filter is "all"', () => {
       expect(statusColumn.filterMethod({ value: 'all' })).toBe(true);

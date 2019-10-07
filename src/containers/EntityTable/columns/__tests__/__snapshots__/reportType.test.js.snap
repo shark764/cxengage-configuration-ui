@@ -2,7 +2,7 @@
 
 exports[`reportTypeColumn Cell renders correctly 1`] = `
 <span
-  title="mock report type"
+  title="Mock report type"
 >
   Mock report type
 </span>

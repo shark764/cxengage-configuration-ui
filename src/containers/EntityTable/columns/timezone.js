@@ -17,6 +17,7 @@ export const timezoneColumn = {
   id: 'timezone',
   Header: <span title="Timezone">Timezone</span>,
   accessor: d => (d.timezone ? d.timezone : ''),
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
@@ -30,6 +31,9 @@ export const timezoneColumn = {
   )
 };
 
+timezoneColumn.Cell.propTypes = {
+  value: PropTypes.any
+};
 timezoneColumn.Filter.propTypes = {
   filter: PropTypes.func,
   onChange: PropTypes.func

@@ -20,7 +20,7 @@ export const activeSlaColumn = {
   id: 'activeSla',
   Header: <span title="Active Version">Active Version</span>,
   accessor: sla => sla.activeSla && sla.activeSla.versionName,
-  Cell: ({ row }) => <span title={row.activeSla}>{row.activeSla}</span>,
+  Cell: ({ value }) => <span title={value}>{value}</span>,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
@@ -34,7 +34,7 @@ export const activeSlaColumn = {
 };
 
 activeSlaColumn.Cell.propTypes = {
-  row: PropTypes.any
+  value: PropTypes.any
 };
 activeSlaColumn.Filter.propTypes = {
   filter: PropTypes.func,
