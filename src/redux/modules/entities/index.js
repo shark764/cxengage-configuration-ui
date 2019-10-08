@@ -764,7 +764,9 @@ export default function reducer(state = initialState, action) {
       }
 
       if (entityIndex !== -1) {
-        if (action.entityName === 'dispatchMappings') {
+        if (action.type !== 'BULK_ENTITY_UPDATE_FULFILLED' && action.entityName === 'dispatchMappings') {
+          // We probably haven't fetched flows data when performing
+          // bulk actions, so we prevent accesing flows data.
           const flowIndex = findEntityIndex(state, 'flows', result.flowId);
           result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', flowIndex]).get('name') };
         } else if (action.entityName === 'businessHours') {
@@ -780,14 +782,8 @@ export default function reducer(state = initialState, action) {
         return state
           .remove('loading')
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }));
-      } else {
-        if (action.entityName === 'dispatchMappings') {
-          const flowIndex = findEntityIndex(state, 'flows', result.flowId);
-          result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', flowIndex]).get('name') };
-          state.getIn([action.entityName, 'data', entityIndex, 'flow'], result.flow);
-        }
-        return state;
       }
+      return state;
     }
     case 'TOGGLE_LIST_ITEM_ENTITY': {
       return state.set('loading', action.id);

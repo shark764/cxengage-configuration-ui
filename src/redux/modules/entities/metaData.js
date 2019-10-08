@@ -464,7 +464,7 @@ entities.chatWidgets.columns = [
 ];
 
 // Presence Reasons Lists
-entities.reasonLists.bulkEditsAvailable = false;
+entities.reasonLists.bulkEditsAvailable = true;
 entities.reasonLists.pageTitle = 'Presence Reason List Management';
 entities.reasonLists.title = 'Presence Reason List';
 entities.reasonLists.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm';
@@ -620,7 +620,7 @@ entities.dataAccessReports.standardDashboards = [
 ];
 
 // Reasons
-entities.reasons.bulkEditsAvailable = false;
+entities.reasons.bulkEditsAvailable = true;
 entities.reasons.pageTitle = 'Presence Reasons';
 entities.reasons.title = 'Presence Reason';
 entities.reasons.helpLink = '/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Reasons.htm';

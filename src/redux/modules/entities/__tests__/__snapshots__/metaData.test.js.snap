@@ -2454,7 +2454,7 @@ Object {
   },
   "reasonLists": EntityMetaData {
     "betaFeature": false,
-    "bulkEditsAvailable": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
@@ -2560,7 +2560,7 @@ Object {
   },
   "reasons": EntityMetaData {
     "betaFeature": false,
-    "bulkEditsAvailable": false,
+    "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {

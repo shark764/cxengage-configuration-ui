@@ -345,6 +345,10 @@ export const BulkEntityUpdate = (action$, store) =>
     .ofType('BULK_ENTITY_UPDATE')
     .filter(a => a.entityName !== 'users')
     .map(a => {
+      a.successMessage = a.errorMessage = a.notAffectedMessage = null;
+      if (a.entityName === 'flows') {
+        a.errorMessage = `BULKED_ITEMS_AFFECTED item(s) failed to update.<br/><br/>Flows without active version cannot be enabled.`;
+      }
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.allSdkCalls = [...a.allIdsToProcess.toJS()].map(item => ({
@@ -367,7 +371,7 @@ export const BulkEntityUpdate = (action$, store) =>
           )
         )
       )
-        .do(allResult => handleBulkSuccess(allResult))
+        .do(allResult => handleBulkSuccess(allResult, null, a.successMessage, a.errorMessage, a.notAffectedMessage))
         .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
     );
 

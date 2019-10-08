@@ -25,6 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.2] - 2019-10-08
+### Changed
+- <no-jira> - Flows - Message for failing bulk actions was changed.
+### Fixed
+- CXV1-20229 - Dispatch Mappings - Bulk actions were not updating data until page refresh.
+
 ## [0.66.1] - 2019-10-04
 ### Changed
 - Version bump component library to 0.55.1.
