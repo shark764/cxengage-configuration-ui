@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.5] - 2019-10-10
+### Changed
+- Version bump components library to 0.55.4.
+
 ## [0.66.4] - 2019-10-10
 ### Changed
 - Version bump component library to 0.55.2.
