@@ -72,9 +72,13 @@ export default class UsersBulkActionsForm extends Component {
 
   toggleFormField = name => {
     const _that = this;
-    ['inviteNow', 'resendInvitation', 'cancelInvitation', 'passwordReset'].forEach(function(el) {
-      _that.props.toggleInvitationStatus(el, el === name);
-    });
+    for (
+      let index = 0, fieldNames = ['inviteNow', 'resendInvitation', 'cancelInvitation', 'passwordReset'];
+      index < fieldNames.length;
+      index++
+    ) {
+      _that.props.change(fieldNames[index], fieldNames[index] === name);
+    }
     this.setState({
       visibleFields: {
         ...this.state.initialVisibleFields,
@@ -400,6 +404,7 @@ UsersBulkActionsForm.propTypes = {
   cancelInvitationIsChecked: PropTypes.bool,
   passwordResetIsChecked: PropTypes.bool,
   isUserPlatformAdmin: PropTypes.bool,
+  change: PropTypes.func,
   groups: PropTypes.object,
   skills: PropTypes.object,
   isSaving: PropTypes.bool,

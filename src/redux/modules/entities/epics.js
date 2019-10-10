@@ -142,7 +142,7 @@ export const FormSubmission = (action$, store) =>
       selectedEntityId: getSelectedEntityId(store.getState())
     }))
     .map(a => {
-      if (a.entityName === 'transferLists') {
+      if (a.entityName === 'transferLists' && a.selectedEntityId !== 'bulk') {
         a.values = a.values.update('endpoints', endpoints =>
           endpoints.map(endpoint =>
             endpoint
@@ -166,7 +166,7 @@ export const FormSubmission = (action$, store) =>
             return accumVal.push(currentEndpoint.remove('warmColdTransfer'));
           }, List());
         });
-      } else if (a.entityName === 'reasonLists') {
+      } else if (a.entityName === 'reasonLists' && a.selectedEntityId !== 'bulk') {
         a.values = a.values.update('reasons', reasons =>
           reasons.map(reason =>
             fromJS({
@@ -343,7 +343,7 @@ export const UpdateEntity = (action$, store) =>
 export const BulkEntityUpdate = (action$, store) =>
   action$
     .ofType('BULK_ENTITY_UPDATE')
-    .filter(a => a.entityName !== 'users')
+    .filter(a => a.entityName !== 'users' && a.entityName !== 'reasons' && a.entityName !== 'reasonLists')
     .map(a => {
       a.successMessage = a.errorMessage = a.notAffectedMessage = null;
       if (a.entityName === 'flows') {

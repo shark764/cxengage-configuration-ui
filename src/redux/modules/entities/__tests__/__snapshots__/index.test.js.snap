@@ -439,7 +439,7 @@ Immutable.Map {
       "UPDATE_PRESENCE_REASONS",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 550,
   },
   "businessHours": Immutable.Map {
     "readPermission": Immutable.List [

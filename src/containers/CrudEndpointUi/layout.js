@@ -50,6 +50,7 @@ import MessageTemplatesForm from '../Form/MessageTemplates';
 import ExceptionsForm from '../Form/BusinessHours/Exception';
 import UpdateReasonListItemsForm from '../Form/ReasonListItems/Update';
 import CreateReasonListItemForm from '../Form/ReasonListItems/Create';
+import ReasonsBulkActionsForm from '../Form/Reasons/Bulk';
 import TenantsForm from '../Form/Tenants';
 //hygen-inject-before3
 
@@ -619,7 +620,7 @@ const bulkChangeFormRoutes = [
     path: '/configuration/reasons',
     component: () => (
       <DetailsPanel>
-        <GenericBulkActionsForm />
+        <ReasonsBulkActionsForm />
       </DetailsPanel>
     )
   },
@@ -627,7 +628,7 @@ const bulkChangeFormRoutes = [
     path: '/configuration/reasonLists',
     component: () => (
       <DetailsPanel>
-        <GenericBulkActionsForm />
+        <ReasonsBulkActionsForm />
       </DetailsPanel>
     )
   }

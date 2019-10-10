@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReasonsBulkActionsForm /> renders reasons bulk actions form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <styled.span>
+      <span>
+        Enable/Disable 
+        Reasons
+      </span>
+      <Styled(Toggle)
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Share 
+        Reasons
+      </span>
+      <ConfirmationWrapper
+        mainText="Setting shared to 'enabled' cannot be reverted."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <Styled(ToggleField)
+          data-automation="reasonsBulkActionsFormFieldShare"
+          disabled={true}
+          label=""
+          name="shared"
+        />
+      </ConfirmationWrapper>
+    </styled.span>
+    <styled.p>
+      <strong>
+        Note:
+      </strong>
+       This action cannot be undone.
+    </styled.p>
+  </styled.div>
+</form>
+`;

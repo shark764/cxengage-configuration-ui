@@ -186,7 +186,6 @@ const initialState = fromJS({
   },
   reasons: {
     ...defaultEntity,
-    sidePanelWidth: 750,
     readPermission: ['READ_PRESENCE_REASONS'],
     updatePermission: ['UPDATE_PRESENCE_REASONS'],
     createPermission: ['CREATE_PRESENCE_REASONS'],
@@ -384,11 +383,6 @@ export const setConfirmationDialog = (modalType, metaData) => ({
 });
 export const toggleProficiency = () => ({
   type: 'TOGGLE_PROFICIENCY'
-});
-export const toggleInvitationStatus = (fieldToToggle, toValue) => ({
-  type: 'TOGGLE_INVITATION_STATUS',
-  fieldToToggle,
-  toValue
 });
 
 export const executeConfirmCallback = referenceData => ({

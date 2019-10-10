@@ -25,6 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.4] - 2019-10-10
+### Changed
+- Version bump component library to 0.55.2.
+### Fixed
+- CXV1-20233 - Reasons - Missing bulk actions.
+
 ## [0.66.3] - 2019-10-09
 ### Fixed 
 - CXV1-17305 - Groups2 - Outbound Identifiers & Presence Reason lists should be assignable to the "everyone" inherited group 

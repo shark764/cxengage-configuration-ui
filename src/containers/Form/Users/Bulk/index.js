@@ -11,7 +11,6 @@ import { formValidation } from './validation';
 import { isCreating, getCurrentEntity, getEntityData } from '../../../../redux/modules/entities/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
 import { formSubmission, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
-import { toggleInvitationStatus } from '../../../../redux/modules/entities';
 import { isUserPlatformAdmin } from '../../../../redux/modules/entities/users/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
@@ -46,8 +45,4 @@ export function mapStateToProps(state) {
   };
 }
 
-export const actions = {
-  toggleInvitationStatus
-};
-
-export default connect(mapStateToProps, actions)(UsersBulkActionsForm);
+export default connect(mapStateToProps)(UsersBulkActionsForm);

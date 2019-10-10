@@ -11,13 +11,12 @@ import {
   getSelectedEntityId,
   getSelectedEntity,
   getSelectedEntityBulkChangeItems,
-  getSelectedEntityFormId,
   findEntity,
   findEntityByProperty
 } from '../selectors';
 import { selectTenantRoles } from '../roles/selectors';
 import { getDisplay } from './selectors';
-import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../form/selectors';
+import { selectFormInitialValues } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
 import { Toast } from 'cx-ui-components';
 import { changeUserInviteStatus } from '../../entities';
@@ -90,7 +89,7 @@ export const UpdateUserEntity = action$ =>
           )
         )
       )
-        .do(allResult => Toast.success(`User updated successfully`))
+        .do(() => Toast.success(`User updated successfully`))
         .mergeMap(result =>
           from(result).map(response => {
             if (response.result && response.result.extensions) {
@@ -702,7 +701,7 @@ export const BulkEntityUpdate = (action$, store) =>
         )
     );
 
-export const FocusNoPasswordValueFormField = (action$, store) =>
+export const FocusNoPasswordValueFormField = action$ =>
   action$
     .ofType('@@redux-form/REGISTER_FIELD')
     .filter(
@@ -711,17 +710,6 @@ export const FocusNoPasswordValueFormField = (action$, store) =>
         (a.payload.name === 'noPassword' || a.payload.name === 'defaultIdentityProvider')
     )
     .map(a => change(a.meta.form, a.payload.name, 'null'));
-
-export const ToggleInvitationStatusFormField = (action$, store) =>
-  action$
-    .ofType('TOGGLE_INVITATION_STATUS')
-    .map(a =>
-      change(
-        getSelectedEntityFormId(store.getState()),
-        a.fieldToToggle,
-        a.toValue !== undefined ? a.toValue : !getCurrentFormValueByFieldName(store.getState(), a.fieldToToggle)
-      )
-    );
 
 export const OpenAdvancedReports = (action$, store) =>
   action$

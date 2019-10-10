@@ -2,30 +2,16 @@
 
 exports[`GenericBulkItems Renders renders 1`] = `
 <Connect(ReduxForm)
-  cancelInvitationIsChecked={true}
   dispatch={[Function]}
-  groups={Immutable.Map {}}
-  identityProviders={
-    Object {
-      "label": "idp1",
-      "value": "0001",
-    }
-  }
+  entityName="reasons"
   initialValues={
     Immutable.Map {
-      "inviteNow": false,
-      "resendInvitation": false,
-      "cancelInvitation": false,
-      "passwordReset": false,
+      "shared": false,
     }
   }
-  inviteNowIsChecked={true}
   isSaving={true}
-  isUserPlatformAdmin={true}
-  key="users:bulk"
-  passwordResetIsChecked={true}
-  resendInvitationIsChecked={true}
-  skills={Immutable.Map {}}
+  key="reasons:bulk"
+  sharedIsChecked={true}
   store={
     Object {
       "dispatch": [Function],
@@ -62,30 +48,18 @@ exports[`GenericBulkItems Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "cancelInvitationIsChecked": true,
-  "groups": Immutable.Map {},
-  "identityProviders": Object {
-    "label": "idp1",
-    "value": "0001",
-  },
+  "entityName": "reasons",
   "initialValues": Immutable.Map {
-    "inviteNow": false,
-    "resendInvitation": false,
-    "cancelInvitation": false,
-    "passwordReset": false,
+    "shared": false,
   },
-  "inviteNowIsChecked": true,
   "isSaving": true,
-  "isUserPlatformAdmin": true,
-  "key": "users:bulk",
-  "passwordResetIsChecked": true,
-  "resendInvitationIsChecked": true,
-  "skills": Immutable.Map {},
+  "key": "reasons:bulk",
+  "sharedIsChecked": true,
 }
 `;
 
 exports[`createFormName returns proper values 1`] = `
 Object {
-  "form": "users:bulk",
+  "form": "reasons:bulk",
 }
 `;
