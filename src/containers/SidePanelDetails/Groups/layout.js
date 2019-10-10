@@ -43,7 +43,8 @@ export default function GroupsDetailsPanel({
   defaultFilters,
   sidePanelReadPermissions,
   sidePanelUpdatePermissions,
-  itemApiPending
+  itemApiPending,
+  isEveryone
 }) {
   return (
     <Wrapper id="dtpanel-groups">
@@ -90,7 +91,9 @@ export default function GroupsDetailsPanel({
             userHasUpdatePermission={userHasUpdatePermission && sidePanelUpdatePermissions.outboundIdentifierLists}
             deleteSubEntity={removeListItem}
             items={outboundIdentifierListsItems}
-            inherited={inherited}
+            inherited={
+              (inherited && !isEveryone) || (isEveryone && !sidePanelUpdatePermissions.outboundIdentifierLists)
+            }
             fields={outboundIdentifierListsFields}
             filtered={defaultFilters.outboundIdentifierLists}
             fetching={outboundIdentifierListsFetching}
@@ -104,7 +107,7 @@ export default function GroupsDetailsPanel({
             userHasUpdatePermission={!reasonListsFetching && userHasUpdatePermission}
             text={detailHeaderText(reasonListsItems, 'Presence Reason Lists')}
             onActionButtonClick={() => setSelectedSubEntityId('reasonLists')}
-            inherited={inherited}
+            inherited={(inherited && !isEveryone) || (isEveryone && !sidePanelUpdatePermissions.reasonLists)}
           />
           <SidePanelTable
             tableType={'sidePanel'}
@@ -142,5 +145,6 @@ GroupsDetailsPanel.propTypes = {
   defaultFilters: PropTypes.object,
   sidePanelReadPermissions: PropTypes.object,
   sidePanelUpdatePermissions: PropTypes.object,
-  itemApiPending: PropTypes.string
+  itemApiPending: PropTypes.string,
+  isEveryone: PropTypes.bool
 };

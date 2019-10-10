@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.3] - 2019-10-09
+### Fixed 
+- CXV1-17305 - Groups2 - Outbound Identifiers & Presence Reason lists should be assignable to the "everyone" inherited group 
+
 ## [0.66.2] - 2019-10-08
 ### Changed
 - <no-jira> - Flows - Message for failing bulk actions was changed.

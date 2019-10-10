@@ -29,6 +29,7 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
     }
   }
   inherited={false}
+  isEveryone={false}
   item={
     Object {
       "active": true,
@@ -90,14 +91,15 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
   setSelectedSubEntityId={[Function]}
   sidePanelReadPermissions={
     Object {
-      "groups": undefined,
       "outboundIdentifierLists": undefined,
       "reasonLists": undefined,
+      "users": undefined,
     }
   }
   sidePanelUpdatePermissions={
     Object {
       "outboundIdentifierLists": undefined,
+      "reasonLists": undefined,
     }
   }
   store={
@@ -199,6 +201,7 @@ Object {
     ],
   },
   "inherited": false,
+  "isEveryone": false,
   "item": Object {
     "active": true,
     "description": "mockDescription",
@@ -254,12 +257,13 @@ Object {
   ],
   "reasonListsItems": Array [],
   "sidePanelReadPermissions": Object {
-    "groups": undefined,
     "outboundIdentifierLists": undefined,
     "reasonLists": undefined,
+    "users": undefined,
   },
   "sidePanelUpdatePermissions": Object {
     "outboundIdentifierLists": undefined,
+    "reasonLists": undefined,
   },
   "userHasUpdatePermission": true,
   "usersFetching": undefined,

@@ -57,6 +57,7 @@ describe('<GroupsDetailsPanel />', () => {
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
         sidePanelUpdatePermissions={sidePanelUpdatePermissions}
+        inherited={false}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -76,6 +77,7 @@ describe('<GroupsDetailsPanel />', () => {
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
         sidePanelUpdatePermissions={sidePanelUpdatePermissions}
+        inherited={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -95,6 +97,7 @@ describe('<GroupsDetailsPanel />', () => {
         defaultFilters={defaultFilters}
         sidePanelReadPermissions={sidePanelReadPermissions}
         sidePanelUpdatePermissions={sidePanelUpdatePermissions}
+        inherited={true}
       />
     );
     expect(rendered).toMatchSnapshot();

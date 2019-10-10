@@ -16,7 +16,7 @@ import {
 } from '../../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity } from '../../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../../redux/modules/entities/listItemSelectors';
-import { getGroupsDependantEntityTableItems } from '../../../../redux/modules/entities/groups/selectors';
+import { getGroupsDependantEntityTableItems, isEveryone } from '../../../../redux/modules/entities/groups/selectors';
 
 jest.mock('../../../../redux/modules/entities/listItemSelectors');
 jest.mock('../../../../redux/modules/entities/groups/selectors');
@@ -41,6 +41,7 @@ getGroupsDependantEntityTableItems.mockImplementation(() => []);
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);
+isEveryone.mockImplementation(() => false);
 
 jest.mock('../../../../redux/modules/entities');
 toggleListItemEntity.mockImplementation(() => 'mockId');

@@ -14,7 +14,7 @@ import {
 } from '../../../redux/modules/entities/selectors';
 import { setSelectedSubEntityId, toggleListItemEntity } from '../../../redux/modules/entities';
 import { getSidePanelTableItems } from '../../../redux/modules/entities/listItemSelectors';
-import { getGroupsDependantEntityTableItems } from '../../../redux/modules/entities/groups/selectors';
+import { getGroupsDependantEntityTableItems, isEveryone } from '../../../redux/modules/entities/groups/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
 export function mapStateToProps(state, props) {
@@ -34,13 +34,15 @@ export function mapStateToProps(state, props) {
     defaultFilters: entitiesMetaData.groups.defaultAssociationFilters,
     itemApiPending: itemApiPending(state),
     sidePanelReadPermissions: {
-      groups: userHasPermissions(state, ['VIEW_ALL_GROUPS']),
+      users: userHasPermissions(state, ['VIEW_ALL_GROUPS']),
       outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_READ']),
       reasonLists: userHasPermissions(state, ['READ_PRESENCE_REASONS'])
     },
     sidePanelUpdatePermissions: {
-      outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_ASSIGN'])
-    }
+      outboundIdentifierLists: userHasPermissions(state, ['OUTBOUND_IDENTIFIER_ASSIGN']),
+      reasonLists: userHasPermissions(state, ['MANAGE_ALL_GROUP_REASON_LISTS'])
+    },
+    isEveryone: isEveryone(state)
   };
 }
 
