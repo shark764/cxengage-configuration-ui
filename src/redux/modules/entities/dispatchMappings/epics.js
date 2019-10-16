@@ -71,17 +71,18 @@ export const CreateDispatchMapping = action$ =>
 export const ClearMappingValue = (action$, store) =>
   action$
     .ofType('@@redux-form/CHANGE')
-    .filter(
-      a =>
-        a.meta.form.includes('dispatchMappings') &&
-        a.meta.field.includes('interactionField') &&
-        getSelectedEntity(store.getState()) !== undefined
-    )
+    .filter(a => a.meta.form.includes('dispatchMappings') && a.meta.field.includes('interactionField'))
     // We set the first option of the selectField if interactionField
     // is either 'direction' or 'source', otherwise we set null to clear
-    .map(a =>
-      change(a.meta.form, 'value', a.payload === 'direction' ? 'inbound' : a.payload === 'source' ? 'twilio' : null)
-    );
+    .map(a => {
+      let value = null;
+      if (a.payload === 'source') {
+        value = 'twilio';
+      } else if (a.payload === 'direction') {
+        value = 'inbound';
+      }
+      return change(a.meta.form, 'value', value);
+    });
 
 export const FocusMappingValue = (action$, store) =>
   action$

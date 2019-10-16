@@ -613,6 +613,7 @@ export const RemovingListItems = (action$, store) =>
 export const FetchFormMetaData = (action$, store) =>
   action$
     .ofType('SET_SELECTED_ENTITY_ID')
+    .filter(a => a.entityId !== '')
     .map(a => ({
       ...a,
       currentEntityName: getCurrentEntity(store.getState()),
