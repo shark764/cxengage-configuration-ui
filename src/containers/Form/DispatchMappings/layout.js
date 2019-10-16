@@ -36,7 +36,7 @@ export default function DispatchMappingsForm({
         label="Name *"
         componentType="input"
         inputType="text"
-        data-automation="dispatchMappingsFormFieldName"
+        data-automation="nameInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
@@ -44,13 +44,13 @@ export default function DispatchMappingsForm({
         label="Description"
         componentType="textarea"
         inputType="text"
-        data-automation="dispatchMappingsFormFieldDescription"
+        data-automation="descriptionInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <SelectField
         name="channelType"
         label="Interaction Type *"
-        data-automation="dispatchMappingsFormFieldChannelType"
+        data-automation="interactionList"
         required
         options={[
           { value: 'any', label: 'Any' },
@@ -65,7 +65,7 @@ export default function DispatchMappingsForm({
       <SelectField
         name="interactionField"
         label="Mapping *"
-        data-automation="dispatchMappingsFormFieldInteractionField"
+        data-automation="mappingList"
         required
         options={[
           { value: 'customer', label: 'Customer' },
@@ -78,7 +78,7 @@ export default function DispatchMappingsForm({
       {mappingValue === 'source' && (
         <SelectField
           name="value"
-          data-automation="dispatchMappingsFormFieldValue"
+          data-automation="integrationList"
           required
           label="Integration *"
           options={integrationElements}
@@ -89,7 +89,7 @@ export default function DispatchMappingsForm({
       {mappingValue === 'direction' && (
         <SelectField
           name="value"
-          data-automation="dispatchMappingsFormFieldValue"
+          data-automation="directionList"
           label="Direction *"
           required
           options={[
@@ -105,7 +105,7 @@ export default function DispatchMappingsForm({
         <InputField
           name="value"
           label="Mapping Value *"
-          data-automation="dispatchMappingsFormFieldValue"
+          data-automation="valueInput"
           componentType="input"
           inputType="text"
           className="frm-dispatch-mappings-name"
@@ -117,7 +117,7 @@ export default function DispatchMappingsForm({
         name="flowId"
         label="Dispatch to flow *"
         required={initialValues.get('id') !== undefined}
-        data-automation="dispatchMappingsFormFieldFlowId"
+        data-automation="dispatchList"
         options={!flowsFetching ? flowIds : undefined}
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />

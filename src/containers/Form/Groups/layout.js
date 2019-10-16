@@ -21,7 +21,7 @@ export default function GroupsForm({ handleSubmit, isSaving, inherited, userHasU
           name="name"
           label="Name *"
           id="frm-groups-name"
-          data-automation="groupsName"
+          data-automation="nameInput"
           componentType="input"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -30,7 +30,7 @@ export default function GroupsForm({ handleSubmit, isSaving, inherited, userHasU
           name="description"
           label="Description"
           id="frm-groups-description"
-          data-automation="groupsDescription"
+          data-automation="descriptionInput"
           componentType="textarea"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}

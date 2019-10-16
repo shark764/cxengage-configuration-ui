@@ -62,6 +62,7 @@ export default function UsersForm({
             className="frm-users-firstname"
             name="firstName"
             label="First Name"
+            data-automation="firstNameInput"
             componentType="input"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
@@ -70,6 +71,7 @@ export default function UsersForm({
             className="frm-users-lastname"
             name="lastName"
             label="Last Name"
+            data-automation="lastNameInput"
             componentType="input"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
@@ -79,6 +81,7 @@ export default function UsersForm({
             name="externalId"
             label="External ID"
             componentType="input"
+            data-automation="externalIDInput"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
@@ -106,6 +109,7 @@ export default function UsersForm({
             className="frm-users-platform-authentication"
             name="noPassword"
             label="Platform Authentication"
+            data-automation="authenticationList"
             disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
             options={[
               { label: 'Use Tenant Default: Enabled', value: 'null' },
@@ -117,6 +121,7 @@ export default function UsersForm({
           <SelectField
             className="frm-users-default-sso-provider"
             name="defaultIdentityProvider"
+            data-automation="identityProviderList"
             label="Single Sign On Identitiy Provider"
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantIdentityProviders}
@@ -187,6 +192,7 @@ export default function UsersForm({
             className="frm-users-workstation-id"
             name="workStationId"
             label="Workstation ID"
+            data-automation="workstationIdInput"
             componentType="input"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
@@ -197,6 +203,7 @@ export default function UsersForm({
                 className="frm-users-role-id"
                 name="roleId"
                 label="Tenant Role"
+                data-automation="tenantList"
                 disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
                 options={tenantRoles}
               />

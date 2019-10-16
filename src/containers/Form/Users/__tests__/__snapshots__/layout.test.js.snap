@@ -14,6 +14,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       <InputField
         className="frm-users-firstname"
         componentType="input"
+        data-automation="firstNameInput"
         disabled={false}
         inputType="text"
         label="First Name"
@@ -22,6 +23,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       <InputField
         className="frm-users-lastname"
         componentType="input"
+        data-automation="lastNameInput"
         disabled={false}
         inputType="text"
         label="Last Name"
@@ -30,6 +32,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       <InputField
         className="frm-users-external-id"
         componentType="input"
+        data-automation="externalIDInput"
         disabled={false}
         inputType="text"
         label="External ID"
@@ -60,6 +63,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <SelectField
         className="frm-users-platform-authentication"
+        data-automation="authenticationList"
         disabled={true}
         label="Platform Authentication"
         name="noPassword"
@@ -79,6 +83,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <SelectField
         className="frm-users-default-sso-provider"
+        data-automation="identityProviderList"
         disabled={false}
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
@@ -94,6 +99,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       <InputField
         className="frm-users-workstation-id"
         componentType="input"
+        data-automation="workstationIdInput"
         disabled={false}
         inputType="text"
         label="Workstation ID"
@@ -101,6 +107,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <SelectField
         className="frm-users-role-id"
+        data-automation="tenantList"
         disabled={true}
         label="Tenant Role"
         name="roleId"
@@ -155,6 +162,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       <InputField
         className="frm-users-firstname"
         componentType="input"
+        data-automation="firstNameInput"
         disabled={false}
         inputType="text"
         label="First Name"
@@ -163,6 +171,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       <InputField
         className="frm-users-lastname"
         componentType="input"
+        data-automation="lastNameInput"
         disabled={false}
         inputType="text"
         label="Last Name"
@@ -171,6 +180,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       <InputField
         className="frm-users-external-id"
         componentType="input"
+        data-automation="externalIDInput"
         disabled={false}
         inputType="text"
         label="External ID"
@@ -201,6 +211,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
       <SelectField
         className="frm-users-platform-authentication"
+        data-automation="authenticationList"
         disabled={true}
         label="Platform Authentication"
         name="noPassword"
@@ -220,6 +231,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
       <SelectField
         className="frm-users-default-sso-provider"
+        data-automation="identityProviderList"
         disabled={false}
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
@@ -235,6 +247,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       <InputField
         className="frm-users-workstation-id"
         componentType="input"
+        data-automation="workstationIdInput"
         disabled={false}
         inputType="text"
         label="Workstation ID"
@@ -242,6 +255,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
       <SelectField
         className="frm-users-role-id"
+        data-automation="tenantList"
         disabled={true}
         label="Tenant Role"
         name="roleId"
@@ -296,6 +310,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <InputField
         className="frm-users-firstname"
         componentType="input"
+        data-automation="firstNameInput"
         disabled={true}
         inputType="text"
         label="First Name"
@@ -304,6 +319,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <InputField
         className="frm-users-lastname"
         componentType="input"
+        data-automation="lastNameInput"
         disabled={true}
         inputType="text"
         label="Last Name"
@@ -312,6 +328,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <InputField
         className="frm-users-external-id"
         componentType="input"
+        data-automation="externalIDInput"
         disabled={true}
         inputType="text"
         label="External ID"
@@ -342,6 +359,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
       <SelectField
         className="frm-users-platform-authentication"
+        data-automation="authenticationList"
         disabled={true}
         label="Platform Authentication"
         name="noPassword"
@@ -361,6 +379,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
       <SelectField
         className="frm-users-default-sso-provider"
+        data-automation="identityProviderList"
         disabled={true}
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
@@ -376,6 +395,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <InputField
         className="frm-users-workstation-id"
         componentType="input"
+        data-automation="workstationIdInput"
         disabled={true}
         inputType="text"
         label="Workstation ID"
@@ -383,6 +403,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
       <SelectField
         className="frm-users-role-id"
+        data-automation="tenantList"
         disabled={true}
         label="Tenant Role"
         name="roleId"
@@ -437,6 +458,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <InputField
         className="frm-users-firstname"
         componentType="input"
+        data-automation="firstNameInput"
         disabled={true}
         inputType="text"
         label="First Name"
@@ -445,6 +467,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <InputField
         className="frm-users-lastname"
         componentType="input"
+        data-automation="lastNameInput"
         disabled={true}
         inputType="text"
         label="Last Name"
@@ -453,6 +476,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <InputField
         className="frm-users-external-id"
         componentType="input"
+        data-automation="externalIDInput"
         disabled={true}
         inputType="text"
         label="External ID"
@@ -483,6 +507,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
       <SelectField
         className="frm-users-platform-authentication"
+        data-automation="authenticationList"
         disabled={true}
         label="Platform Authentication"
         name="noPassword"
@@ -502,6 +527,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
       <SelectField
         className="frm-users-default-sso-provider"
+        data-automation="identityProviderList"
         disabled={true}
         label="Single Sign On Identitiy Provider"
         name="defaultIdentityProvider"
@@ -517,6 +543,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <InputField
         className="frm-users-workstation-id"
         componentType="input"
+        data-automation="workstationIdInput"
         disabled={true}
         inputType="text"
         label="Workstation ID"
@@ -524,6 +551,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
       <SelectField
         className="frm-users-role-id"
+        data-automation="tenantList"
         disabled={true}
         label="Tenant Role"
         name="roleId"

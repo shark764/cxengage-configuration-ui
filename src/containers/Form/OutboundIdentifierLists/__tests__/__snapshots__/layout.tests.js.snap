@@ -6,6 +6,7 @@ exports[`OutboundIdentifierListsForm renders regular form 1`] = `
 >
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -13,6 +14,7 @@ exports[`OutboundIdentifierListsForm renders regular form 1`] = `
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
@@ -27,6 +29,7 @@ exports[`OutboundIdentifierListsForm renders, inherited is true, fields should b
 >
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={true}
     inputType="text"
     label="Name *"
@@ -34,6 +37,7 @@ exports[`OutboundIdentifierListsForm renders, inherited is true, fields should b
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={true}
     inputType="text"
     label="Description"
@@ -48,6 +52,7 @@ exports[`OutboundIdentifierListsForm renders, isSaving is true, fields should be
 >
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={true}
     inputType="text"
     label="Name *"
@@ -55,6 +60,7 @@ exports[`OutboundIdentifierListsForm renders, isSaving is true, fields should be
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={true}
     inputType="text"
     label="Description"

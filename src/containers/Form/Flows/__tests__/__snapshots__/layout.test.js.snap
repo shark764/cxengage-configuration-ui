@@ -9,7 +9,7 @@ exports[`<FlowsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="flowsFormFieldName"
+    data-automation="nameInput"
     disabled={true}
     inputType="text"
     label="Name *"
@@ -17,7 +17,7 @@ exports[`<FlowsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="flowsFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={true}
     inputType="text"
     label="Description"
@@ -27,7 +27,7 @@ exports[`<FlowsForm /> renders create form 1`] = `
     text="Properties"
   />
   <SelectField
-    data-automation="flowsFormFieldType"
+    data-automation="typeList"
     disabled={true}
     label="Type *"
     name="type"
@@ -62,7 +62,7 @@ exports[`<FlowsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="flowsFormFieldName"
+    data-automation="nameInput"
     disabled={true}
     inputType="text"
     label="Name *"
@@ -70,7 +70,7 @@ exports[`<FlowsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="flowsFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={true}
     inputType="text"
     label="Description"
@@ -80,7 +80,7 @@ exports[`<FlowsForm /> renders update form 1`] = `
     text="Properties"
   />
   <SelectField
-    data-automation="flowsFormFieldType"
+    data-automation="typeList"
     disabled={true}
     label="Type *"
     name="type"

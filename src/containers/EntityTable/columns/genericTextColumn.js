@@ -5,6 +5,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
+import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
+
 import styled from 'styled-components';
 import { SearchIconSVG } from 'cx-ui-components';
 
@@ -34,6 +36,7 @@ export function constructGeneralTextColumn(string) {
       <div>
         <Input
           className={`${normalizedString}-filter-input`}
+          data-automation={`search${capitalizeFirstLetter(string)}Column`}
           onChange={event => onChange(event.target.value)}
           value={filter ? filter.value : ''}
         />

@@ -9,7 +9,7 @@ exports[`<DispatchMappingsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="dispatchMappingsFormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -17,14 +17,14 @@ exports[`<DispatchMappingsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="dispatchMappingsFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
   <SelectField
-    data-automation="dispatchMappingsFormFieldChannelType"
+    data-automation="interactionList"
     disabled={false}
     label="Interaction Type *"
     name="channelType"
@@ -59,7 +59,7 @@ exports[`<DispatchMappingsForm /> renders create form 1`] = `
     required={true}
   />
   <SelectField
-    data-automation="dispatchMappingsFormFieldInteractionField"
+    data-automation="mappingList"
     disabled={false}
     label="Mapping *"
     name="interactionField"
@@ -86,7 +86,7 @@ exports[`<DispatchMappingsForm /> renders create form 1`] = `
     required={true}
   />
   <SelectField
-    data-automation="dispatchMappingsFormFieldFlowId"
+    data-automation="dispatchList"
     disabled={false}
     label="Dispatch to flow *"
     name="flowId"
@@ -111,7 +111,7 @@ exports[`<DispatchMappingsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="dispatchMappingsFormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -119,14 +119,14 @@ exports[`<DispatchMappingsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="dispatchMappingsFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
   <SelectField
-    data-automation="dispatchMappingsFormFieldChannelType"
+    data-automation="interactionList"
     disabled={false}
     label="Interaction Type *"
     name="channelType"
@@ -161,7 +161,7 @@ exports[`<DispatchMappingsForm /> renders update form 1`] = `
     required={true}
   />
   <SelectField
-    data-automation="dispatchMappingsFormFieldInteractionField"
+    data-automation="mappingList"
     disabled={false}
     label="Mapping *"
     name="interactionField"
@@ -188,7 +188,7 @@ exports[`<DispatchMappingsForm /> renders update form 1`] = `
     required={true}
   />
   <SelectField
-    data-automation="dispatchMappingsFormFieldFlowId"
+    data-automation="dispatchList"
     disabled={false}
     label="Dispatch to flow *"
     name="flowId"

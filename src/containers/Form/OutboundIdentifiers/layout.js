@@ -29,20 +29,20 @@ export default function OutboundIdentifiersForm({
         <InputField
           name="name"
           label="Name *"
+          data-automation="nameInput"
           componentType="input"
           inputType="text"
-          data-automation="outboundIdentifiersFormFieldName"
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         <SelectField
           name="channelType"
           label="Channel Type *"
+          data-automation="channelList"
           options={[
             { value: 'voice', label: 'Voice' },
             { value: 'sms', label: 'Sms' },
             { value: 'email', label: 'Email' }
           ]}
-          data-automation="outboundIdentifiersFormFieldChannelType"
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
         {channelType && (
@@ -50,8 +50,8 @@ export default function OutboundIdentifiersForm({
             name="value"
             label="Value *"
             componentType="input"
+            data-automation="valueInput"
             inputType="text"
-            data-automation="outboundIdentifiersFormFieldValue"
             placeholder={`Enter${channelType === 'email' ? ' an email address' : ' a e.164 formatted number'}`}
             disabled={isSaving || inherited || !userHasUpdatePermission}
           />
@@ -60,7 +60,7 @@ export default function OutboundIdentifiersForm({
           name="flowId"
           label="Flow Id *"
           required={initialValues.get('id') !== undefined}
-          data-automation="outboundIdentifiersFormFieldFlowId"
+          data-automation="flowList"
           options={!flowsFetching ? flowIds : undefined}
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />
@@ -68,7 +68,8 @@ export default function OutboundIdentifiersForm({
           name="description"
           label="Description"
           componentType="textarea"
-          data-automation="outboundIdentifiersFormFieldDescription"
+          data-automation="descriptionInput"
+          automation="outboundIdentifiersFormFieldDescription"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}
         />

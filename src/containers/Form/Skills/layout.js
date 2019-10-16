@@ -30,6 +30,7 @@ export default function SkillsForm({
           name="name"
           label="Name *"
           id="frm-skills-name"
+          data-automation="nameInput"
           componentType="input"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}
@@ -38,6 +39,7 @@ export default function SkillsForm({
           name="description"
           label="Description"
           id="frm-skills-description"
+          data-automation="descriptionInput"
           componentType="textarea"
           inputType="text"
           disabled={isSaving || inherited || !userHasUpdatePermission}

@@ -29,7 +29,8 @@ export default function RolesForm({
       <InputField
         name="name"
         label="Name *"
-        data-automation="rolesFormFieldName"
+        id="frm-roles-name"
+        data-automation="nameInput"
         componentType="input"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole}
@@ -37,7 +38,8 @@ export default function RolesForm({
       <InputField
         name="description"
         label="Description"
-        data-automation="rolesFormFieldDescription"
+        id="frm-roles-description"
+        data-automation="descriptionInput"
         componentType="textarea"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole}
@@ -51,11 +53,11 @@ export default function RolesForm({
         secondaryText={'Are you sure you want to continue?'}
       >
         <ToggleField
-          data-automation="rolesFormFieldShared"
           name="shared"
           label="Shared"
-          title={`Change "Shared" state for this Role`}
-          disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole}
+          data-automation="sharedToggle"
+          title="Change &quot;Shared&quot; state for this Role"
+          disabled={isSaving || inherited || !userHasUpdatePermission}
         />
       </ConfirmationWrapper>
     </form>

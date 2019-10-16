@@ -30,6 +30,7 @@ export default function DataAccessReportsForm({
         name="name"
         label="Name *"
         id="frm-data-access-reports-name"
+        data-automation="nameInput"
         componentType="input"
         inputType="text"
         disabled={isSaving || !userHasUpdatePermission}
@@ -38,6 +39,7 @@ export default function DataAccessReportsForm({
         name="description"
         label="Description"
         id="frm-data-access-reports-description"
+        data-automation="descriptionInput"
         componentType="textarea"
         inputType="text"
         disabled={isSaving || !userHasUpdatePermission}
@@ -45,6 +47,7 @@ export default function DataAccessReportsForm({
       <DetailHeader text="Report" />
       <RadioGroupField
         name="reportType"
+        data-automation="typeChoose"
         label="Type *"
         id="frm-data-access-reports-report-type"
         disabled={isSaving || !userHasUpdatePermission}
@@ -66,6 +69,7 @@ export default function DataAccessReportsForm({
             name="realtimeReportType"
             label="Realtime Report Type *"
             id="frm-data-access-reports-realtime-report-type"
+            data-automation="realtimeReportTypeChoose"
             disabled={isSaving || !userHasUpdatePermission}
             options={[
               {
@@ -83,6 +87,7 @@ export default function DataAccessReportsForm({
             <AutoCompleteField
               name="realtimeReportName"
               label="Realtime Report *"
+              data-automation="realtimeReportAutoComplete"
               placeholder="Search..."
               suggestions={realtimeReportType === 'custom' ? dashboards : standardDashboards}
               id="frm-data-access-reports-realtime-report-name"
@@ -95,6 +100,7 @@ export default function DataAccessReportsForm({
         <AutoCompleteField
           name="historicalCatalogName"
           label="Historical Reports Folder *"
+          data-automation="historicalReportAutoComplete"
           placeholder="Search..."
           suggestions={folders}
           id="frm-data-access-reports-historical-catalog-name"

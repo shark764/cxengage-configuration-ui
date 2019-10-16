@@ -10,6 +10,7 @@ exports[`<SkillsForm /> renders create form 1`] = `
   <React.Fragment>
     <InputField
       componentType="input"
+      data-automation="nameInput"
       disabled={true}
       id="frm-skills-name"
       inputType="text"
@@ -18,6 +19,7 @@ exports[`<SkillsForm /> renders create form 1`] = `
     />
     <InputField
       componentType="textarea"
+      data-automation="descriptionInput"
       disabled={true}
       id="frm-skills-description"
       inputType="text"
@@ -50,6 +52,7 @@ exports[`<SkillsForm /> renders create form with no proficiency 1`] = `
   <React.Fragment>
     <InputField
       componentType="input"
+      data-automation="nameInput"
       disabled={true}
       id="frm-skills-name"
       inputType="text"
@@ -58,6 +61,7 @@ exports[`<SkillsForm /> renders create form with no proficiency 1`] = `
     />
     <InputField
       componentType="textarea"
+      data-automation="descriptionInput"
       disabled={true}
       id="frm-skills-description"
       inputType="text"
@@ -90,6 +94,7 @@ exports[`<SkillsForm /> renders update form 1`] = `
   <React.Fragment>
     <InputField
       componentType="input"
+      data-automation="nameInput"
       disabled={true}
       id="frm-skills-name"
       inputType="text"
@@ -98,6 +103,7 @@ exports[`<SkillsForm /> renders update form 1`] = `
     />
     <InputField
       componentType="textarea"
+      data-automation="descriptionInput"
       disabled={true}
       id="frm-skills-description"
       inputType="text"
@@ -130,6 +136,7 @@ exports[`<SkillsForm /> renders update form with no proficiency 1`] = `
   <React.Fragment>
     <InputField
       componentType="input"
+      data-automation="nameInput"
       disabled={true}
       id="frm-skills-name"
       inputType="text"
@@ -138,6 +145,7 @@ exports[`<SkillsForm /> renders update form with no proficiency 1`] = `
     />
     <InputField
       componentType="textarea"
+      data-automation="descriptionInput"
       disabled={true}
       id="frm-skills-description"
       inputType="text"

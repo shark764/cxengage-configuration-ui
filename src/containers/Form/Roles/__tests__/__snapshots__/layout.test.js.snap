@@ -9,16 +9,18 @@ exports[`<RolesForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="rolesFormFieldName"
+    data-automation="nameInput"
     disabled={false}
+    id="frm-roles-name"
     inputType="text"
     label="Name *"
     name="name"
   />
   <InputField
     componentType="textarea"
-    data-automation="rolesFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
+    id="frm-roles-description"
     inputType="text"
     label="Description"
     name="description"
@@ -28,7 +30,7 @@ exports[`<RolesForm /> renders create form 1`] = `
     secondaryText="Are you sure you want to continue?"
   >
     <ToggleField
-      data-automation="rolesFormFieldShared"
+      data-automation="sharedToggle"
       disabled={false}
       label="Shared"
       name="shared"
@@ -47,16 +49,18 @@ exports[`<RolesForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="rolesFormFieldName"
+    data-automation="nameInput"
     disabled={false}
+    id="frm-roles-name"
     inputType="text"
     label="Name *"
     name="name"
   />
   <InputField
     componentType="textarea"
-    data-automation="rolesFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
+    id="frm-roles-description"
     inputType="text"
     label="Description"
     name="description"
@@ -66,7 +70,7 @@ exports[`<RolesForm /> renders update form 1`] = `
     secondaryText="Are you sure you want to continue?"
   >
     <ToggleField
-      data-automation="rolesFormFieldShared"
+      data-automation="sharedToggle"
       disabled={false}
       label="Shared"
       name="shared"

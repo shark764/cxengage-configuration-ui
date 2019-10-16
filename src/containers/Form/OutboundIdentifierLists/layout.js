@@ -25,12 +25,14 @@ export default function OutboundIdentifierListsForm({
         name="name"
         label="Name *"
         componentType="input"
+        data-automation="nameInput"
         inputType="text"
         disabled={isSaving || inherited || !userHasCurrentFormPermission}
       />
       <InputField
         name="description"
         label="Description"
+        data-automation="descriptionInput"
         componentType="textarea"
         inputType="text"
         disabled={isSaving || inherited || !userHasCurrentFormPermission}

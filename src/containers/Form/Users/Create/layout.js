@@ -42,11 +42,19 @@ export default function UsersForm({
 
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Login Details" />
-          <InputField name="email" label="Email *" id="frm-users-email" componentType="input" inputType="text" />
+          <InputField
+            name="email"
+            data-automation="emailInput"
+            label="Email *"
+            id="frm-users-email"
+            componentType="input"
+            inputType="text"
+          />
           <SelectField
             name="platformRoleId"
             label="Platform Role *"
             id="frm-users-platform-role-id"
+            data-automation="roleList"
             disabled={isSaving || !userHasUpdatePermission}
             options={platformRoles}
           />
@@ -54,6 +62,7 @@ export default function UsersForm({
             name="noPassword"
             label="Platform Authentication"
             id="frm-users-no-password-id"
+            data-automation="authenticationList"
             disabled={isSaving || !userHasUpdatePermission}
             options={[
               { label: 'Use Tenant Default: Enabled', value: 'null' },
@@ -66,6 +75,7 @@ export default function UsersForm({
             name="defaultIdentityProvider"
             label="Single Sign On Identitiy Provider"
             id="frm-users-default-identity-provider-id"
+            data-automation="identityProviderList"
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantIdentityProviders}
             required
@@ -78,6 +88,7 @@ export default function UsersForm({
             name="workStationId"
             label="Workstation ID"
             id="frm-users-work-station-id"
+            data-automation="workstationIdInput"
             componentType="input"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
@@ -86,6 +97,7 @@ export default function UsersForm({
             name="roleId"
             label="Tenant Role *"
             id="frm-users-role-id"
+            data-automation="tenantList"
             disabled={isSaving || !userHasUpdatePermission}
             options={tenantRoles}
           />
@@ -93,6 +105,7 @@ export default function UsersForm({
             name="inviteNow"
             label="Invite Now"
             id="frm-users-invite-now"
+            data-automation="inviteToggle"
             disabled={isSaving || !userHasUpdatePermission}
           />
         </DetailWrapper>

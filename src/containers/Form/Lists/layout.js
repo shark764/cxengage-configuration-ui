@@ -19,16 +19,24 @@ export default function ListsForm(props) {
         name="name"
         label="Name *"
         id="frm-lists-name"
+        data-automation="nameInput"
         componentType="input"
         inputType="text"
         disabled={props.isSaving || props.inherited}
       />
-      <ToggleField name="shared" label="Shared *" id="frm-lists-shared" disabled={props.isSaving || props.inherited} />
+      <ToggleField
+        name="shared"
+        label="Shared *"
+        id="frm-lists-shared"
+        disabled={props.isSaving || props.inherited}
+        data-automation="sharedToggle"
+      />
       {!props.update && (
         <SelectField
           name="listTypeId"
           label="List Type *"
           id="frm-lists-list-type-id"
+          data-automation="listTypeList"
           options={props.listTypes}
           disabled={props.isSaving}
         />

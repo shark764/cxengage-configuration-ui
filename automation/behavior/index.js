@@ -13,4 +13,5 @@ elements.$ = (searchTerm, elementType) => {
     return new Element(`${elementType}[title="${searchTerm}"]`);
   }
 };
-module.exports = elements;
+
+ module.exports = elements;

@@ -3,114 +3,160 @@
  */
 const { Element, Brow } = require('cx-automation-utils/pageObject');
 const Elem = require('..');
-
-//const CreateBehavior = require('../create');
-const create = require('../create/index.js');
-//const createButton = new Element('button[id="sdpanel-create"]')
-const tableRow = new Element('div[tablerowselect="0"]');
-const createAction = new Element('svg[viewBox="0 0 154.21 88.74"]');
+const dictionary = require('../../dictionary/index.json');
+const tableRow = new Element('div[tableRowSelect="0"]');
+const uuid = require('uuid');
 
 const commonBehavior = {
-  login: function(username, password) {
+	login: function (username, password) {
     Brow.url(`${process.env.URL}`);
-    Elem.username.waitForVisible(60000);
-    Elem.username.setValue(username);
-    Elem.password.waitForVisible(40000);
-    Elem.password.setValue(password);
-    Elem.signInButton.waitAndClick();
-    // Elem.chooseTenantButton.waitForVisible(60000);
-    // Elem.chooseTenantButton.waitAndClick();
+		Elem.username.waitForVisible(60000);
+		Elem.username.setValue(username);
+		Elem.password.waitForVisible(40000);
+		Elem.password.setValue(password);
+		Elem.signInButton.waitAndClick();
+		Elem.chooseTenantButton.waitForVisible(60000);
+		Elem.chooseTenantButton.waitAndClick();
+    Brow.pause(2000);
+  },
+        
+  navigationMainBar: function (firstChoice, secondChoice) {
+    let navBar = new Element(`[data-automation="${firstChoice}"]`);
+    let navBarSub = new Element(`[data-automation="${secondChoice}"]`);
+    navBar.waitAndClick();
+    navBarSub.waitAndClick();
     Brow.pause(2000);
   },
 
-  navigationMainBar: function(firstChoice, secondChoice) {
-    switch (secondChoice) {
-      //All the these cases are reletad to the ##User Management## tab
-      case 'navigationLinkUsers':
-        Elem.userManagementMenu.waitAndClick();
-        Elem.navigationLinkUsers.waitAndClick();
-        break;
-      case 'navigationLinkGroups':
-        Elem.userManagementMenu.waitAndClick();
-        Elem.navigationLinkGroups.waitAndClick();
-        break;
-      case 'navigationLinkSkills':
-        Elem.userManagementMenu.waitAndClick();
-        Elem.navigationLinkSkills.waitAndClick();
-        break;
-      case 'navigationLinkRoles':
-        Elem.userManagementMenu.waitAndClick();
-        Elem.navigationLinkRoles.waitAndClick();
-        break;
+  /**
+ * insertDataTextValues
+ * @param {String} entity - The tested page name
+ * @return - Set the text value 
+ */
+  insertDataTextValues: function(entity,action,type) {
+    dictionary[entity].specs[action].parametersToInsert.forEach(parameters => {
+      const param = Object.keys(parameters)[0];
+      if(param.includes(type)) {
+        parameters.textInputs.forEach(insertedInput => {
+          if(insertedInput.includes("email")) return Elem[insertedInput].setValue(uuid()+"@test.com");
+          else return Elem[insertedInput].setValue(uuid()+"test");
+        });
+      }
+    });
+  },
 
-      //All the these cases are reletad to the ##Configuration## tab
-      case 'navigationLinkLists':
-        Elem.configurationtMenu.waitAndClick();
-        Elem.navigationLinkLists.waitAndClick();
-        break;
-      //=>SHARON - The name is not align to the tab - "User Management Emails"
-      case 'navigationLinkEmailTemplates':
-        Elem.configurationtMenu.waitAndClick();
-        Elem.navigationLinkEmailTemplates.waitAndClick();
-        break;
-      case 'navigationLinkOutboundIdentifierLists':
-        Elem.configurationtMenu.waitAndClick();
-        Elem.navigationLinkOutboundIdentifierLists.waitAndClick();
-        break;
-      case 'navigationLinkOutboundIdentifiers':
-        Elem.configurationtMenu.waitAndClick();
-        Elem.navigationLinkOutboundIdentifiers.waitAndClick();
-        break;
-      case 'navigationLinkStatistics':
-        Elem.configurationtMenu.waitAndClick();
-        Elem.navigationLinkStatistics.waitAndClick();
-        break;
-      case 'navigationLinkChatWidgets':
-        Elem.configurationtMenu.waitAndClick();
-        Elem.navigationLinkChatWidgets.waitAndClick();
-        break;
+  insertAutoCompleteValues: function(entity,action,type) {
+    dictionary[entity].specs[action].parametersToInsert.forEach(parameters => {
+      const param = Object.keys(parameters)[0];
+      if(param.includes(type)) {
+        parameters.autoCompleteInputs.forEach(insertedInput => {
+          Object.keys(insertedInput).forEach (autoCompleteLine => {
+            Elem[autoCompleteLine].setValue(insertedInput[autoCompleteLine]);
+            let parameterAutoCompleteValue = new Element(`.//li[text()="${insertedInput[autoCompleteLine]}"]`);
+            parameterAutoCompleteValue.waitAndClick();
+      });  
+        });
+      }
+    });
+  },
 
-      //All the these cases are reletad to the ##Flows## tab
-      case 'navigationLinkFlows':
-        Elem.flowsMenu.waitAndClick();
-        Elem.navigationLinkFlows.waitAndClick();
-        break;
-      case 'navigationLinkDispatchMappings':
-        Elem.flowsMenu.waitAndClick();
-        Elem.navigationLinkDispatchMappings.waitAndClick();
-        break;
+  insertExtraValues: function(entity,action,type) {
+    dictionary[entity].specs[action].parametersToInsert.forEach(parameters => {
+      const param = Object.keys(parameters)[0];
+      if(param.includes(type)) {
+        parameters.extraInputs.forEach(insertedInput => {
+          Object.keys(insertedInput).forEach (extraLine => {
+            Elem[extraLine].setValue(insertedInput[extraLine]);
 
-      //All the these cases are reletad to the ##Reporting## tab
-      //=>SHARON - The name is not align to the tab - "reporting"
-      case 'navigationLinkDataAccessReports':
-        Elem.reportingMenu.waitAndClick();
-        Elem.navigationLinkDataAccessReports.waitAndClick();
-        break;
-      case 'navigationLinkInteractionMonitoring':
-        Elem.reportingMenu.waitAndClick();
-        Elem.navigationLinkInteractionMonitoring.waitAndClick();
-        break;
-      default:
-        console.error('Incorrect param passed to navigationMainBar function');
+      });  
+        });
+      }
+    });
+  },
+
+
+  insertListValues: function (entity,action,type){
+    dictionary[entity].specs[action].parametersToInsert.forEach(parameters => {
+      const param = Object.keys(parameters)[0];
+      if(param.includes(type)) {
+        parameters.listInputs.forEach(insertedInput => {
+          Object.keys(insertedInput).forEach (listLine => {
+          Elem[listLine].waitAndClick();
+          let parameterListValue = new Element(`.//option[text()="${insertedInput[listLine]}"]`);
+          parameterListValue.waitAndClick();
+          });
+        });
+      }
+    });
+  },
+
+  insertRadioValues: function (entity,action,type){
+    dictionary[entity].specs[action].parametersToInsert.forEach(parameters => {
+      const param = Object.keys(parameters)[0];
+      if(param.includes(type)) {
+        parameters.radioGroupInputs.forEach(insertedInput => {
+          Object.keys(insertedInput).forEach (radioGroupLine => {
+            let parameterRadioGroupValue =  new Element(`input[value="${insertedInput[radioGroupLine]}"]`);
+            parameterRadioGroupValue.waitAndClick();
+          });  
+        });
+      }
+    });
+  },
+
+  updateValues: function(valueToSearchForUpdate,entity){
+      this.searchByNameAndClick(entity,valueToSearchForUpdate);
+      Brow.pause(3000);
+      this.insertDataTextValues(entity,"update","text");
+      this.insertListValues(entity,"update","list");
+      this.insertRadioValues(entity,"update","radio");
+      this.insertAutoCompleteValues(entity,"update","auto");
+      if (Elem.submitButton.isExisting()){
+        Elem.submitButton.waitAndClick();
+        Brow.pause(3000);
+        return (this.verifyAction());
+      }
+    
+    return false
+  },
+
+  createNewEntity: function (entity){
+    if (Elem.entityCreateButton.isExisting()){
+      Elem.entityCreateButton.waitAndClick();
+      this.insertDataTextValues(entity,"create","text");
+      this.insertListValues(entity,"create","list");
+      this.insertRadioValues(entity,"create","radio");
+      this.insertAutoCompleteValues(entity,"create","auto");
+      this.insertExtraValues(entity,"create","extra");
+      if (Elem.submitButton.isExisting()){
+        Elem.submitButton.waitAndClick();
+        Brow.pause(3000);
+        return (this.verifyAction());
+      }
     }
-    Brow.pause(2000);
+    return false
   },
 
-  CreateNewLine: function(name, description) {
-    Elem.entityCreateButton.waitAndClick();
-    //CreateBehavior.updateJson(name,description,email);
-    // createButton.waitAndClick();
-    Brow.pause(6000);
+  verifyAction:function (){
+    Brow.pause(1000);
+    var verification = new Element('div[aria-live="assertive"]');
+    return !(verification.isExisting())
   },
 
-  clickActionButton: function() {
-    Elem.actionsButton.waitAndClick();
-    Brow.pause(6000);
-  },
 
-  SearchByNameAndClick: function(name) {
-    Elem.searchNameColumn.setValue(name);
+  searchByNameAndClick: function (entity,valueToSearchForUpdate){
+    Brow.pause(1000);
+    var columnElement = new Element(`[data-automation="${dictionary[entity].whichCatagoryToSearch}"]`);
+    columnElement.setValue(valueToSearchForUpdate);
     tableRow.waitAndClick();
+  },
+
+  statusToggle: function(name) {
+    this.searchByNameAndClick(name);
+    Elem.statusToggle.waitAndClick();
+    let confirmButton = new Element('button[id="confirm"]');
+    confirmButton.waitAndClick();
+    Brow.pause(2000);
   }
 };
 

@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.9] - 2019-10-16
+### Changed
+- Improved Automation tests
+
 ## [0.66.8] - 2019-10-15
 ### Fixed
 - CXV1-20254 - Convert Mapping Value* field value to empty string after updating ChannelType in the MainEntity form.

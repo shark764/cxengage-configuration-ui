@@ -9,6 +9,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={false}
     id="frm-data-access-reports-name"
     inputType="text"
@@ -17,6 +18,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={false}
     id="frm-data-access-reports-description"
     inputType="text"
@@ -27,6 +29,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
     text="Report"
   />
   <RadioGroupField
+    data-automation="typeChoose"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -47,6 +50,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
   />
   <React.Fragment>
     <RadioGroupField
+      data-automation="realtimeReportTypeChoose"
       disabled={false}
       id="frm-data-access-reports-realtime-report-type"
       label="Realtime Report Type *"
@@ -66,6 +70,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
       required={true}
     />
     <AutoCompleteField
+      data-automation="realtimeReportAutoComplete"
       disabled={false}
       id="frm-data-access-reports-realtime-report-name"
       label="Realtime Report *"
@@ -86,6 +91,7 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={false}
     id="frm-data-access-reports-name"
     inputType="text"
@@ -94,6 +100,7 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={false}
     id="frm-data-access-reports-description"
     inputType="text"
@@ -104,6 +111,7 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
     text="Report"
   />
   <RadioGroupField
+    data-automation="typeChoose"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -123,6 +131,7 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
     required={true}
   />
   <AutoCompleteField
+    data-automation="historicalReportAutoComplete"
     disabled={false}
     id="frm-data-access-reports-historical-catalog-name"
     label="Historical Reports Folder *"
@@ -142,6 +151,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={false}
     id="frm-data-access-reports-name"
     inputType="text"
@@ -150,6 +160,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={false}
     id="frm-data-access-reports-description"
     inputType="text"
@@ -160,6 +171,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
     text="Report"
   />
   <RadioGroupField
+    data-automation="typeChoose"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -180,6 +192,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
   />
   <React.Fragment>
     <RadioGroupField
+      data-automation="realtimeReportTypeChoose"
       disabled={false}
       id="frm-data-access-reports-realtime-report-type"
       label="Realtime Report Type *"
@@ -199,6 +212,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
       required={true}
     />
     <AutoCompleteField
+      data-automation="realtimeReportAutoComplete"
       disabled={false}
       id="frm-data-access-reports-realtime-report-name"
       label="Realtime Report *"
@@ -219,6 +233,7 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={false}
     id="frm-data-access-reports-name"
     inputType="text"
@@ -227,6 +242,7 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={false}
     id="frm-data-access-reports-description"
     inputType="text"
@@ -237,6 +253,7 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
     text="Report"
   />
   <RadioGroupField
+    data-automation="typeChoose"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -257,6 +274,7 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
   />
   <React.Fragment>
     <RadioGroupField
+      data-automation="realtimeReportTypeChoose"
       disabled={false}
       id="frm-data-access-reports-realtime-report-type"
       label="Realtime Report Type *"
@@ -276,6 +294,7 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
       required={true}
     />
     <AutoCompleteField
+      data-automation="realtimeReportAutoComplete"
       disabled={false}
       id="frm-data-access-reports-realtime-report-name"
       label="Realtime Report *"
@@ -296,6 +315,7 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={false}
     id="frm-data-access-reports-name"
     inputType="text"
@@ -304,6 +324,7 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={false}
     id="frm-data-access-reports-description"
     inputType="text"
@@ -314,6 +335,7 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
     text="Report"
   />
   <RadioGroupField
+    data-automation="typeChoose"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -333,6 +355,7 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
     required={true}
   />
   <AutoCompleteField
+    data-automation="historicalReportAutoComplete"
     disabled={false}
     id="frm-data-access-reports-historical-catalog-name"
     label="Historical Reports Folder *"
@@ -352,6 +375,7 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={true}
     id="frm-data-access-reports-name"
     inputType="text"
@@ -360,6 +384,7 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={true}
     id="frm-data-access-reports-description"
     inputType="text"
@@ -370,6 +395,7 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
     text="Report"
   />
   <RadioGroupField
+    data-automation="typeChoose"
     disabled={true}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -389,6 +415,7 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
     required={true}
   />
   <AutoCompleteField
+    data-automation="historicalReportAutoComplete"
     disabled={true}
     id="frm-data-access-reports-historical-catalog-name"
     label="Historical Reports Folder *"

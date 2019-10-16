@@ -32,7 +32,7 @@ exports[`<DispositionsForm /> renders create form 1`] = `
     name="description"
   />
   <ToggleField
-    data-automation="dispositionToggleField"
+    data-automation="sharedToggle"
     disabled={false}
     id="frm-lists-shared"
     label="Shared"
@@ -73,7 +73,7 @@ exports[`<DispositionsForm /> renders update form 1`] = `
     name="description"
   />
   <ToggleField
-    data-automation="dispositionToggleField"
+    data-automation="sharedToggle"
     disabled={false}
     id="frm-lists-shared"
     label="Shared"

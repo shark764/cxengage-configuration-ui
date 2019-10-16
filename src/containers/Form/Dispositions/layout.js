@@ -44,7 +44,7 @@ export default function DispositionsForm({ handleSubmit, isSaving, inherited, us
         name="shared"
         label="Shared"
         id="frm-lists-shared"
-        data-automation="dispositionToggleField"
+        data-automation="sharedToggle"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
     </form>

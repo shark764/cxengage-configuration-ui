@@ -10,7 +10,7 @@ exports[`<GroupsForm /> renders create form 1`] = `
   <React.Fragment>
     <InputField
       componentType="input"
-      data-automation="groupsName"
+      data-automation="nameInput"
       disabled={true}
       id="frm-groups-name"
       inputType="text"
@@ -19,7 +19,7 @@ exports[`<GroupsForm /> renders create form 1`] = `
     />
     <InputField
       componentType="textarea"
-      data-automation="groupsDescription"
+      data-automation="descriptionInput"
       disabled={true}
       id="frm-groups-description"
       inputType="text"
@@ -40,7 +40,7 @@ exports[`<GroupsForm /> renders update form 1`] = `
   <React.Fragment>
     <InputField
       componentType="input"
-      data-automation="groupsName"
+      data-automation="nameInput"
       disabled={true}
       id="frm-groups-name"
       inputType="text"
@@ -49,7 +49,7 @@ exports[`<GroupsForm /> renders update form 1`] = `
     />
     <InputField
       componentType="textarea"
-      data-automation="groupsDescription"
+      data-automation="descriptionInput"
       disabled={true}
       id="frm-groups-description"
       inputType="text"

@@ -13,6 +13,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <InputField
         componentType="input"
+        data-automation="emailInput"
         disabled={false}
         id="frm-users-email"
         inputType="text"
@@ -20,6 +21,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         name="email"
       />
       <SelectField
+        data-automation="roleList"
         disabled={false}
         id="frm-users-platform-role-id"
         label="Platform Role *"
@@ -28,6 +30,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         required={false}
       />
       <SelectField
+        data-automation="authenticationList"
         disabled={false}
         id="frm-users-no-password-id"
         label="Platform Authentication"
@@ -51,6 +54,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         required={true}
       />
       <SelectField
+        data-automation="identityProviderList"
         disabled={false}
         id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
@@ -66,6 +70,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <InputField
         componentType="input"
+        data-automation="workstationIdInput"
         disabled={false}
         id="frm-users-work-station-id"
         inputType="text"
@@ -73,6 +78,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         name="workStationId"
       />
       <SelectField
+        data-automation="tenantList"
         disabled={false}
         id="frm-users-role-id"
         label="Tenant Role *"
@@ -81,6 +87,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         required={false}
       />
       <ToggleField
+        data-automation="inviteToggle"
         disabled={false}
         id="frm-users-invite-now"
         label="Invite Now"
@@ -104,6 +111,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
       />
       <InputField
         componentType="input"
+        data-automation="emailInput"
         disabled={false}
         id="frm-users-email"
         inputType="text"
@@ -111,6 +119,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
         name="email"
       />
       <SelectField
+        data-automation="roleList"
         disabled={true}
         id="frm-users-platform-role-id"
         label="Platform Role *"
@@ -119,6 +128,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
         required={false}
       />
       <SelectField
+        data-automation="authenticationList"
         disabled={true}
         id="frm-users-no-password-id"
         label="Platform Authentication"
@@ -142,6 +152,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
         required={true}
       />
       <SelectField
+        data-automation="identityProviderList"
         disabled={true}
         id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
@@ -157,6 +168,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
       />
       <InputField
         componentType="input"
+        data-automation="workstationIdInput"
         disabled={true}
         id="frm-users-work-station-id"
         inputType="text"
@@ -164,6 +176,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
         name="workStationId"
       />
       <SelectField
+        data-automation="tenantList"
         disabled={true}
         id="frm-users-role-id"
         label="Tenant Role *"
@@ -172,6 +185,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
         required={false}
       />
       <ToggleField
+        data-automation="inviteToggle"
         disabled={true}
         id="frm-users-invite-now"
         label="Invite Now"
@@ -195,6 +209,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
       />
       <InputField
         componentType="input"
+        data-automation="emailInput"
         disabled={false}
         id="frm-users-email"
         inputType="text"
@@ -202,6 +217,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
         name="email"
       />
       <SelectField
+        data-automation="roleList"
         disabled={true}
         id="frm-users-platform-role-id"
         label="Platform Role *"
@@ -210,6 +226,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
         required={false}
       />
       <SelectField
+        data-automation="authenticationList"
         disabled={true}
         id="frm-users-no-password-id"
         label="Platform Authentication"
@@ -233,6 +250,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
         required={true}
       />
       <SelectField
+        data-automation="identityProviderList"
         disabled={true}
         id="frm-users-default-identity-provider-id"
         label="Single Sign On Identitiy Provider"
@@ -248,6 +266,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
       />
       <InputField
         componentType="input"
+        data-automation="workstationIdInput"
         disabled={true}
         id="frm-users-work-station-id"
         inputType="text"
@@ -255,6 +274,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
         name="workStationId"
       />
       <SelectField
+        data-automation="tenantList"
         disabled={true}
         id="frm-users-role-id"
         label="Tenant Role *"
@@ -263,6 +283,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
         required={false}
       />
       <ToggleField
+        data-automation="inviteToggle"
         disabled={true}
         id="frm-users-invite-now"
         label="Invite Now"

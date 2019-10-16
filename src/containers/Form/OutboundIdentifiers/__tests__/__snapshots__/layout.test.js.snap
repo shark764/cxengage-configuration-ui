@@ -7,14 +7,14 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
   <div>
     <InputField
       componentType="input"
-      data-automation="outboundIdentifiersFormFieldName"
+      data-automation="nameInput"
       disabled={true}
       inputType="text"
       label="Name *"
       name="name"
     />
     <SelectField
-      data-automation="outboundIdentifiersFormFieldChannelType"
+      data-automation="channelList"
       disabled={true}
       label="Channel Type *"
       name="channelType"
@@ -38,7 +38,7 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
     />
     <InputField
       componentType="input"
-      data-automation="outboundIdentifiersFormFieldValue"
+      data-automation="valueInput"
       disabled={true}
       inputType="text"
       label="Value *"
@@ -46,7 +46,7 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
       placeholder="Enter a e.164 formatted number"
     />
     <SelectField
-      data-automation="outboundIdentifiersFormFieldFlowId"
+      data-automation="flowList"
       disabled={true}
       label="Flow Id *"
       name="flowId"
@@ -65,8 +65,9 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
       required={false}
     />
     <InputField
+      automation="outboundIdentifiersFormFieldDescription"
       componentType="textarea"
-      data-automation="outboundIdentifiersFormFieldDescription"
+      data-automation="descriptionInput"
       disabled={true}
       inputType="text"
       label="Description"

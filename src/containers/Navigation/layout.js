@@ -101,107 +101,103 @@ export default class Navigation extends Component {
 
           <Divider />
 
-          <NavbarMenu theme={this.props.theme} onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} data-automation="userManagementMenu" onClick={this.setVisibleMenu}>
             User Management
             {this.state.visibleMenu === 'User Management' && (
               <SubMenu>
-                <StyledLink data-automation="navigation-link-users" to="/configuration/users">
+                <StyledLink data-automation="navigationLinkUsers" to="/configuration/users">
                   Users
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-groups" to="/configuration/groups">
+                <StyledLink data-automation="navigationLinkGroups" to="/configuration/groups">
                   Groups
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-skills" to="/configuration/skills">
+                <StyledLink data-automation="navigationLinkSkills" to="/configuration/skills">
                   Skills
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-roles" to="/configuration/roles">
+                <StyledLink data-automation="navigationLinkRoles" to="/configuration/roles">
                   Roles
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-reasons" to="/configuration/reasons">
+                <StyledLink data-automation="navigationLinkReasons" to="/configuration/reasons">
                   Presence Reasons
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-reasons-list" to="/configuration/reasonLists">
+                <StyledLink data-automation="navigationLinkReasonsList" to="/configuration/reasonLists">
                   Presence Reasons Lists
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
-
-          <NavbarMenu theme={this.props.theme} onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} data-automation="configurationMenu" onClick={this.setVisibleMenu}>
             Configuration
             {this.state.visibleMenu === 'Configuration' && (
               <SubMenu>
-                <StyledLink data-automation="navigation-link-tenants" to="/configuration/tenants">
+                <StyledLink data-automation="navigationLinkTenants" to="/configuration/tenants">
                   Tenants
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-lists" to="/configuration/lists">
+                <StyledLink data-automation="navigationLinkLists" to="/configuration/lists">
                   Lists
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-slas" to="/configuration/slas">
+                <StyledLink data-automation="navigationLinkSlas" to="/configuration/slas">
                   Statistics
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-emailTemplates" to="/configuration/emailTemplates">
+                <StyledLink data-automation="navigationLinkEmailTemplates" to="/configuration/emailTemplates">
                   User Management Emails
                 </StyledLink>
-                <StyledLink
-                  data-automation="navigation-link-outboundIdentifiers"
-                  to="/configuration/outboundIdentifiers"
-                >
+                <StyledLink data-automation="navigationLinkOutboundIdentifiers" to="/configuration/outboundIdentifiers">
                   Outbound Identifiers
                 </StyledLink>
                 <StyledLink
-                  data-automation="navigation-link-outboundIdentifierLists"
+                  data-automation="navigationLinkOutboundIdentifierLists"
                   to="/configuration/outboundIdentifierLists"
                 >
                   Outbound Identifier Lists
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-chatWidgets" to="/configuration/chatWidgets">
+                <StyledLink data-automation="navigationLinkChatWidgets" to="/configuration/chatWidgets">
                   Chat Widgets
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-transferLists" to="/configuration/transferLists">
+                <StyledLink data-automation="navigationLinkTransferLists" to="/configuration/transferLists">
                   Transfer Lists
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-apiKeys" to="/configuration/apiKeys">
+                <StyledLink data-automation="navigationLinkApiKeys" to="/configuration/apiKeys">
                   Api Keys
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-messageTemplates" to="/configuration/messageTemplates">
+                <StyledLink data-automation="navigationLinkMessageTemplates" to="/configuration/messageTemplates">
                   Message Templates
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-businessHours" to="/configuration/businessHours">
+                <StyledLink data-automation="navigationLinkBusinessHours" to="/configuration/businessHours">
                   Business Hours
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
 
-          <NavbarMenu theme={this.props.theme} onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} data-automation="flowsMenu" onClick={this.setVisibleMenu}>
             Flows
             {this.state.visibleMenu === 'Flows' && (
               <SubMenu>
-                <StyledLink data-automation="navigation-link-flows" to="/configuration/flows">
+                <StyledLink data-automation="navigationLinkFlows" to="/configuration/flows">
                   Flows
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-flowDebugger" to="/flowDebugLogs">
+                <StyledLink data-automation="navigationLinkFlowDebugger" to="/flowDebugLogs">
                   Flow Debug Logs
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-dispatchMappings" to="/configuration/dispatchMappings">
+                <StyledLink data-automation="navigationLinkDispatchMappings" to="/configuration/dispatchMappings">
                   Dispatch Mappings
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
 
-          <NavbarMenu theme={this.props.theme} onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} data-automation="reportingMenu" onClick={this.setVisibleMenu}>
             Reporting
             {this.state.visibleMenu === 'Reporting' && (
               <SubMenu>
-                <StyledLink data-automation="navigation-link-dataAccessReports" to="/configuration/dataAccessReports">
+                <StyledLink data-automation="navigationLinkDataAccessReports" to="/configuration/dataAccessReports">
                   Access Controlled Reports
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-interactionMonitoring" to="/interactionMonitoring">
+                <StyledLink data-automation="navigationLinkInteractionMonitoring" to="/interactionMonitoring">
                   Interaction Monitoring
                 </StyledLink>
-                <StyledLink data-automation="navigation-link-agentStateMonitoring" to="/agentStateMonitoring">
+                <StyledLink data-automation="navigationLinkAgentStateMonitoring" to="/agentStateMonitoring">
                   Agent State Monitoring
                 </StyledLink>
               </SubMenu>
