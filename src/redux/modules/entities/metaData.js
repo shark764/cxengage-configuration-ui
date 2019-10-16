@@ -163,7 +163,6 @@ export const listOfEntities = [
   'roles',
   'skills',
   'standardDashboards',
-  'transferLists',
   'users',
   'reasons',
   'queues',
@@ -177,8 +176,7 @@ export const listOfEntities = [
   'tenants',
   'flowDebugger',
   'apiKeys',
-  'businessHours',
-  'tenants'
+  'businessHours'
 
   //Hygen-insert-at-end-of-list
 ];
@@ -513,7 +511,7 @@ entities.messageTemplates.memberListTableFields = [
 entities.messageTemplates.dependentEntity = 'messageTemplate';
 
 // Transfer Lists
-entities.transferLists.bulkEditsAvailable = false;
+entities.transferLists.bulkEditsAvailable = true;
 entities.transferLists.pageTitle = 'Transfer Lists Management';
 entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Creating_Transfer_Lists.htm';
 entities.transferLists.columns = [

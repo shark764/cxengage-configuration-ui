@@ -631,6 +631,14 @@ const bulkChangeFormRoutes = [
         <ReasonsBulkActionsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/transferLists',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before3
 ];

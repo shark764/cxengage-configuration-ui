@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.7] - 2019-10-15
+### Fixed
+- CXV1-20258 - TransferList - Missing bulk actions.
+
 ## [0.66.6] - 2019-10-15
 ### Changed
 - Version bump components library to 0.55.6.
