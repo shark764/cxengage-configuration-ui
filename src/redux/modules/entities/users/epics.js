@@ -28,12 +28,7 @@ export const UpdateUserEntity = action$ =>
     .ofType('UPDATE_ENTITY')
     .filter(({ entityName }) => entityName === 'users')
     .map(a => {
-      a.sdkCall = {
-        command: 'updateUser',
-        data: {},
-        module: 'entities',
-        topic: 'cxengage/entities/update-user-response'
-      };
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       const filterValues = {
         workStationId: a.values.workStationId,
         roleId: a.values.roleId,
@@ -57,57 +52,60 @@ export const UpdateUserEntity = action$ =>
       );
       filterValues.extensions = modifiedExtensions;
 
-      a.sdkCall.data = {
-        updateBody: {
-          ...filterValues
-        },
-        userId: a.entityId
-      };
+      a.sdkCall.data = { updateBody: { ...filterValues }, userId: a.entityId };
 
-      // Changing users capacity
-      a.sdkCall2 = {
+      return { ...a };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .mergeMap(response => {
+          if (response.result && response.result.extensions) {
+            response.result.extensions = [
+              ...response.result.extensions.map(item => ({
+                ...item,
+                id: generateUUID()
+              }))
+            ];
+          }
+          return [
+            handleSuccess(response, a, `User was updated successfully!`),
+            { ...a, type: 'UPDATE_USER_CAPACITY_RULE' },
+            { ...a, type: 'UPDATE_PLATFORM_USER_ENTITY' }
+          ];
+        })
+        .catch(error => handleError(error, a))
+    );
+
+export const UpdateUserCapacityRule = (action$, store) =>
+  action$
+    .ofType('UPDATE_USER_CAPACITY_RULE')
+    .filter(
+      ({ entityName, values: { effectiveCapacityRule } }) => entityName === 'users' && effectiveCapacityRule !== null
+    )
+    .map(a => {
+      a.sdkCall = {
         command: 'updateUsersCapacityRule',
         data: {
           userId: a.values.id,
-          capacityRuleId: a.values.effectiveCapacityRule === 'null' ? null : a.values.effectiveCapacityRule
+          capacityRuleId: a.values.effectiveCapacityRule,
+          // SDK fetchs user data to get effectiveCapacityRule,
+          // we add it to avoid that call
+          effectiveCapacityRule: getSelectedEntity(store.getState()).getIn(['effectiveCapacityRule', 'id'])
         },
         module: 'entities',
         topic: 'cxengage/entities/update-users-capacity-rule-response'
       };
-
-      a.allSdkCalls = [a.sdkCall, a.sdkCall2];
       return { ...a };
     })
-    .mergeMap(a =>
-      forkJoin(
-        a.allSdkCalls.map(apiCall =>
-          from(
-            sdkPromise(apiCall).catch(error => ({
-              error: error,
-              id: apiCall.data['userId']
-            }))
-          )
-        )
-      )
-        .do(() => Toast.success(`User updated successfully`))
-        .mergeMap(result =>
-          from(result).map(response => {
-            if (response.result && response.result.extensions) {
-              response.result.extensions = [
-                ...response.result.extensions.map(item => ({
-                  ...item,
-                  id: generateUUID()
-                }))
-              ];
-            }
-            return handleSuccess(response, a);
-          })
-        )
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
     );
 
 export const UpdatePlatformUserEntity = action$ =>
   action$
-    .ofType('UPDATE_ENTITY')
+    .ofType('UPDATE_PLATFORM_USER_ENTITY')
     .filter(({ entityName }) => entityName === 'users')
     .map(a => {
       a.sdkCall = {
@@ -128,12 +126,7 @@ export const UpdatePlatformUserEntity = action$ =>
         filterValues.externalId = null;
       }
 
-      a.sdkCall.data = {
-        updateBody: {
-          ...filterValues
-        },
-        userId: a.entityId
-      };
+      a.sdkCall.data = { updateBody: { ...filterValues }, userId: a.entityId };
 
       return { ...a };
     })

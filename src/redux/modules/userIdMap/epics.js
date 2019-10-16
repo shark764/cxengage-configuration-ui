@@ -54,8 +54,12 @@ export const FetchSideCreatedAndUpdatedBy = (action$, store) =>
     .map(a => {
       a.sdkCall = entitiesMetaData['users'].entityApiRequest('get', 'singleMainEntity');
       a.allSdkCalls = [
-        ...(!a.createdByName ? [a.createdById] : []),
-        ...(!a.updatedByName && a.createdById !== a.updatedById ? [a.updatedById] : [])
+        ...(!a.createdByName && a.createdById !== '00000000-0000-0000-0000-000000000000' ? [a.createdById] : []),
+        ...(!a.updatedByName &&
+        a.createdById !== a.updatedById &&
+        a.updatedById !== '00000000-0000-0000-0000-000000000000'
+          ? [a.updatedById]
+          : [])
       ].map(id => ({
         ...a.sdkCall,
         data: {

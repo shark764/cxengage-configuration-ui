@@ -134,7 +134,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         disabled={false}
         label="Capacity Rule"
         name="effectiveCapacityRule"
-        required={true}
+        required={false}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -275,7 +275,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         disabled={false}
         label="Capacity Rule"
         name="effectiveCapacityRule"
-        required={true}
+        required={false}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -416,7 +416,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         disabled={true}
         label="Capacity Rule"
         name="effectiveCapacityRule"
-        required={true}
+        required={false}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -557,7 +557,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         disabled={true}
         label="Capacity Rule"
         name="effectiveCapacityRule"
-        required={true}
+        required={false}
       />
     </Connect(DetailWrapper)>
   </styled.div>

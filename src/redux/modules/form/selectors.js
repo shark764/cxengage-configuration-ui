@@ -33,16 +33,14 @@ export const selectFormInitialValues = state => {
   } else if (getSelectedEntity(state) === undefined) {
     return new Map({ active: true });
   } else if (entityName === 'users') {
-    const initValues = getSelectedEntity(state).toJS();
-    delete initValues.active;
-    if ('effectiveCapacityRule' in initValues) {
-      if (initValues.effectiveCapacityRule === null) {
-        initValues.effectiveCapacityRule = 'null';
-      } else {
-        initValues.effectiveCapacityRule = initValues.effectiveCapacityRule.id;
-      }
+    const initValues = getSelectedEntity(state);
+    if (initValues.has('effectiveCapacityRule') && initValues.get('effectiveCapacityRule') !== null) {
+      return initValues
+        .delete('active')
+        .set('effectiveCapacityRule', initValues.getIn(['effectiveCapacityRule', 'id']))
+        .toJS();
     }
-    return initValues;
+    return initValues.delete('active').toJS();
   } else {
     // Members and active are not handled in the same Update
     // as the rest of values, so not need to be set in form

@@ -120,15 +120,15 @@ export const errorManager = error => {
       messageFromAPI = responseError[0];
     } else if (typeof responseError === 'object') {
       let { code, message, attribute } = responseError;
-      attr = Object.keys(attribute)[0];
+      attr = attribute && Object.keys(attribute)[0];
       errorDetails = ` ${code}: ${message}`;
 
       if (attribute && typeof attribute === 'object') {
         messageFromAPI = attribute[attr];
         errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(attribute[attr])}`;
-      } else if (attribute && message) {
+      } else if (error.message && message) {
         messageFromAPI = message;
-        errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(message)}.`;
+        errorDetails = ` ${error.message}<br/>${code}: ${capitalizeFirstLetter(message)}.`;
       } else if (code === undefined || message === undefined) {
         errorDetails = ` ${error.data.apiResponse.status}: ${responseError}`;
       }

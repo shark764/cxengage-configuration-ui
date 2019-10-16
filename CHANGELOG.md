@@ -25,6 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.6] - 2019-10-15
+### Changed
+- Version bump components library to 0.55.6.
+### Fixed
+- CXV1-17317 - Users2 - Updating a user role to be one that has more permissions than the customer updating the role should be forbidden.
+
 ## [0.66.5] - 2019-10-10
 ### Changed
 - Version bump components library to 0.55.4.

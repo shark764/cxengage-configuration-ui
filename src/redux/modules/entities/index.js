@@ -603,7 +603,7 @@ export default function reducer(state = initialState, action) {
       }
     }
     case 'FETCH_DATA_REJECTED': {
-      return state.setIn([action.entityName, 'data'], new List());
+      return state.setIn([action.entityName, 'data'], new List()).deleteIn([action.entityName, 'fetching']);
     }
     case 'FETCH_DATA_ITEM': {
       return state.setIn([action.entityName, 'fetching'], true);
@@ -722,6 +722,8 @@ export default function reducer(state = initialState, action) {
     case 'TOGGLE_ENTITY_FULFILLED':
     case 'UPDATE_ENTITY_FULFILLED':
     case 'CHANGE_USER_INVITE_STATUS_FULFILLED':
+    case 'UPDATE_USER_CAPACITY_RULE_FULFILLED':
+    case 'UPDATE_PLATFORM_USER_ENTITY_FULFILLED':
     case 'BULK_ENTITY_UPDATE_FULFILLED': {
       const { result } = action.response;
       const entityIndex = findEntityIndex(state, action.entityName, result.id || action.id);

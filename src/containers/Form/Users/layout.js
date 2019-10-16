@@ -39,10 +39,8 @@ const InviteButtons = styled(Button)`
 
 export default function UsersForm({
   handleSubmit,
-  platformRoles,
   tenantRoles,
   status,
-  scenario,
   isUserPlatformAdmin,
   initialValues,
   tenantIdentityProviders,
@@ -215,14 +213,7 @@ export default function UsersForm({
                 .getState()
                 .getIn(['form', `users:${id}`, 'values', 'extensions'])
                 .push(
-                  fromJS({
-                    type: 'pstn',
-                    value: '',
-                    provider: '',
-                    region: '',
-                    description: '',
-                    id: generateUUID()
-                  })
+                  fromJS({ type: 'pstn', value: '', provider: '', region: '', description: '', id: generateUUID() })
                 );
               store.dispatch({
                 type: '@@redux-form/CHANGE',
@@ -247,7 +238,6 @@ export default function UsersForm({
             label="Capacity Rule"
             disabled={isSaving || !userHasUpdatePermission}
             options={capacityRules}
-            required
           />
         </DetailWrapper>
       </Wrapper>
@@ -263,12 +253,6 @@ UsersForm.propTypes = {
   userHasUpdatePermission: PropTypes.bool,
   currentAgentId: PropTypes.string,
   initialValues: PropTypes.object,
-  platformRoles: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string.isRequired
-    })
-  ),
   tenantIdentityProviders: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
@@ -281,12 +265,15 @@ UsersForm.propTypes = {
       value: PropTypes.string.isRequired
     })
   ),
-  capacityRules: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string
-    })
-  ),
+  capacityRules: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.string.isRequired
+      })
+    ),
+    PropTypes.object
+  ]),
   status: PropTypes.string,
   scenario: PropTypes.string,
   changeUserInviteStatus: PropTypes.func.isRequired,

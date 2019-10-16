@@ -18,20 +18,17 @@ export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
 export const existsPlatformUserByEmail = state => state.getIn(['Entities', 'users', 'userExistInPlatform'], false);
 
-export const selectNonDisabledUsers = createSelector(
-  [getUsers],
-  users => {
-    return users !== undefined
-      ? users
-          .toJS()
-          .filter(user => user.platformStatus !== 'disabled' && user.status !== 'disabled')
-          .map(user => ({
-            ...user,
-            name: getDisplay(user)
-          }))
-      : undefined;
-  }
-);
+export const selectNonDisabledUsers = createSelector([getUsers], users => {
+  return users !== undefined
+    ? users
+        .toJS()
+        .filter(user => user.platformStatus !== 'disabled' && user.status !== 'disabled')
+        .map(user => ({
+          ...user,
+          name: getDisplay(user)
+        }))
+    : undefined;
+});
 
 export const filterUsersByPermissions = (state, users, permissionNames) => {
   const allRoles = convertRoles(state);
