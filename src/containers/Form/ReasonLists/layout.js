@@ -44,6 +44,7 @@ export default function ReasonListsForm({
         componentType="input"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
+        data-automation="nameInput"
       />
       <InputField
         id="frm-reason-list-external-id"
@@ -52,6 +53,7 @@ export default function ReasonListsForm({
         componentType="input"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
+        data-automation="externalIdInput"
       />
       <InputField
         id="frm-reason-list-description"
@@ -60,6 +62,7 @@ export default function ReasonListsForm({
         componentType="textarea"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
+        data-automation="descriptionInput"
       />
       <ConfirmationWrapper
         confirmBtnCallback={!disableShared && !sharedFormValue ? toggleShared : undefined}
@@ -67,6 +70,7 @@ export default function ReasonListsForm({
           "Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
         }
         secondaryText={'Are you sure you want to continue?'}
+        data-automation="toggleSharedConfirmationWrapper"
       >
         <ToggleField
           id="frm-reason-list-shared"
@@ -78,6 +82,7 @@ export default function ReasonListsForm({
               : 'Change "Shared" state for this Presence Reason List'
           }
           disabled={isSaving || inherited || disableShared || !userHasUpdatePermission}
+          data-automation="sharedToggle"
         />
       </ConfirmationWrapper>
       <ToggleField
@@ -87,6 +92,7 @@ export default function ReasonListsForm({
         title="Assigns list to all users on tenant"
         onChange={() => {}}
         disabled={isSaving || inherited || !userHasUpdatePermission}
+        data-automation="isDefaultToggle"
       />
       <DetailHeader
         userHasUpdatePermission={userHasUpdatePermission && !inherited}
@@ -103,6 +109,7 @@ export default function ReasonListsForm({
         userHasUpdatePermission={userHasUpdatePermission && !inherited}
         removeReasonListItem={removeReasonListItem}
         removeCategoryItems={removeCategoryItems}
+        data-automation="reasonListNestedList"
       />
     </form>
   );

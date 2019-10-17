@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.10] - 2019-10-16
+### Changed
+- <no-jira> - Adding Automation attributes | Part I.
+
 ## [0.66.9] - 2019-10-16
 ### Changed
 - Improved Automation tests

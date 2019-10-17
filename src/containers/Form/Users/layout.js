@@ -81,7 +81,7 @@ export default function UsersForm({
             name="externalId"
             label="External ID"
             componentType="input"
-            data-automation="externalIDInput"
+            data-automation="externalIdInput"
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
@@ -93,6 +93,7 @@ export default function UsersForm({
             name="email"
             label="Email"
             className="frm-users-email"
+            data-automation="emailInput"
             componentType="input"
             inputType="text"
             disabled
@@ -100,6 +101,7 @@ export default function UsersForm({
           <InputField
             className="frm-users-invitation-status"
             name="invitationStatus"
+            data-automation="invitationStatusInput"
             label="Platform Status"
             componentType="input"
             inputType="text"
@@ -132,8 +134,14 @@ export default function UsersForm({
             <ConfirmationWrapper
               confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
               mainText={`This will send an email invitation to ${initialValues.get('email')}.`}
+              data-automation="pendingConfirmationWrapper"
             >
-              <InviteButtons type="button" buttonType="secondary" className="invite-now-button">
+              <InviteButtons
+                type="button"
+                buttonType="secondary"
+                className="invite-now-button"
+                data-automation="inviteButton"
+              >
                 Send Invitation
               </InviteButtons>
             </ConfirmationWrapper>
@@ -143,8 +151,14 @@ export default function UsersForm({
             <ConfirmationWrapper
               confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
               mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
+              data-automation="expiredConfirmationWrapper"
             >
-              <InviteButtons type="button" buttonType="secondary" className="resend-invite-button">
+              <InviteButtons
+                type="button"
+                buttonType="secondary"
+                className="resend-invite-button"
+                data-automation="resendInviteButton"
+              >
                 Resend Invitation
               </InviteButtons>
             </ConfirmationWrapper>
@@ -155,8 +169,14 @@ export default function UsersForm({
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
                 mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
+                data-automation="invitedConfirmationWrapper"
               >
-                <InviteButtons type="button" buttonType="secondary" className="resend-invite-button">
+                <InviteButtons
+                  type="button"
+                  buttonType="secondary"
+                  className="resend-invite-button"
+                  data-automation="resendInviteButton"
+                >
                   Resend Invitation
                 </InviteButtons>
               </ConfirmationWrapper>
@@ -164,8 +184,14 @@ export default function UsersForm({
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('pending', initialValues.get('id'))}
                 mainText={`This will prevent the user ${initialValues.get('email')} from accepting the invitation.`}
+                data-automation="cancelConfirmationWrapper"
               >
-                <InviteButtons type="button" buttonType="secondary" className="cancel-invite-button">
+                <InviteButtons
+                  type="button"
+                  buttonType="secondary"
+                  className="cancel-invite-button"
+                  data-automation="cancelInviteButton"
+                >
                   Cancel Invitation
                 </InviteButtons>
               </ConfirmationWrapper>
@@ -178,8 +204,14 @@ export default function UsersForm({
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
                 mainText={`Are you sure you want to send a password reset email to ${initialValues.get('email')}?`}
+                data-automation="resetPasswordConfirmationWrapper"
               >
-                <InviteButtons type="button" buttonType="secondary" className="reset-password-button">
+                <InviteButtons
+                  type="button"
+                  buttonType="secondary"
+                  className="reset-password-button"
+                  data-automation="resetPasswordButton"
+                >
                   Reset Password
                 </InviteButtons>
               </ConfirmationWrapper>
@@ -203,7 +235,7 @@ export default function UsersForm({
                 className="frm-users-role-id"
                 name="roleId"
                 label="Tenant Role"
-                data-automation="tenantList"
+                data-automation="roleList"
                 disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
                 options={tenantRoles}
               />
@@ -234,7 +266,12 @@ export default function UsersForm({
               });
             }}
           />
-          <ExtensionListField className="users-extensions" name="extensions" label="Inputs" />
+          <ExtensionListField
+            className="users-extensions"
+            name="extensions"
+            label="Inputs"
+            data-automation="extensionsExtensionList"
+          />
         </DetailWrapper>
 
         <DetailWrapper open={true}>
@@ -245,6 +282,7 @@ export default function UsersForm({
             label="Capacity Rule"
             disabled={isSaving || !userHasUpdatePermission}
             options={capacityRules}
+            data-automation="effectiveCapacityRuleList"
           />
         </DetailWrapper>
       </Wrapper>

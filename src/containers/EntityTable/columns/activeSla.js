@@ -24,7 +24,7 @@ export const activeSlaColumn = {
   Filter: ({ filter, onChange }) => (
     <div>
       <Input
-        data-automation="entityTableFilterColumnActiveSla"
+        data-automation="searchActiveSlaColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
       />

@@ -7,20 +7,16 @@ import store from '../../redux/store.js';
 
 export function messageObservable() {
   return fromEvent(document, 'mousedown')
-    .filter(
-      event =>
-        event.target.id === 'SlidingResizer' ||
-        event.target.id === 'SlidingResizerInnerIcon'
-    )
+    .filter(event => event.target.id === 'SlidingResizer' || event.target.id === 'SlidingResizerInnerIcon')
     .mergeMap(md =>
       fromEvent(document, 'mousemove')
         .map(mm => {
           mm.preventDefault();
           const left = window.innerWidth - mm.clientX;
-          if (left > 550 && left < (window.innerWidth - 500)) {
+          if (left > 550 && left < window.innerWidth - 500) {
             return { left: left };
-          } else if (left > (window.innerWidth - 500)) {
-            return { left: (window.innerWidth - 500) };
+          } else if (left > window.innerWidth - 500) {
+            return { left: window.innerWidth - 500 };
           } else {
             return { left: 550 };
           }

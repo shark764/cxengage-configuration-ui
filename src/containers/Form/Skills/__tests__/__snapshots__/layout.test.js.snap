@@ -27,10 +27,12 @@ exports[`<SkillsForm /> renders create form 1`] = `
       name="description"
     />
     <ConfirmationWrapper
+      data-automation="hasProficiencyConfirmationWrapper"
       mainText="You cannot update 'Has Proficiency' once it's set to true."
       secondaryText="Are you sure you want to continue?"
     >
       <ToggleField
+        data-automation="hasProficiencyToggle"
         disabled={true}
         id="frm-skills-has-proficiency"
         label="Has Proficiency"
@@ -69,10 +71,12 @@ exports[`<SkillsForm /> renders create form with no proficiency 1`] = `
       name="description"
     />
     <ConfirmationWrapper
+      data-automation="hasProficiencyConfirmationWrapper"
       mainText="You cannot update 'Has Proficiency' once it's set to true."
       secondaryText="Are you sure you want to continue?"
     >
       <ToggleField
+        data-automation="hasProficiencyToggle"
         disabled={true}
         id="frm-skills-has-proficiency"
         label="Has Proficiency"
@@ -111,10 +115,12 @@ exports[`<SkillsForm /> renders update form 1`] = `
       name="description"
     />
     <ConfirmationWrapper
+      data-automation="hasProficiencyConfirmationWrapper"
       mainText="You cannot update 'Has Proficiency' once it's set to true."
       secondaryText="Are you sure you want to continue?"
     >
       <ToggleField
+        data-automation="hasProficiencyToggle"
         disabled={true}
         id="frm-skills-has-proficiency"
         label="Has Proficiency"
@@ -153,10 +159,12 @@ exports[`<SkillsForm /> renders update form with no proficiency 1`] = `
       name="description"
     />
     <ConfirmationWrapper
+      data-automation="hasProficiencyConfirmationWrapper"
       mainText="You cannot update 'Has Proficiency' once it's set to true."
       secondaryText="Are you sure you want to continue?"
     >
       <ToggleField
+        data-automation="hasProficiencyToggle"
         disabled={true}
         id="frm-skills-has-proficiency"
         label="Has Proficiency"

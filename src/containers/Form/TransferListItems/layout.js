@@ -99,7 +99,7 @@ export default class TransferListItemsForm extends React.Component {
                   placeholder="Select a Category..."
                   suggestedDropDownWidth="100%"
                   suggestions={this.props.existingCategories}
-                  data-automation="categoryNameAutoSelectInput"
+                  data-automation="categoryNameAutoComplete"
                   suggestedDropdownStyle={{ width: '100%', overflowX: 'hidden', whiteSpace: 'nowrap' }}
                   disabled={this.props.isSaving}
                   required
@@ -116,7 +116,7 @@ export default class TransferListItemsForm extends React.Component {
             <SelectField
               name="contactType"
               label="Contact Type *"
-              data-automation="contactTypeDropDownBtn"
+              data-automation="contactTypeList"
               disabled={this.props.isSaving}
               options={[
                 { label: 'Select a contact type...', value: 'selectContactType' },
@@ -129,7 +129,7 @@ export default class TransferListItemsForm extends React.Component {
             <SelectField
               name="transferType"
               label="Transfer Type *"
-              data-automation="transferTypeDropDownBtn"
+              data-automation="transferTypeList"
               options={[
                 { label: 'Select a transfer type...', value: 'selectTransferType' },
                 { label: 'Internal', value: 'internal' },
@@ -142,7 +142,7 @@ export default class TransferListItemsForm extends React.Component {
               name="warmColdTransfer"
               label="Warm/Cold Transfer *"
               dropDownText="Select warm/cold transfer..."
-              data-automation="warmColdTransferDropDownBtn"
+              data-automation="warmColdTransferToggle"
               items={[
                 { name: 'warmTransfer', label: 'Warm Transfer' },
                 { name: 'coldTransfer', label: 'Cold Transfer' }
@@ -155,7 +155,7 @@ export default class TransferListItemsForm extends React.Component {
                 placeholder="Select a queue..."
                 suggestedDropDownWidth="100%"
                 suggestions={this.props.selectActiveQueueNames}
-                data-automation="endpointAutoSelectInput"
+                data-automation="endpointAutoComplete"
                 suggestedDropdownStyle={{ width: '100%', overflowX: 'hidden', whiteSpace: 'nowrap' }}
                 disabled={this.props.isSaving}
               />

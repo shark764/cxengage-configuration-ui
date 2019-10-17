@@ -57,7 +57,7 @@ export default function TransferListsForm({
         label="Name *"
         componentType="input"
         inputType="text"
-        data-automation="transferListsNameInput"
+        data-automation="nameInput"
         disabled={isSaving || !userHasUpdatePermission}
       />
       <InputField
@@ -65,7 +65,7 @@ export default function TransferListsForm({
         label="Description"
         componentType="textarea"
         inputType="text"
-        data-automation="transferListsDescriptionInput"
+        data-automation="descriptionInput"
         disabled={isSaving || !userHasUpdatePermission}
       />
       <DetailHeader
@@ -90,6 +90,7 @@ export default function TransferListsForm({
           setSelectedSubEntityId={setSelectedSubEntityId}
           removeTransferListItem={removeTransferListItem}
           userHasUpdatePermission={userHasUpdatePermission}
+          data-automation="endpointsTransferList"
         />
       </TransferListContainer>
     </form>

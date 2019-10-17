@@ -18,33 +18,32 @@ export default function EmailTemplatesForm(props) {
       <SelectField
         name="email"
         label="Email"
+        data-automation="emailList"
         disabled={props.isSaving || props.inherited}
-        options={[
-          {
-            label: 'Default Email',
-            value: 'default'
-          },
-          {
-            label: 'Custom Email',
-            value: 'custom'
-          }
-        ]}
+        options={[{ label: 'Default Email', value: 'default' }, { label: 'Custom Email', value: 'custom' }]}
         required
       />
       {props.email === 'custom' && (
         <Fragment>
-          <ToggleField name="shared" label="Shared" disabled={props.isSaving || props.inherited} />
+          <ToggleField
+            name="shared"
+            label="Shared"
+            disabled={props.isSaving || props.inherited}
+            data-automation="sharedToggle"
+          />
           <TemplateTextEditorField
             name="subject"
             label="Subject"
             disabled={props.isSaving || props.inherited}
             templates={props.templates}
+            data-automation="subjectTextEditor"
           />
           <TemplateTextEditorField
             name="body"
             label="Body"
             disabled={props.isSaving || props.inherited}
             templates={props.templates}
+            data-automation="bodyTextEditor"
           />
         </Fragment>
       )}

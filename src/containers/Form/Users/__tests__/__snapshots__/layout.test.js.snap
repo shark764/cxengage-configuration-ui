@@ -32,7 +32,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       <InputField
         className="frm-users-external-id"
         componentType="input"
-        data-automation="externalIDInput"
+        data-automation="externalIdInput"
         disabled={false}
         inputType="text"
         label="External ID"
@@ -48,6 +48,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       <InputField
         className="frm-users-email"
         componentType="input"
+        data-automation="emailInput"
         disabled={true}
         inputType="text"
         label="Email"
@@ -56,6 +57,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       <InputField
         className="frm-users-invitation-status"
         componentType="input"
+        data-automation="invitationStatusInput"
         disabled={true}
         inputType="text"
         label="Platform Status"
@@ -107,7 +109,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <SelectField
         className="frm-users-role-id"
-        data-automation="tenantList"
+        data-automation="roleList"
         disabled={true}
         label="Tenant Role"
         name="roleId"
@@ -125,6 +127,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <ExtensionListField
         className="users-extensions"
+        data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
@@ -138,6 +141,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
       <SelectField
         className="users-form-capacity-rule"
+        data-automation="effectiveCapacityRuleList"
         disabled={false}
         label="Capacity Rule"
         name="effectiveCapacityRule"
@@ -180,7 +184,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       <InputField
         className="frm-users-external-id"
         componentType="input"
-        data-automation="externalIDInput"
+        data-automation="externalIdInput"
         disabled={false}
         inputType="text"
         label="External ID"
@@ -196,6 +200,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       <InputField
         className="frm-users-email"
         componentType="input"
+        data-automation="emailInput"
         disabled={true}
         inputType="text"
         label="Email"
@@ -204,6 +209,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       <InputField
         className="frm-users-invitation-status"
         componentType="input"
+        data-automation="invitationStatusInput"
         disabled={true}
         inputType="text"
         label="Platform Status"
@@ -255,7 +261,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
       <SelectField
         className="frm-users-role-id"
-        data-automation="tenantList"
+        data-automation="roleList"
         disabled={true}
         label="Tenant Role"
         name="roleId"
@@ -273,6 +279,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
       <ExtensionListField
         className="users-extensions"
+        data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
@@ -286,6 +293,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
       <SelectField
         className="users-form-capacity-rule"
+        data-automation="effectiveCapacityRuleList"
         disabled={false}
         label="Capacity Rule"
         name="effectiveCapacityRule"
@@ -328,7 +336,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <InputField
         className="frm-users-external-id"
         componentType="input"
-        data-automation="externalIDInput"
+        data-automation="externalIdInput"
         disabled={true}
         inputType="text"
         label="External ID"
@@ -344,6 +352,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <InputField
         className="frm-users-email"
         componentType="input"
+        data-automation="emailInput"
         disabled={true}
         inputType="text"
         label="Email"
@@ -352,6 +361,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <InputField
         className="frm-users-invitation-status"
         componentType="input"
+        data-automation="invitationStatusInput"
         disabled={true}
         inputType="text"
         label="Platform Status"
@@ -403,7 +413,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
       <SelectField
         className="frm-users-role-id"
-        data-automation="tenantList"
+        data-automation="roleList"
         disabled={true}
         label="Tenant Role"
         name="roleId"
@@ -421,6 +431,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
       <ExtensionListField
         className="users-extensions"
+        data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
@@ -434,6 +445,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
       <SelectField
         className="users-form-capacity-rule"
+        data-automation="effectiveCapacityRuleList"
         disabled={true}
         label="Capacity Rule"
         name="effectiveCapacityRule"
@@ -476,7 +488,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <InputField
         className="frm-users-external-id"
         componentType="input"
-        data-automation="externalIDInput"
+        data-automation="externalIdInput"
         disabled={true}
         inputType="text"
         label="External ID"
@@ -492,6 +504,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <InputField
         className="frm-users-email"
         componentType="input"
+        data-automation="emailInput"
         disabled={true}
         inputType="text"
         label="Email"
@@ -500,6 +513,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <InputField
         className="frm-users-invitation-status"
         componentType="input"
+        data-automation="invitationStatusInput"
         disabled={true}
         inputType="text"
         label="Platform Status"
@@ -551,7 +565,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
       <SelectField
         className="frm-users-role-id"
-        data-automation="tenantList"
+        data-automation="roleList"
         disabled={true}
         label="Tenant Role"
         name="roleId"
@@ -569,6 +583,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
       <ExtensionListField
         className="users-extensions"
+        data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
@@ -582,6 +597,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
       <SelectField
         className="users-form-capacity-rule"
+        data-automation="effectiveCapacityRuleList"
         disabled={true}
         label="Capacity Rule"
         name="effectiveCapacityRule"

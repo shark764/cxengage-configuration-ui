@@ -10,6 +10,7 @@ exports[`<GenericBulkItemsForm /> renders generic bulk actions form 1`] = `
         Active
       </span>
       <Styled(Toggle)
+        data-automation="bulkActiveToggle"
         onChange={[Function]}
         value={false}
       />

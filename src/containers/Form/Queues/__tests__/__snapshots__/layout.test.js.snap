@@ -9,6 +9,7 @@ exports[`<QueuesForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={true}
     inputType="text"
     label="Name *"
@@ -16,6 +17,7 @@ exports[`<QueuesForm /> renders create form 1`] = `
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={true}
     inputType="text"
     label="Description"
@@ -33,6 +35,7 @@ exports[`<QueuesForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={true}
     inputType="text"
     label="Name *"
@@ -40,6 +43,7 @@ exports[`<QueuesForm /> renders update form 1`] = `
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={true}
     inputType="text"
     label="Description"

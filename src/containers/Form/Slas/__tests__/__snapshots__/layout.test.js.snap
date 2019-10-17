@@ -9,7 +9,7 @@ exports[`<SlasForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="slasFormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -17,18 +17,19 @@ exports[`<SlasForm /> renders create form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="slasFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
   <ConfirmationWrapper
+    data-automation="toggleSharedConfirmationWrapper"
     mainText="Setting shared to \\"enabled\\" for this SLA. Once an SLA is shared and saved, it cannot be reverted."
     secondaryText="Are you sure you want to continue?"
   >
     <ToggleField
-      data-automation="slasFormFieldShared"
+      data-automation="sharedToggle"
       disabled={false}
       label="Shared"
       name="shared"
@@ -56,7 +57,7 @@ exports[`<SlasForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="slasFormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -64,18 +65,19 @@ exports[`<SlasForm /> renders update form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="slasFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
   <ConfirmationWrapper
+    data-automation="toggleSharedConfirmationWrapper"
     mainText="Setting shared to \\"enabled\\" for this SLA. Once an SLA is shared and saved, it cannot be reverted."
     secondaryText="Are you sure you want to continue?"
   >
     <ToggleField
-      data-automation="slasFormFieldShared"
+      data-automation="sharedToggle"
       disabled={false}
       label="Shared"
       name="shared"

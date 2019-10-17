@@ -86,14 +86,14 @@ exports[`<DispatchMappingsForm /> renders create form 1`] = `
     required={true}
   />
   <SelectField
-    data-automation="dispatchList"
+    data-automation="flowList"
     disabled={false}
     label="Dispatch to flow *"
     name="flowId"
     required={false}
   />
   <SelectField
-    data-automation="dispatchMappingsFormFieldVersion"
+    data-automation="versionList"
     disabled={false}
     label="Flow Version *"
     name="version"
@@ -188,14 +188,14 @@ exports[`<DispatchMappingsForm /> renders update form 1`] = `
     required={true}
   />
   <SelectField
-    data-automation="dispatchList"
+    data-automation="flowList"
     disabled={false}
     label="Dispatch to flow *"
     name="flowId"
     required={false}
   />
   <SelectField
-    data-automation="dispatchMappingsFormFieldVersion"
+    data-automation="versionList"
     disabled={false}
     label="Flow Version *"
     name="version"

@@ -32,6 +32,7 @@ export const flowColumn = {
     <div>
       <Input
         className={`flow-filter-input`}
+        data-automation="searchFlowColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
       />

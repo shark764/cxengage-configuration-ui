@@ -58,7 +58,11 @@ export default class GenericBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Active</span>
-            <StyledToggle onChange={this.toggleField} value={this.state.visibleFields.active} />
+            <StyledToggle
+              onChange={this.toggleField}
+              value={this.state.visibleFields.active}
+              data-automation="bulkActiveToggle"
+            />
           </ToggleList>
           {this.state.visibleFields.active && (
             <Options>
@@ -66,16 +70,8 @@ export default class GenericBulkActionsForm extends Component {
                 name="active"
                 label="Active"
                 disabled={this.props.isSaving || this.props.inherited}
-                options={[
-                  {
-                    label: 'Enabled',
-                    value: true
-                  },
-                  {
-                    label: 'Disabled',
-                    value: false
-                  }
-                ]}
+                options={[{ label: 'Enabled', value: true }, { label: 'Disabled', value: false }]}
+                data-automation="bulkActiveChoose"
               />
             </Options>
           )}

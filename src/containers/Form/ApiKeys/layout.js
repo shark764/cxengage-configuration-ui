@@ -83,16 +83,15 @@ export default class ApiKeysForm extends Component {
           componentType="input"
           inputType="text"
           placeholder=""
-          data-automation="ApiKeysFormFieldName"
+          data-automation="nameInput"
           disabled={this.props.isSaving || this.props.inherited}
         />
-
         <InputField
           name="description"
           label="Description"
           componentType="textarea"
           inputType="text"
-          data-automation="ApiKeysFormFieldDescription"
+          data-automation="descriptionInput"
           disabled={this.props.isSaving || this.props.inherited}
         />
         <SelectField
@@ -101,30 +100,44 @@ export default class ApiKeysForm extends Component {
           placeholder="Select a role..."
           disabled={this.props.isSaving || this.props.inherited}
           options={this.props.roles}
-          data-automation="ApiKeysFormFieldRoleId"
+          data-automation="roleList"
           required
         />
         {this.props.update &&
           this.props.initialValues.get('secret') && (
-            <Confirmation cancelBtnCallback={this.props.removeSecretApiKey} openPopupBox cancelBtnText="OK">
-              <div>
-                <Title>API Key</Title>
-                <TextSecret>{this.props.initialValues.get('id')}</TextSecret>
-              </div>
-              <div>
-                <Title>API Key Secret</Title>
-                <TextSecret>{this.props.initialValues.get('secret')}</TextSecret>
-              </div>
-              <TextWarning>
-                {' Retain this secret in a safe place and do not share it. You cannot request/view this secret again.'}
-              </TextWarning>
+            <Confirmation
+              cancelBtnCallback={this.props.removeSecretApiKey}
+              openPopupBox
+              cancelBtnText="OK"
+              data-automation="secretConfirmation"
+            >
+              <Fragment>
+                <Fragment>
+                  <Title>API Key</Title>
+                  <TextSecret>{this.props.initialValues.get('id')}</TextSecret>
+                </Fragment>
+                <Fragment>
+                  <Title>API Key Secret</Title>
+                  <TextSecret>{this.props.initialValues.get('secret')}</TextSecret>
+                </Fragment>
+                <TextWarning>
+                  {
+                    ' Retain this secret in a safe place and do not share it. You cannot request/view this secret again.'
+                  }
+                </TextWarning>
+              </Fragment>
             </Confirmation>
           )}
 
         {this.props.update && (
           <Fragment>
             <DetailHeader text="API Key" />
-            <ButtonShowHide id="btnShowHide" type="button" onClick={this.ShowPassword}>
+            <ButtonShowHide
+              id="btnShowHide"
+              type="button"
+              onClick={this.ShowPassword}
+              data-automation="showPasswordButton"
+            >
               <EyeIconSVG alt="help" title="Help" size={20} icon={this.state.icon} /> Key SID
             </ButtonShowHide>
 
@@ -134,15 +147,16 @@ export default class ApiKeysForm extends Component {
               inputType="text"
               label=""
               dataType={this.state.typeInput}
-              disabled="true"
-              data-automation="ApiKeysFormFieldId"
+              disabled={true}
+              data-automation="idInput"
             />
             <ConfirmationWrapper
               confirmBtnCallback={this.props.deleteApiKey}
               mainText={'Deleting this API Key will revoke API access for any application using it.'}
               secondaryText={'Do you want to continue?'}
+              data-automation="deleteKeyConfirmationWrapper"
             >
-              <ButtonDeleteKey id="btnDeletekey" type="button">
+              <ButtonDeleteKey id="btnDeletekey" type="button" data-automation="deleteKeyButton">
                 Delete Key
               </ButtonDeleteKey>
             </ConfirmationWrapper>

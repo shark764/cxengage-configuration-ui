@@ -51,6 +51,7 @@ export default function RolesForm({
           'If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role.'
         }
         secondaryText={'Are you sure you want to continue?'}
+        data-automation="toggleSharedConfirmationWrapper"
       >
         <ToggleField
           name="shared"

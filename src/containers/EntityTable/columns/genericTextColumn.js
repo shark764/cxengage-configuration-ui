@@ -4,8 +4,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
-import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
+import { camelCaseToRegularForm, capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
 import styled from 'styled-components';
 import { SearchIconSVG } from 'cx-ui-components';

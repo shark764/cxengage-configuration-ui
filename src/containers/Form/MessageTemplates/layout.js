@@ -48,7 +48,7 @@ export default class MessageTemplatesForm extends React.Component {
           label="Name *"
           componentType="input"
           inputType="text"
-          data-automation="messageTemplateNameInput"
+          data-automation="nameInput"
           disabled={this.props.isSaving || !this.props.userHasUpdatePermission}
         />
         <InputField
@@ -56,14 +56,14 @@ export default class MessageTemplatesForm extends React.Component {
           label="Description"
           componentType="textarea"
           inputType="text"
-          data-automation="messageTemplateDescriptionInput"
+          data-automation="descriptionInput"
           disabled={this.props.isSaving || !this.props.userHasUpdatePermission}
         />
         <CheckboxField
           label="Channels *"
           name="channels"
           dropDownText="Select Channel Type..."
-          data-automation="msgTemplateChannelTypeDropDownBtn"
+          data-automation="channelsDropdown"
           items={[
             { name: 'sms', label: 'SMS' },
             { name: 'messaging', label: 'Messaging' },
@@ -74,7 +74,7 @@ export default class MessageTemplatesForm extends React.Component {
         <SelectField
           name="templateTextType"
           label="Type *"
-          data-automation="msgTemplateTextTypeDropDownBtn"
+          data-automation="typeList"
           options={[{ label: 'Plain Text', value: 'plaintext' }, { label: 'Rich Text', value: 'html' }]}
           disabled={
             (this.props.channels &&
@@ -89,13 +89,14 @@ export default class MessageTemplatesForm extends React.Component {
             label="Template *"
             componentType="textarea"
             inputType="text"
-            data-automation="messageTemplateInput"
+            data-automation="templateInput"
             disabled={this.props.isSaving || !this.props.userHasUpdatePermission}
           />
         ) : (
           <RichTextEditorField
             name="template"
             label="Template *"
+            data-automation="templateEditor"
             templateText={this.props.templateText}
             isDisplayContentInHtml={this.props.isDisplayContentInHtml}
             toggleMessageTemplateText={isDisplayContentInHtml =>
@@ -115,6 +116,7 @@ export default class MessageTemplatesForm extends React.Component {
                 : 'You are trying to switch from RichText editor to PlainText editor, existing template content will be lost if you submit the form with the new content!'
             }
             secondaryText="Are you sure you want to continue?"
+            data-automation="clearConfirmation"
           />
         )}
       </form>

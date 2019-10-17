@@ -58,7 +58,7 @@ export default function ExceptionsForm({
         <DatepickerField
           name="date"
           label="Date *"
-          data-automation="exceptionsFormFieldDate"
+          data-automation="dateDatePicker"
           minDate={new Date()}
           disabled={isSaving}
         />
@@ -67,7 +67,7 @@ export default function ExceptionsForm({
           label="Description"
           componentType="textarea"
           inputType="text"
-          data-automation="exceptionsFormFieldDescription"
+          data-automation="descriptionInput"
           disabled={isSaving}
         />
         <RadioGroupField
@@ -75,11 +75,22 @@ export default function ExceptionsForm({
           label=""
           options={[{ label: 'All Day', value: true }, { label: 'Custom', value: false }]}
           disabled={isSaving}
+          data-automation="isAllDayChoose"
         />
         {!isAllDay && (
           <Fragment>
-            <TimepickerField name="startTimeMinutes" label="Start Time" twelveHoursMode />
-            <TimepickerField name="endTimeMinutes" label="End Time" twelveHoursMode />
+            <TimepickerField
+              name="startTimeMinutes"
+              label="Start Time"
+              twelveHoursMode
+              data-automation="startTimeMinutesTimePicker"
+            />
+            <TimepickerField
+              name="endTimeMinutes"
+              label="End Time"
+              twelveHoursMode
+              data-automation="endTimeMinutesTimePicker"
+            />
           </Fragment>
         )}
       </Wrapper>

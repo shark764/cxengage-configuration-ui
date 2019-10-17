@@ -9,6 +9,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={true}
     id="frm-reason-list-name"
     inputType="text"
@@ -17,6 +18,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="externalIdInput"
     disabled={true}
     id="frm-reason-list-external-id"
     inputType="text"
@@ -25,6 +27,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={true}
     id="frm-reason-list-description"
     inputType="text"
@@ -32,10 +35,12 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
     name="description"
   />
   <ConfirmationWrapper
+    data-automation="toggleSharedConfirmationWrapper"
     mainText="Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
     secondaryText="Are you sure you want to continue?"
   >
     <ToggleField
+      data-automation="sharedToggle"
       disabled={true}
       id="frm-reason-list-shared"
       label="Shared"
@@ -44,6 +49,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
     />
   </ConfirmationWrapper>
   <ToggleField
+    data-automation="isDefaultToggle"
     disabled={true}
     id="frm-reason-list-is-default"
     label="Tenant Default?"
@@ -58,6 +64,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
   />
   <NestedListField
     className="reason-list"
+    data-automation="reasonListNestedList"
     name="reasons"
     removeCategoryItems={[Function]}
     removeReasonListItem={[Function]}
@@ -76,6 +83,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={true}
     id="frm-reason-list-name"
     inputType="text"
@@ -84,6 +92,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="externalIdInput"
     disabled={true}
     id="frm-reason-list-external-id"
     inputType="text"
@@ -92,6 +101,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={true}
     id="frm-reason-list-description"
     inputType="text"
@@ -99,10 +109,12 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
     name="description"
   />
   <ConfirmationWrapper
+    data-automation="toggleSharedConfirmationWrapper"
     mainText="Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
     secondaryText="Are you sure you want to continue?"
   >
     <ToggleField
+      data-automation="sharedToggle"
       disabled={true}
       id="frm-reason-list-shared"
       label="Shared"
@@ -111,6 +123,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
     />
   </ConfirmationWrapper>
   <ToggleField
+    data-automation="isDefaultToggle"
     disabled={true}
     id="frm-reason-list-is-default"
     label="Tenant Default?"
@@ -125,6 +138,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   />
   <NestedListField
     className="reason-list"
+    data-automation="reasonListNestedList"
     name="reasons"
     removeCategoryItems={[Function]}
     removeReasonListItem={[Function]}

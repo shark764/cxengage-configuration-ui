@@ -25,6 +25,7 @@ export const activeQueueColumn = {
     <div>
       <Input
         className="entity-table-filter-column-active-queue"
+        data-automation="searchActiveQueueColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
       />

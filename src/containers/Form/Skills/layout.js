@@ -48,6 +48,7 @@ export default function SkillsForm({
           confirmBtnCallback={!disableProficiency && !hasProficiency ? toggleProficiency : undefined}
           mainText={`You cannot update 'Has Proficiency' once it's set to true.`}
           secondaryText={'Are you sure you want to continue?'}
+          data-automation="hasProficiencyConfirmationWrapper"
         >
           <ToggleField
             name="hasProficiency"
@@ -59,6 +60,7 @@ export default function SkillsForm({
                 : 'Controls whether the skill needs a value specified'
             }
             disabled={isSaving || inherited || !userHasUpdatePermission || disableProficiency}
+            data-automation="hasProficiencyToggle"
           />
         </ConfirmationWrapper>
       </Fragment>

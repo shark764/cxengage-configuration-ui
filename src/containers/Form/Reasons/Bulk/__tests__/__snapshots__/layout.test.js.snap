@@ -23,11 +23,12 @@ exports[`<ReasonsBulkActionsForm /> renders reasons bulk actions form 1`] = `
         Reasons
       </span>
       <ConfirmationWrapper
+        data-automation="toggleSharedConfirmationWrapper"
         mainText="Setting shared to 'enabled' cannot be reverted."
         secondaryText="Are you sure you want to continue?"
       >
         <Styled(ToggleField)
-          data-automation="reasonsBulkActionsFormFieldShare"
+          data-automation="sharedToggle"
           disabled={true}
           label=""
           name="shared"

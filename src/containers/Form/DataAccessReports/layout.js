@@ -47,7 +47,7 @@ export default function DataAccessReportsForm({
       <DetailHeader text="Report" />
       <RadioGroupField
         name="reportType"
-        data-automation="typeChoose"
+        data-automation="reportTypeChoose"
         label="Type *"
         id="frm-data-access-reports-report-type"
         disabled={isSaving || !userHasUpdatePermission}

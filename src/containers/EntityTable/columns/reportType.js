@@ -28,6 +28,7 @@ export const reportTypeColumn = {
   Filter: ({ filter, onChange }) => (
     <FilterSelect
       className="entity-table-filter-column-report-type"
+      data-automation="searchReportTypeColumn"
       onChange={event => onChange(event.target.value)}
       value={filter ? filter.value : 'all'}
     >

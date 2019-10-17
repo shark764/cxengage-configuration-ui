@@ -11,7 +11,7 @@ exports[`<BusinessHoursForm /> renders create form 1`] = `
       />
       <InputField
         componentType="input"
-        data-automation="BusinessHoursFormFieldName"
+        data-automation="nameInput"
         disabled={false}
         inputType="text"
         label="Name *"
@@ -19,14 +19,14 @@ exports[`<BusinessHoursForm /> renders create form 1`] = `
       />
       <InputField
         componentType="textarea"
-        data-automation="BusinessHoursFormFieldDescription"
+        data-automation="descriptionInput"
         disabled={false}
         inputType="text"
         label="Description"
         name="description"
       />
       <SelectField
-        data-automation="BusinessHoursFormFieldTimezone"
+        data-automation="timezoneList"
         disabled={false}
         label="Timezone"
         name="timezone"
@@ -52,6 +52,7 @@ exports[`<BusinessHoursForm /> renders create form 1`] = `
         text="Regular Hours"
       />
       <RadioGroupField
+        data-automation="businessHoursTypeChoose"
         disabled={false}
         label="Business Hours"
         name="businessHoursType"
@@ -85,7 +86,7 @@ exports[`<BusinessHoursForm /> renders update form 1`] = `
       />
       <InputField
         componentType="input"
-        data-automation="BusinessHoursFormFieldName"
+        data-automation="nameInput"
         disabled={false}
         inputType="text"
         label="Name *"
@@ -93,14 +94,14 @@ exports[`<BusinessHoursForm /> renders update form 1`] = `
       />
       <InputField
         componentType="textarea"
-        data-automation="BusinessHoursFormFieldDescription"
+        data-automation="descriptionInput"
         disabled={false}
         inputType="text"
         label="Description"
         name="description"
       />
       <SelectField
-        data-automation="BusinessHoursFormFieldTimezone"
+        data-automation="timezoneList"
         disabled={false}
         label="Timezone"
         name="timezone"
@@ -126,6 +127,7 @@ exports[`<BusinessHoursForm /> renders update form 1`] = `
         text="Regular Hours"
       />
       <RadioGroupField
+        data-automation="businessHoursTypeChoose"
         disabled={false}
         label="Business Hours"
         name="businessHoursType"

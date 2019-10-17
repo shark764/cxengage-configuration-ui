@@ -22,6 +22,7 @@ export default function QueuesForm({ handleSubmit, isSaving, userHasUpdatePermis
         componentType="input"
         inputType="text"
         disabled={isSaving || !userHasUpdatePermission}
+        data-automation="nameInput"
       />
       <InputField
         name="description"
@@ -29,6 +30,7 @@ export default function QueuesForm({ handleSubmit, isSaving, userHasUpdatePermis
         componentType="textarea"
         inputType="text"
         disabled={isSaving || !userHasUpdatePermission}
+        data-automation="descriptionInput"
       />
     </form>
   );

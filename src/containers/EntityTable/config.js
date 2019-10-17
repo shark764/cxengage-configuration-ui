@@ -15,7 +15,6 @@ import { activeQueueColumn } from './columns/activeQueue';
 import { activeFlowColumn } from './columns/activeFlow';
 import { flowColumn } from './columns/flow';
 import { activeSlaColumn } from './columns/activeSla';
-import { apiKeyStatusColumn } from './columns/apiKeyStatus';
 import { timezoneColumn } from './columns/timezone';
 import { parentTenantColumn } from './columns/parentTenant';
 
@@ -56,7 +55,6 @@ export function getTableColumns(columns) {
     'Interaction Field': constructGeneralTextColumn('interactionField'),
     Flow: flowColumn,
     'Active Sla': activeSlaColumn,
-    'ApiKey Status': apiKeyStatusColumn,
     Timezone: timezoneColumn,
     Type: constructGeneralTextColumn('type'),
     Channels: constructGeneralTextColumn('channels'),

@@ -62,7 +62,7 @@ export default class SlasForm extends Component {
           label="Name *"
           componentType="input"
           inputType="text"
-          data-automation="slasFormFieldName"
+          data-automation="nameInput"
           disabled={this.props.isSaving || this.props.inherited || !this.props.userHasUpdatePermission}
         />
         <InputField
@@ -70,7 +70,7 @@ export default class SlasForm extends Component {
           label="Description"
           componentType="textarea"
           inputType="text"
-          data-automation="slasFormFieldDescription"
+          data-automation="descriptionInput"
           disabled={this.props.isSaving || this.props.inherited || !this.props.userHasUpdatePermission}
         />
         {this.props.initialValues.get('id') !== undefined && (
@@ -79,7 +79,7 @@ export default class SlasForm extends Component {
             label="Active Version *"
             placeholder="Select a version..."
             options={this.props.versions}
-            data-automation="slasFormFieldActiveVersion"
+            data-automation="activeVersionList"
             disabled={
               this.props.isSaving ||
               this.props.inherited ||
@@ -95,6 +95,7 @@ export default class SlasForm extends Component {
           }
           mainText={`Setting shared to "enabled" for this SLA. Once an SLA is shared and saved, it cannot be reverted.`}
           secondaryText={'Are you sure you want to continue?'}
+          data-automation="toggleSharedConfirmationWrapper"
         >
           <ToggleField
             name="shared"
@@ -105,7 +106,7 @@ export default class SlasForm extends Component {
                 : `Change "Shared" state for this SLA`
             }
             onChange={() => {}}
-            data-automation="slasFormFieldShared"
+            data-automation="sharedToggle"
             disabled={
               this.props.isSaving ||
               this.props.inherited ||
@@ -133,7 +134,7 @@ export default class SlasForm extends Component {
                 <CancelInitialVersionButton
                   type="button"
                   buttonType="secondary"
-                  data-automation="slasFormFieldAddInitialVersion"
+                  data-automation="cancelInitialVersionButton"
                   onClick={() => this.addInitialVersion(false)}
                 >
                   Cancel

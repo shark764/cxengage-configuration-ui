@@ -10,7 +10,7 @@ exports[`<ApiKeysForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="ApiKeysFormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -19,14 +19,14 @@ exports[`<ApiKeysForm /> renders create form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="ApiKeysFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
   <SelectField
-    data-automation="ApiKeysFormFieldRoleId"
+    data-automation="roleList"
     disabled={false}
     label="Role *"
     name="roleId"
@@ -46,7 +46,7 @@ exports[`<ApiKeysForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="ApiKeysFormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -55,14 +55,14 @@ exports[`<ApiKeysForm /> renders update form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="ApiKeysFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
   <SelectField
-    data-automation="ApiKeysFormFieldRoleId"
+    data-automation="roleList"
     disabled={false}
     label="Role *"
     name="roleId"

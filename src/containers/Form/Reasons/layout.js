@@ -38,6 +38,7 @@ export default function ReasonsForm({
         componentType="input"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
+        data-automation="nameInput"
       />
       <InputField
         id="frm-reason-external-id"
@@ -46,6 +47,7 @@ export default function ReasonsForm({
         componentType="input"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
+        data-automation="externalIdInput"
       />
       <InputField
         id="frm-reason-description"
@@ -54,6 +56,7 @@ export default function ReasonsForm({
         componentType="textarea"
         inputType="text"
         disabled={isSaving || inherited || !userHasUpdatePermission}
+        data-automation="descriptionInput"
       />
       <ConfirmationWrapper
         confirmBtnCallback={!disableShared && !sharedFormValue ? toggleShared : undefined}
@@ -61,6 +64,7 @@ export default function ReasonsForm({
           "Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
         }
         secondaryText={'Are you sure you want to continue?'}
+        data-automation="toggleSharedConfirmationWrapper"
       >
         <ToggleField
           id="frm-reason-shared"
@@ -72,6 +76,7 @@ export default function ReasonsForm({
               : 'Change "Shared" state for this Presence Reason'
           }
           disabled={isSaving || inherited || disableShared || !userHasUpdatePermission}
+          data-automation="sharedToggle"
         />
       </ConfirmationWrapper>
     </form>

@@ -18,6 +18,7 @@ exports[`<ListItemsForm /> renders create list item 1`] = `
   <styled.div>
     <InputField
       componentType="input"
+      data-automation="Test Field Item Name 1Input"
       dataType="string"
       disabled={false}
       id="frm-list-item-Test Field Item Name 1"
@@ -27,6 +28,7 @@ exports[`<ListItemsForm /> renders create list item 1`] = `
     />
     <InputField
       componentType="input"
+      data-automation="Test Field Item Name 1Input"
       dataType="number"
       disabled={false}
       id="frm-list-item-Test Field Item Name 1"
@@ -35,6 +37,7 @@ exports[`<ListItemsForm /> renders create list item 1`] = `
       name="Test Field Item Name 1"
     />
     <SelectField
+      data-automation="Test Field Item Name 1List"
       disabled={false}
       id="frm-list-item-Test Field Item Name 1"
       key="Test Field Item Name 1"
@@ -71,6 +74,7 @@ exports[`<ListItemsForm /> renders update list item 1`] = `
   <styled.div>
     <InputField
       componentType="input"
+      data-automation="Test Field Item Name 1Input"
       dataType="string"
       disabled={false}
       id="frm-list-item-Test Field Item Name 1"
@@ -80,6 +84,7 @@ exports[`<ListItemsForm /> renders update list item 1`] = `
     />
     <InputField
       componentType="input"
+      data-automation="Test Field Item Name 1Input"
       dataType="number"
       disabled={false}
       id="frm-list-item-Test Field Item Name 1"
@@ -88,6 +93,7 @@ exports[`<ListItemsForm /> renders update list item 1`] = `
       name="Test Field Item Name 1"
     />
     <SelectField
+      data-automation="Test Field Item Name 1List"
       disabled={false}
       id="frm-list-item-Test Field Item Name 1"
       key="Test Field Item Name 1"

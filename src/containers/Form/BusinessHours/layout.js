@@ -67,7 +67,8 @@ const Warning = styled.span`
   display: block:
 `;
 
-const Picker = ({ input, disabled, twelveHoursMode, hoursStep, minutesStep, nullOption, meta: { error, warning } }) => {
+const Picker = props => {
+  const { input, disabled, twelveHoursMode, hoursStep, minutesStep, nullOption, meta: { error, warning } } = props;
   return (
     <div>
       {input.name.includes('StartTimeMinutes') &&
@@ -83,6 +84,7 @@ const Picker = ({ input, disabled, twelveHoursMode, hoursStep, minutesStep, null
         hoursStep={hoursStep}
         minutesStep={minutesStep}
         nullOption={nullOption}
+        data-automation={props['data-automation']}
       />
     </div>
   );
@@ -109,7 +111,7 @@ export default function BusinessHoursForm({
             <td>
               <TimepickerField
                 name={`${dayInitials}StartTimeMinutes`}
-                data-automation={`BusinessHoursFormField${dayInitials}StartTimeMinutes`}
+                data-automation={`startTimeMinutes${dayInitials}Picker`}
                 disabled={isSaving || inherited || !userHasUpdatePermission}
                 twelveHoursMode
                 nullOption
@@ -118,7 +120,7 @@ export default function BusinessHoursForm({
             <td>
               <TimepickerField
                 name={`${dayInitials}EndTimeMinutes`}
-                data-automation={`BusinessHoursFormField${dayInitials}EndTimeMinutes`}
+                data-automation={`endTimeMinutes${dayInitials}Picker`}
                 disabled={isSaving || inherited || !userHasUpdatePermission}
                 twelveHoursMode
                 nullOption
@@ -139,7 +141,7 @@ export default function BusinessHoursForm({
             label="Name *"
             componentType="input"
             inputType="text"
-            data-automation="BusinessHoursFormFieldName"
+            data-automation="nameInput"
             disabled={isSaving || inherited || !userHasUpdatePermission}
           />
           <InputField
@@ -147,7 +149,7 @@ export default function BusinessHoursForm({
             label="Description"
             componentType="textarea"
             inputType="text"
-            data-automation="BusinessHoursFormFieldDescription"
+            data-automation="descriptionInput"
             disabled={isSaving || inherited || !userHasUpdatePermission}
           />
           <SelectField
@@ -158,7 +160,7 @@ export default function BusinessHoursForm({
               label: `(${offset}) ${timezone}`,
               value: timezone
             }))}
-            data-automation="BusinessHoursFormFieldTimezone"
+            data-automation="timezoneList"
             required
           />
         </div>
@@ -169,6 +171,7 @@ export default function BusinessHoursForm({
             label="Business Hours"
             options={[{ label: '24/7', value: '24/7' }, { label: 'Scheduled Hours', value: 'scheduledHours' }]}
             disabled={isSaving || inherited || !userHasUpdatePermission}
+            data-automation="businessHoursTypeChoose"
           />
           {businessHoursType === 'scheduledHours' && (
             <Table>
@@ -205,7 +208,8 @@ Picker.propTypes = {
   hoursStep: PropTypes.number,
   minutesStep: PropTypes.number,
   nullOption: PropTypes.bool,
-  meta: PropTypes.object
+  meta: PropTypes.object,
+  'data-automation': PropTypes.string
 };
 
 TimepickerField.propTypes = {
@@ -214,5 +218,6 @@ TimepickerField.propTypes = {
   twelveHoursMode: PropTypes.bool,
   hoursStep: PropTypes.number,
   minutesStep: PropTypes.number,
-  nullOption: PropTypes.bool
+  nullOption: PropTypes.bool,
+  'data-automation': PropTypes.string
 };

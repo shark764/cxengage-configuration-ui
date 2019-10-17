@@ -4,7 +4,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
+import { camelCaseToRegularForm, capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
 export function constructGeneralBooleanColumn(string) {
   const normalizedString = camelCaseToRegularForm(string);
@@ -25,6 +25,7 @@ export function constructGeneralBooleanColumn(string) {
     Filter: ({ filter, onChange }) => (
       <select
         className={'entity-table-filter-column-' + string}
+        data-automation={`search${capitalizeFirstLetter(string)}Column`}
         onChange={event => onChange(event.target.value)}
         style={{ width: '100%' }}
         value={filter ? filter.value : 'all'}

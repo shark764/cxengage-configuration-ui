@@ -25,6 +25,7 @@ export const activeFlowColumn = {
     <div>
       <Input
         className="entity-table-filter-column-active-flow"
+        data-automation="searchActiveFlowColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
       />

@@ -5,6 +5,7 @@ exports[`<EmailTemplatesForm /> renders custom email 1`] = `
   onSubmit={[Function]}
 >
   <SelectField
+    data-automation="emailList"
     disabled={false}
     label="Email"
     name="email"
@@ -24,11 +25,13 @@ exports[`<EmailTemplatesForm /> renders custom email 1`] = `
   />
   <React.Fragment>
     <ToggleField
+      data-automation="sharedToggle"
       disabled={false}
       label="Shared"
       name="shared"
     />
     <TemplateTextEditorField
+      data-automation="subjectTextEditor"
       disabled={false}
       label="Subject"
       name="subject"
@@ -39,6 +42,7 @@ exports[`<EmailTemplatesForm /> renders custom email 1`] = `
       }
     />
     <TemplateTextEditorField
+      data-automation="bodyTextEditor"
       disabled={false}
       label="Body"
       name="body"
@@ -57,6 +61,7 @@ exports[`<EmailTemplatesForm /> renders default email 1`] = `
   onSubmit={[Function]}
 >
   <SelectField
+    data-automation="emailList"
     disabled={false}
     label="Email"
     name="email"

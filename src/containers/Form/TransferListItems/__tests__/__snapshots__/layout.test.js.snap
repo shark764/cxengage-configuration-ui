@@ -38,7 +38,7 @@ exports[`<TransferListItemsForm> renders create transfer list items form 1`] = `
       name="name"
     />
     <SelectField
-      data-automation="contactTypeDropDownBtn"
+      data-automation="contactTypeList"
       disabled={false}
       label="Contact Type *"
       name="contactType"
@@ -65,7 +65,7 @@ exports[`<TransferListItemsForm> renders create transfer list items form 1`] = `
       required={true}
     />
     <SelectField
-      data-automation="transferTypeDropDownBtn"
+      data-automation="transferTypeList"
       disabled={true}
       label="Transfer Type *"
       name="transferType"
@@ -89,7 +89,7 @@ exports[`<TransferListItemsForm> renders create transfer list items form 1`] = `
     />
     <CheckboxField
       buttonType="checkboxField"
-      data-automation="warmColdTransferDropDownBtn"
+      data-automation="warmColdTransferToggle"
       dropDownText="Select warm/cold transfer..."
       items={
         Array [
@@ -107,7 +107,7 @@ exports[`<TransferListItemsForm> renders create transfer list items form 1`] = `
       name="warmColdTransfer"
     />
     <AutoCompleteField
-      data-automation="endpointAutoSelectInput"
+      data-automation="endpointAutoComplete"
       disabled={false}
       label="Endpoint *"
       name="endpoint"
@@ -181,7 +181,7 @@ exports[`<TransferListItemsForm> renders update transfer list items form 1`] = `
       mockTransferListName
     </styled.h3>
     <AutoCompleteField
-      data-automation="categoryNameAutoSelectInput"
+      data-automation="categoryNameAutoComplete"
       disabled={false}
       label="Category Name *"
       name="hierarchy"
@@ -211,7 +211,7 @@ exports[`<TransferListItemsForm> renders update transfer list items form 1`] = `
       name="name"
     />
     <SelectField
-      data-automation="contactTypeDropDownBtn"
+      data-automation="contactTypeList"
       disabled={false}
       label="Contact Type *"
       name="contactType"
@@ -238,7 +238,7 @@ exports[`<TransferListItemsForm> renders update transfer list items form 1`] = `
       required={true}
     />
     <SelectField
-      data-automation="transferTypeDropDownBtn"
+      data-automation="transferTypeList"
       disabled={false}
       label="Transfer Type *"
       name="transferType"
@@ -262,7 +262,7 @@ exports[`<TransferListItemsForm> renders update transfer list items form 1`] = `
     />
     <CheckboxField
       buttonType="checkboxField"
-      data-automation="warmColdTransferDropDownBtn"
+      data-automation="warmColdTransferToggle"
       dropDownText="Select warm/cold transfer..."
       items={
         Array [

@@ -26,6 +26,7 @@ export const listTypeColumn = {
     <div>
       <Input
         className={`entity-table-filter-column-list-type`}
+        data-automation="searchListTypeColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
       />

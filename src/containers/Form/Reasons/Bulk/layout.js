@@ -85,7 +85,7 @@ export default class ReasonsBulkActionsForm extends Component {
                 label="Active"
                 disabled={this.props.isSaving || this.props.inherited}
                 options={[{ label: 'Enabled', value: 'enabled' }, { label: 'Disabled', value: 'disabled' }]}
-                data-automation="reasonsBulkActionsFormFieldActive"
+                data-automation="activeChoose"
               />
             </Options>
           )}
@@ -97,12 +97,13 @@ export default class ReasonsBulkActionsForm extends Component {
               confirmBtnCallback={!this.props.sharedIsChecked ? () => this.toggleFormField('shared') : undefined}
               mainText={`Setting shared to 'enabled' cannot be reverted.`}
               secondaryText={'Are you sure you want to continue?'}
+              data-automation="toggleSharedConfirmationWrapper"
             >
               <StyledToggleField
                 name="shared"
                 label=""
                 disabled={this.props.isSaving || this.props.inherited}
-                data-automation="reasonsBulkActionsFormFieldShare"
+                data-automation="sharedToggle"
               />
             </ConfirmationWrapper>
           </ToggleList>

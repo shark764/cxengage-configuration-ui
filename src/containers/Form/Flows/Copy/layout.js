@@ -53,7 +53,7 @@ export default function ListItemsForm(props) {
           label="Name *"
           componentType="input"
           inputType="text"
-          data-automation="flowsCopyFormFieldName"
+          data-automation="nameInput"
           disabled={props.isSaving}
         />
         {!(props.subEntityId === 'drafts' && props.subEntityName === 'versions') && (
@@ -62,7 +62,7 @@ export default function ListItemsForm(props) {
             label="Description"
             componentType="textarea"
             inputType="text"
-            data-automation="flowsCopyFormFieldDescription"
+            data-automation="descriptionInput"
             disabled={props.isSaving}
           />
         )}

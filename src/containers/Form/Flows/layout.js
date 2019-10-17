@@ -42,18 +42,9 @@ export default function FlowsForm({ handleSubmit, initialValues, isSaving, userH
         disabled={isSaving || !userHasUpdatePermission}
         data-automation="typeList"
         options={[
-          {
-            label: 'Customer',
-            value: 'customer'
-          },
-          {
-            label: 'Resource',
-            value: 'resource'
-          },
-          {
-            label: 'Reusable',
-            value: 'reusable'
-          }
+          { label: 'Customer', value: 'customer' },
+          { label: 'Resource', value: 'resource' },
+          { label: 'Reusable', value: 'reusable' }
         ]}
         required
       />
@@ -63,7 +54,7 @@ export default function FlowsForm({ handleSubmit, initialValues, isSaving, userH
           label="Active Version *"
           placeholder="Select a version..."
           options={versions}
-          data-automation="flowsFormFieldActiveVersion"
+          data-automation="versionList"
           disabled={isSaving || versions.length === 0 || !userHasUpdatePermission}
           required
         />

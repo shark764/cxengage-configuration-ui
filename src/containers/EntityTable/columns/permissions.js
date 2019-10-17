@@ -25,6 +25,7 @@ export const permissionsColumn = {
     <div>
       <Input
         className={`entity-table-filter-column-permissions`}
+        data-automation="searchPermissionsColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
       />

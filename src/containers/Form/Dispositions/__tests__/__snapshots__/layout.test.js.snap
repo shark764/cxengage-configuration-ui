@@ -9,7 +9,7 @@ exports[`<DispositionsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="dispositionsName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -18,14 +18,14 @@ exports[`<DispositionsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="dispositionExternalid"
+    data-automation="externalIdInput"
     disabled={false}
     label="External ID"
     name="externalid"
   />
   <InputField
     componentType="textarea"
-    data-automation="dispositionsDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
@@ -50,7 +50,7 @@ exports[`<DispositionsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="dispositionsName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -59,14 +59,14 @@ exports[`<DispositionsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="dispositionExternalid"
+    data-automation="externalIdInput"
     disabled={false}
     label="External ID"
     name="externalid"
   />
   <InputField
     componentType="textarea"
-    data-automation="dispositionsDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"

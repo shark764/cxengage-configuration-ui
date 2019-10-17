@@ -81,7 +81,7 @@ export default class ReasonListItemsForm extends React.Component {
                   placeholder="Select a Category..."
                   suggestedDropDownWidth="100%"
                   suggestions={this.props.existingCategories}
-                  data-automation="categoryNameAutoSelectInput"
+                  data-automation="categoryNameAutoComplete"
                   suggestedDropdownStyle={{ width: '100%', overflowX: 'hidden', whiteSpace: 'nowrap' }}
                   disabled={this.props.isSaving}
                   required
@@ -91,7 +91,7 @@ export default class ReasonListItemsForm extends React.Component {
               <SelectField
                 name="reason"
                 label="Reason *"
-                data-automation="reasonDropDownBtn"
+                data-automation="reasonList"
                 options={[{ label: 'Select a reason...', value: 'selectReason' }].concat(this.props.reasons)}
                 disabled={this.props.isSaving}
                 required

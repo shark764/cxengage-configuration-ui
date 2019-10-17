@@ -117,7 +117,7 @@ export default function DispatchMappingsForm({
         name="flowId"
         label="Dispatch to flow *"
         required={initialValues.get('id') !== undefined}
-        data-automation="dispatchList"
+        data-automation="flowList"
         options={!flowsFetching ? flowIds : undefined}
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
@@ -126,7 +126,7 @@ export default function DispatchMappingsForm({
           name="version"
           label="Flow Version *"
           required={initialValues.get('id') !== undefined}
-          data-automation="dispatchMappingsFormFieldVersion"
+          data-automation="versionList"
           options={!flowsFetching ? flowVersions : undefined}
           disabled={isSaving || inherited || !userHasUpdatePermission || flowsFetching || !flowId}
         />

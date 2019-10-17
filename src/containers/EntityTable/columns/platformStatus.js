@@ -34,6 +34,7 @@ export const platformStatusColumn = {
     <FilterSelect
       tableType="modal"
       className="entity-table-filter-column-platform-status"
+      data-automation="searchPlatformStatusColumn"
       onChange={event => onChange(event.target.value)}
       value={filter ? filter.value : 'all non-disabled'}
       options={['all', 'all non-disabled', 'pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']}

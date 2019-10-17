@@ -10,7 +10,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, InputField, SelectField } from 'cx-ui-components';
+import { DetailHeader, InputField } from 'cx-ui-components';
 
 export default function TenantsForm({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key }) {
   return (
@@ -21,8 +21,7 @@ export default function TenantsForm({ handleSubmit, isSaving, inherited, userHas
         label="Name *"
         componentType="input"
         inputType="text"
-        placeholder="You are using Hygen!"
-        data-automation="TenantsFormFieldName"
+        data-automation="nameInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
@@ -30,22 +29,8 @@ export default function TenantsForm({ handleSubmit, isSaving, inherited, userHas
         label="Description"
         componentType="textarea"
         inputType="text"
-        data-automation="TenantsFormFieldDescription"
+        data-automation="descriptionInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-      />
-      <DetailHeader text="Properties" />
-      <SelectField
-        name="type"
-        label="Type *"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
-        options={[
-          {
-            label: 'custom label',
-            value: 'custom value'
-          }
-        ]}
-        data-automation="TenantsFormFieldType"
-        required
       />
     </form>
   );

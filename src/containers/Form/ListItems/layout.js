@@ -62,19 +62,21 @@ export default function ListItemsForm(props) {
                 key={field.name}
                 name={field.name}
                 label={`${field.label}${field.required ? ' *' : ''}`}
-                id={'frm-list-item-' + field.name}
+                id={`frm-list-item-${field.name}`}
                 disabled={props.isSaving}
                 options="boolean"
+                data-automation={`${field.name}List`}
               />
             ) : (
               <InputField
                 key={field.name}
                 name={field.name}
                 label={`${field.label}${field.required ? ' *' : ''}`}
-                id={'frm-list-item-' + field.name}
+                id={`frm-list-item-${field.name}`}
                 disabled={props.isSaving}
                 componentType="input"
                 dataType={field.type}
+                data-automation={`${field.name}Input`}
               />
             )
         )}
