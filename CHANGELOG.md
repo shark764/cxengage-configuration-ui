@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.11] - 2019-10-17
+## Changed 
+- Bump sdk version to 9.2.1 
+
 ## [0.66.10] - 2019-10-16
 ### Changed
 - <no-jira> - Adding Automation attributes | Part I.
