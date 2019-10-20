@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.12] - 2019-10-18
+## Fixed
+-CXV1-20312-Updated permissions to Reset Pasword on a user Profile in Config-Ui-2
+
 ## [0.66.11] - 2019-10-17
 ## Changed 
 - Bump sdk version to 9.2.1 

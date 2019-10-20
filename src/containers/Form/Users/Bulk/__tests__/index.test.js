@@ -8,9 +8,13 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentFormValueByFieldName } from '../../../../../redux/modules/form/selectors';
 import UsersBulkActionsForm, { mapStateToProps, createFormName } from '../';
-import { getCurrentEntity, isCreating, getEntityData } from '../../../../../redux/modules/entities/selectors';
+import {
+  getCurrentEntity,
+  isCreating,
+  getEntityData,
+  userHasPermissions
+} from '../../../../../redux/modules/entities/selectors';
 import { selectTenantIdentityProviders } from '../../../../../redux/modules/entities/identityProviders/selectors';
-import { isUserPlatformAdmin } from '../../../../../redux/modules/entities/users/selectors';
 
 jest.mock('../../../../../redux/modules/form/selectors');
 getCurrentFormValueByFieldName.mockImplementation(() => true);
@@ -19,12 +23,10 @@ jest.mock('../../../../../redux/modules/entities/selectors');
 getCurrentEntity.mockImplementation(() => 'users');
 isCreating.mockImplementation(() => true);
 getEntityData.mockImplementation(() => new Map({}));
+userHasPermissions.mockImplementation(() => true);
 
 jest.mock('../../../../../redux/modules/entities/identityProviders/selectors');
 selectTenantIdentityProviders.mockImplementation(() => ({ label: 'idp1', value: '0001' }));
-
-jest.mock('../../../../../redux/modules/entities/users/selectors');
-isUserPlatformAdmin.mockImplementation(() => true);
 
 describe('GenericBulkItems Renders', () => {
   it('renders', () => {

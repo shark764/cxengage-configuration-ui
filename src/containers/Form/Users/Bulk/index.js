@@ -8,10 +8,14 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import UsersBulkActionsFormLayout from './layout';
 import { formValidation } from './validation';
-import { isCreating, getCurrentEntity, getEntityData } from '../../../../redux/modules/entities/selectors';
+import {
+  isCreating,
+  getCurrentEntity,
+  getEntityData,
+  userHasPermissions
+} from '../../../../redux/modules/entities/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
 import { formSubmission, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
-import { isUserPlatformAdmin } from '../../../../redux/modules/entities/users/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
 
@@ -41,7 +45,7 @@ export function mapStateToProps(state) {
     skills: getEntityData(state, 'skills'),
     isSaving: isCreating(state),
     key: `${getCurrentEntity(state)}:bulk`,
-    isUserPlatformAdmin: isUserPlatformAdmin(state)
+    displayResetPassword: userHasPermissions(state, ['PLATFORM_MANAGE_ALL_USER_PASSWORDS', 'MANAGE_ALL_USER_PASSWORDS'])
   };
 }
 

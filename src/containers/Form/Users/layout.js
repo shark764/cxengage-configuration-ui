@@ -41,7 +41,6 @@ export default function UsersForm({
   handleSubmit,
   tenantRoles,
   status,
-  isUserPlatformAdmin,
   initialValues,
   tenantIdentityProviders,
   isSaving,
@@ -198,8 +197,7 @@ export default function UsersForm({
             </Fragment>
           )}
 
-          {isUserPlatformAdmin &&
-            displayResetPassword &&
+          {displayResetPassword &&
             status === 'enabled' && (
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
@@ -322,7 +320,6 @@ UsersForm.propTypes = {
   status: PropTypes.string,
   scenario: PropTypes.string,
   changeUserInviteStatus: PropTypes.func.isRequired,
-  isUserPlatformAdmin: PropTypes.bool,
   displayResetPassword: PropTypes.bool,
   usersFetching: PropTypes.bool
 };

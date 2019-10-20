@@ -18,11 +18,7 @@ import {
 import { getCurrentAgentId } from '../../../redux/modules/userData/selectors';
 import { onFormSubmit, changeUserInviteStatus } from '../../../redux/modules/entities';
 import { createFormName } from '../../../redux/modules/form/selectors';
-import {
-  selectUsersFormInitialValues,
-  getUserInvitationStatus,
-  isUserPlatformAdmin
-} from '../../../redux/modules/entities/users/selectors';
+import { selectUsersFormInitialValues, getUserInvitationStatus } from '../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../redux/modules/entities/identityProviders/selectors';
 import { getCapacityRulesSelector } from '../../../redux/modules/entities/capacityRules/selectors';
@@ -51,8 +47,10 @@ export function mapStateToProps(state) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
     currentAgentId: getCurrentAgentId(state),
-    displayResetPassword: userHasPermissions(state, ['MANAGE_ALL_USER_PASSWORDS']),
-    isUserPlatformAdmin: isUserPlatformAdmin(state),
+    displayResetPassword: userHasPermissions(state, [
+      'PLATFORM_MANAGE_ALL_USER_PASSWORDS',
+      'MANAGE_ALL_USER_PASSWORDS'
+    ]),
     usersFetching: isEntityFetching(state, 'users')
   };
 }

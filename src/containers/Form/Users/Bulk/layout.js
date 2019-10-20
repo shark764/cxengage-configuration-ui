@@ -171,7 +171,7 @@ export default class UsersBulkActionsForm extends Component {
             </ConfirmationWrapper>
           </ToggleList>
         </Container>
-        {this.props.isUserPlatformAdmin && (
+        {this.props.displayResetPassword && (
           <Container>
             <ToggleList>
               <span>Reset Password</span>
@@ -403,7 +403,7 @@ UsersBulkActionsForm.propTypes = {
   resendInvitationIsChecked: PropTypes.bool,
   cancelInvitationIsChecked: PropTypes.bool,
   passwordResetIsChecked: PropTypes.bool,
-  isUserPlatformAdmin: PropTypes.bool,
+  displayResetPassword: PropTypes.bool,
   change: PropTypes.func,
   groups: PropTypes.object,
   skills: PropTypes.object,
