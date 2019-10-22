@@ -3,23 +3,20 @@
  */
 
 import { createSelector } from 'reselect';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import { getSelectedEntity } from '../selectors';
 import { selectFormInitialValues } from '../../form/selectors';
 
 export const getRoles = state => state.getIn(['Entities', 'roles'], new Map([]));
+export const getRolesData = state => state.getIn(['Entities', 'roles', 'data'], new List([]));
 
-export const convertRoles = createSelector([getRoles], roles => roles.get('data').toJS());
+export const convertRoles = createSelector([getRolesData], roles => roles.toJS());
 
-export const selectTenantRoles = createSelector([getRoles], roles => {
+export const selectTenantRoles = createSelector([getRolesData], roles => {
   const rolesArray = roles
-    .get('data')
-    .toJS()
-    .filter(role => role.active)
-    .map(role => ({
-      value: role.id,
-      label: role.name
-    }));
+    .filter(role => role.get('active'))
+    .map(role => ({ value: role.get('id'), label: role.get('name') }))
+    .toJS();
   if (rolesArray.length > 0) {
     rolesArray.splice(0, 0, rolesArray[2]);
     rolesArray.splice(3, 1);
@@ -34,16 +31,13 @@ export const selectFirstTenantRoleValue = state => {
   }
 };
 
-export const getPlatformRoles = state => state.getIn(['Entities', 'platformRoles', 'data']);
+export const getPlatformRoles = state => state.getIn(['Entities', 'platformRoles', 'data'], new List([]));
 
 export const selectPlatformRoles = createSelector([getPlatformRoles], roles =>
   roles
-    .toJS()
-    .map(role => ({
-      value: role.id,
-      label: role.name
-    }))
+    .map(role => ({ value: role.get('id'), label: role.get('name') }))
     .reverse()
+    .toJS()
 );
 
 export const selectFirstPlatformRoleValue = state => {

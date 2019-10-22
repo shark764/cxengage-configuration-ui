@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`roleNameColumn Cell renders correctly 1`] = `
+<span
+  title="mock role name"
+>
+  mock role name
+</span>
+`;
+
+exports[`roleNameColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Role Name"
+  >
+    Role Name
+  </span>,
+  "accessor": "roleName",
+  "filterMethod": [Function],
+  "id": "roleName",
+}
+`;

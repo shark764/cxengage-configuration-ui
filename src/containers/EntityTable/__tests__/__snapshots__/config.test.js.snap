@@ -145,6 +145,7 @@ Array [
       Role Name
     </span>,
     "accessor": "roleName",
+    "filterMethod": [Function],
     "id": "roleName",
   },
   Object {

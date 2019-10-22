@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.15] - 2019-10-22
+## Changed
+- CXV1-20324 - API Keys - Change the 'Role Name' column field type.
+
 ## [0.66.14] - 2019-10-22
 ## Changed
 - Version bump components library to 0.55.7.
