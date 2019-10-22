@@ -381,7 +381,7 @@ Immutable.Map {
       "MANAGE_ALL_TRANSFER_LISTS",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 550,
     "assignPermission": Immutable.List [
       "MANAGE_ALL_TRANSFER_LISTS",
     ],
@@ -393,6 +393,9 @@ Immutable.Map {
     "data": Immutable.List [],
     "createPermission": Immutable.List [
       "CUSTOM_STATS_CREATE",
+    ],
+    "sharePermission": Immutable.List [
+      "CUSTOM_STATS_UPDATE",
     ],
     "confirmationDialogType": undefined,
     "disablePermission": Immutable.List [],
@@ -487,22 +490,25 @@ Immutable.Map {
     ],
   },
   "reasonLists": Immutable.Map {
-    "data": Immutable.List [],
-    "selectedEntityId": "",
-    "sidePanelWidth": 750,
-    "confirmationDialogType": undefined,
     "readPermission": Immutable.List [
       "READ_REASON_LIST",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "CREATE_REASON_LIST",
+    ],
+    "sharePermission": Immutable.List [
+      "UPDATE_REASON_LIST",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "UPDATE_REASON_LIST",
     ],
     "updatePermission": Immutable.List [
       "UPDATE_REASON_LIST",
     ],
-    "createPermission": Immutable.List [
-      "CREATE_REASON_LIST",
-    ],
-    "disablePermission": Immutable.List [
-      "UPDATE_REASON_LIST",
-    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
   },
   "messageTemplates": Immutable.Map {
     "readPermission": Immutable.List [
@@ -678,6 +684,9 @@ Immutable.Map {
     "createPermission": Immutable.List [
       "CREATE_DISPOSITIONS",
     ],
+    "sharePermission": Immutable.List [
+      "SHARE_DISPOSITIONS",
+    ],
   },
   "capacityRules": Immutable.Map {
     "data": Immutable.List [],
@@ -702,6 +711,10 @@ Immutable.Map {
     ],
     "createPermission": Immutable.List [
       "PLATFORM_CREATE_TENANT_ROLES",
+      "MANAGE_ALL_ROLES",
+    ],
+    "sharePermission": Immutable.List [
+      "PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT",
       "MANAGE_ALL_ROLES",
     ],
   },

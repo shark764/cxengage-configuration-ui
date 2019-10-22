@@ -107,7 +107,8 @@ const initialState = fromJS({
       'MANAGE_ALL_ROLES',
       'MANAGE_TENANT_ENROLLMENT'
     ],
-    createPermission: ['PLATFORM_CREATE_TENANT_ROLES', 'MANAGE_ALL_ROLES']
+    createPermission: ['PLATFORM_CREATE_TENANT_ROLES', 'MANAGE_ALL_ROLES'],
+    sharePermission: ['PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT', 'MANAGE_ALL_ROLES']
   },
   permissions: {
     ...defaultEntity,
@@ -194,11 +195,11 @@ const initialState = fromJS({
   },
   reasonLists: {
     ...defaultEntity,
-    sidePanelWidth: 750,
     readPermission: ['READ_REASON_LIST'],
     updatePermission: ['UPDATE_REASON_LIST'],
     createPermission: ['CREATE_REASON_LIST'],
-    disablePermission: ['UPDATE_REASON_LIST']
+    disablePermission: ['UPDATE_REASON_LIST'],
+    sharePermission: ['UPDATE_REASON_LIST']
   },
   flows: {
     ...defaultEntity,
@@ -220,7 +221,6 @@ const initialState = fromJS({
   },
   transferLists: {
     ...defaultEntity,
-    sidePanelWidth: 750,
     readPermission: ['VIEW_ALL_TRANSFER_LISTS'],
     updatePermission: ['MANAGE_ALL_TRANSFER_LISTS'],
     createPermission: ['MANAGE_ALL_TRANSFER_LISTS'],
@@ -250,7 +250,8 @@ const initialState = fromJS({
     ...defaultEntity,
     readPermission: ['READ_DISPOSITIONS'],
     updatePermission: ['UPDATE_DISPOSITIONS'],
-    createPermission: ['CREATE_DISPOSITIONS']
+    createPermission: ['CREATE_DISPOSITIONS'],
+    sharePermission: ['SHARE_DISPOSITIONS']
   },
   slas: {
     ...defaultEntity,
@@ -258,6 +259,7 @@ const initialState = fromJS({
     readPermission: ['CUSTOM_STATS_READ'],
     updatePermission: ['CUSTOM_STATS_UPDATE'],
     createPermission: ['CUSTOM_STATS_CREATE'],
+    sharePermission: ['CUSTOM_STATS_UPDATE'],
     disablePermission: [],
     assignPermission: []
   },
@@ -808,12 +810,7 @@ export default function reducer(state = initialState, action) {
           .setIn([entityName, 'data', entityIndex, name], modifiedList)
           .updateIn(['users', 'data', userIndex, 'skills'], list => {
             if (actionType === 'associate') {
-              return list.push(
-                fromJS({
-                  id: response.result.skillId,
-                  proficiency: response.result.proficiency
-                })
-              );
+              return list.push(fromJS({ id: response.result.skillId, proficiency: response.result.proficiency }));
             } else {
               const itemIndex = list.findIndex(item => item.get('id') === entityId);
               return list.delete(itemIndex);
@@ -886,11 +883,7 @@ export default function reducer(state = initialState, action) {
             .update(action.entityName, entityStore =>
               entityStore
                 .updateIn(['data', entityIndex, 'drafts'], subEntityList =>
-                  subEntityList.push(
-                    fromJS({
-                      ...action.response.result
-                    })
-                  )
+                  subEntityList.push(fromJS(action.response.result))
                 )
                 .set('selectedSubEntityId', undefined)
                 .set('subEntitySaving', false)
@@ -916,12 +909,10 @@ export default function reducer(state = initialState, action) {
         return state
           .update('businessHours', entityStore =>
             entityStore
-              .updateIn(['data', entityIndex, 'exceptions'], exceptions =>
-                exceptions.push(
-                  fromJS({
-                    ...action.response.result
-                  })
-                )
+              .updateIn(
+                ['data', entityIndex, 'exceptions'],
+                exceptions =>
+                  !exceptions ? fromJS([action.response.result]) : exceptions.push(fromJS(action.response.result))
               )
               .set('selectedSubEntityId', undefined)
               .set('subEntitySaving', false)
