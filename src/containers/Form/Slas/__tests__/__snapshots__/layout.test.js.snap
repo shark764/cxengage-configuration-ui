@@ -30,7 +30,7 @@ exports[`<SlasForm /> renders create form 1`] = `
   >
     <ToggleField
       data-automation="sharedToggle"
-      disabled={false}
+      disabled={true}
       label="Shared"
       name="shared"
       onChange={[Function]}

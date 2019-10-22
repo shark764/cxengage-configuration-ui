@@ -13,6 +13,7 @@ Object {
   "key": "mockId",
   "sharedFormValue": "ignore-abandons",
   "slaAbandonType": "ignore-abandons",
+  "userHasSharePermission": true,
   "userHasUpdatePermission": true,
   "versions": Array [],
 }
@@ -63,6 +64,7 @@ exports[`Slas Renders renders 1`] = `
     }
   }
   toggleShared={[Function]}
+  userHasSharePermission={true}
   userHasUpdatePermission={true}
   versions={Array []}
 >

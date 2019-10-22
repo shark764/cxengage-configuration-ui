@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import ReasonsBulkActionsFormLayout from './layout';
-import { isCreating, getCurrentEntity } from '../../../../redux/modules/entities/selectors';
+import { isCreating, getCurrentEntity, userHasSharePermission } from '../../../../redux/modules/entities/selectors';
 import { formSubmission, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
@@ -30,6 +30,7 @@ export function mapStateToProps(state) {
     // reasons required to enable Submit button if
     // the toggle changes.
     sharedIsChecked: getCurrentFormValueByFieldName(state, 'shared'),
+    userHasSharePermission: userHasSharePermission(state),
     isSaving: isCreating(state),
     key: `${getCurrentEntity(state)}:bulk`
   };

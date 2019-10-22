@@ -11,7 +11,8 @@ import {
   getSelectedEntityId,
   isInherited,
   isCreating,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  userHasSharePermission
 } from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
@@ -30,6 +31,7 @@ export function mapStateToProps(state) {
     isSaving: isCreating(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasSharePermission: userHasSharePermission(state),
     key: getSelectedEntityId(state)
   };
 }

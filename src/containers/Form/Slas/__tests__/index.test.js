@@ -11,7 +11,8 @@ import {
   getSelectedEntityId,
   isInherited,
   isCreating,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  userHasSharePermission
 } from '../../../../redux/modules/entities/selectors';
 import {
   selectFormInitialValues,
@@ -33,6 +34,7 @@ getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 userHasUpdatePermission.mockImplementation(() => true);
+userHasSharePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 getCurrentFormValueByFieldName.mockImplementation(() => 'ignore-abandons');
 

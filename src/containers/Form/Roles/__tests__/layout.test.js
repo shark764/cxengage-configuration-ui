@@ -16,6 +16,7 @@ describe('<RolesForm />', () => {
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
+        userHasSharePermission={false}
         handleSubmit={() => {}}
       />
     );
@@ -30,6 +31,7 @@ describe('<RolesForm />', () => {
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
+        userHasSharePermission={true}
         handleSubmit={() => {}}
       />
     );

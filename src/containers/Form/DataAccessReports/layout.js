@@ -51,16 +51,7 @@ export default function DataAccessReportsForm({
         label="Type *"
         id="frm-data-access-reports-report-type"
         disabled={isSaving || !userHasUpdatePermission}
-        options={[
-          {
-            label: 'Realtime',
-            value: 'realtime'
-          },
-          {
-            label: 'Historical',
-            value: 'historical'
-          }
-        ]}
+        options={[{ label: 'Realtime', value: 'realtime' }, { label: 'Historical', value: 'historical' }]}
         required
       />
       {reportType === 'realtime' && (
@@ -71,16 +62,7 @@ export default function DataAccessReportsForm({
             id="frm-data-access-reports-realtime-report-type"
             data-automation="realtimeReportTypeChoose"
             disabled={isSaving || !userHasUpdatePermission}
-            options={[
-              {
-                label: 'Standard',
-                value: 'standard'
-              },
-              {
-                label: 'Custom',
-                value: 'custom'
-              }
-            ]}
+            options={[{ label: 'Standard', value: 'standard' }, { label: 'Custom', value: 'custom' }]}
             required
           />
           {realtimeReportType && (

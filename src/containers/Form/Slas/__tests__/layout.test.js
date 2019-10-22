@@ -22,6 +22,7 @@ describe('<SlasForm />', () => {
         inherited={false}
         initialValues={initialValues}
         userHasUpdatePermission={true}
+        userHasSharePermission={false}
         handleSubmit={() => {}}
       />
     );
@@ -38,6 +39,7 @@ describe('<SlasForm />', () => {
         inherited={false}
         initialValues={initialValues}
         userHasUpdatePermission={true}
+        userHasSharePermission={true}
         handleSubmit={() => {}}
       />
     );

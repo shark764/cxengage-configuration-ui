@@ -6,6 +6,4 @@ import 'rxjs/add/operator/mergeMap';
 import { fetchData } from '../index';
 
 export const FetchBranding = action$ =>
-  action$
-    .ofType('FETCH_BRANDING_$')
-    .mergeMap(() => [fetchData('branding'), fetchData('protectedBranding')]);
+  action$.ofType('FETCH_BRANDING_$').mergeMap(() => [fetchData('branding'), fetchData('protectedBranding')]);

@@ -8,6 +8,7 @@ Object {
   "isSaving": true,
   "key": "mockId",
   "sharedFormValue": true,
+  "userHasSharePermission": true,
   "userHasUpdatePermission": true,
 }
 `;
@@ -52,6 +53,7 @@ exports[`reasons Renders renders 1`] = `
     }
   }
   toggleShared={[Function]}
+  userHasSharePermission={true}
   userHasUpdatePermission={true}
 >
   Child

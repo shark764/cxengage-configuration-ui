@@ -13,7 +13,12 @@ import {
   getCurrentFormValueByFieldName
 } from '../../../../redux/modules/form/selectors';
 import ReasonListsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isCreating,
+  userHasUpdatePermission,
+  userHasSharePermission
+} from '../../../../redux/modules/entities/selectors';
 import { reasonListsInitialValues, checkDisableShared } from '../../../../redux/modules/entities/reasonLists/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -28,6 +33,7 @@ reasonListsInitialValues.mockImplementation(
 );
 getCurrentFormValueByFieldName.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
+userHasSharePermission.mockImplementation(() => true);
 checkDisableShared.mockImplementation(() => false);
 
 describe('reasonLists Renders', () => {

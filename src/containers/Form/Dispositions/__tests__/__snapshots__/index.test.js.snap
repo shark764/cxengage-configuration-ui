@@ -39,6 +39,7 @@ exports[`Dispositions Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  userHasSharePermission={true}
   userHasUpdatePermission={true}
 >
   Child
@@ -53,6 +54,7 @@ Object {
   },
   "isSaving": true,
   "key": "mockId",
+  "userHasSharePermission": true,
   "userHasUpdatePermission": true,
 }
 `;

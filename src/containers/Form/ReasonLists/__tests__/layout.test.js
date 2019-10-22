@@ -20,6 +20,8 @@ describe('<ReasonListsForm />', () => {
         inherited={false}
         isDefault={false}
         reasons={[]}
+        userHasUpdatePermission={true}
+        userHasSharePermission={false}
         selectedEntityId="0000-0000-0000-0000-0000"
         handleSubmit={() => {}}
         removeReasonListItem={() => {}}
@@ -42,6 +44,8 @@ describe('<ReasonListsForm />', () => {
         inherited={false}
         isDefault={false}
         reasons={[]}
+        userHasUpdatePermission={true}
+        userHasSharePermission={true}
         selectedEntityId="0000-0000-0000-0000-0000"
         handleSubmit={() => {}}
         removeReasonListItem={() => {}}

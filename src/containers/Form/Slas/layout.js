@@ -91,7 +91,9 @@ export default class SlasForm extends Component {
         )}
         <ConfirmationWrapper
           confirmBtnCallback={
-            !this.props.disableShared && !this.props.sharedFormValue ? this.props.toggleShared : undefined
+            !this.props.disableShared && !this.props.sharedFormValue && this.props.userHasSharePermission
+              ? this.props.toggleShared
+              : undefined
           }
           mainText={`Setting shared to "enabled" for this SLA. Once an SLA is shared and saved, it cannot be reverted.`}
           secondaryText={'Are you sure you want to continue?'}
@@ -111,6 +113,7 @@ export default class SlasForm extends Component {
               this.props.isSaving ||
               this.props.inherited ||
               !this.props.userHasUpdatePermission ||
+              !this.props.userHasSharePermission ||
               this.props.disableShared
             }
           />
@@ -164,6 +167,7 @@ SlasForm.propTypes = {
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
+  userHasSharePermission: PropTypes.bool,
   slaAbandonType: PropTypes.string,
   isSlaTenantDefault: PropTypes.bool,
   sharedFormValue: PropTypes.bool,

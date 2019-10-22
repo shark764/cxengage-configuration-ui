@@ -8,7 +8,12 @@ import { shallow } from 'enzyme';
 import { Map } from 'immutable';
 import { getCurrentForm, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 import ReasonsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isCreating,
+  userHasUpdatePermission,
+  userHasSharePermission
+} from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, createFormName, formSubmission } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -20,6 +25,7 @@ isCreating.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => new Map({ active: true, shared: false }));
 getCurrentFormValueByFieldName.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
+userHasSharePermission.mockImplementation(() => true);
 
 describe('reasons Renders', () => {
   it('renders', () => {

@@ -17,6 +17,7 @@ describe('<DispositionsForm />', () => {
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
+        userHasSharePermission={false}
         handleSubmit={() => {}}
       />
     );
@@ -32,6 +33,7 @@ describe('<DispositionsForm />', () => {
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
+        userHasSharePermission={true}
         handleSubmit={() => {}}
       />
     );

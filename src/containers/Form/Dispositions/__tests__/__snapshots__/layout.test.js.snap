@@ -33,7 +33,7 @@ exports[`<DispositionsForm /> renders create form 1`] = `
   />
   <ToggleField
     data-automation="sharedToggle"
-    disabled={false}
+    disabled={true}
     id="frm-lists-shared"
     label="Shared"
     name="shared"

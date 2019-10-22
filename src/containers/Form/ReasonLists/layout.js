@@ -21,6 +21,7 @@ export default function ReasonListsForm({
   disableShared,
   sharedFormValue,
   userHasUpdatePermission,
+  userHasSharePermission,
   toggleShared,
   selectedEntityId,
   reasonHeaders,
@@ -65,7 +66,7 @@ export default function ReasonListsForm({
         data-automation="descriptionInput"
       />
       <ConfirmationWrapper
-        confirmBtnCallback={!disableShared && !sharedFormValue ? toggleShared : undefined}
+        confirmBtnCallback={!disableShared && !sharedFormValue && userHasSharePermission ? toggleShared : undefined}
         mainText={
           "Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
         }
@@ -81,7 +82,7 @@ export default function ReasonListsForm({
               ? "You cannot update 'Shared' once it's set to true"
               : 'Change "Shared" state for this Presence Reason List'
           }
-          disabled={isSaving || inherited || disableShared || !userHasUpdatePermission}
+          disabled={isSaving || inherited || disableShared || !userHasUpdatePermission || !userHasSharePermission}
           data-automation="sharedToggle"
         />
       </ConfirmationWrapper>
@@ -123,6 +124,7 @@ ReasonListsForm.propTypes = {
   disableShared: PropTypes.bool,
   sharedFormValue: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
+  userHasSharePermission: PropTypes.bool,
   toggleShared: PropTypes.func,
   reasonHeaders: PropTypes.object,
   selectedEntityId: PropTypes.string,

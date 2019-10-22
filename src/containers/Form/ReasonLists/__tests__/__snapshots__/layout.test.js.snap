@@ -10,7 +10,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
   <InputField
     componentType="input"
     data-automation="nameInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-list-name"
     inputType="text"
     label="Name *"
@@ -19,7 +19,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
   <InputField
     componentType="input"
     data-automation="externalIdInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-list-external-id"
     inputType="text"
     label="External Id"
@@ -28,7 +28,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
   <InputField
     componentType="textarea"
     data-automation="descriptionInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-list-description"
     inputType="text"
     label="Description"
@@ -50,7 +50,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
   </ConfirmationWrapper>
   <ToggleField
     data-automation="isDefaultToggle"
-    disabled={true}
+    disabled={false}
     id="frm-reason-list-is-default"
     label="Tenant Default?"
     name="isDefault"
@@ -61,6 +61,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
     onActionButtonClick={[Function]}
     open={true}
     text="Reasons"
+    userHasUpdatePermission={true}
   />
   <NestedListField
     className="reason-list"
@@ -70,6 +71,7 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
     removeReasonListItem={[Function]}
     selectedEntityId="0000-0000-0000-0000-0000"
     setSelectedSubEntityId={[Function]}
+    userHasUpdatePermission={true}
   />
 </form>
 `;
@@ -84,7 +86,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   <InputField
     componentType="input"
     data-automation="nameInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-list-name"
     inputType="text"
     label="Name *"
@@ -93,7 +95,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   <InputField
     componentType="input"
     data-automation="externalIdInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-list-external-id"
     inputType="text"
     label="External Id"
@@ -102,7 +104,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   <InputField
     componentType="textarea"
     data-automation="descriptionInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-list-description"
     inputType="text"
     label="Description"
@@ -115,7 +117,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   >
     <ToggleField
       data-automation="sharedToggle"
-      disabled={true}
+      disabled={false}
       id="frm-reason-list-shared"
       label="Shared"
       name="shared"
@@ -124,7 +126,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
   </ConfirmationWrapper>
   <ToggleField
     data-automation="isDefaultToggle"
-    disabled={true}
+    disabled={false}
     id="frm-reason-list-is-default"
     label="Tenant Default?"
     name="isDefault"
@@ -135,6 +137,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
     onActionButtonClick={[Function]}
     open={true}
     text="Reasons"
+    userHasUpdatePermission={true}
   />
   <NestedListField
     className="reason-list"
@@ -144,6 +147,7 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
     removeReasonListItem={[Function]}
     selectedEntityId="0000-0000-0000-0000-0000"
     setSelectedSubEntityId={[Function]}
+    userHasUpdatePermission={true}
   />
 </form>
 `;

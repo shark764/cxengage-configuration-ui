@@ -11,7 +11,8 @@ import {
   getSelectedEntityId,
   isInherited,
   isCreating,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  userHasSharePermission
 } from '../../../redux/modules/entities/selectors';
 import {
   selectSlaVersions,
@@ -37,6 +38,7 @@ export function mapStateToProps(state) {
     isSaving: isCreating(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasSharePermission: userHasSharePermission(state),
     versions: selectSlaVersions(state),
     slaAbandonType: getCurrentFormValueByFieldName(state, 'abandonType'),
     isSlaTenantDefault: isSlaTenantDefault(state),

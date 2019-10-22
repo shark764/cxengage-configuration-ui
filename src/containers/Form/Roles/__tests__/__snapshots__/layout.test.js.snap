@@ -32,7 +32,7 @@ exports[`<RolesForm /> renders create form 1`] = `
   >
     <ToggleField
       data-automation="sharedToggle"
-      disabled={false}
+      disabled={true}
       label="Shared"
       name="shared"
       title="Change \\"Shared\\" state for this Role"

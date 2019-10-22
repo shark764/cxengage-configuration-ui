@@ -10,7 +10,7 @@ exports[`<ReasonsForm /> renders create form 1`] = `
   <InputField
     componentType="input"
     data-automation="nameInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-name"
     inputType="text"
     label="Name *"
@@ -19,7 +19,7 @@ exports[`<ReasonsForm /> renders create form 1`] = `
   <InputField
     componentType="input"
     data-automation="externalIdInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-external-id"
     inputType="text"
     label="External Id"
@@ -28,7 +28,7 @@ exports[`<ReasonsForm /> renders create form 1`] = `
   <InputField
     componentType="textarea"
     data-automation="descriptionInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-description"
     inputType="text"
     label="Description"
@@ -61,7 +61,7 @@ exports[`<ReasonsForm /> renders update form 1`] = `
   <InputField
     componentType="input"
     data-automation="nameInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-name"
     inputType="text"
     label="Name *"
@@ -70,7 +70,7 @@ exports[`<ReasonsForm /> renders update form 1`] = `
   <InputField
     componentType="input"
     data-automation="externalIdInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-external-id"
     inputType="text"
     label="External Id"
@@ -79,7 +79,7 @@ exports[`<ReasonsForm /> renders update form 1`] = `
   <InputField
     componentType="textarea"
     data-automation="descriptionInput"
-    disabled={true}
+    disabled={false}
     id="frm-reason-description"
     inputType="text"
     label="Description"
@@ -92,7 +92,7 @@ exports[`<ReasonsForm /> renders update form 1`] = `
   >
     <ToggleField
       data-automation="sharedToggle"
-      disabled={true}
+      disabled={false}
       id="frm-reason-shared"
       label="Shared"
       name="shared"

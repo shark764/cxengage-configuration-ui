@@ -11,7 +11,8 @@ import {
   getSelectedEntityId,
   isInherited,
   isCreating,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  userHasSharePermission
 } from '../../../redux/modules/entities/selectors';
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { toggleShared } from '../../../redux/modules/entities';
@@ -35,7 +36,8 @@ export function mapStateToProps(state) {
     key: getSelectedEntityId(state),
     disableShared: checkDisableShared(state),
     sharedFormValue: getCurrentFormValueByFieldName(state, 'shared'),
-    userHasUpdatePermission: userHasUpdatePermission(state)
+    userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasSharePermission: userHasSharePermission(state)
   };
 }
 

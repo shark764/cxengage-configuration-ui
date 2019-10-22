@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.16] - 2019-10-22
+## Changed
+- <no-jira> - Adding sharing permissions to prevent users from sharing if they don't have permissions.
+
 ## [0.66.15] - 2019-10-22
 ## Changed
 - CXV1-20324 - API Keys - Change the 'Role Name' column field type.

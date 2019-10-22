@@ -94,7 +94,11 @@ export default class ReasonsBulkActionsForm extends Component {
           <ToggleList>
             <span>Share {camelCaseToRegularForm(this.props.entityName)}</span>
             <ConfirmationWrapper
-              confirmBtnCallback={!this.props.sharedIsChecked ? () => this.toggleFormField('shared') : undefined}
+              confirmBtnCallback={
+                !this.props.sharedIsChecked && this.props.userHasSharePermission
+                  ? () => this.toggleFormField('shared')
+                  : undefined
+              }
               mainText={`Setting shared to 'enabled' cannot be reverted.`}
               secondaryText={'Are you sure you want to continue?'}
               data-automation="toggleSharedConfirmationWrapper"
@@ -102,7 +106,7 @@ export default class ReasonsBulkActionsForm extends Component {
               <StyledToggleField
                 name="shared"
                 label=""
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.inherited || !this.props.userHasSharePermission}
                 data-automation="sharedToggle"
               />
             </ConfirmationWrapper>
@@ -123,7 +127,8 @@ ReasonsBulkActionsForm.propTypes = {
   change: PropTypes.func,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
-  sharedIsChecked: PropTypes.bool
+  sharedIsChecked: PropTypes.bool,
+  userHasSharePermission: PropTypes.bool
 };
 
 ReasonsBulkActionsForm.defaultProps = {

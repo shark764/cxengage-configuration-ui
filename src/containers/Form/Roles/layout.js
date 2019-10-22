@@ -17,6 +17,7 @@ export default function RolesForm({
   isSaving,
   inherited,
   userHasUpdatePermission,
+  userHasSharePermission,
   key,
   disableShared,
   sharedFormValue,
@@ -46,7 +47,11 @@ export default function RolesForm({
       />
 
       <ConfirmationWrapper
-        confirmBtnCallback={!inherited && !isSystemRole && disableShared && sharedFormValue ? toggleShared : undefined}
+        confirmBtnCallback={
+          !inherited && !isSystemRole && disableShared && sharedFormValue && userHasSharePermission
+            ? toggleShared
+            : undefined
+        }
         mainText={
           'If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role.'
         }
@@ -58,7 +63,7 @@ export default function RolesForm({
           label="Shared"
           data-automation="sharedToggle"
           title="Change &quot;Shared&quot; state for this Role"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          disabled={isSaving || inherited || !userHasUpdatePermission || !userHasSharePermission}
         />
       </ConfirmationWrapper>
     </form>
@@ -69,6 +74,7 @@ RolesForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   userHasUpdatePermission: PropTypes.bool,
+  userHasSharePermission: PropTypes.bool,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   sharedFormValue: PropTypes.bool,

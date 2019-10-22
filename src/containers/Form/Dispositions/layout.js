@@ -12,7 +12,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, InputField, ToggleField } from 'cx-ui-components';
 
-export default function DispositionsForm({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key }) {
+export default function DispositionsForm({
+  handleSubmit,
+  isSaving,
+  inherited,
+  userHasUpdatePermission,
+  userHasSharePermission,
+  key
+}) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
@@ -45,7 +52,7 @@ export default function DispositionsForm({ handleSubmit, isSaving, inherited, us
         label="Shared"
         id="frm-lists-shared"
         data-automation="sharedToggle"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
+        disabled={isSaving || inherited || !userHasUpdatePermission || !userHasSharePermission}
       />
     </form>
   );
@@ -56,5 +63,6 @@ DispositionsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool
+  userHasUpdatePermission: PropTypes.bool,
+  userHasSharePermission: PropTypes.bool
 };

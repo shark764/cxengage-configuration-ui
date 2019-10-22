@@ -7,7 +7,12 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentFormValueByFieldName } from '../../../../../redux/modules/form/selectors';
 import ReasonsBulkActionsForm, { mapStateToProps, createFormName } from '../';
-import { getCurrentEntity, isCreating } from '../../../../../redux/modules/entities/selectors';
+import {
+  getCurrentEntity,
+  isCreating,
+  userHasUpdatePermission,
+  userHasSharePermission
+} from '../../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../../redux/modules/form/selectors');
 getCurrentFormValueByFieldName.mockImplementation(() => true);
@@ -15,6 +20,8 @@ getCurrentFormValueByFieldName.mockImplementation(() => true);
 jest.mock('../../../../../redux/modules/entities/selectors');
 getCurrentEntity.mockImplementation(() => 'reasons');
 isCreating.mockImplementation(() => true);
+userHasUpdatePermission.mockImplementation(() => true);
+userHasSharePermission.mockImplementation(() => true);
 
 describe('GenericBulkItems Renders', () => {
   it('renders', () => {

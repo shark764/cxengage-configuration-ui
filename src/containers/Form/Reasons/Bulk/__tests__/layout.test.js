@@ -13,6 +13,8 @@ describe('<ReasonsBulkActionsForm />', () => {
     const rendered = shallow(
       <ReasonsBulkActionsForm
         entityName={`reasons`}
+        userHasUpdatePermission={true}
+        userHasSharePermission={false}
         initialValues={fromJS({ shared: false })}
         sharedIsChecked={true}
         isSaving={true}
