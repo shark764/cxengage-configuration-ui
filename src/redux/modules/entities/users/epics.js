@@ -23,6 +23,12 @@ import { changeUserInviteStatus } from '../../entities';
 import { validateEmail } from 'serenova-js-utils/validation';
 import { change } from 'redux-form';
 
+export const getRolesAfterFetchingUsers = action$ =>
+  action$
+    .ofType('FETCH_DATA_FULFILLED')
+    .filter(a => a.entityName === 'users')
+    .map(a => ({ type: 'FETCH_DATA', entityName: 'roles' }));
+
 export const UpdateUserEntity = action$ =>
   action$
     .ofType('UPDATE_ENTITY')
@@ -550,17 +556,28 @@ export const BulkEntityUpdate = (action$, store) =>
           sdkCallValues.updateBody.status = a.values.status;
         }
         if (a.values.region !== undefined) {
-          // TODO: setting region isn't working due null extension issue coming from api
-          const activeExtension = userData.activeExtension;
+          // Active Extension
+          // We update user's active extension if exists
+          // by setting the new region.
+          let activeExtension = userData.activeExtension;
           if (activeExtension) {
             activeExtension.region = a.values.region;
           }
-          const extensions = userData.extensions;
-          extensions.forEach(ext => {
-            if (ext.provider && ext.provider === 'twilio') {
-              ext.region = a.values.region;
+          // Users Extensions
+          // All extensions where provider is twilio must
+          // be updated with new region.
+          // A user should have just one twilio extension.
+          // Active extension must be twilio.
+          const extensions = [...userData.extensions];
+          for (let index = 0; index < extensions.length; index++) {
+            let extension = extensions[index];
+            if (extension.provider && extension.provider === 'twilio') {
+              extension.region = a.values.region;
+              activeExtension = extension;
             }
-          });
+            delete extension.id;
+          }
+
           sdkCallValues.updateBody.activeExtension = activeExtension;
           sdkCallValues.updateBody.extensions = extensions;
         }

@@ -22,6 +22,8 @@ import {
   userHasReadPermissionManual,
   userHasUpdatePermission,
   userHasCreatePermission,
+  userHasSharePermission,
+  userHasDisablePermission,
   userHasPermissions,
   hasPermission,
   userHasEveryPermissions,
@@ -75,6 +77,8 @@ const initialState = fromJS({
       readPermission: ['READ_ALL'],
       updatePermission: ['UPDATE_ALL'],
       createPermission: ['CREATE_ALL'],
+      sharePermission: ['SHARE_ALL'],
+      disablePermission: ['UPDATE_ALL'],
       fetching: false,
       creating: true,
       updating: false,
@@ -121,7 +125,7 @@ jest.mock('../../entities/users/selectors');
 isUserPlatformAdmin.mockImplementation(() => false);
 
 jest.mock('../../userData/selectors');
-getCurrentPermissions.mockImplementation(() => ['READ_ALL', 'UPDATE_ALL', 'MANAGE_ALL']);
+getCurrentPermissions.mockImplementation(() => ['READ_ALL', 'UPDATE_ALL', 'MANAGE_ALL', 'SHARE_ALL']);
 getCurrentTenantId.mockImplementation(() => '0000-0000');
 
 jest.mock('../../userIdMap/selectors');
@@ -148,6 +152,8 @@ describe('getCurrentEntityStore', () => {
         readPermission: ['READ_ALL'],
         updatePermission: ['UPDATE_ALL'],
         createPermission: ['CREATE_ALL'],
+        sharePermission: ['SHARE_ALL'],
+        disablePermission: ['UPDATE_ALL'],
         fetching: false,
         creating: true,
         updating: false,
@@ -333,6 +339,18 @@ describe('userHasReadPermissionManual', () => {
 describe('userHasUpdatePermission', () => {
   it('Returns if user has update permissions', () => {
     expect(userHasUpdatePermission(initialState)).toEqual(true);
+  });
+});
+
+describe('userHasSharePermission', () => {
+  it('Returns if user has sharing permissions', () => {
+    expect(userHasSharePermission(initialState)).toEqual(true);
+  });
+});
+
+describe('userHasDisablePermission', () => {
+  it('Returns if user has disabling permissions', () => {
+    expect(userHasDisablePermission(initialState)).toEqual(true);
   });
 });
 

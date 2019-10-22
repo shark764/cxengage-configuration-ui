@@ -45,7 +45,15 @@ describe('handleBulkSuccess', () => {
     expect(handleBulkSuccess([{ ok: '', ok2: '', ok3: '' }])).toMatchSnapshot();
   });
   it('response contained an error object fire "_rejected" action', () => {
-    expect(handleBulkSuccess([{ ok: '', ok2: '', ok3: '' }])).toMatchSnapshot();
+    expect(
+      handleBulkSuccess([
+        {
+          ok: '',
+          ok2: '',
+          error: { data: { apiResponse: { apiResponse: { response: { error: { message: 'error' } } } } } }
+        }
+      ])
+    ).toMatchSnapshot();
   });
   it('response contained uneeded calls', () => {
     expect(

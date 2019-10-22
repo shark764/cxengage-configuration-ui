@@ -25,6 +25,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.14] - 2019-10-22
+## Changed
+- Version bump components library to 0.55.7.
+- CXV1-17364 - Users page | Bulk Actions | Set twilio regions.
+
 ## [0.66.13] - 2019-10-22
 ## Fixed
 - CXV1-20325 - Adding first exception for a new Business hours was failing.

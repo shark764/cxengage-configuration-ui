@@ -51,7 +51,7 @@ export function handleBulkSuccess(response, a, successMessage = null, errorMessa
     ${failedCalls.map(
       call => `<br/></br>
       ${call.id}<br/>
-      ${call.error.data.apiResponse.apiResponse.response.error.message}
+      ${errorManager(call.error).errorMessage}
       `
     )}
     `);

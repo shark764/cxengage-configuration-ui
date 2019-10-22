@@ -57,15 +57,16 @@ export const getSelectedEntityStatus = state => getSelectedEntity(state) && getS
 
 export const userHasReadPermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('readPermission'));
-
 export const userHasReadPermissionManual = (state, entityName) =>
   hasPermission(getCurrentPermissions(state), state.getIn(['Entities', entityName, 'readPermission']));
-
 export const userHasUpdatePermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('updatePermission'));
-
 export const userHasCreatePermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('createPermission'));
+export const userHasSharePermission = state =>
+  hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('sharePermission'));
+export const userHasDisablePermission = state =>
+  hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('disablePermission'));
 
 export const userHasPermissions = (state, permissions) => hasPermission(getCurrentPermissions(state), permissions);
 

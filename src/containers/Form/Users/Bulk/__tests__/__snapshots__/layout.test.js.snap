@@ -10,6 +10,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Enable/Disable Users
       </span>
       <Styled(Toggle)
+        data-automation="statusToggle"
         onChange={[Function]}
         value={false}
       />
@@ -21,11 +22,12 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Send Invitation
       </span>
       <ConfirmationWrapper
+        data-automation="inviteNowConfirmationWrapper"
         mainText="This will send an email invitation to all users selected"
         secondaryText="Are you sure you want to continue?"
       >
         <Styled(ToggleField)
-          data-automation="usersBulkActionsFormFieldInviteNow"
+          data-automation="inviteNowToggle"
           label=""
           name="inviteNow"
         />
@@ -39,11 +41,12 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <ConfirmationWrapper
         confirmBtnCallback={[Function]}
+        data-automation="resendInvitationConfirmationWrapper"
         mainText="This will resend an email invitation to all users selected"
         secondaryText="Are you sure you want to continue?"
       >
         <Styled(ToggleField)
-          data-automation="usersBulkActionsFormFieldResendInvitation"
+          data-automation="resendInvitationToggle"
           label=""
           name="resendInvitation"
         />
@@ -57,11 +60,12 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <ConfirmationWrapper
         confirmBtnCallback={[Function]}
+        data-automation="cancelInvitationConfirmationWrapper"
         mainText="This will prevent all selected users from accepting the invitation."
         secondaryText="Are you sure you want to continue?"
       >
         <Styled(ToggleField)
-          data-automation="usersBulkActionsFormFieldCancelInvitation"
+          data-automation="cancelInvitationToggle"
           label=""
           name="cancelInvitation"
         />
@@ -75,11 +79,12 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <ConfirmationWrapper
         confirmBtnCallback={[Function]}
+        data-automation="passwordResetConfirmationWrapper"
         mainText="This will send a password reset email to all users selected"
         secondaryText="Are you sure you want to continue?"
       >
         <Styled(ToggleField)
-          data-automation="usersBulkActionsFormFieldPasswordReset"
+          data-automation="passwordResetToggle"
           label=""
           name="passwordReset"
         />
@@ -92,6 +97,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Set Platform Authentication
       </span>
       <Styled(Toggle)
+        data-automation="noPasswordToggle"
         onChange={[Function]}
         value={false}
       />
@@ -103,6 +109,19 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Set Default Identity Provider
       </span>
       <Styled(Toggle)
+        data-automation="defaultIdentityProviderToggle"
+        onChange={[Function]}
+        value={false}
+      />
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      <span>
+        Set Twilio Regions 
+      </span>
+      <Styled(Toggle)
+        data-automation="regionToggle"
         onChange={[Function]}
         value={false}
       />
@@ -114,6 +133,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Add Group
       </span>
       <Styled(Toggle)
+        data-automation="addGroupToggle"
         onChange={[Function]}
         value={false}
       />
@@ -125,6 +145,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Remove Group
       </span>
       <Styled(Toggle)
+        data-automation="removeGroupToggle"
         onChange={[Function]}
         value={false}
       />
@@ -136,6 +157,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Add Skill
       </span>
       <Styled(Toggle)
+        data-automation="addSkillToggle"
         onChange={[Function]}
         value={false}
       />
@@ -147,6 +169,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
         Remove Skill
       </span>
       <Styled(Toggle)
+        data-automation="removeSkillToggle"
         onChange={[Function]}
         value={false}
       />

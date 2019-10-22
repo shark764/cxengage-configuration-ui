@@ -119,7 +119,10 @@ export const errorManager = error => {
     if (responseError instanceof Array) {
       messageFromAPI = responseError[0];
     } else if (typeof responseError === 'object') {
-      let { code, message, attribute } = responseError;
+      // Not all APIs return the same error structure
+      // in some cases message is null or undefined, so
+      // we add the same default message as Config-UI1.
+      let { code, message = 'Some bulk actions could not be applied.', attribute } = responseError;
       attr = attribute && Object.keys(attribute)[0];
       errorDetails = ` ${code}: ${message}`;
 
@@ -131,6 +134,7 @@ export const errorManager = error => {
         errorDetails = ` ${error.message}<br/>${code}: ${capitalizeFirstLetter(message)}.`;
       } else if (code === undefined || message === undefined) {
         errorDetails = ` ${error.data.apiResponse.status}: ${responseError}`;
+        messageFromAPI = message;
       }
     }
 

@@ -17,7 +17,8 @@ import {
   ToggleField,
   SelectField,
   ConfirmationWrapper,
-  AutoCompleteField
+  AutoCompleteField,
+  regions
 } from 'cx-ui-components';
 
 const Container = styled.div`
@@ -93,7 +94,11 @@ export default class UsersBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Enable/Disable Users</span>
-            <StyledToggle onChange={() => this.toggleFormField('status')} value={this.state.visibleFields.status} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('status')}
+              value={this.state.visibleFields.status}
+              data-automation="statusToggle"
+            />
           </ToggleList>
           {this.state.visibleFields.status && (
             <BulkActions>
@@ -101,17 +106,8 @@ export default class UsersBulkActionsForm extends Component {
                 name="status"
                 label="Status"
                 disabled={this.props.isSaving || this.props.inherited}
-                options={[
-                  {
-                    label: 'Enabled',
-                    value: 'accepted'
-                  },
-                  {
-                    label: 'Disabled',
-                    value: 'disabled'
-                  }
-                ]}
-                data-automation="usersBulkActionsFormFieldStatus"
+                options={[{ label: 'Enabled', value: 'accepted' }, { label: 'Disabled', value: 'disabled' }]}
+                data-automation="statusChoose"
               />
             </BulkActions>
           )}
@@ -123,12 +119,13 @@ export default class UsersBulkActionsForm extends Component {
               confirmBtnCallback={!this.props.inviteNowIsChecked ? () => this.toggleFormField('inviteNow') : undefined}
               mainText={`This will send an email invitation to all users selected`}
               secondaryText={'Are you sure you want to continue?'}
+              data-automation="inviteNowConfirmationWrapper"
             >
               <StyledToggleField
                 name="inviteNow"
                 label=""
                 disabled={this.props.isSaving || this.props.inherited}
-                data-automation="usersBulkActionsFormFieldInviteNow"
+                data-automation="inviteNowToggle"
               />
             </ConfirmationWrapper>
           </ToggleList>
@@ -142,12 +139,13 @@ export default class UsersBulkActionsForm extends Component {
               }
               mainText={`This will resend an email invitation to all users selected`}
               secondaryText={'Are you sure you want to continue?'}
+              data-automation="resendInvitationConfirmationWrapper"
             >
               <StyledToggleField
                 name="resendInvitation"
                 label=""
                 disabled={this.props.isSaving || this.props.inherited}
-                data-automation="usersBulkActionsFormFieldResendInvitation"
+                data-automation="resendInvitationToggle"
               />
             </ConfirmationWrapper>
           </ToggleList>
@@ -161,12 +159,13 @@ export default class UsersBulkActionsForm extends Component {
               }
               mainText={`This will prevent all selected users from accepting the invitation.`}
               secondaryText={'Are you sure you want to continue?'}
+              data-automation="cancelInvitationConfirmationWrapper"
             >
               <StyledToggleField
                 name="cancelInvitation"
                 label=""
                 disabled={this.props.isSaving || this.props.inherited}
-                data-automation="usersBulkActionsFormFieldCancelInvitation"
+                data-automation="cancelInvitationToggle"
               />
             </ConfirmationWrapper>
           </ToggleList>
@@ -181,12 +180,13 @@ export default class UsersBulkActionsForm extends Component {
                 }
                 mainText={`This will send a password reset email to all users selected`}
                 secondaryText={'Are you sure you want to continue?'}
+                data-automation="passwordResetConfirmationWrapper"
               >
                 <StyledToggleField
                   name="passwordReset"
                   label=""
                   disabled={this.props.isSaving || this.props.inherited}
-                  data-automation="usersBulkActionsFormFieldPasswordReset"
+                  data-automation="passwordResetToggle"
                 />
               </ConfirmationWrapper>
             </ToggleList>
@@ -198,6 +198,7 @@ export default class UsersBulkActionsForm extends Component {
             <StyledToggle
               onChange={() => this.toggleFormField('noPassword')}
               value={this.state.visibleFields.noPassword}
+              data-automation="noPasswordToggle"
             />
           </ToggleList>
           {this.state.visibleFields.noPassword && (
@@ -207,21 +208,12 @@ export default class UsersBulkActionsForm extends Component {
                 label="Platform Authentication"
                 disabled={this.props.isSaving || this.props.inherited}
                 options={[
-                  {
-                    label: 'Use Tenant Default',
-                    value: 'null'
-                  },
-                  {
-                    label: 'Enabled',
-                    value: false
-                  },
-                  {
-                    label: 'Disabled',
-                    value: true
-                  }
+                  { label: 'Use Tenant Default', value: 'null' },
+                  { label: 'Enabled', value: false },
+                  { label: 'Disabled', value: true }
                 ]}
                 required
-                data-automation="usersBulkActionsFormFieldNoPassword"
+                data-automation="noPasswordList"
               />
             </BulkActions>
           )}
@@ -232,6 +224,7 @@ export default class UsersBulkActionsForm extends Component {
             <StyledToggle
               onChange={() => this.toggleFormField('defaultIdentityProvider')}
               value={this.state.visibleFields.defaultIdentityProvider}
+              data-automation="defaultIdentityProviderToggle"
             />
           </ToggleList>
           {this.state.visibleFields.defaultIdentityProvider && (
@@ -242,15 +235,19 @@ export default class UsersBulkActionsForm extends Component {
                 disabled={this.props.isSaving || this.props.inherited}
                 options={this.props.identityProviders}
                 required
-                data-automation="usersBulkActionsFormFieldDefaultIdentityProvider"
+                data-automation="defaultIdentityProviderList"
               />
             </BulkActions>
           )}
         </Container>
-        {/* <Container>
+        <Container>
           <ToggleList>
             <span>Set Twilio Regions </span>
-            <StyledToggle onChange={() => this.toggleFormField('region')} value={this.state.visibleFields.region} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('region')}
+              value={this.state.visibleFields.region}
+              data-automation="regionToggle"
+            />
           </ToggleList>
           {this.state.visibleFields.region && (
             <BulkActions>
@@ -258,52 +255,20 @@ export default class UsersBulkActionsForm extends Component {
                 name="region"
                 label="Twilio Region"
                 disabled={this.props.isSaving || this.props.inherited}
-                options={[{
-                  value: 'default',
-                  label: 'Use Tenant Default'
-                }, {
-                  value: 'gll',
-                  label: 'Global Low Latency'
-                }, {
-                  value: 'au1',
-                  label: 'Australia'
-                }, {
-                  value: 'br1',
-                  label: 'Brazil'
-                }, {
-                  value: 'ie1',
-                  label: 'Ireland'
-                }, {
-                  value: 'jp1',
-                  label: 'Japan'
-                }, {
-                  value: 'sg1',
-                  label: 'Singapore'
-                }, {
-                  value: 'us1',
-                  label: 'US East Coast (Virginia)'
-                }, {
-                  value: 'us1-tnx',
-                  label: 'Virginia Interconnect'
-                }, {
-                  value: 'us2-tnx',
-                  label: 'Oregon Interconnect'
-                }, {
-                  value: 'de1',
-                  label: 'Germany Interconnect'
-                }, {
-                  value: 'ie1-tnx',
-                  label: 'Ireland Interconnect'
-                }]}
-                data-automation="usersBulkActionsFormFieldRegion"
+                options={regions}
+                data-automation="regionList"
               />
             </BulkActions>
           )}
-        </Container> */}
+        </Container>
         <Container>
           <ToggleList>
             <span>Add Group</span>
-            <StyledToggle onChange={() => this.toggleFormField('addGroup')} value={this.state.visibleFields.addGroup} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('addGroup')}
+              value={this.state.visibleFields.addGroup}
+              data-automation="addGroupToggle"
+            />
           </ToggleList>
           {this.state.visibleFields.addGroup && (
             <BulkActions>
@@ -317,7 +282,7 @@ export default class UsersBulkActionsForm extends Component {
                   }
                   return acc;
                 }, [])}
-                data-automation="usersBulkActionsAddGroup"
+                data-automation="addGroupAutoComplete"
               />
             </BulkActions>
           )}
@@ -328,6 +293,7 @@ export default class UsersBulkActionsForm extends Component {
             <StyledToggle
               onChange={() => this.toggleFormField('removeGroup')}
               value={this.state.visibleFields.removeGroup}
+              data-automation="removeGroupToggle"
             />
           </ToggleList>
           {this.state.visibleFields.removeGroup && (
@@ -342,7 +308,7 @@ export default class UsersBulkActionsForm extends Component {
                   }
                   return acc;
                 }, [])}
-                data-automation="usersBulkActionsRemoveGroup"
+                data-automation="removeGroupAutoComplete"
               />
             </BulkActions>
           )}
@@ -350,7 +316,11 @@ export default class UsersBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Add Skill</span>
-            <StyledToggle onChange={() => this.toggleFormField('addSkill')} value={this.state.visibleFields.addSkill} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('addSkill')}
+              value={this.state.visibleFields.addSkill}
+              data-automation="addSkillToggle"
+            />
           </ToggleList>
           {this.state.visibleFields.addSkill && (
             <BulkActions>
@@ -359,7 +329,7 @@ export default class UsersBulkActionsForm extends Component {
                 label="Skill"
                 placeholder="Search..."
                 suggestions={this.props.skills.toJS().map(skill => skill.name)}
-                data-automation="usersBulkActionsAddSkill"
+                data-automation="addSkillAutoComplete"
               />
             </BulkActions>
           )}
@@ -370,6 +340,7 @@ export default class UsersBulkActionsForm extends Component {
             <StyledToggle
               onChange={() => this.toggleFormField('removeSkill')}
               value={this.state.visibleFields.removeSkill}
+              data-automation="removeSkillToggle"
             />
           </ToggleList>
           {this.state.visibleFields.removeSkill && (
@@ -379,7 +350,7 @@ export default class UsersBulkActionsForm extends Component {
                 label="Skill"
                 placeholder="Search..."
                 suggestions={this.props.skills.toJS().map(skill => skill.name)}
-                data-automation="usersBulkActionsRemoveSkill"
+                data-automation="removeSkillAutoComplete"
               />
             </BulkActions>
           )}
