@@ -11,7 +11,7 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
     text=" Users"
     userHasUpdatePermission={true}
   />
-  <_temp
+  <_class
     deleteSubEntity={[Function]}
     fields={Array []}
     items={
@@ -42,7 +42,7 @@ exports[`<DataAccessReportsDetailsPanel /> renders DataAccessReports detailsPane
     text=" Users"
     userHasUpdatePermission={false}
   />
-  <_temp
+  <_class
     deleteSubEntity={[Function]}
     fields={Array []}
     items={

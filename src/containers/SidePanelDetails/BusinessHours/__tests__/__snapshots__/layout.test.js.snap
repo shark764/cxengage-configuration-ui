@@ -10,7 +10,7 @@ exports[`<BusinessHoursDetailsPanel /> renders businessHours detailsPanel 1`] = 
     open={true}
     text="Exceptions"
   />
-  <_temp
+  <_class
     confirmDeleteSubEntity={true}
     contains="exceptions"
     defaultSorted={

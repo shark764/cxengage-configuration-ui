@@ -15,7 +15,7 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders 1`] = `
     text="Outbound Identifiers"
     userHasUpdatePermission={true}
   />
-  <_temp
+  <_class
     tableType="sidePanel"
     userHasUpdatePermission={true}
   />
@@ -37,7 +37,7 @@ exports[`OutboundIdentifierListsDetailsPanel Renders renders without update perm
     text="Outbound Identifiers"
     userHasUpdatePermission={false}
   />
-  <_temp
+  <_class
     tableType="sidePanel"
     userHasUpdatePermission={false}
   />

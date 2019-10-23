@@ -19,7 +19,7 @@ exports[`AddMemberToListLayout Layout renders the AddMemberToListLayout 1`] = `
       />
     </styled.div>
   </div>
-  <_temp
+  <_class
     tableType="modal"
     userHasUpdatePermission={true}
   />

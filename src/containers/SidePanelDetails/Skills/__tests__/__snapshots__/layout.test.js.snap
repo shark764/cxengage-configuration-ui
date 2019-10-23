@@ -14,7 +14,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel 1`] = `
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_temp
+    <_class
       contains="outboundIdentifierLists"
       filtered={Array []}
       items={Array []}
@@ -39,7 +39,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no proficiency 
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_temp
+    <_class
       contains="outboundIdentifierLists"
       filtered={Array []}
       items={Array []}
@@ -64,7 +64,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with no update permi
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={false}
     />
-    <_temp
+    <_class
       contains="outboundIdentifierLists"
       filtered={Array []}
       items={Array []}
@@ -89,7 +89,7 @@ exports[`<SkillsDetailsPanel /> renders Skills detailsPanel with status disabled
       text=" Outbound Identifier Lists"
       userHasUpdatePermission={true}
     />
-    <_temp
+    <_class
       contains="outboundIdentifierLists"
       filtered={Array []}
       items={Array []}

@@ -11,7 +11,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel 1`] = `
     text="undefined Permissions"
     userHasUpdatePermission={true}
   />
-  <_temp
+  <_class
     deleteSubEntity={[Function]}
     tableType="sidePanel"
     userHasUpdatePermission={true}
@@ -30,7 +30,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with no update permisi
     text="undefined Permissions"
     userHasUpdatePermission={false}
   />
-  <_temp
+  <_class
     tableType="sidePanel"
     userHasUpdatePermission={false}
   />
@@ -48,7 +48,7 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with status disabled 1
     text="undefined Permissions"
     userHasUpdatePermission={true}
   />
-  <_temp
+  <_class
     deleteSubEntity={[Function]}
     tableType="sidePanel"
     userHasUpdatePermission={true}

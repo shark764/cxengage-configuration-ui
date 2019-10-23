@@ -10,7 +10,7 @@ exports[`<SlasDetailsPanel /> renders slas detailsPanel 1`] = `
     open={true}
     text="Published Versions"
   />
-  <_temp
+  <_class
     contains="versions"
     defaultSorted={
       Array [

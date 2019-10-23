@@ -10,7 +10,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
     text="Published Versions"
     userHasUpdatePermission={true}
   />
-  <_temp
+  <_class
     contains="versions"
     defaultSorted={
       Array [
@@ -30,7 +30,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
     text="Drafts"
     userHasUpdatePermission={true}
   />
-  <_temp
+  <_class
     confirmDeleteSubEntity={true}
     contains="drafts"
     defaultSorted={
@@ -57,7 +57,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
     text="Published Versions"
     userHasUpdatePermission={false}
   />
-  <_temp
+  <_class
     contains="versions"
     defaultSorted={
       Array [
@@ -77,7 +77,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
     text="Drafts"
     userHasUpdatePermission={false}
   />
-  <_temp
+  <_class
     confirmDeleteSubEntity={true}
     contains="drafts"
     defaultSorted={
