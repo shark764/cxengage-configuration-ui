@@ -42,7 +42,8 @@ export function mapStateToProps(state) {
       outboundIdentifierLists: false,
       roles: false,
       flows: false,
-      dispatchMappings: false
+      dispatchMappings: false,
+      reasons: false
     }
   };
 }
