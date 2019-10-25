@@ -25,6 +25,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.20] - 2019-10-25
+## Added
+- CXV1-20403 - Add Reason Lists to navbar and expose it as Beta feature
+- CXV1-20427 - Add Transfer List page to beta features and expose it in navbar.
+
 ## [0.66.19] - 2019-10-24
 ## Added
 - [CXV1-20370, CXV1-20368 & CXV1-20369] - Added automation tests for Presence Reasons, Api Keys & Dispatch Mapping pages

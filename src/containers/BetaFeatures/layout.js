@@ -77,7 +77,9 @@ export default class BetaFeatures extends Component {
       businessHours: false,
       apiKeys: false,
       messageTemplates: false,
-      reasons: false
+      reasons: false,
+      reasonLists: false,
+      transferLists: false
     };
     const pageTitles = {};
     Object.keys(features).forEach(entityName => {
