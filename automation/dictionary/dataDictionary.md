@@ -1,5 +1,4 @@
 
-
 HOW TO UPDATE THE DICTIONARY?
 1. Adding the "data-automation" label for each new field of a component
 2. Choosing the label name according to the field type:
@@ -10,6 +9,7 @@ HOW TO UPDATE THE DICTIONARY?
     E) Radio Group - ended with "Choose"
     F) Button - ended with "Button"
     G) Searching by Column  - search____Column
+    H) Checkbox type elements - ends with checkbox
 3. Updating the json dictionary (index.json) to test the new page (automation > dictionary > index.json)
 
 
@@ -128,11 +128,11 @@ Type        |   typeList
 ######################
 # DISPATCH MAPPINGS  #
 ######################
-Name                |  nameInput
+Name                |   nameInput
 Description         |	descriptionInput
 Interaction type    |   interactionList
-Mapping             |       mappingList
-Mapping Value       |   valueInput
+Mapping             |   mappingList
+Mapping Value       |   phoneValueInput
 Dispatch to flow    |   dispatchList
 Interaction type    |   interactionList
 Direction           |   directionList

@@ -105,12 +105,7 @@ export default class ApiKeysForm extends Component {
         />
         {this.props.update &&
           this.props.initialValues.get('secret') && (
-            <Confirmation
-              cancelBtnCallback={this.props.removeSecretApiKey}
-              openPopupBox
-              cancelBtnText="OK"
-              data-automation="secretConfirmation"
-            >
+            <Confirmation cancelBtnCallback={this.props.removeSecretApiKey} openPopupBox cancelBtnText="OK">
               <Fragment>
                 <Fragment>
                   <Title>API Key</Title>
@@ -148,7 +143,7 @@ export default class ApiKeysForm extends Component {
               label=""
               dataType={this.state.typeInput}
               disabled={true}
-              data-automation="idInput"
+              data-automation="keyIdInput"
             />
             <ConfirmationWrapper
               confirmBtnCallback={this.props.deleteApiKey}

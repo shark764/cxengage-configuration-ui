@@ -93,7 +93,7 @@ exports[`<DispatchMappingsForm /> renders create form 1`] = `
     required={false}
   />
   <SelectField
-    data-automation="versionList"
+    data-automation="flowVersionList"
     disabled={false}
     label="Flow Version *"
     name="version"
@@ -195,7 +195,7 @@ exports[`<DispatchMappingsForm /> renders update form 1`] = `
     required={false}
   />
   <SelectField
-    data-automation="versionList"
+    data-automation="flowVersionList"
     disabled={false}
     label="Flow Version *"
     name="version"

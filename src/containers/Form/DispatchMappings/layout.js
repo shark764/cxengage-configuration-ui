@@ -105,7 +105,7 @@ export default function DispatchMappingsForm({
         <InputField
           name="value"
           label="Mapping Value *"
-          data-automation="valueInput"
+          data-automation="phoneValueInput"
           componentType="input"
           inputType="text"
           className="frm-dispatch-mappings-name"
@@ -126,7 +126,7 @@ export default function DispatchMappingsForm({
           name="version"
           label="Flow Version *"
           required={initialValues.get('id') !== undefined}
-          data-automation="versionList"
+          data-automation="flowVersionList"
           options={!flowsFetching ? flowVersions : undefined}
           disabled={isSaving || inherited || !userHasUpdatePermission || flowsFetching || !flowId}
         />

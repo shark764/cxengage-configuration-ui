@@ -42,15 +42,6 @@ export default function ReasonsForm({
         data-automation="nameInput"
       />
       <InputField
-        id="frm-reason-external-id"
-        name="externalId"
-        label="External Id"
-        componentType="input"
-        inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
-        data-automation="externalIdInput"
-      />
-      <InputField
         id="frm-reason-description"
         name="description"
         label="Description"
@@ -59,13 +50,21 @@ export default function ReasonsForm({
         disabled={isSaving || inherited || !userHasUpdatePermission}
         data-automation="descriptionInput"
       />
+      <InputField
+        id="frm-reason-external-id"
+        name="externalId"
+        label="External Id"
+        componentType="input"
+        inputType="text"
+        disabled={isSaving || inherited || !userHasUpdatePermission}
+        data-automation="externalIdInput"
+      />
       <ConfirmationWrapper
         confirmBtnCallback={!disableShared && !sharedFormValue && userHasSharePermission ? toggleShared : undefined}
         mainText={
           "Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
         }
         secondaryText={'Are you sure you want to continue?'}
-        data-automation="toggleSharedConfirmationWrapper"
       >
         <ToggleField
           id="frm-reason-shared"

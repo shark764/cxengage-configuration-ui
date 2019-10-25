@@ -116,7 +116,6 @@ export default class MessageTemplatesForm extends React.Component {
                 : 'You are trying to switch from RichText editor to PlainText editor, existing template content will be lost if you submit the form with the new content!'
             }
             secondaryText="Are you sure you want to continue?"
-            data-automation="clearConfirmation"
           />
         )}
       </form>

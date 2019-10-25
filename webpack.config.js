@@ -42,7 +42,7 @@ module.exports = {
                 [
                   "create-automation-page-objects",
                   {
-                    "saveFilePath": "automation/behavior/pageObjects.json"
+                    "saveFilePath": "automation/pageObjects/locators.json"
                   }
                 ]
               ]

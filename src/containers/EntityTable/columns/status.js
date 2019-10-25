@@ -16,7 +16,7 @@ export const statusColumn = {
     <FilterSelect
       tableType="modal"
       className="entity-table-filter-column-status"
-      data-automation="searchStatusColumn"
+      data-automation="searchStatusColumnButton"
       onChange={event => onChange(event.target.value)}
       value={filter ? filter.value : 'all'}
       options={['all', 'enabled', 'disabled']}

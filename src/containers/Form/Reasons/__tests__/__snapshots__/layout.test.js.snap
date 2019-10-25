@@ -17,15 +17,6 @@ exports[`<ReasonsForm /> renders create form 1`] = `
     name="name"
   />
   <InputField
-    componentType="input"
-    data-automation="externalIdInput"
-    disabled={false}
-    id="frm-reason-external-id"
-    inputType="text"
-    label="External Id"
-    name="externalId"
-  />
-  <InputField
     componentType="textarea"
     data-automation="descriptionInput"
     disabled={false}
@@ -34,8 +25,16 @@ exports[`<ReasonsForm /> renders create form 1`] = `
     label="Description"
     name="description"
   />
+  <InputField
+    componentType="input"
+    data-automation="externalIdInput"
+    disabled={false}
+    id="frm-reason-external-id"
+    inputType="text"
+    label="External Id"
+    name="externalId"
+  />
   <ConfirmationWrapper
-    data-automation="toggleSharedConfirmationWrapper"
     mainText="Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
     secondaryText="Are you sure you want to continue?"
   >
@@ -68,15 +67,6 @@ exports[`<ReasonsForm /> renders update form 1`] = `
     name="name"
   />
   <InputField
-    componentType="input"
-    data-automation="externalIdInput"
-    disabled={false}
-    id="frm-reason-external-id"
-    inputType="text"
-    label="External Id"
-    name="externalId"
-  />
-  <InputField
     componentType="textarea"
     data-automation="descriptionInput"
     disabled={false}
@@ -85,8 +75,16 @@ exports[`<ReasonsForm /> renders update form 1`] = `
     label="Description"
     name="description"
   />
+  <InputField
+    componentType="input"
+    data-automation="externalIdInput"
+    disabled={false}
+    id="frm-reason-external-id"
+    inputType="text"
+    label="External Id"
+    name="externalId"
+  />
   <ConfirmationWrapper
-    data-automation="toggleSharedConfirmationWrapper"
     mainText="Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
     secondaryText="Are you sure you want to continue?"
   >

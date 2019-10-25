@@ -326,7 +326,7 @@ export default class Login extends Component {
                 <div>
                   <SignInTitle>Select a tenant</SignInTitle>
                   <Selector
-                    data-automation="tenantSelect"
+                    data-automation="chooseTenantInput"
                     placeholder="Select a tenant"
                     options={this.state.tenants.map(({ tenantName, tenantId }) => ({
                       label: tenantName,
@@ -342,7 +342,7 @@ export default class Login extends Component {
                   <Prefrences>
                     <Checkbox
                       type="checkbox"
-                      data-automation="platform"
+                      data-automation="platformAdminModeCheckbox"
                       name="platform"
                       onChange={this.lgoinPrefrences}
                       value={this.state.loginPrefrences.platform}
@@ -350,7 +350,7 @@ export default class Login extends Component {
                     <CheckboxLabel for="platform">Platform admin view-only mode</CheckboxLabel> <br />
                   </Prefrences>
                   <LoginButton
-                    data-automation="chooseTenantButton"
+                    data-automation="selectTenantButton"
                     disabled={!this.state.selectedTenant}
                     onClick={this.chooseTenant}
                   >
