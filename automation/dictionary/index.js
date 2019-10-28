@@ -77,7 +77,7 @@ const data = {
             interactionList: "Voice",
             mappingList: "Contact Point",
             phoneValueInput: `+1${randomPhoneNum()}`,
-            flowList: 2
+            flowList: 1
           }
         ]
       },
@@ -90,7 +90,7 @@ const data = {
             mappingList: "Customer",
             phoneValueInput: `+1${randomPhoneNum()}`,
             flowList: 2,
-            flowVersionList: 2
+            flowVersionList: 1
           }
         ]
       },

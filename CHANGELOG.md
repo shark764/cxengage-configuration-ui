@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.21] - 2019-10-25
+## Added
+- <no-Jira> - Added automation tests to Jenkins Pipeline 
+
 ## [0.66.20] - 2019-10-25
 ## Added
 - CXV1-20403 - Add Reason Lists to navbar and expose it as Beta feature

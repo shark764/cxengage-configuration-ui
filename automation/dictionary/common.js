@@ -6,21 +6,21 @@ const commonBehavior = {
   login() {
     Brow.url(process.env.URL);
     Elem.username.waitForVisible();
-    Elem.username.setValue(process.env.USERNAME);
+    Elem.username.setValue('areddy@serenova.com');
     Elem.password.waitForVisible();
-    Elem.password.setValue(process.env.PASSWORD);
+    Elem.password.setValue('selenium1!');
     Elem.signInButton.waitAndClick();
     Elem.selectTenantButton.waitForVisible();
     Elem.selectTenantButton.validateElementsState('isVisible', true);
   },
   chooseTenant() {
-    Elem.chooseTenantInput.waitForVisible();
-    Elem.chooseTenantInput.moveToObject();
-    Elem.chooseTenantInput.waitAndClick();
-    let tenantName = new Element(`.//div[text()="${process.env.TENANT}"]`);
-    tenantName.moveToObject();
-    tenantName.waitAndClick();
-    tenantName.waitForVisible(30000, false);
+    // Elem.chooseTenantInput.waitForVisible();
+    // Elem.chooseTenantInput.moveToObject();
+    // Elem.chooseTenantInput.waitAndClick();
+    // let tenantName = new Element(`.//div[text()="Anil-1"]`);
+    // tenantName.moveToObject();
+    // tenantName.waitAndClick();
+    // tenantName.waitForVisible(30000, false);
     Elem.selectTenantButton.waitAndClick();
     Elem.loadingSpinnerIcon.waitForVisible(30000, false);
     Elem.loadingSpinnerIcon.validateElementsState('isVisible', false);
@@ -30,9 +30,10 @@ const commonBehavior = {
     let navBarSub = new Element(`[data-automation=${dictionary[entity].navigation.subMainBar}]`);
     navBar.waitAndClick();
     navBarSub.waitAndClick();
-    Elem.loadingSpinnerIcon.waitForVisible();
-    Elem.loadingSpinnerIcon.waitForVisible(30000, false);
-    Elem.loadingSpinnerIcon.validateElementsState('isVisible', false);
+    Elem.entityCreateButton.waitForVisible();
+    Elem.entityCreateButton.validateElementsState('isVisible', true);
+    Elem.entityCreateButton.waitForEnabled();
+    Elem.entityCreateButton.validateElementsState('isEnabled', true);
   },
   insertDataTextValues(parameter, param) {
     Elem[param].waitForVisible();

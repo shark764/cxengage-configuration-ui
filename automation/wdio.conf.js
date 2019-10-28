@@ -14,10 +14,12 @@ if (process.env.URI) {
 } else if (!process.env.URL) {
     console.log('URL not provided , running test against localhost');
     process.env.LOCALONLY = true;
-    process.env.URL = 'http://localhost:3000/#/';
+    process.env.URL = 'https://dev-config2.cxengagelabs.net/#/'
     config.maxInstances = 1;
     process.env.REGIONVAR = '';
     process.env.ENVIRONMENT = '';
+    process.env.USERNAME = 'areddy@serenova.com';
+    process.env.PASSWORD = 'selenium1!';
     process.env.TENANT = 'Anil-1';
 }
 
