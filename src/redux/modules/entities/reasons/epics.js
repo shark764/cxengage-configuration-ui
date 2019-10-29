@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { from } from 'rxjs/observable/from';
 import { removeLastLetter } from 'serenova-js-utils/strings';
-import { getSelectedEntityBulkChangeItems } from '../selectors';
+import { getSelectedEntityBulkChangeItems, findEntity } from '../selectors';
 import { entitiesMetaData } from '../metaData';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleBulkSuccess, handleSuccess } from '../handleResult';
@@ -30,7 +30,8 @@ export const BulkEntityUpdate = (action$, store) =>
         ...a.sdkCall,
         data: {
           ...a.values,
-          [removeLastLetter(a.entityName) + 'Id']: item
+          [removeLastLetter(a.entityName) + 'Id']: item,
+          active: findEntity(store.getState(), a.entityName, item).get('active')
         }
       }));
       return { ...a };
@@ -46,14 +47,6 @@ export const BulkEntityUpdate = (action$, store) =>
           )
         )
       )
-        .do(allResult =>
-          handleBulkSuccess(
-            allResult,
-            null,
-            null,
-            `BULKED_ITEMS_AFFECTED item(s) failed to update.<br/><br/>Check if you are not performing bulk actions on inherited items or attempting to perform an unshare.`,
-            null
-          )
-        )
+        .do(allResult => handleBulkSuccess(allResult))
         .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
     );

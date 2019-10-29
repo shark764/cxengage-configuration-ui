@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.23] - 2019-10-29
+## Fixed
+- CXV1-20437 - enable bulk sharing action | Presence list | config - UI 2 
+
 ## [0.66.22] - 2019-10-29
 ## Fixed
 - CXV1-20404 - Creating new Reason List throws an error when removing the reason
