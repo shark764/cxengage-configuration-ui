@@ -133,7 +133,7 @@ ReasonListItemsForm.propTypes = {
   reasonListName: PropTypes.string,
   existingCategories: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   isSaving: PropTypes.bool,
-  reasons: PropTypes.object,
+  reasons: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   onCancel: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   invalid: PropTypes.bool,

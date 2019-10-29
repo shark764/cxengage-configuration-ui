@@ -304,7 +304,8 @@ export const RemoveReasonListItem = (action$, store) =>
           description: getCurrentFormValueByFieldName(store.getState(), 'description'),
           externalId: getCurrentFormValueByFieldName(store.getState(), 'externalId'),
           shared: getCurrentFormValueByFieldName(store.getState(), 'shared'),
-          isDefault: getCurrentFormValueByFieldName(store.getState(), 'isDefault')
+          isDefault: getCurrentFormValueByFieldName(store.getState(), 'isDefault'),
+          active: getCurrentFormValueByFieldName(store.getState(), 'active')
         };
         return {
           type: '@@redux-form/INITIALIZE',
