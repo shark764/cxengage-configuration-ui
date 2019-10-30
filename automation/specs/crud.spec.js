@@ -1,6 +1,17 @@
 const commonBehavior = require('../dictionary/common');
 const dictionary = require('../dictionary/index');
 
+const keydInTests = process.env.TESTS_TO_RUN;
+const totalTests = Object.keys(dictionary);
+let testsToRun = [];
+
+// Filters out the tests to run based on the input provided to TESTS_TO_RUN in './automation/config/.env' file
+if (keydInTests && keydInTests !== 'all') {
+  testsToRun = keydInTests.splite('').filter(a => totalTests.find(b => a === b) !== undefined)
+} else {
+  testsToRun = totalTests;
+}
+
 describe(`Config UI`, () => {
   it('Login', () => {
     commonBehavior.login();
@@ -10,7 +21,7 @@ describe(`Config UI`, () => {
   });
 });
 
-Object.keys(dictionary).forEach(entity => {
+testsToRun.forEach(entity => {
   describe(`Config UI`, () => {
     it(`Navigate to ${entity}`, () => {
       commonBehavior.navigationMainBar(entity);

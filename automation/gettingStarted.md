@@ -1,28 +1,47 @@
-Run a test suite:
 
-## Current test running and creation steps
+### Instructions to setup automation in a local machine:
+1. Clone this repository/library.
+2. Switch to node version 8.11.3 & run "npm install".
+3. Navigate to './automation/config/' folder and create a file with the name '.env'
+4. copy-paste following ENVIRONMENT variables to the newly created .env file.
+      APP="Config2"
+      REGIONVAR="us-east-1"
+      ENVIRONMENT="dev"
+      TEST_BROWSER="chrome"
+      HEADLESS=false
+      HOST="127.0.0.1"
+      PORT=4444
+      MAX_INSTANCES=1
+      VERBOSELOGS=true
+      LOCAL_HOST=false
+      LOCAL_HOST_PORT=3000
+      TESTS_TO_RUN="all"
+      TENANT="YOUR_TENANT_NAME"
+      CX_USERNAME="YOUR_CX_USER_NAME"
+      CX_PASSWORD="YOUR_CX_PASSWORD"
+5. Provide your TENANT, CX_USERNAME & CX_PASSWORD values in the .env file.
+6. Not including any of the above environment variables in your .env file could result in automation tests faliure.
 
-Create new tests in the inProgress folder:
-./automation/specs/inProgress
+### Instructions to configure automation tests:
+1. Navigate to .env file ('./automation/config/.env') & modify the Environment variables as per your need.
+2. Sample configuration:
+   a) To run tests in QE environment, ENVIRONMENT="QE".
+   b) To run tests in firefox, TEST_BROWSER="firefox"
+   c) To run tests in headless browser, HEADLESS=true
+   d) To run tests on a remote machine, HOST="REMOTE_MACHINE_IP_ADDRESS"
+   e) To run tests in multiple browser instances, MAX_INSTANCES=10
+   f) To run tests in local build, change LOCAL_HOST=true
 
-Run tests in the inProgress folder:
-`npm run test:auto`
+### Changing what tests to run:
+1. To run all of the tests: TESTS_TO_RUN="all"
+2. To run selected tests:
+   a) Navigate to './config/specs.txt' file
+   b) copy the test names you want to run & change the TESTS_TO_RUN environment variable.
+   c) For example, to run Presence Reasons, Dispatch Mappings & Api Keys" tests: TESTS_TO_RUN="Reason, Dispatch Mappings, Api Keys"
+   d) use ',' as a seperator between each test name
+3. To run a single test: TEST_TO_RUN="Reason"
 
-
-07/05/2019
-Summary for the next steps:
-
-1.	Creating a dictionary for everything + main table columns under /automation/dictionary+
-2.	Verifying the creation by catching the Green(successful) or Red (Fail) popup after creation – Make the test to be failed if there is an error (Red) 
-3.	One test per testcase – to combine the functions in the specs page +
-4.	Updating the Jenkins file
-5.	Updating the inputs values to be unique - current time +
-6.	Change “user specs” to “create” and define another specs per test case.
-
-
-Future planning:
-1.	Inputs verification for updating/creating cases
-2.	Labeling parameters if they are required or not.
-3.	Developing specs function to test navigation between pages 
-4.	Verifying visual components – how many columns, which components existing in each page etc.
-
+### Insturctions to run the tests:
+1. From command line, run "npm run selenium".
+2. Open another terminal & switch to node version 8.11.3 &
+3. Run "npm run regression" ---> your tests should start running & logs can be viewed on the terminal.

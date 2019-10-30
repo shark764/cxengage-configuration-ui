@@ -1,7 +1,7 @@
 const randomPhoneNum = () => Number(new Date().getTime()).toString().slice(0, 10);
 const randomId = randomPhoneNum();
 
-const data = {
+const pages = {
   Reason: {
     specs: {
       create: {
@@ -107,4 +107,4 @@ const data = {
   }
 };
 
-module.exports = data;
+module.exports = pages;

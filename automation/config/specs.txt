@@ -1,0 +1,12 @@
+# Copy paste the tests you want to run from here:
+
+userManagementMenu
+  Reason
+
+configurationMenu
+  Api Keys
+
+flowsMenu
+  Dispatch Mappings
+  
+reportingMenu

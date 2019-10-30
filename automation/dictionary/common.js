@@ -1,14 +1,14 @@
-const { Element, Brow } = require('cx-automation-utils/pageObject');
+const { Element, Brow } = require('cx-automation-utils/src/pageObject.js');
 const Elem = require('../pageObjects/webElements');
 const dictionary = require('./index');
 
 const commonBehavior = {
   login() {
-    Brow.url(process.env.URL);
+    Brow.url(process.env.URI ? process.env.URI : process.ENV.URL);
     Elem.username.waitForVisible();
-    Elem.username.setValue('areddy@serenova.com');
+    Elem.username.setValue(process.ENV.userName);
     Elem.password.waitForVisible();
-    Elem.password.setValue('selenium1!');
+    Elem.password.setValue(process.ENV.password);
     Elem.signInButton.waitAndClick();
     Elem.selectTenantButton.waitForVisible();
     Elem.selectTenantButton.validateElementsState('isVisible', true);
@@ -17,7 +17,7 @@ const commonBehavior = {
     // Elem.chooseTenantInput.waitForVisible();
     // Elem.chooseTenantInput.moveToObject();
     // Elem.chooseTenantInput.waitAndClick();
-    // let tenantName = new Element(`.//div[text()="Anil-1"]`);
+    // let tenantName = new Element(`.//div[text()="${process.ENV.tenantName}"]`);
     // tenantName.moveToObject();
     // tenantName.waitAndClick();
     // tenantName.waitForVisible(30000, false);

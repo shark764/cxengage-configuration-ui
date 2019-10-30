@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API Keys
 - Message Templates
 
+## [0.66.24] - 2019-10-30
+## Fixed
+- CXV1-20466 - Add headless browser & enhance config file of config2 automation tests
+
 ## [0.66.23] - 2019-10-29
 ## Fixed
 - CXV1-20437 - enable bulk sharing action | Presence list | config - UI 2 

@@ -1,4 +1,4 @@
-const { Element } = require('cx-automation-utils/pageObject');
+const { Element } = require('cx-automation-utils/src/pageObject.js');
 const generatedPageObjects = require('./locators.json');
 
 const elements = {};
