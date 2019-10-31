@@ -6,15 +6,21 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import DispatchMappingsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isCreating,
+  userHasUpdatePermission,
+  isEntityFetching
+} from '../../../../redux/modules/entities/selectors';
 import {
   selectFormInitialValues,
   formSubmission,
   createFormName,
   getCurrentFormValueByFieldName
 } from '../../../../redux/modules/form/selectors';
-import { selectNonReusableFlows } from '../../../../redux/modules/entities/flows/selectors';
+import { selectNonReusableFlows, selectVersionsFromFlow } from '../../../../redux/modules/entities/flows/selectors';
 import { selectIntegrations } from '../../../../redux/modules/entities/integrations/selectors';
+import { getMappingValueInvalid } from '../../../../redux/modules/entities/dispatchMappings/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
@@ -28,6 +34,9 @@ selectFormInitialValues.mockImplementation(() => ({ active: true }));
 getCurrentFormValueByFieldName.mockImplementation(() => 'source');
 selectNonReusableFlows.mockImplementation(() => [{ value: 'mockValue', label: 'mockLabel' }]);
 selectIntegrations.mockImplementation(() => ['mockId1', 'mockId2']);
+selectVersionsFromFlow.mockImplementation(() => [{ value: 'mockValue', label: 'mockLabel' }]);
+isEntityFetching.mockImplementation(() => true);
+getMappingValueInvalid.mockImplementation(() => true);
 
 describe('DispatchMappings Renders', () => {
   it('renders', () => {

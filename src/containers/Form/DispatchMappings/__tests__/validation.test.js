@@ -1,16 +1,19 @@
 import { formValidation } from '../validation';
 import { fromJS } from 'immutable';
 
-const props = {
-  initialValues: fromJS({
-    id: 'mockId1',
-    value: 'mockValueUnique2',
-    channelType: 'mockChannelTypeUnique2'
-  }),
-  flowsFetching: false
-};
-
 describe('formValidation', () => {
+  let props;
+  beforeEach(() => {
+    props = {
+      initialValues: fromJS({
+        id: 'mockId1',
+        value: 'mockValueUnique2',
+        channelType: 'mockChannelTypeUnique2'
+      }),
+      flowsFetching: false,
+      setMappingValueInvalid: () => {}
+    };
+  });
   it('returns proper object when required fields are provided', () => {
     const values = fromJS({
       id: 'mockId',
@@ -59,7 +62,8 @@ describe('formValidation', () => {
         channelType: 'mockChannelTypeUnique2',
         interactionField: 'mockInteractionField1'
       }),
-      flowsFetching: false
+      flowsFetching: false,
+      setMappingValueInvalid: () => {}
     };
 
     const values = fromJS({

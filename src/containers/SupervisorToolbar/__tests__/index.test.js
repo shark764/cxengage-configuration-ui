@@ -14,15 +14,11 @@ jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
   selectSupervisorToolbarTwilioEnabled: () => true,
   selectSupervisorToolbarTwilioIsDefaultExtension: () => true,
   selectSupervisorToolbarSilentMonitoringStatus: () => 'conected',
-  selectSupervisorToolbarSilentMonitoringInteractionId: () =>
-    'mockInteractionId'
+  selectSupervisorToolbarSilentMonitoringInteractionId: () => 'mockInteractionId'
 }));
-jest.mock(
-  '../../../redux/modules/reporting/interactionMonitoring/selectors',
-  () => ({
-    userHasBargeAllCallsPermission: () => true
-  })
-);
+jest.mock('../../../redux/modules/reporting/interactionMonitoring/selectors', () => ({
+  userHasBargeAllCallsPermission: () => true
+}));
 
 describe('Supervisor Toolbar Renders', () => {
   it('renders', () => {

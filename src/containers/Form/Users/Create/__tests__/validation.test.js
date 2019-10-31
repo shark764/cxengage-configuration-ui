@@ -3,12 +3,12 @@ import { Map } from 'immutable';
 import { fromJS } from 'immutable';
 
 const props = {
-  tenantUsers:fromJS([
-  {
-    email: "mockEmail@email.com"
-  }
-]),
-setSelectedEntityId: id => true
+  tenantUsers: fromJS([
+    {
+      email: 'mockEmail@email.com'
+    }
+  ]),
+  setSelectedEntityId: id => true
 };
 
 describe('formValidation', () => {
@@ -18,7 +18,7 @@ describe('formValidation', () => {
       platformRoleId: 'mockPlatformRoleId',
       roleId: 'mockRoleId'
     });
-    expect(formValidation(values,props)).toMatchSnapshot();
+    expect(formValidation(values, props)).toMatchSnapshot();
   });
   it('returns proper object (errors) when required fields are not provided', () => {
     const values = new Map({
@@ -34,6 +34,6 @@ describe('formValidation', () => {
       platformRoleId: null,
       roleId: null
     });
-    expect(formValidation(values,props)).toMatchSnapshot();
+    expect(formValidation(values, props)).toMatchSnapshot();
   });
 });

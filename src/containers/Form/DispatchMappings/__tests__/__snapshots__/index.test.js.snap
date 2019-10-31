@@ -2,7 +2,6 @@
 
 exports[`DispatchMappings Renders renders 1`] = `
 <Connect(ReduxForm)
-  dispatch={[Function]}
   flowId="source"
   flowIds={
     Array [
@@ -12,15 +11,26 @@ exports[`DispatchMappings Renders renders 1`] = `
       },
     ]
   }
+  flowVersions={
+    Array [
+      Object {
+        "label": "mockLabel",
+        "value": "mockValue",
+      },
+    ]
+  }
+  flowsFetching={true}
   integrationElements={
     Array [
       "mockId1",
       "mockId2",
     ]
   }
+  isMappingValueInvalid={true}
   isSaving={true}
   key="mockId"
   mappingValue="source"
+  setMappingValueInvalid={[Function]}
   store={
     Object {
       "dispatch": [Function],
@@ -65,14 +75,20 @@ Object {
       "value": "mockValue",
     },
   ],
-  "flowVersions": undefined,
-  "flowsFetching": undefined,
+  "flowVersions": Array [
+    Object {
+      "label": "mockLabel",
+      "value": "mockValue",
+    },
+  ],
+  "flowsFetching": true,
   "inherited": undefined,
   "initialValues": undefined,
   "integrationElements": Array [
     "mockId1",
     "mockId2",
   ],
+  "isMappingValueInvalid": true,
   "isSaving": true,
   "key": "mockId",
   "mappingValue": "source",

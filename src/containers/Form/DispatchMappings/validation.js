@@ -15,15 +15,7 @@ const emailValidation = email => {
   }
 };
 
-const phoneNumberValidation = phoneNumber => {
-  if (isEmpty(phoneNumber)) {
-    return 'Please enter an e.164 formatted number or SIP address';
-  } else if (!validatePhoneNumber(phoneNumber) && !validateSip(phoneNumber)) {
-    return 'Please enter either a valid e.164 formatted number or a valid SIP address';
-  } else {
-    return false;
-  }
-};
+const phoneNumberValidation = phoneNumber => !validatePhoneNumber(phoneNumber) && !validateSip(phoneNumber);
 
 export const formValidation = (values, props) => {
   let validation = {};
@@ -36,10 +28,14 @@ export const formValidation = (values, props) => {
       (props.flowsFetching && (!values.get('version') || values.get('version') === 'null'))) &&
     'Please select a flow version';
 
+  props.setMappingValueInvalid(false);
   validation.value = !values.get('value') && 'Please set a mapping value';
-  if (values.get('interactionField') === 'contact-point') {
-    if (['voice', 'sms'].includes(values.get('channelType'))) {
-      validation.value = phoneNumberValidation(values.get('value'));
+  if (values.get('interactionField') === 'contact-point' || values.get('interactionField') === 'customer') {
+    if (['voice', 'sms'].includes(values.get('channelType')) && values.get('value')) {
+      // We just need to show a warning message, no need to prevent
+      // user from submitting form if mapping value is not a
+      // valid e.164 or SIP.
+      props.setMappingValueInvalid(phoneNumberValidation(values.get('value')));
     }
     if (values.get('channelType') === 'email') {
       validation.value = emailValidation(values.get('value'));

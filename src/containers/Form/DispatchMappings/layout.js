@@ -8,9 +8,17 @@
  *
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, InputField, SelectField, DetailsPanelAlert } from 'cx-ui-components';
+import { DetailHeader, InputField, SelectField, DetailsPanelAlert, DetailsPanelMessage } from 'cx-ui-components';
+import styled from 'styled-components';
+
+const PanelMessage = styled(DetailsPanelMessage)`
+  padding-top: 0;
+  & p {
+    font-size: 12px;
+  }
+`;
 
 export default function DispatchMappingsForm({
   mappingValue,
@@ -25,7 +33,8 @@ export default function DispatchMappingsForm({
   flowsFetching,
   initialValues,
   flowId,
-  mappingValueMessage
+  mappingValueMessage,
+  isMappingValueInvalid
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -102,16 +111,21 @@ export default function DispatchMappingsForm({
       )}
 
       {(mappingValue === 'customer' || mappingValue === 'contact-point') && (
-        <InputField
-          name="value"
-          label="Mapping Value *"
-          data-automation="phoneValueInput"
-          componentType="input"
-          inputType="text"
-          className="frm-dispatch-mappings-name"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
-          placeholder={mappingValueMessage}
-        />
+        <Fragment>
+          <InputField
+            name="value"
+            label="Mapping Value *"
+            data-automation="phoneValueInput"
+            componentType="input"
+            inputType="text"
+            className="frm-dispatch-mappings-name"
+            disabled={isSaving || inherited || !userHasUpdatePermission}
+            placeholder={mappingValueMessage}
+          />
+          {isMappingValueInvalid && (
+            <PanelMessage text={`Warning: Not a valid E.164 formatted phone number or SIP address.`} type="error" />
+          )}
+        </Fragment>
       )}
       <SelectField
         name="flowId"
@@ -169,5 +183,6 @@ DispatchMappingsForm.propTypes = {
   flowsFetching: PropTypes.bool,
   initialValues: PropTypes.object,
   flowId: PropTypes.string,
-  mappingValueMessage: PropTypes.string
+  mappingValueMessage: PropTypes.string,
+  isMappingValueInvalid: PropTypes.bool
 };

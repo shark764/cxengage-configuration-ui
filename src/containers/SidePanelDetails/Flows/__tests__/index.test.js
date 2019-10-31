@@ -16,14 +16,7 @@ import {
 import { selectFlowItems } from '../../../../redux/modules/entities/flows/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
-getSelectedEntity.mockImplementation(
-  () =>
-    new Map({
-      id: 'mockId',
-      name: 'mockName',
-      type: 'mockType'
-    })
-);
+getSelectedEntity.mockImplementation(() => new Map({ id: 'mockId', name: 'mockName', type: 'mockType' }));
 userHasUpdatePermission.mockImplementation(() => true);
 isInherited.mockImplementation(() => false);
 isSaving.mockImplementation(() => false);

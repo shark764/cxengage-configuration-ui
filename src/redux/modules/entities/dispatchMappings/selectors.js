@@ -1,8 +1,10 @@
 /*
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
+
+import { createSelector } from 'reselect';
 import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../form/selectors';
-import { getSelectedEntity } from '../selectors';
+import { getSelectedEntity, getCurrentEntityStore } from '../selectors';
 import { Map } from 'immutable';
 
 export const selectDispatchMappingsFormInitialValues = state => {
@@ -24,3 +26,13 @@ export const getMappingValueMessage = state =>
         ? ' an email adress'
         : 'a mapping value'
   }`;
+
+/**
+ * Returns if current open form has an invalid
+ * mapping value, only if channelType is voice|sms
+ * and interactionField is customer|contact-point
+ */
+export const getMappingValueInvalid = createSelector(
+  [getCurrentEntityStore],
+  currentEntity => currentEntity.get('mappingValueInvalid') || false
+);

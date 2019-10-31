@@ -11,8 +11,10 @@ import { selectNonReusableFlows, selectVersionsFromFlow } from '../../../redux/m
 import { selectIntegrations } from '../../../redux/modules/entities/integrations/selectors';
 import {
   selectDispatchMappingsFormInitialValues,
-  getMappingValueMessage
+  getMappingValueMessage,
+  getMappingValueInvalid
 } from '../../../redux/modules/entities/dispatchMappings/selectors';
+import { setMappingValueInvalid } from '../../../redux/modules/entities/dispatchMappings/actions';
 import {
   getSelectedEntityId,
   isInherited,
@@ -44,8 +46,13 @@ export function mapStateToProps(state) {
     flowVersions: selectVersionsFromFlow(state),
     flowsFetching: isEntityFetching(state, 'flows'),
     flowId: getCurrentFormValueByFieldName(state, 'flowId'),
-    mappingValueMessage: getMappingValueMessage(state)
+    mappingValueMessage: getMappingValueMessage(state),
+    isMappingValueInvalid: getMappingValueInvalid(state)
   };
 }
 
-export default connect(mapStateToProps)(CreateDispatchMappingsForm);
+export const actions = {
+  setMappingValueInvalid
+};
+
+export default connect(mapStateToProps, actions)(CreateDispatchMappingsForm);

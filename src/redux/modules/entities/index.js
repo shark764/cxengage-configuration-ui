@@ -656,6 +656,9 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'SET_MAPPING_VALUE_INVALID': {
+      return state.setIn(['dispatchMappings', 'mappingValueInvalid'], action.invalid);
+    }
     case 'CREATE_ENTITY': {
       return state.setIn([action.entityName, 'creating'], true);
     }
