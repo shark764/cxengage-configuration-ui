@@ -62,6 +62,11 @@ const Submit = styled(Button)`
   margin-bottom: 20px;
 `;
 
+const ActionButton = styled(Button)`
+  width: 90%;
+  margin: 20px 5%;
+`;
+
 export default class BetaFeatures extends Component {
   constructor() {
     super();
@@ -102,10 +107,24 @@ export default class BetaFeatures extends Component {
     });
   }
 
-  saveBetaFeaturePrefs = features => {
-    updateBetaFeatures(features).then(r => {
+  saveBetaFeaturePrefs = features => this.setState({ features });
+
+  saveBetaFeaturePrefsAll = () => {
+    const features = this.state.features;
+
+    updateBetaFeatures(features).then(() => {
       this.setState({ features });
+      sdkCall({ module: 'setBetaFeatures', data: features });
     });
+  };
+
+  toggleAll = (enableAll = true) => {
+    const features = Object.keys(this.state.features).reduce((previous, current) => {
+      previous[current] = enableAll;
+      return previous;
+    }, this.state.features || {});
+
+    this.setState({ features });
   };
 
   render() {
@@ -129,6 +148,14 @@ export default class BetaFeatures extends Component {
           <FeaturesTitle background={this.props.theme.navbar} accent={this.props.theme.navbarText}>
             Beta Features / Pages
           </FeaturesTitle>
+          <div style={{ display: 'flex' }}>
+            <ActionButton buttonType="secondary" onClick={() => this.toggleAll(true)}>
+              Enable All
+            </ActionButton>
+            <ActionButton buttonType="secondary" onClick={() => this.toggleAll(false)}>
+              Disable All
+            </ActionButton>
+          </div>
           {Object.keys(this.state.features).map(entityName => (
             <Feature key={entityName}>
               <span>{this.state.pageTitles[entityName]}</span>
@@ -162,10 +189,7 @@ export default class BetaFeatures extends Component {
               />
             </Feature>
           ))}
-          <Submit
-            buttonType="primary"
-            onClick={() => sdkCall({ module: 'setBetaFeatures', data: this.state.features })}
-          >
+          <Submit buttonType="primary" onClick={this.saveBetaFeaturePrefsAll}>
             Apply Changes
           </Submit>
         </Features>

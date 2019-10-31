@@ -123,7 +123,7 @@ export default function DispatchMappingsForm({
             placeholder={mappingValueMessage}
           />
           {isMappingValueInvalid && (
-            <PanelMessage text={`Warning: Not a valid E.164 formatted phone number or SIP address.`} type="error" />
+            <PanelMessage text={`Warning: Not a valid E.164 formatted phone number or SIP address.`} type="warning" />
           )}
         </Fragment>
       )}

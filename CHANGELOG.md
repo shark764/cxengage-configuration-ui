@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bulk actions
 - Chat Widgets
 - Queues
-- Transfer Lists
-- Agent State Monitoring
 - Flow Debugger
 
 ## [Beta User Acceptance Testing]
@@ -24,6 +22,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Business Hours
 - API Keys
 - Message Templates
+- Reasons
+- Reason Lists
+- Transfer Lists
+
+## [0.66.26] - 2019-10-30
+## Fixed
+- CXV1-20423 - Changing Beta Features without clicking Apply Changes keeps visual indicators
+
+## [0.66.25] - 2019-10-30
+## Fixed
+- CXV1-20426 - Config2 - Dispatch Mappings - Voice & SMS channels should have warning for invalid e.164 numbers but not enforce e.164.
 
 ## [0.66.24] - 2019-10-30
 ## Fixed
