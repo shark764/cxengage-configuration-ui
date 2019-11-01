@@ -7,7 +7,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import ReasonsBulkActionsFormLayout from './layout';
-import { isCreating, getCurrentEntity, userHasSharePermission } from '../../../../redux/modules/entities/selectors';
+import {
+  isSaving,
+  getCurrentEntity,
+  userHasSharePermission,
+  isBulkUpdating
+} from '../../../../redux/modules/entities/selectors';
 import { formSubmission, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
@@ -31,7 +36,8 @@ export function mapStateToProps(state) {
     // the toggle changes.
     sharedIsChecked: getCurrentFormValueByFieldName(state, 'shared'),
     userHasSharePermission: userHasSharePermission(state),
-    isSaving: isCreating(state),
+    isSaving: isSaving(state),
+    isBulkUpdating: isBulkUpdating(state),
     key: `${getCurrentEntity(state)}:bulk`
   };
 }

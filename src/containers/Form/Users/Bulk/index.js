@@ -9,10 +9,11 @@ import { reduxForm } from 'redux-form/immutable';
 import UsersBulkActionsFormLayout from './layout';
 import { formValidation } from './validation';
 import {
-  isCreating,
+  isSaving,
   getCurrentEntity,
   getEntityData,
-  userHasPermissions
+  userHasPermissions,
+  isBulkUpdating
 } from '../../../../redux/modules/entities/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
 import { formSubmission, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
@@ -43,7 +44,8 @@ export function mapStateToProps(state) {
     passwordResetIsChecked: getCurrentFormValueByFieldName(state, 'passwordReset'),
     groups: getEntityData(state, 'groups'),
     skills: getEntityData(state, 'skills'),
-    isSaving: isCreating(state),
+    isSaving: isSaving(state),
+    isBulkUpdating: isBulkUpdating(state),
     key: `${getCurrentEntity(state)}:bulk`,
     displayResetPassword: userHasPermissions(state, ['PLATFORM_MANAGE_ALL_USER_PASSWORDS', 'MANAGE_ALL_USER_PASSWORDS'])
   };

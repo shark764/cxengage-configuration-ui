@@ -76,14 +76,18 @@ export default class ReasonsBulkActionsForm extends Component {
         <Container>
           <ToggleList>
             <span>Enable/Disable {camelCaseToRegularForm(this.props.entityName)}</span>
-            <StyledToggle onChange={() => this.toggleFormField('active')} value={this.state.visibleFields.active} />
+            <StyledToggle
+              onChange={() => this.toggleFormField('active')}
+              value={this.state.visibleFields.active}
+              disabled={this.props.isSaving || this.props.isBulkUpdating}
+            />
           </ToggleList>
           {this.state.visibleFields.active && (
             <Options>
               <RadioGroupField
                 name="active"
                 label="Active"
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 options={[{ label: 'Enabled', value: 'enabled' }, { label: 'Disabled', value: 'disabled' }]}
                 data-automation="activeChoose"
               />
@@ -106,7 +110,7 @@ export default class ReasonsBulkActionsForm extends Component {
               <StyledToggleField
                 name="shared"
                 label=""
-                disabled={this.props.isSaving || this.props.inherited || !this.props.userHasSharePermission}
+                disabled={this.props.isSaving || this.props.isBulkUpdating || !this.props.userHasSharePermission}
                 data-automation="sharedToggle"
               />
             </ConfirmationWrapper>
@@ -126,7 +130,7 @@ ReasonsBulkActionsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   change: PropTypes.func,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool,
+  isBulkUpdating: PropTypes.bool,
   sharedIsChecked: PropTypes.bool,
   userHasSharePermission: PropTypes.bool
 };

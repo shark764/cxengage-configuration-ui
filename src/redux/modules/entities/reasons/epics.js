@@ -9,10 +9,12 @@ import 'rxjs/add/operator/catch';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { from } from 'rxjs/observable/from';
 import { removeLastLetter } from 'serenova-js-utils/strings';
+import { Toast } from 'cx-ui-components';
 import { getSelectedEntityBulkChangeItems, findEntity } from '../selectors';
 import { entitiesMetaData } from '../metaData';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleBulkSuccess, handleSuccess } from '../handleResult';
+import { getCurrentTenantId } from '../../userData/selectors';
 
 export const BulkEntityUpdate = (action$, store) =>
   action$
@@ -26,14 +28,23 @@ export const BulkEntityUpdate = (action$, store) =>
         a.values.active = a.values.active === 'enabled';
       }
 
-      a.allSdkCalls = [...a.allIdsToProcess.toJS()].map(item => ({
-        ...a.sdkCall,
-        data: {
-          ...a.values,
-          [removeLastLetter(a.entityName) + 'Id']: item,
-          active: findEntity(store.getState(), a.entityName, item).get('active')
+      a.allSdkCalls = [...a.allIdsToProcess.toJS()].reduce((allCalls, item) => {
+        const entityData = findEntity(store.getState(), a.entityName, item);
+        if (getCurrentTenantId(store.getState()) !== entityData.get('tenantId')) {
+          Toast.error(`"${entityData.get('name')}" is inherited and cannot be edited.`);
+          return allCalls;
         }
-      }));
+        allCalls.push({
+          ...a.sdkCall,
+          data: {
+            ...a.values,
+            [removeLastLetter(a.entityName) + 'Id']: item,
+            active: entityData.get('active')
+          }
+        });
+        return allCalls;
+      }, []);
+
       return { ...a };
     })
     .mergeMap(a =>

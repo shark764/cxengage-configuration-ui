@@ -9,9 +9,10 @@ import { getCurrentFormValueByFieldName } from '../../../../../redux/modules/for
 import ReasonsBulkActionsForm, { mapStateToProps, createFormName } from '../';
 import {
   getCurrentEntity,
-  isCreating,
+  isSaving,
   userHasUpdatePermission,
-  userHasSharePermission
+  userHasSharePermission,
+  isBulkUpdating
 } from '../../../../../redux/modules/entities/selectors';
 
 jest.mock('../../../../../redux/modules/form/selectors');
@@ -19,7 +20,8 @@ getCurrentFormValueByFieldName.mockImplementation(() => true);
 
 jest.mock('../../../../../redux/modules/entities/selectors');
 getCurrentEntity.mockImplementation(() => 'reasons');
-isCreating.mockImplementation(() => true);
+isSaving.mockImplementation(() => true);
+isBulkUpdating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 userHasSharePermission.mockImplementation(() => true);
 

@@ -14,14 +14,14 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Toast } from 'cx-ui-components';
 import { clearFields, touch, change } from 'redux-form';
 
-import * as MODALS from '../../../containers/ConfirmationDialog/constants.js';
+import * as MODALS from '../../../containers/ConfirmationDialog/constants';
 
 import { sdkPromise } from '../../../utils/sdk';
 import { handleError, handleSuccess, handleBulkSuccess } from './handleResult';
 
 import { entityAddedToList, entityRemovedFromList } from './listItemSelectors';
 
-import { uploadCsv, setEntityUpdating } from './index';
+import { uploadCsv, setEntityUpdating } from './';
 import { isInIframe } from 'serenova-js-utils/browser';
 import { generateUUID } from 'serenova-js-utils/uuid';
 
@@ -36,7 +36,9 @@ import {
   getConfirmationDialogMetaData,
   getSelectedEntityName,
   getSelectedEntityBulkChangeItems,
-  getSelectedEntityFormId
+  getSelectedEntityFormId,
+  findEntity,
+  isItemInherited
 } from './selectors';
 
 import { entitiesMetaData } from './metaData';
@@ -124,7 +126,7 @@ export const FocusOutboundIdentifiersValueFormField = (action$, store) =>
 export const ToggleHasProficiencyFormField = (action$, store) =>
   action$
     .ofType('TOGGLE_PROFICIENCY')
-    .map(a =>
+    .map(() =>
       change(
         getSelectedEntityFormId(store.getState()),
         'hasProficiency',
@@ -205,7 +207,7 @@ export const FormSubmission = (action$, store) =>
 export const ToggleSharedFormField = (action$, store) =>
   action$
     .ofType('TOGGLE_SHARED')
-    .map(a =>
+    .map(() =>
       change(
         getSelectedEntityFormId(store.getState()),
         'shared',
@@ -213,7 +215,7 @@ export const ToggleSharedFormField = (action$, store) =>
       )
     );
 
-export const FetchData = (action$, store) =>
+export const FetchData = action$ =>
   action$
     .ofType('FETCH_DATA')
     .filter(({ entityName }) => hasCustomFetchEntityData(entityName))
@@ -241,8 +243,8 @@ export const FetchDataItem = action$ =>
 export const getTenantPermissions = action$ =>
   action$
     .ofType('SET_CURRENT_ENTITY', 'START_SUPERVISOR_TOOLBAR_$', 'FETCH_BRANDING_$')
-    .filter(a => !isInIframe())
-    .switchMap(a =>
+    .filter(() => !isInIframe())
+    .switchMap(() =>
       fromPromise(
         sdkPromise({
           module: 'updateLocalStorage',
@@ -265,7 +267,7 @@ export const getTenantPermissions = action$ =>
       })
     );
 
-export const CreateEntity = (action$, store) =>
+export const CreateEntity = action$ =>
   action$
     .ofType('CREATE_ENTITY')
     .filter(({ entityName }) => hasCustomCreateEntity(entityName))
@@ -315,7 +317,7 @@ export const CopyEntity = (action$, store) =>
         .catch(error => handleError(error, a))
     );
 
-export const UpdateEntity = (action$, store) =>
+export const UpdateEntity = action$ =>
   action$
     .ofType('UPDATE_ENTITY')
     .filter(({ entityName }) => hasCustomUpdateEntity(entityName))
@@ -345,19 +347,23 @@ export const BulkEntityUpdate = (action$, store) =>
     .ofType('BULK_ENTITY_UPDATE')
     .filter(a => a.entityName !== 'users' && a.entityName !== 'reasons' && a.entityName !== 'reasonLists')
     .map(a => {
-      a.successMessage = a.errorMessage = a.notAffectedMessage = null;
-      if (a.entityName === 'flows') {
-        a.errorMessage = `BULKED_ITEMS_AFFECTED item(s) failed to update.<br/><br/>Flows without active version cannot be enabled.`;
-      }
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
-      a.allSdkCalls = [...a.allIdsToProcess.toJS()].map(item => ({
-        ...a.sdkCall,
-        data: {
-          ...a.values,
-          [removeLastLetter(a.entityName) + 'Id']: item
+      a.allSdkCalls = [...a.allIdsToProcess.toJS()].reduce((allCalls, item) => {
+        const entityData = findEntity(store.getState(), a.entityName, item);
+        if (isItemInherited(store.getState(), a.entityName, item)) {
+          Toast.error(`"${entityData.get('name')}" is inherited and cannot be edited.`);
+          return allCalls;
         }
-      }));
+        allCalls.push({
+          ...a.sdkCall,
+          data: {
+            ...a.values,
+            [removeLastLetter(a.entityName) + 'Id']: item
+          }
+        });
+        return allCalls;
+      }, []);
       return { ...a };
     })
     .mergeMap(a =>
@@ -371,7 +377,7 @@ export const BulkEntityUpdate = (action$, store) =>
           )
         )
       )
-        .do(allResult => handleBulkSuccess(allResult, null, a.successMessage, a.errorMessage, a.notAffectedMessage))
+        .do(allResult => handleBulkSuccess(allResult))
         .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
     );
 
@@ -576,7 +582,7 @@ export const fetchEntityListItems = (action$, store) =>
         .catch(error => handleError(error, a))
     );
 
-export const fetchEntityListItemDependency = (action$, store) =>
+export const fetchEntityListItemDependency = action$ =>
   action$.ofType('FETCH_LIST_ITEMS').map(a => ({
     type: 'FETCH_DATA',
     entityName: a.associatedEntityName
@@ -777,7 +783,7 @@ export const DeleteSubEntity = (action$, store) =>
     );
 
 export const ExecuteConfirmationDialogCallback = (action$, store) =>
-  action$.ofType('EXECUTE_CONFIRM_CALLBACK').switchMap(action => {
+  action$.ofType('EXECUTE_CONFIRM_CALLBACK').switchMap(() => {
     const currentConfirmationModal = getConfirmationDialogType(store.getState());
     const metaData = getConfirmationDialogMetaData(store.getState());
     switch (currentConfirmationModal) {
@@ -843,7 +849,7 @@ export const UploadCsv = (action$, store) =>
             Toast.error(`Number of Failures: ${response.result.numberOfFailures}`);
           }
         })
-        .map(response => ({
+        .map(() => ({
           type: 'FETCH_DATA_ITEM',
           entityName: a.entityName,
           id: a.selectedEntityId

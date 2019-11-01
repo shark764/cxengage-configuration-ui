@@ -27,6 +27,8 @@ describe('<UsersBulkActionsForm />', () => {
         identityProviders={[]}
         groups={fromJS([])}
         skills={fromJS([])}
+        isSaving={true}
+        isBulkUpdating={true}
       />
     );
     expect(rendered).toMatchSnapshot();

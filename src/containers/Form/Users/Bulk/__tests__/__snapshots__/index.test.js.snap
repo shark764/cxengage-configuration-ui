@@ -21,6 +21,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
     }
   }
   inviteNowIsChecked={true}
+  isBulkUpdating={true}
   isSaving={true}
   key="users:bulk"
   passwordResetIsChecked={true}
@@ -76,6 +77,7 @@ Object {
     "passwordReset": false,
   },
   "inviteNowIsChecked": true,
+  "isBulkUpdating": true,
   "isSaving": true,
   "key": "users:bulk",
   "passwordResetIsChecked": true,

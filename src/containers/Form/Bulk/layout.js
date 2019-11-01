@@ -69,7 +69,7 @@ export default class GenericBulkActionsForm extends Component {
               <RadioGroupField
                 name="active"
                 label="Active"
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 options={[{ label: 'Enabled', value: true }, { label: 'Disabled', value: false }]}
                 data-automation="bulkActiveChoose"
               />
@@ -85,5 +85,5 @@ GenericBulkActionsForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool
+  isBulkUpdating: PropTypes.bool
 };

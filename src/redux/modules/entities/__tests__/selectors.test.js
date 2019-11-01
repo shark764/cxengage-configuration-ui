@@ -28,11 +28,13 @@ import {
   hasPermission,
   userHasEveryPermissions,
   hasEveryPermission,
+  isItemInherited,
   isInherited,
   shouldDisableField,
   isCreating,
   isUpdating,
   isSaving,
+  isBulkUpdating,
   getCurrentSubEntity,
   getSelectedSubEntityId,
   getSelectedSubEntityName,
@@ -82,6 +84,7 @@ const initialState = fromJS({
       fetching: false,
       creating: true,
       updating: false,
+      bulkUpdating: false,
       subEntity: 'mockDependentEntity',
       selectedSubEntityId: '0001',
       selectedSubEntityName: 'mockDependentEntity',
@@ -157,6 +160,7 @@ describe('getCurrentEntityStore', () => {
         fetching: false,
         creating: true,
         updating: false,
+        bulkUpdating: false,
         subEntity: 'mockDependentEntity',
         selectedSubEntityId: '0001',
         selectedSubEntityName: 'mockDependentEntity',
@@ -390,6 +394,77 @@ describe('hasEveryPermission', () => {
   });
 });
 
+describe('isItemInherited', () => {
+  it('Returns if entity item is inherited', () => {
+    expect(isItemInherited(initialState)).toEqual(false);
+  });
+  it('Returns if entity item is inherited when currentEntity does not match default', () => {
+    expect(
+      isItemInherited(
+        fromJS({
+          Entities: {
+            currentEntity: 'users',
+            users: {
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004'
+                }
+              ]
+            }
+          }
+        }),
+        'users',
+        '0004'
+      )
+    ).toEqual(false);
+  });
+  it('Returns if entity item is inherited when currentEntity matches roles', () => {
+    expect(
+      isItemInherited(
+        fromJS({
+          Entities: {
+            currentEntity: 'roles',
+            roles: {
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004',
+                  type: 'system'
+                }
+              ]
+            }
+          }
+        }),
+        'roles',
+        '0004'
+      )
+    ).toEqual(false);
+  });
+  it('Returns if entity item is inherited when currentEntity matches groups', () => {
+    expect(
+      isItemInherited(
+        fromJS({
+          Entities: {
+            currentEntity: 'groups',
+            groups: {
+              selectedEntityId: '0005',
+              data: [
+                {
+                  id: '0005',
+                  name: 'everyone'
+                }
+              ]
+            }
+          }
+        }),
+        'groups',
+        '0005'
+      )
+    ).toEqual(true);
+  });
+});
+
 describe('isInherited', () => {
   it('Returns if selected entity is inherited', () => {
     expect(isInherited(initialState)).toEqual(false);
@@ -429,7 +504,12 @@ describe('isInherited', () => {
           Entities: {
             currentEntity: 'users',
             users: {
-              selectedEntityId: '0004'
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004'
+                }
+              ]
             }
           }
         })
@@ -580,6 +660,29 @@ describe('isSaving', () => {
               selectedEntityId: '0000',
               creating: false,
               updating: true
+            }
+          }
+        })
+      )
+    ).toEqual(true);
+  });
+});
+
+describe('isBulkUpdating', () => {
+  it('Returns if bulk actions form for instance of entity is being submmited', () => {
+    expect(isBulkUpdating(initialState)).toEqual(false);
+  });
+  it('Returns if bulk actions form for instance of entity is being updated', () => {
+    expect(
+      isBulkUpdating(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              creating: false,
+              updating: false,
+              bulkUpdating: true
             }
           }
         })

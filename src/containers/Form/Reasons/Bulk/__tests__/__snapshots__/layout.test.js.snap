@@ -11,6 +11,7 @@ exports[`<ReasonsBulkActionsForm /> renders reasons bulk actions form 1`] = `
         Reasons
       </span>
       <Styled(Toggle)
+        disabled={true}
         onChange={[Function]}
         value={false}
       />

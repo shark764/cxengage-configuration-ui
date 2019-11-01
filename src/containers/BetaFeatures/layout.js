@@ -55,16 +55,21 @@ const Feedback = styled.div`
   width: 40%;
 `;
 
+const Actions = styled.div`
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+`;
+
+const ActionButton = styled(Button)`
+  margin: 20px 0 0 10px;
+`;
+
 const Submit = styled(Button)`
   width: 90%;
   margin-left: 5%;
   margin-top: 20px;
   margin-bottom: 20px;
-`;
-
-const ActionButton = styled(Button)`
-  width: 90%;
-  margin: 20px 5%;
 `;
 
 export default class BetaFeatures extends Component {
@@ -148,14 +153,14 @@ export default class BetaFeatures extends Component {
           <FeaturesTitle background={this.props.theme.navbar} accent={this.props.theme.navbarText}>
             Beta Features / Pages
           </FeaturesTitle>
-          <div style={{ display: 'flex' }}>
+          <Actions>
             <ActionButton buttonType="secondary" onClick={() => this.toggleAll(true)}>
               Enable All
             </ActionButton>
             <ActionButton buttonType="secondary" onClick={() => this.toggleAll(false)}>
               Disable All
             </ActionButton>
-          </div>
+          </Actions>
           {Object.keys(this.state.features).map(entityName => (
             <Feature key={entityName}>
               <span>{this.state.pageTitles[entityName]}</span>

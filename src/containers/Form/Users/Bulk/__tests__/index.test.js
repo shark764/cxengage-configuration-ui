@@ -10,9 +10,10 @@ import { getCurrentFormValueByFieldName } from '../../../../../redux/modules/for
 import UsersBulkActionsForm, { mapStateToProps, createFormName } from '../';
 import {
   getCurrentEntity,
-  isCreating,
+  isSaving,
   getEntityData,
-  userHasPermissions
+  userHasPermissions,
+  isBulkUpdating
 } from '../../../../../redux/modules/entities/selectors';
 import { selectTenantIdentityProviders } from '../../../../../redux/modules/entities/identityProviders/selectors';
 
@@ -21,9 +22,10 @@ getCurrentFormValueByFieldName.mockImplementation(() => true);
 
 jest.mock('../../../../../redux/modules/entities/selectors');
 getCurrentEntity.mockImplementation(() => 'users');
-isCreating.mockImplementation(() => true);
+isSaving.mockImplementation(() => true);
 getEntityData.mockImplementation(() => new Map({}));
 userHasPermissions.mockImplementation(() => true);
+isBulkUpdating.mockImplementation(() => true);
 
 jest.mock('../../../../../redux/modules/entities/identityProviders/selectors');
 selectTenantIdentityProviders.mockImplementation(() => ({ label: 'idp1', value: '0001' }));

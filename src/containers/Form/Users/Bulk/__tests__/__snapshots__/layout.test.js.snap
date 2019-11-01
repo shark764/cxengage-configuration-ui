@@ -11,6 +11,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         data-automation="statusToggle"
+        disabled={true}
         onChange={[Function]}
         value={false}
       />
@@ -28,6 +29,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       >
         <Styled(ToggleField)
           data-automation="inviteNowToggle"
+          disabled={true}
           label=""
           name="inviteNow"
         />
@@ -47,6 +49,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       >
         <Styled(ToggleField)
           data-automation="resendInvitationToggle"
+          disabled={true}
           label=""
           name="resendInvitation"
         />
@@ -66,6 +69,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       >
         <Styled(ToggleField)
           data-automation="cancelInvitationToggle"
+          disabled={true}
           label=""
           name="cancelInvitation"
         />
@@ -85,6 +89,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       >
         <Styled(ToggleField)
           data-automation="passwordResetToggle"
+          disabled={true}
           label=""
           name="passwordReset"
         />
@@ -122,6 +127,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         data-automation="regionToggle"
+        disabled={true}
         onChange={[Function]}
         value={false}
       />
@@ -134,6 +140,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         data-automation="addGroupToggle"
+        disabled={true}
         onChange={[Function]}
         value={false}
       />
@@ -146,6 +153,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         data-automation="removeGroupToggle"
+        disabled={true}
         onChange={[Function]}
         value={false}
       />
@@ -158,6 +166,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         data-automation="addSkillToggle"
+        disabled={true}
         onChange={[Function]}
         value={false}
       />
@@ -170,6 +179,7 @@ exports[`<UsersBulkActionsForm /> renders users bulk actions form 1`] = `
       </span>
       <Styled(Toggle)
         data-automation="removeSkillToggle"
+        disabled={true}
         onChange={[Function]}
         value={false}
       />

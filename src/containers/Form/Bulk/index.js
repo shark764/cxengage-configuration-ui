@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import GenericBulkItemsFormLayout from './layout';
-import { isCreating, getCurrentEntity } from '../../../redux/modules/entities/selectors';
+import { isSaving, getCurrentEntity, isBulkUpdating } from '../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission } from '../../../redux/modules/form/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
@@ -22,7 +22,8 @@ const GenericBulkItemsForm = compose(
 export function mapStateToProps(state) {
   return {
     initialValues: selectFormInitialValues(state),
-    isSaving: isCreating(state),
+    isSaving: isSaving(state),
+    isBulkUpdating: isBulkUpdating(state),
     key: `${getCurrentEntity(state)}:bulk`
   };
 }

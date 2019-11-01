@@ -18,6 +18,7 @@ describe('<ReasonsBulkActionsForm />', () => {
         initialValues={fromJS({ shared: false })}
         sharedIsChecked={true}
         isSaving={true}
+        isBulkUpdating={true}
         change={() => {}}
         handleSubmit={() => {}}
       />

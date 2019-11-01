@@ -31,6 +31,15 @@ export const getSelectedEntityBulkChangeItems = state =>
     .filter(item => item.get('bulkChangeItem'))
     .reduce((accum, item) => accum.push(item.get('id')), List());
 
+/**
+ * Returns if bulk actions form for current entity
+ * has been submitted.
+ */
+export const isBulkUpdating = createSelector(
+  [getCurrentEntityStore],
+  currentEntity => currentEntity.get('bulkUpdating') || false
+);
+
 export const getConfirmationDialogType = state => getCurrentEntityStore(state).get('confirmationDialogType');
 
 export const getConfirmationDialogMetaData = state => getCurrentEntityStore(state).get('confirmationDialogMetaData');
@@ -91,29 +100,29 @@ export const hasEveryPermission = (userPermissions, permissionsNeeded) => {
   }
 };
 
-export const isInherited = state => {
-  if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
-    switch (getCurrentEntity(state)) {
-      case 'roles': {
-        return (
-          getSelectedEntity(state).get('type') !== 'system' &&
-          getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state)
-        );
-      }
-      case 'groups': {
-        return getSelectedEntity(state).get('name') === 'everyone';
-      }
-      case 'users':
-      case 'agentStateMonitoring':
-      case 'tenants':
-        return false;
-      default:
-        return getSelectedEntity(state).get('tenantId') !== getCurrentTenantId(state);
+export const isItemInherited = (state, entityName = null, entityId = null) => {
+  const currentEntity = entityName || getCurrentEntity(state);
+  const selectedEntity = entityId ? findEntity(state, currentEntity, entityId) : getSelectedEntity(state);
+  const currentTenantId = getCurrentTenantId(state);
+
+  switch (currentEntity) {
+    case 'roles': {
+      return selectedEntity.get('type') !== 'system' && selectedEntity.get('tenantId') !== currentTenantId;
     }
-  } else {
-    return false;
+    case 'groups': {
+      return selectedEntity.get('name') === 'everyone';
+    }
+    case 'users':
+    case 'agentStateMonitoring':
+    case 'tenants':
+      return false;
+    default:
+      return selectedEntity.get('tenantId') !== currentTenantId;
   }
 };
+
+export const isInherited = state =>
+  getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk' ? isItemInherited(state) : false;
 
 export const isSystemRole = state => {
   if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {

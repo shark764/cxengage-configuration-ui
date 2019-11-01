@@ -637,6 +637,12 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_DATA_ITEM_REJECTED': {
       return setEntityUpdatingHelper(state, action, false);
     }
+    case 'BULK_ENTITY_UPDATE': {
+      return state.setIn([action.entityName, 'bulkUpdating'], true);
+    }
+    case 'BULK_ENTITY_UPDATE_rejected': {
+      return state.deleteIn([state.get('currentEntity'), 'bulkUpdating']);
+    }
     case 'TOGGLE_BULK_ENTITY_CHANGE': {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1 && action.bool !== undefined) {
@@ -740,7 +746,9 @@ export default function reducer(state = initialState, action) {
       ) {
         const userEntityIndex = findEntityIndex(state, 'users', action.response.result.userId);
         if (action.values.addSkill) {
-          return state.updateIn(['users', 'data', userEntityIndex, 'skills'], skills => skills.push(fromJS(result)));
+          return state
+            .updateIn(['users', 'data', userEntityIndex, 'skills'], skills => skills.push(fromJS(result)))
+            .deleteIn(['users', 'bulkUpdating']);
         } else if (action.values.removeSkill) {
           const skillIndex = state.getIn(['users', 'data', userEntityIndex, 'skills']).findIndex(skill => {
             if (typeof skill === 'object') {
@@ -749,9 +757,13 @@ export default function reducer(state = initialState, action) {
               return action.values.removeSkillId === skill;
             }
           });
-          return state.deleteIn(['users', 'data', userEntityIndex, 'skills', skillIndex]);
+          return state
+            .deleteIn(['users', 'data', userEntityIndex, 'skills', skillIndex])
+            .deleteIn(['users', 'bulkUpdating']);
         } else if (action.values.addGroup) {
-          return state.updateIn(['users', 'data', userEntityIndex, 'groups'], groups => groups.push(fromJS(result)));
+          return state
+            .updateIn(['users', 'data', userEntityIndex, 'groups'], groups => groups.push(fromJS(result)))
+            .deleteIn(['users', 'bulkUpdating']);
         } else if (action.values.removeGroup) {
           const groupIndex = state.getIn(['users', 'data', userEntityIndex, 'groups']).findIndex(group => {
             if (typeof group === 'object') {
@@ -760,7 +772,9 @@ export default function reducer(state = initialState, action) {
               return action.values.removeGroupId === group;
             }
           });
-          return state.deleteIn(['users', 'data', userEntityIndex, 'groups', groupIndex]);
+          return state
+            .deleteIn(['users', 'data', userEntityIndex, 'groups', groupIndex])
+            .deleteIn(['users', 'bulkUpdating']);
         }
       }
 
@@ -782,9 +796,10 @@ export default function reducer(state = initialState, action) {
 
         return state
           .remove('loading')
-          .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }));
+          .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result, updating: false }))
+          .deleteIn([action.entityName, 'bulkUpdating']);
       }
-      return state;
+      return state.deleteIn([action.entityName, 'bulkUpdating']);
     }
     case 'TOGGLE_LIST_ITEM_ENTITY': {
       return state.set('loading', action.id);

@@ -9,6 +9,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
       "shared": false,
     }
   }
+  isBulkUpdating={true}
   isSaving={true}
   key="reasons:bulk"
   sharedIsChecked={true}
@@ -53,6 +54,7 @@ Object {
   "initialValues": Immutable.Map {
     "shared": false,
   },
+  "isBulkUpdating": true,
   "isSaving": true,
   "key": "reasons:bulk",
   "sharedIsChecked": true,

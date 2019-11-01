@@ -98,6 +98,7 @@ export default class UsersBulkActionsForm extends Component {
               onChange={() => this.toggleFormField('status')}
               value={this.state.visibleFields.status}
               data-automation="statusToggle"
+              disabled={this.props.isSaving || this.props.isBulkUpdating}
             />
           </ToggleList>
           {this.state.visibleFields.status && (
@@ -105,7 +106,7 @@ export default class UsersBulkActionsForm extends Component {
               <RadioGroupField
                 name="status"
                 label="Status"
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 options={[{ label: 'Enabled', value: 'accepted' }, { label: 'Disabled', value: 'disabled' }]}
                 data-automation="statusChoose"
               />
@@ -124,7 +125,7 @@ export default class UsersBulkActionsForm extends Component {
               <StyledToggleField
                 name="inviteNow"
                 label=""
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 data-automation="inviteNowToggle"
               />
             </ConfirmationWrapper>
@@ -144,7 +145,7 @@ export default class UsersBulkActionsForm extends Component {
               <StyledToggleField
                 name="resendInvitation"
                 label=""
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 data-automation="resendInvitationToggle"
               />
             </ConfirmationWrapper>
@@ -164,7 +165,7 @@ export default class UsersBulkActionsForm extends Component {
               <StyledToggleField
                 name="cancelInvitation"
                 label=""
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 data-automation="cancelInvitationToggle"
               />
             </ConfirmationWrapper>
@@ -185,7 +186,7 @@ export default class UsersBulkActionsForm extends Component {
                 <StyledToggleField
                   name="passwordReset"
                   label=""
-                  disabled={this.props.isSaving || this.props.inherited}
+                  disabled={this.props.isSaving || this.props.isBulkUpdating}
                   data-automation="passwordResetToggle"
                 />
               </ConfirmationWrapper>
@@ -206,7 +207,7 @@ export default class UsersBulkActionsForm extends Component {
               <SelectField
                 name="noPassword"
                 label="Platform Authentication"
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 options={[
                   { label: 'Use Tenant Default', value: 'null' },
                   { label: 'Enabled', value: false },
@@ -232,7 +233,7 @@ export default class UsersBulkActionsForm extends Component {
               <SelectField
                 name="defaultIdentityProvider"
                 label="Single Sign On Identitiy Provider"
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 options={this.props.identityProviders}
                 required
                 data-automation="defaultIdentityProviderList"
@@ -247,6 +248,7 @@ export default class UsersBulkActionsForm extends Component {
               onChange={() => this.toggleFormField('region')}
               value={this.state.visibleFields.region}
               data-automation="regionToggle"
+              disabled={this.props.isSaving || this.props.isBulkUpdating}
             />
           </ToggleList>
           {this.state.visibleFields.region && (
@@ -254,7 +256,7 @@ export default class UsersBulkActionsForm extends Component {
               <SelectField
                 name="region"
                 label="Twilio Region"
-                disabled={this.props.isSaving || this.props.inherited}
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
                 options={regions}
                 data-automation="regionList"
               />
@@ -268,6 +270,7 @@ export default class UsersBulkActionsForm extends Component {
               onChange={() => this.toggleFormField('addGroup')}
               value={this.state.visibleFields.addGroup}
               data-automation="addGroupToggle"
+              disabled={this.props.isSaving || this.props.isBulkUpdating}
             />
           </ToggleList>
           {this.state.visibleFields.addGroup && (
@@ -283,6 +286,7 @@ export default class UsersBulkActionsForm extends Component {
                   return acc;
                 }, [])}
                 data-automation="addGroupAutoComplete"
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
               />
             </BulkActions>
           )}
@@ -294,6 +298,7 @@ export default class UsersBulkActionsForm extends Component {
               onChange={() => this.toggleFormField('removeGroup')}
               value={this.state.visibleFields.removeGroup}
               data-automation="removeGroupToggle"
+              disabled={this.props.isSaving || this.props.isBulkUpdating}
             />
           </ToggleList>
           {this.state.visibleFields.removeGroup && (
@@ -309,6 +314,7 @@ export default class UsersBulkActionsForm extends Component {
                   return acc;
                 }, [])}
                 data-automation="removeGroupAutoComplete"
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
               />
             </BulkActions>
           )}
@@ -320,6 +326,7 @@ export default class UsersBulkActionsForm extends Component {
               onChange={() => this.toggleFormField('addSkill')}
               value={this.state.visibleFields.addSkill}
               data-automation="addSkillToggle"
+              disabled={this.props.isSaving || this.props.isBulkUpdating}
             />
           </ToggleList>
           {this.state.visibleFields.addSkill && (
@@ -330,6 +337,7 @@ export default class UsersBulkActionsForm extends Component {
                 placeholder="Search..."
                 suggestions={this.props.skills.toJS().map(skill => skill.name)}
                 data-automation="addSkillAutoComplete"
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
               />
             </BulkActions>
           )}
@@ -341,6 +349,7 @@ export default class UsersBulkActionsForm extends Component {
               onChange={() => this.toggleFormField('removeSkill')}
               value={this.state.visibleFields.removeSkill}
               data-automation="removeSkillToggle"
+              disabled={this.props.isSaving || this.props.isBulkUpdating}
             />
           </ToggleList>
           {this.state.visibleFields.removeSkill && (
@@ -351,6 +360,7 @@ export default class UsersBulkActionsForm extends Component {
                 placeholder="Search..."
                 suggestions={this.props.skills.toJS().map(skill => skill.name)}
                 data-automation="removeSkillAutoComplete"
+                disabled={this.props.isSaving || this.props.isBulkUpdating}
               />
             </BulkActions>
           )}
@@ -379,5 +389,5 @@ UsersBulkActionsForm.propTypes = {
   groups: PropTypes.object,
   skills: PropTypes.object,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool
+  isBulkUpdating: PropTypes.bool
 };

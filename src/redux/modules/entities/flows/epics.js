@@ -9,7 +9,6 @@ import 'rxjs/add/operator/catch';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
-import { camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
 import { entitiesMetaData } from '../metaData';
 import {
   getCurrentEntity,
@@ -22,7 +21,7 @@ import {
 import { change } from 'redux-form';
 import { getNewFlowDraftName } from './selectors';
 
-export const CreateFlow = (action$, store) =>
+export const CreateFlow = action$ =>
   action$
     .ofType('CREATE_ENTITY')
     .filter(({ entityName }) => entityName === 'flows')
@@ -37,9 +36,7 @@ export const CreateFlow = (action$, store) =>
     })
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response =>
-          handleSuccess(response, a, `${camelCaseToRegularFormAndRemoveLastLetter('flows')} was created successfully!`)
-        )
+        .map(response => handleSuccess(response, a, `Flow was created successfully!`))
         .catch(error => handleError(error, a))
     );
 
@@ -80,29 +77,28 @@ export const CreateFlowFullfilled = action$ =>
       }
     });
 
-export const CreateFlowDraft = (action$, store) =>
+export const CreateFlowDraft = action$ =>
   action$
     .ofType('CREATE_FLOW_DRAFT')
-    .map(a => {
-      a.sdkCall = {
+    .map(a => ({
+      ...a,
+      sdkCall: {
         command: 'createFlowDraft',
-        data: {},
+        data: {
+          ...a.values,
+          flowId: a.entityId
+        },
         module: 'entities',
         topic: 'cxengage/entities/create-flow-draft-response'
-      };
-      a.sdkCall.data = {
-        ...a.values,
-        flowId: a.entityId
-      };
-      return { ...a };
-    })
+      }
+    }))
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response => handleSuccess(response, a, `Flow draft was created successfully!`))
         .catch(error => handleError(error, a))
     );
 
-export const UpdateFlow = (action$, store) =>
+export const UpdateFlow = action$ =>
   action$
     .ofType('UPDATE_ENTITY')
     .filter(({ entityName }) => entityName === 'flows')
@@ -117,9 +113,7 @@ export const UpdateFlow = (action$, store) =>
     })
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response =>
-          handleSuccess(response, a, `${camelCaseToRegularFormAndRemoveLastLetter('flows')} was updated successfully!`)
-        )
+        .map(response => handleSuccess(response, a, `Flow was updated successfully!`))
         .catch(error => handleError(error, a))
     );
 
@@ -128,8 +122,8 @@ export const CopyFlowFormSubmission = (action$, store) =>
     .ofType('COPY_LIST_ITEM_FORM_SUBMIT')
     .debounceTime(300)
     .filter(({ dirty }) => dirty)
-    .map(action => ({
-      ...action,
+    .map(a => ({
+      ...a,
       selectedSubEntityId: getSelectedSubEntityId(store.getState())
     }))
     .filter(({ selectedSubEntityId }) => selectedSubEntityId)
@@ -170,32 +164,31 @@ export const CopyFlowFormSubmission = (action$, store) =>
 export const RemoveFlowDraft = (action$, store) =>
   action$
     .ofType('REMOVE_LIST_ITEM')
-    .map(action => ({
-      ...action,
+    .map(a => ({
+      ...a,
       entityName: getCurrentEntity(store.getState()),
       listId: getSelectedEntityId(store.getState())
     }))
     .filter(({ entityName }) => entityName === 'flows')
-    .map(a => {
-      a.sdkCall = {
+    .map(a => ({
+      ...a,
+      sdkCall: {
         command: 'removeFlowDraft',
-        data: {},
+        data: {
+          flowId: a.listId,
+          draftId: a.listItemId
+        },
         module: 'entities',
         topic: 'cxengage/entities/remove-flow-draft-response'
-      };
-      a.sdkCall.data = {
-        flowId: a.listId,
-        draftId: a.listItemId
-      };
-      return { ...a };
-    })
+      }
+    }))
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response => handleSuccess(response, a))
         .catch(error => handleError(error, a))
     );
 
-export const OpenFlowDesigner = (action$, store) =>
+export const OpenFlowDesigner = action$ =>
   action$
     .ofType('OPEN_FLOW_DESIGNER')
     .map(a => ({

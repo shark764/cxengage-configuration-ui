@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import GenericBulkItemsForm, { mapStateToProps, createFormName } from '../';
-import { getCurrentEntity, isCreating } from '../../../../redux/modules/entities/selectors';
+import { getCurrentEntity, isSaving, isBulkUpdating } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/form/selectors');
@@ -16,7 +16,8 @@ getCurrentForm.mockImplementation(() => 'gets form from state');
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getCurrentEntity.mockImplementation(() => 'mockEntity');
-isCreating.mockImplementation(() => true);
+isSaving.mockImplementation(() => true);
+isBulkUpdating.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 describe('GenericBulkItems Renders', () => {

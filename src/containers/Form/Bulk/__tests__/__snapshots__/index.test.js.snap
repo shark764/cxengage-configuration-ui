@@ -8,6 +8,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
       "active": true,
     }
   }
+  isBulkUpdating={true}
   isSaving={true}
   key="mockEntity:bulk"
   store={
@@ -49,6 +50,7 @@ Object {
   "initialValues": Object {
     "active": true,
   },
+  "isBulkUpdating": true,
   "isSaving": true,
   "key": "mockEntity:bulk",
 }
