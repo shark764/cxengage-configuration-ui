@@ -47,7 +47,7 @@ export default function DataAccessReportsForm({
       <DetailHeader text="Report" />
       <RadioGroupField
         name="reportType"
-        data-automation="reportTypeChoose"
+        data-automation="reportTypeRadio"
         label="Type *"
         id="frm-data-access-reports-report-type"
         disabled={isSaving || !userHasUpdatePermission}
@@ -60,7 +60,7 @@ export default function DataAccessReportsForm({
             name="realtimeReportType"
             label="Realtime Report Type *"
             id="frm-data-access-reports-realtime-report-type"
-            data-automation="realtimeReportTypeChoose"
+            data-automation="realtimeReportTypeRadio"
             disabled={isSaving || !userHasUpdatePermission}
             options={[{ label: 'Standard', value: 'standard' }, { label: 'Custom', value: 'custom' }]}
             required

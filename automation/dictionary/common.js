@@ -61,7 +61,9 @@ const commonBehavior = {
     Elem.detailsPanelAlertText.validateElementsState('isVisible', true);
   },
   insertAutoCompleteValues(parameter, param) {
-    Elem[param].setValue(parameter[param]);
+    let autoCompleteInput = new Element(`input${Elem[param].selector}`);
+    autoCompleteInput.waitAndClick();
+    autoCompleteInput.setValue(parameter[param]);
     let autoCompleteValue = new Element(`.//li[text()="${parameter[param]}"]`);
     autoCompleteValue.waitAndClick();
   },
@@ -94,7 +96,7 @@ const commonBehavior = {
           this.insertListValues(parameter, param);
         } else if (param.endsWith('Radio')) {
           this.insertRadioValues(parameter, param);
-        } else if (param.endsWith('Auto')) {
+        } else if (param.endsWith('AutoComplete')) {
           this.insertAutoCompleteValues(parameter, param);
         } else if (param.endsWith('Toggle')) {
           this.insertToggleValues(parameter, param);
@@ -132,7 +134,7 @@ const commonBehavior = {
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
     Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
-    this.closeToastr();
+    this.closeToastr(entity, actionType);
   },
   verifyEntitySpecificAction(entity) {
     if (entity === 'Api Key') {
@@ -152,11 +154,16 @@ const commonBehavior = {
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
     Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was disabled successfully!`);
-    this.closeToastr();
+    this.closeToastr(entity);
   },
-  closeToastr() {
+  closeToastr(entity, actionType) {
     if (Elem.toastCloseButton.isVisible()) {
       Elem.toastCloseButton.waitAndClick();
+      if(entity === 'User' && actionType === 'create') {
+        let userCreatedToastr = new Element(`.//div[text()="User was created successfully!"]`);
+        userCreatedToastr.waitForVisible(30000, false);
+        Elem.toastCloseButton.waitAndClick();
+      }
       Elem.toastCloseButton.waitForVisible(30000, false);
       Elem.toastCloseButton.validateElementsState('isVisible', false);
     }

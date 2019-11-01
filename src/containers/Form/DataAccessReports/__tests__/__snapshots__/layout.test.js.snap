@@ -29,7 +29,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
     text="Report"
   />
   <RadioGroupField
-    data-automation="reportTypeChoose"
+    data-automation="reportTypeRadio"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -50,7 +50,7 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
   />
   <React.Fragment>
     <RadioGroupField
-      data-automation="realtimeReportTypeChoose"
+      data-automation="realtimeReportTypeRadio"
       disabled={false}
       id="frm-data-access-reports-realtime-report-type"
       label="Realtime Report Type *"
@@ -111,7 +111,7 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
     text="Report"
   />
   <RadioGroupField
-    data-automation="reportTypeChoose"
+    data-automation="reportTypeRadio"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -171,7 +171,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
     text="Report"
   />
   <RadioGroupField
-    data-automation="reportTypeChoose"
+    data-automation="reportTypeRadio"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -192,7 +192,7 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
   />
   <React.Fragment>
     <RadioGroupField
-      data-automation="realtimeReportTypeChoose"
+      data-automation="realtimeReportTypeRadio"
       disabled={false}
       id="frm-data-access-reports-realtime-report-type"
       label="Realtime Report Type *"
@@ -253,7 +253,7 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
     text="Report"
   />
   <RadioGroupField
-    data-automation="reportTypeChoose"
+    data-automation="reportTypeRadio"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -274,7 +274,7 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
   />
   <React.Fragment>
     <RadioGroupField
-      data-automation="realtimeReportTypeChoose"
+      data-automation="realtimeReportTypeRadio"
       disabled={false}
       id="frm-data-access-reports-realtime-report-type"
       label="Realtime Report Type *"
@@ -335,7 +335,7 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
     text="Report"
   />
   <RadioGroupField
-    data-automation="reportTypeChoose"
+    data-automation="reportTypeRadio"
     disabled={false}
     id="frm-data-access-reports-report-type"
     label="Type *"
@@ -395,7 +395,7 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
     text="Report"
   />
   <RadioGroupField
-    data-automation="reportTypeChoose"
+    data-automation="reportTypeRadio"
     disabled={true}
     id="frm-data-access-reports-report-type"
     label="Type *"

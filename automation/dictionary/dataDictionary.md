@@ -144,6 +144,6 @@ Direction           |   directionList
 Name                        |  nameInput
 Description                 |	descriptionInput
 Type                        |   typeChoose
-Realtime Report Type        |   realtimeReportTypeChoose
+Realtime Report Type        |   realtimeReportTypeRadio
 historical Reports Folders  |   historicalReportAutoComplete
 Realtime Report             |   realtimeReportAutoComplete

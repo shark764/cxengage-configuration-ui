@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.66.27] - 2019-11-01
+## Added
+- <no-Jira> - Added automation tests
+
 ## [0.66.26] - 2019-10-30
 ## Fixed
 - CXV1-20423 - Changing Beta Features without clicking Apply Changes keeps visual indicators
