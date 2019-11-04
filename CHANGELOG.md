@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.66.31] - 2019-11-04
+## Fixed
+- CXV1-20518 - Display confirmation modal before submitting bulk actions form.
+
 ## [0.66.30] - 2019-11-01
 ## Fixed
 - CXV1-20511 - Loading icon remains in modal when getting a forbidden request after adding permissions to a Role.

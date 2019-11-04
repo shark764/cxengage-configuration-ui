@@ -17,10 +17,14 @@ export const getCurrentEntity = state => getEntities(state).get('currentEntity')
 
 export const getCurrentEntityStore = state => getEntities(state).get(getCurrentEntity(state));
 
-export const getSidePanelWidth = state => getCurrentEntityStore(state).get('sidePanelWidth');
-
 export const getSelectedEntityId = state =>
   getCurrentEntityStore(state) && getCurrentEntityStore(state).get('selectedEntityId');
+
+export const getSidePanelWidth = createSelector(
+  [getCurrentEntityStore, getSelectedEntityId],
+  (currentEntityStore, selectedEntityId) =>
+    selectedEntityId !== 'bulk' ? currentEntityStore.get('sidePanelWidth') : 550
+);
 
 export const itemApiPending = state => state.getIn(['Entities', 'loading']);
 

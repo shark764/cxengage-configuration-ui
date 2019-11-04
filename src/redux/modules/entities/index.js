@@ -146,7 +146,6 @@ const initialState = fromJS({
     metaData: {
       listDependency: 'users'
     },
-    sidePanelWidth: 750,
     readPermission: ['VIEW_ALL_GROUPS'],
     updatePermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',

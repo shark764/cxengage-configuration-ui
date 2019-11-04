@@ -7,6 +7,10 @@ import { shallow } from 'enzyme';
 import { mockStore } from '../../../utils/testUtils';
 import SidePanelActions, { mapStateToProps, actions } from '../';
 
+jest.mock('../../../redux/modules/entities/messageTemplates/selectors', () => ({
+  isDisplayContentInHtml: () => true
+}));
+
 jest.mock('../../../redux/modules/entities');
 jest.mock('../../../redux/modules/form/selectors', () => ({
   isFormInvalid: () => true,
@@ -16,10 +20,11 @@ jest.mock('../../../redux/modules/form/selectors', () => ({
 
 jest.mock('../../../redux/modules/entities/selectors', () => ({
   isSaving: () => true,
+  isBulkUpdating: () => true,
   getSelectedEntityFormId: () => 'mock selected entity form id',
   getSelectedEntity: () => 'mock selected entity',
   getSelectedEntityId: () => 'mock selected entity id',
-  getCurrentEntityStore: () => undefined
+  getSelectedEntityBulkChangeItems: () => 'mock bulk selected'
 }));
 
 describe('SidePanelActions Renders', () => {

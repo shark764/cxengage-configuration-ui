@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 import { fromJS, List } from 'immutable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { from } from 'rxjs/observable/from';
+import { of } from 'rxjs/observable/of';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Toast } from 'cx-ui-components';
 import { clearFields, touch, change } from 'redux-form';
@@ -366,19 +367,22 @@ export const BulkEntityUpdate = (action$, store) =>
       }, []);
       return { ...a };
     })
-    .mergeMap(a =>
-      forkJoin(
-        a.allSdkCalls.map(apiCall =>
-          from(
-            sdkPromise(apiCall).catch(error => ({
-              error: error,
-              id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
-            }))
-          )
-        )
-      )
-        .do(allResult => handleBulkSuccess(allResult))
-        .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+    .mergeMap(
+      a =>
+        a.allSdkCalls.length > 0
+          ? forkJoin(
+              a.allSdkCalls.map(apiCall =>
+                from(
+                  sdkPromise(apiCall).catch(error => ({
+                    error: error,
+                    id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
+                  }))
+                )
+              )
+            )
+              .do(allResult => handleBulkSuccess(allResult))
+              .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
 export const ToggleEntity = (action$, store) =>

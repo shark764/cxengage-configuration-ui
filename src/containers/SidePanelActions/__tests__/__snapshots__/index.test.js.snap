@@ -9,9 +9,12 @@ Object {
 
 exports[`mapStateToProps maps the selectors to the object correctly 1`] = `
 Object {
+  "bulkItemsAffected": undefined,
   "dirty": true,
   "invalid": true,
+  "isBulkUpdating": true,
   "isSaving": true,
   "pristine": false,
+  "selectedEntityId": "mock selected entity id",
 }
 `;

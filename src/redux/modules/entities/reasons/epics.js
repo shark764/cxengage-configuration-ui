@@ -8,6 +8,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { from } from 'rxjs/observable/from';
+import { of } from 'rxjs/observable/of';
 import { removeLastLetter } from 'serenova-js-utils/strings';
 import { Toast } from 'cx-ui-components';
 import { getSelectedEntityBulkChangeItems, findEntity } from '../selectors';
@@ -47,17 +48,20 @@ export const BulkEntityUpdate = (action$, store) =>
 
       return { ...a };
     })
-    .mergeMap(a =>
-      forkJoin(
-        a.allSdkCalls.map(apiCall =>
-          from(
-            sdkPromise(apiCall).catch(error => ({
-              error: error,
-              id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
-            }))
-          )
-        )
-      )
-        .do(allResult => handleBulkSuccess(allResult))
-        .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+    .mergeMap(
+      a =>
+        a.allSdkCalls.length > 0
+          ? forkJoin(
+              a.allSdkCalls.map(apiCall =>
+                from(
+                  sdkPromise(apiCall).catch(error => ({
+                    error: error,
+                    id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
+                  }))
+                )
+              )
+            )
+              .do(allResult => handleBulkSuccess(allResult))
+              .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );

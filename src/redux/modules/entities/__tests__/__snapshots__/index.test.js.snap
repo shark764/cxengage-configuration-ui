@@ -534,7 +534,7 @@ Immutable.Map {
   "groups": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
     "metaData": Immutable.Map {
       "listDependency": "users",
