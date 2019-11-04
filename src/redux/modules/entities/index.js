@@ -640,7 +640,8 @@ export default function reducer(state = initialState, action) {
     case 'BULK_ENTITY_UPDATE': {
       return state.setIn([action.entityName, 'bulkUpdating'], true);
     }
-    case 'BULK_ENTITY_UPDATE_rejected': {
+    case 'BULK_ENTITY_UPDATE_rejected':
+    case 'BULK_ENTITY_UPDATE_cancelled': {
       return state.deleteIn([state.get('currentEntity'), 'bulkUpdating']);
     }
     case 'TOGGLE_BULK_ENTITY_CHANGE': {
@@ -878,7 +879,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'UPDATE_ENTITY_REJECTED':
     case 'UPLOAD_CSV_REJECTED': {
-      return setEntityUpdatingHelper(state, action, false);
+      return setEntityUpdatingHelper(state.remove('loading'), action, false);
     }
     case 'SET_ENTITY_UPDATING': {
       return setEntityUpdatingHelper(state, action, action.updating);

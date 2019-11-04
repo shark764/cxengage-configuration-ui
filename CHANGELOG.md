@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.66.30] - 2019-11-01
+## Fixed
+- CXV1-20511 - Loading icon remains in modal when getting a forbidden request after adding permissions to a Role.
+
 ## [0.66.29] - 2019-11-01
 ## Fixed
 - <no-jira> - cx-ui-components version bump & updated node from 8.11.3 to 10.5.0
