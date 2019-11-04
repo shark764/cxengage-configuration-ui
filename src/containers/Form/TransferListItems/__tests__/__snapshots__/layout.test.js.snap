@@ -129,9 +129,11 @@ exports[`<TransferListItemsForm> renders create transfer list items form 1`] = `
     />
   </React.Fragment>
   <SidePanelActions
+    bulkItemsAffected={0}
     isSaving={false}
     onCancel={[Function]}
     save={false}
+    selectedEntityId=""
   />
 </form>
 `;
@@ -159,9 +161,11 @@ exports[`<TransferListItemsForm> renders update category header form 1`] = `
     />
   </React.Fragment>
   <SidePanelActions
+    bulkItemsAffected={0}
     isSaving={false}
     onCancel={[Function]}
     save={false}
+    selectedEntityId=""
   />
 </form>
 `;
@@ -289,9 +293,11 @@ exports[`<TransferListItemsForm> renders update transfer list items form 1`] = `
     />
   </React.Fragment>
   <SidePanelActions
+    bulkItemsAffected={0}
     isSaving={false}
     onCancel={[Function]}
     save={false}
+    selectedEntityId=""
   />
 </form>
 `;

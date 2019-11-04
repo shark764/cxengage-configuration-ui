@@ -9,7 +9,7 @@ exports[`SidePanel Layout renders the side panel 1`] = `
   <styled.div
     slidingWidth={30}
   >
-    <Styled(Connect(SidePanelHeader)) />
+    <Styled(Connect(withRouter(SidePanelHeader))) />
     <Styled(Connect(SidePanelActions)) />
   </styled.div>
 </React.Fragment>

@@ -48,10 +48,12 @@ exports[`<ListItemsForm /> renders create list item 1`] = `
     />
   </styled.div>
   <SidePanelActions
+    bulkItemsAffected={0}
     invalid={false}
     isSaving={false}
     onCancel={[Function]}
     pristine={false}
+    selectedEntityId=""
   />
 </form>
 `;
@@ -104,10 +106,12 @@ exports[`<ListItemsForm /> renders update list item 1`] = `
     />
   </styled.div>
   <SidePanelActions
+    bulkItemsAffected={0}
     invalid={false}
     isSaving={false}
     onCancel={[Function]}
     pristine={false}
+    selectedEntityId=""
   />
 </form>
 `;
