@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import NavigationLayout from './layout';
+import { setCurrentEntity, setSelectedEntityId } from '../../redux/modules/entities';
 
 import {
   authenticatedAndBrandingReady,
@@ -21,7 +22,9 @@ export function mapStateToProps(state, props) {
 }
 
 export const actions = {
-  switchTenant
+  switchTenant,
+  setCurrentEntity,
+  setSelectedEntityId
 };
 
 export default connect(mapStateToProps, actions)(NavigationLayout);

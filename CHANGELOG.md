@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.66.32] - 2019-11-05
+## Fixed
+- CXV1-20561 - Navigating between the pages throws different errors.
+
 ## [0.66.31] - 2019-11-04
 ## Fixed
 - CXV1-20518 - Display confirmation modal before submitting bulk actions form.
