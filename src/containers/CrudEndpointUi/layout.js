@@ -52,6 +52,7 @@ import UpdateReasonListItemsForm from '../Form/ReasonListItems/Update';
 import CreateReasonListItemForm from '../Form/ReasonListItems/Create';
 import ReasonsBulkActionsForm from '../Form/Reasons/Bulk';
 import TenantsForm from '../Form/Tenants';
+import DispositionListsForm from '../Form/DispositionLists';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -81,6 +82,7 @@ import ApiKeysDetailsPanel from '../SidePanelDetails/ApiKeys';
 import BusinessHoursDetailsPanel from '../SidePanelDetails/BusinessHours';
 import MessageTemplatesDetailsPanel from '../SidePanelDetails/MessageTemplates';
 import TenantsDetailsPanel from '../SidePanelDetails/Tenants';
+import DispositionListsDetailsPanel from '../SidePanelDetails/DispositionLists';
 //hygen-inject-before4
 
 const Wrapper = styled.div`
@@ -289,6 +291,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <TenantsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/dispositionLists',
+    component: () => (
+      <DetailsPanel>
+        <DispositionListsForm />
       </DetailsPanel>
     )
   }
@@ -515,6 +525,16 @@ const detailsPanelRoutes = [
         </TenantsDetailsPanel>
       </NoScrollDetailsPanel>
     )
+  },
+  {
+    path: '/configuration/dispositionLists',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <DispositionListsDetailsPanel>
+          <DispositionListsForm />
+        </DispositionListsDetailsPanel>
+      </NoScrollDetailsPanel>
+    )
   }
   //hygen-inject-before2
 ];
@@ -634,6 +654,22 @@ const bulkChangeFormRoutes = [
   },
   {
     path: '/configuration/transferLists',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/dispositionLists',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/dispositions',
     component: () => (
       <DetailsPanel>
         <GenericBulkActionsForm />

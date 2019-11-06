@@ -252,6 +252,13 @@ export default class Navigation extends Component {
                 >
                   Flows
                 </StyledLink>
+             
+                <StyledLink data-automation="navigationLinkDispositions" to="/configuration/dispositions" onClick={() => this.setCurrentEntityAndEntityId('dispositions')}>
+                  Dispositions
+                </StyledLink>
+                <StyledLink data-automation="navigationLinkDispositionLists" to="/configuration/dispositionLists" onClick={() => this.setCurrentEntityAndEntityId('dispositionLists')}>
+                  Disposition Lists
+                </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkFlowDebugger"
                   to="/flowDebugLogs"

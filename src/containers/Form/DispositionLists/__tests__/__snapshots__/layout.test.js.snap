@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DispositionListsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="You are using Hygen!"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <SelectField
+    disabled={false}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "custom label",
+          "value": "custom value",
+        },
+      ]
+    }
+    required={true}
+  />
+</form>
+`;
+
+exports[`<DispositionListsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="You are using Hygen!"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <SelectField
+    disabled={false}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "custom label",
+          "value": "custom value",
+        },
+      ]
+    }
+    required={true}
+  />
+</form>
+`;

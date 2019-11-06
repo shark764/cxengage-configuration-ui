@@ -731,6 +731,27 @@ Immutable.Map {
       "PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE",
     ],
   },
+  "dispositionLists": Immutable.Map {
+    "readPermission": Immutable.List [
+      "READ_DISPOSITION_LIST",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "CREATE_DISPOSITION_LIST",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "",
+    ],
+    "updatePermission": Immutable.List [
+      "UPDATE_DISPOSITION_LIST",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [
+      "",
+    ],
+  },
   "dashboards": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",

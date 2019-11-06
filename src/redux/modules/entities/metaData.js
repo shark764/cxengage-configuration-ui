@@ -176,7 +176,8 @@ export const listOfEntities = [
   'tenants',
   'flowDebugger',
   'apiKeys',
-  'businessHours'
+  'businessHours',
+  'dispositionLists'
 
   //Hygen-insert-at-end-of-list
 ];
@@ -695,6 +696,7 @@ entities.dispatchMappings.defaultFilters = [{ id: 'active', value: 'enabled' }];
 // Dispositions
 entities.dispositions.pageTitle = 'Dispositions Management';
 entities.dispositions.helpLink = '/Help/Content/Managing%20Dispositions/Creating_Dispositions.htm';
+entities.dispositions.bulkEditsAvailable = true;
 entities.dispositions.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -780,6 +782,18 @@ entities.tenants.columns = [
   { name: 'Description', active: true },
   { name: 'Identifier', active: true },
   { name: 'Parent Tenant', active: true },
+  { name: 'Status', active: true }
+];
+// Disposition Lists
+entities.dispositionLists.pageTitle = 'Disposition Lists Management';
+entities.dispositionLists.helpLink = '/Help/Content/Managing%20DispositionLists/Creating_DispositionLists.htm';
+entities.dispositionLists.dependentEntity = 'dependentEntity';
+entities.dispositionLists.bulkEditsAvailable = true;
+entities.dispositionLists.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'External Id', active: true },
+  { name: 'Shared', active: true },
   { name: 'Status', active: true }
 ];
 //Hygen-insert-new-entity-configuration

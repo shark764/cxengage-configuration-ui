@@ -295,6 +295,14 @@ const initialState = fromJS({
     createPermission: ['MANAGE_ALL_BUSINESS_HOURS'],
     disablePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
     assignPermission: ['MANAGE_ALL_BUSINESS_HOURS']
+  },
+  dispositionLists: {
+    ...defaultEntity,
+    readPermission: ['READ_DISPOSITION_LIST'],
+    updatePermission: ['UPDATE_DISPOSITION_LIST'],
+    createPermission: ['CREATE_DISPOSITION_LIST'],
+    disablePermission: [''],
+    assignPermission: ['']
   }
   //hygen-inject-before
 });

@@ -49,7 +49,8 @@ import {
   hasCustomUpdateEntity,
   hasCustomRemoveSubEntity,
   hasCustomCreateSubEntity,
-  hasCustomFetchEntityData
+  hasCustomFetchEntityData,
+  hasCustomFetchEntityItemData
 } from './config';
 
 import { downloadFile } from 'serenova-js-utils/browser';
@@ -230,6 +231,7 @@ export const FetchDataItem = action$ =>
   action$
     .ofType('FETCH_DATA_ITEM', 'FETCH_DATA_FLOW')
     .debounceTime(300)
+    .filter(({ entityName }) => hasCustomFetchEntityItemData(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('get', 'singleMainEntity');
       a.sdkCall.data = { [removeLastLetter(a.entityName) + 'Id']: a.id };
