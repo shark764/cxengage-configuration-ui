@@ -768,7 +768,7 @@ export default class CrudEndpointUiLayout extends Component {
       prevProps.bulkSelectedTotal.size > 0 &&
       this.props.bulkSelectedTotal.size === 0
     ) {
-      this.props.setSelectedEntityId('');
+      this.props.unsetSelectedEntityId();
     }
     if (prevProps.currentTenantId !== this.props.currentTenantId) {
       this.props.fetchData(this.props.match.params.entityName);
@@ -834,6 +834,7 @@ CrudEndpointUiLayout.propTypes = {
   fetchData: PropTypes.func.isRequired,
   selectedEntityId: PropTypes.string,
   selectedSubEntityId: PropTypes.string,
+  unsetSelectedEntityId: PropTypes.func,
   showConfirmationDialog: PropTypes.string,
   setSelectedSubEntityId: PropTypes.func,
   slidingWidth: PropTypes.number,

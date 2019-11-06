@@ -793,16 +793,6 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
     const currentConfirmationModal = getConfirmationDialogType(store.getState());
     const metaData = getConfirmationDialogMetaData(store.getState());
     switch (currentConfirmationModal) {
-      case MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE:
-        return [
-          {
-            type: 'TOGGLE_ENTITY'
-          },
-          {
-            type: 'SET_CONFIRMATION_DIALOG',
-            modalType: undefined
-          }
-        ];
       case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
         return [
           uploadCsv(metaData),

@@ -223,7 +223,11 @@ export const ToggleUserEntity = (action$, store) =>
     .ofType('TOGGLE_ENTITY')
     .map(a => ({
       ...a,
-      entityName: getCurrentEntity(store.getState()),
+      entityName: getCurrentEntity(store.getState())
+    }))
+    .filter(a => a.entityName === 'users')
+    .map(a => ({
+      ...a,
       id: getSelectedEntityId(store.getState()),
       currentStatus: getSelectedEntity(store.getState()).get('status'),
       sdkCall: {
@@ -236,7 +240,6 @@ export const ToggleUserEntity = (action$, store) =>
         topic: 'cxengage/entities/update-user-response'
       }
     }))
-    .filter(a => a.entityName === 'users')
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>

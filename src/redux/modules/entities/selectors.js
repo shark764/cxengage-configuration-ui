@@ -294,3 +294,28 @@ export const findEntityByProperty = (state, entityName, entityProperty, value) =
         .find(entity => entity.has(entityProperty) && entity.get(entityProperty) === value);
 
 export const getEntityParentTenantName = state => getSelectedEntity(state).get('tenantName') || '';
+
+export const getEntityDisplay = createSelector(
+  [getSelectedEntity],
+  selectedEntity => selectedEntity.get('name') || getDisplay(selectedEntity.toJS())
+);
+
+export const getConfirmationToggleEntityMessage = createSelector(
+  [getCurrentEntity, getSelectedEntity, getSelectedEntityId],
+  (currentEntity, selectedEntity, selectedEntityId) => {
+    if (selectedEntityId === 'bulk' || selectedEntityId === 'create' || selectedEntityId === '') {
+      return null;
+    }
+    const title = entitiesMetaData[currentEntity].title;
+    if (selectedEntity.get('active') || selectedEntity.get('status') === 'accepted') {
+      if (currentEntity === 'roles') {
+        return `If you disable this role it will become unavailable for this tenant and all child tenants it is shared with and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role.`;
+      } else if (currentEntity === 'slas') {
+        return `This will disable the SLA, but will not remove its association with queue or tenant default settings. Associated queues or tenant settings will continue to use this SLA until they are updated.`;
+      } else {
+        return `This will disable this ${title}.`;
+      }
+    }
+    return `This will enable this ${title}.`;
+  }
+);

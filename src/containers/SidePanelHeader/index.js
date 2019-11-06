@@ -1,19 +1,20 @@
 /*
- * Copyright © 2015-2017 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
 import { connect } from 'react-redux';
 import { SidePanelHeader } from 'cx-ui-components';
 
-import * as MODALS from '../ConfirmationDialog/constants.js';
-
-import { unsetSelectedEntityId, setConfirmationDialog, copyCurrentEntity } from '../../redux/modules/entities';
+import { unsetSelectedEntityId, copyCurrentEntity, toggleEntity } from '../../redux/modules/entities';
 import {
   sidePanelHeader,
   userHasUpdatePermission,
   isInherited,
-  shouldDisableField
+  shouldDisableField,
+  isBulkUpdating,
+  getConfirmationToggleEntityMessage
 } from '../../redux/modules/entities/selectors';
+import { isFormPristine, isFormDirty } from '../../redux/modules/form/selectors';
 
 export function mapDispatchToProps(dispatch) {
   let actions = {};
@@ -24,7 +25,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     ...actions,
     onClose: () => dispatch(unsetSelectedEntityId()),
-    onToggle: () => dispatch(setConfirmationDialog(MODALS.CONFIRM_ENTITY_ACTIVE_TOGGLE))
+    onToggle: () => dispatch(toggleEntity())
   };
 }
 
@@ -36,7 +37,11 @@ export function mapStateToProps(state) {
     toggleStatus: sidePanelHeader(state).toggleStatus,
     userHasUpdatePermission: userHasUpdatePermission(state),
     inherited: isInherited(state),
-    disabled: shouldDisableField(state)
+    disabled: shouldDisableField(state),
+    isBulkUpdating: isBulkUpdating(state),
+    pristine: isFormPristine(state),
+    dirty: isFormDirty(state),
+    confirmationMessage: getConfirmationToggleEntityMessage(state)
   };
 }
 

@@ -26,6 +26,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.67.3] - 2019-11-05
+## Changed
+- <no-jira> - Version bump components library to 0.56.4.
+## Fixed
+- CXV1-20507 - Selected entity table item should be de-selected after clicking on close-side-panel/createEntityButton/bulk actions.
+- CXV1-20574 - Closing SidePanel Form should display a confirmation warning.
+
 ## [0.67.2] - 2019-11-05
 ## Added
 - <no-jira> - Automation test for SLA

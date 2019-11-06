@@ -52,7 +52,9 @@ import {
   getSelectedEntityWithIndex,
   sidePanelHeader,
   isUpdateForm,
-  userHasCurrentFormPermission
+  userHasCurrentFormPermission,
+  getEntityDisplay,
+  getConfirmationToggleEntityMessage
 } from '../selectors';
 import { EntityMetaData, entitiesMetaData } from '../metaData';
 import { getCurrentPermissions, getCurrentTenantId } from '../../userData/selectors';
@@ -1244,5 +1246,139 @@ describe('findEntityByProperty', () => {
         ]
       })
     );
+  });
+});
+
+describe('getEntityDisplay', () => {
+  it('Returns entity display for name value defined', () => {
+    expect(getEntityDisplay(initialState)).toEqual('mockName');
+  });
+  it('Returns entity display for users case', () => {
+    getDisplay.mockImplementationOnce(() => 'mockFirstName 1 mockLastName 1');
+    expect(
+      getEntityDisplay(
+        fromJS({
+          Entities: {
+            currentEntity: 'users',
+            users: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  firstName: 'mockFirstName 1',
+                  lastName: 'mockLastName 1'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual('mockFirstName 1 mockLastName 1');
+  });
+  it('Returns entity display for users case when no firstName and lastName defined', () => {
+    getDisplay.mockImplementationOnce(() => 'mock@mock.com');
+    expect(
+      getEntityDisplay(
+        fromJS({
+          Entities: {
+            currentEntity: 'users',
+            users: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  email: 'mock@mock.com'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual('mock@mock.com');
+  });
+});
+
+describe('getConfirmationToggleEntityMessage', () => {
+  it('Returns confirmation message for default entity case', () => {
+    expect(getConfirmationToggleEntityMessage(initialState)).toEqual('This will disable this Mock Entit.');
+  });
+  it('Returns confirmation message when selectedEntityId is create', () => {
+    expect(
+      getConfirmationToggleEntityMessage(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: 'create',
+              data: [{}]
+            }
+          }
+        })
+      )
+    ).toEqual(null);
+  });
+  it('Returns confirmation message for Roles entity case', () => {
+    expect(
+      getConfirmationToggleEntityMessage(
+        fromJS({
+          Entities: {
+            currentEntity: 'roles',
+            roles: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  active: true
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual(
+      'If you disable this role it will become unavailable for this tenant and all child tenants it is shared with and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role.'
+    );
+  });
+  it('Returns confirmation message for SLA entity case', () => {
+    expect(
+      getConfirmationToggleEntityMessage(
+        fromJS({
+          Entities: {
+            currentEntity: 'slas',
+            slas: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  active: true
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual(
+      'This will disable the SLA, but will not remove its association with queue or tenant default settings. Associated queues or tenant settings will continue to use this SLA until they are updated.'
+    );
+  });
+  it('Returns confirmation message when entity is not active', () => {
+    expect(
+      getConfirmationToggleEntityMessage(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  active: false
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual('This will enable this Mock Entit.');
   });
 });

@@ -343,6 +343,11 @@ export const onFormSubmit = (values, { dirty }) => ({
   dirty
 });
 
+export const toggleEntity = entity => ({
+  type: 'TOGGLE_ENTITY',
+  entity
+});
+
 export const toggleEntityListItemActive = entity => ({
   type: 'TOGGLE_ENTITY_LIST_ITEM',
   entity
@@ -542,12 +547,24 @@ export default function reducer(state = initialState, action) {
       );
     }
     case 'SET_SELECTED_ENTITY_ID': {
-      if (state.get('currentEntity') === 'users') {
-        return state
-          .setIn([state.get('currentEntity'), 'fetching'], true)
-          .setIn([state.get('currentEntity'), 'selectedEntityId'], action.entityId);
-      }
-      return state.setIn([state.get('currentEntity'), 'selectedEntityId'], action.entityId);
+      const currentEntity = state.get('currentEntity');
+      const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId'], '');
+      const isFetching = state.getIn([currentEntity, 'fetching'], false);
+
+      return (
+        state
+          .setIn([currentEntity, 'fetching'], currentEntity === 'users' ? true : isFetching)
+          .setIn([currentEntity, 'selectedEntityId'], action.entityId)
+          // We uncheck all rows if form is closed and
+          // we were performing bulk actions
+          .updateIn(
+            [currentEntity, 'data'],
+            entityData =>
+              selectedEntityId === 'bulk' && action.entityId === ''
+                ? entityData.map(item => item.set('bulkChangeItem', false))
+                : entityData
+          )
+      );
     }
     case 'UPDATE_USER_PERMISSIONS': {
       const { tenantId } = action.tenantInfo;

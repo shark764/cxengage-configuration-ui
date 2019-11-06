@@ -121,6 +121,7 @@ exports[`entities reducer SET_SELECTED_ENTITY_ID with setSelectedEntityCreate() 
 Immutable.Map {
   "currentEntity": "mockEntity",
   "mockEntity": Immutable.Map {
+    "fetching": false,
     "selectedEntityId": "create",
   },
 }
@@ -130,6 +131,7 @@ exports[`entities reducer SET_SELECTED_ENTITY_ID with setSelectedEntityId() sets
 Immutable.Map {
   "currentEntity": "mockEntity",
   "mockEntity": Immutable.Map {
+    "fetching": false,
     "selectedEntityId": "mock entity id",
   },
 }
@@ -140,6 +142,7 @@ Immutable.Map {
   "currentEntity": "mockEntity",
   "mockEntity": Immutable.Map {
     "selectedEntityId": "",
+    "fetching": false,
   },
 }
 `;

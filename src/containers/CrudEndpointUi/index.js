@@ -5,7 +5,13 @@
 import { connect } from 'react-redux';
 
 // Actions
-import { setCurrentEntity, fetchData, setSelectedSubEntityId, setSelectedEntityId } from '../../redux/modules/entities';
+import {
+  setCurrentEntity,
+  fetchData,
+  setSelectedSubEntityId,
+  setSelectedEntityId,
+  unsetSelectedEntityId
+} from '../../redux/modules/entities';
 
 // Selectors
 import {
@@ -38,7 +44,8 @@ export const actions = {
   setCurrentEntity,
   fetchData,
   setSelectedSubEntityId: setSelectedSubEntityId(undefined),
-  setSelectedEntityId
+  setSelectedEntityId,
+  unsetSelectedEntityId
 };
 
 export default connect(mapStateToProps, actions)(Layout);

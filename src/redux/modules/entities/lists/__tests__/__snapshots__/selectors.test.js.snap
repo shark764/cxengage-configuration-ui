@@ -4,5 +4,8 @@ exports[`getInitialUpdateFormValues returns a map of the initial values needed f
 Immutable.Map {
   "name": "mock list name",
   "shared": true,
+  "listType": Immutable.Map {
+    "name": "mock list type name",
+  },
 }
 `;
