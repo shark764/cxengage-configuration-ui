@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.67.1] - 2019-11-05
+## Fixed
+- CXV1-20589 - State column search type must be a dropdown | Users page.
+
 ## [0.67.0] - 2019-11-04
 ## Added
 - CXV1-16885 - Config 2 | Dispositions Lists - Basic page structure

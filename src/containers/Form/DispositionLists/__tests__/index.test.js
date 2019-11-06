@@ -7,12 +7,7 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import DispositionListsForm, { mapStateToProps } from '../';
-import {
-  getSelectedEntityId,
-  isInherited,
-  isCreating,
-  userHasUpdatePermission
-} from '../../../../redux/modules/entities/selectors';
+import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');

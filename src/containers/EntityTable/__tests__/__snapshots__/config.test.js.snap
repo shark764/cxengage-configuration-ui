@@ -168,7 +168,8 @@ Array [
       State
     </span>,
     "accessor": "state",
-    "id": "state",
+    "filterMethod": [Function],
+    "id": "presenceState",
   },
   Object {
     "Cell": [Function],

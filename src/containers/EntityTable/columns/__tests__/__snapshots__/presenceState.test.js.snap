@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`presenceStateColumn Cell renders correctly 1`] = `
+<span
+  title="Offline"
+>
+  Offline
+</span>
+`;
+
+exports[`presenceStateColumn Cell renders notready state correctly 1`] = `
+<span
+  title="Not Ready"
+>
+  Not Ready
+</span>
+`;
+
+exports[`presenceStateColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="State"
+  >
+    State
+  </span>,
+  "accessor": "state",
+  "filterMethod": [Function],
+  "id": "presenceState",
+}
+`;

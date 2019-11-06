@@ -6,7 +6,7 @@ import React from 'react';
 import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import DispositionListsDetailsPanel, { mapStateToProps } from '../';
+import DispositionListsDetailsPanel from '../';
 import {
   getSelectedEntity,
   userHasUpdatePermission,
@@ -33,5 +33,3 @@ describe('DispositionListsDetailsPanel Renders', () => {
     expect(shallow(<DispositionListsDetailsPanel store={store}>Child</DispositionListsDetailsPanel>)).toMatchSnapshot();
   });
 });
-
-

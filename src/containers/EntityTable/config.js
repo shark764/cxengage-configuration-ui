@@ -18,6 +18,7 @@ import { activeSlaColumn } from './columns/activeSla';
 import { timezoneColumn } from './columns/timezone';
 import { parentTenantColumn } from './columns/parentTenant';
 import { roleNameColumn } from './columns/roleName';
+import { presenceStateColumn } from './columns/presenceState';
 
 export function getTableColumns(columns) {
   /**
@@ -31,7 +32,7 @@ export function getTableColumns(columns) {
     'Last Name': constructGeneralTextColumn('lastName'),
     Role: roleNameColumn,
     Email: constructGeneralTextColumn('email'),
-    Presence: constructGeneralTextColumn('state'),
+    Presence: presenceStateColumn,
     // TODO: Skills and Groups require a special column to work
     // 'Skills': constructGeneralTextColumn('skills'),
     // 'Groups': constructGeneralTextColumn('groups'),
