@@ -26,6 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.67.2] - 2019-11-05
+## Added
+- <no-jira> - Automation test for SLA
+- <no-jira> - SLA panel alert "Once enabled, cannot be reverted"
+
 ## [0.67.1] - 2019-11-05
 ## Fixed
 - CXV1-20589 - State column search type must be a dropdown | Users page.

@@ -29,9 +29,16 @@ testsToRun.forEach(entity => {
     it(`Create ${entity}`, () => {
       commonBehavior.entityCRUD(entity, 'create');
     });
-    it(`Update ${entity}`, () => {
-      commonBehavior.entityCRUD(entity, 'update');
-    });
+    if (dictionary[entity].specs['createVersion']) {
+      it(`Create Version for ${entity}`, () => {
+        commonBehavior.entityCRUD(entity, 'createVersion');
+      });
+    }
+    if (dictionary[entity].specs['update']) {
+      it(`Update ${entity}`, () => {
+        commonBehavior.entityCRUD(entity, 'update');
+      });
+    }
     if (dictionary[entity].specs['delete']) {
       it(`Delete ${entity}`, () => {
         commonBehavior.entityCRUD(entity, 'delete');

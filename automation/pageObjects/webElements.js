@@ -22,8 +22,10 @@ elements.$ = (searchTerm, elementType) => {
 elements['toastSuccessMessage'] = new Element('div[class="toast toast-success"] div[class="toast-message"]');
 elements['toastErrorMessage'] = new Element('div[class="toast toast-error"] div[class="toast-message"]');
 elements['toastCloseButton'] = new Element('button[class="toast-close-button"]');
-// mainEntity table component:
-elements['inActiveTableRow'] = new Element('div[class="rt-tr row-selected-not-active -odd"]');
-elements['activeTableRow'] = new Element('div[class="rt-tr row-selected-active -odd"]');
+elements['enableMessage'] = new Element(`//div[contains(text(),'This will enable')]`);
+//modal components
+elements['modalNameInput'] = new Element('input[data-automation="nameInput"]', 1);
+elements['modalDescriptionInput'] = new Element('textarea[data-automation="descriptionInput"]', 1);
+elements['modalSubmitButton'] = new Element('button[data-automation="sdpanelSubmitButton"]', 1);
 
 module.exports = elements;

@@ -44,7 +44,7 @@ export default function InitialVersionForm(props) {
       <RadioGroupField
         name="abandonType"
         label="SLA Abandon Type"
-        data-automation="abandonTypeChoose"
+        data-automation="abandonTypeRadio"
         disabled={props.isSaving || props.viewOnly}
         options={[
           {

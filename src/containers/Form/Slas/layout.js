@@ -56,6 +56,11 @@ export default class SlasForm extends Component {
         {this.props.isSlaTenantDefault && (
           <DetailsPanelAlert text="This SLA has been configured as the default for this Tenant" />
         )}
+        {this.props.sharedFormValue &&
+          !this.props.disableShared &&
+          !this.props.inherited && (
+            <DetailsPanelAlert text="You have set shared to 'enabled' for this SLA. Once an SLA is enabled and saved, it cannot be reverted." />
+          )}
         <DetailHeader text="Details" />
         <InputField
           name="name"

@@ -77,15 +77,23 @@ const commonBehavior = {
   searchByNameAndClick(entity, actionType) {
     var columnElement = new Element(`[data-automation="${dictionary[entity].whichCatagoryToSearch}"]`);
     columnElement.clearElement();
-    if (actionType === 'update') {
+    if (actionType === 'createVersion' || actionType === 'update') {
       columnElement.setValue(dictionary[entity].updateSearchValue);
-      Elem.inActiveTableRow.waitAndClick();
-    } if (actionType === 'delete') {
-      columnElement.setValue(dictionary[entity].deleteSearchValue);
-      Elem.activeTableRow.waitAndClick();
+      let searchedForElement = new Element(`.//span[text()="${dictionary[entity].updateSearchValue}"]`);
+      searchedForElement.waitAndClick();
     }
-    Elem.sdpanelSubmitButton.waitForVisible();
-    Elem.sdpanelSubmitButton.validateElementsState('isVisible', true);
+    if (actionType === 'delete') {
+      columnElement.setValue(dictionary[entity].deleteSearchValue);
+      let searchedForElement = new Element(`.//span[text()="${dictionary[entity].deleteSearchValue}"]`);
+      searchedForElement.waitAndClick();
+    }
+    if (entity === 'Sla') { // To Fix
+      Elem.sdpanelAddItem.waitForVisible(30000, true);
+      Elem.sdpanelAddItem.validateElementsState('isVisible', true);
+    } else {
+      Elem.sdpanelSubmitButton.waitForVisible(30000, true);
+      Elem.sdpanelSubmitButton.validateElementsState('isVisible', true);
+    }
   },
   submitFormData(entity, actionType) {
     dictionary[entity].specs[actionType].parametersToInsert.forEach(parameter => {
@@ -105,12 +113,35 @@ const commonBehavior = {
         }
       });
     });
-    Elem.sdpanelSubmitButton.waitAndClick();
+    if (actionType === 'createVersion') {
+      Elem.modalSubmitButton.waitForVisible();
+      Elem.modalSubmitButton.waitAndClick();
+    } else {
+      Elem.sdpanelSubmitButton.waitForEnabled();
+      Elem.sdpanelSubmitButton.waitAndClick();
+    }
+  },
+  inputFormDataForModal(entity, actionType) {
+    if(entity === 'Sla' && actionType === 'createVersion'){
+      Elem.modalNameInput.setValue('versionSLAName');
+      Elem.modalDescriptionInput.setValue('versionSLADescription');
+    }
   },
   entityCRUD(entity, actionType) {
     if (actionType === 'create') {
       Elem.entityCreateButton.waitAndClick();
       Elem.sdpanelSubmitButton.waitForVisible();
+      this.submitFormData(entity, actionType);
+      this.verifyAction(entity, actionType);
+      this.verifyEntitySpecificAction(entity);
+      this.closeSidePanel();
+    } else if (actionType === 'createVersion') {
+      Elem.searchStatusColumnButton.waitAndClick();
+      Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
+      this.searchByNameAndClick(entity, actionType);
+      Elem.sdpanelAddItem.waitAndClick();
+      Elem.thresholdInput.waitForVisible(30000, true);
+      this.inputFormDataForModal(entity, actionType);
       this.submitFormData(entity, actionType);
       this.verifyAction(entity, actionType);
       this.verifyEntitySpecificAction(entity);
@@ -133,7 +164,9 @@ const commonBehavior = {
   verifyAction(entity, actionType) {
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
+    if(actionType === ('create' || 'update' || 'delete')) {
+      Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
+    }
     this.closeToastr(entity, actionType);
   },
   verifyEntitySpecificAction(entity) {
@@ -150,10 +183,16 @@ const commonBehavior = {
   toggleEntity(entity) {
     Elem.sdpanelStatusToggle.waitAndClick();
     Elem.confirmationWrapper.waitForVisible();
+    Elem.confirmButton.waitForVisible();
+    let enabledToggle = Elem.enableMessage.isExisting();
     Elem.confirmButton.waitAndClick();
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was disabled successfully!`);
+    if(enabledToggle === true) {
+      Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was enabled successfully!`);
+    } else {
+      Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was disabled successfully!`);
+    }
     this.closeToastr(entity);
   },
   closeToastr(entity, actionType) {
@@ -169,6 +208,7 @@ const commonBehavior = {
     }
   },
   closeSidePanel() {
+    Elem.sdpanelCloseButton.waitForVisible(30000, true);
     Elem.sdpanelCloseButton.waitAndClick();
     Elem.sdpanelSubmitButton.waitForVisible(30000, false);
     Elem.sdpanelSubmitButton.validateElementsState('isVisible', false);

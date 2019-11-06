@@ -4,9 +4,9 @@ const randomId = randomPhoneNum();
 // Reason Lists - Needs extra logic for creation
 // Capacity Rules - Page not completed yet
 // Tenants - Page not completed yet
+// Sla - cant find submit button when updating in jenkins
 // Identity Providers - Page not completed yet
 // Integrations - Page not completed yet
-// Sla - needs extra logic for creation
 // Email Templates - needs data-automation labels added
 // Chat Widget - needs data-automation labels added
 // Transfer Lists - needs extra logic for creation
@@ -31,7 +31,7 @@ const pages = {
       create: {
         parametersToInsert: [
           {
-            emailInput: `rEmail-${randomId}@gmail.com`,
+            emailInput: `remail-${randomId}@gmail.com`,
             roleList: "Platform User",
             tenantList: "Agent"
           }
@@ -55,7 +55,7 @@ const pages = {
       subMainBar: "navigationLinkUsers"
     },
     whichCatagoryToSearch: "searchEmailColumn",
-    updateSearchValue: `rEmail-${randomId}@gmail.com`
+    updateSearchValue: `remail-${randomId}@gmail.com`
   },
   'Group': {
         specs: {
@@ -244,37 +244,47 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `rName-${randomId}`
   },
-  // 'Sla': {
-  //   specs: {
-  //     create: {
-  //       parametersToInsert: [
-  //         {
-  //           nameInput: `rName-${randomId}`,
-  //           descriptionInput: `rDesc-${randomId}`,
-  //           sharedToggle: ""
-  //         }
-  //       ]
-  //     },
-  //     update: {
-  //       parametersToInsert: [
-  //         {
-  //           nameInput: `updatedRName-${randomId}`,
-  //           descriptionInput: `updatedRDesc-${randomId}`,
-  //           sharedToggle: ""
-  //         }
-  //       ]
-  //     },
-  //     read: {
-  //       parameters: {}
-  //     }
-  //   },
-  //   navigation: {
-  //     mainBar: "configurationMenu",
-  //     subMainBar: "navigationLinkSlas"
-  //   },
-  //   whichCatagoryToSearch: "searchNameColumn",
-  //   updateSearchValue: `rName-${randomId}`
-  // },
+  'Sla': {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`,
+            sharedToggle: ""
+          }
+        ]
+      },
+      createVersion:{
+        parametersToInsert: [
+          {
+            //Name and Description modal elements defined in webElements.js
+            //Name and Description data added via inputFormDataForModal in common.js
+            thresholdInput: "20",
+            abandonTypeRadio: "ignore-abandons",
+            abandonThresholdInput: "30"
+          }
+        ]
+      },
+      // update: {
+      //   parametersToInsert: [
+      //     {
+      //       nameInput: `updatedRName-${randomId}`,
+      //       descriptionInput: `updatedRDesc-${randomId}`
+      //     }
+      //   ]
+      // },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkSlas"
+    },
+    whichCatagoryToSearch: "searchNameColumn",
+    updateSearchValue: `rName-${randomId}`
+  },
   // 'Email Template': {
   //   specs: {
   //     update: {
