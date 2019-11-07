@@ -18,6 +18,7 @@ Object {
   "entityMetadata": Object {},
   "fetching": false,
   "filtered": Array [],
+  "insideIframe": false,
   "items": Array [
     "mock all entities",
   ],

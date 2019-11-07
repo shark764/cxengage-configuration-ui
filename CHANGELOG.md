@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.67.4] - 2019-11-06
+## Fixed
+- <no-jira> - Version bump components library to 0.56.6.
+
 ## [0.67.3] - 2019-11-05
 ## Changed
 - <no-jira> - Version bump components library to 0.56.4.

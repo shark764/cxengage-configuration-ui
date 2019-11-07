@@ -15,6 +15,7 @@ import {
   getConfirmationToggleEntityMessage
 } from '../../redux/modules/entities/selectors';
 import { isFormPristine, isFormDirty } from '../../redux/modules/form/selectors';
+import { isInIframe } from 'serenova-js-utils/browser';
 
 export function mapDispatchToProps(dispatch) {
   let actions = {};
@@ -41,7 +42,8 @@ export function mapStateToProps(state) {
     isBulkUpdating: isBulkUpdating(state),
     pristine: isFormPristine(state),
     dirty: isFormDirty(state),
-    confirmationMessage: getConfirmationToggleEntityMessage(state)
+    confirmationMessage: getConfirmationToggleEntityMessage(state),
+    insideIframe: !isInIframe()
   };
 }
 

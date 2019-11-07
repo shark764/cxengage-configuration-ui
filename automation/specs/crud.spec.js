@@ -7,7 +7,7 @@ let testsToRun = [];
 
 // Filters out the tests to run based on the input provided to TESTS_TO_RUN in './automation/config/.env' file
 if (keydInTests && keydInTests !== 'all') {
-  testsToRun = keydInTests.splite('').filter(a => totalTests.find(b => a === b) !== undefined)
+  testsToRun = keydInTests.split(',').filter(a => totalTests.find(b => a === b) !== undefined)
 } else {
   testsToRun = totalTests;
 }
