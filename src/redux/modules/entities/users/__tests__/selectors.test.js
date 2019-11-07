@@ -10,7 +10,8 @@ import {
   getDisplay,
   selectEntityListMembers,
   existsPlatformUserByEmail,
-  selectAvailableEntityMembersForList
+  selectAvailableEntityMembersForList,
+  userHasNameSet
 } from '../selectors';
 
 const initialState = fromJS({
@@ -230,5 +231,11 @@ describe('existsPlatformUserByEmail', () => {
 describe('selectAvailableEntityMembersForList', () => {
   it('should return a member list', () => {
     expect(selectAvailableEntityMembersForList(initialState)).toMatchSnapshot();
+  });
+});
+
+describe('userHasNameSet', () => {
+  it('should return if selected user has name', () => {
+    expect(userHasNameSet(initialState)).toMatchSnapshot();
   });
 });

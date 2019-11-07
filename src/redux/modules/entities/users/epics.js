@@ -29,7 +29,7 @@ export const getRolesAfterFetchingUsers = action$ =>
     .filter(a => a.entityName === 'users')
     .map(a => ({ type: 'FETCH_DATA', entityName: 'roles' }));
 
-export const UpdateUserEntity = action$ =>
+export const UpdateUserEntity = (action$, store) =>
   action$
     .ofType('UPDATE_ENTITY')
     .filter(({ entityName }) => entityName === 'users')
@@ -65,6 +65,9 @@ export const UpdateUserEntity = action$ =>
     .mergeMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .mergeMap(response => {
+          if (response.result.roleId !== getSelectedEntity(store.getState()).get('roleId')) {
+            response.result.roleName = findEntity(store.getState(), 'roles', response.result.roleId).get('name');
+          }
           if (response.result && response.result.extensions) {
             response.result.extensions = [
               ...response.result.extensions.map(item => ({
@@ -85,8 +88,13 @@ export const UpdateUserEntity = action$ =>
 export const UpdateUserCapacityRule = (action$, store) =>
   action$
     .ofType('UPDATE_USER_CAPACITY_RULE')
+    .map(a => ({
+      ...a,
+      currentCapacityRule: getSelectedEntity(store.getState()).getIn(['effectiveCapacityRule', 'id'], null)
+    }))
     .filter(
-      ({ entityName, values: { effectiveCapacityRule } }) => entityName === 'users' && effectiveCapacityRule !== null
+      ({ entityName, currentCapacityRule, values: { effectiveCapacityRule } }) =>
+        entityName === 'users' && effectiveCapacityRule !== null && effectiveCapacityRule !== currentCapacityRule
     )
     .map(a => {
       a.sdkCall = {
@@ -96,7 +104,7 @@ export const UpdateUserCapacityRule = (action$, store) =>
           capacityRuleId: a.values.effectiveCapacityRule,
           // SDK fetchs user data to get effectiveCapacityRule,
           // we add it to avoid that call
-          effectiveCapacityRule: getSelectedEntity(store.getState()).getIn(['effectiveCapacityRule', 'id'])
+          effectiveCapacityRule: a.currentCapacityRule
         },
         module: 'entities',
         topic: 'cxengage/entities/update-users-capacity-rule-response'
@@ -638,13 +646,15 @@ export const BulkEntityUpdate = (action$, store) =>
           sdkCallValues.updateBody.status = a.values.cancelInvitation ? 'pending' : 'invited';
         }
 
-        if (Object.keys(sdkCallValues.updateBody).length) {
+        if (Object.keys(sdkCallValues.updateBody).length && userData.firstName && userData.lastName) {
           // Using the default sdkCall to update single entity data,
           // by calling updateUser
           a.allSdkCalls.push({
             ...a.sdkCall,
             data: { ...sdkCallValues }
           });
+        } else {
+          Toast.error(`User "${userData.email}" must have firstName and lastName set before performing any action.`);
         }
 
         if (a.values.passwordReset) {
@@ -684,34 +694,37 @@ export const BulkEntityUpdate = (action$, store) =>
         handleBulkUneeded(a);
       }
     })
-    .mergeMap(a =>
-      forkJoin(
-        a.allSdkCalls.map(apiCall =>
-          from(
-            sdkPromise(apiCall).catch(error => ({
-              error: error,
-              id: apiCall.data['userId']
-            }))
-          )
-        )
-      )
-        .do(allResult => handleBulkSuccess(allResult, a))
-        .mergeMap(result =>
-          from(result).map(response => {
-            if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
-              return handleSuccess(
-                {
-                  result: {
-                    ...response.result,
-                    invitationStatus: a.toStatus
+    .mergeMap(
+      a =>
+        a.allSdkCalls.length > 0
+          ? forkJoin(
+              a.allSdkCalls.map(apiCall =>
+                from(
+                  sdkPromise(apiCall).catch(error => ({
+                    error: error,
+                    id: apiCall.data['userId']
+                  }))
+                )
+              )
+            )
+              .do(allResult => handleBulkSuccess(allResult, a))
+              .mergeMap(result =>
+                from(result).map(response => {
+                  if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
+                    return handleSuccess(
+                      {
+                        result: {
+                          ...response.result,
+                          invitationStatus: a.toStatus
+                        }
+                      },
+                      a
+                    );
                   }
-                },
-                a
-              );
-            }
-            return handleSuccess(response, a);
-          })
-        )
+                  return handleSuccess(response, a);
+                })
+              )
+          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
 export const FocusNoPasswordValueFormField = action$ =>

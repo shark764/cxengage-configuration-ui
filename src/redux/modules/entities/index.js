@@ -817,6 +817,9 @@ export default function reducer(state = initialState, action) {
             : 'scheduledHours';
         } else if (action.entityName === 'apiKeys') {
           result.active = result.status === 'enabled';
+        } else if (action.type === 'UPDATE_PLATFORM_USER_ENTITY_FULFILLED' && action.entityName === 'users') {
+          result.platformRoleId = result.roleId;
+          delete result['roleId'];
         }
 
         return state

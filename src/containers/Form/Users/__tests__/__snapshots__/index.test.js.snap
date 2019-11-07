@@ -15,6 +15,7 @@ Object {
   "status": undefined,
   "tenantIdentityProviders": Array [],
   "tenantRoles": Array [],
+  "userHasNameSet": true,
   "userHasUpdatePermission": true,
   "usersFetching": undefined,
 }
@@ -63,6 +64,7 @@ exports[`Users Renders renders 1`] = `
   }
   tenantIdentityProviders={Array []}
   tenantRoles={Array []}
+  userHasNameSet={true}
   userHasUpdatePermission={true}
 >
   Child

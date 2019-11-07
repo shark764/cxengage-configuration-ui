@@ -2,6 +2,7 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 import { validatePhoneNumber, validateSip } from 'serenova-js-utils/validation';
+import { isEmpty } from 'serenova-js-utils/strings';
 
 const validateValue = (value, type) =>
   type === 'pstn' ? Boolean(validatePhoneNumber(value)) : Boolean(validateSip(value));
@@ -23,6 +24,8 @@ export const formValidation = values => {
   if (labels.some(err => typeof err === 'string')) {
     formValidation.extensions = labels;
   }
+  formValidation.firstName = isEmpty(values.get('firstName')) && 'Please enter a first name';
+  formValidation.lastName = isEmpty(values.get('lastName')) && 'Please enter a last name';
   formValidation.roleId = !values.get('roleId') && 'Please select a Tenant Role';
   return formValidation;
 };

@@ -35,3 +35,5 @@ Array [
   },
 ]
 `;
+
+exports[`userHasNameSet should return if selected user has name 1`] = `true`;

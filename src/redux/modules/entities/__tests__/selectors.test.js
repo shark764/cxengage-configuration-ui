@@ -30,7 +30,7 @@ import {
   hasEveryPermission,
   isItemInherited,
   isInherited,
-  shouldDisableField,
+  shouldDisableHeaderToggleField,
   isCreating,
   isUpdating,
   isSaving,
@@ -59,7 +59,7 @@ import {
 import { EntityMetaData, entitiesMetaData } from '../metaData';
 import { getCurrentPermissions, getCurrentTenantId } from '../../userData/selectors';
 import { getUserDisplayName } from '../../userIdMap/selectors';
-import { isUserPlatformAdmin, getDisplay } from '../../entities/users/selectors';
+import { isUserPlatformAdmin, getDisplay, userHasNameSet } from '../../entities/users/selectors';
 
 entitiesMetaData.mockEntity = new EntityMetaData('mockEntity');
 
@@ -560,13 +560,13 @@ describe('isInherited', () => {
   });
 });
 
-describe('shouldDisableField', () => {
+describe('shouldDisableHeaderToggleField', () => {
   it('Returns if selected entity field should be disabled', () => {
-    expect(shouldDisableField(initialState)).toEqual(false);
+    expect(shouldDisableHeaderToggleField(initialState)).toEqual(false);
   });
   it('Returns if selected entity field should be disabled when selectedEntityId is "create"', () => {
     expect(
-      shouldDisableField(
+      shouldDisableHeaderToggleField(
         fromJS({
           Entities: {
             currentEntity: 'mockEntity',
@@ -580,11 +580,11 @@ describe('shouldDisableField', () => {
   });
   it('Returns if selected entity field should be disabled when currentEntity matches default', () => {
     expect(
-      shouldDisableField(
+      shouldDisableHeaderToggleField(
         fromJS({
           Entities: {
-            currentEntity: 'users',
-            users: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
               selectedEntityId: '0004'
             }
           }
@@ -592,9 +592,53 @@ describe('shouldDisableField', () => {
       )
     ).toEqual(false);
   });
+  it('Returns if selected entity field should be disabled when currentEntity matches users', () => {
+    userHasNameSet.mockImplementationOnce(() => true);
+    expect(
+      shouldDisableHeaderToggleField(
+        fromJS({
+          Entities: {
+            currentEntity: 'users',
+            users: {
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004',
+                  firstName: 'Lisa',
+                  lastName: 'Vicari'
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual(false);
+  });
+  it('Returns if selected entity field should be disabled when currentEntity matches users and no name has been set', () => {
+    userHasNameSet.mockImplementationOnce(() => false);
+    expect(
+      shouldDisableHeaderToggleField(
+        fromJS({
+          Entities: {
+            currentEntity: 'users',
+            users: {
+              selectedEntityId: '0004',
+              data: [
+                {
+                  id: '0004',
+                  firstName: null,
+                  lastName: null
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual(true);
+  });
   it('Returns if selected entity is inherited when currentEntity matches reasonLists', () => {
     expect(
-      shouldDisableField(
+      shouldDisableHeaderToggleField(
         fromJS({
           Entities: {
             currentEntity: 'reasonLists',
@@ -615,7 +659,7 @@ describe('shouldDisableField', () => {
   });
   it('Returns if selected entity is inherited when currentEntity matches flows', () => {
     expect(
-      shouldDisableField(
+      shouldDisableHeaderToggleField(
         fromJS({
           Entities: {
             currentEntity: 'flows',

@@ -7,7 +7,7 @@ import { List } from 'immutable';
 import moment from 'moment';
 import { getCurrentPermissions, getCurrentTenantId } from '../userData/selectors';
 import { entitiesMetaData } from './metaData';
-import { getDisplay } from './users/selectors';
+import { getDisplay, userHasNameSet } from './users/selectors';
 import { getUserDisplayName } from '../userIdMap/selectors';
 import { getSelectedSidePanelId, getSelectedAgentsBulkChangeItems } from '../reporting/agentStateMonitoring/selectors';
 
@@ -136,7 +136,7 @@ export const isSystemRole = state => {
   }
 };
 
-export const shouldDisableField = state => {
+export const shouldDisableHeaderToggleField = state => {
   if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
     switch (getCurrentEntity(state)) {
       case 'reasonLists': {
@@ -150,6 +150,11 @@ export const shouldDisableField = state => {
       }
       case 'roles': {
         return getSelectedEntity(state).get('type') === 'system';
+      }
+      case 'users': {
+        // Most of the available actions for user entity
+        // must be disabled until firstName and lastName are set
+        return !userHasNameSet(state);
       }
       default:
         return false;

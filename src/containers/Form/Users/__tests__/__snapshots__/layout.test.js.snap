@@ -19,6 +19,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         inputType="text"
         label="First Name"
         name="firstName"
+        required={true}
       />
       <InputField
         className="frm-users-lastname"
@@ -28,6 +29,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         inputType="text"
         label="Last Name"
         name="lastName"
+        required={true}
       />
       <InputField
         className="frm-users-external-id"
@@ -45,14 +47,8 @@ exports[`<UsersForm /> renders create user 1`] = `
       <Styled(DetailHeader)
         text="Login Details"
       />
-      <InputField
-        className="frm-users-email"
-        componentType="input"
-        data-automation="emailInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Email"
-        name="email"
       />
       <InputField
         className="frm-users-invitation-status"
@@ -87,7 +83,7 @@ exports[`<UsersForm /> renders create user 1`] = `
         className="frm-users-default-sso-provider"
         data-automation="identityProviderList"
         disabled={false}
-        label="Single Sign On Identitiy Provider"
+        label="Single Sign on Identity Provider"
         name="defaultIdentityProvider"
         required={true}
       />
@@ -151,13 +147,13 @@ exports[`<UsersForm /> renders create user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Capacity"
+        text="Capacity Rule"
       />
       <SelectField
         className="users-form-capacity-rule"
         data-automation="effectiveCapacityRuleList"
         disabled={false}
-        label="Capacity Rule"
+        label="Current Capacity Rule"
         name="effectiveCapacityRule"
         required={false}
       />
@@ -185,6 +181,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         inputType="text"
         label="First Name"
         name="firstName"
+        required={true}
       />
       <InputField
         className="frm-users-lastname"
@@ -194,6 +191,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         inputType="text"
         label="Last Name"
         name="lastName"
+        required={true}
       />
       <InputField
         className="frm-users-external-id"
@@ -211,14 +209,8 @@ exports[`<UsersForm /> renders update user 1`] = `
       <Styled(DetailHeader)
         text="Login Details"
       />
-      <InputField
-        className="frm-users-email"
-        componentType="input"
-        data-automation="emailInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Email"
-        name="email"
       />
       <InputField
         className="frm-users-invitation-status"
@@ -253,7 +245,7 @@ exports[`<UsersForm /> renders update user 1`] = `
         className="frm-users-default-sso-provider"
         data-automation="identityProviderList"
         disabled={false}
-        label="Single Sign On Identitiy Provider"
+        label="Single Sign on Identity Provider"
         name="defaultIdentityProvider"
         required={true}
       />
@@ -317,13 +309,13 @@ exports[`<UsersForm /> renders update user 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Capacity"
+        text="Capacity Rule"
       />
       <SelectField
         className="users-form-capacity-rule"
         data-automation="effectiveCapacityRuleList"
         disabled={false}
-        label="Capacity Rule"
+        label="Current Capacity Rule"
         name="effectiveCapacityRule"
         required={false}
       />
@@ -351,6 +343,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         inputType="text"
         label="First Name"
         name="firstName"
+        required={true}
       />
       <InputField
         className="frm-users-lastname"
@@ -360,6 +353,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         inputType="text"
         label="Last Name"
         name="lastName"
+        required={true}
       />
       <InputField
         className="frm-users-external-id"
@@ -377,14 +371,8 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <Styled(DetailHeader)
         text="Login Details"
       />
-      <InputField
-        className="frm-users-email"
-        componentType="input"
-        data-automation="emailInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Email"
-        name="email"
       />
       <InputField
         className="frm-users-invitation-status"
@@ -419,7 +407,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         className="frm-users-default-sso-provider"
         data-automation="identityProviderList"
         disabled={true}
-        label="Single Sign On Identitiy Provider"
+        label="Single Sign on Identity Provider"
         name="defaultIdentityProvider"
         required={true}
       />
@@ -483,15 +471,148 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Capacity"
+        text="Capacity Rule"
       />
       <SelectField
         className="users-form-capacity-rule"
         data-automation="effectiveCapacityRuleList"
         disabled={true}
-        label="Capacity Rule"
+        label="Current Capacity Rule"
         name="effectiveCapacityRule"
         required={false}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
+</form>
+`;
+
+exports[`<UsersForm /> renders update user with no name set 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Platform Details"
+      />
+      <InputField
+        className="frm-users-firstname"
+        componentType="input"
+        data-automation="firstNameInput"
+        disabled={false}
+        inputType="text"
+        label="First Name"
+        name="firstName"
+        required={true}
+      />
+      <InputField
+        className="frm-users-lastname"
+        componentType="input"
+        data-automation="lastNameInput"
+        disabled={false}
+        inputType="text"
+        label="Last Name"
+        name="lastName"
+        required={true}
+      />
+      <InputField
+        className="frm-users-external-id"
+        componentType="input"
+        data-automation="externalIdInput"
+        disabled={false}
+        inputType="text"
+        label="External ID"
+        name="externalId"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Login Details"
+      />
+      <Detail
+        label="Email"
+      />
+      <InputField
+        className="frm-users-invitation-status"
+        componentType="input"
+        data-automation="invitationStatusInput"
+        disabled={true}
+        inputType="text"
+        label="Platform Status"
+        name="invitationStatus"
+      />
+      <SelectField
+        className="frm-users-platform-authentication"
+        data-automation="authenticationList"
+        disabled={true}
+        label="Platform Authentication"
+        name="noPassword"
+        options={
+          Array [
+            Object {
+              "label": "Enabled",
+              "value": false,
+            },
+            Object {
+              "label": "Disabled",
+              "value": true,
+            },
+          ]
+        }
+        required={true}
+      />
+      <SelectField
+        className="frm-users-default-sso-provider"
+        data-automation="identityProviderList"
+        disabled={false}
+        label="Single Sign on Identity Provider"
+        name="defaultIdentityProvider"
+        required={true}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Tenant Details"
+      />
+      <InputField
+        className="frm-users-workstation-id"
+        componentType="input"
+        data-automation="workstationIdInput"
+        disabled={false}
+        inputType="text"
+        label="Workstation ID"
+        name="workStationId"
+      />
+      <SelectField
+        className="frm-users-role-id"
+        data-automation="roleList"
+        disabled={true}
+        label="Tenant Role"
+        name="roleId"
+        options={Array []}
+        required={false}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      open={true}
+    >
+      <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
+        text="Extensions"
+        userHasUpdatePermission={true}
+      />
+      <ExtensionListField
+        className="users-extensions"
+        data-automation="extensionsExtensionList"
+        disabled={false}
+        label="Inputs"
+        name="extensions"
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -517,6 +638,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         inputType="text"
         label="First Name"
         name="firstName"
+        required={true}
       />
       <InputField
         className="frm-users-lastname"
@@ -526,6 +648,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         inputType="text"
         label="Last Name"
         name="lastName"
+        required={true}
       />
       <InputField
         className="frm-users-external-id"
@@ -543,14 +666,8 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <Styled(DetailHeader)
         text="Login Details"
       />
-      <InputField
-        className="frm-users-email"
-        componentType="input"
-        data-automation="emailInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Email"
-        name="email"
       />
       <InputField
         className="frm-users-invitation-status"
@@ -585,7 +702,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         className="frm-users-default-sso-provider"
         data-automation="identityProviderList"
         disabled={true}
-        label="Single Sign On Identitiy Provider"
+        label="Single Sign on Identity Provider"
         name="defaultIdentityProvider"
         required={true}
       />
@@ -635,13 +752,13 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       open={true}
     >
       <Styled(DetailHeader)
-        text="Capacity"
+        text="Capacity Rule"
       />
       <SelectField
         className="users-form-capacity-rule"
         data-automation="effectiveCapacityRuleList"
         disabled={true}
-        label="Capacity Rule"
+        label="Current Capacity Rule"
         name="effectiveCapacityRule"
         required={false}
       />

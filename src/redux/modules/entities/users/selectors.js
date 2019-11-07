@@ -134,3 +134,8 @@ export const selectUsersFormInitialValues = createSelector(
   [getAllRoles, getInitialValues],
   (roles, initialValues) => (roles.size === 0 ? { ...initialValues, roleId: null } : initialValues)
 );
+
+export const userHasNameSet = state => {
+  const selectedEntity = getSelectedEntity(state);
+  return selectedEntity && selectedEntity.get('firstName') !== null && selectedEntity.get('lastName') !== null;
+};

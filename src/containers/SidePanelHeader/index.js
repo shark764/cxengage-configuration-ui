@@ -10,7 +10,7 @@ import {
   sidePanelHeader,
   userHasUpdatePermission,
   isInherited,
-  shouldDisableField,
+  shouldDisableHeaderToggleField,
   isBulkUpdating,
   getConfirmationToggleEntityMessage
 } from '../../redux/modules/entities/selectors';
@@ -38,7 +38,7 @@ export function mapStateToProps(state) {
     toggleStatus: sidePanelHeader(state).toggleStatus,
     userHasUpdatePermission: userHasUpdatePermission(state),
     inherited: isInherited(state),
-    disabled: shouldDisableField(state),
+    disabled: shouldDisableHeaderToggleField(state),
     isBulkUpdating: isBulkUpdating(state),
     pristine: isFormPristine(state),
     dirty: isFormDirty(state),

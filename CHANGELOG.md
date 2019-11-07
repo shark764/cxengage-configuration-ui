@@ -26,6 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.67.5] - 2019-11-07
+## Changed
+- <no-jira> - Version bump components library to 0.56.7.
+- SDK version bump to 9.3.1.
+## Fixed
+- CXV1-20598 - Changing capacity for a user throws an error | user page | config - ui2.
+- CXV1-20517 - Show proper error warnings when performing bulk actions.
+
 ## [0.67.4] - 2019-11-06
 ## Fixed
 - <no-jira> - Version bump components library to 0.56.6.
