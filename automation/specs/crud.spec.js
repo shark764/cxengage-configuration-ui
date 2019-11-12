@@ -29,6 +29,11 @@ testsToRun.forEach(entity => {
     it(`Create ${entity}`, () => {
       commonBehavior.entityCRUD(entity, 'create');
     });
+    if (dictionary[entity].specs['createSecond']) {
+      it(`Create Second ${entity}`, () => {
+        commonBehavior.entityCRUD(entity, 'createSecond');
+      });
+    }
     if (dictionary[entity].specs['createVersion']) {
       it(`Create Version for ${entity}`, () => {
         commonBehavior.entityCRUD(entity, 'createVersion');
@@ -37,6 +42,11 @@ testsToRun.forEach(entity => {
     if (dictionary[entity].specs['update']) {
       it(`Update ${entity}`, () => {
         commonBehavior.entityCRUD(entity, 'update');
+      });
+    }
+    if (dictionary[entity].specs['updateSecond']) {
+      it(`Update Second ${entity}`, () => {
+        commonBehavior.entityCRUD(entity, 'updateSecond');
       });
     }
     if (dictionary[entity].specs['delete']) {

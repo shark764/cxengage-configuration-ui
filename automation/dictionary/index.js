@@ -28,15 +28,15 @@ const randomId = randomPhoneNum();
 // Agent State Monitoring - ready to be worked on
 
 const pages = {
-  ////////////////////////User Management///////////////////////////
-  User: {
+////////////////////////User Management///////////////////////////
+  'User': {
     specs: {
       create: {
         parametersToInsert: [
           {
             emailInput: `remail-${randomId}@gmail.com`,
-            roleList: 'Platform User',
-            tenantList: 'Agent'
+            roleList: "Platform User",
+            tenantList: "Agent"
           }
         ]
       },
@@ -45,7 +45,7 @@ const pages = {
           {
             firstNameInput: `updatedRName-${randomId}`,
             lastNameInput: `updatedRDesc-${randomId}`,
-            roleList: 'Supervisor'
+            roleList: "Supervisor",
           }
         ]
       },
@@ -54,110 +54,110 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'userManagementMenu',
-      subMainBar: 'navigationLinkUsers'
+      mainBar: "userManagementMenu",
+      subMainBar: "navigationLinkUsers"
     },
-    whichCatagoryToSearch: 'searchEmailColumn',
+    whichCatagoryToSearch: "searchEmailColumn",
     updateSearchValue: `remail-${randomId}@gmail.com`
   },
-  Group: {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`
+  'Group': {
+        specs: {
+          create: {
+            parametersToInsert: [
+              {
+                nameInput: `rName-${randomId}`,
+                descriptionInput: `rDesc-${randomId}`
+              }
+            ]
+          },
+          update: {
+            parametersToInsert: [
+              {
+                nameInput: `updatedRName-${randomId}`,
+                descriptionInput: `updatedRDesc-${randomId}`
+              }
+            ]
+          },
+          read: {
+            parameters: {}
           }
-        ]
+        },
+        navigation: {
+          mainBar: "userManagementMenu",
+          subMainBar: "navigationLinkGroups"
+        },
+        whichCatagoryToSearch: "searchNameColumn",
+        updateSearchValue: `rName-${randomId}`
       },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`
+  'Skill': {
+        specs: {
+          create: {
+            parametersToInsert: [
+              {
+                nameInput: `rName-${randomId}`,
+                descriptionInput: `rDesc-${randomId}`
+                // hasProficiencyToggle: ""
+              }
+            ]
+          },
+          update: {
+            parametersToInsert: [
+              {
+                nameInput: `updatedRName-${randomId}`,
+                descriptionInput: `updatedRDesc-${randomId}`,
+              }
+            ]
+          },
+          read: {
+            parameters: {}
           }
-        ]
+        },
+        navigation: {
+          mainBar: "userManagementMenu",
+          subMainBar: "navigationLinkSkills"
+        },
+        whichCatagoryToSearch: "searchNameColumn",
+        updateSearchValue: `rName-${randomId}`
       },
-      read: {
-        parameters: {}
-      }
-    },
-    navigation: {
-      mainBar: 'userManagementMenu',
-      subMainBar: 'navigationLinkGroups'
-    },
-    whichCatagoryToSearch: 'searchNameColumn',
-    updateSearchValue: `rName-${randomId}`
-  },
-  Skill: {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`
-            // hasProficiencyToggle: ""
+  'Role': {
+        specs: {
+          create: {
+            parametersToInsert: [
+              {
+                nameInput: `rName-${randomId}`,
+                descriptionInput: `rDesc-${randomId}`,
+                // sharedToggle: ""
+                }
+            ]
+          },
+          update: {
+            parametersToInsert: [
+              {
+                nameInput: `updatedRName-${randomId}`,
+                descriptionInput: `updatedRDesc-${randomId}`,
+              }
+            ]
+          },
+          read: {
+            parameters: {}
           }
-        ]
+        },
+        navigation: {
+          mainBar: "userManagementMenu",
+          subMainBar: "navigationLinkRoles"
+        },
+        whichCatagoryToSearch: "searchNameColumn",
+        updateSearchValue: `rName-${randomId}`
       },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`
-          }
-        ]
-      },
-      read: {
-        parameters: {}
-      }
-    },
-    navigation: {
-      mainBar: 'userManagementMenu',
-      subMainBar: 'navigationLinkSkills'
-    },
-    whichCatagoryToSearch: 'searchNameColumn',
-    updateSearchValue: `rName-${randomId}`
-  },
-  Role: {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`
-            // sharedToggle: ""
-          }
-        ]
-      },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`
-          }
-        ]
-      },
-      read: {
-        parameters: {}
-      }
-    },
-    navigation: {
-      mainBar: 'userManagementMenu',
-      subMainBar: 'navigationLinkRoles'
-    },
-    whichCatagoryToSearch: 'searchNameColumn',
-    updateSearchValue: `rName-${randomId}`
-  },
-  Reason: {
+  'Reason': {
     specs: {
       create: {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
             descriptionInput: `rDesc-${randomId}`,
-            externalIdInput: '',
-            sharedToggle: ''
+            externalIdInput: "",
+            sharedToggle: ""
           }
         ]
       },
@@ -166,7 +166,7 @@ const pages = {
           {
             nameInput: `updatedRName-${randomId}`,
             descriptionInput: `updatedRDesc-${randomId}`,
-            externalIdInput: ''
+            externalIdInput: "",
           }
         ]
       },
@@ -175,63 +175,63 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'userManagementMenu',
-      subMainBar: 'navigationLinkReasons'
+      mainBar: "userManagementMenu",
+      subMainBar: "navigationLinkReasons"
     },
-    whichCatagoryToSearch: 'searchNameColumn',
+    whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `rName-${randomId}`
   },
-  // 'Reasonlist': {
-  //   specs: {
-  //     create: {
-  //       parametersToInsert: [
-  //         {
-  //           nameInput: `rName-${randomId}`,
-  //           descriptionInput: `rDesc-${randomId}`,
-  //           externalIdInput: "",
-  //           //sharedToggle: "",
-  //           //isDefaultToggle: ""
-  //           }
-  //       ]
-  //     },
-  //     update: {
-  //       parametersToInsert: [
-  //         {
-  //           nameInput: `updatedRName-${randomId}`,
-  //           descriptionInput: `updatedRDesc-${randomId}`,
-  //           externalIdInput: "",
-  //           //sharedToggle: "",
-  //           //isDefaultToggle: ""
-  //         }
-  //       ]
-  //     },
-  //     read: {
-  //       parameters: {}
-  //     }
-  //   },
-  //   navigation: {
-  //     mainBar: "userManagementMenu",
-  //     subMainBar: "navigationLinkReasonsList"
-  //   },
-  //   whichCatagoryToSearch: "searchNameColumn",
-  //   updateSearchValue: `rName-${randomId}`
-  // },
-  //////////////////////////Configuration///////////////////////////
-  List: {
+// 'Reasonlist': {
+//   specs: {
+//     create: {
+//       parametersToInsert: [
+//         {
+//           nameInput: `rName-${randomId}`,
+//           descriptionInput: `rDesc-${randomId}`,
+//           externalIdInput: "",
+//           //sharedToggle: "",
+//           //isDefaultToggle: ""
+//           }
+//       ]
+//     },
+//     update: {
+//       parametersToInsert: [
+//         {
+//           nameInput: `updatedRName-${randomId}`,
+//           descriptionInput: `updatedRDesc-${randomId}`,
+//           externalIdInput: "",
+//           //sharedToggle: "",
+//           //isDefaultToggle: ""
+//         }
+//       ]
+//     },
+//     read: {
+//       parameters: {}
+//     }
+//   },
+//   navigation: {
+//     mainBar: "userManagementMenu",
+//     subMainBar: "navigationLinkReasonsList"
+//   },
+//   whichCatagoryToSearch: "searchNameColumn",
+//   updateSearchValue: `rName-${randomId}`
+// },
+//////////////////////////Configuration///////////////////////////
+  'List': {
     specs: {
       create: {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
             //sharedToggle: "",
-            listTypeList: 'Disposition Codes Type'
+            listTypeList: "Disposition Codes Type"
           }
         ]
       },
       update: {
         parametersToInsert: [
           {
-            nameInput: `updatedRName-${randomId}`
+            nameInput: `updatedRName-${randomId}`,
             //sharedToggle: ""
           }
         ]
@@ -241,31 +241,31 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'configurationMenu',
-      subMainBar: 'navigationLinkLists'
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkLists"
     },
-    whichCatagoryToSearch: 'searchNameColumn',
+    whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `rName-${randomId}`
   },
-  Sla: {
+  'Sla': {
     specs: {
       create: {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
             descriptionInput: `rDesc-${randomId}`,
-            sharedToggle: ''
+            sharedToggle: ""
           }
         ]
       },
-      createVersion: {
+      createVersion:{
         parametersToInsert: [
           {
             //Name and Description modal elements defined in webElements.js
             //Name and Description data added via inputFormDataForModal in common.js
-            thresholdInput: '20',
-            abandonTypeRadio: 'ignore-abandons',
-            abandonThresholdInput: '30'
+            thresholdInput: "20",
+            abandonTypeRadio: "ignore-abandons",
+            abandonThresholdInput: "30"
           }
         ]
       },
@@ -282,10 +282,10 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'configurationMenu',
-      subMainBar: 'navigationLinkSlas'
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkSlas"
     },
-    whichCatagoryToSearch: 'searchNameColumn',
+    whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `rName-${randomId}`
   },
   // 'Email Template': {
@@ -320,7 +320,7 @@ const pages = {
             descriptionInput: `rDesc-${randomId}`,
             channelList: 1,
             flowList: 1,
-            valueInput: '+15063001234'
+            valueInput: "+15063001234"
           }
         ]
       },
@@ -331,7 +331,7 @@ const pages = {
             descriptionInput: `updatedRDesc-${randomId}`,
             channelList: 0,
             flowList: 2,
-            valueInput: '+15063004321'
+            valueInput: "+15063004321"
           }
         ]
       },
@@ -340,10 +340,10 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'configurationMenu',
-      subMainBar: 'navigationLinkOutboundIdentifiers'
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkOutboundIdentifiers"
     },
-    whichCatagoryToSearch: 'searchNameColumn',
+    whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `rName-${randomId}`
   },
   'Outbound Identifier List': {
@@ -352,7 +352,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`
+            descriptionInput: `rDesc-${randomId}`,
           }
         ]
       },
@@ -360,7 +360,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`
+            descriptionInput: `updatedRDesc-${randomId}`,
           }
         ]
       },
@@ -369,10 +369,10 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'configurationMenu',
-      subMainBar: 'navigationLinkOutboundIdentifierLists'
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkOutboundIdentifierLists"
     },
-    whichCatagoryToSearch: 'searchNameColumn',
+    whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `rName-${randomId}`
   },
   // 'Chat Widget': {
@@ -438,7 +438,7 @@ const pages = {
           {
             nameInput: `keyName-${randomId}`,
             descriptionInput: `keyDesc-${randomId}`,
-            roleList: 'Administrator'
+            roleList: "Administrator"
           }
         ]
       },
@@ -447,7 +447,7 @@ const pages = {
           {
             nameInput: `updatedKeyName-${randomId}`,
             descriptionInput: `updatedKeyDesc-${randomId}`,
-            roleList: 'Agent'
+            roleList: "Agent"
           }
         ]
       },
@@ -457,45 +457,65 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'configurationMenu',
-      subMainBar: 'navigationLinkApiKeys'
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkApiKeys"
+    },
+    whichCatagoryToSearch: "searchNameColumn",
+    updateSearchValue: `keyName-${randomId}`,
+    deleteSearchValue: `updatedKeyName-${randomId}`,
+  },
+  'Message Template': {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`,
+            channelsDropdown: "sms",
+            typeList: 0,
+            templateInput: `rTemplateInput-${randomId}-${randomId}`
+          }
+        ]
+      },
+      createSecond: {
+        parametersToInsert: [
+          {
+            nameInput: `rRichName-${randomId}`,
+            descriptionInput: `rRichDesc-${randomId}`,
+            channelsDropdown: "email",
+            typeList: 1,
+            richTextEditorInput: `rTemplateInput-${randomId}-${randomId}`
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`,
+            channelsDropdown: "email",
+            templateInput: `rUpdatedTemplateInput-${randomId}-${randomId}`
+          }
+        ]
+      },
+      updateSecond: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRichName-${randomId}`,
+            descriptionInput: `updatedRichDesc-${randomId}`,
+            richTextEditorInput: `rUpdatedRichTemplateInput-${randomId}-${randomId}`
+          }
+        ]
+      },
+    },
+    navigation: {
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkMessageTemplates"
     },
     whichCatagoryToSearch: 'searchNameColumn',
-    updateSearchValue: `keyName-${randomId}`,
-    deleteSearchValue: `updatedKeyName-${randomId}`
+    updateSearchValue: `rName-${randomId}`,
+    updateSecondSearchValue: `rRichName-${randomId}`,
   },
-  // 'Message Template': {
-  //   specs: {
-  //     create: {
-  //       parametersToInsert: [
-  //         {
-  //           nameInput: `rName-${randomId}`,
-  //           descriptionInput: `rDesc-${randomId}`,
-  //           //channelsDropdown: "",
-  //           typeList: "Plain Text",
-  //           templateInput: `rInput-${randomId}`
-  //         }
-  //       ]
-  //     },
-  //     update: {
-  //       parametersToInsert: [
-  //         {
-  //           nameInput: `updatedRName-${randomId}`,
-  //           descriptionInput: `updatedRDesc-${randomId}`,
-  //           //channelsDropdown: "",
-  //           typeList: "Rich Text",
-  //           //templateEditor: `rInput-${randomId}`
-  //         }
-  //       ]
-  //     }
-  //   },
-  //   navigation: {
-  //     mainBar: "configurationMenu",
-  //     subMainBar: "navigationLinkMessageTemplates"
-  //   },
-  //   whichCatagoryToSearch: "searchNameColumn",
-  //   updateSearchValue: `rName-${randomId}`
-  // },
   'Business Hour': {
     specs: {
       create: {
@@ -518,13 +538,13 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'configurationMenu',
-      subMainBar: 'navigationLinkBusinessHours'
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkBusinessHours"
     },
-    whichCatagoryToSearch: 'searchNameColumn',
+    whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `rName-${randomId}`
   },
-  /////////////////////////////////Flows//////////////////////////////
+/////////////////////////////////Flows//////////////////////////////
   // 'Flow': {
   //   specs: {
   //     create: {
@@ -563,8 +583,8 @@ const pages = {
           {
             nameInput: `dMapName-${randomId}`,
             descriptionInput: `dMapDesc-${randomId}`,
-            interactionList: 'Voice',
-            mappingList: 'Contact Point',
+            interactionList: "Voice",
+            mappingList: "Contact Point",
             phoneValueInput: `+1${randomPhoneNum()}`,
             flowList: 1
           }
@@ -575,8 +595,8 @@ const pages = {
           {
             nameInput: `updatedDMapName-${randomId}`,
             descriptionInput: `updatedDMapDesc-${randomId}`,
-            interactionList: 'Sms',
-            mappingList: 'Customer',
+            interactionList: "Sms",
+            mappingList: "Customer",
             phoneValueInput: `+1${randomPhoneNum()}`,
             flowList: 2,
             flowVersionList: 1
@@ -588,13 +608,13 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'flowsMenu',
-      subMainBar: 'navigationLinkDispatchMappings'
+      mainBar: "flowsMenu",
+      subMainBar: "navigationLinkDispatchMappings"
     },
-    whichCatagoryToSearch: 'searchNameColumn',
+    whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `dMapName-${randomId}`
   },
-  /////////////////////////////Reporting/////////////////////////////
+/////////////////////////////Reporting/////////////////////////////
   'Data Access Report': {
     specs: {
       create: {
@@ -602,9 +622,9 @@ const pages = {
           {
             nameInput: `rName-${randomId}`,
             descriptionInput: `rDesc-${randomId}`,
-            reportTypeRadio: 'realtime',
-            realtimeReportTypeRadio: 'standard',
-            realtimeReportAutoComplete: 'Agent State Table'
+            reportTypeRadio: "realtime",
+            realtimeReportTypeRadio: "standard",
+            realtimeReportAutoComplete: "Agent State Table"
           }
         ]
       },
@@ -612,7 +632,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`
+            descriptionInput: `updatedRDesc-${randomId}`,
             //realtimeReportAutoComplete: "Interactions Completed Table"
           }
         ]
@@ -622,10 +642,10 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: 'reportingMenu',
-      subMainBar: 'navigationLinkDataAccessReports'
+      mainBar: "reportingMenu",
+      subMainBar: "navigationLinkDataAccessReports"
     },
-    whichCatagoryToSearch: 'searchNameColumn',
+    whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: `rName-${randomId}`
   }
 };

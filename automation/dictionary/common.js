@@ -71,16 +71,30 @@ const commonBehavior = {
     let radioGroupValue = new Element(`input[value="${parameter[param]}"]`);
     radioGroupValue.waitAndClick();
   },
+  insertDropdownValues(parameter, param) {
+    let dropdownValue = new Element(`button${Elem[param].selector}`);
+    let dropdownCheckboxValue = new Element(`input[name="${parameter[param]}"]`);
+    dropdownValue.waitAndClick();
+    dropdownCheckboxValue.waitForVisible();
+    dropdownCheckboxValue.waitAndClick();
+    Elem.clickMask.waitAndClick();
+  },
   insertExtraValues(parameter, param) {
     Elem[param].setValue(parameter[param]);
   },
   searchByNameAndClick(entity, actionType) {
     var columnElement = new Element(`[data-automation="${dictionary[entity].whichCatagoryToSearch}"]`);
     columnElement.clearElement();
-    if (actionType === 'createVersion' || actionType === 'update') {
-      columnElement.setValue(dictionary[entity].updateSearchValue);
-      let searchedForElement = new Element(`.//span[text()="${dictionary[entity].updateSearchValue}"]`);
-      searchedForElement.waitAndClick();
+    if (actionType === 'createVersion' || actionType === 'update' || actionType === 'updateSecond') {
+      if(actionType === 'updateSecond'){
+        columnElement.setValue(dictionary[entity].updateSecondSearchValue);
+        let searchedForElement = new Element(`.//span[text()="${dictionary[entity].updateSecondSearchValue}"]`);
+        searchedForElement.waitAndClick();
+      } else {
+        columnElement.setValue(dictionary[entity].updateSearchValue);
+        let searchedForElement = new Element(`.//span[text()="${dictionary[entity].updateSearchValue}"]`);
+        searchedForElement.waitAndClick();
+      }
     }
     if (actionType === 'delete') {
       columnElement.setValue(dictionary[entity].deleteSearchValue);
@@ -102,6 +116,8 @@ const commonBehavior = {
           this.insertDataTextValues(parameter, param)
         } else if (param.endsWith('List')) {
           this.insertListValues(parameter, param);
+        } else if (param.endsWith('Dropdown')) {
+          this.insertDropdownValues(parameter, param);
         } else if (param.endsWith('Radio')) {
           this.insertRadioValues(parameter, param);
         } else if (param.endsWith('AutoComplete')) {
@@ -128,7 +144,7 @@ const commonBehavior = {
     }
   },
   entityCRUD(entity, actionType) {
-    if (actionType === 'create') {
+    if (actionType === 'create' || actionType === 'createSecond') {
       Elem.entityCreateButton.waitAndClick();
       Elem.sdpanelSubmitButton.waitForVisible();
       this.submitFormData(entity, actionType);
@@ -146,7 +162,7 @@ const commonBehavior = {
       this.verifyAction(entity, actionType);
       this.verifyEntitySpecificAction(entity);
       this.closeSidePanel();
-    } else if (actionType === 'update') {
+    } else if (actionType === 'update' || actionType === 'updateSecond') {
       this.searchByNameAndClick(entity, actionType);
       this.submitFormData(entity, actionType);
       this.verifyAction(entity, actionType);

@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.67.6] - 2019-11-08
+## Added
+- <no-jira> - Added message templates automation test
+
 ## [0.67.5] - 2019-11-07
 ## Changed
 - <no-jira> - Version bump components library to 0.56.7.
