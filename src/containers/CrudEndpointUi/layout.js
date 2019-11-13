@@ -785,6 +785,7 @@ export default class CrudEndpointUiLayout extends Component {
             tableType={this.props.tableType}
             currentVisibleSubMenu={this.props.currentVisibleSubMenu}
             selectionType="checkbox"
+            data-automation="entityTableColumnSelectionBtn"
           >
             Columns
           </InlineCheckboxFilterMenu>

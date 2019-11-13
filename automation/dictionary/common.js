@@ -30,14 +30,15 @@ const commonBehavior = {
     let navBarSub = new Element(`[data-automation=${dictionary[entity].navigation.subMainBar}]`);
     navBar.waitAndClick();
     navBarSub.waitAndClick();
-    Elem.entityCreateButton.waitForVisible();
-    Elem.entityCreateButton.validateElementsState('isVisible', true);
-    Elem.entityCreateButton.waitForEnabled();
-    Elem.entityCreateButton.validateElementsState('isEnabled', true);
+    Elem.entityTableColumnSelectionBtn.waitForVisible();
+    Elem.entityTableColumnSelectionBtn.validateElementsState('isVisible', true);
+    Elem.entityTableColumnSelectionBtn.waitForEnabled();
+    Elem.entityTableColumnSelectionBtn.validateElementsState('isEnabled', true);
   },
   insertDataTextValues(parameter, param) {
     Elem[param].waitForVisible();
     Elem[param].waitForEnabled();
+    Elem[param].clearElement();
     Elem[param].setValue(parameter[param]);
   },
   insertListValues(parameter, param) {
@@ -52,13 +53,13 @@ const commonBehavior = {
       loadingIcon.validateElementsState('isVisible', false);
     }
   },
-  insertToggleValues(parameter, param) {
+  insertToggleValues(parameter, param, entity) {
     Elem[param].waitAndClick();
-    Elem.confirmationWrapper.waitForVisible();
-    Elem.confirmButton.waitAndClick();
-    Elem.confirmationWrapper.waitForVisible(30000, false);
-    Elem.detailsPanelAlertText.waitForVisible();
-    Elem.detailsPanelAlertText.validateElementsState('isVisible', true);
+    if (entity === 'Skill' || entity === 'Reason' || entity === 'Sla') {
+      Elem.confirmationWrapper.waitForVisible();
+      Elem.confirmButton.waitAndClick();
+      Elem.confirmationWrapper.waitForVisible(30000, false);
+    }
   },
   insertAutoCompleteValues(parameter, param) {
     let autoCompleteInput = new Element(`input${Elem[param].selector}`);
@@ -71,119 +72,135 @@ const commonBehavior = {
     let radioGroupValue = new Element(`input[value="${parameter[param]}"]`);
     radioGroupValue.waitAndClick();
   },
-  insertDropdownValues(parameter, param) {
-    let dropdownValue = new Element(`button${Elem[param].selector}`);
-    let dropdownCheckboxValue = new Element(`input[name="${parameter[param]}"]`);
-    dropdownValue.waitAndClick();
-    dropdownCheckboxValue.waitForVisible();
-    dropdownCheckboxValue.waitAndClick();
-    Elem.clickMask.waitAndClick();
+  insertCheckboxValues(parameter, param) {
+    Elem[param].waitAndClick();
+    Elem.checkboxMenuWrapper.waitForVisible();
+    parameter[param].input.forEach(x => new Element(`[data-automation="${x}"]`).waitAndClick());
+    Elem.modalMask.waitAndClick();
+    Elem.checkboxMenuWrapper.waitForVisible(30000, false);
+    new Element(`button[data-automation="${param}"] span`).waitForVisible();
+    new Element(`button[data-automation="${param}"] span`).validateElementsString('exact', parameter[param].value);
   },
-  insertExtraValues(parameter, param) {
-    Elem[param].setValue(parameter[param]);
-  },
-  searchByNameAndClick(entity, actionType) {
+  searchByNameAndClick(entity, searchValue) {
     var columnElement = new Element(`[data-automation="${dictionary[entity].whichCatagoryToSearch}"]`);
     columnElement.clearElement();
-    if (actionType === 'createVersion' || actionType === 'update' || actionType === 'updateSecond') {
-      if(actionType === 'updateSecond'){
-        columnElement.setValue(dictionary[entity].updateSecondSearchValue);
-        let searchedForElement = new Element(`.//span[text()="${dictionary[entity].updateSecondSearchValue}"]`);
-        searchedForElement.waitAndClick();
+    columnElement.setValue(searchValue);
+    new Element(`.//span[text()="${searchValue}"]`).waitAndClick();
+    Elem.sdpanelStatusToggle.waitForVisible();
+    Elem.sdpanelStatusToggle.validateElementsState('isVisible', true);
+  },
+  fillFormFields(parameter, entity) {
+    Object.keys(parameter).forEach(param => {
+      if (param.endsWith('Input')) {
+        this.insertDataTextValues(parameter, param)
+      } else if (param.endsWith('List')) {
+        this.insertListValues(parameter, param);
+      } else if (param.endsWith('Toggle')) {
+        this.insertToggleValues(parameter, param, entity);
+      } else if (param.endsWith('Checkbox')) {
+        this.insertCheckboxValues(parameter, param);
+      } else if (param.endsWith('Radio')) {
+        this.insertRadioValues(parameter, param);
+      } else if (param.endsWith('AutoComplete')) {
+        this.insertAutoCompleteValues(parameter, param);
+      }
+    });
+  },
+  submitFormData(entity, actionType, parameter) {
+    this.fillFormFields(parameter, entity);
+    const subEntityFormParams = dictionary[entity].specs[actionType].subEntityParametersToInsert;
+    if (actionType === 'create') {
+      if (subEntityFormParams) {
+        subEntityFormParams.forEach(parameter => {
+          Elem.sdpanelAddItem.waitAndClick();
+          this.fillFormFields(parameter, entity);
+          if (entity !== 'Sla') {
+            Elem.modalSubmitButton.waitAndClick();
+          }
+        });
+      }
+      Elem.sdpanelSubmitButton.waitAndClick();
+    } else if (actionType === 'update') {
+      if (subEntityFormParams) {
+        if (entity === 'Reason List') {
+          Elem.updateCategoryButton.waitAndClick();
+        } else if (entity === 'Transfer List') {
+          Elem.updateListItemButton.waitAndClick();
+        }
+        subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
+        Elem.modalSubmitButton.waitAndClick();
       } else {
-        columnElement.setValue(dictionary[entity].updateSearchValue);
-        let searchedForElement = new Element(`.//span[text()="${dictionary[entity].updateSearchValue}"]`);
-        searchedForElement.waitAndClick();
+        $('button[data-automation="sdpanelSubmitButton"]').scroll();
+        Elem.sdpanelSubmitButton.waitAndClick();
       }
     }
-    if (actionType === 'delete') {
-      columnElement.setValue(dictionary[entity].deleteSearchValue);
-      let searchedForElement = new Element(`.//span[text()="${dictionary[entity].deleteSearchValue}"]`);
-      searchedForElement.waitAndClick();
-    }
-    if (entity === 'Sla') { // To Fix
-      Elem.sdpanelAddItem.waitForVisible(30000, true);
-      Elem.sdpanelAddItem.validateElementsState('isVisible', true);
-    } else {
-      Elem.sdpanelSubmitButton.waitForVisible(30000, true);
-      Elem.sdpanelSubmitButton.validateElementsState('isVisible', true);
-    }
   },
-  submitFormData(entity, actionType) {
+  createEntity(entity, actionType) {
     dictionary[entity].specs[actionType].parametersToInsert.forEach(parameter => {
-      Object.keys(parameter).forEach(param => {
-        if (param.endsWith('Input')) {
-          this.insertDataTextValues(parameter, param)
-        } else if (param.endsWith('List')) {
-          this.insertListValues(parameter, param);
-        } else if (param.endsWith('Dropdown')) {
-          this.insertDropdownValues(parameter, param);
-        } else if (param.endsWith('Radio')) {
-          this.insertRadioValues(parameter, param);
-        } else if (param.endsWith('AutoComplete')) {
-          this.insertAutoCompleteValues(parameter, param);
-        } else if (param.endsWith('Toggle')) {
-          this.insertToggleValues(parameter, param);
-        } else {
-          this.insertExtraValues(param);
-        }
-      });
-    });
-    if (actionType === 'createVersion') {
-      Elem.modalSubmitButton.waitForVisible();
-      Elem.modalSubmitButton.waitAndClick();
-    } else {
-      Elem.sdpanelSubmitButton.waitForEnabled();
-      Elem.sdpanelSubmitButton.waitAndClick();
-    }
-  },
-  inputFormDataForModal(entity, actionType) {
-    if(entity === 'Sla' && actionType === 'createVersion'){
-      Elem.modalNameInput.setValue('versionSLAName');
-      Elem.modalDescriptionInput.setValue('versionSLADescription');
-    }
-  },
-  entityCRUD(entity, actionType) {
-    if (actionType === 'create' || actionType === 'createSecond') {
       Elem.entityCreateButton.waitAndClick();
       Elem.sdpanelSubmitButton.waitForVisible();
-      this.submitFormData(entity, actionType);
+      this.submitFormData(entity, actionType, parameter);
       this.verifyAction(entity, actionType);
+      this.closeToastr(entity, actionType);
       this.verifyEntitySpecificAction(entity);
       this.closeSidePanel();
-    } else if (actionType === 'createVersion') {
-      Elem.searchStatusColumnButton.waitAndClick();
-      Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
-      this.searchByNameAndClick(entity, actionType);
-      Elem.sdpanelAddItem.waitAndClick();
-      Elem.thresholdInput.waitForVisible(30000, true);
-      this.inputFormDataForModal(entity, actionType);
-      this.submitFormData(entity, actionType);
+    });
+  },
+  updateEntity(entity, actionType) {
+    dictionary[entity].specs[actionType].parametersToInsert.forEach((parameter, index) => {
+      this.searchByNameAndClick(entity, dictionary[entity].updateSearchValue[index]);
+      this.submitFormData(entity, actionType, parameter);
       this.verifyAction(entity, actionType);
-      this.verifyEntitySpecificAction(entity);
-      this.closeSidePanel();
-    } else if (actionType === 'update' || actionType === 'updateSecond') {
-      this.searchByNameAndClick(entity, actionType);
-      this.submitFormData(entity, actionType);
-      this.verifyAction(entity, actionType);
+      this.closeToastr(entity, actionType);
       this.toggleEntity(entity);
       this.closeSidePanel();
-    } else if (actionType === 'delete') {
-      Elem.searchStatusColumnButton.waitAndClick();
-      Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
-      this.searchByNameAndClick(entity, actionType);
+    });
+  },
+  deleteEntity(entity, actionType) {
+    Elem.searchStatusColumnButton.waitAndClick();
+    Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
+    this.searchByNameAndClick(entity, dictionary[entity].deleteSearchValue);
+    if (entity === 'Reason List' || entity === 'Transfer List') {
+      Elem.removeCategoryButton.waitForVisible();
+      Elem.removeCategoryButton.waitAndClick();
+      Elem.confirmationWrapper.waitForVisible();
+      Elem.confirmButton.waitAndClick();
+      Elem.confirmationWrapper.waitForVisible(30000, false);
+      this.verifyAction(entity, actionType);
+      this.closeToastr(entity, actionType);
+      Elem.removeListItemButton.waitForVisible();
+      Elem.removeListItemButton.waitAndClick();
+      Elem.confirmationWrapper.waitForVisible();
+      Elem.confirmButton.waitAndClick();
+      Elem.confirmationWrapper.waitForVisible(30000, false);
+      this.verifyAction(entity, actionType);
+      this.closeToastr(entity, actionType);
+      this.closeSidePanel();
+    }
+    if (entity === 'Api Key') {
       Elem.deleteKeyButton.waitAndClick();
       Elem.confirmButton.waitAndClick();
       this.verifyAction(entity, actionType);
+      this.closeToastr(entity, actionType);
+    }
+  },
+  entityCRUD(entity, actionType) {
+    if (actionType === 'create') {
+      this.createEntity(entity, actionType);
+    } else if (actionType === 'update') {
+      this.updateEntity(entity, actionType);
+    } else if (actionType === 'delete') {
+      this.deleteEntity(entity, actionType);
     }
   },
   verifyAction(entity, actionType) {
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    if(actionType === ('create' || 'update' || 'delete')) {
+    if ((entity === 'Reason List' || entity === 'Transfer List') && actionType === 'delete') {
+      Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was updated successfully!`);
+    } else {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
     }
-    this.closeToastr(entity, actionType);
   },
   verifyEntitySpecificAction(entity) {
     if (entity === 'Api Key') {
@@ -204,7 +221,7 @@ const commonBehavior = {
     Elem.confirmButton.waitAndClick();
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    if(enabledToggle === true) {
+    if (enabledToggle === true) {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was enabled successfully!`);
     } else {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was disabled successfully!`);
@@ -214,7 +231,7 @@ const commonBehavior = {
   closeToastr(entity, actionType) {
     if (Elem.toastCloseButton.isVisible()) {
       Elem.toastCloseButton.waitAndClick();
-      if(entity === 'User' && actionType === 'create') {
+      if (entity === 'User' && actionType === 'create') {
         let userCreatedToastr = new Element(`.//div[text()="User was created successfully!"]`);
         userCreatedToastr.waitForVisible(30000, false);
         Elem.toastCloseButton.waitAndClick();

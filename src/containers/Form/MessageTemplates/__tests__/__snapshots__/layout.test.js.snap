@@ -22,7 +22,7 @@ exports[`<MessageTemplatesForm /> renders create form 1`] = `
   />
   <CheckboxField
     buttonType="checkboxField"
-    data-automation="channelsDropdown"
+    data-automation="msgTemplatechannelsCheckbox"
     disabled={false}
     dropDownText="Select Channel Type..."
     items={
@@ -96,7 +96,7 @@ exports[`<MessageTemplatesForm /> renders update form 1`] = `
   />
   <CheckboxField
     buttonType="checkboxField"
-    data-automation="channelsDropdown"
+    data-automation="msgTemplatechannelsCheckbox"
     disabled={true}
     dropDownText="Select Channel Type..."
     items={

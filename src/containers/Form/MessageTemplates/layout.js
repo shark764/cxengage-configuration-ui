@@ -63,7 +63,7 @@ export default class MessageTemplatesForm extends React.Component {
           label="Channels *"
           name="channels"
           dropDownText="Select Channel Type..."
-          data-automation="channelsDropdown"
+          data-automation="msgTemplatechannelsCheckbox"
           items={[
             { name: 'sms', label: 'SMS' },
             { name: 'messaging', label: 'Messaging' },

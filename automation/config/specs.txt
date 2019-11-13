@@ -1,12 +1,28 @@
 # Copy paste the tests you want to run from here:
 
 userManagementMenu
+  User
+  Group
+  Role
+  Skill
   Reason
+  Reason List
 
 configurationMenu
-  Api Keys
+  List
+  Sla
+  Email Template
+  Outbound Identifier
+  Outbound Identifier List
+  Chat Widget
+  Transfer List
+  Api Key
+  Message Template
+  Business Hour
 
 flowsMenu
+  Flow
   Dispatch Mappings
   
 reportingMenu
+  Data Access Report

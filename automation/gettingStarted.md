@@ -45,3 +45,20 @@
 1. From command line, run "npm run selenium".
 2. Open another terminal & switch to node version 8.11.3 &
 3. Run "npm run regression" ---> your tests should start running & logs can be viewed on the terminal.
+
+
+### Instruction to write new tests?
+
+1. Add "data-automation" label for each new field of a component
+
+2. Choosing the label name according to the field type:
+    A) Input text - ended with "Input"
+    B) Drop Down List (select) - ended with "List" 
+    c) Toggle - ended with "Toggle"
+    D) Auto Complete Field - ended with "AutoComplete"
+    E) Radio Group - ended with "Choose"
+    F) Button - ended with "Button"
+    G) Searching by Column  - search____Column
+    H) Checkbox type elements - ends with checkbox
+
+3. Update the dictionary/index.js to include new test

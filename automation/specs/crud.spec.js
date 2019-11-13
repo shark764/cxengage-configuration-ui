@@ -7,7 +7,7 @@ let testsToRun = [];
 
 // Filters out the tests to run based on the input provided to TESTS_TO_RUN in './automation/config/.env' file
 if (keydInTests && keydInTests !== 'all') {
-  testsToRun = keydInTests.split(',').filter(a => totalTests.find(b => a === b) !== undefined)
+  testsToRun = keydInTests.split(',').map(x => x.trim()).filter(a => totalTests.find(b => a === b) !== undefined)
 } else {
   testsToRun = totalTests;
 }
@@ -26,27 +26,14 @@ testsToRun.forEach(entity => {
     it(`Navigate to ${entity}`, () => {
       commonBehavior.navigationMainBar(entity);
     });
-    it(`Create ${entity}`, () => {
-      commonBehavior.entityCRUD(entity, 'create');
-    });
-    if (dictionary[entity].specs['createSecond']) {
-      it(`Create Second ${entity}`, () => {
-        commonBehavior.entityCRUD(entity, 'createSecond');
-      });
-    }
-    if (dictionary[entity].specs['createVersion']) {
-      it(`Create Version for ${entity}`, () => {
-        commonBehavior.entityCRUD(entity, 'createVersion');
+    if (dictionary[entity].specs['create']) {
+      it(`Create ${entity}`, () => {
+        commonBehavior.entityCRUD(entity, 'create');
       });
     }
     if (dictionary[entity].specs['update']) {
       it(`Update ${entity}`, () => {
         commonBehavior.entityCRUD(entity, 'update');
-      });
-    }
-    if (dictionary[entity].specs['updateSecond']) {
-      it(`Update Second ${entity}`, () => {
-        commonBehavior.entityCRUD(entity, 'updateSecond');
       });
     }
     if (dictionary[entity].specs['delete']) {

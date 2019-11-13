@@ -18,7 +18,7 @@ export default function InitialVersionForm(props) {
       <InputField
         name="versionName"
         label="Name *"
-        data-automation="nameInput"
+        data-automation="subEntityFormNameInput"
         componentType="input"
         inputType="text"
         disabled={props.isSaving || props.viewOnly}
@@ -26,7 +26,7 @@ export default function InitialVersionForm(props) {
       <InputField
         name="versionDescription"
         label="Description"
-        data-automation="descriptionInput"
+        data-automation="subEntityFormDescriptionInput"
         componentType="textarea"
         inputType="text"
         disabled={props.isSaving || props.viewOnly}

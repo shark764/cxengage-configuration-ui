@@ -142,7 +142,7 @@ export default class TransferListItemsForm extends React.Component {
               name="warmColdTransfer"
               label="Warm/Cold Transfer *"
               dropDownText="Select warm/cold transfer..."
-              data-automation="warmColdTransferToggle"
+              data-automation="warmColdTransferCheckbox"
               items={[
                 { name: 'warmTransfer', label: 'Warm Transfer' },
                 { name: 'coldTransfer', label: 'Cold Transfer' }

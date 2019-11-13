@@ -89,7 +89,7 @@ exports[`<TransferListItemsForm> renders create transfer list items form 1`] = `
     />
     <CheckboxField
       buttonType="checkboxField"
-      data-automation="warmColdTransferToggle"
+      data-automation="warmColdTransferCheckbox"
       dropDownText="Select warm/cold transfer..."
       items={
         Array [
@@ -266,7 +266,7 @@ exports[`<TransferListItemsForm> renders update transfer list items form 1`] = `
     />
     <CheckboxField
       buttonType="checkboxField"
-      data-automation="warmColdTransferToggle"
+      data-automation="warmColdTransferCheckbox"
       dropDownText="Select warm/cold transfer..."
       items={
         Array [
