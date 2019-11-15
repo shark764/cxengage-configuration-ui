@@ -46,9 +46,18 @@ export class EntityMetaData {
     this.createFormDependencies = [];
     this.updateFormDependencies = [];
     this.bulkFormDependencies = [];
-    this.entityTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
-    this.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
-    this.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.entityTableFields = [
+      { label: 'Name', name: 'name' },
+      { label: 'Description', name: 'description' }
+    ];
+    this.sidePanelListTableFields = [
+      { label: 'Name', name: 'name' },
+      { label: 'Description', name: 'description' }
+    ];
+    this.modalListTableFields = [
+      { label: 'Name', name: 'name' },
+      { label: 'Description', name: 'description' }
+    ];
     this.defaultFilters = [];
     this.defaultSorted = [{ id: 'name', alpha: true }];
     this.defaultDependentEntityFilters = [];
@@ -253,7 +262,10 @@ entities.skills.associations = {
   users: ['users', 'skills'],
   outboundIdentifierLists: ['skills', 'outboundIdentifierLists']
 };
-entities.skills.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
+entities.skills.modalListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Email', name: 'email' }
+];
 entities.skills.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' },
@@ -264,7 +276,10 @@ entities.skills.memberListTableFields = [
     filterOptions: ['enabled', 'disabled']
   }
 ];
-entities.skills.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
+entities.skills.sidePanelListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Email', name: 'email' }
+];
 entities.skills.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -273,7 +288,10 @@ entities.skills.columns = [
 ];
 entities.skills.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.skills.defaultAssociationFilters = {
-  users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
+  users: [
+    { id: 'status', value: 'accepted' },
+    { id: 'invitationStatus', value: 'enabled' }
+  ],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }]
 };
 
@@ -288,12 +306,18 @@ entities.groups.associations = {
   outboundIdentifierLists: ['groups', 'outboundIdentifierLists'],
   reasonLists: ['groups', 'reasonLists']
 };
-entities.groups.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
+entities.groups.modalListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Email', name: 'email' }
+];
 entities.groups.outboundIdentifiersFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' }
 ];
-entities.groups.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
+entities.groups.sidePanelListTableFields = [
+  { label: 'Name', name: 'name' },
+  { label: 'Email', name: 'email' }
+];
 entities.groups.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' },
@@ -311,7 +335,10 @@ entities.groups.columns = [
 ];
 entities.groups.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.groups.defaultAssociationFilters = {
-  users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
+  users: [
+    { id: 'status', value: 'accepted' },
+    { id: 'invitationStatus', value: 'enabled' }
+  ],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }],
   reasonLists: [{ id: 'active', value: 'enabled' }]
 };
@@ -452,7 +479,10 @@ entities.agentStateMonitoring.columns = [
 entities.emailTemplates.bulkEditsAvailable = false;
 entities.emailTemplates.pageTitle = 'User Management Emails';
 entities.emailTemplates.helpLink = '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
-entities.emailTemplates.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
+entities.emailTemplates.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true }
+];
 
 // Chat Widgets
 entities.chatWidgets.bulkEditsAvailable = false;
@@ -673,7 +703,10 @@ entities.flows.membersTableFields = {
     { label: 'Name', name: 'name' },
     { label: 'Created On', name: 'created', format: 'datetime' }
   ],
-  drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'datetime' }]
+  drafts: [
+    { label: 'Name', name: 'name' },
+    { label: 'Created On', name: 'created', format: 'datetime' }
+  ]
 };
 
 // Dispatch Mappings
@@ -694,8 +727,8 @@ entities.dispatchMappings.columns = [
 entities.dispatchMappings.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
 // Dispositions
-entities.dispositions.pageTitle = 'Dispositions Management';
-entities.dispositions.helpLink = '/Help/Content/Managing%20Dispositions/Creating_Dispositions.htm';
+entities.dispositions.pageTitle = 'Disposition Management';
+entities.dispositions.helpLink = '/Help/Content/Managing%20Flows/Dispositions/Creating_Dispositions.htm';
 entities.dispositions.bulkEditsAvailable = true;
 entities.dispositions.columns = [
   { name: 'Name', active: true },
@@ -784,10 +817,11 @@ entities.tenants.columns = [
   { name: 'Parent Tenant', active: true },
   { name: 'Status', active: true }
 ];
+
 // Disposition Lists
-entities.dispositionLists.pageTitle = 'Disposition Lists Management';
-entities.dispositionLists.helpLink = '/Help/Content/Managing%20DispositionLists/Creating_DispositionLists.htm';
-entities.dispositionLists.dependentEntity = 'dependentEntity';
+entities.dispositionLists.pageTitle = 'Disposition List Management';
+entities.dispositionLists.helpLink = '/Help/Content/Managing%20Flows/Dispositions/Creating_Disposition_Lists.htm';
+entities.dispositionLists.dependentEntity = 'dispositions';
 entities.dispositionLists.bulkEditsAvailable = true;
 entities.dispositionLists.columns = [
   { name: 'Name', active: true },

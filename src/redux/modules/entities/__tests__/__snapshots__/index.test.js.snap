@@ -742,6 +742,9 @@ Immutable.Map {
     "createPermission": Immutable.List [
       "CREATE_DISPOSITION_LIST",
     ],
+    "sharePermission": Immutable.List [
+      "UPDATE_DISPOSITION_LIST",
+    ],
     "confirmationDialogType": undefined,
     "disablePermission": Immutable.List [
       "",

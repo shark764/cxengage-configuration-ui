@@ -305,6 +305,11 @@ export const getEntityDisplay = createSelector(
   selectedEntity => selectedEntity.get('name') || getDisplay(selectedEntity.toJS())
 );
 
+export const getEntityItemDisplay = (state, entityId) => {
+  const entityItem = findEntity(state, getCurrentEntity(state), entityId);
+  return entityItem.get('name') || getDisplay(entityItem.toJS());
+};
+
 export const getConfirmationToggleEntityMessage = createSelector(
   [getCurrentEntity, getSelectedEntity, getSelectedEntityId],
   (currentEntity, selectedEntity, selectedEntityId) => {

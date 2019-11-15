@@ -609,9 +609,7 @@ export const BulkEntityUpdate = (action$, store) =>
           ['invited', 'expired', 'enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
         ) {
           console.warn(
-            `Cannot send email invitation for User (${
-              userData.email
-            }) as he/she is in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
+            `Cannot send email invitation for User (${userData.email}) as he/she is in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
             `Cannot send email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
@@ -621,9 +619,7 @@ export const BulkEntityUpdate = (action$, store) =>
           ['enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
         ) {
           console.warn(
-            `Cannot resend an email invitation for User (${
-              userData.email
-            }) as he/she is in one of the following states: "Enabled", "Disabled" or "SSO Only".`
+            `Cannot resend an email invitation for User (${userData.email}) as he/she is in one of the following states: "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
             `Cannot resend an email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Enabled", "Disabled" or "SSO Only".`
@@ -633,9 +629,7 @@ export const BulkEntityUpdate = (action$, store) =>
           ['pending', 'expired', 'enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
         ) {
           console.warn(
-            `Cannot cancel email invitation for User (${
-              userData.email
-            }) as he/she is in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
+            `Cannot cancel email invitation for User (${userData.email}) as he/she is in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
           a.uneededCalls.push(
             `Cannot cancel email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
@@ -664,9 +658,7 @@ export const BulkEntityUpdate = (action$, store) =>
             ['invited', 'pending', 'expired'].includes(userData.invitationStatus)
           ) {
             console.warn(
-              `Cannot send a password reset email to User (${
-                userData.email
-              }) as he/she is in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or doesn't have firstName and lastName set.`
+              `Cannot send a password reset email to User (${userData.email}) as he/she is in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or doesn't have firstName and lastName set.`
             );
             a.uneededCalls.push(
               `Cannot send a password reset email to BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or they don't have firstName and lastName set.`
@@ -694,37 +686,36 @@ export const BulkEntityUpdate = (action$, store) =>
         handleBulkUneeded(a);
       }
     })
-    .mergeMap(
-      a =>
-        a.allSdkCalls.length > 0
-          ? forkJoin(
-              a.allSdkCalls.map(apiCall =>
-                from(
-                  sdkPromise(apiCall).catch(error => ({
-                    error: error,
-                    id: apiCall.data['userId']
-                  }))
-                )
+    .mergeMap(a =>
+      a.allSdkCalls.length > 0
+        ? forkJoin(
+            a.allSdkCalls.map(apiCall =>
+              from(
+                sdkPromise(apiCall).catch(error => ({
+                  error: error,
+                  id: apiCall.data['userId']
+                }))
               )
             )
-              .do(allResult => handleBulkSuccess(allResult, a))
-              .mergeMap(result =>
-                from(result).map(response => {
-                  if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
-                    return handleSuccess(
-                      {
-                        result: {
-                          ...response.result,
-                          invitationStatus: a.toStatus
-                        }
-                      },
-                      a
-                    );
-                  }
-                  return handleSuccess(response, a);
-                })
-              )
-          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
+          )
+            .do(allResult => handleBulkSuccess(allResult, a))
+            .mergeMap(result =>
+              from(result).map(response => {
+                if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
+                  return handleSuccess(
+                    {
+                      result: {
+                        ...response.result,
+                        invitationStatus: a.toStatus
+                      }
+                    },
+                    a
+                  );
+                }
+                return handleSuccess(response, a);
+              })
+            )
+        : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
 export const FocusNoPasswordValueFormField = action$ =>

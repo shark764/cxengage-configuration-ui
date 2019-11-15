@@ -348,7 +348,7 @@ export const UpdateEntity = action$ =>
 export const BulkEntityUpdate = (action$, store) =>
   action$
     .ofType('BULK_ENTITY_UPDATE')
-    .filter(a => a.entityName !== 'users' && a.entityName !== 'reasons' && a.entityName !== 'reasonLists')
+    .filter(a => !['users', 'reasons', 'reasonLists', 'dispositions', 'dispositionLists'].includes(a.entityName))
     .map(a => {
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
@@ -369,22 +369,21 @@ export const BulkEntityUpdate = (action$, store) =>
       }, []);
       return { ...a };
     })
-    .mergeMap(
-      a =>
-        a.allSdkCalls.length > 0
-          ? forkJoin(
-              a.allSdkCalls.map(apiCall =>
-                from(
-                  sdkPromise(apiCall).catch(error => ({
-                    error: error,
-                    id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
-                  }))
-                )
+    .mergeMap(a =>
+      a.allSdkCalls.length > 0
+        ? forkJoin(
+            a.allSdkCalls.map(apiCall =>
+              from(
+                sdkPromise(apiCall).catch(error => ({
+                  error: error,
+                  id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
+                }))
               )
             )
-              .do(allResult => handleBulkSuccess(allResult))
-              .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
-          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
+          )
+            .do(allResult => handleBulkSuccess(allResult))
+            .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+        : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
 export const ToggleEntity = (action$, store) =>
@@ -632,15 +631,14 @@ export const FetchFormMetaData = (action$, store) =>
       entityId: getSelectedEntityId(store.getState()),
       isDefined: name => store.getState().getIn(['Entities', name, 'data']).size === 0
     }))
-    .switchMap(
-      a =>
-        a.entityId === 'create'
-          ? from(entitiesMetaData[a.currentEntityName].createFormDependencies)
-              .filter(entityName => a.isDefined(entityName))
-              .map(entityName => ({ type: 'FETCH_DATA', entityName }))
-          : from(entitiesMetaData[a.currentEntityName].updateFormDependencies)
-              .filter(entityName => a.isDefined(entityName))
-              .map(entityName => ({ type: 'FETCH_DATA', entityName }))
+    .switchMap(a =>
+      a.entityId === 'create'
+        ? from(entitiesMetaData[a.currentEntityName].createFormDependencies)
+            .filter(entityName => a.isDefined(entityName))
+            .map(entityName => ({ type: 'FETCH_DATA', entityName }))
+        : from(entitiesMetaData[a.currentEntityName].updateFormDependencies)
+            .filter(entityName => a.isDefined(entityName))
+            .map(entityName => ({ type: 'FETCH_DATA', entityName }))
     );
 
 export const FetchBulkFormMetaData = (action$, store) =>
@@ -686,23 +684,22 @@ export const SubEntityFormSubmission = (action$, store) =>
     }))
     .filter(({ selectedSubEntityId }) => selectedSubEntityId)
     .filter(({ entityName }) => entityName !== 'transferLists' && entityName !== 'reasonLists')
-    .map(
-      a =>
-        a.selectedSubEntityId === 'create'
-          ? {
-              type: 'CREATE_SUB_ENTITY',
-              entityName: a.entityName,
-              selectedEntity: a.selectedEntity,
-              subEntityName: a.subEntityName,
-              values: a.values.toJS()
-            }
-          : {
-              type: 'UPDATE_SUB_ENTITY',
-              entityName: a.entityName,
-              selectedEntity: a.selectedEntity,
-              subEntityName: a.subEntityName,
-              values: a.values.toJS()
-            }
+    .map(a =>
+      a.selectedSubEntityId === 'create'
+        ? {
+            type: 'CREATE_SUB_ENTITY',
+            entityName: a.entityName,
+            selectedEntity: a.selectedEntity,
+            subEntityName: a.subEntityName,
+            values: a.values.toJS()
+          }
+        : {
+            type: 'UPDATE_SUB_ENTITY',
+            entityName: a.entityName,
+            selectedEntity: a.selectedEntity,
+            subEntityName: a.subEntityName,
+            values: a.values.toJS()
+          }
     );
 
 export const CreateSubEntity = (action$, store) =>

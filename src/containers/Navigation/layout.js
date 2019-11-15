@@ -83,10 +83,12 @@ export default class Navigation extends Component {
         <NavBar theme={this.props.theme}>
           <Selector
             placeholder="Select a tenant"
-            options={this.props.tenants.filter(tenant => tenant.tenantActive).map(({ tenantName, tenantId }) => ({
-              label: tenantName,
-              value: tenantId
-            }))}
+            options={this.props.tenants
+              .filter(tenant => tenant.tenantActive)
+              .map(({ tenantName, tenantId }) => ({
+                label: tenantName,
+                value: tenantId
+              }))}
             listWidth={200}
             listHeight={250}
             noSuggestionsMessage="No Options"
@@ -252,11 +254,18 @@ export default class Navigation extends Component {
                 >
                   Flows
                 </StyledLink>
-             
-                <StyledLink data-automation="navigationLinkDispositions" to="/configuration/dispositions" onClick={() => this.setCurrentEntityAndEntityId('dispositions')}>
+                <StyledLink
+                  data-automation="navigationLinkDispositions"
+                  to="/configuration/dispositions"
+                  onClick={() => this.setCurrentEntityAndEntityId('dispositions')}
+                >
                   Dispositions
                 </StyledLink>
-                <StyledLink data-automation="navigationLinkDispositionLists" to="/configuration/dispositionLists" onClick={() => this.setCurrentEntityAndEntityId('dispositionLists')}>
+                <StyledLink
+                  data-automation="navigationLinkDispositionLists"
+                  to="/configuration/dispositionLists"
+                  onClick={() => this.setCurrentEntityAndEntityId('dispositionLists')}
+                >
                   Disposition Lists
                 </StyledLink>
                 <StyledLink

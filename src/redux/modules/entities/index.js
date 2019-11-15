@@ -301,6 +301,7 @@ const initialState = fromJS({
     readPermission: ['READ_DISPOSITION_LIST'],
     updatePermission: ['UPDATE_DISPOSITION_LIST'],
     createPermission: ['CREATE_DISPOSITION_LIST'],
+    sharePermission: ['UPDATE_DISPOSITION_LIST'],
     disablePermission: [''],
     assignPermission: ['']
   }
@@ -557,12 +558,10 @@ export default function reducer(state = initialState, action) {
           .setIn([currentEntity, 'selectedEntityId'], action.entityId)
           // We uncheck all rows if form is closed and
           // we were performing bulk actions
-          .updateIn(
-            [currentEntity, 'data'],
-            entityData =>
-              selectedEntityId === 'bulk' && action.entityId === ''
-                ? entityData.map(item => item.set('bulkChangeItem', false))
-                : entityData
+          .updateIn([currentEntity, 'data'], entityData =>
+            selectedEntityId === 'bulk' && action.entityId === ''
+              ? entityData.map(item => item.set('bulkChangeItem', false))
+              : entityData
           )
       );
     }
@@ -575,7 +574,10 @@ export default function reducer(state = initialState, action) {
     }
     case 'FETCH_DATA_FULFILLED': {
       // As we recieve the data we tag on the items that are considered inherited
-      const { entityName, response: { result } } = action;
+      const {
+        entityName,
+        response: { result }
+      } = action;
       switch (entityName) {
         case 'roles': {
           const newResult = result.map(entity => ({
@@ -815,7 +817,7 @@ export default function reducer(state = initialState, action) {
             .every(([key, value]) => value <= 0)
             ? '24/7'
             : 'scheduledHours';
-        } else if (action.entityName === 'apiKeys') {
+        } else if (action.entityName === 'apiKeys' || action.entityName === 'dispositions') {
           result.active = result.status === 'enabled';
         } else if (action.type === 'UPDATE_PLATFORM_USER_ENTITY_FULFILLED' && action.entityName === 'users') {
           result.platformRoleId = result.roleId;
@@ -955,10 +957,8 @@ export default function reducer(state = initialState, action) {
         return state
           .update('businessHours', entityStore =>
             entityStore
-              .updateIn(
-                ['data', entityIndex, 'exceptions'],
-                exceptions =>
-                  !exceptions ? fromJS([action.response.result]) : exceptions.push(fromJS(action.response.result))
+              .updateIn(['data', entityIndex, 'exceptions'], exceptions =>
+                !exceptions ? fromJS([action.response.result]) : exceptions.push(fromJS(action.response.result))
               )
               .set('selectedSubEntityId', undefined)
               .set('subEntitySaving', false)

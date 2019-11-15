@@ -89,7 +89,9 @@ export default class BetaFeatures extends Component {
       messageTemplates: false,
       reasons: false,
       reasonLists: false,
-      transferLists: false
+      transferLists: false,
+      dispositions: false,
+      dispositionLists: false
     };
     const pageTitles = {};
     Object.keys(features).forEach(entityName => {

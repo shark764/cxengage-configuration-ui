@@ -45,7 +45,9 @@ export function mapStateToProps(state) {
       dispatchMappings: false,
       reasons: false,
       reasonLists: false,
-      transferLists: false
+      transferLists: false,
+      dispositions: false,
+      dispositionLists: false
     }
   };
 }

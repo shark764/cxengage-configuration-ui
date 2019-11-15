@@ -914,7 +914,7 @@ Object {
         "id": "name",
       },
     ],
-    "dependentEntity": "dependentEntity",
+    "dependentEntity": "dispositions",
     "entityName": "dispositionLists",
     "entityTableFields": Array [
       Object {
@@ -926,7 +926,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Managing%20DispositionLists/Creating_DispositionLists.htm",
+    "helpLink": "/Help/Content/Managing%20Flows/Dispositions/Creating_Disposition_Lists.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -937,7 +937,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Disposition Lists Management",
+    "pageTitle": "Disposition List Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
@@ -1009,7 +1009,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Managing%20Dispositions/Creating_Dispositions.htm",
+    "helpLink": "/Help/Content/Managing%20Flows/Dispositions/Creating_Dispositions.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -1020,7 +1020,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Dispositions Management",
+    "pageTitle": "Disposition Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",

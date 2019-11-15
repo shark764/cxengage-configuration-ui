@@ -54,7 +54,8 @@ import {
   isUpdateForm,
   userHasCurrentFormPermission,
   getEntityDisplay,
-  getConfirmationToggleEntityMessage
+  getConfirmationToggleEntityMessage,
+  getEntityItemDisplay
 } from '../selectors';
 import { EntityMetaData, entitiesMetaData } from '../metaData';
 import { getCurrentPermissions, getCurrentTenantId } from '../../userData/selectors';
@@ -1337,6 +1338,57 @@ describe('getEntityDisplay', () => {
             }
           }
         })
+      )
+    ).toEqual('mock@mock.com');
+  });
+});
+
+describe('getEntityItemDisplay', () => {
+  it('Returns entity display for name value defined', () => {
+    expect(getEntityItemDisplay(initialState, '0000')).toEqual('mockName');
+  });
+  it('Returns entity display for users case', () => {
+    getDisplay.mockImplementationOnce(() => 'mockFirstName 1 mockLastName 1');
+    expect(
+      getEntityItemDisplay(
+        fromJS({
+          Entities: {
+            currentEntity: 'users',
+            users: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  firstName: 'mockFirstName 1',
+                  lastName: 'mockLastName 1'
+                }
+              ]
+            }
+          }
+        }),
+        '0000'
+      )
+    ).toEqual('mockFirstName 1 mockLastName 1');
+  });
+  it('Returns entity display for users case when no firstName and lastName defined', () => {
+    getDisplay.mockImplementationOnce(() => 'mock@mock.com');
+    expect(
+      getEntityItemDisplay(
+        fromJS({
+          Entities: {
+            currentEntity: 'users',
+            users: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  email: 'mock@mock.com'
+                }
+              ]
+            }
+          }
+        }),
+        '0000'
       )
     ).toEqual('mock@mock.com');
   });

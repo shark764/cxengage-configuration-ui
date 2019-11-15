@@ -664,7 +664,7 @@ const bulkChangeFormRoutes = [
     path: '/configuration/dispositionLists',
     component: () => (
       <DetailsPanel>
-        <GenericBulkActionsForm />
+        <ReasonsBulkActionsForm />
       </DetailsPanel>
     )
   },
@@ -672,7 +672,7 @@ const bulkChangeFormRoutes = [
     path: '/configuration/dispositions',
     component: () => (
       <DetailsPanel>
-        <GenericBulkActionsForm />
+        <ReasonsBulkActionsForm />
       </DetailsPanel>
     )
   }

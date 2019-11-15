@@ -20,7 +20,7 @@ import { getCurrentTenantId } from '../../userData/selectors';
 export const BulkEntityUpdate = (action$, store) =>
   action$
     .ofType('BULK_ENTITY_UPDATE')
-    .filter(a => a.entityName === 'reasons' || a.entityName === 'reasonLists')
+    .filter(a => ['reasons', 'reasonLists', 'dispositions', 'dispositionLists'].includes(a.entityName))
     .map(a => {
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
@@ -38,9 +38,9 @@ export const BulkEntityUpdate = (action$, store) =>
         allCalls.push({
           ...a.sdkCall,
           data: {
+            active: entityData.get('active'),
             ...a.values,
-            [removeLastLetter(a.entityName) + 'Id']: item,
-            active: entityData.get('active')
+            [removeLastLetter(a.entityName) + 'Id']: item
           }
         });
         return allCalls;
@@ -48,20 +48,19 @@ export const BulkEntityUpdate = (action$, store) =>
 
       return { ...a };
     })
-    .mergeMap(
-      a =>
-        a.allSdkCalls.length > 0
-          ? forkJoin(
-              a.allSdkCalls.map(apiCall =>
-                from(
-                  sdkPromise(apiCall).catch(error => ({
-                    error: error,
-                    id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
-                  }))
-                )
+    .mergeMap(a =>
+      a.allSdkCalls.length > 0
+        ? forkJoin(
+            a.allSdkCalls.map(apiCall =>
+              from(
+                sdkPromise(apiCall).catch(error => ({
+                  error: error,
+                  id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
+                }))
               )
             )
-              .do(allResult => handleBulkSuccess(allResult))
-              .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
-          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
+          )
+            .do(allResult => handleBulkSuccess(allResult))
+            .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+        : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );

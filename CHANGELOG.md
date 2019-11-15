@@ -26,6 +26,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.67.8] - 2019-11-13
+## Added
+- CXV1-20540 - Add Dispositions to navbar and expose it as Beta feature
+- CXV1-20541 - Add Disposition Lists to navbar and expose it as Beta feature
+## Fixed
+- CXV1-20568 - Bulk Actions for Dispositions Page
 
 ## [0.67.7] - 2019-11-12
 ## Added
