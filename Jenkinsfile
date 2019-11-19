@@ -46,10 +46,10 @@ pipeline {
         }
       }
     }
-    stage ('Build') {
+    stage ('Lint and Build') {
       when { changeRequest() }
       parallel {
-        stage ('Lint for errors') {
+        stage ('Lint') {
           steps {
             sh 'echo "Stage Description: Lints the project for common js errors and formatting"'
             sh "docker exec ${docker_tag} npm run lint"
@@ -62,6 +62,14 @@ pipeline {
             sh "docker cp ${docker_tag}:/home/node/app/build build"
           }
         }
+      }
+    }
+    stage ('Build') {
+      when { anyOf {branch 'master'; branch 'develop'}}
+      steps {
+        sh 'echo "Stage Description: Builds the production version of the app"'
+        sh "docker exec ${docker_tag} npm run build"
+        sh "docker cp ${docker_tag}:/home/node/app/build build"
       }
     }
     stage ('Dev temp build') {

@@ -26,6 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.68.1] - 2019-11-19
+## Fixed
+- Added build stage after pr is merged in to master
 
 ## [0.68.0] - 2019-11-18
 ## Added
