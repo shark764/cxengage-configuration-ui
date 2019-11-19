@@ -3,6 +3,7 @@
 
 import common
 import git
+import hipchat
 import node
 import frontend
 
@@ -10,6 +11,7 @@ def service = 'cxengage-configuration-ui'
 def docker_tag = BUILD_TAG.toLowerCase()
 def pr = env.CHANGE_ID
 def c = new common()
+def h = new hipchat()
 def n = new node()
 def f = new frontend()
 
@@ -25,89 +27,141 @@ pipeline {
     stage ('Setup') {
       parallel {
         stage ('Set build version') {
-            steps {
-              sh 'echo "Stage Description: Set build version from package.json"'
-              script{
-                buildTool = c.getBuildTool()
-                props = c.exportProperties(buildTool)
-                build_version = readFile('version')
-              }
-            }
-          }
-          stage ('Setup Docker') {
-            steps {
-              sh 'echo "Stage Description: Sets up docker image for use in the next stages"'
-              sh "rm -rf build; mkdir build -p"
-              sh "docker build -t ${docker_tag} -f Dockerfile ."
-              sh "docker run --rm -t -d --name=${docker_tag} ${docker_tag}"
+          steps {
+            sh 'echo "Stage Description: Set build version from package.json"'
+            script{
+              buildTool = c.getBuildTool()
+              props = c.exportProperties(buildTool)
+              build_version = readFile('version')
             }
           }
         }
-    }
-    stage ('Testing') {
-      when { changeRequest() }
-      parallel {
-        stage('Lint for errors') {
-            steps {
-                sh 'echo "Stage Description: Lints the project for common js errors and formatting"'
-                sh "docker exec ${docker_tag} npm run lint"
-            }
-        }
-        stage('Unit Tests') {
-            steps {
-                sh 'echo "Stage Description: Runs unit tests and fails if they do not meet coverage expectations"'
-                sh "docker exec ${docker_tag} npm run test:coverage"
-            }
+        stage ('Setup Docker') {
+          steps {
+            sh 'echo "Stage Description: Sets up docker image for use in the next stages"'
+            sh "rm -rf build; mkdir build -p"
+            sh "docker build -t ${docker_tag} -f Dockerfile ."
+            sh "docker run --rm -t -d --name=${docker_tag} ${docker_tag}"
+          }
         }
       }
     }
     stage ('Build') {
-      steps {
-        sh 'echo "Stage Description: Builds the production version of the app"'
-        sh "docker exec ${docker_tag} npm run build"
-        sh "docker cp ${docker_tag}:/home/node/app/build build"
-      }
-    }
-    stage ('Preview PR (dev) and Automation Tests') {
       when { changeRequest() }
-      steps {
-        sh "echo 'Stage Description: Creates a temp build of the site in dev to review the changes, PR: ${pr}'"
-        sh "aws s3 rm s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --recursive"
-        sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --delete"
-        sh "docker exec ${docker_tag} /bin/bash -c 'export URI=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ && npm run regression'"
-        script {
-          f.invalidate("E23K7T1ARU8K88")
-        }
-      }
-    }
-    stage ('Github tagged release') {
-      when { anyOf {branch 'master'; branch 'develop'}}
-      steps {
-        sh 'echo "Makes a github tagged release under a new branch with the same name as the tag version"'
-        git url: "git@github.com:SerenovaLLC/${service}"
-        sh "git checkout -b build-${BUILD_TAG}"
-        script {
-          if (build_version.contains("SNAPSHOT")) {
-            sh "if git tag --list | grep ${build_version}; then git tag -d ${build_version}; git push origin :refs/tags/${build_version}; fi"
+      parallel {
+        stage ('Lint for errors') {
+          steps {
+            sh 'echo "Stage Description: Lints the project for common js errors and formatting"'
+            sh "docker exec ${docker_tag} npm run lint"
           }
         }
-        sh "git tag -a ${build_version} -m 'release ${build_version}, Jenkins tagged ${BUILD_TAG}'"
-        sh "git push origin ${build_version}"
+        stage ('Build') {
+          steps {
+            sh 'echo "Stage Description: Builds the production version of the app"'
+            sh "docker exec ${docker_tag} npm run build"
+            sh "docker cp ${docker_tag}:/home/node/app/build build"
+          }
+        }
+      }
+    }
+    stage ('Dev temp build') {
+      when { changeRequest() }
+      steps {
+        sh "echo 'Stage Description: Creates a temp build of the site in dev'"
+        sh "aws s3 rm s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --recursive"
+        sh "sed -i 's/\\\"\\/main/\\\"\\/config2\\/${pr}\\/main/g' build/build/index.html"
+        sh "cp config/dev/config.json build/build"
+        sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --delete"
+      }
+    }
+    stage ('Testing') {
+      when { changeRequest() }
+      parallel {
+        stage ('Unit Tests') {
+          steps {
+            sh 'echo "Stage Description: Runs unit tests and fails if they do not meet coverage expectations"'
+            sh "docker exec ${docker_tag} npm run test:coverage"
+          }
+        }
+        stage ('Automation Tests') {
+          steps { 
+            sh 'echo "Stage Description: Runs automation tests in the Dev temp pr build"'
+            sh "docker exec ${docker_tag} /bin/bash -c 'export URI=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ && npm run regression'"
+          }
+        }
+      }
+    }
+    stage ('Preview PR') {
+      when { changeRequest() }
+      steps {
+        sh "echo 'Stage Description: Notifies team members that the PR is ready for review'"
+        script {
+          f.invalidate("E23K7T1ARU8K88")
+          office365ConnectorSend status:"Ready for review", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 Dev Preview</a>", webhookUrl:"https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373"
+        }
+      }
+    }
+    stage ('Ready for QE') {
+      when { changeRequest() }
+      steps {
+        timeout(time: 5, unit: 'DAYS') {
+          script {
+            input message: 'Ready for QE?', submittedParameter: 'submitter'
+          }
+          sh "echo 'Stage Description: Creates a temp build of the site in QE & notifies team members that the pr is reviewd and is ready to test'"
+          sh "aws s3 rm s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --recursive"
+          sh "sed -i 's/dev/qe/g' build/build/config.json"
+          sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --delete"
+          script {
+            f.invalidate("E23K7T1ARU8K88")
+            office365ConnectorSend status:"Ready for QE", color:"f6c342", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 QE Preview</a>", webhookUrl:"https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373"
+          }
+        }
+      }
+    }
+    stage ('QE Approval') {
+      when { changeRequest() }
+      steps {
+        timeout(time: 5, unit: 'DAYS') {
+          script {
+            input message: 'Testing complete?', submittedParameter: 'submitter'
+            office365ConnectorSend status:"Ready to be merged", color:"67ab49", webhookUrl:"https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373"
+          }
+        }
+      }
+    }
+    stage ('Push new tag') {
+      when { anyOf {branch 'master'; branch 'develop'}}
+      steps {
+        script {
+          try {
+            sh 'echo "Makes a github tagged release under a new branch with the same name as the tag version"'
+            git url: "git@github.com:SerenovaLLC/${service}"
+            sh "git checkout -b build-${BUILD_TAG}"
+            if (build_version.contains("SNAPSHOT")) {
+              sh "if git tag --list | grep ${build_version}; then git tag -d ${build_version}; git push origin :refs/tags/${build_version}; fi"
+            }
+            sh "git tag -a ${build_version} -m 'release ${build_version}, Jenkins tagged ${BUILD_TAG}'"
+            sh "git push origin ${build_version}"
+          } catch (e) {
+            sh 'echo "Failed create git tag"'
+          }
+        }
       }
     }
     stage ('Create dev build') {
-      when { anyOf {branch 'master'}}
+      when { anyOf {branch 'master'; branch 'develop'}}
       steps {
         sh 'echo "Stage Description: Pushes built app to S3"'
-        sh "cp config/dev/config.json build"
+        sh "cp config/dev/config.json build/build"
         sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/dev/builds/config2/${build_version}/ --delete"
       }
     }
     stage ('Create qe build') {
-      when { anyOf {branch 'master'}}
+      when { anyOf {branch 'master'; branch 'develop'}}
       steps {
         sh 'echo "Stage Description: Pushes built app to S3"'
-        sh "cp config/qe/config.json build"
+        sh "cp config/qe/config.json build/build"
         sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/qe/builds/config2/${build_version}/ --delete"
       }
     }
@@ -128,60 +182,103 @@ pipeline {
         }
       }
     }
-    stage ('Deploy to Dev') {
+    stage ('Deploy') {
       when { anyOf {branch 'master'; branch 'develop'}}
       steps {
-        build(
-        job: 'Deploy - Front-End',
-        parameters: [
+        build job: 'Deploy - Front-End', parameters: [
           [
             $class: 'StringParameterValue',
             name: 'Service',
-            value: "Config-UI2",
+            value: "Config-UI2"
           ],
           [
             $class: 'StringParameterValue',
             name: 'RefreshRate',
-            value: "9000",
+            value: "9000"
           ],
           [
             $class: 'StringParameterValue',
             name: 'Version',
-            value: build_version,
+            value: build_version
           ],
           [
             $class: 'StringParameterValue',
             name: 'Environment',
-            value: 'dev',
+            value: 'dev'
           ],
           [
             $class: 'BooleanParameterValue',
             name: 'blastSqsOutput',
-            value: true,
+            value: true
           ],
           [
             $class: 'StringParameterValue',
             name: 'logLevel',
-            value: 'debug',
+            value: 'debug'
+          ]
+        ]
+        build job: 'Deploy - Front-End', parameters: [
+          [
+              $class: 'StringParameterValue',
+              name: 'Service',
+              value: "Config-UI2"
           ],
-        ],
-      )
+          [
+              $class: 'StringParameterValue',
+              name: 'RefreshRate',
+              value: "9000"
+          ],
+          [
+              $class: 'StringParameterValue',
+              name: 'Version',
+              value: build_version
+          ],
+          [
+              $class: 'StringParameterValue',
+              name: 'Environment',
+              value: 'qe'
+          ],
+          [
+              $class: 'BooleanParameterValue',
+              name: 'blastSqsOutput',
+              value: true
+          ],
+          [
+              $class: 'StringParameterValue',
+              name: 'logLevel',
+              value: 'debug'
+          ]
+        ]
       }
     }
   }
   post {
     always {
-      sh "docker rmi ${docker_tag} --force"
       script {
+        try {
+          sh "docker rmi ${docker_tag} --force"
+        } catch(e) {
+          sh 'echo "Failed to remove docker image"'
+        }
         c.cleanup()
       }
     }
+    success {
+      script {
+        h.hipchatPullRequestSuccess("${service}", "${build_version}")
+      }
+    }
+    failure {
+      script {
+        h.hipchatPullRequestFailure("${service}", "${build_version}")
+      }
+    }
     unstable {
-        echo 'This will run only if the run was marked as unstable'
+      echo 'This will run only if the run was marked as unstable'
     }
     changed {
-        echo 'This will run only if the state of the Pipeline has changed'
-        echo 'For example, if the Pipeline was previously failing but is now successful'
+      echo 'This will run only if the state of the Pipeline has changed'
+      echo 'For example, if the Pipeline was previously failing but is now successful'
     }
   }
 }

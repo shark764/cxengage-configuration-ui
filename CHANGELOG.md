@@ -26,6 +26,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+
+## [0.68.0] - 2019-11-18
+## Added
+- CXV1-20430 - Add 'Ready for QE' and 'Testing Complete' stages to Config-UI2's Jenkins pipeline
+- CXV1-20668 - Enable QE environment for config2
+
 ## [0.67.8] - 2019-11-13
 ## Added
 - CXV1-20540 - Add Dispositions to navbar and expose it as Beta feature

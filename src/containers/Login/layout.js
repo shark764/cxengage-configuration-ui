@@ -7,7 +7,7 @@ import * as Cx from 'cx-js-sdk';
 import { Logo } from 'cx-ui-components';
 import { LegalCopyright, Typeahead } from 'cx-ui-components';
 
-import { cxSetTenant, cxLogin, cxTokenLogin } from '../../utils/cxSdk';
+import { cxInit, versionCheck, cxSetTenant, cxLogin, cxTokenLogin } from '../../utils/cxSdk';
 import messages from './messages';
 
 const Loading = styled(LoadingSpinnerSVG)`
@@ -133,8 +133,12 @@ export default class Login extends Component {
         (localStorage.getItem('loginPrefrences') && JSON.parse(localStorage.getItem('loginPrefrences'))) || {}
     };
   }
+  componentWillUnmount() {
+    clearInterval(versionCheck);
+  }
   componentDidMount() {
-    if (!this.props.authenticated) {
+    cxInit();
+    if (CxEngage.authentication && !this.props.authenticated) {
       const token = sessionStorage.getItem('token');
       if (token) {
         this.login(token, response => this.handleLoginResponse(response));

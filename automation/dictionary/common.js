@@ -248,8 +248,8 @@ const commonBehavior = {
   },
   logout() {
     Brow.refresh();
-    Elem.selectTenantButton.waitForVisible();
-    Elem.selectTenantButton.validateElementsState('isVisible', true);
+    // Elem.selectTenantButton.waitForVisible();
+    // Elem.selectTenantButton.validateElementsState('isVisible', true);
   }
 };
 

@@ -30,8 +30,8 @@ ReactDOM.render(
         <Route path="/supervisorToolbar" component={SupervisorToolbar} />
         <RootStyles>
           <Fragment>
-            <Navigation />
             <Route exact path="/" component={Login} />
+            <Navigation />
             <Route path="/interactionMonitoring" component={PrivateRoute(InteractionMonitoring)} />
             <Route path="/agentStateMonitoring" component={PrivateRoute(AgentStateMonitoring)} />
             <Route path="/betaFeatures" component={PrivateRoute(BetaFeatures)} />
