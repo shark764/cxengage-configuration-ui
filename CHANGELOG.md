@@ -26,6 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.68.2] - 2019-11-19
+## Changed
+- <no-jira> - Version bump components library to 0.56.12.
+## Fixed
+- CXV1-20640 - Wrong message error when removing skills or groups on Users bulk actions.
+- CXV1-20460 - Transfer Lists | User without Permissions is able to remove contacts.
+- CXV1-20744 - Double message from adding a permission to a role.
+
 ## [0.68.1] - 2019-11-19
 ## Fixed
 - Added build stage after pr is merged in to master

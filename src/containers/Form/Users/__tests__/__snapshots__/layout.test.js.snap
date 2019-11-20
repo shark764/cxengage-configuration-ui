@@ -50,14 +50,8 @@ exports[`<UsersForm /> renders create user 1`] = `
       <Detail
         label="Email"
       />
-      <InputField
-        className="frm-users-invitation-status"
-        componentType="input"
-        data-automation="invitationStatusInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Platform Status"
-        name="invitationStatus"
       />
       <SelectField
         className="frm-users-platform-authentication"
@@ -212,14 +206,8 @@ exports[`<UsersForm /> renders update user 1`] = `
       <Detail
         label="Email"
       />
-      <InputField
-        className="frm-users-invitation-status"
-        componentType="input"
-        data-automation="invitationStatusInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Platform Status"
-        name="invitationStatus"
       />
       <SelectField
         className="frm-users-platform-authentication"
@@ -374,14 +362,8 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       <Detail
         label="Email"
       />
-      <InputField
-        className="frm-users-invitation-status"
-        componentType="input"
-        data-automation="invitationStatusInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Platform Status"
-        name="invitationStatus"
       />
       <SelectField
         className="frm-users-platform-authentication"
@@ -536,14 +518,8 @@ exports[`<UsersForm /> renders update user with no name set 1`] = `
       <Detail
         label="Email"
       />
-      <InputField
-        className="frm-users-invitation-status"
-        componentType="input"
-        data-automation="invitationStatusInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Platform Status"
-        name="invitationStatus"
       />
       <SelectField
         className="frm-users-platform-authentication"
@@ -669,14 +645,8 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       <Detail
         label="Email"
       />
-      <InputField
-        className="frm-users-invitation-status"
-        componentType="input"
-        data-automation="invitationStatusInput"
-        disabled={true}
-        inputType="text"
+      <Detail
         label="Platform Status"
-        name="invitationStatus"
       />
       <SelectField
         className="frm-users-platform-authentication"

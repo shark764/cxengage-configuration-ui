@@ -52,9 +52,9 @@ export default function GroupsDetailsPanel({
       {children}
 
       {sidePanelReadPermissions.users && (
-        <DetailWrapper open={true} autoCloseOverride>
+        <DetailWrapper open={true} contains="users" autoCloseOverride>
           <WrappedDetailHeader
-            userHasUpdatePermission={!usersFetching && userHasUpdatePermission}
+            userHasUpdatePermission={!usersFetching && userHasUpdatePermission && sidePanelUpdatePermissions.users}
             text={detailHeaderText(usersItems, 'Users')}
             onActionButtonClick={() => setSelectedSubEntityId('users')}
             inherited={inherited}

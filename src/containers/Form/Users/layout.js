@@ -38,6 +38,25 @@ const InviteButtons = styled(Button)`
   margin: 10px;
 `;
 
+const platformStatus = value => {
+  switch (value) {
+    case 'pending':
+      return 'Pending Invite';
+    case 'invited':
+      return 'Invited';
+    case 'expired':
+      return 'Expired';
+    case 'enabled':
+      return 'Enabled';
+    case 'disabled':
+      return 'Disabled';
+    case 'sso-only':
+      return 'SSO Only';
+    default:
+      break;
+  }
+};
+
 export default function UsersForm({
   handleSubmit,
   tenantRoles,
@@ -93,15 +112,7 @@ export default function UsersForm({
         <DetailWrapper open={true}>
           <WrappedDetailHeader text="Login Details" />
           <Detail label="Email" value={initialValues.get('email')} />
-          <InputField
-            className="frm-users-invitation-status"
-            name="invitationStatus"
-            data-automation="invitationStatusInput"
-            label="Platform Status"
-            componentType="input"
-            inputType="text"
-            disabled
-          />
+          <Detail label="Platform Status" value={platformStatus(initialValues.get('invitationStatus'))} />
           <SelectField
             className="frm-users-platform-authentication"
             name="noPassword"

@@ -778,7 +778,7 @@ export default class CrudEndpointUiLayout extends Component {
   render() {
     return (
       <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''} slidingWidth={this.props.slidingWidth}>
-        <Table tableType={this.props.match.params.entityName}>
+        <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
           <InlineCheckboxFilterMenu
             type="secondary"
             menuType="Columns"

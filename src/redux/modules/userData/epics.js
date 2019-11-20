@@ -48,17 +48,10 @@ export const SetCurrentAgentRole = (action$, store) =>
     }))
     // If roleId for current agent is not in state,
     // we need to fetch it
-    .map(
-      a =>
-        a.tenantRoleId === undefined
-          ? {
-              ...a,
-              type: 'GET_CURRENT_AGENT_TENANT_ROLE'
-            }
-          : {
-              ...a,
-              type: 'SET_TENANT_PERMISSIONS'
-            }
+    .map(a =>
+      a.tenantRoleId === undefined
+        ? { ...a, type: 'GET_CURRENT_AGENT_TENANT_ROLE' }
+        : { ...a, type: 'SET_TENANT_PERMISSIONS' }
     );
 
 export const SetNewAgentPermissions = (action$, store) =>

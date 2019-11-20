@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
 import { generateUUID } from 'serenova-js-utils/uuid';
 import { sdkPromise } from '../../../../utils/sdk';
-import { handleSuccess, handleError, handleBulkSuccess, handleBulkUneeded } from '../handleResult';
+import { handleSuccess, handleError, handleBulkSuccess } from '../handleResult';
 import {
   getCurrentEntity,
   getSelectedEntityId,
@@ -23,11 +23,11 @@ import { changeUserInviteStatus } from '../../entities';
 import { validateEmail } from 'serenova-js-utils/validation';
 import { change } from 'redux-form';
 
-export const getRolesAfterFetchingUsers = action$ =>
+export const getRolesAfterFetchingUsers = (action$, store) =>
   action$
     .ofType('FETCH_DATA_FULFILLED')
-    .filter(a => a.entityName === 'users')
-    .map(a => ({ type: 'FETCH_DATA', entityName: 'roles' }));
+    .filter(a => getCurrentEntity(store.getState()) === 'users' && a.entityName === 'users')
+    .map(() => ({ type: 'FETCH_DATA', entityName: 'roles' }));
 
 export const UpdateUserEntity = (action$, store) =>
   action$
@@ -430,147 +430,41 @@ export const BulkEntityUpdate = (action$, store) =>
     .ofType('BULK_ENTITY_UPDATE')
     .filter(a => a.entityName === 'users')
     .map(a => {
-      a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
-      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
-      a.uneededCalls = [];
-      a.allSdkCalls = [];
-      [...a.allIdsToProcess.toJS()].forEach(item => {
-        const userData = findEntity(store.getState(), 'users', item).toJS();
+      const allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
+      const sdkCall = entitiesMetaData['users'].entityApiRequest('update', 'singleMainEntity');
+      const allSdkCalls = [];
+      const allUsersSelected = [...allIdsToProcess.toJS()];
+      for (let index = 0, len = allUsersSelected.length; index < len; index++) {
+        let item = allUsersSelected[index];
+        let currentBulkUser = findEntity(store.getState(), 'users', item);
+
+        // Cannot perform bulk actions on users with no firstName and lastName set
+        if (!(currentBulkUser.get('firstName') && currentBulkUser.get('lastName'))) {
+          Toast.error(
+            `User "${currentBulkUser.get('email')}" must have firstName and lastName set before performing any action.`
+          );
+          continue;
+        }
 
         // Creating values to pass data to sdkCall, this data will be
         // used for a single call to updateUser function
-        let sdkCallValues = {
-          updateBody: {},
-          userId: item
-        };
+        let sdkCallValues = { updateBody: {}, userId: item };
 
-        if (a.values.addSkill || a.values.removeSkill) {
-          const addOrRemoveSkillData =
-            (a.values.addSkill || a.values.removeSkill) &&
-            findEntityByProperty(store.getState(), 'skills', 'name', a.values.addSkill || a.values.removeSkill);
-          const userDoesntHaveSkill =
-            userData.skills.filter(
-              skill => addOrRemoveSkillData.get('id') === (skill.skillId || skill.id || skill)
-            )[0] === undefined;
-          a.values.addSkillId = a.values.addSkill && addOrRemoveSkillData.get('id');
-          a.values.removeSkillId = a.values.removeSkill && addOrRemoveSkillData.get('id');
-          if (a.values.addSkill) {
-            if (userDoesntHaveSkill) {
-              console.warn(`Attempting to associate skill (${a.values.addSkill}) to user (${userData.email})`);
-              a.allSdkCalls.push({
-                module: 'entities',
-                data: {
-                  originEntity: {
-                    name: 'users',
-                    id: item
-                  },
-                  destinationEntity: {
-                    name: 'skills',
-                    id: a.values.addSkillId
-                  }
-                },
-                command: 'associate',
-                topic: `cxengage/entities/associate-response`
-              });
-            } else {
-              console.warn(`"${a.values.addSkill}" is already associated with user (${userData.email})`);
-              a.uneededCalls.push(`"${a.values.addSkill}" is already associated to BULKED_ITEMS_AFFECTED user(s)`);
-            }
-          }
-          if (a.values.removeSkill) {
-            if (!userDoesntHaveSkill) {
-              console.warn(`Attempting to dissociate skill (${a.values.removeSkill}) from user (${userData.email})`);
-              a.allSdkCalls.push({
-                module: 'entities',
-                data: {
-                  originEntity: {
-                    name: 'users',
-                    id: item
-                  },
-                  destinationEntity: {
-                    name: 'skills',
-                    id: a.values.removeSkillId
-                  }
-                },
-                command: 'dissociate',
-                topic: `cxengage/entities/dissociate-response`
-              });
-            } else {
-              console.warn(`"${a.values.removeSkill}" is already not associated with user (${userData.email})`);
-              a.uneededCalls.push(
-                `"${a.values.removeSkill}" is already not associated to BULKED_ITEMS_AFFECTED user(s)`
-              );
-            }
-          }
-        }
-        if (a.values.addGroup || a.values.removeGroup) {
-          const addOrRemoveGroupData =
-            (a.values.addGroup || a.values.removeGroup) &&
-            findEntityByProperty(store.getState(), 'groups', 'name', a.values.addGroup || a.values.removeGroup);
-          const userDoesntHaveGroup =
-            userData.groups.filter(
-              group => addOrRemoveGroupData.get('id') === (group.groupId || group.id || group)
-            )[0] === undefined;
-          a.values.addGroupId = a.values.addGroup && addOrRemoveGroupData.get('id');
-          a.values.removeGroupId = a.values.removeGroup && addOrRemoveGroupData.get('id');
-          if (a.values.addGroup) {
-            if (userDoesntHaveGroup) {
-              console.warn(`Attempting to associate group (${a.values.addGroup}) to user (${userData.email})`);
-              a.allSdkCalls.push({
-                module: 'entities',
-                data: {
-                  originEntity: {
-                    name: 'groups',
-                    id: a.values.addGroupId
-                  },
-                  destinationEntity: {
-                    name: 'users',
-                    id: item
-                  }
-                },
-                command: 'associate',
-                topic: `cxengage/entities/associate-response`
-              });
-            } else {
-              console.warn(`"${a.values.addGroup}" is already associated with user (${userData.email})`);
-              a.uneededCalls.push(`"${a.values.addGroup}" is already associated to BULKED_ITEMS_AFFECTED user(s)`);
-            }
-          }
-          if (a.values.removeGroup) {
-            if (!userDoesntHaveGroup) {
-              console.warn(`Attempting to dissociate group (${a.values.removeGroup}) from user (${userData.email})`);
-              a.allSdkCalls.push({
-                module: 'entities',
-                data: {
-                  originEntity: {
-                    name: 'groups',
-                    id: a.values.removeGroupId
-                  },
-                  destinationEntity: {
-                    name: 'users',
-                    id: item
-                  }
-                },
-                command: 'dissociate',
-                topic: `cxengage/entities/dissociate-response`
-              });
-            } else {
-              console.warn(`"${a.values.removeGroup}" is already not associated with user (${userData.email})`);
-              a.uneededCalls.push(
-                `"${a.values.removeGroup}" is already not associated to BULKED_ITEMS_AFFECTED user(s)`
-              );
-            }
-          }
-        }
-
+        /**
+         * Users Status
+         */
         if (a.values.status !== undefined) {
           sdkCallValues.updateBody.status = a.values.status;
         }
+
+        /**
+         * Users region
+         */
         if (a.values.region !== undefined) {
           // Active Extension
           // We update user's active extension if exists
           // by setting the new region.
-          let activeExtension = userData.activeExtension;
+          let activeExtension = currentBulkUser.get('activeExtension');
           if (activeExtension) {
             activeExtension.region = a.values.region;
           }
@@ -579,7 +473,7 @@ export const BulkEntityUpdate = (action$, store) =>
           // be updated with new region.
           // A user should have just one twilio extension.
           // Active extension must be twilio.
-          const extensions = [...userData.extensions];
+          const extensions = [...currentBulkUser.get('extensions').toJS()];
           for (let index = 0; index < extensions.length; index++) {
             let extension = extensions[index];
             if (extension.provider && extension.provider === 'twilio') {
@@ -592,6 +486,10 @@ export const BulkEntityUpdate = (action$, store) =>
           sdkCallValues.updateBody.activeExtension = activeExtension;
           sdkCallValues.updateBody.extensions = extensions;
         }
+
+        /**
+         * Users Platform Authentication
+         */
         if (a.values.noPassword !== undefined) {
           if (a.values.noPassword === 'null') {
             sdkCallValues.updateBody.noPassword = null;
@@ -599,40 +497,59 @@ export const BulkEntityUpdate = (action$, store) =>
             sdkCallValues.updateBody.noPassword = a.values.noPassword === 'true';
           }
         }
+
+        /**
+         * Users Default Identity Provider
+         */
         if (a.values.defaultIdentityProvider !== undefined) {
           sdkCallValues.updateBody.defaultIdentityProvider =
             a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider;
         }
 
+        /**
+         * Users Invite Status
+         */
         if (
           a.values.inviteNow &&
-          ['invited', 'expired', 'enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
+          ['invited', 'expired', 'enabled', 'disabled', 'sso-only'].includes(currentBulkUser.get('invitationStatus'))
         ) {
           console.warn(
-            `Cannot send email invitation for User (${userData.email}) as he/she is in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
+            `Cannot send email invitation for User (${currentBulkUser.get(
+              'email'
+            )}) as he/she is in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
-          a.uneededCalls.push(
-            `Cannot send email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
+          Toast.error(
+            `Cannot send email invitation for User (${currentBulkUser.get(
+              'email'
+            )}) as he/she is in one of the following states: "Invited", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
         } else if (
           a.values.resendInvitation &&
-          ['enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
+          ['enabled', 'disabled', 'sso-only'].includes(currentBulkUser.get('invitationStatus'))
         ) {
           console.warn(
-            `Cannot resend an email invitation for User (${userData.email}) as he/she is in one of the following states: "Enabled", "Disabled" or "SSO Only".`
+            `Cannot resend an email invitation for User (${currentBulkUser.get(
+              'email'
+            )}) as he/she is in one of the following states: "Enabled", "Disabled" or "SSO Only".`
           );
-          a.uneededCalls.push(
-            `Cannot resend an email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Enabled", "Disabled" or "SSO Only".`
+          Toast.error(
+            `Cannot resend an email invitation for User (${currentBulkUser.get(
+              'email'
+            )}) as he/she is in one of the following states: "Enabled", "Disabled" or "SSO Only".`
           );
         } else if (
           a.values.cancelInvitation &&
-          ['pending', 'expired', 'enabled', 'disabled', 'sso-only'].includes(userData.invitationStatus)
+          ['pending', 'expired', 'enabled', 'disabled', 'sso-only'].includes(currentBulkUser.get('invitationStatus'))
         ) {
           console.warn(
-            `Cannot cancel email invitation for User (${userData.email}) as he/she is in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
+            `Cannot cancel email invitation for User (${currentBulkUser.get(
+              'email'
+            )}) as he/she is in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
-          a.uneededCalls.push(
-            `Cannot cancel email invitation for BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
+          Toast.error(
+            `Cannot cancel email invitation for User (${currentBulkUser.get(
+              'email'
+            )}) as he/she is in one of the following states: "Pending Invitation", "Expired Invitation", "Enabled", "Disabled" or "SSO Only".`
           );
         } else if (a.values.inviteNow || a.values.resendInvitation || a.values.cancelInvitation) {
           // Change each user invitation status if any of these options
@@ -640,32 +557,30 @@ export const BulkEntityUpdate = (action$, store) =>
           sdkCallValues.updateBody.status = a.values.cancelInvitation ? 'pending' : 'invited';
         }
 
-        if (Object.keys(sdkCallValues.updateBody).length && userData.firstName && userData.lastName) {
+        if (Object.keys(sdkCallValues.updateBody).length) {
           // Using the default sdkCall to update single entity data,
           // by calling updateUser
-          a.allSdkCalls.push({
-            ...a.sdkCall,
-            data: { ...sdkCallValues }
-          });
-        } else {
-          Toast.error(`User "${userData.email}" must have firstName and lastName set before performing any action.`);
+          allSdkCalls.push({ ...sdkCall, data: { ...sdkCallValues } });
         }
 
+        /**
+         * Users Password Reset
+         */
         if (a.values.passwordReset) {
-          if (
-            !userData.firstName ||
-            !userData.lastName ||
-            ['invited', 'pending', 'expired'].includes(userData.invitationStatus)
-          ) {
+          if (['invited', 'pending', 'expired'].includes(currentBulkUser.get('invitationStatus'))) {
             console.warn(
-              `Cannot send a password reset email to User (${userData.email}) as he/she is in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or doesn't have firstName and lastName set.`
+              `Cannot send a password reset email to User (${currentBulkUser.get(
+                'email'
+              )}) as he/she is in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or doesn't have firstName and lastName set.`
             );
-            a.uneededCalls.push(
-              `Cannot send a password reset email to BULKED_ITEMS_AFFECTED user(s) as they are in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or they don't have firstName and lastName set.`
+            Toast.error(
+              `Cannot send a password reset email to User (${currentBulkUser.get(
+                'email'
+              )}) as he/she is in one of the following states: "Invited", "Pending Invitation", "Expired Invitation" or doesn't have firstName and lastName set.`
             );
           } else {
             // Reset password for all users if option was selected
-            a.allSdkCalls.push({
+            allSdkCalls.push({
               command: 'updatePlatformUser',
               data: {
                 userId: item,
@@ -678,13 +593,116 @@ export const BulkEntityUpdate = (action$, store) =>
             });
           }
         }
-      });
-      return { ...a };
-    })
-    .do(a => {
-      if (a.uneededCalls.length > 0 && a.allSdkCalls.length === 0) {
-        handleBulkUneeded(a);
+
+        /**
+         * Associate / Dissociate Skills
+         */
+        if (a.values.addSkill || a.values.removeSkill) {
+          const skillSelected = findEntityByProperty(
+            store.getState(),
+            'skills',
+            'name',
+            a.values.addSkill || a.values.removeSkill
+          );
+          const userHasSkillSelected =
+            currentBulkUser.get('skills').filter(skill => {
+              if (typeof skill === 'object') {
+                return skillSelected.get('id') === (skill.get('skillId') || skill.get('id'));
+              }
+              return skill === skillSelected.get('id');
+            }).size > 0;
+          const callData = {
+            module: 'entities',
+            data: {
+              originEntity: { name: 'users', id: item },
+              destinationEntity: { name: 'skills', id: skillSelected.get('id') }
+            },
+            command: 'associate',
+            topic: `cxengage/entities/associate-response`
+          };
+
+          if (a.values.addSkill) {
+            if (userHasSkillSelected) {
+              console.warn(`"${a.values.addSkill}" is already associated with user (${currentBulkUser.get('email')})`);
+              Toast.warning(`"${a.values.addSkill}" is already associated with user (${currentBulkUser.get('email')})`);
+              continue;
+            }
+            console.warn(
+              `Attempting to associate skill (${a.values.addSkill}) to user (${currentBulkUser.get('email')})`
+            );
+            allSdkCalls.push(callData);
+          } else {
+            if (!userHasSkillSelected) {
+              console.warn(
+                `"${a.values.removeSkill}" is already not associated with user (${currentBulkUser.get('email')})`
+              );
+              Toast.warning(
+                `"${a.values.removeSkill}" is already not associated with user (${currentBulkUser.get('email')})`
+              );
+              continue;
+            }
+            console.warn(
+              `Attempting to dissociate skill (${a.values.removeSkill}) from user (${currentBulkUser.get('email')})`
+            );
+            allSdkCalls.push({ ...callData, command: 'dissociate', topic: `cxengage/entities/dissociate-response` });
+          }
+        }
+
+        /**
+         * Associate / Dissociate Groups
+         */
+        if (a.values.addGroup || a.values.removeGroup) {
+          const groupSelected = findEntityByProperty(
+            store.getState(),
+            'groups',
+            'name',
+            a.values.addGroup || a.values.removeGroup
+          );
+          const userHasGroupSelected =
+            currentBulkUser.get('groups').filter(group => {
+              if (typeof group === 'object') {
+                return groupSelected.get('id') === (group.get('groupId') || group.get('id'));
+              }
+              return group === groupSelected.get('id');
+            }).size > 0;
+          const callData = {
+            module: 'entities',
+            data: {
+              originEntity: { name: 'groups', id: groupSelected.get('id') },
+              destinationEntity: { name: 'users', id: item }
+            },
+            command: 'associate',
+            topic: `cxengage/entities/associate-response`
+          };
+
+          if (a.values.addGroup) {
+            if (userHasGroupSelected) {
+              console.warn(`"${a.values.addGroup}" is already associated with user (${currentBulkUser.get('email')})`);
+              Toast.warning(`"${a.values.addGroup}" is already associated with user (${currentBulkUser.get('email')})`);
+              continue;
+            }
+            console.warn(
+              `Attempting to associate group (${a.values.addGroup}) to user (${currentBulkUser.get('email')})`
+            );
+            allSdkCalls.push(callData);
+          } else {
+            if (!userHasGroupSelected) {
+              console.warn(
+                `"${a.values.removeGroup}" is already not associated with user (${currentBulkUser.get('email')})`
+              );
+              Toast.warning(
+                `"${a.values.removeGroup}" is already not associated with user (${currentBulkUser.get('email')})`
+              );
+              continue;
+            }
+            console.warn(
+              `Attempting to dissociate group (${a.values.removeGroup}) from user (${currentBulkUser.get('email')})`
+            );
+            allSdkCalls.push({ ...callData, command: 'dissociate', topic: `cxengage/entities/dissociate-response` });
+          }
+        }
       }
+      return { ...a, allSdkCalls };
     })
     .mergeMap(a =>
       a.allSdkCalls.length > 0

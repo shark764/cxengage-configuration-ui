@@ -550,11 +550,9 @@ export default function reducer(state = initialState, action) {
     case 'SET_SELECTED_ENTITY_ID': {
       const currentEntity = state.get('currentEntity');
       const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId'], '');
-      const isFetching = state.getIn([currentEntity, 'fetching'], false);
 
       return (
         state
-          .setIn([currentEntity, 'fetching'], currentEntity === 'users' ? true : isFetching)
           .setIn([currentEntity, 'selectedEntityId'], action.entityId)
           // We uncheck all rows if form is closed and
           // we were performing bulk actions
@@ -619,7 +617,7 @@ export default function reducer(state = initialState, action) {
           const newResult = result.map(entity => ({
             ...entity,
             businessHoursType: Object.entries(entity)
-              .filter(([key, value]) => key.includes('TimeMinutes'))
+              .filter(([key]) => key.includes('TimeMinutes'))
               .every(([key, value]) => value <= 0)
               ? '24/7'
               : 'scheduledHours'
@@ -704,7 +702,7 @@ export default function reducer(state = initialState, action) {
         result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', entityIndex]).get('name') };
       } else if (action.entityName === 'businessHours') {
         result.businessHoursType = Object.entries(result)
-          .filter(([key, value]) => key.includes('TimeMinutes'))
+          .filter(([key]) => key.includes('TimeMinutes'))
           .every(([key, value]) => value <= 0)
           ? '24/7'
           : 'scheduledHours';
@@ -813,7 +811,7 @@ export default function reducer(state = initialState, action) {
           result.flow = { id: result.flowId, name: state.getIn(['flows', 'data', flowIndex]).get('name') };
         } else if (action.entityName === 'businessHours') {
           result.businessHoursType = Object.entries(result)
-            .filter(([key, value]) => key.includes('TimeMinutes'))
+            .filter(([key]) => key.includes('TimeMinutes'))
             .every(([key, value]) => value <= 0)
             ? '24/7'
             : 'scheduledHours';
@@ -892,6 +890,12 @@ export default function reducer(state = initialState, action) {
       }
       if (action.associatedEntityName === 'outboundIdentifierLists' && action.entityName !== 'users') {
         idType = 'id';
+      }
+      if (action.associatedEntityName === 'users' && action.entityName === 'groups') {
+        idType = 'memberId';
+      }
+      if (action.associatedEntityName === 'users' && action.entityName === 'skills') {
+        idType = 'userId';
       }
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {

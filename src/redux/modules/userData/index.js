@@ -61,7 +61,7 @@ export default function reducer(state = initialState, action) {
         .set('permissions', fromJS(tenantPermissions))
         .set('currentTenantId', tenantId)
         .set('currentTenantName', tenantName)
-        .set('agentId', action.agentId)
+        .set('agentId', action.agentId || action.userId)
         .set('tenantRoleId', action.tenantRoleId || state.get('tenantRoleId'));
     }
     case 'UPDATE_PLATFORM_PERMISSIONS': {

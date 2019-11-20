@@ -146,9 +146,7 @@ export const errorManager = error => {
       // The only entity that has its own messages is DispatchMappings
       !messageFromAPI.includes('channel type')
     ) {
-      errorDetails = ` ${
-        error.message
-      } ${code}: Resource with the same name or value already exists in the system, please enter a different value.`;
+      errorDetails = ` ${error.message} ${code}: Resource with the same name or value already exists in the system, please enter a different value.`;
     }
   }
   return { errorMessage: errorDetails ? errorDetails : 'An error has occurred.', attribute: attr };

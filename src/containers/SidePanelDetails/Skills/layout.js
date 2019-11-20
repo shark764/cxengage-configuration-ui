@@ -46,7 +46,7 @@ export default function SkillsDetailsPanel({
       {children}
 
       {sidePanelReadPermissions.users && (
-        <DetailWrapper open={true} autoCloseOverride>
+        <DetailWrapper open={true} contains="users" autoCloseOverride>
           <WrappedDetailHeader
             userHasUpdatePermission={!usersFetching && userHasUpdatePermission && sidePanelUpdatePermissions.users}
             text={`${usersItems.length > 1 ? usersItems.length : ''} Users`}
