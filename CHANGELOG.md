@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.68.3] - 2019-11-25
+## Changed
+- <no-jira> - Remove disposition and dispositionsLists from Beta Features.
+
 ## [0.68.2] - 2019-11-19
 ## Changed
 - <no-jira> - Version bump components library to 0.56.12.
