@@ -134,18 +134,24 @@ const pages = {
             descriptionInput: `updatedRDesc-${randomId}`,
             sharedToggle: ""
           }
+        ],
+        subEntityParametersToInsert: [
+          {
+          }
         ]
       },
+      delete: 'deleteRoleAttrubuite',
       read: {
         parameters: {}
-      }
+      },
     },
     navigation: {
       mainBar: "userManagementMenu",
       subMainBar: "navigationLinkRoles"
     },
     whichCatagoryToSearch: "searchNameColumn",
-    updateSearchValue: [`rName-${randomId}`]
+    updateSearchValue: [`rName-${randomId}`],
+    deleteSearchValue: `updatedRName-${randomId}`
   },
   Reason: {
     specs: {
@@ -190,6 +196,10 @@ const pages = {
           {
             categoryNameInput: `CategoryOne-${randomId}`,
             reasonList: 1
+          },
+          {
+            categoryNameAutoComplete: `CategoryOne-${randomId}`,
+            reasonList: 2
           },
           {
             newCategoryToggle: '',
@@ -438,6 +448,17 @@ const pages = {
               value: 'warmTransfer, coldTransfer'
             },
             endpointInput: `sip:${randomId}@gmail.com`
+          },
+          {
+            categoryNameAutoComplete: `CategoryOne-${randomId}`,
+            contactNameInput: `ContactOne-${randomId}`,
+            contactTypeList: 'PSTN',
+            transferTypeList: 'External',
+            warmColdTransferCheckbox: {
+              input: ['coldTransferCheckbox'],
+              value: 'coldTransfer'
+            },
+            endpointInput: `+1${randomPhoneNum()}`,
           },
           {
             newCategoryToggle: '',

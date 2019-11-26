@@ -47,7 +47,12 @@ export default function AddMemberToList(props) {
         <Header>Add list items : </Header>
         <Item title={camelCaseToRegularForm(props.listName)}>{camelCaseToRegularForm(props.listName)}</Item>
         <CloseButtonWrapper>
-          <CloseIconSVG onClick={props.onCancel} size={18} closeIconType="secondary" />
+          <CloseIconSVG
+            onClick={props.onCancel}
+            size={18}
+            closeIconType="secondary"
+            data-automation="dtpanelActionClose"
+          />
         </CloseButtonWrapper>
       </div>
       <SidePanelTable
@@ -80,5 +85,5 @@ AddMemberToList.propTypes = {
   tableItems: PropTypes.array,
   fields: PropTypes.array,
   defaultFilters: PropTypes.array,
-  itemApiPending: PropTypes.string,
+  itemApiPending: PropTypes.string
 };

@@ -42,7 +42,7 @@ const commonBehavior = {
     Elem[param].setValue(parameter[param]);
   },
   insertListValues(parameter, param) {
-    if (typeof parameter[param] === "number") {
+    if (typeof parameter[param] === 'number') {
       Elem[param].selectDropDownValue('byIndex', parameter[param]);
     } else {
       Elem[param].selectDropDownValue('byVisibleText', parameter[param]);
@@ -92,7 +92,7 @@ const commonBehavior = {
   fillFormFields(parameter, entity) {
     Object.keys(parameter).forEach(param => {
       if (param.endsWith('Input')) {
-        this.insertDataTextValues(parameter, param)
+        this.insertDataTextValues(parameter, param);
       } else if (param.endsWith('List')) {
         this.insertListValues(parameter, param);
       } else if (param.endsWith('Toggle')) {
@@ -124,9 +124,22 @@ const commonBehavior = {
       if (subEntityFormParams) {
         if (entity === 'Reason List') {
           Elem.updateCategoryButton.waitAndClick();
+          subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
+          Elem.modalSubmitButton.waitAndClick();
         } else if (entity === 'Transfer List') {
           Elem.updateListItemButton.waitAndClick();
+          subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
+          Elem.modalSubmitButton.waitAndClick();
+        } else if (entity === 'Role') {
+            Elem.sdpanelAddItem.waitAndClick();
+            Elem.dtpanelActionAddItem.waitAndClick();
+            this.closeToastr(entity, actionType);
+
+            Elem.dtpanelActionClose.waitAndClick();
+            this.closeToastr(entity, actionType);
+            Elem.sdpanelSubmitButton.waitAndClick();
         }
+
         subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
         Elem.modalSubmitButton.waitAndClick();
       } else {
@@ -143,7 +156,7 @@ const commonBehavior = {
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
       this.verifyEntitySpecificAction(entity);
-      this.closeSidePanel();
+  //    this.closeSidePanel();
     });
   },
   updateEntity(entity, actionType) {
@@ -160,7 +173,7 @@ const commonBehavior = {
     Elem.searchStatusColumnButton.waitAndClick();
     Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
     this.searchByNameAndClick(entity, dictionary[entity].deleteSearchValue);
-    if (entity === 'Reason List' || entity === 'Transfer List') {
+    if (entity === 'Reason List' || entity === 'Transfer List' ) {
       Elem.removeCategoryButton.waitForVisible();
       Elem.removeCategoryButton.waitAndClick();
       Elem.confirmationWrapper.waitForVisible();
@@ -168,7 +181,7 @@ const commonBehavior = {
       Elem.confirmationWrapper.waitForVisible(30000, false);
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
-      Elem.removeListItemButton.waitForVisible();
+      Elem.removeCategoryButton.waitForVisible();
       Elem.removeListItemButton.waitAndClick();
       Elem.confirmationWrapper.waitForVisible();
       Elem.confirmButton.waitAndClick();
@@ -181,6 +194,11 @@ const commonBehavior = {
       Elem.deleteKeyButton.waitAndClick();
       Elem.confirmButton.waitAndClick();
       this.verifyAction(entity, actionType);
+      this.closeToastr(entity, actionType);
+    }
+
+    if (entity === 'Role') {
+      Elem.dtpanelActionRemoveItem.waitAndClick();
       this.closeToastr(entity, actionType);
     }
   },
@@ -196,7 +214,7 @@ const commonBehavior = {
   verifyAction(entity, actionType) {
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    if ((entity === 'Reason List' || entity === 'Transfer List') && actionType === 'delete') {
+    if ((entity === 'Reason List' || entity === 'Transfer List' || entity ==='Role') && actionType === 'delete') {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was updated successfully!`);
     } else {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
