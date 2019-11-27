@@ -76,7 +76,7 @@ export default function UsersForm({
   return (
     <form onSubmit={handleSubmit} key={key}>
       <Wrapper>
-        <DetailWrapper open={true}>
+        <DetailWrapper open={true} data-automation="platformDetailsSVG">
           <WrappedDetailHeader text="Platform Details" />
           <InputField
             className="frm-users-firstname"
@@ -109,7 +109,7 @@ export default function UsersForm({
           />
         </DetailWrapper>
 
-        <DetailWrapper open={true}>
+        <DetailWrapper open={true} data-automation="loginDetailsSVG">
           <WrappedDetailHeader text="Login Details" />
           <Detail label="Email" value={initialValues.get('email')} />
           <Detail label="Platform Status" value={platformStatus(initialValues.get('invitationStatus'))} />
@@ -136,46 +136,30 @@ export default function UsersForm({
             required
           />
 
-          {userHasNameSet && status === 'pending' && (
-            <ConfirmationWrapper
-              confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-              mainText={`This will send an email invitation to ${initialValues.get('email')}.`}
-              data-automation="pendingConfirmationWrapper"
-            >
-              <InviteButtons
-                type="button"
-                buttonType="secondary"
-                className="invite-now-button"
-                data-automation="inviteButton"
+          {userHasNameSet &&
+            status === 'pending' && (
+              <ConfirmationWrapper
+                confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
+                mainText={`This will send an email invitation to ${initialValues.get('email')}.`}
+                data-automation="pendingConfirmationWrapper"
               >
-                Send Invitation
-              </InviteButtons>
-            </ConfirmationWrapper>
-          )}
+                <InviteButtons
+                  type="button"
+                  buttonType="secondary"
+                  className="invite-now-button"
+                  data-automation="inviteButton"
+                >
+                  Send Invitation
+                </InviteButtons>
+              </ConfirmationWrapper>
+            )}
 
-          {userHasNameSet && status === 'expired' && (
-            <ConfirmationWrapper
-              confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
-              mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
-              data-automation="expiredConfirmationWrapper"
-            >
-              <InviteButtons
-                type="button"
-                buttonType="secondary"
-                className="resend-invite-button"
-                data-automation="resendInviteButton"
-              >
-                Resend Invitation
-              </InviteButtons>
-            </ConfirmationWrapper>
-          )}
-
-          {userHasNameSet && status === 'invited' && (
-            <Fragment>
+          {userHasNameSet &&
+            status === 'expired' && (
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
                 mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
-                data-automation="invitedConfirmationWrapper"
+                data-automation="expiredConfirmationWrapper"
               >
                 <InviteButtons
                   type="button"
@@ -186,43 +170,64 @@ export default function UsersForm({
                   Resend Invitation
                 </InviteButtons>
               </ConfirmationWrapper>
+            )}
 
+          {userHasNameSet &&
+            status === 'invited' && (
+              <Fragment>
+                <ConfirmationWrapper
+                  confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
+                  mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
+                  data-automation="invitedConfirmationWrapper"
+                >
+                  <InviteButtons
+                    type="button"
+                    buttonType="secondary"
+                    className="resend-invite-button"
+                    data-automation="resendInviteButton"
+                  >
+                    Resend Invitation
+                  </InviteButtons>
+                </ConfirmationWrapper>
+
+                <ConfirmationWrapper
+                  confirmBtnCallback={() => changeUserInviteStatus('pending', initialValues.get('id'))}
+                  mainText={`This will prevent the user ${initialValues.get('email')} from accepting the invitation.`}
+                  data-automation="cancelConfirmationWrapper"
+                >
+                  <InviteButtons
+                    type="button"
+                    buttonType="secondary"
+                    className="cancel-invite-button"
+                    data-automation="cancelInviteButton"
+                  >
+                    Cancel Invitation
+                  </InviteButtons>
+                </ConfirmationWrapper>
+              </Fragment>
+            )}
+
+          {userHasNameSet &&
+            displayResetPassword &&
+            status === 'enabled' && (
               <ConfirmationWrapper
-                confirmBtnCallback={() => changeUserInviteStatus('pending', initialValues.get('id'))}
-                mainText={`This will prevent the user ${initialValues.get('email')} from accepting the invitation.`}
-                data-automation="cancelConfirmationWrapper"
+                confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
+                mainText={`Are you sure you want to send a password reset email to ${initialValues.get('email')}?`}
+                data-automation="resetPasswordConfirmationWrapper"
               >
                 <InviteButtons
                   type="button"
                   buttonType="secondary"
-                  className="cancel-invite-button"
-                  data-automation="cancelInviteButton"
+                  className="reset-password-button"
+                  data-automation="resetPasswordButton"
                 >
-                  Cancel Invitation
+                  Reset Password
                 </InviteButtons>
               </ConfirmationWrapper>
-            </Fragment>
-          )}
-
-          {userHasNameSet && displayResetPassword && status === 'enabled' && (
-            <ConfirmationWrapper
-              confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
-              mainText={`Are you sure you want to send a password reset email to ${initialValues.get('email')}?`}
-              data-automation="resetPasswordConfirmationWrapper"
-            >
-              <InviteButtons
-                type="button"
-                buttonType="secondary"
-                className="reset-password-button"
-                data-automation="resetPasswordButton"
-              >
-                Reset Password
-              </InviteButtons>
-            </ConfirmationWrapper>
-          )}
+            )}
         </DetailWrapper>
 
-        <DetailWrapper open={true}>
+        <DetailWrapper open={true} data-automation="tenantDetailsSVG">
           <WrappedDetailHeader text="Tenant Details" />
           <InputField
             className="frm-users-workstation-id"
@@ -233,19 +238,20 @@ export default function UsersForm({
             inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
           />
-          {tenantRoles && !usersFetching && (
-            <SelectField
-              className="frm-users-role-id"
-              name="roleId"
-              label="Tenant Role"
-              data-automation="roleList"
-              disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
-              options={tenantRoles}
-            />
-          )}
+          {tenantRoles &&
+            !usersFetching && (
+              <SelectField
+                className="frm-users-role-id"
+                name="roleId"
+                label="Tenant Role"
+                data-automation="roleList"
+                disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
+                options={tenantRoles}
+              />
+            )}
         </DetailWrapper>
 
-        <DetailWrapper open={true}>
+        <DetailWrapper open={true} data-automation="extensionsSVG">
           <WrappedDetailHeader
             text="Extensions"
             userHasUpdatePermission={userHasUpdatePermission}
@@ -278,7 +284,7 @@ export default function UsersForm({
         </DetailWrapper>
 
         {userHasNameSet && (
-          <DetailWrapper open={true}>
+          <DetailWrapper open={true} data-automation="capacityRuleSVG">
             <WrappedDetailHeader text="Capacity Rule" />
             <SelectField
               className="users-form-capacity-rule"

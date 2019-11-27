@@ -81,6 +81,18 @@ const commonBehavior = {
     new Element(`button[data-automation="${param}"] span`).waitForVisible();
     new Element(`button[data-automation="${param}"] span`).validateElementsString('exact', parameter[param].value);
   },
+  openSVGDropdown(param, entity) {
+    if(Elem.sdpanelAddItem.isExisting()) {
+      if(entity !== 'Role'){
+        Elem[param].validateElementsState('isVisible', true);
+      }
+    } else {
+      if(entity !== 'Role'){
+        Elem[param].waitAndClick();
+        Elem.sdpanelAddItem.waitForVisible();
+      }
+    }
+  },
   searchByNameAndClick(entity, searchValue) {
     var columnElement = new Element(`[data-automation="${dictionary[entity].whichCatagoryToSearch}"]`);
     columnElement.clearElement();
@@ -89,7 +101,7 @@ const commonBehavior = {
     Elem.sdpanelStatusToggle.waitForVisible();
     Elem.sdpanelStatusToggle.validateElementsState('isVisible', true);
   },
-  fillFormFields(parameter, entity) {
+  fillFormFields(parameter, entity, actionType) {
     Object.keys(parameter).forEach(param => {
       if (param.endsWith('Input')) {
         this.insertDataTextValues(parameter, param);
@@ -103,17 +115,20 @@ const commonBehavior = {
         this.insertRadioValues(parameter, param);
       } else if (param.endsWith('AutoComplete')) {
         this.insertAutoCompleteValues(parameter, param);
+      } else if (param.endsWith('SVG')) {
+        this.addRemoveSubEntity(parameter, param, entity, actionType);
       }
     });
   },
   submitFormData(entity, actionType, parameter) {
-    this.fillFormFields(parameter, entity);
+    this.fillFormFields(parameter, entity, actionType);
     const subEntityFormParams = dictionary[entity].specs[actionType].subEntityParametersToInsert;
+    const subEntityToAddThenRemove = dictionary[entity].specs[actionType].subEntityToAddAndRemove;
     if (actionType === 'create') {
       if (subEntityFormParams) {
         subEntityFormParams.forEach(parameter => {
           Elem.sdpanelAddItem.waitAndClick();
-          this.fillFormFields(parameter, entity);
+          this.fillFormFields(parameter, entity, actionType);
           if (entity !== 'Sla') {
             Elem.modalSubmitButton.waitAndClick();
           }
@@ -121,6 +136,9 @@ const commonBehavior = {
       }
       Elem.sdpanelSubmitButton.waitAndClick();
     } else if (actionType === 'update') {
+      if (subEntityToAddThenRemove) {
+        subEntityToAddThenRemove.forEach(parameter => this.fillFormFields(parameter, entity, actionType));
+      }
       if (subEntityFormParams) {
         if (entity === 'Reason List') {
           Elem.updateCategoryButton.waitAndClick();
@@ -130,19 +148,7 @@ const commonBehavior = {
           Elem.updateListItemButton.waitAndClick();
           subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
           Elem.modalSubmitButton.waitAndClick();
-        } else if (entity === 'Role') {
-          Elem.sdpanelAddItem.waitAndClick();
-          Elem.dtpanelActionAddItem.waitAndClick();
-          Elem.loadingSpinnerIcon.waitForVisible();
-          Elem.loadingSpinnerIcon.waitForVisible(20000, false);
-          this.verifyAction(entity, actionType);
-          this.closeToastr(entity, actionType);
-          Elem.dtpanelActionClose.waitAndClick();
-          Elem.dtpanelActionRemoveItem.waitAndClick();
-          this.verifyAction(entity, actionType);
-          this.closeToastr(entity, actionType);
-          Elem.sdpanelSubmitButton.waitAndClick();
-        }
+        } 
       } else {
         $('button[data-automation="sdpanelSubmitButton"]').scroll();
         Elem.sdpanelSubmitButton.waitAndClick();
@@ -169,6 +175,25 @@ const commonBehavior = {
       this.toggleEntity(entity);
       this.closeSidePanel();
     });
+  },
+  addRemoveSubEntity(parameter, param, entity, actionType) {
+        this.openSVGDropdown(param, entity);
+        Elem.sdpanelAddItem.waitAndClick();
+        Elem.dtpanelActionAddItem.waitForVisible();
+        Elem.dtpanelActionAddItem.waitAndClick();
+        Elem.loadingSpinnerIcon.waitForVisible();
+        Elem.loadingSpinnerIcon.waitForVisible(20000, false);
+        this.verifyAction(entity, actionType);
+        this.closeToastr(entity, actionType);
+        Elem.dtpanelActionClose.waitAndClick();
+        Elem.dtpanelActionRemoveItem.waitAndClick();
+        Elem.loadingSpinnerIcon.waitForVisible();
+        Elem.loadingSpinnerIcon.waitForVisible(20000, false);
+        this.verifyAction(entity, actionType);
+        this.closeToastr(entity, actionType);
+        if(entity !== 'Role'){
+          Elem[param].waitAndClick();
+        }
   },
   deleteEntity(entity, actionType) {
     Elem.searchStatusColumnButton.waitAndClick();

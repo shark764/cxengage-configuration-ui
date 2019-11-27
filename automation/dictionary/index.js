@@ -89,7 +89,7 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: [`rName-${randomId}`]
   },
-  Reason: {
+  'Reason': {
     specs: {
       create: {
         parametersToInsert: [
@@ -153,7 +153,7 @@ const pages = {
           {
             nameInput: `updatedRName-${randomId}`,
             descriptionInput: `updatedRDesc-${randomId}`,
-            isDefaultToggle: ""
+            //isDefaultToggle: ""
           }
         ],
         subEntityParametersToInsert: [
@@ -175,7 +175,7 @@ const pages = {
     updateSearchValue: [`rName-${randomId}`],
     deleteSearchValue: `updatedRName-${randomId}`,
   },
-  Skill: {
+  'Skill': {
     specs: {
       create: {
         parametersToInsert: [
@@ -205,7 +205,7 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: [`rName-${randomId}`]
   },
-  Group: {
+  'Group': {
     specs: {
       create: {
         parametersToInsert: [
@@ -221,7 +221,18 @@ const pages = {
             nameInput: `updatedRName-${randomId}`,
             descriptionInput: `updatedRDesc-${randomId}`
           }
-        ]
+        ],
+        subEntityToAddAndRemove: [
+          {
+            usersSVG: "usersSVG"
+          },
+          {
+            outboundIdentifierListsSVG: "outboundIdentifierListsSVG"
+          },
+          {
+            reasonListsSVG: "reasonListsSVG"
+          }
+        ],
       },
       read: {
         parameters: {}
@@ -324,7 +335,7 @@ const pages = {
     updateSearchValue: [`rName-${randomId}`],
     deleteSearchValue: `updatedRName-${randomId}`,
   },
-  User: {
+  'User': {
     specs: {
       create: {
         parametersToInsert: [
@@ -355,7 +366,7 @@ const pages = {
     whichCatagoryToSearch: "searchEmailColumn",
     updateSearchValue: [`remail-${randomId}@gmail.com`]
   },
-  Role: {
+  'Role': {
     specs: {
       create: {
         parametersToInsert: [
@@ -373,10 +384,11 @@ const pages = {
             sharedToggle: ""
           }
         ],
-        subEntityParametersToInsert: [
+        subEntityToAddAndRemove: [
           {
+            permissionsSVG: "permissionsSVG"
           }
-        ]
+        ],
       },
       read: {
         parameters: {}
@@ -389,7 +401,7 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: [`rName-${randomId}`],
   },
-  List: {
+  'List': {
     specs: {
       create: {
         parametersToInsert: [
@@ -418,7 +430,7 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: [`rName-${randomId}`]
   },
-  Sla: {
+  'Sla': {
     specs: {
       create: {
         parametersToInsert: [

@@ -40,7 +40,7 @@ class DetailWrapper extends Component {
   render() {
     return (
       <span>
-        <Wrapper onClick={this.toggle}>
+        <Wrapper data-automation={this.props['data-automation']} onClick={this.toggle}>
           <CaretIcon size={15} direction={this.state.open ? 'up' : 'down'} />
         </Wrapper>
         {!this.state.open && this.props.children[0]}

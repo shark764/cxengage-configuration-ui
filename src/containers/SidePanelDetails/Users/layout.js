@@ -65,7 +65,7 @@ export default function UsersDetailsPanel({
       {children}
 
       {sidePanelReadPermissions.skills && (
-        <DetailWrapper open={false} contains="skills">
+        <DetailWrapper open={false} data-automation="skillsSVG" contains="skills">
           <WrappedDetailHeader
             userHasUpdatePermission={!skillsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.skills}
             text={detailHeaderText(skillsItems, 'Skills')}
@@ -86,7 +86,7 @@ export default function UsersDetailsPanel({
       )}
 
       {sidePanelReadPermissions.groups && (
-        <DetailWrapper open={false} contains="groups">
+        <DetailWrapper open={false} data-automation="groupsSVG" contains="groups">
           <WrappedDetailHeader
             userHasUpdatePermission={!groupsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.groups}
             text={detailHeaderText(groupsItems, 'Groups')}
@@ -107,7 +107,7 @@ export default function UsersDetailsPanel({
       )}
 
       {sidePanelReadPermissions.reasonLists && (
-        <DetailWrapper open={false} contains="reasonLists">
+        <DetailWrapper open={false} data-automation="reasonListsSVG" contains="reasonLists">
           <WrappedDetailHeader
             userHasUpdatePermission={
               !reasonListsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.reasonLists
@@ -132,7 +132,7 @@ export default function UsersDetailsPanel({
       )}
 
       {sidePanelReadPermissions.messageTemplates && (
-        <DetailWrapper open={false} contains="messageTemplates">
+        <DetailWrapper open={false} data-automation="messageTemplatesSVG" contains="messageTemplates">
           <WrappedDetailHeader
             userHasUpdatePermission={
               !messageTemplatesFetching && userHasUpdatePermission && sidePanelUpdatePermissions.messageTemplates
@@ -157,7 +157,7 @@ export default function UsersDetailsPanel({
       )}
 
       {sidePanelReadPermissions.transferLists && (
-        <DetailWrapper open={false} contains="transferLists">
+        <DetailWrapper open={false} data-automation="transferListsSVG" contains="transferLists">
           <WrappedDetailHeader
             userHasUpdatePermission={
               !transferListsFetching && userHasUpdatePermission && sidePanelUpdatePermissions.transferLists
@@ -182,7 +182,7 @@ export default function UsersDetailsPanel({
       )}
 
       {sidePanelReadPermissions.outboundIdentifierLists && (
-        <DetailWrapper open={false} contains="outboundIdentifierLists">
+        <DetailWrapper open={false} data-automation="outboundIdentifierListsSVG" contains="outboundIdentifierLists">
           <WrappedDetailHeader
             userHasUpdatePermission={
               !outboundIdentifierListsFetching &&

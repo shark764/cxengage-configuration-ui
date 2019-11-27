@@ -46,7 +46,7 @@ export default function SkillsDetailsPanel({
       {children}
 
       {sidePanelReadPermissions.users && (
-        <DetailWrapper open={true} contains="users" autoCloseOverride>
+        <DetailWrapper open={true} data-automation="usersSVG" contains="users" autoCloseOverride>
           <WrappedDetailHeader
             userHasUpdatePermission={!usersFetching && userHasUpdatePermission && sidePanelUpdatePermissions.users}
             text={`${usersItems.length > 1 ? usersItems.length : ''} Users`}
@@ -66,7 +66,7 @@ export default function SkillsDetailsPanel({
         </DetailWrapper>
       )}
       {sidePanelReadPermissions.outboundIdentifierLists && (
-        <DetailWrapper open={false} contains="outboundIdentifierLists">
+        <DetailWrapper open={false} data-automation="outboundIdentifierListsSVG" contains="outboundIdentifierLists">
           <WrappedDetailHeader
             userHasUpdatePermission={
               !outboundIdentifierListsFetching &&

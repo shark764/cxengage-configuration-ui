@@ -7,6 +7,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
   Mock Child
   <Connect(DetailWrapper)
     contains="skills"
+    data-automation="skillsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -24,6 +25,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="groups"
+    data-automation="groupsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -41,6 +43,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="reasonLists"
+    data-automation="reasonListsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -58,6 +61,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="messageTemplates"
+    data-automation="messageTemplatesSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -75,6 +79,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="transferLists"
+    data-automation="transferListsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -92,6 +97,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
+    data-automation="outboundIdentifierListsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -117,6 +123,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   Mock Child
   <Connect(DetailWrapper)
     contains="skills"
+    data-automation="skillsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -134,6 +141,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="groups"
+    data-automation="groupsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -151,6 +159,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="reasonLists"
+    data-automation="reasonListsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -168,6 +177,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="messageTemplates"
+    data-automation="messageTemplatesSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -185,6 +195,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="transferLists"
+    data-automation="transferListsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -202,6 +213,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
+    data-automation="outboundIdentifierListsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -227,6 +239,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   Mock Child
   <Connect(DetailWrapper)
     contains="skills"
+    data-automation="skillsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -244,6 +257,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="groups"
+    data-automation="groupsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -261,6 +275,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="reasonLists"
+    data-automation="reasonListsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -278,6 +293,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="messageTemplates"
+    data-automation="messageTemplatesSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -295,6 +311,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="transferLists"
+    data-automation="transferListsSVG"
     open={false}
   >
     <Styled(DetailHeader)
@@ -312,6 +329,7 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
   </Connect(DetailWrapper)>
   <Connect(DetailWrapper)
     contains="outboundIdentifierLists"
+    data-automation="outboundIdentifierListsSVG"
     open={false}
   >
     <Styled(DetailHeader)

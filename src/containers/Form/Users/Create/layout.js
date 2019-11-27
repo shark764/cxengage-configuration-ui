@@ -40,7 +40,7 @@ export default function UsersForm({
           <DetailsPanelAlert text="This user already exists on the platform and it will be added to the tenant upon clicking “Submit”" />
         )}
 
-        <DetailWrapper open={true}>
+        <DetailWrapper open={true} data-automation="loginDetailsSVG">
           <WrappedDetailHeader text="Login Details" />
           <InputField
             name="email"
@@ -82,7 +82,7 @@ export default function UsersForm({
           />
         </DetailWrapper>
 
-        <DetailWrapper open={true}>
+        <DetailWrapper open={true} data-automation="tenantDetailsSVG">
           <WrappedDetailHeader text="Tenant Details" />
           <InputField
             name="workStationId"

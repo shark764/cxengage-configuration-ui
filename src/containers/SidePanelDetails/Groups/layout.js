@@ -52,7 +52,7 @@ export default function GroupsDetailsPanel({
       {children}
 
       {sidePanelReadPermissions.users && (
-        <DetailWrapper open={true} contains="users" autoCloseOverride>
+        <DetailWrapper open={true} data-automation="usersSVG" contains="users" autoCloseOverride>
           <WrappedDetailHeader
             userHasUpdatePermission={!usersFetching && userHasUpdatePermission && sidePanelUpdatePermissions.users}
             text={detailHeaderText(usersItems, 'Users')}
@@ -74,7 +74,7 @@ export default function GroupsDetailsPanel({
         </DetailWrapper>
       )}
       {sidePanelReadPermissions.outboundIdentifierLists && (
-        <DetailWrapper open={false} contains="outboundIdentifierLists">
+        <DetailWrapper open={false} data-automation="outboundIdentifierListsSVG" contains="outboundIdentifierLists">
           <WrappedDetailHeader
             userHasUpdatePermission={
               !outboundIdentifierListsFetching &&
@@ -102,7 +102,7 @@ export default function GroupsDetailsPanel({
         </DetailWrapper>
       )}
       {sidePanelReadPermissions.reasonLists && (
-        <DetailWrapper open={false} contains="reasonLists">
+        <DetailWrapper open={false} data-automation="reasonListsSVG" contains="reasonLists">
           <WrappedDetailHeader
             userHasUpdatePermission={!reasonListsFetching && userHasUpdatePermission}
             text={detailHeaderText(reasonListsItems, 'Presence Reason Lists')}

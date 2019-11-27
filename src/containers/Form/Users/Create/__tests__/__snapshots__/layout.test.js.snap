@@ -6,6 +6,7 @@ exports[`<UsersForm /> renders create user 1`] = `
 >
   <styled.div>
     <Connect(DetailWrapper)
+      data-automation="loginDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -63,6 +64,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="tenantDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -104,6 +106,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
 >
   <styled.div>
     <Connect(DetailWrapper)
+      data-automation="loginDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -161,6 +164,7 @@ exports[`<UsersForm /> renders create user saving and inherited 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="tenantDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -202,6 +206,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
 >
   <styled.div>
     <Connect(DetailWrapper)
+      data-automation="loginDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -259,6 +264,7 @@ exports[`<UsersForm /> renders create user without create permision 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="tenantDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)

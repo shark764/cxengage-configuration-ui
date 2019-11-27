@@ -6,6 +6,7 @@ exports[`<UsersForm /> renders create user 1`] = `
 >
   <styled.div>
     <Connect(DetailWrapper)
+      data-automation="platformDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -42,6 +43,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="loginDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -97,6 +99,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       </ConfirmationWrapper>
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="tenantDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -122,6 +125,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="extensionsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -138,6 +142,7 @@ exports[`<UsersForm /> renders create user 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="capacityRuleSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -162,6 +167,7 @@ exports[`<UsersForm /> renders update user 1`] = `
 >
   <styled.div>
     <Connect(DetailWrapper)
+      data-automation="platformDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -198,6 +204,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="loginDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -253,6 +260,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       </ConfirmationWrapper>
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="tenantDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -278,6 +286,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="extensionsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -294,6 +303,7 @@ exports[`<UsersForm /> renders update user 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="capacityRuleSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -318,6 +328,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
 >
   <styled.div>
     <Connect(DetailWrapper)
+      data-automation="platformDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -354,6 +365,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="loginDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -409,6 +421,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       </ConfirmationWrapper>
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="tenantDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -434,6 +447,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="extensionsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -450,6 +464,7 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="capacityRuleSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -474,6 +489,7 @@ exports[`<UsersForm /> renders update user with no name set 1`] = `
 >
   <styled.div>
     <Connect(DetailWrapper)
+      data-automation="platformDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -510,6 +526,7 @@ exports[`<UsersForm /> renders update user with no name set 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="loginDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -551,6 +568,7 @@ exports[`<UsersForm /> renders update user with no name set 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="tenantDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -576,6 +594,7 @@ exports[`<UsersForm /> renders update user with no name set 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="extensionsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -601,6 +620,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
 >
   <styled.div>
     <Connect(DetailWrapper)
+      data-automation="platformDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -637,6 +657,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="loginDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -678,6 +699,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="tenantDetailsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -703,6 +725,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="extensionsSVG"
       open={true}
     >
       <Styled(DetailHeader)
@@ -719,6 +742,7 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
+      data-automation="capacityRuleSVG"
       open={true}
     >
       <Styled(DetailHeader)

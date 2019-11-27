@@ -164,7 +164,7 @@ export default function BusinessHoursForm({
             required
           />
         </div>
-        <DetailWrapper open={true}>
+        <DetailWrapper open={true} data-automation="regularHoursSVG">
           <WrappedDetailHeader text="Regular Hours" />
           <RadioGroupField
             name="businessHoursType"
