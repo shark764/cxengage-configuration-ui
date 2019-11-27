@@ -131,17 +131,18 @@ const commonBehavior = {
           subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
           Elem.modalSubmitButton.waitAndClick();
         } else if (entity === 'Role') {
-            Elem.sdpanelAddItem.waitAndClick();
-            Elem.dtpanelActionAddItem.waitAndClick();
-            this.closeToastr(entity, actionType);
-
-            Elem.dtpanelActionClose.waitAndClick();
-            this.closeToastr(entity, actionType);
-            Elem.sdpanelSubmitButton.waitAndClick();
+          Elem.sdpanelAddItem.waitAndClick();
+          Elem.dtpanelActionAddItem.waitAndClick();
+          Elem.loadingSpinnerIcon.waitForVisible();
+          Elem.loadingSpinnerIcon.waitForVisible(20000, false);
+          this.verifyAction(entity, actionType);
+          this.closeToastr(entity, actionType);
+          Elem.dtpanelActionClose.waitAndClick();
+          Elem.dtpanelActionRemoveItem.waitAndClick();
+          this.verifyAction(entity, actionType);
+          this.closeToastr(entity, actionType);
+          Elem.sdpanelSubmitButton.waitAndClick();
         }
-
-        subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
-        Elem.modalSubmitButton.waitAndClick();
       } else {
         $('button[data-automation="sdpanelSubmitButton"]').scroll();
         Elem.sdpanelSubmitButton.waitAndClick();
@@ -156,7 +157,7 @@ const commonBehavior = {
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
       this.verifyEntitySpecificAction(entity);
-  //    this.closeSidePanel();
+      this.closeSidePanel();
     });
   },
   updateEntity(entity, actionType) {
@@ -173,7 +174,7 @@ const commonBehavior = {
     Elem.searchStatusColumnButton.waitAndClick();
     Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
     this.searchByNameAndClick(entity, dictionary[entity].deleteSearchValue);
-    if (entity === 'Reason List' || entity === 'Transfer List' ) {
+    if (entity === 'Reason List' || entity === 'Transfer List') {
       Elem.removeCategoryButton.waitForVisible();
       Elem.removeCategoryButton.waitAndClick();
       Elem.confirmationWrapper.waitForVisible();
@@ -196,11 +197,6 @@ const commonBehavior = {
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
     }
-
-    if (entity === 'Role') {
-      Elem.dtpanelActionRemoveItem.waitAndClick();
-      this.closeToastr(entity, actionType);
-    }
   },
   entityCRUD(entity, actionType) {
     if (actionType === 'create') {
@@ -214,7 +210,7 @@ const commonBehavior = {
   verifyAction(entity, actionType) {
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    if ((entity === 'Reason List' || entity === 'Transfer List' || entity ==='Role') && actionType === 'delete') {
+    if ((entity === 'Reason List' || entity === 'Transfer List' || entity === 'Role') && actionType === 'delete') {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was updated successfully!`);
     } else {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);

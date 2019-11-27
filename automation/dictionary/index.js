@@ -11,7 +11,6 @@ const randomId = randomPhoneNum();
 // Integrations - Page not completed yet
 // Email Templates - needs data-automation labels added
 // Chat Widget - needs data-automation labels added
-// Message Templates - needs extra logic for creation / automation input name change
 // Contact Attributes - Page not completed yet.
 // Contact Layouts - Page not completed yet.
 // Flows - needs extra logic for update.
@@ -26,53 +25,27 @@ const randomId = randomPhoneNum();
 // Agent State Monitoring - ready to be worked on
 
 const pages = {
-  // ********************** User Management ****************************** //
-  User: {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            emailInput: `remail-${randomId}@gmail.com`,
-            roleList: "Platform User",
-            tenantList: "Agent"
-          }
-        ]
-      },
-      update: {
-        parametersToInsert: [
-          {
-            firstNameInput: `updatedRName-${randomId}`,
-            lastNameInput: `updatedRDesc-${randomId}`,
-            roleList: "Supervisor",
-          }
-        ]
-      },
-      read: {
-        parameters: {}
-      }
-    },
-    navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkUsers"
-    },
-    whichCatagoryToSearch: "searchEmailColumn",
-    updateSearchValue: [`remail-${randomId}@gmail.com`]
-  },
-  Group: {
+  'Outbound Identifier': {
     specs: {
       create: {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`
+            channelList: 1,
+            valueInput: `+1${randomPhoneNum()}`,
+            flowList: 1,
+            descriptionInput: `rDesc-${randomId}`,
           }
-        ],
+        ]
       },
       update: {
         parametersToInsert: [
           {
             nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`
+            channelList: 3,
+            valueInput: `remail-${randomId}@gmail.com`,
+            // flowList: 2,
+            descriptionInput: `updatedRDesc-${randomId}`,
           }
         ]
       },
@@ -81,13 +54,13 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkGroups"
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkOutboundIdentifiers"
     },
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: [`rName-${randomId}`]
   },
-  Skill: {
+  'Outbound Identifier List': {
     specs: {
       create: {
         parametersToInsert: [
@@ -102,7 +75,6 @@ const pages = {
           {
             nameInput: `updatedRName-${randomId}`,
             descriptionInput: `updatedRDesc-${randomId}`,
-            hasProficiencyToggle: ""
           }
         ]
       },
@@ -111,47 +83,11 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkSkills"
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkOutboundIdentifierLists"
     },
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: [`rName-${randomId}`]
-  },
-  Role: {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
-          }
-        ]
-      },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`,
-            sharedToggle: ""
-          }
-        ],
-        subEntityParametersToInsert: [
-          {
-          }
-        ]
-      },
-      delete: 'deleteRoleAttrubuite',
-      read: {
-        parameters: {}
-      },
-    },
-    navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkRoles"
-    },
-    whichCatagoryToSearch: "searchNameColumn",
-    updateSearchValue: [`rName-${randomId}`],
-    deleteSearchValue: `updatedRName-${randomId}`
   },
   Reason: {
     specs: {
@@ -239,9 +175,220 @@ const pages = {
     updateSearchValue: [`rName-${randomId}`],
     deleteSearchValue: `updatedRName-${randomId}`,
   },
-
-  // ********************** Configuration ****************************** //
-
+  Skill: {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`,
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`,
+            hasProficiencyToggle: ""
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: "userManagementMenu",
+      subMainBar: "navigationLinkSkills"
+    },
+    whichCatagoryToSearch: "searchNameColumn",
+    updateSearchValue: [`rName-${randomId}`]
+  },
+  Group: {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
+          }
+        ],
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: "userManagementMenu",
+      subMainBar: "navigationLinkGroups"
+    },
+    whichCatagoryToSearch: "searchNameColumn",
+    updateSearchValue: [`rName-${randomId}`]
+  },
+  'Transfer List': {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`,
+          }
+        ],
+        subEntityParametersToInsert: [
+          {
+            categoryNameInput: `CategoryOne-${randomId}`,
+            contactNameInput: `ContactOne-${randomId}`,
+            contactTypeList: 'SIP',
+            transferTypeList: 'Internal',
+            warmColdTransferCheckbox: {
+              input: ['warmTransferCheckbox', 'coldTransferCheckbox'],
+              value: 'warmTransfer, coldTransfer'
+            },
+            endpointInput: `sip:${randomId}@gmail.com`
+          },
+          {
+            categoryNameAutoComplete: `CategoryOne-${randomId}`,
+            contactNameInput: `ContactOne-${randomId}`,
+            contactTypeList: 'PSTN',
+            transferTypeList: 'External',
+            warmColdTransferCheckbox: {
+              input: ['coldTransferCheckbox'],
+              value: 'coldTransfer'
+            },
+            endpointInput: `+1${randomPhoneNum()}`,
+          },
+          {
+            newCategoryToggle: '',
+            categoryNameInput: `CategoryTwo-${randomId}`,
+            contactNameInput: `ContactTwo-${randomId}`,
+            contactTypeList: 'PSTN',
+            transferTypeList: 'Internal',
+            warmColdTransferCheckbox: {
+              input: ['warmTransferCheckbox'],
+              value: 'warmTransfer'
+            },
+            endpointInput: `+1${randomPhoneNum()}`,
+          },
+          {
+            categoryNameAutoComplete: `CategoryTwo-${randomId}`,
+            contactNameInput: `ContactTwo-${randomId}`,
+            contactTypeList: 'PSTN',
+            transferTypeList: 'External',
+            warmColdTransferCheckbox: {
+              input: ['coldTransferCheckbox'],
+              value: 'coldTransfer'
+            },
+            endpointInput: `+1${randomPhoneNum()}`,
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`,
+          }
+        ],
+        subEntityParametersToInsert: [
+          {
+            contactNameInput: `updatedContact-${randomId}`,
+            contactTypeList: 'PSTN',
+            transferTypeList: 'Internal',
+            warmColdTransferCheckbox: {
+              input: ['warmTransferCheckbox'],
+              value: 'coldTransfer'
+            },
+            endpointInput: `+1${randomPhoneNum()}`,
+          }
+        ]
+      },
+      delete: 'deleteTransferLists',
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: "configurationMenu",
+      subMainBar: "navigationLinkTransferLists"
+    },
+    whichCatagoryToSearch: "searchNameColumn",
+    updateSearchValue: [`rName-${randomId}`],
+    deleteSearchValue: `updatedRName-${randomId}`,
+  },
+  User: {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            emailInput: `remail-${randomId}@gmail.com`,
+            roleList: "Platform User",
+            tenantList: "Agent"
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            firstNameInput: `updatedRName-${randomId}`,
+            lastNameInput: `updatedRDesc-${randomId}`,
+            roleList: "Supervisor",
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: "userManagementMenu",
+      subMainBar: "navigationLinkUsers"
+    },
+    whichCatagoryToSearch: "searchEmailColumn",
+    updateSearchValue: [`remail-${randomId}@gmail.com`]
+  },
+  Role: {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`,
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`,
+            sharedToggle: ""
+          }
+        ],
+        subEntityParametersToInsert: [
+          {
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      },
+    },
+    navigation: {
+      mainBar: "userManagementMenu",
+      subMainBar: "navigationLinkRoles"
+    },
+    whichCatagoryToSearch: "searchNameColumn",
+    updateSearchValue: [`rName-${randomId}`],
+  },
   List: {
     specs: {
       create: {
@@ -335,70 +482,6 @@ const pages = {
     updateSearchValue: ["password-reset"]
   },
   */
-  'Outbound Identifier': {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            channelList: 1,
-            valueInput: `+1${randomPhoneNum()}`,
-            flowList: 1,
-            descriptionInput: `rDesc-${randomId}`,
-          }
-        ]
-      },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            channelList: 3,
-            valueInput: `remail-${randomId}@gmail.com`,
-            flowList: 2,
-            descriptionInput: `updatedRDesc-${randomId}`,
-          }
-        ]
-      },
-      read: {
-        parameters: {}
-      }
-    },
-    navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkOutboundIdentifiers"
-    },
-    whichCatagoryToSearch: "searchNameColumn",
-    updateSearchValue: [`rName-${randomId}`]
-  },
-  'Outbound Identifier List': {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
-          }
-        ]
-      },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`,
-          }
-        ]
-      },
-      read: {
-        parameters: {}
-      }
-    },
-    navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkOutboundIdentifierLists"
-    },
-    whichCatagoryToSearch: "searchNameColumn",
-    updateSearchValue: [`rName-${randomId}`]
-  },
   /*
   'Chat Widget': {
     specs: {
@@ -428,96 +511,6 @@ const pages = {
     updateSearchValue: [`rName-${randomId}`]
   },
   */
-  'Transfer List': {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
-          }
-        ],
-        subEntityParametersToInsert: [
-          {
-            categoryNameInput: `CategoryOne-${randomId}`,
-            contactNameInput: `ContactOne-${randomId}`,
-            contactTypeList: 'SIP',
-            transferTypeList: 'Internal',
-            warmColdTransferCheckbox: {
-              input: ['warmTransferCheckbox', 'coldTransferCheckbox'],
-              value: 'warmTransfer, coldTransfer'
-            },
-            endpointInput: `sip:${randomId}@gmail.com`
-          },
-          {
-            categoryNameAutoComplete: `CategoryOne-${randomId}`,
-            contactNameInput: `ContactOne-${randomId}`,
-            contactTypeList: 'PSTN',
-            transferTypeList: 'External',
-            warmColdTransferCheckbox: {
-              input: ['coldTransferCheckbox'],
-              value: 'coldTransfer'
-            },
-            endpointInput: `+1${randomPhoneNum()}`,
-          },
-          {
-            newCategoryToggle: '',
-            categoryNameInput: `CategoryTwo-${randomId}`,
-            contactNameInput: `ContactTwo-${randomId}`,
-            contactTypeList: 'PSTN',
-            transferTypeList: 'Internal',
-            warmColdTransferCheckbox: {
-              input: ['warmTransferCheckbox'],
-              value: 'warmTransfer'
-            },
-            endpointInput: `+1${randomPhoneNum()}`,
-          },
-          {
-            categoryNameAutoComplete: `CategoryTwo-${randomId}`,
-            contactNameInput: `ContactTwo-${randomId}`,
-            contactTypeList: 'PSTN',
-            transferTypeList: 'External',
-            warmColdTransferCheckbox: {
-              input: ['coldTransferCheckbox'],
-              value: 'coldTransfer'
-            },
-            endpointInput: `+1${randomPhoneNum()}`,
-          }
-        ]
-      },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`,
-          }
-        ],
-        subEntityParametersToInsert: [
-          {
-            contactNameInput: `updatedContact-${randomId}`,
-            contactTypeList: 'PSTN',
-            transferTypeList: 'Internal',
-            warmColdTransferCheckbox: {
-              input: ['warmTransferCheckbox'],
-              value: 'coldTransfer'
-            },
-            endpointInput: `+1${randomPhoneNum()}`,
-          }
-        ]
-      },
-      delete: 'deleteTransferLists',
-      read: {
-        parameters: {}
-      }
-    },
-    navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkTransferLists"
-    },
-    whichCatagoryToSearch: "searchNameColumn",
-    updateSearchValue: [`rName-${randomId}`],
-    deleteSearchValue: `updatedRName-${randomId}`,
-  },
   'Api Key': {
     specs: {
       create: {
@@ -630,8 +623,6 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: [`rName-${randomId}`]
   },
-
-  // ********************** Flows ****************************** //
   /*
   'Flow': {
     specs: {
@@ -687,7 +678,6 @@ const pages = {
             interactionList: "Sms",
             mappingList: "Customer",
             phoneValueInput: `+1${randomPhoneNum()}`,
-            flowList: 2,
             flowVersionList: 1
           }
         ]
@@ -703,8 +693,6 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: [`dMapName-${randomId}`]
   },
-
-  // ********************** Reporting ****************************** //
   'Data Access Report': {
     specs: {
       create: {

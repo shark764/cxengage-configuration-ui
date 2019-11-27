@@ -15,7 +15,7 @@ WORKDIR /home/node/app
 ENV APP=config2
 ENV REGIONVAR=us-east-1
 ENV ENVIRONMENT=dev
-ENV TENANT=Anil-1
+ENV TENANT=Anil
 ENV CX_USERNAME=areddy@serenova.com
 ENV CX_PASSWORD=selenium1!
 ENV TEST_BROWSER=chrome
