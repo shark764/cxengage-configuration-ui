@@ -26,9 +26,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.68.7] - 2019-11-27
+## Changed
+- <no-jira> - Added subEntity addRemove logic for users and skills.
+
 ## [0.68.6] - 2019-11-27
 ## Changed
-- <no-jira> - Added subEntity addRemove logic for Groups and Roles with verification.
+- <no-jira> - Added subEntity addRemove logic for groups and roles with verification.
 
 ## [0.68.5] - 2019-11-27
 ## Changed

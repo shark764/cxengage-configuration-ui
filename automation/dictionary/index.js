@@ -77,6 +77,13 @@ const pages = {
             descriptionInput: `updatedRDesc-${randomId}`,
           }
         ]
+        /*
+        subEntityToAddAndRemove: [
+          {
+            outboundIdentifiersSVG: "outboundIdentifiersSVG"
+          }
+        ]
+        */
       },
       read: {
         parameters: {}
@@ -192,7 +199,15 @@ const pages = {
             descriptionInput: `updatedRDesc-${randomId}`,
             hasProficiencyToggle: ""
           }
-        ]
+        ],
+        subEntityToAddAndRemove: [
+          {
+            usersSVG: "usersSVG"
+          },
+          {
+            outboundIdentifierListsSVG: "outboundIdentifierListsSVG"
+          }
+        ],
       },
       read: {
         parameters: {}
@@ -353,7 +368,27 @@ const pages = {
             lastNameInput: `updatedRDesc-${randomId}`,
             roleList: "Supervisor",
           }
-        ]
+        ],
+        subEntityToAddAndRemove: [
+          {
+            skillsSVG: "skillsSVG"
+          },
+          {
+            groupsSVG: "groupsSVG"
+          },
+          {
+            reasonListsSVG: "reasonListsSVG"
+          },
+          {
+            messageTemplatesSVG: "messageTemplatesSVG"
+          },
+          {
+            transferListsSVG: "transferListsSVG"
+          },
+          {
+            outboundIdentifierListsSVG: "outboundIdentifierListsSVG"
+          }
+        ],
       },
       read: {
         parameters: {}

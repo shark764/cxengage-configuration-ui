@@ -83,14 +83,10 @@ const commonBehavior = {
   },
   openSVGDropdown(param, entity) {
     if(Elem.sdpanelAddItem.isExisting()) {
-      if(entity !== 'Role'){
         Elem[param].validateElementsState('isVisible', true);
-      }
     } else {
-      if(entity !== 'Role'){
         Elem[param].waitAndClick();
         Elem.sdpanelAddItem.waitForVisible();
-      }
     }
   },
   searchByNameAndClick(entity, searchValue) {
@@ -177,23 +173,30 @@ const commonBehavior = {
     });
   },
   addRemoveSubEntity(parameter, param, entity, actionType) {
-        this.openSVGDropdown(param, entity);
-        Elem.sdpanelAddItem.waitAndClick();
-        Elem.dtpanelActionAddItem.waitForVisible();
-        Elem.dtpanelActionAddItem.waitAndClick();
-        Elem.loadingSpinnerIcon.waitForVisible();
-        Elem.loadingSpinnerIcon.waitForVisible(20000, false);
-        this.verifyAction(entity, actionType);
-        this.closeToastr(entity, actionType);
-        Elem.dtpanelActionClose.waitAndClick();
-        Elem.dtpanelActionRemoveItem.waitAndClick();
-        Elem.loadingSpinnerIcon.waitForVisible();
-        Elem.loadingSpinnerIcon.waitForVisible(20000, false);
-        this.verifyAction(entity, actionType);
-        this.closeToastr(entity, actionType);
-        if(entity !== 'Role'){
-          Elem[param].waitAndClick();
-        }
+    if (entity === 'User' && Elem.sdpanelAddItem.isExisting()) {
+      Elem.extensionsSVG.waitAndClick();
+      Elem.sdpanelAddItem.waitForVisible(20000, false);
+    }
+    if (entity !== 'Role' && entity !== 'Outbound Identifier List') {
+      this.openSVGDropdown(param, entity);
+    }
+    Elem.sdpanelAddItem.waitAndClick();
+    Elem.dtpanelActionAddItem.waitForVisible();
+    Elem.dtpanelActionAddItem.waitAndClick();
+    Elem.loadingSpinnerIcon.waitForVisible();
+    Elem.loadingSpinnerIcon.waitForVisible(20000, false);
+    this.verifyAction(entity, actionType);
+    this.closeToastr(entity, actionType);
+    Elem.dtpanelActionClose.waitAndClick();
+    Elem.dtpanelActionRemoveItem.waitAndClick();
+    Elem.loadingSpinnerIcon.waitForVisible();
+    Elem.loadingSpinnerIcon.waitForVisible(20000, false);
+    this.verifyAction(entity, actionType);
+    this.closeToastr(entity, actionType);
+    if (entity !== 'Role' && entity !== 'Outbound Identifier List') {
+      Elem[param].waitAndClick();
+      Elem.sdpanelAddItem.waitForVisible(20000, false);
+    }
   },
   deleteEntity(entity, actionType) {
     Elem.searchStatusColumnButton.waitAndClick();
