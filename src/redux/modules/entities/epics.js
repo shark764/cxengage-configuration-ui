@@ -39,7 +39,8 @@ import {
   getSelectedEntityBulkChangeItems,
   getSelectedEntityFormId,
   findEntity,
-  isItemInherited
+  isItemInherited,
+  getEntityItemDisplay
 } from './selectors';
 
 import { entitiesMetaData } from './metaData';
@@ -229,7 +230,7 @@ export const FetchData = action$ =>
 
 export const FetchDataItem = action$ =>
   action$
-    .ofType('FETCH_DATA_ITEM', 'FETCH_DATA_FLOW')
+    .ofType('FETCH_DATA_ITEM')
     .debounceTime(300)
     .filter(({ entityName }) => hasCustomFetchEntityItemData(entityName))
     .map(a => {
@@ -369,21 +370,26 @@ export const BulkEntityUpdate = (action$, store) =>
       }, []);
       return { ...a };
     })
-    .mergeMap(a =>
-      a.allSdkCalls.length > 0
-        ? forkJoin(
-            a.allSdkCalls.map(apiCall =>
-              from(
-                sdkPromise(apiCall).catch(error => ({
-                  error: error,
-                  id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
-                }))
+    .mergeMap(
+      a =>
+        a.allSdkCalls.length > 0
+          ? forkJoin(
+              a.allSdkCalls.map(apiCall =>
+                from(
+                  sdkPromise(apiCall).catch(error => ({
+                    error: error,
+                    id: apiCall.data[removeLastLetter(a.entityName) + 'Id'],
+                    toString: getEntityItemDisplay(
+                      store.getState(),
+                      apiCall.data[removeLastLetter(a.entityName) + 'Id']
+                    )
+                  }))
+                )
               )
             )
-          )
-            .do(allResult => handleBulkSuccess(allResult))
-            .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
-        : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
+              .do(allResult => handleBulkSuccess(allResult))
+              .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
 export const ToggleEntity = (action$, store) =>
@@ -460,7 +466,13 @@ export const RemoveListItem = (action$, store) =>
     })
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
+          )
+        )
         .catch(error => handleError(error, a))
     );
 
@@ -484,7 +496,13 @@ export const AddListItem = (action$, store) =>
     })
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
+          )
+        )
         .catch(error => handleError(error, a))
     );
 
@@ -631,14 +649,15 @@ export const FetchFormMetaData = (action$, store) =>
       entityId: getSelectedEntityId(store.getState()),
       isDefined: name => store.getState().getIn(['Entities', name, 'data']).size === 0
     }))
-    .switchMap(a =>
-      a.entityId === 'create'
-        ? from(entitiesMetaData[a.currentEntityName].createFormDependencies)
-            .filter(entityName => a.isDefined(entityName))
-            .map(entityName => ({ type: 'FETCH_DATA', entityName }))
-        : from(entitiesMetaData[a.currentEntityName].updateFormDependencies)
-            .filter(entityName => a.isDefined(entityName))
-            .map(entityName => ({ type: 'FETCH_DATA', entityName }))
+    .switchMap(
+      a =>
+        a.entityId === 'create'
+          ? from(entitiesMetaData[a.currentEntityName].createFormDependencies)
+              .filter(entityName => a.isDefined(entityName))
+              .map(entityName => ({ type: 'FETCH_DATA', entityName }))
+          : from(entitiesMetaData[a.currentEntityName].updateFormDependencies)
+              .filter(entityName => a.isDefined(entityName))
+              .map(entityName => ({ type: 'FETCH_DATA', entityName }))
     );
 
 export const FetchBulkFormMetaData = (action$, store) =>
@@ -684,22 +703,23 @@ export const SubEntityFormSubmission = (action$, store) =>
     }))
     .filter(({ selectedSubEntityId }) => selectedSubEntityId)
     .filter(({ entityName }) => entityName !== 'transferLists' && entityName !== 'reasonLists')
-    .map(a =>
-      a.selectedSubEntityId === 'create'
-        ? {
-            type: 'CREATE_SUB_ENTITY',
-            entityName: a.entityName,
-            selectedEntity: a.selectedEntity,
-            subEntityName: a.subEntityName,
-            values: a.values.toJS()
-          }
-        : {
-            type: 'UPDATE_SUB_ENTITY',
-            entityName: a.entityName,
-            selectedEntity: a.selectedEntity,
-            subEntityName: a.subEntityName,
-            values: a.values.toJS()
-          }
+    .map(
+      a =>
+        a.selectedSubEntityId === 'create'
+          ? {
+              type: 'CREATE_SUB_ENTITY',
+              entityName: a.entityName,
+              selectedEntity: a.selectedEntity,
+              subEntityName: a.subEntityName,
+              values: a.values.toJS()
+            }
+          : {
+              type: 'UPDATE_SUB_ENTITY',
+              entityName: a.entityName,
+              selectedEntity: a.selectedEntity,
+              subEntityName: a.subEntityName,
+              values: a.values.toJS()
+            }
     );
 
 export const CreateSubEntity = (action$, store) =>

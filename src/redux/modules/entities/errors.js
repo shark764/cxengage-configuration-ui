@@ -16,8 +16,6 @@ const ignoredErrorList = {
 export const explicitSuccessIgnores = [
   'BULK_ENTITY_UPDATE',
   'TOGGLE_ENTITY_LIST_ITEM',
-  'REMOVE_LIST_ITEM',
-  'ADD_LIST_ITEM',
   'FETCH_DATA_ITEM',
   'FETCH_DATA'
 ];

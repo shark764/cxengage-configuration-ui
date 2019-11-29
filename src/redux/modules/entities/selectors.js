@@ -300,13 +300,15 @@ export const findEntityByProperty = (state, entityName, entityProperty, value) =
 
 export const getEntityParentTenantName = state => getSelectedEntity(state).get('tenantName') || '';
 
-export const getEntityDisplay = createSelector(
-  [getSelectedEntity],
-  selectedEntity => selectedEntity.get('name') || getDisplay(selectedEntity.toJS())
+export const getEntityDisplay = createSelector([getSelectedEntity], selectedEntity =>
+  selectedEntity ? selectedEntity.get('name') || getDisplay(selectedEntity.toJS()) : null
 );
 
 export const getEntityItemDisplay = (state, entityId) => {
   const entityItem = findEntity(state, getCurrentEntity(state), entityId);
+  if (!entityItem) {
+    return null;
+  }
   return entityItem.get('name') || getDisplay(entityItem.toJS());
 };
 

@@ -110,6 +110,7 @@ export const SetDispatchMappingVersionToNull = (action$, store) =>
   // then it gets first value "Active Version"
   action$
     .ofType('FETCH_DATA_FLOW')
+    .filter(a => getCurrentEntity(store.getState()) === 'dispatchMappings')
     // We set value of version field to null while is fetching flow single data,
     // that way we get it disabled until data is retrieved
     .map(a => change(getSelectedEntityFormId(store.getState()), 'version', null));

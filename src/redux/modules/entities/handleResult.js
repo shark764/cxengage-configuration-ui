@@ -47,13 +47,8 @@ export function handleBulkSuccess(response, a, successMessage = null, errorMessa
     Toast.error(errorMessage.replace('BULKED_ITEMS_AFFECTED', failedCalls.length));
   } else if (failedCalls.length > 0) {
     Toast.error(`
-    ${failedCalls.length} item(s) failed to update.
-    ${failedCalls.map(
-      call => `<br/></br>
-      ${call.id}<br/>
-      ${errorManager(call.error).errorMessage}
-      `
-    )}
+    ${failedCalls.length} bulk action(s) could not be applied.<br/>The following item(s) failed to update:
+    ${failedCalls.map(call => `<br/></br>${call.toString || call.id}<br/>${errorManager(call.error).errorMessage}`)}
     `);
   }
 

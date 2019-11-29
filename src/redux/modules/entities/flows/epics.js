@@ -16,10 +16,32 @@ import {
   getSelectedEntity,
   getSelectedSubEntityId,
   getSelectedSubEntityName,
-  getSelectedSubEntityData
+  getSelectedSubEntityData,
+  userHasPermissions
 } from '../selectors';
 import { change } from 'redux-form';
 import { getNewFlowDraftName } from './selectors';
+
+export const FetchDataItem = (action$, store) =>
+  action$
+    .ofType('FETCH_DATA_ITEM', 'FETCH_DATA_FLOW')
+    .debounceTime(300)
+    .filter(({ entityName }) => entityName === 'flows')
+    .map(a => {
+      a.sdkCall = entitiesMetaData['flows'].entityApiRequest('get', 'singleMainEntity');
+      a.sdkCall.data = {
+        flowId: a.id,
+        includeDrafts:
+          userHasPermissions(store.getState(), ['MANAGE_ALL_FLOWS']) &&
+          getCurrentEntity(store.getState()) !== 'dispatchMappings'
+      };
+      return { ...a };
+    })
+    .switchMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
+    );
 
 export const CreateFlow = action$ =>
   action$

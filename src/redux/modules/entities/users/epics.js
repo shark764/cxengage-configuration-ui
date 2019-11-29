@@ -12,7 +12,8 @@ import {
   getSelectedEntity,
   getSelectedEntityBulkChangeItems,
   findEntity,
-  findEntityByProperty
+  findEntityByProperty,
+  getEntityItemDisplay
 } from '../selectors';
 import { selectTenantRoles } from '../roles/selectors';
 import { getDisplay } from './selectors';
@@ -711,7 +712,8 @@ export const BulkEntityUpdate = (action$, store) =>
               from(
                 sdkPromise(apiCall).catch(error => ({
                   error: error,
-                  id: apiCall.data['userId']
+                  id: apiCall.data['userId'],
+                  toString: getEntityItemDisplay(store.getState(), apiCall.data['userId'])
                 }))
               )
             )

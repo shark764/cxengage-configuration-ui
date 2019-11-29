@@ -11,7 +11,7 @@ import { from } from 'rxjs/observable/from';
 import { of } from 'rxjs/observable/of';
 import { removeLastLetter } from 'serenova-js-utils/strings';
 import { Toast } from 'cx-ui-components';
-import { getSelectedEntityBulkChangeItems, findEntity } from '../selectors';
+import { getSelectedEntityBulkChangeItems, findEntity, getEntityItemDisplay } from '../selectors';
 import { entitiesMetaData } from '../metaData';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleBulkSuccess, handleSuccess } from '../handleResult';
@@ -55,7 +55,8 @@ export const BulkEntityUpdate = (action$, store) =>
               from(
                 sdkPromise(apiCall).catch(error => ({
                   error: error,
-                  id: apiCall.data[removeLastLetter(a.entityName) + 'Id']
+                  id: apiCall.data[removeLastLetter(a.entityName) + 'Id'],
+                  toString: getEntityItemDisplay(store.getState(), apiCall.data[removeLastLetter(a.entityName) + 'Id'])
                 }))
               )
             )
