@@ -72,7 +72,8 @@ DetailWrapper.propTypes = {
   entityName: PropTypes.string,
   entityId: PropTypes.string,
   contains: PropTypes.string,
-  autoCloseOverride: PropTypes.bool
+  autoCloseOverride: PropTypes.bool,
+  'data-automation': PropTypes.string
 };
 
 export default connect(mapStateToProps, actions)(DetailWrapper);

@@ -5,7 +5,8 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { getCurrentForm } from '../../../../redux/modules/form/selectors';
+import { Map } from 'immutable';
+import { getCurrentForm, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
 import DispositionsForm, { mapStateToProps } from '../';
 import {
   getSelectedEntityId,
@@ -20,9 +21,10 @@ jest.mock('../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
+selectFormInitialValues.mockImplementation(() => new Map({ active: true, shared: false }));
+getCurrentFormValueByFieldName.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 userHasSharePermission.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 describe('Dispositions Renders', () => {
   it('renders', () => {
@@ -47,7 +49,10 @@ describe('formSubmission', () => {
   const values = {
     id: 'mockId',
     name: 'mockName',
-    description: 'mockDescription'
+    description: 'mockDescription',
+    shared: true,
+    active: false,
+    externalId: 'mockExternalId'
   };
   const dispatch = action => action;
   const props = { dirty: true };

@@ -31,13 +31,18 @@ exports[`<DispositionsForm /> renders create form 1`] = `
     label="Description"
     name="description"
   />
-  <ToggleField
-    data-automation="sharedToggle"
-    disabled={true}
-    id="frm-lists-shared"
-    label="Shared"
-    name="shared"
-  />
+  <ConfirmationWrapper
+    mainText="Setting shared to 'enabled' for this Disposition. Once a Disposition is enabled and saved, it cannot be reverted."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="sharedToggle"
+      disabled={true}
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Disposition"
+    />
+  </ConfirmationWrapper>
 </form>
 `;
 
@@ -72,12 +77,18 @@ exports[`<DispositionsForm /> renders update form 1`] = `
     label="Description"
     name="description"
   />
-  <ToggleField
-    data-automation="sharedToggle"
-    disabled={false}
-    id="frm-lists-shared"
-    label="Shared"
-    name="shared"
-  />
+  <ConfirmationWrapper
+    confirmBtnCallback={[Function]}
+    mainText="Setting shared to 'enabled' for this Disposition. Once a Disposition is enabled and saved, it cannot be reverted."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="sharedToggle"
+      disabled={false}
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Disposition"
+    />
+  </ConfirmationWrapper>
 </form>
 `;

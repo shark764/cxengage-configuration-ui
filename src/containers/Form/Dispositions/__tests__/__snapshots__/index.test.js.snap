@@ -2,14 +2,17 @@
 
 exports[`Dispositions Renders renders 1`] = `
 <Connect(ReduxForm)
+  disableShared={false}
   dispatch={[Function]}
   initialValues={
-    Object {
+    Immutable.Map {
       "active": true,
+      "shared": false,
     }
   }
   isSaving={true}
   key="mockId"
+  sharedFormValue={true}
   store={
     Object {
       "dispatch": [Function],
@@ -48,12 +51,15 @@ exports[`Dispositions Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "disableShared": false,
   "inherited": undefined,
-  "initialValues": Object {
+  "initialValues": Immutable.Map {
     "active": true,
+    "shared": false,
   },
   "isSaving": true,
   "key": "mockId",
+  "sharedFormValue": true,
   "userHasSharePermission": true,
   "userHasUpdatePermission": true,
 }

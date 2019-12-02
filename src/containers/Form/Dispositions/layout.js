@@ -10,7 +10,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, InputField, ToggleField } from 'cx-ui-components';
+import { DetailHeader, InputField, ToggleField, ConfirmationWrapper, DetailsPanelAlert } from 'cx-ui-components';
 
 export default function DispositionsForm({
   handleSubmit,
@@ -18,10 +18,17 @@ export default function DispositionsForm({
   inherited,
   userHasUpdatePermission,
   userHasSharePermission,
-  key
+  key,
+  disableShared,
+  sharedFormValue,
+  change
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
+      {inherited && <DetailsPanelAlert text="This Disposition is inherited and cannot be edited" />}
+      {sharedFormValue && !disableShared && !inherited && (
+        <DetailsPanelAlert text="You have set shared to 'enabled' for this Disposition. Once a Disposition is enabled and saved, it cannot be reverted." />
+      )}
       <DetailHeader text="Details" />
       <InputField
         name="name"
@@ -47,13 +54,29 @@ export default function DispositionsForm({
         data-automation="descriptionInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
-      <ToggleField
-        name="shared"
-        label="Shared"
-        id="frm-lists-shared"
-        data-automation="sharedToggle"
-        disabled={isSaving || inherited || !userHasUpdatePermission || !userHasSharePermission}
-      />
+      <ConfirmationWrapper
+        confirmBtnCallback={
+          !disableShared && !sharedFormValue && userHasSharePermission
+            ? () => change('shared', !sharedFormValue)
+            : undefined
+        }
+        mainText={
+          "Setting shared to 'enabled' for this Disposition. Once a Disposition is enabled and saved, it cannot be reverted."
+        }
+        secondaryText={'Are you sure you want to continue?'}
+      >
+        <ToggleField
+          name="shared"
+          label="Shared"
+          title={
+            disableShared
+              ? "You cannot update 'Shared' once it's set to true"
+              : 'Change "Shared" state for this Disposition'
+          }
+          disabled={isSaving || inherited || disableShared || !userHasUpdatePermission || !userHasSharePermission}
+          data-automation="sharedToggle"
+        />
+      </ConfirmationWrapper>
     </form>
   );
 }
@@ -64,5 +87,8 @@ DispositionsForm.propTypes = {
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
-  userHasSharePermission: PropTypes.bool
+  userHasSharePermission: PropTypes.bool,
+  sharedFormValue: PropTypes.bool,
+  disableShared: PropTypes.bool,
+  change: PropTypes.func
 };

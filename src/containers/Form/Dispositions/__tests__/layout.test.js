@@ -13,7 +13,9 @@ describe('<DispositionsForm />', () => {
       <DispositionsForm
         name="mockName"
         description="mockDescription"
-        type="mockType"
+        externalId="mockExternalId"
+        shared={false}
+        active={true}
         isSaving={false}
         inherited={false}
         userHasUpdatePermission={true}
@@ -28,7 +30,9 @@ describe('<DispositionsForm />', () => {
       <DispositionsForm
         name="mockName"
         description="mockDescription"
-        type="mockType"
+        shared={false}
+        active={true}
+        externalId="mockExternalId"
         id="0000-0000-0000-0000-0000"
         isSaving={false}
         inherited={false}

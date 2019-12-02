@@ -14,7 +14,9 @@ import {
   userHasUpdatePermission,
   userHasSharePermission
 } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
+import { selectDispositionsFormInitialValues } from '../../../redux/modules/entities/dispositions/selectors';
+import { checkDisableShared } from '../../../redux/modules/entities/reasonLists/selectors';
 
 const CreateDispositionsForm = compose(
   connect(state => createFormName(state)),
@@ -27,12 +29,14 @@ const CreateDispositionsForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    initialValues: selectFormInitialValues(state),
+    initialValues: selectDispositionsFormInitialValues(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     userHasSharePermission: userHasSharePermission(state),
-    key: getSelectedEntityId(state)
+    key: getSelectedEntityId(state),
+    disableShared: checkDisableShared(state),
+    sharedFormValue: getCurrentFormValueByFieldName(state, 'shared')
   };
 }
 

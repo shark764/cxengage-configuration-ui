@@ -13,7 +13,7 @@ describe('<ReasonsForm />', () => {
       <ReasonsForm
         name="mockName"
         description="mockDescription"
-        externalId={'mockExternalId'}
+        externalId="mockExternalId"
         userHasUpdatePermission={true}
         userHasSharePermission={false}
         shared={false}
@@ -30,7 +30,7 @@ describe('<ReasonsForm />', () => {
       <ReasonsForm
         name="mockName"
         description="mockDescription"
-        externalId={'mockExternalId'}
+        externalId="mockExternalId"
         userHasUpdatePermission={true}
         userHasSharePermission={true}
         shared={false}

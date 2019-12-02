@@ -812,7 +812,7 @@ export default function reducer(state = initialState, action) {
             .every(([key, value]) => value <= 0)
             ? '24/7'
             : 'scheduledHours';
-        } else if (action.entityName === 'apiKeys' || action.entityName === 'dispositions') {
+        } else if (action.entityName === 'apiKeys') {
           result.active = result.status === 'enabled';
         } else if (action.type === 'UPDATE_PLATFORM_USER_ENTITY_FULFILLED' && action.entityName === 'users') {
           result.platformRoleId = result.roleId;

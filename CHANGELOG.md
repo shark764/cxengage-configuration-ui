@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.68.10] - 2019-11-29
+## Fixed
+- CXV1-20762 - Dispositions - Creating new disposition fails and throws an error.
+
 ## [0.68.9] - 2019-11-29
 ## Changed
 - <no-jira> - Version bump components library to 0.56.13.

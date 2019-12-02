@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectDispositionsFormInitialValues Empty Disposition, all values provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "shared": false,
+  "active": true,
+}
+`;
+
+exports[`selectDispositionsFormInitialValues Return the initial Disposition Values, all values NOT provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+}
+`;
+
+exports[`selectDispositionsFormInitialValues Return the initial Disposition Values, all values provided 1`] = `
+Immutable.Map {
+  "id": "mockId",
+  "shared": false,
+  "active": true,
+}
+`;
