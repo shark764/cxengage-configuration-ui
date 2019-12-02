@@ -5,167 +5,134 @@ exports[`<ChatWidgetsForm /> renders create chatWidgets 1`] = `
   onSubmit={[Function]}
 >
   <InputField
-    className="name-input-field"
     componentType="input"
     disabled={false}
+    id="chat-widget-name"
     inputType="text"
     label="Name *"
     name="name"
   />
-  <ToggleField
-    className="shared-toggle-field"
+  <InputField
+    componentType="textarea"
     disabled={false}
-    label="Shared"
-    name="shared"
+    id="chat-widget-description"
+    inputType="text"
+    label="Description"
+    name="description"
   />
-  <DetailHeader
-    text="Fields"
-  />
-  <ListField
-    className="list-inputs-field-chat-widgets"
+  <InputField
+    componentType="input"
     disabled={false}
-    label="Inputs"
-    name="inputs"
+    id="chat-widget-contact-point"
+    inputType="text"
+    label="Contact Point *"
+    name="contactPoint"
   />
+  <React.Fragment>
+    <Detail
+      label="App"
+    />
+    <Detail
+      label="App Id"
+    />
+  </React.Fragment>
   <DetailHeader
-    text="Images"
+    text="Branding"
   />
   <RadioGroupField
-    className="radio-group-field-chat-widgets"
+    className="chat-widget-display-style"
     disabled={false}
-    label="Welcome"
-    name="welcome"
+    label="Display Style"
+    name="displayStyle"
     options={
       Array [
         Object {
-          "helpText": "(Display 300 x 410)",
-          "label": "Hero",
-          "value": "hero",
+          "label": "Button",
+          "value": "button",
         },
         Object {
-          "helpText": "(Display 300 x 800)",
-          "label": "Logo",
-          "value": "logo",
+          "label": "Tab",
+          "value": "tab",
         },
       ]
     }
     required={true}
   />
-  <FileUpload
-    acceptedFileType=".jpg"
-    className="file-upload-field"
-    id="dtpanel-chat-widget-upload-csv"
-  />
-  <DetailHeader
-    text="Type"
-  />
-  <SelectField
-    className="font-input-select-field"
+  <InputField
+    componentType="input"
     disabled={false}
-    label="Font Family"
-    name="fontFamily"
+    id="chat-widget-business-name"
+    inputType="text"
+    label="Business Name"
+    name="businessName"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="chat-widget-business-icon-url"
+    inputType="text"
+    label="Business Icon URL"
+    name="businessIconUrl"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="chat-widget-background-image-url"
+    inputType="text"
+    label="Background Image URL"
+    name="backgroundImageUrl"
+  />
+  <ColorField
+    disabled={false}
+    id="chat-widget-header-color"
+    label="Brand Color"
+    name="brandColor"
+  />
+  <ColorField
+    className="chat-widget-conversation-color"
+    disabled={false}
+    label="Conversation Color"
+    name="conversationColor"
+  />
+  <ColorField
+    className="chat-widget-action-color"
+    disabled={false}
+    label="Action Color"
+    name="actionColor"
+  />
+  <ToggleField
+    disabled={false}
+    id="chat-widget-fixed-intro-pane"
+    label="Fixed Intro Pane"
+    name="fixedIntroPane"
+  />
+  <RadioGroupField
+    className="chat-widget-prechat-capture"
+    disabled={false}
+    label="Prechat Capture"
+    name="prechatCapture"
     options={
       Array [
         Object {
-          "label": "Arial",
-          "value": "arial",
+          "label": "Name",
+          "value": "name",
         },
-      ]
-    }
-    required={false}
-  />
-  <SelectField
-    className="font-input-select-field"
-    disabled={false}
-    label="Font Size"
-    name="fontSize"
-    options={
-      Array [
         Object {
-          "label": "12pt",
-          "value": "12pt",
+          "label": "Email",
+          "value": "email",
         },
       ]
     }
-    required={false}
+    required={true}
   />
   <DetailHeader
-    text="Color"
-  />
-  <ColorField
-    className="chat-widgets-header-color"
-    disabled={false}
-    label="Header Color"
-    name="headerColor"
-  />
-  <ColorField
-    className="chat-widgets-header-text-icons"
-    disabled={false}
-    label="Header Text/Icons"
-    name="headerTextIcons"
-  />
-  <ColorField
-    className="chat-widgets-chat-background"
-    disabled={false}
-    label="Chat BG"
-    name="chatbg"
-  />
-  <ColorField
-    className="chat-widgets-agent-header"
-    disabled={false}
-    label="Agent Header"
-    name="agentHeader"
-  />
-  <ColorField
-    className="chat-widgets-agent-text"
-    disabled={false}
-    label="Agent Text"
-    name="agentText"
-  />
-  <ColorField
-    className="chat-widgets-customer-header"
-    disabled={false}
-    label="Customer Header"
-    name="customerHeader"
-  />
-  <ColorField
-    className="chat-widgets-customer-text"
-    disabled={false}
-    label="Customer Text"
-    name="customerText"
-  />
-  <ColorField
-    className="chat-widgets-system-text"
-    disabled={false}
-    label="System Text"
-    name="systemText"
-  />
-  <ColorField
-    className="chat-widgets-button-text"
-    disabled={false}
-    label="Button Text"
-    name="buttonText"
-  />
-  <ColorField
-    className="chat-widgets-icon-color"
-    disabled={false}
-    label="Icon Color"
-    name="iconColor"
-  />
-  <ColorField
-    className="chat-widgets-border-color"
-    disabled={false}
-    label="Border Color"
-    name="borderColor"
-  />
-  <DetailHeader
-    text="Whitelist"
+    text="Origin Whitelist"
   />
   <ListField
-    className="list-urls-field-chat-widgets"
+    className="chat-widget-whitelisted-urls"
     disabled={false}
-    label="Urls"
-    name="urls"
+    label="Whitelisted URLs"
+    name="whitelistedUrls"
   />
 </form>
 `;

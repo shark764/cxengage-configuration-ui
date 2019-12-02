@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "appId": "Please choose an app",
+  "contactPoint": "Please enter a contact point",
+  "name": "Please enter a name",
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "appId": false,
+  "contactPoint": false,
+  "name": false,
+}
+`;

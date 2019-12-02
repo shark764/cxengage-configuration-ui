@@ -277,7 +277,9 @@ export const CreateEntity = action$ =>
     .filter(({ entityName }) => hasCustomCreateEntity(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
-      a.sdkCall.path = [camelCaseToKebabCase(a.entityName)];
+      a.sdkCall.path = entitiesMetaData[a.entityName].sdkCall.path
+        ? entitiesMetaData[a.entityName].sdkCall.path
+        : [camelCaseToKebabCase(a.entityName)];
       a.sdkCall.data = a.values;
       return { ...a };
     })
@@ -327,11 +329,22 @@ export const UpdateEntity = action$ =>
     .filter(({ entityName }) => hasCustomUpdateEntity(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
-      a.sdkCall.path = [camelCaseToKebabCase(a.entityName), a.entityId];
       a.sdkCall.data = {
-        ...a.values,
-        [removeLastLetter(a.entityName) + 'Id']: a.entityId
+        ...a.values
       };
+      if (entitiesMetaData[a.entityName].sdkCall.path) {
+        a.sdkCall.path = [...entitiesMetaData[a.entityName].sdkCall.path, a.entityId];
+        delete a.sdkCall.data.id;
+        delete a.sdkCall.data.tenantId;
+      } else {
+        a.sdkCall.path = [camelCaseToKebabCase(a.entityName), a.entityId];
+        a.sdkCall.data[removeLastLetter(a.entityName) + 'Id'] = a.entityId;
+      }
+      delete a.sdkCall.data.created;
+      delete a.sdkCall.data.createdBy;
+      delete a.sdkCall.data.updated;
+      delete a.sdkCall.data.updatedBy;
+      delete a.sdkCall.data.updating;
       return { ...a };
     })
     .concatMap(a =>

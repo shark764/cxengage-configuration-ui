@@ -8,83 +8,173 @@
  *
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
   InputField,
+  SelectField,
   DetailHeader,
   ToggleField,
   RadioGroupField,
-  SelectField,
-  FileUpload,
   ColorField,
-  ListField
+  ListField,
+  Detail
 } from 'cx-ui-components';
 
-export default function ChatWidgetsForm({ handleSubmit, isSaving, inherited, key }) {
+export default function ChatWidgetsForm({
+  handleSubmit,
+  disabled,
+  digitalChannelsAppsFetching,
+  digitalChannelsAppIds,
+  key,
+  chatWidgetId,
+  app,
+  displayStyleIsButton
+}) {
   return (
     <form onSubmit={handleSubmit} key={key}>
-      <InputField className="name-input-field" name="name" label="Name *" componentType="input" inputType="text" disabled={isSaving || inherited} />
-      <ToggleField className="shared-toggle-field" name="shared" label="Shared" disabled={isSaving || inherited} />
-      <DetailHeader text="Fields" />
-      <ListField className="list-inputs-field-chat-widgets" name="inputs" label="Inputs" />
-      <DetailHeader text="Images" />
+      <InputField
+        name="name"
+        label="Name *"
+        id="chat-widget-name"
+        componentType="input"
+        inputType="text"
+        disabled={disabled}
+      />
+      <InputField
+        name="description"
+        label="Description"
+        id="chat-widget-description"
+        componentType="textarea"
+        inputType="text"
+        disabled={disabled}
+      />
+      <InputField
+        name="contactPoint"
+        label="Contact Point *"
+        id="chat-widget-contact-point"
+        componentType="input"
+        inputType="text"
+        disabled={disabled}
+      />
+      {chatWidgetId === 'create'
+        ? <SelectField
+            name="appId"
+            label="App *"
+            options={!digitalChannelsAppsFetching ? digitalChannelsAppIds : undefined}
+            disabled={disabled}
+          />
+        : <Fragment>
+            <Detail label="App" value={app && app.get('name')} />
+            <Detail label="App Id" value={app && app.get('id')} />
+          </Fragment>
+      }
+
+      <DetailHeader text="Branding" />
+
       <RadioGroupField
-        className="radio-group-field-chat-widgets"
-        name="welcome"
-        label="Welcome"
-        disabled={isSaving || inherited}
+        className="chat-widget-display-style"
+        name="displayStyle"
+        label="Display Style"
+        disabled={disabled}
         options={[
           {
-            label: 'Hero',
-            value: 'hero',
-            helpText: '(Display 300 x 410)'
+            label: 'Button',
+            value: 'button'
           },
           {
-            label: 'Logo',
-            value: 'logo',
-            helpText: '(Display 300 x 800)'
+            label: 'Tab',
+            value: 'tab'
           }
         ]}
         required
       />
-      <FileUpload
-        // onFileSelect={uploadCsv}
-        className="file-upload-field"
-        acceptedFileType=".jpg"
-        disabled={isSaving}
-        id="dtpanel-chat-widget-upload-csv"
+      {displayStyleIsButton && (
+        <Fragment>
+          <InputField
+            name="buttonIconUrl"
+            label="Button Icon URL"
+            id="chat-widget-button-icon-url"
+            componentType="input"
+            inputType="text"
+            disabled={disabled}
+          />
+          <InputField
+            name="buttonWidth"
+            label="Button Width"
+            id="chat-widget-button-width"
+            componentType="input"
+            inputType="text"
+            disabled={disabled}
+          />
+          <InputField
+            name="buttonHeight"
+            label="Button Height"
+            id="chat-widget-button-height"
+            componentType="input"
+            inputType="text"
+            disabled={disabled}
+          />
+        </Fragment>
+      )}
+      <InputField
+        name="businessName"
+        label="Business Name"
+        id="chat-widget-business-name"
+        componentType="input"
+        inputType="text"
+        disabled={disabled}
       />
-      <DetailHeader text="Type" />
-      <SelectField
-        className="font-input-select-field"
-        name="fontFamily"
-        label="Font Family"
-        options={[{ value: 'arial', label: 'Arial' }]}
-        disabled={isSaving || inherited}
+      <InputField
+        name="businessIconUrl"
+        label="Business Icon URL"
+        id="chat-widget-business-icon-url"
+        componentType="input"
+        inputType="text"
+        disabled={disabled}
       />
-      <SelectField
-        className="font-input-select-field"
-        name="fontSize"
-        label="Font Size"
-        options={[{ value: '12pt', label: '12pt' }]}
-        disabled={isSaving || inherited}
+      <InputField
+        name="backgroundImageUrl"
+        label="Background Image URL"
+        id="chat-widget-background-image-url"
+        componentType="input"
+        inputType="text"
+        disabled={disabled}
       />
-      <DetailHeader text="Color" />
-      <ColorField className="chat-widgets-header-color" name="headerColor" label="Header Color" />
-      <ColorField className="chat-widgets-header-text-icons" name="headerTextIcons" label="Header Text/Icons" />
-      <ColorField className="chat-widgets-chat-background" name="chatbg" label="Chat BG" />
-      <ColorField className="chat-widgets-agent-header" name="agentHeader" label="Agent Header" />
-      <ColorField className="chat-widgets-agent-text" name="agentText" label="Agent Text" />
-      <ColorField className="chat-widgets-customer-header" name="customerHeader" label="Customer Header" />
-      <ColorField className="chat-widgets-customer-text" name="customerText" label="Customer Text" />
-      <ColorField className="chat-widgets-system-text" name="systemText" label="System Text" />
-      <ColorField className="chat-widgets-button-text" name="buttonText" label="Button Text" />
-      <ColorField className="chat-widgets-icon-color" name="iconColor" label="Icon Color" />
-      <ColorField className="chat-widgets-border-color" name="borderColor" label="Border Color" />
+      <ColorField id="chat-widget-header-color" name="brandColor" label="Brand Color" disabled={disabled} />
+      <ColorField
+        className="chat-widget-conversation-color"
+        name="conversationColor"
+        label="Conversation Color"
+        disabled={disabled}
+      />
+      <ColorField className="chat-widget-action-color" name="actionColor" label="Action Color" disabled={disabled} />
+      <ToggleField
+        id="chat-widget-fixed-intro-pane"
+        name="fixedIntroPane"
+        label="Fixed Intro Pane"
+        disabled={disabled}
+      />
+      <RadioGroupField
+        className="chat-widget-prechat-capture"
+        name="prechatCapture"
+        label="Prechat Capture"
+        disabled={disabled}
+        options={[
+          {
+            label: 'Name',
+            value: 'name'
+          },
+          {
+            label: 'Email',
+            value: 'email'
+          }
+        ]}
+        required
+      />
 
-      <DetailHeader text="Whitelist" />
-      <ListField className="list-urls-field-chat-widgets" name="urls" label="Urls" />
+      <DetailHeader text="Origin Whitelist" />
+      <ListField name="whitelistedUrls" label="Whitelisted URLs" className="chat-widget-whitelisted-urls" />
     </form>
   );
 }
@@ -92,6 +182,10 @@ export default function ChatWidgetsForm({ handleSubmit, isSaving, inherited, key
 ChatWidgetsForm.propTypes = {
   key: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
-  isSaving: PropTypes.bool,
-  inherited: PropTypes.bool,
+  disabled: PropTypes.bool,
+  chatWidgetId: PropTypes.string,
+  digitalChannelsAppsFetching: PropTypes.bool,
+  digitalChannelsAppIds: PropTypes.array,
+  app: PropTypes.object,
+  displayStyleIsButton: PropTypes.bool
 };

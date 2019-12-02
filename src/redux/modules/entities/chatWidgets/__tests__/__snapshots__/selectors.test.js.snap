@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getDigitalChannelsApp gets the app of the selected chat widget 1`] = `
+Immutable.Map {
+  "name": "mock-name",
+  "id": "mock-app-id",
+  "foo": "bar",
+}
+`;
+
+exports[`getDigitalChannelsAppIds maps digital channels to id and name 1`] = `
+Array [
+  Object {
+    "label": "mock-name",
+    "value": "mock-app-id",
+  },
+]
+`;
+
+exports[`selectChatWidgetFormInitialValues create returns initial values 1`] = `
+Immutable.Map {
+  "brandColor": "#65758e",
+  "conversationColor": "#0099ff",
+  "actionColor": "#0099ff",
+  "displayStyle": "button",
+  "buttonWidth": "58",
+  "buttonHeight": "58",
+  "prechatCapture": "name",
+}
+`;

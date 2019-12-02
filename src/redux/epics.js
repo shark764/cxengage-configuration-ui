@@ -22,6 +22,7 @@ import * as fetchReportingEventsEpics from './modules/entities/reportingEvents/e
 import * as tenantsEpics from './modules/entities/tenants/epics';
 import * as reasonsEpics from './modules/entities/reasons/epics';
 import * as dispositionListsEpics from './modules/entities/dispositionLists/epics';
+import * as chatWidgetsEpics from './modules/entities/chatWidgets/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -46,5 +47,6 @@ export const rootEpic = combineEpics(
   ...Object.values(fetchReportingEventsEpics),
   ...Object.values(tenantsEpics),
   ...Object.values(reasonsEpics),
-  ...Object.values(dispositionListsEpics)
+  ...Object.values(dispositionListsEpics),
+  ...Object.values(chatWidgetsEpics)
 );

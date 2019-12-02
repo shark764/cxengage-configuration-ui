@@ -154,6 +154,7 @@ export const listOfEntities = [
   'chatWidgets',
   'dashboards',
   'dataAccessReports',
+  'digitalChannelsApps',
   'emailTemplates',
   'groups',
   'historicalReportFolders',
@@ -486,11 +487,15 @@ entities.emailTemplates.columns = [
 
 // Chat Widgets
 entities.chatWidgets.bulkEditsAvailable = false;
-entities.chatWidgets.columns = [
-  { name: 'Name', active: true },
-  { name: 'Description', active: true },
-  { name: 'Status', active: true }
-];
+entities.chatWidgets.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
+entities.chatWidgets.sdkCall.path = ['web-integrations'];
+entities.chatWidgets.createFormDependencies.push('digitalChannelsApps');
+entities.chatWidgets.updateFormDependencies.push('digitalChannelsApps');
+entities.chatWidgets.hideActiveToggle = true;
+
+// Digital Channels Apps
+// These don't have a config ui page, but are a dependency of chat widgets
+entities.digitalChannelsApps.sdkCall.path = ['digital-channels-app'];
 
 // Presence Reasons Lists
 entities.reasonLists.bulkEditsAvailable = true;

@@ -650,15 +650,15 @@ Immutable.Map {
         "name": "Description",
         "active": true,
       },
-      Immutable.Map {
-        "name": "Status",
-        "active": true,
-      },
     ],
   },
   "none": Immutable.Map {
     "Columns": Immutable.List [],
     "visibleMenu": "none",
+  },
+  "digitalChannelsApps": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
   },
   "outboundIdentifiers": Immutable.Map {
     "visibleMenu": "none",

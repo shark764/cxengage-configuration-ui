@@ -2,14 +2,15 @@
 
 exports[`ChatWidgets Renders renders 1`] = `
 <Connect(ReduxForm)
+  app="mock-app"
+  chatWidgetId="mock-selected-entity-id"
+  digitalChannelsAppIds="mock-app-ids"
+  digitalChannelsAppsFetching="mock-entity-is-fetching"
+  disabled="mock-is-fetching"
   dispatch={[Function]}
-  initialValues={
-    Object {
-      "active": true,
-    }
-  }
-  isSaving={true}
-  key="mockId"
+  displayStyleIsButton="mock-is-button"
+  initialValues="mock-initial-values"
+  key="mock-selected-entity-id"
   store={
     Object {
       "dispatch": [Function],
@@ -46,10 +47,13 @@ exports[`ChatWidgets Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "initialValues": Object {
-    "active": true,
-  },
-  "isSaving": true,
-  "key": "mockId",
+  "app": "mock-app",
+  "chatWidgetId": "mock-selected-entity-id",
+  "digitalChannelsAppIds": "mock-app-ids",
+  "digitalChannelsAppsFetching": "mock-entity-is-fetching",
+  "disabled": "mock-is-fetching",
+  "displayStyleIsButton": "mock-is-button",
+  "initialValues": "mock-initial-values",
+  "key": "mock-selected-entity-id",
 }
 `;

@@ -6,22 +6,41 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import ChatWidgetsForm from './layout';
-import { getSelectedEntityId, isCreating } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import { formValidation } from './validation';
+import {
+  getSelectedEntityId,
+  isCreating,
+  isUpdating,
+  isEntityFetching,
+  userHasUpdatePermission
+} from '../../../redux/modules/entities/selectors';
+import {
+  selectChatWidgetFormInitialValues,
+  getDigitalChannelsAppIds,
+  getDigitalChannelsApp,
+  getDisplayStyleIsButton
+} from '../../../redux/modules/entities/chatWidgets/selectors';
+import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
 const CreateChatWidgetsForm = compose(
   connect(createFormName),
   reduxForm({
     onSubmit: formSubmission,
+    validate: formValidation,
     destroyOnUnmount: true
   })
 )(ChatWidgetsForm);
 
 export function mapStateToProps(state) {
   return {
-    initialValues: selectFormInitialValues(state),
-    isSaving: isCreating(state),
-    key: getSelectedEntityId(state)
+    initialValues: selectChatWidgetFormInitialValues(state),
+    key: getSelectedEntityId(state),
+    chatWidgetId: getSelectedEntityId(state),
+    disabled: isCreating(state) || isUpdating(state) || !userHasUpdatePermission(state),
+    digitalChannelsAppsFetching: isEntityFetching(state, 'digitalChannelsApps'),
+    digitalChannelsAppIds: getDigitalChannelsAppIds(state),
+    app: getDigitalChannelsApp(state),
+    displayStyleIsButton: getDisplayStyleIsButton(state)
   };
 }
 

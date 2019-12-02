@@ -588,27 +588,24 @@ Immutable.Map {
     "subEntitySaving": false,
   },
   "chatWidgets": Immutable.Map {
-    "readPermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_READ",
-    ],
     "data": Immutable.List [],
-    "createPermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_CREATE",
-    ],
-    "confirmationDialogType": undefined,
-    "disablePermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_DISABLE",
-    ],
-    "updatePermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_MODIFY",
-    ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
-    "assignPermission": Immutable.List [
-      "OUTBOUND_IDENTIFIER_ASSIGN",
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "WEB_INTEGRATIONS_APP_READ",
+    ],
+    "updatePermission": Immutable.List [
+      "WEB_INTEGRATIONS_APP_UPDATE",
+    ],
+    "createPermission": Immutable.List [
+      "WEB_INTEGRATIONS_APP_UPDATE",
     ],
   },
   "none": Immutable.Map {},
+  "digitalChannelsApps": Immutable.Map {
+    "data": Immutable.List [],
+  },
   "outboundIdentifiers": Immutable.Map {
     "readPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_READ",

@@ -5,19 +5,32 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import ChatWidgetsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
-jest.mock('../../../../redux/modules/form/selectors');
-getCurrentForm.mockImplementation(() => 'gets form from state');
+import {
+  getSelectedEntityId,
+  isCreating,
+  isEntityFetching,
+  userHasUpdatePermission
+} from '../../../../redux/modules/entities/selectors';
+import {
+  selectChatWidgetFormInitialValues,
+  getDigitalChannelsAppIds,
+  getDigitalChannelsApp,
+  getDisplayStyleIsButton
+} from '../../../../redux/modules/entities/chatWidgets/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
-jest.mock('../../../../redux/modules/form/selectors');
-getSelectedEntityId.mockImplementation(() => 'mockId');
-isCreating.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
+getSelectedEntityId.mockReturnValue('mock-selected-entity-id');
+isCreating.mockReturnValue('mock-is-fetching');
+isEntityFetching.mockReturnValue('mock-entity-is-fetching');
+userHasUpdatePermission.mockReturnValue('mock-user-has-update-permission');
+
+jest.mock('../../../../redux/modules/entities/chatWidgets/selectors');
+selectChatWidgetFormInitialValues.mockReturnValue('mock-initial-values');
+getDigitalChannelsAppIds.mockReturnValue('mock-app-ids');
+getDigitalChannelsApp.mockReturnValue('mock-app');
+getDisplayStyleIsButton.mockReturnValue('mock-is-button');
 
 describe('ChatWidgets Renders', () => {
   it('renders', () => {

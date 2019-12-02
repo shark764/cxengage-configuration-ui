@@ -287,7 +287,10 @@ export const sidePanelHeader = state => {
       updatedAt: `Last updated on ${moment(selectedEntity.get('updated')).format('lll')} ${
         updatedByName ? ` by ${updatedByName}` : ''
       }`,
-      toggleStatus: Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted'
+      toggleStatus:
+        entitiesMetaData[currentEntity].hideActiveToggle === true
+          ? undefined
+          : Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted'
     };
   }
 };

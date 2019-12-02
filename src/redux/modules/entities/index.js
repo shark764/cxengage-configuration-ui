@@ -67,11 +67,12 @@ const initialState = fromJS({
   },
   chatWidgets: {
     ...defaultEntity,
-    readPermission: ['OUTBOUND_IDENTIFIER_READ'],
-    updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
-    createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
-    disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
-    assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
+    readPermission: ['WEB_INTEGRATIONS_APP_READ'],
+    updatePermission: ['WEB_INTEGRATIONS_APP_UPDATE'],
+    createPermission: ['WEB_INTEGRATIONS_APP_UPDATE']
+  },
+  digitalChannelsApps: {
+    data: []
   },
   users: {
     ...defaultEntity,
@@ -569,10 +570,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'FETCH_DATA_FULFILLED': {
       // As we recieve the data we tag on the items that are considered inherited
-      const {
-        entityName,
-        response: { result }
-      } = action;
+      const { entityName, response: { result } } = action;
       switch (entityName) {
         case 'roles': {
           const newResult = result.map(entity => ({
@@ -958,8 +956,10 @@ export default function reducer(state = initialState, action) {
         return state
           .update('businessHours', entityStore =>
             entityStore
-              .updateIn(['data', entityIndex, 'exceptions'], exceptions =>
-                !exceptions ? fromJS([action.response.result]) : exceptions.push(fromJS(action.response.result))
+              .updateIn(
+                ['data', entityIndex, 'exceptions'],
+                exceptions =>
+                  !exceptions ? fromJS([action.response.result]) : exceptions.push(fromJS(action.response.result))
               )
               .set('selectedSubEntityId', undefined)
               .set('subEntitySaving', false)

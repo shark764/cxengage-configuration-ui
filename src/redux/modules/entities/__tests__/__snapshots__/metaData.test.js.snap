@@ -450,17 +450,15 @@ Object {
         "active": true,
         "name": "Description",
       },
-      Object {
-        "active": true,
-        "name": "Status",
-      },
     ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
       "trueButtonText": "",
     },
-    "createFormDependencies": Array [],
+    "createFormDependencies": Array [
+      "digitalChannelsApps",
+    ],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
@@ -483,6 +481,7 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Home.htm",
+    "hideActiveToggle": true,
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -497,6 +496,9 @@ Object {
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
+      "path": Array [
+        "web-integrations",
+      ],
     },
     "sidePanelListTableFields": Array [
       Object {
@@ -510,7 +512,9 @@ Object {
     ],
     "subEntityName": "",
     "title": "Chat Widget",
-    "updateFormDependencies": Array [],
+    "updateFormDependencies": Array [
+      "digitalChannelsApps",
+    ],
   },
   "dashboards": EntityMetaData {
     "betaFeature": false,
@@ -770,6 +774,71 @@ Object {
       "roles",
       "permissions",
     ],
+  },
+  "digitalChannelsApps": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "digitalChannelsApps",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Digital Channels Apps",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+      "path": Array [
+        "digital-channels-app",
+      ],
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Digital Channels App",
+    "updateFormDependencies": Array [],
   },
   "dispatchMappings": EntityMetaData {
     "betaFeature": false,

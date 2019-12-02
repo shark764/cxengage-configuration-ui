@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.69.0] - 2019-11-29
+## Added
+- CXV1-20396 - Chat widgets
+
 ## [0.68.10] - 2019-11-29
 ## Fixed
 - CXV1-20762 - Dispositions - Creating new disposition fails and throws an error.

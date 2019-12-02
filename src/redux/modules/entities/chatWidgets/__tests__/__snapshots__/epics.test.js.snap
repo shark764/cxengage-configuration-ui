@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`chatWidgets epics FetchSidePanelChatWidgetData 1`] = `
+Object {
+  "entityName": "chatWidgets",
+  "id": "mock-chat-widget-id",
+  "response": "mock response",
+  "sdkCall": Object {
+    "crudAction": "read",
+    "module": "api",
+    "path": Array [
+      "web-integrations",
+      "mock-chat-widget-id",
+    ],
+    "topic": "cxengage/entities/get-chat-widgets-response",
+  },
+  "type": "SET_SELECTED_ENTITY_ID_FULFILLED",
+}
+`;
+
+exports[`chatWidgets epics FetchSidePanelChatWidgetDataFulfilled 1`] = `
+Object {
+  "meta": Object {
+    "form": "chatWidgets:mock-chat-widget-id",
+    "keepDirty": false,
+    "updateUnregisteredFields": false,
+  },
+  "payload": Object {
+    "mock-initial-values": "mock-value",
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
