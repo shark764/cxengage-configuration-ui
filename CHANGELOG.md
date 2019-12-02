@@ -26,6 +26,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.68.9] - 2019-11-29
+## Changed
+- <no-jira> - Version bump components library to 0.56.13.
+## Fixed
+- CXV1-20875 - Add confirmation when form is dirty and a second row is clicked.
+
 ## [0.68.8] - 2019-11-27
 ## Changed
 - CXV1-17998 - Flows2 - Missing MANAGE_ALL_FLOWS permission causes stuck loading state.

@@ -28,12 +28,18 @@ export const getSidePanelWidth = createSelector(
 
 export const itemApiPending = state => state.getIn(['Entities', 'loading']);
 
-export const getSelectedEntityBulkChangeItems = state =>
-  getCurrentEntityStore(state).get('data') &&
-  getCurrentEntityStore(state)
-    .get('data')
-    .filter(item => item.get('bulkChangeItem'))
-    .reduce((accum, item) => accum.push(item.get('id')), List());
+export const getSelectedEntityBulkChangeItems = createSelector(
+  [getCurrentEntityStore],
+  currentEntityStore =>
+    currentEntityStore.get('data') &&
+    currentEntityStore
+      .get('data')
+      .filter(item => item.get('bulkChangeItem'))
+      .reduce((accum, item) => accum.push(item.get('id')), List())
+);
+
+export const getBulkSelectedTotal = state =>
+  getSelectedEntityBulkChangeItems(state) ? getSelectedEntityBulkChangeItems(state).size : 0;
 
 /**
  * Returns if bulk actions form for current entity

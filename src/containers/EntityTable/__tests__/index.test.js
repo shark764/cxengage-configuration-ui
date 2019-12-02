@@ -26,6 +26,11 @@ jest.mock('../selectors', () => ({
   getHelpLink: () => 'mock help link'
 }));
 
+jest.mock('../../../redux/modules/form/selectors', () => ({
+  isFormDirty: () => false,
+  isFormPristine: () => true
+}));
+
 jest.mock('../config', () => ({
   getTableColumns: () => ['mock table columns']
 }));

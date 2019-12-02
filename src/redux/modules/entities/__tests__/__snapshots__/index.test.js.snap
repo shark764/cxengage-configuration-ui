@@ -131,6 +131,7 @@ Immutable.Map {
   "currentEntity": "mockEntity",
   "mockEntity": Immutable.Map {
     "selectedEntityId": "mock entity id",
+    "data": Immutable.List [],
   },
 }
 `;
@@ -140,6 +141,7 @@ Immutable.Map {
   "currentEntity": "mockEntity",
   "mockEntity": Immutable.Map {
     "selectedEntityId": "",
+    "data": Immutable.List [],
   },
 }
 `;

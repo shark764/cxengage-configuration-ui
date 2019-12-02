@@ -549,7 +549,6 @@ export default function reducer(state = initialState, action) {
     }
     case 'SET_SELECTED_ENTITY_ID': {
       const currentEntity = state.get('currentEntity');
-      const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId'], '');
 
       return (
         state
@@ -557,9 +556,7 @@ export default function reducer(state = initialState, action) {
           // We uncheck all rows if form is closed and
           // we were performing bulk actions
           .updateIn([currentEntity, 'data'], entityData =>
-            selectedEntityId === 'bulk' && action.entityId === ''
-              ? entityData.map(item => item.set('bulkChangeItem', false))
-              : entityData
+            action.entityId === '' ? entityData.map(item => item.set('bulkChangeItem', false)) : entityData
           )
       );
     }

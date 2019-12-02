@@ -39,8 +39,8 @@ export function cxInit() {
   if (window.location.hostname === 'localhost' || window.location.hostname.includes('ngrok')) {
     if (window.self === window.top && CxEngage.initialize) {
       const sdkConf = {
-        environment: 'dev',
-        baseUrl: 'https://dev-api.cxengagelabs.net/v1/',
+        environment: 'qe',
+        baseUrl: 'https://qe-api.cxengagelabs.net/v1/',
         logLevel: 'debug',
         blastSqsOutput: true,
         reportingRefreshRate: 10000,

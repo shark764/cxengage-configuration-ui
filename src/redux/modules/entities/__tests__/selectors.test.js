@@ -11,6 +11,7 @@ import {
   getSelectedEntityId,
   itemApiPending,
   getSelectedEntityBulkChangeItems,
+  getBulkSelectedTotal,
   getConfirmationDialogType,
   getConfirmationDialogMetaData,
   getAllEntities,
@@ -237,6 +238,32 @@ describe('getSelectedEntityBulkChangeItems', () => {
         })
       )
     ).toEqual(fromJS(['0000']));
+  });
+});
+
+describe('getBulkSelectedTotal', () => {
+  it('Returns number of items selected for changes when there is no any selected', () => {
+    expect(getBulkSelectedTotal(initialState)).toEqual(0);
+  });
+  it('Returns number of items selected for changes', () => {
+    expect(
+      getBulkSelectedTotal(
+        fromJS({
+          Entities: {
+            currentEntity: 'mockEntity',
+            mockEntity: {
+              selectedEntityId: '0000',
+              data: [
+                {
+                  id: '0000',
+                  bulkChangeItem: true
+                }
+              ]
+            }
+          }
+        })
+      )
+    ).toEqual(1);
   });
 });
 

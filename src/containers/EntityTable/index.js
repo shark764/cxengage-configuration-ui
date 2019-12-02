@@ -19,6 +19,7 @@ import { setVisibleMenu } from '../../redux/modules/columnFilterMenus';
 import { getHelpLink, getAllEntitiesTableData } from './selectors';
 import { getTableColumns } from './config';
 import { isInIframe } from 'serenova-js-utils/browser';
+import { isFormDirty, isFormPristine } from '../../redux/modules/form/selectors';
 
 export function mapStateToProps(state, props) {
   const entity = entitiesMetaData[getCurrentEntity(state)] || {};
@@ -42,7 +43,9 @@ export function mapStateToProps(state, props) {
     sorted: defaultSorted,
     fetching: isEntityFetching(state),
     showBulkActionsMenu: bulkEditsAvailable,
-    insideIframe: !isInIframe()
+    insideIframe: !isInIframe(),
+    pristine: isFormPristine(state),
+    dirty: isFormDirty(state)
   };
 }
 

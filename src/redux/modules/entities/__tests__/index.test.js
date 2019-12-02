@@ -59,7 +59,7 @@ describe('entities reducer', () => {
       it("sets the current entity's selected entity id", () => {
         const initialState = fromJS({
           currentEntity: 'mockEntity',
-          mockEntity: {}
+          mockEntity: { selectedEntityId: 'mock entity id', data: [] }
         });
         expect(
           entitiesReducer(initialState, entitiesReducerFunctions.setSelectedEntityId('mock entity id'))
@@ -79,7 +79,7 @@ describe('entities reducer', () => {
       it('sets the current entity\'s selected entity id to ""', () => {
         const initialState = fromJS({
           currentEntity: 'mockEntity',
-          mockEntity: { selectedEntityId: 'mock entity id' }
+          mockEntity: { selectedEntityId: 'mock entity id', data: [] }
         });
         expect(entitiesReducer(initialState, entitiesReducerFunctions.unsetSelectedEntityId())).toMatchSnapshot();
       });
