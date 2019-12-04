@@ -635,10 +635,10 @@ export const BulkEntityUpdate = (action$, store) =>
           } else {
             if (!userHasSkillSelected) {
               console.warn(
-                `"${a.values.removeSkill}" is already not associated with user (${currentBulkUser.get('email')})`
+                `"${a.values.removeSkill}" is not associated with the user (${currentBulkUser.get('email')})`
               );
               Toast.warning(
-                `"${a.values.removeSkill}" is already not associated with user (${currentBulkUser.get('email')})`
+                `"${a.values.removeSkill}" is not associated with the user (${currentBulkUser.get('email')})`
               );
               continue;
             }
@@ -689,10 +689,10 @@ export const BulkEntityUpdate = (action$, store) =>
           } else {
             if (!userHasGroupSelected) {
               console.warn(
-                `"${a.values.removeGroup}" is already not associated with user (${currentBulkUser.get('email')})`
+                `"${a.values.removeGroup}" is not associated with the user (${currentBulkUser.get('email')})`
               );
               Toast.warning(
-                `"${a.values.removeGroup}" is already not associated with user (${currentBulkUser.get('email')})`
+                `"${a.values.removeGroup}" is not associated with the user (${currentBulkUser.get('email')})`
               );
               continue;
             }
@@ -705,37 +705,38 @@ export const BulkEntityUpdate = (action$, store) =>
       }
       return { ...a, allSdkCalls };
     })
-    .mergeMap(a =>
-      a.allSdkCalls.length > 0
-        ? forkJoin(
-            a.allSdkCalls.map(apiCall =>
-              from(
-                sdkPromise(apiCall).catch(error => ({
-                  error: error,
-                  id: apiCall.data['userId'],
-                  toString: getEntityItemDisplay(store.getState(), apiCall.data['userId'])
-                }))
+    .mergeMap(
+      a =>
+        a.allSdkCalls.length > 0
+          ? forkJoin(
+              a.allSdkCalls.map(apiCall =>
+                from(
+                  sdkPromise(apiCall).catch(error => ({
+                    error: error,
+                    id: apiCall.data['userId'],
+                    toString: getEntityItemDisplay(store.getState(), apiCall.data['userId'])
+                  }))
+                )
               )
             )
-          )
-            .do(allResult => handleBulkSuccess(allResult, a))
-            .mergeMap(result =>
-              from(result).map(response => {
-                if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
-                  return handleSuccess(
-                    {
-                      result: {
-                        ...response.result,
-                        invitationStatus: a.toStatus
-                      }
-                    },
-                    a
-                  );
-                }
-                return handleSuccess(response, a);
-              })
-            )
-        : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
+              .do(allResult => handleBulkSuccess(allResult, a))
+              .mergeMap(result =>
+                from(result).map(response => {
+                  if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
+                    return handleSuccess(
+                      {
+                        result: {
+                          ...response.result,
+                          invitationStatus: a.toStatus
+                        }
+                      },
+                      a
+                    );
+                  }
+                  return handleSuccess(response, a);
+                })
+              )
+          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
 export const FocusNoPasswordValueFormField = action$ =>

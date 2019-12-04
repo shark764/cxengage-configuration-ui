@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.69.1] - 2019-11-29
+## Added
+- CXV1-20882 - Error message is incorrect when performing a Bulk Action that has already been made
+
 ## [0.69.0] - 2019-11-29
 ## Added
 - CXV1-20396 - Chat widgets
