@@ -6,7 +6,12 @@ import { connect } from 'react-redux';
 
 import { EntityTable } from 'cx-ui-components';
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
-import { setSelectedEntityCreate, setSelectedEntityId, toggleBulkEntityChange } from '../../redux/modules/entities';
+import {
+  setSelectedEntityCreate,
+  setSelectedEntityId,
+  toggleBulkEntityChange,
+  updateConfigUIUrlWithQueryString
+} from '../../redux/modules/entities';
 import {
   getCurrentEntity,
   userHasCreatePermission,
@@ -53,7 +58,8 @@ export const actions = {
   onCreateButtonClick: setSelectedEntityCreate,
   onRowClick: setSelectedEntityId,
   onBulkClick: toggleBulkEntityChange,
-  setVisibleMenu
+  setVisibleMenu,
+  updateConfigUIUrlWithQueryString
 };
 
 export default connect(mapStateToProps, actions)(EntityTable);

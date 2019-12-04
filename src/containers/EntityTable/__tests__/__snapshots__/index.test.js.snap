@@ -6,6 +6,7 @@ Object {
   "onCreateButtonClick": [MockFunction],
   "onRowClick": [MockFunction],
   "setVisibleMenu": [Function],
+  "updateConfigUIUrlWithQueryString": [MockFunction],
 }
 `;
 

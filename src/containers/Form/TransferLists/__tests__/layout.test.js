@@ -13,6 +13,7 @@ describe('<TransferListsForm />', () => {
     const rendered = shallow(
       <TransferListsForm
         name="mockName"
+        entityName="transferLists"
         isSaving={false}
         handleSubmit={() => {}}
         endpointHeaders={List([{ a: 'mockEndpointheaders' }])}
@@ -21,6 +22,8 @@ describe('<TransferListsForm />', () => {
         removeCategoryItems={() => {}}
         removeTransferListItem={() => {}}
         setSelectedSubEntityId={() => {}}
+        allowUpdateCategory={true}
+        allowUpdateItem={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -29,6 +32,7 @@ describe('<TransferListsForm />', () => {
     const rendered = shallow(
       <TransferListsForm
         name="mockName"
+        entityName="transferLists"
         isSaving={false}
         handleSubmit={() => {}}
         endpointHeaders={List([{ a: 'mockEndpointheaders' }])}
@@ -37,6 +41,8 @@ describe('<TransferListsForm />', () => {
         removeCategoryItems={() => {}}
         removeTransferListItem={() => {}}
         setSelectedSubEntityId={() => {}}
+        allowUpdateCategory={true}
+        allowUpdateItem={false}
       />
     );
     expect(rendered).toMatchSnapshot();

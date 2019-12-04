@@ -907,3 +907,43 @@ export const DownloadCsv = (action$, store) =>
         })
         .catch(error => handleError(error, a))
     );
+
+// open side panel form when user tries to access the URL with id param
+export const getConfigUI1URLIdParam = (action$, store) =>
+  action$
+    .ofType('FETCH_DATA_FULFILLED')
+    .filter(a => !isInIframe() && a.entityName === getCurrentEntity(store.getState()))
+    .map(() => ({
+      module: 'getUrlParamId'
+    }))
+    .mergeMap(sdkCall =>
+      fromPromise(sdkPromise(sdkCall)).map(response => {
+        // if the id is valid, open the side panel
+        if (response && findEntity(store.getState(), getCurrentEntity(store.getState()), response)) {
+          return {
+            type: 'SET_SELECTED_ENTITY_ID',
+            entityId: response
+          };
+        } else {
+          return {
+            type: 'UPDATE_CONFIG_UI_URL_WITH_QUERY_STRING',
+            entityId: ''
+          };
+        }
+      })
+    );
+
+// update url with id as query param string
+export const updateConfig1UrlWithQueryString = action$ =>
+  action$
+    .ofType('UPDATE_CONFIG_UI_URL_WITH_QUERY_STRING')
+    .map(({ entityId }) => ({
+      module: 'updateURLWithQueryString',
+      entityId
+    }))
+    .mergeMap(sdkCall =>
+      fromPromise(sdkPromise(sdkCall)).map(response => ({
+        type: 'CONFIG_UI_URL_UPDATED',
+        entityId: response
+      }))
+    );

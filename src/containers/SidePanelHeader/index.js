@@ -4,7 +4,6 @@
 
 import { connect } from 'react-redux';
 import { SidePanelHeader } from 'cx-ui-components';
-
 import { unsetSelectedEntityId, copyCurrentEntity, toggleEntity } from '../../redux/modules/entities';
 import {
   sidePanelHeader,
@@ -15,6 +14,7 @@ import {
   getConfirmationToggleEntityMessage
 } from '../../redux/modules/entities/selectors';
 import { isFormPristine, isFormDirty } from '../../redux/modules/form/selectors';
+import { updateConfigUIUrlWithQueryString } from '../../redux/modules/entities';
 import { isInIframe } from 'serenova-js-utils/browser';
 
 export function mapDispatchToProps(dispatch) {
@@ -26,7 +26,8 @@ export function mapDispatchToProps(dispatch) {
   return {
     ...actions,
     onClose: () => dispatch(unsetSelectedEntityId()),
-    onToggle: () => dispatch(toggleEntity())
+    onToggle: () => dispatch(toggleEntity()),
+    updateConfigUIUrlWithQueryString: entityId => dispatch(updateConfigUIUrlWithQueryString(entityId))
   };
 }
 

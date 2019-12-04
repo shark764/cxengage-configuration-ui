@@ -84,12 +84,15 @@ export default function TransferListsForm({
         <TransferListField
           className="transfer-lists"
           name="endpoints"
+          entityName="transferLists"
           endpointHeaders={endpointHeaders}
           selectedEntityId={selectedEntityId}
           removeCategoryItems={removeCategoryItems}
           setSelectedSubEntityId={setSelectedSubEntityId}
           removeTransferListItem={removeTransferListItem}
           userHasUpdatePermission={userHasUpdatePermission}
+          allowUpdateCategory={true}
+          allowUpdateItem={true}
           data-automation="endpointsTransferList"
         />
       </TransferListContainer>

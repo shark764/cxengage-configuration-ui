@@ -42,6 +42,8 @@ exports[`<TransferListsForm /> renders create form 1`] = `
       </styled.div>
     </styled.div>
     <TransferListField
+      allowUpdateCategory={true}
+      allowUpdateItem={true}
       className="transfer-lists"
       data-automation="endpointsTransferList"
       disabled={false}
@@ -52,6 +54,7 @@ exports[`<TransferListsForm /> renders create form 1`] = `
           },
         ]
       }
+      entityName="transferLists"
       name="endpoints"
       removeCategoryItems={[Function]}
       removeTransferListItem={[Function]}
@@ -105,6 +108,8 @@ exports[`<TransferListsForm /> renders update form 1`] = `
       </styled.div>
     </styled.div>
     <TransferListField
+      allowUpdateCategory={true}
+      allowUpdateItem={true}
       className="transfer-lists"
       data-automation="endpointsTransferList"
       disabled={false}
@@ -115,6 +120,7 @@ exports[`<TransferListsForm /> renders update form 1`] = `
           },
         ]
       }
+      entityName="transferLists"
       name="endpoints"
       removeCategoryItems={[Function]}
       removeTransferListItem={[Function]}

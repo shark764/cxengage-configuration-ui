@@ -521,6 +521,11 @@ export const deleteApiKey = () => ({
   type: 'DELETE_API_KEY'
 });
 
+export const updateConfigUIUrlWithQueryString = entityId => ({
+  type: 'UPDATE_CONFIG_UI_URL_WITH_QUERY_STRING',
+  entityId
+});
+
 // Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -556,8 +561,10 @@ export default function reducer(state = initialState, action) {
           .setIn([currentEntity, 'selectedEntityId'], action.entityId)
           // We uncheck all rows if form is closed and
           // we were performing bulk actions
-          .updateIn([currentEntity, 'data'], entityData =>
-            action.entityId === '' ? entityData.map(item => item.set('bulkChangeItem', false)) : entityData
+          .updateIn(
+            [currentEntity, 'data'],
+            entityData =>
+              action.entityId === '' ? entityData.map(item => item.set('bulkChangeItem', false)) : entityData
           )
       );
     }
