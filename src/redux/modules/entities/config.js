@@ -10,7 +10,8 @@ export const hasCustomUpdateEntity = entityName =>
     'flows',
     'dispatchMappings',
     'businessHours',
-    'apiKeys'
+    'apiKeys',
+    'dispositionLists'
   ].includes(entityName);
 
 export const hasCustomCreateSubEntity = entityName => !['businessHours'].includes(entityName);

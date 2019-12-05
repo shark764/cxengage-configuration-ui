@@ -9,36 +9,63 @@ exports[`<DispositionListsForm /> renders create form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
     name="name"
-    placeholder="You are using Hygen!"
+    placeholder="Please enter a name..."
+  />
+  <InputField
+    componentType="input"
+    data-automation="externalIdInput"
+    disabled={false}
+    label="External ID"
+    name="externalId"
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
+  <ConfirmationWrapper
+    mainText="Setting shared to 'enabled' for this Disposition List. Once a Disposition List is enabled and saved, it cannot be reverted."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="sharedToggle"
+      disabled={true}
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Disposition List"
+    />
+  </ConfirmationWrapper>
   <DetailHeader
-    text="Properties"
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Dispositions"
+    userHasUpdatePermission={true}
   />
-  <SelectField
-    disabled={false}
-    label="Type *"
-    name="type"
-    options={
-      Array [
-        Object {
-          "label": "custom label",
-          "value": "custom value",
-        },
-      ]
-    }
-    required={true}
-  />
+  <styled.div>
+    <TransferListField
+      allowUpdateCategory={true}
+      allowUpdateItem={false}
+      className="disposition-lists"
+      data-automation="dispositionListNestedList"
+      disabled={false}
+      endpointHeaders={Object {}}
+      entityName="dispositionLists"
+      name="dispositions"
+      removeCategoryItems={[Function]}
+      removeTransferListItem={[Function]}
+      selectedEntityId="0000-0000-0000-0000-0000"
+      setSelectedSubEntityId={[Function]}
+      userHasUpdatePermission={true}
+    />
+  </styled.div>
 </form>
 `;
 
@@ -51,35 +78,63 @@ exports[`<DispositionListsForm /> renders update form 1`] = `
   />
   <InputField
     componentType="input"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
     name="name"
-    placeholder="You are using Hygen!"
+    placeholder="Please enter a name..."
+  />
+  <InputField
+    componentType="input"
+    data-automation="externalIdInput"
+    disabled={false}
+    label="External ID"
+    name="externalId"
   />
   <InputField
     componentType="textarea"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
+  <ConfirmationWrapper
+    confirmBtnCallback={[Function]}
+    mainText="Setting shared to 'enabled' for this Disposition List. Once a Disposition List is enabled and saved, it cannot be reverted."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="sharedToggle"
+      disabled={false}
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Disposition List"
+    />
+  </ConfirmationWrapper>
   <DetailHeader
-    text="Properties"
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Dispositions"
+    userHasUpdatePermission={true}
   />
-  <SelectField
-    disabled={false}
-    label="Type *"
-    name="type"
-    options={
-      Array [
-        Object {
-          "label": "custom label",
-          "value": "custom value",
-        },
-      ]
-    }
-    required={true}
-  />
+  <styled.div>
+    <TransferListField
+      allowUpdateCategory={true}
+      allowUpdateItem={false}
+      className="disposition-lists"
+      data-automation="dispositionListNestedList"
+      disabled={false}
+      endpointHeaders={Object {}}
+      entityName="dispositionLists"
+      name="dispositions"
+      removeCategoryItems={[Function]}
+      removeTransferListItem={[Function]}
+      selectedEntityId="0000-0000-0000-0000-0000"
+      setSelectedSubEntityId={[Function]}
+      userHasUpdatePermission={true}
+    />
+  </styled.div>
 </form>
 `;

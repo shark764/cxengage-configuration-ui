@@ -50,7 +50,7 @@ export const getReasonsAfterFetchingReasonsLists = action$ =>
   action$
     .ofType('FETCH_DATA_FULFILLED')
     .filter(a => a.entityName === 'reasonLists')
-    .map(a => ({ type: 'FETCH_DATA', entityName: 'reasons' }));
+    .map(() => ({ type: 'FETCH_DATA', entityName: 'reasons' }));
 
 export const InitReasonListsForm = action$ =>
   action$
@@ -115,7 +115,7 @@ export const ReasonListsSubEntityFormSubmission = (action$, store) =>
       if (a.entityId === 'create') {
         // Checking reasons with same hierarchy but different category uuid
         // Transfer List does not have this but needs one
-        a.values = a.values.map((reason, index) => {
+        a.values = a.values.map(reason => {
           let firstOccur = a.values.find(first => reason.get('hierarchy')[0] === first.get('hierarchy')[0]);
           if (firstOccur && firstOccur.get('categoryUUID') !== reason.get('categoryUUID')) {
             reason = reason.set('categoryUUID', firstOccur.get('categoryUUID'));

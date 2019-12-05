@@ -2,21 +2,43 @@
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
+import { Map, fromJS } from 'immutable';
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { getCurrentForm } from '../../../../redux/modules/form/selectors';
+import {
+  getCurrentForm,
+  createFormName,
+  formSubmission,
+  getCurrentFormValueByFieldName
+} from '../../../../redux/modules/form/selectors';
 import DispositionListsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
+import {
+  getSelectedEntityId,
+  isCreating,
+  userHasUpdatePermission,
+  userHasSharePermission
+} from '../../../../redux/modules/entities/selectors';
+import {
+  dispositionListsInitialValues,
+  selectDispositionsHeaders
+} from '../../../../redux/modules/entities/dispositionLists/selectors';
+import { checkDisableShared } from '../../../../redux/modules/entities/reasonLists/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
+jest.mock('../../../../redux/modules/entities/dispositionLists/selectors');
+jest.mock('../../../../redux/modules/entities/reasonLists/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
+dispositionListsInitialValues.mockImplementation(() => new Map({ active: true, shared: false, dispositions: [] }));
+selectDispositionsHeaders.mockImplementation(() => fromJS([{ name: 'D1', hierarchy: ['H1'] }]));
+getCurrentFormValueByFieldName.mockImplementation(() => true);
+userHasUpdatePermission.mockImplementation(() => true);
+userHasSharePermission.mockImplementation(() => true);
+checkDisableShared.mockImplementation(() => false);
 
 describe('DispositionLists Renders', () => {
   it('renders', () => {
@@ -42,7 +64,10 @@ describe('formSubmission', () => {
     id: 'mockId',
     name: 'mockName',
     description: 'mockDescription',
-    type: 'mockType'
+    shared: true,
+    active: false,
+    externalId: 'mockExternalId',
+    dispositions: []
   };
   const dispatch = action => action;
   const props = { dirty: true };

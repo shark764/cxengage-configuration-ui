@@ -85,7 +85,7 @@ Immutable.Map {
 
 exports[`TransferListsForm selectors converts queueName to queueId when the transferListItem contactType is queue 1`] = `"updatedMockQueueId"`;
 
-exports[`TransferListsForm selectors select endpoints that only contians categoryHeaders 1`] = `
+exports[`TransferListsForm selectors select endpoints that only contains categoryHeaders 1`] = `
 Immutable.List [
   Immutable.Map {
     "name": "mockContactName1",

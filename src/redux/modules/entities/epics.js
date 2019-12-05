@@ -181,6 +181,16 @@ export const FormSubmission = (action$, store) =>
             })
           )
         );
+      } else if (a.entityName === 'dispositionLists' && a.selectedEntityId !== 'bulk') {
+        a.values = a.values.update('dispositions', dispositions =>
+          dispositions.map(disposition =>
+            fromJS({
+              dispositionId: disposition.get('dispositionId'),
+              sortOrder: disposition.get('sortOrder'),
+              hierarchy: disposition.get('hierarchy')
+            })
+          )
+        );
       }
       return a;
     })
@@ -730,7 +740,10 @@ export const SubEntityFormSubmission = (action$, store) =>
       selectedSubEntityId: getSelectedSubEntityId(store.getState())
     }))
     .filter(({ selectedSubEntityId }) => selectedSubEntityId)
-    .filter(({ entityName }) => entityName !== 'transferLists' && entityName !== 'reasonLists')
+    .filter(
+      ({ entityName }) =>
+        entityName !== 'transferLists' && entityName !== 'reasonLists' && entityName !== 'dispositionLists'
+    )
     .map(
       a =>
         a.selectedSubEntityId === 'create'

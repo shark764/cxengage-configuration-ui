@@ -220,7 +220,7 @@ describe('TransferListsForm selectors', () => {
       transferListSelectors.transferListItemUpdateValues('updateCategoryHeader:mockTransferListId1')
     ).toMatchSnapshot();
   });
-  it('select endpoints that only contians categoryHeaders', () => {
+  it('select endpoints that only contains categoryHeaders', () => {
     expect(transferListSelectors.selectEndpointHeaders(mockEndpoints)).toMatchSnapshot();
   });
 });

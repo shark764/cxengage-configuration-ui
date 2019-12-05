@@ -13,11 +13,20 @@ describe('<DispositionListsForm />', () => {
       <DispositionListsForm
         name="mockName"
         description="mockDescription"
-        type="mockType"
+        externalId="mockExternalId"
+        shared={false}
+        active={true}
         isSaving={false}
         inherited={false}
+        dispositions={[]}
+        dispositionHeaders={{}}
         userHasUpdatePermission={true}
+        userHasSharePermission={false}
+        selectedEntityId="0000-0000-0000-0000-0000"
         handleSubmit={() => {}}
+        removeDispositionListItem={() => {}}
+        removeCategoryItems={() => {}}
+        setSelectedSubEntityId={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -27,12 +36,21 @@ describe('<DispositionListsForm />', () => {
       <DispositionListsForm
         name="mockName"
         description="mockDescription"
-        type="mockType"
+        externalId="mockExternalId"
+        shared={false}
+        active={true}
         id="0000-0000-0000-0000-0000"
         isSaving={false}
         inherited={false}
+        dispositions={[]}
+        dispositionHeaders={{}}
         userHasUpdatePermission={true}
+        userHasSharePermission={true}
+        selectedEntityId="0000-0000-0000-0000-0000"
         handleSubmit={() => {}}
+        removeDispositionListItem={() => {}}
+        removeCategoryItems={() => {}}
+        setSelectedSubEntityId={() => {}}
       />
     );
     expect(rendered).toMatchSnapshot();

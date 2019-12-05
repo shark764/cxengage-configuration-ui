@@ -5,6 +5,8 @@
 import { isEmpty } from 'serenova-js-utils/strings';
 
 export const formValidation = values => ({
-  name: isEmpty(values.get('name')) && 'Please enter a ...',
-  type: !values.get('type') && 'Please select a ...'
+  name: isEmpty(values.get('name')) && 'Please enter a name',
+  dispositions:
+    (!values.get('dispositions') || values.get('dispositions').size === 0) &&
+    'Disposition List should contain at least one disposition category.'
 });

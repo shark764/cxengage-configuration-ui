@@ -50,6 +50,8 @@ import MessageTemplatesForm from '../Form/MessageTemplates';
 import ExceptionsForm from '../Form/BusinessHours/Exception';
 import UpdateReasonListItemsForm from '../Form/ReasonListItems/Update';
 import CreateReasonListItemForm from '../Form/ReasonListItems/Create';
+import UpdateDispositionListItemsForm from '../Form/DispositionListItems/Update';
+import CreateDispositionListItemForm from '../Form/DispositionListItems/Create';
 import ReasonsBulkActionsForm from '../Form/Reasons/Bulk';
 import TenantsForm from '../Form/Tenants';
 import DispositionListsForm from '../Form/DispositionLists';
@@ -695,6 +697,10 @@ const createSubEntityFormRoutes = [
   {
     path: '/configuration/reasonLists',
     component: CreateReasonListItemForm
+  },
+  {
+    path: '/configuration/dispositionLists',
+    component: CreateDispositionListItemForm
   }
 ];
 
@@ -742,6 +748,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/reasonLists',
     component: UpdateReasonListItemsForm
+  },
+  {
+    path: '/configuration/dispositionLists',
+    component: UpdateDispositionListItemsForm
   }
 ];
 

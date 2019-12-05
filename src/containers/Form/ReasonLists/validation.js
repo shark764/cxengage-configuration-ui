@@ -9,6 +9,6 @@ export const formValidation = values => {
     name: isEmpty(values.get('name')) && 'Please enter a name',
     reasons:
       (!values.get('reasons') || values.get('reasons').size === 0) &&
-      'ReasonList should contian at least one reason category.'
+      'Reason List should contain at least one reason category.'
   };
 };

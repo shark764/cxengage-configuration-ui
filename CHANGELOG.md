@@ -25,6 +25,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reasons
 - Reason Lists
 - Transfer Lists
+- Dispositions
+- Disposition Lists
+
+## [0.70.0] - 2019-12-02
+## Added
+- CXV1-20570 - SidePanel Form for Disposition Lists.
+- CXV1-16889 - Nested List component for Disposition Lists.
 
 ## [0.69.3] - 2019-12-04
 ## Fixed

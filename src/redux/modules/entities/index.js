@@ -720,7 +720,11 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], false);
     }
     case 'UPDATE_ENTITY': {
-      if (action.entityName === 'transferLists' || action.entityName === 'reasonLists') {
+      if (
+        action.entityName === 'transferLists' ||
+        action.entityName === 'reasonLists' ||
+        action.entityName === 'dispositionLists'
+      ) {
         return setEntityUpdatingHelper(state, action, true).deleteIn([action.entityName, 'selectedSubEntityId']);
       }
       return setEntityUpdatingHelper(state, action, true);
@@ -1151,7 +1155,9 @@ export default function reducer(state = initialState, action) {
     case '@@redux-form/INITIALIZE':
     case '@@redux-form/CHANGE': {
       if (
-        (action.entityName === 'transferLists' || action.entityName === 'reasonLists') &&
+        (action.entityName === 'transferLists' ||
+          action.entityName === 'reasonLists' ||
+          action.entityName === 'dispositionLists') &&
         state.getIn([action.entityName, 'selectedSubEntityId']) !== undefined
       ) {
         return state.deleteIn([action.entityName, 'selectedSubEntityId']);

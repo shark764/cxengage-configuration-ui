@@ -14,7 +14,7 @@ const Header = styled.h3`
   font-weight: 700;
   display: inline-block;
 `;
-const ReasonListItem = styled.h3`
+const DispositionListItem = styled.h3`
   color: #474747;
   font-size: 28px;
   max-width: 55%;
@@ -31,11 +31,11 @@ const ToggleFieldDiv = styled(ToggleField)`
   margin-bottom: 15px;
 `;
 
-export default class ReasonListItemsForm extends React.Component {
+export default class DispositionListItemsForm extends React.Component {
   shouldComponentUpdate(nextProps) {
     if (nextProps.dirty) {
       if (this.props.isUserCreatingNewCategory !== nextProps.isUserCreatingNewCategory) {
-        nextProps.clearFields('reasonListItems:create', false, false, 'hierarchy');
+        nextProps.clearFields('dispositionListItems:create', false, false, 'hierarchy');
       }
     }
     return true;
@@ -46,9 +46,11 @@ export default class ReasonListItemsForm extends React.Component {
         {!this.props.selectedSubEntityId.includes('updateCategoryHeader') && (
           <Fragment>
             <Header>
-              {this.props.selectedSubEntityId === 'create' ? 'Creating' : 'Updating'} Reason List Item for :
+              {this.props.selectedSubEntityId === 'create' ? 'Creating' : 'Updating'} Disposition List Item for :
             </Header>
-            <ReasonListItem title={this.props.reasonListName}>{this.props.reasonListName}</ReasonListItem>
+            <DispositionListItem title={this.props.dispositionListName}>
+              {this.props.dispositionListName}
+            </DispositionListItem>
             {this.props.selectedSubEntityId === 'create' &&
               this.props.existingCategories &&
               this.props.existingCategories[0] && (
@@ -89,10 +91,13 @@ export default class ReasonListItemsForm extends React.Component {
               )}
             {
               <SelectField
-                name="reason"
-                label="Reason *"
-                data-automation="reasonList"
-                options={[{ label: '-- Please select a reason --', value: 'selectReason' }].concat(this.props.reasons)}
+                name="disposition"
+                label="Disposition *"
+                data-automation="dispositionList"
+                options={[
+                  { label: '-- Please select a disposition --', value: 'selectDisposition' },
+                  ...this.props.dispositions
+                ]}
                 disabled={this.props.isSaving}
                 required
               />
@@ -102,7 +107,9 @@ export default class ReasonListItemsForm extends React.Component {
         {this.props.selectedSubEntityId.includes('updateCategoryHeader') && (
           <Fragment>
             <Header>Updating category name for :</Header>
-            <ReasonListItem title={this.props.reasonListName}>{this.props.reasonListName}</ReasonListItem>
+            <DispositionListItem title={this.props.dispositionListName}>
+              {this.props.dispositionListName}
+            </DispositionListItem>
             <InputField
               name="hierarchy"
               label="Category Name *"
@@ -125,15 +132,15 @@ export default class ReasonListItemsForm extends React.Component {
   }
 }
 
-ReasonListItemsForm.propTypes = {
+DispositionListItemsForm.propTypes = {
   isUserCreatingNewCategory: PropTypes.bool,
   handleSubmit: PropTypes.func.isRequired,
   key: PropTypes.string,
   selectedSubEntityId: PropTypes.string.isRequired,
-  reasonListName: PropTypes.string,
+  dispositionListName: PropTypes.string,
   existingCategories: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   isSaving: PropTypes.bool,
-  reasons: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  dispositions: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   onCancel: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   invalid: PropTypes.bool,

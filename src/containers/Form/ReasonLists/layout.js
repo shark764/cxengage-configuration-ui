@@ -10,8 +10,21 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, DetailsPanelAlert, InputField, ToggleField, ConfirmationWrapper } from 'cx-ui-components';
-import { NestedListField } from 'cx-ui-components';
+import {
+  DetailHeader,
+  DetailsPanelAlert,
+  InputField,
+  ToggleField,
+  ConfirmationWrapper,
+  NestedListField
+} from 'cx-ui-components';
+import styled from 'styled-components';
+
+const ReasonListContainer = styled.div`
+  font-size: 14px;
+  max-wdith: 700px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+`;
 
 export default function ReasonListsForm({
   handleSubmit,
@@ -32,11 +45,9 @@ export default function ReasonListsForm({
   return (
     <form onSubmit={handleSubmit} key={key}>
       {inherited && <DetailsPanelAlert text="This Presence Reason List is inherited and cannot be edited" />}
-      {sharedFormValue &&
-        !disableShared &&
-        !inherited && (
-          <DetailsPanelAlert text="You have set shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted." />
-        )}
+      {sharedFormValue && !disableShared && !inherited && (
+        <DetailsPanelAlert text="You have set shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted." />
+      )}
       <DetailHeader text="Details" />
       <InputField
         id="frm-reason-list-name"
@@ -101,17 +112,19 @@ export default function ReasonListsForm({
         onActionButtonClick={() => setSelectedSubEntityId('create')}
         open
       />
-      <NestedListField
-        className="reason-list"
-        name="reasons"
-        reasonHeaders={reasonHeaders}
-        selectedEntityId={selectedEntityId}
-        setSelectedSubEntityId={setSelectedSubEntityId}
-        userHasUpdatePermission={userHasUpdatePermission && !inherited}
-        removeReasonListItem={removeReasonListItem}
-        removeCategoryItems={removeCategoryItems}
-        data-automation="reasonListNestedList"
-      />
+      <ReasonListContainer>
+        <NestedListField
+          className="reason-list"
+          name="reasons"
+          reasonHeaders={reasonHeaders}
+          selectedEntityId={selectedEntityId}
+          setSelectedSubEntityId={setSelectedSubEntityId}
+          userHasUpdatePermission={userHasUpdatePermission && !inherited}
+          removeReasonListItem={removeReasonListItem}
+          removeCategoryItems={removeCategoryItems}
+          data-automation="reasonListNestedList"
+        />
+      </ReasonListContainer>
     </form>
   );
 }

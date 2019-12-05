@@ -10,18 +10,59 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, InputField, SelectField } from 'cx-ui-components';
+import styled from 'styled-components';
+import {
+  DetailHeader,
+  InputField,
+  ToggleField,
+  TransferListField as DispositionListField,
+  ConfirmationWrapper,
+  DetailsPanelAlert
+} from 'cx-ui-components';
 
-export default function DispositionListsForm({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key }) {
+const DispositionListContainer = styled.div`
+  font-size: 14px;
+  max-wdith: 700px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
+export default function DispositionListsForm({
+  handleSubmit,
+  isSaving,
+  inherited,
+  userHasUpdatePermission,
+  userHasSharePermission,
+  key,
+  selectedEntityId,
+  dispositionHeaders,
+  removeDispositionListItem,
+  removeCategoryItems,
+  setSelectedSubEntityId,
+  disableShared,
+  sharedFormValue,
+  change
+}) {
   return (
     <form onSubmit={handleSubmit} key={key}>
+      {inherited && <DetailsPanelAlert text="This Disposition List is inherited and cannot be edited" />}
+      {sharedFormValue && !disableShared && !inherited && (
+        <DetailsPanelAlert text="You have set shared to 'enabled' for this Disposition List. Once a Disposition List is enabled and saved, it cannot be reverted." />
+      )}
       <DetailHeader text="Details" />
       <InputField
         name="name"
         label="Name *"
         componentType="input"
         inputType="text"
-        placeholder="You are using Hygen!"
+        placeholder="Please enter a name..."
+        data-automation="nameInput"
+        disabled={isSaving || inherited || !userHasUpdatePermission}
+      />
+      <InputField
+        name="externalId"
+        label="External ID"
+        componentType="input"
+        data-automation="externalIdInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
@@ -29,21 +70,55 @@ export default function DispositionListsForm({ handleSubmit, isSaving, inherited
         label="Description"
         componentType="textarea"
         inputType="text"
+        data-automation="descriptionInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
-      <DetailHeader text="Properties" />
-      <SelectField
-        name="type"
-        label="Type *"
-        disabled={isSaving || inherited || !userHasUpdatePermission}
-        options={[
-          {
-            label: 'custom label',
-            value: 'custom value'
+      <ConfirmationWrapper
+        confirmBtnCallback={
+          !disableShared && !sharedFormValue && userHasSharePermission
+            ? () => change('shared', !sharedFormValue)
+            : undefined
+        }
+        mainText={
+          "Setting shared to 'enabled' for this Disposition List. Once a Disposition List is enabled and saved, it cannot be reverted."
+        }
+        secondaryText={'Are you sure you want to continue?'}
+      >
+        <ToggleField
+          name="shared"
+          label="Shared"
+          title={
+            disableShared
+              ? "You cannot update 'Shared' once it's set to true"
+              : 'Change "Shared" state for this Disposition List'
           }
-        ]}
-        required
+          disabled={isSaving || inherited || disableShared || !userHasUpdatePermission || !userHasSharePermission}
+          data-automation="sharedToggle"
+        />
+      </ConfirmationWrapper>
+
+      <DetailHeader
+        userHasUpdatePermission={userHasUpdatePermission && !inherited}
+        text="Dispositions"
+        onActionButtonClick={() => setSelectedSubEntityId('create')}
+        open
       />
+      <DispositionListContainer>
+        <DispositionListField
+          className="disposition-lists"
+          name="dispositions"
+          entityName="dispositionLists"
+          endpointHeaders={dispositionHeaders}
+          selectedEntityId={selectedEntityId}
+          removeCategoryItems={removeCategoryItems}
+          setSelectedSubEntityId={setSelectedSubEntityId}
+          removeTransferListItem={removeDispositionListItem}
+          userHasUpdatePermission={userHasUpdatePermission && !inherited}
+          allowUpdateCategory={true}
+          allowUpdateItem={false}
+          data-automation="dispositionListNestedList"
+        />
+      </DispositionListContainer>
     </form>
   );
 }
@@ -53,5 +128,14 @@ DispositionListsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool
+  userHasUpdatePermission: PropTypes.bool,
+  dispositionHeaders: PropTypes.object,
+  selectedEntityId: PropTypes.string,
+  removeDispositionListItem: PropTypes.func.isRequired,
+  removeCategoryItems: PropTypes.func.isRequired,
+  setSelectedSubEntityId: PropTypes.func.isRequired,
+  userHasSharePermission: PropTypes.bool,
+  sharedFormValue: PropTypes.bool,
+  disableShared: PropTypes.bool,
+  change: PropTypes.func
 };

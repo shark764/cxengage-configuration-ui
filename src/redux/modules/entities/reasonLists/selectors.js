@@ -43,7 +43,7 @@ export const reasonListsInitialValues = state => {
     return Map({
       name: getSelectedEntity(state).get('name'),
       description: getSelectedEntity(state).get('description'),
-      isDefault: getSelectedEntity(state).get('isDefault'),
+      isDefault: getSelectedEntity(state).get('isDefault') || false,
       shared: getSelectedEntity(state).get('shared')
     });
   } else {

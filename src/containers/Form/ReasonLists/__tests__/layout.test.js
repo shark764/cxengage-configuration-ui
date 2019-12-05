@@ -13,7 +13,7 @@ describe('<ReasonListsForm />', () => {
       <ReasonListsForm
         name="mockName"
         description="mockDescription"
-        externalId={'mockExternalId'}
+        externalId="mockExternalId"
         shared={false}
         active={true}
         isSaving={false}
@@ -36,7 +36,7 @@ describe('<ReasonListsForm />', () => {
       <ReasonListsForm
         name="mockName"
         description="mockDescription"
-        externalId={'mockExternalId'}
+        externalId="mockExternalId"
         shared={false}
         active={true}
         id="0000-0000-0000-0000-0000"

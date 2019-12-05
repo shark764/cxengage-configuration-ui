@@ -35,12 +35,12 @@ export default function DispositionsForm({
         label="Name *"
         componentType="input"
         inputType="text"
-        placeholder="Please enter a name.."
+        placeholder="Please enter a name..."
         data-automation="nameInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
-        name="externalid"
+        name="externalId"
         label="External ID"
         componentType="input"
         data-automation="externalIdInput"

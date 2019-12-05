@@ -739,40 +739,40 @@ const pages = {
     },
     whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`dMapName-${randomId}`]
+  },
+  'Data Access Report': {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`,
+            reportTypeRadio: 'realtime',
+            realtimeReportTypeRadio: 'standard',
+            realtimeReportAutoComplete: 'Agent State Table'
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`
+            //realtimeReportAutoComplete: "Interactions Completed Table"
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: 'reportingMenu',
+      subMainBar: 'navigationLinkDataAccessReports'
+    },
+    whichCatagoryToSearch: 'searchNameColumn',
+    updateSearchValue: [`rName-${randomId}`]
   }
-  // 'Data Access Report': {
-  //   specs: {
-  //     create: {
-  //       parametersToInsert: [
-  //         {
-  //           nameInput: `rName-${randomId}`,
-  //           descriptionInput: `rDesc-${randomId}`,
-  //           reportTypeRadio: "realtime",
-  //           realtimeReportTypeRadio: "standard",
-  //           realtimeReportAutoComplete: "Agent State Table"
-  //         }
-  //       ]
-  //     },
-  //     update: {
-  //       parametersToInsert: [
-  //         {
-  //           nameInput: `updatedRName-${randomId}`,
-  //           descriptionInput: `updatedRDesc-${randomId}`,
-  //           //realtimeReportAutoComplete: "Interactions Completed Table"
-  //         }
-  //       ]
-  //     },
-  //     read: {
-  //       parameters: {}
-  //     }
-  //   },
-  //   navigation: {
-  //     mainBar: "reportingMenu",
-  //     subMainBar: "navigationLinkDataAccessReports"
-  //   },
-  //   whichCatagoryToSearch: "searchNameColumn",
-  //   updateSearchValue: [`rName-${randomId}`]
-  // }
 };
 
 module.exports = pages;

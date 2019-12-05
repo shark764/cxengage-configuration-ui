@@ -46,18 +46,9 @@ export class EntityMetaData {
     this.createFormDependencies = [];
     this.updateFormDependencies = [];
     this.bulkFormDependencies = [];
-    this.entityTableFields = [
-      { label: 'Name', name: 'name' },
-      { label: 'Description', name: 'description' }
-    ];
-    this.sidePanelListTableFields = [
-      { label: 'Name', name: 'name' },
-      { label: 'Description', name: 'description' }
-    ];
-    this.modalListTableFields = [
-      { label: 'Name', name: 'name' },
-      { label: 'Description', name: 'description' }
-    ];
+    this.entityTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
+    this.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Description', name: 'description' }];
     this.defaultFilters = [];
     this.defaultSorted = [{ id: 'name', alpha: true }];
     this.defaultDependentEntityFilters = [];
@@ -83,6 +74,7 @@ export class EntityMetaData {
     )}-response`;
 
     const subEntityCommand = `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.subEntityName))}`;
+
     const subEntityTopic = `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
       removeLastLetter(this.subEntityName)
     )}-response`;
@@ -263,10 +255,7 @@ entities.skills.associations = {
   users: ['users', 'skills'],
   outboundIdentifierLists: ['skills', 'outboundIdentifierLists']
 };
-entities.skills.modalListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' }
-];
+entities.skills.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.skills.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' },
@@ -277,10 +266,7 @@ entities.skills.memberListTableFields = [
     filterOptions: ['enabled', 'disabled']
   }
 ];
-entities.skills.sidePanelListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' }
-];
+entities.skills.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.skills.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -289,10 +275,7 @@ entities.skills.columns = [
 ];
 entities.skills.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.skills.defaultAssociationFilters = {
-  users: [
-    { id: 'status', value: 'accepted' },
-    { id: 'invitationStatus', value: 'enabled' }
-  ],
+  users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }]
 };
 
@@ -307,18 +290,12 @@ entities.groups.associations = {
   outboundIdentifierLists: ['groups', 'outboundIdentifierLists'],
   reasonLists: ['groups', 'reasonLists']
 };
-entities.groups.modalListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' }
-];
+entities.groups.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.groups.outboundIdentifiersFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' }
 ];
-entities.groups.sidePanelListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Email', name: 'email' }
-];
+entities.groups.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.groups.memberListTableFields = [
   { label: 'Name', name: 'name' },
   { label: 'Description', name: 'description' },
@@ -336,10 +313,7 @@ entities.groups.columns = [
 ];
 entities.groups.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.groups.defaultAssociationFilters = {
-  users: [
-    { id: 'status', value: 'accepted' },
-    { id: 'invitationStatus', value: 'enabled' }
-  ],
+  users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }],
   reasonLists: [{ id: 'active', value: 'enabled' }]
 };
@@ -480,10 +454,7 @@ entities.agentStateMonitoring.columns = [
 entities.emailTemplates.bulkEditsAvailable = false;
 entities.emailTemplates.pageTitle = 'User Management Emails';
 entities.emailTemplates.helpLink = '/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm';
-entities.emailTemplates.columns = [
-  { name: 'Name', active: true },
-  { name: 'Description', active: true }
-];
+entities.emailTemplates.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 
 // Chat Widgets
 entities.chatWidgets.bulkEditsAvailable = false;
@@ -708,10 +679,7 @@ entities.flows.membersTableFields = {
     { label: 'Name', name: 'name' },
     { label: 'Created On', name: 'created', format: 'datetime' }
   ],
-  drafts: [
-    { label: 'Name', name: 'name' },
-    { label: 'Created On', name: 'created', format: 'datetime' }
-  ]
+  drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'datetime' }]
 };
 
 // Dispatch Mappings

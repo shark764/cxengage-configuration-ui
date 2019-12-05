@@ -63,16 +63,18 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
     text="Reasons"
     userHasUpdatePermission={true}
   />
-  <NestedListField
-    className="reason-list"
-    data-automation="reasonListNestedList"
-    name="reasons"
-    removeCategoryItems={[Function]}
-    removeReasonListItem={[Function]}
-    selectedEntityId="0000-0000-0000-0000-0000"
-    setSelectedSubEntityId={[Function]}
-    userHasUpdatePermission={true}
-  />
+  <styled.div>
+    <NestedListField
+      className="reason-list"
+      data-automation="reasonListNestedList"
+      name="reasons"
+      removeCategoryItems={[Function]}
+      removeReasonListItem={[Function]}
+      selectedEntityId="0000-0000-0000-0000-0000"
+      setSelectedSubEntityId={[Function]}
+      userHasUpdatePermission={true}
+    />
+  </styled.div>
 </form>
 `;
 
@@ -139,15 +141,17 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
     text="Reasons"
     userHasUpdatePermission={true}
   />
-  <NestedListField
-    className="reason-list"
-    data-automation="reasonListNestedList"
-    name="reasons"
-    removeCategoryItems={[Function]}
-    removeReasonListItem={[Function]}
-    selectedEntityId="0000-0000-0000-0000-0000"
-    setSelectedSubEntityId={[Function]}
-    userHasUpdatePermission={true}
-  />
+  <styled.div>
+    <NestedListField
+      className="reason-list"
+      data-automation="reasonListNestedList"
+      name="reasons"
+      removeCategoryItems={[Function]}
+      removeReasonListItem={[Function]}
+      selectedEntityId="0000-0000-0000-0000-0000"
+      setSelectedSubEntityId={[Function]}
+      userHasUpdatePermission={true}
+    />
+  </styled.div>
 </form>
 `;

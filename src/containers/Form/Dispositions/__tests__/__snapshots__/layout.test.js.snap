@@ -14,14 +14,14 @@ exports[`<DispositionsForm /> renders create form 1`] = `
     inputType="text"
     label="Name *"
     name="name"
-    placeholder="Please enter a name.."
+    placeholder="Please enter a name..."
   />
   <InputField
     componentType="input"
     data-automation="externalIdInput"
     disabled={false}
     label="External ID"
-    name="externalid"
+    name="externalId"
   />
   <InputField
     componentType="textarea"
@@ -60,14 +60,14 @@ exports[`<DispositionsForm /> renders update form 1`] = `
     inputType="text"
     label="Name *"
     name="name"
-    placeholder="Please enter a name.."
+    placeholder="Please enter a name..."
   />
   <InputField
     componentType="input"
     data-automation="externalIdInput"
     disabled={false}
     label="External ID"
-    name="externalid"
+    name="externalId"
   />
   <InputField
     componentType="textarea"

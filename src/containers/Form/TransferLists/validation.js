@@ -8,5 +8,5 @@ export const formValidation = values => ({
   name: isEmpty(values.get('name')) && 'Please enter a name.',
   endpoints:
     (!values.get('endpoints') || values.get('endpoints').size === 0) &&
-    'TransferList should contian at least one contact.'
+    'Transfer List should contain at least one contact.'
 });

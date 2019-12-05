@@ -2,14 +2,31 @@
 
 exports[`DispositionLists Renders renders 1`] = `
 <Connect(ReduxForm)
-  dispatch={[Function]}
+  disableShared={false}
+  dispositionHeaders={
+    Immutable.List [
+      Immutable.Map {
+        "name": "D1",
+        "hierarchy": Immutable.List [
+          "H1",
+        ],
+      },
+    ]
+  }
   initialValues={
-    Object {
+    Immutable.Map {
       "active": true,
+      "shared": false,
+      "dispositions": Array [],
     }
   }
   isSaving={true}
   key="mockId"
+  removeCategoryItems={[Function]}
+  removeDispositionListItem={[Function]}
+  selectedEntityId="mockId"
+  setSelectedSubEntityId={[Function]}
+  sharedFormValue={true}
   store={
     Object {
       "dispatch": [Function],
@@ -39,6 +56,7 @@ exports[`DispositionLists Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  userHasSharePermission={true}
   userHasUpdatePermission={true}
 >
   Child
@@ -47,12 +65,26 @@ exports[`DispositionLists Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "disableShared": false,
+  "dispositionHeaders": Immutable.List [
+    Immutable.Map {
+      "name": "D1",
+      "hierarchy": Immutable.List [
+        "H1",
+      ],
+    },
+  ],
   "inherited": undefined,
-  "initialValues": Object {
+  "initialValues": Immutable.Map {
     "active": true,
+    "shared": false,
+    "dispositions": Array [],
   },
   "isSaving": true,
   "key": "mockId",
+  "selectedEntityId": "mockId",
+  "sharedFormValue": true,
+  "userHasSharePermission": true,
   "userHasUpdatePermission": true,
 }
 `;
