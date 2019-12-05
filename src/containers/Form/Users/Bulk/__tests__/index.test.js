@@ -2,11 +2,11 @@
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
-import { Map } from 'immutable';
+import { Map, fromJS } from 'immutable';
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { getCurrentFormValueByFieldName } from '../../../../../redux/modules/form/selectors';
+import { getCurrentFormValueByFieldName, selectFormInitialValues } from '../../../../../redux/modules/form/selectors';
 import UsersBulkActionsForm, { mapStateToProps, createFormName } from '../';
 import {
   getCurrentEntity,
@@ -26,6 +26,7 @@ isSaving.mockImplementation(() => true);
 getEntityData.mockImplementation(() => new Map({}));
 userHasPermissions.mockImplementation(() => true);
 isBulkUpdating.mockImplementation(() => true);
+selectFormInitialValues.mockImplementation(() => fromJS({ status: 'accepted' }));
 
 jest.mock('../../../../../redux/modules/entities/identityProviders/selectors');
 selectTenantIdentityProviders.mockImplementation(() => ({ label: 'idp1', value: '0001' }));

@@ -6,7 +6,8 @@ exports[`GenericBulkItems Renders renders 1`] = `
   entityName="reasons"
   initialValues={
     Immutable.Map {
-      "shared": false,
+      "active": "enabled",
+      "shared": true,
     }
   }
   isBulkUpdating={true}
@@ -52,7 +53,8 @@ exports[`Maps state to props only using selectors validates object created from 
 Object {
   "entityName": "reasons",
   "initialValues": Immutable.Map {
-    "shared": false,
+    "active": "enabled",
+    "shared": true,
   },
   "isBulkUpdating": true,
   "isSaving": true,

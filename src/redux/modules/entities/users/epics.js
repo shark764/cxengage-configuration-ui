@@ -705,38 +705,37 @@ export const BulkEntityUpdate = (action$, store) =>
       }
       return { ...a, allSdkCalls };
     })
-    .mergeMap(
-      a =>
-        a.allSdkCalls.length > 0
-          ? forkJoin(
-              a.allSdkCalls.map(apiCall =>
-                from(
-                  sdkPromise(apiCall).catch(error => ({
-                    error: error,
-                    id: apiCall.data['userId'],
-                    toString: getEntityItemDisplay(store.getState(), apiCall.data['userId'])
-                  }))
-                )
+    .mergeMap(a =>
+      a.allSdkCalls.length > 0
+        ? forkJoin(
+            a.allSdkCalls.map(apiCall =>
+              from(
+                sdkPromise(apiCall).catch(error => ({
+                  error: error,
+                  id: apiCall.data['userId'],
+                  toString: getEntityItemDisplay(store.getState(), apiCall.data['userId'])
+                }))
               )
             )
-              .do(allResult => handleBulkSuccess(allResult, a))
-              .mergeMap(result =>
-                from(result).map(response => {
-                  if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
-                    return handleSuccess(
-                      {
-                        result: {
-                          ...response.result,
-                          invitationStatus: a.toStatus
-                        }
-                      },
-                      a
-                    );
-                  }
-                  return handleSuccess(response, a);
-                })
-              )
-          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
+          )
+            .do(allResult => handleBulkSuccess(allResult, a))
+            .mergeMap(result =>
+              from(result).map(response => {
+                if (response.result && response.result.invitationStatus && a.toStatus !== undefined) {
+                  return handleSuccess(
+                    {
+                      result: {
+                        ...response.result,
+                        invitationStatus: a.toStatus
+                      }
+                    },
+                    a
+                  );
+                }
+                return handleSuccess(response, a);
+              })
+            )
+        : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
 export const FocusNoPasswordValueFormField = action$ =>

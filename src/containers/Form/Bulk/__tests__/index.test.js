@@ -1,7 +1,8 @@
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
+import { fromJS } from 'immutable';
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
@@ -18,7 +19,7 @@ jest.mock('../../../../redux/modules/form/selectors');
 getCurrentEntity.mockImplementation(() => 'mockEntity');
 isSaving.mockImplementation(() => true);
 isBulkUpdating.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
+selectFormInitialValues.mockImplementation(() => fromJS({ active: true }));
 
 describe('GenericBulkItems Renders', () => {
   it('renders', () => {

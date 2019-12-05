@@ -4,7 +4,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
 <Connect(ReduxForm)
   dispatch={[Function]}
   initialValues={
-    Object {
+    Immutable.Map {
       "active": true,
     }
   }
@@ -47,7 +47,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "initialValues": Object {
+  "initialValues": Immutable.Map {
     "active": true,
   },
   "isBulkUpdating": true,

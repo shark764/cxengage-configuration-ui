@@ -14,10 +14,7 @@ exports[`GenericBulkItems Renders renders 1`] = `
   }
   initialValues={
     Immutable.Map {
-      "inviteNow": false,
-      "resendInvitation": false,
-      "cancelInvitation": false,
-      "passwordReset": false,
+      "status": "accepted",
     }
   }
   inviteNowIsChecked={true}
@@ -71,10 +68,7 @@ Object {
     "value": "0001",
   },
   "initialValues": Immutable.Map {
-    "inviteNow": false,
-    "resendInvitation": false,
-    "cancelInvitation": false,
-    "passwordReset": false,
+    "status": "accepted",
   },
   "inviteNowIsChecked": true,
   "isBulkUpdating": true,

@@ -1,8 +1,7 @@
 /*
- * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
+ * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
-import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
@@ -16,7 +15,11 @@ import {
   isBulkUpdating
 } from '../../../../redux/modules/entities/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
-import { formSubmission, getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
+import {
+  formSubmission,
+  getCurrentFormValueByFieldName,
+  selectFormInitialValues
+} from '../../../../redux/modules/form/selectors';
 
 export const createFormName = state => ({ form: `${getCurrentEntity(state)}:bulk` });
 
@@ -31,12 +34,7 @@ const UsersBulkActionsForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    initialValues: new Map({
-      inviteNow: false,
-      resendInvitation: false,
-      cancelInvitation: false,
-      passwordReset: false
-    }),
+    initialValues: selectFormInitialValues(state),
     identityProviders: selectTenantIdentityProviders(state),
     inviteNowIsChecked: getCurrentFormValueByFieldName(state, 'inviteNow'),
     resendInvitationIsChecked: getCurrentFormValueByFieldName(state, 'resendInvitation'),

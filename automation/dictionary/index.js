@@ -34,7 +34,7 @@ const pages = {
             channelList: 1,
             valueInput: `+1${randomPhoneNum()}`,
             flowList: 1,
-            descriptionInput: `rDesc-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
           }
         ]
       },
@@ -45,7 +45,7 @@ const pages = {
             channelList: 3,
             valueInput: `remail-${randomId}@gmail.com`,
             // flowList: 2,
-            descriptionInput: `updatedRDesc-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`
           }
         ]
       },
@@ -54,10 +54,10 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkOutboundIdentifiers"
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkOutboundIdentifiers'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
   'Outbound Identifier List': {
@@ -66,7 +66,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
           }
         ]
       },
@@ -74,7 +74,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`
           }
         ]
         /*
@@ -90,19 +90,19 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkOutboundIdentifierLists"
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkOutboundIdentifierLists'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
-  'Reason': {
+  Reason: {
     specs: {
       create: {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
           }
         ]
       },
@@ -111,7 +111,7 @@ const pages = {
           {
             nameInput: `updatedRName-${randomId}`,
             descriptionInput: `updatedRDesc-${randomId}`,
-            sharedToggle: ""
+            sharedToggle: ''
           }
         ]
       },
@@ -120,10 +120,10 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkReasons"
+      mainBar: 'userManagementMenu',
+      subMainBar: 'navigationLinkReasons'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
   'Reason List': {
@@ -132,7 +132,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
           }
         ],
         subEntityParametersToInsert: [
@@ -159,13 +159,13 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`
             //isDefaultToggle: ""
           }
         ],
         subEntityParametersToInsert: [
           {
-            categoryNameInput: `updatedCategoryName-${randomId}`,
+            categoryNameInput: `updatedCategoryName-${randomId}`
           }
         ]
       },
@@ -175,20 +175,20 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkReasonsList"
+      mainBar: 'userManagementMenu',
+      subMainBar: 'navigationLinkReasonsList'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`],
-    deleteSearchValue: `updatedRName-${randomId}`,
+    deleteSearchValue: `updatedRName-${randomId}`
   },
-  'Skill': {
+  Skill: {
     specs: {
       create: {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
           }
         ]
       },
@@ -197,30 +197,30 @@ const pages = {
           {
             nameInput: `updatedRName-${randomId}`,
             descriptionInput: `updatedRDesc-${randomId}`,
-            hasProficiencyToggle: ""
+            hasProficiencyToggle: ''
           }
         ],
         subEntityToAddAndRemove: [
           {
-            usersSVG: "usersSVG"
+            usersSVG: 'usersSVG'
           },
           {
-            outboundIdentifierListsSVG: "outboundIdentifierListsSVG"
+            outboundIdentifierListsSVG: 'outboundIdentifierListsSVG'
           }
-        ],
+        ]
       },
       read: {
         parameters: {}
       }
     },
     navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkSkills"
+      mainBar: 'userManagementMenu',
+      subMainBar: 'navigationLinkSkills'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
-  'Group': {
+  Group: {
     specs: {
       create: {
         parametersToInsert: [
@@ -228,7 +228,7 @@ const pages = {
             nameInput: `rName-${randomId}`,
             descriptionInput: `rDesc-${randomId}`
           }
-        ],
+        ]
       },
       update: {
         parametersToInsert: [
@@ -239,25 +239,25 @@ const pages = {
         ],
         subEntityToAddAndRemove: [
           {
-            usersSVG: "usersSVG"
+            usersSVG: 'usersSVG'
           },
           {
-            outboundIdentifierListsSVG: "outboundIdentifierListsSVG"
+            outboundIdentifierListsSVG: 'outboundIdentifierListsSVG'
           },
           {
-            reasonListsSVG: "reasonListsSVG"
+            reasonListsSVG: 'reasonListsSVG'
           }
-        ],
+        ]
       },
       read: {
         parameters: {}
       }
     },
     navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkGroups"
+      mainBar: 'userManagementMenu',
+      subMainBar: 'navigationLinkGroups'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
   'Transfer List': {
@@ -266,7 +266,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
           }
         ],
         subEntityParametersToInsert: [
@@ -290,7 +290,7 @@ const pages = {
               input: ['coldTransferCheckbox'],
               value: 'coldTransfer'
             },
-            endpointInput: `+1${randomPhoneNum()}`,
+            endpointInput: `+1${randomPhoneNum()}`
           },
           {
             newCategoryToggle: '',
@@ -302,7 +302,7 @@ const pages = {
               input: ['warmTransferCheckbox'],
               value: 'warmTransfer'
             },
-            endpointInput: `+1${randomPhoneNum()}`,
+            endpointInput: `+1${randomPhoneNum()}`
           },
           {
             categoryNameAutoComplete: `CategoryTwo-${randomId}`,
@@ -313,7 +313,7 @@ const pages = {
               input: ['coldTransferCheckbox'],
               value: 'coldTransfer'
             },
-            endpointInput: `+1${randomPhoneNum()}`,
+            endpointInput: `+1${randomPhoneNum()}`
           }
         ]
       },
@@ -321,7 +321,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`
           }
         ],
         subEntityParametersToInsert: [
@@ -333,7 +333,7 @@ const pages = {
               input: ['warmTransferCheckbox'],
               value: 'coldTransfer'
             },
-            endpointInput: `+1${randomPhoneNum()}`,
+            endpointInput: `+1${randomPhoneNum()}`
           }
         ]
       },
@@ -343,21 +343,21 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkTransferLists"
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkTransferLists'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`],
-    deleteSearchValue: `updatedRName-${randomId}`,
+    deleteSearchValue: `updatedRName-${randomId}`
   },
-  'User': {
+  User: {
     specs: {
       create: {
         parametersToInsert: [
           {
             emailInput: `remail-${randomId}@gmail.com`,
-            roleList: "Platform User",
-            tenantList: "Agent"
+            roleList: 'Platform User',
+            tenantList: 'Agent'
           }
         ]
       },
@@ -366,48 +366,48 @@ const pages = {
           {
             firstNameInput: `updatedRName-${randomId}`,
             lastNameInput: `updatedRDesc-${randomId}`,
-            roleList: "Supervisor",
+            roleList: 'Supervisor'
           }
         ],
         subEntityToAddAndRemove: [
           {
-            skillsSVG: "skillsSVG"
+            skillsSVG: 'skillsSVG'
           },
           {
-            groupsSVG: "groupsSVG"
+            groupsSVG: 'groupsSVG'
           },
           {
-            reasonListsSVG: "reasonListsSVG"
+            reasonListsSVG: 'reasonListsSVG'
           },
           {
-            messageTemplatesSVG: "messageTemplatesSVG"
+            messageTemplatesSVG: 'messageTemplatesSVG'
           },
           {
-            transferListsSVG: "transferListsSVG"
+            transferListsSVG: 'transferListsSVG'
           },
           {
-            outboundIdentifierListsSVG: "outboundIdentifierListsSVG"
+            outboundIdentifierListsSVG: 'outboundIdentifierListsSVG'
           }
-        ],
+        ]
       },
       read: {
         parameters: {}
       }
     },
     navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkUsers"
+      mainBar: 'userManagementMenu',
+      subMainBar: 'navigationLinkUsers'
     },
-    whichCatagoryToSearch: "searchEmailColumn",
+    whichCatagoryToSearch: 'searchEmailColumn',
     updateSearchValue: [`remail-${randomId}@gmail.com`]
   },
-  'Role': {
+  Role: {
     specs: {
       create: {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
           }
         ]
       },
@@ -416,41 +416,12 @@ const pages = {
           {
             nameInput: `updatedRName-${randomId}`,
             descriptionInput: `updatedRDesc-${randomId}`,
-            sharedToggle: ""
+            sharedToggle: ''
           }
         ],
         subEntityToAddAndRemove: [
           {
-            permissionsSVG: "permissionsSVG"
-          }
-        ],
-      },
-      read: {
-        parameters: {}
-      },
-    },
-    navigation: {
-      mainBar: "userManagementMenu",
-      subMainBar: "navigationLinkRoles"
-    },
-    whichCatagoryToSearch: "searchNameColumn",
-    updateSearchValue: [`rName-${randomId}`],
-  },
-  'List': {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            listTypeList: "Disposition Codes Type"
-          }
-        ]
-      },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            sharedToggle: ""
+            permissionsSVG: 'permissionsSVG'
           }
         ]
       },
@@ -459,19 +430,48 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkLists"
+      mainBar: 'userManagementMenu',
+      subMainBar: 'navigationLinkRoles'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
-  'Sla': {
+  List: {
     specs: {
       create: {
         parametersToInsert: [
           {
             nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
+            listTypeList: 'Disposition Codes Type'
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            sharedToggle: ''
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkLists'
+    },
+    whichCatagoryToSearch: 'searchNameColumn',
+    updateSearchValue: [`rName-${randomId}`]
+  },
+  Sla: {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
           }
         ],
         subEntityParametersToInsert: [
@@ -488,7 +488,7 @@ const pages = {
         parametersToInsert: [
           {
             nameInput: `updatedName-${randomId}`,
-            descriptionInput: `updatedDesc-${randomId}`,
+            descriptionInput: `updatedDesc-${randomId}`
             // sharedToggle: '',
           }
         ]
@@ -498,10 +498,10 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkSlas"
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkSlas'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
   /*
@@ -565,7 +565,7 @@ const pages = {
           {
             nameInput: `keyName-${randomId}`,
             descriptionInput: `keyDesc-${randomId}`,
-            roleList: "Administrator"
+            roleList: 'Administrator'
           }
         ]
       },
@@ -574,7 +574,7 @@ const pages = {
           {
             nameInput: `updatedKeyName-${randomId}`,
             descriptionInput: `updatedKeyDesc-${randomId}`,
-            roleList: "Agent"
+            roleList: 'Agent'
           }
         ]
       },
@@ -584,12 +584,12 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkApiKeys"
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkApiKeys'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`keyName-${randomId}`],
-    deleteSearchValue: `updatedKeyName-${randomId}`,
+    deleteSearchValue: `updatedKeyName-${randomId}`
   },
   'Message Template': {
     specs: {
@@ -600,7 +600,7 @@ const pages = {
             descriptionInput: `rDesc-${randomId}`,
             msgTemplatechannelsCheckbox: {
               input: ['smsCheckbox'],
-              value: 'sms',
+              value: 'sms'
             },
             templateInput: `rTemplateInput-${randomId}-${randomId}`
           },
@@ -609,7 +609,7 @@ const pages = {
             descriptionInput: `rRichDesc-${randomId}`,
             msgTemplatechannelsCheckbox: {
               input: ['emailCheckbox'],
-              value: 'email',
+              value: 'email'
             },
             typeList: 1,
             richTextEditorInput: `rTemplateInput-${randomId}-${randomId}`
@@ -623,7 +623,7 @@ const pages = {
             descriptionInput: `updatedRDesc-${randomId}`,
             msgTemplatechannelsCheckbox: {
               input: ['smsCheckbox', 'messagingCheckbox'],
-              value: 'messaging',
+              value: 'messaging'
             },
             templateInput: `rUpdatedTemplateInput-${randomId}-${randomId}`
           },
@@ -633,14 +633,14 @@ const pages = {
             richTextEditorInput: `rUpdatedRichTemplateInput-${randomId}-${randomId}`
           }
         ]
-      },
+      }
     },
     navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkMessageTemplates"
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkMessageTemplates'
     },
     whichCatagoryToSearch: 'searchNameColumn',
-    updateSearchValue: [`rName-${randomId}`, `rRichName-${randomId}`],
+    updateSearchValue: [`rName-${randomId}`, `rRichName-${randomId}`]
   },
   'Business Hour': {
     specs: {
@@ -664,10 +664,10 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "configurationMenu",
-      subMainBar: "navigationLinkBusinessHours"
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkBusinessHours'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
   /*
@@ -710,8 +710,8 @@ const pages = {
           {
             nameInput: `dMapName-${randomId}`,
             descriptionInput: `dMapDesc-${randomId}`,
-            interactionList: "Voice",
-            mappingList: "Contact Point",
+            interactionList: 'Voice',
+            mappingList: 'Contact Point',
             phoneValueInput: `+1${randomPhoneNum()}`,
             flowList: 1
           }
@@ -722,8 +722,8 @@ const pages = {
           {
             nameInput: `updatedDMapName-${randomId}`,
             descriptionInput: `updatedDMapDesc-${randomId}`,
-            interactionList: "Sms",
-            mappingList: "Customer",
+            interactionList: 'Sms',
+            mappingList: 'Customer',
             phoneValueInput: `+1${randomPhoneNum()}`,
             flowVersionList: 1
           }
@@ -734,45 +734,45 @@ const pages = {
       }
     },
     navigation: {
-      mainBar: "flowsMenu",
-      subMainBar: "navigationLinkDispatchMappings"
+      mainBar: 'flowsMenu',
+      subMainBar: 'navigationLinkDispatchMappings'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`dMapName-${randomId}`]
-  },
-  'Data Access Report': {
-    specs: {
-      create: {
-        parametersToInsert: [
-          {
-            nameInput: `rName-${randomId}`,
-            descriptionInput: `rDesc-${randomId}`,
-            reportTypeRadio: "realtime",
-            realtimeReportTypeRadio: "standard",
-            realtimeReportAutoComplete: "Agent State Table"
-          }
-        ]
-      },
-      update: {
-        parametersToInsert: [
-          {
-            nameInput: `updatedRName-${randomId}`,
-            descriptionInput: `updatedRDesc-${randomId}`,
-            //realtimeReportAutoComplete: "Interactions Completed Table"
-          }
-        ]
-      },
-      read: {
-        parameters: {}
-      }
-    },
-    navigation: {
-      mainBar: "reportingMenu",
-      subMainBar: "navigationLinkDataAccessReports"
-    },
-    whichCatagoryToSearch: "searchNameColumn",
-    updateSearchValue: [`rName-${randomId}`]
   }
+  // 'Data Access Report': {
+  //   specs: {
+  //     create: {
+  //       parametersToInsert: [
+  //         {
+  //           nameInput: `rName-${randomId}`,
+  //           descriptionInput: `rDesc-${randomId}`,
+  //           reportTypeRadio: "realtime",
+  //           realtimeReportTypeRadio: "standard",
+  //           realtimeReportAutoComplete: "Agent State Table"
+  //         }
+  //       ]
+  //     },
+  //     update: {
+  //       parametersToInsert: [
+  //         {
+  //           nameInput: `updatedRName-${randomId}`,
+  //           descriptionInput: `updatedRDesc-${randomId}`,
+  //           //realtimeReportAutoComplete: "Interactions Completed Table"
+  //         }
+  //       ]
+  //     },
+  //     read: {
+  //       parameters: {}
+  //     }
+  //   },
+  //   navigation: {
+  //     mainBar: "reportingMenu",
+  //     subMainBar: "navigationLinkDataAccessReports"
+  //   },
+  //   whichCatagoryToSearch: "searchNameColumn",
+  //   updateSearchValue: [`rName-${randomId}`]
+  // }
 };
 
 module.exports = pages;

@@ -2,10 +2,11 @@
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
+import { fromJS } from 'immutable';
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import { getCurrentFormValueByFieldName } from '../../../../../redux/modules/form/selectors';
+import { getCurrentFormValueByFieldName, selectFormInitialValues } from '../../../../../redux/modules/form/selectors';
 import ReasonsBulkActionsForm, { mapStateToProps, createFormName } from '../';
 import {
   getCurrentEntity,
@@ -24,6 +25,7 @@ isSaving.mockImplementation(() => true);
 isBulkUpdating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 userHasSharePermission.mockImplementation(() => true);
+selectFormInitialValues.mockImplementation(() => fromJS({ active: 'enabled', shared: true }));
 
 describe('GenericBulkItems Renders', () => {
   it('renders', () => {

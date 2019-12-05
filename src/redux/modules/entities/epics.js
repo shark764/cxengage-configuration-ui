@@ -405,6 +405,20 @@ export const BulkEntityUpdate = (action$, store) =>
           : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
+export const BulkEntityUpdateFulfilled = action$ =>
+  action$
+    .ofType('BULK_ENTITY_UPDATE_FULFILLED')
+    .debounceTime(300)
+    .map(a => ({
+      type: '@@redux-form/INITIALIZE',
+      meta: {
+        form: `${a.entityName}:bulk`,
+        keepDirty: false,
+        updateUnregisteredFields: false
+      },
+      payload: {}
+    }));
+
 export const ToggleEntity = (action$, store) =>
   action$
     .ofType('TOGGLE_ENTITY')
@@ -676,12 +690,13 @@ export const FetchFormMetaData = (action$, store) =>
 export const FetchBulkFormMetaData = (action$, store) =>
   action$
     .ofType('TOGGLE_BULK_ENTITY_CHANGE')
+    .debounceTime(300)
     .map(a => ({
       ...a,
       entityId: getSelectedEntityId(store.getState()),
       isDefined: name => store.getState().getIn(['Entities', name, 'data']).size === 0
     }))
-    .filter(a => a.entityId === 'bulk')
+    .filter(a => a.entityId === 'bulk' && a.bool !== false)
     .switchMap(a =>
       from(entitiesMetaData[a.entityName].bulkFormDependencies)
         .filter(entityName => a.isDefined(entityName))

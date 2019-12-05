@@ -26,14 +26,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reason Lists
 - Transfer Lists
 
+## [0.69.3] - 2019-12-04
+## Fixed
+- CXV1-20905 - Clicking Select All action throws an error when performing bulk actions.
+- CXV1-20881 -  After bulk action is performed Selected items are not cleared and gives warning about loosing changes if closed.
+
 ## [0.69.2] - 2019-12-04
 ## Fixed
 - CXV1-20612 - Remove entityId from the URL when navigated between pages
 - CXV1-20611 - Display sidepanel entity form while accessing config-ui & config2 URL with id
 
 ## [0.69.1] - 2019-11-29
-## Added
-- CXV1-20882 - Error message is incorrect when performing a Bulk Action that has already been made
+## Fixed
+- CXV1-20882 - Error message is incorrect when performing a Bulk Action that has already been made.
 
 ## [0.69.0] - 2019-11-29
 ## Added

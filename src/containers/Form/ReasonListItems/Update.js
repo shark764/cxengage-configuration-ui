@@ -33,7 +33,6 @@ const UpdateReasonListItemsForm = compose(
 )(ReasonListItemsForm);
 
 export const mapStateToProps = state => {
-  console.log(getCurrentFormValueByFieldName(state, 'name'));
   return {
     key: getSelectedSubEntityId(state),
     isSaving: isSubEntitySaving(state),
