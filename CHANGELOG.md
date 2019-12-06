@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.1] - 2019-12-06
+## Added
+- <no-jira> - Adding automation for exceptions | Business Hours.
+
 ## [0.70.0] - 2019-12-02
 ## Added
 - CXV1-20570 - SidePanel Form for Disposition Lists.

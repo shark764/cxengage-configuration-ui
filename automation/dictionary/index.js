@@ -660,15 +660,23 @@ const pages = {
             descriptionInput: `updatedRDesc-${randomId}`,
             timezoneList: 5
           }
+        ],
+        subEntityParametersToInsert: [
+          {
+            modalDescriptionInput: `updatedCategoryName-${randomId}`,
+          }
         ]
       }
+
     },
     navigation: {
       mainBar: 'configurationMenu',
       subMainBar: 'navigationLinkBusinessHours'
     },
-    whichCatagoryToSearch: 'searchNameColumn',
-    updateSearchValue: [`rName-${randomId}`]
+    whichCatagoryToSearch: "searchNameColumn",
+    updateSearchValue: [`rName-${randomId}`],
+    deleteSearchValue: `updatedKeyName-${randomId}`
+
   },
   /*
   'Flow': {

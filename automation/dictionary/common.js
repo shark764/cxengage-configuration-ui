@@ -1,7 +1,8 @@
 const { Element, Brow } = require('cx-automation-utils/src/pageObject.js');
 const Elem = require('../pageObjects/webElements');
 const dictionary = require('./index');
-
+const today =  new Date();
+const tomorrow =  new Date(today.setDate(today.getDate() + 1)).toString().slice(0, 15);
 const commonBehavior = {
   login() {
     Brow.url(process.env.URI ? process.env.URI : process.ENV.URL);
@@ -25,6 +26,7 @@ const commonBehavior = {
     Elem.loadingSpinnerIcon.waitForVisible(30000, false);
     Elem.loadingSpinnerIcon.validateElementsState('isVisible', false);
   },
+
   navigationMainBar(entity) {
     let navBar = new Element(`[data-automation=${dictionary[entity].navigation.mainBar}]`);
     let navBarSub = new Element(`[data-automation=${dictionary[entity].navigation.subMainBar}]`);
@@ -144,7 +146,20 @@ const commonBehavior = {
           Elem.updateListItemButton.waitAndClick();
           subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
           Elem.modalSubmitButton.waitAndClick();
-        } 
+        }
+        else if ( entity === 'Business Hour' ) {
+          Elem.sdpanelAddItem.waitAndClick();
+          Elem.dateDatePicker.waitForVisible();
+          Elem.dateDatePicker.waitAndClick();
+          new Element(`div[class="DayPicker-Day"][aria-label="${tomorrow}"]`).waitForVisible();
+          new Element(`div[class="DayPicker-Day"][aria-label="${tomorrow}"]`).waitAndClick();
+          subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
+          Elem.modalSubmitButton.waitAndClick();
+          this.verifyAction(entity , 'exception');
+          this.closeToastr();
+          Elem.sdpanelSubmitButton.waitAndClick();
+
+        }
       } else {
         $('button[data-automation="sdpanelSubmitButton"]').scroll();
         Elem.sdpanelSubmitButton.waitAndClick();
@@ -163,7 +178,7 @@ const commonBehavior = {
     });
   },
   updateEntity(entity, actionType) {
-    dictionary[entity].specs[actionType].parametersToInsert.forEach((parameter, index) => {
+     dictionary[entity].specs[actionType].parametersToInsert.forEach((parameter, index) => {
       this.searchByNameAndClick(entity, dictionary[entity].updateSearchValue[index]);
       this.submitFormData(entity, actionType, parameter);
       this.verifyAction(entity, actionType);
@@ -177,7 +192,7 @@ const commonBehavior = {
       Elem.extensionsSVG.waitAndClick();
       Elem.sdpanelAddItem.waitForVisible(20000, false);
     }
-    if (entity !== 'Role' && entity !== 'Outbound Identifier List') {
+    if (entity !== 'Role' && entity !== 'Outbound Identifier List' && entity !== 'Business Hour') {
       this.openSVGDropdown(param, entity);
     }
     Elem.sdpanelAddItem.waitAndClick();
@@ -193,6 +208,7 @@ const commonBehavior = {
     Elem.loadingSpinnerIcon.waitForVisible(20000, false);
     this.verifyAction(entity, actionType);
     this.closeToastr(entity, actionType);
+
     if (entity !== 'Role' && entity !== 'Outbound Identifier List') {
       Elem[param].waitAndClick();
       Elem.sdpanelAddItem.waitForVisible(20000, false);
@@ -225,6 +241,12 @@ const commonBehavior = {
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
     }
+    if (entity === 'Business Hour') {
+      Elem.dtpanelActionRemoveItem.waitAndClick();
+      Elem.confirmButton.waitAndClick();
+
+    }
+
   },
   entityCRUD(entity, actionType) {
     if (actionType === 'create') {
@@ -238,9 +260,14 @@ const commonBehavior = {
   verifyAction(entity, actionType) {
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    if ((entity === 'Reason List' || entity === 'Transfer List' || entity === 'Role') && actionType === 'delete') {
+    if ((entity === 'Reason List' || entity === 'Transfer List' || entity === 'Role' || entity === 'Business Hour') && actionType === 'delete') {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was updated successfully!`);
-    } else {
+    }
+    else if (entity === 'Business Hour' && actionType === 'exception'){
+      Elem.toastSuccessMessage.validateElementsString('exact', `Exception was created successfully!`);
+
+    }
+    else {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
     }
   },
