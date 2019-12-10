@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.2] - 2019-12-09
+## Fixed
+- CXV1-20935 - Reordering dispositions when Creating new Disposition List causes duplication of items
+
 ## [0.70.1] - 2019-12-06
 ## Added
 - <no-jira> - Adding automation for exceptions | Business Hours.

@@ -63,13 +63,16 @@ export const selectDispositionsHeaders = createSelector(currentFormDispositions,
       const hierarchyExists = accumlator.find(val => {
         return val.get('hierarchy').toJS()[0] === currHierarchy;
       });
+
       if (!hierarchyExists) {
         return accumlator.push(
           fromJS({
             name: currentVal.get('name'),
             hierarchy: currentVal.get('hierarchy'),
             categoryUUID: currentVal.get('categoryUUID'),
-            droppableUUID: currentVal.get('droppableUUID')
+            droppableUUID: currentVal.get('droppableUUID'),
+            draggableUUID: currentVal.get('draggableUUID'),
+            endpointUUID: currentVal.get('endpointUUID')
           })
         );
       }
@@ -112,9 +115,9 @@ export const selectDispositionUUIDS = createSelector(
       .set('sortOrder', current.length)
       .set('dispositionId', disposition[0].id)
       .set('draggableUUID', generateUUID())
-      .set('dispositionUUID', generateUUID())
       .set('categoryUUID', generateUUID())
       .set('droppableUUID', generateUUID())
+      .set('endpointUUID', generateUUID())
       .delete('newCategory');
   }
 );
@@ -133,7 +136,6 @@ export const dispositionListItemUpdateValues = createSelector(
           ? disposition.set('hierarchy', [props.values.get('hierarchy')])
           : disposition;
       });
-
       return updatedDispositions;
     }
   }
@@ -144,8 +146,9 @@ export const dispositionListItemCreateValues = createSelector(
   [selectDispositionUUIDS, currentFormDispositions],
   (values, existingDispositions) => {
     if (existingDispositions !== undefined) {
-      let currHierarchy = existingDispositions.find(disposition =>
-        disposition.get('hierarchy')[0] ? disposition.get('hierarchy')[0] : disposition.get('hierarchy').toJS()[0]
+      let currHierarchy = existingDispositions.find(
+        disposition =>
+          disposition.get('hierarchy')[0] ? disposition.get('hierarchy')[0] : disposition.get('hierarchy').toJS()[0]
       );
       const hierarchyExists = currHierarchy === values.get('hierarchy')[0];
 
@@ -161,7 +164,6 @@ export const dispositionListItemCreateValues = createSelector(
             .set('categoryUUID', hierarchyExists.get('categoryUUID'))
             .set('droppableUUID', hierarchyExists.get('droppableUUID'))
         );
-
         return updatedValues;
       }
     } else {
