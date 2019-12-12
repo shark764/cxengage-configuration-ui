@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.3] - 2019-12-11
+## Fixed
+- CXV1-20921 - Wrong error message when attempting to add an unshared disposition to a shared disposition list.
+
 ## [0.70.2] - 2019-12-09
 ## Fixed
 - CXV1-20935 - Reordering dispositions when Creating new Disposition List causes duplication of items

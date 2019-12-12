@@ -22,7 +22,6 @@ import {
 
 const DispositionListContainer = styled.div`
   font-size: 14px;
-  max-wdith: 700px;
   border: 1px solid rgba(0, 0, 0, 0.1);
 `;
 

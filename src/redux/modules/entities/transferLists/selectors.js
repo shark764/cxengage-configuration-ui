@@ -167,17 +167,16 @@ export const transferListItemUpdateValues = createSelector(
     props.values = props.values.get('contactType') === 'queue' ? props.values.set('endpoint', queueId) : props.values;
     // updates hierarchy title:
     if (selectedSubEntityId.includes('updateCategoryHeader')) {
-      const updatedEndpoints = existingEndpoints.map(
-        endpoint =>
-          endpoint.get('hierarchy') === props.initialValues.get('hierarchy')
-            ? endpoint.set('hierarchy', props.values.get('hierarchy'))
-            : endpoint
+      const updatedEndpoints = existingEndpoints.map(endpoint =>
+        endpoint.get('hierarchy') === props.initialValues.get('hierarchy')
+          ? endpoint.set('hierarchy', props.values.get('hierarchy'))
+          : endpoint
       );
       return updatedEndpoints;
     } else if (!selectedSubEntityId.includes('updateCategoryHeader')) {
       // updates transferListItem:
-      const updatedEndpoints = existingEndpoints.map(
-        endpoint => (endpoint.get('endpointUUID') === props.values.get('endpointUUID') ? props.values : endpoint)
+      const updatedEndpoints = existingEndpoints.map(endpoint =>
+        endpoint.get('endpointUUID') === props.values.get('endpointUUID') ? props.values : endpoint
       );
       return updatedEndpoints;
     }

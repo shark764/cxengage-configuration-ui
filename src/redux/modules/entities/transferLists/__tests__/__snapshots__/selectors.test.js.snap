@@ -18,7 +18,7 @@ Immutable.Map {
 }
 `;
 
-exports[`TransferListsForm selectors Gets currently selected trasnferList endpoints 1`] = `
+exports[`TransferListsForm selectors Gets currently selected transferList endpoints 1`] = `
 Immutable.List [
   Immutable.Map {
     "hierarchy": "mockHierarchy1",

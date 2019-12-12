@@ -192,11 +192,20 @@ export const selectExistingCategories = createSelector(
     }, [])
 );
 
+const currentSharedValue = state => getCurrentFormValueByFieldName(state, 'shared') || false;
+
 export const selectActiveReasonDropDownData = createSelector(
-  [getAllReasons, currentFormReasons],
-  (reasons, formReasons) =>
+  [getAllReasons, currentFormReasons, currentSharedValue],
+  (reasons, formReasons, isShared) =>
     reasons
-      .filter(reason => reason.active === true)
+      .filter(reason => {
+        // If Reason List is shared, then just shared reasons
+        // can only be added to nested list component.
+        if (isShared) {
+          return reason.active === true && reason.shared;
+        }
+        return reason.active === true;
+      })
       .map(activeReason => {
         return { label: activeReason.name, value: activeReason.id };
       })

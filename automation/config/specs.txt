@@ -22,6 +22,8 @@ configurationMenu
 
 flowsMenu
   Flow
+  Disposition
+  Disposition List
   Dispatch Mappings
   
 reportingMenu

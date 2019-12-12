@@ -148,7 +148,7 @@ export default class Navigation extends Component {
                   Presence Reasons
                 </StyledLink>
                 <StyledLink
-                  data-automation="navigationLinkReasonsList"
+                  data-automation="navigationLinkReasonLists"
                   to="/configuration/reasonLists"
                   onClick={() => this.setCurrentEntityAndEntityId('reasonLists')}
                 >

@@ -28,7 +28,7 @@ const initialState = fromJS({
   },
   lists: {
     ...defaultEntity,
-    sidePanelWidth: 750,
+    sidePanelWidth: 600,
     subEntity: 'listItems',
     selectedSubEntityId: undefined,
     subEntitySaving: false,
@@ -49,7 +49,7 @@ const initialState = fromJS({
   },
   emailTemplates: {
     ...defaultEntity,
-    sidePanelWidth: 750,
+    sidePanelWidth: 650,
     readPermission: ['USER_MANAGEMENT_EMAIL_READ'],
     updatePermission: ['USER_MANAGEMENT_EMAIL_UPDATE', 'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE']
   },
@@ -58,7 +58,7 @@ const initialState = fromJS({
     metaData: {
       listDependency: 'outboundIdentifiers'
     },
-    sidePanelWidth: 750,
+    sidePanelWidth: 650,
     readPermission: ['OUTBOUND_IDENTIFIER_READ'],
     updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
     createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
@@ -127,7 +127,7 @@ const initialState = fromJS({
     metaData: {
       listDependency: 'users'
     },
-    sidePanelWidth: 750,
+    sidePanelWidth: 650,
     readPermission: ['VIEW_ALL_SKILLS'],
     updatePermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
@@ -180,7 +180,7 @@ const initialState = fromJS({
     metaData: {
       listDependency: 'users'
     },
-    sidePanelWidth: 750,
+    sidePanelWidth: 600,
     readPermission: ['CUSTOM_STATS_READ'],
     updatePermission: ['CUSTOM_STATS_UPDATE'],
     createPermission: ['CUSTOM_STATS_CREATE']
@@ -203,7 +203,7 @@ const initialState = fromJS({
   },
   flows: {
     ...defaultEntity,
-    sidePanelWidth: 750,
+    sidePanelWidth: 600,
     readPermission: ['VIEW_ALL_FLOWS'],
     updatePermission: ['MANAGE_ALL_FLOWS'],
     createPermission: ['MANAGE_ALL_FLOWS'],
@@ -229,7 +229,7 @@ const initialState = fromJS({
   },
   messageTemplates: {
     ...defaultEntity,
-    sidePanelWidth: 750,
+    sidePanelWidth: 650,
     readPermission: ['VIEW_ALL_MESSAGE_TEMPLATES'],
     updatePermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
     createPermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
@@ -255,7 +255,7 @@ const initialState = fromJS({
   },
   slas: {
     ...defaultEntity,
-    sidePanelWidth: 750,
+    sidePanelWidth: 650,
     readPermission: ['CUSTOM_STATS_READ'],
     updatePermission: ['CUSTOM_STATS_UPDATE'],
     createPermission: ['CUSTOM_STATS_CREATE'],

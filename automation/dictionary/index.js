@@ -176,7 +176,7 @@ const pages = {
     },
     navigation: {
       mainBar: 'userManagementMenu',
-      subMainBar: 'navigationLinkReasonsList'
+      subMainBar: 'navigationLinkReasonLists'
     },
     whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`],
@@ -345,6 +345,91 @@ const pages = {
     navigation: {
       mainBar: 'configurationMenu',
       subMainBar: 'navigationLinkTransferLists'
+    },
+    whichCatagoryToSearch: 'searchNameColumn',
+    updateSearchValue: [`rName-${randomId}`],
+    deleteSearchValue: `updatedRName-${randomId}`
+  },
+  Disposition: {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`,
+            sharedToggle: ''
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: 'flowsMenu',
+      subMainBar: 'navigationLinkDispositions'
+    },
+    whichCatagoryToSearch: 'searchNameColumn',
+    updateSearchValue: [`rName-${randomId}`]
+  },
+  'Disposition List': {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`
+          }
+        ],
+        subEntityParametersToInsert: [
+          {
+            categoryNameInput: `CategoryOne-${randomId}`,
+            dispositionList: 1
+          },
+          {
+            categoryNameAutoComplete: `CategoryOne-${randomId}`,
+            dispositionList: 2
+          },
+          {
+            newCategoryToggle: '',
+            categoryNameInput: `CategoryTwo-${randomId}`,
+            dispositionList: 1
+          },
+          {
+            categoryNameAutoComplete: `CategoryTwo-${randomId}`,
+            dispositionList: 2
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedRName-${randomId}`,
+            descriptionInput: `updatedRDesc-${randomId}`
+          }
+        ],
+        subEntityParametersToInsert: [
+          {
+            categoryNameInput: `updatedCategoryName-${randomId}`
+          }
+        ]
+      },
+      delete: 'deleteDispositionLists',
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: 'flowsMenu',
+      subMainBar: 'navigationLinkDispositionLists'
     },
     whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`],
@@ -663,20 +748,18 @@ const pages = {
         ],
         subEntityParametersToInsert: [
           {
-            modalDescriptionInput: `updatedCategoryName-${randomId}`,
+            modalDescriptionInput: `updatedCategoryName-${randomId}`
           }
         ]
       }
-
     },
     navigation: {
       mainBar: 'configurationMenu',
       subMainBar: 'navigationLinkBusinessHours'
     },
-    whichCatagoryToSearch: "searchNameColumn",
+    whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`],
     deleteSearchValue: `updatedKeyName-${randomId}`
-
   },
   /*
   'Flow': {

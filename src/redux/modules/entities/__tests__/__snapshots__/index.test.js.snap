@@ -216,7 +216,7 @@ Immutable.Map {
   "skills": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 650,
     "confirmationDialogType": undefined,
     "metaData": Immutable.Map {
       "listDependency": "users",
@@ -296,7 +296,7 @@ Immutable.Map {
       "MANAGE_ALL_FLOWS",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 600,
     "assignPermission": Immutable.List [
       "MANAGE_ALL_FLOWS",
     ],
@@ -405,7 +405,7 @@ Immutable.Map {
       "CUSTOM_STATS_UPDATE",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 650,
     "assignPermission": Immutable.List [],
   },
   "apiKeys": Immutable.Map {
@@ -476,7 +476,7 @@ Immutable.Map {
   "dataAccessReports": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 600,
     "confirmationDialogType": undefined,
     "metaData": Immutable.Map {
       "listDependency": "users",
@@ -528,7 +528,7 @@ Immutable.Map {
       "MANAGE_ALL_MESSAGE_TEMPLATES",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 650,
     "assignPermission": Immutable.List [
       "MANAGE_ALL_MESSAGE_TEMPLATES",
     ],
@@ -584,7 +584,7 @@ Immutable.Map {
       "MANAGE_ALL_LISTS",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 600,
     "subEntitySaving": false,
   },
   "chatWidgets": Immutable.Map {
@@ -664,7 +664,7 @@ Immutable.Map {
       "OUTBOUND_IDENTIFIER_MODIFY",
     ],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 650,
     "assignPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_ASSIGN",
     ],
@@ -720,7 +720,7 @@ Immutable.Map {
   "emailTemplates": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",
-    "sidePanelWidth": 750,
+    "sidePanelWidth": 650,
     "confirmationDialogType": undefined,
     "readPermission": Immutable.List [
       "USER_MANAGEMENT_EMAIL_READ",

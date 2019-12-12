@@ -2,19 +2,19 @@
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
+import { fromJS } from 'immutable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import { generateUUID } from 'serenova-js-utils/uuid';
 
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
-import { generateUUID } from 'serenova-js-utils/uuid';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity } from '../selectors';
 import { getCurrentFormValueByFieldName } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
-import { fromJS } from 'immutable';
 
-export const UpdatePresenceDispositionList = (action$, store) =>
+export const UpdateDispositionList = (action$, store) =>
   action$
     .ofType('UPDATE_ENTITY')
     .filter(({ entityName }) => entityName === 'dispositionLists')

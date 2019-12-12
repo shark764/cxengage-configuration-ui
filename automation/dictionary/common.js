@@ -1,8 +1,8 @@
 const { Element, Brow } = require('cx-automation-utils/src/pageObject.js');
 const Elem = require('../pageObjects/webElements');
 const dictionary = require('./index');
-const today =  new Date();
-const tomorrow =  new Date(today.setDate(today.getDate() + 1)).toString().slice(0, 15);
+const today = new Date();
+const tomorrow = new Date(today.setDate(today.getDate() + 1)).toString().slice(0, 15);
 const commonBehavior = {
   login() {
     Brow.url(process.env.URI ? process.env.URI : process.ENV.URL);
@@ -57,7 +57,7 @@ const commonBehavior = {
   },
   insertToggleValues(parameter, param, entity) {
     Elem[param].waitAndClick();
-    if (entity === 'Skill' || entity === 'Reason' || entity === 'Sla') {
+    if (entity === 'Skill' || entity === 'Reason' || entity === 'Disposition' || entity === 'Sla') {
       Elem.confirmationWrapper.waitForVisible();
       Elem.confirmButton.waitAndClick();
       Elem.confirmationWrapper.waitForVisible(30000, false);
@@ -84,11 +84,11 @@ const commonBehavior = {
     new Element(`button[data-automation="${param}"] span`).validateElementsString('exact', parameter[param].value);
   },
   openSVGDropdown(param, entity) {
-    if(Elem.sdpanelAddItem.isExisting()) {
-        Elem[param].validateElementsState('isVisible', true);
+    if (Elem.sdpanelAddItem.isExisting()) {
+      Elem[param].validateElementsState('isVisible', true);
     } else {
-        Elem[param].waitAndClick();
-        Elem.sdpanelAddItem.waitForVisible();
+      Elem[param].waitAndClick();
+      Elem.sdpanelAddItem.waitForVisible();
     }
   },
   searchByNameAndClick(entity, searchValue) {
@@ -138,7 +138,7 @@ const commonBehavior = {
         subEntityToAddThenRemove.forEach(parameter => this.fillFormFields(parameter, entity, actionType));
       }
       if (subEntityFormParams) {
-        if (entity === 'Reason List') {
+        if (entity === 'Reason List' || entity === 'Disposition List') {
           Elem.updateCategoryButton.waitAndClick();
           subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
           Elem.modalSubmitButton.waitAndClick();
@@ -146,8 +146,7 @@ const commonBehavior = {
           Elem.updateListItemButton.waitAndClick();
           subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
           Elem.modalSubmitButton.waitAndClick();
-        }
-        else if ( entity === 'Business Hour' ) {
+        } else if (entity === 'Business Hour') {
           Elem.sdpanelAddItem.waitAndClick();
           Elem.dateDatePicker.waitForVisible();
           Elem.dateDatePicker.waitAndClick();
@@ -155,10 +154,9 @@ const commonBehavior = {
           new Element(`div[class="DayPicker-Day"][aria-label="${tomorrow}"]`).waitAndClick();
           subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
           Elem.modalSubmitButton.waitAndClick();
-          this.verifyAction(entity , 'exception');
+          this.verifyAction(entity, 'exception');
           this.closeToastr();
           Elem.sdpanelSubmitButton.waitAndClick();
-
         }
       } else {
         $('button[data-automation="sdpanelSubmitButton"]').scroll();
@@ -178,7 +176,7 @@ const commonBehavior = {
     });
   },
   updateEntity(entity, actionType) {
-     dictionary[entity].specs[actionType].parametersToInsert.forEach((parameter, index) => {
+    dictionary[entity].specs[actionType].parametersToInsert.forEach((parameter, index) => {
       this.searchByNameAndClick(entity, dictionary[entity].updateSearchValue[index]);
       this.submitFormData(entity, actionType, parameter);
       this.verifyAction(entity, actionType);
@@ -218,7 +216,7 @@ const commonBehavior = {
     Elem.searchStatusColumnButton.waitAndClick();
     Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
     this.searchByNameAndClick(entity, dictionary[entity].deleteSearchValue);
-    if (entity === 'Reason List' || entity === 'Transfer List') {
+    if (entity === 'Reason List' || entity === 'Transfer List' || entity === 'Disposition List') {
       Elem.removeCategoryButton.waitForVisible();
       Elem.removeCategoryButton.waitAndClick();
       Elem.confirmationWrapper.waitForVisible();
@@ -244,9 +242,7 @@ const commonBehavior = {
     if (entity === 'Business Hour') {
       Elem.dtpanelActionRemoveItem.waitAndClick();
       Elem.confirmButton.waitAndClick();
-
     }
-
   },
   entityCRUD(entity, actionType) {
     if (actionType === 'create') {
@@ -260,14 +256,18 @@ const commonBehavior = {
   verifyAction(entity, actionType) {
     Elem.toastSuccessMessage.waitForVisible();
     Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    if ((entity === 'Reason List' || entity === 'Transfer List' || entity === 'Role' || entity === 'Business Hour') && actionType === 'delete') {
+    if (
+      (entity === 'Reason List' ||
+        entity === 'Transfer List' ||
+        entity === 'Disposition List' ||
+        entity === 'Role' ||
+        entity === 'Business Hour') &&
+      actionType === 'delete'
+    ) {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was updated successfully!`);
-    }
-    else if (entity === 'Business Hour' && actionType === 'exception'){
+    } else if (entity === 'Business Hour' && actionType === 'exception') {
       Elem.toastSuccessMessage.validateElementsString('exact', `Exception was created successfully!`);
-
-    }
-    else {
+    } else {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
     }
   },

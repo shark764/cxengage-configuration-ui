@@ -46,7 +46,7 @@ export const UpdatePresenceReasonList = (action$, store) =>
         .catch(error => handleError(error, a))
     );
 
-export const getReasonsAfterFetchingReasonsLists = action$ =>
+export const getReasonsAfterFetchingReasonListss = action$ =>
   action$
     .ofType('FETCH_DATA_FULFILLED')
     .filter(a => a.entityName === 'reasonLists')

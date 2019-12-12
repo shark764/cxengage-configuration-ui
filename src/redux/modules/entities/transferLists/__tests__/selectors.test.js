@@ -137,7 +137,7 @@ describe('TransferListsForm selectors', () => {
     getSelectedEntityId.mockImplementation(() => 'mockTransferListId1');
     expect(transferListSelectors.transferListsFormInitialValues(updateState)).toMatchSnapshot();
   });
-  it('Gets currently selected trasnferList endpoints', () => {
+  it('Gets currently selected transferList endpoints', () => {
     expect(transferListSelectors.currentFormEndpoints(mockEndpoints)).toMatchSnapshot();
   });
 

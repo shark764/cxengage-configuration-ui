@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DispositionListsForm selectors Gets all of the dispositionListItem values to display in the respective fields while updating a dispositionListItem 1`] = `undefined`;
+
+exports[`DispositionListsForm selectors Gets category header value to display in the categoryName field while updating category header 1`] = `
+Immutable.Map {
+  "hierarchy": "mockHierarchy1",
+}
+`;
+
+exports[`DispositionListsForm selectors Gets currently selected dispositionList dispositions 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy1",
+    ],
+    "categoryUUID": "mockCategoryUUID1",
+    "name": "mockDispName1",
+    "dispositionId": "mockDispositionId1",
+    "endpointUUID": "mockDispositionUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+  },
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy1",
+    ],
+    "name": "mockDispName2",
+    "dispositionId": "mockDispositionId2",
+    "endpointUUID": "mockDispositionUUID2",
+    "droppableUUID": "mockDroppableUUID2",
+  },
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy2",
+    ],
+    "categoryUUID": "mockCategoryUUID2",
+    "name": "mockDispName3",
+    "dispositionId": "mockDispositionId3",
+    "endpointUUID": "mockDispositionUUID3",
+    "droppableUUID": "mockDroppableUUID3",
+  },
+]
+`;
+
+exports[`DispositionListsForm selectors Gets initial values when an existing dispositionList is selected 1`] = `
+Immutable.Map {
+  "name": "mockDispositionListName1",
+  "description": "mockDispositionListDescription1",
+  "shared": false,
+}
+`;
+
+exports[`DispositionListsForm selectors Gets initial values while creating a new dispositionList 1`] = `
+Immutable.Map {
+  "active": true,
+  "shared": false,
+}
+`;
+
+exports[`DispositionListsForm selectors adds UUIDS to the dispositionListItem that is going to be added to the dispositionList 1`] = `
+Immutable.Map {
+  "shared": false,
+  "active": true,
+  "draggableUUID": "mockGenerateUUID",
+  "name": "mockDispName1",
+  "sortOrder": 0,
+  "endpointUUID": "mockGenerateUUID",
+  "dispositionId": "mockDispositionId1",
+  "hierarchy": Array [
+    Immutable.List [
+      "mockHierarchy1",
+    ],
+  ],
+  "droppableUUID": "mockGenerateUUID",
+  "categoryUUID": "mockGenerateUUID",
+  "id": "mockDispositionId1",
+}
+`;
+
+exports[`DispositionListsForm selectors select dispositions that only contains categoryHeaders 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "name": "mockDispName1",
+    "hierarchy": Immutable.List [
+      "mockHierarchy1",
+    ],
+    "categoryUUID": "mockCategoryUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+    "draggableUUID": undefined,
+    "endpointUUID": "mockDispositionUUID1",
+  },
+  Immutable.Map {
+    "name": "mockDispName3",
+    "hierarchy": Immutable.List [
+      "mockHierarchy2",
+    ],
+    "categoryUUID": "mockCategoryUUID2",
+    "droppableUUID": "mockDroppableUUID3",
+    "draggableUUID": undefined,
+    "endpointUUID": "mockDispositionUUID3",
+  },
+]
+`;
+
+exports[`DispositionListsForm selectors updates dispositionList dispositions (mainEntityForm values) when adding dispositionListItem to a new dispositionList 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "shared": false,
+    "active": true,
+    "draggableUUID": "mockGenerateUUID",
+    "name": "mockDispName1",
+    "sortOrder": 0,
+    "endpointUUID": "mockGenerateUUID",
+    "dispositionId": "mockDispositionId1",
+    "hierarchy": Array [
+      Immutable.List [
+        "updateMockHierarchy",
+      ],
+    ],
+    "droppableUUID": "mockGenerateUUID",
+    "categoryUUID": "mockGenerateUUID",
+    "id": "mockDispositionId1",
+  },
+]
+`;
+
+exports[`DispositionListsForm selectors updates dispositionList dispositions (mainEntityForm values) when adding dispositionListItem to an existing dispositionList 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy1",
+    ],
+    "categoryUUID": "mockCategoryUUID1",
+    "name": "mockDispName1",
+    "dispositionId": "mockDispositionId1",
+    "endpointUUID": "mockDispositionUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+  },
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy1",
+    ],
+    "name": "mockDispName2",
+    "dispositionId": "mockDispositionId2",
+    "endpointUUID": "mockDispositionUUID2",
+    "droppableUUID": "mockDroppableUUID2",
+  },
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy2",
+    ],
+    "categoryUUID": "mockCategoryUUID2",
+    "name": "mockDispName3",
+    "dispositionId": "mockDispositionId3",
+    "endpointUUID": "mockDispositionUUID3",
+    "droppableUUID": "mockDroppableUUID3",
+  },
+  Immutable.Map {
+    "shared": false,
+    "active": true,
+    "draggableUUID": "mockGenerateUUID",
+    "name": "mockDispName1",
+    "sortOrder": 0,
+    "endpointUUID": "mockGenerateUUID",
+    "dispositionId": "mockDispositionId1",
+    "hierarchy": Array [
+      Immutable.List [
+        "updateMockHierarchy",
+      ],
+    ],
+    "droppableUUID": "mockGenerateUUID",
+    "categoryUUID": "mockGenerateUUID",
+    "id": "mockDispositionId1",
+  },
+]
+`;
+
+exports[`DispositionListsForm selectors updates dispositionList dispositions (mainEntityForm values) when updating one of its dispositionListItem category header 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy1",
+    ],
+    "categoryUUID": "mockCategoryUUID1",
+    "name": "mockDispName1",
+    "dispositionId": "mockDispositionId1",
+    "endpointUUID": "mockDispositionUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+  },
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy1",
+    ],
+    "name": "mockDispName2",
+    "dispositionId": "mockDispositionId2",
+    "endpointUUID": "mockDispositionUUID2",
+    "droppableUUID": "mockDroppableUUID2",
+  },
+  Immutable.Map {
+    "hierarchy": Immutable.List [
+      "mockHierarchy2",
+    ],
+    "categoryUUID": "mockCategoryUUID2",
+    "name": "mockDispName3",
+    "dispositionId": "mockDispositionId3",
+    "endpointUUID": "mockDispositionUUID3",
+    "droppableUUID": "mockDroppableUUID3",
+  },
+]
+`;
+
+exports[`DispositionListsForm selectors updates dispositionList dispositions (mainEntityForm values) when updating one of its dispositionListItem values 1`] = `undefined`;
+
+exports[`DispositionListsForm selectors user should be able to select one of the existing category names while creating a dispositionListItem 1`] = `
+Array [
+  "mockHierarchy1",
+  "mockHierarchy2",
+]
+`;

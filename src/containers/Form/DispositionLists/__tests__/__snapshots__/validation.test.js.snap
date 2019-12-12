@@ -9,7 +9,7 @@ Object {
 
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
-  "dispositions": "Disposition List should contain at least one disposition category.",
+  "dispositions": "You must have one or more items in your Disposition List in order to save.",
   "name": "Please enter a name",
 }
 `;

@@ -15,7 +15,6 @@ import { DetailHeader, InputField, TransferListField } from 'cx-ui-components';
 
 const TransferListContainer = styled.div`
   font-size: 14px;
-  max-wdith: 700px;
   border: 1px solid rgba(0, 0, 0, 0.1);
 `;
 const TransferListHeadingWrapper = styled.div`

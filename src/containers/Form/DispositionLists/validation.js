@@ -4,9 +4,18 @@
 
 import { isEmpty } from 'serenova-js-utils/strings';
 
-export const formValidation = values => ({
-  name: isEmpty(values.get('name')) && 'Please enter a name',
-  dispositions:
+export const formValidation = values => {
+  let validation = {};
+  validation.name = isEmpty(values.get('name')) && 'Please enter a name';
+  validation.dispositions =
     (!values.get('dispositions') || values.get('dispositions').size === 0) &&
-    'Disposition List should contain at least one disposition category.'
-});
+    'You must have one or more items in your Disposition List in order to save.';
+
+  if (values.get('shared') === true && values.get('dispositions') && values.get('dispositions').size !== 0) {
+    let unsharedDispositions = values.get('dispositions').filter(d => d.get('shared') !== true);
+    if (unsharedDispositions.size !== 0) {
+      validation.dispositions = "Shared disposition lists cannot contain dispositions that aren't also shared.";
+    }
+  }
+  return validation;
+};

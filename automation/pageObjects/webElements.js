@@ -27,7 +27,7 @@ elements['enableMessage'] = new Element(`.//div[contains(text(),'This will enabl
 
 // Modal components
 elements['modalSubmitButton'] = new Element('button[data-automation="sdpanelSubmitButton"]', 1);
-elements['modalDescriptionInput'] = new Element('textarea[data-automation="descriptionInput"]', 1)
+elements['modalDescriptionInput'] = new Element('textarea[data-automation="descriptionInput"]', 1);
 // Draft-JS Editor (Message Templates & Email Templates)
 elements['emailTemplateSubjectInput'] = new Element('div[class="notranslate public-DraftEditor-content"]');
 elements['emailTemplateBodyInput'] = new Element('div[class="notranslate public-DraftEditor-content"]', 1);

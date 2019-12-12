@@ -2,14 +2,14 @@
 
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
-  "endpoints": "Transfer List should contain at least one contact.",
+  "endpoints": "You must have one or more items in your Transfer List in order to save.",
   "name": "Please enter a name.",
 }
 `;
 
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
-  "endpoints": "Transfer List should contain at least one contact.",
+  "endpoints": "You must have one or more items in your Transfer List in order to save.",
   "name": "Please enter a name.",
 }
 `;
