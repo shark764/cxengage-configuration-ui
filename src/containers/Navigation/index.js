@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import NavigationLayout from './layout';
-import { setCurrentEntity, setSelectedEntityId } from '../../redux/modules/entities';
+import { setCurrentEntity, setSelectedEntityId, setConfirmationDialog } from '../../redux/modules/entities';
 
 import {
   authenticatedAndBrandingReady,
@@ -10,6 +10,7 @@ import {
 } from '../../redux/modules/userData/selectors';
 import { switchTenant } from '../../redux/modules/userData';
 import { getCustomTheme } from '../../redux/modules/entities/branding/selectors';
+import { isFormDirty, isSubEntityFormDirty } from '../../redux/modules/form/selectors';
 
 export function mapStateToProps(state, props) {
   return {
@@ -17,14 +18,17 @@ export function mapStateToProps(state, props) {
     tenants: getAvailableTenants(state),
     currentTenantId: currentTenantId(state),
     currentTenantName: getCurrentTenantName(state),
-    theme: getCustomTheme(state)
+    theme: getCustomTheme(state),
+    isCurrentFormDirty: isFormDirty(state),
+    isSubEntityFormDirty: isSubEntityFormDirty(state)
   };
 }
 
 export const actions = {
   switchTenant,
   setCurrentEntity,
-  setSelectedEntityId
+  setSelectedEntityId,
+  setConfirmationDialog
 };
 
 export default connect(mapStateToProps, actions)(NavigationLayout);

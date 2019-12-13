@@ -22,6 +22,7 @@ import elapsedTimeColumn from '../../components/tableColumns/elapsedTime';
 import monitoringColumn from '../../components/tableColumns/monitoring';
 import groupsColumn from '../../components/tableColumns/groups';
 import skillsColumn from '../../components/tableColumns/skills';
+import { sdkCall } from '../../utils/sdk';
 
 const InlineCheckboxFilterMenu = styled(CheckboxFilterMenu)`
   display: inline-block;
@@ -59,6 +60,12 @@ export default class InteractionMonitoring extends Component {
     this.props.fetchData('groups', 'interactionMonitoring');
     this.props.fetchData('skills', 'interactionMonitoring');
     this.props.startInteractionMonitoring();
+  }
+
+  componentDidMount() {
+    if (this.props.insideIframe) {
+      sdkCall({ module: 'removeDirtyFormIdFromSessionStorage' });
+    }
   }
 
   componentWillUnmount() {
@@ -219,5 +226,6 @@ InteractionMonitoring.propTypes = {
   fetchData: PropTypes.func,
   startInteractionMonitoring: PropTypes.func,
   userHasViewAllMonitoredCallsPermission: PropTypes.bool.isRequired,
-  userHasMonitorAllCallsPermission: PropTypes.bool
+  userHasMonitorAllCallsPermission: PropTypes.bool,
+  insideIframe: PropTypes.bool
 };

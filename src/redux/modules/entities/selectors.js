@@ -15,6 +15,8 @@ const getEntities = state => state.get('Entities');
 
 export const getCurrentEntity = state => getEntities(state).get('currentEntity');
 
+export const getNextEntity = state => getEntities(state).get('nextEntity');
+
 export const getCurrentEntityStore = state => getEntities(state).get(getCurrentEntity(state));
 
 export const getSelectedEntityId = state =>
@@ -197,6 +199,13 @@ export const getSelectedEntityFormId = createSelector(
   (currentEntity, selectedEntityId) => `${currentEntity}:${selectedEntityId}`
 );
 
+export const getAllForms = state => state.get('form');
+
+export const getSelectedSubEntityFormId = createSelector(
+  [getAllForms, getSelectedEntityFormId],
+  (allForms, selectedEntityFormId) => allForms && allForms.findKey((value, key) => key !== selectedEntityFormId)
+);
+
 export const availableEntitiesForList = state => {
   const entityIndex = getCurrentEntityStore(state)
     .get('data')
@@ -309,8 +318,9 @@ export const findEntityByProperty = (state, entityName, entityProperty, value) =
 
 export const getEntityParentTenantName = state => getSelectedEntity(state).get('tenantName') || '';
 
-export const getEntityDisplay = createSelector([getSelectedEntity], selectedEntity =>
-  selectedEntity ? selectedEntity.get('name') || getDisplay(selectedEntity.toJS()) : null
+export const getEntityDisplay = createSelector(
+  [getSelectedEntity],
+  selectedEntity => (selectedEntity ? selectedEntity.get('name') || getDisplay(selectedEntity.toJS()) : null)
 );
 
 export const getEntityItemDisplay = (state, entityId) => {

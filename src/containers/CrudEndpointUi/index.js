@@ -24,7 +24,7 @@ import {
 } from '../../redux/modules/entities/selectors';
 import { selectVisibleSubMenu } from '../../redux/modules/columnFilterMenus/selectors';
 import { currentTenantId } from '../../redux/modules/userData/selectors';
-
+import { isInIframe } from 'serenova-js-utils/browser';
 import Layout from './layout';
 
 function mapStateToProps(state, props) {
@@ -36,7 +36,8 @@ function mapStateToProps(state, props) {
     tableType: getCurrentEntity(state),
     bulkSelectedTotal: getSelectedEntityBulkChangeItems(state),
     slidingWidth: getSidePanelWidth(state),
-    currentTenantId: currentTenantId(state)
+    currentTenantId: currentTenantId(state),
+    insideIframe: !isInIframe()
   };
 }
 

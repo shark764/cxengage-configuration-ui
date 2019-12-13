@@ -17,6 +17,7 @@ import {
 import { userHasBargeAllCallsPermission } from '../../redux/modules/reporting/interactionMonitoring/selectors';
 
 import Layout from './layout';
+import { isInIframe } from 'serenova-js-utils/browser';
 
 export const mapStateToProps = (state, props) => ({
   muted: selectSupervisorToolbarMuted(state, props),
@@ -24,7 +25,8 @@ export const mapStateToProps = (state, props) => ({
   twilioIsDefault: selectSupervisorToolbarTwilioIsDefaultExtension(state, props),
   monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props),
   interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(state, props),
-  userHasBargeAllCallsPermission: userHasBargeAllCallsPermission(state)
+  userHasBargeAllCallsPermission: userHasBargeAllCallsPermission(state),
+  insideIframe: !isInIframe()
 });
 
 const actions = {

@@ -40,7 +40,8 @@ import {
   getSelectedEntityFormId,
   findEntity,
   isItemInherited,
-  getEntityItemDisplay
+  getEntityItemDisplay,
+  getNextEntity
 } from './selectors';
 
 import { entitiesMetaData } from './metaData';
@@ -62,8 +63,9 @@ import {
   camelCaseToKebabCase
 } from 'serenova-js-utils/strings';
 
-import { getCurrentFormValueByFieldName } from '../form/selectors';
+import { getCurrentFormValueByFieldName, isFormDirty, isSubEntityFormDirty } from '../form/selectors';
 
+import { history } from '../../../utils/history';
 /**
  * Note: When you see the variable 'a' shorthand being used
  * it represents the keyword 'action'
@@ -850,6 +852,7 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
   action$.ofType('EXECUTE_CONFIRM_CALLBACK').switchMap(() => {
     const currentConfirmationModal = getConfirmationDialogType(store.getState());
     const metaData = getConfirmationDialogMetaData(store.getState());
+    const nextEntity = getNextEntity(store.getState());
     switch (currentConfirmationModal) {
       case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
         return [
@@ -859,6 +862,33 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
             type: 'SET_CONFIRMATION_DIALOG',
             modalType: undefined,
             metaData: undefined
+          }
+        ];
+      case MODALS.CONFIRM_SET_ENTITY_WHEN_FORM_IS_DIRTY:
+        return [
+          {
+            type: 'SET_CONFIRMATION_DIALOG',
+            modalType: undefined,
+            metaData: undefined
+          },
+          {
+            type: 'SET_SELECTED_ENTITY_ID',
+            entityId: ''
+          },
+          {
+            type: 'UPDATE_HISTORY',
+            func: (function() {
+              if (
+                nextEntity !== 'interactionMonitoring' &&
+                nextEntity !== 'agentStateMonitoring' &&
+                nextEntity !== 'flowDebugLogs' &&
+                nextEntity !== 'betaFeatures'
+              ) {
+                history.push({ pathname: `/configuration/${nextEntity}` });
+              } else {
+                history.push({ pathname: `/${nextEntity}` });
+              }
+            })()
           }
         ];
       default:
@@ -936,7 +966,7 @@ export const DownloadCsv = (action$, store) =>
         .catch(error => handleError(error, a))
     );
 
-// open side panel form when user tries to access the URL with id param
+// open side-panel form when user tries to access the URL with id param
 export const getConfigUI1URLIdParam = (action$, store) =>
   action$
     .ofType('FETCH_DATA_FULFILLED')
@@ -973,5 +1003,36 @@ export const updateConfig1UrlWithQueryString = action$ =>
       fromPromise(sdkPromise(sdkCall)).map(response => ({
         type: 'CONFIG_UI_URL_UPDATED',
         entityId: response
+      }))
+    );
+
+export const saveDirtyFormIdToConfig1SessionStorage = (action$, store) =>
+  action$
+    .ofType('@@redux-form/BLUR')
+    .filter(() => !isInIframe())
+    .filter(() => isFormDirty(store.getState()) || isSubEntityFormDirty(store.getState()))
+    .map(a => ({
+      module: 'setDirtyFormIdInSessionStorage',
+      formId: a.meta.form
+    }))
+    .mergeMap(sdkCall =>
+      fromPromise(sdkPromise(sdkCall)).map(response => ({
+        type: 'DIRTY_FORM_ID_SAVED_TO_SESSION_STORAGE',
+        formId: response
+      }))
+    );
+
+export const DeleteDirtyFormIDFromConfig1SessionStorage = (action$, store) =>
+  action$
+    .ofType('@@redux-form/DESTROY', '@@redux-form/SET_SUBMIT_SUCCEEDED')
+    .filter(() => !isInIframe())
+    .map(a => ({
+      module: 'removeDirtyFormIdFromSessionStorage',
+      formId: Array.isArray(a.meta.form) ? a.meta.form[0] : a.meta.form
+    }))
+    .mergeMap(sdkCall =>
+      fromPromise(sdkPromise(sdkCall)).map(response => ({
+        type: 'DIRTY_FORM_ID_REMOVED_FROM_SESSION_STORAGE',
+        formId: response
       }))
     );

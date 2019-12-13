@@ -8,12 +8,14 @@ import {
 import { getSidePanelWidth } from '../../redux/modules/entities/selectors';
 
 import Layout from './layout';
+import { isInIframe } from 'serenova-js-utils/browser';
 
 export const mapStateToProps = state => ({
   tableType: 'agentStateMonitoring',
   selectedSidePanelId: getSelectedSidePanelId(state),
   slidingWidth: getSidePanelWidth(state),
-  bulkSelectedTotal: getSelectedAgentsBulkChangeItems(state)
+  bulkSelectedTotal: getSelectedAgentsBulkChangeItems(state),
+  insideIframe: !isInIframe()
 });
 
 export const actions = { fetchData, startAgentStateMonitoring, setCurrentEntity, setSelectedSidePanelId };

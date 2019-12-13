@@ -2,6 +2,7 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "insideIframe": false,
   "interactionId": "mockInteractionId",
   "monitoringStatus": "conected",
   "muted": true,

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { cxSetTenant } from '../../utils/cxSdk';
 import { isInIframe } from 'serenova-js-utils/browser';
 import { Typeahead } from 'cx-ui-components';
+import { CONFIRM_SET_ENTITY_WHEN_FORM_IS_DIRTY } from '../ConfirmationDialog/constants';
 
 const NavBar = styled.div`
   background: #00487e;
@@ -71,9 +72,14 @@ export default class Navigation extends Component {
       visibleMenu: e.currentTarget.textContent
     });
 
-  setCurrentEntityAndEntityId = entityName => {
-    this.props.setSelectedEntityId('');
-    this.props.setCurrentEntity(entityName);
+  setCurrentEntityAndEntityId = (entityName, e) => {
+    if (this.props.isCurrentFormDirty || this.props.isSubEntityFormDirty) {
+      e.preventDefault();
+      this.props.setConfirmationDialog(CONFIRM_SET_ENTITY_WHEN_FORM_IS_DIRTY, '', entityName);
+    } else {
+      this.props.setSelectedEntityId('');
+      this.props.setCurrentEntity(entityName);
+    }
   };
 
   render() {
@@ -83,12 +89,10 @@ export default class Navigation extends Component {
         <NavBar theme={this.props.theme}>
           <Selector
             placeholder="Select a tenant"
-            options={this.props.tenants
-              .filter(tenant => tenant.tenantActive)
-              .map(({ tenantName, tenantId }) => ({
-                label: tenantName,
-                value: tenantId
-              }))}
+            options={this.props.tenants.filter(tenant => tenant.tenantActive).map(({ tenantName, tenantId }) => ({
+              label: tenantName,
+              value: tenantId
+            }))}
             listWidth={200}
             listHeight={250}
             noSuggestionsMessage="No Options"
@@ -115,42 +119,42 @@ export default class Navigation extends Component {
                 <StyledLink
                   data-automation="navigationLinkUsers"
                   to="/configuration/users"
-                  onClick={() => this.setCurrentEntityAndEntityId('users')}
+                  onClick={e => this.setCurrentEntityAndEntityId('users', e)}
                 >
                   Users
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkGroups"
                   to="/configuration/groups"
-                  onClick={() => this.setCurrentEntityAndEntityId('groups')}
+                  onClick={e => this.setCurrentEntityAndEntityId('groups', e)}
                 >
                   Groups
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkSkills"
                   to="/configuration/skills"
-                  onClick={() => this.setCurrentEntityAndEntityId('skills')}
+                  onClick={e => this.setCurrentEntityAndEntityId('skills', e)}
                 >
                   Skills
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkRoles"
                   to="/configuration/roles"
-                  onClick={() => this.setCurrentEntityAndEntityId('roles')}
+                  onClick={e => this.setCurrentEntityAndEntityId('roles', e)}
                 >
                   Roles
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkReasons"
                   to="/configuration/reasons"
-                  onClick={() => this.setCurrentEntityAndEntityId('reasons')}
+                  onClick={e => this.setCurrentEntityAndEntityId('reasons', e)}
                 >
                   Presence Reasons
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkReasonLists"
                   to="/configuration/reasonLists"
-                  onClick={() => this.setCurrentEntityAndEntityId('reasonLists')}
+                  onClick={e => this.setCurrentEntityAndEntityId('reasonLists', e)}
                 >
                   Presence Reasons Lists
                 </StyledLink>
@@ -165,77 +169,77 @@ export default class Navigation extends Component {
                 <StyledLink
                   data-automation="navigationLinkTenants"
                   to="/configuration/tenants"
-                  onClick={() => this.setCurrentEntityAndEntityId('tenants')}
+                  onClick={e => this.setCurrentEntityAndEntityId('tenants', e)}
                 >
                   Tenants
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkLists"
                   to="/configuration/lists"
-                  onClick={() => this.setCurrentEntityAndEntityId('lists')}
+                  onClick={e => this.setCurrentEntityAndEntityId('lists', e)}
                 >
                   Lists
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkSlas"
                   to="/configuration/slas"
-                  onClick={() => this.setCurrentEntityAndEntityId('slas')}
+                  onClick={e => this.setCurrentEntityAndEntityId('slas', e)}
                 >
                   Statistics
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkEmailTemplates"
                   to="/configuration/emailTemplates"
-                  onClick={() => this.setCurrentEntityAndEntityId('emailTemplates')}
+                  onClick={e => this.setCurrentEntityAndEntityId('emailTemplates', e)}
                 >
                   User Management Emails
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkOutboundIdentifiers"
                   to="/configuration/outboundIdentifiers"
-                  onClick={() => this.setCurrentEntityAndEntityId('outboundIdentifiers')}
+                  onClick={e => this.setCurrentEntityAndEntityId('outboundIdentifiers', e)}
                 >
                   Outbound Identifiers
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkOutboundIdentifierLists"
                   to="/configuration/outboundIdentifierLists"
-                  onClick={() => this.setCurrentEntityAndEntityId('outboundIdentifierLists')}
+                  onClick={e => this.setCurrentEntityAndEntityId('outboundIdentifierLists', e)}
                 >
                   Outbound Identifier Lists
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkChatWidgets"
                   to="/configuration/chatWidgets"
-                  onClick={() => this.setCurrentEntityAndEntityId('chatWidgets')}
+                  onClick={e => this.setCurrentEntityAndEntityId('chatWidgets', e)}
                 >
                   Chat Widgets
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkTransferLists"
                   to="/configuration/transferLists"
-                  onClick={() => this.setCurrentEntityAndEntityId('transferLists')}
+                  onClick={e => this.setCurrentEntityAndEntityId('transferLists', e)}
                 >
                   Transfer Lists
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkApiKeys"
                   to="/configuration/apiKeys"
-                  onClick={() => this.setCurrentEntityAndEntityId('apiKeys')}
+                  onClick={e => this.setCurrentEntityAndEntityId('apiKeys', e)}
                 >
                   Api Keys
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkMessageTemplates"
                   to="/configuration/messageTemplates"
-                  onClick={() => this.setCurrentEntityAndEntityId('messageTemplates')}
+                  onClick={e => this.setCurrentEntityAndEntityId('messageTemplates', e)}
                 >
                   Message Templates
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkBusinessHours"
                   to="/configuration/businessHours"
-                  onClick={() => this.setCurrentEntityAndEntityId('businessHours')}
+                  onClick={e => this.setCurrentEntityAndEntityId('businessHours', e)}
                 >
                   Business Hours
                 </StyledLink>
@@ -250,35 +254,35 @@ export default class Navigation extends Component {
                 <StyledLink
                   data-automation="navigationLinkFlows"
                   to="/configuration/flows"
-                  onClick={() => this.setCurrentEntityAndEntityId('flows')}
+                  onClick={e => this.setCurrentEntityAndEntityId('flows', e)}
                 >
                   Flows
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkDispositions"
                   to="/configuration/dispositions"
-                  onClick={() => this.setCurrentEntityAndEntityId('dispositions')}
+                  onClick={e => this.setCurrentEntityAndEntityId('dispositions', e)}
                 >
                   Dispositions
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkDispositionLists"
                   to="/configuration/dispositionLists"
-                  onClick={() => this.setCurrentEntityAndEntityId('dispositionLists')}
+                  onClick={e => this.setCurrentEntityAndEntityId('dispositionLists', e)}
                 >
                   Disposition Lists
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkFlowDebugger"
                   to="/flowDebugLogs"
-                  onClick={() => this.setCurrentEntityAndEntityId('flowDebugLogs')}
+                  onClick={e => this.setCurrentEntityAndEntityId('flowDebugLogs', e)}
                 >
                   Flow Debug Logs
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkDispatchMappings"
                   to="/configuration/dispatchMappings"
-                  onClick={() => this.setCurrentEntityAndEntityId('dispatchMappings')}
+                  onClick={e => this.setCurrentEntityAndEntityId('dispatchMappings', e)}
                 >
                   Dispatch Mappings
                 </StyledLink>
@@ -293,21 +297,21 @@ export default class Navigation extends Component {
                 <StyledLink
                   data-automation="navigationLinkDataAccessReports"
                   to="/configuration/dataAccessReports"
-                  onClick={() => this.setCurrentEntityAndEntityId('dataAccessReports')}
+                  onClick={e => this.setCurrentEntityAndEntityId('dataAccessReports', e)}
                 >
                   Access Controlled Reports
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkInteractionMonitoring"
                   to="/interactionMonitoring"
-                  onClick={() => this.setCurrentEntityAndEntityId('interactionMonitoring')}
+                  onClick={e => this.setCurrentEntityAndEntityId('interactionMonitoring', e)}
                 >
                   Interaction Monitoring
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkAgentStateMonitoring"
                   to="/agentStateMonitoring"
-                  onClick={() => this.setCurrentEntityAndEntityId('agentStateMonitoring')}
+                  onClick={e => this.setCurrentEntityAndEntityId('agentStateMonitoring', e)}
                 >
                   Agent State Monitoring
                 </StyledLink>
@@ -328,5 +332,8 @@ Navigation.propTypes = {
   tenants: PropTypes.array.isRequired,
   theme: PropTypes.object,
   setCurrentEntity: PropTypes.func.isRequired,
-  setSelectedEntityId: PropTypes.func.isRequired
+  setSelectedEntityId: PropTypes.func.isRequired,
+  setConfirmationDialog: PropTypes.func,
+  isCurrentFormDirty: PropTypes.bool,
+  isSubEntityFormDirty: PropTypes.bool
 };

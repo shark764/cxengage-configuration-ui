@@ -6,12 +6,14 @@ import {
   getStringifyReportingEvents,
   getStringifyReportingEventsRawData
 } from '../../redux/modules/entities/reportingEvents/selectors';
+import { isInIframe } from 'serenova-js-utils/browser';
 
 export function mapStateToProps(state) {
   return {
     reportingEvents: getReportingEvents(state),
     reportingEventsString: getStringifyReportingEvents(state),
-    reportingEventsRawData: getStringifyReportingEventsRawData(state)
+    reportingEventsRawData: getStringifyReportingEventsRawData(state),
+    insideIframe: !isInIframe()
   };
 }
 

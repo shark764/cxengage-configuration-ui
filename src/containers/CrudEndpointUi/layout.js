@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
+import { sdkCall } from '../../utils/sdk';
 
 import { Modal } from 'cx-ui-components';
 import Confirmation from '../ConfirmationDialog';
@@ -757,9 +758,20 @@ const updateSubEntityFormRoutes = [
 
 export default class CrudEndpointUiLayout extends Component {
   componentDidMount() {
+    if (this.props.insideIframe) {
+      sdkCall({ module: 'removeDirtyFormIdFromSessionStorage' });
+    }
     const entityName = this.props.match.params.entityName;
     this.props.setCurrentEntity(entityName);
     this.props.fetchData(entityName);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!nextProps.match.path.startsWith('/configuration')) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   componentDidUpdate(prevProps, nextProps) {
@@ -850,5 +862,6 @@ CrudEndpointUiLayout.propTypes = {
   setSelectedSubEntityId: PropTypes.func,
   slidingWidth: PropTypes.number,
   entityName: PropTypes.string,
-  currentTenantId: PropTypes.string
+  currentTenantId: PropTypes.string,
+  insideIframe: PropTypes.bool
 };

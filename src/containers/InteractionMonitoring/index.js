@@ -34,6 +34,7 @@ import {
 import { getCurrentAgentId } from '../../redux/modules/userData/selectors';
 
 import Layout from './layout';
+import { isInIframe } from 'serenova-js-utils/browser';
 
 export const mapStateToProps = (state, props) => ({
   getCurrentAgentId: getCurrentAgentId(state),
@@ -51,7 +52,8 @@ export const mapStateToProps = (state, props) => ({
   monitoredId: selectSupervisorToolbarSilentMonitoringInteractionId(state, props),
   monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props),
   userHasViewAllMonitoredCallsPermission: userHasViewAllMonitoredCallsPermission(state),
-  userHasMonitorAllCallsPermission: userHasMonitorAllCallsPermission(state)
+  userHasMonitorAllCallsPermission: userHasMonitorAllCallsPermission(state),
+  insideIframe: !isInIframe()
 });
 
 export const actions = {

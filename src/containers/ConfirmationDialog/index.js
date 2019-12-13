@@ -18,13 +18,13 @@ function mapDispatchToProps(dispatch) {
     },
     cancelBtnCallback: () => {
       dispatch(setConfirmationDialog(undefined));
-    },
-    dispatch
+    }
   };
 }
 
 function mapStateToProps(state) {
   let mainText;
+  let secondaryText;
   let confirmBtnText;
   let cancelBtnText;
   const modalType = getConfirmationDialogType(state);
@@ -34,13 +34,18 @@ function mapStateToProps(state) {
     case MODALS.CONFIRM_ENTITY_CSV_UPLOAD:
       mainText = `Are you sure you want to override this ${currentEntity}?`;
       break;
+    case MODALS.CONFIRM_SET_ENTITY_WHEN_FORM_IS_DIRTY:
+      mainText = 'You have unsaved changes that will be lost!.';
+      secondaryText = 'Click Confirm to discard changes, or Cancel to continue editing.';
+      break;
     default:
   }
 
   return {
     confirmBtnText,
     cancelBtnText,
-    mainText
+    mainText,
+    secondaryText
   };
 }
 

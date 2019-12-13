@@ -24,11 +24,10 @@ export const changeBusinessHoursType = action$ =>
 export const noHoursChange = (action$, store) =>
   action$
     .ofType('@@redux-form/CHANGE')
+    .filter(a => a.meta.form.includes('businessHours') && a.meta.field.includes('TimeMinutes'))
     .filter(a => {
       const dayInitial = a.meta.field.substring(0, 3);
       return (
-        a.meta.form.includes('businessHours') &&
-        a.meta.field.includes('TimeMinutes') &&
         a.payload === -1 &&
         getCurrentFormValueByFieldName(
           store.getState(),

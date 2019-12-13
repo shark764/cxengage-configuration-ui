@@ -8,6 +8,7 @@ Object {
   "areAllColNotActive": false,
   "expanded": Object {},
   "getCurrentAgentId": "0000-0000-0000-0000",
+  "insideIframe": false,
   "monitoredId": "0000-0000-0000-0000",
   "monitoringStatus": "mockStatus",
   "selected": "conected",

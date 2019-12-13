@@ -392,10 +392,11 @@ export const updateProficiency = (id, newValue) => ({
   id,
   newValue
 });
-export const setConfirmationDialog = (modalType, metaData) => ({
+export const setConfirmationDialog = (modalType, metaData, nextEntity) => ({
   type: 'SET_CONFIRMATION_DIALOG',
   modalType,
-  metaData
+  metaData,
+  nextEntity
 });
 export const toggleProficiency = () => ({
   type: 'TOGGLE_PROFICIENCY'
@@ -549,9 +550,16 @@ export default function reducer(state = initialState, action) {
       }
     }
     case 'SET_CONFIRMATION_DIALOG': {
-      return state.update(state.get('currentEntity'), entityStore =>
-        entityStore.set('confirmationDialogType', action.modalType).set('confirmationDialogMetaData', action.metaData)
-      );
+      const updatedState = state
+        .update(state.get('currentEntity'), entityStore =>
+          entityStore.set('confirmationDialogType', action.modalType).set('confirmationDialogMetaData', action.metaData)
+        )
+        .delete('nextEntity');
+      if (action.nextEntity) {
+        return updatedState.set('nextEntity', action.nextEntity);
+      } else {
+        return updatedState;
+      }
     }
     case 'SET_SELECTED_ENTITY_ID': {
       const currentEntity = state.get('currentEntity');
@@ -564,7 +572,9 @@ export default function reducer(state = initialState, action) {
           .updateIn(
             [currentEntity, 'data'],
             entityData =>
-              action.entityId === '' ? entityData.map(item => item.set('bulkChangeItem', false)) : entityData
+              action.entityId === ''
+                ? entityData && entityData.map(item => item.set('bulkChangeItem', false))
+                : entityData
           )
       );
     }
