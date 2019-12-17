@@ -7,12 +7,15 @@ import PropTypes from 'prop-types';
 
 import { InputField, SelectField, SidePanelActions, ToggleField, AutoCompleteField } from 'cx-ui-components';
 
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+`;
 const Header = styled.h3`
   font-size: 28px;
-  margin-bottom: 30px;
   color: #474747;
   font-weight: 700;
-  display: inline-block;
 `;
 const ReasonListItem = styled.h3`
   color: #474747;
@@ -21,11 +24,10 @@ const ReasonListItem = styled.h3`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: inline-block;
   font-weight: initial;
-  margin-left: 30px;
-  margin-bottom: -7px;
+  margin-left: 10px;
   padding-right: 10px;
+  flex: 1;
 `;
 const ToggleFieldDiv = styled(ToggleField)`
   margin-bottom: 15px;
@@ -45,10 +47,12 @@ export default class ReasonListItemsForm extends React.Component {
       <form onSubmit={this.props.handleSubmit} key={this.props.key}>
         {!this.props.selectedSubEntityId.includes('updateCategoryHeader') && (
           <Fragment>
-            <Header>
-              {this.props.selectedSubEntityId === 'create' ? 'Creating' : 'Updating'} Reason List Item for :
-            </Header>
-            <ReasonListItem title={this.props.reasonListName}>{this.props.reasonListName}</ReasonListItem>
+            <HeaderContainer>
+              <Header>
+                {this.props.selectedSubEntityId === 'create' ? 'Creating' : 'Updating'} Reason List Item for :
+              </Header>
+              <ReasonListItem title={this.props.reasonListName}>{this.props.reasonListName}</ReasonListItem>
+            </HeaderContainer>
             {this.props.selectedSubEntityId === 'create' &&
               this.props.existingCategories &&
               this.props.existingCategories[0] && (
@@ -101,8 +105,10 @@ export default class ReasonListItemsForm extends React.Component {
         )}
         {this.props.selectedSubEntityId.includes('updateCategoryHeader') && (
           <Fragment>
-            <Header>Updating category name for :</Header>
-            <ReasonListItem title={this.props.reasonListName}>{this.props.reasonListName}</ReasonListItem>
+            <HeaderContainer>
+              <Header>Updating category name for :</Header>
+              <ReasonListItem title={this.props.reasonListName}>{this.props.reasonListName}</ReasonListItem>
+            </HeaderContainer>
             <InputField
               name="hierarchy"
               label="Category Name *"

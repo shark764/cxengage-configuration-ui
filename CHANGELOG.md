@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.5] - 2019-12-16
+## Fixed
+- <no-jira> - Fixed TransferList, DispositionList and NestedList subEntityForm Headings css issues
+
 ## [0.70.4] - 2019-12-12
 ## Fixed
 - CXV1-20513 - Display alert in config-ui while navigating between config2 pages when the form is dirty.

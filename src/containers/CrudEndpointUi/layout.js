@@ -322,11 +322,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/emailTemplates',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <EmailTemplatesDetailsPanel>
           <EmailTemplatesForm />
         </EmailTemplatesDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {

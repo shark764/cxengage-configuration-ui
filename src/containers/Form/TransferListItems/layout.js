@@ -14,12 +14,15 @@ import {
   CheckboxField
 } from 'cx-ui-components';
 
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+`;
 const Header = styled.h3`
   font-size: 28px;
-  margin-bottom: 30px;
   color: #474747;
   font-weight: 700;
-  display: inline-block;
 `;
 const TransferListItem = styled.h3`
   color: #474747;
@@ -28,11 +31,10 @@ const TransferListItem = styled.h3`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: inline-block;
   font-weight: initial;
-  margin-left: 30px;
-  margin-bottom: -7px;
+  margin-left: 10px;
   padding-right: 10px;
+  flex: 1;
 `;
 const ToggleFieldDiv = styled(ToggleField)`
   margin-bottom: 15px;
@@ -67,10 +69,12 @@ export default class TransferListItemsForm extends React.Component {
       <form onSubmit={this.props.handleSubmit} key={this.props.key}>
         {!this.props.selectedSubEntityId.includes('updateCategoryHeader') && (
           <Fragment>
-            <Header>
-              {this.props.selectedSubEntityId === 'create' ? 'Creating' : 'Updating'} Transfer List Item for :
-            </Header>
-            <TransferListItem title={this.props.transferListName}>{this.props.transferListName}</TransferListItem>
+            <HeaderContainer>
+              <Header>
+                {this.props.selectedSubEntityId === 'create' ? 'Creating' : 'Updating'} Transfer List Item for :
+              </Header>
+              <TransferListItem title={this.props.transferListName}>{this.props.transferListName}</TransferListItem>
+            </HeaderContainer>
             {this.props.selectedSubEntityId === 'create' &&
               this.props.existingCategories && (
                 <ToggleFieldDiv
@@ -173,8 +177,10 @@ export default class TransferListItemsForm extends React.Component {
         )}
         {this.props.selectedSubEntityId.includes('updateCategoryHeader') && (
           <Fragment>
-            <Header>Updating category name for :</Header>
-            <TransferListItem title={this.props.transferListName}>{this.props.transferListName}</TransferListItem>
+            <HeaderContainer>
+              <Header>Updating category name for :</Header>
+              <TransferListItem title={this.props.transferListName}>{this.props.transferListName}</TransferListItem>
+            </HeaderContainer>
             <InputField
               name="hierarchy"
               label="Category Name *"

@@ -5,15 +5,17 @@ exports[`<TransferListItemsForm> renders create transfer list items form 1`] = `
   onSubmit={[Function]}
 >
   <React.Fragment>
-    <styled.h3>
-      Creating
-       Transfer List Item for :
-    </styled.h3>
-    <styled.h3
-      title="mockTransferListName"
-    >
-      mockTransferListName
-    </styled.h3>
+    <styled.div>
+      <styled.h3>
+        Creating
+         Transfer List Item for :
+      </styled.h3>
+      <styled.h3
+        title="mockTransferListName"
+      >
+        mockTransferListName
+      </styled.h3>
+    </styled.div>
     <Styled(ToggleField)
       data-automation="newCategoryToggle"
       disabled={false}
@@ -143,14 +145,16 @@ exports[`<TransferListItemsForm> renders update category header form 1`] = `
   onSubmit={[Function]}
 >
   <React.Fragment>
-    <styled.h3>
-      Updating category name for :
-    </styled.h3>
-    <styled.h3
-      title="mockTransferListName"
-    >
-      mockTransferListName
-    </styled.h3>
+    <styled.div>
+      <styled.h3>
+        Updating category name for :
+      </styled.h3>
+      <styled.h3
+        title="mockTransferListName"
+      >
+        mockTransferListName
+      </styled.h3>
+    </styled.div>
     <InputField
       componentType="input"
       data-automation="categoryNameInput"
@@ -175,15 +179,17 @@ exports[`<TransferListItemsForm> renders update transfer list items form 1`] = `
   onSubmit={[Function]}
 >
   <React.Fragment>
-    <styled.h3>
-      Updating
-       Transfer List Item for :
-    </styled.h3>
-    <styled.h3
-      title="mockTransferListName"
-    >
-      mockTransferListName
-    </styled.h3>
+    <styled.div>
+      <styled.h3>
+        Updating
+         Transfer List Item for :
+      </styled.h3>
+      <styled.h3
+        title="mockTransferListName"
+      >
+        mockTransferListName
+      </styled.h3>
+    </styled.div>
     <AutoCompleteField
       data-automation="categoryNameAutoComplete"
       disabled={false}
