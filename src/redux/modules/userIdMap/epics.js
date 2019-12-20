@@ -48,9 +48,14 @@ export const FetchSideCreatedAndUpdatedBy = (action$, store) =>
       newAction.updatedByName =
         getSelectedEntity(store.getState()).get('updatedByName') ||
         getUserDisplayName(store.getState(), newAction.updatedById);
+
       return newAction;
     })
-    .filter(a => a.createdByName === undefined || a.updatedByName === undefined)
+    .filter(
+      a =>
+        (a.createdById !== undefined && a.createdByName === undefined) ||
+        (a.updatedById !== undefined && a.updatedByName === undefined)
+    )
     .map(a => {
       a.sdkCall = entitiesMetaData['users'].entityApiRequest('get', 'singleMainEntity');
       a.allSdkCalls = [

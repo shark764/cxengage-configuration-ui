@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.7] - 2019-12-20
+## Fixed
+- CXV1-21046 - Unable to load flow page - Selenium tenant, Inbound flow.
+
 ## [0.70.6] - 2019-12-20
 ## Fixed
 - CXV1-19938 - Label on Wrapping button.

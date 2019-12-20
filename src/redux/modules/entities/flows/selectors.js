@@ -54,14 +54,15 @@ const selectVersions = selectedEntity => {
     return [];
   }
   const versions = selectedEntity.get('versions');
-  return versions !== undefined
-    ? versions
-        .map((version, index) => ({
-          value: version.get('version'),
-          label: `v${versions.size - index} - ${version.get('name')}`
-        }))
-        .toJS()
-    : [];
+  if (!versions) {
+    return [];
+  }
+  return versions
+    .map((version, index) => ({
+      value: version.get('version'),
+      label: `v${versions.size - index} - ${version.get('name')}`
+    }))
+    .toJS();
 };
 
 export const selectFlowNames = state => getSelectedSubEntityId(state) !== 'drafts' && getFlowNames(state);
@@ -74,7 +75,7 @@ export const selectFlowDraftNames = state => getSelectedSubEntityId(state) === '
 
 export const getFlowDraftNames = state => {
   const drafts = getSelectedEntity(state).get('drafts');
-  return drafts !== undefined ? drafts.map(draft => draft.get('name')).toJS() : [];
+  return !drafts ? [] : drafts.map(draft => draft.get('name')).toJS();
 };
 
 export const selectFlowItems = (state, memberName) =>
