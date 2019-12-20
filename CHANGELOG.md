@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.6] - 2019-12-20
+## Fixed
+- CXV1-19938 - Label on Wrapping button.
+
 ## [0.70.5] - 2019-12-16
 ## Fixed
 - <no-jira> - Fixed TransferList, DispositionList and NestedList subEntityForm Headings css issues

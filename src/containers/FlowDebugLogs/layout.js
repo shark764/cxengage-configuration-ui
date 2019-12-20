@@ -185,7 +185,7 @@ export default class FlowDebugLogs extends Component {
           <RawButton onClick={this.handleChangeRawData} prettyView={this.state.prettyView}>
             Raw
           </RawButton>
-          <WrapButton onClick={this.handletoggleView} wordwrap={this.state.wordwrap}>
+          <WrapButton onClick={this.handletoggleView} wordwrap={this.state.wordwrap} title="Wrap">
             <WordWrap wordWrapIconType="wordWrapOn" size={10} />
           </WrapButton>
           <Copy onClick={this.copyToClipboard}>
