@@ -63,7 +63,7 @@ export default function RolesForm({
           label="Shared"
           data-automation="sharedToggle"
           title="Change &quot;Shared&quot; state for this Role"
-          disabled={isSaving || inherited || !userHasUpdatePermission || !userHasSharePermission}
+          disabled={isSaving || inherited || !userHasUpdatePermission || !userHasSharePermission || isSystemRole}
         />
       </ConfirmationWrapper>
     </form>

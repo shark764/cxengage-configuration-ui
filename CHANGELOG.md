@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.8] - 2019-12-30
+## Fixed
+- CXV1-18737 - Users should not be able to disable shared entities from a different tenant.
+
 ## [0.70.7] - 2019-12-20
 ## Fixed
 - CXV1-21046 - Unable to load flow page - Selenium tenant, Inbound flow.
