@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.10] - 2020-01-08
+## Fixed
+- CXV1-11439 - user should be prompted with an Alert when a flow type is changed.
+
 ## [0.70.9] - 2020-01-07
 ## Fixed
 - CXV1-17077 - Outbound Identifier Lists - Not able to create Outbound Identifier Lists while missing the OUTBOUND_IDENTIFIER_MODIFY permission.

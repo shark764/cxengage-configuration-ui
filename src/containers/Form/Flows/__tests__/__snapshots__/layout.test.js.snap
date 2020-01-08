@@ -29,6 +29,7 @@ exports[`<FlowsForm /> renders create form 1`] = `
   <SelectField
     data-automation="typeList"
     disabled={true}
+    handleChange={[Function]}
     label="Type *"
     name="type"
     options={
@@ -82,6 +83,7 @@ exports[`<FlowsForm /> renders update form 1`] = `
   <SelectField
     data-automation="typeList"
     disabled={true}
+    handleChange={[Function]}
     label="Type *"
     name="type"
     options={
