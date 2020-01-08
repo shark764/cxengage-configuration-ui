@@ -10,8 +10,8 @@ import { formValidation } from './validation';
 import {
   getSelectedEntityId,
   isCreating,
-  userHasUpdatePermission,
-  isEntityFetching
+  isEntityFetching,
+  userHasCurrentFormPermission
 } from '../../../redux/modules/entities/selectors';
 import { selectNonReusableFlows } from '../../../redux/modules/entities/flows/selectors';
 import {
@@ -36,7 +36,7 @@ export function mapStateToProps(state) {
     channelType: getCurrentFormValueByFieldName(state, 'channelType'),
     initialValues: selectFormInitialValues(state),
     isSaving: isCreating(state),
-    userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasCurrentFormPermission: userHasCurrentFormPermission(state),
     flowsFetching: isEntityFetching(state, 'flows'),
     key: getSelectedEntityId(state)
   };

@@ -16,13 +16,14 @@ export default function OutboundIdentifiersForm({
   handleSubmit,
   isSaving,
   inherited,
-  userHasUpdatePermission,
+  userHasCurrentFormPermission,
   channelType,
   flowIds,
   flowsFetching,
   initialValues,
   key
 }) {
+  const entityId = initialValues.get('id');
   return (
     <form onSubmit={handleSubmit} key={key}>
       <div>
@@ -32,7 +33,7 @@ export default function OutboundIdentifiersForm({
           data-automation="nameInput"
           componentType="input"
           inputType="text"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          disabled={isSaving || inherited || !userHasCurrentFormPermission}
         />
         <SelectField
           name="channelType"
@@ -43,7 +44,7 @@ export default function OutboundIdentifiersForm({
             { value: 'sms', label: 'Sms' },
             { value: 'email', label: 'Email' }
           ]}
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          disabled={isSaving || inherited || !userHasCurrentFormPermission}
         />
         {channelType && (
           <InputField
@@ -53,16 +54,16 @@ export default function OutboundIdentifiersForm({
             data-automation="valueInput"
             inputType="text"
             placeholder={`Enter${channelType === 'email' ? ' an email address' : ' a e.164 formatted number'}`}
-            disabled={isSaving || inherited || !userHasUpdatePermission}
+            disabled={isSaving || inherited || !userHasCurrentFormPermission}
           />
         )}
         <SelectField
           name="flowId"
-          label="Flow Id *"
-          required={initialValues.get('id') !== undefined}
+          label={`Flow Id${entityId !== undefined ? ' *' : ''}`}
+          required={entityId !== undefined}
           data-automation="flowList"
           options={!flowsFetching ? flowIds : undefined}
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          disabled={isSaving || inherited || !userHasCurrentFormPermission}
         />
         <InputField
           name="description"
@@ -71,7 +72,7 @@ export default function OutboundIdentifiersForm({
           data-automation="descriptionInput"
           automation="outboundIdentifiersFormFieldDescription"
           inputType="text"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          disabled={isSaving || inherited || !userHasCurrentFormPermission}
         />
       </div>
     </form>
@@ -83,7 +84,7 @@ OutboundIdentifiersForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool,
+  userHasCurrentFormPermission: PropTypes.bool,
   initialValues: PropTypes.object,
   flowsFetching: PropTypes.bool,
   flowIds: PropTypes.oneOfType([

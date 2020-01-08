@@ -48,7 +48,7 @@ exports[`<OutboundIdentifiersForm /> renders 1`] = `
     <SelectField
       data-automation="flowList"
       disabled={true}
-      label="Flow Id *"
+      label="Flow Id"
       name="flowId"
       options={
         Array [

@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.9] - 2020-01-07
+## Fixed
+- CXV1-17077 - Outbound Identifier Lists - Not able to create Outbound Identifier Lists while missing the OUTBOUND_IDENTIFIER_MODIFY permission.
+
 ## [0.70.8] - 2019-12-30
 ## Fixed
 - CXV1-18737 - Users should not be able to disable shared entities from a different tenant.

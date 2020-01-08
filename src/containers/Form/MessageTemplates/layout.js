@@ -33,7 +33,8 @@ export default class MessageTemplatesForm extends React.Component {
       // toggle "clear text confirmation box" when user wants to switch from richTextEidtor to plainTextEditor:
       if (
         this.props.templateText &&
-        (this.props.templateTextType === 'html' && nextProps.templateTextType === 'plaintext')
+        this.props.templateTextType === 'html' &&
+        nextProps.templateTextType === 'plaintext'
       ) {
         this.openClearRichTextConfirmBox(true);
       }
@@ -75,7 +76,10 @@ export default class MessageTemplatesForm extends React.Component {
           name="templateTextType"
           label="Type *"
           data-automation="typeList"
-          options={[{ label: 'Plain Text', value: 'plaintext' }, { label: 'Rich Text', value: 'html' }]}
+          options={[
+            { label: 'Plain Text', value: 'plaintext' },
+            { label: 'Rich Text', value: 'html' }
+          ]}
           disabled={
             (this.props.channels &&
               (this.props.channels.includes('sms') || this.props.channels.includes('messaging'))) ||
@@ -109,7 +113,6 @@ export default class MessageTemplatesForm extends React.Component {
             onMaskClick={() => this.clearRichTextEditorField(false)}
             cancelBtnCallback={() => this.clearRichTextEditorField(false)}
             confirmBtnCallback={() => this.clearRichTextEditorField(true)}
-            toggleTextContenttoggleTextContent
             mainText={
               this.props.selectedEntityId && this.props.selectedEntityId === 'create'
                 ? 'You have unsaved template content that will be lost!'
