@@ -87,7 +87,6 @@ const initialState = fromJS({
       disablePermission: ['UPDATE_ALL'],
       fetching: false,
       creating: true,
-      updating: false,
       bulkUpdating: false,
       subEntity: 'mockDependentEntity',
       selectedSubEntityId: '0001',
@@ -100,6 +99,7 @@ const initialState = fromJS({
           id: '0000',
           name: 'mockName',
           active: true,
+          updating: false,
           tenantId: '0000-0000',
           created: '2018-07-16T14:43:14Z',
           createdBy: '1000-0000',
@@ -163,7 +163,6 @@ describe('getCurrentEntityStore', () => {
         disablePermission: ['UPDATE_ALL'],
         fetching: false,
         creating: true,
-        updating: false,
         bulkUpdating: false,
         subEntity: 'mockDependentEntity',
         selectedSubEntityId: '0001',
@@ -176,6 +175,7 @@ describe('getCurrentEntityStore', () => {
             id: '0000',
             name: 'mockName',
             active: true,
+            updating: false,
             tenantId: '0000-0000',
             created: '2018-07-16T14:43:14Z',
             createdBy: '1000-0000',
@@ -291,6 +291,7 @@ describe('getAllEntities', () => {
           id: '0000',
           name: 'mockName',
           active: true,
+          updating: false,
           tenantId: '0000-0000',
           created: '2018-07-16T14:43:14Z',
           createdBy: '1000-0000',
@@ -327,6 +328,7 @@ describe('getSelectedEntity', () => {
         id: '0000',
         name: 'mockName',
         active: true,
+        updating: false,
         tenantId: '0000-0000',
         created: '2018-07-16T14:43:14Z',
         createdBy: '1000-0000',
@@ -733,7 +735,7 @@ describe('isSaving', () => {
             mockEntity: {
               selectedEntityId: '0000',
               creating: false,
-              updating: true
+              data: [{ id: '0000', updating: true }]
             }
           }
         })
@@ -904,6 +906,7 @@ describe('findEntity', () => {
         id: '0000',
         name: 'mockName',
         active: true,
+        updating: false,
         tenantId: '0000-0000',
         created: '2018-07-16T14:43:14Z',
         createdBy: '1000-0000',
@@ -1302,6 +1305,7 @@ describe('findEntityByProperty', () => {
         id: '0000',
         name: 'mockName',
         active: true,
+        updating: false,
         tenantId: '0000-0000',
         created: '2018-07-16T14:43:14Z',
         createdBy: '1000-0000',

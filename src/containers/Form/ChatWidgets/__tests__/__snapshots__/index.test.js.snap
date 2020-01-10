@@ -6,7 +6,7 @@ exports[`ChatWidgets Renders renders 1`] = `
   chatWidgetId="mock-selected-entity-id"
   digitalChannelsAppIds="mock-app-ids"
   digitalChannelsAppsFetching="mock-entity-is-fetching"
-  disabled="mock-is-fetching"
+  disabled="mock-is-saving"
   dispatch={[Function]}
   displayStyleIsButton="mock-is-button"
   initialValues="mock-initial-values"
@@ -51,7 +51,7 @@ Object {
   "chatWidgetId": "mock-selected-entity-id",
   "digitalChannelsAppIds": "mock-app-ids",
   "digitalChannelsAppsFetching": "mock-entity-is-fetching",
-  "disabled": "mock-is-fetching",
+  "disabled": "mock-is-saving",
   "displayStyleIsButton": "mock-is-button",
   "initialValues": "mock-initial-values",
   "key": "mock-selected-entity-id",

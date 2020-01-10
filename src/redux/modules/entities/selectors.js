@@ -67,9 +67,8 @@ export const isEntityFetching = (state, entityName) => {
 };
 
 export const getSelectedEntity = createSelector(
-  [getCurrentEntity, getAllEntities, getSelectedEntityId],
-  (currentEntity, allEntities, selectedEntityId) =>
-    selectedEntityId && allEntities.find(obj => obj.get('id') === selectedEntityId)
+  [getAllEntities, getSelectedEntityId],
+  (allEntities, selectedEntityId) => selectedEntityId && allEntities.find(obj => obj.get('id') === selectedEntityId)
 );
 
 export const getSelectedEntityName = state => getSelectedEntity(state).get('name');
@@ -174,7 +173,7 @@ export const shouldDisableHeaderToggleField = state => {
 
 export const isCreating = state => getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
 
-export const isUpdating = state => getCurrentEntityStore(state).get('updating');
+export const isUpdating = state => getSelectedEntity(state) && getSelectedEntity(state).get('updating');
 
 export const isSaving = state => isCreating(state) || isUpdating(state);
 

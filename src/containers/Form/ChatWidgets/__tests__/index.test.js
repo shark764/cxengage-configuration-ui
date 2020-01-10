@@ -9,7 +9,7 @@ import ChatWidgetsForm, { mapStateToProps } from '../';
 
 import {
   getSelectedEntityId,
-  isCreating,
+  isSaving,
   isEntityFetching,
   userHasUpdatePermission
 } from '../../../../redux/modules/entities/selectors';
@@ -22,7 +22,7 @@ import {
 
 jest.mock('../../../../redux/modules/entities/selectors');
 getSelectedEntityId.mockReturnValue('mock-selected-entity-id');
-isCreating.mockReturnValue('mock-is-fetching');
+isSaving.mockReturnValue('mock-is-saving');
 isEntityFetching.mockReturnValue('mock-entity-is-fetching');
 userHasUpdatePermission.mockReturnValue('mock-user-has-update-permission');
 

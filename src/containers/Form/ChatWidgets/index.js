@@ -9,8 +9,7 @@ import ChatWidgetsForm from './layout';
 import { formValidation } from './validation';
 import {
   getSelectedEntityId,
-  isCreating,
-  isUpdating,
+  isSaving,
   isEntityFetching,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
@@ -36,7 +35,7 @@ export function mapStateToProps(state) {
     initialValues: selectChatWidgetFormInitialValues(state),
     key: getSelectedEntityId(state),
     chatWidgetId: getSelectedEntityId(state),
-    disabled: isCreating(state) || isUpdating(state) || !userHasUpdatePermission(state),
+    disabled: isSaving(state) || !userHasUpdatePermission(state),
     digitalChannelsAppsFetching: isEntityFetching(state, 'digitalChannelsApps'),
     digitalChannelsAppIds: getDigitalChannelsAppIds(state),
     app: getDigitalChannelsApp(state),
