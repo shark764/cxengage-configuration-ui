@@ -1,9 +1,9 @@
 #!groovy​
-@Library('sprockets@2.9.4') _
+@Library('sprockets@2.10.6') _
 
 import common
 import git
-import hipchat
+import teams
 import node
 import frontend
 
@@ -11,7 +11,7 @@ def service = 'cxengage-configuration-ui'
 def docker_tag = BUILD_TAG.toLowerCase()
 def pr = env.CHANGE_ID
 def c = new common()
-def h = new hipchat()
+def mt = new teams()
 def n = new node()
 def f = new frontend()
 
@@ -273,12 +273,12 @@ pipeline {
     }
     success {
       script {
-        h.hipchatPullRequestSuccess("${service}", "${build_version}")
+        mt.teamsPullRequestSuccess("${service}", "${build_version}", "https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373")
       }
     }
     failure {
       script {
-        h.hipchatPullRequestFailure("${service}", "${build_version}")
+        mt.teamsPullRequestFailure("${service}", "${build_version}", "https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373")
       }
     }
     unstable {
