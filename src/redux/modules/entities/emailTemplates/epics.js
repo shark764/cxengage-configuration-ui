@@ -43,7 +43,7 @@ export const UpdateEmailTemplate = (action$, store) =>
                 : 'cxengage/entities/update-email-template-response'
           })
         )
-          .map(response => handleSuccess(response, a, 'Email template was updated successfully!'))
+          .map(response => handleSuccess(response, a, 'Email Template was updated successfully!'))
           .catch(error => handleError(error, a));
       } else {
         Toast.info('"Default Email" is unchanged. Nothing to submit.');

@@ -88,7 +88,7 @@ exports[`UpdateEmailTemplate emailTemplates entity with custom email calls toast
 [MockFunction] {
   "calls": Array [
     Array [
-      "Email template was updated successfully!",
+      "Email Template was updated successfully!",
     ],
   ],
   "results": Array [
@@ -146,7 +146,7 @@ exports[`UpdateEmailTemplate emailTemplates entity with default email calls toas
 [MockFunction] {
   "calls": Array [
     Array [
-      "Email template was updated successfully!",
+      "Email Template was updated successfully!",
     ],
   ],
   "results": Array [

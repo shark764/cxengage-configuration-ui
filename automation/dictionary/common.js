@@ -172,7 +172,7 @@ const commonBehavior = {
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
       this.verifyEntitySpecificAction(entity);
-      this.closeSidePanel();
+      this.closeSidePanel(entity);
     });
   },
   updateEntity(entity, actionType) {
@@ -182,7 +182,8 @@ const commonBehavior = {
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
       this.toggleEntity(entity);
-      this.closeSidePanel();
+      this.closeSidePanel(entity);
+      this.revertUpdate(entity, actionType);
     });
   },
   addRemoveSubEntity(parameter, param, entity, actionType) {
@@ -231,7 +232,7 @@ const commonBehavior = {
       Elem.confirmationWrapper.waitForVisible(30000, false);
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
-      this.closeSidePanel();
+      this.closeSidePanel(entity);
     }
     if (entity === 'Api Key') {
       Elem.deleteKeyButton.waitAndClick();
@@ -283,19 +284,21 @@ const commonBehavior = {
     }
   },
   toggleEntity(entity) {
-    Elem.sdpanelStatusToggle.waitAndClick();
-    Elem.confirmationWrapper.waitForVisible();
-    Elem.confirmButton.waitForVisible();
-    let enabledToggle = Elem.enableMessage.isExisting();
-    Elem.confirmButton.waitAndClick();
-    Elem.toastSuccessMessage.waitForVisible();
-    Elem.toastSuccessMessage.validateElementsState('isVisible', true);
-    if (enabledToggle === true) {
-      Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was enabled successfully!`);
-    } else {
-      Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was disabled successfully!`);
+    if (entity !== "Email Template"){
+      Elem.sdpanelStatusToggle.waitAndClick();
+      Elem.confirmationWrapper.waitForVisible();
+      Elem.confirmButton.waitForVisible();
+      let enabledToggle = Elem.enableMessage.isExisting();
+      Elem.confirmButton.waitAndClick();
+      Elem.toastSuccessMessage.waitForVisible();
+      Elem.toastSuccessMessage.validateElementsState('isVisible', true);
+      if (enabledToggle === true) {
+        Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was enabled successfully!`);
+      } else {
+        Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was disabled successfully!`);
+      }
+      this.closeToastr(entity);
     }
-    this.closeToastr(entity);
   },
   closeToastr(entity, actionType) {
     if (Elem.toastCloseButton.isVisible()) {
@@ -309,11 +312,31 @@ const commonBehavior = {
       Elem.toastCloseButton.validateElementsState('isVisible', false);
     }
   },
-  closeSidePanel() {
+  closeSidePanel(entity) {
     Elem.sdpanelCloseButton.waitForVisible(30000, true);
     Elem.sdpanelCloseButton.waitAndClick();
+    // Temporary workaround due to CXV1-21326
+    if (entity === "Email Template") {
+      Elem.confirmButton.waitForVisible(30000, true);
+      Elem.confirmButton.waitAndClick();
+    }
     Elem.sdpanelSubmitButton.waitForVisible(30000, false);
     Elem.sdpanelSubmitButton.validateElementsState('isVisible', false);
+  },
+  revertUpdate(entity, actionType){
+    if (entity === 'Email Template') {
+      var columnElement = new Element(`.//span[text()="${dictionary[entity].updateSearchValue}"]`);
+      console.log(columnElement);
+      columnElement.waitForVisible(30000, true);
+      columnElement.waitAndClick();
+      Elem.emailList.selectDropDownValue('byVisibleText', 'Default Email');
+      Elem.sdpanelSubmitButton.waitForVisible(30000, true);
+      Elem.sdpanelSubmitButton.waitAndClick();
+      this.verifyAction(entity, actionType);
+      this.closeToastr(entity, actionType);
+      // Following due to CXV1-21326
+      this.closeSidePanel(entity);
+    }
   },
   logout() {
     Brow.refresh();

@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.14] - 2020-01-14
+## Added
+- <no-jira> - Added Email Templates automation.
+## Fixed
+- <no-jira> - Updated toaster notification casing for Email Templates.
 
 ## [0.70.13] - 2020-01-13
 ## Added

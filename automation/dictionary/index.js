@@ -589,15 +589,14 @@ const pages = {
     whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
   },
-  /*
   'Email Template': {
     specs: {
       update: {
         parametersToInsert: [
           {
             emailList: "Custom Email",
-            emailTemplateSubjectInput: "custom CxEngage password change request",
-            emailTemplateBodyInput: "click on this link {{{password-reset-url}}} to reset password for {{{username}}}",
+            emailTemplateSubjectInput: "Custom CxEngage password change request",
+            emailTemplateBodyInput: "Click on this link {{{password-reset-url}}} to reset password for {{{username}}}",
             sharedToggle: "",
           }
         ]
@@ -611,9 +610,8 @@ const pages = {
       subMainBar: "navigationLinkEmailTemplates"
     },
     whichCatagoryToSearch: "searchNameColumn",
-    updateSearchValue: ["password-reset"]
+    updateSearchValue: ['password-reset']
   },
-  */
   /*
   'Chat Widget': {
     specs: {
