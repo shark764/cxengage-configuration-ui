@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.15] - 2020-01-17
+## Fixed
+- CXV1-21374 - App dropdown validation is from contact point field.
+
 ## [0.70.14] - 2020-01-14
 ## Added
 - <no-jira> - Added Email Templates automation.
