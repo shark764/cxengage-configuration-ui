@@ -1770,7 +1770,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring",
     "modalListTableFields": Array [
       Object {
         "label": "Name",

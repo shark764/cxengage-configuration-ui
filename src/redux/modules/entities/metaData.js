@@ -436,6 +436,8 @@ entities.roles.columns = [
 //Silent Monitoring
 entities.interactionMonitoring.bulkEditsAvailable = false;
 entities.interactionMonitoring.betaFeature = true;
+entities.interactionMonitoring.pageTitle = 'Interaction Monitoring';
+entities.interactionMonitoring.helpLink = '/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring';
 entities.interactionMonitoring.defaultSorted = [];
 entities.interactionMonitoring.columns = [
   { name: 'InteractionId', active: true },

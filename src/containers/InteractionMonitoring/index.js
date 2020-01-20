@@ -32,11 +32,15 @@ import {
   selectSupervisorToolbarSilentMonitoringStatus
 } from '../../redux/modules/supervisorToolbar/selectors';
 import { getCurrentAgentId } from '../../redux/modules/userData/selectors';
+import { getHelpLink } from '../EntityTable/selectors';
+import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 
 import Layout from './layout';
 import { isInIframe } from 'serenova-js-utils/browser';
 
 export const mapStateToProps = (state, props) => ({
+  pageTitle: entitiesMetaData['interactionMonitoring'] ? entitiesMetaData['interactionMonitoring'].pageTitle : '',
+  pageHelpLink: getHelpLink(state),
   getCurrentAgentId: getCurrentAgentId(state),
   areAllColNotActive: areAllColNotActive(state, {
     menuType: 'Columns',

@@ -11,6 +11,8 @@ Object {
   "insideIframe": false,
   "monitoredId": "0000-0000-0000-0000",
   "monitoringStatus": "mockStatus",
+  "pageHelpLink": undefined,
+  "pageTitle": "Interaction Monitoring",
   "selected": "conected",
   "sorted": true,
   "tableData": Object {

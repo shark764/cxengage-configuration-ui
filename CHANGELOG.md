@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.17] - 2020-01-20
+## Fixed
+- CXV1-17071 - Protected Brandings - Help Link url persists through switching tenants.
+
 ## [0.70.16] - 2020-01-15
 ## Fixed
 - CXV1-21153 - Smooch whitelist URL has no URL validation in the ui.

@@ -2,10 +2,7 @@
 
 exports[`Interaction Monitoring Layout renders all columns , all columns are active  1`] = `
 <styled.div>
-  <PageHeader
-    helpLink="https://docs.cxengage.net/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring"
-    text="Interaction Monitoring"
-  >
+  <PageHeader>
     <div>
       <Styled(Button)
         className="timeConversion"
@@ -447,10 +444,7 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
 
 exports[`Interaction Monitoring Layout renders no columns , all columns are not active  1`] = `
 <styled.div>
-  <PageHeader
-    helpLink="https://docs.cxengage.net/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring"
-    text="Interaction Monitoring"
-  >
+  <PageHeader>
     <div>
       <Styled(Button)
         className="timeConversion"

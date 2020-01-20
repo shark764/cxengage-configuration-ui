@@ -6,6 +6,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import InteractionMonitoring, { mapStateToProps } from '../';
+import { getCurrentEntity } from '../../../redux/modules/entities/selectors';
 jest.mock('../../../redux/store.js', () => jest.fn());
 
 // Mock all the required selectors
@@ -30,6 +31,8 @@ jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
 jest.mock('../../../redux/modules/userData/selectors', () => ({
   getCurrentAgentId: () => '0000-0000-0000-0000'
 }));
+jest.mock('../../../redux/modules/entities/selectors');
+getCurrentEntity.mockImplementation(() => 'InteractionMonitoring');
 
 describe('InteractionMonitoring Renders', () => {
   it('renders', () => {

@@ -56,7 +56,7 @@ export default class InteractionMonitoring extends Component {
   componentWillMount() {
     messageSubscribe();
     localStorageSubscribe();
-    this.props.setCurrentEntity('InteractionMonitoring');
+    this.props.setCurrentEntity('interactionMonitoring');
     this.props.fetchData('groups', 'interactionMonitoring');
     this.props.fetchData('skills', 'interactionMonitoring');
     this.props.startInteractionMonitoring();
@@ -129,8 +129,8 @@ export default class InteractionMonitoring extends Component {
     return (
       <Wrapper>
         <PageHeader
-          text="Interaction Monitoring"
-          helpLink="https://docs.cxengage.net/Help/Content/Monitoring/Silent%20Monitoring/Silent-monitoring.htm?Highlight=silent%20monitoring"
+            text={this.props.pageTitle}
+            helpLink={this.props.pageHelpLink}
         >
           <div>
             <ConverTimeButton
