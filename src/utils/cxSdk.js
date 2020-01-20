@@ -38,14 +38,7 @@ export function versionCheck() {
 export function cxInit() {
   if (window.location.hostname === 'localhost' || window.location.hostname.includes('ngrok')) {
     if (window.self === window.top && CxEngage.initialize) {
-      const sdkConf = {
-        environment: 'dev',
-        baseUrl: 'https://dev-api.cxengagelabs.net/v1/',
-        logLevel: 'debug',
-        blastSqsOutput: true,
-        reportingRefreshRate: 10000,
-        supervisorMode: true
-      };
+      const sdkConf = require('../env.json');
       CxEngage.initialize(sdkConf);
     }
   } else {

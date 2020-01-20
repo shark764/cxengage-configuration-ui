@@ -131,6 +131,191 @@ exports[`<ChatWidgetsForm /> renders create chatWidgets 1`] = `
   <ListField
     className="chat-widget-whitelisted-urls"
     disabled={false}
+    inputError={
+      <React.Fragment>
+        <styled.span>
+          URL entered is not following 'serialized-origin' format from 
+          <a
+            href="https://tools.ietf.org/html/rfc6454"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            RFC 6454
+          </a>
+        </styled.span>
+        <styled.span>
+          The structure should follow the pattern:
+        </styled.span>
+        <Styled(styled.span)>
+          scheme "://" host [ ":" port ], where scheme is http or https
+        </Styled(styled.span)>
+        <styled.span>
+          Example: http://www.example.com
+        </styled.span>
+      </React.Fragment>
+    }
+    inputValidation={[Function]}
+    label="Whitelisted URLs"
+    name="whitelistedUrls"
+  />
+</form>
+`;
+
+exports[`<ChatWidgetsForm /> renders update chatWidgets 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="chat-widget-name"
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    disabled={false}
+    id="chat-widget-description"
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="chat-widget-contact-point"
+    inputType="text"
+    label="Contact Point *"
+    name="contactPoint"
+  />
+  <React.Fragment>
+    <Detail
+      label="App"
+    />
+    <Detail
+      label="App Id"
+    />
+  </React.Fragment>
+  <DetailHeader
+    text="Branding"
+  />
+  <RadioGroupField
+    className="chat-widget-display-style"
+    disabled={false}
+    label="Display Style"
+    name="displayStyle"
+    options={
+      Array [
+        Object {
+          "label": "Button",
+          "value": "button",
+        },
+        Object {
+          "label": "Tab",
+          "value": "tab",
+        },
+      ]
+    }
+    required={true}
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="chat-widget-business-name"
+    inputType="text"
+    label="Business Name"
+    name="businessName"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="chat-widget-business-icon-url"
+    inputType="text"
+    label="Business Icon URL"
+    name="businessIconUrl"
+  />
+  <InputField
+    componentType="input"
+    disabled={false}
+    id="chat-widget-background-image-url"
+    inputType="text"
+    label="Background Image URL"
+    name="backgroundImageUrl"
+  />
+  <ColorField
+    disabled={false}
+    id="chat-widget-header-color"
+    label="Brand Color"
+    name="brandColor"
+  />
+  <ColorField
+    className="chat-widget-conversation-color"
+    disabled={false}
+    label="Conversation Color"
+    name="conversationColor"
+  />
+  <ColorField
+    className="chat-widget-action-color"
+    disabled={false}
+    label="Action Color"
+    name="actionColor"
+  />
+  <ToggleField
+    disabled={false}
+    id="chat-widget-fixed-intro-pane"
+    label="Fixed Intro Pane"
+    name="fixedIntroPane"
+  />
+  <RadioGroupField
+    className="chat-widget-prechat-capture"
+    disabled={false}
+    label="Prechat Capture"
+    name="prechatCapture"
+    options={
+      Array [
+        Object {
+          "label": "Name",
+          "value": "name",
+        },
+        Object {
+          "label": "Email",
+          "value": "email",
+        },
+      ]
+    }
+    required={true}
+  />
+  <DetailHeader
+    text="Origin Whitelist"
+  />
+  <ListField
+    className="chat-widget-whitelisted-urls"
+    disabled={false}
+    inputError={
+      <React.Fragment>
+        <styled.span>
+          URL entered is not following 'serialized-origin' format from 
+          <a
+            href="https://tools.ietf.org/html/rfc6454"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            RFC 6454
+          </a>
+        </styled.span>
+        <styled.span>
+          The structure should follow the pattern:
+        </styled.span>
+        <Styled(styled.span)>
+          scheme "://" host [ ":" port ], where scheme is http or https
+        </Styled(styled.span)>
+        <styled.span>
+          Example: http://www.example.com
+        </styled.span>
+      </React.Fragment>
+    }
+    inputValidation={[Function]}
     label="Whitelisted URLs"
     name="whitelistedUrls"
   />

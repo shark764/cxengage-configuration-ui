@@ -9,13 +9,24 @@ Immutable.Map {
 `;
 
 exports[`getDigitalChannelsAppIds maps digital channels to id and name 1`] = `
-Array [
+Immutable.List [
   Object {
     "label": "mock-name",
     "value": "mock-app-id",
   },
 ]
 `;
+
+exports[`getDigitalChannelsAppIds maps digital channels when at least one is available for assignment 1`] = `
+Immutable.List [
+  Object {
+    "label": "mock-name-3",
+    "value": "mock-app-id-3",
+  },
+]
+`;
+
+exports[`getDigitalChannelsAppIds returns empty map when there is no app available for assignment 1`] = `Immutable.List []`;
 
 exports[`selectChatWidgetFormInitialValues create returns initial values 1`] = `
 Immutable.Map {

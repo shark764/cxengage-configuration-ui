@@ -5,6 +5,7 @@ Object {
   "appId": "Please choose an app",
   "contactPoint": "Please enter a contact point",
   "name": "Please enter a name",
+  "whitelistedUrls": undefined,
 }
 `;
 
@@ -13,5 +14,15 @@ Object {
   "appId": false,
   "contactPoint": false,
   "name": false,
+  "whitelistedUrls": false,
+}
+`;
+
+exports[`formValidation returns proper object with error messages when wrong values are provided 1`] = `
+Object {
+  "appId": "Please choose an app",
+  "contactPoint": "Please enter a contact point",
+  "name": "Please enter a name",
+  "whitelistedUrls": "One or more URL(s) are not properly formatted with serialized-origin standard.",
 }
 `;

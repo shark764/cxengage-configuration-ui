@@ -42,7 +42,7 @@ export const sdkPromise = sdkCall => {
         });
       } else {
         /* istanbul ignore next */
-        CxEngage[sdkCall.module][sdkCall.command](sdkCall.data, function(error, topic, response) {
+        function handleCall(error, topic, response) {
           console.log('[SDK] SDK sending back:', error, topic, response);
           if (error) {
             console.warn('ERROR', error);
@@ -53,7 +53,16 @@ export const sdkPromise = sdkCall => {
           } else {
             resolve(response);
           }
-        });
+        }
+
+        if (CxEngage[sdkCall.module][sdkCall.command] === undefined) {
+          CxEngage.api[sdkCall.crudAction](
+            { path: sdkCall.path, body: sdkCall.data, customTopic: sdkCall.topic },
+            handleCall
+          );
+        } else {
+          CxEngage[sdkCall.module][sdkCall.command](sdkCall.data, handleCall);
+        }
       }
     });
   } else {
@@ -146,7 +155,9 @@ export const errorManager = error => {
       // The only entity that has its own messages is DispatchMappings
       !messageFromAPI.includes('channel type')
     ) {
-      errorDetails = ` ${error.message} ${code}: Resource with the same name or value already exists in the system, please enter a different value.`;
+      errorDetails = ` ${
+        error.message
+      } ${code}: Resource with the same name or value already exists in the system, please enter a different value.`;
     }
   }
   return { errorMessage: errorDetails ? errorDetails : 'An error has occurred.', attribute: attr };

@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.16] - 2020-01-15
+## Fixed
+- CXV1-21153 - Smooch whitelist URL has no URL validation in the ui.
+- CXV1-21329 - Shouldn't be able to select App Id that an existing chat widget is already using.
+
 ## [0.70.15] - 2020-01-17
 ## Fixed
 - CXV1-21374 - App dropdown validation is from contact point field.
