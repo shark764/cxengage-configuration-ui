@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.18] - 2020-01-23
+## Fixed
+- update js-utils with a fixed sip validation regex for IP formatted addresses
+
 ## [0.70.17] - 2020-01-20
 ## Fixed
 - CXV1-17071 - Protected Brandings - Help Link url persists through switching tenants.
