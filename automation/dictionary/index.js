@@ -609,6 +609,7 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: ['password-reset']
   },
+  /*
   'Chat Widget': {
     specs: {
       createAPI: {
@@ -668,6 +669,7 @@ const pages = {
     deleteAPINameValue: [`rName-${randomId}`],
     updateSearchValue: [`rName-${randomId}`]
   },
+  */
   'Api Key': {
     specs: {
       create: {
