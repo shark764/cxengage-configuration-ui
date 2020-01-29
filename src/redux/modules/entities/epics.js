@@ -357,6 +357,7 @@ export const UpdateEntity = action$ =>
       delete a.sdkCall.data.updated;
       delete a.sdkCall.data.updatedBy;
       delete a.sdkCall.data.updating;
+      delete a.sdkCall.data.bulkChangeItem;
       return { ...a };
     })
     .concatMap(a =>

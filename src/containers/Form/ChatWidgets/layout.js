@@ -65,6 +65,7 @@ export default function ChatWidgetsForm({
         name="name"
         label="Name *"
         id="chat-widget-name"
+        data-automation="nameInput"
         componentType="input"
         inputType="text"
         disabled={disabled}
@@ -73,6 +74,7 @@ export default function ChatWidgetsForm({
         name="description"
         label="Description"
         id="chat-widget-description"
+        data-automation="descriptionInput"
         componentType="textarea"
         inputType="text"
         disabled={disabled}
@@ -81,6 +83,7 @@ export default function ChatWidgetsForm({
         name="contactPoint"
         label="Contact Point *"
         id="chat-widget-contact-point"
+        data-automation="contactPointInput"
         componentType="input"
         inputType="text"
         disabled={disabled}
@@ -89,6 +92,7 @@ export default function ChatWidgetsForm({
         <SelectField
           name="appId"
           label="App *"
+          data-automation="appIdList"
           options={!digitalChannelsAppsFetching ? digitalChannelsAppIds : undefined}
           disabled={disabled}
         />
@@ -105,11 +109,9 @@ export default function ChatWidgetsForm({
         className="chat-widget-display-style"
         name="displayStyle"
         label="Display Style"
+        data-automation="displayStyleRadio"
         disabled={disabled}
-        options={[
-          { label: 'Button', value: 'button' },
-          { label: 'Tab', value: 'tab' }
-        ]}
+        options={[{ label: 'Button', value: 'button' }, { label: 'Tab', value: 'tab' }]}
         required
       />
       {displayStyleIsButton && (
@@ -118,6 +120,7 @@ export default function ChatWidgetsForm({
             name="buttonIconUrl"
             label="Button Icon URL"
             id="chat-widget-button-icon-url"
+            data-automation="buttonIconURLInput"
             componentType="input"
             inputType="text"
             disabled={disabled}
@@ -126,6 +129,7 @@ export default function ChatWidgetsForm({
             name="buttonWidth"
             label="Button Width"
             id="chat-widget-button-width"
+            data-automation="buttonWidthInput"
             componentType="input"
             inputType="text"
             disabled={disabled}
@@ -134,6 +138,7 @@ export default function ChatWidgetsForm({
             name="buttonHeight"
             label="Button Height"
             id="chat-widget-button-height"
+            data-automation="buttonHeightInput"
             componentType="input"
             inputType="text"
             disabled={disabled}
@@ -144,6 +149,7 @@ export default function ChatWidgetsForm({
         name="businessName"
         label="Business Name"
         id="chat-widget-business-name"
+        data-automation="businessNameInput"
         componentType="input"
         inputType="text"
         disabled={disabled}
@@ -152,6 +158,7 @@ export default function ChatWidgetsForm({
         name="businessIconUrl"
         label="Business Icon URL"
         id="chat-widget-business-icon-url"
+        data-automation="businessIconURLInput"
         componentType="input"
         inputType="text"
         disabled={disabled}
@@ -160,6 +167,7 @@ export default function ChatWidgetsForm({
         name="backgroundImageUrl"
         label="Background Image URL"
         id="chat-widget-background-image-url"
+        data-automation="backgroundImageURLInput"
         componentType="input"
         inputType="text"
         disabled={disabled}
@@ -176,17 +184,16 @@ export default function ChatWidgetsForm({
         id="chat-widget-fixed-intro-pane"
         name="fixedIntroPane"
         label="Fixed Intro Pane"
+        data-automation="fixedIntroPaneToggle"
         disabled={disabled}
       />
       <RadioGroupField
         className="chat-widget-prechat-capture"
         name="prechatCapture"
         label="Prechat Capture"
+        data-automation="prechatCaptureRadio"
         disabled={disabled}
-        options={[
-          { label: 'Name', value: 'name' },
-          { label: 'Email', value: 'email' }
-        ]}
+        options={[{ label: 'Name', value: 'name' }, { label: 'Email', value: 'email' }]}
         required
       />
 
@@ -195,6 +202,7 @@ export default function ChatWidgetsForm({
         name="whitelistedUrls"
         label="Whitelisted URLs"
         className="chat-widget-whitelisted-urls"
+        data-automation="whiteListURLInput"
         inputValidation={isSerializedOrigin}
         inputError={error}
       />

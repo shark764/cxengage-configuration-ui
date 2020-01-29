@@ -32,9 +32,12 @@ elements['modalDescriptionInput'] = new Element('textarea[data-automation="descr
 elements['emailTemplateSubjectInput'] = new Element('div[class="notranslate public-DraftEditor-content"]');
 elements['emailTemplateBodyInput'] = new Element('div[class="notranslate public-DraftEditor-content"]', 1);
 elements['richTextEditorInput'] = new Element('div[class="notranslate public-DraftEditor-content"]');
-
 // Nested List Components:
 elements['secondCategoryRemoveButton'] = new Element('button[data-automation="removeCategoryButton"]', 1);
 elements['secondListItemRemoveButton'] = new Element('button[data-automation="removeListItemButton"]', 1);
+// Chat-Widget color components:
+elements['brandColorInput'] = new Element('input[data-automation="colorPickerTextInput"]', 0);
+elements['conversationColorInput'] = new Element('input[data-automation="colorPickerTextInput"]', 1);
+elements['actionColorInput'] = new Element('input[data-automation="colorPickerTextInput"]', 2);
 
 module.exports = elements;

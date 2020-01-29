@@ -26,6 +26,11 @@ testsToRun.forEach(entity => {
     it(`Navigate to ${entity}`, () => {
       commonBehavior.navigationMainBar(entity);
     });
+    if (dictionary[entity].specs['createAPI']) {
+      it(`Create a required entity for ${entity} creation`, () => {
+        commonBehavior.entityCRUD(entity, 'createAPI');
+      });
+    }
     if (dictionary[entity].specs['create']) {
       it(`Create ${entity}`, () => {
         commonBehavior.entityCRUD(entity, 'create');
@@ -39,6 +44,11 @@ testsToRun.forEach(entity => {
     if (dictionary[entity].specs['delete']) {
       it(`Delete ${entity}`, () => {
         commonBehavior.entityCRUD(entity, 'delete');
+      });
+    }
+    if (dictionary[entity].specs['deleteAPI']) {
+      it(`Delete an entity for ${entity} to cleanup`, () => {
+        commonBehavior.entityCRUD(entity, 'deleteAPI');
       });
     }
   });

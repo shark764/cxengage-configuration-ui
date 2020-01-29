@@ -9,13 +9,10 @@ const randomId = randomPhoneNum();
 // Tenants - Page not completed yet
 // Identity Providers - Page not completed yet
 // Integrations - Page not completed yet
-// Email Templates - needs data-automation labels added
-// Chat Widget - needs data-automation labels added
+// Email Templates - needs update after bug fix.
 // Contact Attributes - Page not completed yet.
 // Contact Layouts - Page not completed yet.
 // Flows - needs extra logic for update.
-// Dispostions - Page not completed yet.
-// Disposition Lists - Page not completed yet.
 // Queues - Page not completed yet.
 // Media - Page not completed yet.
 // Realtime Dashboards - Page not completed yet.
@@ -612,22 +609,52 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: ['password-reset']
   },
-  /*
   'Chat Widget': {
     specs: {
+      createAPI: {
+        parameters: {}
+      },
       create: {
         parametersToInsert: [
           {
-            nameInput: `rName-${randomId}`
+            nameInput: `rName-${randomId}`,
+            descriptionInput: `rDesc-${randomId}`,
+            contactPointInput: 'messaging-contact-point',
+            appIdList: 'Anil automation app',
+            displayStyleRadio: 'button',
+            buttonIconURLInput: 'https://www.fakeButtonURL.com/',
+            buttonWidthInput: '45',
+            buttonHeightInput: '50',
+            businessNameInput: 'Automation is fun',
+            businessIconURLInput: 'https://www.fakeBusinessIconURL.com',
+            backgroundImageURLInput: 'https://www.fakeBackgroundImageURL.com',
+            brandColorInput: '#0099ff',
+            conversationColorInput: '#ff0026',
+            actionColorInput: '#65758e',
+            fixedIntroPaneToggle: '',
+            prechatCaptureRadio: 'email'
           }
         ]
       },
       update: {
         parametersToInsert: [
           {
-            nameInput: `updatedRName-${randomId}`
+            descriptionInput: `rUpdatedDesc-${randomId}`,
+            contactPointInput: 'messaging-contact-point-updated',
+            displayStyleRadio: 'tab',
+            businessNameInput: 'Automation is super fun',
+            businessIconURLInput: 'https://www.fakeUpdatedBusinessIconURL.com',
+            backgroundImageURLInput: 'https://www.fakeUpdatedBackgroundImageURL.com',
+            brandColorInput: '#306dcb',
+            conversationColorInput: '#ff0026',
+            actionColorInput: '#0099ff',
+            fixedIntroPaneToggle: '',
+            prechatCaptureRadio: 'name'
           }
         ]
+      },
+      deleteAPI: {
+        parameters: {}
       },
       read: {
         parameters: {}
@@ -638,9 +665,9 @@ const pages = {
       subMainBar: "navigationLinkChatWidgets"
     },
     whichCatagoryToSearch: "searchNameColumn",
+    deleteAPINameValue: [`rName-${randomId}`],
     updateSearchValue: [`rName-${randomId}`]
   },
-  */
   'Api Key': {
     specs: {
       create: {

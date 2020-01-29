@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.19] - 2020-01-28
+## Added
+- CXV1-18432 - Chat Widget Config2 automation spec. 
+
 ## [0.70.18] - 2020-01-23
 ## Fixed
 - update js-utils with a fixed sip validation regex for IP formatted addresses

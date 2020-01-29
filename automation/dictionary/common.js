@@ -3,6 +3,13 @@ const Elem = require('../pageObjects/webElements');
 const dictionary = require('./index');
 const today = new Date();
 const tomorrow = new Date(today.setDate(today.getDate() + 1)).toString().slice(0, 15);
+const { cxapi: { Client } } = require('alonzo'),
+    cx = new Client({
+        "user": "jwilliams@serenova.com",
+        "pass": "Password1!",
+        "environment": "dev",
+        "region": "us-east-1"
+    });
 const commonBehavior = {
   login() {
     Brow.url(process.env.URI ? process.env.URI : process.ENV.URL);
@@ -26,7 +33,6 @@ const commonBehavior = {
     Elem.loadingSpinnerIcon.waitForVisible(30000, false);
     Elem.loadingSpinnerIcon.validateElementsState('isVisible', false);
   },
-
   navigationMainBar(entity) {
     let navBar = new Element(`[data-automation=${dictionary[entity].navigation.mainBar}]`);
     let navBarSub = new Element(`[data-automation=${dictionary[entity].navigation.subMainBar}]`);
@@ -73,6 +79,7 @@ const commonBehavior = {
   insertRadioValues(parameter, param) {
     let radioGroupValue = new Element(`input[value="${parameter[param]}"]`);
     radioGroupValue.waitAndClick();
+    Brow.pause(2000);
   },
   insertCheckboxValues(parameter, param) {
     Elem[param].waitAndClick();
@@ -96,8 +103,10 @@ const commonBehavior = {
     columnElement.clearElement();
     columnElement.setValue(searchValue);
     new Element(`.//span[text()="${searchValue}"]`).waitAndClick();
-    Elem.sdpanelStatusToggle.waitForVisible();
-    Elem.sdpanelStatusToggle.validateElementsState('isVisible', true);
+    if(entity !== "Chat Widget") {
+      Elem.sdpanelStatusToggle.waitForVisible();
+      Elem.sdpanelStatusToggle.validateElementsState('isVisible', true);
+    }
   },
   fillFormFields(parameter, entity, actionType) {
     Object.keys(parameter).forEach(param => {
@@ -164,6 +173,15 @@ const commonBehavior = {
       }
     }
   },
+  createEntityViaAPI(entity) {
+    try {
+      if (entity === 'Chat Widget') {
+        browser.waitUntil(() => { return cx.chatWidget.createChatWidgetApp('Anil automation app', process.ENV.tenantId)});
+      }
+    } catch (err) {
+      throw new Error('Could not create entity via api due to ' + err);
+    }
+  },
   createEntity(entity, actionType) {
     dictionary[entity].specs[actionType].parametersToInsert.forEach(parameter => {
       Elem.entityCreateButton.waitAndClick();
@@ -213,6 +231,16 @@ const commonBehavior = {
       Elem.sdpanelAddItem.waitForVisible(20000, false);
     }
   },
+  deleteEntityViaAPI(entity) {
+    try {
+      if (entity === 'Chat Widget') {
+        browser.waitUntil(() => { return cx.chatWidget.deleteChatWebIntegration(dictionary[entity].deleteAPINameValue, process.ENV.tenantId)});
+        browser.waitUntil(() => { return cx.chatWidget.deleteChatWidgetApp('Anil automation app', process.ENV.tenantId)});
+      }
+    } catch(err){
+      throw new Error('Could not delete entity via api due to ' + err);
+    }
+  },
   deleteEntity(entity, actionType) {
     Elem.searchStatusColumnButton.waitAndClick();
     Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
@@ -246,12 +274,16 @@ const commonBehavior = {
     }
   },
   entityCRUD(entity, actionType) {
-    if (actionType === 'create') {
+    if (actionType === 'createAPI') {
+      this.createEntityViaAPI(entity, actionType);
+    } else if (actionType === 'create') {
       this.createEntity(entity, actionType);
     } else if (actionType === 'update') {
       this.updateEntity(entity, actionType);
     } else if (actionType === 'delete') {
       this.deleteEntity(entity, actionType);
+    } else if (actionType === 'deleteAPI') {
+      this.deleteEntityViaAPI(entity, actionType);
     }
   },
   verifyAction(entity, actionType) {
@@ -284,7 +316,7 @@ const commonBehavior = {
     }
   },
   toggleEntity(entity) {
-    if (entity !== "Email Template"){
+    if (entity !== 'Email Template' && entity !== 'Chat Widget') {
       Elem.sdpanelStatusToggle.waitAndClick();
       Elem.confirmationWrapper.waitForVisible();
       Elem.confirmButton.waitForVisible();
