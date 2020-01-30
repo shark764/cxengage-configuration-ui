@@ -480,6 +480,8 @@ const pages = {
       mainBar: 'userManagementMenu',
       subMainBar: 'navigationLinkUsers'
     },
+    userPSTNNumber:'+15063003002',
+    userSIPAddress:'sip:882402150@64.240.105.99',
     whichCatagoryToSearch: 'searchEmailColumn',
     updateSearchValue: [`remail-${randomId}@gmail.com`]
   },

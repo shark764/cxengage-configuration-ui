@@ -204,8 +204,32 @@ const commonBehavior = {
       this.revertUpdate(entity, actionType);
     });
   },
+  addExtension(entity, actionType, type, ext, pos) {
+    let extensionList = new Element(`select[data-automation="extensionList"]`, pos),
+    extensionInput = new Element(`input[data-automation="extensionInput"]`, (pos-1)),
+    extensionLabelInput = new Element(`input[data-automation="extensionLabelInput"]`, pos);
+
+    Elem.sdpanelAddItem.waitAndClick();
+    extensionList.waitForVisible();
+    extensionInput.waitForVisible();
+    extensionLabelInput.waitForVisible();
+    extensionList.selectDropDownValue('byVisibleText', type);
+    extensionInput.clearElement();
+    extensionInput.setValue(ext);
+    extensionLabelInput.clearElement();
+    extensionLabelInput.setValue(type + ' extension');
+    Elem.labelRequiredText.waitForVisible(20000, false);
+    Elem.extensionRequiredText.waitForVisible(20000, false);
+    Elem.sdpanelSubmitButton.waitAndClick();
+    this.verifyAction(entity, actionType);
+    this.closeToastr(entity, actionType);
+  },
   addRemoveSubEntity(parameter, param, entity, actionType) {
     if (entity === 'User' && Elem.sdpanelAddItem.isExisting()) {
+      this.addExtension(entity, actionType, 'PSTN', dictionary[entity].userPSTNNumber, 1);
+      this.addExtension(entity, actionType, 'SIP', dictionary[entity].userSIPAddress, 2);
+      Elem.externalIdInput.clearElement();
+      Elem.externalIdInput.setValue('12345');
       Elem.extensionsSVG.waitAndClick();
       Elem.sdpanelAddItem.waitForVisible(20000, false);
     }

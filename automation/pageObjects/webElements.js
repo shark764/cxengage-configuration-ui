@@ -39,5 +39,7 @@ elements['secondListItemRemoveButton'] = new Element('button[data-automation="re
 elements['brandColorInput'] = new Element('input[data-automation="colorPickerTextInput"]', 0);
 elements['conversationColorInput'] = new Element('input[data-automation="colorPickerTextInput"]', 1);
 elements['actionColorInput'] = new Element('input[data-automation="colorPickerTextInput"]', 2);
-
+// Users Extension Warnings
+elements['labelRequiredText'] = new Element(`.//span[text()="Label is required"]`);
+elements['extensionRequiredText'] = new Element(`.//span[text()="Valid Phone Number Required"]`);
 module.exports = elements;
