@@ -1,5 +1,6 @@
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { isEmpty } from 'serenova-js-utils/strings';
 import { from } from 'rxjs/observable/from';
 import { of } from 'rxjs/observable/of';
 import { camelCaseToRegularFormAndRemoveLastLetter } from 'serenova-js-utils/strings';
@@ -77,11 +78,25 @@ export const UpdateUserEntity = (action$, store) =>
               }))
             ];
           }
-          return [
+
+          const actionList = [
             handleSuccess(response, a, `User was updated successfully!`),
             { ...a, type: 'UPDATE_USER_CAPACITY_RULE' },
             { ...a, type: 'UPDATE_PLATFORM_USER_ENTITY' }
           ];
+
+          // skip 'UPDATE_PLATFORM_USER_ENTITY' submission if the invitation status is still pending (pending, invited or expired)
+          // and if there is not yet entered the firstName and lastName
+          if (
+            (a.values.invitationStatus === 'pending' ||
+              a.values.invitationStatus === 'invited' ||
+              a.values.invitationStatus === 'expired') &&
+            isEmpty(a.values.firstName) &&
+            isEmpty(a.values.lastName)
+          ) {
+            actionList.splice(2, 1);
+          }
+          return actionList;
         })
         .catch(error => handleError(error, a))
     );

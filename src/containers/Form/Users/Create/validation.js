@@ -18,6 +18,7 @@ const emailValidation = email => {
 export const formValidation = (values, props) => {
   const allUsers = props.tenantUsers.toJS();
   const userIndex = allUsers.findIndex(element => element.email === values.get('email'));
+  const platformRoleEnabled = !props.checkPlatformUser;
 
   if (userIndex !== -1) {
     props.setSelectedEntityId(allUsers[userIndex].id);
@@ -25,6 +26,6 @@ export const formValidation = (values, props) => {
   return {
     roleId: !values.get('roleId') && 'Please select a Tenant Role',
     email: emailValidation(values.get('email')),
-    platformRoleId: !values.get('platformRoleId') && 'Please select a Platform Role'
+    platformRoleId: platformRoleEnabled && !values.get('platformRoleId') && 'Please select a Platform Role'
   };
 };

@@ -52,10 +52,6 @@ export const selectFormInitialValues = state => {
   }
 };
 
-export const selectCreateUserFormInitialValues = state => {
-  return new Map({ inviteNow: true });
-};
-
 export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit(values, props));
 
 export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onSubEntityFormSubmit(values, props));

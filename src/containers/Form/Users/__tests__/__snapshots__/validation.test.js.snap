@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`formValidation returns proper object (errors) when invitationStatus is pending, firstname is provided so lastname should be required as well 1`] = `
+Object {
+  "extensions": Array [
+    "Label is required",
+    "Label is required",
+  ],
+  "firstName": false,
+  "lastName": "Please enter a last name",
+  "roleId": false,
+}
+`;
+
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
   "extensions": Array [
@@ -25,6 +37,18 @@ Object {
 `;
 
 exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "extensions": Array [
+    "Label is required",
+    "Label is required",
+  ],
+  "firstName": false,
+  "lastName": false,
+  "roleId": false,
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided, invitationStatus is pending so the firstname & lastname are not required 1`] = `
 Object {
   "extensions": Array [
     "Label is required",

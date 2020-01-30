@@ -569,10 +569,12 @@ export default function reducer(state = initialState, action) {
           .setIn([currentEntity, 'selectedEntityId'], action.entityId)
           // We uncheck all rows if form is closed and
           // we were performing bulk actions
-          .updateIn([currentEntity, 'data'], entityData =>
-            action.entityId === ''
-              ? entityData && entityData.map(item => item.set('bulkChangeItem', false))
-              : entityData
+          .updateIn(
+            [currentEntity, 'data'],
+            entityData =>
+              action.entityId === ''
+                ? entityData && entityData.map(item => item.set('bulkChangeItem', false))
+                : entityData
           )
       );
     }
@@ -585,10 +587,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'FETCH_DATA_FULFILLED': {
       // As we recieve the data we tag on the items that are considered inherited
-      const {
-        entityName,
-        response: { result }
-      } = action;
+      const { entityName, response: { result } } = action;
       switch (entityName) {
         case 'roles': {
           const newResult = result.map(entity => ({
@@ -978,8 +977,10 @@ export default function reducer(state = initialState, action) {
         return state
           .update('businessHours', entityStore =>
             entityStore
-              .updateIn(['data', entityIndex, 'exceptions'], exceptions =>
-                !exceptions ? fromJS([action.response.result]) : exceptions.push(fromJS(action.response.result))
+              .updateIn(
+                ['data', entityIndex, 'exceptions'],
+                exceptions =>
+                  !exceptions ? fromJS([action.response.result]) : exceptions.push(fromJS(action.response.result))
               )
               .set('selectedSubEntityId', undefined)
               .set('subEntitySaving', false)
@@ -1192,15 +1193,21 @@ export default function reducer(state = initialState, action) {
 // Reducer helper functions
 
 export const setUserExistsInPlatform = (state, action) => {
+  let userExistInPlatform = false;
+  let userPlatformRoleId = null;
   if (
     action.meta.form === 'users:create' &&
     action.meta.field === 'email' &&
     action.type === '@@redux-form/CHANGE_FULFILLED'
   ) {
-    return state.setIn([state.get('currentEntity'), 'userExistInPlatform'], true);
-  } else {
-    return state.setIn([state.get('currentEntity'), 'userExistInPlatform'], false);
+    userExistInPlatform = true;
+    if (action.response && action.response.result[0]) {
+      userPlatformRoleId = action.response.result[0].roleId;
+    }
   }
+  return state
+    .setIn([state.get('currentEntity'), 'userExistInPlatform'], userExistInPlatform)
+    .setIn([state.get('currentEntity'), 'userPlatformRoleId'], userPlatformRoleId);
 };
 
 export const setEntityUpdatingHelper = (state, { entityName, entityId }, updating) => {

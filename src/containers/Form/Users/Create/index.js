@@ -10,7 +10,8 @@ import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../
 import { getUsers, existsPlatformUserByEmail } from '../../../../redux/modules/entities/users/selectors';
 import { formValidation } from './validation';
 import { onFormSubmit, setSelectedEntityId } from '../../../../redux/modules/entities';
-import { selectCreateUserFormInitialValues, createFormName } from '../../../../redux/modules/form/selectors';
+import { createFormName } from '../../../../redux/modules/form/selectors';
+import { selectCreateUserFormInitialValues } from '../../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../../redux/modules/entities/identityProviders/selectors';
 

@@ -55,7 +55,7 @@ export default function UsersForm({
             label="Platform Role *"
             id="frm-users-platform-role-id"
             data-automation="roleList"
-            disabled={isSaving || !userHasUpdatePermission}
+            disabled={isSaving || !userHasUpdatePermission || checkPlatformUser}
             options={platformRoles}
           />
           <SelectField

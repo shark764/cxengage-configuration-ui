@@ -1,6 +1,7 @@
 /*
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
+import { Map } from 'immutable';
 import { createSelector } from 'reselect';
 import { getSelectedEntity, userHasPermissions, userHasEveryPermissions } from '../selectors';
 import { convertRoles, selectPlatformRoles, getRoles } from '../roles/selectors';
@@ -17,6 +18,13 @@ import { isTenantSetForReadAllMode } from '../../userData/selectors';
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
 export const existsPlatformUserByEmail = state => state.getIn(['Entities', 'users', 'userExistInPlatform'], false);
+
+export const selectCreateUserFormInitialValues = state => {
+  return new Map({
+    inviteNow: true,
+    platformRoleId: state.getIn(['Entities', 'users', 'userPlatformRoleId'], null)
+  });
+};
 
 export const selectNonDisabledUsers = createSelector([getUsers], users => {
   return users !== undefined

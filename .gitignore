@@ -4,3 +4,5 @@ dist
 coverage
 junit.xml
 .env
+.project
+.settings

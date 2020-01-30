@@ -14,6 +14,13 @@ const errorMessage = type => (type === 'pstn' ? 'Valid Phone Number Required' : 
 export const formValidation = values => {
   const formValidation = {};
   const newValues = values.toJS();
+  const bypassNamesValidation =
+    isEmpty(values.get('firstName')) &&
+    isEmpty(values.get('lastName')) &&
+    (values.get('invitationStatus') === 'pending' ||
+      values.get('invitationStatus') === 'invited' ||
+      values.get('invitationStatus') === 'expired');
+
   const extensions = newValues.extensions.map(
     ext => isWebRtc(ext.type) || validateValue(ext.value, ext.type) || errorMessage(ext.type)
   );
@@ -24,8 +31,8 @@ export const formValidation = values => {
   if (labels.some(err => typeof err === 'string')) {
     formValidation.extensions = labels;
   }
-  formValidation.firstName = isEmpty(values.get('firstName')) && 'Please enter a first name';
-  formValidation.lastName = isEmpty(values.get('lastName')) && 'Please enter a last name';
+  formValidation.firstName = !bypassNamesValidation && isEmpty(values.get('firstName')) && 'Please enter a first name';
+  formValidation.lastName = !bypassNamesValidation && isEmpty(values.get('lastName')) && 'Please enter a last name';
   formValidation.roleId = !values.get('roleId') && 'Please select a Tenant Role';
   return formValidation;
 };

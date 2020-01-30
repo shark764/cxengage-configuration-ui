@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.21] - 2020-01-29
+## Fixed
+- CXV1-21317 - When inviting a existing user to a tenant, pre-select platform-role-id.
+- CXV1-21325 - user-management, first-name and last-name should be required if the user's status is still pending. 
+
 ## [0.70.20] - 2020-01-28
 ## Added
 - <no-jira> - removed chat widget automation spec.
