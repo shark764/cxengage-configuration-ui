@@ -1150,6 +1150,7 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Configuration/Email_Templates/Updating_Email_Templates.htm",
+    "hideActiveToggle": true,
     "modalListTableFields": Array [
       Object {
         "label": "Name",

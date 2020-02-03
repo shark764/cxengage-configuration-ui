@@ -103,7 +103,7 @@ const commonBehavior = {
     columnElement.clearElement();
     columnElement.setValue(searchValue);
     new Element(`.//span[text()="${searchValue}"]`).waitAndClick();
-    if(entity !== "Chat Widget") {
+    if(entity !== "Chat Widget" && entity !== "Email Template") {
       Elem.sdpanelStatusToggle.waitForVisible();
       Elem.sdpanelStatusToggle.validateElementsState('isVisible', true);
     }

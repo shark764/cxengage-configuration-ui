@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.70.23] - 2020-01-31
+## Fixed
+- CXV1-21308 - Updated metadata for emailTemplates to hide ToggleStatus.
+
 ## [0.70.22] - 2020-01-30
 ## Added
 - CXV1-21413 - updating pstn/sip extensions on users spec. 
