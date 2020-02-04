@@ -64,7 +64,7 @@ const Error = styled.span`
 const Warning = styled.span`
   color: orange;
   max-width: 170px;
-  display: block:
+  display: block;
 `;
 
 const Picker = props => {

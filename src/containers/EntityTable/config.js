@@ -19,6 +19,9 @@ import { timezoneColumn } from './columns/timezone';
 import { parentTenantColumn } from './columns/parentTenant';
 import { roleNameColumn } from './columns/roleName';
 import { presenceStateColumn } from './columns/presenceState';
+import { activeBusinessHourColumn } from './columns/activeBusinessHour';
+import { timezoneColumn2 } from './columns/timezone2';
+import { sharedColumn2 } from './columns/shared2';
 
 export function getTableColumns(columns) {
   /**
@@ -61,7 +64,10 @@ export function getTableColumns(columns) {
     Type: constructGeneralTextColumn('type'),
     Channels: constructGeneralTextColumn('channels'),
     Identifier: constructGeneralTextColumn('id'),
-    'Parent Tenant': parentTenantColumn
+    'Parent Tenant': parentTenantColumn,
+    'Active Business Hour': activeBusinessHourColumn,
+    Timezone2: timezoneColumn2,
+    Shared2: sharedColumn2
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`timezoneColumn2 Cell renders correctly 1`] = `
+<span
+  title="Timezone 1"
+>
+  Timezone 1
+</span>
+`;
+
+exports[`timezoneColumn2 is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Timezone"
+  >
+    Timezone
+  </span>,
+  "accessor": [Function],
+  "id": "timezone2",
+}
+`;

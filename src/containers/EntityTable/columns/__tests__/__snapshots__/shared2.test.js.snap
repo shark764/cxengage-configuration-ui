@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sharedColumn2 Cell renders correctly 1`] = `
+<span
+  title="Inherited"
+>
+  Inherited
+</span>
+`;
+
+exports[`sharedColumn2 is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Shared"
+  >
+    Shared
+  </span>,
+  "accessor": [Function],
+  "filterMethod": [Function],
+  "id": "shared2",
+}
+`;

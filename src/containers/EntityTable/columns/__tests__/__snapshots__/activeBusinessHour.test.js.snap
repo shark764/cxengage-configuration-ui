@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activeBusinessHourColumn Cell renders correctly 1`] = `
+<span
+  title="Active Version"
+>
+  Active Version
+</span>
+`;
+
+exports[`activeBusinessHourColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Active Business Hour"
+  >
+    Active Version
+  </span>,
+  "accessor": [Function],
+  "id": "activeBusinessHour",
+}
+`;

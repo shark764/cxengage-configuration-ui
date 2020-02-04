@@ -179,7 +179,8 @@ export const listOfEntities = [
   'flowDebugger',
   'apiKeys',
   'businessHours',
-  'dispositionLists'
+  'dispositionLists',
+  'businessHoursV2'
 
   //Hygen-insert-at-end-of-list
 ];
@@ -807,6 +808,28 @@ entities.dispositionLists.columns = [
   { name: 'Shared', active: true },
   { name: 'Status', active: true }
 ];
+// Business Hours V2
+entities.businessHoursV2.pageTitle = 'Business Hours Management';
+entities.businessHoursV2.helpLink = '/Help/Content/Configuration/Business%20Hours/Business_Hours.htm';
+// drafts and versions have the same schema but what we create from UI are drafts and what we publish are versions
+entities.businessHoursV2.subEntityName = 'drafts';
+entities.businessHoursV2.columns = [
+  { name: 'Name', active: true },
+  { name: 'Active Business Hour', active: true },
+  { name: 'Description', active: true },
+  { name: 'Timezone2', active: true },
+  { name: 'Status', active: true },
+  { name: 'Shared2', active: true }
+];
+entities.businessHoursV2.membersTableFields = {
+  drafts: [
+    { label: 'Version', name: 'version' },
+    { label: 'Name', name: 'name' },
+    { label: 'Timezone', name: 'timezone' },
+    { label: 'Created By', name: 'createdByName' },
+    { label: 'Created On', name: 'created', format: 'datetime' }
+  ]
+};
 //Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

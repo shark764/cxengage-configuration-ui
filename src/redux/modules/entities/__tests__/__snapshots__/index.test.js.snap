@@ -408,6 +408,26 @@ Immutable.Map {
     "sidePanelWidth": 650,
     "assignPermission": Immutable.List [],
   },
+  "businessHoursV2": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "VIEW_ALL_BUSINESS_HOURS",
+    ],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
+    "disablePermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
+    "sharePermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
+  },
   "apiKeys": Immutable.Map {
     "readPermission": Immutable.List [
       "MANAGE_ALL_APP_CREDENTIALS",
@@ -454,6 +474,9 @@ Immutable.Map {
     "createPermission": Immutable.List [
       "MANAGE_ALL_BUSINESS_HOURS",
     ],
+    "sharePermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
     "confirmationDialogType": undefined,
     "disablePermission": Immutable.List [
       "MANAGE_ALL_BUSINESS_HOURS",
@@ -463,9 +486,6 @@ Immutable.Map {
     ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
-    "assignPermission": Immutable.List [
-      "MANAGE_ALL_BUSINESS_HOURS",
-    ],
   },
   "flowDebugger": Immutable.Map {
     "data": Immutable.List [],

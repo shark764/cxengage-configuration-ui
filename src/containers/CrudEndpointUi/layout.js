@@ -88,6 +88,9 @@ import TenantsDetailsPanel from '../SidePanelDetails/Tenants';
 import DispositionListsDetailsPanel from '../SidePanelDetails/DispositionLists';
 //hygen-inject-before4
 
+// Full page panel forms
+import BusinessHoursV2CreateForm from '../FullPagePanel/BusinessHoursV2/Create';
+
 const Wrapper = styled.div`
   height: 100vh;
   display: grid;
@@ -798,52 +801,60 @@ export default class CrudEndpointUiLayout extends Component {
   }
 
   render() {
-    return (
-      <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''} slidingWidth={this.props.slidingWidth}>
-        <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
-          <InlineCheckboxFilterMenu
-            type="secondary"
-            menuType="Columns"
-            tableType={this.props.tableType}
-            currentVisibleSubMenu={this.props.currentVisibleSubMenu}
-            selectionType="checkbox"
-            data-automation="entityTableColumnSelectionBtn"
-          >
-            Columns
-          </InlineCheckboxFilterMenu>
-        </Table>
-        {this.props.selectedEntityId && (
-          <SidePanel>
-            {this.props.selectedEntityId === 'create' &&
-              createFormRoutes.map((route, index) => (
-                <Route key={index} path={route.path} component={route.component} />
-              ))}
-            {this.props.selectedEntityId === 'bulk' &&
-              bulkChangeFormRoutes.map((route, index) => (
-                <Route key={index} path={route.path} component={route.component} />
-              ))}
-            {this.props.selectedEntityId !== 'create' &&
-              this.props.selectedEntityId !== 'bulk' &&
-              detailsPanelRoutes.map((route, index) => (
-                <Route key={index} path={route.path} component={route.component} />
-              ))}
-          </SidePanel>
-        )}
-        {this.props.selectedSubEntityId && (
-          <Modal selectedSubEntityId={this.props.selectedSubEntityId} onMaskClick={this.props.setSelectedSubEntityId}>
-            {this.props.selectedSubEntityId === 'create'
-              ? createSubEntityFormRoutes.map((route, index) => (
-                  <Route key={index} path={route.path} component={route.component} />
-                ))
-              : updateSubEntityFormRoutes.map((route, index) => (
+    if (this.props.match.params.entityName === 'businessHoursV2' && this.props.selectedEntityId) {
+      if (this.props.selectedEntityId === 'create') {
+        return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2CreateForm />} />;
+      } else if (this.props.selectedSubEntityId && this.props.selectedSubEntityId !== 'create') {
+        // Here gies full page draft edit component
+      }
+    } else {
+      return (
+        <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''} slidingWidth={this.props.slidingWidth}>
+          <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
+            <InlineCheckboxFilterMenu
+              type="secondary"
+              menuType="Columns"
+              tableType={this.props.tableType}
+              currentVisibleSubMenu={this.props.currentVisibleSubMenu}
+              selectionType="checkbox"
+              data-automation="entityTableColumnSelectionBtn"
+            >
+              Columns
+            </InlineCheckboxFilterMenu>
+          </Table>
+          {this.props.selectedEntityId && (
+            <SidePanel>
+              {this.props.selectedEntityId === 'create' &&
+                createFormRoutes.map((route, index) => (
                   <Route key={index} path={route.path} component={route.component} />
                 ))}
-          </Modal>
-        )}
+              {this.props.selectedEntityId === 'bulk' &&
+                bulkChangeFormRoutes.map((route, index) => (
+                  <Route key={index} path={route.path} component={route.component} />
+                ))}
+              {this.props.selectedEntityId !== 'create' &&
+                this.props.selectedEntityId !== 'bulk' &&
+                detailsPanelRoutes.map((route, index) => (
+                  <Route key={index} path={route.path} component={route.component} />
+                ))}
+            </SidePanel>
+          )}
+          {this.props.selectedSubEntityId && (
+            <Modal selectedSubEntityId={this.props.selectedSubEntityId} onMaskClick={this.props.setSelectedSubEntityId}>
+              {this.props.selectedSubEntityId === 'create'
+                ? createSubEntityFormRoutes.map((route, index) => (
+                    <Route key={index} path={route.path} component={route.component} />
+                  ))
+                : updateSubEntityFormRoutes.map((route, index) => (
+                    <Route key={index} path={route.path} component={route.component} />
+                  ))}
+            </Modal>
+          )}
 
-        {this.props.showConfirmationDialog && <Confirmation />}
-      </Wrapper>
-    );
+          {this.props.showConfirmationDialog && <Confirmation />}
+        </Wrapper>
+      );
+    }
   }
 }
 

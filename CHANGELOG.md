@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.71.0] - 2020-04-02
+- Config 2 - Basic Page Structure - Create New Business Hour
+
 ## [0.70.23] - 2020-01-31
 ## Fixed
 - CXV1-21308 - Updated metadata for emailTemplates to hide ToggleStatus.

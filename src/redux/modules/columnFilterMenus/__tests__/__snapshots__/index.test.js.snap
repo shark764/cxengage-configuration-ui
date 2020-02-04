@@ -332,6 +332,35 @@ Immutable.Map {
       },
     ],
   },
+  "businessHoursV2": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Active Business Hour",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Timezone2",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Shared2",
+        "active": true,
+      },
+    ],
+  },
   "apiKeys": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [

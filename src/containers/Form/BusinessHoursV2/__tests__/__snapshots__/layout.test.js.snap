@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BusinessHoursV2Form /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    data-automation="BusinessHoursV2FormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="BusinessHoursV2FormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <ConfirmationWrapper
+    data-automation="toggleSharedConfirmationWrapper"
+    mainText="If you unshare this Business Hour it will become unavailable for all child tenants and it flows using this business hours rule on child tenants may become unusable."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="sharedToggle"
+      disabled={false}
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Businees Hour"
+    />
+  </ConfirmationWrapper>
+</form>
+`;
+
+exports[`<BusinessHoursV2Form /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    data-automation="BusinessHoursV2FormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="BusinessHoursV2FormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <SelectField
+    data-automation="businessHourV2sActiveVersion"
+    disabled={false}
+    label="Active Version *"
+    name="activeVersion"
+    options={
+      Array [
+        Object {
+          "label": "draft-1",
+          "value": "id-1",
+        },
+        Object {
+          "label": "draft-2",
+          "value": "id-2",
+        },
+      ]
+    }
+    placeholder="Select a version..."
+    required={false}
+  />
+  <ConfirmationWrapper
+    confirmBtnCallback={[Function]}
+    data-automation="toggleSharedConfirmationWrapper"
+    mainText="If you unshare this Business Hour it will become unavailable for all child tenants and it flows using this business hours rule on child tenants may become unusable."
+    secondaryText="Are you sure you want to continue?"
+  >
+    <ToggleField
+      data-automation="sharedToggle"
+      disabled={false}
+      label="Shared"
+      name="shared"
+      title="Change \\"Shared\\" state for this Businees Hour"
+    />
+  </ConfirmationWrapper>
+</form>
+`;

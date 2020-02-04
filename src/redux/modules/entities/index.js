@@ -13,6 +13,16 @@ const defaultEntity = {
   sidePanelWidth: 550,
   confirmationDialogType: undefined
 };
+
+// Permissions shared by businessHour and businessHourV2 entities
+const businessHourPermisssions = {
+  readPermission: ['VIEW_ALL_BUSINESS_HOURS'],
+  updatePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
+  createPermission: ['MANAGE_ALL_BUSINESS_HOURS'],
+  disablePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
+  sharePermission: ['MANAGE_ALL_BUSINESS_HOURS']
+};
+
 const initialState = fromJS({
   currentEntity: 'none',
   none: {},
@@ -291,11 +301,7 @@ const initialState = fromJS({
   },
   businessHours: {
     ...defaultEntity,
-    readPermission: ['VIEW_ALL_BUSINESS_HOURS'],
-    updatePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
-    createPermission: ['MANAGE_ALL_BUSINESS_HOURS'],
-    disablePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
-    assignPermission: ['MANAGE_ALL_BUSINESS_HOURS']
+    ...businessHourPermisssions
   },
   dispositionLists: {
     ...defaultEntity,
@@ -305,6 +311,12 @@ const initialState = fromJS({
     sharePermission: ['UPDATE_DISPOSITION_LIST'],
     disablePermission: [''],
     assignPermission: ['']
+  },
+  businessHoursV2: {
+    data: [],
+    selectedEntityId: '',
+    confirmationDialogType: undefined,
+    ...businessHourPermisssions
   }
   //hygen-inject-before
 });

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createDraftAfterCreatingBusinessHour The new entity created is a businessHour's V2 one returns CREATE_SUB_ENTIITY 1`] = `
+Object {
+  "entityName": "businessHoursV2",
+  "selectedEntity": "mock-id",
+  "subEntityName": "drafts",
+  "type": "CREATE_SUB_ENTIITY",
+  "values": Object {
+    "name": "Initial Draft",
+  },
+}
+`;
+
+exports[`handleFullFilledDraftCreation The new sub-entity created is a businessHour's V2 draft one returns SET_SELECTED_SUB_ENTITY_ID 1`] = `
+Object {
+  "selectedSubEntityId": "sub-entity-mock-id",
+  "type": "SET_SELECTED_SUB_ENTITY_ID",
+}
+`;

@@ -23,6 +23,7 @@ import * as tenantsEpics from './modules/entities/tenants/epics';
 import * as reasonsEpics from './modules/entities/reasons/epics';
 import * as dispositionListsEpics from './modules/entities/dispositionLists/epics';
 import * as chatWidgetsEpics from './modules/entities/chatWidgets/epics';
+import * as BusinessHoursV2Epics from './modules/entities/businessHoursV2/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -48,5 +49,6 @@ export const rootEpic = combineEpics(
   ...Object.values(tenantsEpics),
   ...Object.values(reasonsEpics),
   ...Object.values(dispositionListsEpics),
-  ...Object.values(chatWidgetsEpics)
+  ...Object.values(chatWidgetsEpics),
+  ...Object.values(BusinessHoursV2Epics)
 );
