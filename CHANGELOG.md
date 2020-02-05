@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.0] - 2020-02-05
+## Fixed
+- CXV1-21307 - Add Custom Interaction Attributes entity
+
 ## [0.71.0] - 2020-04-02
 - Config 2 - Basic Page Structure - Create New Business Hour
 
@@ -50,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.70.19] - 2020-01-28
 ## Added
-- CXV1-18432 - Chat Widget Config2 automation spec. 
+- CXV1-18432 - Chat Widget Config2 automation spec.
 
 ## [0.70.18] - 2020-01-23
 ## Fixed

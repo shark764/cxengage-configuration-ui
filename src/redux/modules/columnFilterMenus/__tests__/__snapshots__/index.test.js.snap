@@ -261,6 +261,35 @@ Immutable.Map {
       },
     ],
   },
+  "customAttributes": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Attribute Identifier",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Realtime Reporting",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Historical Reporting",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
   "protectedBranding": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],

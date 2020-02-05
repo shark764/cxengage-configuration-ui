@@ -317,6 +317,12 @@ const initialState = fromJS({
     selectedEntityId: '',
     confirmationDialogType: undefined,
     ...businessHourPermisssions
+  },
+  customAttributes: {
+    ...defaultEntity,
+    readPermission: ['INTERACTION_ATTRIBUTES_CONFIG_READ'],
+    createPermission: ['INTERACTION_ATTRIBUTES_CONFIG_CREATE'],
+    updatePermission: ['INTERACTION_ATTRIBUTES_CONFIG_UPDATE']
   }
   //hygen-inject-before
 });

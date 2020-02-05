@@ -335,6 +335,21 @@ Immutable.Map {
       "MANAGE_TENANT_ENROLLMENT",
     ],
   },
+  "customAttributes": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "INTERACTION_ATTRIBUTES_CONFIG_READ",
+    ],
+    "createPermission": Immutable.List [
+      "INTERACTION_ATTRIBUTES_CONFIG_CREATE",
+    ],
+    "updatePermission": Immutable.List [
+      "INTERACTION_ATTRIBUTES_CONFIG_UPDATE",
+    ],
+  },
   "tenants": Immutable.Map {
     "readPermission": Immutable.List [
       "PLATFORM_VIEW_ALL_TENANTS",

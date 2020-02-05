@@ -56,6 +56,7 @@ import CreateDispositionListItemForm from '../Form/DispositionListItems/Create';
 import ReasonsBulkActionsForm from '../Form/Reasons/Bulk';
 import TenantsForm from '../Form/Tenants';
 import DispositionListsForm from '../Form/DispositionLists';
+import CustomAttributesForm from '../Form/CustomAttributes';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -86,6 +87,7 @@ import BusinessHoursDetailsPanel from '../SidePanelDetails/BusinessHours';
 import MessageTemplatesDetailsPanel from '../SidePanelDetails/MessageTemplates';
 import TenantsDetailsPanel from '../SidePanelDetails/Tenants';
 import DispositionListsDetailsPanel from '../SidePanelDetails/DispositionLists';
+import CustomAttributesDetailsPanel from '../SidePanelDetails/CustomAttributes';
 //hygen-inject-before4
 
 // Full page panel forms
@@ -305,6 +307,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <DispositionListsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/customAttributes',
+    component: () => (
+      <DetailsPanel>
+        <CustomAttributesForm />
       </DetailsPanel>
     )
   }
@@ -540,6 +550,16 @@ const detailsPanelRoutes = [
           <DispositionListsForm />
         </DispositionListsDetailsPanel>
       </NoScrollDetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/customAttributes',
+    component: () => (
+      <DetailsPanel>
+        <CustomAttributesDetailsPanel>
+          <CustomAttributesForm />
+        </CustomAttributesDetailsPanel>
+      </DetailsPanel>
     )
   }
   //hygen-inject-before2

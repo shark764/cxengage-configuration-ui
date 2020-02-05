@@ -180,8 +180,8 @@ export const listOfEntities = [
   'apiKeys',
   'businessHours',
   'dispositionLists',
-  'businessHoursV2'
-
+  'businessHoursV2',
+  'customAttributes'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -831,5 +831,20 @@ entities.businessHoursV2.membersTableFields = {
   ]
 };
 //Hygen-insert-new-entity-configuration
+
+// Custom Attributes
+entities.customAttributes.pageTitle = 'Custom Attributes Management';
+entities.customAttributes.helpLink = '/Help/Content/Managing%20Flows/CustomAttributes/Creating_Custom_Attributes.htm';
+entities.customAttributes.dependentEntity = 'customAttribute';
+entities.customAttributes.bulkEditsAvailable = true;
+entities.customAttributes.columns = [
+  { name: 'Attribute Identifier', active: true },
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Realtime Reporting', active: true },
+  { name: 'Historical Reporting', active: true },
+  { name: 'Status', active: true }
+];
+entities.customAttributes.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
 export const entitiesMetaData = entities;

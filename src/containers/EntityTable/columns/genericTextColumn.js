@@ -18,18 +18,20 @@ const SearchIcon = styled(SearchIconSVG)`
   opacity: 0.4;
 `;
 
-export function constructGeneralTextColumn(string) {
-  const normalizedString = camelCaseToRegularForm(string);
+export function constructGeneralTextColumn(string, customString) {
+  const normalizedString = customString ? camelCaseToRegularForm(customString) : camelCaseToRegularForm(string);
   const column = {
     id: string,
     Header: <span title={normalizedString}>{normalizedString}</span>,
     accessor: string,
     Cell: ({ row }) => {
-      return Array.isArray(row[string]) ? (
-        <span title={row[string].join(', ')}>{row[string].join(', ')}</span>
-      ) : (
-        <span title={row[string]}>{row[string]}</span>
-      );
+      if (typeof row[string] === 'boolean') {
+        return <span title={row[string] ? 'yes' : 'No'}>{row[string] ? 'yes' : 'No'}</span>;
+      } else if (Array.isArray(row[string])) {
+        return <span title={row[string].join(', ')}>{row[string].join(', ')}</span>;
+      } else {
+        return <span title={row[string]}>{row[string]}</span>;
+      }
     },
     Filter: ({ filter, onChange }) => (
       <div>

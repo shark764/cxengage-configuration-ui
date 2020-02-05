@@ -286,6 +286,13 @@ export default class Navigation extends Component {
                 >
                   Dispatch Mappings
                 </StyledLink>
+                <StyledLink
+                  data-automation="navigationLinkCustomAttributes"
+                  to="/configuration/customAttributes"
+                  onClick={e => this.setCurrentEntityAndEntityId('customAttributes', e)}
+                >
+                  Custom Attributes
+                </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>

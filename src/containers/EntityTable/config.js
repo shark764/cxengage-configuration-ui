@@ -67,7 +67,10 @@ export function getTableColumns(columns) {
     'Parent Tenant': parentTenantColumn,
     'Active Business Hour': activeBusinessHourColumn,
     Timezone2: timezoneColumn2,
-    Shared2: sharedColumn2
+    Shared2: sharedColumn2,
+    'Attribute Identifier': constructGeneralTextColumn('identifier', 'attributeIdentifier'),
+    'Realtime Reporting': constructGeneralTextColumn('realtime', 'realtimeReporting'),
+    'Historical Reporting': constructGeneralTextColumn('historical', 'historicalReporting')
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

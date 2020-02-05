@@ -128,10 +128,7 @@ export default class InteractionMonitoring extends Component {
   render() {
     return (
       <Wrapper>
-        <PageHeader
-            text={this.props.pageTitle}
-            helpLink={this.props.pageHelpLink}
-        >
+        <PageHeader text={this.props.pageTitle} helpLink={this.props.pageHelpLink}>
           <div>
             <ConverTimeButton
               id="timeConversion"
@@ -227,5 +224,7 @@ InteractionMonitoring.propTypes = {
   startInteractionMonitoring: PropTypes.func,
   userHasViewAllMonitoredCallsPermission: PropTypes.bool.isRequired,
   userHasMonitorAllCallsPermission: PropTypes.bool,
-  insideIframe: PropTypes.bool
+  insideIframe: PropTypes.bool,
+  pageTitle: PropTypes.string,
+  pageHelpLink: PropTypes.string
 };
