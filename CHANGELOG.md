@@ -28,11 +28,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.1] - 2020-02-05
+- CXV1-21338 - Add Client Disconnect Minutes to Chat Widgets
+
 ## [0.72.0] - 2020-02-05
 ## Fixed
 - CXV1-21307 - Add Custom Interaction Attributes entity
 
-## [0.71.0] - 2020-04-02
+## [0.71.0] - 2020-02-04
 - Config 2 - Basic Page Structure - Create New Business Hour
 
 ## [0.70.23] - 2020-01-31

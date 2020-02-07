@@ -24,4 +24,17 @@ describe('formValidation', () => {
     const values = new Map();
     expect(formValidation(values)).toMatchSnapshot();
   });
+  it('returns clientDisconnectMinutes error messages correctly', () => {
+    let values = new Map({
+      name: 'mockName',
+      contactPoint: 'mockContactPoint',
+      appId: 'mockAppId',
+      whitelistedUrls: ['http://www.hello.org'],
+      clientDisconnectMinutes: 0
+    });
+    expect(formValidation(values)).toMatchSnapshot();
+
+    values = values.set('clientDisconnectMinutes', 1441);
+    expect(formValidation(values)).toMatchSnapshot();
+  });
 });

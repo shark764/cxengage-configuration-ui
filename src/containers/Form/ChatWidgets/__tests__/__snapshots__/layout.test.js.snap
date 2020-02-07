@@ -31,6 +31,15 @@ exports[`<ChatWidgetsForm /> renders create chatWidgets 1`] = `
     label="Contact Point *"
     name="contactPoint"
   />
+  <InputField
+    componentType="input"
+    data-automation="clientDisconnectMinutes"
+    dataType="number"
+    disabled={false}
+    id="client-disconnect-minutes"
+    label="Client Disconnect Minutes"
+    name="clientDisconnectMinutes"
+  />
   <React.Fragment>
     <Detail
       label="App"
@@ -201,6 +210,15 @@ exports[`<ChatWidgetsForm /> renders update chatWidgets 1`] = `
     inputType="text"
     label="Contact Point *"
     name="contactPoint"
+  />
+  <InputField
+    componentType="input"
+    data-automation="clientDisconnectMinutes"
+    dataType="number"
+    disabled={false}
+    id="client-disconnect-minutes"
+    label="Client Disconnect Minutes"
+    name="clientDisconnectMinutes"
   />
   <React.Fragment>
     <Detail

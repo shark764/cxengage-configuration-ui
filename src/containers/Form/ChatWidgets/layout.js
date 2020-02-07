@@ -88,6 +88,15 @@ export default function ChatWidgetsForm({
         inputType="text"
         disabled={disabled}
       />
+      <InputField
+        name="clientDisconnectMinutes"
+        label="Client Disconnect Minutes"
+        id="client-disconnect-minutes"
+        data-automation="clientDisconnectMinutes"
+        componentType="input"
+        dataType="number"
+        disabled={disabled}
+      />
       {chatWidgetId === 'create' ? (
         <SelectField
           name="appId"

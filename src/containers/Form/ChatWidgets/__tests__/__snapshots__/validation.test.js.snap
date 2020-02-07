@@ -1,8 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`formValidation returns clientDisconnectMinutes error messages correctly 1`] = `
+Object {
+  "appId": false,
+  "clientDisconnectMinutes": "Must be greater than or equal to 1",
+  "contactPoint": false,
+  "name": false,
+  "whitelistedUrls": false,
+}
+`;
+
+exports[`formValidation returns clientDisconnectMinutes error messages correctly 2`] = `
+Object {
+  "appId": false,
+  "clientDisconnectMinutes": "Must be less than or equal to 1440",
+  "contactPoint": false,
+  "name": false,
+  "whitelistedUrls": false,
+}
+`;
+
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
   "appId": "Please choose an app",
+  "clientDisconnectMinutes": false,
   "contactPoint": "Please enter a contact point",
   "name": "Please enter a name",
   "whitelistedUrls": undefined,
@@ -12,6 +33,7 @@ Object {
 exports[`formValidation returns proper object when required fields are provided 1`] = `
 Object {
   "appId": false,
+  "clientDisconnectMinutes": false,
   "contactPoint": false,
   "name": false,
   "whitelistedUrls": false,
@@ -21,6 +43,7 @@ Object {
 exports[`formValidation returns proper object with error messages when wrong values are provided 1`] = `
 Object {
   "appId": "Please choose an app",
+  "clientDisconnectMinutes": false,
   "contactPoint": "Please enter a contact point",
   "name": "Please enter a name",
   "whitelistedUrls": "One or more URL(s) are not properly formatted with serialized-origin standard.",
