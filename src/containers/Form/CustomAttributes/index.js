@@ -8,11 +8,7 @@ import { reduxForm } from 'redux-form/immutable';
 import CustomAttributesForm from './layout';
 import { formValidation } from './validation';
 
-import {
-  createFormName,
-  selectFormInitialValues,
-  getCurrentFormValueByFieldName
-} from '../../../redux/modules/form/selectors';
+import { createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import {
   getSelectedEntityId,
   isInherited,
@@ -20,17 +16,23 @@ import {
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
 import { onFormSubmit } from '../../../redux/modules/entities';
+import {
+  selectCustomAtributesFormInitialValues,
+  getAvailableCustomAttributesIdentifiers
+} from '../../../redux/modules/entities/customAttributes/selectors';
 
 const CreateCustomAttributesForm = compose(
   connect(state => createFormName(state)),
   reduxForm({
     onSubmit: (values, dispatch, props) => {
-      // While creating a custom attribute, initialValue's default value should be 'nil' if a custom value is not provided & dataType should always be 'text' (as per the requirements)
-      // Also  While creating a custom attribute, identifier should not be included in the PUT request body (as per the requirements)
-      const submitValues =
-        props.isCreatingNewAtrribute && !values.get('initialValue')
-          ? values.set('initialValue', 'nil').set('dataType', 'text')
-          : values.delete('identifier');
+      let submitValues;
+      if (props.isCreatingNewAtrribute) {
+        // While creating a custom attribute, initialValue's default value should be 'nil' if a custom value is not provided (as per the requirements).
+        submitValues = !values.get('initialValue') ? values.set('initialValue', 'nil') : values;
+      } else {
+        // Also  While updating a custom attribute, identifier should not be included in the PUT request body (as per the requirements).
+        submitValues = values.delete('identifier');
+      }
       return dispatch(onFormSubmit(submitValues, props));
     },
     validate: formValidation,
@@ -40,13 +42,14 @@ const CreateCustomAttributesForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    initialValues: selectFormInitialValues(state),
+    initialValues: selectCustomAtributesFormInitialValues(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
     isCreatingNewAtrribute: getSelectedEntityId(state) === 'create',
-    initialValueFieldVal: getCurrentFormValueByFieldName(state, 'initialValue')
+    initialValueFieldVal: getCurrentFormValueByFieldName(state, 'initialValue'),
+    availableIdentifiers: getAvailableCustomAttributesIdentifiers(state)
   };
 }
 

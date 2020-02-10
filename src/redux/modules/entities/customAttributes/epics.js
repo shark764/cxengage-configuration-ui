@@ -4,8 +4,11 @@
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/debounceTime';
 
+import { fromPromise } from 'rxjs/observable/fromPromise';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 
@@ -28,24 +31,16 @@ export const FetchData = action$ =>
         .catch(error => handleError(error, a))
     );
 
-export const FetchDataItem = action$ =>
+// In the custom-attributes PUT request body, "identifier" gets removed as identfier cannnot be modified,
+// that's the reason we are using a custom "UPDATE_ENTITY_FULFILLED" to add it back from the redux state once the update is successfull
+export const ReInitCustomAttributesForm = action$ =>
   action$
-    .ofType('FETCH_DATA_ITEM')
-    .debounceTime(300)
-    .filter(({ entityName }) => entityName === 'customAttributes')
-    .map(a => {
-      a.sdkCall = {
-        module: 'entities',
-        command: 'getEntity',
-        topic: 'cxengage/entities/get-entity-response',
-        data: {
-          path: ['custom-attributes', a.id]
-        }
-      };
-      return { ...a };
-    })
-    .switchMap(a =>
-      fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a))
-        .catch(error => handleError(error, a))
-    );
+    .ofType('UPDATE_ENTITY_FULFILLED')
+    .filter(a => a.entityName === 'customAttributes')
+    .map(a => ({
+      type: '@@redux-form/INITIALIZE',
+      meta: {
+        form: `${a.entityName}:${a.entityId}`
+      },
+      payload: a.response.result
+    }));

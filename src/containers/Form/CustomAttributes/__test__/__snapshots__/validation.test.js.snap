@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper object (errors) when creating a custom attribute with an existing identifer 1`] = `
+Object {
+  "identifier": "Identifer with the same name already exists in the Tenant. Duplicate identifers are not allowed.",
+  "name": false,
+}
+`;
+
+exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "identifier": "Attribute Identifier is required.",
+  "name": "Attribute Name is required.",
+}
+`;
+
+exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
+Object {
+  "identifier": "Attribute Identifier should be alphanumeric without spaces & can only contain \\"-\\" and \\"_\\" as special characters.",
+  "name": "Attribute Name is required.",
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "identifier": undefined,
+  "name": false,
+}
+`;

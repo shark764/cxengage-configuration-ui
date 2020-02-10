@@ -860,6 +860,45 @@ const pages = {
     whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`dMapName-${randomId}`]
   },
+  // Custom Attributes is not implemented in QE yet, tests fail in the jenkins pipeline if un-commented
+  // 'Custom Attribute': {
+  //   specs: {
+  //     create: {
+  //       parametersToInsert: [
+  //         {
+  //           attributeIdentifierInput: `cAttrName-${randomId}`,
+  //           attributeNameInput: `cAttrName-${randomId}`,
+  //           descriptionInput: `cAttrDesc-${randomId}`,
+  //           initialValueInput: `cAttrInitialVal-${randomId}`,
+  //           defaultValueInput: `cAttrInitialVal-${randomId}`,
+  //           realtimeToggle: true,
+  //           historicalToggle: true
+  //         }
+  //       ]
+  //     },
+  //     update: {
+  //       parametersToInsert: [
+  //         {
+  //           attributeNameInput: `updatedAAttrName-${randomId}`,
+  //           descriptionInput: `updatedAAttrDesc-${randomId}`,
+  //           initialValueInput: `updatedAttrInitialVal-${randomId}`,
+  //           defaultValueInput: `updatedAttrInitialVal-${randomId}`,
+  //           realtimeToggle: false,
+  //           historicalToggle: false
+  //         }
+  //       ]
+  //     },
+  //     read: {
+  //       parameters: {}
+  //     }
+  //   },
+  //   navigation: {
+  //     mainBar: 'flowsMenu',
+  //     subMainBar: 'navigationLinkCustomAttributes'
+  //   },
+  //   whichCatagoryToSearch: 'searchNameColumn',
+  //   updateSearchValue: [`cAttrName-${randomId}`]
+  // },
   'Data Access Report': {
     specs: {
       create: {

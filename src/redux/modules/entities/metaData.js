@@ -835,7 +835,6 @@ entities.businessHoursV2.membersTableFields = {
 // Custom Attributes
 entities.customAttributes.pageTitle = 'Custom Attributes Management';
 entities.customAttributes.helpLink = '/Help/Content/Managing%20Flows/CustomAttributes/Creating_Custom_Attributes.htm';
-entities.customAttributes.dependentEntity = 'customAttribute';
 entities.customAttributes.bulkEditsAvailable = true;
 entities.customAttributes.columns = [
   { name: 'Attribute Identifier', active: true },

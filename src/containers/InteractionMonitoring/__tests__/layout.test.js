@@ -87,6 +87,7 @@ describe('Interaction Monitoring Layout', () => {
         activeColumns={activeColumnsActive}
         userHasViewAllMonitoredCallsPermission={false}
         getCurrentAgentId={'0000-0000-0000-0000'}
+        pageTitle="mock-title"
       />
     );
     expect(component).toMatchSnapshot();
@@ -130,6 +131,7 @@ describe('Interaction Monitoring Layout', () => {
         activeColumns={allColumnsNotActive}
         userHasViewAllMonitoredCallsPermission={true}
         getCurrentAgentId={'0000-0000-0000-0000'}
+        pageTitle="mock-title"
       />
     );
     expect(component).toMatchSnapshot();
@@ -162,6 +164,7 @@ describe('Full mount to test lifecycle events', () => {
           activeColumns={activeColumnsActive}
           userHasViewAllMonitoredCallsPermission={true}
           getCurrentAgentId={'0000-0000-0000-0000'}
+          pageTitle="mock-title"
         />
       </Provider>
     );
@@ -201,6 +204,7 @@ describe('Interaction monitoring methods', () => {
       monitoredId={'0000-0000-0000-0002'}
       userHasViewAllMonitoredCallsPermission={true}
       getCurrentAgentId={'0000-0000-0000-0000'}
+      pageTitle="mock-title"
     />
   );
   describe('getTableRowProps', () => {

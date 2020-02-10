@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.2] - 2020-02-07
+- <no-Jira> - Add Unit and Automation tests for custom attributes entity
+
 ## [0.72.1] - 2020-02-05
 - CXV1-21338 - Add Client Disconnect Minutes to Chat Widgets
 

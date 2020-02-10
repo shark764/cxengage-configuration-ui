@@ -2,7 +2,9 @@
 
 exports[`Interaction Monitoring Layout renders all columns , all columns are active  1`] = `
 <styled.div>
-  <PageHeader>
+  <PageHeader
+    text="mock-title"
+  >
     <div>
       <Styled(Button)
         className="timeConversion"
@@ -444,7 +446,9 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
 
 exports[`Interaction Monitoring Layout renders no columns , all columns are not active  1`] = `
 <styled.div>
-  <PageHeader>
+  <PageHeader
+    text="mock-title"
+  >
     <div>
       <Styled(Button)
         className="timeConversion"

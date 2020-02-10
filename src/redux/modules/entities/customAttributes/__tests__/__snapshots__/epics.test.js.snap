@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom Attributes Epics tests FetchData 1`] = `
+Object {
+  "entityName": "customAttributes",
+  "response": "mock response",
+  "type": "FETCH_DATA_FULFILLED",
+}
+`;
+
+exports[`Custom Attributes Epics tests ReInitCustomAttributesForm 1`] = `
+Object {
+  "meta": Object {
+    "form": "customAttributes:mockId",
+  },
+  "payload": Object {
+    "identifier": "mockIdentifier",
+    "name": "mockName",
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;

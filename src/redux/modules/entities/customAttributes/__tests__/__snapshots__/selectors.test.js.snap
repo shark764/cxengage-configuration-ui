@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom Attributes Selector tests getAvailableCustomAttributesIdentifiers - returns available custom attribute identifiers 1`] = `
+Immutable.List [
+  "mock-id-1",
+  "mock-id-2",
+]
+`;
+
+exports[`Custom Attributes Selector tests getAvailableCustomAttributesIdentifiers - returns false when no custom attributes are available in the loggedin tenant 1`] = `false`;
+
+exports[`Custom Attributes Selector tests selectCustomAtributesFormInitialValues - returns initial values while creating a new custom attribute 1`] = `
+Immutable.Map {
+  "dataType": "text",
+  "active": true,
+}
+`;
+
+exports[`Custom Attributes Selector tests selectCustomAtributesFormInitialValues - returns initial values while updating a custom attribute 1`] = `
+Immutable.Map {
+  "name": "mock-name-1",
+  "identifier": "mock-id-1",
+  "id": "mockEntityId",
+}
+`;

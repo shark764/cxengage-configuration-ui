@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CustomAttributesForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="detailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="attributeIdentifierInput"
+        disabled={false}
+        inputType="text"
+        label="Attribute Identifier *"
+        name="identifier"
+      />
+      <InputField
+        componentType="input"
+        data-automation="attributeNameInput"
+        disabled={false}
+        inputType="text"
+        label="Attribute Name *"
+        name="name"
+      />
+      <InputField
+        componentType="input"
+        data-automation="descriptionInput"
+        disabled={false}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <SelectField
+        data-automation="dataTypeList"
+        disabled={true}
+        label="Data Type"
+        name="dataType"
+        options={
+          Array [
+            Object {
+              "label": "Text",
+              "value": "text",
+            },
+          ]
+        }
+        required={true}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="textOptionsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Text Options"
+      />
+      <Styled(InputField)
+        componentType="input"
+        data-automation="initialValueInput"
+        disabled={false}
+        fieldVal=""
+        inputType="text"
+        isCreatingNewAtrribute={true}
+        label="Initial Value"
+        name="initialValue"
+      />
+      <InputField
+        componentType="input"
+        data-automation="defaultValueInput"
+        disabled={false}
+        inputType="text"
+        label="Default Value"
+        name="defaultValue"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="availabilitySVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Availability"
+      />
+      <Styled(ToggleField)
+        data-automation="realtimeToggle"
+        disabled={false}
+        label="Available for Realtime Reporting"
+        labelMargin="0px"
+        labelWidth="250px"
+        name="realtime"
+      />
+      <Styled(ToggleField)
+        data-automation="historicalToggle"
+        disabled={false}
+        label="Available for Historical Reporting"
+        labelMargin="0px"
+        labelWidth="250px"
+        name="historical"
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
+</form>
+`;
+
+exports[`<CustomAttributesForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="detailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="attributeIdentifierInput"
+        disabled={true}
+        inputType="text"
+        label="Attribute Identifier *"
+        name="identifier"
+      />
+      <InputField
+        componentType="input"
+        data-automation="attributeNameInput"
+        disabled={false}
+        inputType="text"
+        label="Attribute Name *"
+        name="name"
+      />
+      <InputField
+        componentType="input"
+        data-automation="descriptionInput"
+        disabled={false}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <SelectField
+        data-automation="dataTypeList"
+        disabled={true}
+        label="Data Type"
+        name="dataType"
+        options={
+          Array [
+            Object {
+              "label": "Text",
+              "value": "text",
+            },
+          ]
+        }
+        required={true}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="textOptionsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Text Options"
+      />
+      <Styled(InputField)
+        componentType="input"
+        data-automation="initialValueInput"
+        disabled={false}
+        fieldVal="nil"
+        inputType="text"
+        isCreatingNewAtrribute={false}
+        label="Initial Value"
+        name="initialValue"
+      />
+      <InputField
+        componentType="input"
+        data-automation="defaultValueInput"
+        disabled={false}
+        inputType="text"
+        label="Default Value"
+        name="defaultValue"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="availabilitySVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Availability"
+      />
+      <Styled(ToggleField)
+        data-automation="realtimeToggle"
+        disabled={false}
+        label="Available for Realtime Reporting"
+        labelMargin="0px"
+        labelWidth="250px"
+        name="realtime"
+      />
+      <Styled(ToggleField)
+        data-automation="historicalToggle"
+        disabled={false}
+        label="Available for Historical Reporting"
+        labelMargin="0px"
+        labelWidth="250px"
+        name="historical"
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
+</form>
+`;

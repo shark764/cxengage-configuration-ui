@@ -52,7 +52,9 @@ import {
   hasCustomRemoveSubEntity,
   hasCustomCreateSubEntity,
   hasCustomFetchEntityData,
-  hasCustomFetchEntityItemData
+  hasCustomFetchEntityItemData,
+  hasCustomUpdateEntityFullFilled,
+  entitiesUsingUpdateLogicForToggleEntity
 } from './config';
 
 import { downloadFile } from 'serenova-js-utils/browser';
@@ -88,13 +90,17 @@ export const StartFormSubmission = (action$, store) =>
       meta: { form: `${a.entityName}:${a.selectedIdentityId}` }
     }));
 
-export const reInitForm = action$ =>
+export const reInitForm = (action$, store) =>
   action$
     .ofType('UPDATE_ENTITY_FULFILLED')
     // This filter prevents entity form from reinitializing
     // when modifying entity membersList
     // values just contains the dependentEntity as key
-    .filter(a => a.values.id !== undefined && a.entityName !== 'transferLists')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState())
+    }))
+    .filter(a => a.values.id !== undefined && hasCustomUpdateEntityFullFilled(a.entityName))
     .map(a => {
       if (a.entityName && a.entityName === 'users') {
         a.values.extensions.forEach(ext => (ext.id = generateUUID()));
@@ -441,7 +447,7 @@ export const ToggleEntity = (action$, store) =>
       selectedEntityId: getSelectedEntityId(store.getState()),
       entityStatusActive: getSelectedEntityStatus(store.getState())
     }))
-    .filter(a => a.entityName !== 'users')
+    .filter(({ entityName }) => entityName !== 'users' && !entitiesUsingUpdateLogicForToggleEntity(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.sdkCall.data = {
@@ -463,6 +469,38 @@ export const ToggleEntity = (action$, store) =>
         )
         .catch(error => handleError(error, a))
     );
+
+export const ToggleEntityWithUpdateLogic = (action$, store) =>
+  action$
+    .ofType('TOGGLE_ENTITY')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState()),
+      entityStatusActive: getSelectedEntityStatus(store.getState())
+    }))
+    .filter(({ entityName }) => entityName !== 'users' && entitiesUsingUpdateLogicForToggleEntity(entityName))
+    .map(a => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
+      a.sdkCall.data = {
+        active: !a.entityStatusActive
+      };
+      a.sdkCall.path = [camelCaseToKebabCase(a.entityName), a.selectedEntityId];
+      return { ...a };
+    })
+    .concatMap(a => {
+      return fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was ${
+              a.entityStatusActive ? 'disabled' : 'enabled'
+            } successfully!`
+          )
+        )
+        .catch(error => handleError(error, a));
+    });
 
 export const ToggleEntityListItem = (action$, store) =>
   action$

@@ -678,7 +678,7 @@ Object {
         "id": "name",
       },
     ],
-    "dependentEntity": "customAttribute",
+    "dependentEntity": "",
     "entityName": "customAttributes",
     "entityTableFields": Array [
       Object {
