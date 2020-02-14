@@ -100,7 +100,7 @@ export const reInitForm = (action$, store) =>
       ...a,
       entityName: getCurrentEntity(store.getState())
     }))
-    .filter(a => a.values.id !== undefined && hasCustomUpdateEntityFullFilled(a.entityName))
+    .filter(a => (a.values.id !== undefined && hasCustomUpdateEntityFullFilled(a.entityName)) || (a.entityName === 'emailTemplates' && hasCustomUpdateEntityFullFilled(a.entityName)))
     .map(a => {
       if (a.entityName && a.entityName === 'users') {
         a.values.extensions.forEach(ext => (ext.id = generateUUID()));

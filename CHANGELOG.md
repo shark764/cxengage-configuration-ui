@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.3] - 2020-02-13
+- <CXV1-21326> - Fix "You have unsaved changes that will be lost message" error in User Management Email
+
 ## [0.72.2] - 2020-02-07
 - <no-Jira> - Add Unit and Automation tests for custom attributes entity
 

@@ -371,11 +371,6 @@ const commonBehavior = {
   closeSidePanel(entity) {
     Elem.sdpanelCloseButton.waitForVisible(30000, true);
     Elem.sdpanelCloseButton.waitAndClick();
-    // Temporary workaround due to CXV1-21326
-    if (entity === "Email Template") {
-      Elem.confirmButton.waitForVisible(30000, true);
-      Elem.confirmButton.waitAndClick();
-    }
     Elem.sdpanelSubmitButton.waitForVisible(30000, false);
     Elem.sdpanelSubmitButton.validateElementsState('isVisible', false);
   },
@@ -390,8 +385,6 @@ const commonBehavior = {
       Elem.sdpanelSubmitButton.waitAndClick();
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
-      // Following due to CXV1-21326
-      this.closeSidePanel(entity);
     }
   },
   logout() {
