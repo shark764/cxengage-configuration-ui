@@ -14,7 +14,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { sdkPromise } from '../../../../utils/sdk';
 import { startReportingSubscriptions, reportingSubscriptionStarted } from './';
 import { handleError, handleSuccess, handleBulkSuccess } from '../../entities/handleResult';
-import { hasAgentReasonLists, getSelectedAgentsBulkChangeItems, getAgentCurrentState } from './selectors';
+import { hasAgentReasonLists, getSelectedAgentsBulkChangeItems, getAgentCurrentState, isAgentStale } from './selectors';
 
 export const StartBatchRequest = action$ =>
   action$.ofType('START_AGENT_MONITORING_REPORTING_BATCH_REQUEST_$').switchMap(() =>
@@ -65,7 +65,11 @@ export const SetAgentPresenceState = (action$, store) =>
   action$
     .ofType('SET_AGENT_PRESENCE_STATE')
     .debounceTime(300)
-    .map(a => ({ ...a, agentCurrentState: getAgentCurrentState(store.getState(), a.agentId) }))
+    .map(a => ({
+          ...a,
+          agentCurrentState: getAgentCurrentState(store.getState(), a.agentId),
+          isStale: isAgentStale(store.getState(), a.agentId)
+        }))
     .concatMap(a =>
       fromPromise(
         sdkPromise({
@@ -74,7 +78,8 @@ export const SetAgentPresenceState = (action$, store) =>
             agentId: a.agentId,
             sessionId: a.sessionId,
             state: a.state || 'offline',
-            ...(a.reasonId && { reasonId: a.reasonId, reason: a.reason, reasonListId: a.reasonListId })
+            ...(a.reasonId && { reasonId: a.reasonId, reason: a.reason, reasonListId: a.reasonListId }),
+            ...(a.isStale && { forceLogout: true })
           },
           module: 'session',
           topic: 'cxengage/session/set-presence-state-response'
@@ -174,7 +179,9 @@ export const SetBulkAgentPresenceState = (action$, store) =>
             data: {
               agentId: currentAgent.agentId,
               sessionId: currentAgent.sessionId,
-              ...bulkData
+              ...bulkData,
+              // To foce logout an agent when performing bulk actions
+              ...(isAgentStale(store.getState(), currentAgent.agentId) && { forceLogout: true })
             }
           }
         ],

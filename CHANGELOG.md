@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.4] - 2020-02-17
+- CXV1-20171 - Adding Solution to end stale sessions
+- <no-jira> -  Upgrading javascript-sdk
+
 ## [0.72.3] - 2020-02-13
 - <CXV1-21326> - Fix "You have unsaved changes that will be lost message" error in User Management Email
 

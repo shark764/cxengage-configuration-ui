@@ -3,7 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 
 const selectAgentStateMonitoringMap = state => state.get('AgentStateMonitoring');
 
@@ -87,3 +87,10 @@ export const countBulkSelectedBusyAgents = createSelector(
   [getBulkSelectedBusyAgents],
   busyBulkSelected => busyBulkSelected.size
 );
+
+export const isAgentStale = (state, agentId) => {
+  const agentData = state
+    .get(['AgentStateMonitoring', 'data'], new List([]))
+    .find(agent => agent.get('agentId') === agentId);
+  return agentData && agentData.get('isStale');
+};
