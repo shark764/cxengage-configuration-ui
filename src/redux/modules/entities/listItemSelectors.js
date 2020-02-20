@@ -47,7 +47,7 @@ export const getModalTableItems = (state, entityName) => {
   } else if (requestedItems && entityName === 'reasonLists') {
     return requestedItems
       .toJS()
-      .filter(member => !requestedIds.includes(member.id) && !member.isDefault && !member.inherited);
+      .filter(member => !requestedIds.includes(member.id) && !member.isDefault);
   } else {
     return [];
   }

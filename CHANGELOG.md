@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.5] - 2020-02-19
+## Fixed
+- CXV1-21529 - Unable to add inherited Presence Reasons List to agents
+
 ## [0.72.4] - 2020-02-17
 - CXV1-20171 - Adding Solution to end stale sessions
 - <no-jira> -  Upgrading javascript-sdk
