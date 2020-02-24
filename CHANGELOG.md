@@ -28,6 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.6] - 2020-02-24
+## Changed
+- SDK version bump to 9.5.2
+## Added
+- ChatWidget automation spec.
+
 ## [0.72.5] - 2020-02-19
 ## Fixed
 - CXV1-21529 - Unable to add inherited Presence Reasons List to agents

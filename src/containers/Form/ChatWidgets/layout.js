@@ -92,7 +92,7 @@ export default function ChatWidgetsForm({
         name="clientDisconnectMinutes"
         label="Client Disconnect Minutes"
         id="client-disconnect-minutes"
-        data-automation="clientDisconnectMinutes"
+        data-automation="clientDisconnectInput"
         componentType="input"
         dataType="number"
         disabled={disabled}

@@ -611,19 +611,21 @@ const pages = {
     whichCatagoryToSearch: "searchNameColumn",
     updateSearchValue: ['password-reset']
   },
-  /*
   'Chat Widget': {
     specs: {
+      deleteBeforeAPI: {
+        parameters: {}
+      },
       createAPI: {
         parameters: {}
       },
       create: {
         parametersToInsert: [
           {
-            nameInput: `rName-${randomId}`,
+            nameInput: 'Config2 Automation Web Integration',
             descriptionInput: `rDesc-${randomId}`,
             contactPointInput: 'messaging-contact-point',
-            appIdList: 'Anil automation app',
+            appIdList: 'Chat Widget Automation App',
             displayStyleRadio: 'button',
             buttonIconURLInput: 'https://www.fakeButtonURL.com/',
             buttonWidthInput: '45',
@@ -644,6 +646,7 @@ const pages = {
           {
             descriptionInput: `rUpdatedDesc-${randomId}`,
             contactPointInput: 'messaging-contact-point-updated',
+            clientDisconnectInput: '5',
             displayStyleRadio: 'tab',
             businessNameInput: 'Automation is super fun',
             businessIconURLInput: 'https://www.fakeUpdatedBusinessIconURL.com',
@@ -656,7 +659,7 @@ const pages = {
           }
         ]
       },
-      deleteAPI: {
+      deleteAfterAPI: {
         parameters: {}
       },
       read: {
@@ -668,10 +671,8 @@ const pages = {
       subMainBar: "navigationLinkChatWidgets"
     },
     whichCatagoryToSearch: "searchNameColumn",
-    deleteAPINameValue: [`rName-${randomId}`],
-    updateSearchValue: [`rName-${randomId}`]
+    updateSearchValue: ['Config2 Automation Web Integration']
   },
-  */
   'Api Key': {
     specs: {
       create: {

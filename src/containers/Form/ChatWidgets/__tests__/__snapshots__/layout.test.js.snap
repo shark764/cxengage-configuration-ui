@@ -33,7 +33,7 @@ exports[`<ChatWidgetsForm /> renders create chatWidgets 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="clientDisconnectMinutes"
+    data-automation="clientDisconnectInput"
     dataType="number"
     disabled={false}
     id="client-disconnect-minutes"
@@ -213,7 +213,7 @@ exports[`<ChatWidgetsForm /> renders update chatWidgets 1`] = `
   />
   <InputField
     componentType="input"
-    data-automation="clientDisconnectMinutes"
+    data-automation="clientDisconnectInput"
     dataType="number"
     disabled={false}
     id="client-disconnect-minutes"

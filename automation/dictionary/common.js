@@ -3,13 +3,8 @@ const Elem = require('../pageObjects/webElements');
 const dictionary = require('./index');
 const today = new Date();
 const tomorrow = new Date(today.setDate(today.getDate() + 1)).toString().slice(0, 15);
-const { cxapi: { Client } } = require('alonzo'),
-    cx = new Client({
-        "user": "jwilliams@serenova.com",
-        "pass": "Password1!",
-        "environment": "dev",
-        "region": "us-east-1"
-    });
+const Api = require('./apiClass');
+
 const commonBehavior = {
   login() {
     Brow.url(process.env.URI ? process.env.URI : process.ENV.URL);
@@ -176,10 +171,10 @@ const commonBehavior = {
   createEntityViaAPI(entity) {
     try {
       if (entity === 'Chat Widget') {
-        browser.waitUntil(() => { return cx.chatWidget.createChatWidgetApp('Anil automation app', process.ENV.tenantId)});
+        Api.createChatWidgetApp('Chat Widget Automation App', process.ENV.tenantId);
       }
     } catch (err) {
-      throw new Error('Could not create entity via api due to ' + err);
+        throw new Error('Could not create entity via api due to ' + err);
     }
   },
   createEntity(entity, actionType) {
@@ -258,8 +253,10 @@ const commonBehavior = {
   deleteEntityViaAPI(entity) {
     try {
       if (entity === 'Chat Widget') {
-        browser.waitUntil(() => { return cx.chatWidget.deleteChatWebIntegration(dictionary[entity].deleteAPINameValue, process.ENV.tenantId)});
-        browser.waitUntil(() => { return cx.chatWidget.deleteChatWidgetApp('Anil automation app', process.ENV.tenantId)});
+        let integrations = Api.getChatWebIntegrations(process.ENV.tenantId);
+        Api.deleteAllSmoochAutomationWebIntegrations(integrations);
+        let apps = Api.getChatWidgetApps(process.ENV.tenantId);
+        Api.deleteAllSmoochAutomationApps(apps);
       }
     } catch(err){
       throw new Error('Could not delete entity via api due to ' + err);
@@ -298,7 +295,9 @@ const commonBehavior = {
     }
   },
   entityCRUD(entity, actionType) {
-    if (actionType === 'createAPI') {
+    if (actionType === 'deleteBeforeAPI') {
+      this.deleteEntityViaAPI(entity, actionType);
+    } else if (actionType === 'createAPI') {
       this.createEntityViaAPI(entity, actionType);
     } else if (actionType === 'create') {
       this.createEntity(entity, actionType);
@@ -306,7 +305,7 @@ const commonBehavior = {
       this.updateEntity(entity, actionType);
     } else if (actionType === 'delete') {
       this.deleteEntity(entity, actionType);
-    } else if (actionType === 'deleteAPI') {
+    } else if (actionType === 'deleteAfterAPI') {
       this.deleteEntityViaAPI(entity, actionType);
     }
   },
