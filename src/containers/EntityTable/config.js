@@ -22,6 +22,8 @@ import { presenceStateColumn } from './columns/presenceState';
 import { activeBusinessHourColumn } from './columns/activeBusinessHour';
 import { timezoneColumn2 } from './columns/timezone2';
 import { sharedColumn2 } from './columns/shared2';
+import { skillColumn } from './columns/skill';
+import { groupColumn } from './columns/group';
 
 export function getTableColumns(columns) {
   /**
@@ -36,9 +38,8 @@ export function getTableColumns(columns) {
     Role: roleNameColumn,
     Email: constructGeneralTextColumn('email'),
     Presence: presenceStateColumn,
-    // TODO: Skills and Groups require a special column to work
-    // 'Skills': constructGeneralTextColumn('skills'),
-    // 'Groups': constructGeneralTextColumn('groups'),
+    Skills: skillColumn,
+    Groups: groupColumn,
     'External Id': constructGeneralTextColumn('externalId'),
     Description: constructGeneralTextColumn('description'),
     Status: statusColumn,

@@ -225,9 +225,8 @@ entities.users.columns = [
   { name: 'Name', active: true },
   { name: 'Email', active: true },
   { name: 'External Id', active: true },
-  // TODO: Skills and Groups require a special column to work
-  // {name: 'Skills', active: true},
-  // {name: 'Groups', active: true},
+  { name: 'Skills', active: true },
+  { name: 'Groups', active: true },
   { name: 'Role', active: true },
   { name: 'Presence', active: true },
   { name: 'Platform Status', active: true },

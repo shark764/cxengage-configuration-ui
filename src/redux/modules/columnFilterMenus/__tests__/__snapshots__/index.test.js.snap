@@ -244,6 +244,14 @@ Immutable.Map {
         "active": true,
       },
       Immutable.Map {
+        "name": "Skills",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Groups",
+        "active": true,
+      },
+      Immutable.Map {
         "name": "Role",
         "active": true,
       },

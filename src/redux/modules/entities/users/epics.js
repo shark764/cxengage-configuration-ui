@@ -24,12 +24,13 @@ import { Toast } from 'cx-ui-components';
 import { changeUserInviteStatus } from '../../entities';
 import { validateEmail } from 'serenova-js-utils/validation';
 import { change } from 'redux-form';
+import { fetchData } from '../index';
 
 export const getRolesAfterFetchingUsers = (action$, store) =>
   action$
     .ofType('FETCH_DATA_FULFILLED')
     .filter(a => getCurrentEntity(store.getState()) === 'users' && a.entityName === 'users')
-    .map(() => ({ type: 'FETCH_DATA', entityName: 'roles' }));
+    .mergeMap(() => [fetchData('roles'), fetchData('skills'), fetchData('groups')]);
 
 export const UpdateUserEntity = (action$, store) =>
   action$

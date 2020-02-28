@@ -3608,6 +3608,14 @@ Object {
       },
       Object {
         "active": true,
+        "name": "Skills",
+      },
+      Object {
+        "active": true,
+        "name": "Groups",
+      },
+      Object {
+        "active": true,
         "name": "Role",
       },
       Object {
