@@ -45,6 +45,7 @@ const commonBehavior = {
     Elem[param].setValue(parameter[param]);
   },
   insertListValues(parameter, param) {
+    Brow.pause(2000);
     if (typeof parameter[param] === 'number') {
       Elem[param].selectDropDownValue('byIndex', parameter[param]);
     } else {

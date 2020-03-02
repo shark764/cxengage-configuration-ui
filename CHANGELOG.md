@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.72.7] - 2020-02-27
 ## Fixed
 - CXV1-21414 - Add Skill and Group columns to User Management
+- chatWidget automation spec.
 
 ## [0.72.6] - 2020-02-24
 ## Changed
