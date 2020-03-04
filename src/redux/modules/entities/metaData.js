@@ -829,6 +829,8 @@ entities.businessHoursV2.membersTableFields = {
     { label: 'Created On', name: 'created', format: 'datetime' }
   ]
 };
+entities.businessHoursV2.sdkCall.path = ['business-hours'];
+entities.businessHoursV2.sdkCall.apiVersion = 'v2';
 //Hygen-insert-new-entity-configuration
 
 // Custom Attributes

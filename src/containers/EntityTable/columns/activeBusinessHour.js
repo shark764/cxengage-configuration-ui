@@ -17,6 +17,7 @@ export const activeBusinessHourColumn = {
   Header: <span title="Active Business Hour">Active Version</span>,
   accessor: ({ activeVersion, versions }) =>
     activeVersion &&
+    versions &&
     versions.some(({ id }) => id === activeVersion) &&
     versions.find(({ id }) => id === activeVersion).name,
   Cell: ({ value }) => <span title={value}>{value}</span>,

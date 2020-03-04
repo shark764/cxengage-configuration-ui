@@ -7,8 +7,8 @@ import store from '../../../redux/store';
 export const sharedColumn2 = {
   id: 'shared2',
   Header: <span title="Shared">Shared</span>,
-  accessor: ({ createdBy, shared }) =>
-    createdBy === currentTenantId(store.getState()) ? 'Inherited' : shared ? 'Yes' : 'No',
+  accessor: ({ tenantId, shared }) =>
+    tenantId !== currentTenantId(store.getState()) ? 'Inherited' : shared ? 'Yes' : 'No',
   Cell: ({ value }) => <span title={value}>{value}</span>,
   filterMethod: (filter, row) => {
     // Show all items on 'All'

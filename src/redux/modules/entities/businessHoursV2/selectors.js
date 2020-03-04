@@ -15,7 +15,7 @@ export const getBusinessHourV2Drafts = createSelector(
   getSelectedEntity,
   businessHour =>
     businessHour &&
-    businessHour.get('drafts') &&
-    List.isList(businessHour.get('drafts')) &&
-    businessHour.get('drafts').toJS()
+    businessHour.get('items') &&
+    List.isList(businessHour.get('items')) &&
+    businessHour.get('items').toJS()
 );

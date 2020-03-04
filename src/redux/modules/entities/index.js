@@ -545,6 +545,11 @@ export const updateConfigUIUrlWithQueryString = entityId => ({
   entityId
 });
 
+export const fetchActiveVersionBusinessHoursFulfilled = activeVersions => ({
+  type: 'FETCH_ACTIVE_VERSION_BUSINESS_HOUR_FULFILLED',
+  activeVersions
+});
+
 // Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -724,6 +729,7 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], true);
     }
     case 'COPY_CURRENT_ENTITY_FULFILLED':
+    case 'CREATE_DRAFT_AND_BUSINESS_HOUR_V2_FULFILLED':
     case 'CREATE_ENTITY_FULFILLED': {
       const { result } = action.response;
 
@@ -1036,7 +1042,7 @@ export default function reducer(state = initialState, action) {
         const { itemValue, key } = action.response.result;
         return state.update(action.entityName, entityStore =>
           entityStore
-            .updateIn(['data', entityIndex, 'items'], subEntityList =>
+            .updateIn(['data', entityIndex, 'items'], (subEntityList = List()) =>
               subEntityList.push(
                 fromJS({
                   ...itemValue,
@@ -1202,6 +1208,19 @@ export default function reducer(state = initialState, action) {
     }
     case 'TOGGLE_MESSAGE_TEMPLATE_TEXT_CONTENT': {
       return state.setIn(['messageTemplates', 'isDisplayContentInHtml'], action.isDisplayContentInHtml);
+    }
+    case 'FETCH_ACTIVE_VERSION_BUSINESS_HOUR_FULFILLED': {
+      return state.updateIn(['businessHoursV2', 'data'], businessHours =>
+        businessHours.map(businessHour => {
+          return businessHour.update('versions', (versions = List()) => {
+            if (action.activeVersions[businessHour.get('id')]) {
+              return versions.push(fromJS(action.activeVersions[businessHour.get('id')]));
+            } else {
+              return versions;
+            }
+          });
+        })
+      );
     }
     default:
       return state;

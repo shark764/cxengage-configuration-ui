@@ -55,7 +55,9 @@ export default function BusinessHoursV2Form({
             }))
           }
           data-automation="businessHourV2sActiveVersion"
-          disabled={isSaving || inherited || drafts.length === 0 || drafts.size === 0 || !userHasUpdatePermission}
+          disabled={
+            isSaving || inherited || !drafts || drafts.length === 0 || drafts.size === 0 || !userHasUpdatePermission
+          }
         />
       )}
       <ConfirmationWrapper

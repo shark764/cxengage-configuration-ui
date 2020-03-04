@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.3] - 2020-17-02
+## Fixed
+- <no-jira> - sdk version bump and general fixes related to business hours page V2 
+
 ## [0.72.7] - 2020-02-27
 ## Fixed
 - CXV1-21414 - Add Skill and Group columns to User Management

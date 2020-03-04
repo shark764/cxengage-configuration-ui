@@ -10,13 +10,13 @@ describe('sharedColumn2', () => {
   });
   describe('accessor', () => {
     it('returns "Inherited" when it\'s an inherited business hours', () => {
-      expect(sharedColumn2.accessor({ createdBy: 'tenant-1', shared: false })).toEqual('Inherited');
+      expect(sharedColumn2.accessor({ tenantId: 'tenant-2', shared: false })).toEqual('Inherited');
     });
     it('returns "No" when it isn\'t an inherited business hour and it isn\'t shared', () => {
-      expect(sharedColumn2.accessor({ createdBy: 'tenant-2', shared: false })).toEqual('No');
+      expect(sharedColumn2.accessor({ tenantId: 'tenant-1', shared: false })).toEqual('No');
     });
     it('returns "Yes" when it isn\'t an inherited business hour but it\'s shared one', () => {
-      expect(sharedColumn2.accessor({ createdBy: 'tenant-2', shared: true })).toEqual('Yes');
+      expect(sharedColumn2.accessor({ tenantId: 'tenant-1', shared: true })).toEqual('Yes');
     });
   });
   describe('Cell', () => {

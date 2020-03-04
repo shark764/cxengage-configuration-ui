@@ -824,8 +824,8 @@ export default class CrudEndpointUiLayout extends Component {
     if (this.props.match.params.entityName === 'businessHoursV2' && this.props.selectedEntityId) {
       if (this.props.selectedEntityId === 'create') {
         return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2CreateForm />} />;
-      } else if (this.props.selectedSubEntityId && this.props.selectedSubEntityId !== 'create') {
-        // Here gies full page draft edit component
+      } else if (this.props.selectedEntityId !== 'create' && this.props.selectedSubEntityId) {
+        return <Route path="/configuration/businessHoursV2" component={() => <h1>Here goes edit draft page</h1>} />;
       }
     } else {
       return (

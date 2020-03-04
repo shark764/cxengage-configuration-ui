@@ -4,6 +4,17 @@
 
 import { isEmpty } from 'serenova-js-utils/strings';
 
+import store from '../../../redux/store';
+import { getAllEntitiesTableData } from '../../../containers/EntityTable/selectors';
+import { getCurrentEntity } from '../../../redux/modules/entities/selectors';
+import { getCurrentTenantId } from '../../../redux/modules/userData/selectors';
+
 export const formValidation = values => ({
-  name: isEmpty(values.get('name')) && 'Please enter a name'
+  name:
+    (isEmpty(values.get('name')) && 'Please enter a name') ||
+    (getCurrentEntity(store.getState()) === 'businessHoursV2' &&
+      getAllEntitiesTableData(store.getState())
+        .filter(({ tenantId }) => tenantId === getCurrentTenantId(store.getState()))
+        .some(({ name }) => name === values.get('name')) &&
+      "There's already a business hour with this name")
 });

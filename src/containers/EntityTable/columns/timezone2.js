@@ -17,6 +17,7 @@ export const timezoneColumn2 = {
   Header: <span title="Timezone">Timezone</span>,
   accessor: ({ activeVersion, versions }) =>
     activeVersion &&
+    versions &&
     versions.some(({ id }) => id === activeVersion) &&
     versions.find(({ id }) => id === activeVersion).timezone,
   Cell: ({ value }) => <span title={value}>{value}</span>,

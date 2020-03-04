@@ -297,8 +297,9 @@ export const CreateEntity = action$ =>
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
       a.sdkCall.path = entitiesMetaData[a.entityName].sdkCall.path
         ? entitiesMetaData[a.entityName].sdkCall.path
-        : [camelCaseToKebabCase(a.entityName)];
+        : [camelCaseToKebabCase(a.entityName.replace(/[V|v]\d{1}/, ''))];
       a.sdkCall.data = a.values;
+      a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;
       return { ...a };
     })
     .concatMap(a =>
@@ -350,6 +351,7 @@ export const UpdateEntity = action$ =>
       a.sdkCall.data = {
         ...a.values
       };
+      a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;
       if (entitiesMetaData[a.entityName].sdkCall.path) {
         a.sdkCall.path = [...entitiesMetaData[a.entityName].sdkCall.path, a.entityId];
         delete a.sdkCall.data.id;

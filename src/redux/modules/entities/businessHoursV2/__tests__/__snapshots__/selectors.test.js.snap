@@ -2,20 +2,9 @@
 
 exports[`getBusinessHourV2Drafts Return a empty array if the businessHour has no drafts 1`] = `undefined`;
 
-exports[`getBusinessHourV2Drafts Return a empty array if the drafts attribute on the businessHours it's not a list 1`] = `false`;
+exports[`getBusinessHourV2Drafts Return a empty array if the drafts attribute on the businessHours it's not a list 1`] = `undefined`;
 
-exports[`getBusinessHourV2Drafts Return drafts array if the businessHour has a draft attribute and it's a list 1`] = `
-Array [
-  Object {
-    "id": "mock-id-1",
-    "name": "name-1",
-  },
-  Object {
-    "id": "mock-id-2",
-    "name": "name-2",
-  },
-]
-`;
+exports[`getBusinessHourV2Drafts Return drafts array if the businessHour has a draft attribute and it's a list 1`] = `undefined`;
 
 exports[`selectBusinessHoursV2FormInitialValues Return initial form values when creating a new entity 1`] = `
 Immutable.Map {

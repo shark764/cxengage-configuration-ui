@@ -57,7 +57,7 @@ export const sdkPromise = sdkCall => {
 
         if (CxEngage[sdkCall.module][sdkCall.command] === undefined) {
           CxEngage.api[sdkCall.crudAction](
-            { path: sdkCall.path, body: sdkCall.data, customTopic: sdkCall.topic },
+            { path: sdkCall.path, body: sdkCall.data, customTopic: sdkCall.topic, apiVersion: sdkCall.apiVersion },
             handleCall
           );
         } else {

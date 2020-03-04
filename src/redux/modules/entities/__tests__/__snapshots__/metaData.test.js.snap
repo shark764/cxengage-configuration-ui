@@ -470,8 +470,12 @@ Object {
     ],
     "pageTitle": "Business Hours Management",
     "sdkCall": Object {
+      "apiVersion": "v2",
       "data": Object {},
       "module": "entities",
+      "path": Array [
+        "business-hours",
+      ],
     },
     "sidePanelListTableFields": Array [
       Object {
