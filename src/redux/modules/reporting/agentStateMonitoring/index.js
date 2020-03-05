@@ -3,7 +3,6 @@
  */
 
 import { fromJS } from 'immutable';
-import { isAgentStale } from './selectors';
 
 // Initial Sub State
 export const initialState = fromJS({
@@ -157,19 +156,12 @@ export default function AgentStateMonitoring(state = initialState, action) {
       return state.set('updating', true);
     case 'SET_AGENT_DIRECTION_REJECTED':
     case 'SET_BULK_AGENT_DIRECTION_REJECTED':
-        return state
-                .set('updating'.false)
-                .set('agentSelected', '')
-                .set('menuOpen', '');
     case 'SET_AGENT_PRESENCE_STATE_REJECTED':
-    case 'SET_BULK_AGENT_PRESENCE_STATE_REJECTED': {
-          const agentIndex = state.get('data').findIndex(row => row.get('agentId') === action.agentId);
-                return state
-                  .updateIn(['data', agentIndex], item => item.merge(fromJS({ isStale: true })))
-                  .set('updating', false)
-                  .set('agentSelected', '')
-                  .set('menuOpen', '');
-        }
+    case 'SET_BULK_AGENT_PRESENCE_STATE_REJECTED':
+      return state
+        .set('updating', false)
+        .set('agentSelected', '')
+        .set('menuOpen', '');
     case 'SET_AGENT_PRESENCE_STATE_FULFILLED':
     case 'SET_BULK_AGENT_PRESENCE_STATE_FULFILLED': {
       const { response, agentId, agentCurrentState } = action;
@@ -345,7 +337,6 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
       bulkSelection[agent.agentId] = { agentId: agent.agentId, sessionId: agent.sessionId, checked: true };
     }
 
-    let isStale = isAgentStale(state, agent.agentId) || false;
     agent = {
       // Agent data
       ...agent,
@@ -362,7 +353,6 @@ const getAgentMonitoringData = (state, realtimeStatistics) => {
       // at least two iterations, this way we ensure reporting
       // statistics are updated properly after a state change.
       ...(presenceStateUpdated[agent.agentId] && { ...presenceStateUpdated[agent.agentId] }),
-      isStale,
       channelTypes: agent.capacity
         ? agent.capacity.reduce(
             (acc, item) => {

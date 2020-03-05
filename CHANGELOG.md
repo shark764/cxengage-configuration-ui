@@ -28,7 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
-## [0.72.3] - 2020-17-02
+## [0.72.9] - 2020-03-04
+## Fixed
+- CXV1-20171 - Agent state monitoring, fixing logout issues
+
+## [0.72.8] - 2020-17-02
 ## Fixed
 - <no-jira> - sdk version bump and general fixes related to business hours page V2 
 

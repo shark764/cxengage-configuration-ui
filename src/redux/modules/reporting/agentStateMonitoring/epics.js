@@ -66,10 +66,9 @@ export const SetAgentPresenceState = (action$, store) =>
     .ofType('SET_AGENT_PRESENCE_STATE')
     .debounceTime(300)
     .map(a => ({
-          ...a,
-          agentCurrentState: getAgentCurrentState(store.getState(), a.agentId),
-          isStale: isAgentStale(store.getState(), a.agentId)
-        }))
+      ...a,
+      agentCurrentState: getAgentCurrentState(store.getState(), a.agentId)
+    }))
     .concatMap(a =>
       fromPromise(
         sdkPromise({
@@ -78,8 +77,8 @@ export const SetAgentPresenceState = (action$, store) =>
             agentId: a.agentId,
             sessionId: a.sessionId,
             state: a.state || 'offline',
-            ...(a.reasonId && { reasonId: a.reasonId, reason: a.reason, reasonListId: a.reasonListId }),
-            ...(a.isStale && { forceLogout: true })
+            forceLogout: true,
+            ...(a.reasonId && { reasonId: a.reasonId, reason: a.reason, reasonListId: a.reasonListId })
           },
           module: 'session',
           topic: 'cxengage/session/set-presence-state-response'
@@ -179,9 +178,9 @@ export const SetBulkAgentPresenceState = (action$, store) =>
             data: {
               agentId: currentAgent.agentId,
               sessionId: currentAgent.sessionId,
-              ...bulkData,
-              // To foce logout an agent when performing bulk actions
-              ...(isAgentStale(store.getState(), currentAgent.agentId) && { forceLogout: true })
+              // To force logout an agent when performing bulk actions
+              forceLogout: true,
+              ...bulkData
             }
           }
         ],
