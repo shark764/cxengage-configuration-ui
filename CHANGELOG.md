@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.10] - 2020-03-10
+## Fixed
+- CXV1-21837 - Remove initial and default values from Custom Attributes entity page
+
 ## [0.72.9] - 2020-03-04
 ## Fixed
 - CXV1-20171 - Agent state monitoring, fixing logout issues

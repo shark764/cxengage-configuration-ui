@@ -4,7 +4,6 @@ exports[`Maps state to props only using selectors validates object created from 
 Object {
   "availableIdentifiers": undefined,
   "inherited": true,
-  "initialValueFieldVal": "mock value",
   "initialValues": Immutable.Map {
     "dataType": "text",
     "active": true,
@@ -22,7 +21,6 @@ exports[`customAttributes Renders renders 1`] = `
 <Connect(ReduxForm)
   dispatch={[Function]}
   inherited={true}
-  initialValueFieldVal="mock value"
   initialValues={
     Immutable.Map {
       "dataType": "text",
@@ -73,11 +71,9 @@ Object {
   "type": "FORM_SUBMIT",
   "values": Object {
     "dataType": "text",
-    "defaultValue": 200,
     "description": "mockDescription",
     "historical": true,
     "identifier": "mockId",
-    "initialValue": 100,
     "name": "mockName",
     "realtime": true,
   },

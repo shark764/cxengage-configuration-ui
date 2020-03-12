@@ -16,7 +16,6 @@ describe('<CustomAttributesForm />', () => {
         handleSubmit={() => {}}
         userHasUpdatePermission={true}
         isCreatingNewAtrribute={true}
-        initialValueFieldVal=""
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -29,7 +28,6 @@ describe('<CustomAttributesForm />', () => {
         handleSubmit={() => {}}
         userHasUpdatePermission={true}
         isCreatingNewAtrribute={false}
-        initialValueFieldVal="nil"
       />
     );
     expect(rendered).toMatchSnapshot();

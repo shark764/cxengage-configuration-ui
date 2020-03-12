@@ -17,11 +17,6 @@ const WrappedDetailHeader = styled(DetailHeader)`
   margin-left: 35px;
 `;
 
-const StyledInputField = styled(InputField)`
-  ${props =>
-    !props.isCreatingNewAtrribute && (props.fieldVal === 'nil' || props.fieldVal === '') && 'color: rgba(0,0,0,0.6);'};
-`;
-
 const StyledToggleField = styled(ToggleField)`
   margin-bottom: 15px;
 `;
@@ -32,8 +27,7 @@ export default function CustomAttributesForm({
   inherited,
   handleSubmit,
   userHasUpdatePermission,
-  isCreatingNewAtrribute,
-  initialValueFieldVal
+  isCreatingNewAtrribute
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -74,28 +68,6 @@ export default function CustomAttributesForm({
           />
         </DetailWrapper>
 
-        <DetailWrapper open={true} data-automation="textOptionsSVG">
-          <WrappedDetailHeader text="Text Options" />
-          <StyledInputField
-            name="initialValue"
-            label="Initial Value"
-            componentType="input"
-            inputType="text"
-            data-automation="initialValueInput"
-            fieldVal={initialValueFieldVal}
-            isCreatingNewAtrribute={isCreatingNewAtrribute}
-            disabled={isSaving || inherited || !userHasUpdatePermission}
-          />
-          <InputField
-            name="defaultValue"
-            label="Default Value"
-            componentType="input"
-            inputType="text"
-            data-automation="defaultValueInput"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
-          />
-        </DetailWrapper>
-
         <DetailWrapper open={true} data-automation="availabilitySVG">
           <WrappedDetailHeader text="Availability" />
           <StyledToggleField
@@ -126,6 +98,39 @@ CustomAttributesForm.propTypes = {
   inherited: PropTypes.bool,
   handleSubmit: PropTypes.func.isRequired,
   userHasUpdatePermission: PropTypes.bool,
-  isCreatingNewAtrribute: PropTypes.bool,
-  initialValueFieldVal: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  isCreatingNewAtrribute: PropTypes.bool
 };
+
+/*
+  Both initial & default value fields will be hidden in the current version of customAttibutes, 
+  add them in the above form, when a feature request comes in the future
+  
+  const StyledInputField = styled(InputField)`
+    ${props =>
+      !props.isCreatingNewAtrribute && (props.fieldVal === 'nil' || props.fieldVal === '') && 'color: rgba(0,0,0,0.6);'};
+ `;
+  initialValueFieldVal: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+
+  <DetailWrapper open={true} data-automation="textOptionsSVG">
+    <WrappedDetailHeader text="Text Options" />
+    <StyledInputField
+      name="initialValue"
+      label="Initial Value"
+      componentType="input"
+      inputType="text"
+      data-automation="initialValueInput"
+      fieldVal={initialValueFieldVal}
+      isCreatingNewAtrribute={isCreatingNewAtrribute}
+      disabled={isSaving || inherited || !userHasUpdatePermission}
+    />
+    <InputField
+      name="defaultValue"
+      label="Default Value"
+      componentType="input"
+      inputType="text"
+      data-automation="defaultValueInput"
+      disabled={isSaving || inherited || !userHasUpdatePermission}
+    />
+  </DetailWrapper>
+
+*/

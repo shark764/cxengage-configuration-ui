@@ -56,10 +56,15 @@ export const sdkPromise = sdkCall => {
         }
 
         if (CxEngage[sdkCall.module][sdkCall.command] === undefined) {
-          CxEngage.api[sdkCall.crudAction](
-            { path: sdkCall.path, body: sdkCall.data, customTopic: sdkCall.topic, apiVersion: sdkCall.apiVersion },
-            handleCall
-          );
+          const requestObject = {
+            path: sdkCall.path,
+            body: sdkCall.data,
+            customTopic: sdkCall.topic
+          };
+          if (sdkCall.apiVersion) {
+            requestObject['apiVersion'] = sdkCall.apiVersion;
+          }
+          CxEngage.api[sdkCall.crudAction](requestObject, handleCall);
         } else {
           CxEngage[sdkCall.module][sdkCall.command](sdkCall.data, handleCall);
         }

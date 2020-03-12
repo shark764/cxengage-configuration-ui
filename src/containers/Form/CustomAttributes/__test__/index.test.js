@@ -56,8 +56,6 @@ describe('formSubmission', () => {
     name: 'mockName',
     description: 'mockDescription',
     dataType: 'text',
-    initialValue: 100,
-    defaultValue: 200,
     realtime: true,
     historical: true
   };

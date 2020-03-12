@@ -8,7 +8,7 @@ import { reduxForm } from 'redux-form/immutable';
 import CustomAttributesForm from './layout';
 import { formValidation } from './validation';
 
-import { createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
+import { createFormName } from '../../../redux/modules/form/selectors';
 import {
   getSelectedEntityId,
   isInherited,
@@ -25,14 +25,8 @@ const CreateCustomAttributesForm = compose(
   connect(state => createFormName(state)),
   reduxForm({
     onSubmit: (values, dispatch, props) => {
-      let submitValues;
-      if (props.isCreatingNewAtrribute) {
-        // While creating a custom attribute, initialValue's default value should be 'nil' if a custom value is not provided (as per the requirements).
-        submitValues = !values.get('initialValue') ? values.set('initialValue', 'nil') : values;
-      } else {
-        // Also  While updating a custom attribute, identifier should not be included in the PUT request body (as per the requirements).
-        submitValues = values.delete('identifier');
-      }
+      // While updating a custom attribute, identifier should not be included in the PUT request body (as per the requirements).
+      const submitValues = props.isCreatingNewAtrribute ? values : values.delete('identifier');
       return dispatch(onFormSubmit(submitValues, props));
     },
     validate: formValidation,
@@ -48,7 +42,6 @@ export function mapStateToProps(state) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
     isCreatingNewAtrribute: getSelectedEntityId(state) === 'create',
-    initialValueFieldVal: getCurrentFormValueByFieldName(state, 'initialValue'),
     availableIdentifiers: getAvailableCustomAttributesIdentifiers(state)
   };
 }

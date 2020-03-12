@@ -53,32 +53,6 @@ exports[`<CustomAttributesForm /> renders create form 1`] = `
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
-      data-automation="textOptionsSVG"
-      open={true}
-    >
-      <Styled(DetailHeader)
-        text="Text Options"
-      />
-      <Styled(InputField)
-        componentType="input"
-        data-automation="initialValueInput"
-        disabled={false}
-        fieldVal=""
-        inputType="text"
-        isCreatingNewAtrribute={true}
-        label="Initial Value"
-        name="initialValue"
-      />
-      <InputField
-        componentType="input"
-        data-automation="defaultValueInput"
-        disabled={false}
-        inputType="text"
-        label="Default Value"
-        name="defaultValue"
-      />
-    </Connect(DetailWrapper)>
-    <Connect(DetailWrapper)
       data-automation="availabilitySVG"
       open={true}
     >
@@ -156,32 +130,6 @@ exports[`<CustomAttributesForm /> renders update form 1`] = `
           ]
         }
         required={true}
-      />
-    </Connect(DetailWrapper)>
-    <Connect(DetailWrapper)
-      data-automation="textOptionsSVG"
-      open={true}
-    >
-      <Styled(DetailHeader)
-        text="Text Options"
-      />
-      <Styled(InputField)
-        componentType="input"
-        data-automation="initialValueInput"
-        disabled={false}
-        fieldVal="nil"
-        inputType="text"
-        isCreatingNewAtrribute={false}
-        label="Initial Value"
-        name="initialValue"
-      />
-      <InputField
-        componentType="input"
-        data-automation="defaultValueInput"
-        disabled={false}
-        inputType="text"
-        label="Default Value"
-        name="defaultValue"
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
