@@ -29,12 +29,24 @@ export const getDependantEntityTableItems = state =>
 export const getSidePanelTableItems = (state, entityName) => {
   const selectedEntity = getSelectedEntity(state);
   const requestedIds = selectedEntity && selectedEntity.getIn([entityName], new List([])).toJS();
-  const requestedItems = state.getIn(['Entities', entityName, 'data']);
+  let requestedItems = state.getIn(['Entities', entityName, 'data']);
   if (requestedItems) {
-    return requestedItems.toJS().filter(member => requestedIds.includes(member.id));
-  } else {
-    return requestedItems;
+    requestedItems = requestedItems.toJS().filter(member => requestedIds.includes(member.id));
+    if (entityName === 'reasonLists') {
+      requestedItems = requestedItems.sort((a, b) => {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+        if (nameA < nameB) {
+          return 1;
+        }
+        if (nameA > nameB) {
+          return -1;
+        }
+        return 0;
+      });
+    }
   }
+  return requestedItems;
 };
 
 export const getModalTableItems = (state, entityName) => {
@@ -45,9 +57,7 @@ export const getModalTableItems = (state, entityName) => {
   if (requestedItems && entityName !== 'reasonLists') {
     return requestedItems.toJS().filter(member => !requestedIds.includes(member.id));
   } else if (requestedItems && entityName === 'reasonLists') {
-    return requestedItems
-      .toJS()
-      .filter(member => !requestedIds.includes(member.id) && !member.isDefault);
+    return requestedItems.toJS().filter(member => !requestedIds.includes(member.id) && !member.isDefault);
   } else {
     return [];
   }

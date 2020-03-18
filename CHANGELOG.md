@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.11] - 2020-03-18
+## Fixed
+- CXV1-20945 - Presence Reason List Display Not In Order.
+
 ## [0.72.10] - 2020-03-10
 ## Fixed
 - CXV1-21837 - Remove initial and default values from Custom Attributes entity page
