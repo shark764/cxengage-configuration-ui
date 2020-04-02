@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.13] - 2020-04-02
+## Fixed
+- <no-Jira> - Fixed failing automation tests
+
 ## [0.72.12] - 2020-04-01
 ## Fixed
 - CXV1-21913 - Platform Admin cannot access Custom Attributes pages

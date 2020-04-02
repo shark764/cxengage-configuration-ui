@@ -38,8 +38,16 @@ const commonBehavior = {
     Elem.entityTableColumnSelectionBtn.waitForEnabled();
     Elem.entityTableColumnSelectionBtn.validateElementsState('isEnabled', true);
   },
-  insertDataTextValues(parameter, param) {
-    Elem[param].waitAndClick();
+  insertDataTextValues(parameter, param, entity, actionType) {
+    // for some reason clearElement is kind of broken in the following entity pages during update 
+    const customEntities = ['Reason List', 'Transfer List', 'Disposition List'];
+    if(customEntities.includes(entity) && actionType === 'update') {
+      Brow.pause(1000);
+      Elem[param].waitAndClick();
+      Brow.pause(1000);
+    }
+    Elem[param].waitForVisible();
+    Elem[param].waitForEnabled();
     Elem[param].clearElement();
     Elem[param].setValue(parameter[param]);
   },
@@ -106,7 +114,7 @@ const commonBehavior = {
   fillFormFields(parameter, entity, actionType) {
     Object.keys(parameter).forEach(param => {
       if (param.endsWith('Input')) {
-        this.insertDataTextValues(parameter, param);
+        this.insertDataTextValues(parameter, param, entity, actionType);
       } else if (param.endsWith('List')) {
         this.insertListValues(parameter, param);
       } else if (param.endsWith('Toggle')) {
