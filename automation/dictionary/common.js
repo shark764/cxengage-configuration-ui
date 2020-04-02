@@ -39,8 +39,7 @@ const commonBehavior = {
     Elem.entityTableColumnSelectionBtn.validateElementsState('isEnabled', true);
   },
   insertDataTextValues(parameter, param) {
-    Elem[param].waitForVisible();
-    Elem[param].waitForEnabled();
+    Elem[param].waitAndClick();
     Elem[param].clearElement();
     Elem[param].setValue(parameter[param]);
   },

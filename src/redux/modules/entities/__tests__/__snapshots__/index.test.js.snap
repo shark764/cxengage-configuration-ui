@@ -342,12 +342,15 @@ Immutable.Map {
     "confirmationDialogType": undefined,
     "readPermission": Immutable.List [
       "INTERACTION_ATTRIBUTES_CONFIG_READ",
+      "PLATFORM_VIEW_ALL",
     ],
     "createPermission": Immutable.List [
       "INTERACTION_ATTRIBUTES_CONFIG_CREATE",
+      "PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES",
     ],
     "updatePermission": Immutable.List [
       "INTERACTION_ATTRIBUTES_CONFIG_UPDATE",
+      "PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES",
     ],
   },
   "tenants": Immutable.Map {

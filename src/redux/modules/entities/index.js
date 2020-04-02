@@ -320,9 +320,9 @@ const initialState = fromJS({
   },
   customAttributes: {
     ...defaultEntity,
-    readPermission: ['INTERACTION_ATTRIBUTES_CONFIG_READ'],
-    createPermission: ['INTERACTION_ATTRIBUTES_CONFIG_CREATE'],
-    updatePermission: ['INTERACTION_ATTRIBUTES_CONFIG_UPDATE']
+    readPermission: ['INTERACTION_ATTRIBUTES_CONFIG_READ', 'PLATFORM_VIEW_ALL'],
+    createPermission: ['INTERACTION_ATTRIBUTES_CONFIG_CREATE', 'PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES'],
+    updatePermission: ['INTERACTION_ATTRIBUTES_CONFIG_UPDATE', 'PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES']
   }
   //hygen-inject-before
 });
