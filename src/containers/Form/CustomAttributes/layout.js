@@ -27,6 +27,7 @@ export default function CustomAttributesForm({
   inherited,
   handleSubmit,
   userHasUpdatePermission,
+  userHasCreatePermission,
   isCreatingNewAtrribute
 }) {
   return (
@@ -40,7 +41,7 @@ export default function CustomAttributesForm({
             componentType="input"
             inputType="text"
             data-automation="attributeIdentifierInput"
-            disabled={isSaving || inherited || !userHasUpdatePermission || !isCreatingNewAtrribute}
+            disabled={isSaving || inherited || !userHasCreatePermission || !isCreatingNewAtrribute}
           />
           <InputField
             name="name"
@@ -48,7 +49,9 @@ export default function CustomAttributesForm({
             componentType="input"
             inputType="text"
             data-automation="attributeNameInput"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
+            disabled={
+              isSaving || inherited || !userHasCreatePermission || !(isCreatingNewAtrribute || userHasUpdatePermission)
+            }
           />
           <InputField
             name="description"
@@ -56,7 +59,9 @@ export default function CustomAttributesForm({
             componentType="input"
             inputType="text"
             data-automation="descriptionInput"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
+            disabled={
+              isSaving || inherited || !userHasCreatePermission || !(isCreatingNewAtrribute || userHasUpdatePermission)
+            }
           />
           <SelectField
             name="dataType"
@@ -76,7 +81,9 @@ export default function CustomAttributesForm({
             labelWidth="250px"
             labelMargin="0px"
             data-automation="realtimeToggle"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
+            disabled={
+              isSaving || inherited || !userHasCreatePermission || !(isCreatingNewAtrribute || userHasUpdatePermission)
+            }
           />
           <StyledToggleField
             name="historical"
@@ -84,7 +91,9 @@ export default function CustomAttributesForm({
             labelWidth="250px"
             labelMargin="0px"
             data-automation="historicalToggle"
-            disabled={isSaving || inherited || !userHasUpdatePermission}
+            disabled={
+              isSaving || inherited || !userHasCreatePermission || !(isCreatingNewAtrribute || userHasUpdatePermission)
+            }
           />
         </DetailWrapper>
       </Wrapper>
@@ -98,6 +107,7 @@ CustomAttributesForm.propTypes = {
   inherited: PropTypes.bool,
   handleSubmit: PropTypes.func.isRequired,
   userHasUpdatePermission: PropTypes.bool,
+  userHasCreatePermission: PropTypes.bool,
   isCreatingNewAtrribute: PropTypes.bool
 };
 

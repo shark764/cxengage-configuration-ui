@@ -15,6 +15,7 @@ describe('<CustomAttributesForm />', () => {
         inherited={false}
         handleSubmit={() => {}}
         userHasUpdatePermission={true}
+        userHasCreatePermission={true}
         isCreatingNewAtrribute={true}
       />
     );
@@ -27,6 +28,7 @@ describe('<CustomAttributesForm />', () => {
         inherited={false}
         handleSubmit={() => {}}
         userHasUpdatePermission={true}
+        userHasCreatePermission={true}
         isCreatingNewAtrribute={false}
       />
     );

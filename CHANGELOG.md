@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+
+## [0.72.14] - 2020-04-03
+## Fixed
+- CXV1-21899 - Custom Attributes - fixed update permission being required to create.
+
 ## [0.72.13] - 2020-04-02
 ## Fixed
 - <no-Jira> - Fixed failing automation tests

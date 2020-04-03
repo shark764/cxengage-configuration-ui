@@ -13,6 +13,7 @@ import {
   getSelectedEntityId,
   isInherited,
   isCreating,
+  userHasCreatePermission,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
 import { onFormSubmit } from '../../../redux/modules/entities';
@@ -40,6 +41,7 @@ export function mapStateToProps(state) {
     isSaving: isCreating(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasCreatePermission: userHasCreatePermission(state),
     key: getSelectedEntityId(state),
     isCreatingNewAtrribute: getSelectedEntityId(state) === 'create',
     availableIdentifiers: getAvailableCustomAttributesIdentifiers(state)

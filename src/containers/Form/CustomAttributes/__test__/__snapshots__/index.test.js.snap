@@ -11,6 +11,7 @@ Object {
   "isCreatingNewAtrribute": false,
   "isSaving": true,
   "key": "mock Id",
+  "userHasCreatePermission": true,
   "userHasUpdatePermission": true,
 }
 `;
@@ -59,6 +60,7 @@ exports[`customAttributes Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  userHasCreatePermission={true}
   userHasUpdatePermission={true}
 >
   Child

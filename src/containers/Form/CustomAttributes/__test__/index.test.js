@@ -17,6 +17,7 @@ import {
   isInherited,
   getSelectedEntityId,
   userHasUpdatePermission,
+  userHasCreatePermission,
   getCurrentEntity
 } from '../../../../redux/modules/entities/selectors';
 
@@ -26,6 +27,7 @@ jest.mock('../../../../redux/modules/form/selectors');
 isCreating.mockImplementation(() => true);
 isInherited.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
+userHasCreatePermission.mockImplementation(() => true);
 getSelectedEntityId.mockImplementation(() => 'mock Id');
 getCurrentEntity.mockImplementation(() => 'mock entity');
 getCurrentFormValueByFieldName.mockImplementation(() => 'mock value');
