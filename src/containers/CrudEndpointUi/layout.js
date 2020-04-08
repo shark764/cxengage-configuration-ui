@@ -495,11 +495,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/slas',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <SlasDetailsPanel>
           <SlasForm />
         </SlasDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {

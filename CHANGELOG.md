@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.15] - 2020-04-07
+## Fixed
+- CXV1-18006 - Scroll bar does not show up on SLA config.
 
 ## [0.72.14] - 2020-04-03
 ## Fixed
