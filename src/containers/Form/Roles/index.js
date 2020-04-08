@@ -13,7 +13,8 @@ import {
   isCreating,
   userHasUpdatePermission,
   isSystemRole,
-  userHasSharePermission
+  userHasSharePermission,
+  userHasPermissions
 } from '../../../redux/modules/entities/selectors';
 import { toggleShared } from '../../../redux/modules/entities';
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
@@ -36,6 +37,7 @@ export function mapStateToProps(state) {
     initialValues: selectRolesFormInitialValues(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     userHasSharePermission: userHasSharePermission(state),
+    userHasViewPermission: userHasPermissions(state, ['PLATFORM_VIEW_ALL']),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     key: getSelectedEntityId(state),

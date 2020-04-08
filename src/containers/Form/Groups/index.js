@@ -10,6 +10,7 @@ import { formValidation } from './validation';
 import {
   getSelectedEntityId,
   userHasUpdatePermission,
+  userHasPermissions,
   isInherited,
   isCreating
 } from '../../../redux/modules/entities/selectors';
@@ -28,6 +29,7 @@ export function mapStateToProps(state) {
   return {
     initialValues: selectFormInitialValues(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasViewPermission: userHasPermissions(state, ['PLATFORM_VIEW_ALL']),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     key: getSelectedEntityId(state)

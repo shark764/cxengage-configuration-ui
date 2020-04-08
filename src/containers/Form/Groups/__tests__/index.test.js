@@ -11,7 +11,8 @@ import {
   getSelectedEntityId,
   isInherited,
   isCreating,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  userHasPermissions
 } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues } from '../../../../redux/modules/form/selectors';
 
@@ -22,6 +23,7 @@ getSelectedEntityId.mockImplementation(() => 'mockId');
 isInherited.mockImplementation(() => false);
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
+userHasPermissions.mockImplementation(() => false);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
 
 describe('Groups Renders', () => {

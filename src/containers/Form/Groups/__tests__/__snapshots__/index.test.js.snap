@@ -41,6 +41,7 @@ exports[`Groups Renders renders 1`] = `
     }
   }
   userHasUpdatePermission={true}
+  userHasViewPermission={false}
 >
   Child
 </Connect(ReduxForm)>
@@ -55,5 +56,6 @@ Object {
   "isSaving": true,
   "key": "mockId",
   "userHasUpdatePermission": true,
+  "userHasViewPermission": false,
 }
 `;

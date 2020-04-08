@@ -12,7 +12,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, InputField } from 'cx-ui-components';
 
-export default function GroupsForm({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key }) {
+export default function GroupsForm({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key, userHasViewPermission }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
@@ -24,7 +24,7 @@ export default function GroupsForm({ handleSubmit, isSaving, inherited, userHasU
           data-automation="nameInput"
           componentType="input"
           inputType="text"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          disabled={isSaving || inherited || !userHasUpdatePermission || (!userHasUpdatePermission && userHasViewPermission)}
         />
         <InputField
           name="description"
@@ -33,7 +33,7 @@ export default function GroupsForm({ handleSubmit, isSaving, inherited, userHasU
           data-automation="descriptionInput"
           componentType="textarea"
           inputType="text"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
+          disabled={isSaving || inherited || !userHasUpdatePermission || (!userHasUpdatePermission && userHasViewPermission)}
         />
       </Fragment>
     </form>
@@ -45,5 +45,6 @@ GroupsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool
+  userHasUpdatePermission: PropTypes.bool,
+  userHasViewPermission: PropTypes.bool
 };

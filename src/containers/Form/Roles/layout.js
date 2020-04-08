@@ -18,6 +18,7 @@ export default function RolesForm({
   inherited,
   userHasUpdatePermission,
   userHasSharePermission,
+  userHasViewPermission,
   key,
   disableShared,
   sharedFormValue,
@@ -34,7 +35,7 @@ export default function RolesForm({
         data-automation="nameInput"
         componentType="input"
         inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole}
+        disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole || (!userHasUpdatePermission && userHasViewPermission)}
       />
       <InputField
         name="description"
@@ -43,7 +44,7 @@ export default function RolesForm({
         data-automation="descriptionInput"
         componentType="textarea"
         inputType="text"
-        disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole}
+        disabled={isSaving || inherited || !userHasUpdatePermission || isSystemRole || (!userHasUpdatePermission && userHasViewPermission)}
       />
 
       <ConfirmationWrapper
@@ -63,7 +64,8 @@ export default function RolesForm({
           label="Shared"
           data-automation="sharedToggle"
           title="Change &quot;Shared&quot; state for this Role"
-          disabled={isSaving || inherited || !userHasUpdatePermission || !userHasSharePermission || isSystemRole}
+          disabled={isSaving || inherited || !userHasUpdatePermission || !userHasSharePermission || isSystemRole || (!userHasUpdatePermission && userHasViewPermission)
+          }
         />
       </ConfirmationWrapper>
     </form>
@@ -75,6 +77,7 @@ RolesForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   userHasUpdatePermission: PropTypes.bool,
   userHasSharePermission: PropTypes.bool,
+  userHasViewPermission: PropTypes.bool,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   sharedFormValue: PropTypes.bool,

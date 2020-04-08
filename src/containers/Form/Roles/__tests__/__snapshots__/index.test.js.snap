@@ -14,6 +14,7 @@ Object {
   "sharedFormValue": true,
   "userHasSharePermission": true,
   "userHasUpdatePermission": true,
+  "userHasViewPermission": false,
 }
 `;
 
@@ -63,6 +64,7 @@ exports[`Roles Renders renders 1`] = `
   toggleShared={[Function]}
   userHasSharePermission={true}
   userHasUpdatePermission={true}
+  userHasViewPermission={false}
 >
   Child
 </Connect(ReduxForm)>

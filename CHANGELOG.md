@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.16] - 2020-04-08
+## Fixed
+- CXV1-21711 - Skills and Groups not available on platform view only
+
 ## [0.72.15] - 2020-04-07
 ## Fixed
 - CXV1-18006 - Scroll bar does not show up on SLA config.

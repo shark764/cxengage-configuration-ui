@@ -14,7 +14,8 @@ import {
   isCreating,
   userHasUpdatePermission,
   userHasSharePermission,
-  isSystemRole
+  isSystemRole,
+  userHasPermissions
 } from '../../../../redux/modules/entities/selectors';
 import {
   selectPlatformRoles,
@@ -31,6 +32,7 @@ isInherited.mockImplementation(() => false);
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 userHasSharePermission.mockImplementation(() => true);
+userHasPermissions.mockImplementation(() => false);
 isSystemRole.mockImplementation(() => true);
 selectRolesFormInitialValues.mockImplementation(() => new Map({ active: true, shared: false }));
 getCurrentFormValueByFieldName.mockImplementation(() => true);
