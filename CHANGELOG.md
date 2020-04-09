@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.17] - 2020-04-09
+## Fixed
+- CXV1-22074 - Inconsistent Capitalization on Custom Attributes page
+
 ## [0.72.16] - 2020-04-08
 ## Fixed
 - CXV1-21711 - Skills and Groups not available on platform view only

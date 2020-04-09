@@ -26,7 +26,7 @@ export function constructGeneralTextColumn(string, customString) {
     accessor: string,
     Cell: ({ row }) => {
       if (typeof row[string] === 'boolean') {
-        return <span title={row[string] ? 'yes' : 'No'}>{row[string] ? 'yes' : 'No'}</span>;
+        return <span title={row[string] ? 'Yes' : 'No'}>{row[string] ? 'Yes' : 'No'}</span>;
       } else if (Array.isArray(row[string])) {
         return <span title={row[string].join(', ')}>{row[string].join(', ')}</span>;
       } else {
