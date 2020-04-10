@@ -40,6 +40,7 @@ export function constructGeneralTextColumn(string, customString) {
           data-automation={`search${capitalizeFirstLetter(string)}Column`}
           onChange={event => onChange(event.target.value)}
           value={filter ? filter.value : ''}
+          placeholder={normalizedString}
         />
         <SearchIcon searchIconType="primary" size={10} />
       </div>

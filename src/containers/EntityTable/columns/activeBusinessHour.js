@@ -28,6 +28,7 @@ export const activeBusinessHourColumn = {
         data-automation="searchActiveBusinessHourColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Active Business Hour"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

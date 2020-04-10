@@ -25,6 +25,7 @@ export const parentTenantColumn = {
         data-automation="searchParentTenantColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Parent Tenant"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

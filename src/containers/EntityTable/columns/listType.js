@@ -29,6 +29,7 @@ export const listTypeColumn = {
         data-automation="searchListTypeColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="List Type"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

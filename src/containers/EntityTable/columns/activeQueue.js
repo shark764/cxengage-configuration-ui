@@ -28,6 +28,7 @@ export const activeQueueColumn = {
         data-automation="searchActiveQueueColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Active Queue"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

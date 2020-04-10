@@ -36,6 +36,7 @@ export const nameColumn = {
         data-automation="searchNameColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Name"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

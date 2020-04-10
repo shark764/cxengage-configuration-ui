@@ -35,6 +35,7 @@ export const flowColumn = {
         data-automation="searchFlowColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Flow"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

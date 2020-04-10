@@ -28,6 +28,7 @@ export const activeFlowColumn = {
         data-automation="searchActiveFlowColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Active Flow"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

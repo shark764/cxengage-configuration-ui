@@ -28,6 +28,7 @@ export const timezoneColumn2 = {
         data-automation="searchTimezoneColumn2"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Timezone"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

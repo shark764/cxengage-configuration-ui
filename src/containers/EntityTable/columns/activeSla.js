@@ -27,6 +27,7 @@ export const activeSlaColumn = {
         data-automation="searchActiveSlaColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Active SLA"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>

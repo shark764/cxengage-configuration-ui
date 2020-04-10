@@ -28,6 +28,7 @@ export const permissionsColumn = {
         data-automation="searchPermissionsColumn"
         onChange={event => onChange(event.target.value)}
         value={filter ? filter.value : ''}
+        placeholder="Permissions"
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>
