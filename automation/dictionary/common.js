@@ -271,6 +271,7 @@ const commonBehavior = {
     }
   },
   deleteEntity(entity, actionType) {
+    Brow.pause(2000);
     Elem.searchStatusColumnButton.waitAndClick();
     Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
     this.searchByNameAndClick(entity, dictionary[entity].deleteSearchValue);

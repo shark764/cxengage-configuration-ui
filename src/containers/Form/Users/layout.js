@@ -120,7 +120,7 @@ export default function UsersForm({
             data-automation="authenticationList"
             disabled={isSaving || !userHasUpdatePermission || currentAgentId === initialValues.get('id')}
             options={[
-              { label: 'Use Tenant Default: Enabled', value: 'null' },
+              { label: 'Use Tenant Default', value: 'null' },
               { label: 'Enabled', value: false },
               { label: 'Disabled', value: true }
             ].filter(val => (currentAgentId === initialValues.get('id') ? val.value !== 'null' : val))}

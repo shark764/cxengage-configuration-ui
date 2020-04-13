@@ -65,7 +65,7 @@ export default function UsersForm({
             data-automation="authenticationList"
             disabled={isSaving || !userHasUpdatePermission}
             options={[
-              { label: 'Use Tenant Default: Enabled', value: 'null' },
+              { label: 'Use Tenant Default', value: 'null' },
               { label: 'Enabled', value: true },
               { label: 'Disabled', value: false }
             ]}
