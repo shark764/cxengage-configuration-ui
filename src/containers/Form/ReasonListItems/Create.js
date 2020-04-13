@@ -14,6 +14,7 @@ import {
   getSelectedEntityId
 } from '../../../redux/modules/entities/selectors';
 import {
+  isUncategorized,
   isUserCreatingNewCategory,
   hierarchyInputText,
   reasonListItemCreateValues,
@@ -40,6 +41,7 @@ export const mapStateToProps = state => {
     selectedSubEntityId: getSelectedSubEntityId(state),
     existingCategories: selectExistingCategories(state),
     hierarchyInputText: hierarchyInputText(state),
+    isUncategorized: isUncategorized(state),
     isUserCreatingNewCategory: isUserCreatingNewCategory(state),
     reasons: selectActiveReasonDropDownData(state)
   };

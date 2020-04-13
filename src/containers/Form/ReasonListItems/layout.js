@@ -36,7 +36,10 @@ const ToggleFieldDiv = styled(ToggleField)`
 export default class ReasonListItemsForm extends React.Component {
   shouldComponentUpdate(nextProps) {
     if (nextProps.dirty) {
-      if (this.props.isUserCreatingNewCategory !== nextProps.isUserCreatingNewCategory) {
+      if (
+        this.props.isUserCreatingNewCategory !== nextProps.isUserCreatingNewCategory ||
+        this.props.isUncategorized !== nextProps.isUncategorized
+      ) {
         nextProps.clearFields('reasonListItems:create', false, false, 'hierarchy');
       }
     }
@@ -56,6 +59,7 @@ export default class ReasonListItemsForm extends React.Component {
             {this.props.selectedSubEntityId === 'create' &&
               this.props.existingCategories &&
               this.props.existingCategories[0] && (
+                // Creating new reason list
                 <ToggleFieldDiv
                   name="newCategory"
                   label="Create new category"
@@ -64,24 +68,31 @@ export default class ReasonListItemsForm extends React.Component {
                   disabled={this.props.isSaving}
                 />
               )}
-            {(!this.props.existingCategories ||
+            <ToggleFieldDiv
+              name="isUncategorized"
+              label="Uncategorized?"
+              labelMargin={'0px'}
+              data-automation="uncategorizedToggle"
+              disabled={this.props.isSaving}
+            />
+            {!this.props.isUncategorized &&
+              (!this.props.existingCategories ||
               !this.props.existingCategories[0] ||
-              this.props.isUserCreatingNewCategory) && (
-              <InputField
-                name="hierarchy"
-                label="Category Name *"
-                componentType="input"
-                inputType="text"
-                data-automation="categoryNameInput"
-                disabled={this.props.isSaving}
-              />
-            )}
-            {this.props.existingCategories &&
-              this.props.existingCategories[0] &&
-              !this.props.isUserCreatingNewCategory && (
+              this.props.isUserCreatingNewCategory ? (
+                // change reason list name
+                <InputField
+                  name="hierarchy"
+                  label="Category Name"
+                  componentType="input"
+                  inputType="text"
+                  data-automation="categoryNameInput"
+                  disabled={this.props.isSaving}
+                />
+              ) : (
+                // Add new reason list item
                 <AutoCompleteField
                   name="hierarchy"
-                  label="Category Name *"
+                  label="Category Name"
                   placeholder="Select a Category..."
                   suggestedDropDownWidth="100%"
                   suggestions={this.props.existingCategories}
@@ -90,7 +101,7 @@ export default class ReasonListItemsForm extends React.Component {
                   disabled={this.props.isSaving}
                   required
                 />
-              )}
+              ))}
             {
               <SelectField
                 name="reason"
@@ -111,7 +122,7 @@ export default class ReasonListItemsForm extends React.Component {
             </HeaderContainer>
             <InputField
               name="hierarchy"
-              label="Category Name *"
+              label="Category Name"
               componentType="input"
               inputType="text"
               data-automation="categoryNameInput"
@@ -133,6 +144,7 @@ export default class ReasonListItemsForm extends React.Component {
 
 ReasonListItemsForm.propTypes = {
   isUserCreatingNewCategory: PropTypes.bool,
+  isUncategorized: PropTypes.bool,
   handleSubmit: PropTypes.func.isRequired,
   key: PropTypes.string,
   selectedSubEntityId: PropTypes.string.isRequired,

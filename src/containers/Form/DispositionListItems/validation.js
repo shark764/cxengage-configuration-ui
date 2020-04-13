@@ -9,8 +9,14 @@ export const formValidation = (values, props) => {
     // While updating the transfer list item, validate all of the fields:
     return {
       hierarchy:
-        (values.get('newCategory') && isEmpty(values.get('hierarchy')) && 'Please enter a category name.') ||
-        (!values.get('newCategory') && isEmpty(values.get('hierarchy')) && 'Valid Category from the list is Required'),
+        (values.get('newCategory') &&
+          !values.get('isUncategorized') &&
+          isEmpty(values.get('hierarchy')) &&
+          'Please enter a category name.') ||
+        (!values.get('newCategory') &&
+          !values.get('isUncategorized') &&
+          isEmpty(values.get('hierarchy')) &&
+          'Valid Category from the list is Required'),
       disposition:
         (!values.get('disposition') || values.get('disposition') === 'selectDisposition') &&
         'Please select a disposition.'
@@ -18,7 +24,7 @@ export const formValidation = (values, props) => {
   } else {
     // While updating categoryHeader, just validate the categoryName field:
     return {
-      hierarchy: isEmpty(values.get('hierarchy')) && 'Please enter a contact name.'
+      hierarchy: isEmpty(!values.get('isUncategorized') && values.get('hierarchy')) && 'Please enter a contact name.'
     };
   }
 };

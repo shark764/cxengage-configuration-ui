@@ -28,6 +28,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.19] - 2020-04-11
+## Fixed
+- CXV1-21894 - Unable to add uncategorized presence reasons to Presence Reason Lists.
+
+## [0.72.18] - 2020-04-09
+## Fixed
+- CXV1-13335 - Add placeholder text to EntityTables.
+
 ## [0.72.17] - 2020-04-09
 ## Fixed
 - CXV1-22074 - Inconsistent Capitalization on Custom Attributes page

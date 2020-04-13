@@ -12,6 +12,7 @@ import { setSelectedSubEntityId, onSubEntityFormSubmit } from '../../../redux/mo
 import { getSelectedSubEntityId, isSubEntitySaving } from '../../../redux/modules/entities/selectors';
 import { getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import {
+  isUncategorized,
   isUserCreatingNewCategory,
   hierarchyInputText,
   getSelectedReasonListItemValues,
@@ -41,6 +42,7 @@ export const mapStateToProps = state => {
     initialValues: getSelectedReasonListItemValues(state),
     reasonListItemName: getSelectedSubEntityId(state),
     hierarchyInputText: hierarchyInputText(state),
+    isUncategorized: isUncategorized(state),
     isUserCreatingNewCategory: isUserCreatingNewCategory(state)
   };
 };

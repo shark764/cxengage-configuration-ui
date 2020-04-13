@@ -9,8 +9,11 @@ export const formValidation = (values, props) => {
     // While updating the transfer list item, validate all of the fields:
     return {
       hierarchy:
-        (values.get('newCategory') && isEmpty(values.get('hierarchy')) && 'Please enter a category name.') ||
-        (!values.get('newCategory') && isEmpty(values.get('hierarchy')) && 'Valid Category from the list is Required'),
+        !values.get('isUncategorized') &&
+        ((values.get('newCategory') && isEmpty(values.get('hierarchy')) && 'Please enter a category name.') ||
+          (!values.get('newCategory') &&
+            isEmpty(values.get('hierarchy')) &&
+            'Valid Category from the list is Required')),
       reason: (!values.get('reason') || values.get('reason') === 'selectReason') && 'Please select a reason.'
     };
   } else {

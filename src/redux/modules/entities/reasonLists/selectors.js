@@ -63,28 +63,31 @@ export const currentFormReasons = state => getCurrentFormValueByFieldName(state,
 export const selectReasonHeaders = createSelector(currentFormReasons, reasons => {
   if (reasons && reasons.size > 0) {
     // Finds the first reasonListItem in each category, so that rest of the items can be grouped under them:
-    return reasons.reduce((accumlator, currentVal) => {
+    return reasons.reduce((accumulator, currentVal) => {
+      let currHierarchyArray = currentVal.get('hierarchy');
       // When "create", currentVal.get('hierarchy')[0]
-      let currHierarchy = currentVal.get('hierarchy')[0]
-        ? currentVal.get('hierarchy')[0]
-        : currentVal.get('hierarchy').toJS()[0];
-      const hierarchyExists = accumlator.find(val => {
-        return val.get('hierarchy').toJS()[0] === currHierarchy;
+      let currHierarchyValue =
+        currHierarchyArray[0] || currHierarchyArray.length === 0 ? currHierarchyArray[0] : currHierarchyArray.toJS()[0];
+      const hierarchyExists = accumulator.find(val => {
+        return val.get('hierarchy').toJS()[0] === currHierarchyValue;
       });
       if (!hierarchyExists) {
-        return accumlator.push(
+        return accumulator.push(
           fromJS({
             name: currentVal.get('name'),
-            hierarchy: currentVal.get('hierarchy'),
+            hierarchy: currHierarchyArray,
             categoryUUID: currentVal.get('categoryUUID'),
             droppableUUID: currentVal.get('droppableUUID')
           })
         );
       }
-      return accumlator;
+      return accumulator;
     }, List());
   }
 });
+
+export const isUncategorized = state =>
+  getCurrentSubFormValueByFieldName(state, `reasonListItems:${getSelectedSubEntityId(state)}`, 'isUncategorized');
 
 export const isUserCreatingNewCategory = state =>
   getCurrentSubFormValueByFieldName(state, `reasonListItems:${getSelectedSubEntityId(state)}`, 'newCategory');
@@ -131,7 +134,7 @@ export const selectReasonUUIDS = createSelector(
   (values, reasons, current) => {
     let reason = reasons.filter(reason => reason.id === values.get('reason'));
     return fromJS(reason[0])
-      .set('hierarchy', [values.get('hierarchy')])
+      .set('hierarchy', values.get('hierarchy') ? [values.get('hierarchy')] : [])
       .set('sortOrder', current.length)
       .set('reasonId', reason[0].id)
       .set('draggableUUID', generateUUID())
@@ -175,16 +178,16 @@ export const selectExistingCategories = createSelector(
   reasons =>
     reasons &&
     reasons.reduce((hierarchyNames, currentReason) => {
+      let currHierarchyArray = currentReason.get('hierarchy');
       // when creating new reason list = currentReason.get('hierarchy')[0]
-      let currHierarchy = currentReason.get('hierarchy')[0]
-        ? currentReason.get('hierarchy')[0]
-        : currentReason.get('hierarchy').toJS()[0];
+      let currHierarchyValue =
+        currHierarchyArray[0] || currHierarchyArray.length === 0 ? currHierarchyArray[0] : currHierarchyArray.toJS()[0];
       const categoryExists = hierarchyNames.find(hierarchy => {
-        return hierarchy === currHierarchy;
+        return hierarchy === currHierarchyValue;
       });
       if (!categoryExists) {
         if (currentReason.get('hierarchy').size !== 0) {
-          hierarchyNames.push(currHierarchy);
+          hierarchyNames.push(currHierarchyValue);
         }
         return hierarchyNames;
       }
