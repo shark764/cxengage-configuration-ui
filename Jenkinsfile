@@ -105,7 +105,7 @@ pipeline {
         sh "echo 'Stage Description: Notifies team members that the PR is ready for review'"
         script {
           f.invalidate("E23K7T1ARU8K88")
-          office365ConnectorSend status:"Ready for review", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 Dev Preview</a>", webhookUrl:"https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373"
+          office365ConnectorSend status:"Ready for review", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 Dev Preview</a>", webhookUrl:"https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6"
         }
       }
     }
@@ -122,7 +122,7 @@ pipeline {
           sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --delete"
           script {
             f.invalidate("E23K7T1ARU8K88")
-            office365ConnectorSend status:"Ready for QE", color:"f6c342", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 QE Preview</a>", webhookUrl:"https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373"
+            office365ConnectorSend status:"Ready for QE", color:"f6c342", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 QE Preview</a>", webhookUrl:"https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6"
           }
         }
       }
@@ -133,7 +133,7 @@ pipeline {
         timeout(time: 5, unit: 'DAYS') {
           script {
             input message: 'Testing complete?', submittedParameter: 'submitter'
-            office365ConnectorSend status:"Ready to be merged", color:"67ab49", webhookUrl:"https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373"
+            office365ConnectorSend status:"Ready to be merged", color:"67ab49", webhookUrl:"https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6"
           }
         }
       }
@@ -275,14 +275,14 @@ pipeline {
       script {
         mt.teamsPullRequestSuccess("${service}", 
                                    "${build_version}", 
-                                   "https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373")
+                                   "https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6")
       }
     }
     failure {
       script {
         mt.teamsPullRequestFailure("${service}", 
                                    "${build_version}", 
-                                   "https://outlook.office.com/webhook/2ca7c3d9-47be-4907-9669-0bbed835452d@6baa6e2a-52be-4677-a9b8-36d2ec6f6ebc/JenkinsCI/f19495112ef24fa1a2dbf894d8b19058/d56e9e1b-ab01-40fc-ad2e-71e0bcd5e373")
+                                   "https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6")
       }
     }
     unstable {
