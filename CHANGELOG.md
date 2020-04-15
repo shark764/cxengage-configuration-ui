@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.22] - 2020-04-14
+## Fixed
+- CXV1-13378 - Generic Lists - Bulk Actions
+
 ## [0.72.21] - 2021-04-14
 - Updating the webhook for the the Jenkins Job to point to the new Teams instance and team room.
 

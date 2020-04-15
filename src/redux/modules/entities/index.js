@@ -640,6 +640,13 @@ export default function reducer(state = initialState, action) {
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
+        case 'lists': {
+          const newResult = result.map(entity => ({
+            ...entity,
+            inherited: entity.tenantId !== state.get('currentTenantId')
+          }));
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
+        }
         case 'users': {
           const newResult = result.map(entity => {
             let newEntity = { ...entity };

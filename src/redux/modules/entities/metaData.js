@@ -319,9 +319,11 @@ entities.groups.defaultAssociationFilters = {
 };
 
 // Generic Lists
-entities.lists.bulkEditsAvailable = false;
+entities.lists.bulkEditsAvailable = true;
 entities.lists.createFormDependencies.push('listTypes');
 entities.lists.subEntityName = 'listItems';
+entities.lists.pageTitle = 'Lists';
+entities.lists.title = 'List';
 entities.lists.helpLink = '/Help/Content/Configuration/Lists/Lists.htm';
 entities.lists.columns = [
   { name: 'Name', active: true },
