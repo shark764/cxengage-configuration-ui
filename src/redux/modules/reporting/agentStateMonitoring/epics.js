@@ -14,7 +14,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { sdkPromise } from '../../../../utils/sdk';
 import { startReportingSubscriptions, reportingSubscriptionStarted } from './';
 import { handleError, handleSuccess, handleBulkSuccess } from '../../entities/handleResult';
-import { hasAgentReasonLists, getSelectedAgentsBulkChangeItems, getAgentCurrentState, isAgentStale } from './selectors';
+import { hasAgentReasonLists, getSelectedAgentsBulkChangeItems, getAgentCurrentState } from './selectors';
 
 export const StartBatchRequest = action$ =>
   action$.ofType('START_AGENT_MONITORING_REPORTING_BATCH_REQUEST_$').switchMap(() =>

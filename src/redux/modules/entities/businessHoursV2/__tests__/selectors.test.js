@@ -1,5 +1,10 @@
 import { fromJS } from 'immutable';
-import { selectBusinessHoursV2FormInitialValues, getBusinessHourV2Drafts } from '../selectors';
+import {
+  selectBusinessHoursV2FormInitialValues,
+  getBusinessHourV2Drafts,
+  selectBusinessHoursEntityVersions,
+  selectBusinessHoursRules
+} from '../selectors';
 
 import { selectFormInitialValues } from '../../../form/selectors';
 import { getSelectedEntity } from '../../selectors';
@@ -16,7 +21,8 @@ describe('selectBusinessHoursV2FormInitialValues', () => {
     const initialState = fromJS({
       id: 'mockId',
       shared: false,
-      active: true
+      active: true,
+      versions: []
     });
     getSelectedEntity.mockImplementation(() => initialState);
     selectFormInitialValues.mockImplementation(() => initialState);
@@ -63,6 +69,56 @@ describe('getBusinessHourV2Drafts', () => {
       ]
     });
     expect(getBusinessHourV2Drafts.resultFunc(initialState)).toMatchSnapshot();
+  });
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+});
+
+describe('selectBusinessHoursEntityVersions', () => {
+  it('Return a empty array if the businessHour has no versions', () => {
+    const initialState = fromJS({
+      id: 'mockId',
+      shared: false,
+      active: true,
+      versions: []
+    });
+    expect(selectBusinessHoursEntityVersions(initialState)).toMatchSnapshot();
+  });
+  it('Return an array if the businessHour has versions', () => {
+    const initialState = fromJS({
+      id: 'mockId',
+      shared: false,
+      active: true,
+      versions: [{ name: 'name-1', id: 'id-1' }]
+    });
+    expect(selectBusinessHoursEntityVersions(initialState)).toMatchSnapshot();
+  });
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+});
+
+describe('selectBusinessHoursRules', () => {
+  it('Return a empty array if the version has no rules', () => {
+    const initialState = fromJS({
+      id: 'mockId',
+      shared: false,
+      active: true,
+      versions: [{ name: 'name-1', id: 'id-1', rules: [] }]
+    });
+    expect(selectBusinessHoursRules(initialState)).toMatchSnapshot();
+  });
+  it('Return an array if the version has rules', () => {
+    const initialState = fromJS({
+      id: 'mockId',
+      shared: false,
+      active: true,
+      versions: [{ name: 'name-1', id: 'id-1', rules: [{ id: 'id-1' }] }]
+    });
+    expect(selectBusinessHoursRules(initialState)).toMatchSnapshot();
   });
 
   beforeEach(() => {

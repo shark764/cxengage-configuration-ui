@@ -10,7 +10,7 @@ import { entitiesMetaData } from '../metaData';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 
-import { getCurrentEntity } from '../selectors';
+import { getCurrentEntity, getSelectedEntityId, getSelectedEntityStatus } from '../selectors';
 import { getAllEntities } from '../../../../containers/EntityTable/selectors';
 
 import { setSelectedSubEntityId, setSelectedEntityId, fetchActiveVersionBusinessHoursFulfilled } from '../index';
@@ -100,7 +100,7 @@ export const fetchActiveVersion = ($action, store) =>
                 type: 'FETCH_VERSION_BUSINESS_HOURS',
                 entityName: 'businessHoursV2'
               },
-              "An active version for a business hour couldn't be retrieved"
+              'An active version for selected business hour could not be retrieved'
             )
           );
         })
@@ -118,3 +118,84 @@ export const fetchActiveVersion = ($action, store) =>
       }, {});
       return fetchActiveVersionBusinessHoursFulfilled(activeVersionsObject);
     });
+
+export const fetchVersions = (action$, store) =>
+  action$
+    .ofType('SET_SELECTED_ENTITY_ID')
+    .map(a => {
+      return {
+        entityId: a.entityId,
+        entityName: getCurrentEntity(store.getState()),
+        businessHours: getAllEntities(store.getState())
+      };
+    })
+    .filter(({ entityId, entityName, businessHours }) => {
+      return entityName === 'businessHoursV2' && businessHours && entityId !== '' && entityId !== 'create';
+    })
+    .map(a => {
+      a.sdkCall = {
+        path: ['business-hours', a.entityId, 'versions'],
+        apiVersion: 'v2',
+        module: 'entities',
+        crudAction: 'read',
+        topic: 'cxengage/entities/read-business-hours-v2-versions'
+      };
+      return {
+        ...a,
+        activeVersion: a.businessHours.find(businessHour => businessHour.id === a.entityId).activeVersion
+      };
+    })
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => ({
+          type: 'SET_BUSINESS_HOUR_VERSIONS',
+          versions: response.result,
+          activeVersion: a.activeVersion,
+          businessHourId: a.entityId
+        }))
+        .catch(error =>
+          handleError(
+            error,
+            {
+              type: 'FETCH_VERSIONS_BUSINESS_HOURS',
+              entityName: 'businessHoursV2'
+            },
+            "Versions for a business hour couldn't be retrieved"
+          )
+        )
+    );
+
+export const toggleBusinessHoursV2Entity = (action$, store) =>
+  action$
+    .ofType('TOGGLE_ENTITY')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState()),
+      entityStatusActive: getSelectedEntityStatus(store.getState())
+    }))
+    .filter(({ entityName }) => entityName === 'businessHoursV2')
+    .map(a => {
+      a.sdkCall = {
+        path: ['business-hours', a.selectedEntityId],
+        data: {
+          active: !a.entityStatusActive
+        },
+        apiVersion: 'v2',
+        module: 'entities',
+        crudAction: 'update',
+        topic: 'cxengage/entities/update-business-hours-v2-active'
+      };
+      return { ...a };
+    })
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `${a.entityName.slice(0, -2)} was ${a.entityStatusActive ? 'disabled' : 'enabled'} successfully!`
+          )
+        )
+        .catch(error => handleError(error, { ...a }, 'Status for selected business hour could not be changed'))
+    );

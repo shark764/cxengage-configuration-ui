@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { SimpleCaretIconSVG } from 'cx-ui-components';
 import { fetchListItems } from '../../redux/modules/entities';
 import { getCurrentEntity, getSelectedEntityId } from '../../redux/modules/entities/selectors';
@@ -15,8 +15,12 @@ const Wrapper = styled.div`
 `;
 
 const CaretIcon = styled(SimpleCaretIconSVG)`
-  display: inline-block;
-  margin-left: 15px;
+  ${({ customCaretIcon }) =>
+    customCaretIcon ||
+    css`
+      display: inline-block;
+      margin-left: 15px;
+    `};
 `;
 
 class DetailWrapper extends Component {
@@ -41,7 +45,11 @@ class DetailWrapper extends Component {
     return (
       <span>
         <Wrapper data-automation={this.props['data-automation']} onClick={this.toggle}>
-          <CaretIcon size={15} direction={this.state.open ? 'up' : 'down'} />
+          <CaretIcon
+            customCaretIcon={this.props.customCaretIcon}
+            size={15}
+            direction={this.state.open ? 'up' : 'down'}
+          />
         </Wrapper>
         {!this.state.open && this.props.children[0]}
         {this.state.open &&
@@ -73,6 +81,7 @@ DetailWrapper.propTypes = {
   entityId: PropTypes.string,
   contains: PropTypes.string,
   autoCloseOverride: PropTypes.bool,
+  customCaretIcon: PropTypes.string,
   'data-automation': PropTypes.string
 };
 

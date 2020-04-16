@@ -20,7 +20,7 @@ import {
 } from '../../../../redux/modules/form/selectors';
 import {
   selectBusinessHoursV2FormInitialValues,
-  getBusinessHourV2Drafts
+  selectBusinessHoursEntityVersions
 } from '../../../../redux/modules/entities/businessHoursV2/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -36,7 +36,7 @@ userHasSharePermission.mockImplementation(() => true);
 getCurrentFormValueByFieldName.mockImplementation(() => true);
 
 selectBusinessHoursV2FormInitialValues.mockImplementation(() => ({ active: true }));
-getBusinessHourV2Drafts.mockImplementation(() => undefined);
+selectBusinessHoursEntityVersions.mockImplementation(() => ({ versions: [] }));
 
 describe('BusinessHoursV2 Renders', () => {
   it('renders', () => {

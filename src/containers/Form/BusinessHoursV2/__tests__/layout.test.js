@@ -40,13 +40,13 @@ describe('<BusinessHoursV2Form />', () => {
         userHasSharePermission
         toggleShared={() => {}}
         sharedFormValue
-        drafts={[
+        versions={[
           {
-            name: 'draft-1',
+            name: 'version-1',
             id: 'id-1'
           },
           {
-            name: 'draft-2',
+            name: 'version-2',
             id: 'id-2'
           }
         ]}

@@ -92,6 +92,7 @@ import CustomAttributesDetailsPanel from '../SidePanelDetails/CustomAttributes';
 
 // Full page panel forms
 import BusinessHoursV2CreateForm from '../FullPagePanel/BusinessHoursV2/Create';
+import BusinessHoursV2UpdateForm from '../FullPagePanel/BusinessHoursV2/Update';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -826,6 +827,8 @@ export default class CrudEndpointUiLayout extends Component {
         return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2CreateForm />} />;
       } else if (this.props.selectedEntityId !== 'create' && this.props.selectedSubEntityId) {
         return <Route path="/configuration/businessHoursV2" component={() => <h1>Here goes edit draft page</h1>} />;
+      } else {
+        return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2UpdateForm />} />;
       }
     } else {
       return (

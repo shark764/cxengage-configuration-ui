@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.73.0] - 2020-04-08
+## Added
+- CXV1-21473 - Config 2 - Basic Page Structure - Edit Business Hour.
+
 ## [0.72.23] - 2020-04-14
 ## Fixed
 - CXV1-21967 - Sorting the order of presence reason list in the User Management.

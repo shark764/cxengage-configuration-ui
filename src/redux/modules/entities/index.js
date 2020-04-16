@@ -496,6 +496,11 @@ export const toggleShared = () => ({
   type: 'TOGGLE_SHARED'
 });
 
+export const setSelectedBusinessHourVersion = selectedVersionId => ({
+  type: 'SET_SELECTED_BUSINESS_HOUR_VERSION',
+  selectedVersionId
+});
+
 export const setTenantUserAsImpersonated = () => ({
   type: 'SET_TENANT_USER_AS_IMPERSONATED'
 });
@@ -1228,6 +1233,22 @@ export default function reducer(state = initialState, action) {
           });
         })
       );
+    }
+    case 'SET_BUSINESS_HOUR_VERSIONS': {
+      const currentEntity = state.get('currentEntity');
+      const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
+      const entityIndex = findEntityIndex(state, currentEntity, selectedEntityId);
+      if (entityIndex !== -1) {
+        return state.setIn([currentEntity, 'data', entityIndex, 'versions'], fromJS(action.versions));
+      } else {
+        return state;
+      }
+    }
+    case 'SET_SELECTED_BUSINESS_HOUR_VERSION': {
+      const currentEntity = state.get('currentEntity');
+      const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
+      const entityIndex = findEntityIndex(state, currentEntity, selectedEntityId);
+      return state.setIn([currentEntity, 'data', entityIndex, 'selectedVersion'], fromJS(action.selectedVersionId));
     }
     default:
       return state;

@@ -59,17 +59,17 @@ exports[`<BusinessHoursV2Form /> renders update form 1`] = `
   <SelectField
     data-automation="businessHourV2sActiveVersion"
     disabled={false}
-    label="Active Version *"
+    label="Active Version"
     name="activeVersion"
     options={
       Array [
         Object {
-          "label": "draft-1",
-          "value": "id-1",
+          "id": "id-1",
+          "name": "version-1",
         },
         Object {
-          "label": "draft-2",
-          "value": "id-2",
+          "id": "id-2",
+          "name": "version-2",
         },
       ]
     }

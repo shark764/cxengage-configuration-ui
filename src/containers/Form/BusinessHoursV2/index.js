@@ -17,7 +17,7 @@ import {
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import {
   selectBusinessHoursV2FormInitialValues,
-  getBusinessHourV2Drafts
+  selectBusinessHoursEntityVersions
 } from '../../../redux/modules/entities/businessHoursV2/selectors';
 
 import { toggleShared } from '../../../redux/modules/entities';
@@ -40,7 +40,7 @@ export function mapStateToProps(state) {
     userHasSharePermission: userHasSharePermission(state),
     key: getSelectedEntityId(state),
     sharedFormValue: getCurrentFormValueByFieldName(state, 'shared'),
-    drafts: getBusinessHourV2Drafts(state)
+    versions: selectBusinessHoursEntityVersions(state)
   };
 }
 

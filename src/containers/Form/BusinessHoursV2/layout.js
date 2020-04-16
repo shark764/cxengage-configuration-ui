@@ -22,7 +22,7 @@ export default function BusinessHoursV2Form({
   initialValues,
   sharedFormValue,
   toggleShared,
-  drafts
+  versions
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -45,18 +45,17 @@ export default function BusinessHoursV2Form({
       {initialValues.get('id') && (
         <SelectField
           name="activeVersion"
-          label="Active Version *"
+          label="Active Version"
           placeholder="Select a version..."
-          options={
-            drafts &&
-            drafts.map(({ name, id }) => ({
-              label: name,
-              value: id
-            }))
-          }
+          options={versions}
           data-automation="businessHourV2sActiveVersion"
           disabled={
-            isSaving || inherited || !drafts || drafts.length === 0 || drafts.size === 0 || !userHasUpdatePermission
+            isSaving ||
+            inherited ||
+            !versions ||
+            versions.length === 0 ||
+            versions.size === 0 ||
+            !userHasUpdatePermission
           }
         />
       )}
@@ -96,5 +95,5 @@ BusinessHoursV2Form.propTypes = {
   userHasSharePermission: PropTypes.bool,
   toggleShared: PropTypes.func,
   sharedFormValue: PropTypes.bool,
-  drafts: PropTypes.array
+  versions: PropTypes.array
 };

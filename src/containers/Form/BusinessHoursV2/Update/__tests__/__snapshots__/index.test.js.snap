@@ -2,15 +2,8 @@
 
 exports[`BusinessHoursV2 Renders renders 1`] = `
 <Connect(ReduxForm)
-  inherited={true}
-  initialValues={
-    Object {
-      "active": true,
-    }
-  }
-  isSaving={true}
+  dispatch={[Function]}
   key="mockId"
-  sharedFormValue={true}
   store={
     Object {
       "dispatch": [Function],
@@ -40,14 +33,6 @@ exports[`BusinessHoursV2 Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
-  toggleShared={[Function]}
-  userHasSharePermission={true}
-  userHasUpdatePermission={true}
-  versions={
-    Object {
-      "versions": Array [],
-    }
-  }
 >
   Child
 </Connect(ReduxForm)>
@@ -55,18 +40,7 @@ exports[`BusinessHoursV2 Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "inherited": true,
-  "initialValues": Object {
-    "active": true,
-  },
-  "isSaving": true,
   "key": "mockId",
-  "sharedFormValue": true,
-  "userHasSharePermission": true,
-  "userHasUpdatePermission": true,
-  "versions": Object {
-    "versions": Array [],
-  },
 }
 `;
 

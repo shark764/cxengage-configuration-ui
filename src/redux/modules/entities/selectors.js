@@ -146,6 +146,11 @@ export const isSystemRole = state => {
 export const shouldDisableHeaderToggleField = state => {
   if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
     switch (getCurrentEntity(state)) {
+      case 'businessHoursV2': {
+        // Entity can have versions, but we'll allow to enable it
+        // until it has a version set as active.
+        return !getSelectedEntity(state).get('activeVersion');
+      }
       case 'reasonLists': {
         return getSelectedEntity(state).get('reasons').size === 0;
       }

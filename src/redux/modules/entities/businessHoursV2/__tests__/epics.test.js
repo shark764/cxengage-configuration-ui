@@ -1,5 +1,5 @@
 import { ActionsObservable } from 'redux-observable';
-import { createBusinessHour, createDraftAndSaveToState, fetchActiveVersion } from '../epics';
+import { createBusinessHour, createDraftAndSaveToState, fetchActiveVersion, fetchVersions } from '../epics';
 import { mockStore } from '../../../../../utils/testUtils';
 
 import { sdkPromise } from '../../../../../utils/sdk';
@@ -140,5 +140,58 @@ describe('fetchActiveVersion', () => {
     sdkPromise.mockReset();
     getCurrentEntity.mockReset();
     getAllEntities.mockReset();
+  });
+});
+
+describe('fetchVersions', () => {
+  let action;
+  beforeEach(() => {
+    action = ActionsObservable.of({
+      type: 'SET_SELECTED_ENTITY_ID',
+      entityName: 'businessHoursV2',
+      entityId: 'business-hour1-versions'
+    });
+    sdkPromise
+      .mockReturnValueOnce(
+        new Promise(resolve =>
+          resolve({
+            result: {
+              id: 'business-hour1-versions',
+              businessHourId: 'business-hour-1'
+            }
+          })
+        )
+      )
+      .mockReturnValueOnce(new Promise((resolve, reject) => reject('Error')));
+    getCurrentEntity.mockReturnValue('businessHoursV2');
+    getAllEntities.mockReturnValue([
+      {
+        id: 'business-hour1-versions',
+        versions: [
+          {
+            id: '1',
+            name: 'version-1'
+          },
+          {
+            id: '2',
+            name: 'version-2'
+          }
+        ]
+      }
+    ]);
+  });
+
+  describe('Fetches versions for selected business hours', () => {
+    it('returns SET_BUSINESS_HOUR_VERSIONS', done => {
+      fetchVersions(action, mockStore).subscribe(actualOutputActions => {
+        expect(actualOutputActions).toMatchSnapshot();
+        done();
+      });
+    });
+  });
+
+  afterAll(() => {
+    sdkPromise.mockReset();
+    getCurrentEntity.mockReset();
   });
 });

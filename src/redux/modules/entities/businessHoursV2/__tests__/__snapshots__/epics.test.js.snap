@@ -77,3 +77,15 @@ Object {
   "type": "FETCH_ACTIVE_VERSION_BUSINESS_HOUR_FULFILLED",
 }
 `;
+
+exports[`fetchVersions Fetches versions for selected business hours returns SET_BUSINESS_HOUR_VERSIONS 1`] = `
+Object {
+  "activeVersion": undefined,
+  "businessHourId": "business-hour1-versions",
+  "type": "SET_BUSINESS_HOUR_VERSIONS",
+  "versions": Object {
+    "businessHourId": "business-hour-1",
+    "id": "business-hour1-versions",
+  },
+}
+`;
