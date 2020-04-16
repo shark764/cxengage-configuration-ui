@@ -124,6 +124,11 @@ export default function UsersDetailsPanel({
             deleteSubEntity={removeListItem}
             items={reasonListsItems}
             fields={reasonListsFields}
+            defaultSorted={[
+              { id: 'name', desc: false },
+              { id: 'description', desc: false },
+              { id: 'active', desc: false }
+            ]}
             filtered={defaultFilters.reasonLists}
             fetching={reasonListsFetching}
             itemApiPending={itemApiPending}

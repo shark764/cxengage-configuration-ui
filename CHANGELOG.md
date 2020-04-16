@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.72.23] - 2020-04-14
+## Fixed
+- CXV1-21967 - Sorting the order of presence reason list in the User Management.
+
 ## [0.72.22] - 2020-04-14
 ## Fixed
 - CXV1-13378 - Generic Lists - Bulk Actions

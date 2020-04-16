@@ -489,14 +489,29 @@ entities.reasonLists.columns = [
   { name: 'Is Default', active: true },
   { name: 'Status', active: true }
 ];
+entities.reasonLists.customSortMethod = function(a, b) {
+  if (a === b) {
+    return 0;
+  }
+  return a > b ? 1 : -1;
+};
 entities.reasonLists.memberListTableFields = [
-  { label: 'Name', name: 'name' },
-  { label: 'Description', name: 'description' },
+  {
+    label: 'Name',
+    name: 'name',
+    customSortMethod: entities.reasonLists.customSortMethod
+  },
+  {
+    label: 'Description',
+    name: 'description',
+    customSortMethod: entities.reasonLists.customSortMethod
+  },
   {
     label: 'Status',
     name: 'active',
     type: 'select',
-    filterOptions: ['enabled', 'disabled']
+    filterOptions: ['enabled', 'disabled'],
+    customSortMethod: entities.reasonLists.customSortMethod
   }
 ];
 

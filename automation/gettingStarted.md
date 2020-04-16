@@ -1,7 +1,7 @@
 
 ### Instructions to setup automation in a local machine:
 1. Clone this repository/library.
-2. Switch to node version 8.11.3 & run "npm install".
+2. Switch to node version 10.15.3 & run "npm install".
 3. Navigate to './automation/config/' folder and create a file with the name '.env'
 4. copy-paste following ENVIRONMENT variables to the newly created .env file.
       APP="Config2"

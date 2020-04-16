@@ -53,6 +53,22 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel 1`] = `
     />
     <_class
       contains="reasonLists"
+      defaultSorted={
+        Array [
+          Object {
+            "desc": false,
+            "id": "name",
+          },
+          Object {
+            "desc": false,
+            "id": "description",
+          },
+          Object {
+            "desc": false,
+            "id": "active",
+          },
+        ]
+      }
       filtered={Array []}
       items={Array []}
       tableType="sidePanel"
@@ -169,6 +185,22 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
     />
     <_class
       contains="reasonLists"
+      defaultSorted={
+        Array [
+          Object {
+            "desc": false,
+            "id": "name",
+          },
+          Object {
+            "desc": false,
+            "id": "description",
+          },
+          Object {
+            "desc": false,
+            "id": "active",
+          },
+        ]
+      }
       filtered={Array []}
       items={Array []}
       tableType="sidePanel"
@@ -285,6 +317,22 @@ exports[`<UsersDetailsPanel /> renders users detailsPanel with no update permisi
     />
     <_class
       contains="reasonLists"
+      defaultSorted={
+        Array [
+          Object {
+            "desc": false,
+            "id": "name",
+          },
+          Object {
+            "desc": false,
+            "id": "description",
+          },
+          Object {
+            "desc": false,
+            "id": "active",
+          },
+        ]
+      }
       filtered={Array []}
       items={Array []}
       tableType="sidePanel"

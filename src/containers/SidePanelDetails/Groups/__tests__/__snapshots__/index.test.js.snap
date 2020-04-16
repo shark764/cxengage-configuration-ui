@@ -68,14 +68,17 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
   reasonListsFields={
     Array [
       Object {
+        "customSortMethod": [Function],
         "label": "Name",
         "name": "name",
       },
       Object {
+        "customSortMethod": [Function],
         "label": "Description",
         "name": "description",
       },
       Object {
+        "customSortMethod": [Function],
         "filterOptions": Array [
           "enabled",
           "disabled",
@@ -239,14 +242,17 @@ Object {
   "reasonListsFetching": undefined,
   "reasonListsFields": Array [
     Object {
+      "customSortMethod": [Function],
       "label": "Name",
       "name": "name",
     },
     Object {
+      "customSortMethod": [Function],
       "label": "Description",
       "name": "description",
     },
     Object {
+      "customSortMethod": [Function],
       "filterOptions": Array [
         "enabled",
         "disabled",

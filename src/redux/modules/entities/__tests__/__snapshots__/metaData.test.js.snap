@@ -2849,6 +2849,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
+    "customSortMethod": [Function],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
@@ -2873,14 +2874,17 @@ Object {
     "helpLink": "/Help/Content/Managing%20Users/Presence%20Reasons/Creating_Presence_Reason_Lists.htm",
     "memberListTableFields": Array [
       Object {
+        "customSortMethod": [Function],
         "label": "Name",
         "name": "name",
       },
       Object {
+        "customSortMethod": [Function],
         "label": "Description",
         "name": "description",
       },
       Object {
+        "customSortMethod": [Function],
         "filterOptions": Array [
           "enabled",
           "disabled",
