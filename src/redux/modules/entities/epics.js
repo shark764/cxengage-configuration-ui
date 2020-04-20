@@ -812,7 +812,8 @@ export const CreateSubEntity = (action$, store) =>
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),
-      entityId: getSelectedEntityId(store.getState())
+      entityId: getSelectedEntityId(store.getState()),
+      subEntityName: getCurrentSubEntity(store.getState())
     }))
     .filter(({ entityName }) => hasCustomCreateSubEntity(entityName))
     .map(a => {
@@ -826,7 +827,7 @@ export const CreateSubEntity = (action$, store) =>
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
-          handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.entityName)}</i> was created successfully!`)
+          handleSuccess(response, a, `<i>${camelCaseToRegularFormAndRemoveLastLetter(a.subEntityName)}</i> was created successfully!`)
         )
         .catch(error => handleError(error, a))
     );
@@ -838,7 +839,7 @@ export const UpdateSubEntity = (action$, store) =>
       ...action,
       subEntityId: getSelectedSubEntityId(store.getState()),
       entityName: getCurrentEntity(store.getState()),
-      subEntityName: getSelectedEntityName(store.getState()),
+      subEntityName: getCurrentSubEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState())
     }))
     .map(a => {
@@ -853,7 +854,7 @@ export const UpdateSubEntity = (action$, store) =>
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
-          handleSuccess(response, a, `<i>${camelCaseToRegularForm(a.subEntityName)} </i> was updated successfully!`)
+          handleSuccess(response, a, `<i>${camelCaseToRegularFormAndRemoveLastLetter(a.subEntityName)} </i> was updated successfully!`)
         )
         .catch(error => handleError(error, a))
     );
@@ -867,7 +868,7 @@ export const DeleteSubEntity = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       selectedEntity: getSelectedEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState()),
-      subEntityName: getSelectedEntityName(store.getState())
+      subEntityName: getCurrentSubEntity(store.getState())
     }))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('delete', 'subEntity');
@@ -883,7 +884,7 @@ export const DeleteSubEntity = (action$, store) =>
           handleSuccess(
             response,
             a,
-            `<i>${camelCaseToRegularForm(a.selectedEntity.get('name'))}</i> was deleted successfully!`
+            `<i>${camelCaseToRegularFormAndRemoveLastLetter(a.subEntityName)}</i> was deleted successfully!`
           )
         )
         .catch(error => handleError(error, a))
