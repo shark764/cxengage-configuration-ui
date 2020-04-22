@@ -1837,7 +1837,24 @@ Object {
     "betaFeature": false,
     "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
-    "columns": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Type",
+      },
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -1846,14 +1863,19 @@ Object {
     "createFormDependencies": Array [],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
-    "defaultFilters": Array [],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
     "defaultSorted": Array [
       Object {
         "alpha": true,
         "id": "name",
       },
     ],
-    "dependentEntity": "",
+    "dependentEntity": "listeners",
     "entityName": "integrations",
     "entityTableFields": Array [
       Object {
@@ -1865,7 +1887,29 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Configuration/Integrations/Creating_Integrations.htm",
+    "membersTableFields": Object {
+      "listeners": Array [
+        Object {
+          "label": "Name",
+          "name": "name",
+        },
+        Object {
+          "filterOptions": Array [
+            "enabled",
+            "disabled",
+          ],
+          "label": "Status",
+          "name": "active",
+          "type": "select",
+        },
+        Object {
+          "format": "datetime",
+          "label": "Created On",
+          "name": "created",
+        },
+      ],
+    },
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -1876,7 +1920,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Integrations",
+    "pageTitle": "Integration Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",

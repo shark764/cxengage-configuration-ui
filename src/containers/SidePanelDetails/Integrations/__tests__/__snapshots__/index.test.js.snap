@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IntegrationsDetailsPanel Renders renders 1`] = `
+<IntegrationsDetailsPanel
+  inherited={false}
+  integrationType="salesforce"
+  listenersFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "filterOptions": Array [
+          "enabled",
+          "disabled",
+        ],
+        "label": "Status",
+        "name": "active",
+        "type": "select",
+      },
+      Object {
+        "format": "datetime",
+        "label": "Created On",
+        "name": "created",
+      },
+    ]
+  }
+  listenersItems={Array []}
+  setSelectedSubEntityId={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  userHasUpdatePermission={true}
+>
+  Child
+</IntegrationsDetailsPanel>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": false,
+  "integrationType": "salesforce",
+  "integrationsFetching": undefined,
+  "itemApiPending": undefined,
+  "listenersFields": Array [
+    Object {
+      "label": "Name",
+      "name": "name",
+    },
+    Object {
+      "filterOptions": Array [
+        "enabled",
+        "disabled",
+      ],
+      "label": "Status",
+      "name": "active",
+      "type": "select",
+    },
+    Object {
+      "format": "datetime",
+      "label": "Created On",
+      "name": "created",
+    },
+  ],
+  "listenersItems": Array [],
+  "userHasUpdatePermission": true,
+}
+`;

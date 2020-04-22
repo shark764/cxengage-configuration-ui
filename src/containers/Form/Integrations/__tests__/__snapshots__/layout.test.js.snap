@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IntegrationsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <SelectField
+    data-automation="integrationsType"
+    disabled={false}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "REST",
+          "value": "rest",
+        },
+        Object {
+          "label": "Salesforce",
+          "value": "salesforce",
+        },
+        Object {
+          "label": "Zendesk",
+          "value": "zendesk",
+        },
+        Object {
+          "label": "Calabrio",
+          "value": "calabrio",
+        },
+      ]
+    }
+    required={true}
+  />
+  <DefaultForm
+    inherited={false}
+    initialValues={
+      Object {
+        "get": [Function],
+      }
+    }
+    isSaving={false}
+    userHasUpdatePermission={true}
+  />
+  <RestForm
+    authType="noAuth"
+    inherited={false}
+    initialValues={
+      Object {
+        "get": [Function],
+      }
+    }
+    isSaving={false}
+    userHasUpdatePermission={true}
+  />
+</form>
+`;
+
+exports[`<IntegrationsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <SelectField
+    data-automation="integrationsType"
+    disabled={false}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "REST",
+          "value": "rest",
+        },
+        Object {
+          "label": "Salesforce",
+          "value": "salesforce",
+        },
+        Object {
+          "label": "Zendesk",
+          "value": "zendesk",
+        },
+        Object {
+          "label": "Calabrio",
+          "value": "calabrio",
+        },
+      ]
+    }
+    required={true}
+  />
+  <DefaultForm
+    inherited={false}
+    initialValues={
+      Object {
+        "get": [Function],
+      }
+    }
+    isSaving={false}
+    userHasUpdatePermission={true}
+  />
+  <RestForm
+    authType="noAuth"
+    inherited={false}
+    initialValues={
+      Object {
+        "get": [Function],
+      }
+    }
+    isSaving={false}
+    userHasUpdatePermission={true}
+  />
+</form>
+`;

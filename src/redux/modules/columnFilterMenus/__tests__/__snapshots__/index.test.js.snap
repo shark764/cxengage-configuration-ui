@@ -973,7 +973,24 @@ Immutable.Map {
   },
   "integrations": Immutable.Map {
     "visibleMenu": "none",
-    "Columns": Immutable.List [],
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Type",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
   },
   "dispatchMappings": Immutable.Map {
     "visibleMenu": "none",

@@ -174,6 +174,13 @@ export default class Navigation extends Component {
                   Tenants
                 </StyledLink>
                 <StyledLink
+                  data-automation="navigationLinkIntegrations"
+                  to="/configuration/integrations"
+                  onClick={e => this.setCurrentEntityAndEntityId('integrations', e)}
+                >
+                  Integrations
+                </StyledLink>
+                <StyledLink
                   data-automation="navigationLinkLists"
                   to="/configuration/lists"
                   onClick={e => this.setCurrentEntityAndEntityId('lists', e)}

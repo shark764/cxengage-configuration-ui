@@ -26,8 +26,6 @@ export function mapStateToProps(state) {
   };
 }
 
-export const actions = {
-  setSelectedSubEntityId
-};
+export const actions = { setSelectedSubEntityId };
 
 export default connect(mapStateToProps, actions)(SlasDetailsPanel);

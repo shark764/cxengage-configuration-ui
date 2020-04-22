@@ -57,6 +57,8 @@ import ReasonsBulkActionsForm from '../Form/Reasons/Bulk';
 import TenantsForm from '../Form/Tenants';
 import DispositionListsForm from '../Form/DispositionLists';
 import CustomAttributesForm from '../Form/CustomAttributes';
+import IntegrationsForm from '../Form/Integrations';
+import IntegrationListenerForm from '../Form/Integrations/Listener';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -88,6 +90,7 @@ import MessageTemplatesDetailsPanel from '../SidePanelDetails/MessageTemplates';
 import TenantsDetailsPanel from '../SidePanelDetails/Tenants';
 import DispositionListsDetailsPanel from '../SidePanelDetails/DispositionLists';
 import CustomAttributesDetailsPanel from '../SidePanelDetails/CustomAttributes';
+import IntegrationsDetailsPanel from '../SidePanelDetails/Integrations';
 //hygen-inject-before4
 
 // Full page panel forms
@@ -316,6 +319,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <CustomAttributesForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/integrations',
+    component: () => (
+      <DetailsPanel>
+        <IntegrationsForm />
       </DetailsPanel>
     )
   }
@@ -562,6 +573,16 @@ const detailsPanelRoutes = [
         </CustomAttributesDetailsPanel>
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/integrations',
+    component: () => (
+      <DetailsPanel>
+        <IntegrationsDetailsPanel>
+          <IntegrationsForm />
+        </IntegrationsDetailsPanel>
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before2
 ];
@@ -702,6 +723,14 @@ const bulkChangeFormRoutes = [
         <ReasonsBulkActionsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/integrations',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before3
 ];
@@ -777,6 +806,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/dispositionLists',
     component: UpdateDispositionListItemsForm
+  },
+  {
+    path: '/configuration/integrations',
+    component: IntegrationListenerForm
   }
 ];
 

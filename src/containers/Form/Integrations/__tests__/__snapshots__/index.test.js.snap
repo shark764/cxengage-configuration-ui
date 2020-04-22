@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Integrations Renders renders 1`] = `
+<Connect(ReduxForm)
+  authType={
+    Immutable.Map {
+      "type": "salesforce",
+    }
+  }
+  dispatch={[Function]}
+  initialValues={
+    Immutable.Map {
+      "active": true,
+      "type": "rest",
+      "authType": "noAuth",
+    }
+  }
+  integrationType={
+    Immutable.Map {
+      "type": "salesforce",
+    }
+  }
+  isSaving={true}
+  key="mockId"
+  regions={
+    Array [
+      Object {
+        "label": "Global Low Latency",
+        "value": "gll",
+      },
+      Object {
+        "label": "Australia",
+        "value": "au1",
+      },
+      Object {
+        "label": "Brazil",
+        "value": "br1",
+      },
+      Object {
+        "label": "Ireland",
+        "value": "ie1",
+      },
+      Object {
+        "label": "Japan",
+        "value": "jp1",
+      },
+      Object {
+        "label": "Singapore",
+        "value": "sg1",
+      },
+      Object {
+        "label": "US East Coast (Virginia)",
+        "value": "us1",
+      },
+      Object {
+        "label": "Virginia Interconnect",
+        "value": "us1-tnx",
+      },
+      Object {
+        "label": "Oregon Interconnect",
+        "value": "us2-tnx",
+      },
+      Object {
+        "label": "Germany",
+        "value": "de1",
+      },
+      Object {
+        "label": "Ireland Interconnect",
+        "value": "ie1-tnx",
+      },
+    ]
+  }
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  userHasUpdatePermission={true}
+>
+  Child
+</Connect(ReduxForm)>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "authType": Immutable.Map {
+    "type": "salesforce",
+  },
+  "ctiEnabled": undefined,
+  "inherited": undefined,
+  "initialValues": Immutable.Map {
+    "active": true,
+    "type": "rest",
+    "authType": "noAuth",
+  },
+  "integrationType": Immutable.Map {
+    "type": "salesforce",
+  },
+  "isSaving": true,
+  "key": "mockId",
+  "regions": Array [
+    Object {
+      "label": "Global Low Latency",
+      "value": "gll",
+    },
+    Object {
+      "label": "Australia",
+      "value": "au1",
+    },
+    Object {
+      "label": "Brazil",
+      "value": "br1",
+    },
+    Object {
+      "label": "Ireland",
+      "value": "ie1",
+    },
+    Object {
+      "label": "Japan",
+      "value": "jp1",
+    },
+    Object {
+      "label": "Singapore",
+      "value": "sg1",
+    },
+    Object {
+      "label": "US East Coast (Virginia)",
+      "value": "us1",
+    },
+    Object {
+      "label": "Virginia Interconnect",
+      "value": "us1-tnx",
+    },
+    Object {
+      "label": "Oregon Interconnect",
+      "value": "us2-tnx",
+    },
+    Object {
+      "label": "Germany",
+      "value": "de1",
+    },
+    Object {
+      "label": "Ireland Interconnect",
+      "value": "ie1-tnx",
+    },
+  ],
+  "rtaEnabled": undefined,
+  "userHasUpdatePermission": true,
+  "workItems": undefined,
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `undefined`;
+
+exports[`formSubmission returns proper values 1`] = `undefined`;

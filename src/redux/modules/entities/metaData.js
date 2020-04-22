@@ -181,7 +181,8 @@ export const listOfEntities = [
   'businessHours',
   'dispositionLists',
   'businessHoursV2',
-  'customAttributes'
+  'customAttributes',
+  'integrations'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -801,6 +802,7 @@ entities.businessHours.membersTableFields = {
   ]
 };
 entities.businessHours.defaultFilters = [{ id: 'active', value: 'enabled' }];
+
 // Tenants
 entities.tenants.pageTitle = 'Tenants Management';
 entities.tenants.helpLink = '/Help/Content/Configuration/Creating_Tenants.htm';
@@ -824,6 +826,7 @@ entities.dispositionLists.columns = [
   { name: 'Shared', active: true },
   { name: 'Status', active: true }
 ];
+
 // Business Hours V2
 entities.businessHoursV2.pageTitle = 'Business Hours Management';
 entities.businessHoursV2.helpLink = '/Help/Content/Configuration/Business%20Hours/Business_Hours.htm';
@@ -848,7 +851,25 @@ entities.businessHoursV2.membersTableFields = {
 };
 entities.businessHoursV2.sdkCall.path = ['business-hours'];
 entities.businessHoursV2.sdkCall.apiVersion = 'v2';
-//Hygen-insert-new-entity-configuration
+
+// Integrations
+entities.integrations.pageTitle = 'Integration Management';
+entities.integrations.helpLink = '/Help/Content/Configuration/Integrations/Creating_Integrations.htm';
+entities.integrations.dependentEntity = 'listeners';
+entities.integrations.columns = [
+  { name: 'Type', active: true },
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true }
+];
+entities.integrations.defaultFilters = [{ id: 'active', value: 'enabled' }];
+entities.integrations.membersTableFields = {
+  listeners: [
+    { label: 'Name', name: 'name' },
+    { label: 'Status', name: 'active', type: 'select', filterOptions: ['enabled', 'disabled'] },
+    { label: 'Created On', name: 'created', format: 'datetime' }
+  ]
+};
 
 // Custom Attributes
 entities.customAttributes.pageTitle = 'Custom Attributes Management';
@@ -863,5 +884,7 @@ entities.customAttributes.columns = [
   { name: 'Status', active: true }
 ];
 entities.customAttributes.defaultFilters = [{ id: 'active', value: 'enabled' }];
+
+//Hygen-insert-new-entity-configuration
 
 export const entitiesMetaData = entities;

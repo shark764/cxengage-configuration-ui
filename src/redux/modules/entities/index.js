@@ -253,9 +253,6 @@ const initialState = fromJS({
     createPermission: ['MAP_ALL_CONTACT_POINTS'],
     disablePermission: ['MAP_ALL_CONTACT_POINTS']
   },
-  integrations: {
-    ...defaultEntity
-  },
   dispositions: {
     ...defaultEntity,
     readPermission: ['READ_DISPOSITIONS'],
@@ -323,6 +320,14 @@ const initialState = fromJS({
     readPermission: ['INTERACTION_ATTRIBUTES_CONFIG_READ', 'PLATFORM_VIEW_ALL'],
     createPermission: ['INTERACTION_ATTRIBUTES_CONFIG_CREATE', 'PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES'],
     updatePermission: ['INTERACTION_ATTRIBUTES_CONFIG_UPDATE', 'PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES']
+  },
+  integrations: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_PROVIDERS'],
+    updatePermission: ['MANAGE_ALL_PROVIDERS'],
+    createPermission: ['MANAGE_ALL_PROVIDERS'],
+    disablePermission: [],
+    assignPermission: []
   }
   //hygen-inject-before
 });
@@ -523,6 +528,7 @@ export const toggleMessageTemplateText = isDisplayContentInHtml => ({
   type: 'TOGGLE_MESSAGE_TEMPLATE_TEXT_CONTENT',
   isDisplayContentInHtml
 });
+
 export const removeReasonListItem = (type, deleteEntityId) => {
   if (type === 'reasonListItem') {
     return {
@@ -553,6 +559,12 @@ export const updateConfigUIUrlWithQueryString = entityId => ({
 export const fetchActiveVersionBusinessHoursFulfilled = activeVersions => ({
   type: 'FETCH_ACTIVE_VERSION_BUSINESS_HOUR_FULFILLED',
   activeVersions
+});
+
+export const onIntegrationListenerFormSubmit = (values, { dirty }) => ({
+  type: 'INTEGRATION_LISTENER_FORM_SUBMIT',
+  values,
+  dirty
 });
 
 // Reducer
@@ -1040,9 +1052,29 @@ export default function reducer(state = initialState, action) {
           .remove('loading')
           .setIn([action.entityName, 'selectedSubEntityId'], undefined)
           .setIn([action.entityName, 'subEntitySaving'], false);
-      } else {
-        return state;
       }
+      return state;
+    }
+    case 'INTEGRATION_LISTENER_FORM_SUBMIT_FULFILLED': {
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
+      if (entityIndex !== -1 && action.entityName === 'integrations') {
+        return state.update(action.entityName, entityStore =>
+          entityStore
+            .updateIn(['data', entityIndex, 'listeners'], subEntityList => {
+              if (action.subEntityId === 'listeners') {
+                return subEntityList.push(fromJS({ ...action.response.result }));
+              }
+              const subEntityIndex = subEntityList.findIndex(subEntity => subEntity.get('id') === action.subEntityId);
+              if (subEntityIndex !== -1) {
+                return subEntityList.setIn([subEntityIndex], fromJS({ ...action.response.result }));
+              }
+              return subEntityList;
+            })
+            .set('selectedSubEntityId', undefined)
+            .set('subEntitySaving', false)
+        );
+      }
+      return state;
     }
     case 'CREATE_SUB_ENTITY':
     case 'UPDATE_SUB_ENTITY': {

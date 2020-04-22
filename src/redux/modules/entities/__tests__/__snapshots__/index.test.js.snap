@@ -799,10 +799,21 @@ Immutable.Map {
     "confirmationDialogType": undefined,
   },
   "integrations": Immutable.Map {
+    "readPermission": Immutable.List [
+      "VIEW_ALL_PROVIDERS",
+    ],
     "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_PROVIDERS",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_PROVIDERS",
+    ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
-    "confirmationDialogType": undefined,
+    "assignPermission": Immutable.List [],
   },
   "dispatchMappings": Immutable.Map {
     "data": Immutable.List [],
