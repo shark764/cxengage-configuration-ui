@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.74.1] - 2020-04-22
+## Added
+- CXV1-16197 - Email Templates - Variables not showing in UI until Filtered upon
+
 ## [0.74.0] - 2020-04-21
 ### Added
 - CXV1-18500 - Config 2 | Integrations Page - Main List.
