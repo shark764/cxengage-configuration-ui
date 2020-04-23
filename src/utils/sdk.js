@@ -20,7 +20,7 @@ export const sdkPromise = sdkCall => {
       const currentEntity = getCurrentEntity(store.getState());
       if (
         sdkCall.module === 'subscribe' &&
-        (currentEntity === 'InteractionMonitoring' || currentEntity === 'agentStateMonitoring')
+        (currentEntity === 'interactionMonitoring' || currentEntity === 'agentStateMonitoring')
       ) {
         CxEngage.subscribe(sdkCall.command, function(error, topic, response) {
           if (error) {

@@ -28,6 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.74.2] - 2020-04-23
+## Changed
+- <no-jira> - Bump SDK version 9.6.3 -> 9.7.4. See SDK Changelog.
+## Fixed
+- CXV1-22292 - Fixed interactions-in-conversation list not loading on Interaction Monitoring page when not run in an iframe.
+
 ## [0.74.1] - 2020-04-22
 ## Added
 - CXV1-16197 - Email Templates - Variables not showing in UI until Filtered upon
