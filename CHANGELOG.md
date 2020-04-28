@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.75.1] - 2020-04-28
+### Fixed
+- CXV1-22165 - Config 2 - currentTenantId in the redux state is not updated after switching to a new tenant
+
 ## [0.75.0] - 2020-04-23
 ### Added
 - CXV1-22156 - Recurring Event List for Calendar - Business Hours Page.

@@ -622,6 +622,10 @@ export default function reducer(state = initialState, action) {
       const { tenantId } = action.tenantInfo;
       return state.set('currentTenantId', tenantId);
     }
+    case 'SWITCH_TENANT': {
+      const { tenantId } = action;
+      return state.set('currentTenantId', tenantId);
+    }
     case 'FETCH_DATA': {
       return state.setIn([action.entityName, 'fetching'], true);
     }
