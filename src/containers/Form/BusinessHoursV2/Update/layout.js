@@ -14,7 +14,6 @@ import PropTypes from 'prop-types';
 import { DetailHeader, BusinessHoursRule } from 'cx-ui-components';
 import DetailWrapper from '../../../../components/DetailWrapper';
 import { FieldArray } from 'redux-form';
-import { detailHeaderText } from '../../../../utils';
 
 const WrappedDetailHeader = styled(DetailHeader)`
   margin-left: 55px;
@@ -43,7 +42,7 @@ export default function BusinessHoursV2UpdateForm({ key, handleSubmit, rules }) 
     <BusinessRuleContainer>
       {rules.map((rule, index) => (
         <Fragment key={index.toString()}>
-          <BusinessHoursRule rule={rule} key={index.toString()} viewOnly disabled />
+          <BusinessHoursRule rule={rule} key={index.toString()} onChange={() => {}} viewOnly disabled />
           <br />
         </Fragment>
       ))}
@@ -51,23 +50,23 @@ export default function BusinessHoursV2UpdateForm({ key, handleSubmit, rules }) 
   );
   return (
     <form onSubmit={handleSubmit} key={key}>
-    <WrapperDiv>
-    <RowWrapper>
-      <DetailWrapper customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;" open>
-        <WrappedDetailHeader
-          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
-          fontSize="20px"
-          text="Hours"
-        />
-        <div style={{ marginLeft: '60px' }}>
-          <label>Hours and Exceptions</label>
-          <br />
-          <br />
-          <FieldArray name="businessRules" component={businessRulesList} />
-        </div>
-      </DetailWrapper>
-      </RowWrapper>
-    </WrapperDiv>
+      <WrapperDiv>
+        <RowWrapper>
+          <DetailWrapper customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;" open>
+            <WrappedDetailHeader
+              customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+              fontSize="20px"
+              text="Hours"
+            />
+            <div style={{ marginLeft: '60px' }}>
+              <label>Hours and Exceptions</label>
+              <br />
+              <br />
+              <FieldArray name="businessRules" component={businessRulesList} />
+            </div>
+          </DetailWrapper>
+        </RowWrapper>
+      </WrapperDiv>
     </form>
   );
 }

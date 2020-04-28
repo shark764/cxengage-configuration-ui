@@ -60,7 +60,6 @@ import {
 import { downloadFile } from 'serenova-js-utils/browser';
 import {
   removeLastLetter,
-  camelCaseToRegularForm,
   camelCaseToRegularFormAndRemoveLastLetter,
   camelCaseToKebabCase
 } from 'serenova-js-utils/strings';
@@ -100,7 +99,11 @@ export const reInitForm = (action$, store) =>
       ...a,
       entityName: getCurrentEntity(store.getState())
     }))
-    .filter(a => (a.values.id !== undefined && hasCustomUpdateEntityFullFilled(a.entityName)) || (a.entityName === 'emailTemplates' && hasCustomUpdateEntityFullFilled(a.entityName)))
+    .filter(
+      a =>
+        (a.values.id !== undefined && hasCustomUpdateEntityFullFilled(a.entityName)) ||
+        (a.entityName === 'emailTemplates' && hasCustomUpdateEntityFullFilled(a.entityName))
+    )
     .map(a => {
       if (a.entityName && a.entityName === 'users') {
         a.values.extensions.forEach(ext => (ext.id = generateUUID()));
@@ -449,7 +452,12 @@ export const ToggleEntity = (action$, store) =>
       selectedEntityId: getSelectedEntityId(store.getState()),
       entityStatusActive: getSelectedEntityStatus(store.getState())
     }))
-    .filter(({ entityName }) => entityName !== 'users' && entityName !== 'businessHoursV2' && !entitiesUsingUpdateLogicForToggleEntity(entityName))
+    .filter(
+      ({ entityName }) =>
+        entityName !== 'users' &&
+        entityName !== 'businessHoursV2' &&
+        !entitiesUsingUpdateLogicForToggleEntity(entityName)
+    )
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.sdkCall.data = {
@@ -827,7 +835,11 @@ export const CreateSubEntity = (action$, store) =>
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
-          handleSuccess(response, a, `<i>${camelCaseToRegularFormAndRemoveLastLetter(a.subEntityName)}</i> was created successfully!`)
+          handleSuccess(
+            response,
+            a,
+            `<i>${camelCaseToRegularFormAndRemoveLastLetter(a.subEntityName)}</i> was created successfully!`
+          )
         )
         .catch(error => handleError(error, a))
     );
@@ -854,7 +866,11 @@ export const UpdateSubEntity = (action$, store) =>
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
         .map(response =>
-          handleSuccess(response, a, `<i>${camelCaseToRegularFormAndRemoveLastLetter(a.subEntityName)} </i> was updated successfully!`)
+          handleSuccess(
+            response,
+            a,
+            `<i>${camelCaseToRegularFormAndRemoveLastLetter(a.subEntityName)} </i> was updated successfully!`
+          )
         )
         .catch(error => handleError(error, a))
     );

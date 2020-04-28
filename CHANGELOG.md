@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.75.0] - 2020-04-23
+### Added
+- CXV1-22156 - Recurring Event List for Calendar - Business Hours Page.
+
 ## [0.74.2] - 2020-04-23
 ## Changed
 - <no-jira> - Bump SDK version 9.6.3 -> 9.7.4. See SDK Changelog.
