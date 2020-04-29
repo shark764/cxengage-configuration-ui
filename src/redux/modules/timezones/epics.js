@@ -4,12 +4,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 
-import { sdkPromise } from '../../../../utils/sdk';
+import { sdkPromise } from '../../../utils/sdk';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
-import { getCurrentEntity } from '../selectors';
+import { getCurrentEntity } from '../entities/selectors';
 
-import { handleError } from '../handleResult';
+import { handleError } from '../entities/handleResult';
 
 import { getTimezones } from './selectors';
 
@@ -21,7 +21,10 @@ export const fetchTimezones = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       timezones: getTimezones(store.getState())
     }))
-    .filter(({ entityName, timezones }) => entityName === 'businessHours' && timezones.length === 0)
+    .filter(
+      ({ entityName, timezones }) =>
+        (entityName === 'businessHours' || entityName === 'tenants') && timezones.length === 0
+    )
     .map(a => {
       a.sdkCall = {
         command: 'getTimezones',

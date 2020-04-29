@@ -1231,9 +1231,6 @@ export default function reducer(state = initialState, action) {
         entityStore.update('data', data => data.push(fromJS(result)))
       );
     }
-    case 'SET_TIMEZONES': {
-      return state.setIn(['businessHours', 'timezones'], fromJS(action.timezones));
-    }
     case '@@redux-form/INITIALIZE':
     case '@@redux-form/CHANGE': {
       if (

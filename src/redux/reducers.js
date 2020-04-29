@@ -12,6 +12,7 @@ import InteractionMonitoring from './modules/reporting/interactionMonitoring';
 import AgentStateMonitoring from './modules/reporting/agentStateMonitoring';
 import ColumnFilterMenus from './modules/columnFilterMenus';
 import UserIdMap from './modules/userIdMap';
+import timezones from './modules/timezones';
 
 const reducer = combineReducers({
   Entities,
@@ -21,7 +22,8 @@ const reducer = combineReducers({
   InteractionMonitoring,
   AgentStateMonitoring,
   ColumnFilterMenus,
-  UserIdMap
+  UserIdMap,
+  timezones
 });
 
 export default reducer;

@@ -16,7 +16,7 @@ import {
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { selectBusinessHoursFormInitialValues } from '../../../redux/modules/entities/businessHours/selectors';
 
-import { getTimezones } from '../../../redux/modules/entities/timezones/selectors';
+import { getTimezones } from '../../../redux/modules/timezones/selectors';
 
 const CreateBusinessHoursForm = compose(
   connect(state => createFormName(state)),
