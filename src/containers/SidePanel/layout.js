@@ -17,7 +17,7 @@ const SidePanelDiv = styled.div.attrs({
   right: 0px;
   background: white;
   min-width: 550px;
-  overflow: hidden;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   grid-area: sidePanel;

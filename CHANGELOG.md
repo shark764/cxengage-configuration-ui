@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.75.3] - 2020-04-29
+### Fixed
+- CXV1-22314 - Disposition list in config ui and in skylight size adjustment.
+
 ## [0.75.2] - 2020-04-28
 ### Fixed
 - <no-Jira> - Moved timezones in to it's own reducer.
