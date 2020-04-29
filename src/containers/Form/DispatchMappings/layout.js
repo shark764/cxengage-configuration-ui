@@ -132,7 +132,7 @@ export default function DispatchMappingsForm({
         label="Dispatch to flow *"
         required={initialValues.get('id') !== undefined}
         data-automation="flowList"
-        options={!flowsFetching ? flowIds : undefined}
+        options={flowIds && flowIds.size > 0 ? flowIds : undefined}
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       {flowId && (
