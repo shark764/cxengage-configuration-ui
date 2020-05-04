@@ -694,7 +694,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Managing%20Flows/CustomAttributes/Creating_Custom_Attributes.htm",
+    "helpLink": "/Help/Content/Managing%20Flows/Custom%20Interaction%20Attributes/About-Custom-Attributes.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",

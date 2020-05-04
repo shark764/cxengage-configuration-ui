@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.75.5] - 2020-04-30
+### Fixed
+- CXV1-22315 - Custom Attributes Management - Invalid Help Link from Custom Attributes Management page
+
 ## [0.75.4] - 2020-04-29
 ### Fixed
 - CXV1-22338 - Dispatch Mappings - Can't submit new dispatch mapping if flow dropdown is unfocused while version list is fetching

@@ -873,7 +873,8 @@ entities.integrations.membersTableFields = {
 
 // Custom Attributes
 entities.customAttributes.pageTitle = 'Custom Attributes Management';
-entities.customAttributes.helpLink = '/Help/Content/Managing%20Flows/CustomAttributes/Creating_Custom_Attributes.htm';
+entities.customAttributes.helpLink =
+  '/Help/Content/Managing%20Flows/Custom%20Interaction%20Attributes/About-Custom-Attributes.htm';
 entities.customAttributes.bulkEditsAvailable = true;
 entities.customAttributes.columns = [
   { name: 'Attribute Identifier', active: true },
