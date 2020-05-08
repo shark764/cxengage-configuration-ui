@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.75.6] - 2020-05-05
+### Fixed
+- CXV1-22336 - Error when fetching presence reason, transfer, and disposition lists
+
 ## [0.75.5] - 2020-04-30
 ### Fixed
 - CXV1-22315 - Custom Attributes Management - Invalid Help Link from Custom Attributes Management page

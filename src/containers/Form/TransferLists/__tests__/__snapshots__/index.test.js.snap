@@ -4,6 +4,7 @@ exports[`Maps state to props only using selectors validates object created from 
 Object {
   "endpointHeaders": "mockEndpointHeaders",
   "initialValues": "mock transferList initial values",
+  "isFetching": false,
   "isSaving": true,
   "key": "mockId",
   "selectedEntityId": "mockId",
@@ -15,6 +16,7 @@ exports[`TransferLists Renders renders 1`] = `
 <Connect(ReduxForm)
   endpointHeaders="mockEndpointHeaders"
   initialValues="mock transferList initial values"
+  isFetching={false}
   isSaving={true}
   key="mockId"
   removeCategoryItems={[Function]}

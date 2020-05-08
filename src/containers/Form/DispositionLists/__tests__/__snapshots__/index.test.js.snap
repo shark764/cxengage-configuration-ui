@@ -20,6 +20,7 @@ exports[`DispositionLists Renders renders 1`] = `
       "dispositions": Array [],
     }
   }
+  isFetching={false}
   isSaving={true}
   key="mockId"
   removeCategoryItems={[Function]}
@@ -80,6 +81,7 @@ Object {
     "shared": false,
     "dispositions": Array [],
   },
+  "isFetching": false,
   "isSaving": true,
   "key": "mockId",
   "selectedEntityId": "mockId",

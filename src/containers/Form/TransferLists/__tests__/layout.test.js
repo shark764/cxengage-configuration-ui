@@ -15,6 +15,7 @@ describe('<TransferListsForm />', () => {
         name="mockName"
         entityName="transferLists"
         isSaving={false}
+        isFetching={false}
         handleSubmit={() => {}}
         endpointHeaders={List([{ a: 'mockEndpointheaders' }])}
         selectedEntityId="mockEntitiyId"
@@ -34,6 +35,7 @@ describe('<TransferListsForm />', () => {
         name="mockName"
         entityName="transferLists"
         isSaving={false}
+        isFetching={false}
         handleSubmit={() => {}}
         endpointHeaders={List([{ a: 'mockEndpointheaders' }])}
         selectedEntityId="mockEntitiyId"

@@ -8,7 +8,12 @@ import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import TransferListsForm, { mapStateToProps } from '../';
 import { createFormName, formSubmission } from '../../../../redux/modules/form/selectors';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isSaving,
+  userHasUpdatePermission,
+  isEntityFetching
+} from '../../../../redux/modules/entities/selectors';
 import {
   selectEndpointHeaders,
   transferListsFormInitialValues
@@ -17,7 +22,8 @@ import {
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 jest.mock('../../../../redux/modules/entities/transferLists/selectors');
-isCreating.mockImplementation(() => true);
+isSaving.mockImplementation(() => true);
+isEntityFetching.mockImplementation(() => false);
 getSelectedEntityId.mockImplementation(() => 'mockId');
 transferListsFormInitialValues.mockImplementation(() => 'mock transferList initial values');
 selectEndpointHeaders.mockImplementation(() => 'mockEndpointHeaders');
@@ -50,7 +56,12 @@ describe('formSubmission', () => {
     endpoints: 'mockEndpoints'
   };
   const dispatch = action => action;
-  const props = { dirty: true };
+  const props = {
+    isSaving: true,
+    isFetching: false,
+    initialized: true,
+    dirty: true
+  };
   it('returns proper values', () => {
     expect(formSubmission(values, dispatch, props)).toMatchSnapshot();
   });

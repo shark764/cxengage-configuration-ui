@@ -1,8 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+exports[`formValidation does not return disposition error when no dispositions are provided while fetching 1`] = `
 Object {
   "dispositions": false,
+  "name": "Please enter a name",
+}
+`;
+
+exports[`formValidation does not return disposition error when no dispositions are provided while saving 1`] = `
+Object {
+  "dispositions": false,
+  "name": "Please enter a name",
+}
+`;
+
+exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "dispositions": "You must have one or more items in your Disposition List in order to save.",
   "name": "Please enter a name",
 }
 `;

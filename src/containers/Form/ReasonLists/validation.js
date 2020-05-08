@@ -4,10 +4,14 @@
 
 import { isEmpty } from 'serenova-js-utils/strings';
 
-export const formValidation = values => {
+export const formValidation = (values, props = {}) => {
   let validation = {};
+  let { isSaving, isFetching, initialized } = props;
   validation.name = isEmpty(values.get('name')) && 'Please enter a name';
   validation.reasons =
+    !isSaving &&
+    !isFetching &&
+    initialized &&
     (!values.get('reasons') || values.get('reasons').size === 0) &&
     'You must have one or more reason categories in your Reason List in order to save.';
 

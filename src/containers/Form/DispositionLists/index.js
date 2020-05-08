@@ -10,9 +10,10 @@ import { formValidation } from './validation';
 import {
   getSelectedEntityId,
   isInherited,
-  isCreating,
+  isSaving,
   userHasUpdatePermission,
-  userHasSharePermission
+  userHasSharePermission,
+  isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import {
@@ -35,8 +36,9 @@ const CreateDispositionListsForm = compose(
 export function mapStateToProps(state) {
   return {
     initialValues: dispositionListsInitialValues(state),
-    isSaving: isCreating(state),
+    isSaving: isSaving(state),
     inherited: isInherited(state),
+    isFetching: isEntityFetching(state, 'dispositionLists'),
     userHasUpdatePermission: userHasUpdatePermission(state),
     userHasSharePermission: userHasSharePermission(state),
     key: getSelectedEntityId(state),

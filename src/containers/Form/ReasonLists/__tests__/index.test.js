@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { createStore } from 'redux';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import { shallow } from 'enzyme';
 import {
   getCurrentForm,
@@ -15,7 +15,8 @@ import {
 import ReasonListsForm, { mapStateToProps } from '../';
 import {
   getSelectedEntityId,
-  isCreating,
+  isSaving,
+  isEntityFetching,
   userHasUpdatePermission,
   userHasSharePermission
 } from '../../../../redux/modules/entities/selectors';
@@ -25,9 +26,10 @@ jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 jest.mock('../../../../redux/modules/entities/reasons/selectors');
 jest.mock('../../../../redux/modules/entities/reasonLists/selectors');
+isEntityFetching.mockImplementation(() => false);
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
-isCreating.mockImplementation(() => true);
+isSaving.mockImplementation(() => true);
 reasonListsInitialValues.mockImplementation(
   () => new Map({ active: true, isDefault: false, shared: false, reasons: [] })
 );
@@ -56,7 +58,7 @@ describe('createFormName', () => {
 });
 
 describe('formSubmission', () => {
-  const values = {
+  const values = new Map({
     id: 'mockId',
     name: 'mockName',
     description: 'mockDescription',
@@ -64,10 +66,15 @@ describe('formSubmission', () => {
     active: false,
     externalId: 'mockExternalId',
     isDefault: false,
-    reasons: []
-  };
+    reasons: new List([{}])
+  });
   const dispatch = action => action;
-  const props = { dirty: true };
+  const props = {
+    isSaving: true,
+    isFetching: false,
+    initialized: true,
+    dirty: true
+  };
   it('returns proper values', () => {
     expect(formSubmission(values, dispatch, props)).toMatchSnapshot();
   });

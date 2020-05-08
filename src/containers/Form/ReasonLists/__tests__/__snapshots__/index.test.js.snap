@@ -10,6 +10,7 @@ Object {
     "shared": false,
     "reasons": Array [],
   },
+  "isFetching": false,
   "isSaving": true,
   "key": "mockId",
   "reasonHeaders": undefined,
@@ -35,6 +36,7 @@ exports[`reasonLists Renders renders 1`] = `
       "reasons": Array [],
     }
   }
+  isFetching={false}
   isSaving={true}
   key="mockId"
   removeCategoryItems={[Function]}

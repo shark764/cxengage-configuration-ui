@@ -8,7 +8,12 @@ import { reduxForm } from 'redux-form/immutable';
 import TransferListsForm from './layout';
 import { formValidation } from './validation';
 import { setSelectedSubEntityId, removeTransferListItem } from '../../../redux/modules/entities';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isSaving,
+  userHasUpdatePermission,
+  isEntityFetching
+} from '../../../redux/modules/entities/selectors';
 import { createFormName, formSubmission } from '../../../redux/modules/form/selectors';
 import {
   selectEndpointHeaders,
@@ -27,8 +32,9 @@ const CreateTransferListsForm = compose(
 )(TransferListsForm);
 
 export const mapStateToProps = state => ({
-  isSaving: isCreating(state),
+  isSaving: isSaving(state),
   key: getSelectedEntityId(state),
+  isFetching: isEntityFetching(state, 'transferLists'),
   selectedEntityId: getSelectedEntityId(state),
   initialValues: transferListsFormInitialValues(state),
   endpointHeaders: selectEndpointHeaders(state),

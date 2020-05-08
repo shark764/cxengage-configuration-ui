@@ -15,7 +15,8 @@ import {
 import DispositionListsForm, { mapStateToProps } from '../';
 import {
   getSelectedEntityId,
-  isCreating,
+  isSaving,
+  isEntityFetching,
   userHasUpdatePermission,
   userHasSharePermission
 } from '../../../../redux/modules/entities/selectors';
@@ -31,7 +32,8 @@ jest.mock('../../../../redux/modules/entities/reasonLists/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
-isCreating.mockImplementation(() => true);
+isSaving.mockImplementation(() => true);
+isEntityFetching.mockImplementation(() => false);
 userHasUpdatePermission.mockImplementation(() => true);
 dispositionListsInitialValues.mockImplementation(() => new Map({ active: true, shared: false, dispositions: [] }));
 selectDispositionsHeaders.mockImplementation(() => fromJS([{ name: 'D1', hierarchy: ['H1'] }]));
@@ -70,7 +72,12 @@ describe('formSubmission', () => {
     dispositions: []
   };
   const dispatch = action => action;
-  const props = { dirty: true };
+  const props = {
+    isSaving: true,
+    isFetching: false,
+    initialized: true,
+    dirty: true
+  };
   it('returns proper values', () => {
     expect(formSubmission(values, dispatch, props)).toMatchSnapshot();
   });

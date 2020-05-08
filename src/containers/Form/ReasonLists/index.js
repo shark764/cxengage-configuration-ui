@@ -10,9 +10,10 @@ import { formValidation } from './validation';
 import {
   getSelectedEntityId,
   isInherited,
-  isCreating,
+  isSaving,
   userHasUpdatePermission,
-  userHasSharePermission
+  userHasSharePermission,
+  isEntityFetching
 } from '../../../redux/modules/entities/selectors';
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { setSelectedSubEntityId, removeReasonListItem } from '../../../redux/modules/entities';
@@ -36,11 +37,12 @@ const CreateReasonListsForm = compose(
 export function mapStateToProps(state) {
   return {
     initialValues: reasonListsInitialValues(state),
-    isSaving: isCreating(state),
+    isSaving: isSaving(state),
     inherited: isInherited(state),
     key: getSelectedEntityId(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     userHasSharePermission: userHasSharePermission(state),
+    isFetching: isEntityFetching(state, 'reasonLists'),
     disableShared: checkDisableShared(state),
     sharedFormValue: getCurrentFormValueByFieldName(state, 'shared'),
     selectedEntityId: getSelectedEntityId(state),
