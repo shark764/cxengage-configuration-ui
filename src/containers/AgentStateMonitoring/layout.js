@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   ${props =>
     props.isSidePanelOpen
       ? `
-    grid-template-columns: 1fr ${props.slidingWidth}px;
+    grid-template-columns: 1fr;
     grid-template-areas: "table sidePanel";
   `
       : `

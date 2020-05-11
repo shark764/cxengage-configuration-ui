@@ -54,19 +54,12 @@ export const getAgentReasonLists = createSelector(
 
 export const selectPresenceReasonLists = createSelector(
   [selectAgentStateMonitoringMap],
-  agentMonitoring =>
-    agentMonitoring.get('ReasonLists').size > 0
-      ? agentMonitoring
-          .get('ReasonLists')
-          .filter(list => list.get('name') !== 'System Presence Reasons')
-          .toJS()
-      : []
+  agentMonitoring => (agentMonitoring.get('ReasonLists').size > 0 ? agentMonitoring.get('ReasonLists').toJS() : [])
 );
 
 export const selectAgentPresenceReasonLists = createSelector(
   [getAgentReasonLists],
-  agentReasons =>
-    agentReasons ? agentReasons.filter(list => list.get('name') !== 'System Presence Reasons').toJS() : []
+  agentReasons => (agentReasons ? agentReasons.toJS() : [])
 );
 
 export const getAgentCurrentState = (state, agentId) => {
