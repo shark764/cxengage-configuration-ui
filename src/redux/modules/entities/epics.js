@@ -172,6 +172,8 @@ export const FormSubmission = (action$, store) =>
         // converts warmColdTransfer immutable List in to individual values(warmTransfer, coldTransfer):
         a.values = a.values.update('endpoints', endpoint => {
           return endpoint.reduce((accumVal, currentEndpoint) => {
+            // Backend takes sort order from the list order itself, so this field is redundant.
+            currentEndpoint = currentEndpoint.remove('sortOrder');
             if (List.isList(currentEndpoint.get('warmColdTransfer'))) {
               const obj = {};
               currentEndpoint.get('warmColdTransfer').forEach(transferType => {

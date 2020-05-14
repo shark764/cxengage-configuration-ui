@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.75.8] - 2020-05-11
+### Fixed
+- CXV1-21501 - Config UI | Cannot  reorder categories or contacts within a Transfer List
+
 ## [0.75.7] - 2020-05-05
 ### Fixed
 - CXV1-21827 - Agent State Monitoring now shows System Presence Reasons
