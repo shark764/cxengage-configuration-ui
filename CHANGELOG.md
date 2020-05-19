@@ -28,6 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.75.9] - 2020-04-30
+### Fixed
+- <no-ticket> - Config 2 - Business Hours V2
+              - Weekend removed, instaed Weekday was added
+              - Yearly dates interval was not working
+              - Events list were split into Recurring and not recurring events
+
 ## [0.75.8] - 2020-05-11
 ### Fixed
 - CXV1-21501 - Config UI | Cannot  reorder categories or contacts within a Transfer List

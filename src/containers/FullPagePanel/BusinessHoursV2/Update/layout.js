@@ -173,11 +173,12 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
       switch (calendarEvent.repeats) {
         case 'daily':
           // create array to hold result dates
-          let dates = [];
-          let start = eventStartDate,
+          let dailyEvents = [],
+            dailyRecurringEvents = [],
+            start = eventStartDate,
             end = start;
-          // Pushing the first event as initial value
-          dates.push({
+          // Pushing the first events as initial value
+          dailyEvents.push({
             start: eventStartDate,
             end: moment(eventStartDate)
               .set({
@@ -187,22 +188,25 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               })
               .toDate()
           });
-          // add new dates until rule end date or calendar visible end date is reached up
-          while ((start = this.addDays(start, calendarEvent.every)) <= eventEndDate) {
-            end = moment(start)
-              .set({
-                // finish same day, with specific endDate hour
-                hour: calendarEventEndDateHour,
-                minute: calendarEventEndDateMinutes,
-                second: calendarEventEndDateSeconds
-              })
-              .toDate();
-            dates.push({
-              start,
-              end
-            });
+          // add recurring events until rule end date or calendar visible end date is reached up
+          if (calendarEvent.type === 'recurring-hours' || calendarEvent.type === 'blackout-recurring-exceptions') {
+            while ((start = this.addDays(start, calendarEvent.every)) <= eventEndDate) {
+              end = moment(start)
+                .set({
+                  // finish same day, with specific endDate hour
+                  hour: calendarEventEndDateHour,
+                  minute: calendarEventEndDateMinutes,
+                  second: calendarEventEndDateSeconds
+                })
+                .toDate();
+              dailyRecurringEvents.push({
+                start,
+                end
+              });
+            }
           }
-          const dailyCalendarEvents = dates
+          const dailyCalendarEvents = dailyEvents
+            .concat(dailyRecurringEvents)
             .filter(dailyEvent =>
               moment(dailyEvent.start).isBetween(this.calendarDateRange.start, this.calendarDateRange.end, null, '[]')
             )
@@ -220,12 +224,12 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
           break;
         case 'weekly':
           const daysOfTheWeek = calendarEvent.on;
-          let daysOfFirstWeek = [];
-          let recurringWeekDays = [];
+          let weeklyEvents = [],
+            weeklyRecurringEvents = [];
           // Setting time to selected week days and pushing them in first week as initial values
           for (let i = 0; i < daysOfTheWeek.length; i++) {
             const weekDay = moment(eventStartDate).day(daysOfTheWeek[i]);
-            daysOfFirstWeek.push({
+            weeklyEvents.push({
               start: weekDay.toDate(),
               end: moment(weekDay)
                 .set({
@@ -237,24 +241,26 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
             });
           }
           // Fill recurring data with initial week days with 'every' param from rule
-          for (let i = 0; i < daysOfFirstWeek.length; i++) {
-            let weeklyCurrentDate = moment(daysOfFirstWeek[i].start).add(calendarEvent.every, 'week');
-            while (weeklyCurrentDate <= eventEndDate) {
-              recurringWeekDays.push({
-                start: weeklyCurrentDate.toDate(),
-                end: moment(weeklyCurrentDate)
-                  .set({
-                    hour: calendarEventEndDateHour,
-                    minute: calendarEventEndDateMinutes,
-                    second: calendarEventEndDateSeconds
-                  })
-                  .toDate()
-              });
-              weeklyCurrentDate = moment(weeklyCurrentDate).add(calendarEvent.every, 'week');
+          if (calendarEvent.type === 'recurring-hours' || calendarEvent.type === 'blackout-recurring-exceptions') {
+            for (let i = 0; i < weeklyEvents.length; i++) {
+              let weeklyCurrentDate = moment(weeklyEvents[i].start).add(calendarEvent.every, 'week');
+              while (weeklyCurrentDate <= eventEndDate) {
+                weeklyRecurringEvents.push({
+                  start: weeklyCurrentDate.toDate(),
+                  end: moment(weeklyCurrentDate)
+                    .set({
+                      hour: calendarEventEndDateHour,
+                      minute: calendarEventEndDateMinutes,
+                      second: calendarEventEndDateSeconds
+                    })
+                    .toDate()
+                });
+                weeklyCurrentDate = moment(weeklyCurrentDate).add(calendarEvent.every, 'week');
+              }
             }
           }
-          const currentCalendarWeekEvents = daysOfFirstWeek
-            .concat(recurringWeekDays)
+          const weeklyCalendarEvents = weeklyEvents
+            .concat(weeklyRecurringEvents)
             .filter(weeklyEvent =>
               moment(weeklyEvent.start).isBetween(this.calendarDateRange.start, this.calendarDateRange.end, null, '[]')
             )
@@ -268,7 +274,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 eventTypeID: calendarEvent.eventTypeID
               };
             });
-          this.formattedEvents = this.formattedEvents.concat(currentCalendarWeekEvents);
+          this.formattedEvents = this.formattedEvents.concat(weeklyCalendarEvents);
           break;
         case 'monthly':
         case 'yearly':
@@ -278,26 +284,38 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
             calendarViewYear = moment(endOfYear),
             initialYear = moment(startDate),
             diffYears = calendarViewYear.diff(initialYear, 'years');
-          let monthYearRecurringEvents = [],
-            dayOfMonth; // = moment(dayOfMonth).month(calendarEvent.every);
-
+          let monthlyEvents = [],
+            monthlyRecurringEvents = [],
+            yearlyEvents = [],
+            yearlyRecurringEvents = [],
+            dayOfMonth;
           if (typeof calendarEvent.on.value === 'number') {
             // type: day, value: input number
             const day = calendarEvent.on.value;
             dayOfMonth = moment(startOfMonth).date(day);
-            if (dayOfMonth < eventStartDate) {
-              // if rule start date is greater than day found, search day in next month
-              dayOfMonth = moment(startOfMonth)
-                .add(1, 'M')
-                .date(day);
-            }
             if (calendarEvent.repeats === 'yearly') {
               dayOfMonth = moment(dayOfMonth).month(calendarEvent.every);
-              for (let i = 0; i <= diffYears; i++) {
-                const yearlyDayOfMonth = moment(dayOfMonth)
-                  .add(i, 'years')
-                  .date(day);
-                monthYearRecurringEvents.push({
+              // Yearly Recurring events
+              if (calendarEvent.type === 'recurring-hours' || calendarEvent.type === 'blackout-recurring-exceptions') {
+                for (let i = 0; i <= diffYears; i++) {
+                  const yearlyDayOfMonth = moment(dayOfMonth)
+                    .add(i, 'years')
+                    .date(day);
+                  yearlyRecurringEvents.push({
+                    start: yearlyDayOfMonth.toDate(),
+                    end: moment(yearlyDayOfMonth)
+                      .set({
+                        hour: calendarEventEndDateHour,
+                        minute: calendarEventEndDateMinutes,
+                        second: calendarEventEndDateSeconds
+                      })
+                      .toDate()
+                  });
+                }
+              } else {
+                // One-time events
+                const yearlyDayOfMonth = moment(dayOfMonth).date(day);
+                yearlyEvents.push({
                   start: yearlyDayOfMonth.toDate(),
                   end: moment(yearlyDayOfMonth)
                     .set({
@@ -309,9 +327,24 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 });
               }
             } else {
-              // monthly
-              while (dayOfMonth <= endOfYear) {
-                monthYearRecurringEvents.push({
+              // Monthly Recurring Events
+              if (calendarEvent.type === 'recurring-hours' || calendarEvent.type === 'blackout-recurring-exceptions') {
+                while (dayOfMonth <= endOfYear) {
+                  monthlyRecurringEvents.push({
+                    start: dayOfMonth.toDate(),
+                    end: moment(dayOfMonth)
+                      .set({
+                        hour: calendarEventEndDateHour,
+                        minute: calendarEventEndDateMinutes,
+                        second: calendarEventEndDateSeconds
+                      })
+                      .toDate()
+                  });
+                  dayOfMonth = moment(dayOfMonth).add(calendarEvent.every, 'M');
+                }
+              } else {
+                // Monthly Events
+                monthlyEvents.push({
                   start: dayOfMonth.toDate(),
                   end: moment(dayOfMonth)
                     .set({
@@ -321,52 +354,102 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                     })
                     .toDate()
                 });
-                dayOfMonth = moment(dayOfMonth).add(calendarEvent.every, 'M');
               }
             }
           } else {
-            const eventType = calendarEvent.on.type, // day, weekend, weekend-day, sunday, monday, tuesday, wednesday, thursday, friday, saturday
+            const eventType = calendarEvent.on.type, // day, weekday, weekend-day, sunday, monday, tuesday, wednesday, thursday, friday, saturday
               eventValue = calendarEvent.on.value, // first, second, third, fourth, last //ordinalKeywords
               eventDayIndex = weekdays.indexOf(eventType),
               onWeekInterval = ordinalKeywords.indexOf(eventValue),
               endOfMonth = moment(startDate).endOf('month');
-            let isDateInValidRange,
-              monthWeekend = [];
             dayOfMonth = startDate.startOf('month');
+            const currentYear = moment(dayOfMonth).year();
             // Getting initial dates
             switch (eventType) {
               case 'day':
-                if (dayOfMonth < eventStartDate && onWeekInterval < 4) {
-                  dayOfMonth = startDate.add(1, 'M').startOf('month');
-                }
-                if (onWeekInterval > 0 && onWeekInterval <= 3) {
-                  dayOfMonth = dayOfMonth.date(onWeekInterval + 1);
-                } else if (onWeekInterval === 4) {
-                  // last
-                  dayOfMonth = startDate.endOf('month');
+                if (calendarEvent.repeats === 'yearly') {
+                  if (onWeekInterval === 4) {
+                    dayOfMonth = startDate.month(calendarEvent.every).endOf('month');
+                  } else {
+                    dayOfMonth = moment(dayOfMonth)
+                      .month(calendarEvent.every)
+                      .year(currentYear)
+                      .startOf('month')
+                      .add(onWeekInterval, 'days');
+                  }
+                } else {
+                  if (onWeekInterval > 0 && onWeekInterval <= 3) {
+                    dayOfMonth = dayOfMonth.date(onWeekInterval + 1);
+                  } else if (onWeekInterval === 4) {
+                    dayOfMonth = startDate.endOf('month');
+                  }
                 }
                 break;
-              case 'weekend':
-              case 'weekend-day':
-                dayOfMonth = this.getSpecificDayDate(startOfMonth, onWeekInterval, 6);
-                if (dayOfMonth <= eventStartDate) {
-                  while (dayOfMonth < endOfMonth) {
-                    dayOfMonth = moment(dayOfMonth).add(1, 'week');
-                  }
-                  dayOfMonth = dayOfMonth.add(onWeekInterval, 'week');
+              case 'weekday':
+                if (calendarEvent.repeats === 'yearly') {
+                  dayOfMonth = moment(dayOfMonth)
+                    .month(calendarEvent.every)
+                    .year(currentYear)
+                    .startOf('month');
                 } else {
+                  dayOfMonth = moment(dayOfMonth).startOf('month');
+                }
+                if (onWeekInterval === 4) {
+                  if (calendarEvent.repeats === 'yearly') {
+                    dayOfMonth = moment(dayOfMonth)
+                      .month(calendarEvent.every)
+                      .year(currentYear)
+                      .endOf('month');
+                  } else {
+                    dayOfMonth = moment(dayOfMonth).endOf('month');
+                  }
+                  dayOfMonth = moment(dayOfMonth).add(
+                    dayOfMonth.day() % 6 !== 0 ? 0 : dayOfMonth.day() === 0 ? -2 : -1,
+                    'day'
+                  );
+                } else {
+                  dayOfMonth = new moment([currentYear, startOfMonth.month()]);
+                  while (dayOfMonth.day() % 6 == 0) {
+                    dayOfMonth = dayOfMonth.add(1, 'day');
+                  }
+                  dayOfMonth = dayOfMonth.add(onWeekInterval, 'day');
+                  if (dayOfMonth.day() === 6) {
+                    dayOfMonth = dayOfMonth.add(2, 'days');
+                  } else if (dayOfMonth.day() === 0) {
+                    dayOfMonth = dayOfMonth.add(2, 'days');
+                  } else if (dayOfMonth.day() === 1) {
+                    dayOfMonth = dayOfMonth.add(2, 'days');
+                  }
+                }
+                break;
+              case 'weekend-day':
+                if (calendarEvent.repeats === 'yearly') {
+                  dayOfMonth = moment(dayOfMonth)
+                    .month(calendarEvent.every)
+                    .year(currentYear)
+                    .startOf('month');
+                  if (onWeekInterval === 4) {
+                    dayOfMonth = moment(dayOfMonth)
+                      .month(calendarEvent.every)
+                      .year(currentYear)
+                      .endOf('month')
+                      .day(0);
+                    if (dayOfMonth > endOfMonth) {
+                      while (dayOfMonth > endOfMonth) {
+                        dayOfMonth.subtract(1, 'week');
+                      }
+                    }
+                  } else {
+                    dayOfMonth = this.getSpecificDayDate(dayOfMonth, onWeekInterval, eventType === 'weekday' ? 1 : 6);
+                  }
+                } else {
+                  //monthly
+                  dayOfMonth = this.getSpecificDayDate(startOfMonth, onWeekInterval, eventType === 'weekday' ? 1 : 6);
                   if (dayOfMonth > endOfMonth) {
                     while (dayOfMonth > endOfMonth) {
                       dayOfMonth.subtract(1, 'week');
                     }
                   }
-                }
-                if (eventType === 'weekend-day') {
-                  dayOfMonth = moment(dayOfMonth).add(1, 'days'); //second weekend day
-                }
-                if (eventType === 'weekend') {
-                  monthWeekend.push(dayOfMonth.toDate());
-                  monthWeekend.push(dayOfMonth.add(1, 'days').toDate());
                 }
                 break;
               case 'sunday':
@@ -376,103 +459,173 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               case 'thursday':
               case 'friday':
               case 'saturday':
-                isDateInValidRange = false;
-                if (onWeekInterval <= 3) {
-                  dayOfMonth = this.getSpecificDayDate(startOfMonth, onWeekInterval, eventDayIndex);
-                  if (dayOfMonth <= eventStartDate) {
-                    while (dayOfMonth < eventStartDate) {
-                      dayOfMonth = moment(dayOfMonth).add(1, 'week');
-                    }
+                if (calendarEvent.repeats === 'yearly') {
+                  let initialYearEveryMonth;
+                  if (onWeekInterval === 4) {
+                    const dayOfMonth = moment(dayOfMonth)
+                      .month(calendarEvent.every)
+                      .year(currentYear)
+                      .endOf('month')
+                      .day(eventDayIndex);
                   } else {
-                    isDateInValidRange = true;
-                  }
-                  if (!isDateInValidRange) {
-                    while (dayOfMonth < endOfMonth) {
-                      dayOfMonth = moment(dayOfMonth).add(1, 'week');
-                    }
-                    if (onWeekInterval > 0 && onWeekInterval < 3) {
-                      dayOfMonth = moment(dayOfMonth).add(onWeekInterval, 'week');
-                    }
+                    initialYearEveryMonth = moment(dayOfMonth)
+                      .month(calendarEvent.every)
+                      .year(currentYear)
+                      .startOf('month');
+                    dayOfMonth = this.getSpecificDayDate(initialYearEveryMonth, onWeekInterval, eventDayIndex);
                   }
                 } else {
-                  //last
-                  dayOfMonth = startDate.endOf('month');
-                  while (dayOfMonth.day() !== eventDayIndex) {
-                    dayOfMonth.subtract(1, 'day');
-                  }
-                  if (dayOfMonth < eventStartDate) {
-                    dayOfMonth = startDate.endOf('month').add(1, 'M');
+                  if (onWeekInterval <= 3) {
+                    dayOfMonth = this.getSpecificDayDate(startOfMonth, onWeekInterval, eventDayIndex);
+                  } else {
+                    //last
+                    dayOfMonth = startDate.endOf('month');
                     while (dayOfMonth.day() !== eventDayIndex) {
                       dayOfMonth.subtract(1, 'day');
+                    }
+                    if (dayOfMonth < eventStartDate) {
+                      dayOfMonth = startDate.endOf('month').add(1, 'M');
+                      while (dayOfMonth.day() !== eventDayIndex) {
+                        dayOfMonth.subtract(1, 'day');
+                      }
                     }
                   }
                 }
                 break;
             }
-            // Manipulating initial days to calculate rule intervals and push to event list
-            if (calendarEvent.repeats === 'yearly') {
-              if (monthWeekend.length > 0) {
-                for (let i = 0; i < dayOfMonth.length; i++) {
-                  const yearlyDayOfMonth = moment(dayOfMonth[i]).add(i, 'years');
-                  monthYearRecurringEvents.push({
-                    start: moment(yearlyDayOfMonth)
-                      .set({
-                        hour: calendarEventStartDateHour,
-                        minute: calendarEventStartDateMinutes,
-                        second: calendarEventStartDateSeconds
-                      })
-                      .toDate(),
-                    end: moment(yearlyDayOfMonth)
-                      .set({
-                        hour: calendarEventEndDateHour,
-                        minute: calendarEventEndDateMinutes,
-                        second: calendarEventEndDateSeconds
-                      })
-                      .toDate()
-                  });
-                }
+            if (
+              calendarEvent.type === 'one-time-extended-hours' ||
+              calendarEvent.type === 'blackout-one-time-exceptions'
+            ) {
+              if (calendarEvent.repeats === 'yearly') {
+                yearlyEvents.push({
+                  start: moment(dayOfMonth)
+                    .set({
+                      hour: calendarEventStartDateHour,
+                      minute: calendarEventStartDateMinutes,
+                      second: calendarEventStartDateSeconds
+                    })
+                    .toDate(),
+                  end: moment(dayOfMonth)
+                    .set({
+                      hour: calendarEventEndDateHour,
+                      minute: calendarEventEndDateMinutes,
+                      second: calendarEventEndDateSeconds
+                    })
+                    .toDate()
+                });
               } else {
-                for (let i = 0; i <= diffYears; i++) {
-                  const yearlyDayOfMonth = moment(dayOfMonth).add(i, 'years');
-                  monthYearRecurringEvents.push({
-                    start: moment(yearlyDayOfMonth)
-                      .set({
-                        hour: calendarEventStartDateHour,
-                        minute: calendarEventStartDateMinutes,
-                        second: calendarEventStartDateSeconds
-                      })
-                      .toDate(),
-                    end: moment(yearlyDayOfMonth)
-                      .set({
-                        hour: calendarEventEndDateHour,
-                        minute: calendarEventEndDateMinutes,
-                        second: calendarEventEndDateSeconds
-                      })
-                      .toDate()
-                  });
-                }
+                monthlyEvents.push({
+                  start: moment(dayOfMonth)
+                    .set({
+                      hour: calendarEventStartDateHour,
+                      minute: calendarEventStartDateMinutes,
+                      second: calendarEventStartDateSeconds
+                    })
+                    .toDate(),
+                  end: moment(dayOfMonth)
+                    .set({
+                      hour: calendarEventEndDateHour,
+                      minute: calendarEventEndDateMinutes,
+                      second: calendarEventEndDateSeconds
+                    })
+                    .toDate()
+                });
               }
             } else {
-              // monthly
-              const endOfNextMonth = moment(eventEndDate)
-                .add(1, 'M')
-                .endOf('month'); // Current month based on rule start date
-              //weekends
-              if (monthWeekend.length > 0) {
-                // 0 = Saturdays && 1 = Sundays
-                for (let i = 0; i < monthWeekend.length; i++) {
-                  dayOfMonth = moment(monthWeekend[i]);
-                  //.add(5, 'weeks');
-                  // Pushing first weekend day
-                  monthYearRecurringEvents.push({
-                    start: moment(monthWeekend[i])
+              // Manipulating initial days to calculate rule intervals and push to event list
+              if (calendarEvent.repeats === 'yearly') {
+                for (let i = 0; i <= diffYears; i++) {
+                  const currentMonth = moment(dayOfMonth)
+                    .add(i, 'year')
+                    .endOf('month');
+                  let yearlyDayOfMonth;
+                  if (eventType === 'day') {
+                    if (onWeekInterval === 4) {
+                      yearlyDayOfMonth = moment(dayOfMonth)
+                        .add(i, 'year')
+                        .endOf('month');
+                    } else {
+                      yearlyDayOfMonth = moment(dayOfMonth)
+                        .add(i, 'year')
+                        .startOf('month')
+                        .add(onWeekInterval, 'days');
+                    }
+                  } else if (eventType === 'weekday') {
+                    yearlyDayOfMonth = moment(dayOfMonth).add(i, 'years');
+                    if (onWeekInterval === 4) {
+                      yearlyDayOfMonth = moment(yearlyDayOfMonth)
+                        .month(calendarEvent.every)
+                        .year(currentYear)
+                        .endOf('month');
+                      yearlyDayOfMonth = moment(yearlyDayOfMonth).add(
+                        yearlyDayOfMonth.day() % 6 !== 0 ? 0 : yearlyDayOfMonth.day() === 0 ? -2 : -1,
+                        'day'
+                      );
+                    } else {
+                      yearlyDayOfMonth = new moment([
+                        yearlyDayOfMonth.year(),
+                        moment(yearlyDayOfMonth)
+                          .month(calendarEvent.every)
+                          .month()
+                      ]);
+                      while (yearlyDayOfMonth.day() % 6 == 0) {
+                        yearlyDayOfMonth = yearlyDayOfMonth.add(1, 'days');
+                      }
+                      yearlyDayOfMonth = yearlyDayOfMonth.add(onWeekInterval, 'days');
+                      if (
+                        yearlyDayOfMonth.day() === 6 ||
+                        yearlyDayOfMonth.day() === 0 ||
+                        yearlyDayOfMonth.day() === 1
+                      ) {
+                        yearlyDayOfMonth = yearlyDayOfMonth.add(2, 'days');
+                      }
+                    }
+                  } else if (eventType === 'weekend-day') {
+                    if (onWeekInterval === 4) {
+                      yearlyDayOfMonth = moment(yearlyDayOfMonth)
+                        .add(i, 'year')
+                        .endOf('month')
+                        .day(6);
+                      if (yearlyDayOfMonth > currentMonth) {
+                        yearlyDayOfMonth = yearlyDayOfMonth.subtract(1, 'week');
+                      }
+                    } else {
+                      yearlyDayOfMonth = moment(dayOfMonth).add(i, 'years');
+                      yearlyDayOfMonth = this.getSpecificDayDate(
+                        moment(yearlyDayOfMonth).startOf('month'),
+                        onWeekInterval,
+                        6
+                      );
+                    }
+                  } else {
+                    if (onWeekInterval === 4) {
+                      yearlyDayOfMonth = moment()
+                        .month(calendarEvent.every)
+                        .add(i, 'year')
+                        .endOf('month')
+                        .day(eventDayIndex);
+                      if (yearlyDayOfMonth > currentMonth) {
+                        yearlyDayOfMonth = yearlyDayOfMonth.subtract(1, 'week');
+                      }
+                    } else {
+                      yearlyDayOfMonth = moment(dayOfMonth).add(i, 'years');
+                      yearlyDayOfMonth = this.getSpecificDayDate(
+                        moment(yearlyDayOfMonth).startOf('month'),
+                        onWeekInterval,
+                        eventDayIndex
+                      );
+                    }
+                  }
+                  yearlyRecurringEvents.push({
+                    start: moment(yearlyDayOfMonth)
                       .set({
                         hour: calendarEventStartDateHour,
                         minute: calendarEventStartDateMinutes,
                         second: calendarEventStartDateSeconds
                       })
                       .toDate(),
-                    end: moment(monthWeekend[i])
+                    end: moment(yearlyDayOfMonth)
                       .set({
                         hour: calendarEventEndDateHour,
                         minute: calendarEventEndDateMinutes,
@@ -480,51 +633,14 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                       })
                       .toDate()
                   });
-                  while (dayOfMonth <= endOfNextMonth) {
-                    const currentMonth = moment(dayOfMonth),
-                      nextMonth = moment(dayOfMonth).add(1, 'M'),
-                      numDayInWeek = this.getAmountOfWeekDaysInMonth(currentMonth, eventDayIndex),
-                      nextNumDayInWeek = this.getAmountOfWeekDaysInMonth(nextMonth, eventDayIndex);
-                    if (eventValue === 'last') {
-                      if (
-                        (numDayInWeek === 5 && nextNumDayInWeek === 4) ||
-                        (numDayInWeek === 4 && nextNumDayInWeek === 4)
-                      ) {
-                        dayOfMonth = moment(dayOfMonth).add(4, 'week');
-                      } else if (numDayInWeek === 4 && nextNumDayInWeek === 5) {
-                        dayOfMonth = moment(dayOfMonth).add(5, 'week');
-                      }
-                    } else {
-                      if (
-                        (numDayInWeek === 4 && nextNumDayInWeek === 5) ||
-                        (numDayInWeek === 4 && nextNumDayInWeek === 4)
-                      ) {
-                        dayOfMonth = moment(dayOfMonth).add(4, 'week');
-                      } else if (numDayInWeek === 5 && nextNumDayInWeek === 4) {
-                        dayOfMonth = moment(dayOfMonth).add(5, 'week');
-                      }
-                    }
-                    monthYearRecurringEvents.push({
-                      start: moment(dayOfMonth)
-                        .set({
-                          hour: calendarEventStartDateHour,
-                          minute: calendarEventStartDateMinutes,
-                          second: calendarEventStartDateSeconds
-                        })
-                        .toDate(),
-                      end: moment(dayOfMonth)
-                        .set({
-                          hour: calendarEventEndDateHour,
-                          minute: calendarEventEndDateMinutes,
-                          second: calendarEventEndDateSeconds
-                        })
-                        .toDate()
-                    });
-                  }
                 }
               } else {
+                // monthly
+                const endOfNextMonth = moment(eventEndDate)
+                  .add(1, 'M')
+                  .endOf('month'); // Current month based on rule start date
                 while (dayOfMonth <= endOfNextMonth) {
-                  monthYearRecurringEvents.push({
+                  monthlyRecurringEvents.push({
                     start: moment(dayOfMonth)
                       .set({
                         hour: calendarEventStartDateHour,
@@ -562,6 +678,28 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                       default:
                         break;
                     }
+                  } else if (eventType === 'weekday') {
+                    if (onWeekInterval === 4) {
+                      dayOfMonth = moment(dayOfMonth)
+                        .add(1, 'M')
+                        .endOf('month');
+                      dayOfMonth = moment(dayOfMonth).add(
+                        dayOfMonth.day() % 6 !== 0 ? 0 : dayOfMonth.day() === 0 ? -2 : -1,
+                        'day'
+                      );
+                    } else {
+                      dayOfMonth = moment(dayOfMonth)
+                        .add(1, 'M')
+                        .startOf('month');
+                      while (dayOfMonth.day() % 6 == 0) {
+                        dayOfMonth = dayOfMonth.add(1, 'days');
+                      }
+                      dayOfMonth = dayOfMonth.add(onWeekInterval, 'days');
+                      // Adding two extra days for saturday, sunday or monday
+                      if (dayOfMonth.day() === 6 || dayOfMonth.day() === 0 || dayOfMonth.day() === 1) {
+                        dayOfMonth = dayOfMonth.add(2, 'days');
+                      }
+                    }
                   } else {
                     const currentMonth = moment(dayOfMonth),
                       nextMonth = moment(dayOfMonth).add(1, 'M'),
@@ -581,15 +719,19 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                     }
                   }
                 }
+                let monthlyEveryEvents = [];
+                for (let i = 0; i < monthlyRecurringEvents.length; i += calendarEvent.every) {
+                  monthlyEveryEvents.push(monthlyRecurringEvents[i]);
+                }
+                monthlyRecurringEvents = monthlyEveryEvents;
               }
-              let monthlyYearlyEvents = [];
-              for (let i = 0; i < monthYearRecurringEvents.length; i += calendarEvent.every) {
-                monthlyYearlyEvents.push(monthYearRecurringEvents[i]);
-              }
-              monthYearRecurringEvents = monthlyYearlyEvents;
             }
           }
-          const currentCalendarMonthlyEvents = monthYearRecurringEvents
+          const monthlyYearlyCalendarEvents =
+            calendarEvent.repeats === 'yearly'
+              ? yearlyEvents.concat(yearlyRecurringEvents)
+              : monthlyEvents.concat(monthlyRecurringEvents);
+          const monthYearEventList = monthlyYearlyCalendarEvents
             .filter(monthYearEvent =>
               moment(monthYearEvent.start).isBetween(
                 this.calendarDateRange.start,
@@ -606,7 +748,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               end: monthYearEvent.end,
               eventTypeID: calendarEvent.eventTypeID
             }));
-          this.formattedEvents = this.formattedEvents.concat(currentCalendarMonthlyEvents);
+          this.formattedEvents = this.formattedEvents.concat(monthYearEventList);
           break;
         default:
           break;
@@ -690,7 +832,8 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               const intervalEndDate = moment(ruleEndDate + ' ' + intertvalEndTime);
 
               const ruleInterval = {
-                id: rule.name + i.toString(),
+                id: `v0_${i}_` + rule.name,
+                type: rule.type,
                 title: rule.name,
                 ...(rule.hours && { ...rule.hours.allDay } && { allDay: rule.hours.allDay }),
                 start: intervalStartDate,
@@ -708,7 +851,8 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
           } else {
             return {
               //Events without intervals
-              id: rule.name,
+              id: `v_` + rule.name,
+              type: rule.type,
               title: rule.name,
               ...(rule.hours && { ...rule.hours.allDay } && { allDay: rule.hours.allDay }),
               start: new Date(rule.startDate),
@@ -727,7 +871,6 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
     this.calendarEvents = selectedVersionEvents.concat(selectedVersionIntervalEvents);
     this.handleCalendarEvents();
   };
-
   render() {
     return (
       <Fragment>
