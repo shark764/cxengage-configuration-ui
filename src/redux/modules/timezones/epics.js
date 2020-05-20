@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import { sdkPromise } from '../../../utils/sdk';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
-import { getCurrentEntity } from '../entities/selectors';
+import { getCurrentEntity, getSelectedSubEntityId } from '../entities/selectors';
 
 import { handleError } from '../entities/handleResult';
 
@@ -15,15 +15,16 @@ import { getTimezones } from './selectors';
 
 export const fetchTimezones = (action$, store) =>
   action$
-    .ofType('SET_SELECTED_ENTITY_ID')
+    .ofType('SET_SELECTED_ENTITY_ID', 'CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED')
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),
-      timezones: getTimezones(store.getState())
+      timezones: getTimezones(store.getState()),
+      subEntityId: getSelectedSubEntityId(store.getState())
     }))
     .filter(
-      ({ entityName, timezones }) =>
-        (entityName === 'businessHours' || entityName === 'tenants') && timezones.length === 0
+      ({ entityName, timezones, subEntityId }) =>
+        (entityName === 'businessHours' || entityName === 'businessHoursV2') && timezones.length === 0
     )
     .map(a => {
       a.sdkCall = {

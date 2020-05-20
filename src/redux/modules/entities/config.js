@@ -11,11 +11,12 @@ export const hasCustomUpdateEntity = entityName =>
     'dispatchMappings',
     'businessHours',
     'apiKeys',
-    'dispositionLists'
+    'dispositionLists',
+    'businessHoursV2'
   ].includes(entityName);
 
 export const hasCustomUpdateEntityFullFilled = entityName =>
-  !['dispositionLists', 'reasonLists', 'transferLists', 'customAttributes'].includes(entityName);
+  !['dispositionLists', 'reasonLists', 'transferLists', 'customAttributes', 'businessHoursV2'].includes(entityName);
 
 export const hasCustomCreateSubEntity = entityName => !['businessHours'].includes(entityName);
 
@@ -28,3 +29,10 @@ export const hasCustomFetchEntityData = entityName =>
 export const hasCustomFetchEntityItemData = entityName => !['dispositionLists', 'flows'].includes(entityName);
 
 export const entitiesUsingUpdateLogicForToggleEntity = entityName => ['customAttributes'].includes(entityName);
+
+export const hasCustomSubEntityUpdate = (entityName, subEntityName) => {
+  const entityMap = {
+    businessHoursV2: 'drafts'
+  };
+  return entityMap[entityName] === subEntityName;
+};

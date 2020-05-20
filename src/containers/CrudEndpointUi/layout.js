@@ -96,6 +96,7 @@ import IntegrationsDetailsPanel from '../SidePanelDetails/Integrations';
 // Full page panel forms
 import BusinessHoursV2CreateForm from '../FullPagePanel/BusinessHoursV2/Create';
 import BusinessHoursV2UpdateForm from '../FullPagePanel/BusinessHoursV2/Update';
+import BusinessHoursV2DraftForm from '../FullPagePanel/BusinessHoursV2/Draft';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -859,7 +860,7 @@ export default class CrudEndpointUiLayout extends Component {
       if (this.props.selectedEntityId === 'create') {
         return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2CreateForm />} />;
       } else if (this.props.selectedEntityId !== 'create' && this.props.selectedSubEntityId) {
-        return <Route path="/configuration/businessHoursV2" component={() => <h1>Here goes edit draft page</h1>} />;
+        return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2DraftForm />} />;
       } else {
         return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2UpdateForm />} />;
       }

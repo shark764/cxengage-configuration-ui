@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.76.0] - 2020-04-28
+## Added
+- CXV1-21472 - Basic Page Structure - Edit Draft
+
 ## [0.75.9] - 2020-04-30
 ### Fixed
 - <no-ticket> - Config 2 - Business Hours V2

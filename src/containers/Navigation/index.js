@@ -10,7 +10,7 @@ import {
 } from '../../redux/modules/userData/selectors';
 import { switchTenant } from '../../redux/modules/userData';
 import { getCustomTheme } from '../../redux/modules/entities/branding/selectors';
-import { isFormDirty, isSubEntityFormDirty } from '../../redux/modules/form/selectors';
+import { isFormDirty, areSubEntityFormsDirty } from '../../redux/modules/form/selectors';
 
 export function mapStateToProps(state, props) {
   return {
@@ -20,7 +20,7 @@ export function mapStateToProps(state, props) {
     currentTenantName: getCurrentTenantName(state),
     theme: getCustomTheme(state),
     isCurrentFormDirty: isFormDirty(state),
-    isSubEntityFormDirty: isSubEntityFormDirty(state)
+    areSubEntityFormsDirty: areSubEntityFormsDirty(state)
   };
 }
 

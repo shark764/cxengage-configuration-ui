@@ -52,6 +52,7 @@ export default function BusinessHoursV2Form({
           disabled={
             isSaving ||
             inherited ||
+            !userHasUpdatePermission ||
             !versions ||
             versions.length === 0 ||
             versions.size === 0 ||

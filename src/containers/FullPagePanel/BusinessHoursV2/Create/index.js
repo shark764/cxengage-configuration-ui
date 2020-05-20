@@ -6,7 +6,7 @@ import BusinessHoursV2 from '../../../Form/BusinessHoursV2';
 import SidePanelActionsContainer from '../../../../containers/SidePanelActions';
 
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
-  width: 75%;
+  width: 70%;
 `;
 
 const HeaderContainer = styled.div`
@@ -15,7 +15,7 @@ const HeaderContainer = styled.div`
 `;
 
 const SidePanelActions = styled(SidePanelActionsContainer)`
-  width: 25%;
+  width: 30%;
   float: right;
 `;
 

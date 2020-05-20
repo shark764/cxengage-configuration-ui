@@ -15,6 +15,6 @@ export const formValidation = values => ({
     (getCurrentEntity(store.getState()) === 'businessHoursV2' &&
       getAllEntitiesTableData(store.getState())
         .filter(({ tenantId }) => tenantId === getCurrentTenantId(store.getState()))
-        .some(({ name }) => name === values.get('name')) &&
+        .some(({ name, id }) => name.toLowerCase() === values.get('name').toLowerCase() && id !== values.get('id')) &&
       "There's already a business hour with this name")
 });

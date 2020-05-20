@@ -9,7 +9,7 @@ import {
   getSelectedEntity,
   getSelectedEntityId,
   getSelectedEntityFormId,
-  getSelectedSubEntityFormId
+  getSelectedSubEntityFormsIds
 } from '../entities/selectors';
 import { onFormSubmit, onSubEntityFormSubmit } from '../entities';
 
@@ -26,7 +26,11 @@ export const getCurrentFormInitialValues = state =>
 export const isFormInvalid = state => isInvalid(getSelectedEntityFormId(state))(state);
 export const isFormDirty = state => isDirty(getSelectedEntityFormId(state))(state);
 export const isFormPristine = state => isPristine(getSelectedEntityFormId(state))(state);
-export const isSubEntityFormDirty = state => isDirty(getSelectedSubEntityFormId(state))(state);
+export const areSubEntityFormsDirty = state =>
+  getSelectedSubEntityFormsIds(state) &&
+  getSelectedSubEntityFormsIds(state)
+    .map(formName => isDirty(formName)(state))
+    .some(isDirty => isDirty);
 
 export const selectFormInitialValues = state => {
   const entityName = getCurrentEntity(state);

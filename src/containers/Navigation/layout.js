@@ -73,7 +73,7 @@ export default class Navigation extends Component {
     });
 
   setCurrentEntityAndEntityId = (entityName, e) => {
-    if (this.props.isCurrentFormDirty || this.props.isSubEntityFormDirty) {
+    if (this.props.isCurrentFormDirty || this.props.areSubEntityFormsDirty) {
       e.preventDefault();
       this.props.setConfirmationDialog(CONFIRM_SET_ENTITY_WHEN_FORM_IS_DIRTY, '', entityName);
     } else {
@@ -349,5 +349,5 @@ Navigation.propTypes = {
   setSelectedEntityId: PropTypes.func.isRequired,
   setConfirmationDialog: PropTypes.func,
   isCurrentFormDirty: PropTypes.bool,
-  isSubEntityFormDirty: PropTypes.bool
+  areSubEntityFormsDirty: PropTypes.bool
 };

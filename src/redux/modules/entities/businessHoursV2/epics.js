@@ -2,48 +2,80 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/mapTo';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/startWith';
+import { of } from 'rxjs/observable/of';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { submit, change } from 'redux-form';
+import { formValueSelector } from 'redux-form/immutable';
+import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
 import { entitiesMetaData } from '../metaData';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 
-import { getCurrentEntity, getSelectedEntityId, getSelectedEntityStatus } from '../selectors';
+import {
+  getCurrentEntity,
+  getSelectedEntity,
+  getCurrentSubEntity,
+  getSelectedEntityId,
+  getSelectedSubEntityId,
+  getSelectedSubEntity,
+  getSelectedEntityStatus
+} from '../selectors';
 import { getAllEntities } from '../../../../containers/EntityTable/selectors';
 
-import { setSelectedSubEntityId, setSelectedEntityId, fetchActiveVersionBusinessHoursFulfilled } from '../index';
+import {
+  fetchActiveVersionBusinessHoursFulfilled,
+  createDraftBusinessHoursV2,
+  setSelectedBusinessHourVersion
+} from '../index';
+
+const draftFormSelector = formValueSelector('draft:edit');
+const ruleFormSelector = formValueSelector('businessHoursV2:rules');
 
 export const createBusinessHour = $action =>
   $action
     .ofType('CREATE_ENTITY')
     .filter(({ entityName }) => entityName === 'businessHoursV2')
-    .map(a => {
-      a.sdkCall = entitiesMetaData['businessHoursV2'].entityApiRequest('create', 'singleMainEntity');
-      a.sdkCall.path = ['business-hours'];
-      a.sdkCall.data = a.values;
-      a.sdkCall.apiVersion = 'v2';
-      return { ...a, type: 'CREATE_DRAFT_AND_BUSINESS_HOUR_V2' };
-    })
-    .concatMap(a =>
-      fromPromise(sdkPromise(a.sdkCall))
-        .map(response => ({
-          ...a,
-          response
-        }))
-        .catch(error => handleError(error, a))
-    );
+    .mergeMap(a => {
+      const sdkCall = entitiesMetaData['businessHoursV2'].entityApiRequest('create', 'singleMainEntity');
 
-export const createDraftAndSaveToState = $action =>
+      return fromPromise(
+        sdkPromise({
+          ...sdkCall,
+          path: ['business-hours'],
+          data: a.values,
+          apiVersion: 'v2'
+        })
+      )
+        .mergeMap(response => [
+          handleSuccess(response, a),
+          createDraftBusinessHoursV2(
+            {
+              draftName: 'Initial Draft'
+            },
+            response.result.id
+          )
+        ])
+        .catch(error => handleError(error, a));
+    });
+
+export const createDraft = ($action, store) =>
   $action
-    .ofType('CREATE_DRAFT_AND_BUSINESS_HOUR_V2')
+    .ofType('CREATE_DRAFT_BUSINESS_HOURS_V2')
     .map(a => ({
       ...a,
+      selectedEntityId: getSelectedEntityId(store.getState()),
       sdkCall: {
-        path: ['business-hours', a.response.result.id, 'drafts'],
+        path: ['business-hours', a.businessHourId, 'drafts'],
         data: {
-          name: 'Initial draft'
+          name: a.values.draftName
         },
         apiVersion: 'v2',
         command: 'createBusinessHourV2Draft',
@@ -52,21 +84,18 @@ export const createDraftAndSaveToState = $action =>
         topic: 'cxengage/entities/create-business-hours-v2-draft'
       }
     }))
-    .mergeMap(a =>
-      fromPromise(sdkPromise(a.sdkCall)).mergeMap(response => [
-        handleSuccess(
-          {
-            result: {
-              ...a.response.result,
-              items: [response.result]
-            }
-          },
-          a,
-          `<i>Business Hour</i> was created successfully!`
-        ),
-        setSelectedSubEntityId(response.result.id),
-        setSelectedEntityId(a.response.result.id)
-      ])
+    .switchMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            a.selectedEntityId
+              ? '<i>Draft</i> has been created sucessfully'
+              : '<i>Business Hour</i> has been created sucessfully'
+          )
+        )
+        .catch(error => handleError(error, a))
     );
 
 export const fetchActiveVersion = ($action, store) =>
@@ -119,7 +148,7 @@ export const fetchActiveVersion = ($action, store) =>
       return fetchActiveVersionBusinessHoursFulfilled(activeVersionsObject);
     });
 
-export const fetchVersions = (action$, store) =>
+export const fetchVersionsAndDrafts = (action$, store) =>
   action$
     .ofType('SET_SELECTED_ENTITY_ID')
     .map(a => {
@@ -129,40 +158,139 @@ export const fetchVersions = (action$, store) =>
         businessHours: getAllEntities(store.getState())
       };
     })
-    .filter(({ entityId, entityName, businessHours }) => {
-      return entityName === 'businessHoursV2' && businessHours && entityId !== '' && entityId !== 'create';
+    .filter(
+      ({ entityId, entityName, businessHours }) =>
+        entityName === 'businessHoursV2' && businessHours && entityId && entityId !== '' && entityId !== 'create'
+    )
+    .mergeMap(({ entityId }) => {
+      const apis = ['versions', 'drafts'];
+      return forkJoin(
+        apis.map(api => {
+          const sdkCall = {
+            path: ['business-hours', entityId, api],
+            apiVersion: 'v2',
+            command: `getBusinessHourV2${capitalizeFirstLetter(api)}`,
+            module: 'entities',
+            crudAction: 'read',
+            topic: `cxengage/entities/read-business-hours-v2-${api}`
+          };
+
+          return fromPromise(sdkPromise(sdkCall)).catch(error =>
+            handleError(
+              error,
+              {
+                type: `FETCH_${api.toUpperCase()}_BUSINESS_HOURS`,
+                entityName: 'businessHoursV2'
+              },
+              `${capitalizeFirstLetter(api)} for a business hour couldn't be retrieved`
+            )
+          );
+        })
+      );
     })
+    .mergeMap(responses => {
+      const selectedBusinessHour = getSelectedEntity(store.getState());
+      return responses.every(({ result }) => !result)
+        ? responses
+        : [
+            {
+              type: 'SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS',
+              versions: responses[0].result || [],
+              drafts: responses[1].result || []
+            },
+            ...(!responses[0].result ? [responses[0]] : []),
+            ...(!responses[1].result ? [responses[1]] : []),
+            ...(selectedBusinessHour && selectedBusinessHour.get('activeVersion')
+              ? [setSelectedBusinessHourVersion(selectedBusinessHour.get('activeVersion'))]
+              : [])
+          ];
+    });
+
+export const UpdateDraft = (action$, store) =>
+  action$
+    .ofType('UPDATE_SUB_ENTITY')
+    .map(action => ({
+      ...action,
+      subEntityId: getSelectedSubEntityId(store.getState()),
+      entityName: getCurrentEntity(store.getState()),
+      subEntityName: getCurrentSubEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState()),
+      values: {
+        ...action.values,
+        ...(action.values.rules
+          ? draftFormSelector(store.getState(), 'name', 'description', 'timezone')
+          : {
+              rules: ruleFormSelector(store.getState(), 'rules') && ruleFormSelector(store.getState(), 'rules').toJS()
+            })
+      }
+    }))
+    .filter(({ entityName, subEntityName }) => entityName === 'businessHoursV2' && subEntityName === 'drafts')
     .map(a => {
-      a.sdkCall = {
-        path: ['business-hours', a.entityId, 'versions'],
+      const { subEntityId: draftId, entityId: id, values: { name, description, timezone } } = a;
+
+      const rules =
+        a.values.rules &&
+        a.values.rules.length &&
+        a.values.rules.map(rule => {
+          const {
+            id,
+            endDate,
+            startDate,
+            on: { value, type } = {},
+            on,
+            hours: { intervals },
+            hours,
+            description,
+            every,
+            ...r
+          } = rule;
+          return {
+            ...r,
+            description: description || '',
+            startDate: startDate instanceof Date ? startDate.toJSON() : startDate,
+            ...(endDate ? { endDate: endDate instanceof Date ? endDate.toJSON() : endDate } : {}),
+            ...(on ? { on: value && !isNaN(value) ? { type, value: parseInt(value, 10) } : on } : {}),
+            hours: {
+              ...hours,
+              ...(intervals ? { intervals } : {})
+            },
+            every: isNaN(every) ? every : parseInt(every, 10)
+          };
+        });
+      const sdkCall = {
+        path: ['business-hours', id, 'drafts', draftId],
+        data: {
+          name: name.trim(),
+          ...(rules ? { rules } : {}),
+          description: description || '',
+          ...(timezone ? { timezone } : {})
+        },
         apiVersion: 'v2',
+        command: 'updateBusinessHoursV2Draft',
         module: 'entities',
-        crudAction: 'read',
-        topic: 'cxengage/entities/read-business-hours-v2-versions'
+        crudAction: 'update',
+        topic: 'cxengage/entities/update-business-hours-v2-draft'
       };
+
       return {
         ...a,
-        activeVersion: a.businessHours.find(businessHour => businessHour.id === a.entityId).activeVersion
+        sdkCall
       };
     })
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response => ({
-          type: 'SET_BUSINESS_HOUR_VERSIONS',
-          versions: response.result,
-          activeVersion: a.activeVersion,
-          businessHourId: a.entityId
-        }))
-        .catch(error =>
-          handleError(
-            error,
+        .map(response =>
+          handleSuccess(
             {
-              type: 'FETCH_VERSIONS_BUSINESS_HOURS',
-              entityName: 'businessHoursV2'
+              result: {
+                itemValue: response.result
+              }
             },
-            "Versions for a business hour couldn't be retrieved"
+            a,
+            `<i>Draft</i> was updated successfully!`
           )
         )
+        .catch(error => handleError(error, a))
     );
 
 export const toggleBusinessHoursV2Entity = (action$, store) =>
@@ -199,3 +327,154 @@ export const toggleBusinessHoursV2Entity = (action$, store) =>
         )
         .catch(error => handleError(error, { ...a }, 'Status for selected business hour could not be changed'))
     );
+
+export const PubilshDraft = (action$, store) =>
+  action$
+    .ofType('PUBLISH_BUSINESS_HOURS_V2_DRAFT')
+    .map(a => {
+      const businessHoursId = getSelectedEntityId(store.getState());
+      const draft = getSelectedSubEntity(store.getState());
+      const sdkCall = {
+        path: ['business-hours', businessHoursId, 'versions'],
+        data: {
+          ...draft.toJS(),
+          name: a.values.get('versionName').trim()
+        },
+        apiVersion: 'v2',
+        command: 'createBusinessHoursV2Version',
+        module: 'entities',
+        crudAction: 'create',
+        topic: 'cxengage/entities/create-business-hours-v2-version'
+      };
+
+      return {
+        ...a,
+        sdkCall
+      };
+    })
+    .mergeMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .mergeMap(response => [
+          handleSuccess(
+            response,
+            {
+              ...a,
+              entityId: a.sdkCall.path[1]
+            },
+            '<i>Version</i> was created successfully!'
+          ),
+          ...(a.values.get('makeActive')
+            ? [
+                {
+                  type: 'UPDATE_ENTITY',
+                  entityName: 'businessHoursV2',
+                  entityId: a.sdkCall.path[1],
+                  values: {
+                    activeVersion: a.values.get('makeActive') ? response.result.id : undefined,
+                    ...(a.values.get('isInitialDraft') ? { active: true } : {})
+                  }
+                }
+              ]
+            : [])
+        ])
+        .catch(error => handleError(error, a))
+    );
+
+export const SaveDraftBeforePublish = action$ =>
+  action$.ofType('SAVE_BEFORE_PUBLISH_BUSINESS_HOURS_V2_DRAFT').switchMap(action =>
+    action$
+      .ofType('UPDATE_SUB_ENTITY_FULFILLED')
+      .take(1)
+      .mapTo({
+        type: 'PUBLISH_BUSINESS_HOURS_V2_DRAFT',
+        values: action.values
+      })
+      .startWith(submit('draft:edit'))
+  );
+
+export const changeIntervalsHours = action$ =>
+  action$
+    .ofType('@@redux-form/CHANGE')
+    .filter(
+      a =>
+        a.meta.form === 'businessHoursV2:rules' &&
+        a.payload.hours.intervals &&
+        a.payload.hours.intervals.some(interval => interval.end === 0)
+    )
+    .switchMap(a =>
+      of(
+        change(a.meta.form, a.meta.field, {
+          ...a.payload,
+          hours: {
+            ...a.payload.hours,
+            intervals: a.payload.hours.intervals.map(
+              ({ start, end }) => (end !== 0 ? { start, end } : { start, end: 1440 })
+            )
+          }
+        })
+      )
+    );
+
+export const unselectBusinessHourVersion = (action$, store) =>
+  action$
+    .ofType('SET_SELECTED_ENTITY_ID')
+    .map(a => ({
+      entityId: a.entityId,
+      entityName: getCurrentEntity(store.getState())
+    }))
+    .filter(({ entityId, entityName }) => entityName === 'businessHoursV2' && !entityId)
+    .map(() => setSelectedBusinessHourVersion(undefined));
+
+export const selectBusinessHourVersionWhenUpdated = action$ =>
+  action$
+    .ofType('UPDATE_ENTITY_FULFILLED')
+    .filter(
+      ({ entityName, response: { result: { activeVersion } } }) => entityName === 'businessHoursV2' && activeVersion
+    )
+    .map(({ response: { result: { activeVersion } } }) => setSelectedBusinessHourVersion(activeVersion));
+
+export const updateBusinessHourV2 = action$ =>
+  action$
+    .ofType('UPDATE_ENTITY')
+    .filter(({ entityName }) => entityName === 'businessHoursV2')
+    .map(a => {
+      const { name, description, shared, activeVersion, active } = a.values;
+      const sdkCall = {
+        path: ['business-hours', a.entityId],
+        data: {
+          ...(name ? { name } : {}),
+          ...(description !== undefined ? { description: description || '' } : {}),
+          ...(shared !== undefined ? { shared } : {}),
+          ...(active !== undefined ? { active } : {}),
+          ...(activeVersion !== 'undefined' ? { activeVersion } : {})
+        },
+        apiVersion: 'v2',
+        command: 'updateBusinessHourV2',
+        module: 'entities',
+        crudAction: 'update',
+        topic: 'cxengage/entities/update-business-hour-v2'
+      };
+
+      return {
+        ...a,
+        sdkCall
+      };
+    })
+    .switchMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a, `<i>Busines Hours</i> was created successfully!`))
+        .catch(error => handleError(error, a))
+    );
+
+// We reinitialize here since the values sent to the API might not be the ones that are needed to render the form properly
+export const ReInitCustomAttributesForm = action$ =>
+  action$
+    .ofType('UPDATE_ENTITY_FULFILLED')
+    .filter(a => a.entityName === 'businessHoursV2')
+    .map(a => ({
+      type: '@@redux-form/INITIALIZE',
+      meta: {
+        form: `${a.entityName}:${a.entityId}`
+      },
+      payload: a.response.result
+    }));

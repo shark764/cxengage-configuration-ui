@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 import {
   selectBusinessHoursEntityVersions,
-  getBusinessHourActiveVersion
+  selectRules,
+  selectDrafts,
+  isCreatingDraft,
+  getSelectedBusinessHourV2Version
 } from '../../../../redux/modules/entities/businessHoursV2/selectors';
 import {
   getSelectedEntityId,
@@ -9,36 +12,33 @@ import {
   isCreating,
   userHasUpdatePermission,
   userHasSharePermission,
-  userHasPermissions,
-  isEntityFetching,
-  itemApiPending
+  userHasPermissions
 } from '../../../../redux/modules/entities/selectors';
 import {
-  selectBusinessHoursV2FormInitialValues,
-  selectBusinessHoursRules
-} from '../../../../redux/modules/entities/businessHoursV2/selectors';
-import { getCurrentFormValueByFieldName } from '../../../../redux/modules/form/selectors';
-import { setSelectedBusinessHourVersion } from '../../../../redux/modules/entities';
+  setSelectedBusinessHourVersion,
+  createDraftBusinessHoursV2,
+  setSelectedSubEntityId
+} from '../../../../redux/modules/entities';
 import UpdateLayout from './layout';
 
 export const mapStateToProps = state => ({
-  initialValues: selectBusinessHoursV2FormInitialValues(state),
-  key: getSelectedEntityId(state),
+  businessHourId: getSelectedEntityId(state),
   versions: selectBusinessHoursEntityVersions(state),
-  activeVersion: getBusinessHourActiveVersion(state),
-  rules: selectBusinessHoursRules(state),
+  rules: selectRules(state),
   isSaving: isCreating(state),
   inherited: isInherited(state),
   userHasViewPermission: userHasPermissions(state, ['PLATFORM_VIEW_ALL']),
   userHasUpdatePermission: userHasUpdatePermission(state),
   userHasSharePermission: userHasSharePermission(state),
-  sharedFormValue: getCurrentFormValueByFieldName(state, 'shared'),
-  versionsFetching: isEntityFetching(state, 'versions'),
-  itemApiPending: itemApiPending(state)
+  drafts: selectDrafts(state),
+  isCreatingDraft: isCreatingDraft(state),
+  selectedBusinessHourVersion: getSelectedBusinessHourV2Version(state)
 });
 
 export const actions = {
-  setSelectedBusinessHourVersion
+  setSelectedBusinessHourVersion,
+  createDraft: (values, businessHourId) => createDraftBusinessHoursV2(values, businessHourId),
+  setSelectedSubEntityId: subEntityId => setSelectedSubEntityId(subEntityId)
 };
 
 export default connect(mapStateToProps, actions)(UpdateLayout);

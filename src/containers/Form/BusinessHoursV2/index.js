@@ -26,8 +26,7 @@ const CreateBusinessHoursV2Form = compose(
   connect(state => createFormName(state)),
   reduxForm({
     onSubmit: formSubmission,
-    validate: formValidation,
-    destroyOnUnmount: true
+    validate: formValidation
   })
 )(BusinessHoursV2Form);
 

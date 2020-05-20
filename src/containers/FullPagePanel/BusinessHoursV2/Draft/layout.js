@@ -1,26 +1,25 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment, Component } from 'react';
 import { Map } from 'immutable';
 import { reduxForm } from 'redux-form/immutable';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
+  Button,
+  MixCalendar,
+  ConfirmationWrapper,
   Modal,
   InputField,
   SidePanelActions,
-  MixCalendar,
-  DetailHeader,
-  SidePanelTable,
-  Detail
+  ToggleField,
+  DetailHeader
 } from 'cx-ui-components';
 import { isEmpty } from 'serenova-js-utils/strings';
-
-import SidePanelHeaderContainer from '../SidePanelHeader';
-import BusinessHoursV2 from '../../../Form/BusinessHoursV2';
-import RulesForm from '../../../Form/BusinessHoursV2/RulesForm';
-import SidePanelActionsContainer from '../../../../containers/SidePanelActions';
-import DetailWrapper from '../../../../components/DetailWrapper';
-import { detailHeaderText } from '../../../../utils';
 import moment from 'moment';
+
+import DetailWrapper from '../../../../components/DetailWrapper';
+import SidePanelHeaderContainer from '../SidePanelHeader';
+import BusinessHoursV2Draft from '../../../Form/BusinessHoursV2/Draft';
+import BusinessHoursV2RulesForm from '../../../Form/BusinessHoursV2/RulesForm';
 
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
   width: 75%;
@@ -31,43 +30,39 @@ const HeaderContainer = styled.div`
   padding: 10px 14px 16px;
 `;
 
-const Actions = styled(SidePanelActionsContainer)`
+const ButtonWrapper = styled.div`
+  margin: 0 10px 0 0;
+  box-sizing: border-box;
+  flex-grow: 1;
+`;
+
+const SidePanelActionsContainer = styled.div`
   width: 25%;
   float: right;
+  display: flex;
+  flex-direction: row;
 `;
 
-const FieldsColumn = styled.div`
-  padding: 10px 14px;
+const FormPanel = styled.div`
+  padding: 10px 14px 16px;
+  display: flex;
+`;
+
+const ExceptionsPanel = styled.div`
+  padding: 10px 14px 16px;
+  width: 100%;
+`;
+
+const DraftFormWrapper = styled.div`
   width: 30%;
-  margin-rigth: 35px;
 `;
 
-const CalendarColumn = styled.div`
+const CalendarWrapper = styled.div`
   width: 65%;
 `;
 
-const VersionsColumn = styled.div`
-  width: 95%;
-  margin-left: 50px;
-`;
-
-const RowWrapper = styled.div`
-  width: 100%;
-`;
-
-const WrappedDetailHeader = styled(DetailHeader)`
-  margin-left: 55px;
-  color: #2e9afe;
-`;
-
-const WrapperDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-`;
-
 const ModalWrapper = styled.div`
-  min-height: 100px;
+  min-height: 150px;
   overflow: auto;
   margin-top: 10px;
 `;
@@ -79,14 +74,13 @@ const ModalTitle = styled.h3`
   font-weight: 700;
 `;
 
-const VersionDetailContainer = styled.div`
-  margin: 0 auto;
-  max-width: 295px;
-  padding: 10px 0;
-`;
-
 const ModalActions = styled(SidePanelActions)`
   display: flow-root;
+`;
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 55px;
+  color: #2e9afe;
 `;
 
 const eventType = [
@@ -116,55 +110,35 @@ const eventType = [
   }
 ];
 
-const versionsEntitiyTableHeaders = [
-  {
-    type: 'string',
-    name: 'version',
-    label: 'Version',
-    required: true
-  },
-  {
-    type: 'string',
-    name: 'name',
-    label: 'Name',
-    required: true
-  },
-  {
-    type: 'string',
-    name: 'createdBy',
-    label: 'Created By',
-    required: true
-  },
-  {
-    type: 'string',
-    name: 'createdOn',
-    label: 'Created On',
-    required: true
-  }
-];
-
 const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 const ordinalKeywords = ['first', 'second', 'third', 'fourth', 'last'];
 
-const CreateDraftForm = reduxForm({
-  form: 'businessHoursV2:createDraft'
-})(function({ handleSubmit, onCancel, invalid, isSaving }) {
+const PublishForm = reduxForm({
+  form: 'businessHoursV2:publishDraft'
+})(function({ handleSubmit, isInitialDraft, onCancel, invalid, isSaving }) {
   return (
     <form onSubmit={handleSubmit}>
       <ModalActions onCancel={onCancel} isSaving={isSaving} invalid={invalid} />
       <ModalTitle>Publish Draft</ModalTitle>
       <ModalWrapper>
-        <InputField name="draftName" label="Draft Name" componentType="input" inputType="text" disabled={isSaving} />
+        <InputField
+          name="versionName"
+          label="Version Name"
+          componentType="input"
+          inputType="text"
+          disabled={isSaving}
+        />
+        <ToggleField name="makeActive" disabled={isSaving || isInitialDraft} label="Make active" />
       </ModalWrapper>
     </form>
   );
 });
 
-export default class BusinessHoursV2UpdateFullPage extends Component {
+export default class BusinessHoursV2DraftEditFullPage extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      isCreateModalOpen: false,
+      isPublishModalOpen: false,
       calendarDateRange: {
         start: moment()
           .startOf('month')
@@ -174,40 +148,14 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
           .endOf('month')
           .endOf('week')
           .toString()
-      },
-      eventList: []
+      }
     };
   }
 
-  componentDidMount() {
-    const { selectedBusinessHourVersion, rules } = this.props;
-    if (selectedBusinessHourVersion && rules) {
-      this.setState({
-        eventList: this.handleCalendarEvents()
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { selectedBusinessHourVersion: prevselectedBusinessHourVersion, rules: prevRules } = prevProps;
-    const { selectedBusinessHourVersion, rules } = this.props;
-    const { calendarDateRange: prevCalendarDateRange } = prevState;
-    const { calendarDateRange } = this.state;
-    if (
-      selectedBusinessHourVersion !== prevselectedBusinessHourVersion ||
-      (!prevRules && rules) ||
-      prevCalendarDateRange.start !== calendarDateRange.start ||
-      prevCalendarDateRange.end !== calendarDateRange.end
-    ) {
-      this.setState({
-        eventList: this.handleCalendarEvents()
-      });
-    }
-  }
-
-  toggleCreateModal = () => {
-    this.setState(({ isCreateModalOpen: prevIsCreateModalOpen }) => ({
-      isCreateModalOpen: !prevIsCreateModalOpen
+  togglePublishModal = e => {
+    e.preventDefault();
+    this.setState(prevProps => ({
+      isPublishModalOpen: !prevProps.isPublishModalOpen
     }));
   };
 
@@ -218,8 +166,11 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
   };
 
   handleCalendarEvents = () =>
-    this.props.rules && this.props.rules.length
+    this.props.rules && this.props.rules.size
       ? this.props.rules
+          // For the time being we get rid of rules that are new or are copies of older rules, so the page doesn't become slow.
+          // This should be improved
+          .filter(({ id }) => !id.includes('new-rule') || !id.includes('exception-copy'))
           .reduce((eventList, rule) => {
             let calendarEventTypeId;
             switch (rule.type) {
@@ -954,115 +905,120 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
   };
 
   render() {
+    const {
+      props: {
+        cancel,
+        saveDraft,
+        publishDraft,
+        saveBeforePublish,
+        shouldPublish,
+        isSubEntitySaving,
+        formsAreDirty,
+        formsAreInvalid,
+        draftName,
+        versions,
+        isPublishingDraft
+      },
+      state: { isPublishModalOpen }
+    } = this;
+
+    const calendarEvents = this.handleCalendarEvents();
+
     return (
       <Fragment>
         <HeaderContainer>
-          <Actions />
+          <SidePanelActionsContainer>
+            <ButtonWrapper>
+              <ConfirmationWrapper
+                confirmBtnCallback={!isSubEntitySaving && !isPublishingDraft && formsAreDirty ? cancel : undefined}
+                mainText="You have unsaved changes that will be lost!."
+                secondaryText="Click Confirm to discard changes, or Cancel to continue editing."
+              >
+                <Button
+                  buttonType="secondary"
+                  disabled={isSubEntitySaving || isPublishingDraft}
+                  onClick={!isSubEntitySaving && !isPublishingDraft && !formsAreDirty ? cancel : undefined}
+                >
+                  Cancel
+                </Button>
+              </ConfirmationWrapper>
+            </ButtonWrapper>
+            <ButtonWrapper>
+              <Button
+                buttonType="primary"
+                onClick={saveDraft}
+                disabled={isSubEntitySaving || !formsAreDirty || formsAreInvalid || isPublishingDraft}
+              >
+                Save Draft
+              </Button>
+            </ButtonWrapper>
+            <ButtonWrapper>
+              <Button
+                buttonType="primary"
+                disabled={!shouldPublish || isSubEntitySaving || formsAreInvalid || isPublishingDraft}
+                onClick={this.togglePublishModal}
+              >
+                {`${formsAreDirty ? 'Save and ' : ''}Publish`}
+              </Button>
+            </ButtonWrapper>
+          </SidePanelActionsContainer>
           <SidePanelHeader />
         </HeaderContainer>
-        <WrapperDiv>
-          <FieldsColumn>
-            <BusinessHoursV2 />
-          </FieldsColumn>
-          <CalendarColumn>
+        <FormPanel>
+          <DraftFormWrapper>
+            <BusinessHoursV2Draft />
+          </DraftFormWrapper>
+          <CalendarWrapper>
             <MixCalendar
-              eventList={this.state.eventList}
               eventType={eventType}
+              eventList={calendarEvents}
               onChange={e => this.updateCalendarDateRange(e)}
             />
-          </CalendarColumn>
-          <br />
-          <RowWrapper>
-            <DetailWrapper customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;" open>
-              <WrappedDetailHeader
-                customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
-                fontSize="20px"
-                text="Versions"
-              />
-              <br />
-              <VersionsColumn>
-                <label>Versioning ({this.props.versions && this.props.versions.length} Published)</label>
-                <DetailHeader
-                  userHasUpdatePermission={!this.props.inherited && this.props.userHasUpdatePermission}
-                  text={detailHeaderText(this.props.versions || [], 'Published')}
-                  onActionButtonClick={this.props.drafts && this.toggleCreateModal}
-                  inherited={this.props.inherited}
-                  open
-                />
-                <SidePanelTable
-                  items={[...(this.props.versions || []), ...(this.props.drafts || [])]}
-                  fields={versionsEntitiyTableHeaders}
-                  defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
-                  userHasUpdatePermission={this.props.userHasUpdatePermission}
-                  userHasViewPermission={this.props.userHasViewPermission}
-                  //copySubEntity={() => alert('Copy Selected')}  //ToDo
-                  viewSubEntity={id => this.props.setSelectedBusinessHourVersion(id)}
-                  updateSubEntity={draftId => this.props.setSelectedSubEntityId(draftId)}
-                  fetching={!this.props.versions || !this.props.drafts}
-                  inherited={this.props.inherited}
-                  // itemApiPending={this.props.itemApiPending} //ToDo
-                />
-              </VersionsColumn>
-            </DetailWrapper>
-          </RowWrapper>
-          <br />
-          <RowWrapper>
-            <DetailWrapper customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;" open>
-              <WrappedDetailHeader
-                customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
-                fontSize="20px"
-                text="Hours and Exceptions"
-              />
-              <VersionDetailContainer>
-                <Detail
-                  label="Selected Version"
-                  value={
-                    this.props.versions &&
-                    this.props.selectedBusinessHourVersion &&
-                    this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
-                      ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).name
-                      : ''
-                  }
-                />
-                <Detail
-                  label="Timezone"
-                  value={
-                    this.props.versions &&
-                    this.props.selectedBusinessHourVersion &&
-                    this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
-                      ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).timezone
-                      : ''
-                  }
-                />
-              </VersionDetailContainer>
-              <RulesForm />
-            </DetailWrapper>
-          </RowWrapper>
-        </WrapperDiv>
-        {this.state.isCreateModalOpen && (
-          <Modal onMaskClick={!this.props.isCreatingDraft && this.toggleCreateModal}>
-            <CreateDraftForm
+          </CalendarWrapper>
+        </FormPanel>
+        <ExceptionsPanel>
+          <DetailWrapper customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;" open>
+            <WrappedDetailHeader
+              customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+              fontSize="20px"
+              text="Hours and Exceptions"
+              userHasUpdatePermission={this.props.userHasUpdatePermission}
+              onActionButtonClick={this.props.addRule}
+            />
+            <BusinessHoursV2RulesForm />
+          </DetailWrapper>
+        </ExceptionsPanel>
+        {isPublishModalOpen && (
+          <Modal onMaskClick={!this.props.isPublishingDraft && this.togglePublishModal}>
+            <PublishForm
               onSubmit={values => {
-                this.props.createDraft(values.toJS(), this.props.businessHourId);
+                if (formsAreDirty) {
+                  saveBeforePublish(values.set('isInitialDraft', !versions || versions.length === 0));
+                } else {
+                  publishDraft(values.set('isInitialDraft', !versions || versions.length === 0));
+                }
               }}
               initialValues={Map({
-                draftName: ''
+                versionName: draftName,
+                makeActive: !versions || versions.length === 0
               })}
               validate={values => ({
-                draftName:
-                  (isEmpty(values.get('draftName')) && "Draft Name can't be empty") ||
-                  (this.props.drafts.some(
-                    draft =>
-                      draft.name.toLowerCase() ===
-                      values
-                        .get('draftName')
-                        .trim()
-                        .toLowerCase()
-                  ) &&
-                    'Draft name should be unique')
+                versionName:
+                  (isEmpty(values.get('versionName')) && "Version Name can't be empty") ||
+                  (versions &&
+                    versions.some(
+                      version =>
+                        version.name.toLowerCase() ===
+                        values
+                          .get('versionName')
+                          .trim()
+                          .toLowerCase()
+                    ) &&
+                    'Version name should be unique')
               })}
-              isSaving={this.props.isCreatingDraft}
-              onCancel={this.toggleCreateModal}
+              isInitialDraft={!versions || versions.length === 0}
+              onCancel={this.togglePublishModal}
+              isSaving={isPublishingDraft || isSubEntitySaving}
             />
           </Modal>
         )}
@@ -1071,30 +1027,27 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
   }
 }
 
-BusinessHoursV2UpdateFullPage.propTypes = {
-  versions: PropTypes.array,
-  rules: PropTypes.array,
-  setSelectedBusinessHourVersion: PropTypes.func,
-  isSaving: PropTypes.bool,
-  inherited: PropTypes.bool,
-  userHasViewPermission: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool,
-  userHasSharePermission: PropTypes.bool,
-  drafts: PropTypes.array,
-  createDraft: PropTypes.func,
-  businessHourId: PropTypes.string,
-  isCreatingDraft: PropTypes.bool,
-  setSelectedSubEntityId: PropTypes.func,
-  selectedBusinessHourVersion: PropTypes.string
-};
-
-CreateDraftForm.propTypes = {
+PublishForm.propTypes = {
   handleSubmit: PropTypes.func,
+  isInitialDraft: PropTypes.bool,
   onCancel: PropTypes.func,
   invalid: PropTypes.bool,
   isSaving: PropTypes.bool
 };
 
-BusinessHoursV2UpdateFullPage.defaultProps = {
-  events: []
+BusinessHoursV2DraftEditFullPage.propTypes = {
+  cancel: PropTypes.func.isRequired,
+  saveDraft: PropTypes.func.isRequired,
+  publishDraft: PropTypes.func.isRequired,
+  saveBeforePublish: PropTypes.func.isRequired,
+  userHasUpdatePermission: PropTypes.bool,
+  formsAreDirty: PropTypes.bool,
+  formsAreInvalid: PropTypes.bool,
+  shouldPublish: PropTypes.bool,
+  isSubEntitySaving: PropTypes.bool,
+  draftName: PropTypes.string,
+  versions: PropTypes.array,
+  isPublishingDraft: PropTypes.bool,
+  rules: PropTypes.object,
+  addRule: PropTypes.func
 };

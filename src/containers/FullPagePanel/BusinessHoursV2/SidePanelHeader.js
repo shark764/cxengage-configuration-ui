@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { SidePanelHeader } from 'cx-ui-components';
 import { toggleEntity } from '../../../redux/modules/entities';
 import {
-  sidePanelHeader,
   userHasUpdatePermission,
   isInherited,
   shouldDisableHeaderToggleField,
@@ -10,6 +9,7 @@ import {
   getConfirmationToggleEntityMessage
 } from '../../../redux/modules/entities/selectors';
 import { isFormPristine, isFormDirty } from '../../../redux/modules/form/selectors';
+import { panelHeaderBusinessHoursV2 as sidePanelHeader } from '../../../redux/modules/entities/businessHoursV2/selectors';
 import { isInIframe } from 'serenova-js-utils/browser';
 
 export function mapDispatchToProps(dispatch) {

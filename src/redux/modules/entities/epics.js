@@ -54,7 +54,8 @@ import {
   hasCustomFetchEntityData,
   hasCustomFetchEntityItemData,
   hasCustomUpdateEntityFullFilled,
-  entitiesUsingUpdateLogicForToggleEntity
+  entitiesUsingUpdateLogicForToggleEntity,
+  hasCustomSubEntityUpdate
 } from './config';
 
 import { downloadFile } from 'serenova-js-utils/browser';
@@ -64,7 +65,7 @@ import {
   camelCaseToKebabCase
 } from 'serenova-js-utils/strings';
 
-import { getCurrentFormValueByFieldName, isFormDirty, isSubEntityFormDirty } from '../form/selectors';
+import { getCurrentFormValueByFieldName, isFormDirty, areSubEntityFormsDirty } from '../form/selectors';
 
 import { history } from '../../../utils/history';
 /**
@@ -320,10 +321,13 @@ export const CreateEntity = action$ =>
     );
 
 export const CreateEntityFullfilled = action$ =>
-  action$.ofType('CREATE_ENTITY_FULFILLED', 'COPY_CURRENT_ENTITY_FULFILLED').map(a => ({
-    type: 'SET_SELECTED_ENTITY_ID',
-    entityId: a.response.result.id || a.response.result.userId
-  }));
+  action$
+    .ofType('CREATE_ENTITY_FULFILLED', 'COPY_CURRENT_ENTITY_FULFILLED')
+    .filter(({ entityName }) => entityName !== 'businessHoursV2')
+    .map(a => ({
+      type: 'SET_SELECTED_ENTITY_ID',
+      entityId: a.response.result.id || a.response.result.userId
+    }));
 
 export const CopyEntity = (action$, store) =>
   action$
@@ -856,6 +860,7 @@ export const UpdateSubEntity = (action$, store) =>
       subEntityName: getCurrentSubEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState())
     }))
+    .filter(({ entityName, subEntityName }) => !hasCustomSubEntityUpdate(entityName, subEntityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'subEntity');
       a.sdkCall.data = {
@@ -1070,7 +1075,7 @@ export const saveDirtyFormIdToConfig1SessionStorage = (action$, store) =>
   action$
     .ofType('@@redux-form/BLUR')
     .filter(() => !isInIframe())
-    .filter(() => isFormDirty(store.getState()) || isSubEntityFormDirty(store.getState()))
+    .filter(() => isFormDirty(store.getState()) || areSubEntityFormsDirty(store.getState()))
     .map(a => ({
       module: 'setDirtyFormIdInSessionStorage',
       formId: a.meta.form

@@ -1,73 +1,197 @@
 import { createSelector } from 'reselect';
 import { Map, List } from 'immutable';
+import { isInvalid, formValueSelector, isDirty } from 'redux-form/immutable';
+import { generateUUID } from 'serenova-js-utils/uuid';
+import { dateToString } from '../../../../utils/dateUtils';
 
 import { selectFormInitialValues } from '../../form/selectors';
-import { getSelectedEntity } from '../selectors';
+import { getSelectedEntity, getSelectedSubEntity } from '../selectors';
+import { onSubEntityFormSubmit } from '../../entities';
+import { sidePanelHeader, isSubEntitySaving } from '../../entities/selectors';
+
+const draftEditFormSelector = formValueSelector('draft:edit');
+const ruleFormSelector = formValueSelector('businessHoursV2:rules');
 
 export const selectBusinessHoursV2FormInitialValues = state => {
   if (getSelectedEntity(state) === undefined) {
-    return Map({ active: true, shared: false });
+    return Map({ shared: false });
   }
   return selectFormInitialValues(state);
 };
 
-export const getBusinessHourV2Drafts = createSelector(
-  getSelectedEntity,
-  businessHour =>
-    businessHour &&
-    businessHour.get('items') &&
-    List.isList(businessHour.get('items')) &&
-    businessHour.get('items').toJS()
-);
-
 export const selectBusinessHoursEntityVersions = createSelector(
   [getSelectedEntity],
   selectedEntity =>
-    (selectedEntity &&
-      selectedEntity.get('versions') &&
-      List.isList(selectedEntity.get('versions')) &&
-      selectedEntity
-        .get('versions')
-        .map((version, index) => ({
-          id: version.get('id'), // Used to set in selectedVersion on redux in EntityTable
-          version: `v${selectedEntity.get('versions').size - index}`,
-          name: `v${selectedEntity.get('versions').size - index} - ${version.get('name')}`,
-          createdBy: version.get('createdByName'),
-          createdOn: version.get('created'),
-          rules: version.get('rules').toJS(),
-          value: version.get('id'),
-          label: `v${selectedEntity.get('versions').size - index} - ${version.get('name')}`
-        }))
-        .toJS()) ||
-    []
-);
-
-export const getBusinessHourActiveVersion = createSelector(
-  [getSelectedEntity],
-  selectedEntity => (selectedEntity && selectedEntity.get('activeVersion')) || ''
-);
-
-export const selectBusinessHoursRules = createSelector(
-  [getSelectedEntity],
-  selectedEntity =>
-    (selectedEntity &&
+    selectedEntity &&
     selectedEntity.get('versions') &&
     List.isList(selectedEntity.get('versions')) &&
-    (selectedEntity.get('selectedVersion') || selectedEntity.get('activeVersion')) && // When the component is loading, there is no selectedVersion yet, so we use activeVersion
-      selectedEntity.get('versions').size > 0 &&
-      selectedEntity
-        .get('versions')
-        .find(
-          version =>
-            version.get('id') === (selectedEntity.get('selectedVersion') || selectedEntity.get('activeVersion'))
-        )
-        .get('rules')
-        .toJS() //
-        .map(({ startDate, endDate, ...rule }, index) => ({
-          ...rule,
-          ...(startDate && { startDate: new Date(startDate) }),
-          ...(endDate && { endDate: new Date(endDate) }),
-          id: index.toString() // id required for BusinessRuleComponent
-        }))) ||
-    []
+    selectedEntity
+      .get('versions')
+      .sort((versionA, versionB) => {
+        const createdA = new Date(versionA.get('created'));
+        const createdB = new Date(versionB.get('created'));
+
+        if (createdA > createdB) {
+          return -1;
+        } else if (createdA < createdB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      })
+      .map((version, index) => ({
+        id: version.get('id'), // Used to set in selectedVersion on redux in EntityTable
+        version: `v${selectedEntity.get('versions').size - index}`,
+        name: version.get('name'),
+        createdBy: version.get('createdByName'),
+        createdOn: dateToString(version.get('created')),
+        value: version.get('id'),
+        label: `v${selectedEntity.get('versions').size - index} - ${version.get('name')}`,
+        timezone: version.get('timezone')
+      }))
+      .toJS()
+);
+
+export const panelHeaderBusinessHoursV2 = createSelector(
+  sidePanelHeader,
+  getSelectedEntity,
+  getSelectedSubEntity,
+  (panelHeaderData, entity, subEntity) => {
+    if (subEntity) {
+      return {
+        title: entity && entity.get('name')
+      };
+    } else {
+      return panelHeaderData;
+    }
+  }
+);
+
+export const getSelectedBusinessHourV2Version = state =>
+  state.getIn(['Entities', 'businessHoursV2', 'selectedVersion']);
+
+export const selectRules = createSelector(
+  getSelectedEntity,
+  getSelectedSubEntity,
+  getSelectedBusinessHourV2Version,
+  (entity, subEntity, selectedVersion) => {
+    if (subEntity) {
+      return (
+        subEntity &&
+        List.isList(subEntity.get('rules')) &&
+        subEntity.get('rules').reduce((ruleList, rule) => {
+          const { startDate, endDate, ...r } = rule.toJS();
+          return [
+            ...ruleList,
+            {
+              ...r,
+              id: generateUUID(),
+              startDate: new Date(startDate),
+              ...(endDate ? { endDate: new Date(endDate) } : {})
+            }
+          ];
+        }, [])
+      );
+    } else {
+      return (
+        selectedVersion &&
+        entity &&
+        entity.get('versions') &&
+        List.isList(entity.get('versions')) &&
+        entity.get('versions').find(version => version.get('id') === selectedVersion) &&
+        entity
+          .get('versions')
+          .find(version => version.get('id') === selectedVersion)
+          .get('rules')
+          .reduce((ruleList, rule) => {
+            const { startDate, endDate, ...r } = rule.toJS();
+            return [
+              ...ruleList,
+              {
+                ...r,
+                id: generateUUID(),
+                startDate: new Date(startDate),
+                ...(endDate ? { endDate: new Date(endDate) } : {})
+              }
+            ];
+          }, [])
+      );
+    }
+  }
+);
+
+export const selectBusinessHoursV2RulesFormInitalValues = createSelector(
+  getSelectedSubEntity,
+  selectRules,
+  (subEntity, rules) =>
+    Map({
+      rules:
+        subEntity && !rules
+          ? List([
+              {
+                id: 'new-rule',
+                startDate: new Date(),
+                hours: {
+                  allDay: true
+                },
+                name: ''
+              }
+            ])
+          : List(rules)
+    })
+);
+
+export const selectBusinessHoursV2DraftFormInitalValues = createSelector(getSelectedSubEntity, selectedSubEntity => {
+  if (selectedSubEntity) {
+    return Map({
+      name: selectedSubEntity.get('name'),
+      timezone: selectedSubEntity.get('timezone'),
+      description: selectedSubEntity.get('description'),
+      created: selectedSubEntity.get('created'),
+      updated: selectedSubEntity.get('updated')
+    });
+  } else {
+    return Map({
+      name: ''
+    });
+  }
+});
+
+export const selectRulesFormViewMode = state => getSelectedEntity(state) && !getSelectedSubEntity(state);
+
+export const draftFormsAreInvalid = state =>
+  isInvalid('draft:edit')(state) || isInvalid('businessHoursV2:rules')(state);
+
+export const draftFormsAreDirty = state => isDirty('draft:edit')(state) || isDirty('businessHoursV2:rules')(state);
+
+export const shouldPublishDraft = state =>
+  draftEditFormSelector(state, 'timezone') &&
+  ruleFormSelector(state, 'rules') &&
+  ruleFormSelector(state, 'rules').size > 0;
+
+export const isPublishingDraft = state => state.getIn(['Entities', 'businessHoursV2', 'isPublishingDraft']);
+
+export const selectRulesFormDisabled = state =>
+  !getSelectedSubEntity(state) || isSubEntitySaving(state) || isPublishingDraft(state);
+
+export const subEntityFormSubmission = (values, dispatch) => dispatch(onSubEntityFormSubmit(values, { dirty: true }));
+
+export const isCreatingDraft = state => state.getIn(['Entities', 'businessHoursV2', 'isCreatingDraft']);
+
+export const selectDrafts = createSelector(
+  getSelectedEntity,
+  entity =>
+    entity &&
+    entity.get('items') &&
+    List.isList(entity.get('items')) &&
+    entity
+      .get('items')
+      .map(draft => ({
+        id: draft.get('id'), // Used to set in selectedVersion on redux in EntityTable
+        version: 'Draft',
+        name: draft.get('name'),
+        createdBy: draft.get('createdByName'),
+        createdOn: draft.get('created')
+      }))
+      .toJS()
 );

@@ -191,9 +191,14 @@ export const getSelectedSubEntityName = state => getCurrentEntityStore(state).ge
 export const getSelectedSubEntityData = state => getCurrentEntityStore(state).get('selectedSubEntityData');
 
 export const getSelectedSubEntity = createSelector(
-  [getSelectedEntity, getCurrentSubEntity, getSelectedSubEntityId],
-  (selectedEntity, currentSubEntity, selectedSubEntityId) =>
-    selectedEntity && selectedEntity.get('items').find(subEntity => subEntity.get('key') === selectedSubEntityId)
+  [getSelectedEntity, getSelectedSubEntityId],
+  (selectedEntity, selectedSubEntityId) =>
+    selectedEntity &&
+    selectedSubEntityId &&
+    selectedEntity.get('items') &&
+    selectedEntity
+      .get('items')
+      .find(subEntity => subEntity.get('key') === selectedSubEntityId || subEntity.get('id') === selectedSubEntityId)
 );
 
 export const isSubEntitySaving = state => getCurrentEntityStore(state).get('subEntitySaving');
@@ -205,9 +210,9 @@ export const getSelectedEntityFormId = createSelector(
 
 export const getAllForms = state => state.get('form');
 
-export const getSelectedSubEntityFormId = createSelector(
+export const getSelectedSubEntityFormsIds = createSelector(
   [getAllForms, getSelectedEntityFormId],
-  (allForms, selectedEntityFormId) => allForms && allForms.findKey((value, key) => key !== selectedEntityFormId)
+  (allForms, selectedEntityFormId) => allForms && [...allForms.keys()].filter(key => key !== selectedEntityFormId)
 );
 
 export const availableEntitiesForList = state => {

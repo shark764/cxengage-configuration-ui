@@ -310,6 +310,7 @@ const initialState = fromJS({
     assignPermission: ['']
   },
   businessHoursV2: {
+    subEntity: 'drafts',
     data: [],
     selectedEntityId: '',
     confirmationDialogType: undefined,
@@ -567,6 +568,22 @@ export const onIntegrationListenerFormSubmit = (values, { dirty }) => ({
   dirty
 });
 
+export const publishBusinessHoursV2Draft = values => ({
+  type: 'PUBLISH_BUSINESS_HOURS_V2_DRAFT',
+  values
+});
+
+export const saveBeforePublishBusinessHoursV2Drfat = values => ({
+  type: 'SAVE_BEFORE_PUBLISH_BUSINESS_HOURS_V2_DRAFT',
+  values
+});
+
+export const createDraftBusinessHoursV2 = (values, businessHourId) => ({
+  type: 'CREATE_DRAFT_BUSINESS_HOURS_V2',
+  businessHourId,
+  values
+});
+
 // Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -757,7 +774,6 @@ export default function reducer(state = initialState, action) {
       return state.setIn([action.entityName, 'creating'], true);
     }
     case 'COPY_CURRENT_ENTITY_FULFILLED':
-    case 'CREATE_DRAFT_AND_BUSINESS_HOUR_V2_FULFILLED':
     case 'CREATE_ENTITY_FULFILLED': {
       const { result } = action.response;
 
@@ -775,7 +791,9 @@ export default function reducer(state = initialState, action) {
       }
 
       return state.update(action.entityName, entityStore =>
-        entityStore.update('data', data => data.push(fromJS(result))).set('creating', false)
+        entityStore
+          .update('data', data => data.push(fromJS(result)))
+          .set('creating', action.entityName === 'businessHoursV2')
       );
     }
     case 'CREATE_ENTITY_REJECTED': {
@@ -1165,8 +1183,10 @@ export default function reducer(state = initialState, action) {
       if (entityIndex !== -1) {
         return state.update(action.entityName, entityStore =>
           entityStore
-            .updateIn(['data', entityIndex, 'items'], subEntityList => {
-              const subEntityIndex = subEntityList.findIndex(subEntity => subEntity.get('key') === action.subEntityId);
+            .updateIn(['data', entityIndex, 'items'], (subEntityList = List()) => {
+              const subEntityIndex = subEntityList.findIndex(
+                subEntity => subEntity.get('key') === action.subEntityId || subEntity.get('id') === action.subEntityId
+              );
               if (entityIndex !== -1) {
                 const { itemValue, key } = action.response.result;
                 return subEntityList.setIn(
@@ -1180,7 +1200,10 @@ export default function reducer(state = initialState, action) {
                 return subEntityList;
               }
             })
-            .set('selectedSubEntityId', undefined)
+            .update(
+              'selectedSubEntityId',
+              selectedSubEntityId => (action.entityName === 'businessHoursV2' ? selectedSubEntityId : undefined)
+            )
             .set('subEntitySaving', false)
         );
       } else {
@@ -1267,21 +1290,66 @@ export default function reducer(state = initialState, action) {
         })
       );
     }
-    case 'SET_BUSINESS_HOUR_VERSIONS': {
+    case 'SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS': {
       const currentEntity = state.get('currentEntity');
       const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
       const entityIndex = findEntityIndex(state, currentEntity, selectedEntityId);
       if (entityIndex !== -1) {
-        return state.setIn([currentEntity, 'data', entityIndex, 'versions'], fromJS(action.versions));
+        return state
+          .setIn([currentEntity, 'data', entityIndex, 'versions'], fromJS(action.versions))
+          .setIn([currentEntity, 'data', entityIndex, 'items'], fromJS(action.drafts));
+      } else {
+        return state;
+      }
+    }
+    case 'PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED': {
+      const index = state
+        .getIn(['businessHoursV2', 'data'])
+        .findIndex(businessHour => businessHour.get('id') === action.entityId);
+      if (index !== -1) {
+        return state
+          .updateIn(['businessHoursV2', 'data', index, 'versions'], (versions = List()) =>
+            versions.push(
+              fromJS({
+                ...action.response.result
+              })
+            )
+          )
+          .setIn(['businessHoursV2', 'isPublishingDraft'], false)
+          .deleteIn(['businessHoursV2', 'selectedSubEntityId']);
       } else {
         return state;
       }
     }
     case 'SET_SELECTED_BUSINESS_HOUR_VERSION': {
-      const currentEntity = state.get('currentEntity');
-      const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
-      const entityIndex = findEntityIndex(state, currentEntity, selectedEntityId);
-      return state.setIn([currentEntity, 'data', entityIndex, 'selectedVersion'], fromJS(action.selectedVersionId));
+      return state.setIn(['businessHoursV2', 'selectedVersion'], fromJS(action.selectedVersionId));
+    }
+    case 'PUBLISH_BUSINESS_HOURS_V2_DRAFT':
+    case 'SAVE_BEFORE_PUBLISH_BUSINESS_HOURS_V2_DRAFT': {
+      return state.setIn(['businessHoursV2', 'isPublishingDraft'], true);
+    }
+    case 'CREATE_DRAFT_BUSINESS_HOURS_V2': {
+      return state.setIn(['businessHoursV2', 'isCreatingDraft'], true);
+    }
+    case 'CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED': {
+      const index = state
+        .getIn(['businessHoursV2', 'data'])
+        .findIndex(businessHour => businessHour.get('id') === action.businessHourId);
+      if (index !== -1) {
+        return state.update('businessHoursV2', businessHoursV2State =>
+          businessHoursV2State
+            .updateIn(['data', index, 'items'], (drafts = List()) => drafts.push(fromJS(action.response.result)))
+            .set('isCreatingDraft', false)
+            .set('creating', false)
+            .set('selectedEntityId', action.businessHourId)
+            .set('selectedSubEntityId', action.response.result.id)
+        );
+      } else {
+        return state;
+      }
+    }
+    case 'CREATE_DRAFT_BUSINESS_HOURS_V2_REJECTED': {
+      return state.setIn(['businessHoursV2', 'isCreatingDraft'], false);
     }
     default:
       return state;

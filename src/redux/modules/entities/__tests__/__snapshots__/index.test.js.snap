@@ -427,24 +427,25 @@ Immutable.Map {
     "assignPermission": Immutable.List [],
   },
   "businessHoursV2": Immutable.Map {
-    "data": Immutable.List [],
-    "selectedEntityId": "",
-    "confirmationDialogType": undefined,
+    "subEntity": "drafts",
     "readPermission": Immutable.List [
       "VIEW_ALL_BUSINESS_HOURS",
     ],
-    "updatePermission": Immutable.List [
-      "MANAGE_ALL_BUSINESS_HOURS",
-    ],
+    "data": Immutable.List [],
     "createPermission": Immutable.List [
-      "MANAGE_ALL_BUSINESS_HOURS",
-    ],
-    "disablePermission": Immutable.List [
       "MANAGE_ALL_BUSINESS_HOURS",
     ],
     "sharePermission": Immutable.List [
       "MANAGE_ALL_BUSINESS_HOURS",
     ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_BUSINESS_HOURS",
+    ],
+    "selectedEntityId": "",
   },
   "apiKeys": Immutable.Map {
     "readPermission": Immutable.List [

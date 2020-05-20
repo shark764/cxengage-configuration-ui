@@ -1,34 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createBusinessHour The new entity being created is a businessHour's V2 one returns CREATE_DRAFT_AND_BUSINESS_HOUR_V2 1`] = `
+exports[`createBusinessHour The new entity being created is a businessHour's V2 one returns CREATE_ENTITY_FULFILLED and CREATE_DRAFT_BUSINESS_HOURS_V2 1`] = `
 Object {
   "entityName": "businessHoursV2",
-  "response": "mock response",
-  "sdkCall": Object {
-    "apiVersion": "v2",
-    "command": "createBusinessHoursV",
-    "crudAction": "create",
-    "data": undefined,
-    "module": "entities",
-    "path": Array [
-      "business-hours",
-    ],
-    "topic": "cxengage/entities/create-business-hours-v-response",
+  "response": Object {
+    "result": Object {
+      "id": "mock-id",
+    },
   },
-  "type": "CREATE_DRAFT_AND_BUSINESS_HOUR_V2",
+  "type": "CREATE_ENTITY_FULFILLED",
 }
 `;
 
-exports[`createDraftAndSaveToState The business hour draft is created and saved to the redux state returns CREATE_DRAFT_AND_BUSINESS_HOUR_V2_FULFILLED 1`] = `
+exports[`createBusinessHour The new entity being created is a businessHour's V2 one returns CREATE_ENTITY_FULFILLED and CREATE_DRAFT_BUSINESS_HOURS_V2 2`] = `
 Object {
+  "businessHourId": "mock-id",
+  "type": "CREATE_DRAFT_BUSINESS_HOURS_V2",
+  "values": Object {
+    "draftName": "Initial Draft",
+  },
+}
+`;
+
+exports[`createDraft The business hour draft is created and saved to the redux state returns CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED 1`] = `
+Object {
+  "businessHourId": "mock-id",
   "response": Object {
     "result": Object {
-      "id": "business-hour-id",
-      "items": Array [
-        Object {
-          "id": "version-id",
-        },
-      ],
+      "id": "version-id",
     },
   },
   "sdkCall": Object {
@@ -36,31 +35,21 @@ Object {
     "command": "createBusinessHourV2Draft",
     "crudAction": "create",
     "data": Object {
-      "name": "Initial draft",
+      "name": "mock-name",
     },
     "module": "entities",
     "path": Array [
       "business-hours",
-      "business-hour-id",
+      "mock-id",
       "drafts",
     ],
     "topic": "cxengage/entities/create-business-hours-v2-draft",
   },
-  "type": "CREATE_DRAFT_AND_BUSINESS_HOUR_V2_FULFILLED",
-}
-`;
-
-exports[`createDraftAndSaveToState The business hour draft is created and saved to the redux state returns CREATE_DRAFT_AND_BUSINESS_HOUR_V2_FULFILLED 2`] = `
-Object {
-  "selectedSubEntityId": "version-id",
-  "type": "SET_SELECTED_SUB_ENTITY_ID",
-}
-`;
-
-exports[`createDraftAndSaveToState The business hour draft is created and saved to the redux state returns CREATE_DRAFT_AND_BUSINESS_HOUR_V2_FULFILLED 3`] = `
-Object {
-  "entityId": "business-hour-id",
-  "type": "SET_SELECTED_ENTITY_ID",
+  "selectedEntityId": undefined,
+  "type": "CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED",
+  "values": Object {
+    "draftName": "mock-name",
+  },
 }
 `;
 
@@ -78,11 +67,13 @@ Object {
 }
 `;
 
-exports[`fetchVersions Fetches versions for selected business hours returns SET_BUSINESS_HOUR_VERSIONS 1`] = `
+exports[`fetchVersionsAndDrafts Fetches versions and drafts for selected business hours returns SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS 1`] = `
 Object {
-  "activeVersion": undefined,
-  "businessHourId": "business-hour1-versions",
-  "type": "SET_BUSINESS_HOUR_VERSIONS",
+  "drafts": Object {
+    "businessHourId": "business-hour-1",
+    "id": "business-hour1-draft",
+  },
+  "type": "SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS",
   "versions": Object {
     "businessHourId": "business-hour-1",
     "id": "business-hour1-versions",
