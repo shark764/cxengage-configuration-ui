@@ -19,5 +19,6 @@ Object {
   </span>,
   "accessor": [Function],
   "id": "name",
+  "sortMethod": [Function],
 }
 `;

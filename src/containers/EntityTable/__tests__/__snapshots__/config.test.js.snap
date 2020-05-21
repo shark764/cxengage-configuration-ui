@@ -12,6 +12,7 @@ Array [
     </span>,
     "accessor": [Function],
     "id": "name",
+    "sortMethod": [Function],
   },
   Object {
     "Cell": [Function],

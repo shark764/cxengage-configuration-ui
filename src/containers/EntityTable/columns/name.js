@@ -40,7 +40,20 @@ export const nameColumn = {
       />
       <SearchIcon searchIconType="primary" size={10} />
     </div>
-  )
+  ),
+  sortMethod: (a, b) => {
+    let tempArray = [];
+    tempArray = [a, b];
+
+    const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+    tempArray.sort(collator.compare);
+
+    if (tempArray[0] === a) {
+        return -1;
+    } else {
+        return 1;
+    }
+  }
 };
 
 nameColumn.Cell.propTypes = {

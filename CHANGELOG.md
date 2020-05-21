@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.76.1] - 2020-05-18
+### Fixed
+- CXV1-17704 - Queues and Transfer List from Config UI aren't sort in alphabetical order
+
 ## [0.76.0] - 2020-04-28
 ## Added
 - CXV1-21472 - Basic Page Structure - Edit Draft
