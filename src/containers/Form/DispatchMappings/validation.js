@@ -25,7 +25,7 @@ export const formValidation = (values, props) => {
   validation.flowId = !values.get('flowId') && 'Please select a flow';
   validation.version =
     ((!props.flowsFetching && values.get('version') === '') ||
-      (props.flowsFetching && (!values.get('version') || values.get('version') === 'null'))) &&
+      (props.flowsFetching && (!values.get('version')))) &&
     'Please select a flow version';
 
   props.setMappingValueInvalid(false);

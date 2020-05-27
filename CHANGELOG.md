@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.76.2] - 2020-05-27
+### Fixed
+- CXV1-22121 - Creating dispatch mapping submit button grayed out
+
 ## [0.76.1] - 2020-05-18
 ### Fixed
 - CXV1-17704 - Queues and Transfer List from Config UI aren't sort in alphabetical order
