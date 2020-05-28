@@ -28,6 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.76.3] - 2020-05-27
+- CXV1-22521 - create start and end date 
+- CXV1-22520 - view draft
+- CXV1-22519 - Repeaters values
+- CXV1-21472 - Config 2 - Basic Page Structure - Edit Draft
+- CXV1-22510 - Fixes to rule component for one-time rules and SidePanelTable component
+
 ## [0.76.2] - 2020-05-27
 ### Fixed
 - CXV1-22121 - Creating dispatch mapping submit button grayed out

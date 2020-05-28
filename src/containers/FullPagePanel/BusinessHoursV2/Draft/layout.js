@@ -20,6 +20,7 @@ import DetailWrapper from '../../../../components/DetailWrapper';
 import SidePanelHeaderContainer from '../SidePanelHeader';
 import BusinessHoursV2Draft from '../../../Form/BusinessHoursV2/Draft';
 import BusinessHoursV2RulesForm from '../../../Form/BusinessHoursV2/RulesForm';
+import { ruleValidation } from '../../../Form/BusinessHoursV2/RulesForm/validation';
 
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
   width: 75%;
@@ -170,7 +171,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
       ? this.props.rules
           // For the time being we get rid of rules that are new or are copies of older rules, so the page doesn't become slow.
           // This should be improved
-          .filter(({ id }) => !id.includes('new-rule') || !id.includes('exception-copy'))
+          .filter(rule => !ruleValidation(rule, this.props.rules))
           .reduce((eventList, rule) => {
             let calendarEventTypeId;
             switch (rule.type) {

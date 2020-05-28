@@ -19,9 +19,12 @@ export const selectBusinessHoursV2FormInitialValues = state => {
   return selectFormInitialValues(state);
 };
 
+export const getSelectedBusinessHourV2Version = state =>
+  state.getIn(['Entities', 'businessHoursV2', 'selectedVersion']);
+
 export const selectBusinessHoursEntityVersions = createSelector(
-  [getSelectedEntity],
-  selectedEntity =>
+  [getSelectedEntity, getSelectedBusinessHourV2Version],
+  (selectedEntity, selectedBusinessHour) =>
     selectedEntity &&
     selectedEntity.get('versions') &&
     List.isList(selectedEntity.get('versions')) &&
@@ -47,7 +50,8 @@ export const selectBusinessHoursEntityVersions = createSelector(
         createdOn: dateToString(version.get('created')),
         value: version.get('id'),
         label: `v${selectedEntity.get('versions').size - index} - ${version.get('name')}`,
-        timezone: version.get('timezone')
+        timezone: version.get('timezone'),
+        viewing: selectedBusinessHour === version.get('id')
       }))
       .toJS()
 );
@@ -66,9 +70,6 @@ export const panelHeaderBusinessHoursV2 = createSelector(
     }
   }
 );
-
-export const getSelectedBusinessHourV2Version = state =>
-  state.getIn(['Entities', 'businessHoursV2', 'selectedVersion']);
 
 export const selectRules = createSelector(
   getSelectedEntity,
@@ -191,7 +192,7 @@ export const selectDrafts = createSelector(
         version: 'Draft',
         name: draft.get('name'),
         createdBy: draft.get('createdByName'),
-        createdOn: draft.get('created')
+        createdOn: dateToString(draft.get('created')),
       }))
       .toJS()
 );

@@ -23,7 +23,7 @@ import { detailHeaderText } from '../../../../utils';
 import moment from 'moment';
 
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
-  width: 75%;
+  width: 70%;
 `;
 
 const HeaderContainer = styled.div`
@@ -32,7 +32,7 @@ const HeaderContainer = styled.div`
 `;
 
 const Actions = styled(SidePanelActionsContainer)`
-  width: 25%;
+  width: 30%;
   float: right;
 `;
 
@@ -996,6 +996,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                   userHasUpdatePermission={this.props.userHasUpdatePermission}
                   userHasViewPermission={this.props.userHasViewPermission}
                   //copySubEntity={() => alert('Copy Selected')}  //ToDo
+                  shouldShowViewButtonOnItem={this.props.versions && (({ id }) => this.props.versions.find(({ id: versionId }) => id === versionId))}
                   viewSubEntity={id => this.props.setSelectedBusinessHourVersion(id)}
                   updateSubEntity={draftId => this.props.setSelectedSubEntityId(draftId)}
                   fetching={!this.props.versions || !this.props.drafts}

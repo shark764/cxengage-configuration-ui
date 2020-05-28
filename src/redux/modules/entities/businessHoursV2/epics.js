@@ -233,28 +233,30 @@ export const UpdateDraft = (action$, store) =>
         a.values.rules.length &&
         a.values.rules.map(rule => {
           const {
-            id,
             endDate,
             startDate,
-            on: { value, type } = {},
             on,
             hours: { intervals },
             hours,
             description,
             every,
-            ...r
+            repeats,
+            name,
+            type: draftType
           } = rule;
           return {
-            ...r,
+            name,
+            type: draftType,
             description: description || '',
             startDate: startDate instanceof Date ? startDate.toJSON() : startDate,
             ...(endDate ? { endDate: endDate instanceof Date ? endDate.toJSON() : endDate } : {}),
-            ...(on ? { on: value && !isNaN(value) ? { type, value: parseInt(value, 10) } : on } : {}),
+            ...(on && { on }),
             hours: {
               ...hours,
-              ...(intervals ? { intervals } : {})
+              ...(intervals && { intervals })
             },
-            every: isNaN(every) ? every : parseInt(every, 10)
+            ...(every && { every }),
+            ...(repeats && { repeats })
           };
         });
       const sdkCall = {
