@@ -4,24 +4,8 @@ exports[`<TenantsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    inputType="text"
-    label="Description"
-    name="description"
+  <LoadingSpinnerSVG
+    size={60}
   />
 </form>
 `;
@@ -30,24 +14,8 @@ exports[`<TenantsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    inputType="text"
-    label="Description"
-    name="description"
+  <LoadingSpinnerSVG
+    size={60}
   />
 </form>
 `;

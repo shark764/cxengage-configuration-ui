@@ -16,7 +16,6 @@ import * as slasEpics from './modules/entities/slas/epics';
 import * as userDataEpics from './modules/userData/epics';
 import * as transferListsEpics from './modules/entities/transferLists/epics';
 import * as apiKeysEpics from './modules/entities/apiKeys/epics';
-import * as timezoneEpics from './modules/timezones/epics';
 import * as businessHoursEpics from './modules/entities/businessHours/epics';
 import * as fetchReportingEventsEpics from './modules/entities/reportingEvents/epics';
 import * as tenantsEpics from './modules/entities/tenants/epics';
@@ -45,7 +44,6 @@ export const rootEpic = combineEpics(
   ...Object.values(userDataEpics),
   ...Object.values(transferListsEpics),
   ...Object.values(apiKeysEpics),
-  ...Object.values(timezoneEpics),
   ...Object.values(businessHoursEpics),
   ...Object.values(fetchReportingEventsEpics),
   ...Object.values(tenantsEpics),

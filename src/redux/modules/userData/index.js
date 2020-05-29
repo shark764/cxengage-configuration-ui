@@ -38,7 +38,7 @@ export const updatePlatformPermissions = permissions => ({
 });
 export const toggleUserAuthed = () => ({ type: 'TOGGLE_USER_AUTH' });
 
-export const switchTenant = tenantId => ({ type: 'SWITCH_TENANT', tenantId });
+export const switchTenant = (tenantId, setAsActiveTenant) => ({ type: 'SWITCH_TENANT', tenantId, setAsActiveTenant });
 
 // Reducer
 export default function reducer(state = initialState, action) {

@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.77.0] - 2020-05-28
+### Fixed
+- CXV1-18405 - Add Tenants page to config2.
+
 ## [0.76.3] - 2020-05-27
 - CXV1-22521 - create start and end date 
 - CXV1-22520 - view draft

@@ -9,17 +9,17 @@ import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import BusinessHoursForm, { mapStateToProps } from '../';
 import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
-import { getTimezones } from '../../../../redux/modules/timezones/selectors';
+import { selectTimezonesDropDownList } from '../../../../redux/modules/entities/timezones/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
-jest.mock('../../../../redux/modules/timezones/selectors');
+jest.mock('../../../../redux/modules/entities/timezones/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
-getTimezones.mockImplementation(() => []);
+selectTimezonesDropDownList.mockImplementation(() => []);
 
 describe('BusinessHours Renders', () => {
   it('renders', () => {

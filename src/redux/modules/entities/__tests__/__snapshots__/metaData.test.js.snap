@@ -289,7 +289,9 @@ Object {
       "message": "",
       "trueButtonText": "",
     },
-    "createFormDependencies": Array [],
+    "createFormDependencies": Array [
+      "timezones",
+    ],
     "daysInitials": Array [
       "mon",
       "tue",
@@ -373,7 +375,9 @@ Object {
     ],
     "subEntityName": "exceptions",
     "title": "Business Hour",
-    "updateFormDependencies": Array [],
+    "updateFormDependencies": Array [
+      "timezones",
+    ],
   },
   "businessHoursV2": EntityMetaData {
     "betaFeature": false,
@@ -410,7 +414,9 @@ Object {
       "message": "",
       "trueButtonText": "",
     },
-    "createFormDependencies": Array [],
+    "createFormDependencies": Array [
+      "timezones",
+    ],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
@@ -489,7 +495,9 @@ Object {
     ],
     "subEntityName": "drafts",
     "title": "Business Hours V",
-    "updateFormDependencies": Array [],
+    "updateFormDependencies": Array [
+      "timezones",
+    ],
   },
   "capacityRules": EntityMetaData {
     "betaFeature": false,
@@ -3050,6 +3058,68 @@ Object {
     "title": "Presence Reason",
     "updateFormDependencies": Array [],
   },
+  "regions": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "regions",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Regions",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Region",
+    "updateFormDependencies": Array [],
+  },
   "roles": EntityMetaData {
     "betaFeature": true,
     "bulkEditsAvailable": false,
@@ -3464,7 +3534,11 @@ Object {
       "message": "",
       "trueButtonText": "",
     },
-    "createFormDependencies": Array [],
+    "createFormDependencies": Array [
+      "users",
+      "timezones",
+      "regions",
+    ],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],
@@ -3514,6 +3588,76 @@ Object {
     ],
     "subEntityName": "",
     "title": "Tenant",
+    "updateFormDependencies": Array [
+      "users",
+      "integrations",
+      "slas",
+      "identityProviders",
+      "branding",
+      "regions",
+      "timezones",
+    ],
+  },
+  "timezones": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "timezones",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Home.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Timezones",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Timezone",
     "updateFormDependencies": Array [],
   },
   "transferLists": EntityMetaData {

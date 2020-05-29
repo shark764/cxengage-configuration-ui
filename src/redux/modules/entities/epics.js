@@ -53,6 +53,7 @@ import {
   hasCustomCreateSubEntity,
   hasCustomFetchEntityData,
   hasCustomFetchEntityItemData,
+  hasCustomCreateEntityFullFilled,
   hasCustomUpdateEntityFullFilled,
   entitiesUsingUpdateLogicForToggleEntity,
   hasCustomSubEntityUpdate
@@ -152,12 +153,12 @@ export const ToggleHasProficiencyFormField = (action$, store) =>
 export const FormSubmission = (action$, store) =>
   action$
     .ofType('FORM_SUBMIT')
-    .filter(({ dirty }) => dirty)
     .map(a => ({
       ...a,
       entityName: getCurrentEntity(store.getState()),
       selectedEntityId: getSelectedEntityId(store.getState())
     }))
+    .filter(({ dirty, entityName }) => dirty && entityName !== 'tenants')
     .map(a => {
       if (a.entityName === 'transferLists' && a.selectedEntityId !== 'bulk') {
         a.values = a.values.update('endpoints', endpoints =>
@@ -242,10 +243,12 @@ export const ToggleSharedFormField = (action$, store) =>
       )
     );
 
-export const FetchData = action$ =>
+export const FetchData = (action$, store) =>
   action$
     .ofType('FETCH_DATA')
-    .filter(({ entityName }) => hasCustomFetchEntityData(entityName))
+    .filter(
+      ({ entityName }) => hasCustomFetchEntityData(entityName) && getCurrentEntity(store.getState()) !== 'tenants'
+    )
     .mergeMap(a =>
       fromPromise(sdkPromise(entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')))
         .map(response => handleSuccess(response, a))
@@ -314,7 +317,9 @@ export const CreateEntity = action$ =>
           handleSuccess(
             response,
             a,
-            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`
+            a.entityName !== 'tenants'
+              ? `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`
+              : undefined
           )
         )
         .catch(error => handleError(error, a))
@@ -323,7 +328,7 @@ export const CreateEntity = action$ =>
 export const CreateEntityFullfilled = action$ =>
   action$
     .ofType('CREATE_ENTITY_FULFILLED', 'COPY_CURRENT_ENTITY_FULFILLED')
-    .filter(({ entityName }) => entityName !== 'businessHoursV2')
+    .filter(({ entityName }) => hasCustomCreateEntityFullFilled(entityName))
     .map(a => ({
       type: 'SET_SELECTED_ENTITY_ID',
       entityId: a.response.result.id || a.response.result.userId
@@ -383,7 +388,9 @@ export const UpdateEntity = action$ =>
           handleSuccess(
             response,
             a,
-            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
+            a.entityName !== 'tenants'
+              ? `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
+              : undefined
           )
         )
         .catch(error => handleError(error, a))
@@ -736,13 +743,13 @@ export const RemovingListItems = (action$, store) =>
 export const FetchFormMetaData = (action$, store) =>
   action$
     .ofType('SET_SELECTED_ENTITY_ID')
-    .filter(a => a.entityId !== '')
     .map(a => ({
       ...a,
       currentEntityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState()),
       isDefined: name => store.getState().getIn(['Entities', name, 'data']).size === 0
     }))
+    .filter(a => a.entityId !== '' && a.currentEntityName !== 'tenants')
     .switchMap(
       a =>
         a.entityId === 'create'
@@ -778,7 +785,13 @@ export const FetchSidePanelData = (action$, store) =>
       currentEntityName: getCurrentEntity(store.getState()),
       entityId: getSelectedEntityId(store.getState())
     }))
-    .filter(a => a.entityId !== 'create' && a.entityId !== '' && entitiesMetaData[a.currentEntityName].dependentEntity)
+    .filter(
+      a =>
+        a.entityId !== 'create' &&
+        a.entityId !== '' &&
+        a.currentEntityName !== 'tenants' &&
+        entitiesMetaData[a.currentEntityName].dependentEntity
+    )
     .map(a => ({
       type: 'FETCH_DATA_ITEM',
       entityName: a.currentEntityName,
@@ -1036,8 +1049,9 @@ export const getConfigUI1URLIdParam = (action$, store) =>
   action$
     .ofType('FETCH_DATA_FULFILLED')
     .filter(a => !isInIframe() && a.entityName === getCurrentEntity(store.getState()))
-    .map(() => ({
-      module: 'getUrlParamId'
+    .map(a => ({
+      module: 'getUrlParamId',
+      entityId: getSelectedEntityId(store.getState())
     }))
     .mergeMap(sdkCall =>
       fromPromise(sdkPromise(sdkCall)).map(response => {

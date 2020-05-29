@@ -37,10 +37,7 @@ export default function BusinessHoursV2DraftForm({
         name="timezone"
         label="Timezone"
         disabled={isSaving || inherited || !userHasUpdatePermission || isPublishing}
-        options={timezones.map(({ timezone, offset }) => ({
-          label: `(${offset}) ${timezone}`,
-          value: timezone
-        }))}
+        options={timezones}
         data-automation="BusinessHoursV2DraftTimezoneField"
         required
       />

@@ -2,13 +2,14 @@
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import { timeStampToSeconds } from 'cx-ui-components';
 import { onInitialVersionFormSubmit } from '../';
 import { getSelectedEntity, getSelectedSubEntityId, userHasPermissions, findEntity } from '../selectors';
 import { entitiesMetaData } from '../metaData';
 import { selectFormInitialValues } from '../../form/selectors';
 import { getCurrentTenantId } from '../../userData/selectors';
+import { createSelector } from 'reselect';
 
 export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onInitialVersionFormSubmit(values, props));
 
@@ -96,3 +97,15 @@ export const isSlaTenantDefault = state => {
   }
   return selectedEntity.get('id') === tenant.get('defaultSlaId');
 };
+
+export const getTenantSlas = state => state.getIn(['Entities', 'slas', 'data'], List());
+
+export const selectTenantSlas = createSelector(
+  [getTenantSlas],
+  data =>
+    data && data.size > 0
+      ? data
+          .filter(sla => sla.get('active') === true)
+          .map(activeSla => ({ value: activeSla.get('id'), label: activeSla.get('name') }))
+      : undefined
+);

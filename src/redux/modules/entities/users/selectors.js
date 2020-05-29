@@ -147,3 +147,10 @@ export const userHasNameSet = state => {
   const selectedEntity = getSelectedEntity(state);
   return selectedEntity && selectedEntity.get('firstName') !== null && selectedEntity.get('lastName') !== null;
 };
+
+export const getActiveUsersFullNames = users =>
+  users
+    .toJS()
+    .filter(user => user.status === 'accepted')
+    .map(user => ({ label: getDisplay(user), value: user.id }))
+    .sort((a, b) => (a.label.replace(/\s/g, '').toUpperCase() < b.label.replace(/\s/g, '').toUpperCase() ? -1 : 0));

@@ -354,6 +354,23 @@ Immutable.Map {
     ],
   },
   "tenants": Immutable.Map {
+    "dependentEntities": Immutable.Map {
+      "users": Immutable.Map {
+        "data": Immutable.List [],
+      },
+      "integrations": Immutable.Map {
+        "data": Immutable.List [],
+      },
+      "slas": Immutable.Map {
+        "data": Immutable.List [],
+      },
+      "identityProviders": Immutable.Map {
+        "data": Immutable.List [],
+      },
+      "branding": Immutable.Map {
+        "data": Immutable.List [],
+      },
+    },
     "readPermission": Immutable.List [
       "PLATFORM_VIEW_ALL_TENANTS",
       "PLATFORM_MANAGE_ALL_TENANTS",
@@ -645,6 +662,9 @@ Immutable.Map {
   "digitalChannelsApps": Immutable.Map {
     "data": Immutable.List [],
   },
+  "timezones": Immutable.Map {
+    "data": Immutable.List [],
+  },
   "outboundIdentifiers": Immutable.Map {
     "readPermission": Immutable.List [
       "OUTBOUND_IDENTIFIER_READ",
@@ -833,6 +853,9 @@ Immutable.Map {
     "disablePermission": Immutable.List [
       "MAP_ALL_CONTACT_POINTS",
     ],
+  },
+  "regions": Immutable.Map {
+    "data": Immutable.List [],
   },
 }
 `;

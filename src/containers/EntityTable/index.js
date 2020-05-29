@@ -16,7 +16,8 @@ import {
   getCurrentEntity,
   userHasCreatePermission,
   userHasUpdatePermission,
-  isEntityFetching
+  isEntityFetching,
+  userHasTenantsBulkUpdatePermission
 } from '../../redux/modules/entities/selectors';
 import { selectVisibleSubMenu, selectTableColumns } from '../../redux/modules/columnFilterMenus/selectors';
 
@@ -41,7 +42,10 @@ export function mapStateToProps(state, props) {
     items: getAllEntitiesTableData(state),
     columns: getTableColumns(selectTableColumns(state, entityName)),
     userHasCreatePermission: userHasCreatePermission(state),
-    userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasUpdatePermission:
+      (entity && entity.entityName) === 'tenants'
+        ? userHasTenantsBulkUpdatePermission(state)
+        : userHasUpdatePermission(state),
     entityMetadata: entity,
     currentVisibleSubMenu: selectVisibleSubMenu(state, props),
     filtered: defaultFilters,

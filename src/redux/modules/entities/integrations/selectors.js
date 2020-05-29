@@ -8,7 +8,7 @@ import { getSelectedEntity, getSelectedSubEntityId } from '../selectors';
 import { selectFormInitialValues } from '../../form/selectors';
 import { onIntegrationListenerFormSubmit } from '../';
 
-const getIntegrations = state => state.getIn(['Entities', 'integrations', 'data']);
+export const getIntegrations = state => state.getIn(['Entities', 'integrations', 'data']);
 
 export const selectIntegrations = createSelector(getIntegrations, integrations => {
   return integrations !== undefined

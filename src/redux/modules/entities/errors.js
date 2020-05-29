@@ -7,7 +7,10 @@
  * and often return 404 when not configured
  */
 const ignoredErrorList = {
-  FETCH_DATA: ['branding']
+  FETCH_DATA: ['branding'],
+  UPLOAD_LOGO_BRANDING_IMAGE: ['tenants'],
+  UPLOAD_FAVICON_BRANDING_IMAGE: ['tenants'],
+  UPDATE_BRANDING_STYLES: ['tenants']
 };
 
 /**

@@ -34,7 +34,7 @@ ReactDOM.render(
             <Navigation />
             <Route path="/interactionMonitoring" component={PrivateRoute(InteractionMonitoring)} />
             <Route path="/agentStateMonitoring" component={PrivateRoute(AgentStateMonitoring)} />
-            <Route path="/betaFeatures" component={PrivateRoute(BetaFeatures)} />
+            <Route path="/early-access-features" component={PrivateRoute(BetaFeatures)} />
             <Route path="/configuration/:entityName" component={PrivateRoute(CrudEndpointUi)} />
             <Route path="/flowDebugLogs" component={PrivateRoute(FlowDebugLogs)} />
           </Fragment>

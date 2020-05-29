@@ -156,10 +156,7 @@ export default function BusinessHoursForm({
             name="timezone"
             label="Timezone"
             disabled={isSaving || inherited || !userHasUpdatePermission}
-            options={timezones.map(({ timezone, offset }) => ({
-              label: `(${offset}) ${timezone}`,
-              value: timezone
-            }))}
+            options={timezones}
             data-automation="timezoneList"
             required
           />

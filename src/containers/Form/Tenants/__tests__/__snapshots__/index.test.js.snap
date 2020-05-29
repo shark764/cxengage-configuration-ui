@@ -2,26 +2,36 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
-  "inherited": undefined,
-  "initialValues": Object {
-    "active": true,
-  },
+  "adminUserId": undefined,
+  "allDependenciesFetched": undefined,
+  "currentTenantId": "mockTenantId",
+  "identityProviders": undefined,
+  "initialValues": undefined,
   "isSaving": true,
+  "isSelectedTenantHasDefaultBranding": undefined,
   "key": "mockId",
+  "outboundIntegrations": undefined,
+  "regions": undefined,
+  "selectedEntityId": "mockId",
+  "tenantSlas": undefined,
+  "tenantUsers": undefined,
+  "timezones": undefined,
+  "userHasBrandingProductNameUpdatePermissions": undefined,
+  "userHasPlatformViewPermission": undefined,
+  "userHasTenantBrandingUpdatePermissions": undefined,
+  "userHasTenantIdpViewPermissions": undefined,
+  "userHasTenantUpdatePermissions": undefined,
   "userHasUpdatePermission": true,
 }
 `;
 
 exports[`Tenants Renders renders 1`] = `
 <Connect(ReduxForm)
-  dispatch={[Function]}
-  initialValues={
-    Object {
-      "active": true,
-    }
-  }
+  currentTenantId="mockTenantId"
   isSaving={true}
   key="mockId"
+  resetTenantBranding={[Function]}
+  selectedEntityId="mockId"
   store={
     Object {
       "dispatch": [Function],
@@ -51,6 +61,8 @@ exports[`Tenants Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  switchTenant={[Function]}
+  uploadImage={[Function]}
   userHasUpdatePermission={true}
 >
   Child

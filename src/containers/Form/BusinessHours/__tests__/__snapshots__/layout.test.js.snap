@@ -33,12 +33,12 @@ exports[`<BusinessHoursForm /> renders create form 1`] = `
         options={
           Array [
             Object {
-              "label": "(6) a",
-              "value": "a",
+              "offset": 6,
+              "timezone": "a",
             },
             Object {
-              "label": "(7) b",
-              "value": "b",
+              "offset": 7,
+              "timezone": "b",
             },
           ]
         }
@@ -109,12 +109,12 @@ exports[`<BusinessHoursForm /> renders update form 1`] = `
         options={
           Array [
             Object {
-              "label": "(6) a",
-              "value": "a",
+              "offset": 6,
+              "timezone": "a",
             },
             Object {
-              "label": "(7) b",
-              "value": "b",
+              "offset": 7,
+              "timezone": "b",
             },
           ]
         }

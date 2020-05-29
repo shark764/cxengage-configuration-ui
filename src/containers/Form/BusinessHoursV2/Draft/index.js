@@ -4,7 +4,7 @@ import BusinessHoursV2DraftForm from './layout';
 
 import { setSelectedSubEntityId } from '../../../../redux/modules/entities';
 import { isSubEntitySaving, isInherited, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
-import { getTimezones } from '../../../../redux/modules/timezones/selectors';
+import { selectTimezonesDropDownList } from '../../../../redux/modules/entities/timezones/selectors';
 import {
   isPublishingDraft,
   subEntityFormSubmission,
@@ -24,7 +24,7 @@ export function mapStateToProps(state) {
     initialValues: selectBusinessHoursV2DraftFormInitalValues(state),
     isSaving: isSubEntitySaving(state),
     key: 'edit',
-    timezones: getTimezones(state),
+    timezones: selectTimezonesDropDownList(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     isPublishing: isPublishingDraft(state)

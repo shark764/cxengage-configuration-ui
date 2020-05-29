@@ -11,7 +11,7 @@ import { getDisplay, userHasNameSet } from './users/selectors';
 import { getUserDisplayName } from '../userIdMap/selectors';
 import { getSelectedSidePanelId, getSelectedAgentsBulkChangeItems } from '../reporting/agentStateMonitoring/selectors';
 
-const getEntities = state => state.get('Entities');
+export const getEntities = state => state.get('Entities');
 
 export const getCurrentEntity = state => getEntities(state).get('currentEntity');
 
@@ -71,7 +71,7 @@ export const getSelectedEntity = createSelector(
   (allEntities, selectedEntityId) => selectedEntityId && allEntities.find(obj => obj.get('id') === selectedEntityId)
 );
 
-export const getSelectedEntityName = state => getSelectedEntity(state).get('name');
+export const getSelectedEntityName = state => getSelectedEntity(state) && getSelectedEntity(state).get('name');
 
 export const getSelectedEntityStatus = state => getSelectedEntity(state) && getSelectedEntity(state).get('active');
 
@@ -110,6 +110,8 @@ export const hasEveryPermission = (userPermissions, permissionsNeeded) => {
     return false;
   }
 };
+
+export const userHasTenantsBulkUpdatePermission = state => userHasPermissions(state, ['PLATFORM_MANAGE_ALL_TENANTS']);
 
 export const isItemInherited = (state, entityName = null, entityId = null) => {
   const currentEntity = entityName || getCurrentEntity(state);

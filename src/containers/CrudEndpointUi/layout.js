@@ -548,11 +548,11 @@ const detailsPanelRoutes = [
   {
     path: '/configuration/tenants',
     component: () => (
-      <NoScrollDetailsPanel>
+      <DetailsPanel>
         <TenantsDetailsPanel>
           <TenantsForm />
         </TenantsDetailsPanel>
-      </NoScrollDetailsPanel>
+      </DetailsPanel>
     )
   },
   {
@@ -727,6 +727,14 @@ const bulkChangeFormRoutes = [
   },
   {
     path: '/configuration/integrations',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/tenants',
     component: () => (
       <DetailsPanel>
         <GenericBulkActionsForm />

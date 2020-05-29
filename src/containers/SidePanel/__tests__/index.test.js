@@ -12,7 +12,8 @@ jest.mock('../../../redux/modules/entities/selectors', () => ({
   userHasCurrentFormPermission: () => true,
   getSelectedEntity: () => 'mock selected entity',
   getSelectedEntityId: () => 'mock selected entity id',
-  getCurrentEntityStore: () => undefined
+  getCurrentEntityStore: () => undefined,
+  getEntities: () => 'mock Entities'
 }));
 
 describe('SidePanelLayout Renders', () => {

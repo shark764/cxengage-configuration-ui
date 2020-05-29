@@ -7,16 +7,38 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import TenantsForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isCreating,
+  userHasUpdatePermission,
+  getCurrentEntity,
+  getEntities
+} from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
+import { getUsers } from '../../../../redux/modules/entities/users/selectors';
+import { getRegions } from '../../../../redux/modules/entities/regions/selectors';
+import { getTimezones } from '../../../../redux/modules/entities/timezones/selectors';
+import { getCurrentTenantId } from '../../../../redux/modules/userData/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
+jest.mock('../../../../redux/modules/entities/tenants/selectors');
+jest.mock('../../../../redux/modules/entities/users/selectors');
+jest.mock('../../../../redux/modules/entities/regions/selectors');
+jest.mock('../../../../redux/modules/userData/selectors');
+jest.mock('../../../../redux/modules/entities/timezones/selectors');
+
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
-isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
+getCurrentEntity.mockImplementation(() => 'tenants');
+getEntities.mockImplementation(() => 'mockEntitites');
+getRegions.mockImplementation(() => 'mockRegions');
+getTimezones.mockImplementation(() => 'mockTimezone');
+getCurrentTenantId.mockImplementation(() => 'mockTenantId');
+getUsers.mockImplementation(() => 'mockUers');
+isCreating.mockImplementation(() => true);
 
 describe('Tenants Renders', () => {
   it('renders', () => {

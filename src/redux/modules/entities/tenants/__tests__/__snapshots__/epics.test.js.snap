@@ -37,6 +37,7 @@ exports[`fetchTenants user has only permission to fetch the tenant he's in calls
 exports[`fetchTenants user has only permission to fetch the tenant he's in returns FETCH_DATA_FULFILLED 1`] = `
 Object {
   "entityName": "tenants",
+  "fetchAllTenants": true,
   "response": "mock response",
   "tableType": undefined,
   "type": "FETCH_DATA_FULFILLED",
@@ -68,6 +69,7 @@ exports[`fetchTenants user has permission to fetch all tenants on the platform c
 exports[`fetchTenants user has permission to fetch all tenants on the platform returns FETCH_DATA_FULFILLED 1`] = `
 Object {
   "entityName": "tenants",
+  "fetchAllTenants": true,
   "response": "mock response",
   "tableType": undefined,
   "type": "FETCH_DATA_FULFILLED",

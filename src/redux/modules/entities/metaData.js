@@ -182,7 +182,9 @@ export const listOfEntities = [
   'dispositionLists',
   'businessHoursV2',
   'customAttributes',
-  'integrations'
+  'integrations',
+  'regions',
+  'timezones'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -802,10 +804,13 @@ entities.businessHours.membersTableFields = {
   ]
 };
 entities.businessHours.defaultFilters = [{ id: 'active', value: 'enabled' }];
+entities.businessHours.createFormDependencies.push('timezones');
+entities.businessHours.updateFormDependencies.push('timezones');
 
 // Tenants
 entities.tenants.pageTitle = 'Tenants Management';
 entities.tenants.helpLink = '/Help/Content/Configuration/Creating_Tenants.htm';
+entities.tenants.bulkEditsAvailable = true;
 entities.tenants.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
@@ -813,6 +818,16 @@ entities.tenants.columns = [
   { name: 'Parent Tenant', active: true },
   { name: 'Status', active: true }
 ];
+entities.tenants.createFormDependencies.push('users', 'timezones', 'regions');
+entities.tenants.updateFormDependencies.push(
+  'users',
+  'integrations',
+  'slas',
+  'identityProviders',
+  'branding',
+  'regions',
+  'timezones'
+);
 
 // Disposition Lists
 entities.dispositionLists.pageTitle = 'Disposition List Management';
@@ -851,6 +866,8 @@ entities.businessHoursV2.membersTableFields = {
 };
 entities.businessHoursV2.sdkCall.path = ['business-hours'];
 entities.businessHoursV2.sdkCall.apiVersion = 'v2';
+entities.businessHoursV2.createFormDependencies.push('timezones');
+entities.businessHoursV2.updateFormDependencies.push('timezones');
 
 // Integrations
 entities.integrations.pageTitle = 'Integration Management';

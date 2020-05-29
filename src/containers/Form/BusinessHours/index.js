@@ -16,7 +16,7 @@ import {
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { selectBusinessHoursFormInitialValues } from '../../../redux/modules/entities/businessHours/selectors';
 
-import { getTimezones } from '../../../redux/modules/timezones/selectors';
+import { selectTimezonesDropDownList } from '../../../redux/modules/entities/timezones/selectors';
 
 const CreateBusinessHoursForm = compose(
   connect(state => createFormName(state)),
@@ -34,7 +34,7 @@ export function mapStateToProps(state) {
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
-    timezones: getTimezones(state),
+    timezones: selectTimezonesDropDownList(state),
     businessHoursType: getCurrentFormValueByFieldName(state, 'businessHoursType')
   };
 }

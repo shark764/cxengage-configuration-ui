@@ -7,8 +7,11 @@ import { sdkPromise, errorLabel } from '../../../../utils/sdk';
 import toastr from 'toastr';
 
 import { EntityMetaData, entitiesMetaData } from '../metaData';
+import { getCurrentEntity } from '../selectors';
 
 jest.mock('../../../../utils/sdk');
+jest.mock('../selectors');
+getCurrentEntity.mockImplementation(() => 'mockEntity');
 jest.mock('toastr');
 
 errorLabel.mockReturnValue('mock error');
@@ -19,9 +22,7 @@ describe('FetchData', () => {
   let action;
   beforeEach(() => {
     action = ActionsObservable.of(fetchData('mockEntity', 'mockTableType'));
-    sdkPromise.mockReturnValue(
-      new Promise(resolve => resolve('mock response'))
-    );
+    sdkPromise.mockReturnValue(new Promise(resolve => resolve('mock response')));
   });
   afterEach(() => {
     sdkPromise.mockClear();
@@ -43,9 +44,7 @@ describe('FetchData', () => {
   });
   describe('on sdkPromise error', () => {
     beforeEach(() => {
-      sdkPromise.mockReturnValue(
-        new Promise((resolve, reject) => reject('mock error'))
-      );
+      sdkPromise.mockReturnValue(new Promise((resolve, reject) => reject('mock error')));
     });
     it('calls toastr error', done => {
       FetchData(action, mockStore).subscribe(() => {
@@ -63,9 +62,7 @@ describe('FetchData', () => {
   describe('on sdkPromise error on ignore list', () => {
     beforeEach(() => {
       action = ActionsObservable.of(fetchData('branding'));
-      sdkPromise.mockReturnValue(
-        new Promise((resolve, reject) => reject('mock error'))
-      );
+      sdkPromise.mockReturnValue(new Promise((resolve, reject) => reject('mock error')));
     });
     it('does not call toastr error', done => {
       FetchData(action, mockStore).subscribe(() => {
