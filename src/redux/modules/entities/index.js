@@ -601,7 +601,7 @@ export const saveBeforePublishBusinessHoursV2Drfat = values => ({
   values
 });
 
-export const createDraftBusinessHoursV2 = (values, businessHourId) => ({
+export const createDraftBusinessHoursV2 = (businessHourId, values) => ({
   type: 'CREATE_DRAFT_BUSINESS_HOURS_V2',
   businessHourId,
   values
@@ -1223,6 +1223,11 @@ export default function reducer(state = initialState, action) {
           .getIn([entity.type, 'data', entity.index, 'exceptions'])
           .filterNot(member => member.get('id') === action.listItemId);
         return state.remove('loading').setIn([entity.type, 'data', entity.index, 'exceptions'], filteredListMembers);
+      } else if (action.entityName === 'businessHoursV2'){
+        const filteredListMembers = state
+          .getIn([entity.type, 'data', entity.index, 'items'])
+          .filterNot(member => member.get('id') === action.listItemId);
+      return state.remove('loading').setIn([entity.type, 'data', entity.index, 'items'], filteredListMembers);
       }
       const filteredListMembers = state
         .getIn([entity.type, 'data', entity.index, 'members'])
@@ -1418,6 +1423,8 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'PUBLISH_BUSINESS_HOURS_V2_DRAFT_REJECTED':
+      return state.setIn(['businessHoursV2', 'isPublishingDraft'], false);
     case 'SET_SELECTED_BUSINESS_HOUR_VERSION': {
       return state.setIn(['businessHoursV2', 'selectedVersion'], fromJS(action.selectedVersionId));
     }

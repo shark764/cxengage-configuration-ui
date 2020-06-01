@@ -7,7 +7,8 @@ import { dateToString } from '../../../../utils/dateUtils';
 import { selectFormInitialValues } from '../../form/selectors';
 import { getSelectedEntity, getSelectedSubEntity } from '../selectors';
 import { onSubEntityFormSubmit } from '../../entities';
-import { sidePanelHeader, isSubEntitySaving } from '../../entities/selectors';
+import { getEntityData, sidePanelHeader, isSubEntitySaving } from '../../entities/selectors';
+import { getCurrentTenantId } from '../../../../redux/modules/userData/selectors';
 
 const draftEditFormSelector = formValueSelector('draft:edit');
 const ruleFormSelector = formValueSelector('businessHoursV2:rules');
@@ -21,6 +22,9 @@ export const selectBusinessHoursV2FormInitialValues = state => {
 
 export const getSelectedBusinessHourV2Version = state =>
   state.getIn(['Entities', 'businessHoursV2', 'selectedVersion']);
+
+export const selectBusinessHoursV2Data = state => 
+  getEntityData(state, 'businessHoursV2').filter(businessHour => businessHour.get('tenantId') === getCurrentTenantId(state)).toJS();
 
 export const selectBusinessHoursEntityVersions = createSelector(
   [getSelectedEntity, getSelectedBusinessHourV2Version],
@@ -46,12 +50,14 @@ export const selectBusinessHoursEntityVersions = createSelector(
         id: version.get('id'), // Used to set in selectedVersion on redux in EntityTable
         version: `v${selectedEntity.get('versions').size - index}`,
         name: version.get('name'),
+        description: version.get('description'),
         createdBy: version.get('createdByName'),
         createdOn: dateToString(version.get('created')),
         value: version.get('id'),
         label: `v${selectedEntity.get('versions').size - index} - ${version.get('name')}`,
         timezone: version.get('timezone'),
-        viewing: selectedBusinessHour === version.get('id')
+        viewing: selectedBusinessHour === version.get('id'),
+        rules: version.get('rules').toJS()
       }))
       .toJS()
 );
@@ -193,6 +199,9 @@ export const selectDrafts = createSelector(
         name: draft.get('name'),
         createdBy: draft.get('createdByName'),
         createdOn: dateToString(draft.get('created')),
+        timezone: draft.get('timezone'),
+        rules: draft.get('rules') && draft.get('rules').toJS(),
+        description: draft.get('description')
       }))
       .toJS()
 );

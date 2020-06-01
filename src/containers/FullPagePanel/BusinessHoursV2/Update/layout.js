@@ -10,7 +10,7 @@ import {
   MixCalendar,
   DetailHeader,
   SidePanelTable,
-  Detail
+  AutoCompleteField
 } from 'cx-ui-components';
 import { isEmpty } from 'serenova-js-utils/strings';
 
@@ -67,7 +67,7 @@ const WrapperDiv = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  min-height: 100px;
+  min-height: ${props => props.minHeight ? props.minHeight : '100px'};
   overflow: auto;
   margin-top: 10px;
 `;
@@ -76,17 +76,40 @@ const ModalTitle = styled.h3`
   font-size: 28px;
   margin-bottom: 30px;
   color: #474747;
-  font-weight: 700;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const VersionDetailContainer = styled.div`
   margin: 0 auto;
-  max-width: 295px;
+  max-width: 400px;
   padding: 10px 0;
 `;
 
 const ModalActions = styled(SidePanelActions)`
   display: flow-root;
+`;
+
+const VersionDetailWrapper = styled.div`
+  display: inline-flex;
+  width: 100%;
+  margin-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  font-size: 14px;
+`;
+
+const VersionDetailLabel = styled.span`
+  width: 130px;
+  vertical-align: middle;
+  padding-right: 10px;
+  flex-shrink: 0;
+`;
+
+const VersionDetailValue = styled.span`
+  white-space: pre-line;
 `;
 
 const eventType = [
@@ -160,11 +183,54 @@ const CreateDraftForm = reduxForm({
   );
 });
 
+const CreateCopyVersionForm = reduxForm({
+  form: 'businessHoursV2:copyVersion'
+})(function({ handleSubmit, onCancel, invalid, isSaving, businessHoursList, copyVersionId, isCopyVersion, versions, drafts, businessHourId }) {
+  const businessHoursName = businessHoursList.find(bh => bh.id === businessHourId).name;
+  const { name, version } = versions.find(v => v.id === copyVersionId) || drafts.find(v => v.id === copyVersionId);
+  return (
+    <form onSubmit={handleSubmit}>
+      <ModalActions onCancel={onCancel} isSaving={isSaving} invalid={invalid} />
+      <br />
+      {!isCopyVersion &&
+        <Fragment>
+          <ModalTitle title={businessHoursName}>
+            Creating New Draft for: {businessHoursName}
+          </ModalTitle>
+        </Fragment>
+      }
+      <ModalWrapper minHeight={isCopyVersion ? '250px' :  '100px'} >
+      {isCopyVersion &&
+        <Fragment>
+          <ModalTitle title={name}>
+            Copying {version === 'Draft' ? 'Draft' : 'Version'}: {name}
+          </ModalTitle>
+          <AutoCompleteField
+            name="toBusinessHours"
+            label="To Business Hours"
+            placeholder="Select a Business Hour..."
+            suggestedDropDownWidth="100%"
+            suggestions={businessHoursList.map(({ name }) => name)}
+            data-automation="categoryNameAutoComplete"
+            suggestedDropdownStyle={{ width: '100%', overflowX: 'hidden', whiteSpace: 'nowrap' }}
+            required
+          />
+          <br />
+          <br />
+        </Fragment>
+      }
+        <InputField name="draftName" label="New Draft Name" componentType="input" inputType="text" disabled={isSaving} />
+      </ModalWrapper>
+    </form>
+  );
+});
+
 export default class BusinessHoursV2UpdateFullPage extends Component {
   constructor(props) {
     super();
     this.state = {
       isCreateModalOpen: false,
+      isCopyModalOpen: false,
       calendarDateRange: {
         start: moment()
           .startOf('month')
@@ -211,9 +277,34 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
     }));
   };
 
+  toggleCopyModal = () => {
+    this.setState(({ isCopyModalOpen: prevIsCopyModalOpen }) => ({
+      isCopyModalOpen: !prevIsCopyModalOpen
+    }));
+  };
+
   updateCalendarDateRange = ({ dateRange }) => {
     this.setState({
       calendarDateRange: dateRange
+    });
+  };
+
+  copyBusinessHoursVersion = ( id ) => {
+    this.setState({
+      copyVersionId: id,
+      isCopyModalOpen: true,
+      isCopyVersion: true
+    });
+  };
+
+  updateBusinessHoursVersion = ( selectedVersion ) => {
+    if(selectedVersion.version === 'Draft') {
+      this.props.setSelectedSubEntityId(selectedVersion.id)
+    }
+    this.setState({
+      copyVersion: selectedVersion,
+      isCopyModalOpen: true,
+      isCopyVersion: false
     });
   };
 
@@ -244,15 +335,11 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 // Parse durations into timed format
                 const intertvalStartTime = Math.floor(interval.start / 60) + ':' + interval.start % 60;
                 const intertvalEndTime = Math.floor(interval.end / 60) + ':' + interval.end % 60;
-
                 // Add formatted durations to rule dates
                 const ruleStartDate = moment(rule.startDate).format('LL');
-                const ruleEndDate = moment(
-                  rule.endDate === undefined ? new Date(rule.startDate) : new Date(rule.endDate)
-                ).format('LL');
+                const ruleEndDate = rule.endDate === undefined ? moment(this.state.calendarDateRange.end).format('LL') : moment(rule.endDate).format('LL');
                 const intervalStartDate = moment(ruleStartDate + ' ' + intertvalStartTime);
                 const intervalEndDate = moment(ruleEndDate + ' ' + intertvalEndTime);
-
                 return {
                   id: `v0_${i}_` + rule.name,
                   type: rule.type,
@@ -277,7 +364,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                   title: rule.name,
                   ...(rule.hours && { ...rule.hours.allDay } && { allDay: rule.hours.allDay }),
                   start: new Date(rule.startDate),
-                  end: rule.endDate === undefined ? new Date(rule.startDate) : new Date(rule.endDate),
+                  ...(rule.endDate && { end: new Date(rule.endDate) }),
                   eventTypeID: calendarEventTypeId,
                   repeats: rule.repeats,
                   every: rule.every,
@@ -311,11 +398,9 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
 
             const eventStartDate = new Date(calendarEvent.start);
             // set calendarEventEndDate if rule finish after calendar end date visible range
-            const eventEndDate = new Date(
-              calendarEventEndDate.isSameOrAfter(calendarEndDate) ? calendarEvent.end : calendarEndDate
-            );
-
-            switch (calendarEvent.repeats) {
+            const eventEndDate = calendarEvent.end === undefined ? new Date(calendarEndDate) : new Date(calendarEvent.end);
+            const calendarEventRepeats = calendarEvent.repeats !== undefined ? calendarEvent.repeats : 'none';
+            switch (calendarEventRepeats) {
               case 'daily':
                 // create array to hold result dates
                 let dailyEvents = [],
@@ -439,7 +524,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               case 'yearly':
                 const startDate = moment(eventStartDate),
                   startOfMonth = moment(eventStartDate).startOf('month'), // Current month based on rule start date
-                  endOfYear = moment(eventEndDate).endOf('year'),
+                  endOfYear = calendarEvent.end === undefined ? moment(eventEndDate).endOf('year') : moment(eventEndDate),
                   calendarViewYear = moment(endOfYear),
                   initialYear = moment(startDate),
                   diffYears = calendarViewYear.diff(initialYear, 'years');
@@ -574,7 +659,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                         );
                       } else {
                         dayOfMonth = new moment([currentYear, startOfMonth.month()]);
-                        while (dayOfMonth.day() % 6 == 0) {
+                        while (dayOfMonth.day() % 6 === 0) {
                           dayOfMonth = dayOfMonth.add(1, 'day');
                         }
                         dayOfMonth = dayOfMonth.add(onWeekInterval, 'day');
@@ -582,7 +667,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                           dayOfMonth = dayOfMonth.add(2, 'days');
                         } else if (dayOfMonth.day() === 0) {
                           dayOfMonth = dayOfMonth.add(2, 'days');
-                        } else if (dayOfMonth.day() === 1) {
+                        } else if (dayOfMonth.day() === 1 && onWeekInterval !== 0) {
                           dayOfMonth = dayOfMonth.add(2, 'days');
                         }
                       }
@@ -665,6 +750,8 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                         }
                       }
                       break;
+                    default:
+                      break;
                   }
                   if (
                     calendarEvent.type === 'one-time-extended-hours' ||
@@ -742,14 +829,14 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                                 .month(calendarEvent.every)
                                 .month()
                             ]);
-                            while (yearlyDayOfMonth.day() % 6 == 0) {
+                            while (yearlyDayOfMonth.day() % 6 === 0) {
                               yearlyDayOfMonth = yearlyDayOfMonth.add(1, 'days');
                             }
                             yearlyDayOfMonth = yearlyDayOfMonth.add(onWeekInterval, 'days');
                             if (
                               yearlyDayOfMonth.day() === 6 ||
                               yearlyDayOfMonth.day() === 0 ||
-                              yearlyDayOfMonth.day() === 1
+                              (yearlyDayOfMonth.day() === 1 && onWeekInterval !== 0)
                             ) {
                               yearlyDayOfMonth = yearlyDayOfMonth.add(2, 'days');
                             }
@@ -790,45 +877,53 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                             );
                           }
                         }
-                        yearlyRecurringEvents.push({
-                          start: moment(yearlyDayOfMonth)
-                            .set({
-                              hour: calendarEventStartDateHour,
-                              minute: calendarEventStartDateMinutes,
-                              second: calendarEventStartDateSeconds
-                            })
-                            .toDate(),
-                          end: moment(yearlyDayOfMonth)
-                            .set({
-                              hour: calendarEventEndDateHour,
-                              minute: calendarEventEndDateMinutes,
-                              second: calendarEventEndDateSeconds
-                            })
-                            .toDate()
-                        });
+                        yearlyDayOfMonth = yearlyDayOfMonth.set({
+                          hour: calendarEventStartDateHour,
+                          minute: calendarEventStartDateMinutes,
+                          second: calendarEventStartDateSeconds
+                        })
+                        if(yearlyDayOfMonth >= eventStartDate && yearlyDayOfMonth <= eventEndDate) {
+                          yearlyRecurringEvents.push({
+                            start: moment(yearlyDayOfMonth).toDate(),
+                            end: moment(yearlyDayOfMonth)
+                              .set({
+                                hour: calendarEventEndDateHour,
+                                minute: calendarEventEndDateMinutes,
+                                second: calendarEventEndDateSeconds
+                              })
+                              .toDate()
+                          });
+                        }
                       }
                     } else {
                       // monthly
-                      const endOfNextMonth = moment(eventEndDate)
+                      let endOfNextMonth;
+                      if(calendarEvent.end) { // when there is endDate, we use endDate instaed of calendar endDate calculated range
+                        endOfNextMonth = moment(eventEndDate)
+                      } else {
+                        endOfNextMonth = moment(eventEndDate)
                         .add(1, 'M')
                         .endOf('month'); // Current month based on rule start date
+                      }
                       while (dayOfMonth <= endOfNextMonth) {
-                        monthlyRecurringEvents.push({
-                          start: moment(dayOfMonth)
-                            .set({
-                              hour: calendarEventStartDateHour,
-                              minute: calendarEventStartDateMinutes,
-                              second: calendarEventStartDateSeconds
-                            })
-                            .toDate(),
-                          end: moment(dayOfMonth)
-                            .set({
-                              hour: calendarEventEndDateHour,
-                              minute: calendarEventEndDateMinutes,
-                              second: calendarEventEndDateSeconds
-                            })
-                            .toDate()
+                        dayOfMonth = moment(dayOfMonth)
+                        .set({
+                          hour: calendarEventStartDateHour,
+                          minute: calendarEventStartDateMinutes,
+                          second: calendarEventStartDateSeconds
                         });
+                        if(dayOfMonth >= eventStartDate) {
+                          monthlyRecurringEvents.push({
+                            start: moment(dayOfMonth).toDate(),
+                            end: moment(dayOfMonth)
+                              .set({
+                                hour: calendarEventEndDateHour,
+                                minute: calendarEventEndDateMinutes,
+                                second: calendarEventEndDateSeconds
+                              })
+                              .toDate()
+                          });
+                        }
                         if (eventType === 'day') {
                           switch (eventValue) {
                             case 'first':
@@ -864,12 +959,12 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                             dayOfMonth = moment(dayOfMonth)
                               .add(1, 'M')
                               .startOf('month');
-                            while (dayOfMonth.day() % 6 == 0) {
+                            while (dayOfMonth.day() % 6 === 0) {
                               dayOfMonth = dayOfMonth.add(1, 'days');
                             }
                             dayOfMonth = dayOfMonth.add(onWeekInterval, 'days');
                             // Adding two extra days for saturday, sunday or monday
-                            if (dayOfMonth.day() === 6 || dayOfMonth.day() === 0 || dayOfMonth.day() === 1) {
+                            if (dayOfMonth.day() === 6 || dayOfMonth.day() === 0 || (dayOfMonth.day() === 1 && onWeekInterval !== 0)) {
                               dayOfMonth = dayOfMonth.add(2, 'days');
                             }
                           }
@@ -922,6 +1017,22 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                     eventTypeID: calendarEvent.eventTypeID
                   }));
                 return [...calendarEvents, ...monthYearEventList];
+              case 'none':
+                const oneTimeExceptionEvent = {
+                  id: calendarEvent.title,
+                  title: calendarEvent.title,
+                  allDay: calendarEvent.allDay,
+                  start: eventStartDate,
+                  end: moment(eventStartDate)
+                    .set({
+                      hour: calendarEventEndDateHour,
+                      minute: calendarEventEndDateMinutes,
+                      second: calendarEventEndDateSeconds
+                    })
+                    .toDate(),
+                  eventTypeID: calendarEvent.eventTypeID
+                }
+                return [...calendarEvents, oneTimeExceptionEvent];
               default:
                 return calendarEvents;
             }
@@ -995,13 +1106,17 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                   defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
                   userHasUpdatePermission={this.props.userHasUpdatePermission}
                   userHasViewPermission={this.props.userHasViewPermission}
-                  //copySubEntity={() => alert('Copy Selected')}  //ToDo
                   shouldShowViewButtonOnItem={this.props.versions && (({ id }) => this.props.versions.find(({ id: versionId }) => id === versionId))}
+                  shouldShowCopyButtonOnItem={(version) => this.props.versions.find(v => v.id === version.id) || this.props.drafts.find(v => v.id === version.id)}
+                  shouldShowUpdateButtonOnItem={(version) => this.props.versions.find(v => v.id === version.id) || this.props.drafts.find(v => v.id === version.id)}
+                  shouldShowDeleteButtonOnItem={(version) => this.props.drafts.find(v => v.id === version.id)}
                   viewSubEntity={id => this.props.setSelectedBusinessHourVersion(id)}
-                  updateSubEntity={draftId => this.props.setSelectedSubEntityId(draftId)}
+                  copySubEntity={id => this.copyBusinessHoursVersion(id)}
+                  deleteSubEntity={this.props.removeListItem}
+                  updateSubEntity={id => this.updateBusinessHoursVersion(this.props.versions.find(v => v.id === id) || this.props.drafts.find(v => v.id === id))}
+                  confirmDeleteSubEntity={true}
                   fetching={!this.props.versions || !this.props.drafts}
                   inherited={this.props.inherited}
-                  // itemApiPending={this.props.itemApiPending} //ToDo
                 />
               </VersionsColumn>
             </DetailWrapper>
@@ -1014,28 +1129,40 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 fontSize="20px"
                 text="Hours and Exceptions"
               />
-              <VersionDetailContainer>
-                <Detail
-                  label="Selected Version"
-                  value={
-                    this.props.versions &&
-                    this.props.selectedBusinessHourVersion &&
-                    this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
-                      ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).name
-                      : ''
-                  }
-                />
-                <Detail
-                  label="Timezone"
-                  value={
-                    this.props.versions &&
-                    this.props.selectedBusinessHourVersion &&
-                    this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
-                      ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).timezone
-                      : ''
-                  }
-                />
-              </VersionDetailContainer>
+              {this.props.selectedBusinessHourVersion &&
+                <VersionDetailContainer>
+                  <VersionDetailWrapper>
+                  <VersionDetailLabel>
+                    <b>
+                      Selected Version:
+                    </b>
+                  </VersionDetailLabel>
+                  <VersionDetailValue>
+                    {this.props.versions &&
+                      this.props.selectedBusinessHourVersion &&
+                      this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
+                        ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).name
+                        : ''}
+                  </VersionDetailValue>
+                  <br />
+                  </VersionDetailWrapper>
+                  <VersionDetailWrapper>
+                  <VersionDetailLabel>
+                    <b>
+                      Timezone:
+                    </b>
+                  </VersionDetailLabel>
+                  <VersionDetailValue>
+                    {this.props.versions &&
+                      this.props.selectedBusinessHourVersion &&
+                      this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
+                        ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).timezone
+                        : ''}
+                  </VersionDetailValue>
+                  <br />
+                  </VersionDetailWrapper>
+                </VersionDetailContainer>
+              }
               <RulesForm />
             </DetailWrapper>
           </RowWrapper>
@@ -1044,7 +1171,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
           <Modal onMaskClick={!this.props.isCreatingDraft && this.toggleCreateModal}>
             <CreateDraftForm
               onSubmit={values => {
-                this.props.createDraft(values.toJS(), this.props.businessHourId);
+                this.props.createDraft(this.props.businessHourId, values.toJS());
               }}
               initialValues={Map({
                 draftName: ''
@@ -1064,6 +1191,54 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               })}
               isSaving={this.props.isCreatingDraft}
               onCancel={this.toggleCreateModal}
+              updateVersion={this.state.updateVersion}
+            />
+          </Modal>
+        )}
+        {this.state.isCopyModalOpen && (
+          <Modal onMaskClick={!this.props.isCreatingDraft && this.toggleCopyModal}>
+            <CreateCopyVersionForm
+              onSubmit={values => {
+                const versionOrDraft = this.props.versions.find(v => v.id === this.state.copyVersionId) || this.props.drafts.find(v => v.id === this.state.copyVersionId);
+                const newDraft = {
+                  draftName: values.get('draftName'),
+                  description: versionOrDraft.description,
+                  timezone: versionOrDraft.timezone,
+                  rules: versionOrDraft.rules
+                };
+                if(this.state.isCopyVersion) {
+                  const toBusinessHourName = values.get('toBusinessHours');
+                  const businessHourId = this.props.businessHoursList.find(v => v.name === toBusinessHourName).id;
+                  this.props.createDraft(businessHourId, newDraft);
+                } else {
+                  this.props.createDraft(this.props.businessHourId, newDraft);
+                }
+              }}
+              initialValues={Map({
+                draftName: `Copy of ${((this.props.versions.find(v => v.id === this.state.copyVersionId)) || (this.props.drafts.find(v => v.id === this.state.copyVersionId))).name}`
+              })}
+              validate={values => ({
+                version: (isEmpty(values.get('version')) && "Business Hours can't be empty"),
+                draftName:
+                  (isEmpty(values.get('draftName')) && "Draft Name can't be empty") ||
+                  (this.props.drafts.some(
+                    draft =>
+                      draft.name.toLowerCase() ===
+                      values
+                        .get('draftName')
+                        .trim()
+                        .toLowerCase()
+                  ) &&
+                    'Draft name should be unique')
+              })}
+              isSaving={this.props.isCreatingDraft}
+              onCancel={this.toggleCopyModal}
+              businessHoursList={this.props.businessHoursList}
+              copyVersionId={this.state.copyVersionId}
+              isCopyVersion={this.state.isCopyVersion}
+              versions={this.props.versions}
+              drafts={this.props.drafts}
+              businessHourId={this.props.businessHourId}
             />
           </Modal>
         )}
@@ -1086,7 +1261,9 @@ BusinessHoursV2UpdateFullPage.propTypes = {
   businessHourId: PropTypes.string,
   isCreatingDraft: PropTypes.bool,
   setSelectedSubEntityId: PropTypes.func,
-  selectedBusinessHourVersion: PropTypes.string
+  selectedBusinessHourVersion: PropTypes.string,
+  businessHoursList: PropTypes.array,
+  removeListItem: PropTypes.func
 };
 
 CreateDraftForm.propTypes = {
@@ -1096,6 +1273,15 @@ CreateDraftForm.propTypes = {
   isSaving: PropTypes.bool
 };
 
+CreateCopyVersionForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  onCancel: PropTypes.func,
+  invalid: PropTypes.bool,
+  isSaving: PropTypes.bool
+};
+
 BusinessHoursV2UpdateFullPage.defaultProps = {
-  events: []
+  events: [],
+  drafts: [],
+  versions: []
 };

@@ -25,7 +25,7 @@ export const hasCustomUpdateEntityFullFilled = entityName =>
 export const hasCustomCreateSubEntity = entityName => !['businessHours'].includes(entityName);
 
 export const hasCustomRemoveSubEntity = entityName =>
-  !['roles', 'dataAccessReports', 'flows', 'businessHours'].includes(entityName);
+  !['roles', 'dataAccessReports', 'flows', 'businessHours', 'businessHoursV2'].includes(entityName);
 
 export const hasCustomFetchEntityData = entityName =>
   !['tenants', 'dispositionLists', 'customAttributes'].includes(entityName);

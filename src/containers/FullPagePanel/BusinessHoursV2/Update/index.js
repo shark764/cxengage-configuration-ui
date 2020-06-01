@@ -4,7 +4,8 @@ import {
   selectRules,
   selectDrafts,
   isCreatingDraft,
-  getSelectedBusinessHourV2Version
+  getSelectedBusinessHourV2Version,
+  selectBusinessHoursV2Data
 } from '../../../../redux/modules/entities/businessHoursV2/selectors';
 import {
   getSelectedEntityId,
@@ -16,6 +17,7 @@ import {
 } from '../../../../redux/modules/entities/selectors';
 import {
   setSelectedBusinessHourVersion,
+  removeListItem,
   createDraftBusinessHoursV2,
   setSelectedSubEntityId
 } from '../../../../redux/modules/entities';
@@ -32,12 +34,14 @@ export const mapStateToProps = state => ({
   userHasSharePermission: userHasSharePermission(state),
   drafts: selectDrafts(state),
   isCreatingDraft: isCreatingDraft(state),
-  selectedBusinessHourVersion: getSelectedBusinessHourV2Version(state)
+  selectedBusinessHourVersion: getSelectedBusinessHourV2Version(state),
+  businessHoursList: selectBusinessHoursV2Data(state),
 });
 
 export const actions = {
   setSelectedBusinessHourVersion,
-  createDraft: (values, businessHourId) => createDraftBusinessHoursV2(values, businessHourId),
+  removeListItem,
+  createDraft: (businessHourId, values) => createDraftBusinessHoursV2(businessHourId, values),
   setSelectedSubEntityId: subEntityId => setSelectedSubEntityId(subEntityId)
 };
 

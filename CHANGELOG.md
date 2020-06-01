@@ -28,6 +28,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.0] - 2020-05-26
+## Added
+- CXV1-22115 - Config 2 - Basic Page Structure - Copy and Delete Funcionality for Drafts
+  - Copy and Remove added for drafts
+  - Copy and Edit added for published business hours
+## Fixed
+  - one-time-extended-hours and blackout-one-time-exceptions are now render in Calendar component
+  - endDate is now working as expected with recurring events in Calendar component
+  - Minor Css improvements added to view mode on Published Selected version in business hours
+
 ## [0.77.0] - 2020-05-28
 ### Fixed
 - CXV1-18405 - Add Tenants page to config2.

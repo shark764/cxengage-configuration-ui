@@ -50,7 +50,10 @@ describe('createDraft', () => {
       type: 'CREATE_DRAFT_BUSINESS_HOURS_V2',
       businessHourId: 'mock-id',
       values: {
-        draftName: 'mock-name'
+        draftName: 'mock-name',
+        description: 'description',
+        timezone: 'timezone',
+        rules: []
       }
     });
     sdkPromise.mockReturnValue(

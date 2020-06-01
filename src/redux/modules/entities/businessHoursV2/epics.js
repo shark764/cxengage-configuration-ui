@@ -1,3 +1,4 @@
+import 'rxjs/add/operator/race';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
@@ -6,7 +7,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/startWith';
 import { of } from 'rxjs/observable/of';
 import { fromPromise } from 'rxjs/observable/fromPromise';
@@ -57,10 +57,10 @@ export const createBusinessHour = $action =>
         .mergeMap(response => [
           handleSuccess(response, a),
           createDraftBusinessHoursV2(
+            response.result.id,
             {
               draftName: 'Initial Draft'
             },
-            response.result.id
           )
         ])
         .catch(error => handleError(error, a));
@@ -75,7 +75,10 @@ export const createDraft = ($action, store) =>
       sdkCall: {
         path: ['business-hours', a.businessHourId, 'drafts'],
         data: {
-          name: a.values.draftName
+          name: a.values.draftName,
+          ...(a.values.description && { description:  a.values.description }),
+          ...(a.values.timezone && { timezone:  a.values.timezone }),
+          ...(a.values.rules && {  rules: a.values.rules })         
         },
         apiVersion: 'v2',
         command: 'createBusinessHourV2Draft',
@@ -330,7 +333,7 @@ export const toggleBusinessHoursV2Entity = (action$, store) =>
         .catch(error => handleError(error, { ...a }, 'Status for selected business hour could not be changed'))
     );
 
-export const PubilshDraft = (action$, store) =>
+export const PublishDraft = (action$, store) =>
   action$
     .ofType('PUBLISH_BUSINESS_HOURS_V2_DRAFT')
     .map(a => {
@@ -386,11 +389,18 @@ export const SaveDraftBeforePublish = action$ =>
   action$.ofType('SAVE_BEFORE_PUBLISH_BUSINESS_HOURS_V2_DRAFT').switchMap(action =>
     action$
       .ofType('UPDATE_SUB_ENTITY_FULFILLED')
-      .take(1)
       .mapTo({
         type: 'PUBLISH_BUSINESS_HOURS_V2_DRAFT',
         values: action.values
       })
+      .race(
+        action$
+          .ofType('UPDATE_SUB_ENTITY_REJECTED')
+          .mapTo({
+            type: 'PUBLISH_BUSINESS_HOURS_V2_DRAFT_REJECTED'
+          })
+      )
+      .take(1)    
       .startWith(submit('draft:edit'))
   );
 
@@ -480,3 +490,40 @@ export const ReInitCustomAttributesForm = action$ =>
       },
       payload: a.response.result
     }));
+
+
+export const RemoveBusinessHoursDraft = (action$, store) =>
+  action$
+    .ofType('REMOVE_LIST_ITEM')
+    .debounceTime(300)
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      listId: getSelectedEntityId(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState())
+    }))
+    .filter(({ entityName }) => entityName === 'businessHoursV2')
+    .map(a => ({
+      ...a,
+      sdkCall: {
+        path: ['business-hours', a.listId, 'drafts', a.listItemId],
+        command: 'removeBusinessHoursV2Draft',
+        apiVersion: 'v2',
+        module: 'entities',
+        crudAction: 'delete',
+        topic: 'cxengage/entities/remove-business-hours-v2-drafts-response'
+      }
+    }))
+    .switchMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            a.selectedEntityId
+              ? '<i>Draft</i> has been removed sucessfully'
+              : '<i>Business Hour</i> has been removed sucessfully'
+          )
+        )
+        .catch(error => handleError(error, a))
+    );

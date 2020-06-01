@@ -196,15 +196,11 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                 // Parse durations into timed format
                 const intertvalStartTime = Math.floor(interval.start / 60) + ':' + interval.start % 60;
                 const intertvalEndTime = Math.floor(interval.end / 60) + ':' + interval.end % 60;
-
                 // Add formatted durations to rule dates
                 const ruleStartDate = moment(rule.startDate).format('LL');
-                const ruleEndDate = moment(
-                  rule.endDate === undefined ? new Date(rule.startDate) : new Date(rule.endDate)
-                ).format('LL');
+                const ruleEndDate = rule.endDate === undefined ? moment(this.state.calendarDateRange.end).format('LL') : moment(rule.endDate).format('LL');
                 const intervalStartDate = moment(ruleStartDate + ' ' + intertvalStartTime);
                 const intervalEndDate = moment(ruleEndDate + ' ' + intertvalEndTime);
-
                 return {
                   id: `v0_${i}_` + rule.name,
                   type: rule.type,
@@ -229,7 +225,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                   title: rule.name,
                   ...(rule.hours && { ...rule.hours.allDay } && { allDay: rule.hours.allDay }),
                   start: new Date(rule.startDate),
-                  end: rule.endDate === undefined ? new Date(rule.startDate) : new Date(rule.endDate),
+                  ...(rule.endDate && { end: new Date(rule.endDate) }),
                   eventTypeID: calendarEventTypeId,
                   repeats: rule.repeats,
                   every: rule.every,
@@ -263,11 +259,10 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
 
             const eventStartDate = new Date(calendarEvent.start);
             // set calendarEventEndDate if rule finish after calendar end date visible range
-            const eventEndDate = new Date(
-              calendarEventEndDate.isSameOrAfter(calendarEndDate) ? calendarEvent.end : calendarEndDate
-            );
+             const eventEndDate = calendarEvent.end === undefined ? new Date(calendarEndDate) : new Date(calendarEvent.end);
+            const calendarEventRepeats = calendarEvent.repeats !== undefined ? calendarEvent.repeats : 'none';
 
-            switch (calendarEvent.repeats) {
+            switch (calendarEventRepeats) {
               case 'daily':
                 // create array to hold result dates
                 let dailyEvents = [],
@@ -391,7 +386,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
               case 'yearly':
                 const startDate = moment(eventStartDate),
                   startOfMonth = moment(eventStartDate).startOf('month'), // Current month based on rule start date
-                  endOfYear = moment(eventEndDate).endOf('year'),
+                  endOfYear = calendarEvent.end === undefined ? moment(eventEndDate).endOf('year') : moment(eventEndDate),
                   calendarViewYear = moment(endOfYear),
                   initialYear = moment(startDate),
                   diffYears = calendarViewYear.diff(initialYear, 'years');
@@ -526,7 +521,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                         );
                       } else {
                         dayOfMonth = new moment([currentYear, startOfMonth.month()]);
-                        while (dayOfMonth.day() % 6 == 0) {
+                        while (dayOfMonth.day() % 6 === 0) {
                           dayOfMonth = dayOfMonth.add(1, 'day');
                         }
                         dayOfMonth = dayOfMonth.add(onWeekInterval, 'day');
@@ -534,7 +529,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                           dayOfMonth = dayOfMonth.add(2, 'days');
                         } else if (dayOfMonth.day() === 0) {
                           dayOfMonth = dayOfMonth.add(2, 'days');
-                        } else if (dayOfMonth.day() === 1) {
+                        } else if (dayOfMonth.day() === 1 && onWeekInterval !== 0) {
                           dayOfMonth = dayOfMonth.add(2, 'days');
                         }
                       }
@@ -617,6 +612,8 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                         }
                       }
                       break;
+                    default:
+                      break;
                   }
                   if (
                     calendarEvent.type === 'one-time-extended-hours' ||
@@ -694,14 +691,14 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                                 .month(calendarEvent.every)
                                 .month()
                             ]);
-                            while (yearlyDayOfMonth.day() % 6 == 0) {
+                            while (yearlyDayOfMonth.day() % 6 === 0) {
                               yearlyDayOfMonth = yearlyDayOfMonth.add(1, 'days');
                             }
                             yearlyDayOfMonth = yearlyDayOfMonth.add(onWeekInterval, 'days');
                             if (
                               yearlyDayOfMonth.day() === 6 ||
                               yearlyDayOfMonth.day() === 0 ||
-                              yearlyDayOfMonth.day() === 1
+                              (yearlyDayOfMonth.day() === 1 && onWeekInterval !== 0)
                             ) {
                               yearlyDayOfMonth = yearlyDayOfMonth.add(2, 'days');
                             }
@@ -742,45 +739,54 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                             );
                           }
                         }
-                        yearlyRecurringEvents.push({
-                          start: moment(yearlyDayOfMonth)
-                            .set({
-                              hour: calendarEventStartDateHour,
-                              minute: calendarEventStartDateMinutes,
-                              second: calendarEventStartDateSeconds
-                            })
-                            .toDate(),
-                          end: moment(yearlyDayOfMonth)
-                            .set({
-                              hour: calendarEventEndDateHour,
-                              minute: calendarEventEndDateMinutes,
-                              second: calendarEventEndDateSeconds
-                            })
-                            .toDate()
-                        });
+                        yearlyDayOfMonth = yearlyDayOfMonth.set({
+                          hour: calendarEventStartDateHour,
+                          minute: calendarEventStartDateMinutes,
+                          second: calendarEventStartDateSeconds
+                        })
+                        if(yearlyDayOfMonth >= eventStartDate && yearlyDayOfMonth <= eventEndDate) {
+                          yearlyRecurringEvents.push({
+                            start: moment(yearlyDayOfMonth)
+                              .toDate(),
+                            end: moment(yearlyDayOfMonth)
+                              .set({
+                                hour: calendarEventEndDateHour,
+                                minute: calendarEventEndDateMinutes,
+                                second: calendarEventEndDateSeconds
+                              })
+                              .toDate()
+                          });
+                        }
                       }
                     } else {
                       // monthly
-                      const endOfNextMonth = moment(eventEndDate)
+                      let endOfNextMonth;
+                      if(calendarEvent.end) { // when there is endDate, we use endDate instaed of calendar endDate calculated range
+                        endOfNextMonth = moment(eventEndDate)
+                      } else {
+                        endOfNextMonth = moment(eventEndDate)
                         .add(1, 'M')
                         .endOf('month'); // Current month based on rule start date
+                      }
                       while (dayOfMonth <= endOfNextMonth) {
-                        monthlyRecurringEvents.push({
-                          start: moment(dayOfMonth)
-                            .set({
-                              hour: calendarEventStartDateHour,
-                              minute: calendarEventStartDateMinutes,
-                              second: calendarEventStartDateSeconds
-                            })
-                            .toDate(),
-                          end: moment(dayOfMonth)
-                            .set({
-                              hour: calendarEventEndDateHour,
-                              minute: calendarEventEndDateMinutes,
-                              second: calendarEventEndDateSeconds
-                            })
-                            .toDate()
+                        dayOfMonth = moment(dayOfMonth)
+                        .set({
+                          hour: calendarEventStartDateHour,
+                          minute: calendarEventStartDateMinutes,
+                          second: calendarEventStartDateSeconds
                         });
+                        if(dayOfMonth >= eventStartDate) {
+                          monthlyRecurringEvents.push({
+                            start: dayOfMonth.toDate(),
+                            end: moment(dayOfMonth)
+                              .set({
+                                hour: calendarEventEndDateHour,
+                                minute: calendarEventEndDateMinutes,
+                                second: calendarEventEndDateSeconds
+                              })
+                              .toDate()
+                          });
+                        }
                         if (eventType === 'day') {
                           switch (eventValue) {
                             case 'first':
@@ -816,12 +822,12 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                             dayOfMonth = moment(dayOfMonth)
                               .add(1, 'M')
                               .startOf('month');
-                            while (dayOfMonth.day() % 6 == 0) {
+                            while (dayOfMonth.day() % 6 === 0) {
                               dayOfMonth = dayOfMonth.add(1, 'days');
                             }
                             dayOfMonth = dayOfMonth.add(onWeekInterval, 'days');
                             // Adding two extra days for saturday, sunday or monday
-                            if (dayOfMonth.day() === 6 || dayOfMonth.day() === 0 || dayOfMonth.day() === 1) {
+                            if (dayOfMonth.day() === 6 || dayOfMonth.day() === 0 || (dayOfMonth.day() === 1 && onWeekInterval !== 0)) {
                               dayOfMonth = dayOfMonth.add(2, 'days');
                             }
                           }
@@ -874,6 +880,22 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                     eventTypeID: calendarEvent.eventTypeID
                   }));
                 return [...calendarEvents, ...monthYearEventList];
+              case 'none':
+                const oneTimeExceptionEvent = {
+                  id: calendarEvent.title,
+                  title: calendarEvent.title,
+                  allDay: calendarEvent.allDay,
+                  start: eventStartDate,
+                  end: moment(eventStartDate)
+                    .set({
+                      hour: calendarEventEndDateHour,
+                      minute: calendarEventEndDateMinutes,
+                      second: calendarEventEndDateSeconds
+                    })
+                    .toDate(),
+                  eventTypeID: calendarEvent.eventTypeID
+                }
+                return [...calendarEvents, oneTimeExceptionEvent];
               default:
                 return calendarEvents;
             }
