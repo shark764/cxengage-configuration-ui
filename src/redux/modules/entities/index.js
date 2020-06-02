@@ -848,9 +848,7 @@ export default function reducer(state = initialState, action) {
         entityStore.update('data', data => data.push(fromJS(result)))
       );
 
-      if (action.entityName === 'businessHoursV2') {
-        return updatedState.setIn([action.entityName, 'creating', action.entityName === 'businessHoursV2']);
-      } else if (action.entityName === 'tenants') {
+      if (action.entityName === 'tenants' || action.entityName === 'businessHoursV2') {
         return updatedState;
       } else {
         return updatedState.setIn([action.entityName, 'creating'], false);

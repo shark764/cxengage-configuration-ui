@@ -4,6 +4,7 @@
 
 import { createSelector } from 'reselect';
 import { hasAllBranding } from '../entities/branding/selectors';
+import { getEntityData } from '../entities/selectors';
 
 const getUserData = state => state.get('UserData');
 
@@ -36,3 +37,12 @@ export const authenticatedAndBrandingReady = state => hasAllBranding(state) && u
 
 export const isTenantSetForReadAllMode = state =>
   availableTenants(state).find(tenant => tenant.get('tenantId') === getCurrentTenantId(state)) === undefined;
+
+export const getCurrentTenantTimezone = createSelector(
+  [getCurrentTenantId, state => getEntityData(state, 'tenants')],
+  (currentTenantId, tenants) =>
+    tenants &&
+    tenants.size > 0 &&
+    tenants.find(tenant => tenant.get('id') === currentTenantId) &&
+    tenants.find(tenant => tenant.get('id') === currentTenantId).get('timezone')
+);

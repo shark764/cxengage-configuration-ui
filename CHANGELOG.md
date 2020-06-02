@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.1] - 2020-06-01
+- CXV1-22545 - resolutions changes in BH draft page 
+- CXV1-22567 - create a new BH
+
 ## [0.78.0] - 2020-05-26
 ## Added
 - CXV1-22115 - Config 2 - Basic Page Structure - Copy and Delete Funcionality for Drafts

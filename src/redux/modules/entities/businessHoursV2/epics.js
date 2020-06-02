@@ -56,12 +56,9 @@ export const createBusinessHour = $action =>
       )
         .mergeMap(response => [
           handleSuccess(response, a),
-          createDraftBusinessHoursV2(
-            response.result.id,
-            {
-              draftName: 'Initial Draft'
-            },
-          )
+          createDraftBusinessHoursV2(response.result.id, {
+            draftName: 'Initial Draft'
+          })
         ])
         .catch(error => handleError(error, a));
     });
@@ -76,9 +73,9 @@ export const createDraft = ($action, store) =>
         path: ['business-hours', a.businessHourId, 'drafts'],
         data: {
           name: a.values.draftName,
-          ...(a.values.description && { description:  a.values.description }),
-          ...(a.values.timezone && { timezone:  a.values.timezone }),
-          ...(a.values.rules && {  rules: a.values.rules })         
+          ...(a.values.description && { description: a.values.description }),
+          ...(a.values.timezone && { timezone: a.values.timezone }),
+          ...(a.values.rules && { rules: a.values.rules })
         },
         apiVersion: 'v2',
         command: 'createBusinessHourV2Draft',
@@ -394,13 +391,11 @@ export const SaveDraftBeforePublish = action$ =>
         values: action.values
       })
       .race(
-        action$
-          .ofType('UPDATE_SUB_ENTITY_REJECTED')
-          .mapTo({
-            type: 'PUBLISH_BUSINESS_HOURS_V2_DRAFT_REJECTED'
-          })
+        action$.ofType('UPDATE_SUB_ENTITY_REJECTED').mapTo({
+          type: 'PUBLISH_BUSINESS_HOURS_V2_DRAFT_REJECTED'
+        })
       )
-      .take(1)    
+      .take(1)
       .startWith(submit('draft:edit'))
   );
 
@@ -479,7 +474,7 @@ export const updateBusinessHourV2 = action$ =>
     );
 
 // We reinitialize here since the values sent to the API might not be the ones that are needed to render the form properly
-export const ReInitCustomAttributesForm = action$ =>
+export const ReInitBusinessHoursV2Form = action$ =>
   action$
     .ofType('UPDATE_ENTITY_FULFILLED')
     .filter(a => a.entityName === 'businessHoursV2')
@@ -490,7 +485,6 @@ export const ReInitCustomAttributesForm = action$ =>
       },
       payload: a.response.result
     }));
-
 
 export const RemoveBusinessHoursDraft = (action$, store) =>
   action$
@@ -527,3 +521,12 @@ export const RemoveBusinessHoursDraft = (action$, store) =>
         )
         .catch(error => handleError(error, a))
     );
+
+export const FetchActualTenantInfo = (action$, store) =>
+  action$
+    .ofType('CREATE_DRAFT_BUSINESS_HOURS_V2', 'SET_SELECTED_SUB_ENTITY_ID')
+    .filter(() => getCurrentEntity(store.getState()) === 'businessHoursV2')
+    .mapTo({
+      type: 'FETCH_DATA',
+      entityName: 'tenants'
+    });

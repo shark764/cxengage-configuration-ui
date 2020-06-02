@@ -9,6 +9,7 @@ import { getSelectedEntity, getSelectedSubEntity } from '../selectors';
 import { onSubEntityFormSubmit } from '../../entities';
 import { getEntityData, sidePanelHeader, isSubEntitySaving } from '../../entities/selectors';
 import { getCurrentTenantId } from '../../../../redux/modules/userData/selectors';
+import { getCurrentTenantTimezone } from '../../userData/selectors';
 
 const draftEditFormSelector = formValueSelector('draft:edit');
 const ruleFormSelector = formValueSelector('businessHoursV2:rules');
@@ -148,21 +149,26 @@ export const selectBusinessHoursV2RulesFormInitalValues = createSelector(
     })
 );
 
-export const selectBusinessHoursV2DraftFormInitalValues = createSelector(getSelectedSubEntity, selectedSubEntity => {
-  if (selectedSubEntity) {
-    return Map({
-      name: selectedSubEntity.get('name'),
-      timezone: selectedSubEntity.get('timezone'),
-      description: selectedSubEntity.get('description'),
-      created: selectedSubEntity.get('created'),
-      updated: selectedSubEntity.get('updated')
-    });
-  } else {
-    return Map({
-      name: ''
-    });
+export const selectBusinessHoursV2DraftFormInitalValues = createSelector(
+  getSelectedSubEntity,
+  getCurrentTenantTimezone,
+  (selectedSubEntity, currentTenantTimezone) => {
+    if (selectedSubEntity) {
+      return Map({
+        name: selectedSubEntity.get('name'),
+        timezone: selectedSubEntity.get('timezone') || currentTenantTimezone,
+        description: selectedSubEntity.get('description'),
+        created: selectedSubEntity.get('created'),
+        updated: selectedSubEntity.get('updated')
+      });
+    } else {
+      return Map({
+        name: '',
+        timezone: currentTenantTimezone
+      });
+    }
   }
-});
+);
 
 export const selectRulesFormViewMode = state => getSelectedEntity(state) && !getSelectedSubEntity(state);
 

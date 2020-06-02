@@ -23,7 +23,7 @@ import { detailHeaderText } from '../../../../utils';
 import moment from 'moment';
 
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
-  width: 70%;
+  width: 60%;
 `;
 
 const HeaderContainer = styled.div`
@@ -32,7 +32,7 @@ const HeaderContainer = styled.div`
 `;
 
 const Actions = styled(SidePanelActionsContainer)`
-  width: 30%;
+  width: 40%;
   float: right;
 `;
 

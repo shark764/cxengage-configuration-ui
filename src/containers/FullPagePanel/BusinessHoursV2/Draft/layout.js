@@ -23,7 +23,7 @@ import BusinessHoursV2RulesForm from '../../../Form/BusinessHoursV2/RulesForm';
 import { ruleValidation } from '../../../Form/BusinessHoursV2/RulesForm/validation';
 
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
-  width: 75%;
+  width: 65%;
 `;
 
 const HeaderContainer = styled.div`
@@ -34,14 +34,14 @@ const HeaderContainer = styled.div`
 const ButtonWrapper = styled.div`
   margin: 0 10px 0 0;
   box-sizing: border-box;
-  flex-grow: 1;
 `;
 
 const SidePanelActionsContainer = styled.div`
-  width: 25%;
+  width: 35%;
   float: right;
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 `;
 
 const FormPanel = styled.div`
