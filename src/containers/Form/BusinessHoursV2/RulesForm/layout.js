@@ -6,9 +6,8 @@ import { BusinessHoursRuleField } from 'cx-ui-components';
 
 const BusinessRuleContainer = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
-  margin-left: 60px;
+  margin-left: 40px;
 `;
 
 const RulesFieldArray = ({ fields, saveRule, disabled, canSaveRule, viewOnly }) => (

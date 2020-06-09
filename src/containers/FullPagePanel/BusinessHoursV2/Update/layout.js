@@ -386,19 +386,6 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                     </VersionDetailValue>
                     <br />
                   </VersionDetailWrapper>
-                  <VersionDetailWrapper>
-                    <VersionDetailLabel>
-                      <b>Timezone:</b>
-                    </VersionDetailLabel>
-                    <VersionDetailValue>
-                      {this.props.versions &&
-                      this.props.selectedBusinessHourVersion &&
-                      this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
-                        ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).timezone
-                        : ''}
-                    </VersionDetailValue>
-                    <br />
-                  </VersionDetailWrapper>
                 </VersionDetailContainer>
               )}
               <RulesForm />

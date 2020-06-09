@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.4] - 2020-06-05
+- CXV1-22621 - Fix business hours component width to fit to smaller screens 
+
 ## [0.78.3] - 2020-06-05
 - CXV1-22619 - Add Version Timezone in versions Table(entityTable)
 
