@@ -154,6 +154,12 @@ const versionsEntitiyTableHeaders = [
   },
   {
     type: 'string',
+    name: 'timezone',
+    label: 'Timezone',
+    required: true
+  },
+  {
+    type: 'string',
     name: 'createdBy',
     label: 'Created By',
     required: true
