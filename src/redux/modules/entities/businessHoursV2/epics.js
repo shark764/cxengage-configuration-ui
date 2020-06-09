@@ -73,7 +73,7 @@ export const createDraft = ($action, store) =>
         path: ['business-hours', a.businessHourId, 'drafts'],
         data: {
           name: a.values.draftName,
-          ...(a.values.description && { description: a.values.description }),
+          ...((a.values.description != null || a.values.description !== undefined) && { description: a.values.description }),
           ...(a.values.timezone && { timezone: a.values.timezone }),
           ...(a.values.rules && { rules: a.values.rules })
         },

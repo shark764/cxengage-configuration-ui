@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.2] - 2020-06-04
+- CXV1-22591 - Separate create Calendar into own component 
+
 ## [0.78.1] - 2020-06-01
 - CXV1-22545 - resolutions changes in BH draft page 
 - CXV1-22567 - create a new BH
