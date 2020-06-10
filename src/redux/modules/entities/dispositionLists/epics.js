@@ -153,11 +153,12 @@ export const DispositionListsSubEntityFormSubmission = (action$, store) =>
       if (a.entityId === 'create') {
         // Checking dispositions with same hierarchy but different category uuid
         // Transfer List does not have this but needs one
-        a.values = a.values.map(disposition => {
+        a.values = a.values.map((disposition, index) => {
           let firstOccur = a.values.find(first => disposition.get('hierarchy')[0] === first.get('hierarchy')[0]);
           if (firstOccur && firstOccur.get('categoryUUID') !== disposition.get('categoryUUID')) {
             disposition = disposition.set('categoryUUID', firstOccur.get('categoryUUID'));
           }
+          disposition = disposition.set('sortOrder', index);
           return disposition;
         });
         return {

@@ -154,7 +154,12 @@ export const dispositionListItemCreateValues = createSelector(
 
       if (!hierarchyExists) {
         // If a dispositionListItem is being created under new hierarchy:
-        const updatedValues = existingDispositions.push(values);
+        let hierarchyArray = [];
+        existingDispositions.forEach(disposition => {
+          hierarchyArray.push(disposition.toJS().hierarchy[0]);
+        });
+        let lastIndex = hierarchyArray.lastIndexOf(values.get('hierarchy')[0]);
+        const updatedValues = existingDispositions.splice(lastIndex + 1, 0, values);
 
         return updatedValues;
       } else {

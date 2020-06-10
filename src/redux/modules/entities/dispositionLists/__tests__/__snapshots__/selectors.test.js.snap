@@ -127,6 +127,23 @@ Immutable.List [
 exports[`DispositionListsForm selectors updates dispositionList dispositions (mainEntityForm values) when adding dispositionListItem to an existing dispositionList 1`] = `
 Immutable.List [
   Immutable.Map {
+    "shared": false,
+    "active": true,
+    "draggableUUID": "mockGenerateUUID",
+    "name": "mockDispName1",
+    "sortOrder": 0,
+    "endpointUUID": "mockGenerateUUID",
+    "dispositionId": "mockDispositionId1",
+    "hierarchy": Array [
+      Immutable.List [
+        "updateMockHierarchy",
+      ],
+    ],
+    "droppableUUID": "mockGenerateUUID",
+    "categoryUUID": "mockGenerateUUID",
+    "id": "mockDispositionId1",
+  },
+  Immutable.Map {
     "hierarchy": Immutable.List [
       "mockHierarchy1",
     ],
@@ -154,23 +171,6 @@ Immutable.List [
     "dispositionId": "mockDispositionId3",
     "endpointUUID": "mockDispositionUUID3",
     "droppableUUID": "mockDroppableUUID3",
-  },
-  Immutable.Map {
-    "shared": false,
-    "active": true,
-    "draggableUUID": "mockGenerateUUID",
-    "name": "mockDispName1",
-    "sortOrder": 0,
-    "endpointUUID": "mockGenerateUUID",
-    "dispositionId": "mockDispositionId1",
-    "hierarchy": Array [
-      Immutable.List [
-        "updateMockHierarchy",
-      ],
-    ],
-    "droppableUUID": "mockGenerateUUID",
-    "categoryUUID": "mockGenerateUUID",
-    "id": "mockDispositionId1",
   },
 ]
 `;
