@@ -82,7 +82,8 @@ export default class CalendarEvents extends Component {
               const intervalEvents = rule.hours.intervals.map((interval, i) => {
                 // Parse durations into timed format
                 const intertvalStartTime = Math.floor(interval.start / 60) + ':' + interval.start % 60;
-                const intertvalEndTime = Math.floor(interval.end / 60) + ':' + interval.end % 60;
+                const intertvalEndTime =
+                  interval.end !== 1440 ? Math.floor(interval.end / 60) + ':' + interval.end % 60 : '23:59';
                 // Add formatted durations to rule dates
                 const ruleStartDate = moment(rule.startDate).format('LL');
                 const ruleEndDate =

@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 import { reduxForm } from 'redux-form/immutable';
 import styled from 'styled-components';
-import {
-  Modal,
-  InputField,
-  SidePanelActions,
-  DetailHeader,
-  SidePanelTable,
-  AutoCompleteField
-} from 'cx-ui-components';
+import { Modal, InputField, SidePanelActions, DetailHeader, SidePanelTable, AutoCompleteField } from 'cx-ui-components';
 import { isEmpty } from 'serenova-js-utils/strings';
 
 import SidePanelHeaderContainer from '../SidePanelHeader';
@@ -178,7 +171,7 @@ const CreateDraftForm = reduxForm({
   return (
     <form onSubmit={handleSubmit}>
       <ModalActions onCancel={onCancel} isSaving={isSaving} invalid={invalid} />
-      <ModalTitle>Publish Draft</ModalTitle>
+      <ModalTitle>New Draft</ModalTitle>
       <ModalWrapper>
         <InputField name="draftName" label="Draft Name" componentType="input" inputType="text" disabled={isSaving} />
       </ModalWrapper>
@@ -435,7 +428,8 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 };
                 if (this.state.isCopyVersion) {
                   const toBusinessHourName = values.get('toBusinessHours');
-                  const businessHourId = this.props.businessHoursList.find(v => v.name === toBusinessHourName.trim()).id;
+                  const businessHourId = this.props.businessHoursList.find(v => v.name === toBusinessHourName.trim())
+                    .id;
                   this.props.createDraft(businessHourId, newDraft);
                 } else {
                   this.props.createDraft(this.props.businessHourId, newDraft);

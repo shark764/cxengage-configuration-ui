@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.6] - 2020-06-10
+- CXV1-22620 - Fix end time event of 12AM to be displayed as rest of the day in Calendar component
+
 ## [0.78.5] - 2020-06-09
 ### Fixed
 - CXV1-22566 - Disposition Items Added to a Disposition List add to the end of the list regardless of what Category the item was added to
