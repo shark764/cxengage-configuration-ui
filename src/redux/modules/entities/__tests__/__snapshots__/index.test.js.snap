@@ -354,23 +354,6 @@ Immutable.Map {
     ],
   },
   "tenants": Immutable.Map {
-    "dependentEntities": Immutable.Map {
-      "users": Immutable.Map {
-        "data": Immutable.List [],
-      },
-      "integrations": Immutable.Map {
-        "data": Immutable.List [],
-      },
-      "slas": Immutable.Map {
-        "data": Immutable.List [],
-      },
-      "identityProviders": Immutable.Map {
-        "data": Immutable.List [],
-      },
-      "branding": Immutable.Map {
-        "data": Immutable.List [],
-      },
-    },
     "readPermission": Immutable.List [
       "PLATFORM_VIEW_ALL_TENANTS",
       "PLATFORM_MANAGE_ALL_TENANTS",

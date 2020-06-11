@@ -1,5 +1,6 @@
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { of } from 'rxjs/observable/of';
@@ -13,9 +14,10 @@ import { handleSuccess, handleError } from '../handleResult';
 import { isInIframe } from 'serenova-js-utils/browser';
 
 import { userHasPermissions, getSelectedEntity } from '../selectors';
-import { getCurrentFormValueByFieldName } from '../../../modules/form/selectors';
+import { getCurrentFormValueByFieldName, getCurrentFormValues } from '../../../modules/form/selectors';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntityName } from '../../../modules/entities/selectors';
 import {
+  getBrandingImagesUrlPart,
   isLogoOrFaviconSelected,
   tenantsFormCreateValues,
   tenantsFormUpdateValues,
@@ -23,16 +25,17 @@ import {
   tenantsPlatformPermissions,
   getCurrentFormBrandingStyles,
   selectTenantsFormInitialValues,
+  isTenantBrandingImagesUploaded,
+  isAllTenantsFormDependenciesFetched,
   getSelectedTenantBrandingStyles,
-  isAllTenantDependenciesUploaded,
-  isAllTenantsFormDependenciesFetched
+  isTenantsFetched
 } from './selectors';
 
 // Fetch's all the tenant's that the user belongs to:
 export const fetchTenants = ($action, store) =>
   $action
     .ofType('FETCH_DATA')
-    .filter(({ entityName }) => entityName === 'tenants')
+    .filter(({ entityName }) => entityName === 'tenants' && isTenantsFetched(store.getState()))
     .mergeMap(a => {
       if (userHasPermissions(store.getState(), tenantsPlatformPermissions)) {
         a.fetchAllTenants = true;
@@ -71,7 +74,7 @@ export const fetchTenants = ($action, store) =>
     });
 
 // Fetch's tenant-dependentEntities, don't fetch platform level entities like regions & timezones if they are already fetched.
-// Also after a tenant-update, only fetch branding because it's the only dependent entity that gets changed.
+// Also after updating a tenant only fetch branding because it's the only dependent entity that gets changed.
 export const StartFetchingTenantsFormDependencies = (action$, store) =>
   action$
     .ofType('SET_SELECTED_ENTITY_ID')
@@ -80,9 +83,7 @@ export const StartFetchingTenantsFormDependencies = (action$, store) =>
       currentEntityName: getCurrentEntity(store.getState()),
       isDefined: name => store.getState().getIn(['Entities', name, 'data']).size === 0,
       isDependentEntityDefined: name =>
-        name === 'branding'
-          ? true
-          : store.getState().getIn(['Entities', 'tenants', 'dependentEntities', name, 'data']).size === 0,
+        name === 'branding' ? true : !getSelectedEntity(store.getState()).getIn(['dependentEntities', name, 'data']),
       isPlatformEntity: (entityName, entityId) =>
         entityName === 'regions' || entityName === 'timezones' || (entityName === 'users' && entityId === 'create')
     }))
@@ -95,6 +96,7 @@ export const StartFetchingTenantsFormDependencies = (action$, store) =>
               .map(entityName => ({
                 type: 'FETCH_DATA',
                 entityName,
+                entityId,
                 toastMessage,
                 currentEntityName,
                 fetchingDependencies: true,
@@ -110,6 +112,7 @@ export const StartFetchingTenantsFormDependencies = (action$, store) =>
               .map(entityName => ({
                 type: 'FETCH_DATA',
                 entityName,
+                entityId,
                 toastMessage,
                 currentEntityName,
                 fetchingDependencies: true,
@@ -150,11 +153,11 @@ export const ReInitTenantsForm = (action$, store) =>
     .map(a => ({
       ...a,
       entityId: getSelectedEntityId(store.getState()),
-      branding: getSelectedTenantBranding(store.getState()).toJS(),
+      branding: getSelectedTenantBranding(store.getState()) ? getSelectedTenantBranding(store.getState()).toJS() : {},
       selectedEntity: getSelectedEntity(store.getState()) ? getSelectedEntity(store.getState()).toJS() : {}
     }))
     .map(
-      ({ currentEntityName, toastMessage, entityId, selectedEntity, branding }) =>
+      ({ currentEntityName, toastMessage, entityId, selectedEntity, branding, response }) =>
         entityId === 'create'
           ? {
               type: '@@redux-form/INITIALIZE',
@@ -177,30 +180,14 @@ export const ReInitTenantsForm = (action$, store) =>
                 logo: branding.logo,
                 favicon: branding.favicon,
                 ...JSON.parse(branding.styles),
-                productName: JSON.parse(branding.styles).productName
-                  ? JSON.parse(branding.styles).productName
-                  : branding.productName
-              }
+                productName:
+                  JSON.parse(branding.styles) && JSON.parse(branding.styles).productName
+                    ? JSON.parse(branding.styles).productName
+                    : branding.productName
+              },
+              response
             }
     );
-
-export const DisplayToastMessage = action$ =>
-  action$
-    .ofType('@@redux-form/INITIALIZE')
-    .filter(({ entityName }) => entityName === 'tenants')
-    .map(({ toastMessage }) => {
-      if (toastMessage) {
-        if (toastMessage.includes('Branding') && toastMessage.includes('create')) {
-          Toast.success('Tenant was created sucessfully!');
-        } else if (toastMessage.includes('Branding') && toastMessage.includes('update')) {
-          Toast.success('Tenant was updated sucessfully!');
-        }
-        toastMessage.includes('Failed') ? Toast.error(toastMessage) : Toast.success(toastMessage);
-      }
-      return {
-        type: toastMessage ? toastMessage.toUpperCase().replace(/\s/g, '_') : 'TENANT_DATA_FETCH_FULFILLED'
-      };
-    });
 
 export const CreateUpdateTenant = (action$, store) =>
   action$
@@ -216,10 +203,7 @@ export const CreateUpdateTenant = (action$, store) =>
         return {
           type: 'CREATE_ENTITY',
           entityName: a.entityName,
-          values: tenantsFormCreateValues(store.getState(), a.values),
-          isBrandingImagesSelected: isLogoOrFaviconSelected(store.getState()),
-          updatedBrandingStyles: getCurrentFormBrandingStyles(store.getState()),
-          initialBrandingStyles: getSelectedTenantBrandingStyles(store.getState())
+          values: tenantsFormCreateValues(store.getState(), a.values)
         };
       } else if (a.selectedEntityId === 'bulk') {
         return {
@@ -232,100 +216,66 @@ export const CreateUpdateTenant = (action$, store) =>
           type: 'UPDATE_ENTITY',
           entityName: a.entityName,
           entityId: a.selectedEntityId,
-          values: tenantsFormUpdateValues(a.values),
-          isBrandingImagesSelected: isLogoOrFaviconSelected(store.getState()),
-          updatedBrandingStyles: getCurrentFormBrandingStyles(store.getState()),
-          initialBrandingStyles: getSelectedTenantBrandingStyles(store.getState())
+          values: tenantsFormUpdateValues(a.values)
         };
       }
     });
 
-// If Branding styles & images are not modified while creating & updating a tenant, don't make any further tenants dependent-entities requests:
-export const SetSelectedTenantId = action$ =>
+export const SetTenantUpdateCreateOrUpdateBranding = (action$, store) =>
   action$
     .ofType('CREATE_ENTITY_FULFILLED', 'UPDATE_ENTITY_FULFILLED')
-    .filter(
-      a =>
-        a.entityName === 'tenants' && !a.isBrandingImagesSelected && a.initialBrandingStyles === a.updatedBrandingStyles
-    )
-    .map(
-      a =>
-        a.type === 'CREATE_ENTITY_FULFILLED'
-          ? {
-              type: 'SET_SELECTED_ENTITY_ID',
-              toastMessage: `Tenant was created sucessfully!`,
-              entityName: a.entityName,
-              entityId: a.response.result.id
-            }
-          : {
-              type: '@@redux-form/INITIALIZE',
-              entityName: a.entityName,
-              toastMessage: `Tenant was updated sucessfully!`,
-              payload: { ...a.values },
-              meta: {
-                form: `${a.entityName}:${a.response.result.id}`
-              }
-            }
-    );
-
-// If tenant's Branding Styles ae modified, update it upon creating & updating a tenant:
-export const StartUpdatingTenantsBrandingStyles = action$ =>
-  action$
-    .ofType('CREATE_ENTITY_FULFILLED', 'UPDATE_ENTITY_FULFILLED')
-    .filter(a => a.entityName === 'tenants' && a.initialBrandingStyles !== a.updatedBrandingStyles)
-    .map(a => ({
-      ...a,
-      actionType: a.type === 'CREATE_ENTITY_FULFILLED' ? 'create' : 'update',
-      type: 'UPDATE_BRANDING_STYLES',
-      entityId: a.response.result.id,
-      sdkCall: {
-        module: 'entities',
-        data: {
-          tenantId: a.response.result.id,
-          styles: a.updatedBrandingStyles
-        },
-        command: 'updateBranding',
-        topic: 'cxengage/entities/update-branding-response'
+    .filter(a => a.entityName === 'tenants' && !isLogoOrFaviconSelected(store.getState()))
+    .map(a => {
+      if (
+        getCurrentFormBrandingStyles(store.getState()) ===
+        getSelectedTenantBrandingStyles(store.getState(), a.response.result.id)
+      ) {
+        return {
+          ...a,
+          entityId: a.response.result.id,
+          type: a.type.startsWith('CREATE') ? 'CREATE_TENANT_FULFILLED' : 'UPDATE_TENANT_FULFILLED'
+        };
+      } else {
+        return {
+          ...a,
+          type: a.type.startsWith('CREATE') ? 'CREATE_TENANT_BRANDING' : 'UPDATE_TENANT_BRANDING',
+          entityId: a.response.result.id,
+          sdkCall: {
+            module: 'entities',
+            data: {
+              tenantId: a.response.result.id,
+              styles: getCurrentFormBrandingStyles(store.getState()),
+              ...getBrandingImagesUrlPart(store.getState(), a.response.result.id)
+            },
+            command: 'updateBranding',
+            topic: 'cxengage/entities/update-branding-response'
+          }
+        };
       }
-    }));
+    });
 
-// update tenant's branding styles request:
-export const UpdateTenantsBrandingStyles = action$ =>
-  action$.ofType('UPDATE_BRANDING_STYLES').switchMap(a =>
-    fromPromise(sdkPromise(a.sdkCall))
-      .map(response => handleSuccess(response, a))
-      .catch(error => handleError(error, a))
-  );
-
-// Initiate's upload-branding-image request based on the selected logo & favicon:
-export const StartBrandingImagesUpload = (action$, store) =>
+export const InitiatesBrandingImagesUpload = (action$, store) =>
   action$
     .ofType('CREATE_ENTITY_FULFILLED', 'UPDATE_ENTITY_FULFILLED')
-    .filter(({ entityName, isBrandingImagesSelected }) => entityName === 'tenants' && !!isBrandingImagesSelected)
-    .map(a => ({
-      ...a,
-      entityId: a.response.result.id,
-      actionType: a.type === 'CREATE_ENTITY_FULFILLED' ? 'create' : 'update',
-      sdkCall: {
-        module: 'entities',
-        data: {},
-        command: 'uploadBrandingImage',
-        topic: 'cxengage/entities/upload-branding-image-response'
-      },
-      isImageSelected: imageType => getCurrentFormValueByFieldName(store.getState(), `${imageType}Selected`)
-    }))
+    .filter(a => a.entityName === 'tenants' && !!isLogoOrFaviconSelected(store.getState()))
     .switchMap(a =>
       from(['logo', 'favicon'])
-        .filter(imageType => a.isImageSelected(imageType))
+        .filter(imageType => getCurrentFormValueByFieldName(store.getState(), `${imageType}Selected`))
         .map(imageType => {
+          a.entityId = a.response.result.id;
+          a.sdkCall = {
+            module: 'entities',
+            data: {},
+            command: 'uploadBrandingImage',
+            topic: 'cxengage/entities/upload-branding-image-response'
+          };
           a.sdkCall.data.tenantId = a.response.result.id;
           a.sdkCall.data.file = a.values[`${imageType}Selected`];
           a.sdkCall.data.imageType = imageType;
           delete a.type;
           return {
-            type: `UPLOAD_${imageType.toUpperCase()}_BRANDING_IMAGE`,
-            imageType,
-            ...a
+            ...a,
+            type: `UPLOAD_${imageType.toUpperCase()}_BRANDING_IMAGE`
           };
         })
     );
@@ -338,36 +288,162 @@ export const UploadBrandingImages = action$ =>
       .catch(error => handleError(error, a))
   );
 
-// sets the current selected tenantId after the branding is uploaded to the backend
+export const UpdateTenantBrandingAfterImagesUpload = (action$, store) =>
+  action$
+    .ofType('UPLOAD_LOGO_BRANDING_IMAGE_FULFILLED', 'UPLOAD_FAVICON_BRANDING_IMAGE_FULFILLED')
+    .filter(({ entityId }) => isTenantBrandingImagesUploaded(store.getState(), entityId))
+    .map(a => ({
+      ...a,
+      type: getSelectedEntityId(store.getState()) === 'create' ? 'CREATE_TENANT_BRANDING' : 'UPDATE_TENANT_BRANDING',
+      entityId: a.entityId,
+      sdkCall: {
+        module: 'entities',
+        data: {
+          tenantId: a.entityId,
+          styles: getCurrentFormBrandingStyles(store.getState()),
+          ...getBrandingImagesUrlPart(store.getState(), a.entityId)
+        },
+        command: 'updateBranding',
+        topic: 'cxengage/entities/update-branding-response'
+      }
+    }));
+
+// update tenant's branding request:
+export const UpdateTenantBranding = action$ =>
+  action$.ofType('CREATE_TENANT_BRANDING', 'UPDATE_TENANT_BRANDING').switchMap(a =>
+    fromPromise(sdkPromise(a.sdkCall))
+      .map(response => handleSuccess(response, a))
+      .catch(error => handleError(error, a))
+  );
+
 export const SetTenantIdAfterBrandingIsUpdated = (action$, store) =>
   action$
     .ofType(
-      'UPDATE_BRANDING_STYLES_FULFILLED',
-      'UPLOAD_LOGO_BRANDING_IMAGE_FULFILLED',
-      'UPLOAD_FAVICON_BRANDING_IMAGE_FULFILLED'
+      'CREATE_TENANT_FULFILLED',
+      'UPDATE_TENANT_FULFILLED',
+      'CREATE_TENANT_BRANDING_FULFILLED',
+      'UPDATE_TENANT_BRANDING_FULFILLED'
     )
-    .filter(() => isAllTenantDependenciesUploaded(store.getState()))
-    .map(({ actionType, entityId }) => ({
-      type: 'SET_SELECTED_ENTITY_ID',
-      toastMessage:
-        actionType === 'create' ? 'Branding has been created sucessfully!' : 'Branding has been updated sucessfully!',
-      entityId
+    .map(a => {
+      if (a.type.startsWith('CREATE')) {
+        return {
+          type: 'SET_SELECTED_ENTITY_ID',
+          entityName: a.entityName,
+          entityId: a.entityId,
+          toastMessage:
+            a.type === 'CREATE_TENANT_FULFILLED'
+              ? 'Tenant was created sucessfully!'
+              : 'Branding has been created sucessfully!'
+        };
+      } else {
+        return {
+          type: '@@redux-form/INITIALIZE',
+          entityName: a.entityName,
+          toastMessage:
+            a.type === 'UPDATE_TENANT_FULFILLED'
+              ? 'Tenant was updated sucessfully!'
+              : 'Branding has been updated sucessfully!',
+          payload: { ...getCurrentFormValues(store.getState()).toJS() },
+          meta: {
+            form: `${a.entityName}:${a.entityId}`
+          },
+          response: a.response
+        };
+      }
+    });
+
+export const DisplayToastMessage = (action$, store) =>
+  action$
+    .ofType('@@redux-form/INITIALIZE')
+    .filter(({ entityName, toastMessage }) => entityName === 'tenants' && !!toastMessage)
+    .map(({ toastMessage, response }) => {
+      if (toastMessage.includes('Branding') && toastMessage.includes('create')) {
+        Toast.success('Tenant was created sucessfully!');
+      } else if (toastMessage.includes('Branding') && toastMessage.includes('update')) {
+        Toast.success('Tenant was updated sucessfully!');
+      }
+      toastMessage.includes('Failed') ? Toast.error(toastMessage) : Toast.success(toastMessage);
+      return { toastMessage, response };
+    })
+    .map(({ toastMessage, response }) => {
+      if (toastMessage.includes('create') && !toastMessage.includes('Failed') && !isInIframe()) {
+        return {
+          type: 'UPDATE_CONFIG_UI_URL_WITH_QUERY_STRING',
+          entityId: getSelectedEntityId(store.getState())
+        };
+      } else {
+        return {
+          type: toastMessage ? toastMessage.toUpperCase().replace(/\s/g, '_') : 'TENANT_DATA_FETCH_FULFILLED',
+          response
+        };
+      }
+    });
+
+export const InitiatesTenantsBrandingReject = (action$, store) =>
+  action$
+    .ofType('UPLOAD_LOGO_BRANDING_IMAGE_REJECTED', 'UPLOAD_FAVICON_BRANDING_IMAGE_REJECTED')
+    .filter(({ entityId }) => isTenantBrandingImagesUploaded(store.getState(), entityId))
+    .map(a => ({
+      ...a,
+      type:
+        getSelectedEntityId(store.getState()) === 'create'
+          ? 'CREATE_TENANT_BRANDING_REJECTED'
+          : 'UPDATE_TENANT_BRANDING_REJECTED'
     }));
 
-// sets the current selected tenantId after the branding is uploaded to the backend
-export const SetTenantIdAfterBrandingIsRejected = (action$, store) =>
+export const SetTenantIdAfterBrandingIsRejected = action$ =>
+  action$.ofType('CREATE_TENANT_BRANDING_REJECTED', 'UPDATE_TENANT_BRANDING_REJECTED').map(({ type, entityId }) => ({
+    type: 'SET_SELECTED_ENTITY_ID',
+    toastMessage: type.startsWith('CREATE') ? 'Failed to create Branding!' : 'Failed to update Branding!',
+    entityId
+  }));
+
+// reset-tenant branding to default:
+export const ResetTenantBrandingToDefault = action$ =>
   action$
-    .ofType(
-      'UPDATE_BRANDING_STYLES_REJECTED',
-      'UPLOAD_LOGO_BRANDING_IMAGE_REJECTED',
-      'UPLOAD_FAVICON_BRANDING_IMAGE_REJECTED'
-    )
-    .filter(() => isAllTenantDependenciesUploaded(store.getState()))
-    .map(({ actionType, entityId }) => ({
-      type: 'SET_SELECTED_ENTITY_ID',
-      toastMessage: actionType === 'create' ? 'Failed to create Branding!' : 'Failed to update Branding!',
-      entityId
-    }));
+    .ofType('RESET_TENANT_BRANDING_TO_DEFAULT')
+    .map(a => ({
+      ...a,
+      sdkCall: {
+        module: 'entities',
+        data: {
+          tenantId: a.entityId,
+          styles: '{}',
+          favicon: '',
+          logo: ''
+        },
+        command: 'updateBranding',
+        topic: 'cxengage/entities/update-branding-response'
+      }
+    }))
+    .switchMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a))
+        .catch(error => handleError(error, a))
+    );
+
+export const SetSelectedTenantIdAfterResetingBranding = (action$, store) =>
+  action$.ofType('RESET_TENANT_BRANDING_TO_DEFAULT_FULFILLED').map(a => {
+    const formValues = getCurrentFormValues(store.getState())
+      .delete('navbar')
+      .delete('navbarText')
+      .delete('primaryColor')
+      .delete('accentColor')
+      .delete('accentHoverColor')
+      .delete('logo')
+      .delete('favicon');
+    const { result } = a.response;
+    return {
+      type: '@@redux-form/INITIALIZE',
+      entityName: 'tenants',
+      toastMessage: 'Branding has been reset to default sucessfully!',
+      payload: { ...formValues.toJS(), ...JSON.parse(result.styles), logo: result.logo, favicon: result.favicon },
+      meta: {
+        form: `tenants:${a.entityId}`
+      },
+      response: a.response
+    };
+  });
 
 // unset the selected images in the redux state once the images are saved to the backend:
 export const UnSetSelectedImageAfterUpload = action$ =>
@@ -378,7 +454,7 @@ export const UnSetSelectedImageAfterUpload = action$ =>
       type: '@@redux-form/CHANGE',
       meta: {
         form: `tenants:${a.entityId}`,
-        field: `${a.imageType}Selected`,
+        field: a.type === 'UPLOAD_LOGO_BRANDING_IMAGE_FULFILLED' ? 'logoSelected' : 'faviconSelected',
         touch: false,
         persistentSubmitErrors: false
       },
@@ -398,41 +474,9 @@ export const ChangeBrandingImageFileInState = (action$, store) =>
     payload: a.file
   }));
 
-// reset-tenant branding to default:
-export const ResetTenantBrandingToDefault = action$ =>
-  action$
-    .ofType('RESET_TENANT_BRANDING_TO_DEFAULT')
-    .map(a => ({
-      ...a,
-      sdkCall: {
-        module: 'entities',
-        data: {
-          tenantId: a.selectedEntityId,
-          styles: '{}',
-          favicon: '',
-          logo: ''
-        },
-        command: 'updateBranding',
-        topic: 'cxengage/entities/update-branding-response'
-      }
-    }))
-    .switchMap(a =>
-      fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a))
-        .catch(error => handleError(error, a))
-    );
-
-export const SetSelectedTenantIdAfterResetingBranding = (action$, store) =>
-  action$.ofType('RESET_TENANT_BRANDING_TO_DEFAULT_FULFILLED').map(() => ({
-    type: 'SET_SELECTED_ENTITY_ID',
-    toastMessage: 'Branding has been reset to default sucessfully!',
-    entityName: 'tenants',
-    entityId: getSelectedEntityId(store.getState())
-  }));
-
 export const SendBrandingUpdateToConfig1 = (action$, store) =>
   action$
-    .ofType('BRANDING_HAS_BEEN_UPDATED_SUCESSFULLY!', 'BRANDING_HAS_BEEN_RESET_TO_DEFAULT!')
+    .ofType('BRANDING_HAS_BEEN_UPDATED_SUCESSFULLY!', 'BRANDING_HAS_BEEN_RESET_TO_DEFAULT_SUCESSFULLY!')
     .filter(() => !isInIframe())
     .switchMap(() =>
       fromPromise(sdkPromise({ module: 'tenantBrandingUpdated', tenantId: getSelectedEntityId(store.getState()) }))

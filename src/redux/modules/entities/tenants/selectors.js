@@ -10,14 +10,7 @@ import { getCurrentAgentId, getCurrentTenantId } from '../../../../redux/modules
 import { getActiveUsersFullNames } from '../../../../redux/modules/entities/users/selectors';
 import { getCurrentForm, getCurrentFormValueByFieldName } from '../../form/selectors';
 import { getCurrentRegionId } from '../regions/selectors';
-import {
-  getSelectedEntity,
-  getSelectedEntityId,
-  isEntityFetching,
-  getEntities,
-  getCurrentEntityStore,
-  userHasPermissions
-} from '../selectors';
+import { getSelectedEntity, getSelectedEntityId, isEntityFetching, findEntity, userHasPermissions } from '../selectors';
 
 export const selectTenantsFormInitialValues = createSelector(
   [getSelectedEntity, getCurrentAgentId],
@@ -32,28 +25,29 @@ export const selectTenantsFormInitialValues = createSelector(
         })
 );
 
-const selectedTenantUsers = createSelector(getEntities, entities =>
-  entities.getIn(['tenants', 'dependentEntities', 'users', 'data'])
+const selectedTenantUsers = createSelector(
+  getSelectedEntity,
+  entity => entity && entity.getIn(['dependentEntities', 'users', 'data'])
 );
 
-const selectedTenantSlas = createSelector(getEntities, entities =>
-  entities.getIn(['tenants', 'dependentEntities', 'slas', 'data'])
+const selectedTenantSlas = createSelector(
+  getSelectedEntity,
+  entity => entity && entity.getIn(['dependentEntities', 'slas', 'data'])
 );
 
-const selectedTenantIdps = createSelector(getEntities, entities =>
-  entities.getIn(['tenants', 'dependentEntities', 'identityProviders', 'data'])
+const selectedTenantIdps = createSelector(
+  getSelectedEntity,
+  entity => entity && entity.getIn(['dependentEntities', 'identityProviders', 'data'])
 );
 
-const selectedTenantIntegrations = createSelector(getEntities, entities =>
-  entities.getIn(['tenants', 'dependentEntities', 'integrations', 'data'])
+const selectedTenantIntegrations = createSelector(
+  getSelectedEntity,
+  entity => entity && entity.getIn(['dependentEntities', 'integrations', 'data'])
 );
 
-const getTenantBrandingInfo = createSelector(getEntities, entities =>
-  entities.getIn(['tenants', 'dependentEntities', 'branding'])
-);
-
-const selectedTenantBranding = createSelector(getEntities, entities =>
-  entities.getIn(['tenants', 'dependentEntities', 'branding', 'data'])
+const selectedTenantBranding = createSelector(
+  getSelectedEntity,
+  entity => entity && entity.getIn(['dependentEntities', 'branding', 'data'])
 );
 
 export const getSelectedTenantUsers = createSelector(
@@ -83,7 +77,10 @@ export const getCurrentlySelectedTenantIdps = createSelector(
   [selectedTenantIdps],
   idps =>
     idps && idps.size > 0
-      ? idps.filter(idp => idp.get('active') === true).map(idp => ({ value: idp.get('id'), label: idp.get('name') }))
+      ? idps
+          .filter(idp => idp.get('active') === true)
+          .filter(idp => idp.get('name') !== null)
+          .map(idp => ({ value: idp.get('id'), label: idp.get('name') }))
       : List()
 );
 
@@ -102,11 +99,6 @@ export const getSelectedTenantOutbndIntegrations = createSelector(
       : List()
 );
 
-export const getSelectedTenantBranding = createSelector(
-  [selectedTenantBranding],
-  branding => (branding && branding.size > 0 ? branding : Map({}))
-);
-
 export const selectTenantAdminUserId = createSelector(
   [getSelectedEntity],
   selectedEntity => (selectedEntity ? selectedEntity.get('adminUserId') : List())
@@ -117,8 +109,52 @@ export const getParentTenantId = createSelector(
   selectedEntity => (selectedEntity ? selectedEntity.getIn(['parent', 'id']) : Map({}))
 );
 
-export const getSelectedTenantBrandingStyles = createSelector([getSelectedTenantBranding], branding => {
-  if (branding.get('styles')) {
+export const getSelectedTenantBranding = createSelector(
+  [selectedTenantBranding],
+  branding => (branding && branding.size > 0 ? branding : Map({}))
+);
+
+export const getBrandingImagesUrlPart = (state, entityId) => {
+  const entity = findEntity(state, 'tenants', entityId);
+  const branding = entity ? entity.getIn(['dependentEntities', 'branding', 'data']) : Map({});
+  const regx = new RegExp(`${entityId}/.+`);
+  return ['logo', 'favicon'].reduce((accu, imageType) => {
+    accu[imageType] =
+      branding && branding.get(imageType) && regx.test(branding.get(imageType))
+        ? regx.exec(branding.get(imageType))[0]
+        : '';
+    return accu;
+  }, {});
+};
+
+export const isSelectedTenantHasDefaultBranding = state => {
+  const entity = findEntity(state, 'tenants', getSelectedEntityId(state));
+  const branding = entity && entity.getIn(['dependentEntities', 'branding', 'data']);
+  if (branding && branding.size > 0) {
+    return (
+      branding.get('logo') === '' &&
+      branding.get('favicon') === '' &&
+      (branding.get('styles') === '{}' || branding.get('styles') === '{"productName":"CxEngage"}')
+    );
+  } else {
+    return undefined;
+  }
+};
+
+export const isTenantBrandingImagesUploaded = (state, entityId) => {
+  const entity = findEntity(state, 'tenants', entityId);
+  const branding = entity && entity.getIn(['dependentEntities', 'branding']);
+  if (branding) {
+    return ['logo', 'favicon'].every(a => !branding.get(`${a}Uploading`));
+  } else {
+    return true;
+  }
+};
+
+export const getSelectedTenantBrandingStyles = (state, entityId) => {
+  const entity = findEntity(state, 'tenants', entityId);
+  const branding = entity ? entity.getIn(['dependentEntities', 'branding', 'data']) : Map({});
+  if (branding && branding.get('styles')) {
     const styles = JSON.parse(branding.get('styles'));
     return JSON.stringify({
       accentColor: styles.accentColor,
@@ -126,12 +162,12 @@ export const getSelectedTenantBrandingStyles = createSelector([getSelectedTenant
       primaryColor: styles.primaryColor,
       navbar: styles.navbar,
       navbarText: styles.navbarText,
-      productName: branding.get('productName')
+      productName: branding.get('productName') ? branding.get('productName') : styles.productName
     });
   } else {
     return '{}';
   }
-});
+};
 
 export const getCurrentFormBrandingStyles = createSelector(
   getCurrentForm,
@@ -148,31 +184,14 @@ export const getCurrentFormBrandingStyles = createSelector(
       : '{}'
 );
 
-export const isSelectedTenantHasDefaultBranding = createSelector(
-  selectedTenantBranding,
-  branding =>
-    branding && branding.size > 0
-      ? branding.get('logo') === '' && branding.get('favicon') === '' && branding.get('styles') === '{}'
-      : undefined
-);
-
-export const isDependentEntityFetching = (state, dependentEntity, entityName) => {
-  if (entityName) {
-    return getEntities(state).getIn([entityName, 'dependentEntities', dependentEntity, 'fetching']);
-  } else {
-    return getCurrentEntityStore(state).getIn(['dependentEntities', dependentEntity, 'fetching']);
-  }
-};
+export const isDependentEntityFetching = (state, dependentEntity) =>
+  getSelectedEntity(state) && getSelectedEntity(state).getIn(['dependentEntities', dependentEntity, 'fetching']);
 
 export const isAllTenantsFormDependenciesFetched = state =>
   ['users', 'timezones', 'regions'].every(entityName => !isEntityFetching(state, entityName)) &&
   ['users', 'slas', 'identityProviders', 'integrations', 'branding', 'protectedBranding'].every(
     dependentEntity => !isDependentEntityFetching(state, dependentEntity, 'tenants')
   );
-
-export const isAllTenantDependenciesUploaded = createSelector(getTenantBrandingInfo, uploadDependencies =>
-  ['styles', 'logo', 'favicon'].every(a => !uploadDependencies.get(`${a}Updating`))
-);
 
 export const tenantsFormCreateValues = (state, values) =>
   values && values.size > 0
@@ -224,3 +243,5 @@ export const userHasTenantIdpUpdatePermissions = state =>
   userHasTenantUpdatePermissions(state) && userHasPermissions(state, ['IDENTITY_PROVIDERS_UPDATE']);
 
 export const userHasPlatformViewPermission = state => userHasPermissions(state, ['PLATFORM_VIEW_ALL']);
+
+export const isTenantsFetched = state => state.getIn(['Entities', 'tenants', 'data']).size === 0;

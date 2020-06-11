@@ -130,28 +130,11 @@ export default class BetaFeatures extends Component {
               <span>{this.state.pageTitles[entityName]}</span>
               <ToggleWrapper
                 onChange={() => {
-                  if (
-                    (entityName === 'outboundIdentifiers' && !this.state.features.outboundIdentifiers) ||
-                    (entityName === 'outboundIdentifierLists' && !this.state.features.outboundIdentifierLists)
-                  ) {
-                    this.saveBetaFeaturePrefs({
-                      ...this.state.features,
-                      users: true,
-                      groups: true,
-                      skills: true,
-                      outboundIdentifiers: true,
-                      outboundIdentifierLists: true
-                    });
-                    alert(
-                      'Users, Groups, and Skills are dependencies of the outbound identifiers feature and toggled automatically.'
-                    );
-                  } else {
-                    const features = {
-                      ...this.state.features,
-                      [entityName]: !this.state.features[entityName]
-                    };
-                    this.saveBetaFeaturePrefs(features);
-                  }
+                  const features = {
+                    ...this.state.features,
+                    [entityName]: !this.state.features[entityName]
+                  };
+                  this.saveBetaFeaturePrefs(features);
                 }}
                 value={this.state.features[entityName]}
                 disabled={this.props.disabledFeatures[entityName]}

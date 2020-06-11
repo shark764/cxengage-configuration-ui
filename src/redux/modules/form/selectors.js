@@ -14,6 +14,7 @@ import {
 import { onFormSubmit, onSubEntityFormSubmit } from '../entities';
 
 import { entitiesMetaData } from '../entities/metaData';
+import { createSelector } from 'reselect';
 
 export const getCurrentForm = state =>
   state.getIn(['form', `${getCurrentEntity(state)}:${getSelectedEntityId(state)}`]);
@@ -82,3 +83,8 @@ export const getCurrentSubmittingFormValues = (state, props) =>
       return value;
     }
   });
+
+export const getCurrentFormValues = createSelector(
+  getCurrentForm,
+  currentForm => (currentForm ? currentForm.get('values') : Map({}))
+);

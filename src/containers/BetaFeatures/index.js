@@ -23,31 +23,8 @@ export function mapStateToProps(state) {
     theme: getCustomTheme(state),
     entities: entitiesWithViewPermissions(state),
     disabledFeatures: {
-      users: !(
-        (userHasPermissions(state, ['VIEW_ALL_USERS', 'PLATFORM_VIEW_ALL_USERS']) &&
-          userHasPermissions(state, ['MANAGE_ALL_GROUPS', 'MANAGE_ALL_SKILLS'])) ||
-        userHasPermissions(state, ['CONFIG_USERS_VIEW', 'PLATFORM_CONFIG_USERS_VIEW']) ||
-        userHasPermissions(state, [
-          'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
-          'MANAGE_ALL_USER_EXTENSIONS',
-          'MANAGE_ALL_GROUP_USERS',
-          'MANAGE_ALL_USER_SKILLS',
-          'MANAGE_ALL_USER_LOCATIONS',
-          'MANAGE_TENANT_ENROLLMENT'
-        ])
-      ),
-      groups: false,
-      skills: false,
-      outboundIdentifiers: false,
-      outboundIdentifierLists: false,
-      roles: false,
-      flows: false,
-      dispatchMappings: false,
-      reasons: false,
-      reasonLists: false,
-      transferLists: false,
-      dispositions: false,
-      dispositionLists: false
+      tenants: !userHasPermissions(state, ['PLATFORM_VIEW_ALL_TENANTS', 'MANAGE_TENANT']),
+      integrations: !userHasPermissions(state, ['VIEW_ALL_PROVIDERS'])
     }
   };
 }

@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.7] - 2020-06-11
+### Fixed
+- <no-Jira> - Update Branding after uploading branding images.
+
 ## [0.78.6] - 2020-06-10
 - CXV1-22620 - Fix end time event of 12AM to be displayed as rest of the day in Calendar component
 

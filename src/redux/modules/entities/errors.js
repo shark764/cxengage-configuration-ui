@@ -10,7 +10,7 @@ const ignoredErrorList = {
   FETCH_DATA: ['branding'],
   UPLOAD_LOGO_BRANDING_IMAGE: ['tenants'],
   UPLOAD_FAVICON_BRANDING_IMAGE: ['tenants'],
-  UPDATE_BRANDING_STYLES: ['tenants']
+  UPDATE_TENANT_BRANDING: ['tenants']
 };
 
 /**

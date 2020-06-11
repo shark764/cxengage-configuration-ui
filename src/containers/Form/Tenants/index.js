@@ -35,7 +35,6 @@ import {
   userHasTenantIdpViewPermissions,
   userHasPlatformViewPermission
 } from '../../../redux/modules/entities/tenants/selectors';
-import { getCurrentTenantId } from '../../../redux/modules/userData/selectors';
 
 const CreateTenantsForm = compose(
   connect(state => createFormName(state)),
@@ -51,7 +50,7 @@ export const mapStateToProps = state => ({
   tenantSlas: getSelectedTenantSlas(state),
   tenantUsers: getSelectedTenantUsers(state),
   regions: selectRegionsDropDownList(state),
-  currentTenantId: getCurrentTenantId(state),
+  currentTenantId: state.getIn(['Entities', 'currentTenantId']),
   adminUserId: selectTenantAdminUserId(state),
   selectedEntityId: getSelectedEntityId(state),
   timezones: selectTimezonesDropDownList(state),
@@ -71,7 +70,7 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   uploadImage: (field, name) => dispatch(UpdateBrandingImageFileInState(field, name)),
-  resetTenantBranding: selectedEntityId => dispatch(resetTenantBranding(selectedEntityId)),
+  resetTenantBranding: entityId => dispatch(resetTenantBranding(entityId)),
   switchTenant: (tenantId, setAsActiveTenant) => dispatch(switchTenant(tenantId, setAsActiveTenant))
 });
 

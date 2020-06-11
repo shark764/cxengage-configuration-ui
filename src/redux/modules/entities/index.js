@@ -280,23 +280,6 @@ const initialState = fromJS({
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
       'MANAGE_TENANT'
     ],
-    dependentEntities: {
-      users: {
-        data: []
-      },
-      integrations: {
-        data: []
-      },
-      slas: {
-        data: []
-      },
-      identityProviders: {
-        data: []
-      },
-      branding: {
-        data: []
-      }
-    },
     updatePermission: ['PLATFORM_MANAGE_ALL_TENANTS', 'MANAGE_TENANT'],
     createPermission: ['CREATE_CHILD_TENANT'],
     disablePermission: ['MANAGE_TENANT', 'PLATFORM_MANAGE_ALL_TENANTS'],
@@ -613,9 +596,9 @@ export const UpdateBrandingImageFileInState = (file, name) => ({
   name
 });
 
-export const resetTenantBranding = selectedEntityId => ({
+export const resetTenantBranding = entityId => ({
   type: 'RESET_TENANT_BRANDING_TO_DEFAULT',
-  selectedEntityId
+  entityId
 });
 
 // Reducer
@@ -666,12 +649,6 @@ export default function reducer(state = initialState, action) {
               ? entityData && entityData.map(item => item.set('bulkChangeItem', false))
               : entityData
         );
-      // remove all the existing tenant-dependent-entities data while closing tenant's form:
-      if (currentEntity === 'tenants' && action.entityId === '') {
-        return updatedState.updateIn(['tenants', 'dependentEntities'], entities =>
-          entities.map(value => value.set('data', List()))
-        );
-      }
       return updatedState;
     }
     case 'UPDATE_USER_PERMISSIONS': {
@@ -679,12 +656,27 @@ export default function reducer(state = initialState, action) {
       return state.set('currentTenantId', tenantId);
     }
     case 'SWITCH_TENANT': {
-      const { tenantId } = action;
-      return state.set('currentTenantId', tenantId);
+      const { tenantId, setAsActiveTenant } = action;
+      if (setAsActiveTenant) {
+        return state
+          .set('currentTenantId', tenantId)
+          .setIn(['tenants', 'selectedEntityId'], tenantId)
+          .updateIn(['branding', 'data'], () => undefined)
+          .setIn(['branding', 'isUpdating'], true);
+      } else {
+        return state.set('currentTenantId', tenantId);
+      }
     }
     case 'FETCH_DATA': {
       if (action.currentEntityName === 'tenants' && !action.isPlatformEntity) {
-        return state.setIn([action.currentEntityName, 'dependentEntities', action.entityName, 'fetching'], true);
+        const entityIndex = findEntityIndex(state, action.currentEntityName, action.entityId);
+        if (entityIndex !== -1) {
+          const updatedState = state.setIn(
+            [action.currentEntityName, 'data', entityIndex, 'dependentEntities', action.entityName, 'fetching'],
+            true
+          );
+          return action.entityName === 'branding' ? updatedState.deleteIn(['branding', 'isUpdating']) : updatedState;
+        }
       }
       return state.setIn([action.entityName, 'fetching'], true);
     }
@@ -692,12 +684,6 @@ export default function reducer(state = initialState, action) {
       // As we recieve the data we tag on the items that are considered inherited
       const { currentEntityName, entityName, response: { result } } = action;
 
-      // tenants page has dependentEntities whcih changes based on the selected tenant
-      if (currentEntityName === 'tenants' && !action.isPlatformEntity) {
-        return state
-          .setIn([currentEntityName, 'dependentEntities', entityName, 'data'], fromJS(result))
-          .deleteIn([currentEntityName, 'dependentEntities', entityName, 'fetching']);
-      }
       switch (entityName) {
         case 'roles': {
           const newResult = result.map(entity => ({
@@ -735,12 +721,27 @@ export default function reducer(state = initialState, action) {
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'users': {
-          const newResult = result.map(entity => {
-            let newEntity = { ...entity };
-            newEntity.extensions.forEach(ext => (ext.id = generateUUID()));
-            return newEntity;
-          });
-          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
+          // tenants page has dependentEntities whcih changes based on the selected tenant
+          if (currentEntityName === 'tenants' && action.entityId !== 'create' && action.entityId !== '') {
+            const entityIndex = findEntityIndex(state, currentEntityName, action.entityId);
+            if (entityIndex !== -1) {
+              return state
+                .setIn(
+                  [currentEntityName, 'data', entityIndex, 'dependentEntities', entityName, 'data'],
+                  fromJS(result)
+                )
+                .deleteIn([currentEntityName, 'data', entityIndex, 'dependentEntities', entityName, 'fetching']);
+            } else {
+              return state;
+            }
+          } else {
+            const newResult = result.map(entity => {
+              let newEntity = { ...entity };
+              newEntity.extensions.forEach(ext => (ext.id = generateUUID()));
+              return newEntity;
+            });
+            return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
+          }
         }
         case 'businessHours': {
           const newResult = result.map(entity => ({
@@ -753,15 +754,53 @@ export default function reducer(state = initialState, action) {
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([entityName, 'fetching']);
         }
+        case 'slas':
+        case 'branding':
+        case 'integrations':
+        case 'identityProviders': {
+          // tenants page has dependentEntities whcih changes based on the selected tenant
+          if (currentEntityName === 'tenants') {
+            const entityIndex = findEntityIndex(state, currentEntityName, action.entityId);
+            if (entityIndex !== -1) {
+              const updatedState = state
+                .setIn(
+                  [currentEntityName, 'data', entityIndex, 'dependentEntities', entityName, 'data'],
+                  fromJS(result)
+                )
+                .deleteIn([currentEntityName, 'data', entityIndex, 'dependentEntities', entityName, 'fetching']);
+              return entityName === 'branding' && state.get('currentTenantId') === action.entityId
+                ? updatedState.setIn(['branding', 'data'], fromJS(result)).deleteIn(['branding', 'fetching'])
+                : updatedState;
+            } else {
+              return state;
+            }
+          }
+        }
         default:
           return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName, 'fetching']);
       }
     }
     case 'FETCH_DATA_REJECTED': {
       if (action.currentEntityName === 'tenants' && !action.isPlatformEntity) {
-        return state
-          .setIn([action.currentEntityName, 'dependentEntities', action.entityName, 'data'], new List())
-          .deleteIn([action.currentEntityName, 'dependentEntities', action.entityName, 'fetching']);
+        const entityIndex = findEntityIndex(state, action.currentEntityName, action.entityId);
+        if (entityIndex !== -1) {
+          const updatedState = state
+            .setIn(
+              [action.currentEntityName, 'data', entityIndex, 'dependentEntities', action.entityName, 'data'],
+              new List()
+            )
+            .deleteIn([
+              action.currentEntityName,
+              'data',
+              entityIndex,
+              'dependentEntities',
+              action.entityName,
+              'fetching'
+            ]);
+          return action.entityName === 'branding'
+            ? updatedState.deleteIn(['branding', 'fetching']).deleteIn(['branding', 'isUpdating'])
+            : updatedState;
+        }
       }
       return state.setIn([action.entityName, 'data'], new List()).deleteIn([action.entityName, 'fetching']);
     }
@@ -1221,11 +1260,11 @@ export default function reducer(state = initialState, action) {
           .getIn([entity.type, 'data', entity.index, 'exceptions'])
           .filterNot(member => member.get('id') === action.listItemId);
         return state.remove('loading').setIn([entity.type, 'data', entity.index, 'exceptions'], filteredListMembers);
-      } else if (action.entityName === 'businessHoursV2'){
+      } else if (action.entityName === 'businessHoursV2') {
         const filteredListMembers = state
           .getIn([entity.type, 'data', entity.index, 'items'])
           .filterNot(member => member.get('id') === action.listItemId);
-      return state.remove('loading').setIn([entity.type, 'data', entity.index, 'items'], filteredListMembers);
+        return state.remove('loading').setIn([entity.type, 'data', entity.index, 'items'], filteredListMembers);
       }
       const filteredListMembers = state
         .getIn([entity.type, 'data', entity.index, 'members'])
@@ -1323,14 +1362,6 @@ export default function reducer(state = initialState, action) {
         entityStore.update('data', data => data.push(fromJS(result)))
       );
     }
-    case 'RESET_TENANT_BRANDING_TO_DEFAULT': {
-      const a = { entityId: action.selectedEntityId, entityName: state.get('currentEntity') };
-      return setEntityUpdatingHelper(state, a, true);
-    }
-    case 'RESET_TENANT_BRANDING_TO_DEFAULT_REJECTED': {
-      const a = { entityId: action.selectedEntityId, entityName: state.get('currentEntity') };
-      return setEntityUpdatingHelper(state, a, false);
-    }
     case '@@redux-form/INITIALIZE':
     case '@@redux-form/CHANGE': {
       if (
@@ -1365,11 +1396,6 @@ export default function reducer(state = initialState, action) {
         const isCustomEntity = entityName => action.meta.form.toString().startsWith(entityName);
         if (isCustomEntity('messageTemplates')) {
           return updatedState.deleteIn(['messageTemplates', 'isDisplayContentInHtml']);
-        } else if (isCustomEntity('tenants')) {
-          // reset all the dependentEntities after the tenants form gets destroyed:
-          return updatedState.updateIn(['tenants', 'dependentEntities'], entities =>
-            entities.map(value => value.set('data', List()))
-          );
         }
       }
       return updatedState;
@@ -1453,28 +1479,85 @@ export default function reducer(state = initialState, action) {
     case 'CREATE_DRAFT_BUSINESS_HOURS_V2_REJECTED': {
       return state.setIn(['businessHoursV2', 'isCreatingDraft'], false);
     }
-    // sets logoUpdating, faviconUpdating, stylesUpdating to "true" in the tenants dependent-entities upon making API request:
-    case 'UPDATE_BRANDING_STYLES':
     case 'UPLOAD_LOGO_BRANDING_IMAGE':
     case 'UPLOAD_FAVICON_BRANDING_IMAGE': {
-      return state.setIn(
-        ['tenants', 'dependentEntities', 'branding', `${action.imageType ? action.imageType : 'styles'}Updating`],
-        true
-      );
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
+      const imageType = action.type === 'UPLOAD_LOGO_BRANDING_IMAGE' ? 'logo' : 'favicon';
+      if (entityIndex !== -1) {
+        return state.setIn(
+          [action.entityName, 'data', entityIndex, 'dependentEntities', 'branding', `${imageType}Uploading`],
+          true
+        );
+      } else {
+        return state;
+      }
     }
-    // sets logoUpdating, faviconUpdating, stylesUpdating to "false" in the tenants dependent-entities upon successful/rejected API response:
-    case 'UPDATE_BRANDING_STYLES_FULFILLED':
-    case 'UPLOAD_LOGO_BRANDING_IMAGE_FULFILLED':
-    case 'UPLOAD_FAVICON_BRANDING_IMAGE_FULFILLED':
-    case 'UPDATE_BRANDING_STYLES_REJECTED':
     case 'UPLOAD_LOGO_BRANDING_IMAGE_REJECTED':
     case 'UPLOAD_FAVICON_BRANDING_IMAGE_REJECTED': {
-      return state.deleteIn([
-        'tenants',
-        'dependentEntities',
-        'branding',
-        `${action.imageType ? action.imageType : 'styles'}Updating`
-      ]);
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
+      const imageType = action.type === 'UPLOAD_LOGO_BRANDING_IMAGE_REJECTED' ? 'logo' : 'favicon';
+      if (entityIndex !== -1) {
+        return state.deleteIn([
+          'tenants',
+          'data',
+          entityIndex,
+          'dependentEntities',
+          'branding',
+          `${imageType}Uploading`
+        ]);
+      } else {
+        return state;
+      }
+    }
+    case 'UPLOAD_LOGO_BRANDING_IMAGE_FULFILLED':
+    case 'UPLOAD_FAVICON_BRANDING_IMAGE_FULFILLED': {
+      const { result } = action.response;
+      const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
+      const brandingData = state.getIn(['tenants', 'data', entityIndex, 'dependentEntities', 'branding', 'data']);
+      const imageType = action.type === 'UPLOAD_LOGO_BRANDING_IMAGE_FULFILLED' ? 'logo' : 'favicon';
+      if (entityIndex !== -1) {
+        if (!brandingData || brandingData.size === 0) {
+          const brandingObj = {};
+          brandingObj[imageType] = result.url;
+          return state
+            .setIn(['tenants', 'data', entityIndex, 'dependentEntities', 'branding', 'data'], fromJS(brandingObj))
+            .deleteIn(['tenants', 'data', entityIndex, 'dependentEntities', 'branding', `${imageType}Uploading`]);
+        } else {
+          return state
+            .setIn(['tenants', 'data', entityIndex, 'dependentEntities', 'branding', 'data', imageType], result.url)
+            .deleteIn(['tenants', 'data', entityIndex, 'dependentEntities', 'branding', `${imageType}Uploading`]);
+        }
+      } else {
+        return state;
+      }
+    }
+    case 'RESET_TENANT_BRANDING_TO_DEFAULT': {
+      const a = { entityId: action.entityId, entityName: state.get('currentEntity') };
+      return setEntityUpdatingHelper(state, a, true);
+    }
+    case 'RESET_TENANT_BRANDING_TO_DEFAULT_REJECTED': {
+      const a = { entityId: action.entityId, entityName: state.get('currentEntity') };
+      return setEntityUpdatingHelper(state, a, false);
+    }
+    case 'CREATE_TENANT_BRANDING_FULFILLED':
+    case 'UPDATE_TENANT_BRANDING_FULFILLED':
+    case 'RESET_TENANT_BRANDING_TO_DEFAULT_FULFILLED': {
+      const { result } = action.response;
+      const entityIndex = findEntityIndex(state, 'tenants', action.entityId);
+      if (entityIndex !== -1) {
+        return state.setIn(['tenants', 'data', entityIndex, 'dependentEntities', 'branding', 'data'], fromJS(result));
+      } else {
+        return state;
+      }
+    }
+    case 'BRANDING_HAS_BEEN_UPDATED_SUCESSFULLY!':
+    case 'BRANDING_HAS_BEEN_RESET_TO_DEFAULT_SUCESSFULLY!': {
+      const { result } = action.response;
+      if (result.tenantId === state.get('currentTenantId')) {
+        return state.updateIn(['branding', 'data'], () => undefined).setIn(['branding', 'isUpdating'], true);
+      } else {
+        return state;
+      }
     }
     default:
       return state;

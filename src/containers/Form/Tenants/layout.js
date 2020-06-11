@@ -186,7 +186,9 @@ export default function TenantsForm({
               />
               {!isSelectedTenantHasDefaultBranding && (
                 <ConfirmationWrapper
-                  confirmBtnCallback={() => resetTenantBranding(selectedEntityId)}
+                  confirmBtnCallback={
+                    userHasTenantBrandingUpdatePermissions ? () => resetTenantBranding(selectedEntityId) : undefined
+                  }
                   mainText="This will reset this tenant's branding to default"
                   secondaryText="Do you want to continue?"
                 >
@@ -211,50 +213,44 @@ export default function TenantsForm({
             toastError="Logo must be a PNG, JPG, or GIF under 1MB!"
             disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
           />
-          {selectedEntityId !== 'create' && (
-            <FileUploadField
-              name="favicon"
-              label="Favicon"
-              fileType="image"
-              maxFileSize={1000000}
-              uploadFile={uploadImage}
-              acceptedFileType={faviconTypesAllowed.toString()}
-              toastError="Favicon must be a PNG, JPG, GIF or ICO under 1MB!"
+          <FileUploadField
+            name="favicon"
+            label="Favicon"
+            fileType="image"
+            maxFileSize={1000000}
+            uploadFile={uploadImage}
+            acceptedFileType={faviconTypesAllowed.toString()}
+            toastError="Favicon must be a PNG, JPG, GIF or ICO under 1MB!"
+            disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
+          />
+          <SubDetailHeader text="Site Colors" />
+          <ColorFieldWrapper>
+            <ColorField
+              name="navbar"
+              label="Navigation Bar"
               disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
             />
-          )}
-          {selectedEntityId !== 'create' && (
-            <Fragment>
-              <SubDetailHeader text="Site Colors" />
-              <ColorFieldWrapper>
-                <ColorField
-                  name="navbar"
-                  label="Navigation Bar"
-                  disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
-                />
-                <ColorField
-                  name="navbarText"
-                  label="Navigation Bar Text"
-                  disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
-                />
-                <ColorField
-                  name="primaryColor"
-                  label="Primary Color"
-                  disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
-                />
-                <ColorField
-                  name="accentColor"
-                  label="Accent Color"
-                  disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
-                />
-                <ColorField
-                  name="accentHoverColor"
-                  label="Accent Hover Color"
-                  disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
-                />
-              </ColorFieldWrapper>
-            </Fragment>
-          )}
+            <ColorField
+              name="navbarText"
+              label="Navigation Bar Text"
+              disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
+            />
+            <ColorField
+              name="primaryColor"
+              label="Primary Color"
+              disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
+            />
+            <ColorField
+              name="accentColor"
+              label="Accent Color"
+              disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
+            />
+            <ColorField
+              name="accentHoverColor"
+              label="Accent Hover Color"
+              disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
+            />
+          </ColorFieldWrapper>
         </Fragment>
       )}
     </form>

@@ -5,11 +5,14 @@ import { fetchData } from '../../';
 
 import { sdkPromise, errorManager } from '../../../../../utils/sdk';
 import { userHasPermissions } from '../../selectors';
+import { isTenantsFetched } from '../selectors';
 
 jest.mock('../../../../../utils/sdk');
 jest.mock('../../selectors');
 jest.mock('../../../userData/selectors');
+jest.mock('../selectors');
 
+isTenantsFetched.mockReturnValue(true);
 errorManager.mockReturnValue('mock error manager');
 
 describe('fetchTenants', () => {

@@ -5,6 +5,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
+import { fromJS } from 'immutable';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import TenantsForm, { mapStateToProps } from '../';
 import {
@@ -18,7 +19,6 @@ import { selectFormInitialValues, formSubmission, createFormName } from '../../.
 import { getUsers } from '../../../../redux/modules/entities/users/selectors';
 import { getRegions } from '../../../../redux/modules/entities/regions/selectors';
 import { getTimezones } from '../../../../redux/modules/entities/timezones/selectors';
-import { getCurrentTenantId } from '../../../../redux/modules/userData/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
@@ -36,20 +36,20 @@ getCurrentEntity.mockImplementation(() => 'tenants');
 getEntities.mockImplementation(() => 'mockEntitites');
 getRegions.mockImplementation(() => 'mockRegions');
 getTimezones.mockImplementation(() => 'mockTimezone');
-getCurrentTenantId.mockImplementation(() => 'mockTenantId');
 getUsers.mockImplementation(() => 'mockUers');
 isCreating.mockImplementation(() => true);
 
 describe('Tenants Renders', () => {
   it('renders', () => {
-    const store = createStore(state => state);
+    const state = fromJS({ Entities: { currentTenantId: 'mockTenantId' } });
+    const store = createStore(() => state);
     expect(shallow(<TenantsForm store={store}>Child</TenantsForm>)).toMatchSnapshot();
   });
 });
 
 describe('Maps state to props only using selectors', () => {
   it('validates object created from mapStateToProps', () => {
-    expect(mapStateToProps()).toMatchSnapshot();
+    expect(mapStateToProps(fromJS({ Entities: { currentTenantId: 'mockTenantId' } }))).toMatchSnapshot();
   });
 });
 
