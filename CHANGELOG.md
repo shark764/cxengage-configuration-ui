@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.8] - 2020-06-09
+- CXV1-22325 - New Administrators unable to add existing administrators to their tenant
+
 ## [0.78.7] - 2020-06-11
 ### Fixed
 - <no-Jira> - Update Branding after uploading branding images.

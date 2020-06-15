@@ -82,6 +82,7 @@ export class EntityMetaData {
     const crudActions = {
       create: 'create',
       get: 'read',
+      invite: 'invite',
       update: 'update',
       delete: 'delete'
     };

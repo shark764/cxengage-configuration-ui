@@ -284,6 +284,24 @@ export const CreateEntity = action$ =>
     .ofType('CREATE_ENTITY')
     .filter(a => a.entityName === 'users')
     .map(a => {
+      if (!a.values.platformRoleId) {
+        a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('invite', 'singleMainEntity');
+        const filteredValues = {
+          workStationId: a.values.workStationId,
+          roleId: a.values.roleId,
+          inviteNow: a.values.inviteNow,
+          email: a.values.email,
+          noPassword: a.values.noPassword === 'null' ? null : a.values.noPassword,
+          defaultIdentityProvider: a.values.defaultIdentityProvider === 'null' ? null : a.values.defaultIdentityProvider
+        };
+        if (filteredValues.noPassword === 'true') {
+          filteredValues.noPassword = true;
+        } else if (filteredValues.noPassword === 'false') {
+          filteredValues.noPassword = false;
+        }
+        a.sdkCall.data = filteredValues;
+        return { ...a };
+      }
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
       const filteredValues = {
         workStationId: a.values.workStationId,

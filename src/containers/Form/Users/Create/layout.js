@@ -50,14 +50,18 @@ export default function UsersForm({
             componentType="input"
             inputType="text"
           />
-          <SelectField
-            name="platformRoleId"
-            label="Platform Role *"
-            id="frm-users-platform-role-id"
-            data-automation="roleList"
-            disabled={isSaving || !userHasUpdatePermission || checkPlatformUser}
-            options={platformRoles}
-          />
+
+          {!checkPlatformUser && (
+            <SelectField
+              name="platformRoleId"
+              label="Platform Role *"
+              id="frm-users-platform-role-id"
+              data-automation="roleList"
+              disabled={isSaving || !userHasUpdatePermission || checkPlatformUser}
+              options={platformRoles}
+            />
+          )}
+
           <SelectField
             name="noPassword"
             label="Platform Authentication"
