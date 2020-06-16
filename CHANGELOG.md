@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.9] - 2020-06-10
+### Fixed
+- CXV1-22588 - Business Hours Unit Tests - Selectors
+
 ## [0.78.8] - 2020-06-09
 - CXV1-22325 - New Administrators unable to add existing administrators to their tenant
 

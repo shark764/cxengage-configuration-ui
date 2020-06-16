@@ -479,6 +479,7 @@ export default class CalendarEvents extends Component {
                       if (calendarEvent.repeats === 'yearly') {
                         let initialYearEveryMonth;
                         if (onWeekInterval === 4) {
+                          // eslint-disable-next-line no-use-before-define
                           const dayOfMonth = moment(dayOfMonth)
                             .month(calendarEvent.every)
                             .year(currentYear)

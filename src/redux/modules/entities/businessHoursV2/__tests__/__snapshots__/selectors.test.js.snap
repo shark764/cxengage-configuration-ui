@@ -1,8 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`selectBusinessHoursEntityVersions Return a empty array if the businessHour has no versions 1`] = `undefined`;
+exports[`getSelectedBusinessHourV2Version gets the selected version id of the business hour 1`] = `"version-id"`;
 
-exports[`selectBusinessHoursEntityVersions Return an array if the businessHour has versions 1`] = `undefined`;
+exports[`panelHeaderBusinessHoursV2 Returns panelHeaderBusinessHoursV2 business hours panel information 1`] = `
+Immutable.Map {
+  "title": "Business Hours Title",
+  "createdAt": "Created on Apr 6, 2020 7:48 AM",
+  "toggleStatus": true,
+}
+`;
+
+exports[`panelHeaderBusinessHoursV2 Returns panelHeaderBusinessHoursV2 selected subentity name 1`] = `
+Object {
+  "title": "Sub Entity Name",
+}
+`;
+
+exports[`selectBusinessHoursEntityVersions Return an array if the businessHour has versions 1`] = `
+Array [
+  Object {
+    "createdBy": undefined,
+    "createdOn": "Invalid Date",
+    "description": undefined,
+    "id": "id-1",
+    "label": "v1 - name-1",
+    "name": "name-1",
+    "rules": Array [
+      Object {
+        "id": "01",
+        "name": "rule-01",
+      },
+    ],
+    "timezone": undefined,
+    "value": "id-1",
+    "version": "v1",
+    "viewing": false,
+  },
+]
+`;
+
+exports[`selectBusinessHoursEntityVersions Return undefined if the businessHour has no versions 1`] = `undefined`;
+
+exports[`selectBusinessHoursV2Data gets the list of business hour of the current tenant 1`] = `
+Array [
+  Object {
+    "tenantId": "mockTenantId",
+  },
+  Object {
+    "tenantId": "mockTenantId",
+  },
+]
+`;
+
+exports[`selectBusinessHoursV2DraftFormInitalValues Return initial form values when creating a new draft 1`] = `
+Immutable.Map {
+  "name": "",
+  "timezone": "Etc/GMT+12",
+}
+`;
+
+exports[`selectBusinessHoursV2DraftFormInitalValues Return initial form values when updating a draft 1`] = `
+Immutable.Map {
+  "name": "draft-01",
+  "timezone": "draft-timezone-01",
+  "description": "draft-description-01",
+  "created": "2014-04-23T18:25:43.511Z",
+  "updated": "2014-04-23T18:25:43.511Z",
+}
+`;
 
 exports[`selectBusinessHoursV2FormInitialValues Return initial form values when creating a new entity 1`] = `
 Immutable.Map {
@@ -18,3 +83,74 @@ Immutable.Map {
   "versions": Immutable.List [],
 }
 `;
+
+exports[`selectBusinessHoursV2RulesFormInitalValues Return initial form values when creating a new rule 1`] = `
+Immutable.Map {
+  "rules": Immutable.List [
+    Object {
+      "hours": Object {
+        "allDay": true,
+      },
+      "id": "new-rule",
+      "name": "",
+      "startDate": 2019-01-01T18:00:00.000Z,
+    },
+  ],
+}
+`;
+
+exports[`selectBusinessHoursV2RulesFormInitalValues Return initial form values when updating a rule 1`] = `
+Immutable.Map {
+  "rules": Immutable.List [
+    Object {
+      "id": undefined,
+      "name": "rule-01",
+      "startDate": 2019-01-01T18:00:00.000Z,
+    },
+  ],
+}
+`;
+
+exports[`selectDrafts Return an array of the selected businessHour active version drafts 1`] = `
+Array [
+  Object {
+    "createdBy": undefined,
+    "createdOn": "Invalid Date",
+    "description": undefined,
+    "id": "id-1",
+    "name": "name-1",
+    "rules": Array [
+      Object {
+        "id": "01",
+        "name": "draft-rule-01",
+      },
+    ],
+    "timezone": undefined,
+    "version": "Draft",
+  },
+]
+`;
+
+exports[`selectDrafts Return undefined of the selected businessHour active version without drafts 1`] = `undefined`;
+
+exports[`selectRules Return an array of the selected businessHour active version rules 1`] = `
+Array [
+  Object {
+    "id": "rule-id",
+    "name": "rule-01",
+    "startDate": 2012-04-23T18:25:43.511Z,
+  },
+]
+`;
+
+exports[`selectRules Returns array of selected version of businessHour 1`] = `
+Array [
+  Object {
+    "id": "rule-id",
+    "name": "selected-rule-name",
+    "startDate": 2012-04-23T18:25:43.511Z,
+  },
+]
+`;
+
+exports[`selectRules Returns undefined if no active or selected version of businessHour 1`] = `undefined`;
