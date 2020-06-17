@@ -38,7 +38,7 @@ export default function CalabrioForm({
         inputType="text"
         data-automation="integrationsPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
       <DetailHeader text="QM" />
       <ToggleField

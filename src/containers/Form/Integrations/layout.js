@@ -20,7 +20,6 @@ import ClientForm from './Types/client';
 import EmailForm from './Types/email';
 import LambdaForm from './Types/lambda';
 import MonetForm from './Types/monet';
-import PlivoForm from './Types/plivo';
 import RestForm from './Types/rest';
 import SalesforceForm from './Types/salesforce';
 import SerenovaVoiceForm from './Types/serenovaVoice';
@@ -76,7 +75,6 @@ export default function IntegrationsForm({
       {integrationType === 'email' && <EmailForm {...formTypeProps} />}
       {integrationType === 'lambda' && <LambdaForm {...formTypeProps} />}
       {integrationType === 'monet' && <MonetForm {...formTypeProps} />}
-      {integrationType === 'plivo' && <PlivoForm {...formTypeProps} />}
       {integrationType === 'rest' && <RestForm {...formTypeProps} authType={authType} />}
       {integrationType === 'salesforce' && <SalesforceForm {...formTypeProps} />}
       {integrationType === 'serenovaVoice' && <SerenovaVoiceForm {...formTypeProps} />}

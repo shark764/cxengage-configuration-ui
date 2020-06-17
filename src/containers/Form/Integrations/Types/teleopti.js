@@ -47,7 +47,7 @@ export default function TeleoptiForm({ isSaving, inherited, userHasUpdatePermiss
         inputType="text"
         data-automation="integrationsFtpPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
       <InputField
         name="properties.authKey"
@@ -56,7 +56,7 @@ export default function TeleoptiForm({ isSaving, inherited, userHasUpdatePermiss
         inputType="text"
         data-automation="integrationsAuthKey"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
       <InputField
         name="properties.teleoptiUrl"

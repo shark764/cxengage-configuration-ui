@@ -39,7 +39,7 @@ export default function BirstForm({ isSaving, inherited, userHasUpdatePermission
         inputType="text"
         data-automation="integrationsBirstAdminPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
       <InputField
         name="properties.birstDashboardVersion"
@@ -64,7 +64,7 @@ export default function BirstForm({ isSaving, inherited, userHasUpdatePermission
         inputType="text"
         data-automation="integrationsBirstSsoPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
     </Fragment>
   );

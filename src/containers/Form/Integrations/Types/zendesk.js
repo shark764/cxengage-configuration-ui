@@ -31,7 +31,7 @@ export default function ZendeskForm({ isSaving, inherited, userHasUpdatePermissi
         inputType="text"
         data-automation="integrationsPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
       <InputField
         name="properties.endpointPrefix"

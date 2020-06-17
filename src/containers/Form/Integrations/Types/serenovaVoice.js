@@ -31,7 +31,7 @@ export default function SerenovaVoiceForm({ isSaving, inherited, userHasUpdatePe
         inputType="text"
         data-automation="integrationsApiKey"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
     </Fragment>
   );

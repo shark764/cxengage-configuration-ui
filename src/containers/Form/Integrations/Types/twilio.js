@@ -36,7 +36,7 @@ export default function TwilioForm({ isSaving, inherited, userHasUpdatePermissio
         inputType="text"
         data-automation="integrationsAuthToken"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
       <InlineWrapper>
         <SelectField

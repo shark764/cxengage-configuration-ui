@@ -39,7 +39,7 @@ export default function MonetForm({ isSaving, inherited, userHasUpdatePermission
         inputType="text"
         data-automation="integrationsPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        dataType="password"
+        maskValue
       />
       <ToggleField
         name="properties.usernameAsAgentId"

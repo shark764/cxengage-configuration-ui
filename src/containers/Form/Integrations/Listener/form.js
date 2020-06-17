@@ -33,7 +33,7 @@ export default function IntegrationListenerForm({ isSaving, integrationType }) {
             inputType="text"
             data-automation="integrationsListenersPassword"
             disabled={isSaving}
-            dataType="password"
+            maskValue
           />
         </Fragment>
       )}
