@@ -93,7 +93,7 @@ Immutable.Map {
       },
       "id": "new-rule",
       "name": "",
-      "startDate": 2019-01-01T18:00:00.000Z,
+      "startDate": 2020-02-02T12:54:59.218Z,
     },
   ],
 }
@@ -103,9 +103,12 @@ exports[`selectBusinessHoursV2RulesFormInitalValues Return initial form values w
 Immutable.Map {
   "rules": Immutable.List [
     Object {
-      "id": undefined,
-      "name": "rule-01",
-      "startDate": 2019-01-01T18:00:00.000Z,
+      "hours": Object {
+        "allDay": true,
+      },
+      "id": "new-rule",
+      "name": "",
+      "startDate": 2020-02-02T12:54:59.218Z,
     },
   ],
 }
