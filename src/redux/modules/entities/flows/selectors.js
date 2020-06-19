@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 import { getSelectedEntity, userHasPermissions, getSelectedSubEntityId, getSelectedSubEntityData } from '../selectors';
 import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../form/selectors';
 import { onCopyListItemFormSubmit } from '../';
-import { selectNonDisabledUsers, getDisplay } from '../users/selectors';
+import { selectAllUsers, getDisplay } from '../users/selectors';
 import { entitiesMetaData } from '../metaData';
 
 const getFlows = state => state.getIn(['Entities', 'flows', 'data']);
@@ -81,7 +81,7 @@ export const getFlowDraftNames = state => {
 export const selectFlowItems = (state, memberName) =>
   getFlowItems(
     getSelectedEntity(state).get(memberName),
-    selectNonDisabledUsers(state),
+    selectAllUsers(state),
     userHasPermissions(state, [
       'PLATFORM_VIEW_ALL_USERS',
       'PLATFORM_CREATE_USERS',

@@ -6,6 +6,7 @@ import { fromJS } from 'immutable';
 import { getCurrentEntity, getSelectedEntity } from '../../selectors';
 import { listMemberObjects, getEntityListMembers, availableEntityMembersForList } from '../../listItemSelectors';
 import {
+  selectAllUsers,
   selectNonDisabledUsers,
   getDisplay,
   selectEntityListMembers,
@@ -106,6 +107,14 @@ const listMembers = [
   }
 ];
 
+const initialStateNoData = fromJS({
+  Entities: {
+    users: {
+      data: undefined
+    }
+  }
+});
+
 jest.mock('../../listItemSelectors');
 listMemberObjects.mockImplementation(() => fromJS(listMembers));
 availableEntityMembersForList.mockImplementation(() => listMembers);
@@ -151,6 +160,43 @@ describe('getDisplay', () => {
   });
 });
 
+describe('selectAllUsers', () => {
+  it('should get disabled and enabled users, then return it in JS and mapped with new data', () => {
+    expect(selectAllUsers(initialState)).toEqual([
+      {
+        id: '1',
+        email: 'mockEmail 1',
+        firstName: 'mockFirstName 1',
+        lastName: 'mockLastName 1',
+        name: 'mockFirstName 1 mockLastName 1',
+        platformStatus: 'enabled',
+        status: 'enabled'
+      },
+      {
+        id: '2',
+        email: 'mockEmail 2',
+        firstName: 'mockFirstName 2',
+        lastName: 'mockLastName 2',
+        name: 'mockFirstName 2 mockLastName 2',
+        platformStatus: 'enabled',
+        status: 'disabled'
+      },
+      {
+        id: '3',
+        email: 'mockEmail 3',
+        firstName: 'mockFirstName 3',
+        lastName: 'mockLastName 3',
+        name: 'mockFirstName 3 mockLastName 3',
+        platformStatus: 'disabled',
+        status: 'enabled'
+      }
+    ]);
+  });
+  it('returns undefined when no data is available', () => {
+    expect(selectAllUsers(initialStateNoData)).toEqual(undefined);
+  });
+});
+
 describe('selectNonDisabledUsers', () => {
   it('should get users, then return it mapped with new data and filtered', () => {
     expect(selectNonDisabledUsers(initialState)).toEqual([
@@ -166,13 +212,6 @@ describe('selectNonDisabledUsers', () => {
     ]);
   });
   it('returns undefined when no data is available', () => {
-    const initialStateNoData = fromJS({
-      Entities: {
-        users: {
-          data: undefined
-        }
-      }
-    });
     expect(selectNonDisabledUsers(initialStateNoData)).toEqual(undefined);
   });
 });

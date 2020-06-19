@@ -26,6 +26,16 @@ export const selectCreateUserFormInitialValues = state => {
   });
 };
 
+export const selectAllUsers = createSelector([getUsers], users => {
+  return (
+    users &&
+    users.toJS().map(user => ({
+      ...user,
+      name: getDisplay(user)
+    }))
+  );
+});
+
 export const selectNonDisabledUsers = createSelector([getUsers], users => {
   return users !== undefined
     ? users
