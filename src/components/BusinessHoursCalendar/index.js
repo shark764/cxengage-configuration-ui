@@ -115,8 +115,8 @@ export default class CalendarEvents extends Component {
                   type: rule.type,
                   title: rule.name,
                   ...(rule.hours && { ...rule.hours.allDay } && { allDay: rule.hours.allDay }),
-                  start: new Date(rule.startDate),
-                  ...(rule.endDate && { end: new Date(rule.endDate) }),
+                  start: new Date(rule.startDate.setHours(0, 0, 0)),
+                  ...(rule.endDate && { end: new Date(rule.endDate.setHours(23, 59, 59)) }),
                   eventTypeID: calendarEventTypeId,
                   repeats: rule.repeats,
                   every: rule.every,
@@ -141,13 +141,11 @@ export default class CalendarEvents extends Component {
                 second: calendarEventEndDateSeconds
               })
               .toDate();
-
             // Getting time of calendarEventStartDate so we can set it to calendar component start date
             const calendarEventStartDate = moment(calendarEvent.start),
               calendarEventStartDateHour = calendarEventStartDate.get('hour'),
               calendarEventStartDateMinutes = calendarEventStartDate.get('minute'),
               calendarEventStartDateSeconds = calendarEventStartDate.get('second');
-
             const eventStartDate = new Date(calendarEvent.start);
             // set calendarEventEndDate if rule finish after calendar end date visible range
             const eventEndDate =
@@ -254,13 +252,14 @@ export default class CalendarEvents extends Component {
                 }
                 const weeklyCalendarEvents = weeklyEvents
                   .concat(weeklyRecurringEvents)
-                  .filter(weeklyEvent =>
-                    moment(weeklyEvent.start).isBetween(
-                      this.state.calendarDateRange.start,
-                      this.state.calendarDateRange.end,
-                      null,
-                      '[]'
-                    )
+                  .filter(
+                    weeklyEvent =>
+                      moment(weeklyEvent.start).isBetween(
+                        this.state.calendarDateRange.start,
+                        this.state.calendarDateRange.end,
+                        null,
+                        '[]'
+                      ) && weeklyEvent.start >= eventStartDate
                   )
                   .map(weeklyEvent => {
                     return {
@@ -764,13 +763,14 @@ export default class CalendarEvents extends Component {
                     ? yearlyEvents.concat(yearlyRecurringEvents)
                     : monthlyEvents.concat(monthlyRecurringEvents);
                 const monthYearEventList = monthlyYearlyCalendarEvents
-                  .filter(monthYearEvent =>
-                    moment(monthYearEvent.start).isBetween(
-                      this.state.calendarDateRange.start,
-                      this.state.calendarDateRange.end,
-                      null,
-                      '[]'
-                    )
+                  .filter(
+                    monthYearEvent =>
+                      moment(monthYearEvent.start).isBetween(
+                        this.state.calendarDateRange.start,
+                        this.state.calendarDateRange.end,
+                        null,
+                        '[]'
+                      ) && monthYearEvent.start >= eventStartDate
                   )
                   .map(monthYearEvent => ({
                     id: calendarEvent.title,

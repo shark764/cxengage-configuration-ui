@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.13] - 2020-06-19
+### Fixed
+- CXV1-22707 - Minor issues with start date and end date with calendar Events.
+
 ## [0.78.12] - 2020-06-17
 ### Fixed
 - CXV1-22498 - Flow Management in Config 2 missing version Created By value when user is disabled
