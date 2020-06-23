@@ -932,7 +932,93 @@ const pages = {
     },
     whichCatagoryToSearch: 'searchNameColumn',
     updateSearchValue: [`rName-${randomId}`]
-  }
+  },
+  Tenant: {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `tName-${randomId}`,
+            descriptionInput: `tDesc-${randomId}`,
+            tenantAdminList: 1,
+            timezoneList: '(-05:00) US/Eastern',
+            navBarInput: '#f11115',
+            navBarTextInput: '#59e4cd',
+            primaryColorInput: '#de6060',
+            accentColorInput: '#30d230',
+            accentHoverColorInput: '#add2b3'
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedTName-${randomId}`,
+            descriptionInput: `updatedTDesc-${randomId}`,
+            tenantAdminList: 1,
+            timezoneList: '(-05:00) US/Eastern',
+            navBarInput: '#12f168',
+            navBarTextInput: '#e61c9c',
+            primaryColorInput: '#d6c66e',
+            accentColorInput: '#4b46de',
+            accentHoverColorInput: '#d2d7dc'
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkTenants'
+    },
+    whichCatagoryToSearch: 'searchNameColumn',
+    updateSearchValue: [`tName-${randomId}`]
+  },
+  Tenant: {
+    specs: {
+      create: {
+        parametersToInsert: [
+          {
+            nameInput: `tName-${randomId}`,
+            descriptionInput: `tDesc-${randomId}`,
+            tenantAdminList: 1,
+            timezoneList: '(-05:00) US/Eastern',
+            navBarInput: '#f11115',
+            navBarTextInput: '#59e4cd',
+            primaryColorInput: '#de6060',
+            accentColorInput: '#30d230',
+            accentHoverColorInput: '#add2b3'
+          }
+        ]
+      },
+      update: {
+        parametersToInsert: [
+          {
+            nameInput: `updatedTName-${randomId}`,
+            descriptionInput: `updatedTDesc-${randomId}`,
+            tenantAdminList: 1,
+            timezoneList: '(-05:00) US/Eastern',
+            navBarInput: '#12f168',
+            navBarTextInput: '#e61c9c',
+            primaryColorInput: '#d6c66e',
+            accentColorInput: '#4b46de',
+            accentHoverColorInput: '#d2d7dc'
+          }
+        ]
+      },
+      read: {
+        parameters: {}
+      }
+    },
+    navigation: {
+      mainBar: 'configurationMenu',
+      subMainBar: 'navigationLinkTenants'
+    },
+    whichCatagoryToSearch: 'searchNameColumn',
+    updateSearchValue: [`tName-${randomId}`]
+  },
 };
 
 module.exports = pages;

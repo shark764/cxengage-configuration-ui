@@ -332,8 +332,8 @@ export const SetTenantIdAfterBrandingIsUpdated = (action$, store) =>
           entityId: a.entityId,
           toastMessage:
             a.type === 'CREATE_TENANT_FULFILLED'
-              ? 'Tenant was created sucessfully!'
-              : 'Branding has been created sucessfully!'
+              ? 'Tenant was created successfully!'
+              : 'Branding has been created successfully!'
         };
       } else {
         return {
@@ -341,8 +341,8 @@ export const SetTenantIdAfterBrandingIsUpdated = (action$, store) =>
           entityName: a.entityName,
           toastMessage:
             a.type === 'UPDATE_TENANT_FULFILLED'
-              ? 'Tenant was updated sucessfully!'
-              : 'Branding has been updated sucessfully!',
+              ? 'Tenant was updated successfully!'
+              : 'Branding has been updated successfully!',
           payload: { ...getCurrentFormValues(store.getState()).toJS() },
           meta: {
             form: `${a.entityName}:${a.entityId}`
@@ -358,9 +358,9 @@ export const DisplayToastMessage = (action$, store) =>
     .filter(({ entityName, toastMessage }) => entityName === 'tenants' && !!toastMessage)
     .map(({ toastMessage, response }) => {
       if (toastMessage.includes('Branding') && toastMessage.includes('create')) {
-        Toast.success('Tenant was created sucessfully!');
+        Toast.success('Tenant was created successfully!');
       } else if (toastMessage.includes('Branding') && toastMessage.includes('update')) {
-        Toast.success('Tenant was updated sucessfully!');
+        Toast.success('Tenant was updated successfully!');
       }
       toastMessage.includes('Failed') ? Toast.error(toastMessage) : Toast.success(toastMessage);
       return { toastMessage, response };
@@ -436,7 +436,7 @@ export const SetSelectedTenantIdAfterResetingBranding = (action$, store) =>
     return {
       type: '@@redux-form/INITIALIZE',
       entityName: 'tenants',
-      toastMessage: 'Branding has been reset to default sucessfully!',
+      toastMessage: 'Branding has been reset to default successfully!',
       payload: { ...formValues.toJS(), ...JSON.parse(result.styles), logo: result.logo, favicon: result.favicon },
       meta: {
         form: `tenants:${a.entityId}`
@@ -476,7 +476,7 @@ export const ChangeBrandingImageFileInState = (action$, store) =>
 
 export const SendBrandingUpdateToConfig1 = (action$, store) =>
   action$
-    .ofType('BRANDING_HAS_BEEN_UPDATED_SUCESSFULLY!', 'BRANDING_HAS_BEEN_RESET_TO_DEFAULT_SUCESSFULLY!')
+    .ofType('BRANDING_HAS_BEEN_UPDATED_SUCCESSFULLY!', 'BRANDING_HAS_BEEN_RESET_TO_DEFAULT_SUCCESSFULLY!')
     .filter(() => !isInIframe())
     .switchMap(() =>
       fromPromise(sdkPromise({ module: 'tenantBrandingUpdated', tenantId: getSelectedEntityId(store.getState()) }))

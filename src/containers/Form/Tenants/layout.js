@@ -85,7 +85,7 @@ export default function TenantsForm({
             name="adminUserId"
             label="Tenant Admin"
             options={tenantUsers}
-            data-automation="tenantAdminInput"
+            data-automation="tenantAdminList"
             disabled={isSaving || !userHasTenantUpdatePermissions}
           />
           <SelectField
@@ -149,7 +149,7 @@ export default function TenantsForm({
                 <ToggleField
                   name="setAsActiveTenant"
                   label="Set as Active Tenant"
-                  data-automation="sharedToggle"
+                  data-automation="setActiveTenantToggle"
                   disabled={isSaving || !userHasTenantUpdatePermissions}
                 />
               </ConfirmationWrapper>
@@ -195,7 +195,7 @@ export default function TenantsForm({
                   <ToggleField
                     name="resetBranding"
                     label="Reset Branding to Default"
-                    data-automation="sharedToggle"
+                    data-automation="resetBrandingToggle"
                     disabled={!userHasTenantBrandingUpdatePermissions}
                   />
                 </ConfirmationWrapper>
@@ -228,26 +228,31 @@ export default function TenantsForm({
             <ColorField
               name="navbar"
               label="Navigation Bar"
+              data-automation="navBarInput"
               disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
             />
             <ColorField
               name="navbarText"
               label="Navigation Bar Text"
+              data-automation="navBarTextInput"
               disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
             />
             <ColorField
               name="primaryColor"
               label="Primary Color"
+              data-automation="primaryColorInput"
               disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
             />
             <ColorField
               name="accentColor"
               label="Accent Color"
+              data-automation="accentColorInput"
               disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
             />
             <ColorField
               name="accentHoverColor"
               label="Accent Hover Color"
+              data-automation="accentHoverColorInput"
               disabled={isSaving || !userHasTenantBrandingUpdatePermissions}
             />
           </ColorFieldWrapper>

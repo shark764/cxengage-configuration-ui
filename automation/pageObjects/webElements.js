@@ -21,8 +21,11 @@ elements.$ = (searchTerm, elementType) => {
 
 // toastr component:
 elements['toastSuccessMessage'] = new Element('div[class="toast toast-success"] div[class="toast-message"]');
+elements['toastSuccessMessageTwo'] = new Element('div[class="toast toast-success"] div[class="toast-message"]', 1);
+
 elements['toastErrorMessage'] = new Element('div[class="toast toast-error"] div[class="toast-message"]');
 elements['toastCloseButton'] = new Element('button[class="toast-close-button"]');
+elements['toastCloseButtonTwo'] = new Element('button[class="toast-close-button"]', 1);
 elements['enableMessage'] = new Element(`.//div[contains(text(),'This will enable')]`);
 
 // Modal components

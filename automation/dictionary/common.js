@@ -66,7 +66,8 @@ const commonBehavior = {
   },
   insertToggleValues(parameter, param, entity) {
     Elem[param].waitAndClick();
-    if (entity === 'Skill' || entity === 'Reason' || entity === 'Disposition' || entity === 'Sla') {
+    const customEntities = ['Skill', 'Reason', 'Disposition', 'Sla', 'Tenant'];
+    if (customEntities.includes(entity)) {
       Elem.confirmationWrapper.waitForVisible();
       Elem.confirmButton.waitAndClick();
       Elem.confirmationWrapper.waitForVisible(30000, false);
@@ -202,6 +203,12 @@ const commonBehavior = {
       this.submitFormData(entity, actionType, parameter);
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
+      if (entity === 'Tenant') {
+        this.insertToggleValues(parameter, 'resetBrandingToggle', entity);
+        Elem.toastSuccessMessage.waitForVisible();
+        Elem.toastSuccessMessage.validateElementsString('exact', 'Branding has been reset to default successfully!');
+        this.closeToastr(entity, actionType);
+      }
       this.toggleEntity(entity);
       this.closeSidePanel(entity);
       this.revertUpdate(entity, actionType);
@@ -332,6 +339,12 @@ const commonBehavior = {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was updated successfully!`);
     } else if (entity === 'Business Hour' && actionType === 'exception') {
       Elem.toastSuccessMessage.validateElementsString('exact', `Exception was created successfully!`);
+    } else if (entity === 'Tenant') {
+      Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
+      Elem.toastSuccessMessageTwo.validateElementsString('exact', `Branding has been ${actionType}d successfully!`);
+      if(Elem.toastCloseButtonTwo.isVisible) {
+        Elem.toastCloseButtonTwo.waitAndClick();
+      }
     } else {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
     }
