@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 import { reduxForm } from 'redux-form/immutable';
 import styled from 'styled-components';
-import { Modal, InputField, SidePanelActions, DetailHeader, SidePanelTable, AutoCompleteField } from 'cx-ui-components';
+import { Modal, InputField, SidePanelActions, DetailHeader, SidePanelTable, AutoCompleteField, DetailsPanelAlert } from 'cx-ui-components';
 import { isEmpty } from 'serenova-js-utils/strings';
 
 import SidePanelHeaderContainer from '../SidePanelHeader';
@@ -75,34 +75,16 @@ const ModalTitle = styled.h3`
   text-overflow: ellipsis;
 `;
 
-const VersionDetailContainer = styled.div`
-  margin: 0 auto;
-  max-width: 400px;
-  padding: 10px 0;
-`;
-
 const ModalActions = styled(SidePanelActions)`
   display: flow-root;
 `;
 
-const VersionDetailWrapper = styled.div`
-  display: inline-flex;
-  width: 100%;
-  margin-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 20px;
-  font-size: 14px;
-`;
-
-const VersionDetailLabel = styled.span`
-  width: 130px;
-  vertical-align: middle;
-  padding-right: 10px;
-  flex-shrink: 0;
-`;
-
-const VersionDetailValue = styled.span`
-  white-space: pre-line;
+const SelectedVersionDetailsPanelAlert = styled(DetailsPanelAlert)`
+  background-color: #0090fe;
+  border: none;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-align: center;
 `;
 
 const eventType = [
@@ -365,21 +347,11 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 text="Hours and Exceptions"
               />
               {this.props.selectedBusinessHourVersion && (
-                <VersionDetailContainer>
-                  <VersionDetailWrapper>
-                    <VersionDetailLabel>
-                      <b>Selected Version:</b>
-                    </VersionDetailLabel>
-                    <VersionDetailValue>
-                      {this.props.versions &&
-                      this.props.selectedBusinessHourVersion &&
-                      this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
-                        ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).name
-                        : ''}
-                    </VersionDetailValue>
-                    <br />
-                  </VersionDetailWrapper>
-                </VersionDetailContainer>
+                <SelectedVersionDetailsPanelAlert text="Selected Version:" boldText={this.props.versions &&
+                  this.props.selectedBusinessHourVersion &&
+                  this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
+                    ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).name
+                    : ''} />
               )}
               <RulesForm />
             </DetailWrapper>

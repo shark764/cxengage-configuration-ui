@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.78.15] - 2020-06-22
+### Fixed
+- CXV1-22705 - Display more prominently which version you're viewing and show the version number
+
 ## [0.78.14] - 2020-06-22
 ### Added
 - <no-Jira> - Added Tenants Page automation tests.
