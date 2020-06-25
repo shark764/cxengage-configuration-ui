@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+### [0.79.1] - 2020-06-22
+### Fixed
+- CXV1-22699 - Draft should be deleted after being published
+- CXV1-22716 - Draft shouldn't be able to save when the end date of a rule is lesser or equal to the start date
+
 ## [0.79.0] - 2020-06-23
 ### Added
 - CXV1-20166 - Add contact layouts to navbar & create main entity list.

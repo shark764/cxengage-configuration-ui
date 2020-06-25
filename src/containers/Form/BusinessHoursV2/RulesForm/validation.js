@@ -61,7 +61,7 @@ export const ruleValidation = (rule, rules) => {
       startDate: true,
       message: 'You should select a start date'
     };
-  } else if (rule.startDate && !rule.type.includes('one-time') && rule.endDate && rule.startDate > rule.endtDate) {
+  } else if (rule.startDate && !rule.type.includes('one-time') && rule.endDate && rule.startDate > rule.endDate) {
     error = {
       endDate: true,
       message: 'end date should be after start date'
@@ -86,14 +86,19 @@ export const ruleValidation = (rule, rules) => {
       every: true,
       message: 'The Every field should be a integer value'
     };
-  } 
-  else if (!rule.type.includes('one-time') && rule.repeats === 'weekly' && (!rule.on || !Array.isArray(rule.on) || rule.on.length < 1)) {
+  } else if (
+    !rule.type.includes('one-time') &&
+    rule.repeats === 'weekly' &&
+    (!rule.on || !Array.isArray(rule.on) || rule.on.length < 1)
+  ) {
     error = {
       on: true,
       message: 'You should select the days on the week in which the rule should take effect'
     };
-  } else if (!rule.type.includes('one-time') &&
-    ((rule.repeats === 'monthly' || rule.repeats === 'yearly') && (!rule.on || !rule.on.type || !rule.on.value)))  {
+  } else if (
+    !rule.type.includes('one-time') &&
+    ((rule.repeats === 'monthly' || rule.repeats === 'yearly') && (!rule.on || !rule.on.type || !rule.on.value))
+  ) {
     error = {
       on: {
         type: !rule.on || !rule.on.type,
@@ -101,17 +106,17 @@ export const ruleValidation = (rule, rules) => {
       },
       message: 'type or value on the "On" field is undefined'
     };
-  } else if (!rule.type.includes('one-time') &&
-  ((rule.repeats === 'monthly' || rule.repeats === 'yearly') && 
-  (rule.on &&
-    rule.on.value === 'day' &&
-    (rule.on && (isNaN(rule.on.type) || !Number.isInteger(+rule.on.type)))))) {
-      error = {
-        on: {
-          type: true
-        },
-        message: 'value on the "On" field should be a number'
-      };
+  } else if (
+    !rule.type.includes('one-time') &&
+    ((rule.repeats === 'monthly' || rule.repeats === 'yearly') &&
+      (rule.on && rule.on.value === 'day' && (rule.on && (isNaN(rule.on.type) || !Number.isInteger(+rule.on.type)))))
+  ) {
+    error = {
+      on: {
+        type: true
+      },
+      message: 'value on the "On" field should be a number'
+    };
   } else if (
     !rule.type.includes('one-time') &&
     rule.repeats === 'monthly' &&
@@ -121,7 +126,7 @@ export const ruleValidation = (rule, rules) => {
   ) {
     error = {
       on: {
-        type: true,
+        type: true
       },
       message: 'The numeric value in the "On" field has to be between 1 and 31(days on a month)'
     };
@@ -159,8 +164,12 @@ export const ruleValidation = (rule, rules) => {
     const index = rule.hours.intervals.findIndex(
       (interval, ind, intervals) =>
         interval.start > interval.end ||
-        intervals.some((int, i) => i !== ind && ((interval.start >= int.start && interval.start <= int.end) || 
-          (interval.end >= int.start && interval.end <= int.end)))
+        intervals.some(
+          (int, i) =>
+            i !== ind &&
+            ((interval.start >= int.start && interval.start <= int.end) ||
+              (interval.end >= int.start && interval.end <= int.end))
+        )
     );
     let intervalErrors = Array(rule.hours.intervals.length).fill({
       start: false,
@@ -180,4 +189,4 @@ export const ruleValidation = (rule, rules) => {
   }
 
   return error;
-}
+};

@@ -73,7 +73,9 @@ export const createDraft = ($action, store) =>
         path: ['business-hours', a.businessHourId, 'drafts'],
         data: {
           name: a.values.draftName,
-          ...((a.values.description != null || a.values.description !== undefined) && { description: a.values.description }),
+          ...((a.values.description != null || a.values.description !== undefined) && {
+            description: a.values.description
+          }),
           ...(a.values.timezone && { timezone: a.values.timezone }),
           ...(a.values.rules && { rules: a.values.rules })
         },
@@ -356,29 +358,36 @@ export const PublishDraft = (action$, store) =>
     })
     .mergeMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .mergeMap(response => [
-          handleSuccess(
-            response,
-            {
-              ...a,
-              entityId: a.sdkCall.path[1]
-            },
-            '<i>Version</i> was created successfully!'
-          ),
-          ...(a.values.get('makeActive')
-            ? [
-                {
-                  type: 'UPDATE_ENTITY',
-                  entityName: 'businessHoursV2',
-                  entityId: a.sdkCall.path[1],
-                  values: {
-                    activeVersion: a.values.get('makeActive') ? response.result.id : undefined,
-                    ...(a.values.get('isInitialDraft') ? { active: true } : {})
+        .mergeMap(response => {
+          const selectedDraft = getSelectedSubEntityId(store.getState());
+          return [
+            handleSuccess(
+              response,
+              {
+                ...a,
+                entityId: a.sdkCall.path[1]
+              },
+              '<i>Version</i> was created successfully!'
+            ),
+            ...(a.values.get('makeActive')
+              ? [
+                  {
+                    type: 'UPDATE_ENTITY',
+                    entityName: 'businessHoursV2',
+                    entityId: a.sdkCall.path[1],
+                    values: {
+                      activeVersion: a.values.get('makeActive') ? response.result.id : undefined,
+                      ...(a.values.get('isInitialDraft') ? { active: true } : {})
+                    }
                   }
-                }
-              ]
-            : [])
-        ])
+                ]
+              : []),
+            {
+              type: 'REMOVE_LIST_ITEM',
+              listItemId: selectedDraft
+            }
+          ];
+        })
         .catch(error => handleError(error, a))
     );
 
