@@ -250,6 +250,13 @@ export default class Navigation extends Component {
                 >
                   Business Hours
                 </StyledLink>
+                <StyledLink
+                  data-automation="navigationLinkContactLayouts"
+                  to="/configuration/contactLayouts"
+                  onClick={e => this.setCurrentEntityAndEntityId('contactLayouts', e)}
+                >
+                  Contact Layouts
+                </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>

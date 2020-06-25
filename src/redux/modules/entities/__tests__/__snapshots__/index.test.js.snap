@@ -379,6 +379,21 @@ Immutable.Map {
     "sidePanelWidth": 550,
     "assignPermission": Immutable.List [],
   },
+  "contactLayouts": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "CONTACTS_LAYOUTS_READ",
+    ],
+    "updatePermission": Immutable.List [
+      "CONTACTS_LAYOUTS_UPDATE",
+    ],
+    "createPermission": Immutable.List [
+      "CONTACTS_LAYOUTS_CREATE",
+    ],
+  },
   "platformRoles": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",

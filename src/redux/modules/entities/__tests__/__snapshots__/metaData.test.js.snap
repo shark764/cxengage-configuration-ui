@@ -640,6 +640,89 @@ Object {
       "digitalChannelsApps",
     ],
   },
+  "contactLayouts": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": false,
+    "bulkFormDependencies": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [
+      Object {
+        "id": "active",
+        "value": "enabled",
+      },
+    ],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "contactLayouts",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Configuration/ContactLayouts.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Contact Layouts Management",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+      "path": Array [
+        "contacts/layouts",
+      ],
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Contact Layout",
+    "updateFormDependencies": Array [],
+  },
   "customAttributes": EntityMetaData {
     "betaFeature": false,
     "bulkEditsAvailable": true,

@@ -185,7 +185,8 @@ export const listOfEntities = [
   'customAttributes',
   'integrations',
   'regions',
-  'timezones'
+  'timezones',
+  'contactLayouts'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -903,6 +904,18 @@ entities.customAttributes.columns = [
   { name: 'Status', active: true }
 ];
 entities.customAttributes.defaultFilters = [{ id: 'active', value: 'enabled' }];
+
+// Contact Layouts
+entities.contactLayouts.bulkEditsAvailable = false;
+entities.contactLayouts.sdkCall.path = ['contacts/layouts'];
+entities.contactLayouts.pageTitle = 'Contact Layouts Management';
+entities.contactLayouts.defaultFilters = [{ id: 'active', value: 'enabled' }];
+entities.contactLayouts.helpLink = '/Help/Content/Configuration/ContactLayouts.htm';
+entities.contactLayouts.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true }
+];
 
 //Hygen-insert-new-entity-configuration
 

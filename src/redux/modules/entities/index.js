@@ -335,6 +335,12 @@ const initialState = fromJS({
   },
   regions: {
     data: []
+  },
+  contactLayouts: {
+    ...defaultEntity,
+    readPermission: ['CONTACTS_LAYOUTS_READ'],
+    updatePermission: ['CONTACTS_LAYOUTS_UPDATE'],
+    createPermission: ['CONTACTS_LAYOUTS_CREATE']
   }
   //hygen-inject-before
 });

@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.79.0] - 2020-06-23
+### Added
+- CXV1-20166 - Add contact layouts to navbar & create main entity list.
+
 ## [0.78.15] - 2020-06-22
 ### Fixed
 - CXV1-22705 - Display more prominently which version you're viewing and show the version number

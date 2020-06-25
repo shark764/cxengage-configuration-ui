@@ -327,6 +327,23 @@ Immutable.Map {
       },
     ],
   },
+  "contactLayouts": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
   "platformRoles": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
