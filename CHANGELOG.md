@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.79.2] - 2020-06-25
+### Added
+- CXV1-22759 - Early Access page - Remove Toggles when insufficient permissions.
+- CXV1-22554 - Early Access page - Add Disable Birst toggle.
+
 ### [0.79.1] - 2020-06-22
 ### Fixed
 - CXV1-22699 - Draft should be deleted after being published

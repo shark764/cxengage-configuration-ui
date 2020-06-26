@@ -40,7 +40,6 @@ const ToggleWrapper = styled(Toggle)`
 const Feedback = styled.div`
   display: inline-block;
   position: absolute;
-  top: 385px;
   width: 40%;
 `;
 
@@ -66,7 +65,8 @@ export default class BetaFeatures extends Component {
     super();
     const features = {
       tenants: false,
-      integrations: false
+      integrations: false,
+      birst: false
     };
     const pageTitles = {};
     Object.keys(features).forEach(entityName => {
@@ -102,7 +102,9 @@ export default class BetaFeatures extends Component {
 
   toggleAll = (enableAll = true) => {
     const features = Object.keys(this.state.features).reduce((previous, current) => {
-      previous[current] = enableAll;
+      if (this.props.disabledFeatures[current] !== true) {
+        previous[current] = enableAll;
+      }
       return previous;
     }, this.state.features || {});
 
@@ -125,22 +127,26 @@ export default class BetaFeatures extends Component {
               Disable All
             </ActionButton>
           </Actions>
-          {Object.keys(this.state.features).map(entityName => (
-            <Feature key={entityName}>
-              <span>{this.state.pageTitles[entityName]}</span>
-              <ToggleWrapper
-                onChange={() => {
-                  const features = {
-                    ...this.state.features,
-                    [entityName]: !this.state.features[entityName]
-                  };
-                  this.saveBetaFeaturePrefs(features);
-                }}
-                value={this.state.features[entityName]}
-                disabled={this.props.disabledFeatures[entityName]}
-              />
-            </Feature>
-          ))}
+          {Object.keys(this.state.features)
+            .filter(entityName => {
+              return this.props.disabledFeatures[entityName] !== true;
+            })
+            .map(entityName => (
+              <Feature key={entityName}>
+                <span>{this.state.pageTitles[entityName]}</span>
+                <ToggleWrapper
+                  onChange={() => {
+                    const features = {
+                      ...this.state.features,
+                      [entityName]: !this.state.features[entityName]
+                    };
+                    this.saveBetaFeaturePrefs(features);
+                  }}
+                  value={this.state.features[entityName]}
+                  disabled={this.props.disabledFeatures[entityName]}
+                />
+              </Feature>
+            ))}
           <Submit buttonType="primary" onClick={this.saveBetaFeaturePrefsAll}>
             Apply Changes
           </Submit>

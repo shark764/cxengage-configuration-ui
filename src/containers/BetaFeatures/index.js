@@ -24,7 +24,8 @@ export function mapStateToProps(state) {
     entities: entitiesWithViewPermissions(state),
     disabledFeatures: {
       tenants: !userHasPermissions(state, ['PLATFORM_VIEW_ALL_TENANTS', 'MANAGE_TENANT']),
-      integrations: !userHasPermissions(state, ['VIEW_ALL_PROVIDERS'])
+      integrations: !userHasPermissions(state, ['VIEW_ALL_PROVIDERS']),
+      birst: !userHasPermissions(state, ['PLATFORM_MANAGE_ALL_TENANTS'])
     }
   };
 }
