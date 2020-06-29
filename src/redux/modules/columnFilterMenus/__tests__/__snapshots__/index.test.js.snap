@@ -417,7 +417,7 @@ Immutable.Map {
   },
   "birst": Immutable.Map {
     "visibleMenu": "none",
-    "Columns": Immutable.List [],
+    "Columns": undefined,
   },
   "apiKeys": Immutable.Map {
     "visibleMenu": "none",

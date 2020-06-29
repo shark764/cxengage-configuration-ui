@@ -186,8 +186,7 @@ export const listOfEntities = [
   'integrations',
   'regions',
   'timezones',
-  'contactLayouts',
-  'birst'
+  'contactLayouts'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -921,6 +920,6 @@ entities.contactLayouts.columns = [
 //Hygen-insert-new-entity-configuration
 
 // Birst
-entities.birst.pageTitle = 'Disable Birst';
+entities.birst = { pageTitle: 'Enable Birst' };
 
 export const entitiesMetaData = entities;
