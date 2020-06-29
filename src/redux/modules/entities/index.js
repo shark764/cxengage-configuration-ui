@@ -1485,6 +1485,9 @@ export default function reducer(state = initialState, action) {
     case 'CREATE_DRAFT_BUSINESS_HOURS_V2_REJECTED': {
       return state.setIn(['businessHoursV2', 'isCreatingDraft'], false);
     }
+    case 'SET_IS_EDITING_NEW_DRAFT_FOR_FIRST_TIME_BUSINESS_HOURS_V2': {
+      return state.setIn(['businessHoursV2', 'isEditingNewDraftForFirstTime'], action.isEditingNewDraftForFirstTime);
+    }
     case 'UPLOAD_LOGO_BRANDING_IMAGE':
     case 'UPLOAD_FAVICON_BRANDING_IMAGE': {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);

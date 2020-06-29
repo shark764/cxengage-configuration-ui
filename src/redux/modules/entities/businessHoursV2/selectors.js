@@ -24,8 +24,10 @@ export const selectBusinessHoursV2FormInitialValues = state => {
 export const getSelectedBusinessHourV2Version = state =>
   state.getIn(['Entities', 'businessHoursV2', 'selectedVersion']);
 
-export const selectBusinessHoursV2Data = state => 
-  getEntityData(state, 'businessHoursV2').filter(businessHour => businessHour.get('tenantId') === getCurrentTenantId(state)).toJS();
+export const selectBusinessHoursV2Data = state =>
+  getEntityData(state, 'businessHoursV2')
+    .filter(businessHour => businessHour.get('tenantId') === getCurrentTenantId(state))
+    .toJS();
 
 export const selectBusinessHoursEntityVersions = createSelector(
   [getSelectedEntity, getSelectedBusinessHourV2Version],
@@ -131,10 +133,12 @@ export const selectRules = createSelector(
 export const selectBusinessHoursV2RulesFormInitalValues = createSelector(
   getSelectedSubEntity,
   selectRules,
-  (subEntity, rules) =>
-    Map({
+  (subEntity, rules) => {
+    const created = subEntity && new Date(subEntity.get('created'));
+    const updated = subEntity && new Date(subEntity.get('updated'));
+    return Map({
       rules:
-        subEntity && !rules
+        subEntity && !rules && created.getTime() === updated.getTime()
           ? List([
               {
                 id: 'new-rule',
@@ -145,8 +149,9 @@ export const selectBusinessHoursV2RulesFormInitalValues = createSelector(
                 name: ''
               }
             ])
-          : List(rules)
-    })
+          : List(rules || [])
+    });
+  }
 );
 
 export const selectBusinessHoursV2DraftFormInitalValues = createSelector(

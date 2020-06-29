@@ -145,7 +145,12 @@ describe('selectBusinessHoursV2RulesFormInitalValues', () => {
     const state = new Map({
       Entities: { businessHoursV2: { selectedVersion: undefined } }
     });
-    getSelectedSubEntity.mockReturnValue(Map({}));
+    getSelectedSubEntity.mockReturnValue(
+      Map({
+        created: '2020-02-02T23:05:45Z',
+        updated: '2020-02-02T23:05:45Z'
+      })
+    );
     expect(selectBusinessHoursV2RulesFormInitalValues(state)).toMatchSnapshot();
   });
   it('Return initial form values when updating a rule', () => {

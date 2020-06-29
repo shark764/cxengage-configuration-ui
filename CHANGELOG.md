@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.79.4] - 2020-06-24
+### Fixed
+- CXV1-22701 - Drafts should be able to save without rules
+- CXV1-22752 - wrong message when update the active version in BH
+
 ## [0.79.3] - 2020-06-28
 ### Changed
 - CXV1-22554 - Early Access page - Changing to Enable Birst

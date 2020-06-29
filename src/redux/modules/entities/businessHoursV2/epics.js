@@ -265,7 +265,7 @@ export const UpdateDraft = (action$, store) =>
         path: ['business-hours', id, 'drafts', draftId],
         data: {
           name: name.trim(),
-          ...(rules ? { rules } : {}),
+          rules: rules || null,
           description: description || '',
           ...(timezone ? { timezone } : {})
         },
@@ -478,7 +478,7 @@ export const updateBusinessHourV2 = action$ =>
     })
     .switchMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a, `<i>Busines Hours</i> was created successfully!`))
+        .map(response => handleSuccess(response, a, `<i>Busines Hours</i> was updated successfully!`))
         .catch(error => handleError(error, a))
     );
 
