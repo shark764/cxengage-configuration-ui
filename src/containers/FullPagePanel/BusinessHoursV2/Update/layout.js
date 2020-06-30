@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 import { reduxForm } from 'redux-form/immutable';
 import styled from 'styled-components';
-import { Modal, InputField, SidePanelActions, DetailHeader, SidePanelTable, AutoCompleteField, DetailsPanelAlert } from 'cx-ui-components';
+import {
+  Modal,
+  InputField,
+  SidePanelActions,
+  DetailHeader,
+  SidePanelTable,
+  AutoCompleteField,
+  DetailsPanelAlert
+} from 'cx-ui-components';
 import { isEmpty } from 'serenova-js-utils/strings';
 
 import SidePanelHeaderContainer from '../SidePanelHeader';
@@ -13,10 +21,14 @@ import SidePanelActionsContainer from '../../../../containers/SidePanelActions';
 import DetailWrapper from '../../../../components/DetailWrapper';
 import CalendarEvents from '../../../../components/BusinessHoursCalendar';
 import { detailHeaderText } from '../../../../utils';
-import moment from 'moment';
 
 const SidePanelHeader = styled(SidePanelHeaderContainer)`
   width: 60%;
+`;
+
+const InheritedDetailsPanelAlert = styled(DetailsPanelAlert)`
+  margin-right: 30px;
+  margin-left: 20px;
 `;
 
 const HeaderContainer = styled.div`
@@ -24,7 +36,7 @@ const HeaderContainer = styled.div`
   padding: 10px 14px 16px;
 `;
 
-const Actions = styled(SidePanelActionsContainer)`
+const HeaderActions = styled(SidePanelActionsContainer)`
   width: 40%;
   float: right;
 `;
@@ -83,8 +95,10 @@ const SelectedVersionDetailsPanelAlert = styled(DetailsPanelAlert)`
   background-color: #0090fe;
   border: none;
   font-size: 16px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
+  margin-left: 50px;
+  margin-right: 25px;
 `;
 
 const eventType = [
@@ -173,9 +187,10 @@ const CreateCopyVersionForm = reduxForm({
   isCopyVersion,
   versions,
   drafts,
-  businessHourId
+  businessHourId,
+  inherited
 }) {
-  const businessHoursName = businessHoursList.find(bh => bh.id === businessHourId).name;
+  const businessHoursName = !inherited ? businessHoursList.find(bh => bh.id === businessHourId).name : '';
   const { name, version } = versions.find(v => v.id === copyVersionId) || drafts.find(v => v.id === copyVersionId);
   return (
     <form onSubmit={handleSubmit}>
@@ -223,17 +238,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
     super();
     this.state = {
       isCreateModalOpen: false,
-      isCopyModalOpen: false,
-      calendarDateRange: {
-        start: moment()
-          .startOf('month')
-          .startOf('week')
-          .toString(),
-        end: moment()
-          .endOf('month')
-          .endOf('week')
-          .toString()
-      }
+      isCopyModalOpen: false
     };
   }
 
@@ -272,9 +277,15 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
     return (
       <Fragment>
         <HeaderContainer>
-          <Actions />
+          <HeaderActions hideSubmit={this.props.inherited || !this.props.userHasUpdatePermission} />
           <SidePanelHeader />
         </HeaderContainer>
+        {this.props.inherited && (
+          <InheritedDetailsPanelAlert
+            text={`This Business Hours is inherited ${this.props.parentTenantName &&
+              `from ${this.props.parentTenantName}`} and cannot be edited.`}
+          />
+        )}
         <WrapperDiv>
           <FieldsColumn>
             <BusinessHoursV2 />
@@ -333,6 +344,8 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                   }
                   confirmDeleteSubEntity={true}
                   fetching={!this.props.versions || !this.props.drafts}
+                  showInheritedViewOnlyViewButtonOnItem={this.props.inherited || !this.props.userHasUpdatePermission} // View button available in view only or inherited
+                  showInheritedViewOnlyCopyButtonOnItem={this.props.inherited} // Copy button available on inherited business hours
                   inherited={this.props.inherited}
                 />
               </VersionsColumn>
@@ -347,11 +360,16 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 text="Hours and Exceptions"
               />
               {this.props.selectedBusinessHourVersion && (
-                <SelectedVersionDetailsPanelAlert text="Selected Version:" boldText={this.props.versions &&
-                  this.props.selectedBusinessHourVersion &&
-                  this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
-                    ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).name
-                    : ''} />
+                <SelectedVersionDetailsPanelAlert
+                  text="Selected Version:"
+                  boldText={
+                    this.props.versions &&
+                    this.props.selectedBusinessHourVersion &&
+                    this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion)
+                      ? this.props.versions.find(({ id }) => id === this.props.selectedBusinessHourVersion).name
+                      : ''
+                  }
+                />
               )}
               <RulesForm />
             </DetailWrapper>
@@ -437,6 +455,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               versions={this.props.versions}
               drafts={this.props.drafts}
               businessHourId={this.props.businessHourId}
+              inherited={this.props.inherited}
             />
           </Modal>
         )}
@@ -461,7 +480,8 @@ BusinessHoursV2UpdateFullPage.propTypes = {
   setSelectedSubEntityId: PropTypes.func,
   selectedBusinessHourVersion: PropTypes.string,
   businessHoursList: PropTypes.array,
-  removeListItem: PropTypes.func
+  removeListItem: PropTypes.func,
+  parentTenantName: PropTypes.string
 };
 
 CreateDraftForm.propTypes = {

@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+### [0.79.5] - 2020-06-26
+### Fixed
+- CXV1-22702 - Issues regarding users that have MANAGE_ALL_BUSINESS_HOURS while checking an inherited business hour
+- CXV1-22703 - Issues regarding users that do not have MANAGE_ALL_BUSINESS_HOURS while checking an inherited business hour
+
 ## [0.79.4] - 2020-06-24
 ### Fixed
 - CXV1-22701 - Drafts should be able to save without rules

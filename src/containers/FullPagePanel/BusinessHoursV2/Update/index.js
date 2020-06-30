@@ -13,7 +13,8 @@ import {
   isCreating,
   userHasUpdatePermission,
   userHasSharePermission,
-  userHasPermissions
+  userHasPermissions,
+  getEntityParentTenantName
 } from '../../../../redux/modules/entities/selectors';
 import {
   setSelectedBusinessHourVersion,
@@ -32,10 +33,11 @@ export const mapStateToProps = state => ({
   userHasViewPermission: userHasPermissions(state, ['PLATFORM_VIEW_ALL']),
   userHasUpdatePermission: userHasUpdatePermission(state),
   userHasSharePermission: userHasSharePermission(state),
-  drafts: selectDrafts(state),
+  drafts: (!(isInherited(state) || !userHasUpdatePermission(state)) && selectDrafts(state)) || [],
   isCreatingDraft: isCreatingDraft(state),
   selectedBusinessHourVersion: getSelectedBusinessHourV2Version(state),
   businessHoursList: selectBusinessHoursV2Data(state),
+  parentTenantName: getEntityParentTenantName(state)
 });
 
 export const actions = {

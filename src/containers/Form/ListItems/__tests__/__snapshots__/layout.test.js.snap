@@ -49,6 +49,8 @@ exports[`<ListItemsForm /> renders create list item 1`] = `
   </styled.div>
   <SidePanelActions
     bulkItemsAffected={0}
+    hideCancel={false}
+    hideSubmit={false}
     invalid={false}
     isSaving={false}
     onCancel={[Function]}
@@ -107,6 +109,8 @@ exports[`<ListItemsForm /> renders update list item 1`] = `
   </styled.div>
   <SidePanelActions
     bulkItemsAffected={0}
+    hideCancel={false}
+    hideSubmit={false}
     invalid={false}
     isSaving={false}
     onCancel={[Function]}
