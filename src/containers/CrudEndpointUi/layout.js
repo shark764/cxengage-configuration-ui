@@ -59,6 +59,7 @@ import DispositionListsForm from '../Form/DispositionLists';
 import CustomAttributesForm from '../Form/CustomAttributes';
 import IntegrationsForm from '../Form/Integrations';
 import IntegrationListenerForm from '../Form/Integrations/Listener';
+import ContactLayoutsForm from '../Form/ContactLayouts';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -91,6 +92,7 @@ import TenantsDetailsPanel from '../SidePanelDetails/Tenants';
 import DispositionListsDetailsPanel from '../SidePanelDetails/DispositionLists';
 import CustomAttributesDetailsPanel from '../SidePanelDetails/CustomAttributes';
 import IntegrationsDetailsPanel from '../SidePanelDetails/Integrations';
+import ContactLayoutsDetailsPanel from '../SidePanelDetails/ContactLayouts';
 //hygen-inject-before4
 
 // Full page panel forms
@@ -328,6 +330,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <IntegrationsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/contactLayouts',
+    component: () => (
+      <DetailsPanel>
+        <ContactLayoutsForm />
       </DetailsPanel>
     )
   }
@@ -582,6 +592,16 @@ const detailsPanelRoutes = [
         <IntegrationsDetailsPanel>
           <IntegrationsForm />
         </IntegrationsDetailsPanel>
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/contactLayouts',
+    component: () => (
+      <DetailsPanel>
+        <ContactLayoutsDetailsPanel>
+          <ContactLayoutsForm />
+        </ContactLayoutsDetailsPanel>
       </DetailsPanel>
     )
   }

@@ -163,8 +163,12 @@ const commonBehavior = {
           Elem.sdpanelAddItem.waitAndClick();
           Elem.dateDatePicker.waitForVisible();
           Elem.dateDatePicker.waitAndClick();
-          new Element(`div[class="DayPicker-Day"][aria-label="${tomorrow}"]`).waitForVisible();
-          new Element(`div[class="DayPicker-Day"][aria-label="${tomorrow}"]`).waitAndClick();
+          const tomorrowDatePicker = new Element(`div[class="DayPicker-Day"][aria-label="${tomorrow}"]`);
+          Brow.pause(2000);
+          if(!tomorrowDatePicker.isVisible()) {
+            Elem.dayPickerCalenderNextButton.waitAndClick();
+          }
+          tomorrowDatePicker.waitAndClick();
           subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
           Elem.modalSubmitButton.waitAndClick();
           this.verifyAction(entity, 'exception');

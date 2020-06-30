@@ -45,4 +45,8 @@ elements['actionColorInput'] = new Element('input[data-automation="colorPickerTe
 // Users Extension Warnings
 elements['labelRequiredText'] = new Element(`.//span[text()="Label is required"]`);
 elements['extensionRequiredText'] = new Element(`.//span[text()="Valid Phone Number Required"]`);
+
+// Business Hour Modal
+elements['dayPickerCalenderNextButton'] = new Element('span[class="DayPicker-NavButton DayPicker-NavButton--next"]');
+
 module.exports = elements;

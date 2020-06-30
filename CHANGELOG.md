@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.79.6] - 2020-06-30
+### Added
+- CXV1-20167 - Add initial side panel details form to Contact Layouts page.
+
 ### [0.79.5] - 2020-06-26
 ### Fixed
 - CXV1-22702 - Issues regarding users that have MANAGE_ALL_BUSINESS_HOURS while checking an inherited business hour
