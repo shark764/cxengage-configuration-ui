@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import ListsForm from './layout';
 import { createFormValidation as formValidation } from './validation';
-import { isCreating } from '../../../redux/modules/entities/selectors';
+import { isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
 import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import { getListTypesOptions } from '../../../redux/modules/entities/listTypes/selectors';
 
@@ -28,7 +28,8 @@ export function mapStateToProps(state) {
       shared: true
     }),
     isSaving: isCreating(state),
-    key: 'create'
+    key: 'create',
+    userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }
 

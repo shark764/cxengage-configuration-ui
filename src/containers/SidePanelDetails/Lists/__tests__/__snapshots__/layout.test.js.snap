@@ -89,10 +89,12 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel not inherited 1`] = `
       text="Bulk CSV"
     />
     <FileDownload
+      disabled={false}
       id="dtpanel-lists-download-csv"
     />
     <FileUpload
       acceptedFileType=".csv"
+      disabled={false}
       id="dtpanel-lists-upload-csv"
     />
   </React.Fragment>

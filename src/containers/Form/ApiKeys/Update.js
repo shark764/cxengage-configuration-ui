@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import ApiKeysForm from './layout';
 import { formValidation } from './validation';
-import { getSelectedEntityId, isInherited, isUpdating } from '../../../redux/modules/entities/selectors';
+import { getSelectedEntityId, isInherited, isUpdating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
 import { getInitialUpdateFormValues } from '../../../redux/modules/entities/apiKeys/selectors';
 import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import { selectTenantRoles } from '../../../redux/modules/entities/roles/selectors';
@@ -29,7 +29,8 @@ export function mapStateToProps(state) {
     roles: selectTenantRoles(state),
     isSaving: isUpdating(state),
     inherited: isInherited(state),
-    key: getSelectedEntityId(state)
+    key: getSelectedEntityId(state),
+    userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }
 

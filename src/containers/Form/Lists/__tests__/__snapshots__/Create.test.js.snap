@@ -55,5 +55,6 @@ Object {
   "isSaving": false,
   "key": "create",
   "listTypes": "mock list types options",
+  "userHasUpdatePermission": undefined,
 }
 `;

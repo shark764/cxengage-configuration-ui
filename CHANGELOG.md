@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.79.7] - 2020-07-02
+### Fixed
+- CXV1-17519 - Allow user with PLATFORM_VIEW_ALL permissions to view all config-ui pages
+
 ## [0.79.6] - 2020-06-30
 ### Added
 - CXV1-20167 - Add initial side panel details form to Contact Layouts page.

@@ -70,7 +70,8 @@ export default class MessageTemplatesForm extends React.Component {
             { name: 'messaging', label: 'Messaging' },
             { name: 'email', label: 'Email' }
           ]}
-          disabled={this.props.templateTextType === 'html'}
+          disabled={this.props.templateTextType === 'html' ||
+          !this.props.userHasUpdatePermission}
         />
         <SelectField
           name="templateTextType"
@@ -83,7 +84,8 @@ export default class MessageTemplatesForm extends React.Component {
           disabled={
             (this.props.channels &&
               (this.props.channels.includes('sms') || this.props.channels.includes('messaging'))) ||
-            this.props.isDisplayContentInHtml
+            this.props.isDisplayContentInHtml ||
+            !this.props.userHasUpdatePermission
           }
           required
         />
@@ -106,6 +108,7 @@ export default class MessageTemplatesForm extends React.Component {
             toggleMessageTemplateText={isDisplayContentInHtml =>
               this.props.toggleMessageTemplateText(isDisplayContentInHtml)
             }
+            disabled={this.props.isSaving || !this.props.userHasUpdatePermission}
           />
         )}
         {this.state.isClearTemplateTxtConfirmBoxOpen && (

@@ -8,7 +8,7 @@ exports[`<ListsForm /> renders create list 1`] = `
   <InputField
     componentType="input"
     data-automation="nameInput"
-    disabled={false}
+    disabled={true}
     id="frm-lists-name"
     inputType="text"
     label="Name *"
@@ -16,14 +16,14 @@ exports[`<ListsForm /> renders create list 1`] = `
   />
   <ToggleField
     data-automation="sharedToggle"
-    disabled={false}
+    disabled={true}
     id="frm-lists-shared"
     label="Shared *"
     name="shared"
   />
   <SelectField
     data-automation="listTypeList"
-    disabled={false}
+    disabled={true}
     id="frm-lists-list-type-id"
     label="List Type *"
     name="listTypeId"
@@ -52,7 +52,7 @@ exports[`<ListsForm /> renders update list 1`] = `
   <InputField
     componentType="input"
     data-automation="nameInput"
-    disabled={false}
+    disabled={true}
     id="frm-lists-name"
     inputType="text"
     label="Name *"
@@ -60,7 +60,7 @@ exports[`<ListsForm /> renders update list 1`] = `
   />
   <ToggleField
     data-automation="sharedToggle"
-    disabled={false}
+    disabled={true}
     id="frm-lists-shared"
     label="Shared *"
     name="shared"

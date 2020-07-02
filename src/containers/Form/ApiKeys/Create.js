@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import ApiKeysForm from './layout';
 import { formValidation } from './validation';
-import { isCreating } from '../../../redux/modules/entities/selectors';
+import { isCreating, userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
 import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 import { selectTenantRoles } from '../../../redux/modules/entities/roles/selectors';
 import { getInitialCreateFormValues } from '../../../redux/modules/entities/apiKeys/selectors';
@@ -26,7 +26,8 @@ export function mapStateToProps(state) {
     initialValues: getInitialCreateFormValues(state),
     roles: selectTenantRoles(state),
     isSaving: isCreating(state),
-    key: 'create'
+    key: 'create',
+    userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }
 

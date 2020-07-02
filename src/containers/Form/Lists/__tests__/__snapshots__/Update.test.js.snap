@@ -8,6 +8,7 @@ Object {
   "key": "mockId",
   "listType": "mock list type name",
   "update": true,
+  "userHasUpdatePermission": undefined,
 }
 `;
 

@@ -8,6 +8,7 @@ Object {
   "key": "mockId",
   "roles": "mock list roles options",
   "update": true,
+  "userHasUpdatePermission": undefined,
 }
 `;
 

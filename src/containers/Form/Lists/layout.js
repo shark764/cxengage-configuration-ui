@@ -22,13 +22,13 @@ export default function ListsForm(props) {
         data-automation="nameInput"
         componentType="input"
         inputType="text"
-        disabled={props.isSaving || props.inherited}
+        disabled={props.isSaving || props.inherited || !props.userHasUpdatePermission}
       />
       <ToggleField
         name="shared"
         label="Shared *"
         id="frm-lists-shared"
-        disabled={props.isSaving || props.inherited}
+        disabled={props.isSaving || props.inherited || !props.userHasUpdatePermission}
         data-automation="sharedToggle"
       />
       {!props.update && (
@@ -38,7 +38,7 @@ export default function ListsForm(props) {
           id="frm-lists-list-type-id"
           data-automation="listTypeList"
           options={props.listTypes}
-          disabled={props.isSaving}
+          disabled={props.isSaving || !props.userHasUpdatePermission}
         />
       )}
     </form>
@@ -56,7 +56,8 @@ ListsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   update: PropTypes.bool,
   isSaving: PropTypes.bool,
-  inherited: PropTypes.bool
+  inherited: PropTypes.bool,
+  userHasUpdatePermission: PropTypes.bool
 };
 
 ListsForm.defaultProps = {

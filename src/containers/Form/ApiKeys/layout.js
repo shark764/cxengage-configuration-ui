@@ -84,7 +84,8 @@ export default class ApiKeysForm extends Component {
           inputType="text"
           placeholder=""
           data-automation="nameInput"
-          disabled={this.props.isSaving || this.props.inherited}
+          disabled={this.props.isSaving || this.props.inherited ||
+            !this.props.userHasUpdatePermission}
         />
         <InputField
           name="description"
@@ -92,13 +93,15 @@ export default class ApiKeysForm extends Component {
           componentType="textarea"
           inputType="text"
           data-automation="descriptionInput"
-          disabled={this.props.isSaving || this.props.inherited}
+          disabled={this.props.isSaving || this.props.inherited ||
+            !this.props.userHasUpdatePermission}
         />
         <SelectField
           name="roleId"
           label="Role *"
           placeholder="Select a role..."
-          disabled={this.props.isSaving || this.props.inherited}
+          disabled={this.props.isSaving || this.props.inherited ||
+            !this.props.userHasUpdatePermission}
           options={this.props.roles}
           data-automation="roleList"
           required
@@ -151,9 +154,10 @@ export default class ApiKeysForm extends Component {
               secondaryText={'Do you want to continue?'}
               data-automation="deleteKeyConfirmationWrapper"
             >
+              {this.props.userHasUpdatePermission &&
               <ButtonDeleteKey id="btnDeletekey" type="button" data-automation="deleteKeyButton">
                 Delete Key
-              </ButtonDeleteKey>
+              </ButtonDeleteKey>}
             </ConfirmationWrapper>
           </Fragment>
         )}
@@ -177,7 +181,8 @@ ApiKeysForm.propTypes = {
   ),
   removeSecretApiKey: PropTypes.func,
   deleteApiKey: PropTypes.func,
-  initialValues: PropTypes.object
+  initialValues: PropTypes.object,
+  userHasUpdatePermission: PropTypes.bool
 };
 
 ApiKeysForm.defaultProps = {

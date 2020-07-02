@@ -18,16 +18,16 @@ function ListsDetailsPanel(props) {
     <div id={props.id} className={props.className}>
       <DetailHeader text="Details" />
       {props.alertMessage && <DetailsPanelAlert text={props.alertMessage} />}
-      {props.userHasUpdatePermission && props.children}
+      {props.children}
       <Detail label="List Type" value={props.listType} />
       {!props.inherited && (
         <React.Fragment>
           <DetailHeader text="Bulk CSV" />
-          <FileDownload onClick={props.downloadCsv} disabled={props.isSaving} id="dtpanel-lists-download-csv" />
+          <FileDownload onClick={props.downloadCsv} disabled={props.isSaving || !props.userHasUpdatePermission} id="dtpanel-lists-download-csv" />
           <FileUpload
             onFileSelect={props.uploadCsv}
             acceptedFileType=".csv"
-            disabled={props.isSaving}
+            disabled={props.isSaving || !props.userHasUpdatePermission}
             id="dtpanel-lists-upload-csv"
           />
         </React.Fragment>

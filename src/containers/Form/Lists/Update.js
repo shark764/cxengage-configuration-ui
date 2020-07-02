@@ -7,7 +7,12 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import ListsForm from './layout';
 import { updateFormValidation as formValidation } from './validation';
-import { getSelectedEntityId, isInherited, isUpdating } from '../../../redux/modules/entities/selectors';
+import {
+    getSelectedEntityId,
+    isInherited,
+    isUpdating,
+    userHasUpdatePermission
+} from '../../../redux/modules/entities/selectors';
 import { getListTypeName, getInitialUpdateFormValues } from '../../../redux/modules/entities/lists/selectors';
 import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
@@ -27,7 +32,8 @@ export function mapStateToProps(state) {
     listType: getListTypeName(state),
     isSaving: isUpdating(state),
     inherited: isInherited(state),
-    key: getSelectedEntityId(state)
+    key: getSelectedEntityId(state),
+    userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }
 

@@ -53,5 +53,6 @@ Object {
   "isSaving": false,
   "key": "create",
   "roles": "mock roles options",
+  "userHasUpdatePermission": undefined,
 }
 `;
