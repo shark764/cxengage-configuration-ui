@@ -128,36 +128,57 @@ const eventType = [
   }
 ];
 
+const stringSortingMethod = (a, b) => a.localeCompare(b, undefined, { sensitivity: 'base', numeric: true });
+
 const versionsEntitiyTableHeaders = [
   {
     type: 'string',
     name: 'version',
     label: 'Version',
-    required: true
+    required: true,
+    customSortMethod: stringSortingMethod
   },
   {
     type: 'string',
     name: 'name',
     label: 'Name',
-    required: true
+    required: true,
+    customSortMethod: stringSortingMethod
   },
   {
     type: 'string',
     name: 'timezone',
     label: 'Timezone',
-    required: true
+    required: true,
+    customSortMethod: (a, b) => {
+      if (a && b) {
+        return stringSortingMethod(a, b);
+      } else if (!a && b) {
+        return -1;
+      } else if (a && !b) {
+        return 1;
+      }
+    }
   },
   {
     type: 'string',
     name: 'createdBy',
     label: 'Created By',
-    required: true
+    required: true,
+    customSortMethod: stringSortingMethod
   },
   {
-    type: 'string',
+    format: 'datetime',
     name: 'createdOn',
     label: 'Created On',
-    required: true
+    required: true,
+    customSortMethod: (a, b) => {
+      if (a > b) {
+        return 1;
+      } else {
+        return -1;
+      }
+    }
   }
 ];
 
@@ -307,7 +328,8 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               />
               <br />
               <VersionsColumn>
-                <label>Versioning ({this.props.versions && this.props.versions.length} Published)</label>
+                <label>{`Versioning (${this.props.versions && this.props.versions.length} Published, ${this.props
+                  .drafts && this.props.drafts.length} Drafts)`}</label>
                 <DetailHeader
                   userHasUpdatePermission={!this.props.inherited && this.props.userHasUpdatePermission}
                   text={detailHeaderText(this.props.versions || [], 'Published')}
@@ -318,7 +340,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 <SidePanelTable
                   items={[...(this.props.versions || []), ...(this.props.drafts || [])]}
                   fields={versionsEntitiyTableHeaders}
-                  defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
+                  defaultSorted={[{ id: 'version', desc: true }]}
                   userHasUpdatePermission={this.props.userHasUpdatePermission}
                   userHasViewPermission={this.props.userHasViewPermission}
                   shouldShowViewButtonOnItem={

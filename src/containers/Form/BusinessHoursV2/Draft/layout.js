@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { InputField, SelectField, Detail } from 'cx-ui-components';
-
-import { dateToString } from '../../../../utils/dateUtils';
 
 export default function BusinessHoursV2DraftForm({
   handleSubmit,
@@ -23,8 +22,8 @@ export default function BusinessHoursV2DraftForm({
         data-automation="BusinessHoursV2DraftFormFieldName"
         disabled={isSaving || inherited || !userHasUpdatePermission || isPublishing}
       />
-      <Detail label="Created" value={dateToString(initialValues.get('created'))} />
-      <Detail label="Updated" value={dateToString(initialValues.get('updated'))} />
+      <Detail label="Created" value={moment(initialValues.get('created')).format('MMM M, YYYY hh:mm:ss A')} />
+      <Detail label="Updated" value={moment(initialValues.get('updated')).format('MMM M, YYYY hh:mm:ss A')} />
       <InputField
         name="description"
         label="Description"

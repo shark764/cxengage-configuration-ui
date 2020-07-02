@@ -103,7 +103,8 @@ describe('selectBusinessHoursEntityVersions', () => {
               name: 'rule-01',
               id: '01'
             }
-          ]
+          ],
+          createdOn: '2020-02-02T12:54:59.218Z'
         }
       ]
     });
@@ -217,7 +218,14 @@ describe('selectDrafts', () => {
       name: 'draft-name',
       shared: false,
       active: true,
-      items: [{ name: 'name-1', id: 'id-1', rules: [{ name: 'draft-rule-01', id: '01' }] }]
+      items: [
+        {
+          name: 'name-1',
+          id: 'id-1',
+          rules: [{ name: 'draft-rule-01', id: '01' }],
+          createdOn: '2020-02-02T12:54:59.218Z'
+        }
+      ]
     });
     expect(selectDrafts(initialState)).toMatchSnapshot();
   });

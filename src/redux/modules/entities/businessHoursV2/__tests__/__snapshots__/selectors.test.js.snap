@@ -20,7 +20,7 @@ exports[`selectBusinessHoursEntityVersions Return an array if the businessHour h
 Array [
   Object {
     "createdBy": undefined,
-    "createdOn": "Invalid Date",
+    "createdOn": undefined,
     "description": undefined,
     "id": "id-1",
     "label": "v1 - name-1",
@@ -118,7 +118,7 @@ exports[`selectDrafts Return an array of the selected businessHour active versio
 Array [
   Object {
     "createdBy": undefined,
-    "createdOn": "Invalid Date",
+    "createdOn": undefined,
     "description": undefined,
     "id": "id-1",
     "name": "name-1",

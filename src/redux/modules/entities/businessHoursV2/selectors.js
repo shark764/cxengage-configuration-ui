@@ -2,7 +2,6 @@ import { createSelector } from 'reselect';
 import { Map, List } from 'immutable';
 import { isInvalid, formValueSelector, isDirty } from 'redux-form/immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
-import { dateToString } from '../../../../utils/dateUtils';
 
 import { selectFormInitialValues } from '../../form/selectors';
 import { getSelectedEntity, getSelectedSubEntity } from '../selectors';
@@ -55,7 +54,7 @@ export const selectBusinessHoursEntityVersions = createSelector(
         name: version.get('name'),
         description: version.get('description'),
         createdBy: version.get('createdByName'),
-        createdOn: dateToString(version.get('created')),
+        createdOn: version.get('created'),
         value: version.get('id'),
         label: `v${selectedEntity.get('versions').size - index} - ${version.get('name')}`,
         timezone: version.get('timezone'),
@@ -209,7 +208,7 @@ export const selectDrafts = createSelector(
         version: 'Draft',
         name: draft.get('name'),
         createdBy: draft.get('createdByName'),
-        createdOn: dateToString(draft.get('created')),
+        createdOn: draft.get('created'),
         timezone: draft.get('timezone'),
         rules: draft.get('rules') && draft.get('rules').toJS(),
         description: draft.get('description')
