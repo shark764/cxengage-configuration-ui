@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FieldArray } from 'redux-form/immutable';
 import { BusinessHoursRuleField } from 'cx-ui-components';
+import { generateUUID } from 'serenova-js-utils/uuid';
 
 const BusinessRuleContainer = styled.div`
   display: flex;
@@ -10,29 +11,26 @@ const BusinessRuleContainer = styled.div`
   margin-left: 40px;
 `;
 
-const RulesFieldArray = ({ fields, saveRule, disabled, canSaveRule, viewOnly }) => (
+const RulesFieldArray = ({ fields, addRule, disabled, viewOnly }) => (
   <BusinessRuleContainer>
     {fields.map((ruleName, index, fields) => (
       <Fragment key={index}>
         <BusinessHoursRuleField
           key={index}
           name={ruleName}
-          onSave={saveRule}
-          saveException={canSaveRule}
+          onSave={rule => addRule('rules', index, 1, { ...rule, id: generateUUID() })}
           disabled={disabled}
           viewOnly={viewOnly}
           cancel={() => fields.remove(index)}
           showActions={!fields.get(index).id.includes('new-rule') && !fields.get(index).id.includes('exception-copy')}
-          actions={{
-            Delete: () => fields.remove(index),
-            Copy: () => {
-              const copiedField = fields.get(index);
-              fields.push({
-                ...copiedField,
-                name: `${copiedField.name}(Copy)`,
-                id: `exception-copy-${Math.floor(Math.random() * 9999) + 1000}`
-              });
-            }
+          deleteAction={() => fields.remove(index)}
+          copyAction={() => {
+            const copiedField = fields.get(index);
+            fields.push({
+              ...copiedField,
+              name: `${copiedField.name}(Copy)`,
+              id: `exception-copy-${Math.floor(Math.random() * 9999) + 1000}`
+            });
           }}
         />
         <br />
@@ -41,15 +39,14 @@ const RulesFieldArray = ({ fields, saveRule, disabled, canSaveRule, viewOnly }) 
   </BusinessRuleContainer>
 );
 
-export default function RulesForm({ handleSubmit, disabled, viewOnly, submit, valid, dirty }) {
+export default function RulesForm({ disabled, viewOnly, array }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <FieldArray
         name="rules"
         component={RulesFieldArray}
         props={{
-          saveRule: submit,
-          canSaveRule: valid && dirty,
+          addRule: array.splice,
           disabled: disabled,
           viewOnly
         }}
@@ -60,19 +57,13 @@ export default function RulesForm({ handleSubmit, disabled, viewOnly, submit, va
 
 RulesFieldArray.propTypes = {
   fields: PropTypes.object.isRequired,
-  saveRule: PropTypes.func,
-  canSaveRule: PropTypes.bool,
+  addRule: PropTypes.func,
   disabled: PropTypes.bool,
   viewOnly: PropTypes.bool
 };
 
 RulesForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  isSaving: PropTypes.bool,
-  submit: PropTypes.func.isRequired,
-  valid: PropTypes.bool.isRequired,
-  dirty: PropTypes.bool.isRequired,
-  draftFormCanSave: PropTypes.bool.isRequired,
+  array: PropTypes.object.isRequired,
   disabled: PropTypes.bool,
   viewOnly: PropTypes.bool
 };

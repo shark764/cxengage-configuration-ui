@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+### [0.79.9] - 2020-07-03
+### Fixed
+- CXV1-22700 - Draft shouldn't save when clicking on "Add Rule" button on a rule
+
 ### [0.79.8] - 2020-06-25
 ### Fixed
 - CXV1-22704 - Issues regarding Versions/Draft table for Business Hours V2

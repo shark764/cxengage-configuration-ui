@@ -456,18 +456,33 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                 }`
               })}
               validate={values => ({
-                version: isEmpty(values.get('version')) && "Business Hours can't be empty",
+                version:
+                  (isEmpty(values.get('version')) && "Business Hours can't be empty") ||
+                  (!this.props.businessHoursList.find(bh => bh.name === values.get('version').trim()) &&
+                    'You should select a business hours from the list'),
                 draftName:
                   (isEmpty(values.get('draftName')) && "Draft Name can't be empty") ||
-                  (this.props.drafts.some(
-                    draft =>
-                      draft.name.toLowerCase() ===
-                      values
-                        .get('draftName')
-                        .trim()
-                        .toLowerCase()
-                  ) &&
-                    'Draft name should be unique')
+                  (values.get('version') &&
+                    this.props.businessHoursList.find(bh => bh.name === values.get('version').trim()) &&
+                    ((this.props.businessHoursList.find(bh => bh.name === values.get('version').trim()).versions &&
+                      this.props.businessHoursList.find(bh => bh.name === values.get('version').trim()).versions.find(
+                        ({ name }) =>
+                          name.toLowerCase() ===
+                          values
+                            .get('draftName')
+                            .trim()
+                            .toLowerCase()
+                      )) ||
+                      (this.props.businessHoursList.find(bh => bh.name === values.get('version').trim()).items &&
+                        this.props.businessHoursList.find(bh => bh.name === values.get('version').trim()).items.find(
+                          ({ name }) =>
+                            name.toLowerCase() ===
+                            values
+                              .get('draftName')
+                              .trim()
+                              .toLowerCase()
+                        ))) &&
+                    'Draft name should be unique for given business hour')
               })}
               isSaving={this.props.isCreatingDraft}
               onCancel={this.toggleCopyModal}

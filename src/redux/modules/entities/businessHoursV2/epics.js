@@ -152,24 +152,29 @@ export const fetchActiveVersion = ($action, store) =>
 
 export const fetchVersionsAndDrafts = (action$, store) =>
   action$
-    .ofType('SET_SELECTED_ENTITY_ID')
-    .map(a => {
-      return {
-        entityId: a.entityId,
-        entityName: getCurrentEntity(store.getState()),
-        businessHours: getAllEntities(store.getState())
-      };
-    })
+    .ofType('SET_SELECTED_ENTITY_ID', 'CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      businessHours: getAllEntities(store.getState())
+    }))
     .filter(
-      ({ entityId, entityName, businessHours }) =>
-        entityName === 'businessHoursV2' && businessHours && entityId && entityId !== '' && entityId !== 'create'
+      ({ entityId, entityName, businessHours, businessHourId, selectedEntityId, type }) =>
+        (type === 'SET_SELECTED_ENTITY_ID' &&
+          entityName === 'businessHoursV2' &&
+          businessHours &&
+          entityId &&
+          entityId !== '' &&
+          entityId !== 'create') ||
+        (type === 'CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED' && businessHourId !== selectedEntityId && selectedEntityId)
     )
-    .mergeMap(({ entityId }) => {
+    .mergeMap(({ entityId, businessHourId }) => {
       const apis = ['versions', 'drafts'];
+      const id = entityId || businessHourId;
       return forkJoin(
         apis.map(api => {
           const sdkCall = {
-            path: ['business-hours', entityId, api],
+            path: ['business-hours', id, api],
             apiVersion: 'v2',
             command: `getBusinessHourV2${capitalizeFirstLetter(api)}`,
             module: 'entities',
@@ -202,9 +207,7 @@ export const fetchVersionsAndDrafts = (action$, store) =>
             },
             ...(!responses[0].result ? [responses[0]] : []),
             ...(!responses[1].result ? [responses[1]] : []),
-            ...(selectedBusinessHour && selectedBusinessHour.get('activeVersion')
-              ? [setSelectedBusinessHourVersion(selectedBusinessHour.get('activeVersion'))]
-              : [])
+            ...(selectedBusinessHour ? [setSelectedBusinessHourVersion(selectedBusinessHour.get('activeVersion'))] : [])
           ];
     });
 

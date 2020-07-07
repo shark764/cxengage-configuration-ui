@@ -1456,7 +1456,7 @@ export default function reducer(state = initialState, action) {
     case 'PUBLISH_BUSINESS_HOURS_V2_DRAFT_REJECTED':
       return state.setIn(['businessHoursV2', 'isPublishingDraft'], false);
     case 'SET_SELECTED_BUSINESS_HOUR_VERSION': {
-      return state.setIn(['businessHoursV2', 'selectedVersion'], fromJS(action.selectedVersionId));
+      return state.setIn(['businessHoursV2', 'selectedVersion'], action.selectedVersionId);
     }
     case 'PUBLISH_BUSINESS_HOURS_V2_DRAFT':
     case 'SAVE_BEFORE_PUBLISH_BUSINESS_HOURS_V2_DRAFT': {
