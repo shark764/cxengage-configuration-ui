@@ -217,8 +217,14 @@ export const getSelectedEntityFormId = createSelector(
 export const getAllForms = state => state.get('form');
 
 export const getSelectedSubEntityFormsIds = createSelector(
-  [getAllForms, getSelectedEntityFormId],
-  (allForms, selectedEntityFormId) => allForms && [...allForms.keys()].filter(key => key !== selectedEntityFormId)
+  [getAllForms, getSelectedEntityFormId, getCurrentEntity, getSelectedSubEntityId],
+  (allForms, selectedEntityFormId, getCurrentEntity, getSelectedSubEntityId) =>
+    allForms &&
+    [...allForms.keys()].filter(
+      key =>
+        (key !== selectedEntityFormId && key !== 'businessHoursV2:rules') ||
+        (getCurrentEntity === 'businessHoursV2' && key === 'businessHoursV2:rules' && getSelectedSubEntityId)
+    )
 );
 
 export const availableEntitiesForList = state => {

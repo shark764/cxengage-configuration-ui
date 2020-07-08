@@ -2,7 +2,7 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
@@ -342,6 +342,27 @@ const createFormRoutes = [
     )
   }
   //hygen-inject-before1
+];
+
+const fullPageCreateRoutes = [
+  {
+    path: '/configuration/businessHoursV2',
+    component: () => <BusinessHoursV2CreateForm />
+  }
+];
+
+const fullPageUpdateSubEntityRoutes = [
+  {
+    path: '/configuration/businessHoursV2',
+    component: () => <BusinessHoursV2DraftForm />
+  }
+];
+
+const fullPageDetailsRoutes = [
+  {
+    path: '/configuration/businessHoursV2',
+    component: () => <BusinessHoursV2UpdateForm />
+  }
 ];
 
 const detailsPanelRoutes = [
@@ -884,62 +905,85 @@ export default class CrudEndpointUiLayout extends Component {
   }
 
   render() {
-    if (this.props.match.params.entityName === 'businessHoursV2' && this.props.selectedEntityId) {
-      if (this.props.selectedEntityId === 'create') {
-        return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2CreateForm />} />;
-      } else if (this.props.selectedEntityId !== 'create' && this.props.selectedSubEntityId) {
-        return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2DraftForm />} />;
-      } else {
-        return <Route path="/configuration/businessHoursV2" component={() => <BusinessHoursV2UpdateForm />} />;
-      }
-    } else {
-      return (
-        <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''} slidingWidth={this.props.slidingWidth}>
-          <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
-            <InlineCheckboxFilterMenu
-              type="secondary"
-              menuType="Columns"
-              tableType={this.props.tableType}
-              currentVisibleSubMenu={this.props.currentVisibleSubMenu}
-              selectionType="checkbox"
-              data-automation="entityTableColumnSelectionBtn"
-            >
-              Columns
-            </InlineCheckboxFilterMenu>
-          </Table>
-          {this.props.selectedEntityId && (
-            <SidePanel>
-              {this.props.selectedEntityId === 'create' &&
-                createFormRoutes.map((route, index) => (
+    const fullPagePanels = ['businessHoursV2'];
+    return !fullPagePanels.includes(this.props.match.params.entityName) ? (
+      <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''} slidingWidth={this.props.slidingWidth}>
+        <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
+          <InlineCheckboxFilterMenu
+            type="secondary"
+            menuType="Columns"
+            tableType={this.props.tableType}
+            currentVisibleSubMenu={this.props.currentVisibleSubMenu}
+            selectionType="checkbox"
+            data-automation="entityTableColumnSelectionBtn"
+          >
+            Columns
+          </InlineCheckboxFilterMenu>
+        </Table>
+        {this.props.selectedEntityId && (
+          <SidePanel>
+            {this.props.selectedEntityId === 'create' &&
+              createFormRoutes.map((route, index) => (
+                <Route key={index} path={route.path} component={route.component} />
+              ))}
+            {this.props.selectedEntityId === 'bulk' &&
+              bulkChangeFormRoutes.map((route, index) => (
+                <Route key={index} path={route.path} component={route.component} />
+              ))}
+            {this.props.selectedEntityId !== 'create' &&
+              this.props.selectedEntityId !== 'bulk' &&
+              detailsPanelRoutes.map((route, index) => (
+                <Route key={index} path={route.path} component={route.component} />
+              ))}
+          </SidePanel>
+        )}
+        {this.props.selectedSubEntityId && (
+          <Modal selectedSubEntityId={this.props.selectedSubEntityId} onMaskClick={this.props.setSelectedSubEntityId}>
+            {this.props.selectedSubEntityId === 'create'
+              ? createSubEntityFormRoutes.map((route, index) => (
+                  <Route key={index} path={route.path} component={route.component} />
+                ))
+              : updateSubEntityFormRoutes.map((route, index) => (
                   <Route key={index} path={route.path} component={route.component} />
                 ))}
-              {this.props.selectedEntityId === 'bulk' &&
-                bulkChangeFormRoutes.map((route, index) => (
-                  <Route key={index} path={route.path} component={route.component} />
-                ))}
-              {this.props.selectedEntityId !== 'create' &&
-                this.props.selectedEntityId !== 'bulk' &&
-                detailsPanelRoutes.map((route, index) => (
-                  <Route key={index} path={route.path} component={route.component} />
-                ))}
-            </SidePanel>
-          )}
-          {this.props.selectedSubEntityId && (
-            <Modal selectedSubEntityId={this.props.selectedSubEntityId} onMaskClick={this.props.setSelectedSubEntityId}>
-              {this.props.selectedSubEntityId === 'create'
-                ? createSubEntityFormRoutes.map((route, index) => (
-                    <Route key={index} path={route.path} component={route.component} />
-                  ))
-                : updateSubEntityFormRoutes.map((route, index) => (
-                    <Route key={index} path={route.path} component={route.component} />
-                  ))}
-            </Modal>
-          )}
+          </Modal>
+        )}
 
-          {this.props.showConfirmationDialog && <Confirmation />}
-        </Wrapper>
-      );
-    }
+        {this.props.showConfirmationDialog && <Confirmation />}
+      </Wrapper>
+    ) : (
+      <Fragment>
+        {!this.props.selectedEntityId && (
+            <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
+              <InlineCheckboxFilterMenu
+                type="secondary"
+                menuType="Columns"
+                tableType={this.props.tableType}
+                currentVisibleSubMenu={this.props.currentVisibleSubMenu}
+                selectionType="checkbox"
+                data-automation="entityTableColumnSelectionBtn"
+              >
+                Columns
+              </InlineCheckboxFilterMenu>
+            </Table>
+          )}
+        {this.props.selectedEntityId &&
+          !this.props.selectedSubEntityId &&
+          (this.props.selectedEntityId === 'create'
+            ? fullPageCreateRoutes.map((route, index) => (
+                <Route key={index.toString()} path={route.path} component={route.component} />
+              ))
+            : fullPageDetailsRoutes.map((route, index) => (
+                <Route key={index.toString()} path={route.path} component={route.component} />
+              )))}
+        {this.props.selectedEntityId &&
+          this.props.selectedSubEntityId &&
+          fullPageUpdateSubEntityRoutes.map((route, index) => (
+            <Route key={index.toString()} path={route.path} component={route.component} />
+          ))}
+        {this.props.showConfirmationDialog && <Confirmation />}
+      </Fragment>
+    );
   }
 }
 

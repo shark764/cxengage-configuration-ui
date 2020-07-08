@@ -14,7 +14,6 @@ import {
 } from 'cx-ui-components';
 import CalendarEvents from '../../../../components/BusinessHoursCalendar';
 import { isEmpty } from 'serenova-js-utils/strings';
-import moment from 'moment';
 
 import DetailWrapper from '../../../../components/DetailWrapper';
 import SidePanelHeaderContainer from '../SidePanelHeader';
@@ -136,17 +135,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPublishModalOpen: false,
-      calendarDateRange: {
-        start: moment()
-          .startOf('month')
-          .startOf('week')
-          .toString(),
-        end: moment()
-          .endOf('month')
-          .endOf('week')
-          .toString()
-      }
+      isPublishModalOpen: false
     };
   }
 
@@ -221,7 +210,9 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
           </DraftFormWrapper>
           <CalendarWrapper>
             <CalendarEvents
-              rules={this.props.rules ? this.props.rules.filter(rule => !ruleValidation(rule, this.props.rules)).toJS() : []}
+              rules={
+                this.props.rules ? this.props.rules.filter(rule => !ruleValidation(rule, this.props.rules)).toJS() : []
+              }
               eventType={eventType}
             />
           </CalendarWrapper>

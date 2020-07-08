@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.79.11] - 2020-07-07
+### Fixed
+- CXV1-22708 -	navigating form and to the new BH page
+
 ### [0.79.10] - 2020-07-03
 ### Fixed
 - CXV1-22700 - copy button is missing in editing a draft (components version bump)

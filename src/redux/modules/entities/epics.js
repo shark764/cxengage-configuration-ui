@@ -41,7 +41,8 @@ import {
   findEntity,
   isItemInherited,
   getEntityItemDisplay,
-  getNextEntity
+  getNextEntity,
+  getSelectedSubEntity
 } from './selectors';
 
 import { entitiesMetaData } from './metaData';
@@ -949,6 +950,14 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
             modalType: undefined,
             metaData: undefined
           },
+          ...(getCurrentEntity(store.getState()) === 'businessHoursV2' && getSelectedSubEntity(store.getState())
+            ? [
+                {
+                  type: 'SET_SELECTED_SUB_ENTITY_ID',
+                  subEntityId: ''
+                }
+              ]
+            : []),
           {
             type: 'SET_SELECTED_ENTITY_ID',
             entityId: ''
