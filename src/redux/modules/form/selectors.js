@@ -2,7 +2,7 @@
  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
  */
 import { Map } from 'immutable';
-import { isPristine, isDirty, isInvalid } from 'redux-form/immutable';
+import { isPristine, isDirty, isInvalid, formValueSelector } from 'redux-form/immutable';
 
 import {
   getCurrentEntity,
@@ -88,3 +88,6 @@ export const getCurrentFormValues = createSelector(
   getCurrentForm,
   currentForm => (currentForm ? currentForm.get('values') : Map({}))
 );
+
+// Putting this one in here so it can be mocked on Business Hours V2 epics tests
+export const getFormValues = (state, formName, ...formFields) => formValueSelector(formName)(state, ...formFields);

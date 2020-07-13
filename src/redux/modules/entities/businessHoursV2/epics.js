@@ -8,11 +8,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/debounceTime';
 import { of } from 'rxjs/observable/of';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { submit, change } from 'redux-form';
-import { formValueSelector } from 'redux-form/immutable';
 import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
 import { entitiesMetaData } from '../metaData';
@@ -28,6 +28,7 @@ import {
   getSelectedSubEntity,
   getSelectedEntityStatus
 } from '../selectors';
+import { getFormValues } from '../../form/selectors';
 import { getAllEntities } from '../../../../containers/EntityTable/selectors';
 
 import {
@@ -35,9 +36,6 @@ import {
   createDraftBusinessHoursV2,
   setSelectedBusinessHourVersion
 } from '../index';
-
-const draftFormSelector = formValueSelector('draft:edit');
-const ruleFormSelector = formValueSelector('businessHoursV2:rules');
 
 export const createBusinessHour = $action =>
   $action
@@ -207,7 +205,9 @@ export const fetchVersionsAndDrafts = (action$, store) =>
             },
             ...(!responses[0].result ? [responses[0]] : []),
             ...(!responses[1].result ? [responses[1]] : []),
-            ...(selectedBusinessHour ? [setSelectedBusinessHourVersion(selectedBusinessHour.get('activeVersion'))] : [])
+            ...(selectedBusinessHour && selectedBusinessHour.get('activeVersion') && responses[0].result
+              ? [setSelectedBusinessHourVersion(selectedBusinessHour.get('activeVersion'))]
+              : [])
           ];
     });
 
@@ -223,9 +223,11 @@ export const UpdateDraft = (action$, store) =>
       values: {
         ...action.values,
         ...(action.values.rules
-          ? draftFormSelector(store.getState(), 'name', 'description', 'timezone')
+          ? getFormValues(store.getState(), 'draft:edit', 'name', 'description', 'timezone')
           : {
-              rules: ruleFormSelector(store.getState(), 'rules') && ruleFormSelector(store.getState(), 'rules').toJS()
+              rules:
+                getFormValues(store.getState(), 'businessHoursV2:rules', 'rules') &&
+                getFormValues(store.getState(), 'businessHoursV2:rules', 'rules').toJS()
             })
       }
     }))
@@ -465,7 +467,7 @@ export const updateBusinessHourV2 = action$ =>
           ...(description !== undefined ? { description: description || '' } : {}),
           ...(shared !== undefined ? { shared } : {}),
           ...(active !== undefined ? { active } : {}),
-          ...(activeVersion !== 'undefined' ? { activeVersion } : {})
+          ...(activeVersion !== undefined ? { activeVersion } : {})
         },
         apiVersion: 'v2',
         command: 'updateBusinessHourV2',

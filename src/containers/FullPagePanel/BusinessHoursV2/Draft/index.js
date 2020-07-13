@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { submit, arrayPush } from 'redux-form';
-import { formValueSelector } from 'redux-form/immutable';
 
 import EditDraft from './layout';
 
+import { getFormValues } from '../../../../redux/modules/form/selectors';
 import {
   setSelectedSubEntityId,
   publishBusinessHoursV2Draft,
@@ -18,19 +18,16 @@ import {
   isPublishingDraft
 } from '../../../../redux/modules/entities/businessHoursV2/selectors';
 
-const draftFormSelector = formValueSelector('draft:edit');
-const ruleFormSelector = formValueSelector('businessHoursV2:rules');
-
 export function mapStateToProps(state) {
   return {
     formsAreInvalid: draftFormsAreInvalid(state),
     formsAreDirty: draftFormsAreDirty(state),
     shouldPublish: shouldPublishDraft(state),
     isSubEntitySaving: isSubEntitySaving(state),
-    draftName: draftFormSelector(state, 'name'),
+    draftName: getFormValues(state, 'draft:edit', 'name'),
     versions: selectBusinessHoursEntityVersions(state),
     isPublishingDraft: isPublishingDraft(state),
-    rules: ruleFormSelector(state, 'rules'),
+    rules: getFormValues(state, 'businessHoursV2:rules', 'rules'),
     userHasUpdatePermission: userHasUpdatePermission(state)
   };
 }

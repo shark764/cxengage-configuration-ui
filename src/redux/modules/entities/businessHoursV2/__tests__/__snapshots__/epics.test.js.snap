@@ -1,5 +1,496 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FetchActualTenantInfo when create a new draft, it emits an action to fetch tenants info 1`] = `
+Object {
+  "entityName": "tenants",
+  "type": "FETCH_DATA",
+}
+`;
+
+exports[`FetchActualTenantInfo when selecting a draft, it emits an action to fetch tenants info 1`] = `
+Object {
+  "entityName": "tenants",
+  "type": "FETCH_DATA",
+}
+`;
+
+exports[`PublishDraft An draft is being published  a new version is created emiting PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED and it will be set as the active version of the business hour it belongs to, emitting UPDATE_ENTITY with the needed values too 1`] = `
+Object {
+  "entityId": "business-hour-id",
+  "response": Object {
+    "result": Object {
+      "id": "version-id",
+    },
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "createBusinessHoursV2Version",
+    "crudAction": "create",
+    "data": Object {
+      "name": "Initial draft",
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hour-id",
+      "versions",
+    ],
+    "topic": "cxengage/entities/create-business-hours-v2-version",
+  },
+  "type": "PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED",
+  "values": Immutable.Map {
+    "versionName": "Initial draft",
+    "makeActive": true,
+  },
+}
+`;
+
+exports[`PublishDraft An draft is being published  a new version is created emiting PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED and it will be set as the active version of the business hour it belongs to, emitting UPDATE_ENTITY with the needed values too 2`] = `
+Object {
+  "entityId": "business-hour-id",
+  "entityName": "businessHoursV2",
+  "type": "UPDATE_ENTITY",
+  "values": Object {
+    "activeVersion": "version-id",
+  },
+}
+`;
+
+exports[`PublishDraft An draft is being published  a new version is created emiting PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED and it will be set as the active version of the business hour it belongs to, emitting UPDATE_ENTITY with the needed values too 3`] = `
+Object {
+  "listItemId": "draft-id",
+  "type": "REMOVE_LIST_ITEM",
+}
+`;
+
+exports[`PublishDraft An draft is being published  a new version is created emiting PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED but it won't be set as the activeVersion of the business hour it belongs to 1`] = `
+Object {
+  "entityId": "business-hour-id",
+  "response": Object {
+    "result": Object {
+      "id": "version-id",
+    },
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "createBusinessHoursV2Version",
+    "crudAction": "create",
+    "data": Object {
+      "name": "Initial draft",
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hour-id",
+      "versions",
+    ],
+    "topic": "cxengage/entities/create-business-hours-v2-version",
+  },
+  "type": "PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED",
+  "values": Immutable.Map {
+    "versionName": "Initial draft",
+  },
+}
+`;
+
+exports[`PublishDraft An draft is being published  a new version is created emiting PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED but it won't be set as the activeVersion of the business hour it belongs to 2`] = `
+Object {
+  "listItemId": "draft-id",
+  "type": "REMOVE_LIST_ITEM",
+}
+`;
+
+exports[`PublishDraft An initial draft is being published a new version is created emiting PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED and the business hour the draft belongs to is updated, setting the new version as its active version and activating it by emitting UPDATE_ENTITY with the needed values 1`] = `
+Object {
+  "entityId": "business-hour-id",
+  "response": Object {
+    "result": Object {
+      "id": "version-id",
+    },
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "createBusinessHoursV2Version",
+    "crudAction": "create",
+    "data": Object {
+      "name": "Initial draft",
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hour-id",
+      "versions",
+    ],
+    "topic": "cxengage/entities/create-business-hours-v2-version",
+  },
+  "type": "PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED",
+  "values": Immutable.Map {
+    "versionName": "Initial draft",
+    "makeActive": true,
+    "isInitialDraft": true,
+  },
+}
+`;
+
+exports[`PublishDraft An initial draft is being published a new version is created emiting PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED and the business hour the draft belongs to is updated, setting the new version as its active version and activating it by emitting UPDATE_ENTITY with the needed values 2`] = `
+Object {
+  "entityId": "business-hour-id",
+  "entityName": "businessHoursV2",
+  "type": "UPDATE_ENTITY",
+  "values": Object {
+    "active": true,
+    "activeVersion": "version-id",
+  },
+}
+`;
+
+exports[`PublishDraft An initial draft is being published a new version is created emiting PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED and the business hour the draft belongs to is updated, setting the new version as its active version and activating it by emitting UPDATE_ENTITY with the needed values 3`] = `
+Object {
+  "listItemId": "draft-id",
+  "type": "REMOVE_LIST_ITEM",
+}
+`;
+
+exports[`RemoveBusinessHoursDraft when succesfully removing a dratf it emits REMOVE_LIST_ITEM_FULFILLED 1`] = `
+Object {
+  "entityName": "businessHoursV2",
+  "listId": "business-hours-id",
+  "listItemId": "draft-id",
+  "response": "mocked-response",
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "removeBusinessHoursV2Draft",
+    "crudAction": "delete",
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hours-id",
+      "drafts",
+      "draft-id",
+    ],
+    "topic": "cxengage/entities/remove-business-hours-v2-drafts-response",
+  },
+  "selectedEntityId": "business-hours-id",
+  "type": "REMOVE_LIST_ITEM_FULFILLED",
+}
+`;
+
+exports[`SaveDraftBeforePublish emits the draft form submission action, but the update fails so PUBLISH_BUSINESS_HOURS_V2_DRAFT_REJECTED it's emitted 1`] = `
+Object {
+  "meta": Object {
+    "form": "draft:edit",
+  },
+  "type": "@@redux-form/SUBMIT",
+}
+`;
+
+exports[`SaveDraftBeforePublish emits the draft form submission action, waits for the draft to be updated and then emits PUBLISH_BUSINESS_HOURS_V2_DRAFT 1`] = `
+Object {
+  "meta": Object {
+    "form": "draft:edit",
+  },
+  "type": "@@redux-form/SUBMIT",
+}
+`;
+
+exports[`SaveDraftBeforePublish emits the draft form submission action, waits for the draft to be updated and then emits PUBLISH_BUSINESS_HOURS_V2_DRAFT 2`] = `
+Object {
+  "type": "PUBLISH_BUSINESS_HOURS_V2_DRAFT",
+  "values": Immutable.Map {
+    "draftName": "draftName",
+    "makeActive": false,
+    "isInitialDraft": false,
+  },
+}
+`;
+
+exports[`UpdateDraft Updates a draft only sending the draft form values updates the draft taking into account the rules form values and emits UPDATE_SUB_ENTITY_FULFILLED 1`] = `
+Object {
+  "entityId": "business-hour-v2-id",
+  "entityName": "businessHoursV2",
+  "response": Object {
+    "result": Object {
+      "itemValue": "updated-draft",
+    },
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "updateBusinessHoursV2Draft",
+    "crudAction": "update",
+    "data": Object {
+      "description": "a draft description",
+      "name": "draft name",
+      "rules": Array [
+        Object {
+          "description": "",
+          "endDate": "2020-01-30T00:00:01.000Z",
+          "hours": Object {
+            "allDay": false,
+            "intervals": Array [
+              Object {
+                "end": 1310,
+                "start": 300,
+              },
+              Object {
+                "end": 260,
+                "start": 0,
+              },
+            ],
+          },
+          "name": "Super long name test Super long name test Super long name test (should display ellipsis) Super long name test",
+          "on": Object {
+            "type": "day",
+            "value": 2,
+          },
+          "repeats": "monthly",
+          "startDate": "2020-01-16T00:00:01.000Z",
+          "type": "regular-hours",
+        },
+        Object {
+          "description": "",
+          "hours": Object {
+            "allDay": true,
+          },
+          "name": "rule 2",
+          "startDate": "2020-01-16T00:00:01.000Z",
+          "type": "one-time-extended-times",
+        },
+      ],
+      "timezone": "Americas/El_Salvador",
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hour-v2-id",
+      "drafts",
+      "draft-id",
+    ],
+    "topic": "cxengage/entities/update-business-hours-v2-draft",
+  },
+  "subEntityId": "draft-id",
+  "subEntityName": "drafts",
+  "type": "UPDATE_SUB_ENTITY_FULFILLED",
+  "values": Object {
+    "description": "a draft description",
+    "name": "draft name",
+    "rules": Array [
+      Object {
+        "endDate": 2020-01-30T00:00:01.000Z,
+        "hours": Object {
+          "allDay": false,
+          "intervals": Array [
+            Object {
+              "end": 1310,
+              "start": 300,
+            },
+            Object {
+              "end": 260,
+              "start": 0,
+            },
+          ],
+        },
+        "id": "123",
+        "name": "Super long name test Super long name test Super long name test (should display ellipsis) Super long name test",
+        "on": Object {
+          "type": "day",
+          "value": 2,
+        },
+        "repeats": "monthly",
+        "startDate": 2020-01-16T00:00:01.000Z,
+        "type": "regular-hours",
+      },
+      Object {
+        "hours": Object {
+          "allDay": true,
+        },
+        "id": "456",
+        "name": "rule 2",
+        "startDate": 2020-01-16T00:00:01.000Z,
+        "type": "one-time-extended-times",
+      },
+    ],
+    "timezone": "Americas/El_Salvador",
+  },
+}
+`;
+
+exports[`UpdateDraft Updates a draft only sending the rules form values as an empty array updates the draft taking into account the draft form values and sending the rules attribute as null and emits UPDATE_SUB_ENTITY_FULFILLED 1`] = `
+Object {
+  "entityId": "business-hour-v2-id",
+  "entityName": "businessHoursV2",
+  "response": Object {
+    "result": Object {
+      "itemValue": "updated-draft",
+    },
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "updateBusinessHoursV2Draft",
+    "crudAction": "update",
+    "data": Object {
+      "description": "a draft description",
+      "name": "draft name",
+      "rules": null,
+      "timezone": "Americas/El_Salvador",
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hour-v2-id",
+      "drafts",
+      "draft-id",
+    ],
+    "topic": "cxengage/entities/update-business-hours-v2-draft",
+  },
+  "subEntityId": "draft-id",
+  "subEntityName": "drafts",
+  "type": "UPDATE_SUB_ENTITY_FULFILLED",
+  "values": Object {
+    "description": "a draft description",
+    "name": "draft name",
+    "rules": Array [],
+    "timezone": "Americas/El_Salvador",
+  },
+}
+`;
+
+exports[`UpdateDraft Updates a draft only sending the rules form values updates the draft taking into account the draft form values and emits UPDATE_SUB_ENTITY_FULFILLED 1`] = `
+Object {
+  "entityId": "business-hour-v2-id",
+  "entityName": "businessHoursV2",
+  "response": Object {
+    "result": Object {
+      "itemValue": "updated-draft",
+    },
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "updateBusinessHoursV2Draft",
+    "crudAction": "update",
+    "data": Object {
+      "description": "a draft description",
+      "name": "draft name",
+      "rules": Array [
+        Object {
+          "description": "",
+          "endDate": "2020-01-30T00:00:01.000Z",
+          "hours": Object {
+            "allDay": false,
+            "intervals": Array [
+              Object {
+                "end": 1310,
+                "start": 300,
+              },
+              Object {
+                "end": 260,
+                "start": 0,
+              },
+            ],
+          },
+          "name": "Super long name test Super long name test Super long name test (should display ellipsis) Super long name test",
+          "on": Object {
+            "type": "day",
+            "value": 2,
+          },
+          "repeats": "monthly",
+          "startDate": "2020-01-16T00:00:01.000Z",
+          "type": "regular-hours",
+        },
+        Object {
+          "description": "",
+          "hours": Object {
+            "allDay": true,
+          },
+          "name": "rule 2",
+          "startDate": "2020-01-16T00:00:01.000Z",
+          "type": "one-time-extended-times",
+        },
+      ],
+      "timezone": "Americas/El_Salvador",
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hour-v2-id",
+      "drafts",
+      "draft-id",
+    ],
+    "topic": "cxengage/entities/update-business-hours-v2-draft",
+  },
+  "subEntityId": "draft-id",
+  "subEntityName": "drafts",
+  "type": "UPDATE_SUB_ENTITY_FULFILLED",
+  "values": Object {
+    "description": "a draft description",
+    "name": "draft name",
+    "rules": Array [
+      Object {
+        "endDate": 2020-01-30T00:00:01.000Z,
+        "hours": Object {
+          "allDay": false,
+          "intervals": Array [
+            Object {
+              "end": 1310,
+              "start": 300,
+            },
+            Object {
+              "end": 260,
+              "start": 0,
+            },
+          ],
+        },
+        "id": "123",
+        "name": "Super long name test Super long name test Super long name test (should display ellipsis) Super long name test",
+        "on": Object {
+          "type": "day",
+          "value": 2,
+        },
+        "repeats": "monthly",
+        "startDate": 2020-01-16T00:00:01.000Z,
+        "type": "regular-hours",
+      },
+      Object {
+        "hours": Object {
+          "allDay": true,
+        },
+        "id": "456",
+        "name": "rule 2",
+        "startDate": 2020-01-16T00:00:01.000Z,
+        "type": "one-time-extended-times",
+      },
+    ],
+    "timezone": "Americas/El_Salvador",
+  },
+}
+`;
+
+exports[`changeIntervalsHours When changing and end time interval to 12:00 AM it should emit a redux-form field change action for the rule so instead of setting 0 as minute on day for the end time interval, sets 1440 1`] = `
+Object {
+  "meta": Object {
+    "field": "rules[1]",
+    "form": "businessHoursV2:rules",
+    "persistentSubmitErrors": undefined,
+    "touch": undefined,
+  },
+  "payload": Object {
+    "hours": Object {
+      "allDay": false,
+      "intervals": Array [
+        Object {
+          "end": 960,
+          "start": 510,
+        },
+        Object {
+          "end": 1440,
+          "start": 620,
+        },
+      ],
+    },
+  },
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
 exports[`createBusinessHour The new entity being created is a businessHour's V2 one returns CREATE_ENTITY_FULFILLED and CREATE_DRAFT_BUSINESS_HOURS_V2 1`] = `
 Object {
   "entityName": "businessHoursV2",
@@ -22,7 +513,7 @@ Object {
 }
 `;
 
-exports[`createDraft The business hour draft is created and saved to the redux state returns CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED 1`] = `
+exports[`createDraft The business hour draft is created with all its values and saved to the redux state returns CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED 1`] = `
 Object {
   "businessHourId": "mock-id",
   "response": Object {
@@ -59,6 +550,47 @@ Object {
 }
 `;
 
+exports[`createDraft The business hour draft is created with missing values and saved to the redux state returns CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED 1`] = `
+Object {
+  "businessHourId": "mock-id",
+  "response": Object {
+    "result": Object {
+      "id": "version-id",
+    },
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "createBusinessHourV2Draft",
+    "crudAction": "create",
+    "data": Object {
+      "name": "mock-name",
+      "rules": Array [
+        Object {
+          "name": "a rule",
+        },
+      ],
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "mock-id",
+      "drafts",
+    ],
+    "topic": "cxengage/entities/create-business-hours-v2-draft",
+  },
+  "selectedEntityId": undefined,
+  "type": "CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED",
+  "values": Object {
+    "draftName": "mock-name",
+    "rules": Array [
+      Object {
+        "name": "a rule",
+      },
+    ],
+  },
+}
+`;
+
 exports[`fetchActiveVersion Fetches active version for all business hours that have one returns FETCH_ACTIVE_VERSION_BUSINESS_HOUR_FULFILLED 1`] = `
 Object {
   "activeVersions": Object {
@@ -73,16 +605,146 @@ Object {
 }
 `;
 
+exports[`fetchVersionsAndDrafts Fetches versions and drafts for selected business but both requests fail it returns FETCH_DRAFTS_BUSINESS_HOURS_REJECTED and FETCH_VERSIONS_BUSINESS_HOURS_REJECTED 1`] = `
+Object {
+  "entityName": "businessHoursV2",
+  "type": "FETCH_VERSIONS_BUSINESS_HOURS_REJECTED",
+}
+`;
+
+exports[`fetchVersionsAndDrafts Fetches versions and drafts for selected business but both requests fail it returns FETCH_DRAFTS_BUSINESS_HOURS_REJECTED and FETCH_VERSIONS_BUSINESS_HOURS_REJECTED 2`] = `
+Object {
+  "entityName": "businessHoursV2",
+  "type": "FETCH_DRAFTS_BUSINESS_HOURS_REJECTED",
+}
+`;
+
+exports[`fetchVersionsAndDrafts Fetches versions and drafts for selected business hours but only fetches versions correctly it returns SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS only with versions and FETCH_DRAFTS_BUSINESS_HOURS_REJECTED 1`] = `
+Object {
+  "drafts": Array [],
+  "type": "SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS",
+  "versions": "mock-value",
+}
+`;
+
+exports[`fetchVersionsAndDrafts Fetches versions and drafts for selected business hours but only fetches versions correctly it returns SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS only with versions and FETCH_DRAFTS_BUSINESS_HOURS_REJECTED 2`] = `
+Object {
+  "entityName": "businessHoursV2",
+  "type": "FETCH_DRAFTS_BUSINESS_HOURS_REJECTED",
+}
+`;
+
 exports[`fetchVersionsAndDrafts Fetches versions and drafts for selected business hours returns SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS 1`] = `
 Object {
-  "drafts": Object {
-    "businessHourId": "business-hour-1",
-    "id": "business-hour1-draft",
-  },
+  "drafts": "mock-value",
   "type": "SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS",
-  "versions": Object {
-    "businessHourId": "business-hour-1",
-    "id": "business-hour1-versions",
+  "versions": "mock-value",
+}
+`;
+
+exports[`fetchVersionsAndDrafts Fetches versions and drafts for selected business hours that also has an activeVersion it returns SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS and SET_SELECTED_BUSINESS_HOUR_VERSION 1`] = `
+Object {
+  "drafts": "mock-value",
+  "type": "SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS",
+  "versions": "mock-value",
+}
+`;
+
+exports[`fetchVersionsAndDrafts Fetches versions and drafts for selected business hours that also has an activeVersion it returns SET_BUSINESS_HOUR_VERSIONS_AND_DRAFTS and SET_SELECTED_BUSINESS_HOUR_VERSION 2`] = `
+Object {
+  "selectedVersionId": "business-hour-active-version",
+  "type": "SET_SELECTED_BUSINESS_HOUR_VERSION",
+}
+`;
+
+exports[`selectBusinessHourVersionWhenUpdated when a business hour it's updated and it has an active version, set that active version as the selected active version 1`] = `
+Object {
+  "selectedVersionId": "active-version-id",
+  "type": "SET_SELECTED_BUSINESS_HOUR_VERSION",
+}
+`;
+
+exports[`toggleBusinessHoursV2Entity When toggling a business hour that's active it's set to not active and emits TOGGLE_ENTITY_FULFILLED 1`] = `
+Object {
+  "entityName": "businessHoursV2",
+  "entityStatusActive": true,
+  "response": Object {
+    "result": "updated-draft",
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "crudAction": "update",
+    "data": Object {
+      "active": false,
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hours-v2-id",
+    ],
+    "topic": "cxengage/entities/update-business-hours-v2-active",
+  },
+  "selectedEntityId": "business-hours-v2-id",
+  "type": "TOGGLE_ENTITY_FULFILLED",
+}
+`;
+
+exports[`toggleBusinessHoursV2Entity When toggling a business hour that's not active it's set to active and emits TOGGLE_ENTITY_FULFILLED 1`] = `
+Object {
+  "entityName": "businessHoursV2",
+  "entityStatusActive": false,
+  "response": Object {
+    "result": "updated-draft",
+  },
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "crudAction": "update",
+    "data": Object {
+      "active": true,
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hours-v2-id",
+    ],
+    "topic": "cxengage/entities/update-business-hours-v2-active",
+  },
+  "selectedEntityId": "business-hours-v2-id",
+  "type": "TOGGLE_ENTITY_FULFILLED",
+}
+`;
+
+exports[`unselectBusinessHourVersion when unselecting a business hours it also set the selected version as null 1`] = `
+Object {
+  "selectedVersionId": undefined,
+  "type": "SET_SELECTED_BUSINESS_HOUR_VERSION",
+}
+`;
+
+exports[`updateBusinessHourV2 when updating a business hour succesfully it should emit UPDATE_ENTITY_FULFILLED 1`] = `
+Object {
+  "entityId": "business-hour-id",
+  "entityName": "businessHoursV2",
+  "response": "mocked-response",
+  "sdkCall": Object {
+    "apiVersion": "v2",
+    "command": "updateBusinessHourV2",
+    "crudAction": "update",
+    "data": Object {
+      "activeVersion": "version-id",
+      "name": "business hours name",
+    },
+    "module": "entities",
+    "path": Array [
+      "business-hours",
+      "business-hour-id",
+    ],
+    "topic": "cxengage/entities/update-business-hour-v2",
+  },
+  "type": "UPDATE_ENTITY_FULFILLED",
+  "values": Object {
+    "activeVersion": "version-id",
+    "name": "business hours name",
   },
 }
 `;

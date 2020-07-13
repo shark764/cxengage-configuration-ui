@@ -1,17 +1,14 @@
 import { createSelector } from 'reselect';
 import { Map, List } from 'immutable';
-import { isInvalid, formValueSelector, isDirty } from 'redux-form/immutable';
+import { isInvalid, isDirty } from 'redux-form/immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
 
-import { selectFormInitialValues } from '../../form/selectors';
+import { selectFormInitialValues, getFormValues } from '../../form/selectors';
 import { getSelectedEntity, getSelectedSubEntity } from '../selectors';
 import { onSubEntityFormSubmit } from '../../entities';
 import { getEntityData, sidePanelHeader, isSubEntitySaving } from '../../entities/selectors';
 import { getCurrentTenantId } from '../../../../redux/modules/userData/selectors';
 import { getCurrentTenantTimezone } from '../../userData/selectors';
-
-const draftEditFormSelector = formValueSelector('draft:edit');
-const ruleFormSelector = formValueSelector('businessHoursV2:rules');
 
 export const selectBusinessHoursV2FormInitialValues = state => {
   if (getSelectedEntity(state) === undefined) {
@@ -182,9 +179,9 @@ export const draftFormsAreInvalid = state =>
 export const draftFormsAreDirty = state => isDirty('draft:edit')(state) || isDirty('businessHoursV2:rules')(state);
 
 export const shouldPublishDraft = state =>
-  draftEditFormSelector(state, 'timezone') &&
-  ruleFormSelector(state, 'rules') &&
-  ruleFormSelector(state, 'rules').size > 0;
+  getFormValues(state, 'draft:edit', 'timezone') &&
+  getFormValues(state, 'businessHoursV2:rules', 'rules') &&
+  getFormValues(state, 'businessHoursV2:rules', 'rules').size > 0;
 
 export const isPublishingDraft = state => state.getIn(['Entities', 'businessHoursV2', 'isPublishingDraft']);
 

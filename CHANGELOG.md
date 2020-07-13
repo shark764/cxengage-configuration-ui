@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.79.12] - 2020-06-10
+### Added
+- CXV1-22590 - Business Hours Unit Tests - Epics
+
 ## [0.79.11] - 2020-07-07
 ### Fixed
 - CXV1-22708 -	navigating form and to the new BH page
