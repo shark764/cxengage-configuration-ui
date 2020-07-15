@@ -739,6 +739,35 @@ Immutable.Map {
       },
     ],
   },
+  "contactAttributes": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Attribute",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Label",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Type",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Default",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Mandatory",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
   "none": Immutable.Map {
     "Columns": Immutable.List [],
     "visibleMenu": "none",

@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.80.0] - 2020-06-24
+### Added
+- CXV1-20157 - Add contact attributes to navbar & create Main Entity List page
+
 ## [0.79.12] - 2020-06-10
 ### Added
 - CXV1-22590 - Business Hours Unit Tests - Epics

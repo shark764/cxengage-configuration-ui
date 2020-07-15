@@ -34,8 +34,10 @@ export function mapStateToProps(state, props) {
     pageTitle = '',
     defaultFilters = [],
     defaultSorted = [],
-    bulkEditsAvailable = false
+    bulkEditsAvailable = false,
+    customColumnStyle = ''
   } = entity;
+
   return {
     pageTitle,
     pageHelpLink: getHelpLink(state),
@@ -54,7 +56,8 @@ export function mapStateToProps(state, props) {
     showBulkActionsMenu: bulkEditsAvailable,
     insideIframe: !isInIframe(),
     pristine: isFormPristine(state),
-    dirty: isFormDirty(state)
+    dirty: isFormDirty(state),
+    customColumnStyle
   };
 }
 

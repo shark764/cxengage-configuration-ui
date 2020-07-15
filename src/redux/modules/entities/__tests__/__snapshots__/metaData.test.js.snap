@@ -643,6 +643,97 @@ Object {
       "digitalChannelsApps",
     ],
   },
+  "contactAttributes": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Attribute",
+      },
+      Object {
+        "active": true,
+        "name": "Label",
+      },
+      Object {
+        "active": true,
+        "name": "Type",
+      },
+      Object {
+        "active": true,
+        "name": "Default",
+      },
+      Object {
+        "active": true,
+        "name": "Mandatory",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "customColumnStyle": ".EntityTable .rt-tbody .rt-tr-group {height:inherit !important; max-height:inherit !important;} .rt-td {align-self: center}",
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "contactAttributes",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Configuration/Contact_Attributes.htm",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Contact Attributes",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+      "path": Array [
+        "contacts/attributes",
+      ],
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Contact Attribute",
+    "updateFormDependencies": Array [],
+  },
   "contactLayouts": EntityMetaData {
     "betaFeature": false,
     "bulkEditsAvailable": false,

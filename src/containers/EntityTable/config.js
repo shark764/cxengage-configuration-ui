@@ -24,6 +24,7 @@ import { timezoneColumn2 } from './columns/timezone2';
 import { sharedColumn2 } from './columns/shared2';
 import { skillColumn } from './columns/skill';
 import { groupColumn } from './columns/group';
+import { labelColumn } from './columns/label';
 
 export function getTableColumns(columns) {
   /**
@@ -71,7 +72,11 @@ export function getTableColumns(columns) {
     Shared2: sharedColumn2,
     'Attribute Identifier': constructGeneralTextColumn('identifier', 'attributeIdentifier'),
     'Realtime Reporting': constructGeneralTextColumn('realtime', 'realtimeReporting'),
-    'Historical Reporting': constructGeneralTextColumn('historical', 'historicalReporting')
+    'Historical Reporting': constructGeneralTextColumn('historical', 'historicalReporting'),
+    Attribute: constructGeneralTextColumn('objectName', 'attribute'),
+    Label: labelColumn,
+    Default: constructGeneralTextColumn('default'),
+    Mandatory: constructGeneralBooleanColumn('mandatory')
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

@@ -186,6 +186,7 @@ export const listOfEntities = [
   'integrations',
   'regions',
   'timezones',
+  'contactAttributes',
   'contactLayouts'
   //Hygen-insert-at-end-of-list
 ];
@@ -904,6 +905,22 @@ entities.customAttributes.columns = [
   { name: 'Status', active: true }
 ];
 entities.customAttributes.defaultFilters = [{ id: 'active', value: 'enabled' }];
+
+// Contact Attributes
+entities.contactAttributes.pageTitle = 'Contact Attributes';
+entities.contactAttributes.helpLink = '/Help/Content/Configuration/Contact_Attributes.htm';
+entities.contactAttributes.sdkCall.path = ['contacts/attributes'];
+entities.contactAttributes.bulkEditsAvailable = true;
+entities.contactAttributes.columns = [
+  { name: 'Attribute', active: true },
+  { name: 'Label', active: true },
+  { name: 'Type', active: true },
+  { name: 'Default', active: true },
+  { name: 'Mandatory', active: true },
+  { name: 'Status', active: true }
+];
+entities.contactAttributes.customColumnStyle =
+  '.EntityTable .rt-tbody .rt-tr-group {height:inherit !important; max-height:inherit !important;} .rt-td {align-self: center}';
 
 // Contact Layouts
 entities.contactLayouts.bulkEditsAvailable = false;

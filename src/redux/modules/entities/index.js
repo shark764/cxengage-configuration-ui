@@ -336,6 +336,12 @@ const initialState = fromJS({
   regions: {
     data: []
   },
+  contactAttributes: {
+    ...defaultEntity,
+    readPermission: ['CONTACTS_ATTRIBUTES_READ'],
+    updatePermission: ['CONTACTS_ATTRIBUTES_UPDATE'],
+    createPermission: ['CONTACTS_ATTRIBUTES_CREATE']
+  },
   contactLayouts: {
     ...defaultEntity,
     readPermission: ['CONTACTS_LAYOUTS_READ'],

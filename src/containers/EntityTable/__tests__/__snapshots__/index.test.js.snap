@@ -16,6 +16,7 @@ Object {
     "mock table columns",
   ],
   "currentVisibleSubMenu": "none",
+  "customColumnStyle": "",
   "dirty": false,
   "entityMetadata": Object {},
   "fetching": false,
