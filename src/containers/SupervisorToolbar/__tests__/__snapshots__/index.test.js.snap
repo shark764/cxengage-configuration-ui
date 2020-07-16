@@ -7,7 +7,6 @@ Object {
   "monitoringStatus": "conected",
   "muted": true,
   "twilioEnabled": true,
-  "twilioIsDefault": true,
   "userHasBargeAllCallsPermission": true,
 }
 `;

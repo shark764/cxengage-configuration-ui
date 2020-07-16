@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import CheckboxFilterMenu from '../../containers/CheckboxFilterMenu';
 import { monitorInteractionInitialization } from '../../redux/modules/supervisorToolbar';
 import store from '../../redux/store';
-import { Button } from 'cx-ui-components';
+import { Button, PopoverDialog, FormattedTitle, LoadingSpinnerSVG } from 'cx-ui-components';
 
 const MonitorCallButton = styled(Button)`
   float: right;
@@ -41,6 +41,33 @@ const FillerSpaceIcon = styled.div`
   display: inline-block;
   margin: 0px 3px;
 `;
+const PopoverMenu = styled(PopoverDialog)`
+  top: 24px;
+  right: 0px;
+  padding-bottom: 15px;
+`;
+const MonitoringContainer = styled.div`
+  position: relative;
+  order: 0;
+  flex: 0 1 52px;
+  align-self: auto;
+  overflow: visible;
+`;
+const CenterWrapper = styled.div`
+  text-align: center;
+`;
+const ExtensionMenuItem = styled.div`
+  padding: 5px 25px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+
+  &:not([disabled]):hover {
+    background-color: darkslategray;
+    cursor: pointer;
+  }
+`;
 
 export const helperFunctions = {
   implicitDisable: (row, agentId) =>
@@ -56,7 +83,7 @@ export const helperFunctions = {
     return row[filter.id].length === 0;
   },
   monitorFilter: (tableType, onChange) => <MonitorFilter tableType={tableType} onChange={onChange} />,
-  Cell: function(value, row, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission) {
+  Cell: function(value, row, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission, extensions) {
     let activeMonitors = 0;
     let previousMonitors = 0;
     row.monitoring.forEach(monitor => {
@@ -76,12 +103,21 @@ export const helperFunctions = {
         monitoringStatus={monitoringStatus}
         implicitDisable={this.implicitDisable(row, agentId)}
         userHasMonitorAllCallsPermission={userHasMonitorAllCallsPermission}
+        extensions={extensions}
       />
     );
   }
 };
 
-export default function(value, tableType, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission) {
+export default function(
+  value,
+  tableType,
+  monitoredId,
+  monitoringStatus,
+  agentId,
+  userHasMonitorAllCallsPermission,
+  extensions
+) {
   const column = {
     Header: 'Monitoring',
     show: value,
@@ -90,7 +126,15 @@ export default function(value, tableType, monitoredId, monitoringStatus, agentId
     resizable: false,
     accessor: d => helperFunctions.accessor(d),
     Cell: ({ value, row }) =>
-      helperFunctions.Cell(value, row, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission),
+      helperFunctions.Cell(
+        value,
+        row,
+        monitoredId,
+        monitoringStatus,
+        agentId,
+        userHasMonitorAllCallsPermission,
+        extensions
+      ),
     filterMethod: (filter, row) => helperFunctions.monitoringFilterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.monitorFilter(tableType, onChange)
   };
@@ -122,11 +166,30 @@ export class MonitorFilter extends Component {
 }
 
 export class MonitoringCell extends Component {
-  monitorInteractionRequestor = e =>
-    store.dispatch(monitorInteractionInitialization(this.props.interactionId)) && e.stopPropagation();
-  render() {
+  state = { showExtensionMenu: false };
+
+  showExtensionMenu = (e, show = true) => {
+    e.stopPropagation();
+    this.setState({ showExtensionMenu: show });
+  };
+
+  monitorInteractionRequestor = (e, chosenExtension) => {
+    e.stopPropagation();
+    return store.dispatch(monitorInteractionInitialization(this.props.interactionId, chosenExtension));
+  };
+
+  extensionToExtensionMenuItem = (extension, idx) => {
     return (
-      <div>
+      <ExtensionMenuItem key={idx} onClick={e => this.monitorInteractionRequestor(e, extension)}>
+        {extension.description}
+      </ExtensionMenuItem>
+    );
+  };
+
+  render() {
+    const extensionList = this.props.extensions && this.props.extensions.map(this.extensionToExtensionMenuItem);
+    return (
+      <MonitoringContainer>
         {this.props.channel === 'voice' && (
           <Fragment>
             {this.props.previousMonitors !== 0 ? (
@@ -140,23 +203,40 @@ export class MonitoringCell extends Component {
               <FillerSpaceIcon />
             )}
             {this.props.userHasMonitorAllCallsPermission && (
-              <MonitorCallButton
-                type="secondary"
-                id={'monitorCallButton'}
-                className="monitorCall"
-                disabled={
-                  this.props.monitoringStatus !== 'offline' ||
-                  this.props.implicitDisable ||
-                  this.props.monitoringStatus === 'sqsShutDown'
-                }
-                onClick={this.monitorInteractionRequestor}
-              >
-                Monitor
-              </MonitorCallButton>
+              <Fragment>
+                <MonitorCallButton
+                  type="secondary"
+                  id={'monitorCallButton'}
+                  className="monitorCall"
+                  disabled={
+                    this.props.monitoringStatus !== 'offline' ||
+                    this.props.implicitDisable ||
+                    this.props.monitoringStatus === 'sqsShutDown'
+                  }
+                  onClick={e => this.showExtensionMenu(e, !this.state.showExtensionMenu)}
+                >
+                  Monitor
+                </MonitorCallButton>
+                <PopoverMenu
+                  id="chooseExtensionMenu"
+                  widthPx={260}
+                  arrowLeftOffsetPx={110}
+                  hide={e => this.showExtensionMenu(e, false)}
+                  isVisible={this.state.showExtensionMenu}
+                >
+                  <FormattedTitle messageTitle="Choose Extension" />
+                  {this.props.isUpdating && (
+                    <CenterWrapper>
+                      <LoadingSpinnerSVG size={28} color="white" />
+                    </CenterWrapper>
+                  )}
+                  {!this.props.isUpdating && extensionList}
+                </PopoverMenu>
+              </Fragment>
             )}
           </Fragment>
         )}
-      </div>
+      </MonitoringContainer>
     );
   }
 }
@@ -169,7 +249,8 @@ MonitoringCell.propTypes = {
   interactionId: PropTypes.string,
   monitoringStatus: PropTypes.string,
   implicitDisable: PropTypes.bool,
-  userHasMonitorAllCallsPermission: PropTypes.bool
+  userHasMonitorAllCallsPermission: PropTypes.bool,
+  extensions: PropTypes.array
 };
 MonitorFilter.propTypes = {
   tableType: PropTypes.string,

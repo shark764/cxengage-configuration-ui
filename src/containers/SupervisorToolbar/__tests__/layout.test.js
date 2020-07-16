@@ -15,7 +15,6 @@ describe('Supervisor Toolbar Layout', () => {
         requestingHangUp={() => ''}
         muted={true}
         twilioEnabled={true}
-        twilioIsDefault={true}
         monitoringStatus={'connected'}
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
@@ -32,7 +31,6 @@ describe('Supervisor Toolbar Layout', () => {
         requestingHangUp={() => ''}
         muted={true}
         twilioEnabled={true}
-        twilioIsDefault={true}
         monitoringStatus={'connected'}
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
@@ -49,7 +47,6 @@ describe('Supervisor Toolbar Layout', () => {
         requestingHangUp={() => ''}
         muted={true}
         twilioEnabled={true}
-        twilioIsDefault={true}
         monitoringStatus={'offline'}
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
@@ -66,7 +63,6 @@ describe('Supervisor Toolbar Layout', () => {
         requestingHangUp={() => ''}
         muted={false}
         twilioEnabled={true}
-        twilioIsDefault={true}
         monitoringStatus={'connected'}
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
@@ -83,7 +79,6 @@ describe('Supervisor Toolbar Layout', () => {
         requestingHangUp={hangUpMock}
         muted={false}
         twilioEnabled={true}
-        twilioIsDefault={true}
         monitoringStatus={'connected'}
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}
@@ -106,7 +101,6 @@ describe('Full mount to test lifecycle events', () => {
         requestingHangUp={hangUpMock}
         muted={false}
         twilioEnabled={true}
-        twilioIsDefault={true}
         monitoringStatus={'connected'}
         interactionId={'interactionId'}
         setSilentMonitoringInteractionId={() => ''}

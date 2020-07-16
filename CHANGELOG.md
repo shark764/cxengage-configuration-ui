@@ -28,6 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.0] - 2020-07-16
+### Fixed
+- CXV1-22455 - Fix mute button
+### Added
+- CXV1-22443 - Update monitor button to include extension selection
+
 ## [0.80.0] - 2020-06-24
 ### Added
 - CXV1-20157 - Add contact attributes to navbar & create Main Entity List page

@@ -28,9 +28,10 @@ export const supervisorSubscriptionsAdded = subscription => ({
   that actually makes the request to monitor the call to the sdk
  */
 
-export const monitorInteractionInitialization = interactionId => ({
+export const monitorInteractionInitialization = (interactionId, chosenExtension) => ({
   type: 'MONITOR_INTERACTION_INITIALIZATION',
-  interactionId
+  interactionId,
+  chosenExtension
 });
 export const monitorInteractionInitializationCompleted = () => ({
   type: 'MONITOR_INTERACTION_INITIALIZATION_COMPLETED_$'
@@ -41,15 +42,11 @@ export const monitorInteractionInitializationCompleted = () => ({
  the transitionCall property is when you move from one call directly to the next isntead of hanging up
  and taking the next call manually
  */
-export const requestingMonitorCall = (
-  interactionId,
-  defaultExtensionProvider,
-  transitionCall
-) => ({
+export const requestingMonitorCall = (interactionId, transitionCall, chosenExtension) => ({
   type: 'REQUESTING_MONITOR_CALL',
   interactionId,
-  defaultExtensionProvider,
-  transitionCall
+  transitionCall,
+  chosenExtension
 });
 /**
  * 3.
@@ -77,20 +74,13 @@ export const updateAllOfSupervisorToolbar = state => ({
 export default function supervisorToolbarReducer(state = initialState, action) {
   switch (action.type) {
     case 'cxengage/twilio/device-ready':
-      return state.setIn(
-        ['twilio', 'enabled'],
-        !state.getIn(['twilio', 'enabled'])
-      );
+      return state.setIn(['twilio', 'enabled'], !state.getIn(['twilio', 'enabled']));
     case 'cxengage/session/started':
       return state.setIn(['silentMonitoring', 'activeSession'], true);
     case 'cxengage/interactions/voice/silent-monitor-start':
-      return state
-        .setIn(['silentMonitoring', 'status'], 'connected')
-        .set('muted', true);
+      return state.setIn(['silentMonitoring', 'status'], 'connected').set('muted', true);
     case 'cxengage/session/sqs-shut-down':
-      return state.update('silentMonitoring', silentMonitoring =>
-        silentMonitoring.set('status', 'sqsShutDown')
-      );
+      return state.update('silentMonitoring', silentMonitoring => silentMonitoring.set('status', 'sqsShutDown'));
     case 'cxengage/interactions/voice/silent-monitor-end':
       if (state.getIn(['silentMonitoring', 'transitionCall'])) {
         return state;
@@ -101,9 +91,7 @@ export default function supervisorToolbarReducer(state = initialState, action) {
       }
     case 'TRANSITION_CALL_ENDING':
       return state
-        .update('silentMonitoring', silentMonitoring =>
-          silentMonitoring.set('transitionCall', false)
-        )
+        .update('silentMonitoring', silentMonitoring => silentMonitoring.set('transitionCall', false))
         .set('muted', true);
     case 'REQUESTING_MONITOR_CALL':
       return state.update('silentMonitoring', silentMonitoring =>
@@ -114,9 +102,7 @@ export default function supervisorToolbarReducer(state = initialState, action) {
       );
     case 'MONITOR_INTERACTION_REQUESTED':
       return state.update('silentMonitoring', silentMonitoring =>
-        silentMonitoring
-          .set('status', 'connecting')
-          .set('interactionId', action.interactionId)
+        silentMonitoring.set('status', 'connecting').set('interactionId', action.interactionId)
       );
     case 'cxengage/interactions/voice/unmute-acknowledged':
       return state.set('muted', false);

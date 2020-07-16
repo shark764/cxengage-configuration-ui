@@ -53,7 +53,6 @@ export const StartBatchRequest = (action$, store) =>
     .debounceTime(400)
     .mergeMap(action =>
       from([
-        'cxengage/session/extension-list',
         'cxengage/twilio/device-ready',
         'cxengage/session/started',
         'cxengage/session/state-change-request-acknowledged',
@@ -73,11 +72,11 @@ export const MonitorInteractionInitialization = (action$, store) =>
   action$
     .ofType('MONITOR_INTERACTION_INITIALIZATION')
     .throttleTime(4000)
-    .switchMap(({ interactionId }) =>
+    .switchMap(({ interactionId, chosenExtension }) =>
       fromPromise(
         sdkPromise({
           module: 'monitorCall',
-          data: { interactionId },
+          data: { interactionId, chosenExtension },
           topic: 'monitorCall'
         })
       )
@@ -95,20 +94,26 @@ export const MonitorInteraction = (action$, store) =>
       sessionIsActive: isSessionActive(store.getState())
     }))
     .switchMap(a => {
-      if (a.defaultExtensionProvider === 'twilio') {
+      if (a.chosenExtension.provider && a.chosenExtension.provider === 'twilio') {
         if (!a.twilioEnabled && !a.sessionIsActive) {
+          // Waiting on twilio & call session to start
           return zip(
             action$.ofType('cxengage/twilio/device-ready').take(1),
             action$.ofType('cxengage/session/started').take(1)
           ).mapTo(a);
         } else if (!a.twilioEnabled && a.sessionIsActive) {
+          // Waiting on twilio to start
           return zip(action$.ofType('cxengage/twilio/device-ready').take(1)).mapTo(a);
         } else if (a.twilioEnabled && !a.sessionIsActive) {
+          // Waiting on session to start
           return zip(action$.ofType('cxengage/session/started').take(1)).mapTo(a);
         } else if (a.twilioEnabled && a.sessionIsActive) {
+          // Everything is ready
           if (a.transitionCall) {
+            // Require call transition
             return zip(action$.ofType('cxengage/interactions/voice/silent-monitor-end').take(1)).mapTo(a);
           } else {
+            // Happy path!
             return from([a]);
           }
         }
@@ -126,7 +131,10 @@ export const MonitorInteraction = (action$, store) =>
           {
             module: 'interactions.voice',
             command: `silentMonitor`,
-            data: { interactionId: action.interactionId }
+            data: {
+              interactionId: action.interactionId,
+              chosenExtension: action.chosenExtension
+            }
           },
           `monitorCall`
         )

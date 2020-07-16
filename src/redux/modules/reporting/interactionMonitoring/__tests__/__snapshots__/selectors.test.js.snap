@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`selectExtensions returns extension list if user has extensions 1`] = `
+Array [
+  Object {
+    "description": "test",
+  },
+  Object {
+    "description": "test 2",
+  },
+]
+`;
+
 exports[`selectInteractionMonitoringExpanded returns the interaction monitoring expanded 1`] = `
 Immutable.Map {
   "item1": "item1",

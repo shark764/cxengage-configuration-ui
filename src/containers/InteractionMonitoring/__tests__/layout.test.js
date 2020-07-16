@@ -61,6 +61,8 @@ jest.mock('../windowMessageObservable');
 const setCurrentEntityMock = jest.fn();
 const fetchDataMock = jest.fn();
 const startInteractionMonitoringMock = jest.fn();
+const getExtensionsMock = jest.fn();
+const extensionsMock = [{ description: 'test-ext-1' }, { description: 'test-ext-2' }];
 
 describe('Interaction Monitoring Layout', () => {
   const activeColumnsActive = [true, true, true, true, true, true, true, true, true, true, true, true, true, true];
@@ -88,6 +90,8 @@ describe('Interaction Monitoring Layout', () => {
         userHasViewAllMonitoredCallsPermission={false}
         getCurrentAgentId={'0000-0000-0000-0000'}
         pageTitle="mock-title"
+        extensions={extensionsMock}
+        getExtensions={getExtensionsMock}
       />
     );
     expect(component).toMatchSnapshot();
@@ -132,6 +136,8 @@ describe('Interaction Monitoring Layout', () => {
         userHasViewAllMonitoredCallsPermission={true}
         getCurrentAgentId={'0000-0000-0000-0000'}
         pageTitle="mock-title"
+        extensions={extensionsMock}
+        getExtensions={getExtensionsMock}
       />
     );
     expect(component).toMatchSnapshot();
@@ -165,6 +171,8 @@ describe('Full mount to test lifecycle events', () => {
           userHasViewAllMonitoredCallsPermission={true}
           getCurrentAgentId={'0000-0000-0000-0000'}
           pageTitle="mock-title"
+          extensions={extensionsMock}
+          getExtensions={getExtensionsMock}
         />
       </Provider>
     );
@@ -176,6 +184,7 @@ describe('Full mount to test lifecycle events', () => {
     wrapper.unmount();
     expect(localStorageUnsubscribe).toHaveBeenCalled();
     expect(messageUnsubscribe).toHaveBeenCalled();
+    expect(getExtensionsMock).toHaveBeenCalled();
   });
 });
 
@@ -205,6 +214,8 @@ describe('Interaction monitoring methods', () => {
       userHasViewAllMonitoredCallsPermission={true}
       getCurrentAgentId={'0000-0000-0000-0000'}
       pageTitle="mock-title"
+      extensions={extensionsMock}
+      getExtensions={getExtensionsMock}
     />
   );
   describe('getTableRowProps', () => {

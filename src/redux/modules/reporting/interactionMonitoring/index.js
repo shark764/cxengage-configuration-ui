@@ -10,6 +10,7 @@ export const initialState = fromJS({
   sorted: [],
   expanded: {},
   selected: '',
+  extensions: [],
   monitorAllCallsPermission: ['MONITOR_ALL_CALLS'],
   bargeAllCallsPermission: ['BARGE_ALL_CALLS'],
   viewAllMonitoredCallsPermission: ['VIEW_ALL_MONITORED_CALLS']
@@ -28,6 +29,7 @@ export const setSelected = (selected, expanded) => ({
 });
 export const setSorted = sorted => ({ type: 'SET_SORTED', sorted });
 export const removeSelected = () => ({ type: 'REMOVE_SELECTED' });
+export const getExtensions = () => ({ type: 'GET_USER_EXTENSIONS' });
 export const startInteractionMonitoring = () => ({
   type: 'START_REPORTING_BATCH_REQUEST_$'
 });
@@ -41,6 +43,8 @@ export const reportingSubscriptionStarted = () => ({
 // Reducer
 export default function InteractionMonitoring(state = initialState, action) {
   switch (action.type) {
+    case 'SET_EXTENSION_LIST':
+      return state.set('extensions', fromJS(action.extensions));
     case 'SET_TABLE_DATA':
       return state.set('data', fromJS(action.arrayOfTableData));
     case 'SET_SORTED':
@@ -51,9 +55,7 @@ export default function InteractionMonitoring(state = initialState, action) {
     case 'SET_EXPANDED':
       return state.set('expanded', action.expanded);
     case 'SET_SELECTED':
-      return state
-        .set('selected', action.selected)
-        .set('expanded', action.expanded);
+      return state.set('selected', action.selected).set('expanded', action.expanded);
     case 'REMOVE_SELECTED':
       return state.set('expanded', {}).set('selected', '');
     default:

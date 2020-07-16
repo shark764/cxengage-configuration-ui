@@ -12,7 +12,6 @@ jest.mock('../../../redux/store.js', () => jest.fn());
 jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
   selectSupervisorToolbarMuted: () => true,
   selectSupervisorToolbarTwilioEnabled: () => true,
-  selectSupervisorToolbarTwilioIsDefaultExtension: () => true,
   selectSupervisorToolbarSilentMonitoringStatus: () => 'conected',
   selectSupervisorToolbarSilentMonitoringInteractionId: () => 'mockInteractionId'
 }));

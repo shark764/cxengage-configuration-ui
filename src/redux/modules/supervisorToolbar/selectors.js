@@ -6,27 +6,17 @@ import { createSelector } from 'reselect';
 
 const selectSupervisorToolbarMap = state => state.get('SupervisorToolbar');
 
-export const selectSupervisorToolbarMuted = createSelector(
-  selectSupervisorToolbarMap,
-  supervisorToolbar => supervisorToolbar.get('muted')
+export const selectSupervisorToolbarMuted = createSelector(selectSupervisorToolbarMap, supervisorToolbar =>
+  supervisorToolbar.get('muted')
 );
-export const selectSupervisorToolbarTwilioEnabled = createSelector(
-  selectSupervisorToolbarMap,
-  supervisorToolbar => supervisorToolbar.getIn(['twilio', 'enabled'])
+export const selectSupervisorToolbarTwilioEnabled = createSelector(selectSupervisorToolbarMap, supervisorToolbar =>
+  supervisorToolbar.getIn(['twilio', 'enabled'])
 );
-export const selectTransitionCall = createSelector(
-  selectSupervisorToolbarMap,
-  supervisorToolbar =>
-    supervisorToolbar.getIn(['silentMonitoring', 'transitionCall'])
+export const selectTransitionCall = createSelector(selectSupervisorToolbarMap, supervisorToolbar =>
+  supervisorToolbar.getIn(['silentMonitoring', 'transitionCall'])
 );
-export const isSessionActive = createSelector(
-  selectSupervisorToolbarMap,
-  supervisorToolbar =>
-    supervisorToolbar.getIn(['silentMonitoring', 'activeSession'])
-);
-export const selectSupervisorToolbarTwilioIsDefaultExtension = createSelector(
-  selectSupervisorToolbarMap,
-  supervisorToolbar => supervisorToolbar.getIn(['twilio', 'isDefaultExtension'])
+export const isSessionActive = createSelector(selectSupervisorToolbarMap, supervisorToolbar =>
+  supervisorToolbar.getIn(['silentMonitoring', 'activeSession'])
 );
 export const selectSupervisorToolbarSilentMonitoringStatus = createSelector(
   selectSupervisorToolbarMap,
@@ -34,6 +24,5 @@ export const selectSupervisorToolbarSilentMonitoringStatus = createSelector(
 );
 export const selectSupervisorToolbarSilentMonitoringInteractionId = createSelector(
   selectSupervisorToolbarMap,
-  supervisorToolbar =>
-    supervisorToolbar.getIn(['silentMonitoring', 'interactionId'])
+  supervisorToolbar => supervisorToolbar.getIn(['silentMonitoring', 'interactionId'])
 );

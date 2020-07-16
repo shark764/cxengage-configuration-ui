@@ -42,6 +42,9 @@ injectGlobal`
 .InteractionMonitoringTable .rt-resizer {
   z-index: 2 !important;
 }
+.InteractionMonitoringTable .rt-td:last-child {
+  overflow: visible;
+}
 `;
 
 export default class InteractionMonitoring extends Component {
@@ -56,6 +59,7 @@ export default class InteractionMonitoring extends Component {
   componentWillMount() {
     messageSubscribe();
     localStorageSubscribe();
+    this.props.getExtensions();
     this.props.setCurrentEntity('interactionMonitoring');
     this.props.fetchData('groups', 'interactionMonitoring');
     this.props.fetchData('skills', 'interactionMonitoring');
@@ -187,7 +191,8 @@ export default class InteractionMonitoring extends Component {
                 this.props.monitoredId,
                 this.props.monitoringStatus,
                 this.props.getCurrentAgentId,
-                this.props.userHasMonitorAllCallsPermission
+                this.props.userHasMonitorAllCallsPermission,
+                this.props.extensions
               ),
               groupsColumn(this.props.activeColumns[12], 'interactionMonitoring'),
               skillsColumn(this.props.activeColumns[13], 'interactionMonitoring')
@@ -222,9 +227,11 @@ InteractionMonitoring.propTypes = {
   setCurrentEntity: PropTypes.func,
   fetchData: PropTypes.func,
   startInteractionMonitoring: PropTypes.func,
+  getExtensions: PropTypes.func,
   userHasViewAllMonitoredCallsPermission: PropTypes.bool.isRequired,
   userHasMonitorAllCallsPermission: PropTypes.bool,
   insideIframe: PropTypes.bool,
   pageTitle: PropTypes.string,
-  pageHelpLink: PropTypes.string
+  pageHelpLink: PropTypes.string,
+  extensions: PropTypes.array
 };

@@ -22,7 +22,8 @@ jest.mock('../../../redux/modules/reporting/interactionMonitoring/selectors', ()
   selectInteractionMonitoringExpanded: () => ({}),
   selectInteractionMonitoringSelected: () => 'conected',
   userHasViewAllMonitoredCallsPermission: () => true,
-  userHasMonitorAllCallsPermission: () => true
+  userHasMonitorAllCallsPermission: () => true,
+  selectExtensions: () => []
 }));
 jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
   selectSupervisorToolbarSilentMonitoringInteractionId: () => '0000-0000-0000-0000',

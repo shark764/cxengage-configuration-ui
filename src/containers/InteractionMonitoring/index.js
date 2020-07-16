@@ -12,7 +12,8 @@ import {
   setSorted,
   setSelected,
   removeSelected,
-  startInteractionMonitoring
+  startInteractionMonitoring,
+  getExtensions
 } from '../../redux/modules/reporting/interactionMonitoring';
 import {
   updateSkillsColumnFilter,
@@ -25,7 +26,8 @@ import {
   selectInteractionMonitoringExpanded,
   selectInteractionMonitoringSelected,
   userHasViewAllMonitoredCallsPermission,
-  userHasMonitorAllCallsPermission
+  userHasMonitorAllCallsPermission,
+  selectExtensions
 } from '../../redux/modules/reporting/interactionMonitoring/selectors';
 import {
   selectSupervisorToolbarSilentMonitoringInteractionId,
@@ -46,6 +48,7 @@ export const mapStateToProps = (state, props) => ({
     menuType: 'Columns',
     tableType: 'interactionMonitoring'
   }),
+  extensions: selectExtensions(state),
   totalRatio: totalRatio(state, props),
   activeColumns: selectInteractionMonitoringActiveColumns(state, props),
   twelveHourFormat: selectTimeFormat(state, props),
@@ -71,6 +74,7 @@ export const actions = {
   removeSelected,
   fetchData,
   startInteractionMonitoring,
+  getExtensions,
   setCurrentEntity
 };
 

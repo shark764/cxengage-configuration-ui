@@ -12,49 +12,49 @@ exports[`MonitorFilter components renders properly 1`] = `
 `;
 
 exports[`monitoringColumn Cell renders 1 person is activly monitoring the call 1`] = `
-<div>
+<styled.div>
   <React.Fragment>
     <styled.div />
     <styled.div>
       1
     </styled.div>
   </React.Fragment>
-</div>
+</styled.div>
 `;
 
 exports[`monitoringColumn Cell renders 1 person previously monitored the call 1`] = `
-<div>
+<styled.div>
   <React.Fragment>
     <styled.div>
       1
     </styled.div>
     <styled.div />
   </React.Fragment>
-</div>
+</styled.div>
 `;
 
-exports[`monitoringColumn Cell renders does not render in non-voice channels 1`] = `<div />`;
+exports[`monitoringColumn Cell renders does not render in non-voice channels 1`] = `<styled.div />`;
 
 exports[`monitoringColumn Cell renders monitor button is disabled when monitoring id matches the rows id 1`] = `
-<div>
+<styled.div>
   <React.Fragment>
     <styled.div>
       1
     </styled.div>
     <styled.div />
   </React.Fragment>
-</div>
+</styled.div>
 `;
 
 exports[`monitoringColumn Cell renders monitor button is disabled when monitoring status is connecting 1`] = `
-<div>
+<styled.div>
   <React.Fragment>
     <styled.div>
       1
     </styled.div>
     <styled.div />
   </React.Fragment>
-</div>
+</styled.div>
 `;
 
 exports[`monitoringColumn configuration object configurations show method returns false when value is false 1`] = `

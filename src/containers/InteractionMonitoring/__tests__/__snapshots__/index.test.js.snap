@@ -7,6 +7,7 @@ Object {
   ],
   "areAllColNotActive": false,
   "expanded": Object {},
+  "extensions": Array [],
   "getCurrentAgentId": "0000-0000-0000-0000",
   "insideIframe": false,
   "monitoredId": "0000-0000-0000-0000",

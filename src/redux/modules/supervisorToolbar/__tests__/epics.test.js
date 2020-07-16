@@ -37,6 +37,8 @@ jest.mock('../selectors');
 selectSupervisorToolbarMuted.mockReturnValue(false);
 selectSupervisorToolbarSilentMonitoringInteractionId.mockReturnValue('0000-0000-0000-0000');
 selectSupervisorToolbarSilentMonitoringStatus.mockReturnValue('connected');
+const mockTwilioExtension = { description: 'test-twilio', provider: 'twilio' };
+const mockNonTwilioExtension = { description: 'test-non-twilio' };
 
 describe('StartBatchRequest', () => {
   beforeEach(() => {
@@ -84,7 +86,7 @@ describe('MonitorInteractionInitialization', () => {
   });
 });
 
-describe('MonitorInteraction, Twilio is Default Extension', () => {
+describe('MonitorInteraction, Twilio is Chosen Extension', () => {
   beforeEach(() => {
     sdkCall.mockReturnValue(new Promise(resolve => resolve('mock response')));
   });
@@ -93,7 +95,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
   });
   it('first we recieve "session/started" and then "twilio/device-ready" then calls the monitor call sdk', done => {
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       { type: 'cxengage/session/started' },
       { type: 'cxengage/twilio/device-ready' }
     ]);
@@ -104,7 +106,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
   });
   it('first we recieve "twilio/device-ready" and then "session/started" then calls the monitor call sdk', done => {
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       { type: 'cxengage/twilio/device-ready' },
       { type: 'cxengage/session/started' }
     ]);
@@ -118,7 +120,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
     isSessionActive.mockReturnValueOnce(false);
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(false);
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       { type: 'cxengage/twilio/device-ready' },
       { type: 'cxengage/session/started' }
     ]);
@@ -132,7 +134,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
     isSessionActive.mockReturnValueOnce(true);
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(false);
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       { type: 'cxengage/twilio/device-ready' }
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {
@@ -145,7 +147,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
     isSessionActive.mockReturnValueOnce(false);
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(true);
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       { type: 'cxengage/session/started' }
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {
@@ -158,7 +160,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
     isSessionActive.mockReturnValueOnce(true);
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(true);
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', true, mockTwilioExtension),
       { type: 'cxengage/interactions/voice/silent-monitor-end' }
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {
@@ -170,7 +172,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
     selectTransitionCall.mockReturnValueOnce(false);
     isSessionActive.mockReturnValueOnce(true);
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(true);
-    const action = ActionsObservable.from([requestingMonitorCall('0000-0000-0000-0000', 'twilio')]);
+    const action = ActionsObservable.from([requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension)]);
     MonitorInteraction(action, mockStore).subscribe(() => {
       expect(sdkCall).toBeCalled();
       done();
@@ -178,7 +180,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
   });
   it("we don't recieve both required events and do not call the sdk", done => {
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       // {type: 'cxengage/twilio/device-ready'},
       { type: 'cxengage/session/started' }
     ]);
@@ -188,7 +190,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
   });
   it("we don't recieve both required events and do not call the sdk", done => {
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       { type: 'cxengage/twilio/device-ready' }
       // { type: 'cxengage/session/started' }
     ]);
@@ -198,7 +200,7 @@ describe('MonitorInteraction, Twilio is Default Extension', () => {
   });
   it('returns MONITOR_INTERACTION_REQUESTED action', done => {
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'twilio'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       { type: 'cxengage/twilio/device-ready' },
       { type: 'cxengage/session/started' }
     ]);
@@ -218,7 +220,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
   });
   it('we recieve "session/started" then calls the monitor call sdk', done => {
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'mockExtension'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockNonTwilioExtension),
       { type: 'cxengage/session/started' }
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {
@@ -229,7 +231,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
   it('session is not active, wait for the session to start', done => {
     isSessionActive.mockReturnValueOnce(false);
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'mockExtension'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockNonTwilioExtension),
       { type: 'cxengage/session/started' }
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {});
@@ -240,7 +242,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
     isSessionActive.mockReturnValueOnce(true);
     // selectTransitionCall.mockReturnValueOnce(false);
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'mockExtension')
+      requestingMonitorCall('0000-0000-0000-0000', false, mockNonTwilioExtension)
       // {type: 'cxengage/session/started'}
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {});
@@ -251,7 +253,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
     isSessionActive.mockReturnValueOnce(true);
     selectTransitionCall.mockReturnValueOnce(true);
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'mockExtension', true),
+      requestingMonitorCall('0000-0000-0000-0000', true, mockNonTwilioExtension),
       { type: 'cxengage/interactions/voice/silent-monitor-end' }
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {});
@@ -260,7 +262,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
   });
   it('returns MONITOR_INTERACTION_REQUESTED action', done => {
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'mockExtension'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockNonTwilioExtension),
       { type: 'cxengage/session/started' }
     ]);
     MonitorInteraction(action, mockStore).subscribe(actualOutputActions => {
@@ -271,7 +273,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
   it('catches and handles error from sdk', done => {
     sdkCall.mockReturnValueOnce(new Promise((resolve, reject) => reject('mock response')));
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', 'mockExtension'),
+      requestingMonitorCall('0000-0000-0000-0000', false, mockNonTwilioExtension),
       { type: 'cxengage/session/started' }
     ]);
     MonitorInteraction(action, supervisorToolbarMockStore).subscribe(output => {

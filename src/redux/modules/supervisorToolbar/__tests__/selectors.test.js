@@ -31,9 +31,7 @@ describe('selectSupervisorToolbarTwilioEnabled', () => {
         twilio: { enabled: true }
       }
     });
-    expect(sel.selectSupervisorToolbarTwilioEnabled(initialState)).toEqual(
-      true
-    );
+    expect(sel.selectSupervisorToolbarTwilioEnabled(initialState)).toEqual(true);
   });
   it('returns false if twilio is not enabled', () => {
     const initialState = fromJS({
@@ -41,32 +39,7 @@ describe('selectSupervisorToolbarTwilioEnabled', () => {
         twilio: { enabled: false }
       }
     });
-    expect(sel.selectSupervisorToolbarTwilioEnabled(initialState)).toEqual(
-      false
-    );
-  });
-});
-
-describe('selectSupervisorToolbarTwilioIsDefaultExtension', () => {
-  it('returns true if twilio is default extension', () => {
-    const initialState = fromJS({
-      SupervisorToolbar: {
-        twilio: { isDefaultExtension: true }
-      }
-    });
-    expect(
-      sel.selectSupervisorToolbarTwilioIsDefaultExtension(initialState)
-    ).toEqual(true);
-  });
-  it('returns false if twilio is not the default extension', () => {
-    const initialState = fromJS({
-      SupervisorToolbar: {
-        twilio: { isDefaultExtension: false }
-      }
-    });
-    expect(
-      sel.selectSupervisorToolbarTwilioIsDefaultExtension(initialState)
-    ).toEqual(false);
+    expect(sel.selectSupervisorToolbarTwilioEnabled(initialState)).toEqual(false);
   });
 });
 
@@ -77,12 +50,8 @@ describe('selectSupervisorToolbarSilentMonitoringStatus', () => {
         silentMonitoring: { status: 'offline' }
       }
     });
-    expect(
-      sel.selectSupervisorToolbarSilentMonitoringStatus(initialState)
-    ).toEqual(expect.any(String));
-    expect(
-      sel.selectSupervisorToolbarSilentMonitoringStatus(initialState)
-    ).toMatchSnapshot();
+    expect(sel.selectSupervisorToolbarSilentMonitoringStatus(initialState)).toEqual(expect.any(String));
+    expect(sel.selectSupervisorToolbarSilentMonitoringStatus(initialState)).toMatchSnapshot();
   });
 });
 
@@ -139,11 +108,7 @@ describe('selectSupervisorToolbarSilentMonitoringInteractionId', () => {
         silentMonitoring: { interactionId: '0000-0000-0000-0000' }
       }
     });
-    expect(
-      sel.selectSupervisorToolbarSilentMonitoringInteractionId(initialState)
-    ).toEqual(expect.any(String));
-    expect(
-      sel.selectSupervisorToolbarSilentMonitoringInteractionId(initialState)
-    ).toMatchSnapshot();
+    expect(sel.selectSupervisorToolbarSilentMonitoringInteractionId(initialState)).toEqual(expect.any(String));
+    expect(sel.selectSupervisorToolbarSilentMonitoringInteractionId(initialState)).toMatchSnapshot();
   });
 });

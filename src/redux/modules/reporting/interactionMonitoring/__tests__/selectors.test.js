@@ -12,9 +12,7 @@ describe('selectInteractionMonitoringTableData', () => {
         data: [{ item1: 'item1' }, { item2: 'item2' }]
       }
     });
-    expect(
-      sel.selectInteractionMonitoringTableData(initialState)
-    ).toMatchSnapshot();
+    expect(sel.selectInteractionMonitoringTableData(initialState)).toMatchSnapshot();
   });
 });
 
@@ -25,9 +23,7 @@ describe('selectInteractionMonitoringSorted', () => {
         sorted: [{ item1: 'item1' }, { item2: 'item2' }]
       }
     });
-    expect(
-      sel.selectInteractionMonitoringSorted(initialState)
-    ).toMatchSnapshot();
+    expect(sel.selectInteractionMonitoringSorted(initialState)).toMatchSnapshot();
   });
 });
 
@@ -38,9 +34,7 @@ describe('selectInteractionMonitoringExpanded', () => {
         expanded: { item1: 'item1' }
       }
     });
-    expect(
-      sel.selectInteractionMonitoringExpanded(initialState)
-    ).toMatchSnapshot();
+    expect(sel.selectInteractionMonitoringExpanded(initialState)).toMatchSnapshot();
   });
 });
 
@@ -51,9 +45,7 @@ describe('selectInteractionMonitoringSelected', () => {
         selected: 'item1'
       }
     });
-    expect(
-      sel.selectInteractionMonitoringSelected(initialState)
-    ).toMatchSnapshot();
+    expect(sel.selectInteractionMonitoringSelected(initialState)).toMatchSnapshot();
   });
 });
 
@@ -69,9 +61,7 @@ describe('userHasMonitorAllCallsPermission', () => {
         viewAllMonitoredCallsPermission: ['mockPermission3']
       }
     });
-    expect(
-      sel.userHasMonitorAllCallsPermission(initialState)
-    ).toMatchSnapshot();
+    expect(sel.userHasMonitorAllCallsPermission(initialState)).toMatchSnapshot();
   });
 });
 
@@ -103,8 +93,17 @@ describe('userHasViewAllMonitoredCallsPermission', () => {
         viewAllMonitoredCallsPermission: ['mockPermission3']
       }
     });
-    expect(
-      sel.userHasViewAllMonitoredCallsPermission(initialState)
-    ).toMatchSnapshot();
+    expect(sel.userHasViewAllMonitoredCallsPermission(initialState)).toMatchSnapshot();
+  });
+});
+
+describe('selectExtensions', () => {
+  it('returns extension list if user has extensions', () => {
+    const initialState = fromJS({
+      InteractionMonitoring: {
+        extensions: [{ description: 'test' }, { description: 'test 2' }]
+      }
+    });
+    expect(sel.selectExtensions(initialState)).toMatchSnapshot();
   });
 });

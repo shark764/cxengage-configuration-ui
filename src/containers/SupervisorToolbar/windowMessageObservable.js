@@ -20,23 +20,21 @@ export const filterArray = [
 
 export function messageObservable() {
   return fromEvent(window, 'message')
-    .filter(
-      ({ data }) =>
-        data.subscription && filterArray.includes(data.subscription.topic)
-    )
+    .filter(({ data }) => data.subscription && filterArray.includes(data.subscription.topic))
     .map(event => {
-      if (event.data.subscription.topic === 'monitorCall') {
+      let subscription = event.data.subscription;
+      if (subscription.topic === 'monitorCall') {
         store.dispatch(
           requestingMonitorCall(
-            event.data.subscription.response.interactionId,
-            event.data.subscription.response.defaultExtensionProvider,
-            event.data.subscription.response.transitionCall
+            subscription.response.interactionId,
+            subscription.response.transitionCall,
+            subscription.response.chosenExtension
           )
         );
       } else {
         store.dispatch({
-          type: event.data.subscription.topic,
-          response: event.data.subscription.response
+          type: subscription.topic,
+          response: subscription.response
         });
       }
       return event;
