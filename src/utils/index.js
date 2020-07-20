@@ -5,3 +5,5 @@ export const detailHeaderText = (itemArray, name) => {
     return name;
   }
 };
+
+export const parentUrl = document.referrer;

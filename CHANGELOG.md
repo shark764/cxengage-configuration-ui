@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.1] - 2020-07-16
+### Added
+- CXV1-22497 - Flow Management in Config 2 missing options to open versions in a new tab/window
+
 ## [0.81.0] - 2020-07-16
 ### Fixed
 - CXV1-22455 - Fix mute button

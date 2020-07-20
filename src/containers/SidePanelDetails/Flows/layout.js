@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { SidePanelTable, DetailHeader } from 'cx-ui-components';
-import { detailHeaderText } from '../../../utils';
+import { detailHeaderText, parentUrl } from '../../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -52,7 +52,10 @@ export default function FlowsDetailsPanel({
         viewSubEntity={openFlowDesigner}
         copySubEntity={copyListItem}
         updateSubEntity={(listItemId, row, subEntityName) => createDraftItem('drafts', row, subEntityName)}
-        items={versionsItems}
+        items={versionsItems.map(versionItem => ({
+          ...versionItem,
+          viewSubEntityHyperLink: parentUrl + '#/flows/viewer/' + versionItem.flowId + '/' + versionItem.version
+        }))}
         fields={versionsFields}
         defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
         fetching={flowsFetching && !versionsItems.length}
@@ -73,7 +76,10 @@ export default function FlowsDetailsPanel({
         deleteSubEntity={removeListItem}
         confirmDeleteSubEntity={true}
         copySubEntity={copyListItem}
-        items={draftsItems}
+        items={draftsItems.map(draftItem => ({
+          ...draftItem,
+          updateSubEntityHyperLink: parentUrl + '#/flows/editor/' + draftItem.flowId + '/' + draftItem.id
+        }))}
         fields={draftsFields}
         defaultSorted={[{ id: 'created', desc: true }]}
         fetching={flowsFetching && !draftsItems.length}
@@ -97,4 +103,9 @@ FlowsDetailsPanel.propTypes = {
   copyListItem: PropTypes.func,
   itemApiPending: PropTypes.string,
   createDraftItem: PropTypes.func
+};
+
+FlowsDetailsPanel.defaultProps = {
+  versionsItems: [],
+  draftsItems: []
 };

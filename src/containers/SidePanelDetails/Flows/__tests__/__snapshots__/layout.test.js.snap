@@ -7,7 +7,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
   Mock Child
   <DetailHeader
     open={true}
-    text="Published Versions"
+    text=" Published Versions"
     userHasUpdatePermission={true}
   />
   <_class
@@ -20,6 +20,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
         },
       ]
     }
+    items={Array []}
     tableType="sidePanel"
     updateSubEntity={[Function]}
     userHasUpdatePermission={true}
@@ -27,7 +28,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
   <DetailHeader
     onActionButtonClick={[Function]}
     open={true}
-    text="Drafts"
+    text=" Drafts"
     userHasUpdatePermission={true}
   />
   <_class
@@ -41,6 +42,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
         },
       ]
     }
+    items={Array []}
     tableType="sidePanel"
     userHasUpdatePermission={true}
   />
@@ -54,7 +56,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
   Mock Child
   <DetailHeader
     open={true}
-    text="Published Versions"
+    text=" Published Versions"
     userHasUpdatePermission={false}
   />
   <_class
@@ -67,6 +69,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
         },
       ]
     }
+    items={Array []}
     tableType="sidePanel"
     updateSubEntity={[Function]}
     userHasUpdatePermission={false}
@@ -74,7 +77,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
   <DetailHeader
     onActionButtonClick={[Function]}
     open={true}
-    text="Drafts"
+    text=" Drafts"
     userHasUpdatePermission={false}
   />
   <_class
@@ -88,6 +91,7 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
         },
       ]
     }
+    items={Array []}
     tableType="sidePanel"
     userHasUpdatePermission={false}
   />
