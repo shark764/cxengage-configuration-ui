@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.3] - 2020-07-22
+### Changed
+- CXV1-20515 - Fix Typeahead & Autocomplete components
+
 ## [0.81.2] - 2020-06-15
 ### Added
 - CXV1-22589 - Business Hours Unit Tests - Full pages
