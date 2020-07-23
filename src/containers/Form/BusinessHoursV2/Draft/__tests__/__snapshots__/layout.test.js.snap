@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DraftForm /> renders the component 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <InputField
+    componentType="input"
+    data-automation="BusinessHoursV2DraftFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Draft Name *"
+    name="name"
+  />
+  <Detail
+    label="Created"
+    value="Dec 12, 1995 03:24:00 AM"
+  />
+  <Detail
+    label="Updated"
+    value="Dec 12, 1995 03:24:00 AM"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="BusinessHoursV2DraftFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+  <SelectField
+    data-automation="BusinessHoursV2DraftTimezoneField"
+    disabled={false}
+    label="Timezone"
+    name="timezone"
+    options={
+      Array [
+        Object {
+          "label": "timezone 1",
+          "value": "timezone1",
+        },
+        Object {
+          "label": "Timezone 2",
+          "value": "timezone2",
+        },
+      ]
+    }
+    required={true}
+  />
+</form>
+`;

@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation if a rule every attribute it's not a integer when repeats it's not yearly it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "every": true,
+      "message": "The Every field should be a integer value",
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule every attribute it's not a number when repeats it's not yearly it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "every": true,
+      "message": "The Every field should be a number",
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule every attribute it's not a number when repeats it's not yearly it should return an error 2`] = `
+Object {
+  "rules": Array [
+    Object {
+      "every": true,
+      "message": "The Every field should be a number",
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule has an endDate and it's lesser than the startDate it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "endDate": true,
+      "message": "end date should be after start date",
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule has an interval in which the start time it's greater than the end time, it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "hours": Object {
+        "intervals": Array [
+          Object {
+            "end": true,
+            "start": true,
+          },
+          Object {
+            "end": false,
+            "start": false,
+          },
+        ],
+      },
+      "message": "An interval has a greater start time than its end time",
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule has intervals and they overlap each other, it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "hours": Object {
+        "intervals": Array [
+          Object {
+            "end": true,
+            "start": true,
+          },
+          Object {
+            "end": false,
+            "start": false,
+          },
+        ],
+      },
+      "message": "An interval is overlapping with another one",
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule has no every attribute it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "every": true,
+      "message": "You should set every how many days should the rule take effect",
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule has no name it returns an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "The rule should have a name",
+      "name": true,
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule has no repeat attribute it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "You should select the rate at which the rule repeats",
+      "repeats": true,
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule has no startDate it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "You should select a start date",
+      "startDate": true,
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule has no type it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "The rule should have a type",
+      "type": true,
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule repeats montlhly and the value attribute on the "on" attribute it's "day" and type is not within 1 and 31 (days on month), it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "The numeric value in the \\"On\\" field has to be between 1 and 31(days on a month)",
+      "on": Object {
+        "type": true,
+      },
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule repeats montlhly or yearly and either type or value inside on are undefined it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "type or value on the \\"On\\" field is undefined",
+      "on": Object {
+        "type": true,
+        "value": true,
+      },
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule repeats montlhly or yearly and the value attribute on the "on" attribute it's "day" and the type attribute on the on attribute is not an integer, it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "type on the \\"On\\" field should be a number",
+      "on": Object {
+        "type": true,
+      },
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule repeats weekly and on it's not an array or the array has no items it should throw an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "You should select the days on the week in which the rule should take effect",
+      "on": true,
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule repeats yearly and the value attribute on the "on" attribute it's "day" and type is not withind 1 and the days of the month set on the every attribute on the rule, it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "errorMessage": "The numeric value in the \\"On\\" field has to be between 1 and 31 (Number of days on march, considering a day more when leap year on Febraury)",
+      "on": Object {
+        "type": true,
+      },
+    },
+  ],
+}
+`;
+
+exports[`formValidation if no rules are provided then there's no error 1`] = `Object {}`;
+
+exports[`formValidation if rules provided are valid, it shouldn't return an error 1`] = `Object {}`;
+
+exports[`formValidation if two rules have the same name it returns an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "Rule name should be unique within the draft",
+      "name": true,
+    },
+    Object {
+      "message": "Rule name should be unique within the draft",
+      "name": true,
+    },
+  ],
+}
+`;

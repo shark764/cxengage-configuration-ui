@@ -19,35 +19,8 @@ export default class CalendarEvents extends Component {
           .endOf('month')
           .endOf('week')
           .toString()
-      },
-      eventList: []
+      }
     };
-  }
-
-  componentDidMount() {
-    const { selectedBusinessHourVersion, rules } = this.props;
-    if (selectedBusinessHourVersion && rules) {
-      this.setState({
-        eventList: this.handleCalendarEvents()
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { selectedBusinessHourVersion: prevselectedBusinessHourVersion, rules: prevRules } = prevProps;
-    const { selectedBusinessHourVersion, rules } = this.props;
-    const { calendarDateRange: prevCalendarDateRange } = prevState;
-    const { calendarDateRange } = this.state;
-    if (
-      selectedBusinessHourVersion !== prevselectedBusinessHourVersion ||
-      (!prevRules && rules) ||
-      prevCalendarDateRange.start !== calendarDateRange.start ||
-      prevCalendarDateRange.end !== calendarDateRange.end
-    ) {
-      this.setState({
-        eventList: this.handleCalendarEvents()
-      });
-    }
   }
 
   updateCalendarDateRange = ({ dateRange }) => {
@@ -833,7 +806,7 @@ export default class CalendarEvents extends Component {
     const calendarEvents = this.handleCalendarEvents();
     return (
       <MixCalendar
-        eventList={this.props.selectedBusinessHourVersion ? this.state.eventList : calendarEvents}
+        eventList={calendarEvents}
         eventType={this.props.eventType}
         onChange={e => this.updateCalendarDateRange(e)}
       />
@@ -843,6 +816,5 @@ export default class CalendarEvents extends Component {
 
 CalendarEvents.propTypes = {
   eventType: PropTypes.array,
-  rules: PropTypes.array,
-  selectedBusinessHourVersion: PropTypes.string
+  rules: PropTypes.array
 };

@@ -497,7 +497,7 @@ Object {
       },
     ],
     "subEntityName": "drafts",
-    "title": "Business Hours V",
+    "title": "Business Hour",
     "updateFormDependencies": Array [
       "timezones",
     ],

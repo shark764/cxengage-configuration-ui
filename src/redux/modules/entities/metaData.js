@@ -847,6 +847,8 @@ entities.dispositionLists.columns = [
 
 // Business Hours V2
 entities.businessHoursV2.pageTitle = 'Business Hours Management';
+// We overwrite the title of the entity in here by setting the title attribute "by hand"
+entities.businessHoursV2.title = 'Business Hour';
 entities.businessHoursV2.helpLink = '/Help/Content/Configuration/Business%20Hours/Business_Hours.htm';
 // drafts and versions have the same schema but what we create from UI are drafts and what we publish are versions
 entities.businessHoursV2.subEntityName = 'drafts';

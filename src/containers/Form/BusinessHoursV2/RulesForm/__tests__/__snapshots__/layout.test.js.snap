@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RulesFieldArray /> renders the component 1`] = `
+<styled.div>
+  <React.Fragment
+    key="0"
+  >
+    <BusinessHoursRuleField
+      cancel={[Function]}
+      copyAction={[Function]}
+      deleteAction={[Function]}
+      key="0"
+      name="rules[0]"
+      onSave={[Function]}
+      showActions={false}
+    />
+    <br />
+  </React.Fragment>
+  <React.Fragment
+    key="1"
+  >
+    <BusinessHoursRuleField
+      cancel={[Function]}
+      copyAction={[Function]}
+      deleteAction={[Function]}
+      key="1"
+      name="rules[1]"
+      onSave={[Function]}
+      showActions={true}
+    />
+    <br />
+  </React.Fragment>
+</styled.div>
+`;

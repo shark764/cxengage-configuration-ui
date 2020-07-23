@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DraftFullPagePanel /> renders the component 1`] = `
+<React.Fragment>
+  <styled.div>
+    <styled.div>
+      <styled.div>
+        <ConfirmationWrapper
+          confirmBtnCallback={[Function]}
+          mainText="You have unsaved changes that will be lost!."
+          secondaryText="Click Confirm to discard changes, or Cancel to continue editing."
+        >
+          <Button
+            buttonType="secondary"
+          >
+            Cancel
+          </Button>
+        </ConfirmationWrapper>
+      </styled.div>
+      <styled.div>
+        <Button
+          buttonType="primary"
+          onClick={[Function]}
+        >
+          Save Draft
+        </Button>
+      </styled.div>
+      <styled.div>
+        <Button
+          buttonType="primary"
+          onClick={[Function]}
+        >
+          Save and Publish
+        </Button>
+      </styled.div>
+    </styled.div>
+    <Styled(Connect(withRouter(SidePanelHeader))) />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <Connect(ReduxForm) />
+    </styled.div>
+    <styled.div>
+      <CalendarEvents
+        eventType={
+          Array [
+            Object {
+              "color": "#51CE90",
+              "id": 0,
+              "name": "Regular Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F1D29D",
+              "id": 1,
+              "name": "One-Time extended Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F08695",
+              "id": 2,
+              "name": "Blackout Exceptions",
+              "state": true,
+            },
+            Object {
+              "color": "#8383FD",
+              "id": 3,
+              "name": "Blackout One-Time Exceptions",
+              "state": true,
+            },
+          ]
+        }
+        rules={
+          Array [
+            Object {
+              "every": 1,
+              "hours": Object {
+                "allDay": true,
+              },
+              "id": "rule-id-1",
+              "name": "rule name",
+              "on": Array [
+                "monday",
+                "wednesday",
+                "friday",
+              ],
+              "repeats": "weekly",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "regular-hours",
+            },
+            Object {
+              "endDate": 2000-12-17T00:00:00.000Z,
+              "every": 1,
+              "hours": Object {
+                "allDay": false,
+                "intervals": Array [
+                  Object {
+                    "end": 1020,
+                    "start": 540,
+                  },
+                ],
+              },
+              "id": "rule-id-2",
+              "name": "rule name 2",
+              "on": Object {
+                "type": "last",
+                "value": "sunday",
+              },
+              "repeats": "monthy",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "blackout-exceptions",
+            },
+          ]
+        }
+      />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <Connect(DetailWrapper)
+      customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+        fontSize="20px"
+        onActionButtonClick={[Function]}
+        text="Hours and Exceptions"
+        userHasUpdatePermission={true}
+      />
+      <Connect(ReduxForm) />
+    </Connect(DetailWrapper)>
+  </styled.div>
+</React.Fragment>
+`;
+
+exports[`<DraftFullPagePanel /> renders the publish modal within the component 1`] = `
+<React.Fragment>
+  <styled.div>
+    <styled.div>
+      <styled.div>
+        <ConfirmationWrapper
+          confirmBtnCallback={[Function]}
+          mainText="You have unsaved changes that will be lost!."
+          secondaryText="Click Confirm to discard changes, or Cancel to continue editing."
+        >
+          <Button
+            buttonType="secondary"
+          >
+            Cancel
+          </Button>
+        </ConfirmationWrapper>
+      </styled.div>
+      <styled.div>
+        <Button
+          buttonType="primary"
+          onClick={[Function]}
+        >
+          Save Draft
+        </Button>
+      </styled.div>
+      <styled.div>
+        <Button
+          buttonType="primary"
+          onClick={[Function]}
+        >
+          Save and Publish
+        </Button>
+      </styled.div>
+    </styled.div>
+    <Styled(Connect(withRouter(SidePanelHeader))) />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <Connect(ReduxForm) />
+    </styled.div>
+    <styled.div>
+      <CalendarEvents
+        eventType={
+          Array [
+            Object {
+              "color": "#51CE90",
+              "id": 0,
+              "name": "Regular Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F1D29D",
+              "id": 1,
+              "name": "One-Time extended Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F08695",
+              "id": 2,
+              "name": "Blackout Exceptions",
+              "state": true,
+            },
+            Object {
+              "color": "#8383FD",
+              "id": 3,
+              "name": "Blackout One-Time Exceptions",
+              "state": true,
+            },
+          ]
+        }
+        rules={
+          Array [
+            Object {
+              "every": 1,
+              "hours": Object {
+                "allDay": true,
+              },
+              "id": "rule-id-1",
+              "name": "rule name",
+              "on": Array [
+                "monday",
+                "wednesday",
+                "friday",
+              ],
+              "repeats": "weekly",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "regular-hours",
+            },
+            Object {
+              "endDate": 2000-12-17T00:00:00.000Z,
+              "every": 1,
+              "hours": Object {
+                "allDay": false,
+                "intervals": Array [
+                  Object {
+                    "end": 1020,
+                    "start": 540,
+                  },
+                ],
+              },
+              "id": "rule-id-2",
+              "name": "rule name 2",
+              "on": Object {
+                "type": "last",
+                "value": "sunday",
+              },
+              "repeats": "monthy",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "blackout-exceptions",
+            },
+          ]
+        }
+      />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <Connect(DetailWrapper)
+      customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+        fontSize="20px"
+        onActionButtonClick={[Function]}
+        text="Hours and Exceptions"
+        userHasUpdatePermission={true}
+      />
+      <Connect(ReduxForm) />
+    </Connect(DetailWrapper)>
+  </styled.div>
+  <Modal
+    onMaskClick={[Function]}
+  >
+    <ReduxForm
+      initialValues={
+        Immutable.Map {
+          "versionName": "Draft Name",
+          "makeActive": false,
+        }
+      }
+      isInitialDraft={false}
+      onCancel={[Function]}
+      onSubmit={[Function]}
+      validate={[Function]}
+    />
+  </Modal>
+</React.Fragment>
+`;

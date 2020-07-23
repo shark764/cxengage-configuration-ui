@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DraftForm renders renders 1`] = `
+<ReduxForm
+  inherited={false}
+  initialValues={
+    Immutable.Map {
+      "created": 1995-12-17T00:00:00.000Z,
+      "updated": 1995-12-17T00:00:00.000Z,
+    }
+  }
+  isPublishing={false}
+  isSaving={false}
+  key="edit"
+  onCancel={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  timezones={
+    Array [
+      Object {
+        "label": "timezone 1",
+        "value": "timezone1",
+      },
+      Object {
+        "label": "Timezone 2",
+        "value": "timezone2",
+      },
+    ]
+  }
+  userHasUpdatePermission={true}
+>
+  Child
+</ReduxForm>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "inherited": false,
+  "initialValues": Immutable.Map {
+    "created": 1995-12-17T00:00:00.000Z,
+    "updated": 1995-12-17T00:00:00.000Z,
+  },
+  "isPublishing": false,
+  "isSaving": false,
+  "key": "edit",
+  "timezones": Array [
+    Object {
+      "label": "timezone 1",
+      "value": "timezone1",
+    },
+    Object {
+      "label": "Timezone 2",
+      "value": "timezone2",
+    },
+  ],
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`mapDispatchToProps maps the dispatch to the props correctly 1`] = `
+Object {
+  "onCancel": [Function],
+}
+`;

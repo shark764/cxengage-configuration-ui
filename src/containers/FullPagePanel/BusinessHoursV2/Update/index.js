@@ -30,7 +30,7 @@ export const mapStateToProps = state => ({
   rules: selectRules(state),
   isSaving: isCreating(state),
   inherited: isInherited(state),
-  userHasViewPermission: userHasPermissions(state, ['PLATFORM_VIEW_ALL']),
+  userHasViewPermission: userHasPermissions(state, ['PLATFORM_VIEW_ALL', 'VIEW_ALL_BUSINESS_HOURS']),
   userHasUpdatePermission: userHasUpdatePermission(state),
   userHasSharePermission: userHasSharePermission(state),
   drafts: (!(isInherited(state) || !userHasUpdatePermission(state)) && selectDrafts(state)) || [],

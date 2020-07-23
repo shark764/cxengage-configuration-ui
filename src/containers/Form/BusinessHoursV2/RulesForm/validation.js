@@ -8,7 +8,7 @@ const repeats = {
 
 const daysOnMonth = {
   january: 31,
-  febraury: 29, //Max number fo days febraury can have (leap year)
+  febraury: 29, //Max number of days febraury can have (leap year)
   march: 31,
   april: 30,
   may: 31,
@@ -46,7 +46,9 @@ export const ruleValidation = (rule, rules) => {
       name: true,
       message: 'The rule should have a name'
     };
-  } else if (rules.some(r => r.name.trim() === rule.name.trim() && !isEmpty(rule.name) && r.id !== rule.id)) {
+  } else if (
+    rules.some(r => !isEmpty(rule.name) && !isEmpty(r.name) && r.name.trim() === rule.name.trim() && r.id !== rule.id)
+  ) {
     error = {
       name: true,
       message: 'Rule name should be unique within the draft'
@@ -115,7 +117,7 @@ export const ruleValidation = (rule, rules) => {
       on: {
         type: true
       },
-      message: 'value on the "On" field should be a number'
+      message: 'type on the "On" field should be a number'
     };
   } else if (
     !rule.type.includes('one-time') &&
@@ -150,27 +152,9 @@ export const ruleValidation = (rule, rules) => {
     rule.hours &&
     !rule.hours.allDay &&
     rule.hours.intervals &&
-    rule.hours.intervals.findIndex(
-      (interval, ind, intervals) =>
-        interval.start > interval.end ||
-        intervals.some(
-          (int, i) =>
-            i !== ind &&
-            ((interval.start >= int.start && interval.start <= int.end) ||
-              (interval.end >= int.start && interval.end <= int.end))
-        )
-    ) > -1
+    rule.hours.intervals.findIndex(interval => interval.start > interval.end) > -1
   ) {
-    const index = rule.hours.intervals.findIndex(
-      (interval, ind, intervals) =>
-        interval.start > interval.end ||
-        intervals.some(
-          (int, i) =>
-            i !== ind &&
-            ((interval.start >= int.start && interval.start <= int.end) ||
-              (interval.end >= int.start && interval.end <= int.end))
-        )
-    );
+    const index = rule.hours.intervals.findIndex((interval, ind, intervals) => interval.start > interval.end);
     let intervalErrors = Array(rule.hours.intervals.length).fill({
       start: false,
       end: false
@@ -185,6 +169,42 @@ export const ruleValidation = (rule, rules) => {
         intervals: intervalErrors
       },
       message: 'An interval has a greater start time than its end time'
+    };
+  } else if (
+    rule.hours &&
+    !rule.hours.allDay &&
+    rule.hours.intervals &&
+    rule.hours.intervals.findIndex((interval, ind, intervals) =>
+      intervals.some(
+        (int, i) =>
+          i !== ind &&
+          ((interval.start >= int.start && interval.start <= int.end) ||
+            (interval.end >= int.start && interval.end <= int.end))
+      )
+    ) > -1
+  ) {
+    const index = rule.hours.intervals.findIndex((interval, ind, intervals) =>
+      intervals.some(
+        (int, i) =>
+          i !== ind &&
+          ((interval.start >= int.start && interval.start <= int.end) ||
+            (interval.end >= int.start && interval.end <= int.end))
+      )
+    );
+    let intervalErrors = Array(rule.hours.intervals.length).fill({
+      start: false,
+      end: false
+    });
+    intervalErrors[index] = {
+      start: true,
+      end: true
+    };
+
+    error = {
+      hours: {
+        intervals: intervalErrors
+      },
+      message: 'An interval is overlapping with another one'
     };
   }
 

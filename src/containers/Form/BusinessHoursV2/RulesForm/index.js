@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { isValid, isDirty } from 'redux-form/immutable';
-import { reduxForm } from 'redux-form/immutable';
+import { isValid, isDirty, reduxForm } from 'redux-form/immutable';
 import BusinessHoursV2RulesForm from './layout';
 import { subEntityFormSubmission } from '../../../../redux/modules/form/selectors';
 import { userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';

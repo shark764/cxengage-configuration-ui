@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions map properly 1`] = `
+Object {
+  "addRule": [Function],
+  "cancel": [Function],
+  "publishDraft": [Function],
+  "saveBeforePublish": [Function],
+  "saveDraft": [Function],
+}
+`;
+
+exports[`DraftFullPagePanel renders 1`] = `
+<BusinessHoursV2DraftEditFullPage
+  addRule={[Function]}
+  cancel={[Function]}
+  draftName="draftName"
+  formsAreDirty={true}
+  formsAreInvalid={false}
+  isPublishingDraft={false}
+  isSubEntitySaving={false}
+  publishDraft={[Function]}
+  rules={
+    Immutable.List [
+      Object {
+        "every": 1,
+        "hours": Object {
+          "allDay": true,
+        },
+        "id": "rule-id-1",
+        "name": "rule name",
+        "on": Array [
+          "monday",
+          "wednesday",
+          "friday",
+        ],
+        "repeats": "weekly",
+        "startDate": 1995-12-17T00:00:00.000Z,
+        "type": "regular-hours",
+      },
+      Object {
+        "endDate": 2000-12-17T00:00:00.000Z,
+        "every": 1,
+        "hours": Object {
+          "allDay": false,
+          "intervals": Array [
+            Object {
+              "end": 1020,
+              "start": 540,
+            },
+          ],
+        },
+        "id": "rule-id-2",
+        "name": "rule name 2",
+        "on": Object {
+          "type": "last",
+          "value": "sunday",
+        },
+        "repeats": "monthy",
+        "startDate": 1995-12-17T00:00:00.000Z,
+        "type": "blackout-exceptions",
+      },
+    ]
+  }
+  saveBeforePublish={[Function]}
+  saveDraft={[Function]}
+  shouldPublish={true}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  userHasUpdatePermission={true}
+  versions={
+    Array [
+      Object {
+        "name": "Version 1",
+      },
+      Object {
+        "name": "version 2",
+      },
+    ]
+  }
+>
+  Child
+</BusinessHoursV2DraftEditFullPage>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "draftName": "draftName",
+  "formsAreDirty": true,
+  "formsAreInvalid": false,
+  "isPublishingDraft": false,
+  "isSubEntitySaving": false,
+  "rules": Immutable.List [
+    Object {
+      "every": 1,
+      "hours": Object {
+        "allDay": true,
+      },
+      "id": "rule-id-1",
+      "name": "rule name",
+      "on": Array [
+        "monday",
+        "wednesday",
+        "friday",
+      ],
+      "repeats": "weekly",
+      "startDate": 1995-12-17T00:00:00.000Z,
+      "type": "regular-hours",
+    },
+    Object {
+      "endDate": 2000-12-17T00:00:00.000Z,
+      "every": 1,
+      "hours": Object {
+        "allDay": false,
+        "intervals": Array [
+          Object {
+            "end": 1020,
+            "start": 540,
+          },
+        ],
+      },
+      "id": "rule-id-2",
+      "name": "rule name 2",
+      "on": Object {
+        "type": "last",
+        "value": "sunday",
+      },
+      "repeats": "monthy",
+      "startDate": 1995-12-17T00:00:00.000Z,
+      "type": "blackout-exceptions",
+    },
+  ],
+  "shouldPublish": true,
+  "userHasUpdatePermission": true,
+  "versions": Array [
+    Object {
+      "name": "Version 1",
+    },
+    Object {
+      "name": "version 2",
+    },
+  ],
+}
+`;

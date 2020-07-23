@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions map properly 1`] = `
+Object {
+  "createDraft": [Function],
+  "removeListItem": [Function],
+  "setSelectedBusinessHourVersion": [Function],
+  "setSelectedSubEntityId": [Function],
+}
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "businessHourId": "mock-seledted-business-hour",
+  "businessHoursList": Array [
+    Object {
+      "id": "business-hour-id ",
+      "name": "business hour 1",
+    },
+    Object {
+      "id": "business-hours-id2",
+      "name": "business hour 2",
+    },
+  ],
+  "drafts": Array [
+    Object {
+      "id": "draft1",
+      "name": "draft 1",
+      "version": "Draft",
+    },
+    Object {
+      "id": "draft2",
+      "name": "draft 2",
+      "version": "Draft",
+    },
+  ],
+  "inherited": false,
+  "isCreatingDraft": false,
+  "isSaving": false,
+  "parentTenantName": "Parent Tenant",
+  "rules": Array [
+    Object {
+      "name": "rule 1",
+    },
+    Object {
+      "name": "rule 2",
+    },
+  ],
+  "selectedBusinessHourVersion": "mock-selected-version",
+  "userHasSharePermission": true,
+  "userHasUpdatePermission": true,
+  "userHasViewPermission": true,
+  "versions": Array [
+    Object {
+      "id": "business-hour-id ",
+      "name": "business hour 1",
+    },
+    Object {
+      "id": "business-hours-id2",
+      "name": "business hour 2",
+    },
+  ],
+}
+`;
+
+exports[`UpdateBusinessHoursV2FullPagePanel renders 1`] = `
+<BusinessHoursV2UpdateFullPage
+  businessHourId="mock-seledted-business-hour"
+  businessHoursList={
+    Array [
+      Object {
+        "id": "business-hour-id ",
+        "name": "business hour 1",
+      },
+      Object {
+        "id": "business-hours-id2",
+        "name": "business hour 2",
+      },
+    ]
+  }
+  createDraft={[Function]}
+  drafts={
+    Array [
+      Object {
+        "id": "draft1",
+        "name": "draft 1",
+        "version": "Draft",
+      },
+      Object {
+        "id": "draft2",
+        "name": "draft 2",
+        "version": "Draft",
+      },
+    ]
+  }
+  events={Array []}
+  inherited={false}
+  isCreatingDraft={false}
+  isSaving={false}
+  parentTenantName="Parent Tenant"
+  removeListItem={[Function]}
+  rules={
+    Array [
+      Object {
+        "name": "rule 1",
+      },
+      Object {
+        "name": "rule 2",
+      },
+    ]
+  }
+  selectedBusinessHourVersion="mock-selected-version"
+  setSelectedBusinessHourVersion={[Function]}
+  setSelectedSubEntityId={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  userHasSharePermission={true}
+  userHasUpdatePermission={true}
+  userHasViewPermission={true}
+  versions={
+    Array [
+      Object {
+        "id": "business-hour-id ",
+        "name": "business hour 1",
+      },
+      Object {
+        "id": "business-hours-id2",
+        "name": "business hour 2",
+      },
+    ]
+  }
+>
+  Child
+</BusinessHoursV2UpdateFullPage>
+`;

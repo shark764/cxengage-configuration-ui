@@ -11,7 +11,8 @@ const BusinessRuleContainer = styled.div`
   margin-left: 40px;
 `;
 
-const RulesFieldArray = ({ fields, addRule, disabled, viewOnly }) => (
+// Exporting this component for testing purposes
+export const RulesFieldArray = ({ fields, addRule, disabled, viewOnly }) => (
   <BusinessRuleContainer>
     {fields.map((ruleName, index, fields) => (
       <Fragment key={index}>

@@ -312,11 +312,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
             <BusinessHoursV2 />
           </FieldsColumn>
           <CalendarColumn>
-            <CalendarEvents
-              rules={this.props.rules}
-              eventType={eventType}
-              selectedBusinessHourVersion={this.props.selectedBusinessHourVersion}
-            />
+            <CalendarEvents rules={this.props.rules} eventType={eventType} />
           </CalendarColumn>
           <br />
           <RowWrapper>
@@ -366,7 +362,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                   }
                   confirmDeleteSubEntity={true}
                   fetching={!this.props.versions || !this.props.drafts}
-                  showInheritedViewOnlyViewButtonOnItem={this.props.inherited || !this.props.userHasUpdatePermission} // View button available in view only or inherited
+                  showInheritedViewOnlyViewButtonOnItem={this.props.inherited || this.props.userHasViewPermission} // View button available in view only or inherited
                   showInheritedViewOnlyCopyButtonOnItem={this.props.inherited} // Copy button available on inherited business hours
                   inherited={this.props.inherited}
                 />
@@ -421,7 +417,6 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               })}
               isSaving={this.props.isCreatingDraft}
               onCancel={this.toggleCreateModal}
-              updateVersion={this.state.updateVersion}
             />
           </Modal>
         )}

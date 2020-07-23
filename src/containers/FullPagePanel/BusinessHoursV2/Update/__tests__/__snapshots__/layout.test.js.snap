@@ -1,0 +1,1202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UpdateBusinessHoursV2 /> it shows as inherited when editing an inherited business hour 1`] = `
+<React.Fragment>
+  <styled.div>
+    <Styled(Connect(SidePanelActions))
+      hideSubmit={true}
+    />
+    <Styled(Connect(withRouter(SidePanelHeader))) />
+  </styled.div>
+  <Styled(DetailsPanelAlert)
+    text="This Business Hours is inherited from Parent Tenant and cannot be edited."
+  />
+  <styled.div>
+    <styled.div>
+      <Connect(Connect(ReduxForm)) />
+    </styled.div>
+    <styled.div>
+      <CalendarEvents
+        eventType={
+          Array [
+            Object {
+              "color": "#51CE90",
+              "id": 0,
+              "name": "Regular Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F1D29D",
+              "id": 1,
+              "name": "One-Time extended Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F08695",
+              "id": 2,
+              "name": "Blackout Exceptions",
+              "state": true,
+            },
+            Object {
+              "color": "#8383FD",
+              "id": 3,
+              "name": "Blackout One-Time Exceptions",
+              "state": true,
+            },
+          ]
+        }
+        rules={
+          Immutable.List [
+            Object {
+              "every": 1,
+              "hours": Object {
+                "allDay": true,
+              },
+              "id": "rule-id-1",
+              "name": "rule name",
+              "on": Array [
+                "monday",
+                "wednesday",
+                "friday",
+              ],
+              "repeats": "weekly",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "regular-hours",
+            },
+            Object {
+              "endDate": 2000-12-17T00:00:00.000Z,
+              "every": 1,
+              "hours": Object {
+                "allDay": false,
+                "intervals": Array [
+                  Object {
+                    "end": 1020,
+                    "start": 540,
+                  },
+                ],
+              },
+              "id": "rule-id-2",
+              "name": "rule name 2",
+              "on": Object {
+                "type": "last",
+                "value": "sunday",
+              },
+              "repeats": "monthy",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "blackout-exceptions",
+            },
+          ]
+        }
+      />
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Versions"
+        />
+        <br />
+        <styled.div>
+          <label>
+            Versioning (2 Published, 0 Drafts)
+          </label>
+          <DetailHeader
+            inherited={true}
+            onActionButtonClick={[Function]}
+            open={true}
+            text="2 Published"
+            userHasUpdatePermission={false}
+          />
+          <_class
+            confirmDeleteSubEntity={true}
+            copySubEntity={[Function]}
+            defaultSorted={
+              Array [
+                Object {
+                  "desc": true,
+                  "id": "version",
+                },
+              ]
+            }
+            deleteSubEntity={[Function]}
+            fetching={false}
+            fields={
+              Array [
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Version",
+                  "name": "version",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Name",
+                  "name": "name",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Timezone",
+                  "name": "timezone",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Created By",
+                  "name": "createdBy",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "format": "datetime",
+                  "label": "Created On",
+                  "name": "createdOn",
+                  "required": true,
+                },
+              ]
+            }
+            inherited={true}
+            items={
+              Array [
+                Object {
+                  "id": "version1",
+                  "name": "version 1",
+                  "version": "V1",
+                },
+                Object {
+                  "id": "version2",
+                  "name": "version 2",
+                  "version": "V2",
+                },
+              ]
+            }
+            shouldShowCopyButtonOnItem={[Function]}
+            shouldShowDeleteButtonOnItem={[Function]}
+            shouldShowUpdateButtonOnItem={[Function]}
+            shouldShowViewButtonOnItem={[Function]}
+            showInheritedViewOnlyCopyButtonOnItem={true}
+            showInheritedViewOnlyViewButtonOnItem={true}
+            updateSubEntity={[Function]}
+            userHasUpdatePermission={true}
+            userHasViewPermission={true}
+            viewSubEntity={[Function]}
+          />
+        </styled.div>
+      </Connect(DetailWrapper)>
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Hours and Exceptions"
+        />
+        <Connect(ReduxForm) />
+      </Connect(DetailWrapper)>
+    </styled.div>
+  </styled.div>
+</React.Fragment>
+`;
+
+exports[`<UpdateBusinessHoursV2 /> it shows copy modal to copy a version/draft to another business hour 1`] = `
+<React.Fragment>
+  <styled.div>
+    <Styled(Connect(SidePanelActions))
+      hideSubmit={false}
+    />
+    <Styled(Connect(withRouter(SidePanelHeader))) />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <Connect(Connect(ReduxForm)) />
+    </styled.div>
+    <styled.div>
+      <CalendarEvents
+        eventType={
+          Array [
+            Object {
+              "color": "#51CE90",
+              "id": 0,
+              "name": "Regular Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F1D29D",
+              "id": 1,
+              "name": "One-Time extended Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F08695",
+              "id": 2,
+              "name": "Blackout Exceptions",
+              "state": true,
+            },
+            Object {
+              "color": "#8383FD",
+              "id": 3,
+              "name": "Blackout One-Time Exceptions",
+              "state": true,
+            },
+          ]
+        }
+        rules={
+          Immutable.List [
+            Object {
+              "every": 1,
+              "hours": Object {
+                "allDay": true,
+              },
+              "id": "rule-id-1",
+              "name": "rule name",
+              "on": Array [
+                "monday",
+                "wednesday",
+                "friday",
+              ],
+              "repeats": "weekly",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "regular-hours",
+            },
+            Object {
+              "endDate": 2000-12-17T00:00:00.000Z,
+              "every": 1,
+              "hours": Object {
+                "allDay": false,
+                "intervals": Array [
+                  Object {
+                    "end": 1020,
+                    "start": 540,
+                  },
+                ],
+              },
+              "id": "rule-id-2",
+              "name": "rule name 2",
+              "on": Object {
+                "type": "last",
+                "value": "sunday",
+              },
+              "repeats": "monthy",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "blackout-exceptions",
+            },
+          ]
+        }
+      />
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Versions"
+        />
+        <br />
+        <styled.div>
+          <label>
+            Versioning (2 Published, 2 Drafts)
+          </label>
+          <DetailHeader
+            onActionButtonClick={[Function]}
+            open={true}
+            text="2 Published"
+            userHasUpdatePermission={true}
+          />
+          <_class
+            confirmDeleteSubEntity={true}
+            copySubEntity={[Function]}
+            defaultSorted={
+              Array [
+                Object {
+                  "desc": true,
+                  "id": "version",
+                },
+              ]
+            }
+            deleteSubEntity={[Function]}
+            fetching={false}
+            fields={
+              Array [
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Version",
+                  "name": "version",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Name",
+                  "name": "name",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Timezone",
+                  "name": "timezone",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Created By",
+                  "name": "createdBy",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "format": "datetime",
+                  "label": "Created On",
+                  "name": "createdOn",
+                  "required": true,
+                },
+              ]
+            }
+            items={
+              Array [
+                Object {
+                  "id": "version1",
+                  "name": "version 1",
+                  "version": "V1",
+                },
+                Object {
+                  "id": "version2",
+                  "name": "version 2",
+                  "version": "V2",
+                },
+                Object {
+                  "id": "draft1",
+                  "name": "draft 1",
+                  "version": "Draft",
+                },
+                Object {
+                  "id": "draft2",
+                  "name": "draft 2",
+                  "version": "Draft",
+                },
+              ]
+            }
+            shouldShowCopyButtonOnItem={[Function]}
+            shouldShowDeleteButtonOnItem={[Function]}
+            shouldShowUpdateButtonOnItem={[Function]}
+            shouldShowViewButtonOnItem={[Function]}
+            showInheritedViewOnlyViewButtonOnItem={true}
+            updateSubEntity={[Function]}
+            userHasUpdatePermission={true}
+            userHasViewPermission={true}
+            viewSubEntity={[Function]}
+          />
+        </styled.div>
+      </Connect(DetailWrapper)>
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Hours and Exceptions"
+        />
+        <Connect(ReduxForm) />
+      </Connect(DetailWrapper)>
+    </styled.div>
+  </styled.div>
+  <Modal
+    onMaskClick={[Function]}
+  >
+    <ReduxForm
+      businessHoursList={
+        Array [
+          Object {
+            "id": "business-hour-id ",
+            "name": "business hour 1",
+          },
+          Object {
+            "id": "business-hours-id2",
+            "name": "business hour 2",
+          },
+        ]
+      }
+      copyVersionId="version1"
+      drafts={
+        Array [
+          Object {
+            "id": "draft1",
+            "name": "draft 1",
+            "version": "Draft",
+          },
+          Object {
+            "id": "draft2",
+            "name": "draft 2",
+            "version": "Draft",
+          },
+        ]
+      }
+      initialValues={
+        Immutable.Map {
+          "draftName": "Copy of version 1",
+        }
+      }
+      isCopyVersion={true}
+      onCancel={[Function]}
+      onSubmit={[Function]}
+      validate={[Function]}
+      versions={
+        Array [
+          Object {
+            "id": "version1",
+            "name": "version 1",
+            "version": "V1",
+          },
+          Object {
+            "id": "version2",
+            "name": "version 2",
+            "version": "V2",
+          },
+        ]
+      }
+    />
+  </Modal>
+</React.Fragment>
+`;
+
+exports[`<UpdateBusinessHoursV2 /> it shows copy modal to create a new draft within the same business hour 1`] = `
+<React.Fragment>
+  <styled.div>
+    <Styled(Connect(SidePanelActions))
+      hideSubmit={false}
+    />
+    <Styled(Connect(withRouter(SidePanelHeader))) />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <Connect(Connect(ReduxForm)) />
+    </styled.div>
+    <styled.div>
+      <CalendarEvents
+        eventType={
+          Array [
+            Object {
+              "color": "#51CE90",
+              "id": 0,
+              "name": "Regular Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F1D29D",
+              "id": 1,
+              "name": "One-Time extended Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F08695",
+              "id": 2,
+              "name": "Blackout Exceptions",
+              "state": true,
+            },
+            Object {
+              "color": "#8383FD",
+              "id": 3,
+              "name": "Blackout One-Time Exceptions",
+              "state": true,
+            },
+          ]
+        }
+        rules={
+          Immutable.List [
+            Object {
+              "every": 1,
+              "hours": Object {
+                "allDay": true,
+              },
+              "id": "rule-id-1",
+              "name": "rule name",
+              "on": Array [
+                "monday",
+                "wednesday",
+                "friday",
+              ],
+              "repeats": "weekly",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "regular-hours",
+            },
+            Object {
+              "endDate": 2000-12-17T00:00:00.000Z,
+              "every": 1,
+              "hours": Object {
+                "allDay": false,
+                "intervals": Array [
+                  Object {
+                    "end": 1020,
+                    "start": 540,
+                  },
+                ],
+              },
+              "id": "rule-id-2",
+              "name": "rule name 2",
+              "on": Object {
+                "type": "last",
+                "value": "sunday",
+              },
+              "repeats": "monthy",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "blackout-exceptions",
+            },
+          ]
+        }
+      />
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Versions"
+        />
+        <br />
+        <styled.div>
+          <label>
+            Versioning (2 Published, 2 Drafts)
+          </label>
+          <DetailHeader
+            onActionButtonClick={[Function]}
+            open={true}
+            text="2 Published"
+            userHasUpdatePermission={true}
+          />
+          <_class
+            confirmDeleteSubEntity={true}
+            copySubEntity={[Function]}
+            defaultSorted={
+              Array [
+                Object {
+                  "desc": true,
+                  "id": "version",
+                },
+              ]
+            }
+            deleteSubEntity={[Function]}
+            fetching={false}
+            fields={
+              Array [
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Version",
+                  "name": "version",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Name",
+                  "name": "name",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Timezone",
+                  "name": "timezone",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Created By",
+                  "name": "createdBy",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "format": "datetime",
+                  "label": "Created On",
+                  "name": "createdOn",
+                  "required": true,
+                },
+              ]
+            }
+            items={
+              Array [
+                Object {
+                  "id": "version1",
+                  "name": "version 1",
+                  "version": "V1",
+                },
+                Object {
+                  "id": "version2",
+                  "name": "version 2",
+                  "version": "V2",
+                },
+                Object {
+                  "id": "draft1",
+                  "name": "draft 1",
+                  "version": "Draft",
+                },
+                Object {
+                  "id": "draft2",
+                  "name": "draft 2",
+                  "version": "Draft",
+                },
+              ]
+            }
+            shouldShowCopyButtonOnItem={[Function]}
+            shouldShowDeleteButtonOnItem={[Function]}
+            shouldShowUpdateButtonOnItem={[Function]}
+            shouldShowViewButtonOnItem={[Function]}
+            showInheritedViewOnlyViewButtonOnItem={true}
+            updateSubEntity={[Function]}
+            userHasUpdatePermission={true}
+            userHasViewPermission={true}
+            viewSubEntity={[Function]}
+          />
+        </styled.div>
+      </Connect(DetailWrapper)>
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Hours and Exceptions"
+        />
+        <Connect(ReduxForm) />
+      </Connect(DetailWrapper)>
+    </styled.div>
+  </styled.div>
+  <Modal
+    onMaskClick={[Function]}
+  >
+    <ReduxForm
+      businessHoursList={
+        Array [
+          Object {
+            "id": "business-hour-id ",
+            "name": "business hour 1",
+          },
+          Object {
+            "id": "business-hours-id2",
+            "name": "business hour 2",
+          },
+        ]
+      }
+      copyVersionId="version1"
+      drafts={
+        Array [
+          Object {
+            "id": "draft1",
+            "name": "draft 1",
+            "version": "Draft",
+          },
+          Object {
+            "id": "draft2",
+            "name": "draft 2",
+            "version": "Draft",
+          },
+        ]
+      }
+      initialValues={
+        Immutable.Map {
+          "draftName": "Copy of version 1",
+        }
+      }
+      onCancel={[Function]}
+      onSubmit={[Function]}
+      validate={[Function]}
+      versions={
+        Array [
+          Object {
+            "id": "version1",
+            "name": "version 1",
+            "version": "V1",
+          },
+          Object {
+            "id": "version2",
+            "name": "version 2",
+            "version": "V2",
+          },
+        ]
+      }
+    />
+  </Modal>
+</React.Fragment>
+`;
+
+exports[`<UpdateBusinessHoursV2 /> it shows create draft modal 1`] = `
+<React.Fragment>
+  <styled.div>
+    <Styled(Connect(SidePanelActions))
+      hideSubmit={false}
+    />
+    <Styled(Connect(withRouter(SidePanelHeader))) />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <Connect(Connect(ReduxForm)) />
+    </styled.div>
+    <styled.div>
+      <CalendarEvents
+        eventType={
+          Array [
+            Object {
+              "color": "#51CE90",
+              "id": 0,
+              "name": "Regular Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F1D29D",
+              "id": 1,
+              "name": "One-Time extended Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F08695",
+              "id": 2,
+              "name": "Blackout Exceptions",
+              "state": true,
+            },
+            Object {
+              "color": "#8383FD",
+              "id": 3,
+              "name": "Blackout One-Time Exceptions",
+              "state": true,
+            },
+          ]
+        }
+        rules={
+          Immutable.List [
+            Object {
+              "every": 1,
+              "hours": Object {
+                "allDay": true,
+              },
+              "id": "rule-id-1",
+              "name": "rule name",
+              "on": Array [
+                "monday",
+                "wednesday",
+                "friday",
+              ],
+              "repeats": "weekly",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "regular-hours",
+            },
+            Object {
+              "endDate": 2000-12-17T00:00:00.000Z,
+              "every": 1,
+              "hours": Object {
+                "allDay": false,
+                "intervals": Array [
+                  Object {
+                    "end": 1020,
+                    "start": 540,
+                  },
+                ],
+              },
+              "id": "rule-id-2",
+              "name": "rule name 2",
+              "on": Object {
+                "type": "last",
+                "value": "sunday",
+              },
+              "repeats": "monthy",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "blackout-exceptions",
+            },
+          ]
+        }
+      />
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Versions"
+        />
+        <br />
+        <styled.div>
+          <label>
+            Versioning (2 Published, 2 Drafts)
+          </label>
+          <DetailHeader
+            onActionButtonClick={[Function]}
+            open={true}
+            text="2 Published"
+            userHasUpdatePermission={true}
+          />
+          <_class
+            confirmDeleteSubEntity={true}
+            copySubEntity={[Function]}
+            defaultSorted={
+              Array [
+                Object {
+                  "desc": true,
+                  "id": "version",
+                },
+              ]
+            }
+            deleteSubEntity={[Function]}
+            fetching={false}
+            fields={
+              Array [
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Version",
+                  "name": "version",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Name",
+                  "name": "name",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Timezone",
+                  "name": "timezone",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Created By",
+                  "name": "createdBy",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "format": "datetime",
+                  "label": "Created On",
+                  "name": "createdOn",
+                  "required": true,
+                },
+              ]
+            }
+            items={
+              Array [
+                Object {
+                  "id": "version1",
+                  "name": "version 1",
+                  "version": "V1",
+                },
+                Object {
+                  "id": "version2",
+                  "name": "version 2",
+                  "version": "V2",
+                },
+                Object {
+                  "id": "draft1",
+                  "name": "draft 1",
+                  "version": "Draft",
+                },
+                Object {
+                  "id": "draft2",
+                  "name": "draft 2",
+                  "version": "Draft",
+                },
+              ]
+            }
+            shouldShowCopyButtonOnItem={[Function]}
+            shouldShowDeleteButtonOnItem={[Function]}
+            shouldShowUpdateButtonOnItem={[Function]}
+            shouldShowViewButtonOnItem={[Function]}
+            showInheritedViewOnlyViewButtonOnItem={true}
+            updateSubEntity={[Function]}
+            userHasUpdatePermission={true}
+            userHasViewPermission={true}
+            viewSubEntity={[Function]}
+          />
+        </styled.div>
+      </Connect(DetailWrapper)>
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Hours and Exceptions"
+        />
+        <Connect(ReduxForm) />
+      </Connect(DetailWrapper)>
+    </styled.div>
+  </styled.div>
+  <Modal
+    onMaskClick={false}
+  >
+    <ReduxForm
+      initialValues={
+        Immutable.Map {
+          "draftName": "",
+        }
+      }
+      isSaving={true}
+      onCancel={[Function]}
+      onSubmit={[Function]}
+      validate={[Function]}
+    />
+  </Modal>
+</React.Fragment>
+`;
+
+exports[`<UpdateBusinessHoursV2 /> renders the component 1`] = `
+<React.Fragment>
+  <styled.div>
+    <Styled(Connect(SidePanelActions))
+      hideSubmit={false}
+    />
+    <Styled(Connect(withRouter(SidePanelHeader))) />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <Connect(Connect(ReduxForm)) />
+    </styled.div>
+    <styled.div>
+      <CalendarEvents
+        eventType={
+          Array [
+            Object {
+              "color": "#51CE90",
+              "id": 0,
+              "name": "Regular Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F1D29D",
+              "id": 1,
+              "name": "One-Time extended Hours",
+              "state": true,
+            },
+            Object {
+              "color": "#F08695",
+              "id": 2,
+              "name": "Blackout Exceptions",
+              "state": true,
+            },
+            Object {
+              "color": "#8383FD",
+              "id": 3,
+              "name": "Blackout One-Time Exceptions",
+              "state": true,
+            },
+          ]
+        }
+        rules={
+          Immutable.List [
+            Object {
+              "every": 1,
+              "hours": Object {
+                "allDay": true,
+              },
+              "id": "rule-id-1",
+              "name": "rule name",
+              "on": Array [
+                "monday",
+                "wednesday",
+                "friday",
+              ],
+              "repeats": "weekly",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "regular-hours",
+            },
+            Object {
+              "endDate": 2000-12-17T00:00:00.000Z,
+              "every": 1,
+              "hours": Object {
+                "allDay": false,
+                "intervals": Array [
+                  Object {
+                    "end": 1020,
+                    "start": 540,
+                  },
+                ],
+              },
+              "id": "rule-id-2",
+              "name": "rule name 2",
+              "on": Object {
+                "type": "last",
+                "value": "sunday",
+              },
+              "repeats": "monthy",
+              "startDate": 1995-12-17T00:00:00.000Z,
+              "type": "blackout-exceptions",
+            },
+          ]
+        }
+      />
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Versions"
+        />
+        <br />
+        <styled.div>
+          <label>
+            Versioning (2 Published, 2 Drafts)
+          </label>
+          <DetailHeader
+            onActionButtonClick={[Function]}
+            open={true}
+            text="2 Published"
+            userHasUpdatePermission={true}
+          />
+          <_class
+            confirmDeleteSubEntity={true}
+            copySubEntity={[Function]}
+            defaultSorted={
+              Array [
+                Object {
+                  "desc": true,
+                  "id": "version",
+                },
+              ]
+            }
+            deleteSubEntity={[Function]}
+            fetching={false}
+            fields={
+              Array [
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Version",
+                  "name": "version",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Name",
+                  "name": "name",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Timezone",
+                  "name": "timezone",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "label": "Created By",
+                  "name": "createdBy",
+                  "required": true,
+                  "type": "string",
+                },
+                Object {
+                  "customSortMethod": [Function],
+                  "format": "datetime",
+                  "label": "Created On",
+                  "name": "createdOn",
+                  "required": true,
+                },
+              ]
+            }
+            items={
+              Array [
+                Object {
+                  "id": "version1",
+                  "name": "version 1",
+                  "version": "V1",
+                },
+                Object {
+                  "id": "version2",
+                  "name": "version 2",
+                  "version": "V2",
+                },
+                Object {
+                  "id": "draft1",
+                  "name": "draft 1",
+                  "version": "Draft",
+                },
+                Object {
+                  "id": "draft2",
+                  "name": "draft 2",
+                  "version": "Draft",
+                },
+              ]
+            }
+            shouldShowCopyButtonOnItem={[Function]}
+            shouldShowDeleteButtonOnItem={[Function]}
+            shouldShowUpdateButtonOnItem={[Function]}
+            shouldShowViewButtonOnItem={[Function]}
+            showInheritedViewOnlyViewButtonOnItem={true}
+            updateSubEntity={[Function]}
+            userHasUpdatePermission={true}
+            userHasViewPermission={true}
+            viewSubEntity={[Function]}
+          />
+        </styled.div>
+      </Connect(DetailWrapper)>
+    </styled.div>
+    <br />
+    <styled.div>
+      <Connect(DetailWrapper)
+        customCaretIcon="margin-top: 6px;display: inline-block;margin-left: 23px;"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          customLineSpacer="border-top: 1px solid #2E9AFE; flex-grow: 1; margin: 10px 10px 0;align-self: center;"
+          fontSize="20px"
+          text="Hours and Exceptions"
+        />
+        <Styled(DetailsPanelAlert)
+          boldText="version 1"
+          text="Selected Version:"
+        />
+        <Connect(ReduxForm) />
+      </Connect(DetailWrapper)>
+    </styled.div>
+  </styled.div>
+</React.Fragment>
+`;
