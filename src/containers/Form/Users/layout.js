@@ -112,7 +112,7 @@ export default function UsersForm({
         <DetailWrapper open={true} data-automation="loginDetailsSVG">
           <WrappedDetailHeader text="Login Details" />
           <Detail label="Email" value={initialValues.get('email')} />
-          <Detail label="Platform Status" value={platformStatus(initialValues.get('invitationStatus'))} />
+          <Detail label="Platform Status" value={platformStatus(initialValues.get('platformStatus'))} />
           <SelectField
             className="frm-users-platform-authentication"
             name="noPassword"

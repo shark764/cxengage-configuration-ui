@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.4] - 2020-07-27
+### Fixed
+- CXV1-22868 - Update the “Platform Status” login details values
+
 ## [0.81.3] - 2020-07-22
 ### Changed
 - CXV1-20515 - Fix Typeahead & Autocomplete components
