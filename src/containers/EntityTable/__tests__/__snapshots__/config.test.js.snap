@@ -141,6 +141,18 @@ Array [
     "Cell": [Function],
     "Filter": [Function],
     "Header": <span
+      title="Tenant Access"
+    >
+      Tenant Access
+    </span>,
+    "accessor": [Function],
+    "filterMethod": [Function],
+    "id": "invitationStatus",
+  },
+  Object {
+    "Cell": [Function],
+    "Filter": [Function],
+    "Header": <span
       title="Role Name"
     >
       Role Name

@@ -170,6 +170,19 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
         "name": "invitationStatus",
         "type": "select",
       },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Tenant Access",
+        "name": "invitationStatus",
+        "type": "select",
+      },
     ]
   }
   usersItems={Array []}
@@ -305,6 +318,19 @@ Object {
         "sso-only",
       ],
       "label": "Platform Status",
+      "name": "invitationStatus",
+      "type": "select",
+    },
+    Object {
+      "filterOptions": Array [
+        "pending",
+        "invited",
+        "expired",
+        "enabled",
+        "disabled",
+        "sso-only",
+      ],
+      "label": "Tenant Access",
       "name": "invitationStatus",
       "type": "select",
     },

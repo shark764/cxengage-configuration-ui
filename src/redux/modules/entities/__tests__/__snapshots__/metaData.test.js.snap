@@ -4003,6 +4003,10 @@ Object {
         "active": true,
         "name": "Tenant Status",
       },
+      Object {
+        "active": true,
+        "name": "Tenant Access",
+      },
     ],
     "confirmationDialog": Object {
       "falseButtonText": "",
@@ -4062,6 +4066,10 @@ Object {
         "id": "invitationStatus",
         "value": "all non-disabled",
       },
+      Object {
+        "id": "tenantAccess",
+        "value": "all non-disabled",
+      },
     ],
     "defaultSorted": Array [
       Object {
@@ -4112,6 +4120,19 @@ Object {
           "sso-only",
         ],
         "label": "Platform Status",
+        "name": "invitationStatus",
+        "type": "select",
+      },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Tenant Access",
         "name": "invitationStatus",
         "type": "select",
       },

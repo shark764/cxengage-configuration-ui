@@ -88,6 +88,19 @@ Object {
       "type": "select",
     },
     Object {
+      "filterOptions": Array [
+        "pending",
+        "invited",
+        "expired",
+        "enabled",
+        "disabled",
+        "sso-only",
+      ],
+      "label": "Tenant Access",
+      "name": "invitationStatus",
+      "type": "select",
+    },
+    Object {
       "actions": Object {
         "onChange": [Function],
       },
@@ -226,6 +239,19 @@ exports[`SkillsDetailsPanel Renders renders 1`] = `
           "sso-only",
         ],
         "label": "Platform Status",
+        "name": "invitationStatus",
+        "type": "select",
+      },
+      Object {
+        "filterOptions": Array [
+          "pending",
+          "invited",
+          "expired",
+          "enabled",
+          "disabled",
+          "sso-only",
+        ],
+        "label": "Tenant Access",
         "name": "invitationStatus",
         "type": "select",
       },

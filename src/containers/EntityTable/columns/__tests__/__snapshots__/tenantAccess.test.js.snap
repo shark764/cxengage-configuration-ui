@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tenantAccessColumn Cell renders correctly 1`] = `
+<span
+  title="Enabled"
+>
+  Enabled
+</span>
+`;
+
+exports[`tenantAccessColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Tenant Access"
+  >
+    Tenant Access
+  </span>,
+  "accessor": [Function],
+  "filterMethod": [Function],
+  "id": "invitationStatus",
+}
+`;

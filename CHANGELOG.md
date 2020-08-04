@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.5] - 2020-07-28
+### Added
+- CXV1-22869 - New “Tenant Access” column.
+
 ## [0.81.4] - 2020-07-27
 ### Fixed
 - CXV1-22868 - Update the “Platform Status” login details values

@@ -267,6 +267,10 @@ Immutable.Map {
         "name": "Tenant Status",
         "active": true,
       },
+      Immutable.Map {
+        "name": "Tenant Access",
+        "active": true,
+      },
     ],
   },
   "customAttributes": Immutable.Map {

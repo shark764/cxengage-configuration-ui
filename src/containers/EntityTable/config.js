@@ -25,6 +25,7 @@ import { sharedColumn2 } from './columns/shared2';
 import { skillColumn } from './columns/skill';
 import { groupColumn } from './columns/group';
 import { labelColumn } from './columns/label';
+import { tenantAccessColumn } from './columns/tenantAccess';
 
 export function getTableColumns(columns) {
   /**
@@ -76,7 +77,8 @@ export function getTableColumns(columns) {
     Attribute: constructGeneralTextColumn('objectName', 'attribute'),
     Label: labelColumn,
     Default: constructGeneralTextColumn('default'),
-    Mandatory: constructGeneralBooleanColumn('mandatory')
+    Mandatory: constructGeneralBooleanColumn('mandatory'),
+    'Tenant Access': tenantAccessColumn
   };
   let result = [];
   columns.forEach(x => x.active && result.push(columnMap[x.name]));

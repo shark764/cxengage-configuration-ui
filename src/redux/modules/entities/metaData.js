@@ -217,6 +217,12 @@ entities.users.memberListTableFields = [
     name: 'invitationStatus',
     type: 'select',
     filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
+  },
+  {
+    label: 'Tenant Access',
+    name: 'invitationStatus',
+    type: 'select',
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
   }
 ];
 entities.users.associations = {
@@ -236,11 +242,13 @@ entities.users.columns = [
   { name: 'Role', active: true },
   { name: 'Presence', active: true },
   { name: 'Platform Status', active: true },
-  { name: 'Tenant Status', active: true }
+  { name: 'Tenant Status', active: true },
+  { name: 'Tenant Access', active: true }
 ];
 entities.users.defaultFilters = [
   { id: 'status', value: 'accepted' },
-  { id: 'invitationStatus', value: 'all non-disabled' }
+  { id: 'invitationStatus', value: 'all non-disabled' },
+  { id: 'tenantAccess', value: 'all non-disabled' }
 ];
 entities.users.defaultAssociationFilters = {
   skills: [{ id: 'active', value: 'enabled' }],
