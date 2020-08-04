@@ -28,9 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.7] - 2020-07-30
+### Added
+- CXV1-20168 - Add Contact Layouts sub entity form.
+
 ## [0.81.6] - 2020-07-31
 ### Changed
-- CXV1-20512 - Disable "unselect All" & "unselect all visible" in bulk actions when there are no active selected items
+- CXV1-20512 - Disable "unselect All" & "unselect all visible" in bulk actions when there are no active selected items.
 
 ## [0.81.5] - 2020-07-28
 ### Added

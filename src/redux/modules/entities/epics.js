@@ -57,7 +57,9 @@ import {
   hasCustomCreateEntityFullFilled,
   hasCustomUpdateEntityFullFilled,
   entitiesUsingUpdateLogicForToggleEntity,
-  hasCustomSubEntityUpdate
+  hasCustomSubEntityUpdate,
+  hasCustomSetSelectedEntityId,
+  hasCustomSubEntityFormSubmit
 } from './config';
 
 import { downloadFile } from 'serenova-js-utils/browser';
@@ -159,7 +161,7 @@ export const FormSubmission = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       selectedEntityId: getSelectedEntityId(store.getState())
     }))
-    .filter(({ dirty, entityName }) => dirty && entityName !== 'tenants')
+    .filter(({ dirty, entityName }) => dirty && entityName !== 'tenants' && entityName !== 'contactLayouts')
     .map(a => {
       if (a.entityName === 'transferLists' && a.selectedEntityId !== 'bulk') {
         a.values = a.values.update('endpoints', endpoints =>
@@ -750,7 +752,7 @@ export const FetchFormMetaData = (action$, store) =>
       entityId: getSelectedEntityId(store.getState()),
       isDefined: name => store.getState().getIn(['Entities', name, 'data']).size === 0
     }))
-    .filter(a => a.entityId !== '' && a.currentEntityName !== 'tenants')
+    .filter(({ entityId, currentEntityName }) => entityId !== '' && hasCustomSetSelectedEntityId(currentEntityName))
     .switchMap(
       a =>
         a.entityId === 'create'
@@ -790,7 +792,7 @@ export const FetchSidePanelData = (action$, store) =>
       a =>
         a.entityId !== 'create' &&
         a.entityId !== '' &&
-        a.currentEntityName !== 'tenants' &&
+        hasCustomSetSelectedEntityId(a.currentEntityName) &&
         entitiesMetaData[a.currentEntityName].dependentEntity
     )
     .map(a => ({
@@ -810,11 +812,7 @@ export const SubEntityFormSubmission = (action$, store) =>
       subEntityName: getCurrentSubEntity(store.getState()),
       selectedSubEntityId: getSelectedSubEntityId(store.getState())
     }))
-    .filter(({ selectedSubEntityId }) => selectedSubEntityId)
-    .filter(
-      ({ entityName }) =>
-        entityName !== 'transferLists' && entityName !== 'reasonLists' && entityName !== 'dispositionLists'
-    )
+    .filter(({ entityName, selectedSubEntityId }) => selectedSubEntityId && hasCustomSubEntityFormSubmit(entityName))
     .map(
       a =>
         a.selectedSubEntityId === 'create'

@@ -912,7 +912,8 @@ export default function reducer(state = initialState, action) {
       if (
         action.entityName === 'transferLists' ||
         action.entityName === 'reasonLists' ||
-        action.entityName === 'dispositionLists'
+        action.entityName === 'dispositionLists' ||
+        action.entityName === 'contactLayouts'
       ) {
         return setEntityUpdatingHelper(state, action, true).deleteIn([action.entityName, 'selectedSubEntityId']);
       }
@@ -1379,7 +1380,8 @@ export default function reducer(state = initialState, action) {
       if (
         (action.entityName === 'transferLists' ||
           action.entityName === 'reasonLists' ||
-          action.entityName === 'dispositionLists') &&
+          action.entityName === 'dispositionLists' ||
+          action.entityName === 'contactLayouts') &&
         state.getIn([action.entityName, 'selectedSubEntityId']) !== undefined
       ) {
         return state.deleteIn([action.entityName, 'selectedSubEntityId']);

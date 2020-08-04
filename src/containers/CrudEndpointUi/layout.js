@@ -60,6 +60,7 @@ import CustomAttributesForm from '../Form/CustomAttributes';
 import IntegrationsForm from '../Form/Integrations';
 import IntegrationListenerForm from '../Form/Integrations/Listener';
 import ContactLayoutsForm from '../Form/ContactLayouts';
+import CreateUpdateContactLayoutsListItemsForm from '../Form/ContactLayoutsListItems/index';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -805,6 +806,10 @@ const createSubEntityFormRoutes = [
   {
     path: '/configuration/dispositionLists',
     component: CreateDispositionListItemForm
+  },
+  {
+    path: '/configuration/contactLayouts',
+    component: CreateUpdateContactLayoutsListItemsForm
   }
 ];
 
@@ -860,6 +865,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/integrations',
     component: IntegrationListenerForm
+  },
+  {
+    path: '/configuration/contactLayouts',
+    component: CreateUpdateContactLayoutsListItemsForm
   }
 ];
 
@@ -954,19 +963,19 @@ export default class CrudEndpointUiLayout extends Component {
     ) : (
       <Fragment>
         {!this.props.selectedEntityId && (
-            <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
-              <InlineCheckboxFilterMenu
-                type="secondary"
-                menuType="Columns"
-                tableType={this.props.tableType}
-                currentVisibleSubMenu={this.props.currentVisibleSubMenu}
-                selectionType="checkbox"
-                data-automation="entityTableColumnSelectionBtn"
-              >
-                Columns
-              </InlineCheckboxFilterMenu>
-            </Table>
-          )}
+          <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
+            <InlineCheckboxFilterMenu
+              type="secondary"
+              menuType="Columns"
+              tableType={this.props.tableType}
+              currentVisibleSubMenu={this.props.currentVisibleSubMenu}
+              selectionType="checkbox"
+              data-automation="entityTableColumnSelectionBtn"
+            >
+              Columns
+            </InlineCheckboxFilterMenu>
+          </Table>
+        )}
         {this.props.selectedEntityId &&
           !this.props.selectedSubEntityId &&
           (this.props.selectedEntityId === 'create'

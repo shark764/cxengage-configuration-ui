@@ -5,24 +5,36 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
+import store from '../../../redux/store';
 
 import contactLayoutsForm from './layout';
 import { formValidation } from './validation';
-import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import { createFormName } from '../../../redux/modules/form/selectors';
 
 import {
   getSelectedEntityId,
   isSaving,
   isInherited,
+  isEntityFetching,
   userHasUpdatePermission
 } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues } from '../../../redux/modules/form/selectors';
-import { setSelectedSubEntityId } from '../../../redux/modules/entities';
+import { setSelectedSubEntityId, onFormSubmit } from '../../../redux/modules/entities';
+import { removeContactLayoutsListItem } from '../../../redux/modules/entities/contactLayouts/actions';
+import {
+  getContactLayoutsFormInitialValues,
+  getContactLayoutsFormSubmitValues,
+  selectContactLayoutsHeaders,
+  isCurrentFormMissingMandatoryAttributes,
+  getMissingMandatoryAttributesNames
+} from '../../../redux/modules/entities/contactLayouts/selectors';
 
 const CreateContactLayoutsForm = compose(
   connect(state => createFormName(state)),
   reduxForm({
-    onSubmit: formSubmission,
+    onSubmit: (values, dispatch, props) => {
+      const submitValues = getContactLayoutsFormSubmitValues(store.getState(), props);
+      return dispatch(onFormSubmit(submitValues, props));
+    },
     validate: formValidation,
     destroyOnUnmount: true
   })
@@ -32,13 +44,21 @@ export const mapStateToProps = state => ({
   isSaving: isSaving(state),
   inherited: isInherited(state),
   key: getSelectedEntityId(state),
-  initialValues: selectFormInitialValues(state),
   selectedEntityId: getSelectedEntityId(state),
-  userHasUpdatePermission: userHasUpdatePermission(state)
+  userHasUpdatePermission: userHasUpdatePermission(state),
+  initialValues: getContactLayoutsFormInitialValues(state),
+  contactLayoutsHeaders: selectContactLayoutsHeaders(state),
+  isContactAttributesFetching: isEntityFetching(state, 'contactAttributes'),
+  missingMandatoryAttributesNames: getMissingMandatoryAttributesNames(state),
+  isCurrentFormMissingMandatoryAttributes: isCurrentFormMissingMandatoryAttributes(state)
 });
 
 export const mapDispatchToProps = dispatch => ({
-  setSelectedSubEntityId: subEntityId => dispatch(setSelectedSubEntityId(subEntityId))
+  setSelectedSubEntityId: subEntityId => dispatch(setSelectedSubEntityId(subEntityId)),
+  removeContactLayoutsListItem: contactLayoutsListItemId =>
+    dispatch(removeContactLayoutsListItem('contactLayoutsListItem', contactLayoutsListItemId)),
+  removeCategoryItems: contactLayoutsListItemId =>
+    dispatch(removeContactLayoutsListItem('categoryItems', contactLayoutsListItemId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateContactLayoutsForm);

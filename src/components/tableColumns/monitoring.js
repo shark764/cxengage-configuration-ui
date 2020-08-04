@@ -250,7 +250,8 @@ MonitoringCell.propTypes = {
   monitoringStatus: PropTypes.string,
   implicitDisable: PropTypes.bool,
   userHasMonitorAllCallsPermission: PropTypes.bool,
-  extensions: PropTypes.array
+  extensions: PropTypes.array,
+  isUpdating: PropTypes.bool
 };
 MonitorFilter.propTypes = {
   tableType: PropTypes.string,
