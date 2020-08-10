@@ -28,6 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.8] - 2020-08-07
+### Fixed
+- CXV1-22931 - more than one enabled contact layout is allowed.
+- CXV1-22933 - cannot enable/disable a contact-layout
+- CXV1-22932 - huge rows in the main list.
+
 ## [0.81.7] - 2020-07-30
 ### Added
 - CXV1-20168 - Add Contact Layouts sub entity form.

@@ -16,7 +16,7 @@ Object {
     "mock table columns",
   ],
   "currentVisibleSubMenu": "none",
-  "customColumnStyle": "",
+  "customColumnStyle": ".rt-tr-group {height:40px !important; max-height:40px !important;} .rt-td {align-self: center}",
   "dirty": false,
   "entityMetadata": Object {},
   "fetching": false,

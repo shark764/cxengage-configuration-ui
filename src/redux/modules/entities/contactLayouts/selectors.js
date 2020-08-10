@@ -6,8 +6,8 @@ import { Map, List, fromJS } from 'immutable';
 import { createSelector } from 'reselect';
 import { generateUUID } from 'serenova-js-utils/uuid';
 
-import { getCurrentFormValues } from '../../form/selectors';
-import { getSelectedEntity, getSelectedSubEntityId, getSelectedEntityId } from '../selectors';
+import { getCurrentFormValues, isFormDirty } from '../../form/selectors';
+import { getEntities, getSelectedEntity, getSelectedSubEntityId, getSelectedEntityId } from '../selectors';
 import {
   getContactAttributes,
   getContactAttributesNames,
@@ -18,11 +18,11 @@ export const getContactLayoutsFormInitialValues = createSelector(
   [getSelectedEntity, getSelectedEntityId],
   (selectedEntity, selectedEntityId) =>
     selectedEntityId === 'create'
-      ? Map({ active: true })
+      ? Map({})
       : Map({
           name: selectedEntity.get('name'),
           description: selectedEntity.get('description'),
-          active: selectedEntity.get('shared')
+          active: selectedEntity.get('active')
         })
 );
 
@@ -122,7 +122,7 @@ export const getContactLayoutsFormSubmitValues = createSelector(
     return fromJS({
       name: updatedValues.get('name'),
       description: updatedValues.get('description') ? updatedValues.get('description') : '',
-      active: selectedEntityId === 'create' ? true : updatedValues.get('active'),
+      active: selectedEntityId === 'create' ? false : updatedValues.get('active'),
       layout: updatedValues.get('layout')
     });
   }
@@ -210,3 +210,16 @@ export const getContactLayoutsSubEntityFormSubmitValues = (state, props) => {
     return Map({});
   }
 };
+
+export const getActiveContactLayouts = createSelector(
+  getEntities,
+  entitites => (entitites ? entitites.getIn(['contactLayouts', 'data']).filter(a => a.get('active') === true) : [])
+);
+
+export const shouldDisableContactLayoutsStatusToggle = createSelector(
+  [isCurrentFormMissingMandatoryAttributes, getSelectedEntity, getActiveContactLayouts, isFormDirty],
+  (missingMandatoryAttributes, selectedEntity, activeContactLayouts, isFormDirty) =>
+    isFormDirty ||
+    missingMandatoryAttributes ||
+    (selectedEntity && selectedEntity.get('active') === true ? activeContactLayouts.size === 1 : false)
+);

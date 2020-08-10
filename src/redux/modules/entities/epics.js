@@ -471,6 +471,7 @@ export const ToggleEntity = (action$, store) =>
     .filter(
       ({ entityName }) =>
         entityName !== 'users' &&
+        entityName !== 'contactLayouts' &&
         entityName !== 'businessHoursV2' &&
         !entitiesUsingUpdateLogicForToggleEntity(entityName)
     )
@@ -505,7 +506,10 @@ export const ToggleEntityWithUpdateLogic = (action$, store) =>
       selectedEntityId: getSelectedEntityId(store.getState()),
       entityStatusActive: getSelectedEntityStatus(store.getState())
     }))
-    .filter(({ entityName }) => entityName !== 'users' && entitiesUsingUpdateLogicForToggleEntity(entityName))
+    .filter(
+      ({ entityName }) =>
+        entityName !== 'contactLayouts' && entityName !== 'users' && entitiesUsingUpdateLogicForToggleEntity(entityName)
+    )
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
       a.sdkCall.data = {

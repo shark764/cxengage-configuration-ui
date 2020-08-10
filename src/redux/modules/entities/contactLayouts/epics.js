@@ -12,6 +12,7 @@ import { entitiesMetaData } from '../metaData';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 import { getCurrentFormValues } from '../../form/selectors';
+import { getContactLayoutsFormSubmitValues } from './selectors';
 import { getCurrentEntity, getSelectedEntityId, getSelectedEntity, isEntityFetching } from '../selectors';
 import { getContactAttributes, getMandatoryContactAttributes } from '../contactAttributes/selectors';
 
@@ -24,18 +25,24 @@ export const getAttributesAfterFetchingContactLayouts = action$ =>
 export const InitContactLayoutsForm = (action$, store) =>
   action$
     .ofType('SET_SELECTED_ENTITY_ID', 'FETCH_DATA_FULFILLED')
-    .filter(
-      ({ entityId }) =>
-        getCurrentEntity(store.getState()) === 'contactLayouts' && entityId !== '' && entityId !== 'bulk'
-    )
-    .filter(() => !isEntityFetching(store.getState(), 'contactAttributes'))
     .map(a => ({
       ...a,
       selectedEntity: getSelectedEntity(store.getState()),
+      isEntityFetching: isEntityFetching(store.getState()),
+      currentEntityName: getCurrentEntity(store.getState()),
+      selectedEntityId: getSelectedEntityId(store.getState()),
       mandatoryContactAttributes: getMandatoryContactAttributes(store.getState()),
       contactAttributes: getContactAttributes(store.getState()) ? getContactAttributes(store.getState()) : List(),
       currentFormValues: getCurrentFormValues(store.getState()) ? getCurrentFormValues(store.getState()).toJS() : {}
     }))
+    .filter(
+      a =>
+        !a.isEntityFetching &&
+        a.currentEntityName === 'contactLayouts' &&
+        a.selectedEntityId &&
+        a.selectedEntityId !== '' &&
+        a.selectedEntityId !== 'bulk'
+    )
     .map(a => {
       if (a.entityId === 'create') {
         if (a.mandatoryContactAttributes && a.mandatoryContactAttributes.size > 0) {
@@ -241,3 +248,34 @@ export const RemoveContactLayoutsListItem = (action$, store) =>
       },
       payload: a.values.get('layout')
     }));
+
+export const ToggleContactLayoutItem = (action$, store) =>
+  action$
+    .ofType('TOGGLE_ENTITY')
+    .filter(() => getCurrentEntity(store.getState()) === 'contactLayouts')
+    .map(a => ({
+      ...a,
+      entityName: getCurrentEntity(store.getState()),
+      entityId: getSelectedEntityId(store.getState()),
+      values: getContactLayoutsFormSubmitValues(store.getState())
+        ? getContactLayoutsFormSubmitValues(store.getState()).toJS()
+        : {}
+    }))
+    .map(a => {
+      a.sdkCall = entitiesMetaData['contactLayouts'].entityApiRequest('update', 'singleMainEntity');
+      a.sdkCall.data = { ...a.values, active: !a.values.active };
+      a.sdkCall.path = ['contacts/layouts', a.entityId];
+      return { ...a };
+    })
+    .concatMap(a =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map(response => handleSuccess(response, a, `Contact Layout was updated successfully!`))
+        .catch(error => handleError(error, a))
+    );
+
+// After an entity is enabled/disabled, backend disables rest of the other contact-layouts (so we need to refeesh the entiy table after toggling)
+export const FetchContactLayoutsAfterToggle = action$ =>
+  action$
+    .ofType('TOGGLE_ENTITY_FULFILLED')
+    .filter(({ entityName }) => entityName === 'contactLayouts')
+    .map(() => ({ type: 'FETCH_DATA', entityName: 'contactLayouts' }));

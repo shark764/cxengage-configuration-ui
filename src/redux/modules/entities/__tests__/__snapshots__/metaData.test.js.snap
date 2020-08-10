@@ -679,7 +679,7 @@ Object {
       "trueButtonText": "",
     },
     "createFormDependencies": Array [],
-    "customColumnStyle": ".EntityTable .rt-tbody .rt-tr-group {height:inherit !important; max-height:inherit !important;} .rt-td {align-self: center}",
+    "customColumnStyle": ".rt-tr-group {height:inherit !important; max-height:inherit !important;} .rt-td {align-self: center}",
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
     "defaultFilters": Array [],

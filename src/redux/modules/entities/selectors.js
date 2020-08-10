@@ -5,7 +5,7 @@
 import { createSelector } from 'reselect';
 import { List } from 'immutable';
 import moment from 'moment';
-import { getCurrentPermissions, getCurrentTenantId, isTenantSetForReadAllMode} from '../userData/selectors';
+import { getCurrentPermissions, getCurrentTenantId, isTenantSetForReadAllMode } from '../userData/selectors';
 import { entitiesMetaData } from './metaData';
 import { getDisplay, userHasNameSet } from './users/selectors';
 import { getUserDisplayName } from '../userIdMap/selectors';
@@ -62,7 +62,11 @@ export const isEntityFetching = (state, entityName) => {
   if (entityName) {
     return getEntities(state).getIn([entityName, 'fetching']);
   } else {
-    return getCurrentEntityStore(state).get('fetching');
+    const isFetching = getCurrentEntityStore(state).get('fetching');
+    if (getCurrentEntity(state) === 'contactLayouts') {
+      return isFetching || getEntities(state).getIn(['contactAttributes', 'fetching']);
+    }
+    return isFetching;
   }
 };
 
@@ -80,17 +84,18 @@ export const userHasReadPermission = state =>
 export const userHasReadPermissionManual = (state, entityName) =>
   hasPermission(getCurrentPermissions(state), state.getIn(['Entities', entityName, 'readPermission']));
 export const userHasUpdatePermission = state =>
-  (userHasViewOnlyPermission(state) && isTenantSetForReadAllMode(state)) ? undefined :
-    hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('updatePermission'));
+  userHasViewOnlyPermission(state) && isTenantSetForReadAllMode(state)
+    ? undefined
+    : hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('updatePermission'));
 export const userHasCreatePermission = state =>
-  (userHasViewOnlyPermission(state) && isTenantSetForReadAllMode(state)) ? undefined :
-    hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('createPermission'));
+  userHasViewOnlyPermission(state) && isTenantSetForReadAllMode(state)
+    ? undefined
+    : hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('createPermission'));
 export const userHasSharePermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('sharePermission'));
 export const userHasDisablePermission = state =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('disablePermission'));
-export const userHasViewOnlyPermission = state =>
-  hasPermission(getCurrentPermissions(state), ['PLATFORM_VIEW_ALL']);
+export const userHasViewOnlyPermission = state => hasPermission(getCurrentPermissions(state), ['PLATFORM_VIEW_ALL']);
 
 export const userHasPermissions = (state, permissions) => hasPermission(getCurrentPermissions(state), permissions);
 
@@ -173,6 +178,10 @@ export const shouldDisableHeaderToggleField = state => {
         // Most of the available actions for user entity
         // must be disabled until firstName and lastName are set
         return !userHasNameSet(state);
+      }
+      case 'contactLayouts': {
+        const { shouldDisableContactLayoutsStatusToggle } = require('../../modules/entities/contactLayouts/selectors');
+        return shouldDisableContactLayoutsStatusToggle(state);
       }
       default:
         return false;

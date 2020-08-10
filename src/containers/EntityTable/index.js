@@ -35,7 +35,7 @@ export function mapStateToProps(state, props) {
     defaultFilters = [],
     defaultSorted = [],
     bulkEditsAvailable = false,
-    customColumnStyle = ''
+    customColumnStyle = '.rt-tr-group {height:40px !important; max-height:40px !important;} .rt-td {align-self: center}'
   } = entity;
 
   return {

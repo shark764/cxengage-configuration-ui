@@ -689,6 +689,9 @@ export default function reducer(state = initialState, action) {
           );
           return action.entityName === 'branding' ? updatedState.deleteIn(['branding', 'isUpdating']) : updatedState;
         }
+      } else if (action.entityName === 'contactLayouts') {
+        // We need to fetch attributes freshly, each time user navigates to contact-layouts page.
+        return state.setIn([action.entityName, 'fetching'], true).setIn(['contactAttributes', 'fetching'], true);
       }
       return state.setIn([action.entityName, 'fetching'], true);
     }

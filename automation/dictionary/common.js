@@ -105,6 +105,7 @@ const commonBehavior = {
   searchByNameAndClick(entity, searchValue) {
     var columnElement = new Element(`[data-automation="${dictionary[entity].whichCatagoryToSearch}"]`);
     columnElement.clearElement();
+    Brow.pause(1000);
     columnElement.setValue(searchValue);
     new Element(`.//span[text()="${searchValue}"]`).waitAndClick();
     if(entity !== "Chat Widget" && entity !== "Email Template") {

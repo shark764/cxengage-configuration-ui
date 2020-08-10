@@ -930,7 +930,7 @@ entities.contactAttributes.columns = [
   { name: 'Status', active: true }
 ];
 entities.contactAttributes.customColumnStyle =
-  '.EntityTable .rt-tbody .rt-tr-group {height:inherit !important; max-height:inherit !important;} .rt-td {align-self: center}';
+  '.rt-tr-group {height:inherit !important; max-height:inherit !important;} .rt-td {align-self: center}';
 
 // Contact Layouts
 entities.contactLayouts.bulkEditsAvailable = false;
