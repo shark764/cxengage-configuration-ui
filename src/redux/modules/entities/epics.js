@@ -402,7 +402,7 @@ export const UpdateEntity = action$ =>
 export const BulkEntityUpdate = (action$, store) =>
   action$
     .ofType('BULK_ENTITY_UPDATE')
-    .filter(a => !['users', 'reasons', 'reasonLists', 'dispositions', 'dispositionLists'].includes(a.entityName))
+    .filter(a => !['users', 'reasons', 'reasonLists', 'dispositions', 'dispositionLists', 'businessHoursV2'].includes(a.entityName))
     .map(a => {
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');

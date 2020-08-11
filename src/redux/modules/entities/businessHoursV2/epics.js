@@ -15,9 +15,12 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { submit, change } from 'redux-form';
 import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
+import { from } from 'rxjs/observable/from';
 import { entitiesMetaData } from '../metaData';
 import { sdkPromise } from '../../../../utils/sdk';
-import { handleSuccess, handleError } from '../handleResult';
+import { handleSuccess, handleError, handleBulkSuccess } from '../handleResult';
+
+import { Toast } from 'cx-ui-components';
 
 import {
   getCurrentEntity,
@@ -26,7 +29,11 @@ import {
   getSelectedEntityId,
   getSelectedSubEntityId,
   getSelectedSubEntity,
-  getSelectedEntityStatus
+  getSelectedEntityStatus,
+  getSelectedEntityBulkChangeItems,
+  findEntity,
+  isItemInherited,
+  getEntityItemDisplay
 } from '../selectors';
 import { getFormValues } from '../../form/selectors';
 import { getAllEntities } from '../../../../containers/EntityTable/selectors';
@@ -335,6 +342,56 @@ export const toggleBusinessHoursV2Entity = (action$, store) =>
           )
         )
         .catch(error => handleError(error, { ...a }, 'Status for selected business hour could not be changed'))
+    );
+
+export const bulkBusinessHoursV2EntityUpdate = (action$, store) =>
+  action$
+    .ofType('BULK_ENTITY_UPDATE')
+    .filter(({ entityName }) => entityName === 'businessHoursV2')
+    .map(a => {
+      a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update');
+      a.allSdkCalls = [...a.allIdsToProcess.toJS()].reduce((allCalls, item) => {
+        const entityData = findEntity(store.getState(), a.entityName, item);
+        if (isItemInherited(store.getState(), a.entityName, item)) {
+          Toast.error(`"${entityData.get('name')}" is inherited and cannot be edited.`);
+          return allCalls;
+        }
+        if (!entityData.get('activeVersion')) {
+          Toast.error(`"${entityData.get('name')}" does not have an active-version and cannot be edited.`);
+          return allCalls;
+        }
+        allCalls.push({
+          ...a.sdkCall,
+          path: ['business-hours', item],
+          data: {
+            ...a.values
+          }
+        });
+        return allCalls;
+      }, []);
+      return { ...a };
+    })
+    .mergeMap(
+      a =>
+        a.allSdkCalls.length > 0
+          ? forkJoin(
+              a.allSdkCalls.map(apiCall =>
+                from(
+                    sdkPromise(apiCall).catch(error => ({
+                      error: error,
+                      id: apiCall.data[a.entityName],
+                      toString: getEntityItemDisplay(
+                        store.getState(),
+                        apiCall.data[a.entityName]
+                      )
+                    }))
+                  )
+              )
+            )
+            .do(allResult => handleBulkSuccess(allResult))
+            .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+          : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
 export const PublishDraft = (action$, store) =>

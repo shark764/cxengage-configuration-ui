@@ -696,6 +696,14 @@ const bulkChangeFormRoutes = [
     )
   },
   {
+    path: '/configuration/businessHoursV2',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
     path: '/configuration/messageTemplates',
     component: () => (
       <DetailsPanel>
@@ -962,21 +970,31 @@ export default class CrudEndpointUiLayout extends Component {
       </Wrapper>
     ) : (
       <Fragment>
-        {!this.props.selectedEntityId && (
-          <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
-            <InlineCheckboxFilterMenu
-              type="secondary"
-              menuType="Columns"
-              tableType={this.props.tableType}
-              currentVisibleSubMenu={this.props.currentVisibleSubMenu}
-              selectionType="checkbox"
-              data-automation="entityTableColumnSelectionBtn"
-            >
-              Columns
-            </InlineCheckboxFilterMenu>
-          </Table>
+        {(!this.props.selectedEntityId || this.props.selectedEntityId === 'bulk') && (
+          <Wrapper isSidePanelOpen={this.props.selectedEntityId !== ''} slidingWidth={this.props.slidingWidth}>
+            <Table tableType={this.props.match.params.entityName} selectedEntityId={this.props.selectedEntityId}>
+              <InlineCheckboxFilterMenu
+                type="secondary"
+                menuType="Columns"
+                tableType={this.props.tableType}
+                currentVisibleSubMenu={this.props.currentVisibleSubMenu}
+                selectionType="checkbox"
+                data-automation="entityTableColumnSelectionBtn"
+              >
+                Columns
+              </InlineCheckboxFilterMenu>
+            </Table>
+            {this.props.selectedEntityId === 'bulk' && (
+              <SidePanel>
+                {bulkChangeFormRoutes.map((route, index) => (
+                  <Route key={index} path={route.path} component={route.component} />
+                ))}
+              </SidePanel>
+            )}
+          </Wrapper>
         )}
         {this.props.selectedEntityId &&
+          this.props.selectedEntityId !== 'bulk' &&
           !this.props.selectedSubEntityId &&
           (this.props.selectedEntityId === 'create'
             ? fullPageCreateRoutes.map((route, index) => (
