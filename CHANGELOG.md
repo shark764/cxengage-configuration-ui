@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.12] - 2020-07-22
+### Fixed
+- CXV1-13781 - Generic List - Display confirmation box before deleting a list Item
+
 ## [0.81.11] - 2020-08-13
 ### Added
 - No-Ticket - Issue with infinite loading on roles page

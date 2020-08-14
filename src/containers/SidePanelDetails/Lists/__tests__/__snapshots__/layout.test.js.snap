@@ -21,6 +21,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel 1`] = `
     userHasUpdatePermission={true}
   />
   <_class
+    confirmDeleteSubEntity={true}
     deleteSubEntity={[Function]}
     fields={
       Array [
@@ -106,6 +107,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel not inherited 1`] = `
     userHasUpdatePermission={true}
   />
   <_class
+    confirmDeleteSubEntity={true}
     deleteSubEntity={[Function]}
     fields={
       Array [
@@ -177,6 +179,7 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel with alert message 1`]
     userHasUpdatePermission={true}
   />
   <_class
+    confirmDeleteSubEntity={true}
     deleteSubEntity={[Function]}
     fields={
       Array [

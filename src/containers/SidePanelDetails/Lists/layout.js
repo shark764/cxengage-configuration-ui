@@ -23,7 +23,11 @@ function ListsDetailsPanel(props) {
       {!props.inherited && (
         <React.Fragment>
           <DetailHeader text="Bulk CSV" />
-          <FileDownload onClick={props.downloadCsv} disabled={props.isSaving || !props.userHasUpdatePermission} id="dtpanel-lists-download-csv" />
+          <FileDownload
+            onClick={props.downloadCsv}
+            disabled={props.isSaving || !props.userHasUpdatePermission}
+            id="dtpanel-lists-download-csv"
+          />
           <FileUpload
             onFileSelect={props.uploadCsv}
             acceptedFileType=".csv"
@@ -48,6 +52,7 @@ function ListsDetailsPanel(props) {
         deleteSubEntity={props.deleteSubEntity}
         inherited={props.inherited}
         itemApiPending={props.itemApiPending}
+        confirmDeleteSubEntity
       />
     </div>
   );
