@@ -53,7 +53,8 @@ export default function RestForm({ isSaving, inherited, userHasUpdatePermission,
             inputType="text"
             data-automation="integrationsPassword"
             disabled={isSaving || inherited || !userHasUpdatePermission}
-            maskValue
+            type="password"
+            autoComplete={'new-password'}
           />
         </Fragment>
       )}
@@ -65,7 +66,8 @@ export default function RestForm({ isSaving, inherited, userHasUpdatePermission,
           inputType="text"
           data-automation="integrationsToken"
           disabled={isSaving || inherited || !userHasUpdatePermission}
-          maskValue
+          type="password"
+          autoComplete={'new-password'}
         />
       )}
     </Fragment>

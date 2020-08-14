@@ -250,7 +250,10 @@ export const FetchData = (action$, store) =>
   action$
     .ofType('FETCH_DATA')
     .filter(
-      ({ entityName }) => hasCustomFetchEntityData(entityName) && getCurrentEntity(store.getState()) !== 'tenants'
+      ({ entityName }) =>
+        hasCustomFetchEntityData(entityName) &&
+        getCurrentEntity(store.getState()) !== 'tenants' &&
+        getCurrentEntity(store.getState()) !== 'integrations'
     )
     .mergeMap(a =>
       fromPromise(sdkPromise(entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')))

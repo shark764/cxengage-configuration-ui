@@ -1,5 +1,5 @@
 export const hasCustomCreateEntity = entityName =>
-  !['users', 'dataAccessReports', 'flows', 'dispatchMappings', 'businessHours', 'businessHoursV2'].includes(entityName);
+  !['users', 'dataAccessReports', 'flows', 'dispatchMappings', 'businessHours', 'businessHoursV2', 'integrations'].includes(entityName);
 
 export const hasCustomUpdateEntity = entityName =>
   ![

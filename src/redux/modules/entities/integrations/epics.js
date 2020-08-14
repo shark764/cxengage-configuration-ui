@@ -10,6 +10,50 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
 import { getSelectedEntityId, getSelectedSubEntityId } from '../selectors';
+import { isIntegrationsFetched } from './selectors';
+import { entitiesMetaData } from '../metaData';
+import {
+  camelCaseToRegularFormAndRemoveLastLetter,
+  camelCaseToKebabCase
+} from 'serenova-js-utils/strings';
+
+export const FetchData = (action$, store) =>
+  action$
+    .ofType('FETCH_DATA')
+    .filter(({ entityName }) => entityName === 'integrations')
+    .mergeMap(a =>
+      fromPromise(sdkPromise(entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')))
+        .map(response =>
+          handleSuccess({ result: response.result.filter(integration => integration.type !== 'plivo') }, a)
+        )
+        .catch(error => handleError(error, a))
+    );
+
+export const CreateEntity = action$ =>
+    action$
+      .ofType('CREATE_ENTITY')
+      .filter(({ entityName }) => entityName === 'integrations')
+      .map(a => {
+        a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
+        a.sdkCall.path = entitiesMetaData[a.entityName].sdkCall.path
+          ? entitiesMetaData[a.entityName].sdkCall.path
+          : [camelCaseToKebabCase(a.entityName.replace(/[V|v]\d{1}/, ''))];
+        a.sdkCall.data = {...a.values, 'integration-type': a.values.type};
+        a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;
+        return { ...a };
+      })
+      .concatMap(a =>
+        fromPromise(sdkPromise(a.sdkCall))
+          .map(response =>
+            handleSuccess(
+              response,
+              a,
+              `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`
+            )
+          )
+          .catch(error => handleError(error, a))
+      );
+
 
 export const CreateIntegrationListenerFormSubmission = (action$, store) =>
   action$

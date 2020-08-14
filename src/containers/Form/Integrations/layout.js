@@ -59,15 +59,13 @@ export default function IntegrationsForm({
           options={[
             { label: 'REST', value: 'rest' },
             { label: 'Salesforce', value: 'salesforce' },
-            { label: 'Zendesk', value: 'zendesk' },
-            { label: 'Calabrio', value: 'calabrio' }
+            { label: 'Zendesk', value: 'zendesk' }
           ]}
           data-automation="integrationsType"
           required
         />
       )}
       <DefaultForm {...formTypeProps} />
-      {integrationType === 'birst' && <BirstForm {...formTypeProps} />}
       {integrationType === 'calabrio' && (
         <CalabrioForm {...formTypeProps} ctiEnabled={ctiEnabled} rtaEnabled={rtaEnabled} />
       )}
@@ -110,6 +108,5 @@ IntegrationsForm.defaultProps = {
   integrationType: 'rest',
   authType: 'noAuth',
   ctiEnabled: false,
-  rtaEnabled: false,
-  workItems: false
+  rtaEnabled: false
 };

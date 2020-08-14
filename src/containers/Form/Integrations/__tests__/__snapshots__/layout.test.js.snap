@@ -26,10 +26,6 @@ exports[`<IntegrationsForm /> renders create form 1`] = `
           "label": "Zendesk",
           "value": "zendesk",
         },
-        Object {
-          "label": "Calabrio",
-          "value": "calabrio",
-        },
       ]
     }
     required={true}
@@ -83,10 +79,6 @@ exports[`<IntegrationsForm /> renders update form 1`] = `
         Object {
           "label": "Zendesk",
           "value": "zendesk",
-        },
-        Object {
-          "label": "Calabrio",
-          "value": "calabrio",
         },
       ]
     }

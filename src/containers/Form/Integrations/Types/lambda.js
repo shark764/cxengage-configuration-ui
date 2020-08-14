@@ -23,7 +23,7 @@ export default function LambdaForm({ isSaving, inherited, userHasUpdatePermissio
         inputType="text"
         data-automation="integrationsAccessKey"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        type="password"
       />
       <InputField
         name="properties.secretKey"
@@ -32,7 +32,7 @@ export default function LambdaForm({ isSaving, inherited, userHasUpdatePermissio
         inputType="text"
         data-automation="integrationsSecretKey"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        type="password"
       />
     </Fragment>
   );

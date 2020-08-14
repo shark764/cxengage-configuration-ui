@@ -72,7 +72,7 @@ export default function EmailForm({ isSaving, inherited, userHasUpdatePermission
         inputType="text"
         data-automation="integrationsSmtpPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        autoComplete={'new-password'}
       />
     </Fragment>
   );

@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.14] - 2020-08-14
+### Fixed
+- CXV1-22928 - Integration page showing passwords, Plivo, Birst properties
+
 ## [0.81.13] - 2020-08-14
 ### Added
 - CXV1-22876 - User should not be able to monitor interactions if they are logged into Skylight

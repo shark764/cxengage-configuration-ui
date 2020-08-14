@@ -48,7 +48,7 @@ export default function VerintForm({ isSaving, inherited, userHasUpdatePermissio
         inputType="text"
         data-automation="integrationsSftpPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        type="password"
       />
       <DetailHeader text="User Sync" />
       <InputField

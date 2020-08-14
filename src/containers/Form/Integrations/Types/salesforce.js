@@ -31,7 +31,7 @@ export default function SalesforceForm({ isSaving, inherited, userHasUpdatePermi
         inputType="text"
         data-automation="integrationsPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        type="password"
       />
       <InputField
         name="properties.consumerKey"
@@ -48,7 +48,8 @@ export default function SalesforceForm({ isSaving, inherited, userHasUpdatePermi
         inputType="text"
         data-automation="integrationsConsumerSecret"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        type="password"
+        autoComplete={'new-password'}
       />
       <InputField
         name="properties.securityToken"
@@ -57,7 +58,8 @@ export default function SalesforceForm({ isSaving, inherited, userHasUpdatePermi
         inputType="text"
         data-automation="integrationsSecurityToken"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        type="password"
+        autoComplete={'new-password'}
       />
       <InputField
         name="properties.loginUrl"

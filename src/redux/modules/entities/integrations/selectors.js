@@ -46,6 +46,7 @@ export const selectIntegrationsFormInitialValues = state => {
       return initialValues.set('authType', 'token');
     }
   }
+
   return initialValues;
 };
 
@@ -89,3 +90,5 @@ export const selectIntegrationListenerFormInitialValues = state => {
           .get('listeners')
           .find(listener => listener.get('id') === selectedSubEntityId);
 };
+
+export const isIntegrationsFetched = state => state.getIn(['Entities', 'integrations', 'data']).size === 0;
