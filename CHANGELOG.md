@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.11] - 2020-08-13
+### Added
+- No-Ticket - Issue with infinite loading on roles page
+
 ## [0.81.10] - 2020-08-13
 ### Added
 - Automation Test - Fixed Automation Test issues, commented out tenants since it still has some bug.

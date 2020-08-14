@@ -27,15 +27,14 @@ import {
   selectTenantsFormInitialValues,
   isTenantBrandingImagesUploaded,
   isAllTenantsFormDependenciesFetched,
-  getSelectedTenantBrandingStyles,
-  isTenantsFetched
+  getSelectedTenantBrandingStyles
 } from './selectors';
 
 // Fetch's all the tenant's that the user belongs to:
 export const fetchTenants = ($action, store) =>
   $action
     .ofType('FETCH_DATA')
-    .filter(({ entityName }) => entityName === 'tenants' && isTenantsFetched(store.getState()))
+    .filter(({ entityName, fetchingDependencies }) => entityName === 'tenants' && !fetchingDependencies)
     .mergeMap(a => {
       if (userHasPermissions(store.getState(), tenantsPlatformPermissions)) {
         a.fetchAllTenants = true;

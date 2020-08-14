@@ -243,5 +243,3 @@ export const userHasTenantIdpUpdatePermissions = state =>
   userHasTenantUpdatePermissions(state) && userHasPermissions(state, ['IDENTITY_PROVIDERS_UPDATE']);
 
 export const userHasPlatformViewPermission = state => userHasPermissions(state, ['PLATFORM_VIEW_ALL']);
-
-export const isTenantsFetched = state => state.getIn(['Entities', 'tenants', 'data']).size === 0;

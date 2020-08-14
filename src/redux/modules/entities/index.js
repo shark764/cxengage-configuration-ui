@@ -705,7 +705,7 @@ export default function reducer(state = initialState, action) {
             ...entity,
             inherited: entity.type === 'system' || entity.tenantId !== state.get('currentTenantId')
           }));
-          return state.setIn([entityName, 'data'], fromJS(newResult));
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'apiKeys': {
           const newResult = result.map(entity => ({
