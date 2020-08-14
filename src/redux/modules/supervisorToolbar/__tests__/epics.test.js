@@ -4,24 +4,26 @@
 
 import { ActionsObservable } from 'redux-observable';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/timeout';
 import { mockStore, supervisorToolbarMockStore } from '../../../../utils/testUtils';
-import { sdkPromise, sdkCall } from '../../../../utils/sdk';
+import { sdkPromise, sdkCall, errorLabel } from '../../../../utils/sdk';
 import {
   StartBatchRequest,
   MonitorInteraction,
   HangUpEpic,
   ToggleMuteEpic,
   MonitorInteractionInitialization,
-  SqsSessionLost
+  SqsSessionLost,
+  WaitTwilioDeviceReady
 } from '../epics';
 
 import {
   selectSupervisorToolbarSilentMonitoringInteractionId,
   selectSupervisorToolbarSilentMonitoringStatus,
+  selectSupervisorToolbarTwilioEnabled,
   selectSupervisorToolbarMuted,
   selectTransitionCall,
-  isSessionActive,
-  selectSupervisorToolbarTwilioEnabled
+  selectSessionId
 } from '../selectors';
 
 import {
@@ -34,6 +36,7 @@ import {
 
 jest.mock('../../../../utils/sdk');
 jest.mock('../selectors');
+// errorLabel.mockReturnValue('');
 selectSupervisorToolbarMuted.mockReturnValue(false);
 selectSupervisorToolbarSilentMonitoringInteractionId.mockReturnValue('0000-0000-0000-0000');
 selectSupervisorToolbarSilentMonitoringStatus.mockReturnValue('connected');
@@ -117,7 +120,7 @@ describe('MonitorInteraction, Twilio is Chosen Extension', () => {
   });
   it('wait for both twilio and session to be ready', done => {
     selectTransitionCall.mockReturnValueOnce(false);
-    isSessionActive.mockReturnValueOnce(false);
+    selectSessionId.mockReturnValueOnce('');
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(false);
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
@@ -131,7 +134,7 @@ describe('MonitorInteraction, Twilio is Chosen Extension', () => {
   });
   it('session is ready just wait for twilio', done => {
     selectTransitionCall.mockReturnValueOnce(false);
-    isSessionActive.mockReturnValueOnce(true);
+    selectSessionId.mockReturnValueOnce('mockSessionId');
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(false);
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
@@ -144,7 +147,7 @@ describe('MonitorInteraction, Twilio is Chosen Extension', () => {
   });
   it('twilio is ready just wait for session', done => {
     selectTransitionCall.mockReturnValueOnce(false);
-    isSessionActive.mockReturnValueOnce(false);
+    selectSessionId.mockReturnValueOnce('');
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(true);
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
@@ -157,7 +160,7 @@ describe('MonitorInteraction, Twilio is Chosen Extension', () => {
   });
   it('twilio and session are ready and its a transition call , waits for call to end', done => {
     selectTransitionCall.mockReturnValueOnce(true);
-    isSessionActive.mockReturnValueOnce(true);
+    selectSessionId.mockReturnValueOnce('mockSessionId');
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(true);
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', true, mockTwilioExtension),
@@ -170,7 +173,7 @@ describe('MonitorInteraction, Twilio is Chosen Extension', () => {
   });
   it('twilio and session are ready and its not a transition call', done => {
     selectTransitionCall.mockReturnValueOnce(false);
-    isSessionActive.mockReturnValueOnce(true);
+    selectSessionId.mockReturnValueOnce('mockSessionId');
     selectSupervisorToolbarTwilioEnabled.mockReturnValueOnce(true);
     const action = ActionsObservable.from([requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension)]);
     MonitorInteraction(action, mockStore).subscribe(() => {
@@ -178,7 +181,7 @@ describe('MonitorInteraction, Twilio is Chosen Extension', () => {
       done();
     });
   });
-  it("we don't recieve both required events and do not call the sdk", done => {
+  it("we don't recieve both required events and do not call the sdk (no device-ready)", done => {
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       // {type: 'cxengage/twilio/device-ready'},
@@ -188,7 +191,8 @@ describe('MonitorInteraction, Twilio is Chosen Extension', () => {
     expect(sdkCall).toHaveBeenCalledTimes(0);
     done();
   });
-  it("we don't recieve both required events and do not call the sdk", done => {
+  it("we don't recieve both required events and do not call the sdk (no-session-start)", done => {
+    selectSessionId.mockReturnValueOnce('');
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', false, mockTwilioExtension),
       { type: 'cxengage/twilio/device-ready' }
@@ -229,7 +233,7 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
     });
   });
   it('session is not active, wait for the session to start', done => {
-    isSessionActive.mockReturnValueOnce(false);
+    selectSessionId.mockReturnValueOnce('');
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', false, mockNonTwilioExtension),
       { type: 'cxengage/session/started' }
@@ -239,18 +243,18 @@ describe('MonitorInteraction, Twilio is not Default Extension', () => {
     done();
   });
   it("we don't recieve an event and monitor call sdk should fire", done => {
-    isSessionActive.mockReturnValueOnce(true);
-    // selectTransitionCall.mockReturnValueOnce(false);
+    selectSessionId.mockReturnValueOnce('');
+    selectTransitionCall.mockReturnValueOnce(false);
     const action = ActionsObservable.from([
-      requestingMonitorCall('0000-0000-0000-0000', false, mockNonTwilioExtension)
-      // {type: 'cxengage/session/started'}
+      requestingMonitorCall('0000-0000-0000-0000', false, mockNonTwilioExtension),
+      { type: 'cxengage/session/started' }
     ]);
     MonitorInteraction(action, mockStore).subscribe(() => {});
     expect(sdkCall).toHaveBeenCalledTimes(1);
     done();
   });
   it('transition call waits for silent monitor end before monitor call sdk should fire', done => {
-    isSessionActive.mockReturnValueOnce(true);
+    selectSessionId.mockReturnValueOnce('mockSessionId');
     selectTransitionCall.mockReturnValueOnce(true);
     const action = ActionsObservable.from([
       requestingMonitorCall('0000-0000-0000-0000', true, mockNonTwilioExtension),

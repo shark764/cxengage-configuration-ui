@@ -15,9 +15,6 @@ export const selectSupervisorToolbarTwilioEnabled = createSelector(selectSupervi
 export const selectTransitionCall = createSelector(selectSupervisorToolbarMap, supervisorToolbar =>
   supervisorToolbar.getIn(['silentMonitoring', 'transitionCall'])
 );
-export const isSessionActive = createSelector(selectSupervisorToolbarMap, supervisorToolbar =>
-  supervisorToolbar.getIn(['silentMonitoring', 'activeSession'])
-);
 export const selectSupervisorToolbarSilentMonitoringStatus = createSelector(
   selectSupervisorToolbarMap,
   supervisorToolbar => supervisorToolbar.getIn(['silentMonitoring', 'status'])
@@ -25,4 +22,16 @@ export const selectSupervisorToolbarSilentMonitoringStatus = createSelector(
 export const selectSupervisorToolbarSilentMonitoringInteractionId = createSelector(
   selectSupervisorToolbarMap,
   supervisorToolbar => supervisorToolbar.getIn(['silentMonitoring', 'interactionId'])
+);
+export const selectSessionId = createSelector(
+  selectSupervisorToolbarMap,
+  supervisorToolbar => supervisorToolbar.getIn(['silentMonitoring', 'sessionId'])
+);
+export const selectCanSilentMonitor = createSelector(
+  selectSupervisorToolbarMap,
+  subState => subState.get('canSilentMonitor')
+);
+export const selectLoadingUserStatus = createSelector(
+  selectSupervisorToolbarMap,
+  subState => subState.get('loadingUserStatus')
 );

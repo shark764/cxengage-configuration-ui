@@ -10,6 +10,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/operator/timeout';
 import { zip } from 'rxjs/observable/zip';
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
@@ -27,7 +28,7 @@ import {
   selectSupervisorToolbarMuted,
   selectSupervisorToolbarTwilioEnabled,
   selectTransitionCall,
-  isSessionActive
+  selectSessionId
 } from './selectors';
 
 import {
@@ -39,12 +40,35 @@ import {
   transitionCallEnding
 } from './index';
 
+const WAIT_TIMEOUT = 10000;
+
 function handleError(error, state) {
   Toast.error(errorLabel(error));
   localStorage.setItem('SupervisorToolbar', JSON.stringify(state.get('SupervisorToolbar').toJS()));
   sdkCall({ module: 'session', command: 'clearMonitoredInteraction' });
   return of({ type: 'cxengage/interactions/voice/silent-monitor-end' });
 }
+
+const WaitTwilioDeviceReady = (action$, store) =>
+  action$
+    .ofType('cxengage/twilio/device-ready')
+    .timeout(WAIT_TIMEOUT)
+    .take(1)
+    .catch(error => handleError(error, store.getState()));
+
+const WaitSessionStarted = (action$, store) =>
+  action$
+    .ofType('cxengage/session/started')
+    .timeout(WAIT_TIMEOUT)
+    .take(1)
+    .catch(error => handleError(error, store.getState()));
+
+const WaitCurrentSessionEnd = (action$, store) =>
+  action$
+    .ofType('cxengage/interactions/voice/silent-monitor-end')
+    .timeout(WAIT_TIMEOUT)
+    .take(1)
+    .catch(error => handleError(error, store.getState()));
 
 // Start all the required subscriptions
 export const StartBatchRequest = (action$, store) =>
@@ -67,6 +91,31 @@ export const StartBatchRequest = (action$, store) =>
         )
       )
     );
+
+export const CanSilentMonitor = (action$, store) =>
+  action$.ofType('GET_CAN_SILENT_MONITOR').concatMap(a =>
+    fromPromise(
+      sdkPromise({
+        module: 'session',
+        command: 'getRunningSessionState',
+        topic: 'cxengage/session/get-running-session-state'
+      })
+    )
+      .map(result => ({
+        ...a,
+        canSilentMonitor:
+          result.state === 'offline' ||
+          (result.sessionId !== null && result.sessionId === selectSessionId(store.getState())),
+        type: 'SET_CAN_SILENT_MONITOR'
+      }))
+      .catch(error => {
+        Toast.error(errorLabel(error));
+        return {
+          canSilentMonitor: false,
+          type: 'SET_CAN_SILENT_MONITOR'
+        };
+      })
+  );
 
 export const MonitorInteractionInitialization = (action$, store) =>
   action$
@@ -91,36 +140,33 @@ export const MonitorInteraction = (action$, store) =>
       ...action,
       twilioEnabled: selectSupervisorToolbarTwilioEnabled(store.getState()),
       transitionCall: selectTransitionCall(store.getState()),
-      sessionIsActive: isSessionActive(store.getState())
+      sessionIsActive: selectSessionId(store.getState()) != ''
     }))
     .switchMap(a => {
       if (a.chosenExtension.provider && a.chosenExtension.provider === 'twilio') {
         if (!a.twilioEnabled && !a.sessionIsActive) {
           // Waiting on twilio & call session to start
-          return zip(
-            action$.ofType('cxengage/twilio/device-ready').take(1),
-            action$.ofType('cxengage/session/started').take(1)
-          ).mapTo(a);
+          return zip(WaitTwilioDeviceReady(action$, store), WaitSessionStarted(action$, store)).mapTo(a);
         } else if (!a.twilioEnabled && a.sessionIsActive) {
           // Waiting on twilio to start
-          return zip(action$.ofType('cxengage/twilio/device-ready').take(1)).mapTo(a);
+          return zip(WaitTwilioDeviceReady(action$, store)).mapTo(a);
         } else if (a.twilioEnabled && !a.sessionIsActive) {
           // Waiting on session to start
-          return zip(action$.ofType('cxengage/session/started').take(1)).mapTo(a);
+          return zip(WaitSessionStarted(action$, store)).mapTo(a);
         } else if (a.twilioEnabled && a.sessionIsActive) {
           // Everything is ready
           if (a.transitionCall) {
             // Require call transition
-            return zip(action$.ofType('cxengage/interactions/voice/silent-monitor-end').take(1)).mapTo(a);
+            return zip(WaitCurrentSessionEnd(action$, store)).mapTo(a);
           } else {
             // Happy path!
             return from([a]);
           }
         }
       } else if (!a.sessionIsActive) {
-        return zip(action$.ofType('cxengage/session/started').take(1)).mapTo(a);
+        return zip(WaitSessionStarted(action$, store)).mapTo(a);
       } else if (a.transitionCall) {
-        return zip(action$.ofType('cxengage/interactions/voice/silent-monitor-end').take(1)).mapTo(a);
+        return zip(WaitCurrentSessionEnd(action$, store)).mapTo(a);
       } else {
         return from([a]);
       }

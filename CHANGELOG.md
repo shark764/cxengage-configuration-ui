@@ -28,6 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.13] - 2020-08-14
+### Added
+- CXV1-22876 - User should not be able to monitor interactions if they are logged into Skylight
+### Fixed
+- CXV1-22455 - Fix Monitor dropdown not visible when other columns are added.
+
 ## [0.81.12] - 2020-07-22
 ### Fixed
 - CXV1-13781 - Generic List - Display confirmation box before deleting a list Item

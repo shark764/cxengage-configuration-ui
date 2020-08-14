@@ -185,6 +185,8 @@ export default class InteractionMonitoring extends Component {
               startDateColumn(this.props.activeColumns[8], 'interactionMonitoring'),
               startTimeColumn(this.props.activeColumns[9], 'interactionMonitoring', this.props.twelveHourFormat),
               elapsedTimeColumn(this.props.activeColumns[10], 'interactionMonitoring'),
+              groupsColumn(this.props.activeColumns[12], 'interactionMonitoring'),
+              skillsColumn(this.props.activeColumns[13], 'interactionMonitoring'),
               monitoringColumn(
                 this.props.activeColumns[11],
                 'interactionMonitoring',
@@ -192,10 +194,10 @@ export default class InteractionMonitoring extends Component {
                 this.props.monitoringStatus,
                 this.props.getCurrentAgentId,
                 this.props.userHasMonitorAllCallsPermission,
-                this.props.extensions
-              ),
-              groupsColumn(this.props.activeColumns[12], 'interactionMonitoring'),
-              skillsColumn(this.props.activeColumns[13], 'interactionMonitoring')
+                this.props.extensions,
+                this.props.canSilentMonitor,
+                this.props.loadingUserStatus
+              )
             ]}
           />
         )}
@@ -233,5 +235,7 @@ InteractionMonitoring.propTypes = {
   insideIframe: PropTypes.bool,
   pageTitle: PropTypes.string,
   pageHelpLink: PropTypes.string,
-  extensions: PropTypes.array
+  extensions: PropTypes.array,
+  canSilentMonitor: PropTypes.bool,
+  loadingUserStatus: PropTypes.bool
 };

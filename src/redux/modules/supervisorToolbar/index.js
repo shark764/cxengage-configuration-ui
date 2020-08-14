@@ -5,17 +5,36 @@
 import { fromJS } from 'immutable';
 
 // Initial Sub State
-export const initialState = fromJS({
-  twilio: { enabled: false },
-  silentMonitoring: {
-    status: 'offline',
-    interactionId: 'na',
-    activeSession: false
-  },
-  muted: true
-});
+export const constructInitialState = () => {
+  let initialState = {
+    twilio: { enabled: false },
+    silentMonitoring: {
+      status: 'offline',
+      interactionId: 'na',
+      sessionId: ''
+    },
+    canSilentMonitor: false,
+    loadingUserStatus: false,
+    muted: true
+  };
+  // We want to keep the previous sessionId stored in localStorage. This handles cases where the
+  // SupervisorToolbar gets destroyed + rebuilt when leaving and returning to the
+  // interactionMonitoring page.
+  let storedState = localStorage.getItem('SupervisorToolbar');
+  if (storedState !== 'undefined' && storedState != null) {
+    storedState = JSON.parse(storedState);
+    let storedSessionId = storedState.silentMonitoring && storedState.silentMonitoring.sessionId;
+    if (storedSessionId) {
+      initialState.silentMonitoring.sessionId = storedSessionId;
+    }
+  }
+  return fromJS(initialState);
+};
 
 // Actions
+export const getCanSilentMonitor = () => ({
+  type: 'GET_CAN_SILENT_MONITOR'
+});
 export const supervisorSubscriptionsAdded = subscription => ({
   type: 'SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$',
   subscription
@@ -71,12 +90,14 @@ export const updateAllOfSupervisorToolbar = state => ({
 });
 
 // Reducer
-export default function supervisorToolbarReducer(state = initialState, action) {
+export default function supervisorToolbarReducer(state = constructInitialState(), action) {
   switch (action.type) {
     case 'cxengage/twilio/device-ready':
-      return state.setIn(['twilio', 'enabled'], !state.getIn(['twilio', 'enabled']));
-    case 'cxengage/session/started':
-      return state.setIn(['silentMonitoring', 'activeSession'], true);
+      return state.setIn(['twilio', 'enabled'], true);
+    case 'cxengage/session/started': {
+      const newSessionId = action.response && action.response.sessionId;
+      return state.setIn(['silentMonitoring', 'sessionId'], newSessionId);
+    }
     case 'cxengage/interactions/voice/silent-monitor-start':
       return state.setIn(['silentMonitoring', 'status'], 'connected').set('muted', true);
     case 'cxengage/session/sqs-shut-down':
@@ -110,6 +131,10 @@ export default function supervisorToolbarReducer(state = initialState, action) {
       return state.set('muted', true);
     case 'UPDATE_SUPERVISOR_TOOLBAR_STATE':
       return action.state;
+    case 'GET_CAN_SILENT_MONITOR':
+      return state.set('loadingUserStatus', true);
+    case 'SET_CAN_SILENT_MONITOR':
+      return state.set('canSilentMonitor', action.canSilentMonitor).set('loadingUserStatus', false);
     default:
       return state;
   }

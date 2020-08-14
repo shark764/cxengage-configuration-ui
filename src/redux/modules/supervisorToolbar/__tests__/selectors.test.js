@@ -78,26 +78,26 @@ describe('selectTransitionCall', () => {
   });
 });
 
-describe('isSessionActive', () => {
-  it('returns false if session is not active', () => {
+describe('selectSessionId', () => {
+  it('returns empty string if no session is active', () => {
     const initialState = fromJS({
       SupervisorToolbar: {
         silentMonitoring: {
-          activeSession: false
+          sessionId: ''
         }
       }
     });
-    expect(sel.isSessionActive(initialState)).toEqual(false);
+    expect(sel.selectSessionId(initialState)).toEqual('');
   });
-  it('returns true if session is active', () => {
+  it('returns session string if a session is active', () => {
     const initialState = fromJS({
       SupervisorToolbar: {
         silentMonitoring: {
-          activeSession: true
+          sessionId: '0000-0000-0000-0000'
         }
       }
     });
-    expect(sel.isSessionActive(initialState)).toEqual(true);
+    expect(sel.selectSessionId(initialState)).toEqual('0000-0000-0000-0000');
   });
 });
 

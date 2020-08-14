@@ -181,17 +181,6 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
         },
         Object {
           "Cell": [Function],
-          "Filter": [Function],
-          "Header": "Monitoring",
-          "accessor": [Function],
-          "filterMethod": [Function],
-          "id": "monitoring",
-          "minWidth": 180,
-          "resizable": false,
-          "show": true,
-        },
-        Object {
-          "Cell": [Function],
           "Filter": <Connect(CheckboxMenu)
             buttonType="columnFilter"
             menuType="Groups"
@@ -225,6 +214,17 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
           "minWidth": 190,
           "show": true,
           "sortable": false,
+        },
+        Object {
+          "Cell": [Function],
+          "Filter": [Function],
+          "Header": "Monitoring",
+          "accessor": [Function],
+          "filterMethod": [Function],
+          "id": "monitoring",
+          "minWidth": 180,
+          "resizable": false,
+          "show": true,
         },
       ]
     }

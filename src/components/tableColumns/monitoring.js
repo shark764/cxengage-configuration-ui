@@ -7,11 +7,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CheckboxFilterMenu from '../../containers/CheckboxFilterMenu';
 import { monitorInteractionInitialization } from '../../redux/modules/supervisorToolbar';
+import { getCanSilentMonitor } from '../../redux/modules/supervisorToolbar';
 import store from '../../redux/store';
+import { Toast } from 'cx-ui-components';
 import { Button, PopoverDialog, FormattedTitle, LoadingSpinnerSVG } from 'cx-ui-components';
 
 const MonitorCallButton = styled(Button)`
-  float: right;
   margin-right: 10px;
   height: 20px;
   padding-top: 1px;
@@ -43,7 +44,6 @@ const FillerSpaceIcon = styled.div`
 `;
 const PopoverMenu = styled(PopoverDialog)`
   top: 24px;
-  right: 0px;
   padding-bottom: 15px;
 `;
 const MonitoringContainer = styled.div`
@@ -83,7 +83,17 @@ export const helperFunctions = {
     return row[filter.id].length === 0;
   },
   monitorFilter: (tableType, onChange) => <MonitorFilter tableType={tableType} onChange={onChange} />,
-  Cell: function(value, row, monitoredId, monitoringStatus, agentId, userHasMonitorAllCallsPermission, extensions) {
+  Cell: function(
+    value,
+    row,
+    monitoredId,
+    monitoringStatus,
+    agentId,
+    userHasMonitorAllCallsPermission,
+    extensions,
+    canSilentMonitor,
+    loadingUserStatus
+  ) {
     let activeMonitors = 0;
     let previousMonitors = 0;
     row.monitoring.forEach(monitor => {
@@ -104,6 +114,8 @@ export const helperFunctions = {
         implicitDisable={this.implicitDisable(row, agentId)}
         userHasMonitorAllCallsPermission={userHasMonitorAllCallsPermission}
         extensions={extensions}
+        canSilentMonitor={canSilentMonitor}
+        loadingUserStatus={loadingUserStatus}
       />
     );
   }
@@ -116,7 +128,9 @@ export default function(
   monitoringStatus,
   agentId,
   userHasMonitorAllCallsPermission,
-  extensions
+  extensions,
+  canSilentMonitor,
+  loadingUserStatus
 ) {
   const column = {
     Header: 'Monitoring',
@@ -133,7 +147,9 @@ export default function(
         monitoringStatus,
         agentId,
         userHasMonitorAllCallsPermission,
-        extensions
+        extensions,
+        canSilentMonitor,
+        loadingUserStatus
       ),
     filterMethod: (filter, row) => helperFunctions.monitoringFilterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.monitorFilter(tableType, onChange)
@@ -170,17 +186,30 @@ export class MonitoringCell extends Component {
 
   showExtensionMenu = (e, show = true) => {
     e.stopPropagation();
+    if (show) {
+      store.dispatch(getCanSilentMonitor());
+    }
     this.setState({ showExtensionMenu: show });
   };
 
   monitorInteractionRequestor = (e, chosenExtension) => {
     e.stopPropagation();
-    return store.dispatch(monitorInteractionInitialization(this.props.interactionId, chosenExtension));
+    if (!this.props.canSilentMonitor) {
+      Toast.error("You are currently online in Skylight and cannot monitor interactions. Logout of Skylight and try again.");
+    } else {
+      return store.dispatch(monitorInteractionInitialization(this.props.interactionId, chosenExtension));
+    }
   };
 
   extensionToExtensionMenuItem = (extension, idx) => {
     return (
-      <ExtensionMenuItem key={idx} onClick={e => this.monitorInteractionRequestor(e, extension)}>
+      <ExtensionMenuItem
+        key={idx}
+        onClick={e => {
+          this.monitorInteractionRequestor(e, extension);
+          this.showExtensionMenu(e, false);
+        }}
+      >
         {extension.description}
       </ExtensionMenuItem>
     );
@@ -220,17 +249,17 @@ export class MonitoringCell extends Component {
                 <PopoverMenu
                   id="chooseExtensionMenu"
                   widthPx={260}
-                  arrowLeftOffsetPx={110}
+                  arrowLeftOffsetPx={70}
                   hide={e => this.showExtensionMenu(e, false)}
                   isVisible={this.state.showExtensionMenu}
                 >
                   <FormattedTitle messageTitle="Choose Extension" />
-                  {this.props.isUpdating && (
+                  {(this.props.isUpdating || this.props.loadingUserStatus) && (
                     <CenterWrapper>
                       <LoadingSpinnerSVG size={28} color="white" />
                     </CenterWrapper>
                   )}
-                  {!this.props.isUpdating && extensionList}
+                  {(!this.props.isUpdating && !this.props.loadingUserStatus) && extensionList}
                 </PopoverMenu>
               </Fragment>
             )}
@@ -251,7 +280,9 @@ MonitoringCell.propTypes = {
   implicitDisable: PropTypes.bool,
   userHasMonitorAllCallsPermission: PropTypes.bool,
   extensions: PropTypes.array,
-  isUpdating: PropTypes.bool
+  isUpdating: PropTypes.bool,
+  canSilentMonitor: PropTypes.bool,
+  loadingUserStatus: PropTypes.bool
 };
 MonitorFilter.propTypes = {
   tableType: PropTypes.string,

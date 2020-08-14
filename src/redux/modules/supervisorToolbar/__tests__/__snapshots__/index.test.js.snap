@@ -106,7 +106,8 @@ Immutable.Map {
     "status": "connected",
     "interactionId": "0000-0000-0000-0000",
     "transitionCall": false,
-    "activeSession": true,
+    "activeSession": false,
+    "sessionId": undefined,
   },
 }
 `;
@@ -136,8 +137,10 @@ Immutable.Map {
   "silentMonitoring": Immutable.Map {
     "status": "offline",
     "interactionId": "na",
-    "activeSession": false,
+    "sessionId": "",
   },
+  "canSilentMonitor": false,
+  "loadingUserStatus": false,
   "muted": true,
 }
 `;

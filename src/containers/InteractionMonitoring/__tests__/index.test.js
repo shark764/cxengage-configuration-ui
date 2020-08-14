@@ -27,7 +27,10 @@ jest.mock('../../../redux/modules/reporting/interactionMonitoring/selectors', ()
 }));
 jest.mock('../../../redux/modules/supervisorToolbar/selectors', () => ({
   selectSupervisorToolbarSilentMonitoringInteractionId: () => '0000-0000-0000-0000',
-  selectSupervisorToolbarSilentMonitoringStatus: () => 'mockStatus'
+  selectSupervisorToolbarSilentMonitoringStatus: () => 'mockStatus',
+  selectCurrentSessionId: () => '',
+  selectLoadingUserStatus: () => false,
+  selectCanSilentMonitor: () => true
 }));
 jest.mock('../../../redux/modules/userData/selectors', () => ({
   getCurrentAgentId: () => '0000-0000-0000-0000'
