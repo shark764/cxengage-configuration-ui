@@ -1,10 +1,11 @@
 const commonBehavior = require('../dictionary/common');
-const dictionary = require('../dictionary/index');
-
+const prepData = require('../dictionary/index');
+let dictionary = prepData.pages();
+process.env.wdioRetries = 1;
 const keydInTests = process.env.TESTS_TO_RUN;
 const totalTests = Object.keys(dictionary);
 let testsToRun = [];
-
+      
 // Filters out the tests to run based on the input provided to TESTS_TO_RUN in './automation/config/.env' file
 if (keydInTests && keydInTests !== 'all') {
   testsToRun = keydInTests.split(',').map(x => x.trim()).filter(a => totalTests.find(b => a === b) !== undefined)
@@ -38,8 +39,9 @@ testsToRun.forEach(entity => {
     }
     if (dictionary[entity].specs['create']) {
       it(`Create ${entity}`, () => {
+        commonBehavior.checkLogin(entity);
         commonBehavior.entityCRUD(entity, 'create');
-      });
+      },3);
     }
     if (dictionary[entity].specs['update']) {
       it(`Update ${entity}`, () => {

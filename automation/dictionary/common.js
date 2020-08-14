@@ -1,6 +1,7 @@
 const { Element, Brow } = require('cx-automation-utils/src/pageObject.js');
 const Elem = require('../pageObjects/webElements');
-const dictionary = require('./index');
+const prepData = require('./index');
+let dictionary = prepData.pages();
 const today = new Date();
 const tomorrow = new Date(today.setDate(today.getDate() + 1)).toString().slice(0, 15);
 const Api = require('./apiClass');
@@ -28,6 +29,16 @@ const commonBehavior = {
     Elem.loadingSpinnerIcon.waitForVisible(30000, false);
     Elem.loadingSpinnerIcon.validateElementsState('isVisible', false);
   },
+  checkLogin(entity){
+    if(!Elem.entityTableColumnSelectionBtn.isExisting()){//Perform login if not logged in.
+      process.env.wdioRetries = parseInt(process.env.wdioRetries) + 1;
+      dictionary = prepData.pages(process.env.wdioRetries);
+      Brow.refresh();
+      this.login();
+      this.chooseTenant();
+      this.navigationMainBar(entity);
+    }
+  },
   navigationMainBar(entity) {
     let navBar = new Element(`[data-automation=${dictionary[entity].navigation.mainBar}]`);
     let navBarSub = new Element(`[data-automation=${dictionary[entity].navigation.subMainBar}]`);
@@ -37,10 +48,11 @@ const commonBehavior = {
     Elem.entityTableColumnSelectionBtn.validateElementsState('isVisible', true);
     Elem.entityTableColumnSelectionBtn.waitForEnabled();
     Elem.entityTableColumnSelectionBtn.validateElementsState('isEnabled', true);
+    console.log("--end navigation---")
   },
   insertDataTextValues(parameter, param, entity, actionType) {
     // for some reason clearElement is kind of broken in the following entity pages during update 
-    const customEntities = ['Reason List', 'Transfer List', 'Disposition List'];
+    const customEntities = ['Reason List','Transfer List','Disposition List','User','Sla','Tenant'];
     if(customEntities.includes(entity) && actionType === 'update') {
       Brow.pause(1000);
       Elem[param].waitAndClick();
@@ -145,6 +157,13 @@ const commonBehavior = {
             Elem.modalSubmitButton.waitAndClick();
           }
         });
+      }
+      // for some reason when pause and scroll is not implemented sometimes after the submit it will cause the page to clear
+      const customEntities = ['List'];
+      if(customEntities.includes(entity)) {
+        Brow.pause(1000);
+        $('button[data-automation="sdpanelSubmitButton"]').scroll();
+        Brow.pause(1000);
       }
       Elem.sdpanelSubmitButton.waitAndClick();
     } else if (actionType === 'update') {

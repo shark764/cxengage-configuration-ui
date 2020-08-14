@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.10] - 2020-08-13
+### Added
+- Automation Test - Fixed Automation Test issues, commented out tenants since it still has some bug.
+
 ## [0.81.9] - 2020-08-04
 ### Added
 - CXV1-22901 - Bulk Actions not working for Business Hours V2
