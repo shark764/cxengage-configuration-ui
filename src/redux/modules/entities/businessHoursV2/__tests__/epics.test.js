@@ -39,6 +39,20 @@ jest.mock('../../../../../containers/EntityTable/selectors');
 jest.mock('../../../../../utils/sdk');
 jest.mock('../../../form/selectors');
 
+// This doesn't feel the right way to do this but it's the only way to make the snapshots to be consistent regardless of timezone
+jest.mock('moment', () => {
+  const moment = jest.requireActual('moment');
+  const mockedMoment = () => moment.utc('2018-05-24');
+  mockedMoment.utc = () => ({
+    ...mockedMoment,
+    format: () => '2018-05-24T00:00:00Z'
+  });
+  mockedMoment.defineLocale = () => {};
+  mockedMoment.locale = () => {};
+
+  return mockedMoment;
+});
+
 describe('createBusinessHour', () => {
   let action;
   beforeEach(() => {
@@ -305,8 +319,8 @@ describe('UpdateDraft', () => {
         'Super long name test Super long name test Super long name test (should display ellipsis) Super long name test',
       id: '123',
       type: 'regular-hours',
-      startDate: new Date('2020-01-16T00:00:01Z'),
-      endDate: new Date('2020-01-30T00:00:01Z'),
+      startDate: '2020-01-16T00:00:00Z',
+      endDate: '2020-01-30T00:00:00Z',
       repeats: 'monthly',
       hours: {
         allDay: false,
@@ -330,7 +344,7 @@ describe('UpdateDraft', () => {
       name: 'rule 2',
       id: '456',
       type: 'one-time-extended-times',
-      startDate: new Date('2020-01-16T00:00:01Z'),
+      startDate: '2020-01-16T00:00:00Z',
       hours: {
         allDay: true
       }

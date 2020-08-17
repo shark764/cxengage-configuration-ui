@@ -21,6 +21,15 @@ jest.mock('../../selectors');
 jest.mock('serenova-js-utils/uuid');
 jest.mock('../../../userData/selectors');
 
+// This doesn't feel the right way to do this but it's the only way to make the snapshots to be consistent regardless of timezone
+jest.mock('moment', () => {
+  const moment = jest.requireActual('moment');
+  const mockedMoment = () => moment.utc('2018-05-24');
+  mockedMoment.utc = () => mockedMoment;
+
+  return mockedMoment;
+});
+
 describe('selectBusinessHoursV2FormInitialValues', () => {
   it('Return initial form values when creating a new entity', () => {
     getSelectedEntity.mockImplementation(() => {});

@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import { Map, List } from 'immutable';
 import { isInvalid, isDirty } from 'redux-form/immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
+import moment from 'moment';
 
 import { selectFormInitialValues, getFormValues } from '../../form/selectors';
 import { getSelectedEntity, getSelectedSubEntity } from '../selectors';
@@ -92,8 +93,8 @@ export const selectRules = createSelector(
             {
               ...r,
               id: generateUUID(),
-              startDate: new Date(startDate),
-              ...(endDate ? { endDate: new Date(endDate) } : {})
+              startDate: moment(startDate.split('T')[0]).toDate(),
+              ...(endDate ? { endDate: moment(endDate.split('T')[0]).toDate() } : {})
             }
           ];
         }, [])
@@ -116,8 +117,8 @@ export const selectRules = createSelector(
               {
                 ...r,
                 id: generateUUID(),
-                startDate: new Date(startDate),
-                ...(endDate ? { endDate: new Date(endDate) } : {})
+                startDate: moment(startDate.split('T')[0]).toDate(),
+                ...(endDate ? { endDate: moment(endDate.split('T')[0]).toDate() } : {})
               }
             ];
           }, [])

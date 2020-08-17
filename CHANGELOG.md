@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.16] - 2020-08-12
+### Added
+- CXV1-22964 - Rules start date and end date are being converted to local timezones causing them to show incorrectly on calendar and rule component
+
 ## [0.81.15] - 2020-08-14
 ### Added
 - CXV1-20162 - Add side panel details form to Contact Attribute page.

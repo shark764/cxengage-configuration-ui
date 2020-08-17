@@ -223,7 +223,7 @@ Object {
       "rules": Array [
         Object {
           "description": "",
-          "endDate": "2020-01-30T00:00:01.000Z",
+          "endDate": "2018-05-24T00:00:00Z",
           "hours": Object {
             "allDay": false,
             "intervals": Array [
@@ -243,7 +243,7 @@ Object {
             "value": 2,
           },
           "repeats": "monthly",
-          "startDate": "2020-01-16T00:00:01.000Z",
+          "startDate": "2018-05-24T00:00:00Z",
           "type": "regular-hours",
         },
         Object {
@@ -252,7 +252,7 @@ Object {
             "allDay": true,
           },
           "name": "rule 2",
-          "startDate": "2020-01-16T00:00:01.000Z",
+          "startDate": "2018-05-24T00:00:00Z",
           "type": "one-time-extended-times",
         },
       ],
@@ -275,7 +275,7 @@ Object {
     "name": "draft name",
     "rules": Array [
       Object {
-        "endDate": 2020-01-30T00:00:01.000Z,
+        "endDate": "2020-01-30T00:00:00Z",
         "hours": Object {
           "allDay": false,
           "intervals": Array [
@@ -296,7 +296,7 @@ Object {
           "value": 2,
         },
         "repeats": "monthly",
-        "startDate": 2020-01-16T00:00:01.000Z,
+        "startDate": "2020-01-16T00:00:00Z",
         "type": "regular-hours",
       },
       Object {
@@ -305,7 +305,7 @@ Object {
         },
         "id": "456",
         "name": "rule 2",
-        "startDate": 2020-01-16T00:00:01.000Z,
+        "startDate": "2020-01-16T00:00:00Z",
         "type": "one-time-extended-times",
       },
     ],
@@ -373,7 +373,7 @@ Object {
       "rules": Array [
         Object {
           "description": "",
-          "endDate": "2020-01-30T00:00:01.000Z",
+          "endDate": "2018-05-24T00:00:00Z",
           "hours": Object {
             "allDay": false,
             "intervals": Array [
@@ -393,7 +393,7 @@ Object {
             "value": 2,
           },
           "repeats": "monthly",
-          "startDate": "2020-01-16T00:00:01.000Z",
+          "startDate": "2018-05-24T00:00:00Z",
           "type": "regular-hours",
         },
         Object {
@@ -402,7 +402,7 @@ Object {
             "allDay": true,
           },
           "name": "rule 2",
-          "startDate": "2020-01-16T00:00:01.000Z",
+          "startDate": "2018-05-24T00:00:00Z",
           "type": "one-time-extended-times",
         },
       ],
@@ -425,7 +425,7 @@ Object {
     "name": "draft name",
     "rules": Array [
       Object {
-        "endDate": 2020-01-30T00:00:01.000Z,
+        "endDate": "2020-01-30T00:00:00Z",
         "hours": Object {
           "allDay": false,
           "intervals": Array [
@@ -446,7 +446,7 @@ Object {
           "value": 2,
         },
         "repeats": "monthly",
-        "startDate": 2020-01-16T00:00:01.000Z,
+        "startDate": "2020-01-16T00:00:00Z",
         "type": "regular-hours",
       },
       Object {
@@ -455,7 +455,7 @@ Object {
         },
         "id": "456",
         "name": "rule 2",
-        "startDate": 2020-01-16T00:00:01.000Z,
+        "startDate": "2020-01-16T00:00:00Z",
         "type": "one-time-extended-times",
       },
     ],

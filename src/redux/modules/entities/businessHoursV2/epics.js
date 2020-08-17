@@ -14,6 +14,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { submit, change } from 'redux-form';
 import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
+import moment from 'moment';
 
 import { from } from 'rxjs/observable/from';
 import { entitiesMetaData } from '../metaData';
@@ -258,12 +259,18 @@ export const UpdateDraft = (action$, store) =>
             name,
             type: draftType
           } = rule;
+          const start = !(startDate instanceof Date) ? new Date(startDate) : startDate;
+          const end = !(endDate instanceof Date) ? new Date(endDate) : endDate;
           return {
             name,
             type: draftType,
             description: description || '',
-            startDate: startDate instanceof Date ? startDate.toJSON() : startDate,
-            ...(endDate ? { endDate: endDate instanceof Date ? endDate.toJSON() : endDate } : {}),
+            startDate: moment.utc([start.getFullYear(), start.getMonth(), start.getDate()]).format(),
+            ...(endDate
+              ? {
+                  endDate: moment.utc([end.getFullYear(), end.getMonth(), end.getDate()]).format()
+                }
+              : {}),
             ...(on && { on }),
             hours: {
               ...hours,
@@ -378,19 +385,16 @@ export const bulkBusinessHoursV2EntityUpdate = (action$, store) =>
           ? forkJoin(
               a.allSdkCalls.map(apiCall =>
                 from(
-                    sdkPromise(apiCall).catch(error => ({
-                      error: error,
-                      id: apiCall.data[a.entityName],
-                      toString: getEntityItemDisplay(
-                        store.getState(),
-                        apiCall.data[a.entityName]
-                      )
-                    }))
-                  )
+                  sdkPromise(apiCall).catch(error => ({
+                    error: error,
+                    id: apiCall.data[a.entityName],
+                    toString: getEntityItemDisplay(store.getState(), apiCall.data[a.entityName])
+                  }))
+                )
               )
             )
-            .do(allResult => handleBulkSuccess(allResult))
-            .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
+              .do(allResult => handleBulkSuccess(allResult))
+              .mergeMap(result => from(result).map(response => handleSuccess(response, a)))
           : of({ type: 'BULK_ENTITY_UPDATE_cancelled' })
     );
 
