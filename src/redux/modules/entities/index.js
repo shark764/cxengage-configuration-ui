@@ -735,6 +735,13 @@ export default function reducer(state = initialState, action) {
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
+        case 'contactAttributes': {
+          const newResult = result.map(entity => ({
+            ...entity,
+            inherited: entity.tenantId !== state.get('currentTenantId')
+          }));
+          return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
+        }
         case 'users': {
           // tenants page has dependentEntities whcih changes based on the selected tenant
           if (currentEntityName === 'tenants' && action.entityId !== 'create' && action.entityId !== '') {

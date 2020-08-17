@@ -61,11 +61,11 @@ const CategoryLocalizationField = ({ fields, disabled, userHasUpdatePermission }
       onActionButtonClick={() => fields.length < 18 && fields.push(fromJS({ label: '', language: '' }))}
       open
     />
-    {fields.map((category, index, arr) => {
+    {fields.map((category, index) => {
       const languageOptions = localeLanguages.filter(
         a =>
-          a.value === arr.get(index).get('language') ||
-          arr.getAll().find(label => label.get('language') === a.value) === undefined
+          a.value === fields.get(index).get('language') ||
+          fields.getAll().find(label => label.get('language') === a.value) === undefined
       );
       return (
         <LocalizationLanguageContainer key={index}>
@@ -78,6 +78,7 @@ const CategoryLocalizationField = ({ fields, disabled, userHasUpdatePermission }
               labelWidth="auto"
               data-automation="localizationLabelInput"
               disabled={disabled}
+              onBlur={event => event.preventDefault()}
             />
           </LocalizationFieldsContainer>
           <LocalizationFieldsContainer>
@@ -94,7 +95,11 @@ const CategoryLocalizationField = ({ fields, disabled, userHasUpdatePermission }
             <CloseIconSVG
               onClick={() => fields.remove(index)}
               size={10}
-              closeIconType="secondary"
+              closeIconType={
+                fields.get(index) && (!fields.get(index).get('label') || !fields.get(index).get('language'))
+                  ? 'primary'
+                  : 'secondary'
+              }
               data-automation="categoryLocalizationRemoveButton"
             />
           </div>
@@ -127,8 +132,14 @@ export default class ContactLayoutsListItemsForm extends React.Component {
         {!this.props.selectedSubEntityId.startsWith('createListItem:') && (
           <FieldArray
             name="label"
+            rerenderOnEveryChange
             component={CategoryLocalizationField}
             props={{ disabled: this.props.isSaving, userHasUpdatePermission: this.props.userHasUpdatePermission }}
+            validate={value =>
+              !value || value.size === 0 || value.find(a => !a.get('label') || !a.get('language')) !== undefined
+                ? 'Invalid Label Data'
+                : undefined
+            }
           />
         )}
         {this.props.selectedSubEntityId.startsWith('create') && (

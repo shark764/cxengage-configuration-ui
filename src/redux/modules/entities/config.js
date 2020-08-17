@@ -13,7 +13,8 @@ export const hasCustomUpdateEntity = entityName =>
     'apiKeys',
     'dispositionLists',
     'businessHoursV2',
-    'contactLayouts'
+    'contactLayouts',
+    'contactAttributes'
   ].includes(entityName);
 
 export const hasCustomCreateEntityFullFilled = entityName => !['businessHoursV2', 'tenants'].includes(entityName);
@@ -26,7 +27,8 @@ export const hasCustomUpdateEntityFullFilled = entityName =>
     'customAttributes',
     'businessHoursV2',
     'tenants',
-    'contactLayouts'
+    'contactLayouts',
+    'contactAttributes'
   ].includes(entityName);
 
 export const hasCustomCreateSubEntity = entityName => !['businessHours'].includes(entityName);

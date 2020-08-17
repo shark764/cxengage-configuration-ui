@@ -3,7 +3,11 @@
  */
 
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
-import { getAllEntities as getAllEntitiesFromStore, getCurrentEntity } from '../../redux/modules/entities/selectors';
+import {
+  getAllEntities as getAllEntitiesFromStore,
+  getCurrentEntity,
+  isEntityFetching
+} from '../../redux/modules/entities/selectors';
 import { getProtectedBranding } from '../../redux/modules/entities/branding/selectors';
 import { getRoles } from '../../redux/modules/entities/roles/selectors';
 
@@ -21,6 +25,9 @@ export const getAllEntitiesTableData = state => {
             roleName: roles.size > 0 && roles.find(role => role.get('id') === entity.roleId).get('name')
           }))
       : undefined;
+  } else if (getCurrentEntity(state) === 'contactLayouts') {
+    // Don't display entity-table data for contactLayouts unitl contactAttributes are fetched:
+    return isEntityFetching(state) ? [] : getAllEntities(state);
   }
   return getAllEntities(state);
 };

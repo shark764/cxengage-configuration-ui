@@ -27,25 +27,17 @@ export const labelColumn = {
       return getDisplay(d, true);
     }
   },
-  Cell: ({ value }) => {
-    var obj = [];
-    if (value != null) {
-      var string = '';
-      for (var item in value) {
-        string = `: ${value[item]}\n`;
-        obj.push(
-          <div style={{ padding: '2px' }} title={string} key={item}>
-            <text style={{ fontWeight: 'bold' }}>
-              {item[0] + item[1]}-{item[2] + item[3]}
-            </text>
-            {string}
-          </div>
-        );
-      }
-      return <span>{obj}</span>;
-    }
-    return;
-  },
+  Cell: ({ value }) =>
+    value && value != null
+      ? Object.keys(value)
+          .sort()
+          .map(item => (
+            <div style={{ paddingBottom: '5px' }} title={value[item]} key={item}>
+              <span style={{ color: '#656565', fontWeight: '600' }}>{item}</span>
+              {`: ${value[item]}`}
+            </div>
+          ))
+      : undefined,
   Filter: ({ filter, onChange }) => (
     <div>
       <Input

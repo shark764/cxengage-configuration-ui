@@ -405,7 +405,18 @@ export const UpdateEntity = action$ =>
 export const BulkEntityUpdate = (action$, store) =>
   action$
     .ofType('BULK_ENTITY_UPDATE')
-    .filter(a => !['users', 'reasons', 'reasonLists', 'dispositions', 'dispositionLists', 'businessHoursV2'].includes(a.entityName))
+    .filter(
+      a =>
+        ![
+          'users',
+          'reasons',
+          'reasonLists',
+          'dispositions',
+          'dispositionLists',
+          'businessHoursV2',
+          'contactAttributes'
+        ].includes(a.entityName)
+    )
     .map(a => {
       a.allIdsToProcess = getSelectedEntityBulkChangeItems(store.getState());
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
@@ -475,6 +486,7 @@ export const ToggleEntity = (action$, store) =>
       ({ entityName }) =>
         entityName !== 'users' &&
         entityName !== 'contactLayouts' &&
+        entityName !== 'contactAttributes' &&
         entityName !== 'businessHoursV2' &&
         !entitiesUsingUpdateLogicForToggleEntity(entityName)
     )
@@ -511,7 +523,10 @@ export const ToggleEntityWithUpdateLogic = (action$, store) =>
     }))
     .filter(
       ({ entityName }) =>
-        entityName !== 'contactLayouts' && entityName !== 'users' && entitiesUsingUpdateLogicForToggleEntity(entityName)
+        entityName !== 'contactAttributes' &&
+        entityName !== 'contactLayouts' &&
+        entityName !== 'users' &&
+        entitiesUsingUpdateLogicForToggleEntity(entityName)
     )
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');

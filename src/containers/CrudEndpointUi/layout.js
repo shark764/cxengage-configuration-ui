@@ -61,6 +61,7 @@ import IntegrationsForm from '../Form/Integrations';
 import IntegrationListenerForm from '../Form/Integrations/Listener';
 import ContactLayoutsForm from '../Form/ContactLayouts';
 import CreateUpdateContactLayoutsListItemsForm from '../Form/ContactLayoutsListItems/index';
+import ContactAttributesForm from '../Form/ContactAttributes';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -94,6 +95,7 @@ import DispositionListsDetailsPanel from '../SidePanelDetails/DispositionLists';
 import CustomAttributesDetailsPanel from '../SidePanelDetails/CustomAttributes';
 import IntegrationsDetailsPanel from '../SidePanelDetails/Integrations';
 import ContactLayoutsDetailsPanel from '../SidePanelDetails/ContactLayouts';
+import ContactAttributesDetailsPanel from '../SidePanelDetails/ContactAttributes';
 //hygen-inject-before4
 
 // Full page panel forms
@@ -339,6 +341,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <ContactLayoutsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/contactAttributes',
+    component: () => (
+      <DetailsPanel>
+        <ContactAttributesForm />
       </DetailsPanel>
     )
   }
@@ -626,6 +636,16 @@ const detailsPanelRoutes = [
         </ContactLayoutsDetailsPanel>
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/contactAttributes',
+    component: () => (
+      <DetailsPanel>
+        <ContactAttributesDetailsPanel>
+          <ContactAttributesForm />
+        </ContactAttributesDetailsPanel>
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before2
 ];
@@ -785,6 +805,14 @@ const bulkChangeFormRoutes = [
   },
   {
     path: '/configuration/tenants',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
+  },
+  {
+    path: '/configuration/contactAttributes',
     component: () => (
       <DetailsPanel>
         <GenericBulkActionsForm />

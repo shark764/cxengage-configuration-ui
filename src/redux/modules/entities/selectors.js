@@ -31,13 +31,22 @@ export const getSidePanelWidth = createSelector(
 export const itemApiPending = state => state.getIn(['Entities', 'loading']);
 
 export const getSelectedEntityBulkChangeItems = createSelector(
-  [getCurrentEntityStore],
-  currentEntityStore =>
-    currentEntityStore.get('data') &&
-    currentEntityStore
-      .get('data')
-      .filter(item => item.get('bulkChangeItem'))
-      .reduce((accum, item) => accum.push(item.get('id')), List())
+  [getCurrentEntityStore, getCurrentEntity],
+  (currentEntityStore, curentEntity) => {
+    if (curentEntity === 'contactAttributes') {
+      return (
+        currentEntityStore.get('data') && currentEntityStore.get('data').filter(item => item.get('bulkChangeItem'))
+      );
+    } else {
+      return (
+        currentEntityStore.get('data') &&
+        currentEntityStore
+          .get('data')
+          .filter(item => item.get('bulkChangeItem'))
+          .reduce((accum, item) => accum.push(item.get('id')), List())
+      );
+    }
+  }
 );
 
 export const getBulkSelectedTotal = state =>
@@ -183,6 +192,9 @@ export const shouldDisableHeaderToggleField = state => {
         const { shouldDisableContactLayoutsStatusToggle } = require('../../modules/entities/contactLayouts/selectors');
         return shouldDisableContactLayoutsStatusToggle(state);
       }
+      case 'contactAttributes': {
+        return getSelectedEntity(state).get('mandatory') === true;
+      }
       default:
         return false;
     }
@@ -318,8 +330,12 @@ export const sidePanelHeader = state => {
       selectedEntity.get('createdByName') || getUserDisplayName(state, selectedEntity.get('createdBy'));
     const updatedByName =
       selectedEntity.get('updatedByName') || getUserDisplayName(state, selectedEntity.get('updatedBy'));
+    const selectedEntityTitle =
+      getCurrentEntity(state) === 'contactAttributes'
+        ? selectedEntity.get('objectName')
+        : selectedEntity.get('name') || getDisplay(selectedEntity.toJS());
     return {
-      title: selectedEntity.get('name') || getDisplay(selectedEntity.toJS()),
+      title: selectedEntityTitle,
       createdAt: `Created on ${moment(selectedEntity.get('created')).format('lll')} ${
         createdByName ? ` by ${createdByName}` : ''
       } `,
