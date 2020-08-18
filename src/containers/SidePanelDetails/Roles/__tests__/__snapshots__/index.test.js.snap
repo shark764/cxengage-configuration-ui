@@ -8,6 +8,9 @@ Object {
   "listSize": 0,
   "parentTenantName": "ParentTenantName",
   "rolesFetching": undefined,
+  "sidePanelUpdatePermissions": Object {
+    "users": undefined,
+  },
   "tableFields": Array [
     Object {
       "label": "Name",
@@ -33,6 +36,11 @@ exports[`RolesDetailsPanel Renders renders 1`] = `
   parentTenantName="ParentTenantName"
   removeListItem={[Function]}
   setSelectedSubEntityId={[Function]}
+  sidePanelUpdatePermissions={
+    Object {
+      "users": undefined,
+    }
+  }
   store={
     Object {
       "dispatch": [Function],

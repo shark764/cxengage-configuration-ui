@@ -10,6 +10,7 @@ import { RolesDetailsPanel } from '../layout';
 describe('<RolesDetailsPanel />', () => {
   let customItem;
   let customItemDisabled;
+  let sidePanelUpdatePermissions;
   beforeEach(() => {
     customItem = {
       id: 'mockId',
@@ -22,6 +23,9 @@ describe('<RolesDetailsPanel />', () => {
       description: 'mockDescription',
       active: false
     };
+    sidePanelUpdatePermissions = {
+      users: true
+    };
   });
   it('renders Roles detailsPanel', () => {
     const rendered = shallow(
@@ -32,6 +36,7 @@ describe('<RolesDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         setSelectedSubEntityId={() => {}}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -45,6 +50,7 @@ describe('<RolesDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItemDisabled}
         setSelectedSubEntityId={() => {}}
+        sidePanelUpdatePermissions={sidePanelUpdatePermissions}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -58,6 +64,7 @@ describe('<RolesDetailsPanel />', () => {
         children={'Mock Child'}
         item={customItem}
         setSelectedSubEntityId={() => {}}
+        sidePanelUpdatePermissions={!sidePanelUpdatePermissions}
       />
     );
     expect(rendered).toMatchSnapshot();

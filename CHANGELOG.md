@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.17] - 2020-08-17
+### Fixed
+- CXV1-15878 - Change sidepanel view for users with readonly permissions.
+
 ## [0.81.16] - 2020-08-12
 ### Added
 - CXV1-22964 - Rules start date and end date are being converted to local timezones causing them to show incorrectly on calendar and rule component

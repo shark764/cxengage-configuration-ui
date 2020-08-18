@@ -35,7 +35,7 @@ const CreateRolesForm = compose(
 export function mapStateToProps(state) {
   return {
     initialValues: selectRolesFormInitialValues(state),
-    userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasUpdatePermission: userHasUpdatePermission(state) && userHasPermissions(state, ['MANAGE_ALL_ROLES']),
     userHasSharePermission: userHasSharePermission(state),
     userHasViewPermission: userHasPermissions(state, ['PLATFORM_VIEW_ALL']),
     isSaving: isCreating(state),

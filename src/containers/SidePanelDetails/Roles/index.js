@@ -5,10 +5,11 @@
 import { connect } from 'react-redux';
 import { RolesDetailsPanel } from './layout.js';
 //  import { isUserPlatformAdmin } from '../../../redux/modules/entities/users/selectors';
-import { isSystemRole } from '../../../redux/modules/entities/selectors';
 
 import {
+  isSystemRole,
   userHasUpdatePermission,
+  userHasPermissions,
   isInherited,
   isEntityFetching,
   itemApiPending,
@@ -33,13 +34,13 @@ export function mapStateToProps(state, props) {
     inherited: isInherited(state),
     parentTenantName: getEntityParentTenantName(state),
     //  isUserPlatformAdmin: isUserPlatformAdmin(state),
-    isSystemRole: isSystemRole(state)
+    isSystemRole: isSystemRole(state),
+    sidePanelUpdatePermissions: {
+      users: userHasPermissions(state, ['MANAGE_ALL_ROLES'])
+    }
   };
 }
 
 export const actions = { removeListItem, setSelectedSubEntityId };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(RolesDetailsPanel);
+export default connect(mapStateToProps, actions)(RolesDetailsPanel);

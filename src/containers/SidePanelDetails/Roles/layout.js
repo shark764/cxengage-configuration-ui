@@ -33,7 +33,8 @@ export function RolesDetailsPanel({
   itemApiPending,
   parentTenantName,
   //  isUserPlatformAdmin,
-  isSystemRole
+  isSystemRole,
+  sidePanelUpdatePermissions
 }) {
   return (
     <Wrapper id="dtpanel-roles">
@@ -47,7 +48,7 @@ export function RolesDetailsPanel({
 
       <DetailHeader
         userHasUpdatePermission={
-          !isSystemRole && userHasUpdatePermission && !inherited // || (isUserPlatformAdmin && isSystemRole
+          !isSystemRole && userHasUpdatePermission && !inherited && sidePanelUpdatePermissions.users // || (isUserPlatformAdmin && isSystemRole
         }
         text={`${listSize} Permissions`}
         onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
@@ -55,7 +56,7 @@ export function RolesDetailsPanel({
       />
       <SidePanelTable
         tableType={'sidePanel'}
-        userHasUpdatePermission={userHasUpdatePermission}
+        userHasUpdatePermission={userHasUpdatePermission && sidePanelUpdatePermissions.users}
         deleteSubEntity={
           !inherited && userHasUpdatePermission && !isSystemRole
             ? (listItemId, subEntityName) => removeListItem(listItemId, subEntityName)
@@ -84,5 +85,6 @@ RolesDetailsPanel.propTypes = {
   itemApiPending: PropTypes.string,
   parentTenantName: PropTypes.string,
   //  isUserPlatformAdmin: PropTypes.bool,
-  isSystemRole: PropTypes.bool
+  isSystemRole: PropTypes.bool,
+  sidePanelUpdatePermissions: PropTypes.object
 };
