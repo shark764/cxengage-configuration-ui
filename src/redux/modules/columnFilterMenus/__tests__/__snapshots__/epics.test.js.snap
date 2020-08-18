@@ -2,8 +2,9 @@
 
 exports[`SaveColumnsToLocalStorage localstorage is updated on column changes 1`] = `
 Object {
-  "columnsData": undefined,
-  "type": "COLUMNS_LOCALSTORAGE_UPDATED_$",
+  "columnMenus": "{\\"Columns\\":[{\\"name\\":\\"Groups\\",\\"active\\":true},{\\"name\\":\\"Skills\\",\\"active\\":false}],\\"Groups\\":[{\\"active\\":true,\\"groupId\\":\\"001\\"},{\\"active\\":true,\\"groupId\\":\\"002\\"},{\\"active\\":false,\\"groupId\\":\\"003\\"}],\\"Skills\\":[{\\"active\\":true,\\"skillId\\":\\"001\\"},{\\"active\\":true,\\"skillId\\":\\"002\\"},{\\"active\\":false,\\"skillId\\":\\"003\\"}]}",
+  "tableType": "interactionMonitoring",
+  "type": "COLUMN_MENUS_LOCALSTORAGE_UPDATED_$",
 }
 `;
 

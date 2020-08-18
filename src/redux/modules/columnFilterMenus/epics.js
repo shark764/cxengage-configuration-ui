@@ -13,7 +13,7 @@ import 'rxjs/add/operator/ignoreElements';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 
-import { selectTableColumns, selectGroups, selectSkills } from './selectors';
+import { selectGroups, selectSkills, selectTable } from './selectors';
 
 import { updateGroupsColumnFilter, updateSkillsColumnFilter, updateReasonListsColumnFilter } from './index';
 
@@ -27,19 +27,21 @@ const ColumnRelatedActions = [
   'TOGGLE_ALL_MENUITEMS_OFF'
 ];
 
+const ColumnMenuRelatedActions = [...ColumnRelatedActions, 'ONE_ON_REST_OFF'];
+
+// If inside config-1, save to config-1 and then 2. If standalone, only save to config-2.
 export const SaveColumnsToLocalStorage = (action$, store) =>
   action$
-    .ofType(...ColumnRelatedActions)
+    .ofType(...ColumnMenuRelatedActions)
     .debounceTime(2000)
-    .filter(({ menuType }) => menuType === 'Columns')
     .map(action => ({
       ...action,
-      columnsData: JSON.stringify(selectTableColumns(store.getState(), action.tableType))
+      columnMenus: JSON.stringify(selectTable(store.getState(), action.tableType).toJS())
     }))
-    .do(action => localStorage.setItem(`${action.tableType}Columns`, action.columnsData))
+    .do(action => localStorage.setItem(`${action.tableType}ColumnMenus`, action.columnMenus))
     .map(action => ({
-      type: 'COLUMNS_LOCALSTORAGE_UPDATED_$',
-      columnsData: action.columnsData
+      ...action,
+      type: 'COLUMN_MENUS_LOCALSTORAGE_UPDATED_$'
     }));
 
 export const UpdateStatSubscriptionFilters = (action$, store) =>

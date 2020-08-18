@@ -19,57 +19,73 @@ export const constructInitialState = () => {
       visibleMenu: 'none'
     }
   };
+
   /**
    * Add all columns from entityMetaData file
    */
   Object.keys(entitiesMetaData).forEach(entityName => {
     initialState[entityName] = {
-      visibleMenu: 'none'
+      visibleMenu: 'none',
+      Columns: entitiesMetaData[entityName].columns
     };
-    initialState[entityName].Columns =
-      JSON.parse(window.localStorage.getItem(`${entityName}Columns`)) || entitiesMetaData[entityName].columns;
+    const columnMenus = window.localStorage.getItem(`${entityName}ColumnMenus`);
+    // Parsing 'undefined' throws exception.
+    const parsedColumnMenus = columnMenus !== 'undefined' && JSON.parse(columnMenus);
+    if (parsedColumnMenus && parsedColumnMenus.Columns && parsedColumnMenus.Columns.length > 0) {
+      initialState[entityName] = parsedColumnMenus;
+    }
   });
+
   /**
    * Add entities custom menus
    * for example silent monitoring table has custom filters
    */
-  initialState.interactionMonitoring.Groups = [];
-  initialState.interactionMonitoring.Skills = [];
-  initialState.interactionMonitoring.Direction = [
-    { name: 'All', active: true },
-    { name: 'Inbound', active: false },
-    { name: 'Outbound', active: false },
-    { name: 'Agent Initiated', active: false }
-  ];
-  initialState.interactionMonitoring.Monitoring = [
-    { name: 'All', active: true },
-    { name: 'Monitored', active: false },
-    { name: 'Not Monitored', active: false }
-  ];
-
-  initialState.agentStateMonitoring.Groups = [];
-  initialState.agentStateMonitoring.Skills = [];
-  initialState.agentStateMonitoring.ReasonLists = [];
-  initialState.agentStateMonitoring.Direction = [
-    { name: 'All', active: true },
-    { name: 'Inbound', active: false },
-    { name: 'Outbound', active: false },
-    { name: 'Do Not Disturb Outbound', active: false }
-  ];
-  initialState.agentStateMonitoring.PresenceState = [
-    { name: 'All', active: true },
-    { name: 'Idle', active: false },
-    { name: 'Busy', active: false },
-    { name: 'Away', active: false },
-    { name: 'Offline', active: false }
-  ];
-  initialState.agentStateMonitoring.ChannelType = [
-    { name: 'Voice', active: true },
-    { name: 'Messaging', active: true },
-    { name: 'Email', active: true },
-    { name: 'SMS', active: true },
-    { name: 'Work Item', active: true }
-  ];
+  if (!initialState.interactionMonitoring.Groups) {
+    initialState.interactionMonitoring = {
+      ...initialState.interactionMonitoring,
+      Groups: [],
+      Skills: [],
+      Direction: [
+        { name: 'All', active: true },
+        { name: 'Inbound', active: false },
+        { name: 'Outbound', active: false },
+        { name: 'Agent Initiated', active: false }
+      ],
+      Monitoring: [
+        { name: 'All', active: true },
+        { name: 'Monitored', active: false },
+        { name: 'Not Monitored', active: false }
+      ]
+    };
+  }
+  if (!initialState.agentStateMonitoring.Groups) {
+    initialState.agentStateMonitoring = {
+      ...initialState.agentStateMonitoring,
+      Groups: [],
+      Skills: [],
+      ReasonLists: [],
+      Direction: [
+        { name: 'All', active: true },
+        { name: 'Inbound', active: false },
+        { name: 'Outbound', active: false },
+        { name: 'Do Not Disturb Outbound', active: false }
+      ],
+      PresenceState: [
+        { name: 'All', active: true },
+        { name: 'Idle', active: false },
+        { name: 'Busy', active: false },
+        { name: 'Away', active: false },
+        { name: 'Offline', active: false }
+      ],
+      ChannelType: [
+        { name: 'Voice', active: true },
+        { name: 'Messaging', active: true },
+        { name: 'Email', active: true },
+        { name: 'SMS', active: true },
+        { name: 'Work Item', active: true }
+      ]
+    };
+  }
 
   return fromJS(initialState);
 };
@@ -129,50 +145,51 @@ export default function ColumnsMenu(state = constructInitialState(), action) {
   switch (action.type) {
     case 'SET_VISIBLE_MENU':
       return state.setIn([fromJS(action.tableType), 'visibleMenu'], fromJS(action.menuType));
-    case 'SET_GROUPS_DATA':
-      return state.setIn(
-        [action.tableType, 'Groups'],
-        fromJS(
-          action.arrayOfGroupData.reduce(
-            (allGroups, group) =>
-              group.active ? [...allGroups, { id: group.id, name: group.name, active: group.active }] : allGroups,
-            []
-          )
+    case 'SET_GROUPS_DATA': {
+      const mergedGroupFilters = mergeNewColumnMenuItemsWithOld(
+        state.getIn([action.tableType, 'Groups']),
+        action.arrayOfGroupData.reduce(
+          (allGroups, group) =>
+            group.active ? [...allGroups, { id: group.id, name: group.name, active: group.active }] : allGroups,
+          []
         )
       );
-    case 'SET_SKILLS_DATA':
-      return state.setIn(
-        [action.tableType, 'Skills'],
-        fromJS(
-          action.arrayOfSkillData.reduce(
-            (allSkills, skill) =>
-              skill.active ? [...allSkills, { id: skill.id, name: skill.name, active: skill.active }] : allSkills,
-            []
-          )
+      return state.setIn([action.tableType, 'Groups'], fromJS(mergedGroupFilters));
+    }
+    case 'SET_SKILLS_DATA': {
+      const mergedSkillFilters = mergeNewColumnMenuItemsWithOld(
+        state.getIn([action.tableType, 'Skills']),
+        action.arrayOfSkillData.reduce(
+          (allSkills, skill) =>
+            skill.active ? [...allSkills, { id: skill.id, name: skill.name, active: skill.active }] : allSkills,
+          []
         )
       );
-    case 'SET_REASON_LISTS_DATA':
-      return state.setIn(
-        [action.tableType, 'ReasonLists'],
-        fromJS(
-          action.arrayOfReasonListData.reduce(
-            (allReasons, reason) =>
-              reason.active
-                ? [
-                    ...allReasons,
-                    ...reason.reasons.reduce(
-                      (prev, curr) =>
-                        curr.active && !allReasons.find(r => r.id === curr.reasonId)
-                          ? [...prev, { id: curr.reasonId, name: curr.name, active: curr.active }]
-                          : prev,
-                      []
-                    )
-                  ]
-                : allReasons,
-            []
-          )
-        )
+      return state.setIn([action.tableType, 'Skills'], fromJS(mergedSkillFilters));
+    }
+    case 'SET_REASON_LISTS_DATA': {
+      const newReasonFilters = action.arrayOfReasonListData.reduce(
+        (allReasons, reason) =>
+          reason.active
+            ? [
+                ...allReasons,
+                ...reason.reasons.reduce(
+                  (prev, curr) =>
+                    curr.active && !allReasons.find(r => r.id === curr.reasonId)
+                      ? [...prev, { id: curr.reasonId, name: curr.name, active: curr.active }]
+                      : prev,
+                  []
+                )
+              ]
+            : allReasons,
+        []
       );
+      const mergedReasonFilters = mergeNewColumnMenuItemsWithOld(
+        state.getIn([action.tableType, 'ReasonLists']),
+        newReasonFilters
+      );
+      return state.setIn([action.tableType, 'ReasonLists'], fromJS(mergedReasonFilters));
+    }
     case 'TOGGLE_INVERSE_MENUITEMS':
       return state.updateIn([action.tableType, action.menuType], columns =>
         columns.map(column => column.set('active', !column.get('active')))
@@ -207,3 +224,28 @@ export default function ColumnsMenu(state = constructInitialState(), action) {
       return state;
   }
 }
+
+// Merge up-to-date menu items for one entity into older menu items that may be out-of-date.
+const mergeNewColumnMenuItemsWithOld = (currentColumnMenuItems, newColumnMenuItems) => {
+  const combinedList = [];
+  // Merge rules:
+  //  - remove items that reflect instances that have been removed.
+  //  - add items that reflect new instances.
+  //  - combine items that reflect the same entity instance, while keeping saved preferences.
+  for (let columnMenuItem of newColumnMenuItems) {
+    let indexOfMatch = currentColumnMenuItems.findIndex(currentColumnMenuItem => {
+      // Prefer to match on ID, fallback on using name.
+      if (currentColumnMenuItem.get('id')) {
+        return currentColumnMenuItem.get('id') === columnMenuItem.id;
+      } else {
+        return currentColumnMenuItem.get('name') === columnMenuItem.name;
+      }
+    });
+    if (indexOfMatch > -1) {
+      combinedList.push(currentColumnMenuItems.get(indexOfMatch));
+    } else {
+      combinedList.push(columnMenuItem);
+    }
+  }
+  return combinedList;
+};

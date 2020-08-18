@@ -15,16 +15,15 @@ export const menuItems = (state, props) => {
   }
 };
 
-export const selectTableColumns = (state, tableType) => {
+export const selectTable = (state, tableType) => {
   if (tableType) {
-    return state
-      .get('ColumnFilterMenus')
-      .getIn([tableType, 'Columns'])
-      .toJS();
+    return subState(state).get(tableType);
   } else {
     return new List();
   }
 };
+
+export const selectTableColumns = createSelector([selectTable], table => table.get('Columns').toJS());
 
 export const menuItemsJs = createSelector([menuItems], menuItems => {
   return menuItems.toJS();

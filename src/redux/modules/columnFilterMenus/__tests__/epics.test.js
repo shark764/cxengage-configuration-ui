@@ -2,39 +2,58 @@
 //  * Copyright © 2015-2018 Serenova, LLC. All rights reserved.
 //  */
 
+import { createStore } from 'redux';
 import { ActionsObservable } from 'redux-observable';
+import { fromJS } from 'immutable';
 import { mockStore } from '../../../../utils/testUtils';
 import { sdkPromise } from '../../../../utils/sdk';
 
 import { SaveColumnsToLocalStorage, UpdateStatSubscriptionFilters, UpdateSkillsAndGroupsFilter } from '../epics';
 
-import { selectInteractionMonitoringColumns, selectGroups, selectSkills } from '../selectors';
+import { selectInteractionMonitoringColumns, selectGroups, selectSkills, selectTable } from '../selectors';
 
 import { getCurrentEntity } from '../../entities/selectors';
 
 jest.mock('../../../../utils/sdk');
 jest.mock('../selectors');
-selectInteractionMonitoringColumns.mockReturnValue('mockColumnData');
-selectSkills.mockReturnValue([
+const mockSkills = [
   { active: true, skillId: '001' },
   { active: true, skillId: '002' },
   { active: false, skillId: '003' }
-]);
-selectGroups.mockReturnValue([
+];
+const mockGroups = [
   { active: true, groupId: '001' },
   { active: true, groupId: '002' },
   { active: false, groupId: '003' }
-]);
+];
+const mockTable = {
+  Columns: [
+    { name: 'Groups', active: true },
+    { name: 'Skills', active: false }
+  ],
+  Groups: mockGroups,
+  Skills: mockSkills
+}
+const testState = {
+  ColumnFilterMenus: {
+    interactionMonitoring: mockTable
+  }
+};
+selectInteractionMonitoringColumns.mockReturnValue('mockColumnData');
+selectSkills.mockReturnValue(mockSkills);
+selectGroups.mockReturnValue(mockGroups);
+selectTable.mockReturnValue(fromJS(mockTable));
 jest.mock('../../entities/selectors');
 getCurrentEntity.mockReturnValue('InteractionMonitoring');
 
 describe('SaveColumnsToLocalStorage', () => {
   it('localstorage is updated on column changes', done => {
+    const lsTestStore = createStore(state => state, fromJS(testState));
     const action = ActionsObservable.of({
       type: 'TOGGLE_MENUITEMS',
-      menuType: 'Columns'
+      tableType: 'interactionMonitoring'
     });
-    SaveColumnsToLocalStorage(action, mockStore).subscribe(actualOutputActions => {
+    SaveColumnsToLocalStorage(action, lsTestStore).subscribe(actualOutputActions => {
       expect(actualOutputActions).toMatchSnapshot();
       done();
     });
