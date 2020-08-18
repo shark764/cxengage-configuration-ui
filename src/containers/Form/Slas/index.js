@@ -17,9 +17,10 @@ import {
 import {
   selectSlaVersions,
   selectSlaFormInitialValues,
-  isSlaTenantDefault
+  isSlaTenantDefault,
+  formSubmission
 } from '../../../redux/modules/entities/slas/selectors';
-import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
+import { createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { toggleShared } from '../../../redux/modules/entities';
 import { checkDisableShared } from '../../../redux/modules/entities/reasonLists/selectors';
 
@@ -40,7 +41,7 @@ export function mapStateToProps(state) {
     userHasUpdatePermission: userHasUpdatePermission(state),
     userHasSharePermission: userHasSharePermission(state),
     versions: selectSlaVersions(state),
-    slaAbandonType: getCurrentFormValueByFieldName(state, 'abandonType'),
+    slaAbandonType: getCurrentFormValueByFieldName(state, 'initialVersion', 'abandonType'),
     isSlaTenantDefault: isSlaTenantDefault(state),
     disableShared: checkDisableShared(state),
     sharedFormValue: getCurrentFormValueByFieldName(state, 'shared'),

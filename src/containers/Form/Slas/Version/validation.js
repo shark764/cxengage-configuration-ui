@@ -4,12 +4,18 @@
 
 import { isEmpty, isNumber } from 'serenova-js-utils/strings';
 
-export const formValidation = values => ({
-  versionName: isEmpty(values.get('versionName')) && 'Please enter a version name',
-  abandonType: !values.get('abandonType') && 'Please select an abandon type',
-  slaThreshold:
-    (isEmpty(values.get('slaThreshold')) || !isNumber(values.get('slaThreshold'))) && 'SLA Threshold must be a number',
-  abandonThreshold:
-    (isEmpty(values.get('abandonThreshold')) || !isNumber(values.get('abandonThreshold'))) &&
-    'SLA Abandon Threshold must be a number'
-});
+export const formValidation = values => {
+  const versionValues = values.get('initialVersion');
+  return {
+    initialVersion: {
+      versionName: isEmpty(versionValues.get('versionName')) && 'Please enter a version name',
+      abandonType: !versionValues.get('abandonType') && 'Please select an abandon type',
+      slaThreshold:
+        (isEmpty(versionValues.get('slaThreshold')) || !isNumber(versionValues.get('slaThreshold'))) &&
+        'SLA Threshold must be a number',
+      abandonThreshold:
+        (isEmpty(versionValues.get('abandonThreshold')) || !isNumber(versionValues.get('abandonThreshold'))) &&
+        'SLA Abandon Threshold must be a number'
+    }
+  };
+};

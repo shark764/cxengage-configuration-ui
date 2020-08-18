@@ -24,7 +24,12 @@ export function mapStateToProps(state) {
   return {
     initialValues: selectSlaVersionFormInitialValues(state),
     isSaving: isSubEntitySaving(state),
-    slaAbandonType: getCurrentSubFormValueByFieldName(state, 'initialSlaVersion:create', 'abandonType'),
+    slaAbandonType: getCurrentSubFormValueByFieldName(
+      state,
+      'initialSlaVersion:create',
+      'initialVersion',
+      'abandonType'
+    ),
     viewOnly: getSelectedSubEntityId(state) !== 'versions',
     key: 'create'
   };

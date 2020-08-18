@@ -2,33 +2,39 @@
 
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
-  "abandonThreshold": "SLA Abandon Threshold must be a number",
-  "abandonType": "Please select an abandon type",
   "activeVersion": "Please select an active version to be associated to this Sla.",
+  "initialVersion": Object {
+    "abandonThreshold": "SLA Abandon Threshold must be a number",
+    "abandonType": "Please select an abandon type",
+    "slaThreshold": "SLA Threshold must be a number",
+    "versionName": "Please enter a version name",
+  },
   "name": "Please enter a name",
-  "slaThreshold": "SLA Threshold must be a number",
-  "versionName": "Please enter a version name",
 }
 `;
 
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
-  "abandonThreshold": "SLA Abandon Threshold must be a number",
-  "abandonType": "Please select an abandon type",
   "activeVersion": "Please select an active version to be associated to this Sla.",
+  "initialVersion": Object {
+    "abandonThreshold": "SLA Abandon Threshold must be a number",
+    "abandonType": "Please select an abandon type",
+    "slaThreshold": "SLA Threshold must be a number",
+    "versionName": "Please enter a version name",
+  },
   "name": "Please enter a name",
-  "slaThreshold": "SLA Threshold must be a number",
-  "versionName": "Please enter a version name",
 }
 `;
 
 exports[`formValidation returns proper object when required fields are provided 1`] = `
 Object {
-  "abandonThreshold": false,
-  "abandonType": false,
   "activeVersion": false,
+  "initialVersion": Object {
+    "abandonThreshold": false,
+    "abandonType": false,
+    "slaThreshold": false,
+    "versionName": false,
+  },
   "name": false,
-  "slaThreshold": false,
-  "versionName": false,
 }
 `;

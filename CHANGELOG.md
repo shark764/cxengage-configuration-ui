@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.19] - 2020-08-03
+### Fixed
+- CXV1-22563 - Statistics Management - Failed to create: Must be a string error happens after cancelling initial version and creating again.
+
 ## [0.81.18] - 2020-08-18
 ### Fixed
 - CXV1-20902 - Agent State Monitoring does not save column filters chosen if you navigate to another page

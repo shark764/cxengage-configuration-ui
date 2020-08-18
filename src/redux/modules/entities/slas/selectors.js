@@ -4,14 +4,18 @@
 
 import { Map, List } from 'immutable';
 import { timeStampToSeconds } from 'cx-ui-components';
-import { onInitialVersionFormSubmit } from '../';
+import { onInitialVersionFormSubmit, onFormSubmit } from '../';
 import { getSelectedEntity, getSelectedSubEntityId, userHasPermissions, findEntity } from '../selectors';
 import { entitiesMetaData } from '../metaData';
 import { selectFormInitialValues } from '../../form/selectors';
 import { getCurrentTenantId } from '../../userData/selectors';
 import { createSelector } from 'reselect';
 
-export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onInitialVersionFormSubmit(values, props));
+export const formSubmission = (values, dispatch, props) =>
+  dispatch(onFormSubmit(values.merge(values.get('initialVersion')).delete('initialVersion'), props));
+
+export const subEntityFormSubmission = (values, dispatch, props) =>
+  dispatch(onInitialVersionFormSubmit(values.get('initialVersion'), props));
 
 export const selectSlaVersions = state => selectVersions(getSelectedEntity(state));
 
@@ -71,7 +75,7 @@ export const getSlaItems = members =>
 
 export const selectSlaFormInitialValues = state => {
   if (getSelectedEntity(state) === undefined) {
-    return new Map({ active: true, shared: false, versionDescription: '' });
+    return new Map({ active: true, shared: false, initialVersion: Map({ versionDescription: '' }) });
   }
   return selectFormInitialValues(state);
 };
@@ -79,14 +83,14 @@ export const selectSlaFormInitialValues = state => {
 export const selectSlaVersionFormInitialValues = state => {
   const selectedSubEntityId = getSelectedSubEntityId(state);
   if (selectedSubEntityId === 'versions') {
-    return new Map({ versionName: '', versionDescription: '' });
+    return new Map({ initialVersion: Map({ versionName: '', versionDescription: '' }) });
   }
   const selectedVersion =
     getSelectedEntity(state).get('versions') &&
     getSelectedEntity(state)
       .get('versions')
       .find(version => version.get('versionId') === selectedSubEntityId);
-  return selectedVersion.set('versionDescription', selectedVersion.get('description'));
+  return Map({ initialVersion: selectedVersion.set('versionDescription', selectedVersion.get('description')) });
 };
 
 export const isSlaTenantDefault = state => {

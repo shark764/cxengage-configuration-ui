@@ -65,13 +65,13 @@ export const createFormName = state => ({
   form: `${getCurrentEntity(state)}:${getSelectedEntityId(state)}`
 });
 
-export const getCurrentFormValueByFieldName = (state, fieldName) =>
-  getCurrentForm(state) && getCurrentForm(state).getIn(['values', fieldName]);
+export const getCurrentFormValueByFieldName = (state, ...fieldPath) =>
+  getCurrentForm(state) && getCurrentForm(state).getIn(['values', ...fieldPath]);
 
 export const getCurrentSubForm = (state, formId) => state.getIn(['form', formId]);
 
-export const getCurrentSubFormValueByFieldName = (state, formId, fieldName) =>
-  getCurrentSubForm(state, formId) && getCurrentSubForm(state, formId).getIn(['values', fieldName]);
+export const getCurrentSubFormValueByFieldName = (state, formId, ...fieldPath) =>
+  getCurrentSubForm(state, formId) && getCurrentSubForm(state, formId).getIn(['values', ...fieldPath]);
 
 export const getCurrentSubmittingFormProps = (state, props) => props;
 

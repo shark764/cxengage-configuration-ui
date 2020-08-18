@@ -135,7 +135,6 @@ export default class SlasForm extends Component {
               <Wrapper>
                 <InitialVersionForm
                   isSaving={this.props.isSaving}
-                  key="create"
                   slaAbandonType={this.props.slaAbandonType}
                   viewOnly={false}
                 />
@@ -143,7 +142,14 @@ export default class SlasForm extends Component {
                   type="button"
                   buttonType="secondary"
                   data-automation="cancelInitialVersionButton"
-                  onClick={() => this.addInitialVersion(false)}
+                  onClick={() => {
+                    this.props.change('initialVersion.versionName', '');
+                    this.props.change('initialVersion.versionDescription', '');
+                    this.props.change('initialVersion.slaThreshold', null);
+                    this.props.change('initialVersion.abandonType', null);
+                    this.props.change('initialVersion.abandonThreshold', null);
+                    this.addInitialVersion(false);
+                  }}
                 >
                   Cancel
                 </CancelInitialVersionButton>
@@ -177,7 +183,8 @@ SlasForm.propTypes = {
   isSlaTenantDefault: PropTypes.bool,
   sharedFormValue: PropTypes.bool,
   disableShared: PropTypes.bool,
-  toggleShared: PropTypes.func
+  toggleShared: PropTypes.func,
+  change: PropTypes.func.isRequired
 };
 
 SlasForm.defaultProps = {

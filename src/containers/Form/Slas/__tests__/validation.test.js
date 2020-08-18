@@ -7,10 +7,12 @@ describe('formValidation', () => {
       name: 'mockName',
       description: 'mockDescription',
       activeVersion: 'mockActiveVersion',
-      versionName: 'mockVersionName',
-      abandonType: 'mockAbandonType',
-      slaThreshold: 20,
-      abandonThreshold: 20
+      initialVersion: Map({
+        versionName: 'mockVersionName',
+        abandonType: 'mockAbandonType',
+        slaThreshold: 20,
+        abandonThreshold: 20
+      })
     });
     expect(formValidation(values)).toMatchSnapshot();
   });
@@ -19,10 +21,12 @@ describe('formValidation', () => {
       name: '',
       description: '',
       activeVersion: '',
-      versionName: '',
-      abandonType: '',
-      slaThreshold: '',
-      abandonThreshold: ''
+      initialVersion: Map({
+        versionName: '',
+        abandonType: '',
+        slaThreshold: '',
+        abandonThreshold: ''
+      })
     });
     expect(formValidation(values)).toMatchSnapshot();
   });
@@ -31,10 +35,12 @@ describe('formValidation', () => {
       name: undefined,
       description: undefined,
       activeVersion: null,
-      versionName: undefined,
-      abandonType: null,
-      slaThreshold: 'abcd',
-      abandonThreshold: 'wxyz'
+      initialVersion: Map({
+        versionName: undefined,
+        abandonType: null,
+        slaThreshold: 'abcd',
+        abandonThreshold: 'wxyz'
+      })
     });
     expect(formValidation(values)).toMatchSnapshot();
   });

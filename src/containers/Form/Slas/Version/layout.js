@@ -29,13 +29,7 @@ export default function InitialVersionLayout(props) {
         <Header>{`${props.viewOnly ? 'Viewing Published Version' : 'Creating new Version'}`}</Header>
       </Fragment>
 
-      <InitialVersionForm
-        isSaving={props.isSaving}
-        key={props.key}
-        initialValues={props.initialValues}
-        slaAbandonType={props.slaAbandonType}
-        viewOnly={props.viewOnly}
-      />
+      <InitialVersionForm isSaving={props.isSaving} slaAbandonType={props.slaAbandonType} viewOnly={props.viewOnly} />
 
       <SidePanelActions
         onCancel={props.onCancel}
