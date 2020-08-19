@@ -4063,7 +4063,7 @@ Object {
         "value": "accepted",
       },
       Object {
-        "id": "invitationStatus",
+        "id": "platformStatus",
         "value": "all non-disabled",
       },
       Object {
@@ -4112,15 +4112,14 @@ Object {
       },
       Object {
         "filterOptions": Array [
-          "pending",
-          "invited",
-          "expired",
-          "enabled",
+          "all",
+          "all non-disabled",
           "disabled",
-          "sso-only",
+          "enabled",
+          "pending",
         ],
         "label": "Platform Status",
-        "name": "invitationStatus",
+        "name": "platformStatus",
         "type": "select",
       },
       Object {

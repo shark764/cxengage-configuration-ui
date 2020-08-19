@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.20] - 2020-08-14
+### Fixed
+- CXV1-22867 - Update Platform Status Column Values.
+
 ## [0.81.19] - 2020-08-03
 ### Fixed
 - CXV1-22563 - Statistics Management - Failed to create: Must be a string error happens after cancelling initial version and creating again.
@@ -77,7 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.81.8] - 2020-08-07
 ### Fixed
 - CXV1-22931 - more than one enabled contact layout is allowed.
-- CXV1-22933 - cannot enable/disable a contact-layout
+- CXV1-22933 - cannot enable/disable a contact-layout.
 - CXV1-22932 - huge rows in the main list.
 
 ## [0.81.7] - 2020-07-30

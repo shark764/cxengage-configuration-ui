@@ -214,9 +214,9 @@ entities.users.memberListTableFields = [
   },
   {
     label: 'Platform Status',
-    name: 'invitationStatus',
+    name: 'platformStatus',
     type: 'select',
-    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
+    filterOptions: ['all', 'all non-disabled', 'disabled', 'enabled', 'pending']
   },
   {
     label: 'Tenant Access',
@@ -247,7 +247,7 @@ entities.users.columns = [
 ];
 entities.users.defaultFilters = [
   { id: 'status', value: 'accepted' },
-  { id: 'invitationStatus', value: 'all non-disabled' },
+  { id: 'platformStatus', value: 'all non-disabled' },
   { id: 'tenantAccess', value: 'all non-disabled' }
 ];
 entities.users.defaultAssociationFilters = {

@@ -133,9 +133,9 @@ Array [
     >
       Platform Status
     </span>,
-    "accessor": [Function],
+    "accessor": "platformStatus",
     "filterMethod": [Function],
-    "id": "invitationStatus",
+    "id": "platformStatus",
   },
   Object {
     "Cell": [Function],

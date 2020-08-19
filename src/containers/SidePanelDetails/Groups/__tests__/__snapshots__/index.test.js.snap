@@ -159,15 +159,14 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       },
       Object {
         "filterOptions": Array [
-          "pending",
-          "invited",
-          "expired",
-          "enabled",
+          "all",
+          "all non-disabled",
           "disabled",
-          "sso-only",
+          "enabled",
+          "pending",
         ],
         "label": "Platform Status",
-        "name": "invitationStatus",
+        "name": "platformStatus",
         "type": "select",
       },
       Object {
@@ -310,15 +309,14 @@ Object {
     },
     Object {
       "filterOptions": Array [
-        "pending",
-        "invited",
-        "expired",
-        "enabled",
+        "all",
+        "all non-disabled",
         "disabled",
-        "sso-only",
+        "enabled",
+        "pending",
       ],
       "label": "Platform Status",
-      "name": "invitationStatus",
+      "name": "platformStatus",
       "type": "select",
     },
     Object {
