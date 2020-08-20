@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactAttributesForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="nameInput"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="objectName"
+  />
+  <SelectField
+    data-automation="typeList"
+    disabled={true}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "Text",
+          "value": "text",
+        },
+        Object {
+          "label": "Phone",
+          "value": "phone",
+        },
+        Object {
+          "label": "Email",
+          "value": "email",
+        },
+        Object {
+          "label": "Boolean",
+          "value": "boolean",
+        },
+        Object {
+          "label": "Link",
+          "value": "link",
+        },
+        Object {
+          "label": "Number",
+          "value": "number",
+        },
+      ]
+    }
+    placeholder="Select a type..."
+    required={false}
+  />
+  <InputField
+    componentType="input"
+    data-automation="defaultInput"
+    disabled={false}
+    inputType="text"
+    label="Default"
+    name="default"
+  />
+  <ToggleField
+    data-automation="madatoryToggle"
+    disabled={false}
+    label="Mandatory"
+    name="mandatory"
+  />
+  <FieldArray
+    component={[Function]}
+    name="label"
+    props={
+      Object {
+        "disabled": false,
+        "inherited": false,
+        "userHasUpdatePermission": true,
+      }
+    }
+    rerenderOnEveryChange={true}
+    validate={[Function]}
+  />
+</form>
+`;
+
+exports[`<ContactAttributesForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="nameInput"
+    disabled={true}
+    inputType="text"
+    label="Name *"
+    name="objectName"
+  />
+  <SelectField
+    data-automation="typeList"
+    disabled={true}
+    label="Type *"
+    name="type"
+    options={
+      Array [
+        Object {
+          "label": "Text",
+          "value": "text",
+        },
+        Object {
+          "label": "Phone",
+          "value": "phone",
+        },
+        Object {
+          "label": "Email",
+          "value": "email",
+        },
+        Object {
+          "label": "Boolean",
+          "value": "boolean",
+        },
+        Object {
+          "label": "Link",
+          "value": "link",
+        },
+        Object {
+          "label": "Number",
+          "value": "number",
+        },
+      ]
+    }
+    placeholder="Select a type..."
+    required={false}
+  />
+  <InputField
+    componentType="input"
+    data-automation="defaultInput"
+    disabled={false}
+    inputType="text"
+    label="Default"
+    name="default"
+  />
+  <ToggleField
+    data-automation="madatoryToggle"
+    disabled={false}
+    label="Mandatory"
+    name="mandatory"
+  />
+  <FieldArray
+    component={[Function]}
+    name="label"
+    props={
+      Object {
+        "disabled": false,
+        "inherited": false,
+        "userHasUpdatePermission": true,
+      }
+    }
+    rerenderOnEveryChange={true}
+    validate={[Function]}
+  />
+</form>
+`;

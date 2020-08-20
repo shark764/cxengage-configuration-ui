@@ -2,8 +2,8 @@
  * Copyright © 2015-2020 Serenova, LLC. All rights reserved.
  */
 
-import { createSelector } from 'reselect';
 import { Map, List, fromJS } from 'immutable';
+import { createSelector } from 'reselect';
 
 import { getCurrentFormValues } from '../../form/selectors';
 import { getEntities, getSelectedEntity, getSelectedEntityId } from '../selectors';
