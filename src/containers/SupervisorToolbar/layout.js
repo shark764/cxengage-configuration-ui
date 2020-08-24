@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { messageSubscribe, messageUnsubscribe } from './windowMessageObservable.js';
 import { MutedIconSVG, UnMutedIconSVG, HangUpIconSVG } from 'cx-ui-components';
-import { sdkCall } from '../../utils/sdk';
 
 const HangUpIconSVGWrapper = styled(HangUpIconSVG)`
   margin-left: 10px;
@@ -19,12 +18,6 @@ export default class SupervisorToolbar extends Component {
   componentWillMount() {
     this.props.startSupervisorToolbarSubscriptions();
     messageSubscribe();
-  }
-
-  componentDidMount() {
-    if (this.props.insideIframe) {
-      sdkCall({ module: 'removeDirtyFormIdFromSessionStorage' });
-    }
   }
 
   componentWillUnmount() {

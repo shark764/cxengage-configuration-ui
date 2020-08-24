@@ -69,7 +69,7 @@ import {
   camelCaseToKebabCase
 } from 'serenova-js-utils/strings';
 
-import { getCurrentFormValueByFieldName, isFormDirty, areSubEntityFormsDirty } from '../form/selectors';
+import { getCurrentFormValueByFieldName } from '../form/selectors';
 
 import { history } from '../../../utils/history';
 /**
@@ -1114,33 +1114,17 @@ export const updateConfig1UrlWithQueryString = action$ =>
       }))
     );
 
-export const saveDirtyFormIdToConfig1SessionStorage = (action$, store) =>
+// If the current form/subForms are dirty, config1 shoudl display "unsaved.changes" prompt
+export const SetIsCurrentFormDirtyInConfig1 = action$ =>
   action$
-    .ofType('@@redux-form/BLUR')
-    .filter(() => !isInIframe())
-    .filter(() => isFormDirty(store.getState()) || areSubEntityFormsDirty(store.getState()))
+    .ofType('SET_IS_CURRENT_FORM_DIRTY_IN_CONFIG1')
     .map(a => ({
-      module: 'setDirtyFormIdInSessionStorage',
-      formId: a.meta.form
+      ...a,
+      module: 'setIsCurrentConfig2FormDirty'
     }))
     .mergeMap(sdkCall =>
       fromPromise(sdkPromise(sdkCall)).map(response => ({
-        type: 'DIRTY_FORM_ID_SAVED_TO_SESSION_STORAGE',
-        formId: response
-      }))
-    );
-
-export const DeleteDirtyFormIDFromConfig1SessionStorage = (action$, store) =>
-  action$
-    .ofType('@@redux-form/DESTROY', '@@redux-form/SET_SUBMIT_SUCCEEDED')
-    .filter(() => !isInIframe())
-    .map(a => ({
-      module: 'removeDirtyFormIdFromSessionStorage',
-      formId: Array.isArray(a.meta.form) ? a.meta.form[0] : a.meta.form
-    }))
-    .mergeMap(sdkCall =>
-      fromPromise(sdkPromise(sdkCall)).map(response => ({
-        type: 'DIRTY_FORM_ID_REMOVED_FROM_SESSION_STORAGE',
-        formId: response
+        type: 'IS_FORM_DIRTY_UPDATED_IN_CONFIG1',
+        isDirty: response
       }))
     );

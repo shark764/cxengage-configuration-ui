@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import { PageHeader, SearchIconSVG, WordWrapIconSVG, CopyIconSVG, Toast } from 'cx-ui-components';
 import ReactJson from 'react-json-view';
 import PropTypes from 'prop-types';
-import { sdkCall } from '../../utils/sdk';
 import { copyToClipboard, downloadFile } from 'serenova-js-utils/browser';
 
 const dataViewStyle = css`
@@ -109,12 +108,6 @@ export default class FlowDebugLogs extends Component {
       prettyView: false,
       wordwrap: true
     };
-  }
-
-  componentDidMount() {
-    if (this.props.insideIframe) {
-      sdkCall({ module: 'removeDirtyFormIdFromSessionStorage' });
-    }
   }
 
   handleValueChange = event => {

@@ -14,7 +14,6 @@ import { Detail, DetailHeader, SelectField } from 'cx-ui-components';
 import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
 import DefaultForm from './Types/default';
-import BirstForm from './Types/birst';
 import CalabrioForm from './Types/calabrio';
 import ClientForm from './Types/client';
 import EmailForm from './Types/email';

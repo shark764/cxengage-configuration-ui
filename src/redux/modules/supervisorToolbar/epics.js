@@ -140,7 +140,7 @@ export const MonitorInteraction = (action$, store) =>
       ...action,
       twilioEnabled: selectSupervisorToolbarTwilioEnabled(store.getState()),
       transitionCall: selectTransitionCall(store.getState()),
-      sessionIsActive: selectSessionId(store.getState()) != ''
+      sessionIsActive: selectSessionId(store.getState()) !== ''
     }))
     .switchMap(a => {
       if (a.chosenExtension.provider && a.chosenExtension.provider === 'twilio') {

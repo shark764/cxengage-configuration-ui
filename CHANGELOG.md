@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.21] - 2020-08-19
+### Fixed
+- CXV1-22986 - Unsaved changes window prompt is not shown when navigated from contact attributes to different page.
+- <no-Jira>  - Fixed the way unsaved changes window prompt is shown in config1 when current form is Dirty.
+
 ## [0.81.20] - 2020-08-14
 ### Fixed
 - CXV1-22867 - Update Platform Status Column Values.

@@ -6,7 +6,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
-import { sdkCall } from '../../utils/sdk';
 
 import { Modal } from 'cx-ui-components';
 import Confirmation from '../ConfirmationDialog';
@@ -910,9 +909,6 @@ const updateSubEntityFormRoutes = [
 
 export default class CrudEndpointUiLayout extends Component {
   componentDidMount() {
-    if (this.props.insideIframe) {
-      sdkCall({ module: 'removeDirtyFormIdFromSessionStorage' });
-    }
     const entityName = this.props.match.params.entityName;
     this.props.setCurrentEntity(entityName);
     this.props.fetchData(entityName);

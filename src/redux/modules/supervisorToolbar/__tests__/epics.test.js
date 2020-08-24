@@ -6,15 +6,14 @@ import { ActionsObservable } from 'redux-observable';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/timeout';
 import { mockStore, supervisorToolbarMockStore } from '../../../../utils/testUtils';
-import { sdkPromise, sdkCall, errorLabel } from '../../../../utils/sdk';
+import { sdkPromise, sdkCall } from '../../../../utils/sdk';
 import {
   StartBatchRequest,
   MonitorInteraction,
   HangUpEpic,
   ToggleMuteEpic,
   MonitorInteractionInitialization,
-  SqsSessionLost,
-  WaitTwilioDeviceReady
+  SqsSessionLost
 } from '../epics';
 
 import {

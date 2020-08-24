@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { LoadingSpinnerSVG } from 'cx-ui-components';
 import { isBrandingUpdating } from '../redux/modules/entities/branding/selectors';
 import { getSelectedEntityId } from '../redux/modules/entities/selectors';
+import { isFormDirty, areSubEntityFormsDirty } from '../redux/modules/form/selectors';
 
 const Loading = styled(LoadingSpinnerSVG)`
   position: absolute;
@@ -46,6 +47,15 @@ export default function PrivateRoute(WrappedComponent) {
             fetchingDependencies: true
           });
         }
+        if (
+          this.props.isFormDirty !== prevProps.isFormDirty ||
+          this.props.areSubEntityFormsDirty !== prevProps.areSubEntityFormsDirty
+        ) {
+          store.dispatch({
+            type: 'SET_IS_CURRENT_FORM_DIRTY_IN_CONFIG1',
+            isDirty: this.props.isFormDirty || this.props.areSubEntityFormsDirty
+          });
+        }
       }
     }
     render() {
@@ -69,7 +79,9 @@ export default function PrivateRoute(WrappedComponent) {
     hasStarted: authenticatedAndBrandingReady(state),
     userIsAuthed: userIsAuthed(state),
     selectedEntityId: getSelectedEntityId(state),
-    isBrandingUpdating: isBrandingUpdating(state)
+    isBrandingUpdating: isBrandingUpdating(state),
+    isFormDirty: isFormDirty(state),
+    areSubEntityFormsDirty: areSubEntityFormsDirty(state)
   });
 
   WrappedRoute.propTypes = {
@@ -78,7 +90,9 @@ export default function PrivateRoute(WrappedComponent) {
     match: PropTypes.object,
     entityName: PropTypes.string,
     selectedEntityId: PropTypes.string,
-    isBrandingUpdating: PropTypes.bool
+    isBrandingUpdating: PropTypes.bool,
+    isFormDirty: PropTypes.bool,
+    areSubEntityFormsDirty: PropTypes.bool
   };
 
   return connect(mapStateToProps)(WrappedRoute);

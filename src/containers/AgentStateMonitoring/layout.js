@@ -6,7 +6,6 @@ import { messageSubscribe, messageUnsubscribe } from './windowMessageObservable'
 import SidePanel from '../../containers/SidePanel';
 import AgentStateMonitoringBulkActionsForm from './Bulk';
 import AgentStateMonitoringTable from './Table';
-import { sdkCall } from '../../utils/sdk';
 
 const Wrapper = styled.div`
   display: grid;
@@ -36,12 +35,6 @@ export default class AgentStateMonitoring extends Component {
     this.props.fetchData('skills', this.props.tableType);
     this.props.fetchData('reasonLists', this.props.tableType);
     this.props.startAgentStateMonitoring();
-  }
-
-  componentDidMount() {
-    if (this.props.insideIframe) {
-      sdkCall({ module: 'removeDirtyFormIdFromSessionStorage' });
-    }
   }
 
   componentWillUnmount() {
