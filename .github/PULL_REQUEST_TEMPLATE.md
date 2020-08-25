@@ -2,7 +2,7 @@
 ### These are *mandatory*, a PR should not be merged until it adheres to the checklist below ###
 
 ## JIRA Reference ##
-https://liveops.atlassian.net/browse/<ticket-#-here>
+https://lifesize.atlassian.net/browse/<ticket-#-here>
 
 ## Related PRs ##
 -
