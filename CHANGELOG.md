@@ -28,10 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.23] - 2020-08-20
+### Fixed
+- CXV1-22970 - Tenants page, change set active and reset default branding to buttons
+
 ## [0.81.22] - 2020-08-24
 ### Fixed
-- CXV1-16097 - Pagination table show more rows than actual count of items (not valid issue anymore, 
-               however, dynamic pagination options was set to show only page numbers closest to data length)
+- CXV1-16097 - Pagination table show more rows than actual count of items (not valid issue anymore, however, dynamic pagination options was set to show only page numbers closest to data length)
 
 ## [0.81.21] - 2020-08-19
 ### Fixed

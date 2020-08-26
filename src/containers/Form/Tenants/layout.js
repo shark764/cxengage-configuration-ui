@@ -16,11 +16,11 @@ import {
   Detail,
   InputField,
   SelectField,
-  ToggleField,
   FileUploadField,
   ColorField,
   LoadingSpinnerSVG,
-  ConfirmationWrapper
+  ConfirmationWrapper,
+  Button
 } from 'cx-ui-components';
 
 const SubDetailHeader = styled(DetailHeader)`
@@ -29,6 +29,14 @@ const SubDetailHeader = styled(DetailHeader)`
 
 const ColorFieldWrapper = styled.div`
   margin-left: 10px !important;
+`;
+
+const ResetButton = styled(Button)`
+  margin-left: 160px !important;
+  font-size: 12px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  height: 28px !important;
 `;
 
 const logoTypesAllowed = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
@@ -146,12 +154,13 @@ export default function TenantsForm({
                 mainText="This will switch you over to this tenant"
                 secondaryText="Do you want to continue?"
               >
-                <ToggleField
+                <ResetButton
                   name="setAsActiveTenant"
-                  label="Set as Active Tenant"
-                  data-automation="setActiveTenantToggle"
+                  data-automation="setActiveTenantButton"
                   disabled={isSaving || !userHasTenantUpdatePermissions}
-                />
+                >
+                  Set as Active Tenant
+                </ResetButton>
               </ConfirmationWrapper>
             )}
           {selectedEntityId !== 'create' && (
@@ -192,12 +201,14 @@ export default function TenantsForm({
                   mainText="This will reset this tenant's branding to default"
                   secondaryText="Do you want to continue?"
                 >
-                  <ToggleField
+                  <ResetButton
+                    children="Reset Branding to Default"
                     name="resetBranding"
-                    label="Reset Branding to Default"
-                    data-automation="resetBrandingToggle"
+                    data-automation="resetBrandingButton"
                     disabled={!userHasTenantBrandingUpdatePermissions}
-                  />
+                  >
+                    Reset Branding to Default
+                  </ResetButton>
                 </ConfirmationWrapper>
               )}
             </Fragment>
