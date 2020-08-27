@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.24] - 2020-08-27
+### Fixed
+- CXV1-22928 - Adding missed password fields for Teleopti and Email
+
 ## [0.81.23] - 2020-08-20
 ### Fixed
 - CXV1-22970 - Tenants page, change set active and reset default branding to buttons

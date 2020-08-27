@@ -69,9 +69,9 @@ export default function EmailForm({ isSaving, inherited, userHasUpdatePermission
         name="properties.smtpPassword"
         label="SMTP Password *"
         componentType="input"
-        inputType="text"
         data-automation="integrationsSmtpPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
+        type="password"
         autoComplete={'new-password'}
       />
     </Fragment>

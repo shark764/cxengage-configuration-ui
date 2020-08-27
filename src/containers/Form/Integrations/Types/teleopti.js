@@ -44,19 +44,19 @@ export default function TeleoptiForm({ isSaving, inherited, userHasUpdatePermiss
         name="properties.ftpPassword"
         label="FTP Password"
         componentType="input"
-        inputType="text"
         data-automation="integrationsFtpPassword"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        type="password"
+        autoComplete={'new-password'}
       />
       <InputField
         name="properties.authKey"
         label="Auth Key"
         componentType="input"
-        inputType="text"
         data-automation="integrationsAuthKey"
         disabled={isSaving || inherited || !userHasUpdatePermission}
-        maskValue
+        type="password"
+        autoComplete={'new-password'}
       />
       <InputField
         name="properties.teleoptiUrl"
