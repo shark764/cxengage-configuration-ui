@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper error object when empty values are provided 1`] = `
+Object {
+  "hierarchy": "Category Name is required.",
+  "name": "Contact Attribute is required",
+}
+`;
+
+exports[`formValidation returns proper error object when wrong values are provided while creating a new category 1`] = `
+Object {
+  "hierarchy": "Category with the same name already exists, please use a different name.",
+  "name": undefined,
+}
+`;
+
+exports[`formValidation returns proper error object when wrong values are provided while updating an existing category 1`] = `
+Object {
+  "hierarchy": "Category with the same name already exists, please use a different name.",
+  "name": undefined,
+}
+`;
+
+exports[`formValidation returns undefined when valid fields values are provided 1`] = `
+Object {
+  "hierarchy": undefined,
+  "name": undefined,
+}
+`;

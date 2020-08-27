@@ -189,11 +189,14 @@ export const getContactLayoutsSubEntityFormSubmitValues = (state, props) => {
         )
       )
       .update('label', label => label.set('name', props.values.get('hierarchy')));
+
     // update the contactAttributeId to match the selected contactAttribute:
     const attribute =
       getContactAttributes(state) &&
       getContactAttributes(state).find(attr => attr.get('objectName') === updatedValues.get('name'));
+
     const subFormValues = attribute ? updatedValues.set('contactAttributeId', attribute.get('id')) : updatedValues;
+
     return getCurrentFormValues(state).update('layout', layout => {
       if (props.selectedSubEntityId.startsWith('create')) {
         return layout.push(subFormValues);

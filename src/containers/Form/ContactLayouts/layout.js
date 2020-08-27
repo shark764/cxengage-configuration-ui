@@ -60,7 +60,7 @@ export default function ContactLayoutsForm({
             label="Name *"
             componentType="input"
             data-automation="nameInput"
-            disabled={isSaving || !userHasUpdatePermission}
+            disabled={isSaving || !userHasUpdatePermission || inherited}
           />
           <InputField
             name="description"
@@ -68,7 +68,7 @@ export default function ContactLayoutsForm({
             label="Description"
             componentType="textarea"
             data-automation="descriptionInput"
-            disabled={isSaving || !userHasUpdatePermission}
+            disabled={isSaving || !userHasUpdatePermission || inherited}
           />
           <DetailHeader
             userHasUpdatePermission={userHasUpdatePermission}

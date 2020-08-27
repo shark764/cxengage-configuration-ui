@@ -29,8 +29,8 @@ const commonBehavior = {
     Elem.loadingSpinnerIcon.waitForVisible(30000, false);
     Elem.loadingSpinnerIcon.validateElementsState('isVisible', false);
   },
-  checkLogin(entity){
-    if(!Elem.entityTableColumnSelectionBtn.isExisting()){//Perform login if not logged in.
+  checkLogin(entity) {
+    if (!Elem.entityTableColumnSelectionBtn.isExisting()) {//Perform login if not logged in.
       process.env.wdioRetries = parseInt(process.env.wdioRetries) + 1;
       dictionary = prepData.pages(process.env.wdioRetries);
       Brow.refresh();
@@ -52,8 +52,8 @@ const commonBehavior = {
   },
   insertDataTextValues(parameter, param, entity, actionType) {
     // for some reason clearElement is kind of broken in the following entity pages during update 
-    const customEntities = ['Reason List','Transfer List','Disposition List','User','Sla','Tenant'];
-    if(customEntities.includes(entity) && actionType === 'update') {
+    const customEntities = ['Reason List', 'Transfer List', 'Disposition List', 'User', 'Sla', 'Tenant'];
+    if (customEntities.includes(entity) && actionType === 'update') {
       Brow.pause(1000);
       Elem[param].waitAndClick();
       Brow.pause(1000);
@@ -120,7 +120,7 @@ const commonBehavior = {
     Brow.pause(1000);
     columnElement.setValue(searchValue);
     new Element(`.//span[text()="${searchValue}"]`).waitAndClick();
-    if(entity !== "Chat Widget" && entity !== "Email Template") {
+    if (entity !== "Chat Widget" && entity !== "Email Template") {
       Elem.sdpanelStatusToggle.waitForVisible();
       Elem.sdpanelStatusToggle.validateElementsState('isVisible', true);
     }
@@ -160,7 +160,7 @@ const commonBehavior = {
       }
       // for some reason when pause and scroll is not implemented sometimes after the submit it will cause the page to clear
       const customEntities = ['List'];
-      if(customEntities.includes(entity)) {
+      if (customEntities.includes(entity)) {
         Brow.pause(1000);
         $('button[data-automation="sdpanelSubmitButton"]').scroll();
         Brow.pause(1000);
@@ -185,7 +185,7 @@ const commonBehavior = {
           Elem.dateDatePicker.waitAndClick();
           const tomorrowDatePicker = new Element(`div[class="DayPicker-Day"][aria-label="${tomorrow}"]`);
           Brow.pause(2000);
-          if(!tomorrowDatePicker.isVisible()) {
+          if (!tomorrowDatePicker.isVisible()) {
             Elem.dayPickerCalenderNextButton.waitAndClick();
           }
           tomorrowDatePicker.waitAndClick();
@@ -207,7 +207,7 @@ const commonBehavior = {
         Api.createChatWidgetApp('Chat Widget Automation App', process.ENV.tenantId);
       }
     } catch (err) {
-        throw new Error('Could not create entity via api due to ' + err);
+      throw new Error('Could not create entity via api due to ' + err);
     }
   },
   createEntity(entity, actionType) {
@@ -228,7 +228,10 @@ const commonBehavior = {
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
       if (entity === 'Tenant') {
-        this.insertToggleValues(parameter, 'resetBrandingToggle', entity);
+        Elem.resetBrandingButton.waitAndClick();
+        Elem.confirmationWrapper.waitForVisible();
+        Elem.confirmButton.waitAndClick();
+        Elem.confirmationWrapper.waitForVisible(30000, false);
         Elem.toastSuccessMessage.waitForVisible();
         Elem.toastSuccessMessage.validateElementsString('exact', 'Branding has been reset to default successfully!');
         this.closeToastr(entity, actionType);
@@ -240,8 +243,8 @@ const commonBehavior = {
   },
   addExtension(entity, actionType, type, ext, pos) {
     let extensionList = new Element(`select[data-automation="extensionList"]`, pos),
-    extensionInput = new Element(`input[data-automation="extensionInput"]`, (pos-1)),
-    extensionLabelInput = new Element(`input[data-automation="extensionLabelInput"]`, pos);
+      extensionInput = new Element(`input[data-automation="extensionInput"]`, (pos - 1)),
+      extensionLabelInput = new Element(`input[data-automation="extensionLabelInput"]`, pos);
 
     Elem.sdpanelAddItem.waitAndClick();
     extensionList.waitForVisible();
@@ -297,7 +300,7 @@ const commonBehavior = {
         let apps = Api.getChatWidgetApps(process.ENV.tenantId);
         Api.deleteAllSmoochAutomationApps(apps);
       }
-    } catch(err){
+    } catch (err) {
       throw new Error('Could not delete entity via api due to ' + err);
     }
   },
@@ -366,7 +369,7 @@ const commonBehavior = {
     } else if (entity === 'Tenant') {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
       Elem.toastSuccessMessageTwo.validateElementsString('exact', `Branding has been ${actionType}d successfully!`);
-      if(Elem.toastCloseButtonTwo.isVisible) {
+      if (Elem.toastCloseButtonTwo.isVisible) {
         Elem.toastCloseButtonTwo.waitAndClick();
       }
     } else {
@@ -419,7 +422,7 @@ const commonBehavior = {
     Elem.sdpanelSubmitButton.waitForVisible(30000, false);
     Elem.sdpanelSubmitButton.validateElementsState('isVisible', false);
   },
-  revertUpdate(entity, actionType){
+  revertUpdate(entity, actionType) {
     if (entity === 'Email Template') {
       var columnElement = new Element(`.//span[text()="${dictionary[entity].updateSearchValue}"]`);
       console.log(columnElement);

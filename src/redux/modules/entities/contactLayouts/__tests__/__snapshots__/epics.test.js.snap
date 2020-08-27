@@ -1,0 +1,254 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact Layouts Epics tests ContactLayoutsFormSubmission while creating a contact layout 1`] = `
+Object {
+  "entityName": "contactLayouts",
+  "type": "CREATE_ENTITY",
+  "values": Object {
+    "a": "mockValues",
+  },
+}
+`;
+
+exports[`Contact Layouts Epics tests ContactLayoutsFormSubmission while updating a contact layout 1`] = `
+Object {
+  "entityId": "mockSelectedEntityId",
+  "entityName": "contactLayouts",
+  "type": "UPDATE_ENTITY",
+  "values": Object {
+    "a": "mockValues",
+  },
+}
+`;
+
+exports[`Contact Layouts Epics tests ContactLayoutsSubEntityFormSubmission 1`] = `
+Object {
+  "entityId": "mockSelectedEntityId",
+  "entityName": "contactLayouts",
+  "meta": Object {
+    "field": "layout",
+    "form": "contactLayouts:mockSelectedEntityId",
+    "persistentSubmitErrors": false,
+    "touch": false,
+  },
+  "payload": "mockLayout",
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
+exports[`Contact Layouts Epics tests FetchContactLayoutsAfterToggle 1`] = `
+Object {
+  "entityName": "contactLayouts",
+  "type": "FETCH_DATA",
+}
+`;
+
+exports[`Contact Layouts Epics tests InitContactLayoutsForm when selectedEntityId !== create 1`] = `
+Object {
+  "meta": Object {
+    "form": "contactLayouts:mockSelectedEntityId",
+  },
+  "payload": Immutable.Map {
+    "id": "mockContactLayoutId1",
+    "name": "mockContactLayoutName1",
+    "description": "mockContactLayoutDescription1",
+    "layout": Immutable.List [
+      Immutable.Map {
+        "draggableUUID": "mockUUID",
+        "name": "mockContactAttributeName1",
+        "endpointUUID": "mockUUID",
+        "label": Immutable.Map {
+          "en-US": "mock label",
+        },
+        "hierarchy": "mock label",
+        "droppableUUID": "mockUUID",
+        "contactAttributeId": "mockcontactAttributeId1",
+        "categoryUUID": "mockUUID",
+        "mandatory": true,
+      },
+    ],
+    "active": true,
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`Contact Layouts Epics tests InitContactLayoutsForm when selectedEntityId === create 1`] = `
+Object {
+  "meta": Object {
+    "form": "contactLayouts:create",
+  },
+  "payload": Object {
+    "layout": Immutable.List [
+      Immutable.Map {
+        "draggableUUID": "mockUUID",
+        "name": "mockContactAttributeName1",
+        "endpointUUID": "mockUUID",
+        "label": Immutable.Map {
+          "name": "Mandatory Attributes",
+        },
+        "hierarchy": "Mandatory Attributes",
+        "droppableUUID": "mockUUID",
+        "contactAttributeId": "mockcontactAttributeId1",
+        "categoryUUID": "mockUUID",
+        "mandatory": true,
+      },
+    ],
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`Contact Layouts Epics tests ReInitContactLayoutsForm 1`] = `
+Object {
+  "meta": Object {
+    "form": "contactLayouts:mockEntityId",
+  },
+  "payload": Immutable.Map {
+    "id": "mockContactLayoutId1",
+    "name": "mockContactLayoutName1",
+    "description": "mockContactLayoutDescription1",
+    "layout": Immutable.List [
+      Immutable.Map {
+        "draggableUUID": "mockUUID",
+        "name": "mockContactAttributeName1",
+        "endpointUUID": "mockUUID",
+        "label": Immutable.Map {
+          "en-US": "mock label",
+        },
+        "hierarchy": "mock label",
+        "droppableUUID": "mockUUID",
+        "contactAttributeId": "mockcontactAttributeId1",
+        "categoryUUID": "mockUUID",
+        "mandatory": true,
+      },
+    ],
+    "active": true,
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`Contact Layouts Epics tests RemoveContactLayoutsListItem 1`] = `
+Object {
+  "entityId": "mockSelectedEntityId",
+  "entityName": "contactLayouts",
+  "meta": Object {
+    "field": "layout",
+    "form": "contactLayouts:mockSelectedEntityId",
+    "persistentSubmitErrors": false,
+    "touch": false,
+  },
+  "payload": Immutable.List [
+    Immutable.Map {
+      "draggableUUID": "mockDraggableUUID1",
+      "categoryUUID": "mockCategoryUUID1",
+      "endpointUUID": "mockEndpointUUID1",
+      "droppableUUID": "mockDroppableUUID1",
+      "hierarchy": "mockHierarchy1",
+      "name": "mockContactAttributeName1",
+      "contactAttributeId": "mockContactAttributeId1",
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+    },
+    Immutable.Map {
+      "draggableUUID": "mockDraggableUUID2",
+      "categoryUUID": "mockCategoryUUID2",
+      "endpointUUID": "mockEndpointUUID2",
+      "droppableUUID": "mockDroppableUUID2",
+      "hierarchy": "mockHierarchy2",
+      "name": "mockContactAttributeName2",
+      "contactAttributeId": "mockContactAttributeId2",
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+    },
+  ],
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
+exports[`Contact Layouts Epics tests ToggleContactLayoutItem 1`] = `
+Object {
+  "entityId": "mockSelectedEntityId",
+  "entityName": "contactLayouts",
+  "response": "mock response",
+  "sdkCall": Object {
+    "command": "updateContactLayout",
+    "crudAction": "update",
+    "data": Object {
+      "active": false,
+      "description": "mockContactLayoutDescription1",
+      "id": "mockContactLayoutId1",
+      "layout": Array [
+        Object {
+          "attributes": Array [
+            "mockcontactAttributeId1",
+          ],
+          "label": Object {
+            "en-US": "mock label",
+          },
+        },
+      ],
+      "name": "mockContactLayoutName1",
+    },
+    "module": "entities",
+    "path": Array [
+      "contacts/layouts",
+      "mockSelectedEntityId",
+    ],
+    "topic": "cxengage/entities/update-contact-layout-response",
+  },
+  "type": "TOGGLE_ENTITY_FULFILLED",
+  "values": Object {
+    "active": true,
+    "description": "mockContactLayoutDescription1",
+    "id": "mockContactLayoutId1",
+    "layout": Array [
+      Object {
+        "attributes": Array [
+          "mockcontactAttributeId1",
+        ],
+        "label": Object {
+          "en-US": "mock label",
+        },
+      },
+    ],
+    "name": "mockContactLayoutName1",
+  },
+}
+`;
+
+exports[`Contact Layouts Epics tests UpdateContactLayoutsList 1`] = `
+Object {
+  "entityName": "contactLayouts",
+  "response": "mock response",
+  "sdkCall": Object {
+    "command": "updateContactLayout",
+    "crudAction": "update",
+    "data": Object {
+      "a": "mockValues",
+    },
+    "module": "entities",
+    "path": Array [
+      "contacts/layouts",
+      "mockSelectedEntityId",
+    ],
+    "topic": "cxengage/entities/update-contact-layout-response",
+  },
+  "type": "UPDATE_ENTITY_FULFILLED",
+  "values": Object {
+    "a": "mockValues",
+  },
+}
+`;
+
+exports[`Contact Layouts Epics tests getAttributesAfterFetchingContactLayouts 1`] = `
+Object {
+  "entityName": "contactAttributes",
+  "type": "FETCH_DATA",
+}
+`;

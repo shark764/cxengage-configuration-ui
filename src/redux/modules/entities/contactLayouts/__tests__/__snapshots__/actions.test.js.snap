@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`removeContactLayoutsListItem when type is categoryItems 1`] = `
+Object {
+  "categoryId": "mockId",
+  "type": "REMOVE_CONTACT_LAYOUTS_LIST_ITEM",
+}
+`;
+
+exports[`removeContactLayoutsListItem when type is contactLayoutsListItem 1`] = `
+Object {
+  "contactLayoutsListItemId": "mockId",
+  "type": "REMOVE_CONTACT_LAYOUTS_LIST_ITEM",
+}
+`;

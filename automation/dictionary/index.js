@@ -6,12 +6,9 @@ const randomPhoneNum = () =>
 
 // TODO
 // Capacity Rules - Page not completed yet
-// Tenants - Page not completed yet
 // Identity Providers - Page not completed yet
 // Integrations - Page not completed yet
 // Email Templates - needs update after bug fix.
-// Contact Attributes - Page not completed yet.
-// Contact Layouts - Page not completed yet.
 // Flows - needs extra logic for update.
 // Queues - Page not completed yet.
 // Media - Page not completed yet.
@@ -22,9 +19,9 @@ const randomPhoneNum = () =>
 // Agent State Monitoring - ready to be worked on
 
 module.exports = {
-    pages: function(x=1) {
-      let randomId = randomPhoneNum()+"_"+x;
-      return  {
+  pages: function (x = 1) {
+    let randomId = randomPhoneNum() + "_" + x;
+    return {
       'Outbound Identifier': {
         specs: {
           create: {
@@ -483,8 +480,8 @@ module.exports = {
           mainBar: 'userManagementMenu',
           subMainBar: 'navigationLinkUsers'
         },
-        userPSTNNumber:'+15063003002',
-        userSIPAddress:'sip:882402150@64.240.105.99',
+        userPSTNNumber: '+15063003002',
+        userSIPAddress: 'sip:882402150@64.240.105.99',
         whichCatagoryToSearch: 'searchEmailColumn',
         updateSearchValue: [`remail-${randomId}@gmail.com`]
       },
@@ -523,9 +520,6 @@ module.exports = {
         whichCatagoryToSearch: 'searchNameColumn',
         updateSearchValue: [`rName-${randomId}`]
       },
-      /*
-      There is an issue in running "List" automation tests (only in the selenium server).
-      It is hard to find the root cause of the failure (as it is not reproducible when ran locally). That is why we are commenting it out for now.*/
       List: {
         specs: {
           create: {
@@ -555,7 +549,6 @@ module.exports = {
         whichCatagoryToSearch: 'searchNameColumn',
         updateSearchValue: [`rName-${randomId}`]
       },
-      //*/
       Sla: {
         specs: {
           create: {
@@ -868,45 +861,42 @@ module.exports = {
         whichCatagoryToSearch: 'searchNameColumn',
         updateSearchValue: [`dMapName-${randomId}`]
       },
-      // Custom Attributes is not implemented in QE yet, tests fail in the jenkins pipeline if un-commented
-      // 'Custom Attribute': {
-      //   specs: {
-      //     create: {
-      //       parametersToInsert: [
-      //         {
-      //           attributeIdentifierInput: `cAttrName-${randomId}`,
-      //           attributeNameInput: `cAttrName-${randomId}`,
-      //           descriptionInput: `cAttrDesc-${randomId}`,
-      //           initialValueInput: `cAttrInitialVal-${randomId}`,
-      //           defaultValueInput: `cAttrInitialVal-${randomId}`,
-      //           realtimeToggle: true,
-      //           historicalToggle: true
-      //         }
-      //       ]
-      //     },
-      //     update: {
-      //       parametersToInsert: [
-      //         {
-      //           attributeNameInput: `updatedAAttrName-${randomId}`,
-      //           descriptionInput: `updatedAAttrDesc-${randomId}`,
-      //           initialValueInput: `updatedAttrInitialVal-${randomId}`,
-      //           defaultValueInput: `updatedAttrInitialVal-${randomId}`,
-      //           realtimeToggle: false,
-      //           historicalToggle: false
-      //         }
-      //       ]
-      //     },
-      //     read: {
-      //       parameters: {}
-      //     }
-      //   },
-      //   navigation: {
-      //     mainBar: 'flowsMenu',
-      //     subMainBar: 'navigationLinkCustomAttributes'
-      //   },
-      //   whichCatagoryToSearch: 'searchNameColumn',
-      //   updateSearchValue: [`cAttrName-${randomId}`]
-      // },
+      /* Commenting out because we cannot add more than 50 custom attributes per tenant
+      'Custom Attribute': {
+        specs: {
+          create: {
+            parametersToInsert: [
+              {
+                attributeIdentifierInput: `cAttrName-${randomId}`,
+                attributeNameInput: `cAttrName-${randomId}`,
+                descriptionInput: `cAttrDesc-${randomId}`,
+                realtimeToggle: true,
+                historicalToggle: true
+              }
+            ]
+          },
+          update: {
+            parametersToInsert: [
+              {
+                attributeNameInput: `updatedAAttrName-${randomId}`,
+                descriptionInput: `updatedAAttrDesc-${randomId}`,
+                realtimeToggle: false,
+                historicalToggle: false
+              }
+            ]
+          },
+          read: {
+            parameters: {}
+          }
+        },
+        navigation: {
+          mainBar: 'flowsMenu',
+          subMainBar: 'navigationLinkCustomAttributes'
+        },
+        whichCatagoryToSearch: 'searchNameColumn',
+        updateSearchValue: [`cAttrName-${randomId}`]
+      },
+      */
       'Data Access Report': {
         specs: {
           create: {
@@ -1000,22 +990,21 @@ module.exports = {
               }
             ]
           },
-          // ISSUES ON THE TENANTS LISTING PAGE UNCOMMENT WHEN TENANTS LISTING ISSUE IS FIXED
-          // update: {
-          //   parametersToInsert: [
-          //     {
-          //       nameInput: `updatedTName-${randomId}`,
-          //       descriptionInput: `updatedTDesc-${randomId}`,
-          //       tenantAdminList: 1,
-          //       timezoneList: '(-05:00) US/Eastern',
-          //       navBarInput: '#12f168',
-          //       navBarTextInput: '#e61c9c',
-          //       primaryColorInput: '#d6c66e',
-          //       accentColorInput: '#4b46de',
-          //       accentHoverColorInput: '#d2d7dc'
-          //     }
-          //   ]
-          // },
+          update: {
+            parametersToInsert: [
+              {
+                nameInput: `updatedTName-${randomId}`,
+                descriptionInput: `updatedTDesc-${randomId}`,
+                tenantAdminList: 1,
+                timezoneList: '(-05:00) US/Eastern',
+                navBarInput: '#12f168',
+                navBarTextInput: '#e61c9c',
+                primaryColorInput: '#d6c66e',
+                accentColorInput: '#4b46de',
+                accentHoverColorInput: '#d2d7dc'
+              }
+            ]
+          },
           read: {
             parameters: {}
           }
@@ -1027,6 +1016,87 @@ module.exports = {
         whichCatagoryToSearch: 'searchNameColumn',
         updateSearchValue: [`tName-${randomId}`]
       },
+      'Contact Attribute': {
+        specs: {
+          create: {
+            parametersToInsert: [
+              {
+                nameInput: `attrName-${randomId}`,
+                typeList: 1,
+                defaultInput: `defaultAttr-${randomId}`,
+                madatoryToggle: true,
+                localizationLabelInput: `label-${randomId}`,
+                localizationLanguageList: 1,
+              }
+            ]
+          },
+          update: {
+            parametersToInsert: [
+              {
+                defaultInput: `updated-defaultAttr-${randomId}`,
+                madatoryToggle: false,
+                localizationLabelInput: `updated-label-${randomId}`,
+                localizationLanguageList: 2,
+              }
+            ]
+          },
+          read: {
+            parameters: {}
+          }
+        },
+        navigation: {
+          mainBar: 'configurationMenu',
+          subMainBar: 'navigationLinkContactAttributes'
+        },
+        whichCatagoryToSearch: 'searchObjectNameColumn',
+        updateSearchValue: [`attrName-${randomId}`]
+      },
+      /*
+      'Contact Layout': {
+        specs: {
+          create: {
+            parametersToInsert: [
+              {
+                nameInput: `layoutName-${randomId}`,
+                descriptionInput: `layoutDesc-${randomId}`,
+              },
+            ],
+            subEntityParametersToInsert: [
+              {
+                categoryNameInput: `categoryName-${randomId}`,
+                localizationLabelInput: `label-${randomId}`,
+                localizationLanguageList: 1,
+                contactAttributesAutoComplete: `attrName-${randomId}`,
+              }
+            ]
+          },
+          update: {
+            parametersToInsert: [
+              {
+                nameInput: `updated-layoutName-${randomId}`,
+                descriptionInput: `updated-layoutDesc-${randomId}`,
+              }
+            ],
+            subEntityParametersToInsert: [
+              {
+                categoryNameInput: `updated-categoryName-${randomId}`,
+                localizationLabelInput: `updated-label-${randomId}`,
+                localizationLanguageList: 2,
+              },
+            ]
+          },
+          read: {
+            parameters: {}
+          }
+        },
+        navigation: {
+          mainBar: 'configurationMenu',
+          subMainBar: 'navigationLinkContactLayouts'
+        },
+        whichCatagoryToSearch: 'searchNameColumn',
+        updateSearchValue: [`layoutName-${randomId}`]
+      }
+      */
     };
   }
 };

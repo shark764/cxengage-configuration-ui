@@ -18,6 +18,7 @@ const hierarchyFieldValidation = (values, props) => {
         props.existingCategories &&
         props.existingCategories.filter(
           category =>
+            // While updating a category or while creating a listItem, exclude the currently selected category if it's hierarchy === subForm hierarchy
             category.get('categoryUUID') === values.get('categoryUUID')
               ? category.get('hierarchy') !== values.get('hierarchy').trim()
               : true

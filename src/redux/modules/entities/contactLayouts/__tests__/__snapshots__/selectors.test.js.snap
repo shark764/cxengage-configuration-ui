@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contactLayouts selector tests getActiveContactLayouts 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "id": "mockContactLayoutId1",
+    "name": "mockContactLayoutName1",
+    "description": "mockContactLayoutDescription1",
+    "active": true,
+  },
+]
+`;
+
+exports[`contactLayouts selector tests getAvailableContactAttributesNames 1`] = `
+Immutable.List [
+  "mockContactAttributeName4",
+]
+`;
+
+exports[`contactLayouts selector tests getContactLayoutsFormInitialValues while creating a contact layout 1`] = `Immutable.Map {}`;
+
+exports[`contactLayouts selector tests getContactLayoutsFormInitialValues while updating a contact layout 1`] = `
+Immutable.Map {
+  "name": "mockContactLayoutName1",
+  "description": "mockContactLayoutDescription1",
+  "active": true,
+}
+`;
+
+exports[`contactLayouts selector tests getContactLayoutsFormSubmitValues 1`] = `
+Immutable.Map {
+  "name": "mockLayoutName",
+  "description": "",
+  "active": false,
+  "layout": Immutable.List [
+    Immutable.Map {
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+      "attributes": Immutable.List [
+        "mockContactAttributeId1",
+      ],
+    },
+    Immutable.Map {
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+      "attributes": Immutable.List [
+        "mockContactAttributeId2",
+      ],
+    },
+    Immutable.Map {
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+      "attributes": Immutable.List [
+        "mockContactAttributeId3",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`contactLayouts selector tests getContactLayoutsSubEntityFormInitialValues while creating a list item in the category 1`] = `
+Immutable.Map {
+  "draggableUUID": "mokcUUID",
+  "categoryUUID": "mockCategoryUUID1",
+  "endpointUUID": "mokcUUID",
+  "droppableUUID": "mockDroppableUUID1",
+  "hierarchy": "mockHierarchy1",
+  "label": Immutable.List [
+    Immutable.Map {
+      "label": "hierarchyInEnglish",
+      "language": "en-US",
+    },
+    Immutable.Map {
+      "label": "hierarchyInFrench",
+      "language": "fr-CA",
+    },
+  ],
+  "contactAttributeId": "mockContactAttributeId1",
+}
+`;
+
+exports[`contactLayouts selector tests getContactLayoutsSubEntityFormInitialValues while creating a new category 1`] = `
+Immutable.Map {
+  "label": Immutable.List [
+    Immutable.Map {
+      "label": "",
+      "language": "",
+    },
+  ],
+  "categoryUUID": "mokcUUID",
+  "droppableUUID": "mokcUUID",
+  "draggableUUID": "mokcUUID",
+  "endpointUUID": "mokcUUID",
+}
+`;
+
+exports[`contactLayouts selector tests getContactLayoutsSubEntityFormInitialValues while updating a layout item 1`] = `
+Immutable.Map {
+  "draggableUUID": "mokcUUID",
+  "categoryUUID": "mockCategoryUUID1",
+  "endpointUUID": "mokcUUID",
+  "droppableUUID": "mockDroppableUUID1",
+  "hierarchy": "mockHierarchy1",
+  "label": Immutable.List [
+    Immutable.Map {
+      "label": "hierarchyInEnglish",
+      "language": "en-US",
+    },
+    Immutable.Map {
+      "label": "hierarchyInFrench",
+      "language": "fr-CA",
+    },
+  ],
+  "contactAttributeId": "mockContactAttributeId1",
+}
+`;
+
+exports[`contactLayouts selector tests getContactLayoutsSubEntityFormSubmitValues while creating a new contactLayout Item 1`] = `
+Immutable.Map {
+  "id": "mockContactLayoutId",
+  "name": "mockLayoutName",
+  "layout": Immutable.List [
+    Immutable.Map {
+      "draggableUUID": "mockDraggableUUID1",
+      "categoryUUID": "mockCategoryUUID1",
+      "endpointUUID": "mockEndpointUUID1",
+      "droppableUUID": "mockDroppableUUID1",
+      "hierarchy": "mockHierarchy1",
+      "name": "mockContactAttributeName1",
+      "contactAttributeId": "mockContactAttributeId1",
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+    },
+    Immutable.Map {
+      "draggableUUID": "mockDraggableUUID2",
+      "categoryUUID": "mockCategoryUUID2",
+      "endpointUUID": "mockEndpointUUID2",
+      "droppableUUID": "mockDroppableUUID2",
+      "hierarchy": "mockHierarchy2",
+      "name": "mockContactAttributeName2",
+      "contactAttributeId": "mockContactAttributeId2",
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+    },
+    Immutable.Map {
+      "draggableUUID": "mockDraggableUUID2",
+      "categoryUUID": "mockCategoryUUID2",
+      "endpointUUID": "mockEndpointUUID3",
+      "droppableUUID": "mockDroppableUUID3",
+      "hierarchy": "mockHierarchy2",
+      "name": "mockContactAttributeName3",
+      "contactAttributeId": "mockContactAttributeId3",
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+    },
+    Immutable.Map {
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "name": "Mandatory Attributes",
+      },
+      "contactAttributeId": "mockContactAttributeId4",
+      "name": "mockContactAttributeName4",
+      "hierarchy": "Mandatory Attributes",
+      "categoryUUID": "mockCategoryUUID4",
+    },
+  ],
+}
+`;
+
+exports[`contactLayouts selector tests getContactLayoutsSubEntityFormSubmitValues while creating updating a contactLayout Item 1`] = `
+Immutable.Map {
+  "id": "mockContactLayoutId",
+  "name": "mockLayoutName",
+  "layout": Immutable.List [
+    Immutable.Map {
+      "draggableUUID": "mockDraggableUUID1",
+      "categoryUUID": "mockCategoryUUID1",
+      "endpointUUID": "mockEndpointUUID1",
+      "droppableUUID": "mockDroppableUUID1",
+      "hierarchy": "Mandatory Attributes",
+      "name": "mockContactAttributeName1",
+      "contactAttributeId": "mockContactAttributeId1",
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "name": "Mandatory Attributes",
+      },
+    },
+    Immutable.Map {
+      "draggableUUID": "mockDraggableUUID2",
+      "categoryUUID": "mockCategoryUUID2",
+      "endpointUUID": "mockEndpointUUID2",
+      "droppableUUID": "mockDroppableUUID2",
+      "hierarchy": "mockHierarchy2",
+      "name": "mockContactAttributeName2",
+      "contactAttributeId": "mockContactAttributeId2",
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+    },
+    Immutable.Map {
+      "draggableUUID": "mockDraggableUUID2",
+      "categoryUUID": "mockCategoryUUID2",
+      "endpointUUID": "mockEndpointUUID3",
+      "droppableUUID": "mockDroppableUUID3",
+      "hierarchy": "mockHierarchy2",
+      "name": "mockContactAttributeName3",
+      "contactAttributeId": "mockContactAttributeId3",
+      "label": Immutable.Map {
+        "en-US": "hierarchyInEnglish",
+        "fr-CA": "hierarchyInFrench",
+      },
+    },
+  ],
+}
+`;
+
+exports[`contactLayouts selector tests getExistingCategories 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "hierarchy": "mockHierarchy1",
+    "categoryUUID": "mockCategoryUUID1",
+  },
+  Immutable.Map {
+    "hierarchy": "mockHierarchy2",
+    "categoryUUID": "mockCategoryUUID2",
+  },
+]
+`;
+
+exports[`contactLayouts selector tests getExistingCategoryNamesInCurrentLayout 1`] = `
+Immutable.List [
+  "mockHierarchy1",
+  "mockHierarchy2",
+]
+`;
+
+exports[`contactLayouts selector tests isCurrentFormMissingMandatoryAttributes 1`] = `true`;
+
+exports[`contactLayouts selector tests selectContactLayoutsHeaders 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "draggableUUID": "mockDraggableUUID1",
+    "categoryUUID": "mockCategoryUUID1",
+    "endpointUUID": "mockEndpointUUID1",
+    "droppableUUID": "mockDroppableUUID1",
+    "hierarchy": "mockHierarchy1",
+    "name": "mockContactAttributeName1",
+    "contactAttributeId": "mockContactAttributeId1",
+    "label": Immutable.Map {
+      "en-US": "hierarchyInEnglish",
+      "fr-CA": "hierarchyInFrench",
+    },
+  },
+  Immutable.Map {
+    "draggableUUID": "mockDraggableUUID2",
+    "categoryUUID": "mockCategoryUUID2",
+    "endpointUUID": "mockEndpointUUID2",
+    "droppableUUID": "mockDroppableUUID2",
+    "hierarchy": "mockHierarchy2",
+    "name": "mockContactAttributeName2",
+    "contactAttributeId": "mockContactAttributeId2",
+    "label": Immutable.Map {
+      "en-US": "hierarchyInEnglish",
+      "fr-CA": "hierarchyInFrench",
+    },
+  },
+]
+`;
+
+exports[`contactLayouts selector tests shouldDisableContactLayoutsStatusToggle 1`] = `true`;

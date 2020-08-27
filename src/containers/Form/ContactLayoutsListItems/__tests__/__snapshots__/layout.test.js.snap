@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactLayoutsListItemsForm /> renders create List Item form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <styled.h3>
+      Updating
+       Contact Layout List Item for :
+    </styled.h3>
+    <styled.h3
+      title="mockContactLayoutName"
+    >
+      mockContactLayoutName
+    </styled.h3>
+  </styled.div>
+  <InputField
+    componentType="input"
+    data-automation="categoryNameInput"
+    disabled={true}
+    inputType="text"
+    label="Category Name *"
+    name="hierarchy"
+  />
+  <AutoCompleteField
+    data-automation="contactAttributesAutoComplete"
+    disabled={false}
+    label="Contact Attribute *"
+    name="name"
+    placeholder="Select a Contact Attribute..."
+    required={true}
+    suggestedDropDownWidth="100%"
+    suggestedDropdownStyle={
+      Object {
+        "overflowX": "hidden",
+        "whiteSpace": "nowrap",
+        "width": "100%",
+      }
+    }
+    suggestions={
+      Array [
+        "mockAttribute1",
+      ]
+    }
+  />
+  <SidePanelActions
+    bulkItemsAffected={0}
+    hideCancel={false}
+    hideSubmit={false}
+    invalid={false}
+    isSaving={false}
+    onCancel={[Function]}
+    pristine={false}
+    save={true}
+    selectedEntityId=""
+  />
+</form>
+`;
+
+exports[`<ContactLayoutsListItemsForm /> renders create new category form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <styled.h3>
+      Creating
+       Contact Layout List Item for :
+    </styled.h3>
+    <styled.h3
+      title="mockContactLayoutName"
+    >
+      mockContactLayoutName
+    </styled.h3>
+  </styled.div>
+  <InputField
+    componentType="input"
+    data-automation="categoryNameInput"
+    disabled={false}
+    inputType="text"
+    label="Category Name *"
+    name="hierarchy"
+  />
+  <FieldArray
+    component={[Function]}
+    name="label"
+    props={
+      Object {
+        "disabled": false,
+        "userHasUpdatePermission": true,
+      }
+    }
+    rerenderOnEveryChange={true}
+    validate={[Function]}
+  />
+  <AutoCompleteField
+    data-automation="contactAttributesAutoComplete"
+    disabled={false}
+    label="Contact Attribute *"
+    name="name"
+    placeholder="Select a Contact Attribute..."
+    required={true}
+    suggestedDropDownWidth="100%"
+    suggestedDropdownStyle={
+      Object {
+        "overflowX": "hidden",
+        "whiteSpace": "nowrap",
+        "width": "100%",
+      }
+    }
+    suggestions={
+      Array [
+        "mockAttribute1",
+      ]
+    }
+  />
+  <SidePanelActions
+    bulkItemsAffected={0}
+    hideCancel={false}
+    hideSubmit={false}
+    invalid={false}
+    isSaving={false}
+    onCancel={[Function]}
+    pristine={false}
+    save={true}
+    selectedEntityId=""
+  />
+</form>
+`;
+
+exports[`<ContactLayoutsListItemsForm /> renders update category name form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <styled.div>
+    <styled.h3>
+      Updating
+       Contact Layout List Item for :
+    </styled.h3>
+    <styled.h3
+      title="mockContactLayoutName"
+    >
+      mockContactLayoutName
+    </styled.h3>
+  </styled.div>
+  <InputField
+    componentType="input"
+    data-automation="categoryNameInput"
+    disabled={false}
+    inputType="text"
+    label="Category Name *"
+    name="hierarchy"
+  />
+  <FieldArray
+    component={[Function]}
+    name="label"
+    props={
+      Object {
+        "disabled": false,
+        "userHasUpdatePermission": true,
+      }
+    }
+    rerenderOnEveryChange={true}
+    validate={[Function]}
+  />
+  <SidePanelActions
+    bulkItemsAffected={0}
+    hideCancel={false}
+    hideSubmit={false}
+    invalid={false}
+    isSaving={false}
+    onCancel={[Function]}
+    pristine={false}
+    save={true}
+    selectedEntityId=""
+  />
+</form>
+`;

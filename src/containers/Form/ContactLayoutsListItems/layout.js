@@ -160,7 +160,7 @@ export default class ContactLayoutsListItemsForm extends React.Component {
           isSaving={this.props.isSaving}
           pristine={this.props.pristine}
           invalid={this.props.invalid}
-          save={this.props.selectedEntityId === 'create' ? true : false}
+          save
         />
       </form>
     );
