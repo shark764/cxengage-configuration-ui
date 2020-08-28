@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.26] - 2020-08-28
+### Fixed
+- <no-Jira> - Added Contact Attribute selector unit tests.
+
 ## [0.81.25] - 2020-08-26
 ### Fixed
 - <no-Jira> - Added Contact Layouts unit tests.

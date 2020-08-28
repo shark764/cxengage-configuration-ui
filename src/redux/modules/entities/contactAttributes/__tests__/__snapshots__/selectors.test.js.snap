@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contactAttributes selector tests getContactAttributes 1`] = `
+Immutable.List [
+  Immutable.Map {
+    "id": "mockcontactAttributeId1",
+    "name": "mockContactAttributeName1",
+    "active": true,
+    "mandatory": true,
+  },
+  Immutable.Map {
+    "id": "mockContactAttributeId2",
+    "name": "mockContactAttributeName2",
+    "active": false,
+  },
+]
+`;
+
+exports[`contactAttributes selector tests getContactAttributesFormInitialValues while creating a contact attribute 1`] = `
+Immutable.Map {
+  "label": Immutable.List [
+    Immutable.Map {
+      "label": "",
+      "language": "",
+    },
+  ],
+}
+`;
+
+exports[`contactAttributes selector tests getContactAttributesFormInitialValues while updating a contact attribute 1`] = `
+Immutable.Map {
+  "id": "mockContactAttributeId",
+  "name": "mockAttributeName",
+  "default": "mockDefault",
+  "mandatory": "false",
+  "label": Immutable.List [
+    Immutable.Map {
+      "label": "hierarchyInEnglish",
+      "language": "en-US",
+    },
+    Immutable.Map {
+      "label": "hierarchyInFrench",
+      "language": "fr-CA",
+    },
+  ],
+}
+`;
+
+exports[`contactAttributes selector tests getContactAttributesFormSubmitValues while creating a new contactAttributes Item 1`] = `
+Immutable.Map {
+  "active": "true",
+  "default": "mockDefault",
+  "mandatory": "mockMandatory",
+  "label": Immutable.Map {
+    "en-US": "hierarchyInEnglish",
+  },
+}
+`;
+
+exports[`contactAttributes selector tests getContactAttributesFormSubmitValues while updating a contactAttributes Item 1`] = `
+Immutable.Map {
+  "active": "true",
+  "default": "mockDefault1",
+  "mandatory": "mockMandatory1",
+  "label": Immutable.Map {
+    "zhs-CN": "hierarchyInChinese",
+  },
+}
+`;
+
+exports[`contactAttributes selector tests getContactAttributesNames 1`] = `undefined`;
