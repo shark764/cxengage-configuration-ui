@@ -242,9 +242,9 @@ const commonBehavior = {
     });
   },
   addExtension(entity, actionType, type, ext, pos) {
-    let extensionList = new Element(`select[data-automation="extensionList"]`, pos),
+    let extensionList = new Element(`select[data-automation="extensionList"]`, (pos - 1)),
       extensionInput = new Element(`input[data-automation="extensionInput"]`, (pos - 1)),
-      extensionLabelInput = new Element(`input[data-automation="extensionLabelInput"]`, pos);
+      extensionLabelInput = new Element(`input[data-automation="extensionLabelInput"]`, (pos - 1));
 
     Elem.sdpanelAddItem.waitAndClick();
     extensionList.waitForVisible();

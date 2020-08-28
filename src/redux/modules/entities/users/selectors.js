@@ -14,6 +14,7 @@ import {
   getSidePanelTableItems
 } from '../listItemSelectors';
 import { isTenantSetForReadAllMode } from '../../userData/selectors';
+import { isTwilioWebRtcEnabled } from '../integrations/selectors';
 
 export const getUsers = state => state.getIn(['Entities', 'users', 'data']);
 
@@ -164,3 +165,11 @@ export const getActiveUsersFullNames = users =>
     .filter(user => user.status === 'accepted')
     .map(user => ({ label: getDisplay(user), value: user.id }))
     .sort((a, b) => (a.label.replace(/\s/g, '').toUpperCase() < b.label.replace(/\s/g, '').toUpperCase() ? -1 : 0));
+
+export const getUpdatedUserExtensions = (state, extensions) => {
+  const isWebRtcEnabled = isTwilioWebRtcEnabled(state);
+  return (extensions && extensions.length > 0) ? extensions.map(extension => {
+    extension.hide = extension.provider === 'twilio' && extension.type === 'webrtc' && !isWebRtcEnabled;
+    return extension;
+  }) : undefined;
+}

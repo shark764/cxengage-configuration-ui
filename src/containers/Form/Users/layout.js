@@ -258,7 +258,15 @@ export default function UsersForm({
                 .getState()
                 .getIn(['form', `users:${id}`, 'values', 'extensions'])
                 .push(
-                  fromJS({ type: 'pstn', value: '', provider: '', region: '', description: '', id: generateUUID() })
+                  fromJS({
+                    type: 'pstn',
+                    value: '',
+                    provider: '',
+                    region: '',
+                    description: '',
+                    id: generateUUID(),
+                    hide: false
+                  })
                 );
               store.dispatch({
                 type: '@@redux-form/CHANGE',

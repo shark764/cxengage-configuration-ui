@@ -92,3 +92,8 @@ export const selectIntegrationListenerFormInitialValues = state => {
 };
 
 export const isIntegrationsFetched = state => state.getIn(['Entities', 'integrations', 'data']).size === 0;
+
+export const isTwilioWebRtcEnabled = createSelector([getIntegrations],
+    integrations => (integrations && integrations.size > 0) ?
+        integrations.find(integration => integration.get('type') === 'twilio' && integration.get('active') && integration.getIn(['properties', 'webRtc'])) !== undefined : undefined
+);

@@ -17,7 +17,7 @@ import {
   getEntityItemDisplay
 } from '../selectors';
 import { selectTenantRoles } from '../roles/selectors';
-import { getDisplay } from './selectors';
+import { getDisplay, getUpdatedUserExtensions } from './selectors';
 import { selectFormInitialValues } from '../../form/selectors';
 import { entitiesMetaData } from '../metaData';
 import { Toast } from 'cx-ui-components';
@@ -25,12 +25,13 @@ import { changeUserInviteStatus } from '../../entities';
 import { validateEmail } from 'serenova-js-utils/validation';
 import { change } from 'redux-form';
 import { fetchData } from '../index';
+import { isTwilioWebRtcEnabled } from '../integrations/selectors';
 
 export const getRolesAfterFetchingUsers = (action$, store) =>
   action$
     .ofType('FETCH_DATA_FULFILLED')
     .filter(a => getCurrentEntity(store.getState()) === 'users' && a.entityName === 'users')
-    .mergeMap(() => [fetchData('roles'), fetchData('skills'), fetchData('groups')]);
+    .mergeMap(() => [fetchData('roles'), fetchData('skills'), fetchData('groups'), fetchData('integrations')]);
 
 export const UpdateUserEntity = (action$, store) =>
   action$
@@ -49,12 +50,14 @@ export const UpdateUserEntity = (action$, store) =>
       const modifiedExtensions = [...a.values.extensions];
       /**
         1. remove the fake uuid we attached from before
-        2. remove any empty values except description
-        3. return the modified extension
+        2. remove hide property (used in layout to hide/show the extensions)
+        3. remove any empty values except description
+        4. return the modified extension
       **/
       modifiedExtensions.map(
         extension =>
           delete extension.id &&
+          delete extension.hide &&
           Object.keys(extension).map(key => extension[key] || key === 'description' || delete extension[key]) && {
             ...extension
           }
@@ -72,12 +75,13 @@ export const UpdateUserEntity = (action$, store) =>
             response.result.roleName = findEntity(store.getState(), 'roles', response.result.roleId).get('name');
           }
           if (response.result && response.result.extensions) {
-            response.result.extensions = [
-              ...response.result.extensions.map(item => ({
+            const userExtensions = getUpdatedUserExtensions(store.getState(), response.result.extensions);
+            if (userExtensions.length) {
+              a.values.extensions = userExtensions.map(item => ({
                 ...item,
                 id: generateUUID()
-              }))
-            ];
+              }));
+            }
           }
 
           const actionList = [
@@ -217,6 +221,12 @@ export const FetchSidePanelUserDataFulfilled = (action$, store) =>
     .map(a => {
       const roles = selectTenantRoles(store.getState());
       const initialValues = selectFormInitialValues(store.getState());
+
+      const userExtensions = getUpdatedUserExtensions(store.getState(), initialValues.extensions);
+      if (userExtensions.length) {
+        a.payloadValues = { ...initialValues, extensions: userExtensions };
+      }
+
       a.payloadValues = roles.find(role => role.value === initialValues.roleId)
         ? initialValues
         : { ...initialValues, roleId: null };
