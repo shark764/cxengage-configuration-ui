@@ -32,11 +32,14 @@ const ColorFieldWrapper = styled.div`
 `;
 
 const ResetButton = styled(Button)`
-  margin-left: 160px !important;
   font-size: 12px !important;
   text-align: center !important;
   vertical-align: middle !important;
   height: 28px !important;
+`;
+
+const ResetModal = styled(ConfirmationWrapper)`
+  margin-left: 160px !important;
 `;
 
 const logoTypesAllowed = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
@@ -147,7 +150,7 @@ export default function TenantsForm({
           {selectedEntityId !== 'create' &&
             currentTenantId !== selectedEntityId &&
             userHasPlatformViewPermission && (
-              <ConfirmationWrapper
+              <ResetModal
                 confirmBtnCallback={() => {
                   switchTenant(selectedEntityId, true);
                 }}
@@ -161,7 +164,7 @@ export default function TenantsForm({
                 >
                   Set as Active Tenant
                 </ResetButton>
-              </ConfirmationWrapper>
+              </ResetModal>
             )}
           {selectedEntityId !== 'create' && (
             <Fragment>
@@ -194,7 +197,7 @@ export default function TenantsForm({
                 disabled={!userHasBrandingProductNameUpdatePermissions}
               />
               {!isSelectedTenantHasDefaultBranding && (
-                <ConfirmationWrapper
+                <ResetModal
                   confirmBtnCallback={
                     userHasTenantBrandingUpdatePermissions ? () => resetTenantBranding(selectedEntityId) : undefined
                   }
@@ -209,7 +212,7 @@ export default function TenantsForm({
                   >
                     Reset Branding to Default
                   </ResetButton>
-                </ConfirmationWrapper>
+                </ResetModal>
               )}
             </Fragment>
           )}

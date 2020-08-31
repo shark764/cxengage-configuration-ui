@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.28] - 2020-08-28
+### Fixed
+- CXV1-22970 - Tenants page, change set active and reset default branding to buttons - Small Adjustment.
+
 ## [0.81.27] - 2020-08-25
 ### Fixed
 - CXV1-22923 - Twilio extension displayed in User Management UI when WebRTC is disabled in Twilio Integration.
