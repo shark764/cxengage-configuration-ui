@@ -200,6 +200,7 @@ describe('Contact Layouts Epics tests', () => {
     const action = ActionsObservable.of({
       type: 'TOGGLE_ENTITY'
     });
+    sdkPromise.mockReturnValue(new Promise(resolve => resolve({ result: { active: true } })));
     epc.ToggleContactLayoutItem(action, mockStore).subscribe(actualOutputActions => {
       expect(actualOutputActions).toMatchSnapshot();
       done();

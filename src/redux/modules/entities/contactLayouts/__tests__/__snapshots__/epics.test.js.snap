@@ -175,7 +175,11 @@ exports[`Contact Layouts Epics tests ToggleContactLayoutItem 1`] = `
 Object {
   "entityId": "mockSelectedEntityId",
   "entityName": "contactLayouts",
-  "response": "mock response",
+  "response": Object {
+    "result": Object {
+      "active": true,
+    },
+  },
   "sdkCall": Object {
     "command": "updateContactLayout",
     "crudAction": "update",

@@ -1,5 +1,13 @@
 export const hasCustomCreateEntity = entityName =>
-  !['users', 'dataAccessReports', 'flows', 'dispatchMappings', 'businessHours', 'businessHoursV2', 'integrations'].includes(entityName);
+  ![
+    'users',
+    'dataAccessReports',
+    'flows',
+    'dispatchMappings',
+    'businessHours',
+    'businessHoursV2',
+    'integrations'
+  ].includes(entityName);
 
 export const hasCustomUpdateEntity = entityName =>
   ![
@@ -57,13 +65,13 @@ export const hasCustomSubEntityFormSubmit = entityName =>
   !['transferLists', 'reasonLists', 'dispositionLists', 'contactLayouts'].includes(entityName);
 
 export const localeLanguages = [
-  { label: 'Chinese - Simplified', value: 'zh-Hans', id: 'zhCn' },
-  { label: 'Chinese - Traditional', value: 'zh-Hant', id: 'zhTw' },
+  { label: 'Chinese - Simplified', value: 'zh-CN', id: 'zhCn' },
+  { label: 'Chinese - Traditional', value: 'zh-TW', id: 'zhTw' },
   { label: 'Czech', value: 'cs-CZ', id: 'csCz' },
   { label: 'Dutch', value: 'nl-NL', id: 'nlNl' },
   { label: 'English - Great Britain', value: 'en-GB', id: 'enGb' },
   { label: 'English - United States', value: 'en-US', id: 'enUs' },
-  { label: 'Finnish', value: 'fi-FL', id: 'fiFL' },
+  { label: 'Finnish', value: 'fi-FI', id: 'fiFI' },
   { label: 'French - Canada', value: 'fr-CA', id: 'frCa' },
   { label: 'French - France', value: 'fr-FR', id: 'frFr' },
   { label: 'German', value: 'de-DE', id: 'deDe' },

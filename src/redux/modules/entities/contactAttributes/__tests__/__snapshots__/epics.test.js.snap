@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact Attributes Epics tests BulkEntityUpdate 1`] = `
+Object {
+  "allEntitiesToUpdate": Array [
+    Object {
+      "active": true,
+      "default": "default1",
+      "id": "mockEntityId1",
+      "label": Object {
+        "en-US": "mockEnglishLabel",
+        "fr-CA": "mockFrenchLabel",
+      },
+      "mandatory": false,
+      "objectName": "mockName1",
+      "tenantId": "",
+    },
+    Object {
+      "active": false,
+      "default": "default2",
+      "id": "mockEntityId2",
+      "label": Object {
+        "en-US": "mockEnglishLabel",
+        "fr-CA": "mockFrenchLabel",
+      },
+      "mandatory": true,
+      "objectName": "mockName2",
+      "tenantId": "",
+    },
+    Object {
+      "active": true,
+      "default": "default3",
+      "id": "mockEntityId3",
+      "label": Object {
+        "en-US": "mockEnglishLabel",
+        "fr-CA": "mockFrenchLabel",
+      },
+      "mandatory": false,
+      "objectName": "mockName3",
+      "tenantId": "",
+    },
+  ],
+  "allSdkCalls": Array [
+    Object {
+      "data": Object {
+        "active": false,
+        "default": "default3",
+        "label": Object {
+          "en-US": "mockEnglishLabel",
+          "fr-CA": "mockFrenchLabel",
+        },
+        "mandatory": false,
+      },
+      "path": Array [
+        "contacts/attributes",
+        "mockEntityId3",
+      ],
+    },
+  ],
+  "entityId": "mockEntityId",
+  "entityName": "contactAttributes",
+  "response": "mock response",
+  "sdkCall": Object {
+    "data": Object {},
+  },
+  "type": "BULK_ENTITY_UPDATE_FULFILLED",
+  "values": Object {
+    "active": false,
+  },
+}
+`;
+
+exports[`Contact Attributes Epics tests ReInitContactAttributesFormForm when actionType is TOGGLE_ENTITY_FULFILLED 1`] = `
+Object {
+  "meta": Object {
+    "form": "contactAttributes:mockEntityId",
+  },
+  "payload": Immutable.Map {
+    "id": "mockEntityId",
+    "objectName": "mockName",
+    "active": true,
+    "mandatory": true,
+    "label": Immutable.List [
+      Immutable.Map {
+        "label": "mockEnglishLabel",
+        "language": "en-US",
+      },
+      Immutable.Map {
+        "label": "mockFrenchLabel",
+        "language": "fr-CA",
+      },
+    ],
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`Contact Attributes Epics tests ReInitContactAttributesFormForm when actionType is UPDATE_ENTITY_FULFILLED 1`] = `
+Object {
+  "meta": Object {
+    "form": "contactAttributes:mockEntityId",
+  },
+  "payload": Immutable.Map {
+    "id": "mockEntityId",
+    "objectName": "mockName",
+    "active": true,
+    "mandatory": true,
+    "label": Immutable.List [
+      Immutable.Map {
+        "label": "mockEnglishLabel",
+        "language": "en-US",
+      },
+      Immutable.Map {
+        "label": "mockFrenchLabel",
+        "language": "fr-CA",
+      },
+    ],
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`Contact Attributes Epics tests RevertMandatoryFieldValue 1`] = `
+Object {
+  "meta": Object {
+    "field": "mandatory",
+    "form": "contactAttributes:mockEntityId",
+    "persistentSubmitErrors": false,
+    "touch": false,
+  },
+  "payload": false,
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
+exports[`Contact Attributes Epics tests ToggleContacAttributeItem when actionType is TOGGLE_ENTITY 1`] = `
+Object {
+  "entityId": "mockEntityId",
+  "entityName": "contactAttributes",
+  "response": "mock response",
+  "sdkCall": Object {
+    "data": Object {
+      "active": false,
+      "id": "mockEntityId",
+      "label": Array [
+        Object {
+          "label": "mockEnglishLabel",
+          "language": "en-US",
+        },
+        Object {
+          "label": "mockFrenchLabel",
+          "language": "fr-CA",
+        },
+      ],
+      "mandatory": true,
+      "objectName": "mockName",
+    },
+    "path": Array [
+      "contacts/attributes",
+      "mockEntityId",
+    ],
+  },
+  "type": "TOGGLE_ENTITY_FULFILLED",
+  "values": Object {
+    "active": true,
+    "id": "mockEntityId",
+    "label": Array [
+      Object {
+        "label": "mockEnglishLabel",
+        "language": "en-US",
+      },
+      Object {
+        "label": "mockFrenchLabel",
+        "language": "fr-CA",
+      },
+    ],
+    "mandatory": true,
+    "objectName": "mockName",
+  },
+}
+`;
+
+exports[`Contact Attributes Epics tests ToggleContacAttributeItem when actionType is UPDATE_ENTITY 1`] = `
+Object {
+  "entityId": "mockEntityId",
+  "entityName": "contactAttributes",
+  "response": "mock response",
+  "sdkCall": Object {
+    "data": Object {
+      "active": true,
+      "id": "mockEntityId",
+      "label": Array [
+        Object {
+          "label": "mockEnglishLabel",
+          "language": "en-US",
+        },
+        Object {
+          "label": "mockFrenchLabel",
+          "language": "fr-CA",
+        },
+      ],
+      "mandatory": true,
+      "objectName": "mockName",
+    },
+    "path": Array [
+      "contacts/attributes",
+      "mockEntityId",
+    ],
+  },
+  "type": "UPDATE_ENTITY_FULFILLED",
+  "values": Object {
+    "active": true,
+    "id": "mockEntityId",
+    "label": Array [
+      Object {
+        "label": "mockEnglishLabel",
+        "language": "en-US",
+      },
+      Object {
+        "label": "mockFrenchLabel",
+        "language": "fr-CA",
+      },
+    ],
+    "mandatory": true,
+    "objectName": "mockName",
+  },
+}
+`;

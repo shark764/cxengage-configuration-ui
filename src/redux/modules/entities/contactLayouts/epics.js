@@ -269,7 +269,13 @@ export const ToggleContactLayoutItem = (action$, store) =>
     })
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a, `Contact Layout was updated successfully!`))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            `Contact Layout was ${response.result.active === true ? 'enabled' : 'disabled'} successfully!`
+          )
+        )
         .catch(error => handleError(error, a))
     );
 

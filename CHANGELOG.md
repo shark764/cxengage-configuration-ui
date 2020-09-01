@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.81.29] - 2020-09-01
+### Fixed
+- <no-Jira> - Update chinese & finnish language localization keys of contact attributes entity. 
+
 ## [0.81.28] - 2020-08-28
 ### Fixed
 - CXV1-22970 - Tenants page, change set active and reset default branding to buttons - Small Adjustment.

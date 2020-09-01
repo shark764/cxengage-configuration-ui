@@ -25,7 +25,6 @@ import { changeUserInviteStatus } from '../../entities';
 import { validateEmail } from 'serenova-js-utils/validation';
 import { change } from 'redux-form';
 import { fetchData } from '../index';
-import { isTwilioWebRtcEnabled } from '../integrations/selectors';
 
 export const getRolesAfterFetchingUsers = (action$, store) =>
   action$
