@@ -13,6 +13,7 @@ import store from './redux/store';
 
 import PrivateRoute from './PrivateRoute';
 
+import LanguageProvider from './containers/LanguageProvider';
 import Login from './containers/Login';
 import Navigation from './containers/Navigation';
 import SupervisorToolbar from './containers/SupervisorToolbar';
@@ -24,23 +25,25 @@ import FlowDebugLogs from './containers/FlowDebugLogs';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <Switch>
-        {/* Branding is not required for SupervisorToolbar and we do not want to display the loading spinner for it */}
-        <Route path="/supervisorToolbar" component={SupervisorToolbar} />
-        <RootStyles>
-          <Fragment>
-            <Route exact path="/" component={Login} />
-            <Navigation />
-            <Route path="/interactionMonitoring" component={PrivateRoute(InteractionMonitoring)} />
-            <Route path="/agentStateMonitoring" component={PrivateRoute(AgentStateMonitoring)} />
-            <Route path="/early-access-features" component={PrivateRoute(BetaFeatures)} />
-            <Route path="/configuration/:entityName" component={PrivateRoute(CrudEndpointUi)} />
-            <Route path="/flowDebugLogs" component={PrivateRoute(FlowDebugLogs)} />
-          </Fragment>
-        </RootStyles>
-      </Switch>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <Switch>
+          {/* Branding is not required for SupervisorToolbar and we do not want to display the loading spinner for it */}
+          <Route path="/supervisorToolbar" component={SupervisorToolbar} />
+          <RootStyles>
+            <Fragment>
+              <Route exact path="/" component={Login} />
+              <Navigation />
+              <Route path="/interactionMonitoring" component={PrivateRoute(InteractionMonitoring)} />
+              <Route path="/agentStateMonitoring" component={PrivateRoute(AgentStateMonitoring)} />
+              <Route path="/early-access-features" component={PrivateRoute(BetaFeatures)} />
+              <Route path="/configuration/:entityName" component={PrivateRoute(CrudEndpointUi)} />
+              <Route path="/flowDebugLogs" component={PrivateRoute(FlowDebugLogs)} />
+            </Fragment>
+          </RootStyles>
+        </Switch>
+      </Router>
+    </LanguageProvider>
   </Provider>,
   document.getElementById('root')
 );

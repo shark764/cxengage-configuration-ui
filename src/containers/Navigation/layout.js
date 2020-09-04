@@ -6,6 +6,7 @@ import { cxSetTenant } from '../../utils/cxSdk';
 import { isInIframe } from 'serenova-js-utils/browser';
 import { Typeahead } from 'cx-ui-components';
 import { CONFIRM_SET_ENTITY_WHEN_FORM_IS_DIRTY } from '../ConfirmationDialog/constants';
+import { FormattedMessage } from 'react-intl';
 
 const NavBar = styled.div`
   background: #00487e;
@@ -113,7 +114,7 @@ export default class Navigation extends Component {
           <Divider />
 
           <NavbarMenu theme={this.props.theme} data-automation="userManagementMenu" onClick={this.setVisibleMenu}>
-            User Management
+            <FormattedMessage id="navigation.management" defaultMessage="User Management" />
             {this.state.visibleMenu === 'User Management' && (
               <SubMenu>
                 <StyledLink
@@ -121,49 +122,49 @@ export default class Navigation extends Component {
                   to="/configuration/users"
                   onClick={e => this.setCurrentEntityAndEntityId('users', e)}
                 >
-                  Users
+                  <FormattedMessage id="navigation.management.users" defaultMessage="Users" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkGroups"
                   to="/configuration/groups"
                   onClick={e => this.setCurrentEntityAndEntityId('groups', e)}
                 >
-                  Groups
+                  <FormattedMessage id="navigation.management.groups" defaultMessage="Groups" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkSkills"
                   to="/configuration/skills"
                   onClick={e => this.setCurrentEntityAndEntityId('skills', e)}
                 >
-                  Skills
+                  <FormattedMessage id="navigation.management.skills" defaultMessage="Skills" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkRoles"
                   to="/configuration/roles"
                   onClick={e => this.setCurrentEntityAndEntityId('roles', e)}
                 >
-                  Roles
+                  <FormattedMessage id="navigation.management.roles" defaultMessage="Roles" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkReasons"
                   to="/configuration/reasons"
                   onClick={e => this.setCurrentEntityAndEntityId('reasons', e)}
                 >
-                  Presence Reasons
+                  <FormattedMessage id="navigation.management.reasons" defaultMessage="Presence Reasons" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkReasonLists"
                   to="/configuration/reasonLists"
                   onClick={e => this.setCurrentEntityAndEntityId('reasonLists', e)}
                 >
-                  Presence Reasons Lists
+                  <FormattedMessage id="navigation.management.reasonsList" defaultMessage="Presence Reason Lists" />
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
 
           <NavbarMenu theme={this.props.theme} data-automation="configurationMenu" onClick={this.setVisibleMenu}>
-            Configuration
+            <FormattedMessage id="navigation.configuration" defaultMessage="Configuration" />
             {this.state.visibleMenu === 'Configuration' && (
               <SubMenu>
                 <StyledLink
@@ -171,105 +172,117 @@ export default class Navigation extends Component {
                   to="/configuration/tenants"
                   onClick={e => this.setCurrentEntityAndEntityId('tenants', e)}
                 >
-                  Tenants
+                  <FormattedMessage id="navigation.configuration.tenants" defaultMessage="Tenants" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkIntegrations"
                   to="/configuration/integrations"
                   onClick={e => this.setCurrentEntityAndEntityId('integrations', e)}
                 >
-                  Integrations
+                  <FormattedMessage id="navigation.configuration.integrations" defaultMessage="Integrations" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkLists"
                   to="/configuration/lists"
                   onClick={e => this.setCurrentEntityAndEntityId('lists', e)}
                 >
-                  Lists
+                  <FormattedMessage id="navigation.configuration.lists" defaultMessage="Lists" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkSlas"
                   to="/configuration/slas"
                   onClick={e => this.setCurrentEntityAndEntityId('slas', e)}
                 >
-                  Statistics
+                  <FormattedMessage id="navigation.configuration.slas" defaultMessage="Statistics" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkEmailTemplates"
                   to="/configuration/emailTemplates"
                   onClick={e => this.setCurrentEntityAndEntityId('emailTemplates', e)}
                 >
-                  User Management Emails
+                  <FormattedMessage
+                    id="navigation.configuration.emailTemplates"
+                    defaultMessage="User Management Emails"
+                  />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkOutboundIdentifiers"
                   to="/configuration/outboundIdentifiers"
                   onClick={e => this.setCurrentEntityAndEntityId('outboundIdentifiers', e)}
                 >
-                  Outbound Identifiers
+                  <FormattedMessage
+                    id="navigation.configuration.outboundIdentifiers"
+                    defaultMessage="Outbound Identifiers"
+                  />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkOutboundIdentifierLists"
                   to="/configuration/outboundIdentifierLists"
                   onClick={e => this.setCurrentEntityAndEntityId('outboundIdentifierLists', e)}
                 >
-                  Outbound Identifier Lists
+                  <FormattedMessage
+                    id="navigation.configuration.outboundIdentifierLists"
+                    defaultMessage="Outbound Identifier Lists"
+                  />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkChatWidgets"
                   to="/configuration/chatWidgets"
                   onClick={e => this.setCurrentEntityAndEntityId('chatWidgets', e)}
                 >
-                  Chat Widgets
+                  <FormattedMessage id="navigation.configuration.chatWidgets" defaultMessage="Chat Widgets" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkTransferLists"
                   to="/configuration/transferLists"
                   onClick={e => this.setCurrentEntityAndEntityId('transferLists', e)}
                 >
-                  Transfer Lists
+                  <FormattedMessage id="navigation.configuration.transferLists" defaultMessage="Transfer Lists" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkApiKeys"
                   to="/configuration/apiKeys"
                   onClick={e => this.setCurrentEntityAndEntityId('apiKeys', e)}
                 >
-                  Api Keys
+                  <FormattedMessage id="navigation.configuration.apiKeys" defaultMessage="API Key Management" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkMessageTemplates"
                   to="/configuration/messageTemplates"
                   onClick={e => this.setCurrentEntityAndEntityId('messageTemplates', e)}
                 >
-                  Message Templates
+                  <FormattedMessage id="navigation.configuration.messageTemplates" defaultMessage="Message Templates" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkBusinessHours"
                   to="/configuration/businessHours"
                   onClick={e => this.setCurrentEntityAndEntityId('businessHours', e)}
                 >
-                  Business Hours
+                  <FormattedMessage id="navigation.configuration.businessHours" defaultMessage="Business Hours" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkContactAttributes"
                   to="/configuration/contactAttributes"
                   onClick={e => this.setCurrentEntityAndEntityId('contactAttributes', e)}
                 >
-                  Contact Attributes
+                  <FormattedMessage
+                    id="navigation.configuration.contactAttributes"
+                    defaultMessage="Contact Attributes"
+                  />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkContactLayouts"
                   to="/configuration/contactLayouts"
                   onClick={e => this.setCurrentEntityAndEntityId('contactLayouts', e)}
                 >
-                  Contact Layouts
+                  <FormattedMessage id="navigation.configuration.contactLayouts" defaultMessage="Contact Layouts" />
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
 
           <NavbarMenu theme={this.props.theme} data-automation="flowsMenu" onClick={this.setVisibleMenu}>
-            Flows
+            <FormattedMessage id="navigation.flows" defaultMessage="Flows" />
             {this.state.visibleMenu === 'Flows' && (
               <SubMenu>
                 <StyledLink
@@ -277,49 +290,49 @@ export default class Navigation extends Component {
                   to="/configuration/flows"
                   onClick={e => this.setCurrentEntityAndEntityId('flows', e)}
                 >
-                  Flows
+                  <FormattedMessage id="navigation.flows" defaultMessage="Flows" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkDispositions"
                   to="/configuration/dispositions"
                   onClick={e => this.setCurrentEntityAndEntityId('dispositions', e)}
                 >
-                  Dispositions
+                  <FormattedMessage id="navigation.flows.dispositions" defaultMessage="Dispositions" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkDispositionLists"
                   to="/configuration/dispositionLists"
                   onClick={e => this.setCurrentEntityAndEntityId('dispositionLists', e)}
                 >
-                  Disposition Lists
+                  <FormattedMessage id="navigation.flows.dispositionLists" defaultMessage="Disposition Lists" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkFlowDebugger"
                   to="/flowDebugLogs"
                   onClick={e => this.setCurrentEntityAndEntityId('flowDebugLogs', e)}
                 >
-                  Flow Debug Logs
+                  <FormattedMessage id="navigation.flows.flowDebugLogs" defaultMessage="Flow Debug Logs" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkDispatchMappings"
                   to="/configuration/dispatchMappings"
                   onClick={e => this.setCurrentEntityAndEntityId('dispatchMappings', e)}
                 >
-                  Dispatch Mappings
+                  <FormattedMessage id="navigation.flows.dispatchmappings" defaultMessage="Dispatch Mappings" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkCustomAttributes"
                   to="/configuration/customAttributes"
                   onClick={e => this.setCurrentEntityAndEntityId('customAttributes', e)}
                 >
-                  Custom Attributes
+                  <FormattedMessage id="navigation.flows.customAttributes" defaultMessage="Custom Attributes" />
                 </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>
 
           <NavbarMenu theme={this.props.theme} data-automation="reportingMenu" onClick={this.setVisibleMenu}>
-            Reporting
+            <FormattedMessage id="navigation.reports" defaultMessage="Reporting" />
             {this.state.visibleMenu === 'Reporting' && (
               <SubMenu>
                 <StyledLink
@@ -327,21 +340,30 @@ export default class Navigation extends Component {
                   to="/configuration/dataAccessReports"
                   onClick={e => this.setCurrentEntityAndEntityId('dataAccessReports', e)}
                 >
-                  Access Controlled Reports
+                  <FormattedMessage
+                    id="navigation.configuration.dataAccessReports"
+                    defaultMessage="Access Controlled Reports"
+                  />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkInteractionMonitoring"
                   to="/interactionMonitoring"
                   onClick={e => this.setCurrentEntityAndEntityId('interactionMonitoring', e)}
                 >
-                  Interaction Monitoring
+                  <FormattedMessage
+                    id="navigation.reports.interactionMonitoring"
+                    defaultMessage="Interaction Monitoring"
+                  />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkAgentStateMonitoring"
                   to="/agentStateMonitoring"
                   onClick={e => this.setCurrentEntityAndEntityId('agentStateMonitoring', e)}
                 >
-                  Agent State Monitoring
+                  <FormattedMessage
+                    id="navigation.reports.agentStateMonitoring"
+                    defaultMessage="Agent State Monitoring"
+                  />
                 </StyledLink>
               </SubMenu>
             )}
