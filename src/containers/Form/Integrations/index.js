@@ -11,7 +11,8 @@ import {
   getSelectedEntityId,
   isInherited,
   isCreating,
-  userHasUpdatePermission
+  userHasUpdatePermission,
+  userHasPermissions
 } from '../../../redux/modules/entities/selectors';
 import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import {
@@ -41,7 +42,10 @@ export function mapStateToProps(state) {
     rtaEnabled: properties && properties.get('rtaEnabled'),
     workItems: properties && properties.get('workItems'),
     regions: selectTwilioRegions(state),
-    key: getSelectedEntityId(state)
+    key: getSelectedEntityId(state),
+    sidePanelUpdatePermissions: {
+      twilioGlobalDialParams: userHasPermissions(state, ['TWILIO_GLOBAL_DIAL_PARAMS_MANAGE'])
+    }
   };
 }
 

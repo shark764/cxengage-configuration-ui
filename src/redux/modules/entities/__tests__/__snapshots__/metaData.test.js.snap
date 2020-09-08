@@ -2074,6 +2074,16 @@ Object {
     ],
     "helpLink": "/Help/Content/Configuration/Integrations/Creating_Integrations.htm",
     "membersTableFields": Object {
+      "globalDialParams": Array [
+        Object {
+          "label": "Key",
+          "name": "key",
+        },
+        Object {
+          "label": "Value",
+          "name": "value",
+        },
+      ],
       "listeners": Array [
         Object {
           "label": "Name",

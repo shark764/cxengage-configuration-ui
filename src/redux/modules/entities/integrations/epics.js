@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
-import { getSelectedEntityId, getSelectedSubEntityId } from '../selectors';
+import { getSelectedEntityId, getSelectedSubEntityId, getCurrentEntity, getSelectedEntity } from '../selectors';
 import { entitiesMetaData } from '../metaData';
 import { camelCaseToRegularFormAndRemoveLastLetter, camelCaseToKebabCase } from 'serenova-js-utils/strings';
 
@@ -78,3 +78,20 @@ export const CreateIntegrationListenerFormSubmission = (action$, store) =>
         .map(response => handleSuccess(response, a, `A new listener for this Integration was created successfully!`))
         .catch(error => handleError(error, a))
     );
+
+export const RemoveTwilioGlobalDialParamFormSubmission = (action$, store) =>
+  action$
+    .ofType('REMOVE_TWILIO_GLOBAL_DIAL_PARAM')
+    .map(a => {
+      a.entityName = getCurrentEntity(store.getState());
+      a.entityId = getSelectedEntity(store.getState()).get('id');
+      a.values = getSelectedEntity(store.getState()).toJS();
+      if (a.values.properties.globalDialParams.hasOwnProperty(a.subEntityName)) {
+        delete a.values.properties.globalDialParams[a.subEntityName];
+      }
+      return { ...a };
+    })
+    .map(a => ({
+      ...a,
+      type: 'UPDATE_ENTITY'
+    }));

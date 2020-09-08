@@ -4,7 +4,7 @@
 
 import { fromJS, List } from 'immutable';
 import { generateUUID } from 'serenova-js-utils/uuid';
-import { findEntityIndex } from './selectors';
+import { findEntityIndex, getSelectedEntityWithIndex } from './selectors';
 
 // Initial Sub State
 const defaultEntity = {
@@ -429,6 +429,14 @@ export const removeListItem = (listItemId, subEntityName) => ({
   listItemId,
   subEntityName
 });
+export const removeTwilioGlobalDialParam = subEntityName => ({
+  type: 'REMOVE_TWILIO_GLOBAL_DIAL_PARAM',
+  subEntityName
+});
+export const updateTwilioGlobalDialParam = subEntityName => ({
+  type: 'UPDATE_TWILIO_GLOBAL_DIAL_PARAM',
+  subEntityName
+});
 export const updateProficiency = (id, newValue) => ({
   type: 'UPDATE_PROFICIENCY',
   id,
@@ -631,6 +639,14 @@ export default function reducer(state = initialState, action) {
       const entityIndex = findEntityIndex(state, 'apiKeys', action.sdkCall.data.apiKeyId);
       if (entityIndex !== -1) {
         return state.deleteIn(['apiKeys', 'data', entityIndex]).setIn(['apiKeys', 'selectedEntityId'], '');
+      } else {
+        return state;
+      }
+    }
+    case 'UPDATE_TWILIO_GLOBAL_DIAL_PARAM': {
+      const twilioEntityIndex = getSelectedEntityWithIndex(state).get('currentIndex');
+      if (twilioEntityIndex !== -1) {
+        return state.setIn([state.get('currentEntity'), 'selectedSubEntityId'], action.subEntityName);
       } else {
         return state;
       }
@@ -1035,6 +1051,10 @@ export default function reducer(state = initialState, action) {
 
         if (action.entityName === 'tenants') {
           return updatedState;
+        } else if (action.entityName === 'integrations' && action.values.type === 'twilio') {
+          return updatedState
+            .setIn([action.entityName, 'selectedSubEntityId'], undefined)
+            .setIn([action.entityName, 'data', entityIndex, 'updating'], false);
         } else {
           return updatedState.setIn([action.entityName, 'data', entityIndex, 'updating'], false);
         }

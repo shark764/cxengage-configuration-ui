@@ -5,8 +5,9 @@
 import { Map } from 'immutable';
 import { createSelector } from 'reselect';
 import { getSelectedEntity, getSelectedSubEntityId } from '../selectors';
-import { selectFormInitialValues } from '../../form/selectors';
-import { onIntegrationListenerFormSubmit } from '../';
+import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../form/selectors';
+import { onIntegrationListenerFormSubmit, onFormSubmit } from '../';
+import { renameObjectKey } from '../../../../utils';
 
 export const getIntegrations = state => state.getIn(['Entities', 'integrations', 'data']);
 
@@ -77,23 +78,87 @@ export const selectIntegrationListeners = state =>
         .toJS()
     : [];
 
-export const subEntityFormSubmission = (values, dispatch, props) =>
-  dispatch(onIntegrationListenerFormSubmit(values, props));
+export const subEntityFormSubmission = (values, dispatch, props) => {
+  const { integrationType, initialValues } = props;
+  if (integrationType === 'twilio') {
+    const initialKey = initialValues.get('key');
+    const initialValue = initialValues.get('value');
+    const key = values.get('key');
+    const value = values.get('value');
+    const twilioFormValues = initialValues.get('initialTwilioFormValues');
+    const existingGlobalDialParams =
+      (initialValues.get('globalParamsProperties') && initialValues.get('globalParamsProperties').toJS()) || {};
+    let newGlobalDialParam = {};
+    let newState;
+    if (twilioFormValues && existingGlobalDialParams && (!initialKey && !initialValue)) {
+      // create global param property
+      newGlobalDialParam[key] = value;
+      newState = twilioFormValues.setIn(['properties', 'globalDialParams'], {
+        ...existingGlobalDialParams,
+        ...newGlobalDialParam
+      });
+    } else {
+      // update global param property
+      if (existingGlobalDialParams.hasOwnProperty(initialKey)) {
+        existingGlobalDialParams[initialKey] = value;
+        const updatedObject = renameObjectKey(existingGlobalDialParams, initialKey, key);
+        newState = twilioFormValues.setIn(['properties', 'globalDialParams'], updatedObject);
+      }
+    }
+    // Since twilio Global Params does not have an endpoint to create and update, we handle the whole integration request here
+    // So we dispatch onFormSubmit instaed of onIntegrationListenerFormSubmit to update the whole integration
+    return dispatch(onFormSubmit(newState, props));
+  } else {
+    return dispatch(onIntegrationListenerFormSubmit(values, props));
+  }
+};
 
 export const selectIntegrationListenerFormInitialValues = state => {
   const selectedSubEntityId = getSelectedSubEntityId(state);
+  if (getCurrentFormValueByFieldName(state, 'type') === 'twilio') {
+    const globalDialParamFound = selectTwilioGlobalDialParams(state).find(
+      globalDialParam => globalDialParam.key === selectedSubEntityId
+    );
+    return new Map({
+      initialTwilioFormValues: getSelectedEntity(state),
+      key: selectedSubEntityId === 'twilioGlobalDialParams' ? '' : globalDialParamFound.key,
+      value: selectedSubEntityId === 'twilioGlobalDialParams' ? '' : globalDialParamFound.value,
+      globalParamsProperties:
+        getSelectedEntity(state).get('properties') &&
+        getSelectedEntity(state).getIn(['properties', 'globalDialParams']) &&
+        getSelectedEntity(state).getIn(['properties', 'globalDialParams'])
+    });
+  } else {
+    return selectedSubEntityId === 'listeners'
+      ? new Map({ name: '', active: false })
+      : getSelectedEntity(state).get('listeners') &&
+          getSelectedEntity(state)
+            .get('listeners')
+            .find(listener => listener.get('id') === selectedSubEntityId);
+  }
+};
 
-  return selectedSubEntityId === 'listeners'
-    ? new Map({ name: '', active: false })
-    : getSelectedEntity(state).get('listeners') &&
-        getSelectedEntity(state)
-          .get('listeners')
-          .find(listener => listener.get('id') === selectedSubEntityId);
+export const selectTwilioGlobalDialParams = state => {
+  const twilioGlobalDialParams =
+    getSelectedEntity(state) && getSelectedEntity(state).getIn(['properties', 'globalDialParams'])
+      ? getSelectedEntity(state)
+          .getIn(['properties', 'globalDialParams'])
+          .toJS()
+      : [];
+  return Object.entries(twilioGlobalDialParams).map(([key, value]) => ({ key, value }));
 };
 
 export const isIntegrationsFetched = state => state.getIn(['Entities', 'integrations', 'data']).size === 0;
 
-export const isTwilioWebRtcEnabled = createSelector([getIntegrations],
-    integrations => (integrations && integrations.size > 0) ?
-        integrations.find(integration => integration.get('type') === 'twilio' && integration.get('active') && integration.getIn(['properties', 'webRtc'])) !== undefined : undefined
+export const isTwilioWebRtcEnabled = createSelector(
+  [getIntegrations],
+  integrations =>
+    integrations && integrations.size > 0
+      ? integrations.find(
+          integration =>
+            integration.get('type') === 'twilio' &&
+            integration.get('active') &&
+            integration.getIn(['properties', 'webRtc'])
+        ) !== undefined
+      : undefined
 );

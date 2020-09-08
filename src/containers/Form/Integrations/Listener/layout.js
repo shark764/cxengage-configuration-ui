@@ -31,33 +31,64 @@ const Wrapper = styled.div`
 export default function IntegrationListenerLayout(props) {
   return (
     <form onSubmit={props.handleSubmit} key={props.key}>
-      <Fragment>
-        <Header>{`${props.initialValues.get('id') ? 'Updating Listener' : 'Creating new Listener'}`}</Header>
-      </Fragment>
+      {props.integrationType !== 'twilio' ? (
+        <Fragment>
+          <Fragment>
+            <Header>{`${props.initialValues.get('id') ? 'Updating Listener' : 'Creating new Listener'}`}</Header>
+          </Fragment>
 
-      <Wrapper>
-        <InputField
-          name="name"
-          label="Name *"
-          componentType="input"
-          inputType="text"
-          data-automation="integrationListenersName"
-          disabled={props.isSaving}
-        />
-        <ToggleField
-          name="active"
-          label="Active"
-          data-automation="integrationListenersActive"
-          disabled={props.isSaving}
-        />
+          <Wrapper>
+            <InputField
+              name="name"
+              label="Name *"
+              componentType="input"
+              inputType="text"
+              data-automation="integrationListenersName"
+              disabled={props.isSaving}
+            />
+            <ToggleField
+              name="active"
+              label="Active"
+              data-automation="integrationListenersActive"
+              disabled={props.isSaving}
+            />
 
-        <IntegrationListenerForm
-          isSaving={props.isSaving}
-          key={props.key}
-          initialValues={props.initialValues}
-          integrationType={props.integrationType}
-        />
-      </Wrapper>
+            <IntegrationListenerForm
+              isSaving={props.isSaving}
+              key={props.key}
+              initialValues={props.initialValues}
+              integrationType={props.integrationType}
+            />
+          </Wrapper>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <Fragment>
+            <Header>{`${
+              props.initialValues.get('key') !== '' ? 'Updating Global Param Value' : 'Creating new Global Param Value'
+            }`}</Header>
+          </Fragment>
+
+          <Wrapper>
+            <InputField
+              name="key"
+              label="Key *"
+              componentType="input"
+              inputType="text"
+              data-automation="integrationGlobalDialParameterKey"
+              disabled={props.isSaving}
+            />
+            <InputField
+              name="value"
+              label="Value *"
+              componentType="input"
+              inputType="text"
+              data-automation="integrationGlobalDialParameterValue"
+              disabled={props.isSaving}
+            />
+          </Wrapper>
+        </Fragment>
+      )}
 
       <SidePanelActions
         onCancel={props.onCancel}

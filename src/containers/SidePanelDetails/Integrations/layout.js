@@ -14,6 +14,7 @@ import styled from 'styled-components';
 
 import { SidePanelTable, DetailHeader } from 'cx-ui-components';
 import { detailHeaderText } from '../../../utils';
+import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,7 +30,11 @@ export default function IntegrationsDetailsPanel({
   listenersItems,
   listenersFields,
   setSelectedSubEntityId,
-  itemApiPending
+  itemApiPending,
+  globalDialParamsItems,
+  removeTwilioGlobalDialParam,
+  updateTwilioGlobalDialParam,
+  sidePanelUpdatePermissions
 }) {
   return (
     <Wrapper className="dtpanel-entity-integrations">
@@ -55,6 +60,32 @@ export default function IntegrationsDetailsPanel({
           />
         </Fragment>
       )}
+      {integrationType === 'twilio' && (
+        <Fragment>
+          <DetailHeader
+            userHasUpdatePermission={
+              !integrationsFetching &&
+              !inherited &&
+              userHasUpdatePermission &&
+              sidePanelUpdatePermissions.twilioGlobalDialParams
+            }
+            text={`Global Dial Parameters`}
+            onActionButtonClick={() => setSelectedSubEntityId('twilioGlobalDialParams')}
+            open
+          />
+          <SidePanelTable
+            tableType={'sidePanel'}
+            userHasUpdatePermission={userHasUpdatePermission && sidePanelUpdatePermissions.twilioGlobalDialParams}
+            deleteSubEntity={item => removeTwilioGlobalDialParam(item)}
+            updateSubEntity={item => updateTwilioGlobalDialParam(item)}
+            inherited={inherited}
+            items={globalDialParamsItems}
+            fields={entitiesMetaData.integrations.membersTableFields.globalDialParams}
+            fetching={integrationsFetching && !globalDialParamsItems.length}
+            itemApiPending={itemApiPending}
+          />
+        </Fragment>
+      )}
     </Wrapper>
   );
 }
@@ -69,5 +100,9 @@ IntegrationsDetailsPanel.propTypes = {
   listenersItems: PropTypes.array,
   listenersFields: PropTypes.array,
   itemApiPending: PropTypes.string,
-  setSelectedSubEntityId: PropTypes.func
+  setSelectedSubEntityId: PropTypes.func,
+  globalDialParamsItems: PropTypes.array,
+  removeTwilioGlobalDialParam: PropTypes.func,
+  updateTwilioGlobalDialParam: PropTypes.func,
+  sidePanelUpdatePermissions: PropTypes.object
 };

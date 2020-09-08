@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.83.0] - 2020-09-01
+### Added
+- CXV1-22950 - Config 2 - Integrations page missing Global Dial Params for Twilio Integration.
+
 ## [0.82.0] - 2020-08-20
 ### Added
 - CXV1-22912 - Config 2 - Support Localization

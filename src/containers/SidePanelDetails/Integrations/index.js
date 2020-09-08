@@ -8,10 +8,18 @@ import {
   isInherited,
   userHasUpdatePermission,
   isEntityFetching,
-  itemApiPending
+  itemApiPending,
+  userHasPermissions
 } from '../../../redux/modules/entities/selectors';
-import { setSelectedSubEntityId } from '../../../redux/modules/entities';
-import { selectIntegrationListeners } from '../../../redux/modules/entities/integrations/selectors';
+import {
+  setSelectedSubEntityId,
+  removeTwilioGlobalDialParam,
+  updateTwilioGlobalDialParam
+} from '../../../redux/modules/entities';
+import {
+  selectIntegrationListeners,
+  selectTwilioGlobalDialParams
+} from '../../../redux/modules/entities/integrations/selectors';
 import { getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
@@ -23,10 +31,14 @@ export function mapStateToProps(state) {
     listenersItems: selectIntegrationListeners(state),
     listenersFields: entitiesMetaData.integrations.membersTableFields.listeners,
     integrationType: getCurrentFormValueByFieldName(state, 'type'),
-    itemApiPending: itemApiPending(state)
+    itemApiPending: itemApiPending(state),
+    globalDialParamsItems: selectTwilioGlobalDialParams(state),
+    sidePanelUpdatePermissions: {
+      twilioGlobalDialParams: userHasPermissions(state, ['TWILIO_GLOBAL_DIAL_PARAMS_MANAGE'])
+    }
   };
 }
 
-export const actions = { setSelectedSubEntityId };
+export const actions = { setSelectedSubEntityId, removeTwilioGlobalDialParam, updateTwilioGlobalDialParam };
 
 export default connect(mapStateToProps, actions)(IntegrationsDetailsPanel);

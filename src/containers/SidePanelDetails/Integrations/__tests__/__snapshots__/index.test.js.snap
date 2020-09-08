@@ -2,6 +2,7 @@
 
 exports[`IntegrationsDetailsPanel Renders renders 1`] = `
 <IntegrationsDetailsPanel
+  globalDialParamsItems={Array []}
   inherited={false}
   integrationType="salesforce"
   listenersFields={
@@ -27,7 +28,13 @@ exports[`IntegrationsDetailsPanel Renders renders 1`] = `
     ]
   }
   listenersItems={Array []}
+  removeTwilioGlobalDialParam={[Function]}
   setSelectedSubEntityId={[Function]}
+  sidePanelUpdatePermissions={
+    Object {
+      "twilioGlobalDialParams": undefined,
+    }
+  }
   store={
     Object {
       "dispatch": [Function],
@@ -57,6 +64,7 @@ exports[`IntegrationsDetailsPanel Renders renders 1`] = `
       "unsubscribe": [Function],
     }
   }
+  updateTwilioGlobalDialParam={[Function]}
   userHasUpdatePermission={true}
 >
   Child
@@ -65,6 +73,7 @@ exports[`IntegrationsDetailsPanel Renders renders 1`] = `
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "globalDialParamsItems": Array [],
   "inherited": false,
   "integrationType": "salesforce",
   "integrationsFetching": undefined,
@@ -90,6 +99,9 @@ Object {
     },
   ],
   "listenersItems": Array [],
+  "sidePanelUpdatePermissions": Object {
+    "twilioGlobalDialParams": undefined,
+  },
   "userHasUpdatePermission": true,
 }
 `;

@@ -898,6 +898,10 @@ entities.integrations.membersTableFields = {
     { label: 'Name', name: 'name' },
     { label: 'Status', name: 'active', type: 'select', filterOptions: ['enabled', 'disabled'] },
     { label: 'Created On', name: 'created', format: 'datetime' }
+  ],
+  globalDialParams: [
+    { label: 'Key', name: 'key' },
+    { label: 'Value', name: 'value' }
   ]
 };
 

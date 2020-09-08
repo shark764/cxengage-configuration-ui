@@ -17,7 +17,23 @@ const InlineWrapper = styled.div`
   display: inline-flex;
 `;
 
-export default function TwilioForm({ isSaving, inherited, userHasUpdatePermission, initialValues, regions }) {
+const GlobalDialSettingsContainer = styled.div`
+  display: flex;
+`;
+
+const Label = styled.label`
+  display: inline-block;
+  font-size: 13px;
+  margin-top: 10px;
+`;
+
+export default function TwilioForm({
+  isSaving,
+  inherited,
+  userHasUpdatePermission,
+  regions,
+  sidePanelUpdatePermissions
+}) {
   return (
     <Fragment>
       <DetailHeader text="Properties" />
@@ -60,6 +76,21 @@ export default function TwilioForm({ isSaving, inherited, userHasUpdatePermissio
         data-automation="integrationsWebRtc"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
+      <DetailHeader text="Global Dial Settings" />
+      <GlobalDialSettingsContainer>
+        <InputField
+          name="properties.extensionPrefix"
+          label="Extension Prefix"
+          labelWidth="auto"
+          componentType="input"
+          inputType="text"
+          data-automation="integrationsExtensionPrefix"
+          disabled={
+            isSaving || inherited || !userHasUpdatePermission || !sidePanelUpdatePermissions.twilioGlobalDialParams
+          }
+        />
+        <Label>example: 12345#+15551234567</Label>
+      </GlobalDialSettingsContainer>
     </Fragment>
   );
 }
@@ -74,5 +105,6 @@ TwilioForm.propTypes = {
       label: PropTypes.string,
       value: PropTypes.string.isRequired
     })
-  )
+  ),
+  sidePanelUpdatePermissions: PropTypes.object
 };

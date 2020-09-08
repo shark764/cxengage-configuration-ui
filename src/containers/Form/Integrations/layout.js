@@ -39,9 +39,10 @@ export default function IntegrationsForm({
   ctiEnabled,
   rtaEnabled,
   workItems,
-  key
+  key,
+  sidePanelUpdatePermissions
 }) {
-  const formTypeProps = { isSaving, inherited, userHasUpdatePermission, initialValues };
+  const formTypeProps = { isSaving, inherited, userHasUpdatePermission, initialValues, sidePanelUpdatePermissions };
   return (
     <form onSubmit={handleSubmit} key={key}>
       <DetailHeader text="Details" />
@@ -100,7 +101,8 @@ IntegrationsForm.propTypes = {
   ctiEnabled: PropTypes.bool,
   rtaEnabled: PropTypes.bool,
   workItems: PropTypes.bool,
-  userHasUpdatePermission: PropTypes.bool
+  userHasUpdatePermission: PropTypes.bool,
+  sidePanelUpdatePermissions: PropTypes.object
 };
 
 IntegrationsForm.defaultProps = {
