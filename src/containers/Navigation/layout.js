@@ -68,10 +68,10 @@ export default class Navigation extends Component {
     };
   }
 
-  setVisibleMenu = e =>
-    this.setState({
-      visibleMenu: e.currentTarget.textContent
-    });
+  setVisibleMenu = menuName =>
+    this.setState(({ visibleMenu }) => ({
+      visibleMenu: visibleMenu === menuName ? 'none' : menuName
+    }));
 
   setCurrentEntityAndEntityId = (entityName, e) => {
     if (this.props.isCurrentFormDirty || this.props.areSubEntityFormsDirty) {
@@ -113,7 +113,11 @@ export default class Navigation extends Component {
 
           <Divider />
 
-          <NavbarMenu theme={this.props.theme} data-automation="userManagementMenu" onClick={this.setVisibleMenu}>
+          <NavbarMenu
+            theme={this.props.theme}
+            data-automation="userManagementMenu"
+            onClick={() => this.setVisibleMenu('User Management')}
+          >
             <FormattedMessage id="navigation.management" defaultMessage="User Management" />
             {this.state.visibleMenu === 'User Management' && (
               <SubMenu>
@@ -163,7 +167,11 @@ export default class Navigation extends Component {
             )}
           </NavbarMenu>
 
-          <NavbarMenu theme={this.props.theme} data-automation="configurationMenu" onClick={this.setVisibleMenu}>
+          <NavbarMenu
+            theme={this.props.theme}
+            data-automation="configurationMenu"
+            onClick={() => this.setVisibleMenu('Configuration')}
+          >
             <FormattedMessage id="navigation.configuration" defaultMessage="Configuration" />
             {this.state.visibleMenu === 'Configuration' && (
               <SubMenu>
@@ -281,7 +289,7 @@ export default class Navigation extends Component {
             )}
           </NavbarMenu>
 
-          <NavbarMenu theme={this.props.theme} data-automation="flowsMenu" onClick={this.setVisibleMenu}>
+          <NavbarMenu theme={this.props.theme} data-automation="flowsMenu" onClick={() => this.setVisibleMenu('Flows')}>
             <FormattedMessage id="navigation.flows" defaultMessage="Flows" />
             {this.state.visibleMenu === 'Flows' && (
               <SubMenu>
@@ -331,7 +339,11 @@ export default class Navigation extends Component {
             )}
           </NavbarMenu>
 
-          <NavbarMenu theme={this.props.theme} data-automation="reportingMenu" onClick={this.setVisibleMenu}>
+          <NavbarMenu
+            theme={this.props.theme}
+            data-automation="reportingMenu"
+            onClick={() => this.setVisibleMenu('Reporting')}
+          >
             <FormattedMessage id="navigation.reports" defaultMessage="Reporting" />
             {this.state.visibleMenu === 'Reporting' && (
               <SubMenu>

@@ -12,7 +12,9 @@ export default class LanguageProvider extends Component {
       storage.getItem('locale') ||
       mappedLocalesOptions
         .reduce((list, { value }) => [...list, value], [])
-        .find(val => val === window.navigator.language);
+        .find(
+          val => val === window.navigator.language || val.split('-')[0] === window.navigator.language.split('-')[0]
+        );
     if (locale) {
       this.props.changeLocale(locale);
     }

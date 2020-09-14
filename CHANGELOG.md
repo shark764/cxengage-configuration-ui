@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.83.1] - 2020-07-09
+- <no-jira> - Fix to Navbar items not showing submenu when clicking them when language is not English
+
 ## [0.83.0] - 2020-09-01
 ### Added
 - CXV1-22950 - Config 2 - Integrations page missing Global Dial Params for Twilio Integration.
