@@ -159,18 +159,6 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
       },
       Object {
         "filterOptions": Array [
-          "all",
-          "all non-disabled",
-          "disabled",
-          "enabled",
-          "pending",
-        ],
-        "label": "Platform Status",
-        "name": "platformStatus",
-        "type": "select",
-      },
-      Object {
-        "filterOptions": Array [
           "pending",
           "invited",
           "expired",
@@ -178,7 +166,7 @@ exports[`GroupsDetailsPanel Renders renders 1`] = `
           "disabled",
           "sso-only",
         ],
-        "label": "Tenant Access",
+        "label": "Platform Status",
         "name": "invitationStatus",
         "type": "select",
       },
@@ -309,18 +297,6 @@ Object {
     },
     Object {
       "filterOptions": Array [
-        "all",
-        "all non-disabled",
-        "disabled",
-        "enabled",
-        "pending",
-      ],
-      "label": "Platform Status",
-      "name": "platformStatus",
-      "type": "select",
-    },
-    Object {
-      "filterOptions": Array [
         "pending",
         "invited",
         "expired",
@@ -328,7 +304,7 @@ Object {
         "disabled",
         "sso-only",
       ],
-      "label": "Tenant Access",
+      "label": "Platform Status",
       "name": "invitationStatus",
       "type": "select",
     },

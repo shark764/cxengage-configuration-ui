@@ -28,6 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.84.0] - 2020-09-16
+### Removed
+Removed the following changes:
+- CXV1-22869
+- CXV1-22868
+- CXV1-22867
+
 ## [0.83.2] - 2020-09-10
 ### Added
 - CXV1-23088 - Show no extensions warning when a user with no extensions tries to monitor an interaction.
@@ -134,7 +141,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.81.8] - 2020-08-07
 ### Fixed
 - CXV1-22931 - more than one enabled contact layout is allowed.
-- CXV1-22933 - cannot enable/disable a contact-layout.
+- CXV1-22933 - cannot enable/disable a contact-layout
 - CXV1-22932 - huge rows in the main list.
 
 ## [0.81.7] - 2020-07-30

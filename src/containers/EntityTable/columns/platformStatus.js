@@ -5,25 +5,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { camelCaseToRegularForm } from 'serenova-js-utils/strings';
-import { FilterSelect } from 'cx-ui-components';
+import { FilterSelect, columnAccessor } from 'cx-ui-components';
 
 export const platformStatusColumn = {
-  id: 'platformStatus',
+  id: 'invitationStatus',
   Header: <span title="Platform Status">Platform Status</span>,
-  accessor: 'platformStatus',
+  accessor: list => columnAccessor({ name: 'invitationStatus' }, list),
   Cell: ({ row }) => (
-    <span title={camelCaseToRegularForm(row['platformStatus'])}>{camelCaseToRegularForm(row['platformStatus'])}</span>
+    <span title={camelCaseToRegularForm(row['invitationStatus'])}>
+      {camelCaseToRegularForm(row['invitationStatus'])}
+    </span>
   ),
   filterMethod: (filter, row) => {
     // Show all items on 'All'
-    // Show 'enabled' and 'pending' items on 'All non-disabled'
+    // Show 'pending', 'invited', 'expired', 'enabled', 'sso-only' items on 'All non-disabled'
     // Check match otherwise
     // We remove white spaces since camelCaseToRegularForm adds
     // empty space at beginning when string has capital letter
     if (filter.value === 'all') {
       return true;
     } else if (filter.value === 'all non-disabled') {
-      return ['enabled', 'pending'].includes(row['_original'][filter.id]);
+      return ['pending', 'invited', 'expired', 'enabled', 'sso-only'].includes(row['_original'][filter.id]);
     } else {
       return camelCaseToRegularForm(row[filter.id]).trim() === camelCaseToRegularForm(filter.value).trim();
     }
@@ -35,7 +37,7 @@ export const platformStatusColumn = {
       data-automation="searchPlatformStatusColumn"
       onChange={event => onChange(event.target.value)}
       value={filter ? filter.value : 'all non-disabled'}
-      options={['all', 'all non-disabled', 'disabled', 'enabled', 'pending']}
+      options={['all', 'all non-disabled', 'pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']}
     />
   )
 };

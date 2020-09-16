@@ -133,18 +133,6 @@ Array [
     >
       Platform Status
     </span>,
-    "accessor": "platformStatus",
-    "filterMethod": [Function],
-    "id": "platformStatus",
-  },
-  Object {
-    "Cell": [Function],
-    "Filter": [Function],
-    "Header": <span
-      title="Tenant Access"
-    >
-      Tenant Access
-    </span>,
     "accessor": [Function],
     "filterMethod": [Function],
     "id": "invitationStatus",
