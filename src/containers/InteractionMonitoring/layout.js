@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import { messageSubscribe, messageUnsubscribe } from './windowMessageObservable';
 import { localStorageSubscribe, localStorageUnsubscribe } from './localStorageObservable';
 import CheckboxFilterMenu from '../CheckboxFilterMenu';
-import { Button, PageHeader, InteractionDetails, Pagination } from 'cx-ui-components';
+import { Button, PageHeader, InteractionDetails, Pagination, Confirmation, LoadingSpinnerSVG } from 'cx-ui-components';
 import ReactTable from 'react-table';
 import interactionIdColumn from '../../components/tableColumns/interactionId';
 import expanderColumn from '../../components/tableColumns/expander';
@@ -51,7 +51,8 @@ export default class InteractionMonitoring extends Component {
     super();
     this.state = {
       filtered: [{ id: 'channel', value: 'voice' }],
-      defaultRowsNumber: parseFloat((window.innerHeight / 32 - 8).toFixed(0))
+      defaultRowsNumber: parseFloat((window.innerHeight / 32 - 8).toFixed(0)),
+      showNoExtensionsWarning: false
     };
   }
 
@@ -122,6 +123,11 @@ export default class InteractionMonitoring extends Component {
     );
   toggleTimeFormat = () => this.props.toggleTimeFormat();
 
+  showNoExtensionsWarning = (e, show = true) => {
+    e.stopPropagation();
+    this.setState({ showNoExtensionsWarning: show });
+  };
+
   render() {
     return (
       <Wrapper>
@@ -149,6 +155,9 @@ export default class InteractionMonitoring extends Component {
         {!this.props.areAllColNotActive && (
           <ReactTable
             PaginationComponent={Pagination}
+            noDataText={
+              this.props.isFetchingUserExtensions ? <LoadingSpinnerSVG size={60} /> : 'No active interactions found'
+            }
             defaultPageSize={this.state.defaultRowsNumber}
             pageSizeOptions={[this.state.defaultRowsNumber, 20, 50, 100]}
             className="InteractionMonitoringTable -striped -highlight"
@@ -189,9 +198,19 @@ export default class InteractionMonitoring extends Component {
                 this.props.userHasMonitorAllCallsPermission,
                 this.props.extensions,
                 this.props.canSilentMonitor,
-                this.props.loadingUserStatus
+                this.props.loadingUserStatus,
+                this.showNoExtensionsWarning
               )
             ]}
+          />
+        )}
+        {this.state.showNoExtensionsWarning && (
+          <Confirmation
+            mainText="You do not have any extensions configured in your user profile"
+            openPopupBox={true}
+            cancelBtnText="Okay"
+            cancelBtnCallback={e => this.showNoExtensionsWarning(e, false)}
+            onMaskClick={e => this.showNoExtensionsWarning(e, false)}
           />
         )}
       </Wrapper>
@@ -230,5 +249,6 @@ InteractionMonitoring.propTypes = {
   pageHelpLink: PropTypes.string,
   extensions: PropTypes.array,
   canSilentMonitor: PropTypes.bool,
-  loadingUserStatus: PropTypes.bool
+  loadingUserStatus: PropTypes.bool,
+  isFetchingUserExtensions: PropTypes.bool
 };

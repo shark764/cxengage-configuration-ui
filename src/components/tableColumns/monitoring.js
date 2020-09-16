@@ -92,7 +92,8 @@ export const helperFunctions = {
     userHasMonitorAllCallsPermission,
     extensions,
     canSilentMonitor,
-    loadingUserStatus
+    loadingUserStatus,
+    showNoExtensionsWarning
   ) {
     let activeMonitors = 0;
     let previousMonitors = 0;
@@ -116,6 +117,7 @@ export const helperFunctions = {
         extensions={extensions}
         canSilentMonitor={canSilentMonitor}
         loadingUserStatus={loadingUserStatus}
+        showNoExtensionsWarning={showNoExtensionsWarning}
       />
     );
   }
@@ -130,7 +132,8 @@ export default function(
   userHasMonitorAllCallsPermission,
   extensions,
   canSilentMonitor,
-  loadingUserStatus
+  loadingUserStatus,
+  showNoExtensionsWarning
 ) {
   const column = {
     Header: 'Monitoring',
@@ -149,7 +152,8 @@ export default function(
         userHasMonitorAllCallsPermission,
         extensions,
         canSilentMonitor,
-        loadingUserStatus
+        loadingUserStatus,
+        showNoExtensionsWarning
       ),
     filterMethod: (filter, row) => helperFunctions.monitoringFilterMethod(filter, row),
     Filter: ({ onChange }) => helperFunctions.monitorFilter(tableType, onChange)
@@ -195,7 +199,9 @@ export class MonitoringCell extends Component {
   monitorInteractionRequestor = (e, chosenExtension) => {
     e.stopPropagation();
     if (!this.props.canSilentMonitor) {
-      Toast.error("You are currently online in Skylight and cannot monitor interactions. Logout of Skylight and try again.");
+      Toast.error(
+        'You are currently online in Skylight and cannot monitor interactions. Logout of Skylight and try again.'
+      );
     } else {
       return store.dispatch(monitorInteractionInitialization(this.props.interactionId, chosenExtension));
     }
@@ -242,7 +248,11 @@ export class MonitoringCell extends Component {
                     this.props.implicitDisable ||
                     this.props.monitoringStatus === 'sqsShutDown'
                   }
-                  onClick={e => this.showExtensionMenu(e, !this.state.showExtensionMenu)}
+                  onClick={e =>
+                    !this.props.extensions || this.props.extensions.length === 0
+                      ? this.props.showNoExtensionsWarning(e, true)
+                      : this.showExtensionMenu(e, !this.state.showExtensionMenu)
+                  }
                 >
                   Monitor
                 </MonitorCallButton>
@@ -259,7 +269,7 @@ export class MonitoringCell extends Component {
                       <LoadingSpinnerSVG size={28} color="white" />
                     </CenterWrapper>
                   )}
-                  {(!this.props.isUpdating && !this.props.loadingUserStatus) && extensionList}
+                  {!this.props.isUpdating && !this.props.loadingUserStatus && extensionList}
                 </PopoverMenu>
               </Fragment>
             )}
@@ -282,7 +292,8 @@ MonitoringCell.propTypes = {
   extensions: PropTypes.array,
   isUpdating: PropTypes.bool,
   canSilentMonitor: PropTypes.bool,
-  loadingUserStatus: PropTypes.bool
+  loadingUserStatus: PropTypes.bool,
+  showNoExtensionsWarning: PropTypes.func
 };
 MonitorFilter.propTypes = {
   tableType: PropTypes.string,

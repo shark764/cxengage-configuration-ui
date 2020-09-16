@@ -11,6 +11,7 @@ Object {
   "extensions": Array [],
   "getCurrentAgentId": "0000-0000-0000-0000",
   "insideIframe": false,
+  "isFetchingUserExtensions": false,
   "loadingUserStatus": false,
   "monitoredId": "0000-0000-0000-0000",
   "monitoringStatus": "mockStatus",

@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.83.2] - 2020-09-10
+### Added
+- CXV1-23088 - Show no extensions warning when a user with no extensions tries to monitor an interaction.
+
 ## [0.83.1] - 2020-07-09
 - <no-jira> - Fix to Navbar items not showing submenu when clicking them when language is not English
 

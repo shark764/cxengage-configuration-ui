@@ -36,3 +36,7 @@ export const userHasViewAllMonitoredCallsPermission = state =>
     getCurrentPermissions(state),
     selectInteractionMonitoringMap(state).get('viewAllMonitoredCallsPermission')
   );
+
+export const isFetchingUserExtensions = createSelector(selectInteractionMonitoringMap, subState =>
+  subState.get('isFetchingUserExtensions')
+);

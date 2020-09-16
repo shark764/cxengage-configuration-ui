@@ -44,7 +44,7 @@ export const reportingSubscriptionStarted = () => ({
 export default function InteractionMonitoring(state = initialState, action) {
   switch (action.type) {
     case 'SET_EXTENSION_LIST':
-      return state.set('extensions', fromJS(action.extensions));
+      return state.set('extensions', fromJS(action.extensions)).delete('isFetchingUserExtensions');
     case 'SET_TABLE_DATA':
       return state.set('data', fromJS(action.arrayOfTableData));
     case 'SET_SORTED':
@@ -58,6 +58,8 @@ export default function InteractionMonitoring(state = initialState, action) {
       return state.set('selected', action.selected).set('expanded', action.expanded);
     case 'REMOVE_SELECTED':
       return state.set('expanded', {}).set('selected', '');
+    case 'GET_USER_EXTENSIONS':
+      return state.set('isFetchingUserExtensions', true);
     default:
       return state;
   }
