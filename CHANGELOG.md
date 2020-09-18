@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.84.1] - 2020-09-18
+### Added
+- <no-Jira> - Renamed ContactAttributes & CustomAttributes unit tests folder from "test" to "tests".
+
 ## [0.84.0] - 2020-09-16
 ### Removed
 Removed the following changes:
