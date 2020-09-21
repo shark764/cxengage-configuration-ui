@@ -1159,11 +1159,17 @@ export default function reducer(state = initialState, action) {
         .setIn([state.get('currentEntity'), 'selectedSubEntityName'], action.subEntityName)
         .setIn([state.get('currentEntity'), 'selectedSubEntityData'], action.row);
     }
+    case 'VIEW_FLOW_DESIGNER_FULLFILED':{
+      return state
+            .setIn([state.get('currentEntity'), 'selectedSubEntityId'], undefined)
+            .deleteIn([state.get('currentEntity'), 'selectedSubEntityName'])
+            .deleteIn([state.get('currentEntity'), 'selectedSubEntityData']);
+    }
     case 'CREATE_FLOW_VERSION_DRAFT_FULFILLED': {
       if (action.selectedSubEntityId === 'drafts') {
         const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
         if (entityIndex !== -1) {
-          return state
+          return state 
             .update(action.entityName, entityStore =>
               entityStore
                 .updateIn(['data', entityIndex, 'drafts'], subEntityList =>

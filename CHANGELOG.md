@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.84.2] - 2020-08-28
+### Added & Fixed
+- CXV1-22988 - Config 2 - Build Flow page
+- <no-jira> Flow automation
+
 ## [0.84.1] - 2020-09-18
 ### Added
 - <no-Jira> - Renamed ContactAttributes & CustomAttributes unit tests folder from "test" to "tests".

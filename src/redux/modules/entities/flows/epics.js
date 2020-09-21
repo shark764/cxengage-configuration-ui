@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 
+import { createHashHistory } from 'history';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { sdkPromise } from '../../../../utils/sdk';
 import { handleSuccess, handleError } from '../handleResult';
@@ -21,6 +22,9 @@ import {
 } from '../selectors';
 import { change } from 'redux-form';
 import { getNewFlowDraftName } from './selectors';
+
+let history = createHashHistory();
+const iFrameDetection = window === window.parent ? false : true;
 
 export const FetchDataItem = (action$, store) =>
   action$
@@ -210,7 +214,7 @@ export const RemoveFlowDraft = (action$, store) =>
         .catch(error => handleError(error, a))
     );
 
-export const OpenFlowDesigner = action$ =>
+export const OpenFlowDesigner = (action$, store) =>
   action$
     .ofType('OPEN_FLOW_DESIGNER')
     .map(a => ({
@@ -224,12 +228,21 @@ export const OpenFlowDesigner = action$ =>
         }
       }
     }))
-    .concatMap(a =>
-      fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a, `You will be redirected to ${a.row.name}`))
-        .catch(error => handleError(error, a))
-    );
-
+    .map(a => {
+      if (iFrameDetection) {
+        fromPromise(sdkPromise(a.sdkCall))
+          .map(response => handleSuccess(response, a, `You will be redirected to ${a.row.name}`))
+          .catch(error => {
+            handleError(error, a, error);
+          });
+      } else {
+        const pathUrl = a.row.version
+          ? `/flows/viewer/${a.row.flowId}/${a.row.version}`
+          : `/flows/editor/${a.row.flowId}/${a.sdkCall.data.draftId}?id=${a.row.flowId}`;
+        history.push({ pathname: pathUrl });
+      }
+      return { ...a, type: 'VIEW_FLOW_DESIGNER_FULLFILED' };
+    });
 export const FocusCopyFlowDraftFormField = (action$, store) =>
   action$
     .ofType('@@redux-form/REGISTER_FIELD')

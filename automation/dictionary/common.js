@@ -34,7 +34,9 @@ const commonBehavior = {
       process.env.wdioRetries = parseInt(process.env.wdioRetries) + 1;
       dictionary = prepData.pages(process.env.wdioRetries);
       Brow.refresh();
-      this.login();
+      if(!Elem.selectTenantButton.isVisible()){
+        this.login();
+      }
       this.chooseTenant();
       this.navigationMainBar(entity);
     }
@@ -116,6 +118,7 @@ const commonBehavior = {
   },
   searchByNameAndClick(entity, searchValue) {
     var columnElement = new Element(`[data-automation="${dictionary[entity].whichCatagoryToSearch}"]`);
+    this.performEntitySpecificAction(entity,'filter');
     columnElement.clearElement();
     Brow.pause(1000);
     columnElement.setValue(searchValue);
@@ -159,7 +162,7 @@ const commonBehavior = {
         });
       }
       // for some reason when pause and scroll is not implemented sometimes after the submit it will cause the page to clear
-      const customEntities = ['List'];
+      const customEntities = ['List','Flow'];
       if (customEntities.includes(entity)) {
         Brow.pause(1000);
         $('button[data-automation="sdpanelSubmitButton"]').scroll();
@@ -179,6 +182,14 @@ const commonBehavior = {
           Elem.updateListItemButton.waitAndClick();
           subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
           Elem.modalSubmitButton.waitAndClick();
+        }else if (entity === 'Contact Layout') {
+          let updateButton = new Element(`button[data-automation="updateCategoryButton"]`, 1)
+          updateButton.waitAndClick();
+          subEntityFormParams.forEach(parameter => this.fillFormFields(parameter, entity));
+          Elem.modalSubmitButton.waitAndClick();
+          Brow.pause(1000);
+          Elem.sdpanelSubmitButton.waitForVisible();
+          Elem.sdpanelSubmitButton.waitAndClick();
         } else if (entity === 'Business Hour') {
           Elem.sdpanelAddItem.waitAndClick();
           Elem.dateDatePicker.waitForVisible();
@@ -213,17 +224,39 @@ const commonBehavior = {
   createEntity(entity, actionType) {
     dictionary[entity].specs[actionType].parametersToInsert.forEach(parameter => {
       Elem.entityCreateButton.waitAndClick();
+      this.performEntitySpecificAction(entity);
       Elem.sdpanelSubmitButton.waitForVisible();
       this.submitFormData(entity, actionType, parameter);
       this.verifyAction(entity, actionType);
-      this.closeToastr(entity, actionType);
-      this.verifyEntitySpecificAction(entity);
-      this.closeSidePanel(entity);
+      if(entity === 'Flow'){
+        this.closeToastr(entity, actionType);
+        Brow.pause(3000)
+        this.navigationMainBar(entity);
+        Brow.pause(3000)
+      }else{
+        this.closeToastr(entity, actionType);
+        this.verifyEntitySpecificAction(entity);
+        this.closeSidePanel(entity);
+      }
     });
   },
   updateEntity(entity, actionType) {
     dictionary[entity].specs[actionType].parametersToInsert.forEach((parameter, index) => {
       this.searchByNameAndClick(entity, dictionary[entity].updateSearchValue[index]);
+      if (entity === 'Flow') {
+        let flowId = Brow.getUrl().split('?id=').pop();
+        try {
+          Api.createFlowVersion(flowId);
+          Brow.pause(1000);
+          this.closeSidePanel(entity);
+          this.searchByNameAndClick(entity, dictionary[entity].updateSearchValue[index]);  
+        } catch(err){
+          throw new Error('Could not create flow version via api due to ' + err);
+        }
+        Brow.pause(2000);
+        this.closeSidePanel(entity);
+        this.searchByNameAndClick(entity, dictionary[entity].updateSearchValue[index]);
+      }
       this.submitFormData(entity, actionType, parameter);
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
@@ -376,6 +409,18 @@ const commonBehavior = {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
     }
   },
+  performEntitySpecificAction(entity,action=null){
+    if(entity === 'Contact Layout'){
+      if(action){
+        Elem.searchStatusColumnButton.waitAndClick();
+        Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
+      }
+      else if(!Elem.createListItemButton.isExisting()){
+        Elem.entityCreateButton.waitAndClick();
+        Elem.createListItemButton.waitForEnabled(3000);
+      }
+    }
+  },
   verifyEntitySpecificAction(entity) {
     if (entity === 'Api Key') {
       Elem.confirmationWrapper.waitForVisible();
@@ -425,7 +470,6 @@ const commonBehavior = {
   revertUpdate(entity, actionType) {
     if (entity === 'Email Template') {
       var columnElement = new Element(`.//span[text()="${dictionary[entity].updateSearchValue}"]`);
-      console.log(columnElement);
       columnElement.waitForVisible(30000, true);
       columnElement.waitAndClick();
       Elem.emailList.selectDropDownValue('byVisibleText', 'Default Email');

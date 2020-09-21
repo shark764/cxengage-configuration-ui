@@ -1,9 +1,9 @@
 const { cxapi: { Client } } = require('alonzo'),
     cx = new Client({
-        "user": "jwilliams@serenova.com",
-        "pass": "Password1!",
-        "environment": "dev",
-        "region": "us-east-1"
+        "user": process.env.CX_USERNAME,
+        "pass": process.env.CX_PASSWORD,
+        "environment": process.env.ENVIRONMENT,
+        "region": process.env.REGIONVAR
     });
 
 const Api = {
@@ -34,6 +34,12 @@ const Api = {
 	},
 	deleteChatWebIntegration(webIntegrationName, tenantId, timeOutInMs = 15000) {
 		browser.waitUntil(() => cx.chatWidget.deleteChatWebIntegration(webIntegrationName, tenantId), timeOutInMs);
+	},
+	createFlowVersion(flowId, timeOutInMs = 15000){
+		let params = { "tenantId": process.ENV.tenantId, "flowId": flowId, mediaId:"", queueId:"" };
+		let {version} = browser.waitUntil(() => cx.flows.createVersion(params), timeOutInMs);
+		params['activeVersion'] = version;
+		browser.waitUntil(() => cx.flows.setActiveVersion(params), timeOutInMs);
 	},
 	deleteAllSmoochAutomationWebIntegrations(webIntegrations) {
 		if (webIntegrations.length > 0) {

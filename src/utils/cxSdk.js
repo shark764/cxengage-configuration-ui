@@ -25,6 +25,7 @@ export function loadSdkConf() {
         blastSqsOutput: window.Config2Conf.blastSqsOutput,
         reportingRefreshRate: window.Config2Conf.refreshRate
       };
+      localStorage.setItem('ENV', window.Config2Conf.env);
       CxEngage.initialize(sdkConf);
     }
   });
@@ -39,6 +40,7 @@ export function cxInit() {
   if (window.location.hostname === 'localhost' || window.location.hostname.includes('ngrok')) {
     if (window.self === window.top && CxEngage.initialize) {
       const sdkConf = require('../env.json');
+      localStorage.setItem('ENV', sdkConf.environment);
       CxEngage.initialize(sdkConf);
     }
   } else {

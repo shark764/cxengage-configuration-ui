@@ -791,7 +791,6 @@ module.exports = {
         updateSearchValue: [`rName-${randomId}`],
         deleteSearchValue: `updatedKeyName-${randomId}`
       },
-      /*
       'Flow': {
         specs: {
           create: {
@@ -823,7 +822,6 @@ module.exports = {
         whichCatagoryToSearch: "searchNameColumn",
         updateSearchValue: [`dMapName-${randomId}`]
       },
-      */
       'Dispatch Mapping': {
         specs: {
           create: {
@@ -1051,7 +1049,7 @@ module.exports = {
         whichCatagoryToSearch: 'searchObjectNameColumn',
         updateSearchValue: [`attrName-${randomId}`]
       },
-      /*
+      
       'Contact Layout': {
         specs: {
           create: {
@@ -1094,9 +1092,9 @@ module.exports = {
           subMainBar: 'navigationLinkContactLayouts'
         },
         whichCatagoryToSearch: 'searchNameColumn',
-        updateSearchValue: [`layoutName-${randomId}`]
+        updateSearchValue: [`layoutName-${randomId}`],
+        statusColumnFilter: 'All'
       }
-      */
     };
   }
 };
