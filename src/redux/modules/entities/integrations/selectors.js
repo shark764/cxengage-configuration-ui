@@ -108,6 +108,20 @@ export const subEntityFormSubmission = (values, dispatch, props) => {
     // Since twilio Global Params does not have an endpoint to create and update, we handle the whole integration request here
     // So we dispatch onFormSubmit instaed of onIntegrationListenerFormSubmit to update the whole integration
     return dispatch(onFormSubmit(newState, props));
+  } else if (integrationType === 'salesforce') {
+    let newState, omniChannelPropertiesRequest;
+    if (values.get('listenerType') === 'omnichannel') {
+      // filters out email to case properties
+      const { properties: { topic, type, ...omniChannelProperties } } = values.toJS();
+      omniChannelProperties.routingTopics[0].channelType = 'work-item';
+      omniChannelPropertiesRequest = Object.assign({}, omniChannelProperties);
+      newState = values.set('properties', omniChannelPropertiesRequest);
+    } else {
+      // filters out omnichannel properties
+      const { properties: { routingTopics, agentWorkTopic, ...emailToCaseProperties } } = values.toJS();
+      newState = values.set('properties', emailToCaseProperties).delete('listenerType');
+    }
+    return dispatch(onIntegrationListenerFormSubmit(newState, props));
   } else {
     return dispatch(onIntegrationListenerFormSubmit(values, props));
   }
@@ -115,7 +129,8 @@ export const subEntityFormSubmission = (values, dispatch, props) => {
 
 export const selectIntegrationListenerFormInitialValues = state => {
   const selectedSubEntityId = getSelectedSubEntityId(state);
-  if (getCurrentFormValueByFieldName(state, 'type') === 'twilio') {
+  const integrationType = getCurrentFormValueByFieldName(state, 'type');
+  if (integrationType === 'twilio') {
     const globalDialParamFound = selectTwilioGlobalDialParams(state).find(
       globalDialParam => globalDialParam.key === selectedSubEntityId
     );
@@ -130,7 +145,15 @@ export const selectIntegrationListenerFormInitialValues = state => {
     });
   } else {
     return selectedSubEntityId === 'listeners'
-      ? new Map({ name: '', active: false })
+      ? new Map({
+          name: '',
+          active: false,
+          ...(integrationType === 'salesforce' && {
+            properties: new Map({
+              type: 'Case'
+            })
+          })
+        })
       : getSelectedEntity(state).get('listeners') &&
           getSelectedEntity(state)
             .get('listeners')

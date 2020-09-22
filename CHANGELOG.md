@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.85.0] - 2020-08-24
+### Changed
+- CXV1-22998 - Config 2 | Update listeners modal with new configs.
+
 ## [0.84.2] - 2020-08-28
 ### Added & Fixed
 - CXV1-22988 - Config 2 - Build Flow page
