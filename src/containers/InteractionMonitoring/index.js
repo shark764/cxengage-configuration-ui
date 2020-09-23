@@ -43,33 +43,31 @@ import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 import Layout from './layout';
 import { isInIframe } from 'serenova-js-utils/browser';
 
-export const mapStateToProps = (state, props) => {
-  return {
-    pageTitle: entitiesMetaData['interactionMonitoring'] ? entitiesMetaData['interactionMonitoring'].pageTitle : '',
-    pageHelpLink: getHelpLink(state),
-    getCurrentAgentId: getCurrentAgentId(state),
-    areAllColNotActive: areAllColNotActive(state, {
-      menuType: 'Columns',
-      tableType: 'interactionMonitoring'
-    }),
-    extensions: selectExtensions(state),
-    totalRatio: totalRatio(state, props),
-    activeColumns: selectInteractionMonitoringActiveColumns(state, props),
-    twelveHourFormat: selectTimeFormat(state, props),
-    tableData: selectInteractionMonitoringTableData(state, props),
-    expanded: selectInteractionMonitoringExpanded(state, props),
-    selected: selectInteractionMonitoringSelected(state, props),
-    sorted: selectInteractionMonitoringSorted(state, props),
-    monitoredId: selectSupervisorToolbarSilentMonitoringInteractionId(state, props),
-    monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props),
-    userHasViewAllMonitoredCallsPermission: userHasViewAllMonitoredCallsPermission(state),
-    userHasMonitorAllCallsPermission: userHasMonitorAllCallsPermission(state),
-    insideIframe: !isInIframe(),
-    canSilentMonitor: selectCanSilentMonitor(state),
-    loadingUserStatus: selectLoadingUserStatus(state),
-    isFetchingUserExtensions: isFetchingUserExtensions(state)
-  };
-};
+export const mapStateToProps = (state, props) => ({
+  pageTitle: entitiesMetaData['interactionMonitoring'] ? entitiesMetaData['interactionMonitoring'].pageTitle : '',
+  pageHelpLink: getHelpLink(state),
+  getCurrentAgentId: getCurrentAgentId(state),
+  areAllColNotActive: areAllColNotActive(state, {
+    menuType: 'Columns',
+    tableType: 'interactionMonitoring'
+  }),
+  extensions: selectExtensions(state),
+  totalRatio: totalRatio(state, props),
+  activeColumns: selectInteractionMonitoringActiveColumns(state, props),
+  twelveHourFormat: selectTimeFormat(state, props),
+  tableData: selectInteractionMonitoringTableData(state, props),
+  expanded: selectInteractionMonitoringExpanded(state, props),
+  selected: selectInteractionMonitoringSelected(state, props),
+  sorted: selectInteractionMonitoringSorted(state, props),
+  monitoredId: selectSupervisorToolbarSilentMonitoringInteractionId(state, props),
+  monitoringStatus: selectSupervisorToolbarSilentMonitoringStatus(state, props),
+  userHasViewAllMonitoredCallsPermission: userHasViewAllMonitoredCallsPermission(state),
+  userHasMonitorAllCallsPermission: userHasMonitorAllCallsPermission(state),
+  insideIframe: !isInIframe(),
+  canSilentMonitor: selectCanSilentMonitor(state),
+  loadingUserStatus: selectLoadingUserStatus(state),
+  isFetchingUserExtensions: isFetchingUserExtensions(state)
+});
 
 export const actions = {
   toggleTimeFormat,

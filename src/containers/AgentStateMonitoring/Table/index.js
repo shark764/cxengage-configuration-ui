@@ -3,7 +3,7 @@ import {
   selectAgentStateMonitoringActiveColumns,
   areAllColNotActive,
   selectVisibleSubMenu,
-  activeMenuItemsJs,
+  activeMenuItems,
   areAllActive,
   isAllOptionActive
 } from '../../../redux/modules/columnFilterMenus/selectors';
@@ -41,10 +41,10 @@ export const mapStateToProps = (state, props) => ({
   activeColumns: selectAgentStateMonitoringActiveColumns(state, props),
   currentVisibleSubMenu: selectVisibleSubMenu(state, props),
   filterValues: {
-    channelTypes: activeMenuItemsJs(state, { ...props, menuType: 'ChannelType' }),
-    skills: activeMenuItemsJs(state, { ...props, menuType: 'Skills' }),
-    groups: activeMenuItemsJs(state, { ...props, menuType: 'Groups' }),
-    reasons: activeMenuItemsJs(state, { ...props, menuType: 'ReasonLists' })
+    channelTypes: activeMenuItems(state, { ...props, menuType: 'ChannelType' }).toJS(),
+    skills: activeMenuItems(state, { ...props, menuType: 'Skills' }).toJS(),
+    groups: activeMenuItems(state, { ...props, menuType: 'Groups' }).toJS(),
+    reasons: activeMenuItems(state, { ...props, menuType: 'ReasonLists' }).toJS()
   },
   allActive: {
     channelTypes: areAllActive(state, { ...props, menuType: 'ChannelType' }),

@@ -29,9 +29,7 @@ export const menuItemsJs = createSelector([menuItems], menuItems => {
   return menuItems.toJS();
 });
 
-export const activeMenuItemsJs = createSelector([menuItems], menuItems =>
-  menuItems.filter(item => item.get('active')).toJS()
-);
+export const activeMenuItems = createSelector([menuItems], menuItems => menuItems.filter(item => item.get('active')));
 
 const menu = (state, props) => {
   if (props.tableType && props.tableType !== undefined) {
