@@ -7,14 +7,18 @@ import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import InteractionMonitoring, { mapStateToProps } from '../';
 import { getCurrentEntity } from '../../../redux/modules/entities/selectors';
+import { List } from 'immutable';
 jest.mock('../../../redux/store.js', () => jest.fn());
 
 // Mock all the required selectors
+const mockImmutableList = new List();
 jest.mock('../../../redux/modules/columnFilterMenus/selectors', () => ({
   selectInteractionMonitoringActiveColumns: () => [true],
   areAllColNotActive: () => false,
   selectTimeFormat: () => true,
-  totalRatio: () => []
+  totalRatio: () => [],
+  activeMenuItems: () => mockImmutableList,
+  areAllActive: () => false
 }));
 jest.mock('../../../redux/modules/reporting/interactionMonitoring/selectors', () => ({
   selectInteractionMonitoringTableData: () => ({ item1: '', item2: '' }),

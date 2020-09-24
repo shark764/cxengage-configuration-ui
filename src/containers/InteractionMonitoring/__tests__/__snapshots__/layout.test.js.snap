@@ -181,37 +181,23 @@ exports[`Interaction Monitoring Layout renders all columns , all columns are act
         },
         Object {
           "Cell": [Function],
-          "Filter": <Connect(CheckboxMenu)
-            buttonType="columnFilter"
-            menuType="Groups"
-            selectionType="checkbox"
-            tableType="interactionMonitoring"
-          >
-            Groups
-          </Connect(CheckboxMenu)>,
+          "Filter": [Function],
           "Header": "Groups",
           "accessor": [Function],
-          "filterable": true,
+          "filterMethod": [Function],
           "id": "groups",
-          "minWidth": 190,
+          "minWidth": 140,
           "show": true,
           "sortable": false,
         },
         Object {
           "Cell": [Function],
-          "Filter": <Connect(CheckboxMenu)
-            buttonType="columnFilter"
-            menuType="Skills"
-            selectionType="checkbox"
-            tableType="interactionMonitoring"
-          >
-            Skills
-          </Connect(CheckboxMenu)>,
+          "Filter": [Function],
           "Header": "Skills",
           "accessor": [Function],
-          "filterable": true,
+          "filterMethod": [Function],
           "id": "skills",
-          "minWidth": 190,
+          "minWidth": 130,
           "show": true,
           "sortable": false,
         },

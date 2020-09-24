@@ -6,39 +6,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CheckboxFilterMenu from '../../containers/CheckboxFilterMenu';
 
-export default function(value, tableType) {
-  const column = {
+export const helperFunctions = {
+  groupsFilter: (onChange, tableType, allActive) => groupsFilter(onChange, tableType, allActive),
+  filterMethod: ({ value = 'All' }, { _original }, filterValues, allActive) => {
+    const groups = _original.agents[0].groups;
+    return value === 'All' || allActive
+      ? allActive
+      : groups.filter(group => filterValues.map(({ id }) => id).includes(group.groupId)).length > 0;
+  }
+};
+
+export default function(groups, tableType, filterValues, allActive) {
+  const groupsColumn = {
     Header: 'Groups',
-    show: value,
-    filterable: true,
+    show: groups,
     sortable: false,
-    Filter: groupsFilter(tableType),
     id: 'groups',
-    minWidth: 190,
-    accessor: d => {
-      let groupArray = [];
-      d.agents.forEach(agent =>
-        agent.groups.forEach(group => {
-          if (groupArray.indexOf(group.groupName) === -1) {
-            groupArray.push(group.groupName);
-          }
-        })
-      );
-      return groupArray.join(', ');
-    },
-    Cell: ({ value }) => <span title={value}>{value}</span>
+    minWidth: 140,
+    accessor: d => d.agents[0].groups.map(group => group.groupName).join(', '),
+    filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row, filterValues, allActive),
+    Filter: ({ onChange }) => helperFunctions.groupsFilter(onChange, tableType, allActive),
+    Cell: ({ value }) =>
+      value ? (
+        <span title={value}>{value}</span>
+      ) : (
+        <div style={{ textAlign: 'center' }}>
+          <span>--</span>
+        </div>
+      )
   };
 
-  column.Cell.propTypes = {
-    value: PropTypes.any
-  };
+  groupsColumn.Cell.propTypes = { value: PropTypes.any };
 
-  return column;
+  return groupsColumn;
 }
 
-export function groupsFilter(tableType) {
+export function groupsFilter(onChange, tableType, allActive) {
   return (
-    <CheckboxFilterMenu menuType="Groups" tableType={tableType} buttonType="columnFilter" selectionType="checkbox">
+    <CheckboxFilterMenu
+      menuType="Groups"
+      tableType={tableType}
+      buttonType="columnFilter"
+      selectionType="checkbox"
+      updateFilter={onChange}
+      hasActiveFilter={!allActive}
+    >
       Groups
     </CheckboxFilterMenu>
   );

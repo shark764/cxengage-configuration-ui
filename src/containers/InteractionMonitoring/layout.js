@@ -187,8 +187,18 @@ export default class InteractionMonitoring extends Component {
               startDateColumn(this.props.activeColumns[8], 'interactionMonitoring'),
               startTimeColumn(this.props.activeColumns[9], 'interactionMonitoring', this.props.twelveHourFormat),
               elapsedTimeColumn(this.props.activeColumns[10], 'interactionMonitoring'),
-              groupsColumn(this.props.activeColumns[12], 'interactionMonitoring'),
-              skillsColumn(this.props.activeColumns[13], 'interactionMonitoring'),
+              groupsColumn(
+                this.props.activeColumns[12],
+                'interactionMonitoring',
+                this.props.activeGroupFilters,
+                this.props.groupsAreAllActive
+              ),
+              skillsColumn(
+                this.props.activeColumns[13],
+                'interactionMonitoring',
+                this.props.activeSkillFilters,
+                this.props.skillsAreAllActive
+              ),
               monitoringColumn(
                 this.props.activeColumns[11],
                 'interactionMonitoring',
@@ -250,5 +260,9 @@ InteractionMonitoring.propTypes = {
   extensions: PropTypes.array,
   canSilentMonitor: PropTypes.bool,
   loadingUserStatus: PropTypes.bool,
+  activeGroupFilters: PropTypes.array,
+  activeSkillFilters: PropTypes.array,
+  skillsAreAllActive: PropTypes.bool,
+  groupsAreAllActive: PropTypes.bool,
   isFetchingUserExtensions: PropTypes.bool
 };

@@ -8,7 +8,7 @@ exports[`groups table column Cell returns the value wrapped in a span 1`] = `
 </span>
 `;
 
-exports[`groups table column accessor returns groups names as a string seperated by commas 1`] = `"mockSkill1, mockSkill2, mockSkill3, mockSkill4, mockSkill5, mockSkill6"`;
+exports[`groups table column accessor returns groups names as a string seperated by commas 1`] = `"mockSkill1, mockSkill2"`;
 
 exports[`groups table column accessor returns groups names as a string seperated by commas avoiding duplicate groups from multiple agents 1`] = `"mockSkill1, mockSkill2"`;
 
@@ -17,19 +17,12 @@ exports[`groups table column accessor returns single skill name with no comma 1`
 exports[`groups table column function returns correct object 1`] = `
 Object {
   "Cell": [Function],
-  "Filter": <Connect(CheckboxMenu)
-    buttonType="columnFilter"
-    menuType="Groups"
-    selectionType="checkbox"
-    tableType="mockTableType"
-  >
-    Groups
-  </Connect(CheckboxMenu)>,
+  "Filter": [Function],
   "Header": "Groups",
   "accessor": [Function],
-  "filterable": true,
+  "filterMethod": [Function],
   "id": "groups",
-  "minWidth": 190,
+  "minWidth": 140,
   "show": "groups",
   "sortable": false,
 }

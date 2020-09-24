@@ -49,7 +49,7 @@ export const UpdateStatSubscriptionFilters = (action$, store) =>
     .ofType(...ColumnRelatedActions)
     .filter(
       ({ menuType }) =>
-        getCurrentEntity(store.getState()) === 'InteractionMonitoring' &&
+        getCurrentEntity(store.getState()) === 'interactionMonitoring' &&
         (menuType === 'Skills' || menuType === 'Groups')
     )
     .map(action => ({
@@ -103,7 +103,7 @@ export const UpdateSkillsAndGroupsFilter = (action$, store) =>
     }))
     .filter(
       ({ entityName, currentEntity }) =>
-        (currentEntity === 'InteractionMonitoring' || currentEntity === 'agentStateMonitoring') &&
+        (currentEntity === 'interactionMonitoring' || currentEntity === 'agentStateMonitoring') &&
         (entityName === 'groups' || entityName === 'skills' || entityName === 'reasonLists')
     )
     .map(a => {

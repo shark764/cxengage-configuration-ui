@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.85.2] - 2020-09-23
+### Fixed
+- CXV1-22802 - Interaction Monitoring - Groups and Skills filters are not populated
+
 ## [0.85.1] - 2020-09-22
 ### Fixed
 - <no-jira> - Fix AgentStateMonitoring saved filters not applying on reload.

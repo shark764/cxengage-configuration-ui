@@ -3,7 +3,9 @@ import {
   selectInteractionMonitoringActiveColumns,
   areAllColNotActive,
   selectTimeFormat,
-  totalRatio
+  totalRatio,
+  activeMenuItems,
+  areAllActive
 } from '../../redux/modules/columnFilterMenus/selectors';
 import { setCurrentEntity, fetchData } from '../../redux/modules/entities';
 import {
@@ -43,14 +45,20 @@ import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 import Layout from './layout';
 import { isInIframe } from 'serenova-js-utils/browser';
 
+const TABLE_TYPE = 'interactionMonitoring';
+
 export const mapStateToProps = (state, props) => ({
-  pageTitle: entitiesMetaData['interactionMonitoring'] ? entitiesMetaData['interactionMonitoring'].pageTitle : '',
+  pageTitle: entitiesMetaData[TABLE_TYPE] ? entitiesMetaData[TABLE_TYPE].pageTitle : '',
   pageHelpLink: getHelpLink(state),
   getCurrentAgentId: getCurrentAgentId(state),
   areAllColNotActive: areAllColNotActive(state, {
     menuType: 'Columns',
-    tableType: 'interactionMonitoring'
+    tableType: TABLE_TYPE
   }),
+  activeGroupFilters: activeMenuItems(state, { tableType: TABLE_TYPE, menuType: 'Groups' }).toJS(),
+  activeSkillFilters: activeMenuItems(state, { tableType: TABLE_TYPE, menuType: 'Skills' }).toJS(),
+  groupsAreAllActive: areAllActive(state, { tableType: TABLE_TYPE, menuType: 'Groups' }),
+  skillsAreAllActive: areAllActive(state, { tableType: TABLE_TYPE, menuType: 'Skills' }),
   extensions: selectExtensions(state),
   totalRatio: totalRatio(state, props),
   activeColumns: selectInteractionMonitoringActiveColumns(state, props),

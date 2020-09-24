@@ -27,13 +27,10 @@ const mockGroups = [
   { active: false, groupId: '003' }
 ];
 const mockTable = {
-  Columns: [
-    { name: 'Groups', active: true },
-    { name: 'Skills', active: false }
-  ],
+  Columns: [{ name: 'Groups', active: true }, { name: 'Skills', active: false }],
   Groups: mockGroups,
   Skills: mockSkills
-}
+};
 const testState = {
   ColumnFilterMenus: {
     interactionMonitoring: mockTable
@@ -44,7 +41,7 @@ selectSkills.mockReturnValue(mockSkills);
 selectGroups.mockReturnValue(mockGroups);
 selectTable.mockReturnValue(fromJS(mockTable));
 jest.mock('../../entities/selectors');
-getCurrentEntity.mockReturnValue('InteractionMonitoring');
+getCurrentEntity.mockReturnValue('interactionMonitoring');
 
 describe('SaveColumnsToLocalStorage', () => {
   it('localstorage is updated on column changes', done => {

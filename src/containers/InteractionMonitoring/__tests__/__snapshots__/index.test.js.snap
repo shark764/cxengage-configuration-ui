@@ -5,11 +5,14 @@ Object {
   "activeColumns": Array [
     true,
   ],
+  "activeGroupFilters": Array [],
+  "activeSkillFilters": Array [],
   "areAllColNotActive": false,
   "canSilentMonitor": true,
   "expanded": Object {},
   "extensions": Array [],
   "getCurrentAgentId": "0000-0000-0000-0000",
+  "groupsAreAllActive": false,
   "insideIframe": false,
   "isFetchingUserExtensions": false,
   "loadingUserStatus": false,
@@ -18,6 +21,7 @@ Object {
   "pageHelpLink": undefined,
   "pageTitle": "Interaction Monitoring",
   "selected": "conected",
+  "skillsAreAllActive": false,
   "sorted": true,
   "tableData": Object {
     "item1": "",
