@@ -34,7 +34,13 @@ const initialState = fromJS({
     readPermission: ['MANAGE_ALL_USER_STATE', 'MANAGE_ALL_USERS_DIRECTION']
   },
   identityProviders: {
-    ...defaultEntity
+    ...defaultEntity,
+    readPermission: ['IDENTITY_PROVIDERS_CREATE'],
+    updatePermission: ['IDENTITY_PROVIDERS_UPDATE'],
+    createPermission: ['IDENTITY_PROVIDERS_CREATE'],
+    deletePermission: ['IDENTITY_PROVIDERS_DELETE'],
+    disablePermission: [''],
+    sharePermission: ['']
   },
   lists: {
     ...defaultEntity,

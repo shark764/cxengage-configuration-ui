@@ -832,6 +832,17 @@ entities.tenants.updateFormDependencies.push(
   'timezones'
 );
 
+//Identity Providers
+entities.identityProviders.pageTitle = 'Identity Providers';
+entities.identityProviders.helpLink = '/Help/Content/Configuration/SSO/IdentityProviders.htm';
+entities.identityProviders.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Status', active: true }
+];
+entities.identityProviders.bulkEditsAvailable = true;
+entities.identityProviders.sdkCall.path = ['identity-providers'];
+
 // Disposition Lists
 entities.dispositionLists.pageTitle = 'Disposition List Management';
 entities.dispositionLists.helpLink = '/Help/Content/Managing%20Flows/Dispositions/Creating_Disposition_Lists.htm';

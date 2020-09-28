@@ -183,6 +183,13 @@ export default class Navigation extends Component {
                   <FormattedMessage id="navigation.configuration.tenants" defaultMessage="Tenants" />
                 </StyledLink>
                 <StyledLink
+                  data-automation="navigationLinkIdentityProviders"
+                  to="/configuration/identityProviders"
+                  onClick={e => this.setCurrentEntityAndEntityId('identityProviders', e)}
+                >
+                  <FormattedMessage id="navigation.configuration.identityProviders" defaultMessage="Identity Providers" />
+                </StyledLink>
+                <StyledLink
                   data-automation="navigationLinkIntegrations"
                   to="/configuration/integrations"
                   onClick={e => this.setCurrentEntityAndEntityId('integrations', e)}

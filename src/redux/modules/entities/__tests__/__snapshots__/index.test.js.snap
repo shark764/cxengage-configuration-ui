@@ -275,10 +275,28 @@ Immutable.Map {
     ],
   },
   "identityProviders": Immutable.Map {
+    "readPermission": Immutable.List [
+      "IDENTITY_PROVIDERS_CREATE",
+    ],
     "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "IDENTITY_PROVIDERS_CREATE",
+    ],
+    "sharePermission": Immutable.List [
+      "",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "",
+    ],
+    "updatePermission": Immutable.List [
+      "IDENTITY_PROVIDERS_UPDATE",
+    ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
-    "confirmationDialogType": undefined,
+    "deletePermission": Immutable.List [
+      "IDENTITY_PROVIDERS_DELETE",
+    ],
   },
   "flows": Immutable.Map {
     "readPermission": Immutable.List [

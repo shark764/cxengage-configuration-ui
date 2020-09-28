@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.86.0] - 2020-09-22
+### Added
+- CXV1-18675 - Config 2 | Identity Providers - Main List.
+
 ## [0.85.2] - 2020-09-23
 ### Fixed
 - CXV1-22802 - Interaction Monitoring - Groups and Skills filters are not populated

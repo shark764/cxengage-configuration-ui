@@ -1960,7 +1960,20 @@ Object {
     "betaFeature": false,
     "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
-    "columns": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -1988,7 +2001,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Configuration/SSO/IdentityProviders.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -2003,6 +2016,9 @@ Object {
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",
+      "path": Array [
+        "identity-providers",
+      ],
     },
     "sidePanelListTableFields": Array [
       Object {

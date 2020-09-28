@@ -12,11 +12,13 @@ const initialState = fromJS({
         {
           id: 'mockId1',
           name: 'mockName1',
+          description: 'mockDesc1',
           active: true
         },
         {
           id: 'mockId2',
           name: 'mockName2',
+          description: 'mockDesc2',
           active: false
         }
       ],
