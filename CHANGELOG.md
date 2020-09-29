@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.87.0] - 2020-09-28
+### Added
+- CXV1-23143 - Integrations2 status in main pane / status toggle not updating when integration is enabled or disabled.
+
 ## [0.86.0] - 2020-09-22
 ### Added
 - CXV1-18675 - Config 2 | Identity Providers - Main List.
