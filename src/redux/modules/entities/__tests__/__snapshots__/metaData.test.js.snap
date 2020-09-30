@@ -2064,12 +2064,7 @@ Object {
     "createFormDependencies": Array [],
     "defaultAssociationFilters": Array [],
     "defaultDependentEntityFilters": Array [],
-    "defaultFilters": Array [
-      Object {
-        "id": "active",
-        "value": "enabled",
-      },
-    ],
+    "defaultFilters": Array [],
     "defaultSorted": Array [
       Object {
         "alpha": true,

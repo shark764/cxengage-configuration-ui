@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.87.1] - 2020-09-29
+### Added
+- CXV1-23144 - Integrations "Status" column should be set to "all" by default.
+
 ## [0.87.0] - 2020-09-28
 ### Added
 - CXV1-23143 - Integrations2 status in main pane / status toggle not updating when integration is enabled or disabled.

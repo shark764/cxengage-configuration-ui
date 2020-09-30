@@ -895,17 +895,14 @@ entities.integrations.columns = [
   { name: 'Description', active: true },
   { name: 'Status', active: true }
 ];
-entities.integrations.defaultFilters = [{ id: 'active', value: 'enabled' }];
+entities.integrations.defaultFilters = [];
 entities.integrations.membersTableFields = {
   listeners: [
     { label: 'Name', name: 'name' },
     { label: 'Status', name: 'active', type: 'select', filterOptions: ['enabled', 'disabled'] },
     { label: 'Created On', name: 'created', format: 'datetime' }
   ],
-  globalDialParams: [
-    { label: 'Key', name: 'key' },
-    { label: 'Value', name: 'value' }
-  ]
+  globalDialParams: [{ label: 'Key', name: 'key' }, { label: 'Value', name: 'value' }]
 };
 
 // Custom Attributes

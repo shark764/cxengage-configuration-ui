@@ -31,7 +31,7 @@ export default class Flows extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     let id = this.props.match.params.id;
-    if (prevState.id !== undefined && prevState.id != id) {
+    if (prevState.id !== undefined && prevState.id !== id) {
       this.resetIframe(id);
     }
   }
