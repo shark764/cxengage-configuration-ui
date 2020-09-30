@@ -75,7 +75,15 @@ export const CreateIntegrationListenerFormSubmission = (action$, store) =>
     })
     .concatMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response => handleSuccess(response, a, `A new listener for this Integration was created successfully!`))
+        .map(response =>
+          handleSuccess(
+            response,
+            a,
+            a.subEntityId === 'listeners'
+              ? `A new listener for this Integration was created successfully!`
+              : `<i>Listener</i> was updated successfully!`
+          )
+        )
         .catch(error => handleError(error, a))
     );
 

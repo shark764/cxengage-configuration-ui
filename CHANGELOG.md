@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.87.2] - 2020-09-29
+### Added
+- CXV1-23145 - Updating Existing Salesforce Listener shows "Created Successfully" message.
+
 ## [0.87.1] - 2020-09-29
 ### Added
 - CXV1-23144 - Integrations "Status" column should be set to "all" by default.
