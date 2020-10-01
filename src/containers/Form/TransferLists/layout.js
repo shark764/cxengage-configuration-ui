@@ -12,6 +12,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { DetailHeader, InputField, TransferListField } from 'cx-ui-components';
+import DetailWrapper from '../../../components/DetailWrapper';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
 
 const TransferListContainer = styled.div`
   font-size: 14px;
@@ -51,50 +61,57 @@ export default function TransferListsForm({
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
-      <InputField
-        name="name"
-        label="Name *"
-        componentType="input"
-        inputType="text"
-        data-automation="nameInput"
-        disabled={isSaving || !userHasUpdatePermission}
-      />
-      <InputField
-        name="description"
-        label="Description"
-        componentType="textarea"
-        inputType="text"
-        data-automation="descriptionInput"
-        disabled={isSaving || !userHasUpdatePermission}
-      />
-      <DetailHeader
-        userHasUpdatePermission={userHasUpdatePermission}
-        text="Contacts"
-        onActionButtonClick={() => setSelectedSubEntityId('create')}
-        open
-      />
-      <TransferListContainer>
-        <TransferListHeadingWrapper>
-          <CategoryTitle>Category Name</CategoryTitle>
-          <CategoryTitle>Contact Name</CategoryTitle>
-          <CategoryTitle>Contact Type</CategoryTitle>
-          <ActionsTitle>Actions</ActionsTitle>
-        </TransferListHeadingWrapper>
-        <TransferListField
-          className="transfer-lists"
-          name="endpoints"
-          entityName="transferLists"
-          endpointHeaders={endpointHeaders}
-          selectedEntityId={selectedEntityId}
-          removeCategoryItems={removeCategoryItems}
-          setSelectedSubEntityId={setSelectedSubEntityId}
-          removeTransferListItem={removeTransferListItem}
+      <Wrapper>
+        <DetailWrapper open data-automation="transferListsDetailsSVG">
+          <WrappedDetailHeader text="Details" />
+          <InputField
+            name="name"
+            label="Name *"
+            componentType="input"
+            inputType="text"
+            data-automation="nameInput"
+            disabled={isSaving || !userHasUpdatePermission}
+          />
+          <InputField
+            name="description"
+            label="Description"
+            componentType="textarea"
+            inputType="text"
+            data-automation="descriptionInput"
+            disabled={isSaving || !userHasUpdatePermission}
+          />
+        </DetailWrapper>
+      </Wrapper>
+
+      <DetailWrapper open data-automation="transferListsSVG">
+        <WrappedDetailHeader
           userHasUpdatePermission={userHasUpdatePermission}
-          allowUpdateCategory={true}
-          allowUpdateItem={true}
-          data-automation="endpointsTransferList"
+          text="Contacts"
+          onActionButtonClick={() => setSelectedSubEntityId('create')}
         />
-      </TransferListContainer>
+        <TransferListContainer>
+          <TransferListHeadingWrapper>
+            <CategoryTitle>Category Name</CategoryTitle>
+            <CategoryTitle>Contact Name</CategoryTitle>
+            <CategoryTitle>Contact Type</CategoryTitle>
+            <ActionsTitle>Actions</ActionsTitle>
+          </TransferListHeadingWrapper>
+          <TransferListField
+            className="transfer-lists"
+            name="endpoints"
+            entityName="transferLists"
+            endpointHeaders={endpointHeaders}
+            selectedEntityId={selectedEntityId}
+            removeCategoryItems={removeCategoryItems}
+            setSelectedSubEntityId={setSelectedSubEntityId}
+            removeTransferListItem={removeTransferListItem}
+            userHasUpdatePermission={userHasUpdatePermission}
+            allowUpdateCategory={true}
+            allowUpdateItem={true}
+            data-automation="endpointsTransferList"
+          />
+        </TransferListContainer>
+      </DetailWrapper>
     </form>
   );
 }

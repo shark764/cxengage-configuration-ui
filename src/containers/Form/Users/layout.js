@@ -76,7 +76,7 @@ export default function UsersForm({
   return (
     <form onSubmit={handleSubmit} key={key}>
       <Wrapper>
-        <DetailWrapper open={true} data-automation="platformDetailsSVG">
+        <DetailWrapper open data-automation="platformDetailsSVG">
           <WrappedDetailHeader text="Platform Details" />
           <InputField
             className="frm-users-firstname"
@@ -109,7 +109,7 @@ export default function UsersForm({
           />
         </DetailWrapper>
 
-        <DetailWrapper open={true} data-automation="loginDetailsSVG">
+        <DetailWrapper open data-automation="loginDetailsSVG">
           <WrappedDetailHeader text="Login Details" />
           <Detail label="Email" value={initialValues.get('email')} />
           <Detail label="Platform Status" value={platformStatus(initialValues.get('invitationStatus'))} />
@@ -224,7 +224,7 @@ export default function UsersForm({
             )}
         </DetailWrapper>
 
-        <DetailWrapper open={true} data-automation="tenantDetailsSVG">
+        <DetailWrapper open data-automation="tenantDetailsSVG">
           <WrappedDetailHeader text="Tenant Details" />
           <InputField
             className="frm-users-workstation-id"
@@ -248,7 +248,7 @@ export default function UsersForm({
             )}
         </DetailWrapper>
 
-        <DetailWrapper open={true} data-automation="extensionsSVG">
+        <DetailWrapper open data-automation="extensionsSVG">
           <WrappedDetailHeader
             text="Extensions"
             userHasUpdatePermission={userHasUpdatePermission}
@@ -289,7 +289,7 @@ export default function UsersForm({
         </DetailWrapper>
 
         {userHasNameSet && (
-          <DetailWrapper open={true} data-automation="capacityRuleSVG">
+          <DetailWrapper open data-automation="capacityRuleSVG">
             <WrappedDetailHeader text="Capacity Rule" />
             <SelectField
               className="users-form-capacity-rule"

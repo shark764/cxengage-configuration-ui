@@ -16,7 +16,7 @@ import {
   getEntityParentTenantName,
   isSystemRole
 } from '../../../../redux/modules/entities/selectors';
-import { getEntityListMembers, getListSize } from '../../../../redux/modules/entities/listItemSelectors';
+import { getEntityListMembers } from '../../../../redux/modules/entities/listItemSelectors';
 import { setSelectedSubEntityId, removeListItem } from '../../../../redux/modules/entities';
 import { isUserPlatformAdmin } from '../../../../redux/modules/entities/users/selectors';
 
@@ -45,7 +45,6 @@ isUserPlatformAdmin.mockImplementation(() => false);
 
 jest.mock('../../../../redux/modules/entities/listItemSelectors');
 getEntityListMembers.mockImplementation(() => ['mockListMembers']);
-getListSize.mockImplementation(() => 0);
 
 jest.mock('../../../../redux/modules/entities');
 removeListItem.mockImplementation(() => 'mockId');

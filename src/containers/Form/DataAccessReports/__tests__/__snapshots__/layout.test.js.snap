@@ -4,81 +4,93 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Report"
-  />
-  <RadioGroupField
-    data-automation="reportTypeRadio"
-    disabled={false}
-    id="frm-data-access-reports-report-type"
-    label="Type *"
-    name="reportType"
-    options={
-      Array [
-        Object {
-          "label": "Realtime",
-          "value": "realtime",
-        },
-        Object {
-          "label": "Historical",
-          "value": "historical",
-        },
-      ]
-    }
-    required={true}
-  />
-  <React.Fragment>
-    <RadioGroupField
-      data-automation="realtimeReportTypeRadio"
-      disabled={false}
-      id="frm-data-access-reports-realtime-report-type"
-      label="Realtime Report Type *"
-      name="realtimeReportType"
-      options={
-        Array [
-          Object {
-            "label": "Standard",
-            "value": "standard",
-          },
-          Object {
-            "label": "Custom",
-            "value": "custom",
-          },
-        ]
-      }
-      required={true}
-    />
-    <AutoCompleteField
-      data-automation="realtimeReportAutoComplete"
-      disabled={false}
-      id="frm-data-access-reports-realtime-report-name"
-      label="Realtime Report *"
-      name="realtimeReportName"
-      placeholder="Search..."
-      suggestions={Array []}
-    />
-  </React.Fragment>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-data-access-reports-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-data-access-reports-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Report"
+      />
+      <RadioGroupField
+        data-automation="reportTypeRadio"
+        disabled={false}
+        id="frm-data-access-reports-report-type"
+        label="Type *"
+        name="reportType"
+        options={
+          Array [
+            Object {
+              "label": "Realtime",
+              "value": "realtime",
+            },
+            Object {
+              "label": "Historical",
+              "value": "historical",
+            },
+          ]
+        }
+        required={true}
+      />
+      <React.Fragment>
+        <RadioGroupField
+          data-automation="realtimeReportTypeRadio"
+          disabled={false}
+          id="frm-data-access-reports-realtime-report-type"
+          label="Realtime Report Type *"
+          name="realtimeReportType"
+          options={
+            Array [
+              Object {
+                "label": "Standard",
+                "value": "standard",
+              },
+              Object {
+                "label": "Custom",
+                "value": "custom",
+              },
+            ]
+          }
+          required={true}
+        />
+        <AutoCompleteField
+          data-automation="realtimeReportAutoComplete"
+          disabled={false}
+          id="frm-data-access-reports-realtime-report-name"
+          label="Realtime Report *"
+          name="realtimeReportName"
+          placeholder="Search..."
+          suggestions={Array []}
+        />
+      </React.Fragment>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -86,59 +98,71 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Report"
-  />
-  <RadioGroupField
-    data-automation="reportTypeRadio"
-    disabled={false}
-    id="frm-data-access-reports-report-type"
-    label="Type *"
-    name="reportType"
-    options={
-      Array [
-        Object {
-          "label": "Realtime",
-          "value": "realtime",
-        },
-        Object {
-          "label": "Historical",
-          "value": "historical",
-        },
-      ]
-    }
-    required={true}
-  />
-  <AutoCompleteField
-    data-automation="historicalReportAutoComplete"
-    disabled={false}
-    id="frm-data-access-reports-historical-catalog-name"
-    label="Historical Reports Folder *"
-    name="historicalCatalogName"
-    placeholder="Search..."
-    suggestions={Array []}
-  />
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-data-access-reports-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-data-access-reports-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Report"
+      />
+      <RadioGroupField
+        data-automation="reportTypeRadio"
+        disabled={false}
+        id="frm-data-access-reports-report-type"
+        label="Type *"
+        name="reportType"
+        options={
+          Array [
+            Object {
+              "label": "Realtime",
+              "value": "realtime",
+            },
+            Object {
+              "label": "Historical",
+              "value": "historical",
+            },
+          ]
+        }
+        required={true}
+      />
+      <AutoCompleteField
+        data-automation="historicalReportAutoComplete"
+        disabled={false}
+        id="frm-data-access-reports-historical-catalog-name"
+        label="Historical Reports Folder *"
+        name="historicalCatalogName"
+        placeholder="Search..."
+        suggestions={Array []}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -146,81 +170,93 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Report"
-  />
-  <RadioGroupField
-    data-automation="reportTypeRadio"
-    disabled={false}
-    id="frm-data-access-reports-report-type"
-    label="Type *"
-    name="reportType"
-    options={
-      Array [
-        Object {
-          "label": "Realtime",
-          "value": "realtime",
-        },
-        Object {
-          "label": "Historical",
-          "value": "historical",
-        },
-      ]
-    }
-    required={true}
-  />
-  <React.Fragment>
-    <RadioGroupField
-      data-automation="realtimeReportTypeRadio"
-      disabled={false}
-      id="frm-data-access-reports-realtime-report-type"
-      label="Realtime Report Type *"
-      name="realtimeReportType"
-      options={
-        Array [
-          Object {
-            "label": "Standard",
-            "value": "standard",
-          },
-          Object {
-            "label": "Custom",
-            "value": "custom",
-          },
-        ]
-      }
-      required={true}
-    />
-    <AutoCompleteField
-      data-automation="realtimeReportAutoComplete"
-      disabled={false}
-      id="frm-data-access-reports-realtime-report-name"
-      label="Realtime Report *"
-      name="realtimeReportName"
-      placeholder="Search..."
-      suggestions={Array []}
-    />
-  </React.Fragment>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-data-access-reports-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-data-access-reports-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Report"
+      />
+      <RadioGroupField
+        data-automation="reportTypeRadio"
+        disabled={false}
+        id="frm-data-access-reports-report-type"
+        label="Type *"
+        name="reportType"
+        options={
+          Array [
+            Object {
+              "label": "Realtime",
+              "value": "realtime",
+            },
+            Object {
+              "label": "Historical",
+              "value": "historical",
+            },
+          ]
+        }
+        required={true}
+      />
+      <React.Fragment>
+        <RadioGroupField
+          data-automation="realtimeReportTypeRadio"
+          disabled={false}
+          id="frm-data-access-reports-realtime-report-type"
+          label="Realtime Report Type *"
+          name="realtimeReportType"
+          options={
+            Array [
+              Object {
+                "label": "Standard",
+                "value": "standard",
+              },
+              Object {
+                "label": "Custom",
+                "value": "custom",
+              },
+            ]
+          }
+          required={true}
+        />
+        <AutoCompleteField
+          data-automation="realtimeReportAutoComplete"
+          disabled={false}
+          id="frm-data-access-reports-realtime-report-name"
+          label="Realtime Report *"
+          name="realtimeReportName"
+          placeholder="Search..."
+          suggestions={Array []}
+        />
+      </React.Fragment>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -228,81 +264,93 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Report"
-  />
-  <RadioGroupField
-    data-automation="reportTypeRadio"
-    disabled={false}
-    id="frm-data-access-reports-report-type"
-    label="Type *"
-    name="reportType"
-    options={
-      Array [
-        Object {
-          "label": "Realtime",
-          "value": "realtime",
-        },
-        Object {
-          "label": "Historical",
-          "value": "historical",
-        },
-      ]
-    }
-    required={true}
-  />
-  <React.Fragment>
-    <RadioGroupField
-      data-automation="realtimeReportTypeRadio"
-      disabled={false}
-      id="frm-data-access-reports-realtime-report-type"
-      label="Realtime Report Type *"
-      name="realtimeReportType"
-      options={
-        Array [
-          Object {
-            "label": "Standard",
-            "value": "standard",
-          },
-          Object {
-            "label": "Custom",
-            "value": "custom",
-          },
-        ]
-      }
-      required={true}
-    />
-    <AutoCompleteField
-      data-automation="realtimeReportAutoComplete"
-      disabled={false}
-      id="frm-data-access-reports-realtime-report-name"
-      label="Realtime Report *"
-      name="realtimeReportName"
-      placeholder="Search..."
-      suggestions={Array []}
-    />
-  </React.Fragment>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-data-access-reports-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-data-access-reports-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Report"
+      />
+      <RadioGroupField
+        data-automation="reportTypeRadio"
+        disabled={false}
+        id="frm-data-access-reports-report-type"
+        label="Type *"
+        name="reportType"
+        options={
+          Array [
+            Object {
+              "label": "Realtime",
+              "value": "realtime",
+            },
+            Object {
+              "label": "Historical",
+              "value": "historical",
+            },
+          ]
+        }
+        required={true}
+      />
+      <React.Fragment>
+        <RadioGroupField
+          data-automation="realtimeReportTypeRadio"
+          disabled={false}
+          id="frm-data-access-reports-realtime-report-type"
+          label="Realtime Report Type *"
+          name="realtimeReportType"
+          options={
+            Array [
+              Object {
+                "label": "Standard",
+                "value": "standard",
+              },
+              Object {
+                "label": "Custom",
+                "value": "custom",
+              },
+            ]
+          }
+          required={true}
+        />
+        <AutoCompleteField
+          data-automation="realtimeReportAutoComplete"
+          disabled={false}
+          id="frm-data-access-reports-realtime-report-name"
+          label="Realtime Report *"
+          name="realtimeReportName"
+          placeholder="Search..."
+          suggestions={Array []}
+        />
+      </React.Fragment>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -310,59 +358,71 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Report"
-  />
-  <RadioGroupField
-    data-automation="reportTypeRadio"
-    disabled={false}
-    id="frm-data-access-reports-report-type"
-    label="Type *"
-    name="reportType"
-    options={
-      Array [
-        Object {
-          "label": "Realtime",
-          "value": "realtime",
-        },
-        Object {
-          "label": "Historical",
-          "value": "historical",
-        },
-      ]
-    }
-    required={true}
-  />
-  <AutoCompleteField
-    data-automation="historicalReportAutoComplete"
-    disabled={false}
-    id="frm-data-access-reports-historical-catalog-name"
-    label="Historical Reports Folder *"
-    name="historicalCatalogName"
-    placeholder="Search..."
-    suggestions={Array []}
-  />
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-data-access-reports-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-data-access-reports-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Report"
+      />
+      <RadioGroupField
+        data-automation="reportTypeRadio"
+        disabled={false}
+        id="frm-data-access-reports-report-type"
+        label="Type *"
+        name="reportType"
+        options={
+          Array [
+            Object {
+              "label": "Realtime",
+              "value": "realtime",
+            },
+            Object {
+              "label": "Historical",
+              "value": "historical",
+            },
+          ]
+        }
+        required={true}
+      />
+      <AutoCompleteField
+        data-automation="historicalReportAutoComplete"
+        disabled={false}
+        id="frm-data-access-reports-historical-catalog-name"
+        label="Historical Reports Folder *"
+        name="historicalCatalogName"
+        placeholder="Search..."
+        suggestions={Array []}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -370,58 +430,70 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={true}
-    id="frm-data-access-reports-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={true}
-    id="frm-data-access-reports-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Report"
-  />
-  <RadioGroupField
-    data-automation="reportTypeRadio"
-    disabled={true}
-    id="frm-data-access-reports-report-type"
-    label="Type *"
-    name="reportType"
-    options={
-      Array [
-        Object {
-          "label": "Realtime",
-          "value": "realtime",
-        },
-        Object {
-          "label": "Historical",
-          "value": "historical",
-        },
-      ]
-    }
-    required={true}
-  />
-  <AutoCompleteField
-    data-automation="historicalReportAutoComplete"
-    disabled={true}
-    id="frm-data-access-reports-historical-catalog-name"
-    label="Historical Reports Folder *"
-    name="historicalCatalogName"
-    placeholder="Search..."
-    suggestions={Array []}
-  />
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        id="frm-data-access-reports-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        id="frm-data-access-reports-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="dataAccessReportsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Report"
+      />
+      <RadioGroupField
+        data-automation="reportTypeRadio"
+        disabled={true}
+        id="frm-data-access-reports-report-type"
+        label="Type *"
+        name="reportType"
+        options={
+          Array [
+            Object {
+              "label": "Realtime",
+              "value": "realtime",
+            },
+            Object {
+              "label": "Historical",
+              "value": "historical",
+            },
+          ]
+        }
+        required={true}
+      />
+      <AutoCompleteField
+        data-automation="historicalReportAutoComplete"
+        disabled={true}
+        id="frm-data-access-reports-historical-catalog-name"
+        label="Historical Reports Folder *"
+        name="historicalCatalogName"
+        placeholder="Search..."
+        suggestions={Array []}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;

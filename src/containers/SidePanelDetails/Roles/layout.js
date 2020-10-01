@@ -11,7 +11,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { SidePanelTable, DetailHeader, DetailsPanelAlert } from 'cx-ui-components';
+import { SidePanelTable, DetailHeader, DetailsPanelAlert, LoadingSpinnerSVG } from 'cx-ui-components';
+import DetailWrapper from '../../../components/DetailWrapper';
+import { detailHeaderText } from '../../../utils';
 
 /*  TODO - CXV1-17410 */
 const Wrapper = styled.div`
@@ -20,16 +22,23 @@ const Wrapper = styled.div`
   height: calc(100vh - 180px);
 `;
 
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
+
+const CenterWrapper = styled.div`
+  text-align: center;
+`;
+
 export function RolesDetailsPanel({
   children,
   userHasUpdatePermission,
-  tableItems,
-  tableFields,
+  permissions,
+  rolesFields,
   rolesFetching,
   inherited,
   removeListItem,
   setSelectedSubEntityId,
-  listSize,
   itemApiPending,
   parentTenantName,
   //  isUserPlatformAdmin,
@@ -45,29 +54,36 @@ export function RolesDetailsPanel({
       )}
       {isSystemRole && <DetailsPanelAlert text={`This is a system role and cannot be edited.`} />}
       {children}
-
-      <DetailHeader
-        userHasUpdatePermission={
-          !isSystemRole && userHasUpdatePermission && !inherited && sidePanelUpdatePermissions.users // || (isUserPlatformAdmin && isSystemRole
-        }
-        text={`${listSize} Permissions`}
-        onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
-        open
-      />
-      <SidePanelTable
-        tableType={'sidePanel'}
-        userHasUpdatePermission={userHasUpdatePermission && sidePanelUpdatePermissions.users}
-        deleteSubEntity={
-          !inherited && userHasUpdatePermission && !isSystemRole
-            ? (listItemId, subEntityName) => removeListItem(listItemId, subEntityName)
-            : undefined
-        }
-        inherited={inherited}
-        items={tableItems}
-        fields={tableFields}
-        fetching={rolesFetching}
-        itemApiPending={itemApiPending}
-      />
+      {rolesFetching && (
+        <CenterWrapper>
+          <LoadingSpinnerSVG size={100} />
+        </CenterWrapper>
+      )}
+      {!rolesFetching && (
+        <DetailWrapper open data-automation="rolesPermissionsSVG">
+          <WrappedDetailHeader
+            userHasUpdatePermission={
+              !isSystemRole && userHasUpdatePermission && !inherited && sidePanelUpdatePermissions.users // || (isUserPlatformAdmin && isSystemRole
+            }
+            text={detailHeaderText(permissions, 'Permissions')}
+            onActionButtonClick={() => setSelectedSubEntityId('addItemToList')}
+          />
+          <SidePanelTable
+            tableType={'sidePanel'}
+            userHasUpdatePermission={userHasUpdatePermission && sidePanelUpdatePermissions.users}
+            deleteSubEntity={
+              !inherited && userHasUpdatePermission && !isSystemRole
+                ? (listItemId, subEntityName) => removeListItem(listItemId, subEntityName)
+                : undefined
+            }
+            inherited={inherited}
+            items={permissions}
+            fields={rolesFields}
+            fetching={rolesFetching}
+            itemApiPending={itemApiPending}
+          />
+        </DetailWrapper>
+      )}
     </Wrapper>
   );
 }
@@ -76,11 +92,10 @@ RolesDetailsPanel.propTypes = {
   rolesFetching: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
   children: PropTypes.any,
-  tableItems: PropTypes.array,
-  tableFields: PropTypes.array,
+  permissions: PropTypes.array,
+  rolesFields: PropTypes.array,
   removeListItem: PropTypes.func,
   setSelectedSubEntityId: PropTypes.func,
-  listSize: PropTypes.number,
   inherited: PropTypes.bool,
   itemApiPending: PropTypes.string,
   parentTenantName: PropTypes.string,

@@ -8,16 +8,25 @@
  *
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { SidePanelTable, DetailHeader } from 'cx-ui-components';
+import { SidePanelTable, DetailHeader, LoadingSpinnerSVG } from 'cx-ui-components';
 import { detailHeaderText, parentUrl } from '../../../utils';
+import DetailWrapper from '../../../components/DetailWrapper';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
+
+const CenterWrapper = styled.div`
+  text-align: center;
 `;
 
 export default function FlowsDetailsPanel({
@@ -38,53 +47,62 @@ export default function FlowsDetailsPanel({
   return (
     <Wrapper className="dtpanel-entity-flows">
       {children}
-
-      <DetailHeader
-        userHasUpdatePermission={!flowsFetching && userHasUpdatePermission}
-        text={detailHeaderText(versionsItems, 'Published Versions')}
-        open
-      />
-      <SidePanelTable
-        tableType={'sidePanel'}
-        contains="versions"
-        userHasUpdatePermission={userHasUpdatePermission}
-        userHasViewPermission={userHasViewPermission}
-        viewSubEntity={openFlowDesigner}
-        copySubEntity={copyListItem}
-        updateSubEntity={(listItemId, row, subEntityName) => createDraftItem('drafts', row, subEntityName)}
-        items={versionsItems.map(versionItem => ({
-          ...versionItem,
-          viewSubEntityHyperLink: parentUrl + '#/flows/viewer/' + versionItem.flowId + '/' + versionItem.version
-        }))}
-        fields={versionsFields}
-        defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
-        fetching={flowsFetching && !versionsItems.length}
-        itemApiPending={itemApiPending}
-      />
-
-      <DetailHeader
-        userHasUpdatePermission={!flowsFetching && userHasUpdatePermission}
-        text={detailHeaderText(draftsItems, 'Drafts')}
-        onActionButtonClick={() => createDraftItem('drafts')}
-        open
-      />
-      <SidePanelTable
-        tableType={'sidePanel'}
-        contains="drafts"
-        userHasUpdatePermission={userHasUpdatePermission}
-        updateSubEntity={openFlowDesigner}
-        deleteSubEntity={removeListItem}
-        confirmDeleteSubEntity={true}
-        copySubEntity={copyListItem}
-        items={draftsItems.map(draftItem => ({
-          ...draftItem,
-          updateSubEntityHyperLink: parentUrl + '#/flows/editor/' + draftItem.flowId + '/' + draftItem.id
-        }))}
-        fields={draftsFields}
-        defaultSorted={[{ id: 'created', desc: true }]}
-        fetching={flowsFetching && !draftsItems.length}
-        itemApiPending={itemApiPending}
-      />
+      {flowsFetching && (
+        <CenterWrapper>
+          <LoadingSpinnerSVG size={100} />
+        </CenterWrapper>
+      )}
+      {!flowsFetching && (
+        <Fragment>
+          <DetailWrapper open data-automation="publishedFlowsSVG">
+            <WrappedDetailHeader
+              userHasUpdatePermission={!flowsFetching && userHasUpdatePermission}
+              text={detailHeaderText(versionsItems, 'Published Versions')}
+            />
+            <SidePanelTable
+              tableType={'sidePanel'}
+              contains="versions"
+              userHasUpdatePermission={userHasUpdatePermission}
+              userHasViewPermission={userHasViewPermission}
+              viewSubEntity={openFlowDesigner}
+              copySubEntity={copyListItem}
+              updateSubEntity={(listItemId, row, subEntityName) => createDraftItem('drafts', row, subEntityName)}
+              items={versionsItems.map(versionItem => ({
+                ...versionItem,
+                viewSubEntityHyperLink: parentUrl + '#/flows/viewer/' + versionItem.flowId + '/' + versionItem.version
+              }))}
+              fields={versionsFields}
+              defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
+              fetching={flowsFetching && !versionsItems.length}
+              itemApiPending={itemApiPending}
+            />
+          </DetailWrapper>
+          <DetailWrapper open data-automation="draftsFlowsSVG">
+            <WrappedDetailHeader
+              userHasUpdatePermission={!flowsFetching && userHasUpdatePermission}
+              text={detailHeaderText(draftsItems, 'Drafts')}
+              onActionButtonClick={() => createDraftItem('drafts')}
+            />
+            <SidePanelTable
+              tableType={'sidePanel'}
+              contains="drafts"
+              userHasUpdatePermission={userHasUpdatePermission}
+              updateSubEntity={openFlowDesigner}
+              deleteSubEntity={removeListItem}
+              confirmDeleteSubEntity={true}
+              copySubEntity={copyListItem}
+              items={draftsItems.map(draftItem => ({
+                ...draftItem,
+                updateSubEntityHyperLink: parentUrl + '#/flows/editor/' + draftItem.flowId + '/' + draftItem.id
+              }))}
+              fields={draftsFields}
+              defaultSorted={[{ id: 'created', desc: true }]}
+              fetching={flowsFetching && !draftsItems.length}
+              itemApiPending={itemApiPending}
+            />
+          </DetailWrapper>
+        </Fragment>
+      )}
     </Wrapper>
   );
 }

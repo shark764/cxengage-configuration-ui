@@ -4,65 +4,79 @@ exports[`<TransferListsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="Contacts"
-    userHasUpdatePermission={true}
-  />
   <styled.div>
-    <styled.div>
-      <styled.div>
-        Category Name
-      </styled.div>
-      <styled.div>
-        Contact Name
-      </styled.div>
-      <styled.div>
-        Contact Type
-      </styled.div>
-      <styled.div>
-        Actions
-      </styled.div>
-    </styled.div>
-    <TransferListField
-      allowUpdateCategory={true}
-      allowUpdateItem={true}
-      className="transfer-lists"
-      data-automation="endpointsTransferList"
-      disabled={false}
-      endpointHeaders={
-        Immutable.List [
-          Object {
-            "a": "mockEndpointheaders",
-          },
-        ]
-      }
-      entityName="transferLists"
-      name="endpoints"
-      removeCategoryItems={[Function]}
-      removeTransferListItem={[Function]}
-      selectedEntityId="mockEntitiyId"
-      setSelectedSubEntityId={[Function]}
+    <Connect(DetailWrapper)
+      data-automation="transferListsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
+  <Connect(DetailWrapper)
+    data-automation="transferListsSVG"
+    open={true}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text="Contacts"
       userHasUpdatePermission={true}
     />
-  </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.div>
+          Category Name
+        </styled.div>
+        <styled.div>
+          Contact Name
+        </styled.div>
+        <styled.div>
+          Contact Type
+        </styled.div>
+        <styled.div>
+          Actions
+        </styled.div>
+      </styled.div>
+      <TransferListField
+        allowUpdateCategory={true}
+        allowUpdateItem={true}
+        className="transfer-lists"
+        data-automation="endpointsTransferList"
+        disabled={false}
+        endpointHeaders={
+          Immutable.List [
+            Object {
+              "a": "mockEndpointheaders",
+            },
+          ]
+        }
+        entityName="transferLists"
+        name="endpoints"
+        removeCategoryItems={[Function]}
+        removeTransferListItem={[Function]}
+        selectedEntityId="mockEntitiyId"
+        setSelectedSubEntityId={[Function]}
+        userHasUpdatePermission={true}
+      />
+    </styled.div>
+  </Connect(DetailWrapper)>
 </form>
 `;
 
@@ -70,64 +84,78 @@ exports[`<TransferListsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="Contacts"
-    userHasUpdatePermission={true}
-  />
   <styled.div>
-    <styled.div>
-      <styled.div>
-        Category Name
-      </styled.div>
-      <styled.div>
-        Contact Name
-      </styled.div>
-      <styled.div>
-        Contact Type
-      </styled.div>
-      <styled.div>
-        Actions
-      </styled.div>
-    </styled.div>
-    <TransferListField
-      allowUpdateCategory={true}
-      allowUpdateItem={true}
-      className="transfer-lists"
-      data-automation="endpointsTransferList"
-      disabled={false}
-      endpointHeaders={
-        Immutable.List [
-          Object {
-            "a": "mockEndpointheaders",
-          },
-        ]
-      }
-      entityName="transferLists"
-      name="endpoints"
-      removeCategoryItems={[Function]}
-      removeTransferListItem={[Function]}
-      selectedEntityId="mockEntitiyId"
-      setSelectedSubEntityId={[Function]}
+    <Connect(DetailWrapper)
+      data-automation="transferListsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
+  <Connect(DetailWrapper)
+    data-automation="transferListsSVG"
+    open={true}
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text="Contacts"
       userHasUpdatePermission={true}
     />
-  </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.div>
+          Category Name
+        </styled.div>
+        <styled.div>
+          Contact Name
+        </styled.div>
+        <styled.div>
+          Contact Type
+        </styled.div>
+        <styled.div>
+          Actions
+        </styled.div>
+      </styled.div>
+      <TransferListField
+        allowUpdateCategory={true}
+        allowUpdateItem={true}
+        className="transfer-lists"
+        data-automation="endpointsTransferList"
+        disabled={false}
+        endpointHeaders={
+          Immutable.List [
+            Object {
+              "a": "mockEndpointheaders",
+            },
+          ]
+        }
+        entityName="transferLists"
+        name="endpoints"
+        removeCategoryItems={[Function]}
+        removeTransferListItem={[Function]}
+        selectedEntityId="mockEntitiyId"
+        setSelectedSubEntityId={[Function]}
+        userHasUpdatePermission={true}
+      />
+    </styled.div>
+  </Connect(DetailWrapper)>
 </form>
 `;

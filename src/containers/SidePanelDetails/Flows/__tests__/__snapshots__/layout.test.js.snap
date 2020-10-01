@@ -5,47 +5,57 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
   className="dtpanel-entity-flows"
 >
   Mock Child
-  <DetailHeader
-    open={true}
-    text=" Published Versions"
-    userHasUpdatePermission={true}
-  />
-  <_class
-    contains="versions"
-    defaultSorted={
-      Array [
-        Object {
-          "desc": true,
-          "id": "numericOrderVersion",
-        },
-      ]
-    }
-    items={Array []}
-    tableType="sidePanel"
-    updateSubEntity={[Function]}
-    userHasUpdatePermission={true}
-  />
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text=" Drafts"
-    userHasUpdatePermission={true}
-  />
-  <_class
-    confirmDeleteSubEntity={true}
-    contains="drafts"
-    defaultSorted={
-      Array [
-        Object {
-          "desc": true,
-          "id": "created",
-        },
-      ]
-    }
-    items={Array []}
-    tableType="sidePanel"
-    userHasUpdatePermission={true}
-  />
+  <React.Fragment>
+    <Connect(DetailWrapper)
+      data-automation="publishedFlowsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text=" Published Versions"
+        userHasUpdatePermission={true}
+      />
+      <_class
+        contains="versions"
+        defaultSorted={
+          Array [
+            Object {
+              "desc": true,
+              "id": "numericOrderVersion",
+            },
+          ]
+        }
+        items={Array []}
+        tableType="sidePanel"
+        updateSubEntity={[Function]}
+        userHasUpdatePermission={true}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="draftsFlowsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
+        text=" Drafts"
+        userHasUpdatePermission={true}
+      />
+      <_class
+        confirmDeleteSubEntity={true}
+        contains="drafts"
+        defaultSorted={
+          Array [
+            Object {
+              "desc": true,
+              "id": "created",
+            },
+          ]
+        }
+        items={Array []}
+        tableType="sidePanel"
+        userHasUpdatePermission={true}
+      />
+    </Connect(DetailWrapper)>
+  </React.Fragment>
 </styled.div>
 `;
 
@@ -54,46 +64,56 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
   className="dtpanel-entity-flows"
 >
   Mock Child
-  <DetailHeader
-    open={true}
-    text=" Published Versions"
-    userHasUpdatePermission={false}
-  />
-  <_class
-    contains="versions"
-    defaultSorted={
-      Array [
-        Object {
-          "desc": true,
-          "id": "numericOrderVersion",
-        },
-      ]
-    }
-    items={Array []}
-    tableType="sidePanel"
-    updateSubEntity={[Function]}
-    userHasUpdatePermission={false}
-  />
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text=" Drafts"
-    userHasUpdatePermission={false}
-  />
-  <_class
-    confirmDeleteSubEntity={true}
-    contains="drafts"
-    defaultSorted={
-      Array [
-        Object {
-          "desc": true,
-          "id": "created",
-        },
-      ]
-    }
-    items={Array []}
-    tableType="sidePanel"
-    userHasUpdatePermission={false}
-  />
+  <React.Fragment>
+    <Connect(DetailWrapper)
+      data-automation="publishedFlowsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text=" Published Versions"
+        userHasUpdatePermission={false}
+      />
+      <_class
+        contains="versions"
+        defaultSorted={
+          Array [
+            Object {
+              "desc": true,
+              "id": "numericOrderVersion",
+            },
+          ]
+        }
+        items={Array []}
+        tableType="sidePanel"
+        updateSubEntity={[Function]}
+        userHasUpdatePermission={false}
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="draftsFlowsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
+        text=" Drafts"
+        userHasUpdatePermission={false}
+      />
+      <_class
+        confirmDeleteSubEntity={true}
+        contains="drafts"
+        defaultSorted={
+          Array [
+            Object {
+              "desc": true,
+              "id": "created",
+            },
+          ]
+        }
+        items={Array []}
+        tableType="sidePanel"
+        userHasUpdatePermission={false}
+      />
+    </Connect(DetailWrapper)>
+  </React.Fragment>
 </styled.div>
 `;

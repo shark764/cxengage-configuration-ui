@@ -51,8 +51,6 @@ export const getModalTableItems = (state, entityName) => {
   }
 };
 
-export const getListSize = state => getDependantEntityTableItems(state).length;
-
 export const availableItemsForList = state =>
   listMemberObjects(state)
     ? listMemberObjects(state)

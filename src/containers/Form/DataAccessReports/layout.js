@@ -11,6 +11,17 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, InputField, RadioGroupField, AutoCompleteField } from 'cx-ui-components';
+import DetailWrapper from '../../../components/DetailWrapper';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
 
 export default function DataAccessReportsForm({
   handleSubmit,
@@ -25,70 +36,77 @@ export default function DataAccessReportsForm({
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
-      <DetailHeader text="Details" />
-      <InputField
-        name="name"
-        label="Name *"
-        id="frm-data-access-reports-name"
-        data-automation="nameInput"
-        componentType="input"
-        inputType="text"
-        disabled={isSaving || !userHasUpdatePermission}
-      />
-      <InputField
-        name="description"
-        label="Description"
-        id="frm-data-access-reports-description"
-        data-automation="descriptionInput"
-        componentType="textarea"
-        inputType="text"
-        disabled={isSaving || !userHasUpdatePermission}
-      />
-      <DetailHeader text="Report" />
-      <RadioGroupField
-        name="reportType"
-        data-automation="reportTypeRadio"
-        label="Type *"
-        id="frm-data-access-reports-report-type"
-        disabled={isSaving || !userHasUpdatePermission}
-        options={[{ label: 'Realtime', value: 'realtime' }, { label: 'Historical', value: 'historical' }]}
-        required
-      />
-      {reportType === 'realtime' && (
-        <Fragment>
-          <RadioGroupField
-            name="realtimeReportType"
-            label="Realtime Report Type *"
-            id="frm-data-access-reports-realtime-report-type"
-            data-automation="realtimeReportTypeRadio"
+      <Wrapper>
+        <DetailWrapper open data-automation="dataAccessReportsDetailsSVG">
+          <WrappedDetailHeader text="Details" />
+          <InputField
+            name="name"
+            label="Name *"
+            id="frm-data-access-reports-name"
+            data-automation="nameInput"
+            componentType="input"
+            inputType="text"
             disabled={isSaving || !userHasUpdatePermission}
-            options={[{ label: 'Standard', value: 'standard' }, { label: 'Custom', value: 'custom' }]}
+          />
+          <InputField
+            name="description"
+            label="Description"
+            id="frm-data-access-reports-description"
+            data-automation="descriptionInput"
+            componentType="textarea"
+            inputType="text"
+            disabled={isSaving || !userHasUpdatePermission}
+          />
+        </DetailWrapper>
+
+        <DetailWrapper open data-automation="dataAccessReportsSVG">
+          <WrappedDetailHeader text="Report" />
+          <RadioGroupField
+            name="reportType"
+            data-automation="reportTypeRadio"
+            label="Type *"
+            id="frm-data-access-reports-report-type"
+            disabled={isSaving || !userHasUpdatePermission}
+            options={[{ label: 'Realtime', value: 'realtime' }, { label: 'Historical', value: 'historical' }]}
             required
           />
-          {realtimeReportType && (
+          {reportType === 'realtime' && (
+            <Fragment>
+              <RadioGroupField
+                name="realtimeReportType"
+                label="Realtime Report Type *"
+                id="frm-data-access-reports-realtime-report-type"
+                data-automation="realtimeReportTypeRadio"
+                disabled={isSaving || !userHasUpdatePermission}
+                options={[{ label: 'Standard', value: 'standard' }, { label: 'Custom', value: 'custom' }]}
+                required
+              />
+              {realtimeReportType && (
+                <AutoCompleteField
+                  name="realtimeReportName"
+                  label="Realtime Report *"
+                  data-automation="realtimeReportAutoComplete"
+                  placeholder="Search..."
+                  suggestions={realtimeReportType === 'custom' ? dashboards : standardDashboards}
+                  id="frm-data-access-reports-realtime-report-name"
+                  disabled={isSaving || !userHasUpdatePermission}
+                />
+              )}
+            </Fragment>
+          )}
+          {reportType === 'historical' && (
             <AutoCompleteField
-              name="realtimeReportName"
-              label="Realtime Report *"
-              data-automation="realtimeReportAutoComplete"
+              name="historicalCatalogName"
+              label="Historical Reports Folder *"
+              data-automation="historicalReportAutoComplete"
               placeholder="Search..."
-              suggestions={realtimeReportType === 'custom' ? dashboards : standardDashboards}
-              id="frm-data-access-reports-realtime-report-name"
+              suggestions={folders}
+              id="frm-data-access-reports-historical-catalog-name"
               disabled={isSaving || !userHasUpdatePermission}
             />
           )}
-        </Fragment>
-      )}
-      {reportType === 'historical' && (
-        <AutoCompleteField
-          name="historicalCatalogName"
-          label="Historical Reports Folder *"
-          data-automation="historicalReportAutoComplete"
-          placeholder="Search..."
-          suggestions={folders}
-          id="frm-data-access-reports-historical-catalog-name"
-          disabled={isSaving || !userHasUpdatePermission}
-        />
-      )}
+        </DetailWrapper>
+      </Wrapper>
     </form>
   );
 }

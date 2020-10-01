@@ -4,43 +4,48 @@ exports[`<SkillsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      data-automation="nameInput"
-      disabled={true}
-      id="frm-skills-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      data-automation="descriptionInput"
-      disabled={true}
-      id="frm-skills-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <ConfirmationWrapper
-      data-automation="hasProficiencyConfirmationWrapper"
-      mainText="You cannot update 'Has Proficiency' once it's set to true."
-      secondaryText="Are you sure you want to continue?"
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="skillsDetailsSVG"
+      open={true}
     >
-      <ToggleField
-        data-automation="hasProficiencyToggle"
-        disabled={true}
-        id="frm-skills-has-proficiency"
-        label="Has Proficiency"
-        name="hasProficiency"
-        title="You cannot update 'Has Proficiency' once it's set to true"
+      <Styled(DetailHeader)
+        text="Details"
       />
-    </ConfirmationWrapper>
-  </React.Fragment>
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        id="frm-skills-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        id="frm-skills-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <ConfirmationWrapper
+        data-automation="hasProficiencyConfirmationWrapper"
+        mainText="You cannot update 'Has Proficiency' once it's set to true."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="hasProficiencyToggle"
+          disabled={true}
+          id="frm-skills-has-proficiency"
+          label="Has Proficiency"
+          name="hasProficiency"
+          title="You cannot update 'Has Proficiency' once it's set to true"
+        />
+      </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -48,43 +53,48 @@ exports[`<SkillsForm /> renders create form with no proficiency 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      data-automation="nameInput"
-      disabled={true}
-      id="frm-skills-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      data-automation="descriptionInput"
-      disabled={true}
-      id="frm-skills-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <ConfirmationWrapper
-      data-automation="hasProficiencyConfirmationWrapper"
-      mainText="You cannot update 'Has Proficiency' once it's set to true."
-      secondaryText="Are you sure you want to continue?"
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="skillsDetailsSVG"
+      open={true}
     >
-      <ToggleField
-        data-automation="hasProficiencyToggle"
-        disabled={true}
-        id="frm-skills-has-proficiency"
-        label="Has Proficiency"
-        name="hasProficiency"
-        title="Controls whether the skill needs a value specified"
+      <Styled(DetailHeader)
+        text="Details"
       />
-    </ConfirmationWrapper>
-  </React.Fragment>
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        id="frm-skills-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        id="frm-skills-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <ConfirmationWrapper
+        data-automation="hasProficiencyConfirmationWrapper"
+        mainText="You cannot update 'Has Proficiency' once it's set to true."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="hasProficiencyToggle"
+          disabled={true}
+          id="frm-skills-has-proficiency"
+          label="Has Proficiency"
+          name="hasProficiency"
+          title="Controls whether the skill needs a value specified"
+        />
+      </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -92,43 +102,48 @@ exports[`<SkillsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      data-automation="nameInput"
-      disabled={true}
-      id="frm-skills-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      data-automation="descriptionInput"
-      disabled={true}
-      id="frm-skills-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <ConfirmationWrapper
-      data-automation="hasProficiencyConfirmationWrapper"
-      mainText="You cannot update 'Has Proficiency' once it's set to true."
-      secondaryText="Are you sure you want to continue?"
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="skillsDetailsSVG"
+      open={true}
     >
-      <ToggleField
-        data-automation="hasProficiencyToggle"
-        disabled={true}
-        id="frm-skills-has-proficiency"
-        label="Has Proficiency"
-        name="hasProficiency"
-        title="You cannot update 'Has Proficiency' once it's set to true"
+      <Styled(DetailHeader)
+        text="Details"
       />
-    </ConfirmationWrapper>
-  </React.Fragment>
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        id="frm-skills-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        id="frm-skills-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <ConfirmationWrapper
+        data-automation="hasProficiencyConfirmationWrapper"
+        mainText="You cannot update 'Has Proficiency' once it's set to true."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="hasProficiencyToggle"
+          disabled={true}
+          id="frm-skills-has-proficiency"
+          label="Has Proficiency"
+          name="hasProficiency"
+          title="You cannot update 'Has Proficiency' once it's set to true"
+        />
+      </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -136,42 +151,47 @@ exports[`<SkillsForm /> renders update form with no proficiency 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      data-automation="nameInput"
-      disabled={true}
-      id="frm-skills-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      data-automation="descriptionInput"
-      disabled={true}
-      id="frm-skills-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <ConfirmationWrapper
-      data-automation="hasProficiencyConfirmationWrapper"
-      mainText="You cannot update 'Has Proficiency' once it's set to true."
-      secondaryText="Are you sure you want to continue?"
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="skillsDetailsSVG"
+      open={true}
     >
-      <ToggleField
-        data-automation="hasProficiencyToggle"
-        disabled={true}
-        id="frm-skills-has-proficiency"
-        label="Has Proficiency"
-        name="hasProficiency"
-        title="Controls whether the skill needs a value specified"
+      <Styled(DetailHeader)
+        text="Details"
       />
-    </ConfirmationWrapper>
-  </React.Fragment>
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        id="frm-skills-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        id="frm-skills-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <ConfirmationWrapper
+        data-automation="hasProficiencyConfirmationWrapper"
+        mainText="You cannot update 'Has Proficiency' once it's set to true."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="hasProficiencyToggle"
+          disabled={true}
+          id="frm-skills-has-proficiency"
+          label="Has Proficiency"
+          name="hasProficiency"
+          title="Controls whether the skill needs a value specified"
+        />
+      </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;

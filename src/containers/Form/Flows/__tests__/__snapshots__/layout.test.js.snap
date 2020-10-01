@@ -4,53 +4,65 @@ exports[`<FlowsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={true}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={true}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Properties"
-  />
-  <SelectField
-    data-automation="typeList"
-    disabled={true}
-    handleChange={[Function]}
-    label="Type *"
-    name="type"
-    options={
-      Array [
-        Object {
-          "label": "Customer",
-          "value": "customer",
-        },
-        Object {
-          "label": "Resource",
-          "value": "resource",
-        },
-        Object {
-          "label": "Reusable",
-          "value": "reusable",
-        },
-      ]
-    }
-    placeholder="Select a type..."
-    required={true}
-  />
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="flowDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="flowPropertiesSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Properties"
+      />
+      <SelectField
+        data-automation="typeList"
+        disabled={true}
+        handleChange={[Function]}
+        label="Type *"
+        name="type"
+        options={
+          Array [
+            Object {
+              "label": "Customer",
+              "value": "customer",
+            },
+            Object {
+              "label": "Resource",
+              "value": "resource",
+            },
+            Object {
+              "label": "Reusable",
+              "value": "reusable",
+            },
+          ]
+        }
+        placeholder="Select a type..."
+        required={true}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -58,52 +70,64 @@ exports[`<FlowsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={true}
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={true}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Properties"
-  />
-  <SelectField
-    data-automation="typeList"
-    disabled={true}
-    handleChange={[Function]}
-    label="Type *"
-    name="type"
-    options={
-      Array [
-        Object {
-          "label": "Customer",
-          "value": "customer",
-        },
-        Object {
-          "label": "Resource",
-          "value": "resource",
-        },
-        Object {
-          "label": "Reusable",
-          "value": "reusable",
-        },
-      ]
-    }
-    placeholder="Select a type..."
-    required={true}
-  />
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="flowDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="flowPropertiesSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Properties"
+      />
+      <SelectField
+        data-automation="typeList"
+        disabled={true}
+        handleChange={[Function]}
+        label="Type *"
+        name="type"
+        options={
+          Array [
+            Object {
+              "label": "Customer",
+              "value": "customer",
+            },
+            Object {
+              "label": "Resource",
+              "value": "resource",
+            },
+            Object {
+              "label": "Reusable",
+              "value": "reusable",
+            },
+          ]
+        }
+        placeholder="Select a type..."
+        required={true}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;

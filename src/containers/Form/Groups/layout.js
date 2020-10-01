@@ -8,34 +8,58 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, InputField } from 'cx-ui-components';
+import DetailWrapper from '../../../components/DetailWrapper';
+import styled from 'styled-components';
 
-export default function GroupsForm({ handleSubmit, isSaving, inherited, userHasUpdatePermission, key, userHasViewPermission }) {
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
+
+export default function GroupsForm({
+  handleSubmit,
+  isSaving,
+  inherited,
+  userHasUpdatePermission,
+  key,
+  userHasViewPermission
+}) {
   return (
     <form onSubmit={handleSubmit} key={key}>
-      <DetailHeader text="Details" />
-      <Fragment>
-        <InputField
-          name="name"
-          label="Name *"
-          id="frm-groups-name"
-          data-automation="nameInput"
-          componentType="input"
-          inputType="text"
-          disabled={isSaving || inherited || !userHasUpdatePermission || (!userHasUpdatePermission && userHasViewPermission)}
-        />
-        <InputField
-          name="description"
-          label="Description"
-          id="frm-groups-description"
-          data-automation="descriptionInput"
-          componentType="textarea"
-          inputType="text"
-          disabled={isSaving || inherited || !userHasUpdatePermission || (!userHasUpdatePermission && userHasViewPermission)}
-        />
-      </Fragment>
+      <Wrapper>
+        <DetailWrapper open data-automation="groupsDetailsSVG">
+          <WrappedDetailHeader text="Details" />
+          <InputField
+            name="name"
+            label="Name *"
+            id="frm-groups-name"
+            data-automation="nameInput"
+            componentType="input"
+            inputType="text"
+            disabled={
+              isSaving || inherited || !userHasUpdatePermission || (!userHasUpdatePermission && userHasViewPermission)
+            }
+          />
+          <InputField
+            name="description"
+            label="Description"
+            id="frm-groups-description"
+            data-automation="descriptionInput"
+            componentType="textarea"
+            inputType="text"
+            disabled={
+              isSaving || inherited || !userHasUpdatePermission || (!userHasUpdatePermission && userHasViewPermission)
+            }
+          />
+        </DetailWrapper>
+      </Wrapper>
     </form>
   );
 }

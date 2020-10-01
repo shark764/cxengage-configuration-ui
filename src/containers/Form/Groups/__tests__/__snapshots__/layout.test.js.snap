@@ -4,29 +4,34 @@ exports[`<GroupsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      data-automation="nameInput"
-      disabled={true}
-      id="frm-groups-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      data-automation="descriptionInput"
-      disabled={true}
-      id="frm-groups-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </React.Fragment>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="groupsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        id="frm-groups-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        id="frm-groups-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -34,28 +39,33 @@ exports[`<GroupsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <React.Fragment>
-    <InputField
-      componentType="input"
-      data-automation="nameInput"
-      disabled={true}
-      id="frm-groups-name"
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      data-automation="descriptionInput"
-      disabled={true}
-      id="frm-groups-description"
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-  </React.Fragment>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="groupsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={true}
+        id="frm-groups-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={true}
+        id="frm-groups-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;

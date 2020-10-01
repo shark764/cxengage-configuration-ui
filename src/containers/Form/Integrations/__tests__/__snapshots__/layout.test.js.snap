@@ -4,42 +4,49 @@ exports[`<IntegrationsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <SelectField
-    data-automation="integrationsType"
-    disabled={false}
-    label="Type *"
-    name="type"
-    options={
-      Array [
-        Object {
-          "label": "REST",
-          "value": "rest",
-        },
-        Object {
-          "label": "Salesforce",
-          "value": "salesforce",
-        },
-        Object {
-          "label": "Zendesk",
-          "value": "zendesk",
-        },
-      ]
-    }
-    required={true}
-  />
-  <DefaultForm
-    inherited={false}
-    initialValues={
-      Object {
-        "get": [Function],
-      }
-    }
-    isSaving={false}
-    userHasUpdatePermission={true}
-  />
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="integrationDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <SelectField
+        data-automation="integrationsType"
+        disabled={false}
+        label="Type *"
+        name="type"
+        options={
+          Array [
+            Object {
+              "label": "REST",
+              "value": "rest",
+            },
+            Object {
+              "label": "Salesforce",
+              "value": "salesforce",
+            },
+            Object {
+              "label": "Zendesk",
+              "value": "zendesk",
+            },
+          ]
+        }
+        required={true}
+      />
+      <DefaultForm
+        inherited={false}
+        initialValues={
+          Object {
+            "get": [Function],
+          }
+        }
+        isSaving={false}
+        userHasUpdatePermission={true}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
   <RestForm
     authType="noAuth"
     inherited={false}
@@ -58,42 +65,49 @@ exports[`<IntegrationsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <SelectField
-    data-automation="integrationsType"
-    disabled={false}
-    label="Type *"
-    name="type"
-    options={
-      Array [
-        Object {
-          "label": "REST",
-          "value": "rest",
-        },
-        Object {
-          "label": "Salesforce",
-          "value": "salesforce",
-        },
-        Object {
-          "label": "Zendesk",
-          "value": "zendesk",
-        },
-      ]
-    }
-    required={true}
-  />
-  <DefaultForm
-    inherited={false}
-    initialValues={
-      Object {
-        "get": [Function],
-      }
-    }
-    isSaving={false}
-    userHasUpdatePermission={true}
-  />
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="integrationDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <SelectField
+        data-automation="integrationsType"
+        disabled={false}
+        label="Type *"
+        name="type"
+        options={
+          Array [
+            Object {
+              "label": "REST",
+              "value": "rest",
+            },
+            Object {
+              "label": "Salesforce",
+              "value": "salesforce",
+            },
+            Object {
+              "label": "Zendesk",
+              "value": "zendesk",
+            },
+          ]
+        }
+        required={true}
+      />
+      <DefaultForm
+        inherited={false}
+        initialValues={
+          Object {
+            "get": [Function],
+          }
+        }
+        isSaving={false}
+        userHasUpdatePermission={true}
+      />
+    </Connect(DetailWrapper)>
+  </styled.div>
   <RestForm
     authType="noAuth"
     inherited={false}

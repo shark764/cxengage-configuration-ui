@@ -12,6 +12,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Detail, DetailHeader, SelectField } from 'cx-ui-components';
 import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
+import DetailWrapper from '../../../components/DetailWrapper';
+import styled from 'styled-components';
 
 import DefaultForm from './Types/default';
 import CalabrioForm from './Types/calabrio';
@@ -26,6 +28,15 @@ import TeleoptiForm from './Types/teleopti';
 import TwilioForm from './Types/twilio';
 import VerintForm from './Types/verint';
 import ZendeskForm from './Types/zendesk';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
 
 export default function IntegrationsForm({
   initialValues,
@@ -45,30 +56,35 @@ export default function IntegrationsForm({
   const formTypeProps = { isSaving, inherited, userHasUpdatePermission, initialValues, sidePanelUpdatePermissions };
   return (
     <form onSubmit={handleSubmit} key={key}>
-      <DetailHeader text="Details" />
-      {initialValues.get('id') !== undefined ? (
-        <Detail
-          label="Type"
-          value={`${integrationType === 'rest' ? 'REST' : capitalizeFirstLetter(integrationType)}`}
-        />
-      ) : (
-        <SelectField
-          name="type"
-          label="Type *"
-          disabled={isSaving || inherited || !userHasUpdatePermission}
-          options={[
-            { label: 'REST', value: 'rest' },
-            { label: 'Salesforce', value: 'salesforce' },
-            { label: 'Zendesk', value: 'zendesk' }
-          ]}
-          data-automation="integrationsType"
-          required
-        />
-      )}
-      <DefaultForm {...formTypeProps} />
-      {integrationType === 'calabrio' && (
-        <CalabrioForm {...formTypeProps} ctiEnabled={ctiEnabled} rtaEnabled={rtaEnabled} />
-      )}
+      <Wrapper>
+        <DetailWrapper open data-automation="integrationDetailsSVG">
+          <WrappedDetailHeader text="Details" />
+          {initialValues.get('id') !== undefined ? (
+            <Detail
+              label="Type"
+              value={`${integrationType === 'rest' ? 'REST' : capitalizeFirstLetter(integrationType)}`}
+            />
+          ) : (
+            <SelectField
+              name="type"
+              label="Type *"
+              disabled={isSaving || inherited || !userHasUpdatePermission}
+              options={[
+                { label: 'REST', value: 'rest' },
+                { label: 'Salesforce', value: 'salesforce' },
+                { label: 'Zendesk', value: 'zendesk' }
+              ]}
+              data-automation="integrationsType"
+              required
+            />
+          )}
+
+          <DefaultForm {...formTypeProps} />
+          {integrationType === 'calabrio' && (
+            <CalabrioForm {...formTypeProps} ctiEnabled={ctiEnabled} rtaEnabled={rtaEnabled} />
+          )}
+        </DetailWrapper>
+      </Wrapper>
       {integrationType === 'client' && <ClientForm {...formTypeProps} />}
       {integrationType === 'email' && <EmailForm {...formTypeProps} />}
       {integrationType === 'lambda' && <LambdaForm {...formTypeProps} />}

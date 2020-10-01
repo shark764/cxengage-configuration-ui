@@ -10,7 +10,6 @@ import {
   getDependantEntityTableItems,
   getSidePanelTableItems,
   getModalTableItems,
-  getListSize,
   availableItemsForList,
   getEntityListMembers,
   selectedEntityIndex,
@@ -209,12 +208,6 @@ describe('getModalTableItems', () => {
         'mockDependentEntity'
       )
     ).toEqual([]);
-  });
-});
-
-describe('getListSize', () => {
-  it('should get size of collection of dependant members of current entity', () => {
-    expect(getListSize(initialState)).toEqual(1);
   });
 });
 

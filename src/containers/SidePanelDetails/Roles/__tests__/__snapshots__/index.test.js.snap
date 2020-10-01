@@ -5,13 +5,12 @@ Object {
   "inherited": false,
   "isSystemRole": true,
   "itemApiPending": undefined,
-  "listSize": 0,
   "parentTenantName": "ParentTenantName",
+  "permissions": Array [
+    "mockListMembers",
+  ],
   "rolesFetching": undefined,
-  "sidePanelUpdatePermissions": Object {
-    "users": undefined,
-  },
-  "tableFields": Array [
+  "rolesFields": Array [
     Object {
       "label": "Name",
       "name": "name",
@@ -21,9 +20,9 @@ Object {
       "name": "description",
     },
   ],
-  "tableItems": Array [
-    "mockListMembers",
-  ],
+  "sidePanelUpdatePermissions": Object {
+    "users": undefined,
+  },
   "userHasUpdatePermission": true,
 }
 `;
@@ -32,9 +31,25 @@ exports[`RolesDetailsPanel Renders renders 1`] = `
 <RolesDetailsPanel
   inherited={false}
   isSystemRole={true}
-  listSize={0}
   parentTenantName="ParentTenantName"
+  permissions={
+    Array [
+      "mockListMembers",
+    ]
+  }
   removeListItem={[Function]}
+  rolesFields={
+    Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ]
+  }
   setSelectedSubEntityId={[Function]}
   sidePanelUpdatePermissions={
     Object {
@@ -69,23 +84,6 @@ exports[`RolesDetailsPanel Renders renders 1`] = `
       },
       "unsubscribe": [Function],
     }
-  }
-  tableFields={
-    Array [
-      Object {
-        "label": "Name",
-        "name": "name",
-      },
-      Object {
-        "label": "Description",
-        "name": "description",
-      },
-    ]
-  }
-  tableItems={
-    Array [
-      "mockListMembers",
-    ]
   }
   userHasUpdatePermission={true}
 >

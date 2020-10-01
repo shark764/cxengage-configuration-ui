@@ -16,7 +16,7 @@ import {
   getEntityParentTenantName
 } from '../../../redux/modules/entities/selectors';
 
-import { getEntityListMembers, getListSize } from '../../../redux/modules/entities/listItemSelectors';
+import { getEntityListMembers } from '../../../redux/modules/entities/listItemSelectors';
 
 import { setSelectedSubEntityId, removeListItem } from '../../../redux/modules/entities';
 
@@ -26,11 +26,10 @@ import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 export function mapStateToProps(state, props) {
   return {
     userHasUpdatePermission: userHasUpdatePermission(state),
-    tableItems: getEntityListMembers(state),
-    tableFields: entitiesMetaData.roles.sidePanelListTableFields,
+    permissions: getEntityListMembers(state),
+    rolesFields: entitiesMetaData.roles.sidePanelListTableFields,
     rolesFetching: isEntityFetching(state, 'roles'),
     itemApiPending: itemApiPending(state),
-    listSize: getListSize(state),
     inherited: isInherited(state),
     parentTenantName: getEntityParentTenantName(state),
     //  isUserPlatformAdmin: isUserPlatformAdmin(state),

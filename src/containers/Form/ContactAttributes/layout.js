@@ -2,13 +2,23 @@
  * Copyright © 2015-2020 Serenova, LLC. All rights reserved.
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 import styled from 'styled-components';
 import { FieldArray } from 'redux-form/immutable';
 import { DetailHeader, InputField, SelectField, ToggleField, CloseIconSVG, DetailsPanelAlert } from 'cx-ui-components';
 import { localeLanguages } from '../../../redux/modules/entities/config';
+import DetailWrapper from '../../../components/DetailWrapper';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
 
 const LocalizationLanguageContainer = styled.div`
   display: flex;
@@ -19,10 +29,9 @@ const LocalizationFieldsContainer = styled.div`
 `;
 
 const LocalizationField = ({ fields, disabled, userHasUpdatePermission, inherited }) => (
-  <Fragment>
-    <DetailHeader
+  <DetailWrapper open data-automation="contactAttributesSVG">
+    <WrappedDetailHeader
       text="Localization"
-      open
       inherited={inherited}
       userHasUpdatePermission={userHasUpdatePermission}
       onActionButtonClick={() => fields.length < 18 && fields.push(fromJS({ label: '', language: '' }))}
@@ -74,7 +83,7 @@ const LocalizationField = ({ fields, disabled, userHasUpdatePermission, inherite
         </LocalizationLanguageContainer>
       );
     })}
-  </Fragment>
+  </DetailWrapper>
 );
 
 export default function ContactAttributesForm({
@@ -88,44 +97,48 @@ export default function ContactAttributesForm({
   return (
     <form onSubmit={handleSubmit} key={key}>
       {inherited && <DetailsPanelAlert text={`This contact attribute is inherited and cannot be edited.`} />}
-      <DetailHeader text="Details" />
-      <InputField
-        name="objectName"
-        inputType="text"
-        label="Name *"
-        componentType="input"
-        data-automation="nameInput"
-        disabled={selectedEntityId !== 'create' ? true : isSaving || !userHasUpdatePermission || inherited}
-      />
-      <SelectField
-        name="type"
-        label="Type *"
-        placeholder="Select a type..."
-        disabled={selectedEntityId !== 'create' ? true : isSaving || !userHasUpdatePermission || inherited}
-        data-automation="typeList"
-        options={[
-          { label: 'Text', value: 'text' },
-          { label: 'Phone', value: 'phone' },
-          { label: 'Email', value: 'email' },
-          { label: 'Boolean', value: 'boolean' },
-          { label: 'Link', value: 'link' },
-          { label: 'Number', value: 'number' }
-        ]}
-      />
-      <InputField
-        name="default"
-        inputType="text"
-        label="Default"
-        componentType="input"
-        data-automation="defaultInput"
-        disabled={isSaving || !userHasUpdatePermission || inherited}
-      />
-      <ToggleField
-        name="mandatory"
-        label="Mandatory"
-        data-automation="madatoryToggle"
-        disabled={isSaving || !userHasUpdatePermission || inherited}
-      />
+      <Wrapper>
+        <DetailWrapper open data-automation="contactAttributesDetailsSVG">
+          <WrappedDetailHeader text="Details" />
+          <InputField
+            name="objectName"
+            inputType="text"
+            label="Name *"
+            componentType="input"
+            data-automation="nameInput"
+            disabled={selectedEntityId !== 'create' ? true : isSaving || !userHasUpdatePermission || inherited}
+          />
+          <SelectField
+            name="type"
+            label="Type *"
+            placeholder="Select a type..."
+            disabled={selectedEntityId !== 'create' ? true : isSaving || !userHasUpdatePermission || inherited}
+            data-automation="typeList"
+            options={[
+              { label: 'Text', value: 'text' },
+              { label: 'Phone', value: 'phone' },
+              { label: 'Email', value: 'email' },
+              { label: 'Boolean', value: 'boolean' },
+              { label: 'Link', value: 'link' },
+              { label: 'Number', value: 'number' }
+            ]}
+          />
+          <InputField
+            name="default"
+            inputType="text"
+            label="Default"
+            componentType="input"
+            data-automation="defaultInput"
+            disabled={isSaving || !userHasUpdatePermission || inherited}
+          />
+          <ToggleField
+            name="mandatory"
+            label="Mandatory"
+            data-automation="madatoryToggle"
+            disabled={isSaving || !userHasUpdatePermission || inherited}
+          />
+        </DetailWrapper>
+      </Wrapper>
       <FieldArray
         name="label"
         rerenderOnEveryChange

@@ -8,14 +8,20 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, InputField } from 'cx-ui-components';
+import DetailWrapper from '../../../../components/DetailWrapper';
+import styled from 'styled-components';
 
 export default function ClientForm({ isSaving, inherited, userHasUpdatePermission, initialValues }) {
+  const WrappedDetailHeader = styled(DetailHeader)`
+    margin-left: 35px;
+  `;
+
   return (
-    <Fragment>
-      <DetailHeader text="Properties" />
+    <DetailWrapper open={true} data-automation="clientPropertiesSVG">
+      <WrappedDetailHeader text="Properties" />
       <InputField
         name="properties.accessKey"
         label="Access Key *"
@@ -34,7 +40,7 @@ export default function ClientForm({ isSaving, inherited, userHasUpdatePermissio
         disabled={isSaving || inherited || !userHasUpdatePermission}
         type="password"
       />
-    </Fragment>
+    </DetailWrapper>
   );
 }
 

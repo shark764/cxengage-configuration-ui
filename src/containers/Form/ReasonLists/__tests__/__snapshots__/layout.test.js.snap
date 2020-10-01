@@ -4,76 +4,88 @@ exports[`<ReasonListsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-reason-list-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="input"
-    data-automation="externalIdInput"
-    disabled={false}
-    id="frm-reason-list-external-id"
-    inputType="text"
-    label="External Id"
-    name="externalId"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-reason-list-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <ConfirmationWrapper
-    data-automation="toggleSharedConfirmationWrapper"
-    mainText="Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
-    secondaryText="Are you sure you want to continue?"
-  >
-    <ToggleField
-      data-automation="sharedToggle"
-      disabled={true}
-      id="frm-reason-list-shared"
-      label="Shared"
-      name="shared"
-      title="Change \\"Shared\\" state for this Presence Reason List"
-    />
-  </ConfirmationWrapper>
-  <ToggleField
-    data-automation="isDefaultToggle"
-    disabled={false}
-    id="frm-reason-list-is-default"
-    label="Tenant Default?"
-    name="isDefault"
-    onChange={[Function]}
-    title="Assigns list to all users on tenant"
-  />
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="Reasons"
-    userHasUpdatePermission={true}
-  />
   <styled.div>
-    <NestedListField
-      className="reason-list"
-      data-automation="reasonListNestedList"
-      name="reasons"
-      removeCategoryItems={[Function]}
-      removeReasonListItem={[Function]}
-      selectedEntityId="0000-0000-0000-0000-0000"
-      setSelectedSubEntityId={[Function]}
-      userHasUpdatePermission={true}
-    />
+    <Connect(DetailWrapper)
+      data-automation="reasonListsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-reason-list-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="input"
+        data-automation="externalIdInput"
+        disabled={false}
+        id="frm-reason-list-external-id"
+        inputType="text"
+        label="External Id"
+        name="externalId"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-reason-list-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <ConfirmationWrapper
+        data-automation="toggleSharedConfirmationWrapper"
+        mainText="Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="sharedToggle"
+          disabled={true}
+          id="frm-reason-list-shared"
+          label="Shared"
+          name="shared"
+          title="Change \\"Shared\\" state for this Presence Reason List"
+        />
+      </ConfirmationWrapper>
+      <ToggleField
+        data-automation="isDefaultToggle"
+        disabled={false}
+        id="frm-reason-list-is-default"
+        label="Tenant Default?"
+        name="isDefault"
+        onChange={[Function]}
+        title="Assigns list to all users on tenant"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="reasonListsReasonsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
+        open={true}
+        text="Reasons"
+        userHasUpdatePermission={true}
+      />
+      <styled.div>
+        <NestedListField
+          className="reason-list"
+          data-automation="reasonListNestedList"
+          name="reasons"
+          removeCategoryItems={[Function]}
+          removeReasonListItem={[Function]}
+          selectedEntityId="0000-0000-0000-0000-0000"
+          setSelectedSubEntityId={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </styled.div>
+    </Connect(DetailWrapper)>
   </styled.div>
 </form>
 `;
@@ -82,76 +94,88 @@ exports[`<ReasonListsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-reason-list-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="input"
-    data-automation="externalIdInput"
-    disabled={false}
-    id="frm-reason-list-external-id"
-    inputType="text"
-    label="External Id"
-    name="externalId"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-reason-list-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <ConfirmationWrapper
-    data-automation="toggleSharedConfirmationWrapper"
-    mainText="Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
-    secondaryText="Are you sure you want to continue?"
-  >
-    <ToggleField
-      data-automation="sharedToggle"
-      disabled={false}
-      id="frm-reason-list-shared"
-      label="Shared"
-      name="shared"
-      title="Change \\"Shared\\" state for this Presence Reason List"
-    />
-  </ConfirmationWrapper>
-  <ToggleField
-    data-automation="isDefaultToggle"
-    disabled={false}
-    id="frm-reason-list-is-default"
-    label="Tenant Default?"
-    name="isDefault"
-    onChange={[Function]}
-    title="Assigns list to all users on tenant"
-  />
-  <DetailHeader
-    onActionButtonClick={[Function]}
-    open={true}
-    text="Reasons"
-    userHasUpdatePermission={true}
-  />
   <styled.div>
-    <NestedListField
-      className="reason-list"
-      data-automation="reasonListNestedList"
-      name="reasons"
-      removeCategoryItems={[Function]}
-      removeReasonListItem={[Function]}
-      selectedEntityId="0000-0000-0000-0000-0000"
-      setSelectedSubEntityId={[Function]}
-      userHasUpdatePermission={true}
-    />
+    <Connect(DetailWrapper)
+      data-automation="reasonListsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-reason-list-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="input"
+        data-automation="externalIdInput"
+        disabled={false}
+        id="frm-reason-list-external-id"
+        inputType="text"
+        label="External Id"
+        name="externalId"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-reason-list-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <ConfirmationWrapper
+        data-automation="toggleSharedConfirmationWrapper"
+        mainText="Setting shared to 'enabled' for this Presence Reason List. Once a Presence Reason List is enabled and saved, it cannot be reverted."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="sharedToggle"
+          disabled={false}
+          id="frm-reason-list-shared"
+          label="Shared"
+          name="shared"
+          title="Change \\"Shared\\" state for this Presence Reason List"
+        />
+      </ConfirmationWrapper>
+      <ToggleField
+        data-automation="isDefaultToggle"
+        disabled={false}
+        id="frm-reason-list-is-default"
+        label="Tenant Default?"
+        name="isDefault"
+        onChange={[Function]}
+        title="Assigns list to all users on tenant"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="reasonListsReasonsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
+        open={true}
+        text="Reasons"
+        userHasUpdatePermission={true}
+      />
+      <styled.div>
+        <NestedListField
+          className="reason-list"
+          data-automation="reasonListNestedList"
+          name="reasons"
+          removeCategoryItems={[Function]}
+          removeReasonListItem={[Function]}
+          selectedEntityId="0000-0000-0000-0000-0000"
+          setSelectedSubEntityId={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </styled.div>
+    </Connect(DetailWrapper)>
   </styled.div>
 </form>
 `;

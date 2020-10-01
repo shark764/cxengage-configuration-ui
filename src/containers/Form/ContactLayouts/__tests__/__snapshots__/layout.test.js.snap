@@ -16,53 +16,62 @@ exports[`<ContactLayoutsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <React.Fragment>
-    <DetailHeader
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      data-automation="nameInput"
-      disabled={false}
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      data-automation="descriptionInput"
-      disabled={false}
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <DetailHeader
-      onActionButtonClick={[Function]}
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="contactLayoutsDetailsSVG"
       open={true}
-      text="Layout"
-      userHasUpdatePermission={true}
-    />
-    <styled.p>
-      Layout cannot be created without these mandatory Custom Attributes: missingAttribute
-    </styled.p>
-    <styled.div>
-      <TransferListField
-        allowCreateListItem={true}
-        allowUpdateCategory={true}
-        allowUpdateItem={false}
-        data-automation="contactsLayoutNestedList"
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
         disabled={false}
-        endpointHeaders={Immutable.List []}
-        entityName="contactsLayouts"
-        name="layout"
-        removeCategoryItems={[Function]}
-        removeTransferListItem={[Function]}
-        selectedEntityId="create"
-        setSelectedSubEntityId={[Function]}
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="contactLayoutsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
+        text="Layout"
         userHasUpdatePermission={true}
       />
-    </styled.div>
-  </React.Fragment>
+      <styled.p>
+        Layout cannot be created without these mandatory Custom Attributes: missingAttribute
+      </styled.p>
+      <styled.div>
+        <TransferListField
+          allowCreateListItem={true}
+          allowUpdateCategory={true}
+          allowUpdateItem={false}
+          data-automation="contactsLayoutNestedList"
+          disabled={false}
+          endpointHeaders={Immutable.List []}
+          entityName="contactsLayouts"
+          name="layout"
+          removeCategoryItems={[Function]}
+          removeTransferListItem={[Function]}
+          selectedEntityId="create"
+          setSelectedSubEntityId={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </styled.div>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -70,52 +79,61 @@ exports[`<ContactLayoutsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <React.Fragment>
-    <DetailHeader
-      text="Details"
-    />
-    <InputField
-      componentType="input"
-      data-automation="nameInput"
-      disabled={false}
-      inputType="text"
-      label="Name *"
-      name="name"
-    />
-    <InputField
-      componentType="textarea"
-      data-automation="descriptionInput"
-      disabled={false}
-      inputType="text"
-      label="Description"
-      name="description"
-    />
-    <DetailHeader
-      onActionButtonClick={[Function]}
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="contactLayoutsDetailsSVG"
       open={true}
-      text="Layout"
-      userHasUpdatePermission={true}
-    />
-    <styled.p>
-      Layout cannot be updated without these mandatory Custom Attributes: missingAttribute
-    </styled.p>
-    <styled.div>
-      <TransferListField
-        allowCreateListItem={true}
-        allowUpdateCategory={true}
-        allowUpdateItem={false}
-        data-automation="contactsLayoutNestedList"
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
         disabled={false}
-        endpointHeaders={Immutable.List []}
-        entityName="contactsLayouts"
-        name="layout"
-        removeCategoryItems={[Function]}
-        removeTransferListItem={[Function]}
-        selectedEntityId="0000-0000-0000-0000-0000"
-        setSelectedSubEntityId={[Function]}
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+    </Connect(DetailWrapper)>
+    <Connect(DetailWrapper)
+      data-automation="contactLayoutsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        onActionButtonClick={[Function]}
+        text="Layout"
         userHasUpdatePermission={true}
       />
-    </styled.div>
-  </React.Fragment>
+      <styled.p>
+        Layout cannot be updated without these mandatory Custom Attributes: missingAttribute
+      </styled.p>
+      <styled.div>
+        <TransferListField
+          allowCreateListItem={true}
+          allowUpdateCategory={true}
+          allowUpdateItem={false}
+          data-automation="contactsLayoutNestedList"
+          disabled={false}
+          endpointHeaders={Immutable.List []}
+          entityName="contactsLayouts"
+          name="layout"
+          removeCategoryItems={[Function]}
+          removeTransferListItem={[Function]}
+          selectedEntityId="0000-0000-0000-0000-0000"
+          setSelectedSubEntityId={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </styled.div>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;

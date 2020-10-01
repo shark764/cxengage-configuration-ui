@@ -4,40 +4,47 @@ exports[`<RolesForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-roles-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-roles-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <ConfirmationWrapper
-    data-automation="toggleSharedConfirmationWrapper"
-    mainText="If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role."
-    secondaryText="Are you sure you want to continue?"
-  >
-    <ToggleField
-      data-automation="sharedToggle"
-      disabled={true}
-      label="Shared"
-      name="shared"
-      title="Change \\"Shared\\" state for this Role"
-    />
-  </ConfirmationWrapper>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="rolesDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-roles-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-roles-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <ConfirmationWrapper
+        data-automation="toggleSharedConfirmationWrapper"
+        mainText="If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="sharedToggle"
+          disabled={true}
+          label="Shared"
+          name="shared"
+          title="Change \\"Shared\\" state for this Role"
+        />
+      </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -45,39 +52,46 @@ exports[`<RolesForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-roles-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-roles-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <ConfirmationWrapper
-    data-automation="toggleSharedConfirmationWrapper"
-    mainText="If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role."
-    secondaryText="Are you sure you want to continue?"
-  >
-    <ToggleField
-      data-automation="sharedToggle"
-      disabled={false}
-      label="Shared"
-      name="shared"
-      title="Change \\"Shared\\" state for this Role"
-    />
-  </ConfirmationWrapper>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="rolesDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-roles-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-roles-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <ConfirmationWrapper
+        data-automation="toggleSharedConfirmationWrapper"
+        mainText="If you unshare this role it will become unavailable for all child tenants and any users with this role assigned to them may lose permissions granted by this role and may lose the ability to access the platform or specific features granted by this role."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="sharedToggle"
+          disabled={false}
+          label="Shared"
+          name="shared"
+          title="Change \\"Shared\\" state for this Role"
+        />
+      </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;

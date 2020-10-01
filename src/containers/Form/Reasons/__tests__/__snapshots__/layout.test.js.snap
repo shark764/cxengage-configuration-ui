@@ -4,49 +4,56 @@ exports[`<ReasonsForm /> renders create form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-reason-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-reason-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <InputField
-    componentType="input"
-    data-automation="externalIdInput"
-    disabled={false}
-    id="frm-reason-external-id"
-    inputType="text"
-    label="External Id"
-    name="externalId"
-  />
-  <ConfirmationWrapper
-    mainText="Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
-    secondaryText="Are you sure you want to continue?"
-  >
-    <ToggleField
-      data-automation="sharedToggle"
-      disabled={true}
-      id="frm-reason-shared"
-      label="Shared"
-      name="shared"
-      title="Change \\"Shared\\" state for this Presence Reason"
-    />
-  </ConfirmationWrapper>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="reasonsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-reason-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-reason-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <InputField
+        componentType="input"
+        data-automation="externalIdInput"
+        disabled={false}
+        id="frm-reason-external-id"
+        inputType="text"
+        label="External Id"
+        name="externalId"
+      />
+      <ConfirmationWrapper
+        mainText="Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="sharedToggle"
+          disabled={true}
+          id="frm-reason-shared"
+          label="Shared"
+          name="shared"
+          title="Change \\"Shared\\" state for this Presence Reason"
+        />
+      </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;
 
@@ -54,48 +61,55 @@ exports[`<ReasonsForm /> renders update form 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <DetailHeader
-    text="Details"
-  />
-  <InputField
-    componentType="input"
-    data-automation="nameInput"
-    disabled={false}
-    id="frm-reason-name"
-    inputType="text"
-    label="Name *"
-    name="name"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="descriptionInput"
-    disabled={false}
-    id="frm-reason-description"
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <InputField
-    componentType="input"
-    data-automation="externalIdInput"
-    disabled={false}
-    id="frm-reason-external-id"
-    inputType="text"
-    label="External Id"
-    name="externalId"
-  />
-  <ConfirmationWrapper
-    mainText="Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
-    secondaryText="Are you sure you want to continue?"
-  >
-    <ToggleField
-      data-automation="sharedToggle"
-      disabled={false}
-      id="frm-reason-shared"
-      label="Shared"
-      name="shared"
-      title="Change \\"Shared\\" state for this Presence Reason"
-    />
-  </ConfirmationWrapper>
+  <styled.div>
+    <Connect(DetailWrapper)
+      data-automation="reasonsDetailsSVG"
+      open={true}
+    >
+      <Styled(DetailHeader)
+        text="Details"
+      />
+      <InputField
+        componentType="input"
+        data-automation="nameInput"
+        disabled={false}
+        id="frm-reason-name"
+        inputType="text"
+        label="Name *"
+        name="name"
+      />
+      <InputField
+        componentType="textarea"
+        data-automation="descriptionInput"
+        disabled={false}
+        id="frm-reason-description"
+        inputType="text"
+        label="Description"
+        name="description"
+      />
+      <InputField
+        componentType="input"
+        data-automation="externalIdInput"
+        disabled={false}
+        id="frm-reason-external-id"
+        inputType="text"
+        label="External Id"
+        name="externalId"
+      />
+      <ConfirmationWrapper
+        mainText="Setting shared to 'enabled' for this Presence Reason. Once a Presence Reason is enabled and saved, it cannot be reverted."
+        secondaryText="Are you sure you want to continue?"
+      >
+        <ToggleField
+          data-automation="sharedToggle"
+          disabled={false}
+          id="frm-reason-shared"
+          label="Shared"
+          name="shared"
+          title="Change \\"Shared\\" state for this Presence Reason"
+        />
+      </ConfirmationWrapper>
+    </Connect(DetailWrapper)>
+  </styled.div>
 </form>
 `;

@@ -8,17 +8,22 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { SidePanelTable, DetailHeader } from 'cx-ui-components';
+import DetailWrapper from '../../../components/DetailWrapper';
 import { detailHeaderText } from '../../../utils';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
 `;
 
 export default function IntegrationsDetailsPanel({
@@ -40,13 +45,11 @@ export default function IntegrationsDetailsPanel({
     <Wrapper className="dtpanel-entity-integrations">
       {children}
       {(integrationType === 'facebook' || integrationType === 'email' || integrationType === 'salesforce') && (
-        <Fragment>
-          <DetailHeader
+        <DetailWrapper open data-automation="integrationListenersSVG">
+          <WrappedDetailHeader
             userHasUpdatePermission={!integrationsFetching && !inherited && userHasUpdatePermission}
             text={detailHeaderText(listenersItems, 'Listener(s)')}
             onActionButtonClick={() => setSelectedSubEntityId('listeners')}
-            inherited={inherited}
-            open
           />
           <SidePanelTable
             tableType={'sidePanel'}
@@ -58,20 +61,19 @@ export default function IntegrationsDetailsPanel({
             fetching={integrationsFetching && !listenersItems.length}
             itemApiPending={itemApiPending}
           />
-        </Fragment>
+        </DetailWrapper>
       )}
       {integrationType === 'twilio' && (
-        <Fragment>
-          <DetailHeader
+        <DetailWrapper open data-automation="twilioGlobalDialParamsSVG">
+          <WrappedDetailHeader
             userHasUpdatePermission={
               !integrationsFetching &&
               !inherited &&
               userHasUpdatePermission &&
               sidePanelUpdatePermissions.twilioGlobalDialParams
             }
-            text={`Global Dial Parameters`}
+            text={detailHeaderText(globalDialParamsItems, 'Global Dial Parameters')}
             onActionButtonClick={() => setSelectedSubEntityId('twilioGlobalDialParams')}
-            open
           />
           <SidePanelTable
             tableType={'sidePanel'}
@@ -84,7 +86,7 @@ export default function IntegrationsDetailsPanel({
             fetching={integrationsFetching && !globalDialParamsItems.length}
             itemApiPending={itemApiPending}
           />
-        </Fragment>
+        </DetailWrapper>
       )}
     </Wrapper>
   );

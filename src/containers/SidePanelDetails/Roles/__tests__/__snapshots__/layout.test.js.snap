@@ -5,17 +5,21 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel 1`] = `
   id="dtpanel-roles"
 >
   Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
+  <Connect(DetailWrapper)
+    data-automation="rolesPermissionsSVG"
     open={true}
-    text="undefined Permissions"
-    userHasUpdatePermission={true}
-  />
-  <_class
-    deleteSubEntity={[Function]}
-    tableType="sidePanel"
-    userHasUpdatePermission={true}
-  />
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text="Permissions"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      deleteSubEntity={[Function]}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;
 
@@ -24,16 +28,20 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with no update permisi
   id="dtpanel-roles"
 >
   Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
+  <Connect(DetailWrapper)
+    data-automation="rolesPermissionsSVG"
     open={true}
-    text="undefined Permissions"
-    userHasUpdatePermission={false}
-  />
-  <_class
-    tableType="sidePanel"
-    userHasUpdatePermission={false}
-  />
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text="Permissions"
+      userHasUpdatePermission={false}
+    />
+    <_class
+      tableType="sidePanel"
+      userHasUpdatePermission={false}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;
 
@@ -42,16 +50,20 @@ exports[`<RolesDetailsPanel /> renders Roles detailsPanel with status disabled 1
   id="dtpanel-roles"
 >
   Mock Child
-  <DetailHeader
-    onActionButtonClick={[Function]}
+  <Connect(DetailWrapper)
+    data-automation="rolesPermissionsSVG"
     open={true}
-    text="undefined Permissions"
-    userHasUpdatePermission={true}
-  />
-  <_class
-    deleteSubEntity={[Function]}
-    tableType="sidePanel"
-    userHasUpdatePermission={true}
-  />
+  >
+    <Styled(DetailHeader)
+      onActionButtonClick={[Function]}
+      text="Permissions"
+      userHasUpdatePermission={true}
+    />
+    <_class
+      deleteSubEntity={[Function]}
+      tableType="sidePanel"
+      userHasUpdatePermission={true}
+    />
+  </Connect(DetailWrapper)>
 </styled.div>
 `;
