@@ -28,20 +28,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.88.1] - 2020-09-30
+### Fixed
+- CXV1-23166 - Integrations2 Listeners not updating to disabled (visually) when integration is disabled until refresh.
+
 ## [0.88.0] - 2020-09-09
 ### Added
 - CXV1-22950 - Config 2 - Wrap all SidePanelDetails into Collapsable Component.
 
 ## [0.87.2] - 2020-09-29
-### Added
+### Changed
 - CXV1-23145 - Updating Existing Salesforce Listener shows "Created Successfully" message.
 
 ## [0.87.1] - 2020-09-29
-### Added
+### Changed
 - CXV1-23144 - Integrations "Status" column should be set to "all" by default.
 
 ## [0.87.0] - 2020-09-28
-### Added
+### Fixed
 - CXV1-23143 - Integrations2 status in main pane / status toggle not updating when integration is enabled or disabled.
 
 ## [0.86.0] - 2020-09-22

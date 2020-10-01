@@ -1057,10 +1057,23 @@ export default function reducer(state = initialState, action) {
 
         if (action.entityName === 'tenants') {
           return updatedState;
-        } else if (action.entityName === 'integrations' && result.type === 'twilio') {
-          return updatedState
-            .setIn([action.entityName, 'selectedSubEntityId'], undefined)
-            .setIn([action.entityName, 'data', entityIndex, 'updating'], false);
+        } else if (action.entityName === 'integrations') {
+          if (result.type === 'twilio') {
+            return updatedState
+              .setIn([action.entityName, 'selectedSubEntityId'], undefined)
+              .setIn([action.entityName, 'data', entityIndex, 'updating'], false);
+          } else if (
+            (result.type === 'email' || result.type === 'facebook' || result.type === 'salesforce') &&
+            !result.active
+          ) {
+            return updatedState
+              .updateIn([action.entityName, 'data', entityIndex, 'listeners'], listeners =>
+                listeners.map(listener => listener.set('active', false))
+              )
+              .setIn([action.entityName, 'data', entityIndex, 'updating'], false);
+          } else {
+            return updatedState.setIn([action.entityName, 'data', entityIndex, 'updating'], false);
+          }
         } else {
           return updatedState.setIn([action.entityName, 'data', entityIndex, 'updating'], false);
         }
