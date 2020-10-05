@@ -24,7 +24,7 @@ const CenterWrapper = styled.div`
 `;
 
 export const helperFunctions = {
-  directionFilter: (onChange, tableType, isAllOptionActive) => directionFilter(onChange, tableType, isAllOptionActive),
+  directionFilter: (onChange, tableType, areAllActive) => directionFilter(onChange, tableType, areAllActive),
   filterMethod: ({ value = 'All', id }, row) => {
     if (value === 'Inbound') {
       return row[id] === 'inbound';
@@ -48,7 +48,7 @@ export default function(
   menuOpen,
   isUpdating,
   supervisorHasUpdatePermission,
-  isAllOptionActive
+  areAllActive
 ) {
   const directionColumn = {
     Header: 'Work Mode',
@@ -76,7 +76,7 @@ export default function(
         </CenterWrapper>
       ),
     filterMethod: (filter, row) => helperFunctions.filterMethod(filter, row),
-    Filter: ({ onChange }) => helperFunctions.directionFilter(onChange, tableType, isAllOptionActive),
+    Filter: ({ onChange }) => helperFunctions.directionFilter(onChange, tableType, areAllActive),
     getProps: () => {
       // We add this property to ensure popup will
       // be fully displayed on screen
@@ -90,7 +90,7 @@ export default function(
   return directionColumn;
 }
 
-function directionFilter(onChange, tableType, isAllOptionActive) {
+function directionFilter(onChange, tableType, areAllActive) {
   return (
     <CheckboxFilterMenu
       menuType="Direction"
@@ -99,7 +99,7 @@ function directionFilter(onChange, tableType, isAllOptionActive) {
       buttonType="columnFilter"
       selectionType="select"
       updateFilter={onChange}
-      hasActiveFilter={!isAllOptionActive}
+      hasActiveFilter={!areAllActive}
     >
       Work Mode
     </CheckboxFilterMenu>

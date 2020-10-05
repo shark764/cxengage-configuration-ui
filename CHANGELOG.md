@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.88.2] - 2020-09-28
+### Fixed
+- CXV1-23173 - Agent State Monitoring - User with no skills/groups not showing up even if 'All' selected in skills/groups filter
+
 ## [0.88.1] - 2020-09-30
 ### Fixed
 - CXV1-23166 - Integrations2 Listeners not updating to disabled (visually) when integration is disabled until refresh.

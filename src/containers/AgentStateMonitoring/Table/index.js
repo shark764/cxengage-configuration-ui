@@ -4,8 +4,7 @@ import {
   areAllColNotActive,
   selectVisibleSubMenu,
   activeMenuItems,
-  areAllActive,
-  isAllOptionActive
+  areAllActive
 } from '../../../redux/modules/columnFilterMenus/selectors';
 import {
   setSorted,
@@ -51,8 +50,8 @@ export const mapStateToProps = (state, props) => ({
     skills: areAllActive(state, { ...props, menuType: 'Skills' }),
     groups: areAllActive(state, { ...props, menuType: 'Groups' }),
     reasons: areAllActive(state, { ...props, menuType: 'ReasonLists' }),
-    direction: isAllOptionActive(state, { ...props, menuType: 'Direction' }),
-    state: isAllOptionActive(state, { ...props, menuType: 'PresenceState' })
+    direction: areAllActive(state, { ...props, menuType: 'Direction' }),
+    state: areAllActive(state, { ...props, menuType: 'PresenceState' })
   },
   tableData: selectAgentStateMonitoringTableDataJS(state, props),
   expanded: selectAgentStateMonitoringExpanded(state, props),

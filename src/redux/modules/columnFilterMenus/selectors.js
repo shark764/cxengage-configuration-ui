@@ -44,12 +44,11 @@ export const selectVisibleSubMenu = createSelector([menu], menu => menu.get('vis
 export const areAllActive = createSelector(
   [menuItems],
   // If filter items list is empty, then we show all rows
-  menuItems => (menuItems.size > 0 ? menuItems.filter(item => !item.get('active')).size === 0 : true)
-);
-
-export const isAllOptionActive = createSelector(
-  [menuItems],
-  menuItems => menuItems.filter(item => item.get('name') === 'All' && item.get('active')).size > 0
+  menuItems =>
+    menuItems.size > 0
+      ? menuItems.filter(item => !item.get('active')).size === 0 ||
+        menuItems.filter(item => item.get('name') === 'All' && item.get('active')).size > 0
+      : true
 );
 
 export const totalRatio = createSelector([menuItems], menuItems => {

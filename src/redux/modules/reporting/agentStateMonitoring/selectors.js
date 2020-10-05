@@ -4,7 +4,7 @@
 
 import { createSelector } from 'reselect';
 import { fromJS, List } from 'immutable';
-import { activeMenuItems } from '../../columnFilterMenus/selectors';
+import { activeMenuItems, areAllActive } from '../../columnFilterMenus/selectors';
 
 const selectAgentStateMonitoringMap = state => state.get('AgentStateMonitoring');
 
@@ -24,65 +24,85 @@ const AGENT_STATE_MONITORING_FILTER_NAMES = [
 export const getActiveAgentStateMonitoringFilters = (state, props) =>
   fromJS(
     AGENT_STATE_MONITORING_FILTER_NAMES.reduce(
-      (entityFilters, entityName) => ({
+      (entityFilters, entityName) => [
         ...entityFilters,
-        [entityName]: activeMenuItems(state, { ...props, menuType: entityName })
-      }),
-      {}
+        {
+          name: entityName,
+          menuItems: activeMenuItems(state, { ...props, menuType: entityName }),
+          allActive: areAllActive(state, { ...props, menuType: entityName })
+        }
+      ],
+      []
     )
   );
 
+const menuNameToDataIdName = menuName =>
+  menuName.charAt(0).toLowerCase() + menuName.substring(1, menuName.length - 1) + 'Ids';
+
+const isDataMatchingFilter = (data, filter, propNameForMatch = '') => {
+  const menuItems = filter.get('menuItems');
+  const menuItemAll = menuItems.find(menuItem => menuItem.get('name') === 'All');
+  if (menuItemAll || filter.get('allActive')) {
+    // All active, data matches by default.
+    return true;
+  } else if (menuItems.size <= 0) {
+    // Edge case: nothing selected for a filter, or a tenant with no skills/groups/reasonLists enabled.
+    return false;
+  }
+  if (menuItems.getIn([0, 'id'])) {
+    // Match on ID.
+    return data
+      .get(menuNameToDataIdName(filter.get('name')))
+      .some(menuItemId => menuItems.find(menuItem => menuItem.get('id') === menuItemId));
+  } else {
+    // Match on name.
+    return menuItems.some(menuItem => menuItem.get('name').toLowerCase() === data.get(propNameForMatch).toLowerCase());
+  }
+};
+
 export const selectAgentStateMonitoringTableDataJS = createSelector(
   [selectAgentStateMonitoringMap, getActiveAgentStateMonitoringFilters],
-  (agentMonitoring, filterLists) =>
+  (agentMonitoring, filters) =>
     // Filtering data according to the user's filter selections.
     agentMonitoring
       .get('data')
-      .filter(data => {
-        // Edge case: tenant with no skills/groups/reasonLists enabled.
-        if (
-          filterLists.get('Skills').size === 0 ||
-          filterLists.get('Groups').size === 0 ||
-          filterLists.get('ReasonLists').size === 0
-        ) {
-          return false;
-        }
-        // For filters that have IDs, simplify into just the IDs.
-        const activeSkillIds = filterLists.get('Skills').map(skill => skill.get('id'));
-        const activeGroupIds = filterLists.get('Groups').map(group => group.get('id'));
-        const activeReasonIds = filterLists.get('ReasonLists').map(reason => reason.get('id'));
-        const isAllActive = menuType =>
-          filterLists.get(menuType).some(dir => dir.get('name') === 'All' && dir.get('active'));
-        // Skill, group, reason, and channelType are checkboxes, so if ANY filter matches the data, we keep the data.
-        const skillMatch = data
-          .get('skillIds')
-          .some(skillId => activeSkillIds.find(activeSkillId => activeSkillId === skillId) !== undefined);
-        const groupMatch = data
-          .get('groupIds')
-          .some(groupId => activeGroupIds.find(activeGroupId => activeGroupId === groupId) !== undefined);
-        const reasonMatch =
-          data.get('presence') === 'ready' || activeReasonIds.find(reasonId => reasonId === data.get('reasonId'));
-        const channelTypeMatch = filterLists.get('ChannelType').some(channelType => {
-          // Convert channelType from Normal Form -> camelCase.
-          const channelTypeName = channelType
-            .get('name')
-            .toLowerCase()
-            .replace(/\s./g, match => match.trim().toUpperCase());
-          return data.getIn(['channelTypes', channelTypeName, 'active']) === 0;
-        });
-        // Direction and presenceState are radio buttons, so only keep data if there is exact match or 'All' is selected.
-        const directionMatch =
-          isAllActive('Direction') ||
-          filterLists
-            .get('Direction')
-            .some(direction => direction.get('name').toLowerCase() === data.get('direction').toLowerCase());
-        const presenceMatch =
-          isAllActive('PresenceState') ||
-          filterLists
-            .get('PresenceState')
-            .some(presenceState => presenceState.get('name').toLowerCase() === data.get('currentState').toLowerCase());
-        return skillMatch && groupMatch && reasonMatch && channelTypeMatch && directionMatch && presenceMatch;
-      })
+      .filter(data =>
+        filters.reduce((currentResult, filter) => {
+          switch (filter.get('name')) {
+            // Skill, group, reason, and channelType are checkboxes -> if ANY filter matches we keep the data.
+            case 'Skills':
+            case 'Groups':
+              return currentResult && isDataMatchingFilter(data, filter);
+            case 'ReasonLists':
+              // If user is in Ready state, they won't have a valid reasonId applied.
+              return (
+                currentResult &&
+                (data.get('presence') === 'ready' ||
+                  filter.get('menuItems').find(menuItem => menuItem.get('id') === data.get('reasonId')))
+              );
+            case 'ChannelType':
+              // ChannelTypes filter list is nested and requires some extra work to scan.
+              return (
+                currentResult &&
+                filter.get('menuItems').some(channelType => {
+                  // Convert channelType from Normal Form -> camelCase.
+                  const channelTypeName = channelType
+                    .get('name')
+                    .toLowerCase()
+                    .replace(/\s./g, match => match.trim().toUpperCase());
+                  return data.getIn(['channelTypes', channelTypeName, 'active']) === 0;
+                })
+              );
+            // Direction and presenceState are radio buttons -> keep data if there is exact match or 'All' selected.
+            case 'Direction':
+              return currentResult && isDataMatchingFilter(data, filter, 'direction');
+            case 'PresenceState':
+              return currentResult && isDataMatchingFilter(data, filter, 'currentState');
+            default:
+              return currentResult;
+          }
+        }, true)
+      )
       .toJS()
 );
 
