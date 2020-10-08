@@ -117,7 +117,7 @@ describe('createFormName', () => {
 });
 
 describe('formSubmission', () => {
-  const values = { id: 'mockId', name: 'mockName' };
+  const values = fromJS({ id: 'mockId', name: 'mockName', type: 'mockType' });
   const dispatch = action => action;
   const props = { dirty: true };
   it('returns proper values', () => {

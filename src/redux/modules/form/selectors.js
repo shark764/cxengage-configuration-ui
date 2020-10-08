@@ -57,7 +57,14 @@ export const selectFormInitialValues = state => {
   }
 };
 
-export const formSubmission = (values, dispatch, props) => dispatch(onFormSubmit(values, props));
+export const formSubmission = (values, dispatch, props) => {
+  if (values.get('type') === 'email') {
+    const parsedSMTPPort = values.getIn(['properties', 'smtpPort']).toString();
+    const updatedState = values.setIn(['properties', 'smtpPort'], parsedSMTPPort);
+    return dispatch(onFormSubmit(updatedState, props));
+  }
+  return dispatch(onFormSubmit(values, props));
+};
 
 export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onSubEntityFormSubmit(values, props));
 

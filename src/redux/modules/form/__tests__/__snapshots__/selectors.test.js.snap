@@ -10,9 +10,10 @@ exports[`formSubmission returns proper values 1`] = `
 Object {
   "dirty": true,
   "type": "FORM_SUBMIT",
-  "values": Object {
+  "values": Immutable.Map {
     "id": "mockId",
     "name": "mockName",
+    "type": "mockType",
   },
 }
 `;

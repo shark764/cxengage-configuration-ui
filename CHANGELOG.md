@@ -28,9 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.88.3] - 2020-10-07
+### Fixed
+- CXV1-23138 - Email Integrations Version 2 not allowing to save changes.
+
 ## [0.88.2] - 2020-09-28
 ### Fixed
-- CXV1-23173 - Agent State Monitoring - User with no skills/groups not showing up even if 'All' selected in skills/groups filter
+- CXV1-23173 - Agent State Monitoring - User with no skills/groups not showing up even if 'All' selected in skills/groups filter.
 
 ## [0.88.1] - 2020-09-30
 ### Fixed
