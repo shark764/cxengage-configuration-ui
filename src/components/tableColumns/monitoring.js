@@ -45,6 +45,7 @@ const FillerSpaceIcon = styled.div`
 const PopoverMenu = styled(PopoverDialog)`
   top: 24px;
   padding-bottom: 15px;
+  right: calc(50% - 100px);
 `;
 const MonitoringContainer = styled.div`
   position: relative;

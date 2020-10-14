@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.88.4] - 2020-10-05
+### Fixed
+- CXV1-22979 - scroll with silent motioning drop down list.
+
 ## [0.88.3] - 2020-10-07
 ### Fixed
 - CXV1-23138 - Email Integrations Version 2 not allowing to save changes.

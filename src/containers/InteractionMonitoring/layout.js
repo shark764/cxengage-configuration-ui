@@ -37,6 +37,7 @@ const Wrapper = styled.div`
 injectGlobal`
 .InteractionMonitoringTable .rt-tbody {
   overflow-y: overlay;
+  overflow-x: hidden;
 }
 .InteractionMonitoringTable .rt-resizer {
   z-index: 2 !important;
