@@ -14,13 +14,13 @@ import { DetailHeader, InputField } from 'cx-ui-components';
 import DetailWrapper from '../../../../components/DetailWrapper';
 import styled from 'styled-components';
 
-export default function ClientForm({ isSaving, inherited, userHasUpdatePermission, initialValues }) {
-  const WrappedDetailHeader = styled(DetailHeader)`
-    margin-left: 35px;
-  `;
+const WrappedDetailHeader = styled(DetailHeader)`
+  margin-left: 35px;
+`;
 
+export default function ClientForm({ isSaving, inherited, userHasUpdatePermission }) {
   return (
-    <DetailWrapper open={true} data-automation="clientPropertiesSVG">
+    <DetailWrapper open data-automation="clientPropertiesSVG">
       <WrappedDetailHeader text="Properties" />
       <InputField
         name="properties.accessKey"
@@ -45,7 +45,6 @@ export default function ClientForm({ isSaving, inherited, userHasUpdatePermissio
 }
 
 ClientForm.propTypes = {
-  initialValues: PropTypes.object,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool

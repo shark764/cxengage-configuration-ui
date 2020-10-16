@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.88.5] - 2020-10-13
+### Fixed
+- CXV1-23201 - Integrations Page - Losing focus after typing the first character in Properties Fields.
+
 ## [0.88.4] - 2020-10-05
 ### Fixed
 - CXV1-22979 - scroll with silent motioning drop down list.

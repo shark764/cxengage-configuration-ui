@@ -8,13 +8,13 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { InputField } from 'cx-ui-components';
 
-export default function DefaultForm({ isSaving, inherited, userHasUpdatePermission, initialValues }) {
+export default function DefaultForm({ isSaving, inherited, userHasUpdatePermission }) {
   return (
-    <Fragment>
+    <>
       <InputField
         name="name"
         label="Name *"
@@ -32,12 +32,11 @@ export default function DefaultForm({ isSaving, inherited, userHasUpdatePermissi
         data-automation="integrationsDescription"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
-    </Fragment>
+    </>
   );
 }
 
 DefaultForm.propTypes = {
-  initialValues: PropTypes.object,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool

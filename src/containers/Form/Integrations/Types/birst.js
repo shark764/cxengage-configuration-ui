@@ -8,13 +8,13 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { DetailHeader, InputField } from 'cx-ui-components';
 
 export default function BirstForm({ isSaving, inherited, userHasUpdatePermission }) {
   return (
-    <Fragment>
+    <>
       <DetailHeader text="Properties" />
       <InputField
         name="properties.birstBaseUrl"
@@ -66,12 +66,11 @@ export default function BirstForm({ isSaving, inherited, userHasUpdatePermission
         disabled={isSaving || inherited || !userHasUpdatePermission}
         maskValue
       />
-    </Fragment>
+    </>
   );
 }
 
 BirstForm.propTypes = {
-  initialValues: PropTypes.object,
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool
