@@ -79,21 +79,36 @@ Object {
     "form": "contactLayouts:create",
   },
   "payload": Object {
-    "layout": Immutable.List [
-      Immutable.Map {
-        "draggableUUID": "mockUUID",
-        "name": "mockContactAttributeName1",
-        "endpointUUID": "mockUUID",
-        "label": Immutable.Map {
-          "name": "Mandatory Attributes",
+    "id": "mockContactLayoutId",
+    "layout": Array [
+      Object {
+        "categoryUUID": "mockCategoryUUID1",
+        "contactAttributeId": "mockContactAttributeId1",
+        "draggableUUID": "mockDraggableUUID1",
+        "droppableUUID": "mockDroppableUUID1",
+        "endpointUUID": "mockEndpointUUID1",
+        "hierarchy": "mockHierarchy1",
+        "label": Object {
+          "en-US": "hierarchyInEnglish",
+          "fr-CA": "hierarchyInFrench",
         },
-        "hierarchy": "Mandatory Attributes",
-        "droppableUUID": "mockUUID",
-        "contactAttributeId": "mockcontactAttributeId1",
-        "categoryUUID": "mockUUID",
-        "mandatory": true,
+        "name": "mockContactAttributeName1",
+      },
+      Object {
+        "categoryUUID": "mockCategoryUUID2",
+        "contactAttributeId": "mockContactAttributeId2",
+        "draggableUUID": "mockDraggableUUID2",
+        "droppableUUID": "mockDroppableUUID2",
+        "endpointUUID": "mockEndpointUUID2",
+        "hierarchy": "mockHierarchy2",
+        "label": Object {
+          "en-US": "hierarchyInEnglish",
+          "fr-CA": "hierarchyInFrench",
+        },
+        "name": "mockContactAttributeName2",
       },
     ],
+    "name": "mockLayoutName",
   },
   "type": "@@redux-form/INITIALIZE",
 }

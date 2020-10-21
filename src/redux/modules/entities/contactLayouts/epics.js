@@ -45,7 +45,11 @@ export const InitContactLayoutsForm = (action$, store) =>
     )
     .map(a => {
       if (a.entityId === 'create') {
-        if (a.mandatoryContactAttributes && a.mandatoryContactAttributes.size > 0) {
+        if (
+          a.mandatoryContactAttributes &&
+          a.mandatoryContactAttributes.size > 0 &&
+          Object.keys(a.currentFormValues).length === 0
+        ) {
           a.result = {
             layout: a.mandatoryContactAttributes.reduce(
               (acc, currentAttribute, idx) =>
@@ -65,6 +69,8 @@ export const InitContactLayoutsForm = (action$, store) =>
               List()
             )
           };
+        } else if (Object.keys(a.currentFormValues).length > 0) {
+          a.result = { ...a.currentFormValues };
         } else {
           a.result = { ...a.currentFormValues, layout: [] };
         }

@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.88.7] - 2020-10-19
+### Fixed
+- CXV1-23186 - Config2 | Contact Layout | Creating layout and click create button doesn't show unsaved changes prompt.
+
 ## [0.88.6] - 2020-10-20
 ### Changed
 - CXV1-23063 - Twilio Regions Update (Add Sydney, Frankfurt & Tokyo Interconnect Regions; Remove US West Coast region)
