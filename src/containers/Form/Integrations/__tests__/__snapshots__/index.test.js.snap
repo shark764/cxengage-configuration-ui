@@ -37,6 +37,10 @@ exports[`Integrations Renders renders 1`] = `
         "value": "br1",
       },
       Object {
+        "label": "Germany",
+        "value": "de1",
+      },
+      Object {
         "label": "Ireland",
         "value": "ie1",
       },
@@ -53,20 +57,32 @@ exports[`Integrations Renders renders 1`] = `
         "value": "us1",
       },
       Object {
-        "label": "Virginia Interconnect",
-        "value": "us1-tnx",
+        "label": "Interconnect - Australia (Sydney)",
+        "value": "au1-ix",
       },
       Object {
-        "label": "Oregon Interconnect",
-        "value": "us2-tnx",
+        "label": "Interconnect - Germany (Frankfurt)",
+        "value": "de1-ix",
       },
       Object {
-        "label": "Germany",
-        "value": "de1",
-      },
-      Object {
-        "label": "Ireland Interconnect",
+        "label": "Interconnect - Ireland",
         "value": "ie1-tnx",
+      },
+      Object {
+        "label": "Interconnect - Japan (Tokyo)",
+        "value": "jp1-ix",
+      },
+      Object {
+        "label": "Interconnect - Singapore",
+        "value": "sg1-ix",
+      },
+      Object {
+        "label": "Interconnect - US East Coast (Virginia)",
+        "value": "us1-ix",
+      },
+      Object {
+        "label": "Interconnect - US West Coast (Oregon)",
+        "value": "us2-ix",
       },
     ]
   }
@@ -141,6 +157,10 @@ Object {
       "value": "br1",
     },
     Object {
+      "label": "Germany",
+      "value": "de1",
+    },
+    Object {
       "label": "Ireland",
       "value": "ie1",
     },
@@ -157,20 +177,32 @@ Object {
       "value": "us1",
     },
     Object {
-      "label": "Virginia Interconnect",
-      "value": "us1-tnx",
+      "label": "Interconnect - Australia (Sydney)",
+      "value": "au1-ix",
     },
     Object {
-      "label": "Oregon Interconnect",
-      "value": "us2-tnx",
+      "label": "Interconnect - Germany (Frankfurt)",
+      "value": "de1-ix",
     },
     Object {
-      "label": "Germany",
-      "value": "de1",
-    },
-    Object {
-      "label": "Ireland Interconnect",
+      "label": "Interconnect - Ireland",
       "value": "ie1-tnx",
+    },
+    Object {
+      "label": "Interconnect - Japan (Tokyo)",
+      "value": "jp1-ix",
+    },
+    Object {
+      "label": "Interconnect - Singapore",
+      "value": "sg1-ix",
+    },
+    Object {
+      "label": "Interconnect - US East Coast (Virginia)",
+      "value": "us1-ix",
+    },
+    Object {
+      "label": "Interconnect - US West Coast (Oregon)",
+      "value": "us2-ix",
     },
   ],
   "rtaEnabled": undefined,

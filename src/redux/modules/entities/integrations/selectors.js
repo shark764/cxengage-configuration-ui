@@ -56,14 +56,18 @@ export const getTwilioRegions = () => [
   { awsId: null, twilioId: 'gll', display: 'Global Low Latency' },
   { awsId: 'ap-southeast-2', twilioId: 'au1', display: 'Australia' },
   { awsId: 'sa-east-1', twilioId: 'br1', display: 'Brazil' },
+  { awsId: 'eu-central-1', twilioId: 'de1', display: 'Germany' },
   { awsId: 'us-west-1', twilioId: 'ie1', display: 'Ireland' },
   { awsId: 'ap-northeast-1', twilioId: 'jp1', display: 'Japan' },
   { awsId: 'ap-southeast-1', twilioId: 'sg1', display: 'Singapore' },
   { awsId: 'us-east-1', twilioId: 'us1', display: 'US East Coast (Virginia)' },
-  { awsId: null, twilioId: 'us1-tnx', display: 'Virginia Interconnect' },
-  { awsId: null, twilioId: 'us2-tnx', display: 'Oregon Interconnect' },
-  { awsId: 'eu-central-1', twilioId: 'de1', display: 'Germany' },
-  { awsId: 'eu-west-1', twilioId: 'ie1-tnx', display: 'Ireland Interconnect' }
+  { awsId: null, twilioId: 'au1-ix', display: 'Interconnect - Australia (Sydney)' },
+  { awsId: null, twilioId: 'de1-ix', display: 'Interconnect - Germany (Frankfurt)' },
+  { awsId: 'eu-west-1', twilioId: 'ie1-tnx', display: 'Interconnect - Ireland' },
+  { awsId: null, twilioId: 'jp1-ix', display: 'Interconnect - Japan (Tokyo)' },
+  { awsId: null, twilioId: 'sg1-ix', display: 'Interconnect - Singapore' },
+  { awsId: null, twilioId: 'us1-ix', display: 'Interconnect - US East Coast (Virginia)' },
+  { awsId: null, twilioId: 'us2-ix', display: 'Interconnect - US West Coast (Oregon)' },
 ];
 
 export const selectTwilioRegions = state =>
