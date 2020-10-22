@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.88.8] - 2020-10-20
+### Fixed
+- CXV1-18402 - Contact Attributes - Trying to disable a mandatory attribute needs error banner fixed.
+
 ## [0.88.7] - 2020-10-19
 ### Fixed
 - CXV1-23186 - Config2 | Contact Layout | Creating layout and click create button doesn't show unsaved changes prompt.

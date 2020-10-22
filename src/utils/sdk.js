@@ -123,13 +123,17 @@ export const errorManager = error => {
   if (
     error.data &&
     error.data.apiResponse &&
-    error.data.apiResponse.apiResponse &&
-    error.data.apiResponse.apiResponse.response &&
-    error.data.apiResponse.apiResponse.response.error
+    ((error.data.apiResponse.apiResponse &&
+      error.data.apiResponse.apiResponse.response &&
+      error.data.apiResponse.apiResponse.response.error) ||
+      (error.data.apiResponse.response && error.data.apiResponse.response.error))
   ) {
     let code = error.data.apiResponse.status;
-    let responseError = error.data.apiResponse.apiResponse.response.error;
-
+    let responseError =
+      (error.data.apiResponse &&
+        error.data.apiResponse.apiResponse &&
+        error.data.apiResponse.apiResponse.response.error) ||
+      error.data.apiResponse.response.error;
     if (responseError instanceof Array) {
       messageFromAPI = responseError[0];
     } else if (typeof responseError === 'object') {
