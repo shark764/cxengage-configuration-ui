@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.89.0] - 2020-10-20
+### Changed
+- CXV1-23153 - ChatWidgets - Add prechat none radio button
+
 ## [0.88.8] - 2020-10-20
 ### Fixed
 - CXV1-18402 - Contact Attributes - Trying to disable a mandatory attribute needs error banner fixed.

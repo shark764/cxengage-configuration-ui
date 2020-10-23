@@ -139,6 +139,10 @@ exports[`<ChatWidgetsForm /> renders create chatWidgets 1`] = `
           "label": "Email",
           "value": "email",
         },
+        Object {
+          "label": "None",
+          "value": "none",
+        },
       ]
     }
     required={true}
@@ -318,6 +322,10 @@ exports[`<ChatWidgetsForm /> renders update chatWidgets 1`] = `
         Object {
           "label": "Email",
           "value": "email",
+        },
+        Object {
+          "label": "None",
+          "value": "none",
         },
       ]
     }

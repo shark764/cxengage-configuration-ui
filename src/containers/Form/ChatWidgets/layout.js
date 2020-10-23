@@ -202,7 +202,11 @@ export default function ChatWidgetsForm({
         label="Prechat Capture"
         data-automation="prechatCaptureRadio"
         disabled={disabled}
-        options={[{ label: 'Name', value: 'name' }, { label: 'Email', value: 'email' }]}
+        options={[
+          { label: 'Name', value: 'name' },
+          { label: 'Email', value: 'email' },
+          { label: 'None', value: 'none' }
+        ]}
         required
       />
 
