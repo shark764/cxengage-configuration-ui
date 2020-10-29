@@ -83,7 +83,21 @@ export const createDraft = ($action, store) =>
             description: a.values.description
           }),
           ...(a.values.timezone && { timezone: a.values.timezone }),
-          ...(a.values.rules && { rules: a.values.rules })
+          ...(a.values.rules && {
+            rules: a.values.rules.map(({ description, on, on: { type, value } = {}, repeats, ...rule }) => ({
+              ...rule,
+              ...(description != null && { description }),
+              ...(on && value && value === 'day'
+                ? {
+                    on: {
+                      type: value,
+                      value: type
+                    }
+                  }
+                : on ? { on } : {}),
+              ...(repeats && repeats !== 'none' && { repeats })
+            }))
+          })
         },
         apiVersion: 'v2',
         command: 'createBusinessHourV2Draft',
@@ -251,6 +265,7 @@ export const UpdateDraft = (action$, store) =>
             endDate,
             startDate,
             on,
+            on: { type: onType, value } = {},
             hours: { intervals },
             hours,
             description,
@@ -271,13 +286,20 @@ export const UpdateDraft = (action$, store) =>
                   endDate: moment.utc([end.getFullYear(), end.getMonth(), end.getDate()]).format()
                 }
               : {}),
-            ...(on && { on }),
+            ...(on && value && value === 'day'
+              ? {
+                  on: {
+                    type: value,
+                    value: onType
+                  }
+                }
+              : on ? { on } : {}),
             hours: {
               ...hours,
               ...(intervals && { intervals })
             },
             ...(every && { every }),
-            ...(repeats && { repeats })
+            ...(repeats && repeats !== 'none' && { repeats })
           };
         });
       const sdkCall = {
@@ -403,11 +425,23 @@ export const PublishDraft = (action$, store) =>
     .ofType('PUBLISH_BUSINESS_HOURS_V2_DRAFT')
     .map(a => {
       const businessHoursId = getSelectedEntityId(store.getState());
-      const draft = getSelectedSubEntity(store.getState());
+      const { rules, ...draft } = getSelectedSubEntity(store.getState()).toJS();
       const sdkCall = {
         path: ['business-hours', businessHoursId, 'versions'],
         data: {
-          ...draft.toJS(),
+          ...draft,
+          rules: rules.map(({ on, on: { type, value } = {}, repeats, ...rule }) => ({
+            ...rule,
+            ...(on && value && value === 'day'
+              ? {
+                  on: {
+                    type: value,
+                    value: type
+                  }
+                }
+              : on ? { on } : {}),
+            ...(repeats && repeats !== 'none' && { repeats })
+          })),
           name: a.values.get('versionName').trim()
         },
         apiVersion: 'v2',

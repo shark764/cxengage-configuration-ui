@@ -22,17 +22,6 @@ Object {
 }
 `;
 
-exports[`formValidation if a rule every attribute it's not a number when repeats it's not yearly it should return an error 2`] = `
-Object {
-  "rules": Array [
-    Object {
-      "every": true,
-      "message": "The Every field should be a number",
-    },
-  ],
-}
-`;
-
 exports[`formValidation if a rule has an endDate and it's lesser than the startDate it should return an error 1`] = `
 Object {
   "rules": Array [
@@ -143,20 +132,7 @@ Object {
 }
 `;
 
-exports[`formValidation if a rule repeats montlhly and the value attribute on the "on" attribute it's "day" and type is not within 1 and 31 (days on month), it should return an error 1`] = `
-Object {
-  "rules": Array [
-    Object {
-      "message": "The numeric value in the \\"On\\" field has to be between 1 and 31(days on a month)",
-      "on": Object {
-        "type": true,
-      },
-    },
-  ],
-}
-`;
-
-exports[`formValidation if a rule repeats montlhly or yearly and either type or value inside on are undefined it should return an error 1`] = `
+exports[`formValidation if a rule repeats monthly or yearly and either type or value inside on are undefined it should return an error 1`] = `
 Object {
   "rules": Array [
     Object {
@@ -164,6 +140,19 @@ Object {
       "on": Object {
         "type": true,
         "value": true,
+      },
+    },
+  ],
+}
+`;
+
+exports[`formValidation if a rule repeats montlhly and the value attribute on the "on" attribute it's "day" and type is not within 1 and 31 (days on month), it should return an error 1`] = `
+Object {
+  "rules": Array [
+    Object {
+      "message": "The numeric value in the \\"On\\" field has to be between 1 and 31(days on a month)",
+      "on": Object {
+        "type": true,
       },
     },
   ],
@@ -198,7 +187,7 @@ exports[`formValidation if a rule repeats yearly and the value attribute on the 
 Object {
   "rules": Array [
     Object {
-      "errorMessage": "The numeric value in the \\"On\\" field has to be between 1 and 31 (Number of days on march, considering a day more when leap year on Febraury)",
+      "message": "The numeric value in the \\"On\\" field has to be between 1 and 31 (Number of days on march, considering a day more when leap year on Febraury)",
       "on": Object {
         "type": true,
       },

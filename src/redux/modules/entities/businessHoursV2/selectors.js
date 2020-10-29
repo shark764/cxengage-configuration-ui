@@ -87,14 +87,23 @@ export const selectRules = createSelector(
         subEntity &&
         List.isList(subEntity.get('rules')) &&
         subEntity.get('rules').reduce((ruleList, rule) => {
-          const { startDate, endDate, ...r } = rule.toJS();
+          const { startDate, endDate, on, on: { type, value } = {}, repeats, ...r } = rule.toJS();
           return [
             ...ruleList,
             {
               ...r,
               id: generateUUID(),
               startDate: moment(startDate.split('T')[0]).toDate(),
-              ...(endDate ? { endDate: moment(endDate.split('T')[0]).toDate() } : {})
+              ...(endDate ? { endDate: moment(endDate.split('T')[0]).toDate() } : {}),
+              ...(on && type && value && type === 'day' && typeof value === 'number'
+                ? {
+                    on: {
+                      type: value,
+                      value: type
+                    }
+                  }
+                : on ? { on } : {}),
+              ...(!repeats ? { repeats: 'none' } : { repeats })
             }
           ];
         }, [])
@@ -111,14 +120,26 @@ export const selectRules = createSelector(
           .find(version => version.get('id') === selectedVersion)
           .get('rules')
           .reduce((ruleList, rule) => {
-            const { startDate, endDate, ...r } = rule.toJS();
+            const { startDate, endDate, on, on: { type, value } = {}, repeats, ...r } = rule.toJS();
             return [
               ...ruleList,
               {
                 ...r,
                 id: generateUUID(),
                 startDate: moment(startDate.split('T')[0]).toDate(),
-                ...(endDate ? { endDate: moment(endDate.split('T')[0]).toDate() } : {})
+                ...(endDate ? { endDate: moment(endDate.split('T')[0]).toDate() } : {}),
+                // I know this makes no sense based on the API contract file, but it's the only way to keep the inputs
+                // "consistent" and we don't end up crazy trying to figure out what to do on the business hours rule
+                // component. We change it around anyways once it needs to be sent to the API on the epics.
+                ...(on && type && value && type === 'day' && typeof value === 'number'
+                  ? {
+                      on: {
+                        type: value,
+                        value: type
+                      }
+                    }
+                  : on ? { on } : {}),
+                ...(!repeats ? { repeats: 'none' } : { repeats })
               }
             ];
           }, [])

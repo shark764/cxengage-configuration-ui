@@ -473,7 +473,8 @@ describe('PublishDraft', () => {
     getSelectedEntityId.mockReturnValue('business-hour-id');
     getSelectedSubEntity.mockReturnValue(
       Map({
-        name: 'draft name'
+        name: 'draft name',
+        rules: []
       })
     );
     getSelectedSubEntityId.mockReturnValue('draft-id');

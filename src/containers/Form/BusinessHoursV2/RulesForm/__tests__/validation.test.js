@@ -130,22 +130,6 @@ describe('formValidation', () => {
     expect(formValidation(values)).toMatchSnapshot();
   });
 
-  it("if a rule every attribute it's not a number when repeats it's not yearly it should return an error", () => {
-    const values = Map({
-      rules: List([
-        {
-          name: 'random rule',
-          type: 'blackout-exception',
-          startDate: new Date('1995-12-17T03:24:00'),
-          repeats: 'daily',
-          every: 'random string'
-        },
-        validRule
-      ])
-    });
-    expect(formValidation(values)).toMatchSnapshot();
-  });
-
   it("if a rule every attribute it's not a integer when repeats it's not yearly it should return an error", () => {
     const values = Map({
       rules: List([
@@ -179,7 +163,7 @@ describe('formValidation', () => {
     expect(formValidation(values)).toMatchSnapshot();
   });
 
-  it('if a rule repeats montlhly or yearly and either type or value inside on are undefined it should return an error', () => {
+  it('if a rule repeats monthly or yearly and either type or value inside on are undefined it should return an error', () => {
     const values = Map({
       rules: List([
         {

@@ -47,7 +47,13 @@ export const ruleValidation = (rule, rules) => {
       message: 'The rule should have a name'
     };
   } else if (
-    rules.some(r => !isEmpty(rule.name) && !isEmpty(r.name) && r.name.trim() === rule.name.trim() && r.id !== rule.id)
+    rules.some(
+      r =>
+        !isEmpty(rule.name) &&
+        !isEmpty(r.name) &&
+        r.name.toLowerCase().trim() === rule.name.toLowerCase().trim() &&
+        r.id !== rule.id
+    )
   ) {
     error = {
       name: true,
@@ -103,15 +109,17 @@ export const ruleValidation = (rule, rules) => {
   ) {
     error = {
       on: {
-        type: !rule.on || !rule.on.type,
-        value: !rule.on || !rule.on.value
+        type: rule.on && !rule.on.type,
+        value: rule.on && !rule.on.value
       },
       message: 'type or value on the "On" field is undefined'
     };
   } else if (
     !rule.type.includes('one-time') &&
     ((rule.repeats === 'monthly' || rule.repeats === 'yearly') &&
-      (rule.on && rule.on.value === 'day' && (rule.on && (isNaN(rule.on.type) || !Number.isInteger(+rule.on.type)))))
+      (rule.on &&
+        rule.on.value === 'day' &&
+        (rule.on.type && (isNaN(rule.on.type) || !Number.isInteger(+rule.on.type)))))
   ) {
     error = {
       on: {
@@ -124,6 +132,7 @@ export const ruleValidation = (rule, rules) => {
     rule.repeats === 'monthly' &&
     rule.on &&
     rule.on.value === 'day' &&
+    rule.on.type &&
     (rule.on.type < 1 || rule.on.type > 31)
   ) {
     error = {
@@ -144,7 +153,7 @@ export const ruleValidation = (rule, rules) => {
       on: {
         type: true
       },
-      errorMessage: `The numeric value in the "On" field has to be between 1 and ${
+      message: `The numeric value in the "On" field has to be between 1 and ${
         daysOnMonth[rule.every]
       } (Number of days on ${rule.every}, considering a day more when leap year on Febraury)`
     };

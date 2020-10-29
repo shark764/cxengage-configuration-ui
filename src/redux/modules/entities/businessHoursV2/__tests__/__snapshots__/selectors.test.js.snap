@@ -141,6 +141,7 @@ Array [
   Object {
     "id": "rule-id",
     "name": "rule-01",
+    "repeats": "none",
     "startDate": 2018-05-24T00:00:00.000Z,
   },
 ]
@@ -151,6 +152,7 @@ Array [
   Object {
     "id": "rule-id",
     "name": "selected-rule-name",
+    "repeats": "none",
     "startDate": 2018-05-24T00:00:00.000Z,
   },
 ]

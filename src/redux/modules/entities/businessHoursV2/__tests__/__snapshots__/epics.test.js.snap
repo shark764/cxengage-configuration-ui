@@ -28,6 +28,7 @@ Object {
     "crudAction": "create",
     "data": Object {
       "name": "Initial draft",
+      "rules": Array [],
     },
     "module": "entities",
     "path": Array [
@@ -77,6 +78,7 @@ Object {
     "crudAction": "create",
     "data": Object {
       "name": "Initial draft",
+      "rules": Array [],
     },
     "module": "entities",
     "path": Array [
@@ -114,6 +116,7 @@ Object {
     "crudAction": "create",
     "data": Object {
       "name": "Initial draft",
+      "rules": Array [],
     },
     "module": "entities",
     "path": Array [

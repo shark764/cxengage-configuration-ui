@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.89.1] - 2020-10-23
+### Fixed
+- CXV1-23253 - Day input in Business Hours rule creation allow values greater than 31 and negatives.
+
 ## [0.89.0] - 2020-10-20
 ### Changed
 - CXV1-23153 - ChatWidgets - Add prechat none radio button
