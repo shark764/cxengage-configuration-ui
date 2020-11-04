@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.89.2] - 2020-10-19
+### Fixed
+- CXV1-20809 - Copying or updating a draft/version of a business hour created from its conversion from v1 to v2 causes an error
+
 ## [0.89.1] - 2020-10-23
 ### Fixed
 - CXV1-23253 - Day input in Business Hours rule creation allow values greater than 31 and negatives.
