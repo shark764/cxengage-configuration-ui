@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.90.0] - 2020-10-28
+### Added
+- CXV1-23083 - Forecasting Dashboards - Page Setup.
+- CXV1-23082 - Forecasting Dashboards - Build Table Component.
+
 ## [0.89.2] - 2020-10-19
 ### Fixed
 - CXV1-20809 - Copying or updating a draft/version of a business hour created from its conversion from v1 to v2 causes an error

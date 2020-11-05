@@ -789,6 +789,10 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "forecastDashboards": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "timezones": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],

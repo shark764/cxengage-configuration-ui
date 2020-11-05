@@ -185,6 +185,9 @@ const initialState = fromJS({
   standardDashboards: {
     ...defaultEntity
   },
+  forecastDashboards: {
+    ...defaultEntity
+  },
   historicalReportFolders: {
     ...defaultEntity
   },

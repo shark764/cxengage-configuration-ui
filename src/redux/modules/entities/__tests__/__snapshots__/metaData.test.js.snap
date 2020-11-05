@@ -1746,6 +1746,68 @@ Object {
       "users",
     ],
   },
+  "forecastDashboards": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": true,
+    "bulkFormDependencies": Array [],
+    "columns": Array [],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "forecastDashboards",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "",
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Forecasting",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Forecast Dashboard",
+    "updateFormDependencies": Array [],
+  },
   "groups": EntityMetaData {
     "associations": Object {
       "outboundIdentifierLists": Array [

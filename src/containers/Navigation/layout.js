@@ -187,7 +187,10 @@ export default class Navigation extends Component {
                   to="/configuration/identityProviders"
                   onClick={e => this.setCurrentEntityAndEntityId('identityProviders', e)}
                 >
-                  <FormattedMessage id="navigation.configuration.identityProviders" defaultMessage="Identity Providers" />
+                  <FormattedMessage
+                    id="navigation.configuration.identityProviders"
+                    defaultMessage="Identity Providers"
+                  />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkIntegrations"
@@ -354,6 +357,13 @@ export default class Navigation extends Component {
             <FormattedMessage id="navigation.reports" defaultMessage="Reporting" />
             {this.state.visibleMenu === 'Reporting' && (
               <SubMenu>
+                <StyledLink
+                  data-automation="navigationLinkForecastDashboards"
+                  to="/forecastDashboards"
+                  onClick={e => this.setCurrentEntityAndEntityId('forecastDashboards', e)}
+                >
+                  Forecast Dashboards
+                </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkDataAccessReports"
                   to="/configuration/dataAccessReports"

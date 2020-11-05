@@ -187,7 +187,8 @@ export const listOfEntities = [
   'regions',
   'timezones',
   'contactAttributes',
-  'contactLayouts'
+  'contactLayouts',
+  'forecastDashboards'
   //Hygen-insert-at-end-of-list
 ];
 
@@ -947,6 +948,10 @@ entities.contactLayouts.columns = [
   { name: 'Description', active: true },
   { name: 'Status', active: true }
 ];
+
+// Forecast Dashboards
+entities.forecastDashboards.pageTitle = 'Forecasting';
+entities.forecastDashboards.helpLink = '';
 
 //Hygen-insert-new-entity-configuration
 

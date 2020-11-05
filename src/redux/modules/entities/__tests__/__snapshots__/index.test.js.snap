@@ -693,6 +693,12 @@ Immutable.Map {
   "digitalChannelsApps": Immutable.Map {
     "data": Immutable.List [],
   },
+  "forecastDashboards": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+  },
   "timezones": Immutable.Map {
     "data": Immutable.List [],
   },

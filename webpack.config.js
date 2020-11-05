@@ -12,7 +12,7 @@ module.exports = {
     CxEngage: 'CxEngage'
   },
   resolve: {
-    modules: [path.resolve(__dirname, "node_modules")],
+    modules: [path.resolve(__dirname, "node_modules"), "node_modules"],
     alias: {
       Utils: path.resolve(__dirname, 'src', 'utils'),
     }

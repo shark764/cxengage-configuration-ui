@@ -10,6 +10,7 @@ import UserData from './modules/userData';
 import SupervisorToolbar from './modules/supervisorToolbar';
 import InteractionMonitoring from './modules/reporting/interactionMonitoring';
 import AgentStateMonitoring from './modules/reporting/agentStateMonitoring';
+import ForecastDashboards from './modules/reporting/forecastDashboards';
 import ColumnFilterMenus from './modules/columnFilterMenus';
 import UserIdMap from './modules/userIdMap';
 import Language from './modules/language';
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   SupervisorToolbar,
   InteractionMonitoring,
   AgentStateMonitoring,
+  ForecastDashboards,
   ColumnFilterMenus,
   UserIdMap,
   Language
