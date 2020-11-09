@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.90.1] - 2020-11-06
+### Fixed
+- CXV1-23363 - Business Hours V2 - Issue displaying recurring rules in the DRAFT Calendar
+
 ## [0.90.0] - 2020-10-28
 ### Added
 - CXV1-23083 - Forecasting Dashboards - Page Setup.

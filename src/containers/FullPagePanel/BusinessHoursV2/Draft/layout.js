@@ -211,7 +211,22 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
           <CalendarWrapper>
             <CalendarEvents
               rules={
-                this.props.rules ? this.props.rules.filter(rule => !ruleValidation(rule, this.props.rules)).toJS() : []
+                this.props.rules
+                  ? this.props.rules
+                      .filter(rule => !ruleValidation(rule, this.props.rules))
+                      .toJS()
+                      .map(({ on, on: { type, value } = {}, ...rule }) => ({
+                        ...rule,
+                        ...(on && value && value === 'day'
+                          ? {
+                              on: {
+                                type: value,
+                                value: type
+                              }
+                            }
+                          : on ? { on } : {})
+                      }))
+                  : []
               }
               eventType={eventType}
             />
