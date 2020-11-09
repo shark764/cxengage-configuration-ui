@@ -24,7 +24,9 @@ function ListsDetailsPanel(props) {
         <React.Fragment>
           <DetailHeader text="Bulk CSV" />
           <FileDownload
+            label="Download"
             onClick={props.downloadCsv}
+            value="Start Download"
             disabled={props.isSaving || !props.userHasUpdatePermission}
             id="dtpanel-lists-download-csv"
           />

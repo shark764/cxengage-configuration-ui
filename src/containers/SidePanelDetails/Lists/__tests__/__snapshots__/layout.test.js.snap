@@ -92,6 +92,8 @@ exports[`<ListsDetailsPanel /> renders lists detailsPanel not inherited 1`] = `
     <FileDownload
       disabled={false}
       id="dtpanel-lists-download-csv"
+      label="Download"
+      value="Start Download"
     />
     <FileUpload
       acceptedFileType=".csv"

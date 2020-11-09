@@ -50,7 +50,7 @@ export const hasCustomFetchEntityData = entityName =>
 export const hasCustomFetchEntityItemData = entityName =>
   !['dispositionLists', 'flows', 'contactLayouts'].includes(entityName);
 
-export const entitiesUsingUpdateLogicForToggleEntity = entityName => ['customAttributes'].includes(entityName);
+export const entitiesUsingUpdateLogicForToggleEntity = entityName => ['customAttributes', 'identityProviders'].includes(entityName);
 
 export const hasCustomSubEntityUpdate = (entityName, subEntityName) => {
   const entityMap = {

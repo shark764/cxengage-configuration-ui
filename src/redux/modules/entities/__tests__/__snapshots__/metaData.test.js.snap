@@ -2064,6 +2064,24 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Configuration/SSO/IdentityProviders.htm",
+    "idpConfigInfoTypes": Array [
+      Object {
+        "label": "URL",
+        "value": "url",
+      },
+      Object {
+        "label": "XML File",
+        "value": "xml",
+      },
+      Object {
+        "label": "XML Direct Input",
+        "value": "xmlDirectInput",
+      },
+      Object {
+        "label": "Shared Access Code",
+        "value": "sharedIdentityProviderLinkId",
+      },
+    ],
     "modalListTableFields": Array [
       Object {
         "label": "Name",

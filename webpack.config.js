@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -17,7 +16,6 @@ module.exports = {
       Utils: path.resolve(__dirname, 'src', 'utils'),
     }
   },
-  devtool: "eval-source-map",
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html'

@@ -282,13 +282,9 @@ Immutable.Map {
     "createPermission": Immutable.List [
       "IDENTITY_PROVIDERS_CREATE",
     ],
-    "sharePermission": Immutable.List [
-      "",
-    ],
+    "sharePermission": Immutable.List [],
     "confirmationDialogType": undefined,
-    "disablePermission": Immutable.List [
-      "",
-    ],
+    "disablePermission": Immutable.List [],
     "updatePermission": Immutable.List [
       "IDENTITY_PROVIDERS_UPDATE",
     ],

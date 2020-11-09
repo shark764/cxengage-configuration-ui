@@ -371,6 +371,16 @@ export const UpdateEntity = action$ =>
       a.sdkCall.data = {
         ...a.values
       };
+      if (a.entityName === 'identityProviders') {
+        if (a.values.identityProviderType === 'xml' || a.values.identityProviderType === 'xmlDirectInput') {
+          delete a.values.metadataUrl;
+        } else if (a.values.identityProviderType === 'url') {
+          delete a.values.metadataFile;
+        }
+        a.sdkCall.data = {
+          ...a.values
+        };
+      }
       a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;
       if (entitiesMetaData[a.entityName].sdkCall.path) {
         a.sdkCall.path = [...entitiesMetaData[a.entityName].sdkCall.path, a.entityId];

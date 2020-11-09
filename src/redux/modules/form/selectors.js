@@ -33,7 +33,7 @@ export const areSubEntityFormsDirty = state =>
     .map(formName => isDirty(formName)(state))
     .some(isDirty => isDirty);
 
-export const selectFormInitialValues = state => {
+export const selectFormInitialValues = (state) => {
   const entityName = getCurrentEntity(state);
   if (getSelectedEntityId(state) === 'bulk') {
     return new Map({});
@@ -41,13 +41,31 @@ export const selectFormInitialValues = state => {
     return new Map({ active: true });
   } else if (entityName === 'users') {
     const initValues = getSelectedEntity(state);
-    if (initValues.has('effectiveCapacityRule') && initValues.get('effectiveCapacityRule') !== null) {
+    if (
+      initValues.has('effectiveCapacityRule') &&
+      initValues.get('effectiveCapacityRule') !== null
+    ) {
       return initValues
         .delete('active')
-        .set('effectiveCapacityRule', initValues.getIn(['effectiveCapacityRule', 'id']))
+        .set(
+          'effectiveCapacityRule',
+          initValues.getIn(['effectiveCapacityRule', 'id'])
+        )
         .toJS();
     }
     return initValues.delete('active').toJS();
+  } else if (entityName === 'identityProviders') {
+    const initValues = getSelectedEntity(state).delete('active');
+    if (initValues.has('metadataUrl')) {
+      return initValues.set('identityProviderType', 'url')
+        .set('description', (initValues.get('description') === null) ? '' : initValues.get('description'))
+        .toJS();
+    } else if (initValues.has('metadataFile')) {
+      return initValues.set('identityProviderType', 'xml')
+        .set('description', (initValues.get('description') === null) ? '' : initValues.get('description'))
+        .toJS();
+    }
+    return initValues.toJS();
   } else {
     // Members and active are not handled in the same Update
     // as the rest of values, so not need to be set in form

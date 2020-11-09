@@ -39,8 +39,8 @@ const initialState = fromJS({
     updatePermission: ['IDENTITY_PROVIDERS_UPDATE'],
     createPermission: ['IDENTITY_PROVIDERS_CREATE'],
     deletePermission: ['IDENTITY_PROVIDERS_DELETE'],
-    disablePermission: [''],
-    sharePermission: ['']
+    disablePermission: [],
+    sharePermission: []
   },
   lists: {
     ...defaultEntity,
@@ -822,6 +822,7 @@ export default function reducer(state = initialState, action) {
               return state;
             }
           }
+          return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName, 'fetching']);
         }
         default:
           return state.setIn([entityName, 'data'], fromJS(result)).deleteIn([action.entityName, 'fetching']);

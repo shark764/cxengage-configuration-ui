@@ -2,7 +2,7 @@ import {
   capitalizeFirstLetter,
   camelCaseToKebabCase,
   removeLastLetter,
-  camelCaseToRegularForm
+  camelCaseToRegularForm,
 } from 'serenova-js-utils/strings';
 
 /**
@@ -35,7 +35,7 @@ export class EntityMetaData {
     this.confirmationDialog = {
       message: '',
       trueButtonText: '',
-      falseButtonText: ''
+      falseButtonText: '',
     };
     this.columns = [];
     /**
@@ -55,7 +55,7 @@ export class EntityMetaData {
     this.defaultAssociationFilters = [];
     this.sdkCall = {
       module: 'entities',
-      data: {}
+      data: {},
     };
   }
 
@@ -84,7 +84,7 @@ export class EntityMetaData {
       get: 'read',
       invite: 'invite',
       update: 'update',
-      delete: 'delete'
+      delete: 'delete',
     };
 
     if (entityType === 'subEntity') {
@@ -92,21 +92,21 @@ export class EntityMetaData {
         ...this.sdkCall,
         command: subEntityCommand,
         topic: subEntityTopic,
-        crudAction: crudActions[apiMethod]
+        crudAction: crudActions[apiMethod],
       };
     } else if (entityType === 'singleMainEntity') {
       return {
         ...this.sdkCall,
         command: singleEntityCommand,
         topic: singleEntityTopic,
-        crudAction: crudActions[apiMethod]
+        crudAction: crudActions[apiMethod],
       };
     } else {
       return {
         ...this.sdkCall,
         command: mainEntityCommand,
         topic: mainEntityTopic,
-        crudAction: crudActions[apiMethod]
+        crudAction: crudActions[apiMethod],
       };
     }
   }
@@ -121,7 +121,9 @@ export class EntityMetaData {
       return {
         ...this.sdkCall,
         command: `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.dependentEntity))}`,
-        topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(removeLastLetter(this.dependentEntity))}-response`
+        topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
+          removeLastLetter(this.dependentEntity)
+        )}-response`,
       };
     } else {
       return {
@@ -129,7 +131,7 @@ export class EntityMetaData {
         command: `${apiMethod}${capitalizeFirstLetter(removeLastLetter(this.dependentEntity))}ListMember`,
         topic: `cxengage/entities/${apiMethod}-${camelCaseToKebabCase(
           removeLastLetter(this.dependentEntity)
-        )}-list-member-response`
+        )}-list-member-response`,
       };
     }
   }
@@ -188,12 +190,12 @@ export const listOfEntities = [
   'timezones',
   'contactAttributes',
   'contactLayouts',
-  'forecastDashboards'
+  'forecastDashboards',
   //Hygen-insert-at-end-of-list
 ];
 
 const entities = {};
-listOfEntities.forEach(x => (entities[x] = new EntityMetaData(x)));
+listOfEntities.forEach((x) => (entities[x] = new EntityMetaData(x)));
 
 entities.logi.pageTitle = 'New Historical';
 
@@ -211,14 +213,14 @@ entities.users.memberListTableFields = [
     label: 'Tenant Status',
     name: 'status',
     type: 'select',
-    filterOptions: ['accepted', 'pending', 'invited', 'disabled']
+    filterOptions: ['accepted', 'pending', 'invited', 'disabled'],
   },
   {
     label: 'Platform Status',
     name: 'invitationStatus',
     type: 'select',
-    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
-  }
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only'],
+  },
 ];
 entities.users.associations = {
   skills: ['users', 'skills'],
@@ -226,7 +228,7 @@ entities.users.associations = {
   reasonLists: ['users', 'reasonLists'],
   messageTemplates: ['users', 'messageTemplates'],
   transferLists: ['users', 'transferLists'],
-  outboundIdentifierLists: ['users', 'outboundIdentifierLists']
+  outboundIdentifierLists: ['users', 'outboundIdentifierLists'],
 };
 entities.users.columns = [
   { name: 'Name', active: true },
@@ -237,11 +239,11 @@ entities.users.columns = [
   { name: 'Role', active: true },
   { name: 'Presence', active: true },
   { name: 'Platform Status', active: true },
-  { name: 'Tenant Status', active: true }
+  { name: 'Tenant Status', active: true },
 ];
 entities.users.defaultFilters = [
   { id: 'status', value: 'accepted' },
-  { id: 'invitationStatus', value: 'all non-disabled' }
+  { id: 'invitationStatus', value: 'all non-disabled' },
 ];
 entities.users.defaultAssociationFilters = {
   skills: [{ id: 'active', value: 'enabled' }],
@@ -249,7 +251,7 @@ entities.users.defaultAssociationFilters = {
   reasonLists: [{ id: 'active', value: 'enabled' }],
   messageTemplates: [{ id: 'active', value: 'enabled' }],
   transferLists: [{ id: 'active', value: 'enabled' }],
-  outboundIdentifierLists: [{ id: 'active', value: 'enabled' }]
+  outboundIdentifierLists: [{ id: 'active', value: 'enabled' }],
 };
 
 // Skills
@@ -260,7 +262,7 @@ entities.skills.updateFormDependencies.push('users');
 entities.skills.dependentEntity = 'users';
 entities.skills.associations = {
   users: ['users', 'skills'],
-  outboundIdentifierLists: ['skills', 'outboundIdentifierLists']
+  outboundIdentifierLists: ['skills', 'outboundIdentifierLists'],
 };
 entities.skills.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.skills.memberListTableFields = [
@@ -270,20 +272,20 @@ entities.skills.memberListTableFields = [
     label: 'Status',
     name: 'active',
     type: 'select',
-    filterOptions: ['enabled', 'disabled']
-  }
+    filterOptions: ['enabled', 'disabled'],
+  },
 ];
 entities.skills.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.skills.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Has Proficiency', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.skills.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.skills.defaultAssociationFilters = {
   users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
-  outboundIdentifierLists: [{ id: 'active', value: 'enabled' }]
+  outboundIdentifierLists: [{ id: 'active', value: 'enabled' }],
 };
 
 // Groups
@@ -295,12 +297,12 @@ entities.groups.dependentEntity = 'users';
 entities.groups.associations = {
   users: ['groups', 'users'],
   outboundIdentifierLists: ['groups', 'outboundIdentifierLists'],
-  reasonLists: ['groups', 'reasonLists']
+  reasonLists: ['groups', 'reasonLists'],
 };
 entities.groups.modalListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.groups.outboundIdentifiersFields = [
   { label: 'Name', name: 'name' },
-  { label: 'Description', name: 'description' }
+  { label: 'Description', name: 'description' },
 ];
 entities.groups.sidePanelListTableFields = [{ label: 'Name', name: 'name' }, { label: 'Email', name: 'email' }];
 entities.groups.memberListTableFields = [
@@ -310,19 +312,19 @@ entities.groups.memberListTableFields = [
     label: 'Status',
     name: 'active',
     type: 'select',
-    filterOptions: ['enabled', 'disabled']
-  }
+    filterOptions: ['enabled', 'disabled'],
+  },
 ];
 entities.groups.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.groups.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.groups.defaultAssociationFilters = {
   users: [{ id: 'status', value: 'accepted' }, { id: 'invitationStatus', value: 'enabled' }],
   outboundIdentifierLists: [{ id: 'active', value: 'enabled' }],
-  reasonLists: [{ id: 'active', value: 'enabled' }]
+  reasonLists: [{ id: 'active', value: 'enabled' }],
 };
 
 // Generic Lists
@@ -335,7 +337,7 @@ entities.lists.helpLink = '/Help/Content/Configuration/Lists/Lists.htm';
 entities.lists.columns = [
   { name: 'Name', active: true },
   { name: 'List Type', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 
 // Outbound Identifiers
@@ -350,7 +352,7 @@ entities.outboundIdentifiers.columns = [
   { name: 'Value', active: true },
   { name: 'channelType', active: true },
   { name: 'flowId', active: false },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.outboundIdentifiers.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
@@ -368,8 +370,8 @@ entities.outboundIdentifierLists.modalListTableFields = [
     label: 'Status',
     name: 'active',
     type: 'select',
-    filterOptions: ['enabled', 'disabled']
-  }
+    filterOptions: ['enabled', 'disabled'],
+  },
 ];
 entities.outboundIdentifierLists.memberListTableFields = [
   { label: 'Name', name: 'name' },
@@ -378,8 +380,8 @@ entities.outboundIdentifierLists.memberListTableFields = [
     label: 'Status',
     name: 'active',
     type: 'select',
-    filterOptions: ['enabled', 'disabled']
-  }
+    filterOptions: ['enabled', 'disabled'],
+  },
 ];
 entities.outboundIdentifierLists.sidePanelListTableFields = [
   { label: 'Name', name: 'name' },
@@ -390,13 +392,13 @@ entities.outboundIdentifierLists.sidePanelListTableFields = [
     label: 'Status',
     name: 'active',
     type: 'select',
-    filterOptions: ['enabled', 'disabled']
-  }
+    filterOptions: ['enabled', 'disabled'],
+  },
 ];
 entities.outboundIdentifierLists.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.outboundIdentifierLists.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.outboundIdentifierLists.defaultDependentEntityFilters = [{ id: 'active', value: 'enabled' }];
@@ -412,7 +414,7 @@ entities.roles.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Permissions', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 
 //Silent Monitoring
@@ -436,7 +438,7 @@ entities.interactionMonitoring.columns = [
   { name: 'ElapsedTime', active: true },
   { name: 'Monitoring', active: true },
   { name: 'Groups', active: false },
-  { name: 'Skills', active: false }
+  { name: 'Skills', active: false },
 ];
 
 //Agent State Monitoring
@@ -459,7 +461,7 @@ entities.agentStateMonitoring.columns = [
   { name: 'Rejected', active: false },
   { name: 'Accepted Rate', active: false },
   { name: 'Away Time', active: false },
-  { name: 'Away Rate', active: false }
+  { name: 'Away Rate', active: false },
 ];
 
 // Email Templates
@@ -494,7 +496,7 @@ entities.reasonLists.columns = [
   { name: 'External Id', active: true },
   { name: 'Shared', active: true },
   { name: 'Is Default', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.reasonLists.customSortMethod = function(a, b) {
   if (a === b) {
@@ -506,20 +508,20 @@ entities.reasonLists.memberListTableFields = [
   {
     label: 'Name',
     name: 'name',
-    customSortMethod: entities.reasonLists.customSortMethod
+    customSortMethod: entities.reasonLists.customSortMethod,
   },
   {
     label: 'Description',
     name: 'description',
-    customSortMethod: entities.reasonLists.customSortMethod
+    customSortMethod: entities.reasonLists.customSortMethod,
   },
   {
     label: 'Status',
     name: 'active',
     type: 'select',
     filterOptions: ['enabled', 'disabled'],
-    customSortMethod: entities.reasonLists.customSortMethod
-  }
+    customSortMethod: entities.reasonLists.customSortMethod,
+  },
 ];
 
 // Message Templates
@@ -531,7 +533,7 @@ entities.messageTemplates.columns = [
   { name: 'Description', active: true },
   { name: 'Type', active: true },
   { name: 'Channels', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.messageTemplates.memberListTableFields = [
   { label: 'Name', name: 'name' },
@@ -540,8 +542,8 @@ entities.messageTemplates.memberListTableFields = [
     label: 'Status',
     name: 'active',
     type: 'select',
-    filterOptions: ['enabled', 'disabled']
-  }
+    filterOptions: ['enabled', 'disabled'],
+  },
 ];
 entities.messageTemplates.dependentEntity = 'messageTemplate';
 
@@ -552,7 +554,7 @@ entities.transferLists.helpLink = '/Help/Content/Configuration/Transfer_Lists/Cr
 entities.transferLists.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.transferLists.memberListTableFields = [
   { label: 'Name', name: 'name' },
@@ -561,8 +563,8 @@ entities.transferLists.memberListTableFields = [
     label: 'Status',
     name: 'active',
     type: 'select',
-    filterOptions: ['enabled', 'disabled']
-  }
+    filterOptions: ['enabled', 'disabled'],
+  },
 ];
 entities.transferLists.dependentEntity = 'queues';
 
@@ -578,7 +580,7 @@ entities.dataAccessReports.createFormDependencies = [
   // TODO: uncomment 'standardDashboards' when API is reachable.
   // Required for https://liveops.atlassian.net/browse/CXV1-16111
   // 'standardDashboards',
-  'dashboards'
+  'dashboards',
 ];
 entities.dataAccessReports.updateFormDependencies = [
   ...entities.dataAccessReports.updateFormDependencies,
@@ -589,7 +591,7 @@ entities.dataAccessReports.updateFormDependencies = [
   // Required for https://liveops.atlassian.net/browse/CXV1-16111
   // 'standardDashboards',
   'roles',
-  'permissions'
+  'permissions',
 ];
 entities.dataAccessReports.dependentEntity = 'users';
 entities.dataAccessReports.modalListTableFields = [
@@ -599,19 +601,19 @@ entities.dataAccessReports.modalListTableFields = [
     label: 'Tenant Status',
     name: 'status',
     type: 'select',
-    filterOptions: ['accepted', 'pending', 'invited', 'disabled']
+    filterOptions: ['accepted', 'pending', 'invited', 'disabled'],
   },
   {
     label: 'Platform Status',
     name: 'invitationStatus',
     type: 'select',
-    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
-  }
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only'],
+  },
 ];
 entities.dataAccessReports.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.dataAccessReports.defaultDependentEntityFilters = [
   { id: 'invitationStatus', value: 'enabled' },
-  { id: 'status', value: 'accepted' }
+  { id: 'status', value: 'accepted' },
 ];
 entities.dataAccessReports.sidePanelListTableFields = [
   { label: 'Name', name: 'name' },
@@ -620,20 +622,20 @@ entities.dataAccessReports.sidePanelListTableFields = [
     label: 'Tenant Status',
     name: 'status',
     type: 'select',
-    filterOptions: ['accepted', 'pending', 'invited', 'disabled']
+    filterOptions: ['accepted', 'pending', 'invited', 'disabled'],
   },
   {
     label: 'Platform Status',
     name: 'invitationStatus',
     type: 'select',
-    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only']
-  }
+    filterOptions: ['pending', 'invited', 'expired', 'enabled', 'disabled', 'sso-only'],
+  },
 ];
 entities.dataAccessReports.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Report Type', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 // TODO: Remove this array since this data is going to be
 // retrieved from API.
@@ -649,7 +651,7 @@ entities.dataAccessReports.standardDashboards = [
   { label: 'Overview Dashboard', value: '1a861841-628b-4e4b-892c-5fbb178dfd3a' },
   { label: 'Queues Dashboard', value: '5f08bfde-3a79-4aa3-8586-42a1a03ffa90' },
   { label: 'Queue Details Table', value: '1c6a29a9-6020-4543-82f8-490728e53876' },
-  { label: 'Resources Dashboard', value: '0ad70ddc-d3d4-458e-8019-20fc46122a52' }
+  { label: 'Resources Dashboard', value: '0ad70ddc-d3d4-458e-8019-20fc46122a52' },
 ];
 
 // Reasons
@@ -662,7 +664,7 @@ entities.reasons.columns = [
   { name: 'Description', active: true },
   { name: 'External Id', active: true },
   { name: 'Shared', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 
 // Queues
@@ -673,7 +675,7 @@ entities.queues.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Active Queue', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 
 // Flows
@@ -687,7 +689,7 @@ entities.flows.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Active Flow', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.flows.membersTableFields = {
   versions: [
@@ -702,12 +704,12 @@ entities.flows.membersTableFields = {
         }
         return a > b ? 1 : -1;
       },
-      customWidth: 35
+      customWidth: 35,
     },
     { label: 'Name', name: 'name' },
-    { label: 'Created On', name: 'created', format: 'datetime' }
+    { label: 'Created On', name: 'created', format: 'datetime' },
   ],
-  drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'datetime' }]
+  drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'datetime' }],
 };
 
 // Dispatch Mappings
@@ -723,7 +725,7 @@ entities.dispatchMappings.columns = [
   { name: 'Interaction Field', active: true },
   { name: 'Channel Type', active: true },
   { name: 'Status', active: true },
-  { name: 'Flow', active: true }
+  { name: 'Flow', active: true },
 ];
 entities.dispatchMappings.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
@@ -736,7 +738,7 @@ entities.dispositions.columns = [
   { name: 'Description', active: true },
   { name: 'External Id', active: true },
   { name: 'Shared', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 
 // Slas (Replacement for Custom-Metrics)
@@ -748,7 +750,7 @@ entities.slas.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Active Sla', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.slas.dependentEntity = 'versions';
 entities.slas.membersTableFields = {
@@ -764,12 +766,12 @@ entities.slas.membersTableFields = {
         }
         return a > b ? 1 : -1;
       },
-      customWidth: 35
+      customWidth: 35,
     },
     { label: 'Name', name: 'versionName' },
     { label: 'Description', name: 'description' },
-    { label: 'Created On', name: 'created', format: 'datetime' }
-  ]
+    { label: 'Created On', name: 'created', format: 'datetime' },
+  ],
 };
 entities.slas.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
@@ -784,7 +786,7 @@ entities.apiKeys.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Status', active: true },
-  { name: 'Role', active: true }
+  { name: 'Role', active: true },
 ];
 entities.apiKeys.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
@@ -797,15 +799,15 @@ entities.businessHours.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
   { name: 'Status', active: true },
-  { name: 'Timezone', active: true }
+  { name: 'Timezone', active: true },
 ];
 entities.businessHours.membersTableFields = {
   exceptions: [
     { label: 'Date', name: 'date' },
     { label: 'Description', name: 'description' },
     { label: 'Start', name: 'startTime' },
-    { label: 'End', name: 'endTime' }
-  ]
+    { label: 'End', name: 'endTime' },
+  ],
 };
 entities.businessHours.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.businessHours.createFormDependencies.push('timezones');
@@ -820,7 +822,7 @@ entities.tenants.columns = [
   { name: 'Description', active: true },
   { name: 'Identifier', active: true },
   { name: 'Parent Tenant', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.tenants.createFormDependencies.push('users', 'timezones', 'regions');
 entities.tenants.updateFormDependencies.push(
@@ -839,10 +841,16 @@ entities.identityProviders.helpLink = '/Help/Content/Configuration/SSO/IdentityP
 entities.identityProviders.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.identityProviders.bulkEditsAvailable = true;
 entities.identityProviders.sdkCall.path = ['identity-providers'];
+entities.identityProviders.idpConfigInfoTypes = [
+  { label: 'URL', value: 'url' },
+  { label: 'XML File', value: 'xml' },
+  { label: 'XML Direct Input', value: 'xmlDirectInput' },
+  { label: 'Shared Access Code', value: 'sharedIdentityProviderLinkId' },
+];
 
 // Disposition Lists
 entities.dispositionLists.pageTitle = 'Disposition List Management';
@@ -854,7 +862,7 @@ entities.dispositionLists.columns = [
   { name: 'Description', active: true },
   { name: 'External Id', active: true },
   { name: 'Shared', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 
 // Business Hours V2
@@ -870,7 +878,7 @@ entities.businessHoursV2.columns = [
   { name: 'Description', active: true },
   { name: 'Timezone2', active: true },
   { name: 'Status', active: true },
-  { name: 'Shared2', active: true }
+  { name: 'Shared2', active: true },
 ];
 entities.businessHoursV2.membersTableFields = {
   drafts: [
@@ -878,8 +886,8 @@ entities.businessHoursV2.membersTableFields = {
     { label: 'Name', name: 'name' },
     { label: 'Timezone', name: 'timezone' },
     { label: 'Created By', name: 'createdByName' },
-    { label: 'Created On', name: 'created', format: 'datetime' }
-  ]
+    { label: 'Created On', name: 'created', format: 'datetime' },
+  ],
 };
 entities.businessHoursV2.sdkCall.path = ['business-hours'];
 entities.businessHoursV2.sdkCall.apiVersion = 'v2';
@@ -894,16 +902,16 @@ entities.integrations.columns = [
   { name: 'Type', active: true },
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.integrations.defaultFilters = [];
 entities.integrations.membersTableFields = {
   listeners: [
     { label: 'Name', name: 'name' },
     { label: 'Status', name: 'active', type: 'select', filterOptions: ['enabled', 'disabled'] },
-    { label: 'Created On', name: 'created', format: 'datetime' }
+    { label: 'Created On', name: 'created', format: 'datetime' },
   ],
-  globalDialParams: [{ label: 'Key', name: 'key' }, { label: 'Value', name: 'value' }]
+  globalDialParams: [{ label: 'Key', name: 'key' }, { label: 'Value', name: 'value' }],
 };
 
 // Custom Attributes
@@ -917,7 +925,7 @@ entities.customAttributes.columns = [
   { name: 'Description', active: true },
   { name: 'Realtime Reporting', active: true },
   { name: 'Historical Reporting', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.customAttributes.defaultFilters = [{ id: 'active', value: 'enabled' }];
 
@@ -932,7 +940,7 @@ entities.contactAttributes.columns = [
   { name: 'Type', active: true },
   { name: 'Default', active: true },
   { name: 'Mandatory', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 entities.contactAttributes.customColumnStyle =
   '.rt-tr-group {height:inherit !important; max-height:inherit !important;} .rt-td {align-self: center}';
@@ -946,7 +954,7 @@ entities.contactLayouts.helpLink = '/Help/Content/Configuration/ContactLayouts.h
 entities.contactLayouts.columns = [
   { name: 'Name', active: true },
   { name: 'Description', active: true },
-  { name: 'Status', active: true }
+  { name: 'Status', active: true },
 ];
 
 // Forecast Dashboards
