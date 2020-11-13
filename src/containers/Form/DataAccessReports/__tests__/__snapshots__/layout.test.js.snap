@@ -50,10 +50,6 @@ exports[`<DataAccessReportsForm /> renders create form 1`] = `
               "label": "Realtime",
               "value": "realtime",
             },
-            Object {
-              "label": "Historical",
-              "value": "historical",
-            },
           ]
         }
         required={true}
@@ -144,22 +140,9 @@ exports[`<DataAccessReportsForm /> renders create form with historical type 1`] 
               "label": "Realtime",
               "value": "realtime",
             },
-            Object {
-              "label": "Historical",
-              "value": "historical",
-            },
           ]
         }
         required={true}
-      />
-      <AutoCompleteField
-        data-automation="historicalReportAutoComplete"
-        disabled={false}
-        id="frm-data-access-reports-historical-catalog-name"
-        label="Historical Reports Folder *"
-        name="historicalCatalogName"
-        placeholder="Search..."
-        suggestions={Array []}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -215,10 +198,6 @@ exports[`<DataAccessReportsForm /> renders update form 1`] = `
             Object {
               "label": "Realtime",
               "value": "realtime",
-            },
-            Object {
-              "label": "Historical",
-              "value": "historical",
             },
           ]
         }
@@ -310,10 +289,6 @@ exports[`<DataAccessReportsForm /> renders update form with custom realtime type
               "label": "Realtime",
               "value": "realtime",
             },
-            Object {
-              "label": "Historical",
-              "value": "historical",
-            },
           ]
         }
         required={true}
@@ -404,22 +379,9 @@ exports[`<DataAccessReportsForm /> renders update form with historical type 1`] 
               "label": "Realtime",
               "value": "realtime",
             },
-            Object {
-              "label": "Historical",
-              "value": "historical",
-            },
           ]
         }
         required={true}
-      />
-      <AutoCompleteField
-        data-automation="historicalReportAutoComplete"
-        disabled={false}
-        id="frm-data-access-reports-historical-catalog-name"
-        label="Historical Reports Folder *"
-        name="historicalCatalogName"
-        placeholder="Search..."
-        suggestions={Array []}
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -476,22 +438,9 @@ exports[`<DataAccessReportsForm /> renders update form without update permision 
               "label": "Realtime",
               "value": "realtime",
             },
-            Object {
-              "label": "Historical",
-              "value": "historical",
-            },
           ]
         }
         required={true}
-      />
-      <AutoCompleteField
-        data-automation="historicalReportAutoComplete"
-        disabled={true}
-        id="frm-data-access-reports-historical-catalog-name"
-        label="Historical Reports Folder *"
-        name="historicalCatalogName"
-        placeholder="Search..."
-        suggestions={Array []}
       />
     </Connect(DetailWrapper)>
   </styled.div>

@@ -67,7 +67,7 @@ export default function DataAccessReportsForm({
             label="Type *"
             id="frm-data-access-reports-report-type"
             disabled={isSaving || !userHasUpdatePermission}
-            options={[{ label: 'Realtime', value: 'realtime' }, { label: 'Historical', value: 'historical' }]}
+            options={[{ label: 'Realtime', value: 'realtime' }]}
             required
           />
           {reportType === 'realtime' && (
@@ -93,17 +93,6 @@ export default function DataAccessReportsForm({
                 />
               )}
             </Fragment>
-          )}
-          {reportType === 'historical' && (
-            <AutoCompleteField
-              name="historicalCatalogName"
-              label="Historical Reports Folder *"
-              data-automation="historicalReportAutoComplete"
-              placeholder="Search..."
-              suggestions={folders}
-              id="frm-data-access-reports-historical-catalog-name"
-              disabled={isSaving || !userHasUpdatePermission}
-            />
           )}
         </DetailWrapper>
       </Wrapper>
