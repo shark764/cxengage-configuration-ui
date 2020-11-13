@@ -17,19 +17,26 @@ export const FetchData = (action$, store) =>
   action$
     .ofType('FETCH_DATA')
     .filter(({ entityName }) => entityName === 'integrations')
-    .mergeMap(a =>
+    .mergeMap((a) =>
       fromPromise(sdkPromise(entitiesMetaData[a.entityName].entityApiRequest('get', 'mainEntity')))
-        .map(response =>
-          handleSuccess({ result: response.result.filter(integration => integration.type !== 'plivo') }, a)
+        .map((response) =>
+          handleSuccess(
+            {
+              result: response.result.filter(
+                (integration) => integration.type !== 'plivo' && integration.type !== 'birst'
+              ),
+            },
+            a
+          )
         )
-        .catch(error => handleError(error, a))
+        .catch((error) => handleError(error, a))
     );
 
-export const CreateEntity = action$ =>
+export const CreateEntity = (action$) =>
   action$
     .ofType('CREATE_ENTITY')
     .filter(({ entityName }) => entityName === 'integrations')
-    .map(a => {
+    .map((a) => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('create', 'singleMainEntity');
       a.sdkCall.path = entitiesMetaData[a.entityName].sdkCall.path
         ? entitiesMetaData[a.entityName].sdkCall.path
@@ -38,16 +45,16 @@ export const CreateEntity = action$ =>
       a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;
       return { ...a };
     })
-    .concatMap(a =>
+    .concatMap((a) =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response =>
+        .map((response) =>
           handleSuccess(
             response,
             a,
             `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`
           )
         )
-        .catch(error => handleError(error, a))
+        .catch((error) => handleError(error, a))
     );
 
 export const CreateIntegrationListenerFormSubmission = (action$, store) =>
@@ -55,7 +62,7 @@ export const CreateIntegrationListenerFormSubmission = (action$, store) =>
     .ofType('INTEGRATION_LISTENER_FORM_SUBMIT')
     .debounceTime(300)
     .filter(({ dirty }) => dirty)
-    .map(a => {
+    .map((a) => {
       a.subEntityId = getSelectedSubEntityId(store.getState());
       a.entityId = getSelectedEntityId(store.getState());
       a.entityName = 'integrations';
@@ -65,17 +72,17 @@ export const CreateIntegrationListenerFormSubmission = (action$, store) =>
         data: {
           ...a.values.toJS(),
           integrationId: a.entityId,
-          listenerId: a.subEntityId
+          listenerId: a.subEntityId,
         },
         module: 'entities',
-        topic: 'cxengage/entities/create-integration-listener-response'
+        topic: 'cxengage/entities/create-integration-listener-response',
       };
 
       return { ...a };
     })
-    .concatMap(a =>
+    .concatMap((a) =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response =>
+        .map((response) =>
           handleSuccess(
             response,
             a,
@@ -84,13 +91,13 @@ export const CreateIntegrationListenerFormSubmission = (action$, store) =>
               : `<i>Listener</i> was updated successfully!`
           )
         )
-        .catch(error => handleError(error, a))
+        .catch((error) => handleError(error, a))
     );
 
 export const RemoveTwilioGlobalDialParamFormSubmission = (action$, store) =>
   action$
     .ofType('REMOVE_TWILIO_GLOBAL_DIAL_PARAM')
-    .map(a => {
+    .map((a) => {
       a.entityName = getCurrentEntity(store.getState());
       a.entityId = getSelectedEntity(store.getState()).get('id');
       a.values = getSelectedEntity(store.getState()).toJS();
@@ -99,7 +106,7 @@ export const RemoveTwilioGlobalDialParamFormSubmission = (action$, store) =>
       }
       return { ...a };
     })
-    .map(a => ({
+    .map((a) => ({
       ...a,
-      type: 'UPDATE_ENTITY'
+      type: 'UPDATE_ENTITY',
     }));

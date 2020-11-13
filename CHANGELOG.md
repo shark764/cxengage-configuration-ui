@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.90.4] - 2020-11-10
+### Added
+- CXV1-23345 - UI Cleanup Work for v1 Historical Reporting Removal.
+
 ## [0.90.3] - 2020-11-09
 ### Changed
 - CXV1-23344 - Remove Birst-specific access control radio button.

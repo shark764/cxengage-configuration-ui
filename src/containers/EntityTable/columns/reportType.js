@@ -17,38 +17,27 @@ export const reportTypeColumn = {
   accessor: 'reportType',
   Cell: ({ value }) => <span title={camelCaseToRegularForm(value)}>{camelCaseToRegularForm(value)}</span>,
   filterMethod: (filter, row) => {
-    if (filter.value === 'all') {
+    if (filter.value === 'realtime') {
       return true;
     }
-    if (filter.value === 'realtime') {
-      return row[filter.id] === 'realtime';
-    }
-    return row[filter.id] === 'historical';
   },
   Filter: ({ filter, onChange }) => (
     <FilterSelect
       className="entity-table-filter-column-report-type"
       data-automation="searchReportTypeColumn"
-      onChange={event => onChange(event.target.value)}
-      value={filter ? filter.value : 'all'}
-    >
-      <option value="all" className="entity-table-filter-status-option-all">
-        All
-      </option>
+      onChange={(event) => onChange(event.target.value)}
+      value="realtime">
       <option value="realtime" className="entity-table-filter-status-option-realtime">
         View Realtime Reports
       </option>
-      <option value="historical" className="entity-table-filter-status-option-historical">
-        View Historical Reports
-      </option>
     </FilterSelect>
-  )
+  ),
 };
 
 reportTypeColumn.Cell.propTypes = {
-  value: PropTypes.any
+  value: PropTypes.any,
 };
 reportTypeColumn.Filter.propTypes = {
   filter: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
