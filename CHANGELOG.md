@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.90.5] - 2020-11-16
+### Fixed
+- CXV1-23244 - Fix channels column filtering in Agent State Monitoring.
+
 ## [0.90.4] - 2020-11-10
 ### Added
 - CXV1-23345 - UI Cleanup Work for v1 Historical Reporting Removal.
