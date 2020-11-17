@@ -24,6 +24,7 @@ import CrudEndpointUi from './containers/CrudEndpointUi';
 import FlowDebugLogs from './containers/FlowDebugLogs';
 import Flows from './containers/Flows';
 import ForecastDashboards from './containers/ForecastDashboards';
+import UserProfile from './containers/FullPagePanel/UserProfile';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -43,6 +44,7 @@ ReactDOM.render(
               <Route path="/configuration/:entityName" component={PrivateRoute(CrudEndpointUi)} />
               <Route path="/flowDebugLogs" component={PrivateRoute(FlowDebugLogs)} />
               <Route path="/flows/:actionType/:flowId/:id" component={PrivateRoute(Flows)} />
+              <Route path="/userProfile" component={PrivateRoute(UserProfile)} />
             </Fragment>
           </RootStyles>
         </Switch>

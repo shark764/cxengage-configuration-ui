@@ -65,7 +65,22 @@ Immutable.Map {
 }
 `;
 
-exports[`entities reducer FETCH_DATA_ITEM_FULFILLED data item doesn't exists in entity , return unchanged state 1`] = `
+exports[`entities reducer FETCH_DATA_ITEM_FULFILLED data item doesn't exists in entity , it gets added because currentEntity it's userProfile and entity being fetched it's an user 1`] = `
+Immutable.Map {
+  "currentEntity": "userProfile",
+  "users": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "0": Immutable.Map {
+          "userId": "mock entity id",
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`entities reducer FETCH_DATA_ITEM_FULFILLED data item doesn't exists in entity , return unchanged state if currentEntity it's not userProfile or entity being fetch it's not an user 1`] = `
 Immutable.Map {
   "mockEntity": Immutable.Map {
     "data": Immutable.List [],
@@ -844,6 +859,11 @@ Immutable.Map {
     "sidePanelWidth": 550,
     "assignPermission": Immutable.List [
       "",
+    ],
+  },
+  "userProfile": Immutable.Map {
+    "updatePermission": Immutable.List [
+      "PLATFORM_MANAGE_USER_ACCOUNT",
     ],
   },
   "dashboards": Immutable.Map {

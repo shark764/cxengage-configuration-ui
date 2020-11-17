@@ -2,6 +2,7 @@
 
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
+  "canManageAllExtensions": undefined,
   "capacityRules": undefined,
   "currentAgentId": "0000-0000-0000-0000",
   "displayResetPassword": undefined,

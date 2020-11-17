@@ -11,7 +11,7 @@ const defaultEntity = {
   data: [],
   selectedEntityId: '',
   sidePanelWidth: 550,
-  confirmationDialogType: undefined
+  confirmationDialogType: undefined,
 };
 
 // Permissions shared by businessHour and businessHourV2 entities
@@ -20,18 +20,18 @@ const businessHourPermisssions = {
   updatePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
   createPermission: ['MANAGE_ALL_BUSINESS_HOURS'],
   disablePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
-  sharePermission: ['MANAGE_ALL_BUSINESS_HOURS']
+  sharePermission: ['MANAGE_ALL_BUSINESS_HOURS'],
 };
 
 const initialState = fromJS({
   currentEntity: 'none',
   none: {},
   interactionMonitoring: {
-    readPermission: ['VIEW_ALL_MONITORED_CALLS']
+    readPermission: ['VIEW_ALL_MONITORED_CALLS'],
   },
   agentStateMonitoring: {
     ...defaultEntity,
-    readPermission: ['MANAGE_ALL_USER_STATE', 'MANAGE_ALL_USERS_DIRECTION']
+    readPermission: ['MANAGE_ALL_USER_STATE', 'MANAGE_ALL_USERS_DIRECTION'],
   },
   identityProviders: {
     ...defaultEntity,
@@ -40,7 +40,7 @@ const initialState = fromJS({
     createPermission: ['IDENTITY_PROVIDERS_CREATE'],
     deletePermission: ['IDENTITY_PROVIDERS_DELETE'],
     disablePermission: [],
-    sharePermission: []
+    sharePermission: [],
   },
   lists: {
     ...defaultEntity,
@@ -50,10 +50,10 @@ const initialState = fromJS({
     subEntitySaving: false,
     readPermission: ['VIEW_ALL_LISTS'],
     updatePermission: ['MANAGE_ALL_LISTS'],
-    createPermission: ['MANAGE_ALL_LISTS']
+    createPermission: ['MANAGE_ALL_LISTS'],
   },
   listTypes: {
-    ...defaultEntity
+    ...defaultEntity,
   },
   outboundIdentifiers: {
     ...defaultEntity,
@@ -61,34 +61,34 @@ const initialState = fromJS({
     updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
     createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
     disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
-    assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
+    assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN'],
   },
   emailTemplates: {
     ...defaultEntity,
     sidePanelWidth: 650,
     readPermission: ['USER_MANAGEMENT_EMAIL_READ'],
-    updatePermission: ['USER_MANAGEMENT_EMAIL_UPDATE', 'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE']
+    updatePermission: ['USER_MANAGEMENT_EMAIL_UPDATE', 'PLATFORM_USER_MANAGEMENT_EMAIL_UPDATE'],
   },
   outboundIdentifierLists: {
     ...defaultEntity,
     metaData: {
-      listDependency: 'outboundIdentifiers'
+      listDependency: 'outboundIdentifiers',
     },
     sidePanelWidth: 650,
     readPermission: ['OUTBOUND_IDENTIFIER_READ'],
     updatePermission: ['OUTBOUND_IDENTIFIER_MODIFY'],
     createPermission: ['OUTBOUND_IDENTIFIER_CREATE'],
     disablePermission: ['OUTBOUND_IDENTIFIER_DISABLE'],
-    assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN']
+    assignPermission: ['OUTBOUND_IDENTIFIER_ASSIGN'],
   },
   chatWidgets: {
     ...defaultEntity,
     readPermission: ['WEB_INTEGRATIONS_APP_READ'],
     updatePermission: ['WEB_INTEGRATIONS_APP_UPDATE'],
-    createPermission: ['WEB_INTEGRATIONS_APP_UPDATE']
+    createPermission: ['WEB_INTEGRATIONS_APP_UPDATE'],
   },
   digitalChannelsApps: {
-    data: []
+    data: [],
   },
   users: {
     ...defaultEntity,
@@ -100,7 +100,7 @@ const initialState = fromJS({
       'MANAGE_ALL_GROUP_USERS',
       'MANAGE_ALL_USER_SKILLS',
       'MANAGE_ALL_USER_LOCATIONS',
-      'MANAGE_TENANT_ENROLLMENT'
+      'MANAGE_TENANT_ENROLLMENT',
     ],
     createPermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
@@ -108,11 +108,11 @@ const initialState = fromJS({
       'MANAGE_ALL_GROUP_USERS',
       'MANAGE_ALL_USER_SKILLS',
       'MANAGE_ALL_USER_LOCATIONS',
-      'MANAGE_TENANT_ENROLLMENT'
-    ]
+      'MANAGE_TENANT_ENROLLMENT',
+    ],
   },
   platformRoles: {
-    ...defaultEntity
+    ...defaultEntity,
   },
   roles: {
     ...defaultEntity,
@@ -122,10 +122,10 @@ const initialState = fromJS({
       'PLATFORM_CREATE_TENANT_ROLES',
       'VIEW_ALL_ROLES',
       'MANAGE_ALL_ROLES',
-      'MANAGE_TENANT_ENROLLMENT'
+      'MANAGE_TENANT_ENROLLMENT',
     ],
     createPermission: ['PLATFORM_CREATE_TENANT_ROLES', 'MANAGE_ALL_ROLES'],
-    sharePermission: ['PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT', 'MANAGE_ALL_ROLES']
+    sharePermission: ['PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT', 'MANAGE_ALL_ROLES'],
   },
   permissions: {
     ...defaultEntity,
@@ -135,13 +135,13 @@ const initialState = fromJS({
       'PLATFORM_CREATE_TENANT_ROLES',
       'VIEW_ALL_ROLES',
       'MANAGE_ALL_ROLES',
-      'MANAGE_TENANT_ENROLLMENT'
-    ]
+      'MANAGE_TENANT_ENROLLMENT',
+    ],
   },
   skills: {
     ...defaultEntity,
     metaData: {
-      listDependency: 'users'
+      listDependency: 'users',
     },
     sidePanelWidth: 650,
     readPermission: ['VIEW_ALL_SKILLS'],
@@ -149,19 +149,19 @@ const initialState = fromJS({
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
       'MANAGE_ALL_SKILLS',
       'MANAGE_ALL_USER_SKILLS',
-      'MANAGE_TENANT_ENROLLMENT'
+      'MANAGE_TENANT_ENROLLMENT',
     ],
     createPermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
       'MANAGE_ALL_SKILLS',
       'MANAGE_ALL_USER_SKILLS',
-      'MANAGE_TENANT_ENROLLMENT'
-    ]
+      'MANAGE_TENANT_ENROLLMENT',
+    ],
   },
   groups: {
     ...defaultEntity,
     metaData: {
-      listDependency: 'users'
+      listDependency: 'users',
     },
     readPermission: ['VIEW_ALL_GROUPS'],
     updatePermission: [
@@ -169,40 +169,40 @@ const initialState = fromJS({
       'MANAGE_ALL_GROUPS',
       'MANAGE_ALL_GROUP_USERS',
       'MANAGE_ALL_GROUP_OWNERS',
-      'MANAGE_TENANT_ENROLLMENT'
+      'MANAGE_TENANT_ENROLLMENT',
     ],
     createPermission: [
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
       'MANAGE_ALL_GROUPS',
       'MANAGE_ALL_GROUP_USERS',
       'MANAGE_ALL_GROUP_OWNERS',
-      'MANAGE_TENANT_ENROLLMENT'
-    ]
+      'MANAGE_TENANT_ENROLLMENT',
+    ],
   },
   dashboards: {
-    ...defaultEntity
+    ...defaultEntity,
   },
   standardDashboards: {
-    ...defaultEntity
+    ...defaultEntity,
   },
   forecastDashboards: {
-    ...defaultEntity
+    ...defaultEntity,
   },
   historicalReportFolders: {
-    ...defaultEntity
+    ...defaultEntity,
   },
   capacityRules: {
-    ...defaultEntity
+    ...defaultEntity,
   },
   dataAccessReports: {
     ...defaultEntity,
     metaData: {
-      listDependency: 'users'
+      listDependency: 'users',
     },
     sidePanelWidth: 600,
     readPermission: ['CUSTOM_STATS_READ'],
     updatePermission: ['CUSTOM_STATS_UPDATE'],
-    createPermission: ['CUSTOM_STATS_CREATE']
+    createPermission: ['CUSTOM_STATS_CREATE'],
   },
   reasons: {
     ...defaultEntity,
@@ -210,7 +210,7 @@ const initialState = fromJS({
     updatePermission: ['UPDATE_PRESENCE_REASONS'],
     createPermission: ['CREATE_PRESENCE_REASONS'],
     disablePermission: ['UPDATE_PRESENCE_REASONS'],
-    sharePermission: ['SHARE_PRESENCE_REASONS']
+    sharePermission: ['SHARE_PRESENCE_REASONS'],
   },
   reasonLists: {
     ...defaultEntity,
@@ -218,7 +218,7 @@ const initialState = fromJS({
     updatePermission: ['UPDATE_REASON_LIST'],
     createPermission: ['CREATE_REASON_LIST'],
     disablePermission: ['UPDATE_REASON_LIST'],
-    sharePermission: ['UPDATE_REASON_LIST']
+    sharePermission: ['UPDATE_REASON_LIST'],
   },
   flows: {
     ...defaultEntity,
@@ -227,7 +227,7 @@ const initialState = fromJS({
     updatePermission: ['MANAGE_ALL_FLOWS'],
     createPermission: ['MANAGE_ALL_FLOWS'],
     disablePermission: ['MANAGE_ALL_FLOWS'],
-    assignPermission: ['MANAGE_ALL_FLOWS']
+    assignPermission: ['MANAGE_ALL_FLOWS'],
   },
   queues: {
     ...defaultEntity,
@@ -236,7 +236,7 @@ const initialState = fromJS({
     updatePermission: ['MANAGE_ALL_QUEUES'],
     createPermission: ['MANAGE_ALL_QUEUES'],
     disablePermission: ['MANAGE_ALL_QUEUES'],
-    assignPermission: ['MANAGE_ALL_QUEUES']
+    assignPermission: ['MANAGE_ALL_QUEUES'],
   },
   transferLists: {
     ...defaultEntity,
@@ -244,7 +244,7 @@ const initialState = fromJS({
     updatePermission: ['MANAGE_ALL_TRANSFER_LISTS'],
     createPermission: ['MANAGE_ALL_TRANSFER_LISTS'],
     disablePermission: ['MANAGE_ALL_TRANSFER_LISTS'],
-    assignPermission: ['MANAGE_ALL_TRANSFER_LISTS']
+    assignPermission: ['MANAGE_ALL_TRANSFER_LISTS'],
   },
   messageTemplates: {
     ...defaultEntity,
@@ -253,21 +253,21 @@ const initialState = fromJS({
     updatePermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
     createPermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
     disablePermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
-    assignPermission: ['MANAGE_ALL_MESSAGE_TEMPLATES']
+    assignPermission: ['MANAGE_ALL_MESSAGE_TEMPLATES'],
   },
   dispatchMappings: {
     ...defaultEntity,
     readPermission: ['VIEW_ALL_CONTACT_POINTS'],
     updatePermission: ['MAP_ALL_CONTACT_POINTS'],
     createPermission: ['MAP_ALL_CONTACT_POINTS'],
-    disablePermission: ['MAP_ALL_CONTACT_POINTS']
+    disablePermission: ['MAP_ALL_CONTACT_POINTS'],
   },
   dispositions: {
     ...defaultEntity,
     readPermission: ['READ_DISPOSITIONS'],
     updatePermission: ['UPDATE_DISPOSITIONS'],
     createPermission: ['CREATE_DISPOSITIONS'],
-    sharePermission: ['SHARE_DISPOSITIONS']
+    sharePermission: ['SHARE_DISPOSITIONS'],
   },
   slas: {
     ...defaultEntity,
@@ -277,7 +277,7 @@ const initialState = fromJS({
     createPermission: ['CUSTOM_STATS_CREATE'],
     sharePermission: ['CUSTOM_STATS_UPDATE'],
     disablePermission: [],
-    assignPermission: []
+    assignPermission: [],
   },
   tenants: {
     ...defaultEntity,
@@ -287,15 +287,15 @@ const initialState = fromJS({
       'PLATFORM_CREATE_ALL_TENANTS',
       'PLATFORM_CREATE_TENANT_ROLES',
       'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT',
-      'MANAGE_TENANT'
+      'MANAGE_TENANT',
     ],
     updatePermission: ['PLATFORM_MANAGE_ALL_TENANTS', 'MANAGE_TENANT'],
     createPermission: ['CREATE_CHILD_TENANT'],
     disablePermission: ['MANAGE_TENANT', 'PLATFORM_MANAGE_ALL_TENANTS'],
-    assignPermission: []
+    assignPermission: [],
   },
   flowDebugger: {
-    ...defaultEntity
+    ...defaultEntity,
   },
   apiKeys: {
     ...defaultEntity,
@@ -303,11 +303,11 @@ const initialState = fromJS({
     updatePermission: ['MANAGE_ALL_APP_CREDENTIALS'],
     createPermission: ['MANAGE_ALL_APP_CREDENTIALS'],
     disablePermission: [],
-    assignPermission: []
+    assignPermission: [],
   },
   businessHours: {
     ...defaultEntity,
-    ...businessHourPermisssions
+    ...businessHourPermisssions,
   },
   dispositionLists: {
     ...defaultEntity,
@@ -316,20 +316,20 @@ const initialState = fromJS({
     createPermission: ['CREATE_DISPOSITION_LIST'],
     sharePermission: ['UPDATE_DISPOSITION_LIST'],
     disablePermission: [''],
-    assignPermission: ['']
+    assignPermission: [''],
   },
   businessHoursV2: {
     subEntity: 'drafts',
     data: [],
     selectedEntityId: '',
     confirmationDialogType: undefined,
-    ...businessHourPermisssions
+    ...businessHourPermisssions,
   },
   customAttributes: {
     ...defaultEntity,
     readPermission: ['INTERACTION_ATTRIBUTES_CONFIG_READ', 'PLATFORM_VIEW_ALL'],
     createPermission: ['INTERACTION_ATTRIBUTES_CONFIG_CREATE', 'PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES'],
-    updatePermission: ['INTERACTION_ATTRIBUTES_CONFIG_UPDATE', 'PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES']
+    updatePermission: ['INTERACTION_ATTRIBUTES_CONFIG_UPDATE', 'PLATFORM_MANAGE_ALL_INTERACTION_ATTRIBUTES'],
   },
   integrations: {
     ...defaultEntity,
@@ -337,38 +337,41 @@ const initialState = fromJS({
     updatePermission: ['MANAGE_ALL_PROVIDERS'],
     createPermission: ['MANAGE_ALL_PROVIDERS'],
     disablePermission: [],
-    assignPermission: []
+    assignPermission: [],
   },
   timezones: {
-    data: []
+    data: [],
   },
   regions: {
-    data: []
+    data: [],
   },
   contactAttributes: {
     ...defaultEntity,
     readPermission: ['CONTACTS_ATTRIBUTES_READ'],
     updatePermission: ['CONTACTS_ATTRIBUTES_UPDATE'],
-    createPermission: ['CONTACTS_ATTRIBUTES_CREATE']
+    createPermission: ['CONTACTS_ATTRIBUTES_CREATE'],
   },
   contactLayouts: {
     ...defaultEntity,
     readPermission: ['CONTACTS_LAYOUTS_READ'],
     updatePermission: ['CONTACTS_LAYOUTS_UPDATE'],
-    createPermission: ['CONTACTS_LAYOUTS_CREATE']
-  }
+    createPermission: ['CONTACTS_LAYOUTS_CREATE'],
+  },
+  userProfile: {
+    updatePermission: ['PLATFORM_MANAGE_USER_ACCOUNT'],
+  },
   //hygen-inject-before
 });
 
 // Actions
 
-export const setCurrentEntity = entityName => ({
+export const setCurrentEntity = (entityName) => ({
   type: 'SET_CURRENT_ENTITY',
-  entityName
+  entityName,
 });
-export const setSelectedEntityId = entityId => ({
+export const setSelectedEntityId = (entityId) => ({
   type: 'SET_SELECTED_ENTITY_ID',
-  entityId
+  entityId,
 });
 
 export const copyCurrentEntity = () => ({ type: 'COPY_CURRENT_ENTITY' });
@@ -379,255 +382,261 @@ export const setEntityUpdating = (entityName, entityId, updating) => ({
   type: 'SET_ENTITY_UPDATING',
   entityName,
   entityId,
-  updating
+  updating,
 });
 
 export const toggleBulkEntityChange = (entityName, entityId, bool) => ({
   type: 'TOGGLE_BULK_ENTITY_CHANGE',
   entityName,
   entityId,
-  bool
+  bool,
 });
 
 export const onFormButtonSubmit = () => ({ type: 'START_FORM_SUBMISSION' });
 export const onFormSubmit = (values, { dirty }) => ({
   type: 'FORM_SUBMIT',
   values,
-  dirty
+  dirty,
 });
 
-export const toggleEntity = entity => ({
+export const toggleEntity = (entity) => ({
   type: 'TOGGLE_ENTITY',
-  entity
+  entity,
 });
 
-export const toggleEntityListItemActive = entity => ({
+export const toggleEntityListItemActive = (entity) => ({
   type: 'TOGGLE_ENTITY_LIST_ITEM',
-  entity
+  entity,
 });
-export const addListItem = listItemId => ({
+export const addListItem = (listItemId) => ({
   type: 'ADD_LIST_ITEM',
-  listItemId
+  listItemId,
 });
 export const toggleListItemEntity = (id, name, actionType) => ({
   type: 'TOGGLE_LIST_ITEM_ENTITY',
   id,
   name,
-  actionType
+  actionType,
 });
 export const openFlowDesigner = (listItemId, row, subEntityName) => ({
   type: 'OPEN_FLOW_DESIGNER',
   listItemId,
   row,
-  subEntityName
+  subEntityName,
 });
 export const createDraftItem = (listItemId, row, subEntityName) => ({
   type: 'CREATE_DRAFT_ITEM',
   listItemId,
   row,
-  subEntityName
+  subEntityName,
 });
 export const copyListItem = (listItemId, row, subEntityName) => ({
   type: 'COPY_LIST_ITEM',
   listItemId,
   row,
-  subEntityName
+  subEntityName,
 });
 export const removeListItem = (listItemId, subEntityName) => ({
   type: 'REMOVE_LIST_ITEM',
   listItemId,
-  subEntityName
+  subEntityName,
 });
-export const removeTwilioGlobalDialParam = subEntityName => ({
+export const removeTwilioGlobalDialParam = (subEntityName) => ({
   type: 'REMOVE_TWILIO_GLOBAL_DIAL_PARAM',
-  subEntityName
+  subEntityName,
 });
-export const updateTwilioGlobalDialParam = subEntityName => ({
+export const updateTwilioGlobalDialParam = (subEntityName) => ({
   type: 'UPDATE_TWILIO_GLOBAL_DIAL_PARAM',
-  subEntityName
+  subEntityName,
 });
 export const updateProficiency = (id, newValue) => ({
   type: 'UPDATE_PROFICIENCY',
   id,
-  newValue
+  newValue,
 });
 export const setConfirmationDialog = (modalType, metaData, nextEntity) => ({
   type: 'SET_CONFIRMATION_DIALOG',
   modalType,
   metaData,
-  nextEntity
+  nextEntity,
 });
 export const toggleProficiency = () => ({
-  type: 'TOGGLE_PROFICIENCY'
+  type: 'TOGGLE_PROFICIENCY',
 });
 
-export const executeConfirmCallback = referenceData => ({
+export const executeConfirmCallback = (referenceData) => ({
   type: 'EXECUTE_CONFIRM_CALLBACK',
-  referenceData
+  referenceData,
 });
 
 export const fetchData = (entityName, tableType) => ({
   type: 'FETCH_DATA',
   entityName,
-  tableType
+  tableType,
 });
 export const fetchListItems = (entityName, associatedEntityName) => ({
   type: 'FETCH_LIST_ITEMS',
   entityName,
-  associatedEntityName
+  associatedEntityName,
 });
 
-export const fetchReportingEvents = interactionId => ({
+export const fetchReportingEvents = (interactionId) => ({
   type: 'FETCH_REPORTING_EVENTS',
-  interactionId
+  interactionId,
 });
 
-export const setSelectedSubEntityId = selectedSubEntityId => ({
+export const setSelectedSubEntityId = (selectedSubEntityId) => ({
   type: 'SET_SELECTED_SUB_ENTITY_ID',
-  selectedSubEntityId
+  selectedSubEntityId,
 });
 
 export const onSubEntityFormSubmit = (values, { dirty }) => ({
   type: 'SUB_ENTITY_FORM_SUBMIT',
   values,
-  dirty
+  dirty,
 });
 export const onCopyListItemFormSubmit = (values, { dirty }) => ({
   type: 'COPY_LIST_ITEM_FORM_SUBMIT',
   values,
-  dirty
+  dirty,
 });
 export const onInitialVersionFormSubmit = (values, { dirty }) => ({
   type: 'INITIAL_VERSION_FORM_SUBMIT',
   values,
-  dirty
+  dirty,
 });
 export const updateEntity = (entityName, entityId, values) => ({
   type: 'UPDATE_ENTITY',
   entityName,
   entityId,
-  values
+  values,
 });
 
 export const updateEntityRejected = (entityName, entityId) => ({
   type: 'UPDATE_ENTITY_REJECTED',
   entityName,
-  entityId
+  entityId,
 });
-export const updateSidePanelWidth = width => ({
+export const updateSidePanelWidth = (width) => ({
   type: 'UPDATE_SIDE_PANEL_WIDTH',
-  width
+  width,
 });
-export const deleteSubEntity = subEntityId => ({
+export const deleteSubEntity = (subEntityId) => ({
   type: 'DELETE_SUB_ENTITY',
-  subEntityId
+  subEntityId,
 });
 
 export const downloadCsv = () => ({ type: 'DOWNLOAD_CSV' });
 
-export const uploadCsv = target => ({ type: 'UPLOAD_CSV', target });
+export const uploadCsv = (target) => ({ type: 'UPLOAD_CSV', target });
 
 export const changeUserInviteStatus = (toStatus, userId) => ({
   type: 'CHANGE_USER_INVITE_STATUS',
   toStatus,
-  userId
+  userId,
 });
 
 export const toggleShared = () => ({
-  type: 'TOGGLE_SHARED'
+  type: 'TOGGLE_SHARED',
 });
 
-export const setSelectedBusinessHourVersion = selectedVersionId => ({
+export const setSelectedBusinessHourVersion = (selectedVersionId) => ({
   type: 'SET_SELECTED_BUSINESS_HOUR_VERSION',
-  selectedVersionId
+  selectedVersionId,
 });
 
 export const setTenantUserAsImpersonated = () => ({
-  type: 'SET_TENANT_USER_AS_IMPERSONATED'
+  type: 'SET_TENANT_USER_AS_IMPERSONATED',
 });
 
 export const removeTransferListItem = (type, deleteEntityId) => {
   if (type === 'transferListItem') {
     return {
       type: 'REMOVE_TRANSFER_LIST_ITEM',
-      transferListItemId: deleteEntityId
+      transferListItemId: deleteEntityId,
     };
   } else if (type === 'categoryItems') {
     return {
       type: 'REMOVE_TRANSFER_LIST_ITEM',
-      categoryId: deleteEntityId
+      categoryId: deleteEntityId,
     };
   }
 };
 
-export const toggleMessageTemplateText = isDisplayContentInHtml => ({
+export const toggleMessageTemplateText = (isDisplayContentInHtml) => ({
   type: 'TOGGLE_MESSAGE_TEMPLATE_TEXT_CONTENT',
-  isDisplayContentInHtml
+  isDisplayContentInHtml,
 });
 
 export const removeReasonListItem = (type, deleteEntityId) => {
   if (type === 'reasonListItem') {
     return {
       type: 'REMOVE_REASON_LIST_ITEM',
-      reasonListItemId: deleteEntityId
+      reasonListItemId: deleteEntityId,
     };
   } else if (type === 'categoryItems') {
     return {
       type: 'REMOVE_REASON_LIST_ITEM',
-      categoryId: deleteEntityId
+      categoryId: deleteEntityId,
     };
   }
 };
 
 export const removeSecretApiKey = () => ({
-  type: 'REMOVE_SECRET_API_KEY'
+  type: 'REMOVE_SECRET_API_KEY',
 });
 
 export const deleteApiKey = () => ({
-  type: 'DELETE_API_KEY'
+  type: 'DELETE_API_KEY',
 });
 
-export const updateConfigUIUrlWithQueryString = entityId => ({
+export const updateConfigUIUrlWithQueryString = (entityId) => ({
   type: 'UPDATE_CONFIG_UI_URL_WITH_QUERY_STRING',
-  entityId
+  entityId,
 });
 
-export const fetchActiveVersionBusinessHoursFulfilled = activeVersions => ({
+export const fetchActiveVersionBusinessHoursFulfilled = (activeVersions) => ({
   type: 'FETCH_ACTIVE_VERSION_BUSINESS_HOUR_FULFILLED',
-  activeVersions
+  activeVersions,
 });
 
 export const onIntegrationListenerFormSubmit = (values, { dirty }) => ({
   type: 'INTEGRATION_LISTENER_FORM_SUBMIT',
   values,
-  dirty
+  dirty,
 });
 
-export const publishBusinessHoursV2Draft = values => ({
+export const publishBusinessHoursV2Draft = (values) => ({
   type: 'PUBLISH_BUSINESS_HOURS_V2_DRAFT',
-  values
+  values,
 });
 
-export const saveBeforePublishBusinessHoursV2Drfat = values => ({
+export const saveBeforePublishBusinessHoursV2Drfat = (values) => ({
   type: 'SAVE_BEFORE_PUBLISH_BUSINESS_HOURS_V2_DRAFT',
-  values
+  values,
 });
 
 export const createDraftBusinessHoursV2 = (businessHourId, values) => ({
   type: 'CREATE_DRAFT_BUSINESS_HOURS_V2',
   businessHourId,
-  values
+  values,
 });
 
 export const UpdateBrandingImageFileInState = (file, name) => ({
   type: 'UPDATE_BRANDING_FILES_IN_STATE',
   file,
-  name
+  name,
 });
 
-export const resetTenantBranding = entityId => ({
+export const resetTenantBranding = (entityId) => ({
   type: 'RESET_TENANT_BRANDING_TO_DEFAULT',
-  entityId
+  entityId,
+});
+
+export const updateUserProfile = (profileEntity, values) => ({
+  type: 'UPDATE_USER_PROFILE',
+  profileEntity,
+  values,
 });
 
 // Reducer
@@ -662,7 +671,7 @@ export default function reducer(state = initialState, action) {
     }
     case 'SET_CONFIRMATION_DIALOG': {
       const updatedState = state
-        .update(state.get('currentEntity'), entityStore =>
+        .update(state.get('currentEntity'), (entityStore) =>
           entityStore.set('confirmationDialogType', action.modalType).set('confirmationDialogMetaData', action.metaData)
         )
         .delete('nextEntity');
@@ -681,9 +690,9 @@ export default function reducer(state = initialState, action) {
         // we were performing bulk actions
         .updateIn(
           [currentEntity, 'data'],
-          entityData =>
+          (entityData) =>
             action.entityId === ''
-              ? entityData && entityData.map(item => item.set('bulkChangeItem', false))
+              ? entityData && entityData.map((item) => item.set('bulkChangeItem', false))
               : entityData
         );
       return updatedState;
@@ -726,44 +735,44 @@ export default function reducer(state = initialState, action) {
 
       switch (entityName) {
         case 'roles': {
-          const newResult = result.map(entity => ({
+          const newResult = result.map((entity) => ({
             ...entity,
-            inherited: entity.type === 'system' || entity.tenantId !== state.get('currentTenantId')
+            inherited: entity.type === 'system' || entity.tenantId !== state.get('currentTenantId'),
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'apiKeys': {
-          const newResult = result.map(entity => ({
+          const newResult = result.map((entity) => ({
             ...entity,
-            active: entity.status === 'enabled'
+            active: entity.status === 'enabled',
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'reasonLists': {
-          const newResult = result.map(entity => ({
+          const newResult = result.map((entity) => ({
             ...entity,
-            inherited: entity.tenantId !== state.get('currentTenantId')
+            inherited: entity.tenantId !== state.get('currentTenantId'),
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'groups': {
-          const newResult = result.map(entity => ({
+          const newResult = result.map((entity) => ({
             ...entity,
-            inherited: entity.name === 'everyone'
+            inherited: entity.name === 'everyone',
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'lists': {
-          const newResult = result.map(entity => ({
+          const newResult = result.map((entity) => ({
             ...entity,
-            inherited: entity.tenantId !== state.get('currentTenantId')
+            inherited: entity.tenantId !== state.get('currentTenantId'),
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
         case 'contactAttributes': {
-          const newResult = result.map(entity => ({
+          const newResult = result.map((entity) => ({
             ...entity,
-            inherited: entity.tenantId !== state.get('currentTenantId')
+            inherited: entity.tenantId !== state.get('currentTenantId'),
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
         }
@@ -782,22 +791,22 @@ export default function reducer(state = initialState, action) {
               return state;
             }
           } else {
-            const newResult = result.map(entity => {
+            const newResult = result.map((entity) => {
               let newEntity = { ...entity };
-              newEntity.extensions.forEach(ext => (ext.id = generateUUID()));
+              newEntity.extensions.forEach((ext) => (ext.id = generateUUID()));
               return newEntity;
             });
             return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([action.entityName, 'fetching']);
           }
         }
         case 'businessHours': {
-          const newResult = result.map(entity => ({
+          const newResult = result.map((entity) => ({
             ...entity,
             businessHoursType: Object.entries(entity)
               .filter(([key]) => key.includes('TimeMinutes'))
               .every(([key, value]) => value <= 0)
               ? '24/7'
-              : 'scheduledHours'
+              : 'scheduledHours',
           }));
           return state.setIn([entityName, 'data'], fromJS(newResult)).deleteIn([entityName, 'fetching']);
         }
@@ -843,7 +852,7 @@ export default function reducer(state = initialState, action) {
               entityIndex,
               'dependentEntities',
               action.entityName,
-              'fetching'
+              'fetching',
             ]);
           return action.entityName === 'branding'
             ? updatedState.deleteIn(['branding', 'fetching']).deleteIn(['branding', 'isUpdating'])
@@ -858,9 +867,15 @@ export default function reducer(state = initialState, action) {
     case 'SET_SELECTED_ENTITY_ID_FULFILLED':
     case 'FETCH_DATA_ITEM_FULFILLED': {
       const entityIndex = findEntityIndex(state, action.entityName, action.id);
+      const currentEntity = state.get('currentEntity');
       if (entityIndex !== -1) {
         return state
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...action.response.result, updating: false }))
+          .deleteIn([action.entityName, 'fetching']);
+      } else if (currentEntity === 'userProfile' && action.entityName === 'users') {
+        // Add user when we're fetching user data for the userProfile
+        return state
+          .updateIn([action.entityName, 'data'], (data) => data.push(fromJS({ ...action.response.result })))
           .deleteIn([action.entityName, 'fetching']);
       } else {
         return state;
@@ -900,7 +915,7 @@ export default function reducer(state = initialState, action) {
           .mergeIn(
             [action.entityName, 'data', entityIndex],
             fromJS({
-              bulkChangeItem: !state.getIn([action.entityName, 'data', entityIndex, 'bulkChangeItem'], false)
+              bulkChangeItem: !state.getIn([action.entityName, 'data', entityIndex, 'bulkChangeItem'], false),
             })
           )
           .setIn([action.entityName, 'selectedEntityId'], 'bulk');
@@ -931,8 +946,8 @@ export default function reducer(state = initialState, action) {
         result.active = result.status === 'enabled';
       }
 
-      const updatedState = state.update(action.entityName, entityStore =>
-        entityStore.update('data', data => data.push(fromJS(result)))
+      const updatedState = state.update(action.entityName, (entityStore) =>
+        entityStore.update('data', (data) => data.push(fromJS(result)))
       );
 
       if (action.entityName === 'tenants' || action.entityName === 'businessHoursV2') {
@@ -961,20 +976,20 @@ export default function reducer(state = initialState, action) {
       const userId = currentEntity === 'skills' ? action.id : state.getIn([currentEntity, 'selectedEntityId']);
 
       if (currentEntity === 'skills') {
-        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === userId);
+        const userIndex = state.getIn(['users', 'data']).findIndex((entity) => entity.get('id') === userId);
         const skillIndex = state
           .getIn(['users', 'data', userIndex, 'skills'])
-          .findIndex(entity => entity.get('id') === skillId);
+          .findIndex((entity) => entity.get('id') === skillId);
         if (userIndex !== -1) {
           return state.setIn(['users', 'data', userIndex, 'skills', skillIndex, 'proficiency'], action.newValue);
         } else {
           return state;
         }
       } else if (currentEntity === 'users') {
-        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === userId);
+        const userIndex = state.getIn(['users', 'data']).findIndex((entity) => entity.get('id') === userId);
         const skillIndex = state
           .getIn(['users', 'data', userIndex, 'skillsWithProficiency'])
-          .findIndex(entity => entity.get('skillId') === skillId);
+          .findIndex((entity) => entity.get('skillId') === skillId);
         if (userIndex !== -1) {
           return state.setIn(
             ['users', 'data', userIndex, 'skillsWithProficiency', skillIndex, 'proficiency'],
@@ -1004,10 +1019,10 @@ export default function reducer(state = initialState, action) {
         const userEntityIndex = findEntityIndex(state, 'users', action.response.result.userId);
         if (action.values.addSkill) {
           return state
-            .updateIn(['users', 'data', userEntityIndex, 'skills'], skills => skills.push(fromJS(result)))
+            .updateIn(['users', 'data', userEntityIndex, 'skills'], (skills) => skills.push(fromJS(result)))
             .deleteIn(['users', 'bulkUpdating']);
         } else if (action.values.removeSkill) {
-          const skillIndex = state.getIn(['users', 'data', userEntityIndex, 'skills']).findIndex(skill => {
+          const skillIndex = state.getIn(['users', 'data', userEntityIndex, 'skills']).findIndex((skill) => {
             if (typeof skill === 'object') {
               return action.values.removeSkillId === (skill.get('skillId') || skill.get('id'));
             } else {
@@ -1019,10 +1034,10 @@ export default function reducer(state = initialState, action) {
             .deleteIn(['users', 'bulkUpdating']);
         } else if (action.values.addGroup) {
           return state
-            .updateIn(['users', 'data', userEntityIndex, 'groups'], groups => groups.push(fromJS(result)))
+            .updateIn(['users', 'data', userEntityIndex, 'groups'], (groups) => groups.push(fromJS(result)))
             .deleteIn(['users', 'bulkUpdating']);
         } else if (action.values.removeGroup) {
-          const groupIndex = state.getIn(['users', 'data', userEntityIndex, 'groups']).findIndex(group => {
+          const groupIndex = state.getIn(['users', 'data', userEntityIndex, 'groups']).findIndex((group) => {
             if (typeof group === 'object') {
               return action.values.removeGroupId === (group.get('groupId') || group.get('id'));
             } else {
@@ -1071,8 +1086,8 @@ export default function reducer(state = initialState, action) {
             !result.active
           ) {
             return updatedState
-              .updateIn([action.entityName, 'data', entityIndex, 'listeners'], listeners =>
-                listeners.map(listener => listener.set('active', false))
+              .updateIn([action.entityName, 'data', entityIndex, 'listeners'], (listeners) =>
+                listeners.map((listener) => listener.set('active', false))
               )
               .setIn([action.entityName, 'data', entityIndex, 'updating'], false);
           } else {
@@ -1091,29 +1106,29 @@ export default function reducer(state = initialState, action) {
       const { actionType, entityName, entityId, name, id, response } = action;
       const entityIndex = findEntityIndex(state, action.entityName, entityId);
       const currentList = state.getIn([entityName, 'data', entityIndex, name]);
-      const modifiedList = actionType === 'associate' ? currentList.push(id) : currentList.filter(x => x !== id);
+      const modifiedList = actionType === 'associate' ? currentList.push(id) : currentList.filter((x) => x !== id);
       if (entityIndex !== -1 && name === 'skills') {
         return state
           .remove('loading')
           .setIn([entityName, 'data', entityIndex, name], modifiedList)
-          .updateIn([entityName, 'data', entityIndex, 'skillsWithProficiency'], list => {
+          .updateIn([entityName, 'data', entityIndex, 'skillsWithProficiency'], (list) => {
             if (actionType === 'associate') {
               return list.push(fromJS(response.result));
             } else {
-              const itemIndex = list.findIndex(item => item.get('skillId') === id);
+              const itemIndex = list.findIndex((item) => item.get('skillId') === id);
               return list.delete(itemIndex);
             }
           });
       } else if (entityIndex !== -1 && name === 'users') {
-        const userIndex = state.getIn(['users', 'data']).findIndex(entity => entity.get('id') === id);
+        const userIndex = state.getIn(['users', 'data']).findIndex((entity) => entity.get('id') === id);
         return state
           .remove('loading')
           .setIn([entityName, 'data', entityIndex, name], modifiedList)
-          .updateIn(['users', 'data', userIndex, 'skills'], list => {
+          .updateIn(['users', 'data', userIndex, 'skills'], (list) => {
             if (actionType === 'associate') {
               return list.push(fromJS({ id: response.result.skillId, proficiency: response.result.proficiency }));
             } else {
-              const itemIndex = list.findIndex(item => item.get('id') === entityId);
+              const itemIndex = list.findIndex((item) => item.get('id') === entityId);
               return list.delete(itemIndex);
             }
           });
@@ -1156,7 +1171,7 @@ export default function reducer(state = initialState, action) {
       if (entityIndex !== -1) {
         return state.setIn(
           [action.entityName, 'data', entityIndex, action.associatedEntityName],
-          fromJS(response.map(x => x[idType]))
+          fromJS(response.map((x) => x[idType]))
         );
       } else {
         return state;
@@ -1193,9 +1208,9 @@ export default function reducer(state = initialState, action) {
         const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
         if (entityIndex !== -1) {
           return state
-            .update(action.entityName, entityStore =>
+            .update(action.entityName, (entityStore) =>
               entityStore
-                .updateIn(['data', entityIndex, 'drafts'], subEntityList =>
+                .updateIn(['data', entityIndex, 'drafts'], (subEntityList) =>
                   subEntityList.push(fromJS(action.response.result))
                 )
                 .set('selectedSubEntityId', undefined)
@@ -1220,11 +1235,11 @@ export default function reducer(state = initialState, action) {
       const entityIndex = findEntityIndex(state, 'businessHours', action.entityId);
       if (entityIndex !== -1) {
         return state
-          .update('businessHours', entityStore =>
+          .update('businessHours', (entityStore) =>
             entityStore
               .updateIn(
                 ['data', entityIndex, 'exceptions'],
-                exceptions =>
+                (exceptions) =>
                   !exceptions ? fromJS([action.response.result]) : exceptions.push(fromJS(action.response.result))
               )
               .set('selectedSubEntityId', undefined)
@@ -1255,13 +1270,13 @@ export default function reducer(state = initialState, action) {
     case 'INTEGRATION_LISTENER_FORM_SUBMIT_FULFILLED': {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1 && action.entityName === 'integrations') {
-        return state.update(action.entityName, entityStore =>
+        return state.update(action.entityName, (entityStore) =>
           entityStore
-            .updateIn(['data', entityIndex, 'listeners'], subEntityList => {
+            .updateIn(['data', entityIndex, 'listeners'], (subEntityList) => {
               if (action.subEntityId === 'listeners') {
                 return subEntityList.push(fromJS({ ...action.response.result }));
               }
-              const subEntityIndex = subEntityList.findIndex(subEntity => subEntity.get('id') === action.subEntityId);
+              const subEntityIndex = subEntityList.findIndex((subEntity) => subEntity.get('id') === action.subEntityId);
               if (subEntityIndex !== -1) {
                 return subEntityList.setIn([subEntityIndex], fromJS({ ...action.response.result }));
               }
@@ -1281,13 +1296,13 @@ export default function reducer(state = initialState, action) {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {
         const { itemValue, key } = action.response.result;
-        return state.update(action.entityName, entityStore =>
+        return state.update(action.entityName, (entityStore) =>
           entityStore
             .updateIn(['data', entityIndex, 'items'], (subEntityList = List()) =>
               subEntityList.push(
                 fromJS({
                   ...itemValue,
-                  key
+                  key,
                 })
               )
             )
@@ -1302,15 +1317,15 @@ export default function reducer(state = initialState, action) {
       const entity = selectedEntity(state);
       const { result } = action.response;
       return state
-        .updateIn([entity.type, 'data', entity.index, 'members'], membersList => {
-          const memberIndex = membersList.findIndex(member => member.get('id') === result.id);
+        .updateIn([entity.type, 'data', entity.index, 'members'], (membersList) => {
+          const memberIndex = membersList.findIndex((member) => member.get('id') === result.id);
           if (entity.index !== -1 && memberIndex !== -1) {
             return membersList.setIn([memberIndex], fromJS(result));
           } else {
             return membersList;
           }
         })
-        .updateIn([entity.dependency, 'data', entity.dependencyItemIndex(result.id)], item =>
+        .updateIn([entity.dependency, 'data', entity.dependencyItemIndex(result.id)], (item) =>
           item.merge(fromJS(result))
         );
     }
@@ -1325,22 +1340,22 @@ export default function reducer(state = initialState, action) {
       if (action.entityName === 'flows') {
         const filteredListMembers = state
           .getIn([entity.type, 'data', entity.index, 'drafts'])
-          .filterNot(member => member.get('id') === action.listItemId);
+          .filterNot((member) => member.get('id') === action.listItemId);
         return state.remove('loading').setIn([entity.type, 'data', entity.index, 'drafts'], filteredListMembers);
       } else if (action.entityName === 'businessHours') {
         const filteredListMembers = state
           .getIn([entity.type, 'data', entity.index, 'exceptions'])
-          .filterNot(member => member.get('id') === action.listItemId);
+          .filterNot((member) => member.get('id') === action.listItemId);
         return state.remove('loading').setIn([entity.type, 'data', entity.index, 'exceptions'], filteredListMembers);
       } else if (action.entityName === 'businessHoursV2') {
         const filteredListMembers = state
           .getIn([entity.type, 'data', entity.index, 'items'])
-          .filterNot(member => member.get('id') === action.listItemId);
+          .filterNot((member) => member.get('id') === action.listItemId);
         return state.remove('loading').setIn([entity.type, 'data', entity.index, 'items'], filteredListMembers);
       }
       const filteredListMembers = state
         .getIn([entity.type, 'data', entity.index, 'members'])
-        .filterNot(member => member.get('id') === action.listItemId);
+        .filterNot((member) => member.get('id') === action.listItemId);
       return state.remove('loading').setIn([entity.type, 'data', entity.index, 'members'], filteredListMembers);
     }
     case 'ADD_LIST_ITEM': {
@@ -1353,19 +1368,19 @@ export default function reducer(state = initialState, action) {
       const entity = selectedEntity(state);
       const entityToAdd = state
         .getIn([entity.dependency, 'data'])
-        .find(entity => entity.get('id') === action.listItemId);
+        .find((entity) => entity.get('id') === action.listItemId);
       return state
         .remove('loading')
-        .updateIn([entity.type, 'data', entity.index, 'members'], members => members.push(entityToAdd));
+        .updateIn([entity.type, 'data', entity.index, 'members'], (members) => members.push(entityToAdd));
     }
     case 'UPDATE_SUB_ENTITY_FULFILLED': {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {
-        return state.update(action.entityName, entityStore =>
+        return state.update(action.entityName, (entityStore) =>
           entityStore
             .updateIn(['data', entityIndex, 'items'], (subEntityList = List()) => {
               const subEntityIndex = subEntityList.findIndex(
-                subEntity => subEntity.get('key') === action.subEntityId || subEntity.get('id') === action.subEntityId
+                (subEntity) => subEntity.get('key') === action.subEntityId || subEntity.get('id') === action.subEntityId
               );
               if (entityIndex !== -1) {
                 const { itemValue, key } = action.response.result;
@@ -1373,7 +1388,7 @@ export default function reducer(state = initialState, action) {
                   [subEntityIndex],
                   fromJS({
                     ...itemValue,
-                    key
+                    key,
                   })
                 );
               } else {
@@ -1382,7 +1397,7 @@ export default function reducer(state = initialState, action) {
             })
             .update(
               'selectedSubEntityId',
-              selectedSubEntityId => (action.entityName === 'businessHoursV2' ? selectedSubEntityId : undefined)
+              (selectedSubEntityId) => (action.entityName === 'businessHoursV2' ? selectedSubEntityId : undefined)
             )
             .set('subEntitySaving', false)
         );
@@ -1404,11 +1419,11 @@ export default function reducer(state = initialState, action) {
       const entityIndex = findEntityIndex(state, action.entityName, action.entityId);
       if (entityIndex !== -1) {
         return state
-          .update(action.entityName, entityStore =>
+          .update(action.entityName, (entityStore) =>
             entityStore
-              .updateIn(['data', entityIndex, 'items'], subEntityList => {
+              .updateIn(['data', entityIndex, 'items'], (subEntityList) => {
                 const subEntityIndex = subEntityList.findIndex(
-                  subEntity => subEntity.get('key') === action.subEntityId
+                  (subEntity) => subEntity.get('key') === action.subEntityId
                 );
                 if (entityIndex !== -1) {
                   return subEntityList.delete(subEntityIndex);
@@ -1430,8 +1445,8 @@ export default function reducer(state = initialState, action) {
     case 'FETCH_TENANT_DEFAULT_SLA': {
       const { result } = action.response;
 
-      return state.update(action.entityName, entityStore =>
-        entityStore.update('data', data => data.push(fromJS(result)))
+      return state.update(action.entityName, (entityStore) =>
+        entityStore.update('data', (data) => data.push(fromJS(result)))
       );
     }
     case '@@redux-form/INITIALIZE':
@@ -1466,7 +1481,7 @@ export default function reducer(state = initialState, action) {
       const updatedState = setUserExistsInPlatform(state, action);
 
       if (action.type === '@@redux-form/DESTROY') {
-        const isCustomEntity = entityName => action.meta.form.toString().startsWith(entityName);
+        const isCustomEntity = (entityName) => action.meta.form.toString().startsWith(entityName);
         if (isCustomEntity('messageTemplates')) {
           return updatedState.deleteIn(['messageTemplates', 'isDisplayContentInHtml']);
         }
@@ -1477,8 +1492,8 @@ export default function reducer(state = initialState, action) {
       return state.setIn(['messageTemplates', 'isDisplayContentInHtml'], action.isDisplayContentInHtml);
     }
     case 'FETCH_ACTIVE_VERSION_BUSINESS_HOUR_FULFILLED': {
-      return state.updateIn(['businessHoursV2', 'data'], businessHours =>
-        businessHours.map(businessHour => {
+      return state.updateIn(['businessHoursV2', 'data'], (businessHours) =>
+        businessHours.map((businessHour) => {
           return businessHour.update('versions', (versions = List()) => {
             if (action.activeVersions[businessHour.get('id')]) {
               return versions.push(fromJS(action.activeVersions[businessHour.get('id')]));
@@ -1504,13 +1519,13 @@ export default function reducer(state = initialState, action) {
     case 'PUBLISH_BUSINESS_HOURS_V2_DRAFT_FULFILLED': {
       const index = state
         .getIn(['businessHoursV2', 'data'])
-        .findIndex(businessHour => businessHour.get('id') === action.entityId);
+        .findIndex((businessHour) => businessHour.get('id') === action.entityId);
       if (index !== -1) {
         return state
           .updateIn(['businessHoursV2', 'data', index, 'versions'], (versions = List()) =>
             versions.push(
               fromJS({
-                ...action.response.result
+                ...action.response.result,
               })
             )
           )
@@ -1535,9 +1550,9 @@ export default function reducer(state = initialState, action) {
     case 'CREATE_DRAFT_BUSINESS_HOURS_V2_FULFILLED': {
       const index = state
         .getIn(['businessHoursV2', 'data'])
-        .findIndex(businessHour => businessHour.get('id') === action.businessHourId);
+        .findIndex((businessHour) => businessHour.get('id') === action.businessHourId);
       if (index !== -1) {
-        return state.update('businessHoursV2', businessHoursV2State =>
+        return state.update('businessHoursV2', (businessHoursV2State) =>
           businessHoursV2State
             .updateIn(['data', index, 'items'], (drafts = List()) => drafts.push(fromJS(action.response.result)))
             .set('isCreatingDraft', false)
@@ -1576,7 +1591,7 @@ export default function reducer(state = initialState, action) {
           entityIndex,
           'dependentEntities',
           'branding',
-          `${imageType}Uploading`
+          `${imageType}Uploading`,
         ]);
       } else {
         return state;
@@ -1632,6 +1647,35 @@ export default function reducer(state = initialState, action) {
         return state;
       }
     }
+    case 'USER_PROFILE_TENANTS_FULFILLED': {
+      const { details } = action.response;
+      if (details) {
+        return state.setIn(['userProfile', 'userTenants'], fromJS(details));
+      } else {
+        return state;
+      }
+    }
+    case 'UPDATE_USER_PROFILE': {
+      return state.setIn(['userProfile', 'updating'], true);
+    }
+    case 'UPDATE_USER_PROFILE_REJECTED': {
+      return state.deleteIn(['userProfile', 'updating']);
+    }
+    case 'UPDATE_USER_PROFILE_FULFILLED': {
+      const { userId, response: { result: { roleId, ...result } }, profileEntity } = action;
+      const entityIndex = findEntityIndex(state, 'users', userId);
+      return entityIndex !== -1
+        ? state
+            .mergeIn(
+              ['users', 'data', entityIndex],
+              fromJS({
+                ...result,
+                ...(profileEntity === 'platformUser' ? { platformRoleId: roleId } : { roleId }),
+              })
+            )
+            .deleteIn(['userProfile', 'updating'])
+        : state.deleteIn(['userProfile', 'updating']);
+    }
     default:
       return state;
   }
@@ -1672,8 +1716,8 @@ const setSubEntityDeleting = (state, { subEntityId }, deleting) => {
   const entityIndex = findEntityIndex(state, currentEntity, selectedEntityId);
   const subEntityIndex = state
     .getIn([currentEntity, 'data', entityIndex, 'items'])
-    .findIndex(subEntity => subEntity.get('key') === subEntityId);
-  return state.updateIn([currentEntity, 'data', entityIndex, 'items', subEntityIndex], subEntity =>
+    .findIndex((subEntity) => subEntity.get('key') === subEntityId);
+  return state.updateIn([currentEntity, 'data', entityIndex, 'items', subEntityIndex], (subEntity) =>
     subEntity.set('deleting', deleting)
   );
 };
@@ -1683,11 +1727,11 @@ export function selectedEntity(state) {
   const dependentEntity = state.getIn([currentEntity, 'metaData', 'listDependency'], undefined);
   const selectedEntityId = state.getIn([currentEntity, 'selectedEntityId']);
   let context = {
-    index: state.getIn([currentEntity, 'data']).findIndex(entity => entity.get('id') === selectedEntityId),
+    index: state.getIn([currentEntity, 'data']).findIndex((entity) => entity.get('id') === selectedEntityId),
     type: currentEntity,
     dependency: dependentEntity,
-    dependencyItemIndex: itemId =>
-      state.getIn([dependentEntity, 'data']).findIndex(entity => entity.get('id') === itemId)
+    dependencyItemIndex: (itemId) =>
+      state.getIn([dependentEntity, 'data']).findIndex((entity) => entity.get('id') === itemId),
   };
   return context;
 }

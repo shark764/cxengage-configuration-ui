@@ -134,11 +134,18 @@ exports[`<UsersForm /> renders create user 1`] = `
         userHasUpdatePermission={true}
       />
       <ExtensionListField
+        canChangeRegion={true}
         className="users-extensions"
         data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
+        placeholders={
+          Object {
+            "extension": "Enter Extension",
+            "label": "Description",
+          }
+        }
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
@@ -295,11 +302,18 @@ exports[`<UsersForm /> renders update user 1`] = `
         userHasUpdatePermission={true}
       />
       <ExtensionListField
+        canChangeRegion={true}
         className="users-extensions"
         data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
+        placeholders={
+          Object {
+            "extension": "Enter Extension",
+            "label": "Description",
+          }
+        }
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
@@ -456,11 +470,18 @@ exports[`<UsersForm /> renders update user saving and inherited 1`] = `
         userHasUpdatePermission={true}
       />
       <ExtensionListField
+        canChangeRegion={false}
         className="users-extensions"
         data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
+        placeholders={
+          Object {
+            "extension": "Enter Extension",
+            "label": "Description",
+          }
+        }
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)
@@ -603,11 +624,18 @@ exports[`<UsersForm /> renders update user with no name set 1`] = `
         userHasUpdatePermission={true}
       />
       <ExtensionListField
+        canChangeRegion={true}
         className="users-extensions"
         data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
+        placeholders={
+          Object {
+            "extension": "Enter Extension",
+            "label": "Description",
+          }
+        }
       />
     </Connect(DetailWrapper)>
   </styled.div>
@@ -734,11 +762,18 @@ exports[`<UsersForm /> renders update user without update permision 1`] = `
         userHasUpdatePermission={false}
       />
       <ExtensionListField
+        canChangeRegion={false}
         className="users-extensions"
         data-automation="extensionsExtensionList"
         disabled={false}
         label="Inputs"
         name="extensions"
+        placeholders={
+          Object {
+            "extension": "Enter Extension",
+            "label": "Description",
+          }
+        }
       />
     </Connect(DetailWrapper)>
     <Connect(DetailWrapper)

@@ -71,7 +71,8 @@ export default function UsersForm({
   changeUserInviteStatus,
   displayResetPassword,
   usersFetching,
-  userHasNameSet
+  userHasNameSet,
+  canManageAllExtensions
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -285,6 +286,11 @@ export default function UsersForm({
             name="extensions"
             label="Inputs"
             data-automation="extensionsExtensionList"
+            canChangeRegion={canManageAllExtensions}
+            placeholders={{
+              extension: 'Enter Extension',
+              label: 'Description'
+            }}
           />
         </DetailWrapper>
 
@@ -348,5 +354,6 @@ UsersForm.propTypes = {
   changeUserInviteStatus: PropTypes.func.isRequired,
   displayResetPassword: PropTypes.bool,
   usersFetching: PropTypes.bool,
-  userHasNameSet: PropTypes.bool
+  userHasNameSet: PropTypes.bool,
+  canManageAllExtensions: PropTypes.bool
 };

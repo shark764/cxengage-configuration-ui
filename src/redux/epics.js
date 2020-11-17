@@ -28,6 +28,7 @@ import * as integrationsEpics from './modules/entities/integrations/epics';
 import * as contactLayoutsEpics from './modules/entities/contactLayouts/epics';
 import * as contactAttributesEpics from './modules/entities/contactAttributes/epics';
 import * as forecastDashboardsEpics from './modules/reporting/forecastDashboards/epics';
+import * as userProfileEpics from './modules/entities/userProfile/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -58,5 +59,6 @@ export const rootEpic = combineEpics(
   ...Object.values(integrationsEpics),
   ...Object.values(contactLayoutsEpics),
   ...Object.values(contactAttributesEpics),
-  ...Object.values(forecastDashboardsEpics)
+  ...Object.values(forecastDashboardsEpics),
+  ...Object.values(userProfileEpics)
 );

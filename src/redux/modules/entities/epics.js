@@ -268,7 +268,7 @@ export const FetchDataItem = action$ =>
     .filter(({ entityName }) => hasCustomFetchEntityItemData(entityName))
     .map(a => {
       a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('get', 'singleMainEntity');
-      a.sdkCall.data = { [removeLastLetter(a.entityName) + 'Id']: a.id };
+      a.sdkCall.data = { [`${a.entityName === 'users' ? 'resource' : removeLastLetter(a.entityName)}Id`]: a.id };
       return { ...a };
     })
     .switchMap(a =>
@@ -999,7 +999,8 @@ export const ExecuteConfirmationDialogCallback = (action$, store) =>
                 nextEntity !== 'interactionMonitoring' &&
                 nextEntity !== 'agentStateMonitoring' &&
                 nextEntity !== 'flowDebugLogs' &&
-                nextEntity !== 'betaFeatures'
+                nextEntity !== 'betaFeatures' &&
+                nextEntity !== 'userProfile'
               ) {
                 history.push({ pathname: `/configuration/${nextEntity}` });
               } else {

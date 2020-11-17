@@ -59,7 +59,7 @@ describe('entities reducer', () => {
       it("sets the current entity's selected entity id", () => {
         const initialState = fromJS({
           currentEntity: 'mockEntity',
-          mockEntity: { selectedEntityId: 'mock entity id', data: [] }
+          mockEntity: { selectedEntityId: 'mock entity id', data: [] },
         });
         expect(
           entitiesReducer(initialState, entitiesReducerFunctions.setSelectedEntityId('mock entity id'))
@@ -70,7 +70,7 @@ describe('entities reducer', () => {
       it('sets the current entity\'s selected entity id to "create"', () => {
         const initialState = fromJS({
           currentEntity: 'mockEntity',
-          mockEntity: {}
+          mockEntity: {},
         });
         expect(entitiesReducer(initialState, entitiesReducerFunctions.setSelectedEntityCreate())).toMatchSnapshot();
       });
@@ -79,7 +79,7 @@ describe('entities reducer', () => {
       it('sets the current entity\'s selected entity id to ""', () => {
         const initialState = fromJS({
           currentEntity: 'mockEntity',
-          mockEntity: { selectedEntityId: 'mock entity id', data: [] }
+          mockEntity: { selectedEntityId: 'mock entity id', data: [] },
         });
         expect(entitiesReducer(initialState, entitiesReducerFunctions.unsetSelectedEntityId())).toMatchSnapshot();
       });
@@ -90,16 +90,16 @@ describe('entities reducer', () => {
     it('sets the data as the immutable value passed in', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: undefined
-        }
+          data: undefined,
+        },
       });
       expect(
         entitiesReducer(initialState, {
           type: 'FETCH_DATA_FULFILLED',
           entityName: 'mockEntity',
           response: {
-            result: [{ mockEntityId: 'mock entity id' }]
-          }
+            result: [{ mockEntityId: 'mock entity id' }],
+          },
         })
       ).toMatchSnapshot();
     });
@@ -109,8 +109,8 @@ describe('entities reducer', () => {
     it('data item exists in entity , make sure it updates', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: [{ id: 'mockId' }]
-        }
+          data: [{ id: 'mockId' }],
+        },
       });
       expect(
         entitiesReducer(initialState, {
@@ -118,16 +118,16 @@ describe('entities reducer', () => {
           entityName: 'mockEntity',
           id: 'mockId',
           response: {
-            result: [{ mockEntityId: 'mock entity id' }]
-          }
+            result: [{ mockEntityId: 'mock entity id' }],
+          },
         })
       ).toMatchSnapshot();
     });
-    it("data item doesn't exists in entity , return unchanged state", () => {
+    it("data item doesn't exists in entity , return unchanged state if currentEntity it's not userProfile or entity being fetch it's not an user", () => {
       const initialState = fromJS({
         mockEntity: {
-          data: []
-        }
+          data: [],
+        },
       });
       expect(
         entitiesReducer(initialState, {
@@ -135,8 +135,26 @@ describe('entities reducer', () => {
           entityName: 'mockEntity',
           id: 'mockId',
           response: {
-            result: [{ mockEntityId: 'mock entity id' }]
-          }
+            result: [{ mockEntityId: 'mock entity id' }],
+          },
+        })
+      ).toMatchSnapshot();
+    });
+    it("data item doesn't exists in entity , it gets added because currentEntity it's userProfile and entity being fetched it's an user", () => {
+      const initialState = fromJS({
+        currentEntity: 'userProfile',
+        users: {
+          data: [],
+        },
+      });
+      expect(
+        entitiesReducer(initialState, {
+          type: 'FETCH_DATA_ITEM_FULFILLED',
+          entityName: 'users',
+          id: 'mockId',
+          response: {
+            result: [{ userId: 'mock entity id' }],
+          },
         })
       ).toMatchSnapshot();
     });
@@ -146,8 +164,8 @@ describe('entities reducer', () => {
     it('add new subentiy into entities data', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: [{ id: 'mockId' }]
-        }
+          data: [{ id: 'mockId' }],
+        },
       });
       expect(
         entitiesReducer(initialState, {
@@ -155,16 +173,16 @@ describe('entities reducer', () => {
           entityName: 'mockEntity',
           id: 'mockId',
           response: {
-            result: [{ itemValue: 'mock value', key: 'mockKey' }]
-          }
+            result: [{ itemValue: 'mock value', key: 'mockKey' }],
+          },
         })
       ).toMatchSnapshot();
     });
     it('main entity doesnt exist in state , return unchanged state', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: []
-        }
+          data: [],
+        },
       });
       expect(
         entitiesReducer(initialState, {
@@ -172,8 +190,8 @@ describe('entities reducer', () => {
           entityName: 'mockEntity',
           id: 'mockId',
           response: {
-            result: [{ mockEntityId: 'mock entity id' }]
-          }
+            result: [{ mockEntityId: 'mock entity id' }],
+          },
         })
       ).toMatchSnapshot();
     });
@@ -183,8 +201,8 @@ describe('entities reducer', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: []
-        }
+          data: [],
+        },
       });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
       entitiesReducer(initialState, { type: 'FETCH_DATA_ITEM_REJECTED', entityName: 'mockEntity' });
@@ -197,8 +215,8 @@ describe('entities reducer', () => {
     it('sets the data to an empty List', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: undefined
-        }
+          data: undefined,
+        },
       });
       expect(
         entitiesReducer(initialState, { type: 'FETCH_DATA_REJECTED', entityName: 'mockEntity' })
@@ -211,9 +229,9 @@ describe('entities reducer', () => {
       const initialState = fromJS({
         Entities: {
           mockEntity: {
-            data: []
-          }
-        }
+            data: [],
+          },
+        },
       });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
       entitiesReducer(
@@ -231,10 +249,10 @@ describe('entities reducer', () => {
         mockEntity: {
           data: [
             {
-              id: 'mock entity id'
-            }
-          ]
-        }
+              id: 'mock entity id',
+            },
+          ],
+        },
       });
       it('merges the result in and sets "updating" to false', () => {
         expect(
@@ -242,8 +260,8 @@ describe('entities reducer', () => {
             type: 'UPDATE_ENTITY_FULFILLED',
             entityName: 'mockEntity',
             response: {
-              result: { id: 'mock entity id', mockResult: 'mock result value' }
-            }
+              result: { id: 'mock entity id', mockResult: 'mock result value' },
+            },
           })
         ).toMatchSnapshot();
       });
@@ -251,8 +269,8 @@ describe('entities reducer', () => {
     describe('when the entity is not there', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: []
-        }
+          data: [],
+        },
       });
       it('does nothing', () => {
         expect(
@@ -260,8 +278,8 @@ describe('entities reducer', () => {
             type: 'UPDATE_ENTITY_FULFILLED',
             entityName: 'mockEntity',
             response: {
-              result: { id: 'mock entity id', mockResult: 'mock result value' }
-            }
+              result: { id: 'mock entity id', mockResult: 'mock result value' },
+            },
           })
         ).toEqual(initialState);
       });
@@ -274,10 +292,10 @@ describe('entities reducer', () => {
         mockEntity: {
           data: [
             {
-              id: 'mock entity id'
-            }
-          ]
-        }
+              id: 'mock entity id',
+            },
+          ],
+        },
       });
       it('merges the result in and sets "updating" to false', () => {
         expect(
@@ -285,8 +303,8 @@ describe('entities reducer', () => {
             type: 'TOGGLE_ENTITY_FULFILLED',
             entityName: 'mockEntity',
             response: {
-              result: { id: 'mock entity id', mockResult: 'mock result value' }
-            }
+              result: { id: 'mock entity id', mockResult: 'mock result value' },
+            },
           })
         ).toMatchSnapshot();
       });
@@ -294,8 +312,8 @@ describe('entities reducer', () => {
     describe('when the entity is not there', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: []
-        }
+          data: [],
+        },
       });
       it('does nothing', () => {
         expect(
@@ -303,8 +321,8 @@ describe('entities reducer', () => {
             type: 'TOGGLE_ENTITY_FULFILLED',
             entityName: 'mockEntity',
             response: {
-              result: { id: 'mock entity id', mockResult: 'mock result value' }
-            }
+              result: { id: 'mock entity id', mockResult: 'mock result value' },
+            },
           })
         ).toEqual(initialState);
       });
@@ -316,9 +334,9 @@ describe('entities reducer', () => {
       const initialState = fromJS({
         Entities: {
           mockEntity: {
-            data: []
-          }
-        }
+            data: [],
+          },
+        },
       });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
       entitiesReducer(initialState, entitiesReducerFunctions.updateEntityRejected('mockEntity', 'mock entity id'));
@@ -331,14 +349,14 @@ describe('entities reducer', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: []
-        }
+          data: [],
+        },
       });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
       entitiesReducer(initialState, {
         type: 'UPLOAD_CSV_REJECTED',
         entityName: 'mockEntity',
-        entityId: 'mockId'
+        entityId: 'mockId',
       });
       expect(spy).toMatchSnapshot();
       spy.mockRestore();
@@ -349,8 +367,8 @@ describe('entities reducer', () => {
     it('calls setEntityUpdatingHelper correctly', () => {
       const initialState = fromJS({
         mockEntity: {
-          data: []
-        }
+          data: [],
+        },
       });
       const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
       entitiesReducer(initialState, { type: 'SET_ENTITY_UPDATING', entityName: 'mockEntity' });
@@ -366,10 +384,10 @@ describe('entities reducer', () => {
           mockEntity: {
             data: [
               {
-                id: 'mock entity id'
-              }
-            ]
-          }
+                id: 'mock entity id',
+              },
+            ],
+          },
         });
         it("sets the entity's updated field", () => {
           expect(
@@ -384,8 +402,8 @@ describe('entities reducer', () => {
       describe('when the entity is not there', () => {
         const initialState = fromJS({
           mockEntity: {
-            data: []
-          }
+            data: [],
+          },
         });
         it('does nothing', () => {
           expect(
@@ -405,8 +423,8 @@ describe('CREATE_ENTITY', () => {
   it('sets creating to true on the entity that was passed in', () => {
     const initialState = fromJS({
       mockEntity: {
-        data: undefined
-      }
+        data: undefined,
+      },
     });
     expect(entitiesReducer(initialState, { type: 'CREATE_ENTITY', entityName: 'mockEntity' })).toMatchSnapshot();
   });
@@ -416,16 +434,16 @@ describe('CREATE_ENTITY_FULFILLED', () => {
   it('add the created entity into the data on said entity', () => {
     const initialState = fromJS({
       mockEntity: {
-        data: []
-      }
+        data: [],
+      },
     });
     expect(
       entitiesReducer(initialState, {
         type: 'CREATE_ENTITY_FULFILLED',
         entityName: 'mockEntity',
         response: {
-          result: { mockData: {} }
-        }
+          result: { mockData: {} },
+        },
       })
     ).toMatchSnapshot();
   });
@@ -435,8 +453,8 @@ describe('CREATE_ENTITY_REJECTED', () => {
   it('calls setEntityUpdatingHelper correctly', () => {
     const initialState = fromJS({
       mockEntity: {
-        data: []
-      }
+        data: [],
+      },
     });
     const spy = jest.spyOn(entitiesReducerFunctions, 'setEntityUpdatingHelper').mockImplementation(() => {});
     entitiesReducer(initialState, { type: 'CREATE_ENTITY_REJECTED', entityName: 'mockEntity' });

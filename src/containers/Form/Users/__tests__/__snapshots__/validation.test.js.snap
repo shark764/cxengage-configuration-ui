@@ -3,8 +3,15 @@
 exports[`formValidation returns proper object (errors) when invitationStatus is pending, firstname is provided so lastname should be required as well 1`] = `
 Object {
   "extensions": Array [
-    "Label is required",
-    "Label is required",
+    Object {
+      "label": true,
+      "message": "Phone number should be in E.164 format.",
+      "value": true,
+    },
+    Object {
+      "label": true,
+      "message": "Please provide a description",
+    },
   ],
   "firstName": false,
   "lastName": "Please enter a last name",
@@ -15,8 +22,15 @@ Object {
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
   "extensions": Array [
-    "Label is required",
-    "Label is required",
+    Object {
+      "label": true,
+      "message": "Phone number should be in E.164 format.",
+      "value": true,
+    },
+    Object {
+      "label": true,
+      "message": "Please provide a description",
+    },
   ],
   "firstName": false,
   "lastName": false,
@@ -27,8 +41,16 @@ Object {
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
   "extensions": Array [
-    "Label is required",
-    "Label is required",
+    Object {
+      "label": true,
+      "message": "Phone number should be in E.164 format.",
+      "value": true,
+    },
+    Object {
+      "label": true,
+      "message": "Extensions must start with 'sip:'.",
+      "value": true,
+    },
   ],
   "firstName": "Please enter a first name",
   "lastName": "Please enter a last name",
@@ -39,8 +61,15 @@ Object {
 exports[`formValidation returns proper object when required fields are provided 1`] = `
 Object {
   "extensions": Array [
-    "Label is required",
-    "Label is required",
+    Object {
+      "label": true,
+      "message": "Phone number should be in E.164 format.",
+      "value": true,
+    },
+    Object {
+      "label": true,
+      "message": "Please provide a description",
+    },
   ],
   "firstName": false,
   "lastName": false,
@@ -51,8 +80,15 @@ Object {
 exports[`formValidation returns proper object when required fields are provided, invitationStatus is pending so the firstname & lastname are not required 1`] = `
 Object {
   "extensions": Array [
-    "Label is required",
-    "Label is required",
+    Object {
+      "label": true,
+      "message": "Phone number should be in E.164 format.",
+      "value": true,
+    },
+    Object {
+      "label": true,
+      "message": "Please provide a description",
+    },
   ],
   "firstName": false,
   "lastName": false,

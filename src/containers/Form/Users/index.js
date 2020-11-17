@@ -56,7 +56,8 @@ export function mapStateToProps(state) {
       'MANAGE_ALL_USER_PASSWORDS'
     ]),
     usersFetching: isEntityFetching(state, 'users'),
-    userHasNameSet: userHasNameSet(state)
+    userHasNameSet: userHasNameSet(state),
+    canManageAllExtensions: userHasPermissions(state, ['MANAGE_ALL_USER_EXTENSIONS'])
   };
 }
 const actions = { changeUserInviteStatus };

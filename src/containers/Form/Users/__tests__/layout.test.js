@@ -35,6 +35,7 @@ describe('<UsersForm />', () => {
         displayResetPassword={true}
         changeUserInviteStatus={() => {}}
         userHasNameSet={true}
+        canManageAllExtensions={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -63,6 +64,7 @@ describe('<UsersForm />', () => {
         displayResetPassword={true}
         changeUserInviteStatus={() => {}}
         userHasNameSet={true}
+        canManageAllExtensions={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -91,6 +93,7 @@ describe('<UsersForm />', () => {
         displayResetPassword={true}
         changeUserInviteStatus={() => {}}
         userHasNameSet={false}
+        canManageAllExtensions={true}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -119,6 +122,7 @@ describe('<UsersForm />', () => {
         displayResetPassword={true}
         changeUserInviteStatus={() => {}}
         userHasNameSet={true}
+        canManageAllExtensions={false}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -147,6 +151,7 @@ describe('<UsersForm />', () => {
         displayResetPassword={false}
         changeUserInviteStatus={() => {}}
         userHasNameSet={true}
+        canManageAllExtensions={false}
       />
     );
     expect(rendered).toMatchSnapshot();
