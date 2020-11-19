@@ -412,6 +412,24 @@ export const UpdateEntity = action$ =>
         .catch(error => handleError(error, a))
     );
 
+const getEntityPath = (a, item) => {
+  switch(a.entityName) {
+    case 'identityProviders':
+      return [camelCaseToKebabCase(a.entityName), item];
+    default:
+      return a.sdkCall.path;
+  }
+}
+
+const getData = (a, item)=> {
+  switch(a.entityName) {
+    case 'identityProviders':
+      return {...a.values};
+    default:
+      return {...a.values, [removeLastLetter(a.entityName) + 'Id']: item }
+  }
+}
+
 export const BulkEntityUpdate = (action$, store) =>
   action$
     .ofType('BULK_ENTITY_UPDATE')
@@ -438,10 +456,8 @@ export const BulkEntityUpdate = (action$, store) =>
         }
         allCalls.push({
           ...a.sdkCall,
-          data: {
-            ...a.values,
-            [removeLastLetter(a.entityName) + 'Id']: item
-          }
+          path: getEntityPath(a, item),
+          data: getData(a, item)
         });
         return allCalls;
       }, []);

@@ -837,6 +837,14 @@ const bulkChangeFormRoutes = [
         <GenericBulkActionsForm />
       </DetailsPanel>
     )
+  },
+  {
+    path: '/configuration/identityProviders',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    )
   }
   //hygen-inject-before3
 ];

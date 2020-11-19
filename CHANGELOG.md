@@ -28,9 +28,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.91.1] - 2020-11-17
+### Added
+- CXV1-18677 - Config 2 | Identity Providers - Bulk Actions.
+- CXV1-18678 - Config 2 | Identity Providers - Create New.
+
 ## [0.91.0] - 2020-11-09
 ### Added
 - CXV1-22915 - Config 2 - Build and Translate User Profile Page
+
 ## [0.90.5] - 2020-11-16
 ### Fixed
 - CXV1-23244 - Fix channels column filtering in Agent State Monitoring.

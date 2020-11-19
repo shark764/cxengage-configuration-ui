@@ -10,4 +10,5 @@ export const formValidation = values => ({
   emailMapping: isEmpty(values.get('emailMapping')) && 'Please enter an email or the word "Email" for default...',
   metadataUrl: isEmpty(values.get('metadataUrl')) && 'Please enter the URL to XML...',
   metadataFile: isEmpty(values.get('metadataFile')) && 'Please enter the XML markup...',
+  identityProvider: isEmpty(values.get('identityProvider')) && 'Please enter an access code...',
 });

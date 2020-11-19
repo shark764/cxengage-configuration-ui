@@ -97,10 +97,10 @@ export default class IdentityProvidersForm extends Component {
             required
           />
         )}
-        {(this.props.idpType === 'url' &&
-          this.state.showMetadataUrlInput) && (
+        {((!initValues.id && this.props.idpType === 'url') ||
+        (this.props.idpType === 'url' && this.state.showMetadataUrlInput)) && (
             <InputField
-              className="frm-identityproviders-emailmapping"
+              className="frm-identityproviders-metadataUrl"
               name="metadataUrl"
               label="Metadata URL *"
               data-automation="metadataUrlInput"
@@ -110,7 +110,7 @@ export default class IdentityProvidersForm extends Component {
               required
             />
           )}
-        {(this.props.idpType === 'url' &&
+        {(initValues.id && this.props.idpType === 'url' &&
           !this.state.showMetadataUrlInput) && (
             <Detail
               name="metadataUrl"
@@ -122,7 +122,12 @@ export default class IdentityProvidersForm extends Component {
               }
             />
           )}
-        {this.props.idpType === 'url' &&
+        {initValues.id && this.props.idpType === 'url' &&
+          initValues.metadataUrl &&
+          !this.state.showMetadataUrlInput && (
+            <A onClick={() => this.setState({ showMetadataUrlInput: true })}>edit</A>
+          )}
+        {initValues.id && this.props.idpType === 'url' &&
           !initValues.metadataUrl &&
           !this.state.showMetadataUrlInput && (
             <A onClick={() => this.setState({ showMetadataUrlInput: true })}>add url</A>
@@ -178,11 +183,25 @@ export default class IdentityProvidersForm extends Component {
           )}
         {this.props.idpType === 'xmlDirectInput' &&
           !this.state.disableXmlInputEdit && <A onClick={() => this.setState({ disableXmlInputEdit: true })}>cancel</A>}
-        <Detail
-          name="identityProvider"
-          label="Shared Identity Provider ID *"
-          value={initValues.identityProvider}
-        />
+        {(!initValues.id && this.props.idpType === 'sharedIdentityProviderLinkId') && (
+          <InputField
+            className="frm-identityproviders-identityProvider"
+            name="identityProvider"
+            label="Access Code *"
+            data-automation="identityProviderInput"
+            componentType="input"
+            inputType="text"
+            disabled={this.props.isSaving || !this.props.userHasUpdatePermission}
+            required
+          />
+        )}
+        {initValues.id && (
+          <Detail
+            name="identityProvider"
+            label="Shared Identity Provider ID *"
+            value={initValues.identityProvider}
+          />
+        )}
       </form>
     );
   }

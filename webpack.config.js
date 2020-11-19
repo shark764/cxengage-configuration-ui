@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+//Comment this line out and plugin new BundleAnalyzerPlugin in plugins if you want to use Visualize size of webpack output files locally
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 

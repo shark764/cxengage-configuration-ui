@@ -38,6 +38,9 @@ export const selectFormInitialValues = (state) => {
   if (getSelectedEntityId(state) === 'bulk') {
     return new Map({});
   } else if (getSelectedEntity(state) === undefined) {
+    if (entityName === 'identityProviders') {
+      return new Map({ active: false, emailMapping: 'Email' });
+    }
     return new Map({ active: true });
   } else if (entityName === 'users') {
     const initValues = getSelectedEntity(state);
