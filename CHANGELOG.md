@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.91.2] - 2020-11-24
+### Changed
+- <no-jira> - Config 2 | Removing Birst from Early Access Features Page.
+
 ## [0.91.1] - 2020-11-17
 ### Added
 - CXV1-18677 - Config 2 | Identity Providers - Bulk Actions.

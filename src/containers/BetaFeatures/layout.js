@@ -21,9 +21,9 @@ const FeaturesTitle = styled.div`
   font-weight: bold;
   text-align: center;
   padding: 20px;
-  ${props => `background: ${props.background || '#161e5d'};`} margin-top: -1px;
+  ${(props) => `background: ${props.background || '#161e5d'};`} margin-top: -1px;
   border-radius: 10px 10px 0px 0px;
-  ${props => `color: ${props.accent || '#bebfc4'};`};
+  ${(props) => `color: ${props.accent || '#bebfc4'};`};
 `;
 const Feature = styled.div`
   padding: 20px 50px;
@@ -66,19 +66,18 @@ export default class BetaFeatures extends Component {
     const features = {
       tenants: false,
       integrations: false,
-      birst: false
     };
     const pageTitles = {};
-    Object.keys(features).forEach(entityName => {
+    Object.keys(features).forEach((entityName) => {
       pageTitles[entityName] = entitiesMetaData[entityName].pageTitle;
     });
     this.state = { features, pageTitles };
   }
   componentDidMount() {
-    readBetaFeatures().then(r => {
+    readBetaFeatures().then((r) => {
       // remove previous beta features
       const features = this.state.features;
-      Object.keys(r.result).forEach(feature => {
+      Object.keys(r.result).forEach((feature) => {
         if (features[feature] === undefined) {
           delete features[feature];
         } else {
@@ -89,7 +88,7 @@ export default class BetaFeatures extends Component {
     });
   }
 
-  saveBetaFeaturePrefs = features => this.setState({ features });
+  saveBetaFeaturePrefs = (features) => this.setState({ features });
 
   saveBetaFeaturePrefsAll = () => {
     const features = this.state.features;
@@ -128,17 +127,17 @@ export default class BetaFeatures extends Component {
             </ActionButton>
           </Actions>
           {Object.keys(this.state.features)
-            .filter(entityName => {
+            .filter((entityName) => {
               return this.props.disabledFeatures[entityName] !== true;
             })
-            .map(entityName => (
+            .map((entityName) => (
               <Feature key={entityName}>
                 <span>{this.state.pageTitles[entityName]}</span>
                 <ToggleWrapper
                   onChange={() => {
                     const features = {
                       ...this.state.features,
-                      [entityName]: !this.state.features[entityName]
+                      [entityName]: !this.state.features[entityName],
                     };
                     this.saveBetaFeaturePrefs(features);
                   }}
@@ -169,5 +168,5 @@ export default class BetaFeatures extends Component {
 BetaFeatures.propTypes = {
   entities: PropTypes.object,
   theme: PropTypes.any,
-  disabledFeatures: PropTypes.object
+  disabledFeatures: PropTypes.object,
 };

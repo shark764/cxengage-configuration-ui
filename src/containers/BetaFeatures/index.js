@@ -8,9 +8,9 @@ import { userHasReadPermissionManual, userHasPermissions } from '../../redux/mod
 import { entitiesMetaData } from '../../redux/modules/entities/metaData';
 import { getCustomTheme } from '../../redux/modules/entities/branding/selectors';
 
-const entitiesWithViewPermissions = state => {
+const entitiesWithViewPermissions = (state) => {
   let allowedEntities = {};
-  Object.keys(entitiesMetaData).forEach(entity => {
+  Object.keys(entitiesMetaData).forEach((entity) => {
     if (userHasReadPermissionManual(state, entitiesMetaData[entity].entityName)) {
       allowedEntities[entity] = true;
     }
@@ -25,8 +25,7 @@ export function mapStateToProps(state) {
     disabledFeatures: {
       tenants: !userHasPermissions(state, ['PLATFORM_VIEW_ALL_TENANTS', 'MANAGE_TENANT']),
       integrations: !userHasPermissions(state, ['VIEW_ALL_PROVIDERS']),
-      birst: !userHasPermissions(state, ['PLATFORM_MANAGE_ALL_TENANTS'])
-    }
+    },
   };
 }
 
