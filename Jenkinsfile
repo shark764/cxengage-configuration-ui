@@ -65,7 +65,7 @@ pipeline {
       }
     }
     stage ('Build') {
-      when { anyOf {branch 'master'; branch 'develop'}}
+      when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
       steps {
         sh 'echo "Stage Description: Builds the production version of the app"'
         sh "docker exec ${docker_tag} npm run build"
@@ -139,7 +139,7 @@ pipeline {
       }
     }
     stage ('Push new tag') {
-      when { anyOf {branch 'master'; branch 'develop'}}
+      when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
       steps {
         script {
           try {
@@ -158,7 +158,7 @@ pipeline {
       }
     }
     stage ('Create dev build') {
-      when { anyOf {branch 'master'; branch 'develop'}}
+      when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
       steps {
         sh 'echo "Stage Description: Pushes built app to S3"'
         sh "cp config/dev/config.json build/build"
@@ -166,7 +166,7 @@ pipeline {
       }
     }
     stage ('Create qe build') {
-      when { anyOf {branch 'master'; branch 'develop'}}
+      when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
       steps {
         sh 'echo "Stage Description: Pushes built app to S3"'
         sh "cp config/qe/config.json build/build"
@@ -174,7 +174,7 @@ pipeline {
       }
     }
     stage ('Save and Publish') {
-      when { anyOf {branch 'master'; branch 'develop'}}
+      when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
       parallel {
         stage ('Publish specs to npm') {
           steps {
@@ -191,7 +191,7 @@ pipeline {
       }
     }
     stage ('Deploy') {
-      when { anyOf {branch 'master'; branch 'develop'}}
+      when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
       steps {
         build job: 'Deploy - Front-End', parameters: [
           [
