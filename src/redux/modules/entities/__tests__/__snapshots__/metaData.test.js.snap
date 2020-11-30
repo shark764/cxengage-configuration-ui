@@ -401,6 +401,7 @@ Object {
       },
       Object {
         "active": true,
+        "customName": "Timezone",
         "name": "Timezone2",
       },
       Object {
@@ -409,6 +410,7 @@ Object {
       },
       Object {
         "active": true,
+        "customName": "Shared",
         "name": "Shared2",
       },
     ],

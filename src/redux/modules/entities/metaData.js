@@ -876,9 +876,9 @@ entities.businessHoursV2.columns = [
   { name: 'Name', active: true },
   { name: 'Active Business Hour', active: true },
   { name: 'Description', active: true },
-  { name: 'Timezone2', active: true },
+  { name: 'Timezone2', active: true, customName: 'Timezone' },
   { name: 'Status', active: true },
-  { name: 'Shared2', active: true },
+  { name: 'Shared2', active: true, customName: 'Shared' },
 ];
 entities.businessHoursV2.membersTableFields = {
   drafts: [

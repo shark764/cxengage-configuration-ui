@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.91.3] - 2020-11-26
+### Changed
+- CXV1-23252 - Column Names in entyity table & columnFilterMenu are not identical in businessHoursV2 (Timezone/Timezone2 & Shared/Shared2).
+
 ## [0.91.2] - 2020-11-24
 ### Changed
 - <no-jira> - Config 2 | Removing Birst from Early Access Features Page.

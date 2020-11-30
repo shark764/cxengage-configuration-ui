@@ -417,6 +417,7 @@ Immutable.Map {
       Immutable.Map {
         "name": "Timezone2",
         "active": true,
+        "customName": "Timezone",
       },
       Immutable.Map {
         "name": "Status",
@@ -425,6 +426,7 @@ Immutable.Map {
       Immutable.Map {
         "name": "Shared2",
         "active": true,
+        "customName": "Shared",
       },
     ],
   },
