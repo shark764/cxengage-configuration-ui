@@ -25,6 +25,7 @@ export function mapStateToProps(state) {
     disabledFeatures: {
       tenants: !userHasPermissions(state, ['PLATFORM_VIEW_ALL_TENANTS', 'MANAGE_TENANT']),
       integrations: !userHasPermissions(state, ['VIEW_ALL_PROVIDERS']),
+      identityProviders: !userHasPermissions(state, ['IDENTITY_PROVIDERS_READ']),
     },
   };
 }
