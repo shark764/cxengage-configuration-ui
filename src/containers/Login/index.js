@@ -21,12 +21,16 @@ import { isInIframe } from 'serenova-js-utils/browser';
 import { fetchBranding } from '../../redux/modules/entities/branding/actions';
 import { updateUserPermissions } from '../../redux/modules/userData';
 
+import { changeLocale } from '../../redux/modules/language';
+import { selectCurrentLocale } from '../../redux/modules/language/selectors';
+
 export function mapStateToProps(state) {
   return {
     hasStarted: authenticatedAndBrandingReady(state),
     authenticated: userIsAuthed(state),
     platformViewOnlyMode: platformViewOnlyMode(state),
-    insideIframe: !isInIframe()
+    insideIframe: !isInIframe(),
+    locale: selectCurrentLocale(state)
   };
 }
 
@@ -37,7 +41,8 @@ export const actions = {
   updateUserPermissions,
   togglePlatformViewOnlyMode,
   updatePlatformPermissions,
-  switchTenant
+  switchTenant,
+  changeLocale
 };
 
 export default connect(mapStateToProps, actions)(LoginLayout);

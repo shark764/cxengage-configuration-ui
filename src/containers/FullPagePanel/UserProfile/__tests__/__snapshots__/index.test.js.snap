@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "canManageAllExtensions": true,
+  "canUpdateExtensions": true,
+  "canUpdatePassword": true,
+  "extensionsValue": Immutable.List [
+    Object {
+      "hide": false,
+      "id": "an-id",
+      "name": "somebody",
+      "type": "WebRTC",
+    },
+    Object {
+      "hide": false,
+      "id": "another-id",
+      "name": "whoever",
+      "type": "PSTN",
+    },
+  ],
+  "initialValues": Immutable.Map {
+    "lastName": "Whoever",
+    "skills": Immutable.List [
+      Immutable.Map {
+        "name": "skill 1",
+      },
+      Immutable.Map {
+        "name": "skill 2",
+      },
+    ],
+    "externalId": "external-id",
+    "defaultTenant": "tenant-id",
+    "defaultIdentityProvider": "identityProvider",
+    "extensions": Immutable.List [
+      Immutable.Map {
+        "type": "WebRTC",
+        "name": "whatever",
+        "id": "an-id",
+        "hide": false,
+      },
+      Immutable.Map {
+        "type": "PSTN",
+        "name": "someone",
+        "id": "another-id",
+        "hide": false,
+      },
+    ],
+    "groups": Immutable.List [
+      Immutable.Map {
+        "name": "group 1",
+      },
+      Immutable.Map {
+        "name": "group 2",
+      },
+    ],
+    "firstName": "Whatever",
+    "noPassword": false,
+    "email": "email@email.com",
+    "workStationId": "workstation-id",
+  },
+  "isDetailsFormDirty": false,
+  "isExtensionsFormDirty": false,
+  "isSaving": false,
+  "nextEntity": "nextEntity",
+  "showConfirmationDialog": "A_DIALOG_TYPE",
+  "tenantsList": Array [
+    Object {
+      "label": "tenant 1",
+      "value": "tenant1-id",
+    },
+    Object {
+      "label": "tenant 2",
+      "value": "tenant2-id",
+    },
+  ],
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`UserProfilePage renders 1`] = `
+<InjectIntl(UserProfile)
+  canManageAllExtensions={true}
+  canUpdateExtensions={true}
+  canUpdatePassword={true}
+  cancelCallback={[Function]}
+  changeExtensions={[Function]}
+  extensionsValue={
+    Immutable.List [
+      Object {
+        "hide": false,
+        "id": "an-id",
+        "name": "somebody",
+        "type": "WebRTC",
+      },
+      Object {
+        "hide": false,
+        "id": "another-id",
+        "name": "whoever",
+        "type": "PSTN",
+      },
+    ]
+  }
+  fetchData={[Function]}
+  initialValues={
+    Immutable.Map {
+      "lastName": "Whoever",
+      "skills": Immutable.List [
+        Immutable.Map {
+          "name": "skill 1",
+        },
+        Immutable.Map {
+          "name": "skill 2",
+        },
+      ],
+      "externalId": "external-id",
+      "defaultTenant": "tenant-id",
+      "defaultIdentityProvider": "identityProvider",
+      "extensions": Immutable.List [
+        Immutable.Map {
+          "type": "WebRTC",
+          "name": "whatever",
+          "id": "an-id",
+          "hide": false,
+        },
+        Immutable.Map {
+          "type": "PSTN",
+          "name": "someone",
+          "id": "another-id",
+          "hide": false,
+        },
+      ],
+      "groups": Immutable.List [
+        Immutable.Map {
+          "name": "group 1",
+        },
+        Immutable.Map {
+          "name": "group 2",
+        },
+      ],
+      "firstName": "Whatever",
+      "noPassword": false,
+      "email": "email@email.com",
+      "workStationId": "workstation-id",
+    }
+  }
+  isDetailsFormDirty={false}
+  isExtensionsFormDirty={false}
+  isSaving={false}
+  nextEntity="nextEntity"
+  setCurrentEntity={[Function]}
+  showConfirmationDialog="A_DIALOG_TYPE"
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tenantsList={
+    Array [
+      Object {
+        "label": "tenant 1",
+        "value": "tenant1-id",
+      },
+      Object {
+        "label": "tenant 2",
+        "value": "tenant2-id",
+      },
+    ]
+  }
+  updateUserProfile={[Function]}
+  userHasUpdatePermission={true}
+/>
+`;
+
+exports[`mapDispatchToProps maps properly 1`] = `[Function]`;

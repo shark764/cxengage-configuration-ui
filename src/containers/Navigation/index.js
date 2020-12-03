@@ -6,7 +6,8 @@ import {
   authenticatedAndBrandingReady,
   getAvailableTenants,
   currentTenantId,
-  getCurrentTenantName
+  getCurrentTenantName,
+  getCurrentAgentName,
 } from '../../redux/modules/userData/selectors';
 import { switchTenant } from '../../redux/modules/userData';
 import { getCustomTheme } from '../../redux/modules/entities/branding/selectors';
@@ -20,7 +21,8 @@ export function mapStateToProps(state, props) {
     currentTenantName: getCurrentTenantName(state),
     theme: getCustomTheme(state),
     isCurrentFormDirty: isFormDirty(state),
-    areSubEntityFormsDirty: areSubEntityFormsDirty(state)
+    areSubEntityFormsDirty: areSubEntityFormsDirty(state),
+    currentUserName: getCurrentAgentName(state),
   };
 }
 
@@ -28,7 +30,7 @@ export const actions = {
   switchTenant,
   setCurrentEntity,
   setSelectedEntityId,
-  setConfirmationDialog
+  setConfirmationDialog,
 };
 
 export default connect(mapStateToProps, actions)(NavigationLayout);

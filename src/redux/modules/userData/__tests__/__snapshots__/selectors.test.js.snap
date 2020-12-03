@@ -2,6 +2,10 @@
 
 exports[`getCurrentAgentId returns current agent id 1`] = `"0000-0000-0000-0000"`;
 
+exports[`getCurrentAgentName current agent name is returned 1`] = `"First Name"`;
+
+exports[`getCurrentAgentName there's no info for the user, undefined is returned 1`] = `undefined`;
+
 exports[`getCurrentPermissions returns current tenant permissions 1`] = `"mockPermissions"`;
 
 exports[`getCurrentTenantId returns current tenant id 1`] = `"mockTenantId"`;

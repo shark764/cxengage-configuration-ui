@@ -54,7 +54,10 @@ export const formatTranslationMessages = (locale, messages) => {
   // This default message should be defined based on region (en-US for Americas and en-GB for EU)
   // but for the time being this should be good enough
   const defaultFormattedMessages = locale === 'en-US' ? {} : enUsTranslationMessages;
-  return { ...defaultFormattedMessages, ...messages };
+  return { 
+    ...Object.entries(defaultFormattedMessages).reduce((res, [key, val]) => ({...res, [key]: val.replace(/\{+/g, '{').replace(/\}+/g, '}')}), {}),
+    ...Object.entries(messages).reduce((res, [key, val]) => ({...res, [key]: val.replace(/\{+/g, '{').replace(/\}+/g, '}')}), {}) 
+  };
 };
 
 export const mappedLocalesOptions = [

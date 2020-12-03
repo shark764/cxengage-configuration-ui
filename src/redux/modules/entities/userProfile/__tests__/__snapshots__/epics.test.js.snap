@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FetchUserProfileData API errors and action to handle the error is emitted 1`] = `
+Object {
+  "entityName": "userProfile",
+  "type": "FETCH_DATA_REJECTED",
+}
+`;
+
+exports[`FetchUserProfileData Fetches tenants the user can be assigned to, and emits actions to fetch integrations data and user info 1`] = `
+Object {
+  "entityName": "userProfile",
+  "response": Object {
+    "details": Array [
+      Object {
+        "label": "tenant 1",
+        "value": "tenant1-id",
+      },
+      Object {
+        "label": "tenant 2",
+        "value": "tenant2-id",
+      },
+    ],
+  },
+  "type": "USER_PROFILE_TENANTS_FULFILLED",
+}
+`;
+
+exports[`FetchUserProfileData Fetches tenants the user can be assigned to, and emits actions to fetch integrations data and user info 2`] = `
+Object {
+  "entityName": "integrations",
+  "tableType": undefined,
+  "type": "FETCH_DATA",
+}
+`;
+
+exports[`FetchUserProfileData Fetches tenants the user can be assigned to, and emits actions to fetch integrations data and user info 3`] = `
+Object {
+  "entityName": "users",
+  "id": "user-id",
+  "type": "FETCH_DATA_ITEM",
+}
+`;
+
+exports[`ReInitializeUserProfileForms Reinitialize the forms when we sucesfully updated the userProfile or when the requests to fetch info for user profile are completed succesfully 1`] = `
+Object {
+  "meta": Object {
+    "form": "userProfile:details",
+    "keepDirty": false,
+  },
+  "payload": Immutable.Map {
+    "lastName": "Whoever",
+    "skills": Immutable.List [
+      Immutable.Map {
+        "name": "skill 1",
+      },
+      Immutable.Map {
+        "name": "skill 2",
+      },
+    ],
+    "externalId": "external-id",
+    "defaultTenant": "tenant-id",
+    "defaultIdentityProvider": "identityProvider",
+    "groups": Immutable.List [
+      Immutable.Map {
+        "name": "group 1",
+      },
+      Immutable.Map {
+        "name": "group 2",
+      },
+    ],
+    "firstName": "Whatever",
+    "noPassword": false,
+    "email": "email@email.com",
+    "workStationId": "workstation-id",
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`ReInitializeUserProfileForms Reinitialize the forms when we sucesfully updated the userProfile or when the requests to fetch info for user profile are completed succesfully 2`] = `
+Object {
+  "meta": Object {
+    "form": "userProfile:extensions",
+    "keepDirty": false,
+  },
+  "payload": Immutable.Map {
+    "extensions": Immutable.List [
+      Immutable.Map {
+        "type": "WebRTC",
+        "name": "whatever",
+        "id": "an-id",
+        "hide": false,
+      },
+      Immutable.Map {
+        "type": "PSTN",
+        "name": "someone",
+        "id": "another-id",
+        "hide": false,
+      },
+    ],
+  },
+  "type": "@@redux-form/INITIALIZE",
+}
+`;
+
+exports[`UpdateUserProfile Current entity being update it's platform user with a new password Request is to update the platform user it's made sucessfully but the request to update the password fails and a UPDATE_USER_PROFILE_REJECTED is emitted 1`] = `
+Object {
+  "type": "UPDATE_USER_PROFILE_REJECTED",
+}
+`;
+
+exports[`UpdateUserProfile Current entity being update it's the platform user but no new password Request is to update user profile made succesfully and UPDATE_USER_PROFILE_FULFILLED it's emitted 1`] = `
+Object {
+  "response": Object {
+    "result": "mock value",
+  },
+  "type": "UPDATE_USER_PROFILE_FULFILLED",
+  "userId": "user-id",
+}
+`;
+
+exports[`UpdateUserProfile Current entity being update it's the platform user with a new password All requests are made succesfully and UPDATE_USER_PROFILE_FULFILLED it's emitted 1`] = `
+Object {
+  "response": Object {
+    "result": "mock value",
+  },
+  "type": "UPDATE_USER_PROFILE_FULFILLED",
+  "userId": "user-id",
+}
+`;
+
+exports[`UpdateUserProfile Current entity being update it's the tenant user(updating extensions) Request is to update user profile made succesfully and UPDATE_USER_PROFILE_FULFILLED it's emitted 1`] = `
+Object {
+  "response": Object {
+    "result": "mock value",
+  },
+  "type": "UPDATE_USER_PROFILE_FULFILLED",
+  "userId": "user-id",
+}
+`;

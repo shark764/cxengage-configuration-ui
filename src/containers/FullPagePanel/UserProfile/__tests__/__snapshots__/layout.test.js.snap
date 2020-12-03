@@ -1,0 +1,1553 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserProfilePage /> A confirmation dialog it's shown if user wants to navigate away from the page and the form has field that haven't being saved 1`] = `
+<styled.div>
+  <h2>
+    <FormattedMessage
+      defaultMessage="User Profile"
+      id="navigation.profile"
+      values={Object {}}
+    />
+  </h2>
+  <styled.div>
+    <styled.div>
+      <UserIconSVG
+        color="#fff"
+        size={120}
+      />
+    </styled.div>
+    <styled.div>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileDetailsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          text="Details"
+        />
+        <ReduxForm
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "lastName": "Whoever",
+              "skills": Immutable.List [
+                Immutable.Map {
+                  "name": "skill 1",
+                },
+                Immutable.Map {
+                  "name": "skill 2",
+                },
+              ],
+              "externalId": "external-id",
+              "defaultTenant": "tenant-id",
+              "defaultIdentityProvider": "identityProvider",
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+              "groups": Immutable.List [
+                Immutable.Map {
+                  "name": "group 1",
+                },
+                Immutable.Map {
+                  "name": "group 2",
+                },
+              ],
+              "firstName": "Whatever",
+              "noPassword": false,
+              "email": "email@email.com",
+              "workStationId": "workstation-id",
+            }
+          }
+          onSubmit={[Function]}
+          resetPassword={false}
+          tenantsList={
+            Array [
+              Object {
+                "label": "tenant 1",
+                "value": "tenant1-id",
+              },
+              Object {
+                "label": "tenant 2",
+                "value": "tenant2-id",
+              },
+            ]
+          }
+          toggleResetPassword={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileExtensionsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          onActionButtonClick={[Function]}
+          text="Extensions"
+          userHasUpdatePermission={true}
+        />
+        <ReduxForm
+          canManageAllExtensions={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+            }
+          }
+          onSubmit={[Function]}
+          userCanUpdateExtensions={true}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <React.Fragment>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileSkillsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Skills"
+          />
+          <styled.table>
+            <thead>
+              <tr>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Name"
+                    id="tables.header.nameColumn"
+                    values={Object {}}
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Proficiency"
+                    id="skills.proficiency"
+                    values={Object {}}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  skill 1
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  skill 2
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+            </tbody>
+          </styled.table>
+        </Connect(DetailWrapper)>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileGroupsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Groups"
+          />
+          <styled.span>
+            group 1
+          </styled.span>
+          <styled.span>
+            group 2
+          </styled.span>
+        </Connect(DetailWrapper)>
+      </React.Fragment>
+    </styled.div>
+  </styled.div>
+  <Confirmation
+    cancelBtnCallback={[Function]}
+    cancelBtnText="Cancel"
+    confirmBtnCallback={[Function]}
+    confirmBtnText="Confirm"
+    mainText="You have unsaved changes that will be lost!."
+    secondaryText="Click Confirm to discard changes, or Cancel to continue editing."
+  />
+</styled.div>
+`;
+
+exports[`<UserProfilePage /> User has no skills, groups, defaultTenant neither tenants that can be selected to be assigned 1`] = `
+<styled.div>
+  <h2>
+    <FormattedMessage
+      defaultMessage="User Profile"
+      id="navigation.profile"
+      values={Object {}}
+    />
+  </h2>
+  <styled.div>
+    <styled.div>
+      <UserIconSVG
+        color="#fff"
+        size={120}
+      />
+    </styled.div>
+    <styled.div>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileDetailsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          text="Details"
+        />
+        <ReduxForm
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "lastName": "Whoever",
+              "externalId": "external-id",
+              "defaultIdentityProvider": "identityProvider",
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+              "firstName": "Whatever",
+              "noPassword": false,
+              "email": "email@email.com",
+              "workStationId": "workstation-id",
+            }
+          }
+          onSubmit={[Function]}
+          resetPassword={false}
+          toggleResetPassword={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileExtensionsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          onActionButtonClick={[Function]}
+          text="Extensions"
+          userHasUpdatePermission={true}
+        />
+        <ReduxForm
+          canManageAllExtensions={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+            }
+          }
+          onSubmit={[Function]}
+          userCanUpdateExtensions={true}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+    </styled.div>
+  </styled.div>
+  <Confirmation
+    cancelBtnCallback={[Function]}
+    cancelBtnText="Cancel"
+    confirmBtnCallback={[Function]}
+    confirmBtnText="Confirm"
+    mainText="You have unsaved changes that will be lost!."
+    secondaryText="Click Confirm to discard changes, or Cancel to continue editing."
+  />
+</styled.div>
+`;
+
+exports[`<UserProfilePage /> if user has no permissions to update the WebRTC region's extension, that field it's disabled 1`] = `
+<styled.div>
+  <h2>
+    <FormattedMessage
+      defaultMessage="User Profile"
+      id="navigation.profile"
+      values={Object {}}
+    />
+  </h2>
+  <styled.div>
+    <styled.div>
+      <UserIconSVG
+        color="#fff"
+        size={120}
+      />
+    </styled.div>
+    <styled.div>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileDetailsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          text="Details"
+        />
+        <ReduxForm
+          canUpdatePassword={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "lastName": "Whoever",
+              "skills": Immutable.List [
+                Immutable.Map {
+                  "name": "skill 1",
+                },
+                Immutable.Map {
+                  "name": "skill 2",
+                },
+              ],
+              "externalId": "external-id",
+              "defaultTenant": "tenant-id",
+              "defaultIdentityProvider": "identityProvider",
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+              "groups": Immutable.List [
+                Immutable.Map {
+                  "name": "group 1",
+                },
+                Immutable.Map {
+                  "name": "group 2",
+                },
+              ],
+              "firstName": "Whatever",
+              "noPassword": false,
+              "email": "email@email.com",
+              "workStationId": "workstation-id",
+            }
+          }
+          onSubmit={[Function]}
+          resetPassword={false}
+          tenantsList={
+            Array [
+              Object {
+                "label": "tenant 1",
+                "value": "tenant1-id",
+              },
+              Object {
+                "label": "tenant 2",
+                "value": "tenant2-id",
+              },
+            ]
+          }
+          toggleResetPassword={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileExtensionsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          onActionButtonClick={[Function]}
+          text="Extensions"
+          userHasUpdatePermission={true}
+        />
+        <ReduxForm
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+            }
+          }
+          onSubmit={[Function]}
+          userCanUpdateExtensions={true}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <React.Fragment>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileSkillsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Skills"
+          />
+          <styled.table>
+            <thead>
+              <tr>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Name"
+                    id="tables.header.nameColumn"
+                    values={Object {}}
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Proficiency"
+                    id="skills.proficiency"
+                    values={Object {}}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  skill 1
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  skill 2
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+            </tbody>
+          </styled.table>
+        </Connect(DetailWrapper)>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileGroupsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Groups"
+          />
+          <styled.span>
+            group 1
+          </styled.span>
+          <styled.span>
+            group 2
+          </styled.span>
+        </Connect(DetailWrapper)>
+      </React.Fragment>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<UserProfilePage /> if user has no permissions to update the extensions, they're disabled 1`] = `
+<styled.div>
+  <h2>
+    <FormattedMessage
+      defaultMessage="User Profile"
+      id="navigation.profile"
+      values={Object {}}
+    />
+  </h2>
+  <styled.div>
+    <styled.div>
+      <UserIconSVG
+        color="#fff"
+        size={120}
+      />
+    </styled.div>
+    <styled.div>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileDetailsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          text="Details"
+        />
+        <ReduxForm
+          canUpdatePassword={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "lastName": "Whoever",
+              "skills": Immutable.List [
+                Immutable.Map {
+                  "name": "skill 1",
+                },
+                Immutable.Map {
+                  "name": "skill 2",
+                },
+              ],
+              "externalId": "external-id",
+              "defaultTenant": "tenant-id",
+              "defaultIdentityProvider": "identityProvider",
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+              "groups": Immutable.List [
+                Immutable.Map {
+                  "name": "group 1",
+                },
+                Immutable.Map {
+                  "name": "group 2",
+                },
+              ],
+              "firstName": "Whatever",
+              "noPassword": false,
+              "email": "email@email.com",
+              "workStationId": "workstation-id",
+            }
+          }
+          onSubmit={[Function]}
+          resetPassword={false}
+          tenantsList={
+            Array [
+              Object {
+                "label": "tenant 1",
+                "value": "tenant1-id",
+              },
+              Object {
+                "label": "tenant 2",
+                "value": "tenant2-id",
+              },
+            ]
+          }
+          toggleResetPassword={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileExtensionsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          onActionButtonClick={[Function]}
+          text="Extensions"
+          userHasUpdatePermission={true}
+        />
+        <ReduxForm
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+            }
+          }
+          onSubmit={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <React.Fragment>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileSkillsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Skills"
+          />
+          <styled.table>
+            <thead>
+              <tr>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Name"
+                    id="tables.header.nameColumn"
+                    values={Object {}}
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Proficiency"
+                    id="skills.proficiency"
+                    values={Object {}}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  skill 1
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  skill 2
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+            </tbody>
+          </styled.table>
+        </Connect(DetailWrapper)>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileGroupsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Groups"
+          />
+          <styled.span>
+            group 1
+          </styled.span>
+          <styled.span>
+            group 2
+          </styled.span>
+        </Connect(DetailWrapper)>
+      </React.Fragment>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<UserProfilePage /> if user has no update permission or the form is saving, the fields are disabled 1`] = `
+<styled.div>
+  <h2>
+    <FormattedMessage
+      defaultMessage="User Profile"
+      id="navigation.profile"
+      values={Object {}}
+    />
+  </h2>
+  <styled.div>
+    <styled.div>
+      <UserIconSVG
+        color="#fff"
+        size={120}
+      />
+    </styled.div>
+    <styled.div>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileDetailsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          text="Details"
+        />
+        <ReduxForm
+          canUpdatePassword={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "lastName": "Whoever",
+              "skills": Immutable.List [
+                Immutable.Map {
+                  "name": "skill 1",
+                },
+                Immutable.Map {
+                  "name": "skill 2",
+                },
+              ],
+              "externalId": "external-id",
+              "defaultTenant": "tenant-id",
+              "defaultIdentityProvider": "identityProvider",
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+              "groups": Immutable.List [
+                Immutable.Map {
+                  "name": "group 1",
+                },
+                Immutable.Map {
+                  "name": "group 2",
+                },
+              ],
+              "firstName": "Whatever",
+              "noPassword": false,
+              "email": "email@email.com",
+              "workStationId": "workstation-id",
+            }
+          }
+          onSubmit={[Function]}
+          resetPassword={false}
+          tenantsList={
+            Array [
+              Object {
+                "label": "tenant 1",
+                "value": "tenant1-id",
+              },
+              Object {
+                "label": "tenant 2",
+                "value": "tenant2-id",
+              },
+            ]
+          }
+          toggleResetPassword={[Function]}
+        />
+      </Connect(DetailWrapper)>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileExtensionsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          onActionButtonClick={[Function]}
+          text="Extensions"
+          userHasUpdatePermission={true}
+        />
+        <ReduxForm
+          canManageAllExtensions={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+            }
+          }
+          onSubmit={[Function]}
+          userCanUpdateExtensions={true}
+        />
+      </Connect(DetailWrapper)>
+      <React.Fragment>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileSkillsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Skills"
+          />
+          <styled.table>
+            <thead>
+              <tr>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Name"
+                    id="tables.header.nameColumn"
+                    values={Object {}}
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Proficiency"
+                    id="skills.proficiency"
+                    values={Object {}}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  skill 1
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  skill 2
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+            </tbody>
+          </styled.table>
+        </Connect(DetailWrapper)>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileGroupsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Groups"
+          />
+          <styled.span>
+            group 1
+          </styled.span>
+          <styled.span>
+            group 2
+          </styled.span>
+        </Connect(DetailWrapper)>
+      </React.Fragment>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<UserProfilePage /> renders the component 1`] = `
+<styled.div>
+  <h2>
+    <FormattedMessage
+      defaultMessage="User Profile"
+      id="navigation.profile"
+      values={Object {}}
+    />
+  </h2>
+  <styled.div>
+    <styled.div>
+      <UserIconSVG
+        color="#fff"
+        size={120}
+      />
+    </styled.div>
+    <styled.div>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileDetailsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          text="Details"
+        />
+        <ReduxForm
+          canUpdatePassword={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "lastName": "Whoever",
+              "skills": Immutable.List [
+                Immutable.Map {
+                  "name": "skill 1",
+                },
+                Immutable.Map {
+                  "name": "skill 2",
+                },
+              ],
+              "externalId": "external-id",
+              "defaultTenant": "tenant-id",
+              "defaultIdentityProvider": "identityProvider",
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+              "groups": Immutable.List [
+                Immutable.Map {
+                  "name": "group 1",
+                },
+                Immutable.Map {
+                  "name": "group 2",
+                },
+              ],
+              "firstName": "Whatever",
+              "noPassword": false,
+              "email": "email@email.com",
+              "workStationId": "workstation-id",
+            }
+          }
+          onSubmit={[Function]}
+          resetPassword={false}
+          tenantsList={
+            Array [
+              Object {
+                "label": "tenant 1",
+                "value": "tenant1-id",
+              },
+              Object {
+                "label": "tenant 2",
+                "value": "tenant2-id",
+              },
+            ]
+          }
+          toggleResetPassword={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileExtensionsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          onActionButtonClick={[Function]}
+          text="Extensions"
+          userHasUpdatePermission={true}
+        />
+        <ReduxForm
+          canManageAllExtensions={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+            }
+          }
+          onSubmit={[Function]}
+          userCanUpdateExtensions={true}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <React.Fragment>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileSkillsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Skills"
+          />
+          <styled.table>
+            <thead>
+              <tr>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Name"
+                    id="tables.header.nameColumn"
+                    values={Object {}}
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Proficiency"
+                    id="skills.proficiency"
+                    values={Object {}}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  skill 1
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  skill 2
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+            </tbody>
+          </styled.table>
+        </Connect(DetailWrapper)>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileGroupsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Groups"
+          />
+          <styled.span>
+            group 1
+          </styled.span>
+          <styled.span>
+            group 2
+          </styled.span>
+        </Connect(DetailWrapper)>
+      </React.Fragment>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<UserProfilePage /> user has no permissions to update his/her password, options to do it are not shown 1`] = `
+<styled.div>
+  <h2>
+    <FormattedMessage
+      defaultMessage="User Profile"
+      id="navigation.profile"
+      values={Object {}}
+    />
+  </h2>
+  <styled.div>
+    <styled.div>
+      <UserIconSVG
+        color="#fff"
+        size={120}
+      />
+    </styled.div>
+    <styled.div>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileDetailsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          text="Details"
+        />
+        <ReduxForm
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "lastName": "Whoever",
+              "skills": Immutable.List [
+                Immutable.Map {
+                  "name": "skill 1",
+                },
+                Immutable.Map {
+                  "name": "skill 2",
+                },
+              ],
+              "externalId": "external-id",
+              "defaultTenant": "tenant-id",
+              "defaultIdentityProvider": "identityProvider",
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+              "groups": Immutable.List [
+                Immutable.Map {
+                  "name": "group 1",
+                },
+                Immutable.Map {
+                  "name": "group 2",
+                },
+              ],
+              "firstName": "Whatever",
+              "noPassword": false,
+              "email": "email@email.com",
+              "workStationId": "workstation-id",
+            }
+          }
+          onSubmit={[Function]}
+          resetPassword={false}
+          tenantsList={
+            Array [
+              Object {
+                "label": "tenant 1",
+                "value": "tenant1-id",
+              },
+              Object {
+                "label": "tenant 2",
+                "value": "tenant2-id",
+              },
+            ]
+          }
+          toggleResetPassword={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileExtensionsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          onActionButtonClick={[Function]}
+          text="Extensions"
+          userHasUpdatePermission={true}
+        />
+        <ReduxForm
+          canManageAllExtensions={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+            }
+          }
+          onSubmit={[Function]}
+          userCanUpdateExtensions={true}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <React.Fragment>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileSkillsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Skills"
+          />
+          <styled.table>
+            <thead>
+              <tr>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Name"
+                    id="tables.header.nameColumn"
+                    values={Object {}}
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Proficiency"
+                    id="skills.proficiency"
+                    values={Object {}}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  skill 1
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  skill 2
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+            </tbody>
+          </styled.table>
+        </Connect(DetailWrapper)>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileGroupsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Groups"
+          />
+          <styled.span>
+            group 1
+          </styled.span>
+          <styled.span>
+            group 2
+          </styled.span>
+        </Connect(DetailWrapper)>
+      </React.Fragment>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<UserProfilePage /> user wants to update his/her password and fields to do it are shown 1`] = `
+<styled.div>
+  <h2>
+    <FormattedMessage
+      defaultMessage="User Profile"
+      id="navigation.profile"
+      values={Object {}}
+    />
+  </h2>
+  <styled.div>
+    <styled.div>
+      <UserIconSVG
+        color="#fff"
+        size={120}
+      />
+    </styled.div>
+    <styled.div>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileDetailsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          text="Details"
+        />
+        <ReduxForm
+          canUpdatePassword={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "lastName": "Whoever",
+              "skills": Immutable.List [
+                Immutable.Map {
+                  "name": "skill 1",
+                },
+                Immutable.Map {
+                  "name": "skill 2",
+                },
+              ],
+              "externalId": "external-id",
+              "defaultTenant": "tenant-id",
+              "defaultIdentityProvider": "identityProvider",
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+              "groups": Immutable.List [
+                Immutable.Map {
+                  "name": "group 1",
+                },
+                Immutable.Map {
+                  "name": "group 2",
+                },
+              ],
+              "firstName": "Whatever",
+              "noPassword": false,
+              "email": "email@email.com",
+              "workStationId": "workstation-id",
+            }
+          }
+          onSubmit={[Function]}
+          resetPassword={false}
+          tenantsList={
+            Array [
+              Object {
+                "label": "tenant 1",
+                "value": "tenant1-id",
+              },
+              Object {
+                "label": "tenant 2",
+                "value": "tenant2-id",
+              },
+            ]
+          }
+          toggleResetPassword={[Function]}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <Connect(DetailWrapper)
+        autoCloseOverride={true}
+        customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+        data-automation="userProfileExtensionsSVG"
+        open={true}
+      >
+        <Styled(DetailHeader)
+          onActionButtonClick={[Function]}
+          text="Extensions"
+          userHasUpdatePermission={true}
+        />
+        <ReduxForm
+          canManageAllExtensions={true}
+          formatMessage={[Function]}
+          initialValues={
+            Immutable.Map {
+              "extensions": Immutable.List [
+                Immutable.Map {
+                  "type": "WebRTC",
+                  "name": "whatever",
+                  "id": "an-id",
+                  "hide": false,
+                },
+                Immutable.Map {
+                  "type": "PSTN",
+                  "name": "someone",
+                  "id": "another-id",
+                  "hide": false,
+                },
+              ],
+            }
+          }
+          onSubmit={[Function]}
+          userCanUpdateExtensions={true}
+          userHasUpdatePermission={true}
+        />
+      </Connect(DetailWrapper)>
+      <React.Fragment>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileSkillsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Skills"
+          />
+          <styled.table>
+            <thead>
+              <tr>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Name"
+                    id="tables.header.nameColumn"
+                    values={Object {}}
+                  />
+                </th>
+                <th>
+                  <FormattedMessage
+                    defaultMessage="Proficiency"
+                    id="skills.proficiency"
+                    values={Object {}}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  skill 1
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  skill 2
+                </td>
+                <td>
+                  -
+                </td>
+              </tr>
+            </tbody>
+          </styled.table>
+        </Connect(DetailWrapper)>
+        <Connect(DetailWrapper)
+          customCaretIcon="margin-top: 0;display: inline-block;margin-left: 205px;"
+          data-automation="userProfileGroupsSVG"
+          open={true}
+        >
+          <Styled(DetailHeader)
+            text="Groups"
+          />
+          <styled.span>
+            group 1
+          </styled.span>
+          <styled.span>
+            group 2
+          </styled.span>
+        </Connect(DetailWrapper)>
+      </React.Fragment>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`extensionsFormValidation if PSTN extension has a no valid PSTN extension value it should return an error 1`] = `
+Object {
+  "extensions": Array [
+    Object {
+      "message": "Phone number should be in E.164 format.",
+      "value": true,
+    },
+    Object {},
+  ],
+}
+`;
+
+exports[`extensionsFormValidation if SIP extension has a no valid SIP extension value it should return an error 1`] = `
+Object {
+  "extensions": Array [
+    Object {},
+    Object {
+      "message": "Extensions must start with 'sip:'.",
+      "value": true,
+    },
+  ],
+}
+`;
+
+exports[`extensionsFormValidation if all extensions pass all validation, no errors are returned 1`] = `false`;
+
+exports[`extensionsFormValidation if an extension has no description it returns an error 1`] = `
+Object {
+  "extensions": Array [
+    Object {},
+    Object {
+      "label": true,
+      "message": "Please provide a description",
+    },
+  ],
+}
+`;
+
+exports[`extensionsFormValidation if an extension has no value and it's not a webRTC extension it should return an error 1`] = `
+Object {
+  "extensions": Array [
+    Object {
+      "message": "Value required",
+      "value": true,
+    },
+    Object {},
+  ],
+}
+`;
+
+exports[`tenantUserValidation if any of the required field is missing it returns an error 1`] = `
+Object {
+  "currentPassword": "Please enter a password",
+  "firstName": "Please enter a first name",
+  "lastName": false,
+  "password": "Please enter a password",
+}
+`;
+
+exports[`tenantUserValidation if everything is alright with the values no error is returned 1`] = `
+Object {
+  "currentPassword": false,
+  "firstName": false,
+  "lastName": false,
+  "password": false,
+}
+`;
+
+exports[`tenantUserValidation if the new password does not adhere to the password policy it returns an error 1`] = `
+Object {
+  "currentPassword": "Please enter a password",
+  "firstName": false,
+  "lastName": false,
+  "password": "Password must have at least 1 alphabetic character, 1 number, and 1 special character (! # $ % - _ = + < > .)",
+}
+`;

@@ -324,7 +324,7 @@ const ExtensionsForm = reduxForm({
     <form onSubmit={handleSubmit}>
       <ExtensionListField
         name="extensions"
-        disabled={!userHasUpdatePermission || !userCanUpdateExtensions || !canManageAllExtensions}
+        disabled={!(userHasUpdatePermission || userCanUpdateExtensions || canManageAllExtensions) || isSaving}
         extensionLabels={{
           pstn: formatMessage({
             id: 'pstn',
@@ -351,6 +351,10 @@ const ExtensionsForm = reduxForm({
             defaultMessage: 'Description',
           }),
         }}
+        primaryText={formatMessage({
+          id: 'user.details.extensions.primary',
+          defaultMessage: 'Primary'
+        })}
       />
       <UpdateButton
         type="submit"
@@ -428,7 +432,12 @@ export class UserProfile extends React.Component {
 
     return (
       <Wrapper>
-        <h2>User Profile</h2>
+        <h2>
+          <FormattedMessage
+            id="navigation.profile"
+            defaultMessage="User Profile"
+          />
+        </h2>
         <Container>
           <MisteryMan>
             <UserIconSVG size={120} color="#fff" />
@@ -470,12 +479,12 @@ export class UserProfile extends React.Component {
               data-automation="userProfileExtensionsSVG"
               autoCloseOverride>
               <WrappedDetailHeader
-                userHasUpdatePermission={userHasUpdatePermission && canUpdateExtensions}
+                userHasUpdatePermission={userHasUpdatePermission || canUpdateExtensions || canManageAllExtensions}
                 text={formatMessage({
                   id: 'user.details.extensions',
                   defaultMessage: 'Extensions',
                 })}
-                onActionButtonClick={() =>
+                onActionButtonClick={!isSaving && (() =>
                   changeExtensions(
                     extensionsValue.push(
                       Map({
@@ -488,7 +497,7 @@ export class UserProfile extends React.Component {
                         hide: false,
                       })
                     )
-                  )
+                  ))
                 }
               />
               <ExtensionsForm

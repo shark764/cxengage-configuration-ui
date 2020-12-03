@@ -28,6 +28,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.92.0] - 2020-11-27
+### Added
+- CXV1-22916 - Config 2 | Translate Login Page
+- CXV1-22919 - Config 2 | Language Preference Button
+
+### Fixed
+- CXV1-22915 - Config 2 | Build and Translate User Profile Page (Issue with 'User Profile' text at the top of the page)
+
 ## [0.91.4] - 2020-12-01
 ### Changed
 - CXV1-23567 - Config 2 | Identity Providers - Add Beta feature to Config 1.

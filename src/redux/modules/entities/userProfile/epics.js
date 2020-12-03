@@ -19,16 +19,16 @@ export const FetchUserProfileData = (action$, store) =>
   action$
     .ofType('FETCH_DATA')
     .filter(({ entityName }) => entityName === 'userProfile')
-    .switchMap(a =>
+    .switchMap((a) =>
       fromPromise(
         sdkPromise({
           command: 'getTenantDetails',
           module: 'session',
-          topic: 'cxengage/session/get-tenant-details'
+          topic: 'cxengage/session/get-tenant-details',
         })
       )
-        .map(response => ({ ...a, response }))
-        .catch(error => ({ ...a, error }))
+        .map((response) => ({ ...a, response }))
+        .catch((error) => of({ ...a, error }))
     )
     .switchMap(
       ({ response, error, ...a }) =>
@@ -40,8 +40,8 @@ export const FetchUserProfileData = (action$, store) =>
               {
                 type: 'FETCH_DATA_ITEM',
                 entityName: 'users',
-                id: getCurrentAgentId(store.getState())
-              }
+                id: getCurrentAgentId(store.getState()),
+              },
             ]
     );
 
@@ -67,7 +67,7 @@ export const ReInitializeUserProfileForms = (action$, store) =>
       const initialValues = userProfileInitialValues(store.getState());
       return [
         initialize('userProfile:details', initialValues.delete('extensions'), false),
-        initialize('userProfile:extensions', fromJS({ extensions: initialValues.get('extensions') }), false)
+        initialize('userProfile:extensions', fromJS({ extensions: initialValues.get('extensions') }), false),
       ];
     });
 
@@ -87,7 +87,7 @@ export const UpdateUserProfile = (action$, store) =>
           noPassword,
           defaultIdentityProvider,
           externalId,
-          username
+          username,
         },
         profileEntity,
         ...a
@@ -106,14 +106,14 @@ export const UpdateUserProfile = (action$, store) =>
                       ...(currentPassword &&
                         password && {
                           password,
-                          currentPassword
+                          currentPassword,
                         }),
-                      externalId
+                      externalId,
                     },
-                    userId
+                    userId,
                   },
                   module: 'entities',
-                  topic: 'cxengage/entities/update-platform-user-response'
+                  topic: 'cxengage/entities/update-platform-user-response',
                 }
               : {
                   ...entitiesMetaData['users'].entityApiRequest('update', 'singleMainEntity'),
@@ -124,21 +124,21 @@ export const UpdateUserProfile = (action$, store) =>
                       ),
                       defaultIdentityProvider,
                       noPassword,
-                      workStationId
+                      workStationId,
                     },
-                    userId
-                  }
+                    userId,
+                  },
                 }
           )
         )
-          .map(response => ({ ...a, currentPassword, password, profileEntity, response, userId, username }))
-          .catch(error => of({ error, ...a }));
+          .map((response) => ({ ...a, currentPassword, password, profileEntity, response, userId, username }))
+          .catch((error) => of({ error, ...a }));
       }
     )
     .switchMap(({ currentPassword, password, profileEntity, username, userId, error, ...a }) => {
       const successfulResponse = {
         ...a,
-        userId
+        userId,
       };
 
       if (profileEntity === 'platformUser' && currentPassword && password && !error) {
@@ -149,13 +149,13 @@ export const UpdateUserProfile = (action$, store) =>
             data: {
               username,
               password,
-              noStateReset: true
+              noStateReset: true,
             },
-            topic: 'cxengage/sessions/get-new-token-response'
+            topic: 'cxengage/sessions/get-new-token-response',
           })
         )
           .map(() => successfulResponse)
-          .catch(error => of({ error, ...a }));
+          .catch((error) => of({ error, ...a }));
       } else if (error) {
         return of({ error, ...a });
       } else {
@@ -167,7 +167,7 @@ export const UpdateUserProfile = (action$, store) =>
         Toast.error(errorManager(error).errorMessage);
         return {
           ...a,
-          type: `${a.type}_REJECTED`
+          type: `${a.type}_REJECTED`,
         };
       } else {
         return handleSuccess(response, a, 'Profile updated succesfully');

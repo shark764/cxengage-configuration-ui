@@ -2,18 +2,17 @@ import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LoadingSpinnerSVG } from 'cx-ui-components';
+import { LoadingSpinnerSVG, LegalCopyright, Typeahead, Logo, LanguagePicker } from 'cx-ui-components';
 import * as Cx from 'cx-js-sdk';
-import { Logo } from 'cx-ui-components';
-import { LegalCopyright, Typeahead } from 'cx-ui-components';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
+import { mappedLocalesOptions } from '../../i18n';
 import { cxInit, versionCheck, cxSetTenant, cxLogin, cxTokenLogin } from '../../utils/cxSdk';
-import messages from './messages';
 
 const Loading = styled(LoadingSpinnerSVG)`
   position: absolute;
-  top: calc(50% - ${props => props.size / 2}px);
-  left: calc(50% - ${props => props.size / 2}px);
+  top: calc(50% - ${(props) => props.size / 2}px);
+  left: calc(50% - ${(props) => props.size / 2}px);
 `;
 const TempBackground = styled.div`
   position: fixed;
@@ -106,19 +105,19 @@ const CheckboxLabel = styled.label`
   color: rgb(73, 73, 73);
   font-size: 16px;
 `;
-const Privacy = styled.a`
-  color: white;
-  float: right;
-  font-size: 16px;
-  margin-right: 10px;
-  margin-top: -15px;
-  display: inline-block;
-`;
+
 const LegalPolicy = styled.div`
   margin-top: 8em;
 `;
 
-export default class Login extends Component {
+const StyledLanguagePicker = styled(LanguagePicker)`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 1.5em;
+`;
+
+export class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -130,7 +129,7 @@ export default class Login extends Component {
       token: undefined,
       platformViewOnlyCapable: false,
       loginPrefrences:
-        (localStorage.getItem('loginPrefrences') && JSON.parse(localStorage.getItem('loginPrefrences'))) || {}
+        (localStorage.getItem('loginPrefrences') && JSON.parse(localStorage.getItem('loginPrefrences'))) || {},
     };
   }
   componentWillUnmount() {
@@ -141,7 +140,7 @@ export default class Login extends Component {
     if (CxEngage.authentication && !this.props.authenticated) {
       const token = sessionStorage.getItem('token');
       if (token) {
-        this.login(token, response => this.handleLoginResponse(response));
+        this.login(token, (response) => this.handleLoginResponse(response));
       }
     }
   }
@@ -161,11 +160,11 @@ export default class Login extends Component {
 
   fetchAllTenants() {
     Cx.reuseToken({ token: sessionStorage.getItem('token') });
-    Cx.regions().then(d =>
-      Cx.allTenants(d[0].id).then(d => {
-        const updatedTenantList = d.map(tenant => ({
+    Cx.regions().then((d) =>
+      Cx.allTenants(d[0].id).then((d) => {
+        const updatedTenantList = d.map((tenant) => ({
           tenantId: tenant.id,
-          tenantName: tenant.name
+          tenantName: tenant.name,
         }));
         this.setState({ tenants: updatedTenantList });
       })
@@ -174,13 +173,18 @@ export default class Login extends Component {
 
   handleLoginResponse(response) {
     if (response.code && (response.code === 3002 || response.code === 3000)) {
-      return alert('Wrong username or password , or logged out due to inactivity.');
+      return alert(
+        this.props.intl.formatMessage({
+          id: 'login.error',
+          defaultMessage: 'Invalid username or password',
+        })
+      );
     }
     let defaultTenantObject;
     const { defaultTenant, tenants, platformPermissions, userId } = response;
     // Users do not have a 'default tenant' by default
     if (defaultTenant) {
-      defaultTenantObject = response.tenants.filter(tenant => tenant.tenantId === response.defaultTenant)[0];
+      defaultTenantObject = response.tenants.filter((tenant) => tenant.tenantId === response.defaultTenant)[0];
     } else {
       defaultTenantObject = response.tenants[0];
     }
@@ -201,13 +205,13 @@ export default class Login extends Component {
       initalAuth: true,
       selectedTenant: {
         label: defaultTenantObject.tenantName,
-        value: defaultTenantObject.tenantId
+        value: defaultTenantObject.tenantId,
       },
       platformViewOnlyCapable: isPlatformViewCapable,
-      tenants: response.tenants.map(x => ({
+      tenants: response.tenants.map((x) => ({
         tenantId: x.tenantId,
-        tenantName: x.tenantName
-      }))
+        tenantName: x.tenantName,
+      })),
     });
 
     if (this.state.platformViewOnlyCapable) {
@@ -218,9 +222,9 @@ export default class Login extends Component {
     }
   }
 
-  login = token => {
+  login = (token) => {
     if (token) {
-      cxTokenLogin(token, response => {
+      cxTokenLogin(token, (response) => {
         this.handleLoginResponse(response);
       });
     } else {
@@ -229,31 +233,31 @@ export default class Login extends Component {
       } else {
         localStorage.setItem('email', '');
       }
-      cxLogin(this.state.username, this.state.password, response => {
+      cxLogin(this.state.username, this.state.password, (response) => {
         this.handleLoginResponse(response);
       });
     }
   };
 
   chooseTenant = () => {
-    cxSetTenant(this.state.selectedTenant.value, response => {
+    cxSetTenant(this.state.selectedTenant.value, (response) => {
       this.props.switchTenant(response.tenantId);
       this.props.fetchBranding();
     });
   };
 
-  setUsername = e => {
+  setUsername = (e) => {
     this.setState({
-      username: e.target.value
+      username: e.target.value,
     });
   };
-  setPassword = e =>
+  setPassword = (e) =>
     this.setState({
-      password: e.target.value
+      password: e.target.value,
     });
-  setTenant = selectedOption =>
+  setTenant = (selectedOption) =>
     this.setState({
-      selectedTenant: selectedOption
+      selectedTenant: selectedOption,
     });
 
   lgoinPrefrences = ({ target: { name, checked } }) => {
@@ -262,7 +266,7 @@ export default class Login extends Component {
     } else {
       const prefrences = {
         ...this.state.loginPrefrences,
-        [name]: checked
+        [name]: checked,
       };
       this.setState({ loginPrefrences: prefrences });
       localStorage.setItem('loginPrefrences', JSON.stringify(prefrences));
@@ -270,6 +274,11 @@ export default class Login extends Component {
   };
 
   onEnterKey = ({ key }) => (key === 'Enter' ? this.login() : undefined);
+
+  changeLocale = (locale) => {
+    window.localStorage.setItem('locale', locale);
+    this.props.changeLocale(locale);
+  };
 
   render() {
     if (!this.props.insideIframe && !this.props.hasStarted) {
@@ -280,10 +289,15 @@ export default class Login extends Component {
               <Logo />
               {!this.props.authenticated && (
                 <div>
-                  <SignInTitle>Sign in to CxEngage</SignInTitle>
+                  <SignInTitle>
+                    <FormattedMessage id="login.welcomeMessage" defaultMessage="Sign in to CxEngage" />
+                  </SignInTitle>
                   <LoginInput
-                    data-automation="username"
-                    placeholder="Username"
+                    data-automation="email"
+                    placeholder={this.props.intl.formatMessage({
+                      id: 'fields.email.placeholder',
+                      defaultMessage: 'Email',
+                    })}
                     type="email"
                     onChange={this.setUsername}
                     value={this.state.username}
@@ -291,7 +305,10 @@ export default class Login extends Component {
                   {!this.state.loginPrefrences.sso && (
                     <LoginInput
                       data-automation="password"
-                      placeholder="Password"
+                      placeholder={this.props.intl.formatMessage({
+                        id: 'fields.password.placeholder',
+                        defaultMessage: 'Password',
+                      })}
                       type="password"
                       onChange={this.setPassword}
                       value={this.state.password}
@@ -308,7 +325,10 @@ export default class Login extends Component {
                       value={this.state.loginPrefrences.remember}
                       checked={this.state.loginPrefrences.remember}
                     />
-                    <CheckboxLabel for="remember">Remember Me</CheckboxLabel> <br />
+                    <CheckboxLabel for="remember">
+                      <FormattedMessage id="login.rememberMe" defaultMessage="Remember Me" />
+                    </CheckboxLabel>{' '}
+                    <br />
                     <Checkbox
                       type="checkbox"
                       data-automation="sso"
@@ -317,28 +337,39 @@ export default class Login extends Component {
                       value={this.state.loginPrefrences.sso}
                       checked={this.state.loginPrefrences.sso}
                     />
-                    <CheckboxLabel for="sso">Sign in with SSO</CheckboxLabel> <br />
+                    <CheckboxLabel for="sso">
+                      <FormattedMessage id="login.singInWithSso" defaultMessage="Sign in with SSO" />
+                    </CheckboxLabel>{' '}
+                    <br />
                   </Prefrences>
 
                   <LoginButton data-automation="signInButton" onClick={() => this.login()}>
-                    Sign In
+                    <FormattedMessage id="forms.buttons.loginText" defaultMessage="Login" />
                   </LoginButton>
                 </div>
               )}
 
               {this.props.authenticated && (
                 <div>
-                  <SignInTitle>Select a tenant</SignInTitle>
+                  <SignInTitle>
+                    <FormattedMessage id="login.selectTenant" defaultMessage="Select a tenant" />
+                  </SignInTitle>
                   <Selector
                     data-automation="chooseTenantInput"
-                    placeholder="Select a tenant"
+                    placeholder={this.props.intl.formatMessage({
+                      id: 'login.selectTenant.placeholder',
+                      defaultMessage: 'Please Select a Tenant...',
+                    })}
                     options={this.state.tenants.map(({ tenantName, tenantId }) => ({
                       label: tenantName,
-                      value: tenantId
+                      value: tenantId,
                     }))}
                     listWidth={282}
                     listHeight={250}
-                    noSuggestionsMessage="No Options"
+                    noSuggestionsMessage={this.props.intl.formatMessage({
+                      id: 'login.noTenantOption',
+                      defaultMessage: 'No options',
+                    })}
                     onSelectedOptionChange={this.setTenant}
                     selectedOption={this.state.selectedTenant}
                     noBackground={false}
@@ -351,26 +382,53 @@ export default class Login extends Component {
                       onChange={this.lgoinPrefrences}
                       value={this.state.loginPrefrences.platform}
                     />
-                    <CheckboxLabel for="platform">Platform admin view-only mode</CheckboxLabel> <br />
+                    <CheckboxLabel for="platform">
+                      <FormattedMessage id="login.platforViewMode" defaultMessage="Platform admin view-only mode" />
+                    </CheckboxLabel>{' '}
+                    <br />
                   </Prefrences>
                   <LoginButton
                     data-automation="selectTenantButton"
                     disabled={!this.state.selectedTenant}
-                    onClick={this.chooseTenant}
-                  >
-                    Select
+                    onClick={this.chooseTenant}>
+                    <FormattedMessage id="login.selectButton" defaultMessage="Select" />
                   </LoginButton>
                 </div>
               )}
             </LoginFormWrapper>
           </LoginBox>
           <LegalPolicy>
-            <LegalCopyright />
+            <LegalCopyright
+              messages={{
+                copyright: this.props.intl.formatMessage(
+                  {
+                    id: 'copyright',
+                    defaultMessage: 'Copyright \u00a9 2015-{currentYear} Lifesize, Inc. All rights reserved.',
+                  },
+                  {
+                    currentYear: new Date().getFullYear(),
+                  }
+                ),
+                legal: this.props.intl.formatMessage({
+                  id: 'signup.legal',
+                  defaultMessage: 'By accessing the Service, you agree to the following terms: ',
+                }),
+                legalLabel: this.props.intl.formatMessage({
+                  id: 'signup.legalLinkLabel',
+                  defaultMessage: 'Link',
+                }),
+              }}
+            />
           </LegalPolicy>
-          <Privacy target="blank" href={messages.privacyLink.defaultMessage}>
-            <a> {messages.privacy.defaultMessage} </a>
-          </Privacy>
           <TempBackground />
+          {location.hash.includes('alpha') && (
+            <StyledLanguagePicker
+              color="#fff"
+              onLanguageChange={this.changeLocale}
+              selectedLocale={this.props.locale}
+              languageOptions={mappedLocalesOptions}
+            />
+          )}
         </Fragment>
       );
     } else if (!this.props.insideIframe && this.props.hasStarted) {
@@ -380,6 +438,8 @@ export default class Login extends Component {
     }
   }
 }
+
+export default injectIntl(Login);
 
 Login.propTypes = {
   authenticated: PropTypes.bool.isRequired,
@@ -391,5 +451,8 @@ Login.propTypes = {
   children: PropTypes.any,
   insideIframe: PropTypes.bool.isRequired,
   updatePlatformPermissions: PropTypes.func,
-  switchTenant: PropTypes.func.isRequired
+  switchTenant: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
+  intl: PropTypes.object.isRequired,
+  changeLocale: PropTypes.func.isRequired,
 };
