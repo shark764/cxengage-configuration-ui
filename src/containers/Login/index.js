@@ -8,14 +8,14 @@ import LoginLayout from './layout';
 import {
   authenticatedAndBrandingReady,
   userIsAuthed,
-  platformViewOnlyMode
+  platformViewOnlyMode,
 } from '../../redux/modules/userData/selectors';
 import {
-  toggleUserAuthed,
+  setUserAuthed,
   updateTenantsList,
   togglePlatformViewOnlyMode,
   updatePlatformPermissions,
-  switchTenant
+  switchTenant,
 } from '../../redux/modules/userData';
 import { isInIframe } from 'serenova-js-utils/browser';
 import { fetchBranding } from '../../redux/modules/entities/branding/actions';
@@ -30,19 +30,19 @@ export function mapStateToProps(state) {
     authenticated: userIsAuthed(state),
     platformViewOnlyMode: platformViewOnlyMode(state),
     insideIframe: !isInIframe(),
-    locale: selectCurrentLocale(state)
+    locale: selectCurrentLocale(state),
   };
 }
 
 export const actions = {
-  toggleUserAuthed,
+  setUserAuthed,
   fetchBranding,
   updateTenantsList,
   updateUserPermissions,
   togglePlatformViewOnlyMode,
   updatePlatformPermissions,
   switchTenant,
-  changeLocale
+  changeLocale,
 };
 
 export default connect(mapStateToProps, actions)(LoginLayout);

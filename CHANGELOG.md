@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.92.2] - 2020-12-03
+### Fixed
+- CXV1-2366 - changing language causes tenants dont appear in the search 
+
 ## [0.92.1] - 2020-11-30
 ### Added
 - CXV1-23375 - Config 2 | Identity Providers - Add localization support.

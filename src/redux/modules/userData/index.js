@@ -12,7 +12,7 @@ export const initialState = fromJS({
   currentTenantName: '',
   currentTenantId: '',
   tenants: [],
-  platformViewOnlyMode: false
+  platformViewOnlyMode: false,
 });
 
 // Actions
@@ -21,22 +21,22 @@ export const updateUserPermissions = (tenantId, tenantName, tenantPermissions, u
   tenantInfo: {
     tenantId,
     tenantName,
-    tenantPermissions
+    tenantPermissions,
   },
-  userId
+  userId,
 });
-export const updateTenantsList = tenants => ({
+export const updateTenantsList = (tenants) => ({
   type: 'UPDATE_TENANTS_LIST',
-  tenants
+  tenants,
 });
 export const togglePlatformViewOnlyMode = () => ({
-  type: 'TOGGLE_PLATFORM_VIEW_ONLY_MODE'
+  type: 'TOGGLE_PLATFORM_VIEW_ONLY_MODE',
 });
-export const updatePlatformPermissions = permissions => ({
+export const updatePlatformPermissions = (permissions) => ({
   type: 'UPDATE_PLATFORM_PERMISSIONS',
-  permissions
+  permissions,
 });
-export const toggleUserAuthed = () => ({ type: 'TOGGLE_USER_AUTH' });
+export const setUserAuthed = (isAuthed) => ({ type: 'SET_USER_AUTH', isAuthed });
 
 export const switchTenant = (tenantId, setAsActiveTenant) => ({ type: 'SWITCH_TENANT', tenantId, setAsActiveTenant });
 
@@ -51,7 +51,7 @@ export default function reducer(state = initialState, action) {
         localStorage.setItem(
           'LIVEOPS-PREFERENCE-KEY',
           JSON.stringify({
-            tenant: action.tenantInfo
+            tenant: action.tenantInfo,
           })
         );
       }
@@ -70,14 +70,14 @@ export default function reducer(state = initialState, action) {
     case 'UPDATE_TENANTS_LIST': {
       return state.set('tenants', fromJS(action.tenants));
     }
-    case 'TOGGLE_USER_AUTH': {
-      return state.set('userIsAuthed', !state.get('userIsAuthed'));
+    case 'SET_USER_AUTH': {
+      return state.set('userIsAuthed', action.isAuthed);
     }
     case 'TOGGLE_PLATFORM_VIEW_ONLY_MODE': {
       return state.set('platformViewOnlyMode', !state.get('platformViewOnlyMode'));
     }
     case 'SWITCH_TENANT': {
-      const tenantIndex = state.get('tenants').findIndex(tenant => tenant.get('tenantId') === action.tenantId);
+      const tenantIndex = state.get('tenants').findIndex((tenant) => tenant.get('tenantId') === action.tenantId);
       if (tenantIndex !== -1) {
         const { tenantPermissions, tenantId, tenantName } = state.getIn(['tenants', tenantIndex]).toJS();
         return state

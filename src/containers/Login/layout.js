@@ -137,10 +137,11 @@ export class Login extends Component {
   }
   componentDidMount() {
     cxInit();
-    if (CxEngage.authentication && !this.props.authenticated) {
+    // Make auth request when remounting component after changing language so we get the tenants
+    if (CxEngage.authentication) {
       const token = sessionStorage.getItem('token');
       if (token) {
-        this.login(token, (response) => this.handleLoginResponse(response));
+        this.login(token);
       }
     }
   }
@@ -215,9 +216,9 @@ export class Login extends Component {
     });
 
     if (this.state.platformViewOnlyCapable) {
-      this.props.toggleUserAuthed();
+      this.props.setUserAuthed(true);
     } else {
-      this.props.toggleUserAuthed();
+      this.props.setUserAuthed(true);
       this.chooseTenant();
     }
   }
@@ -227,6 +228,10 @@ export class Login extends Component {
       cxTokenLogin(token, (response) => {
         this.handleLoginResponse(response);
       });
+      if (this.state.loginPrefrences.platform) {
+        // If platform was checked before remounting, fetch all tenants
+        this.fetchAllTenants();
+      }
     } else {
       if (this.state.loginPrefrences.remember) {
         localStorage.setItem('email', this.state.username);
@@ -243,6 +248,9 @@ export class Login extends Component {
     cxSetTenant(this.state.selectedTenant.value, (response) => {
       this.props.switchTenant(response.tenantId);
       this.props.fetchBranding();
+      // Clean platform from login preference after succesfullu logging in
+      const { platform, ...prefrences } = this.state.loginPrefrences;
+      localStorage.setItem('loginPrefrences', JSON.stringify(prefrences));
     });
   };
 
@@ -262,15 +270,14 @@ export class Login extends Component {
 
   lgoinPrefrences = ({ target: { name, checked } }) => {
     if (name === 'platform' && checked) {
-      return this.fetchAllTenants();
-    } else {
-      const prefrences = {
-        ...this.state.loginPrefrences,
-        [name]: checked,
-      };
-      this.setState({ loginPrefrences: prefrences });
-      localStorage.setItem('loginPrefrences', JSON.stringify(prefrences));
+      this.fetchAllTenants();
     }
+    const prefrences = {
+      ...this.state.loginPrefrences,
+      [name]: checked,
+    };
+    this.setState({ loginPrefrences: prefrences });
+    localStorage.setItem('loginPrefrences', JSON.stringify(prefrences));
   };
 
   onEnterKey = ({ key }) => (key === 'Enter' ? this.login() : undefined);
@@ -322,8 +329,7 @@ export class Login extends Component {
                       data-automation="remember"
                       name="remember"
                       onChange={this.lgoinPrefrences}
-                      value={this.state.loginPrefrences.remember}
-                      checked={this.state.loginPrefrences.remember}
+                      checked={this.state.loginPrefrences && this.state.loginPrefrences.remember}
                     />
                     <CheckboxLabel for="remember">
                       <FormattedMessage id="login.rememberMe" defaultMessage="Remember Me" />
@@ -334,8 +340,7 @@ export class Login extends Component {
                       data-automation="sso"
                       name="sso"
                       onChange={this.lgoinPrefrences}
-                      value={this.state.loginPrefrences.sso}
-                      checked={this.state.loginPrefrences.sso}
+                      checked={this.state.loginPrefrences && this.state.loginPrefrences.sso}
                     />
                     <CheckboxLabel for="sso">
                       <FormattedMessage id="login.singInWithSso" defaultMessage="Sign in with SSO" />
@@ -380,7 +385,7 @@ export class Login extends Component {
                       data-automation="platformAdminModeCheckbox"
                       name="platform"
                       onChange={this.lgoinPrefrences}
-                      value={this.state.loginPrefrences.platform}
+                      checked={this.state.loginPrefrences && this.state.loginPrefrences.platform}
                     />
                     <CheckboxLabel for="platform">
                       <FormattedMessage id="login.platforViewMode" defaultMessage="Platform admin view-only mode" />
@@ -443,7 +448,7 @@ export default injectIntl(Login);
 
 Login.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  toggleUserAuthed: PropTypes.func.isRequired,
+  setUserAuthed: PropTypes.func.isRequired,
   fetchBranding: PropTypes.func.isRequired,
   updateTenantsList: PropTypes.func.isRequired,
   updateUserPermissions: PropTypes.func.isRequired,
