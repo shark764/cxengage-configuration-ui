@@ -7,7 +7,11 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
 import IdentityProvidersForm from './layout';
 import { formValidation } from './validation';
-import { getSelectedEntityId, userHasUpdatePermission, isCreating } from '../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  userHasUpdatePermission,
+  isCreating
+} from '../../../redux/modules/entities/selectors';
 import {
   selectFormInitialValues,
   formSubmission,
@@ -15,6 +19,8 @@ import {
   getCurrentFormValueByFieldName,
 } from '../../../redux/modules/form/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
+import { uploadXml } from '../../../redux/modules/entities';
+import { injectIntl } from 'react-intl';
 
 const CreateIdentityProvidersForm = compose(
   connect((state) => createFormName(state)),
@@ -33,7 +39,6 @@ export const mapStateToProps = (state) => ({
   userHasUpdatePermission: userHasUpdatePermission(state),
   idpType: getCurrentFormValueByFieldName(state, 'identityProviderType'),
   identityProviderTypes: entitiesMetaData.identityProviders.idpConfigInfoTypes,
-  metadataFile: '',
 });
 
-export default connect(mapStateToProps)(CreateIdentityProvidersForm);
+export default injectIntl(connect(mapStateToProps)(CreateIdentityProvidersForm));

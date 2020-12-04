@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.92.1] - 2020-11-30
+### Added
+- CXV1-23375 - Config 2 | Identity Providers - Add localization support.
+
 ## [0.92.0] - 2020-11-27
 ### Added
 - CXV1-22916 - Config 2 | Translate Login Page
