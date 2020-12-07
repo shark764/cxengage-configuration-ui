@@ -53,7 +53,7 @@ export default class IdentityProvidersForm extends Component {
       },
     } = this;
 
-    const initValues = this.props.initialValues.toJS();
+    const initValues = this.props.initialValues;
     const idpTypes = (!initValues.id) ?
       this.props.identityProviderTypes :
       this.props.identityProviderTypes.filter(

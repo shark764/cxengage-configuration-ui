@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Identity Providers Renders renders 1`] = `
+<Connect(Connect(ReduxForm))
+  intl={
+    Object {
+      "defaultFormats": Object {},
+      "defaultLocale": "en",
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "formats": Object {},
+      "formatters": Object {
+        "getDateTimeFormat": [Function],
+        "getMessageFormat": [Function],
+        "getNumberFormat": [Function],
+        "getPluralFormat": [Function],
+        "getRelativeFormat": [Function],
+      },
+      "locale": "en",
+      "messages": Object {},
+      "now": [Function],
+      "onError": [Function],
+      "textComponent": "span",
+      "timeZone": null,
+    }
+  }
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  Child
+</Connect(Connect(ReduxForm))>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "handleSubmit": [MockFunction],
+  "identityProviderTypes": Array [
+    Object {
+      "label": "URL",
+      "value": "url",
+    },
+    Object {
+      "label": "XML File",
+      "value": "xml",
+    },
+    Object {
+      "label": "XML Direct Input",
+      "value": "xmlDirectInput",
+    },
+    Object {
+      "label": "Shared Access Code",
+      "value": "sharedIdentityProviderLinkId",
+    },
+  ],
+  "idpType": undefined,
+  "initialValues": Object {
+    "active": true,
+  },
+  "isSaving": true,
+  "key": "mockId",
+  "userHasUpdatePermission": true,
+}
+`;
+
+exports[`createFormName returns proper values 1`] = `undefined`;
+
+exports[`formSubmission returns proper values 1`] = `undefined`;

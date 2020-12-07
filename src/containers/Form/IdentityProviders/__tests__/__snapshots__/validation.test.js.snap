@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+Object {
+  "emailMapping": "Please enter an email or \\"Email\\" for default...",
+  "identityProvider": "Please enter an access code...",
+  "identityProviderType": "Please select a type...",
+  "metadataFile": "Please enter the XML markup...",
+  "metadataUrl": "Please enter the URL to XML...",
+  "name": "Please enter a name...",
+}
+`;
+
+exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
+Object {
+  "emailMapping": "Please enter an email or \\"Email\\" for default...",
+  "identityProvider": "Please enter an access code...",
+  "identityProviderType": "Please select a type...",
+  "metadataFile": "Please enter the XML markup...",
+  "metadataUrl": "Please enter the URL to XML...",
+  "name": "Please enter a name...",
+}
+`;
+
+exports[`formValidation returns proper object when required fields are provided 1`] = `
+Object {
+  "emailMapping": false,
+  "identityProvider": false,
+  "identityProviderType": false,
+  "metadataFile": false,
+  "metadataUrl": "Please enter a valid URL...",
+  "name": false,
+}
+`;

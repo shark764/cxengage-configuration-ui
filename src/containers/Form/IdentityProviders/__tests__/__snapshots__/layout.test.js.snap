@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdentityProvidersForm /> renders create form 1`] = `
+<IdentityProvidersForm
+  description="mockDescription"
+  handleSubmit={[Function]}
+  identityProviderTypes={
+    Array [
+      Object {
+        "label": "URL",
+        "value": "url",
+      },
+    ]
+  }
+  idpType="url"
+  inherited={false}
+  initialValues={
+    Object {
+      "get": [Function],
+    }
+  }
+  intl={[Function]}
+  isSaving={false}
+  name="mockName"
+  userHasUpdatePermission={true}
+/>
+`;
+
+exports[`<IdentityProvidersForm /> renders update form 1`] = `
+<IdentityProvidersForm
+  description="mockDescription"
+  emailMapping="mockEmailMapping"
+  handleSubmit={[Function]}
+  id="0000-0000-0000-0000-0000"
+  identityProvider="00000000000000000000"
+  identityProviderTypes={
+    Array [
+      Object {
+        "label": "URL",
+        "value": "url",
+      },
+    ]
+  }
+  idpType="url"
+  inherited={false}
+  initialValues={
+    Object {
+      "get": [Function],
+    }
+  }
+  intl={[Function]}
+  isSaving={false}
+  metadataUrl="mockMetadataUrl"
+  name="mockName"
+  userHasUpdatePermission={true}
+/>
+`;
