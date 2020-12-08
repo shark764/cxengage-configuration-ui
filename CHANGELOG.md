@@ -28,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+## [0.92.4] - 2020-12-08
+### Fixed
+- CXV1-23651 - Config 2 | Identity Provider | configuration for xml cannot be updated, there is no way to upload a new xml.
+
 ## [0.92.3] - 2020-12-04
 ### Added
 - CXV1-23547 - Config 2 | Identity Providers - Unit tests.

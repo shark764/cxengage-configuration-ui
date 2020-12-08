@@ -35,7 +35,7 @@ export default class IdentityProvidersForm extends Component {
   downloadFile = (e, initialValues) => {
     e.preventDefault();
     const idpName = initialValues.name;
-    const doc = initialValues.metadataFile;
+    const doc = initialValues.currentMetadataFile;
     const fileToExport = new Blob([doc], {
       type: 'text/xml',
     });
@@ -53,7 +53,7 @@ export default class IdentityProvidersForm extends Component {
       },
     } = this;
 
-    const initValues = this.props.initialValues;
+    const initValues = this.props.initialValues.toJS();
     const idpTypes = (!initValues.id) ?
       this.props.identityProviderTypes :
       this.props.identityProviderTypes.filter(
@@ -219,26 +219,7 @@ export default class IdentityProvidersForm extends Component {
             </A>
           )}
 
-        {this.props.idpType === 'xml' &&
-          initValues.metadataFile && (
-            <>
-              <FileDownload
-                label={`${formatMessage({
-                  id: 'identityProviders.details.uploadXmlConfig',
-                  defaultMessage: 'Upload XML Config'
-                })} *`}
-                onClick={(e) => this.downloadFile(e, initValues)}
-                value={`${formatMessage({
-                  id: 'identityProviders.details.downloadXmlConfig',
-                  defaultMessage: 'Download Current Config'
-                })}`}
-                disabled={this.props.isSaving || !this.props.userHasUpdatePermission}
-                id="dtpanel-identity-providers-download-xml"
-              />
-            </>
-          )}
-        {this.props.idpType === 'xml' &&
-          !initValues.metadataFile && (
+          {this.props.idpType === 'xml' && (
             <>
               <FileUploadField
                 uploadFile={()=> ""}
@@ -260,10 +241,27 @@ export default class IdentityProvidersForm extends Component {
               />
             </>
           )}
+
+        {this.props.idpType === 'xml' &&
+          initValues.currentMetadataFile && (
+            <>
+              <FileDownload
+                label=""
+                onClick={(e) => this.downloadFile(e, initValues)}
+                value={`${formatMessage({
+                  id: 'identityProviders.details.downloadXmlConfig',
+                  defaultMessage: 'Download Current Config'
+                })}`}
+                disabled={this.props.isSaving || !this.props.userHasUpdatePermission}
+                id="dtpanel-identity-providers-download-xml"
+              />
+            </>
+          )}
+
         {this.props.idpType === 'xmlDirectInput' && (
             <InputField
-              className="frm-identityproviders-metadataFile"
-              name="metadataFile"
+              className="frm-identityproviders-currentMetadataFile"
+              name="currentMetadataFile"
               label={`${formatMessage({
                 id: 'identityProviders.details.enterXml',
                 defaultMessage: 'Enter XML Markup Here'
@@ -271,13 +269,13 @@ export default class IdentityProvidersForm extends Component {
               data-automation="metadataFileInput"
               componentType="textarea"
               inputType="text"
-              disabled={this.state.disableXmlInputEdit && initValues.metadataFile ? true : false}
+              disabled={this.state.disableXmlInputEdit && initValues.currentMetadataFile ? true : false}
               required
             />
         )}
         {this.props.idpType === 'xmlDirectInput' &&
           this.state.disableXmlInputEdit &&
-          initValues.metadataFile && (
+          initValues.currentMetadataFile && (
             <A onClick={() => this.setState({ disableXmlInputEdit: false })}>
               {`${formatMessage({
                 id: 'identityProviders.details.editXmlMarkup',

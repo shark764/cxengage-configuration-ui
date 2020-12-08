@@ -64,7 +64,10 @@ export const selectFormInitialValues = (state) => {
         .set('description', (initValues.get('description') === null) ? '' : initValues.get('description'))
         .toJS();
     } else if (initValues.has('metadataFile')) {
-      return initValues.set('identityProviderType', 'xml')
+      const currentMetadataFile = initValues.get('metadataFile');
+      return initValues.delete('metadataFile')
+        .set('identityProviderType', 'xml')
+        .set('currentMetadataFile', currentMetadataFile)
         .set('description', (initValues.get('description') === null) ? '' : initValues.get('description'))
         .toJS();
     }
