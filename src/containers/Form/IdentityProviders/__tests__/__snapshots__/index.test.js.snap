@@ -65,8 +65,9 @@ Object {
     },
   ],
   "idpType": undefined,
-  "initialValues": Object {
-    "active": true,
+  "initialValues": Immutable.Map {
+    "active": false,
+    "emailMapping": "Email",
   },
   "isSaving": true,
   "key": "mockId",

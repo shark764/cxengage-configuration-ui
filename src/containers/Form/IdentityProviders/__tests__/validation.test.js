@@ -14,6 +14,7 @@ describe('formValidation', () => {
       emailMapping: 'mockEmailMapping',
       metadataUrl: 'mockMetadataUrl',
       metadataFile: '<md:EntityDescriptor>mockXml</md:EntityDescriptor>',
+      newMetadataFile: '<md:EntityDescriptor>newMockXml</md:EntityDescriptor>',
       identityProvider: '00000000000000000000'
     });
     expect(formValidation(values, props)).toMatchSnapshot();
@@ -23,7 +24,8 @@ describe('formValidation', () => {
       name: '',
       identityProviderType: '',
       emailMapping: '',
-      metadataUrl: ''
+      metadataUrl: '',
+      newMetadataFile: ''
     });
     expect(formValidation(values, props)).toMatchSnapshot();
   });
@@ -32,7 +34,8 @@ describe('formValidation', () => {
       name: undefined,
       identityProviderType: null,
       emailMapping: undefined,
-      metadataUrl: undefined
+      metadataUrl: undefined,
+      newMetadataFile: undefined
     });
     expect(formValidation(values, props)).toMatchSnapshot();
   });

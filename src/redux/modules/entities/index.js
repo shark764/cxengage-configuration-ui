@@ -1069,10 +1069,20 @@ export default function reducer(state = initialState, action) {
           delete result['roleId'];
         }
 
-        const updatedState = state
+        let updatedState = state
           .remove('loading')
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...result }))
           .deleteIn([action.entityName, 'bulkUpdating']);
+
+        if (action.entityName === 'identityProviders') {
+          if (result.metadataUrl) {
+            updatedState = updatedState
+              .deleteIn([action.entityName, 'data', entityIndex, 'metadataFile'])
+              .deleteIn([action.entityName, 'data', entityIndex, 'newMetadataFile']);
+          } else if (result.metadataFile) {
+            updatedState = updatedState.deleteIn([action.entityName, 'data', entityIndex, 'metadataUrl']);
+          }
+        }
 
         if (action.entityName === 'tenants') {
           return updatedState;

@@ -373,6 +373,10 @@ export const UpdateEntity = action$ =>
       };
       if (a.entityName === 'identityProviders') {
         if (a.values.identityProviderType === 'xml' || a.values.identityProviderType === 'xmlDirectInput') {
+          if (a.values.newMetadataFile && a.values.newMetadataFile !== '') {
+            a.values.metadataFile = a.values.newMetadataFile;
+          }
+          delete a.values.newMetadataFile;
           delete a.values.metadataUrl;
         } else if (a.values.identityProviderType === 'url') {
           delete a.values.metadataFile;

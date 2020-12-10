@@ -3,7 +3,12 @@
  */
 
 import { fromJS } from 'immutable';
-import { selectTenantIdentityProviders } from '../selectors';
+import { selectTenantIdentityProviders, selectIdentityProvidersFormInitialValues } from '../selectors';
+import { getSelectedEntity } from '../../selectors';
+import { selectFormInitialValues } from '../../../form/selectors';
+
+jest.mock('../../selectors');
+jest.mock('../../../form/selectors');
 
 const initialState = fromJS({
   Entities: {
@@ -33,5 +38,17 @@ describe('selectTenantIdentityProviders', () => {
   });
   it('Does not get any IDPs from state', () => {
     expect(selectTenantIdentityProviders(fromJS([]))).toMatchSnapshot();
+  });
+});
+
+describe('selectIdentityProvidersFormInitialValues', () => {
+  it('Gets the IDPs initial form values when creating a new entity', () => {
+    getSelectedEntity.mockImplementation(() => {});
+    expect(selectIdentityProvidersFormInitialValues()).toMatchSnapshot();
+  });
+  it('Return initial form values when updating an entity', () => {
+    getSelectedEntity.mockImplementation(() => initialState);
+    selectFormInitialValues.mockImplementation(() => initialState);
+    expect(selectIdentityProvidersFormInitialValues()).toMatchSnapshot();
   });
 });

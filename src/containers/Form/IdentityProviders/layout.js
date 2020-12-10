@@ -35,7 +35,7 @@ export default class IdentityProvidersForm extends Component {
   downloadFile = (e, initialValues) => {
     e.preventDefault();
     const idpName = initialValues.name;
-    const doc = initialValues.currentMetadataFile;
+    const doc = initialValues.metadataFile;
     const fileToExport = new Blob([doc], {
       type: 'text/xml',
     });
@@ -230,8 +230,8 @@ export default class IdentityProvidersForm extends Component {
                   defaultMessage: 'Upload XML Config'
                 })} *`}
                 disabled={this.props.isSaving || !this.props.userHasUpdatePermission}
-                id="metadataFile"
-                name="metadataFile"
+                id="newMetadataFile"
+                name="newMetadataFile"
                 maxFileSize={1000000}
                 toastError={`${formatMessage({
                   id: 'identityProviders.details.uploadXmlConfig.error',
@@ -243,7 +243,7 @@ export default class IdentityProvidersForm extends Component {
           )}
 
         {this.props.idpType === 'xml' &&
-          initValues.currentMetadataFile && (
+          initValues.metadataFile && (
             <>
               <FileDownload
                 label=""
@@ -260,8 +260,8 @@ export default class IdentityProvidersForm extends Component {
 
         {this.props.idpType === 'xmlDirectInput' && (
             <InputField
-              className="frm-identityproviders-currentMetadataFile"
-              name="currentMetadataFile"
+              className="frm-identityproviders-metadataFile"
+              name="metadataFile"
               label={`${formatMessage({
                 id: 'identityProviders.details.enterXml',
                 defaultMessage: 'Enter XML Markup Here'
@@ -269,13 +269,13 @@ export default class IdentityProvidersForm extends Component {
               data-automation="metadataFileInput"
               componentType="textarea"
               inputType="text"
-              disabled={this.state.disableXmlInputEdit && initValues.currentMetadataFile ? true : false}
+              disabled={this.state.disableXmlInputEdit && initValues.metadataFile ? true : false}
               required
             />
         )}
         {this.props.idpType === 'xmlDirectInput' &&
           this.state.disableXmlInputEdit &&
-          initValues.currentMetadataFile && (
+          initValues.metadataFile && (
             <A onClick={() => this.setState({ disableXmlInputEdit: false })}>
               {`${formatMessage({
                 id: 'identityProviders.details.editXmlMarkup',

@@ -2,23 +2,25 @@
 
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
-  "emailMapping": "Please enter an email or \\"Email\\" for default...",
-  "identityProvider": "Please enter an access code...",
-  "identityProviderType": "Please select a type...",
-  "metadataFile": "Please enter the XML markup...",
-  "metadataUrl": "Please enter the URL to XML...",
-  "name": "Please enter a name...",
+  "emailMapping": "Please enter an email or \\"Email\\" for default",
+  "identityProvider": "Please enter an access code",
+  "identityProviderType": "Please select a type",
+  "metadataFile": "Please enter the XML markup",
+  "metadataUrl": "Please enter the URL to XML",
+  "name": "Please enter a name",
+  "newMetadataFile": true,
 }
 `;
 
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
-  "emailMapping": "Please enter an email or \\"Email\\" for default...",
-  "identityProvider": "Please enter an access code...",
-  "identityProviderType": "Please select a type...",
-  "metadataFile": "Please enter the XML markup...",
-  "metadataUrl": "Please enter the URL to XML...",
-  "name": "Please enter a name...",
+  "emailMapping": "Please enter an email or \\"Email\\" for default",
+  "identityProvider": "Please enter an access code",
+  "identityProviderType": "Please select a type",
+  "metadataFile": "Please enter the XML markup",
+  "metadataUrl": "Please enter the URL to XML",
+  "name": "Please enter a name",
+  "newMetadataFile": true,
 }
 `;
 
@@ -28,7 +30,8 @@ Object {
   "identityProvider": false,
   "identityProviderType": false,
   "metadataFile": false,
-  "metadataUrl": "Please enter a valid URL...",
+  "metadataUrl": "Please enter a valid URL",
   "name": false,
+  "newMetadataFile": false,
 }
 `;

@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`selectIdentityProvidersFormInitialValues Gets the IDPs initial form values when creating a new entity 1`] = `
+Immutable.Map {
+  "active": false,
+  "emailMapping": "Email",
+}
+`;
+
+exports[`selectIdentityProvidersFormInitialValues Return initial form values when updating an entity 1`] = `
+Object {
+  "Entities": Object {
+    "identityProviders": Object {
+      "data": Array [
+        Object {
+          "active": true,
+          "description": "mockDesc1",
+          "id": "mockId1",
+          "name": "mockName1",
+        },
+        Object {
+          "active": false,
+          "description": "mockDesc2",
+          "id": "mockId2",
+          "name": "mockName2",
+        },
+      ],
+      "userExistInPlatform": true,
+    },
+  },
+  "description": "",
+}
+`;
+
 exports[`selectTenantIdentityProviders Does not get any IDPs from state 1`] = `Array []`;
 
 exports[`selectTenantIdentityProviders Gets the correct IDPs 1`] = `
