@@ -191,6 +191,8 @@ export const listOfEntities = [
   'contactAttributes',
   'contactLayouts',
   'forecastDashboards',
+  'capacityRules',
+
   //Hygen-insert-at-end-of-list
 ];
 
@@ -961,6 +963,14 @@ entities.contactLayouts.columns = [
 entities.forecastDashboards.pageTitle = 'Forecasting';
 entities.forecastDashboards.helpLink = '';
 
+// Capacity Rules
+entities.capacityRules.pageTitle = 'Capacity Rules Management';
+entities.capacityRules.helpLink = '/Help/Content/Managing%20Users/Capacity_Rules/Creating_Capacity_Rules.htm';
+entities.capacityRules.columns = [
+  { name: 'Name', active: true },
+  { name: 'activeVersionCapacityRule', active: true, customName: 'Active Version' },
+  { name: 'Status', active: true },
+];
 //Hygen-insert-new-entity-configuration
 
 // Birst

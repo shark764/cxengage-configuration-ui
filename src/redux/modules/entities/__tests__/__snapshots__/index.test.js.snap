@@ -799,6 +799,15 @@ Immutable.Map {
     "selectedEntityId": "",
     "sidePanelWidth": 550,
     "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "MANAGE_ALL_CAPACITY_RULES",
+    ],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_CAPACITY_RULES",
+    ],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_CAPACITY_RULES",
+    ],
   },
   "roles": Immutable.Map {
     "data": Immutable.List [],

@@ -191,9 +191,6 @@ const initialState = fromJS({
   historicalReportFolders: {
     ...defaultEntity,
   },
-  capacityRules: {
-    ...defaultEntity,
-  },
   dataAccessReports: {
     ...defaultEntity,
     metaData: {
@@ -359,6 +356,12 @@ const initialState = fromJS({
   },
   userProfile: {
     updatePermission: ['PLATFORM_MANAGE_USER_ACCOUNT'],
+  },
+  capacityRules: {
+    ...defaultEntity,
+    readPermission: ['MANAGE_ALL_CAPACITY_RULES'],
+    updatePermission: ['MANAGE_ALL_CAPACITY_RULES'],
+    createPermission: ['MANAGE_ALL_CAPACITY_RULES'],
   },
   //hygen-inject-before
 });

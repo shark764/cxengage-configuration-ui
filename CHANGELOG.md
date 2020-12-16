@@ -28,6 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dispositions
 - Disposition Lists
 
+
+## [0.93.0] - 2020-12-15
+### Added
+- CXV1-16879 - Config 2 | Capacity Rules- Main Entity Table
+### Fixed
+- CXv1-23649 - Config 2 - Translate Login page - "Sign in with SSO" is not translated
 ## [0.92.5] - 2020-12-10
 ### Fixed
 - CXV1-23648 - Config UI 2 | Identity Provider | when updating a configuration from url to xml is not reflected.

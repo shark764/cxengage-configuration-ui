@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CapacityRulesForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="CapacityRulesFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="Name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="CapacityRulesFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;
+
+exports[`<CapacityRulesForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="CapacityRulesFormFieldName"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="Name"
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="CapacityRulesFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+  />
+</form>
+`;

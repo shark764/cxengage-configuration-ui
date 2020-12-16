@@ -343,7 +343,7 @@ export class Login extends Component {
                       checked={this.state.loginPrefrences && this.state.loginPrefrences.sso}
                     />
                     <CheckboxLabel for="sso">
-                      <FormattedMessage id="login.singInWithSso" defaultMessage="Sign in with SSO" />
+                      <FormattedMessage id="login.signInWithSso" defaultMessage="Sign in with SSO" />
                     </CheckboxLabel>{' '}
                     <br />
                   </Prefrences>

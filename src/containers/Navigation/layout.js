@@ -175,6 +175,12 @@ export default class Navigation extends Component {
                   onClick={(e) => this.setCurrentEntityAndEntityId('reasonLists', e)}>
                   <FormattedMessage id="navigation.management.reasonsList" defaultMessage="Presence Reason Lists" />
                 </StyledLink>
+                <StyledLink
+                  data-automation="navigationLinkCapacityRule"
+                  to="/configuration/capacityRules"
+                  onClick={(e) => this.setCurrentEntityAndEntityId('capacityRules', e)}>
+                  <FormattedMessage id="navigation.management.capacityRules" defaultMessage="Capacity Rules" />
+                </StyledLink>
               </SubMenu>
             )}
           </NavbarMenu>

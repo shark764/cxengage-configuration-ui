@@ -979,7 +979,21 @@ Immutable.Map {
   },
   "capacityRules": Immutable.Map {
     "visibleMenu": "none",
-    "Columns": Immutable.List [],
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "activeVersionCapacityRule",
+        "active": true,
+        "customName": "Active Version",
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
   },
   "roles": Immutable.Map {
     "visibleMenu": "none",

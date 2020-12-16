@@ -508,7 +508,21 @@ Object {
     "betaFeature": false,
     "bulkEditsAvailable": true,
     "bulkFormDependencies": Array [],
-    "columns": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "customName": "Active Version",
+        "name": "activeVersionCapacityRule",
+      },
+      Object {
+        "active": true,
+        "name": "Status",
+      },
+    ],
     "confirmationDialog": Object {
       "falseButtonText": "",
       "message": "",
@@ -536,7 +550,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Home.htm",
+    "helpLink": "/Help/Content/Managing%20Users/Capacity_Rules/Creating_Capacity_Rules.htm",
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -547,7 +561,7 @@ Object {
         "name": "description",
       },
     ],
-    "pageTitle": "Capacity Rules",
+    "pageTitle": "Capacity Rules Management",
     "sdkCall": Object {
       "data": Object {},
       "module": "entities",

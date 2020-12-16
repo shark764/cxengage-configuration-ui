@@ -62,6 +62,7 @@ import ContactLayoutsForm from '../Form/ContactLayouts';
 import CreateUpdateContactLayoutsListItemsForm from '../Form/ContactLayoutsListItems/index';
 import ContactAttributesForm from '../Form/ContactAttributes';
 import IdentityProvidersForm from '../Form/IdentityProviders';
+import CapacityRulesForm from '../Form/CapacityRules';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -97,6 +98,7 @@ import IntegrationsDetailsPanel from '../SidePanelDetails/Integrations';
 import ContactLayoutsDetailsPanel from '../SidePanelDetails/ContactLayouts';
 import ContactAttributesDetailsPanel from '../SidePanelDetails/ContactAttributes';
 import IdentityProvidersDetailsPanel from '../SidePanelDetails/IdentityProviders';
+import CapacityRulesDetailsPanel from '../SidePanelDetails/CapacityRules';
 //hygen-inject-before4
 
 // Full page panel forms
@@ -108,7 +110,7 @@ const Wrapper = styled.div`
   height: 100vh;
   display: grid;
 
-  ${props =>
+  ${(props) =>
     props.isSidePanelOpen
       ? `
     grid-template-columns: 1fr ${props.slidingWidth}px;
@@ -151,7 +153,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <CreateListsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/outboundIdentifiers',
@@ -159,7 +161,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <OutboundIdentifiersForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/outboundIdentifierLists',
@@ -167,7 +169,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <OutboundIdentifierListsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/chatWidgets',
@@ -175,7 +177,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <ChatWidgetsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/roles',
@@ -183,7 +185,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <RolesForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/skills',
@@ -191,7 +193,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <SkillsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/groups',
@@ -199,7 +201,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <GroupsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/users',
@@ -207,7 +209,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <UsersCreateForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dataAccessReports',
@@ -215,7 +217,7 @@ const createFormRoutes = [
       <NoScrollDetailsPanel>
         <DataAccessReportsForm />
       </NoScrollDetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/reasons',
@@ -223,7 +225,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <ReasonsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/reasonLists',
@@ -231,7 +233,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <ReasonListsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/queues',
@@ -239,7 +241,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <QueuesForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/flows',
@@ -247,7 +249,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <FlowsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/transferLists',
@@ -255,7 +257,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <TransferListsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispatchMappings',
@@ -263,7 +265,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <DispatchMappingsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispositions',
@@ -271,7 +273,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <DispositionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/slas',
@@ -279,7 +281,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <SlasForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/apiKeys',
@@ -287,7 +289,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <CreateApiKeyForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/businessHours',
@@ -295,7 +297,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <BusinessHoursForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/messageTemplates',
@@ -303,7 +305,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <MessageTemplatesForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/tenants',
@@ -311,7 +313,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <TenantsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispositionLists',
@@ -319,7 +321,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <DispositionListsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/customAttributes',
@@ -327,7 +329,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <CustomAttributesForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/integrations',
@@ -335,7 +337,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <IntegrationsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/contactLayouts',
@@ -343,7 +345,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <ContactLayoutsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/contactAttributes',
@@ -351,7 +353,7 @@ const createFormRoutes = [
       <DetailsPanel>
         <ContactAttributesForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/identityProviders',
@@ -359,30 +361,38 @@ const createFormRoutes = [
       <DetailsPanel>
         <IdentityProvidersForm />
       </DetailsPanel>
-    )
-  }
+    ),
+  },
+  {
+    path: '/configuration/capacityRules',
+    component: () => (
+      <DetailsPanel>
+        <CapacityRulesForm />
+      </DetailsPanel>
+    ),
+  },
   //hygen-inject-before1
 ];
 
 const fullPageCreateRoutes = [
   {
     path: '/configuration/businessHoursV2',
-    component: () => <BusinessHoursV2CreateForm />
-  }
+    component: () => <BusinessHoursV2CreateForm />,
+  },
 ];
 
 const fullPageUpdateSubEntityRoutes = [
   {
     path: '/configuration/businessHoursV2',
-    component: () => <BusinessHoursV2DraftForm />
-  }
+    component: () => <BusinessHoursV2DraftForm />,
+  },
 ];
 
 const fullPageDetailsRoutes = [
   {
     path: '/configuration/businessHoursV2',
-    component: () => <BusinessHoursV2UpdateForm />
-  }
+    component: () => <BusinessHoursV2UpdateForm />,
+  },
 ];
 
 const detailsPanelRoutes = [
@@ -394,7 +404,7 @@ const detailsPanelRoutes = [
           <UpdateListsForm />
         </ListsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/emailTemplates',
@@ -404,7 +414,7 @@ const detailsPanelRoutes = [
           <EmailTemplatesForm />
         </EmailTemplatesDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/outboundIdentifiers',
@@ -414,7 +424,7 @@ const detailsPanelRoutes = [
           <OutboundIdentifiersForm />
         </OutboundIdentifiersDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/outboundIdentifierLists',
@@ -424,7 +434,7 @@ const detailsPanelRoutes = [
           <OutboundIdentifierListsForm />
         </OutboundIdentifierListsPanelContainer>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/chatWidgets',
@@ -434,7 +444,7 @@ const detailsPanelRoutes = [
           <ChatWidgetsForm />
         </ChatWidgetsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/roles',
@@ -444,7 +454,7 @@ const detailsPanelRoutes = [
           <RolesForm />
         </RolesDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/skills',
@@ -454,7 +464,7 @@ const detailsPanelRoutes = [
           <SkillsForm />
         </SkillsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/groups',
@@ -464,7 +474,7 @@ const detailsPanelRoutes = [
           <GroupsForm />
         </GroupsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/users',
@@ -474,7 +484,7 @@ const detailsPanelRoutes = [
           <UsersForm />
         </UsersDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dataAccessReports',
@@ -484,7 +494,7 @@ const detailsPanelRoutes = [
           <DataAccessReportsForm />
         </DataAccessReportsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/reasons',
@@ -494,7 +504,7 @@ const detailsPanelRoutes = [
           <ReasonsForm />
         </ReasonsDetailsPanel>
       </NoScrollDetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/reasonLists',
@@ -504,7 +514,7 @@ const detailsPanelRoutes = [
           <ReasonListsForm />
         </ReasonListsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/queues',
@@ -514,7 +524,7 @@ const detailsPanelRoutes = [
           <QueuesForm />
         </QueuesDetailsPanel>
       </NoScrollDetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/flows',
@@ -524,7 +534,7 @@ const detailsPanelRoutes = [
           <FlowsForm />
         </FlowsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/transferLists',
@@ -534,7 +544,7 @@ const detailsPanelRoutes = [
           <TransferListsForm />
         </TransferListsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispatchMappings',
@@ -544,7 +554,7 @@ const detailsPanelRoutes = [
           <DispatchMappingsForm />
         </DispatchMappingsDetailsPanel>
       </NoScrollDetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispositions',
@@ -554,7 +564,7 @@ const detailsPanelRoutes = [
           <DispositionsForm />
         </DispositionsDetailsPanel>
       </NoScrollDetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/slas',
@@ -564,7 +574,7 @@ const detailsPanelRoutes = [
           <SlasForm />
         </SlasDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/apiKeys',
@@ -574,7 +584,7 @@ const detailsPanelRoutes = [
           <UpdateApiKeyForm />
         </ApiKeysDetailsPanel>
       </NoScrollDetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/businessHours',
@@ -584,7 +594,7 @@ const detailsPanelRoutes = [
           <BusinessHoursForm />
         </BusinessHoursDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/messageTemplates',
@@ -594,7 +604,7 @@ const detailsPanelRoutes = [
           <MessageTemplatesForm />
         </MessageTemplatesDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/tenants',
@@ -604,7 +614,7 @@ const detailsPanelRoutes = [
           <TenantsForm />
         </TenantsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispositionLists',
@@ -614,7 +624,7 @@ const detailsPanelRoutes = [
           <DispositionListsForm />
         </DispositionListsDetailsPanel>
       </NoScrollDetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/customAttributes',
@@ -624,7 +634,7 @@ const detailsPanelRoutes = [
           <CustomAttributesForm />
         </CustomAttributesDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/integrations',
@@ -634,7 +644,7 @@ const detailsPanelRoutes = [
           <IntegrationsForm />
         </IntegrationsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/contactLayouts',
@@ -644,7 +654,7 @@ const detailsPanelRoutes = [
           <ContactLayoutsForm />
         </ContactLayoutsDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/contactAttributes',
@@ -654,7 +664,7 @@ const detailsPanelRoutes = [
           <ContactAttributesForm />
         </ContactAttributesDetailsPanel>
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/identityProviders',
@@ -664,8 +674,18 @@ const detailsPanelRoutes = [
           <IdentityProvidersForm />
         </IdentityProvidersDetailsPanel>
       </DetailsPanel>
-    )
-  }
+    ),
+  },
+  {
+    path: '/configuration/capacityRules',
+    component: () => (
+      <DetailsPanel>
+        <CapacityRulesDetailsPanel>
+          <CapacityRulesForm />
+        </CapacityRulesDetailsPanel>
+      </DetailsPanel>
+    ),
+  },
   //hygen-inject-before2
 ];
 
@@ -676,7 +696,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/outboundIdentifiers',
@@ -684,7 +704,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/outboundIdentifierLists',
@@ -692,7 +712,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/chatWidgets',
@@ -700,7 +720,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/users',
@@ -708,7 +728,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <UsersBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/groups',
@@ -716,7 +736,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/skills',
@@ -724,7 +744,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/businessHours',
@@ -732,7 +752,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/businessHoursV2',
@@ -740,7 +760,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/messageTemplates',
@@ -748,7 +768,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/apiKeys',
@@ -756,7 +776,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/flows',
@@ -764,7 +784,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispatchMappings',
@@ -772,7 +792,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/reasons',
@@ -780,7 +800,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <ReasonsBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/reasonLists',
@@ -788,7 +808,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <ReasonsBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/transferLists',
@@ -796,7 +816,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispositionLists',
@@ -804,7 +824,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <ReasonsBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/dispositions',
@@ -812,7 +832,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <ReasonsBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/integrations',
@@ -820,7 +840,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/tenants',
@@ -828,7 +848,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/contactAttributes',
@@ -836,7 +856,7 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
+    ),
   },
   {
     path: '/configuration/identityProviders',
@@ -844,95 +864,95 @@ const bulkChangeFormRoutes = [
       <DetailsPanel>
         <GenericBulkActionsForm />
       </DetailsPanel>
-    )
-  }
+    ),
+  },
   //hygen-inject-before3
 ];
 
 const createSubEntityFormRoutes = [
   {
     path: '/configuration/lists',
-    component: CreateListItemForm
+    component: CreateListItemForm,
   },
   {
     path: '/configuration/transferLists',
-    component: CreateTransferListItemsForm
+    component: CreateTransferListItemsForm,
   },
   {
     path: '/configuration/businessHours',
-    component: ExceptionsForm
+    component: ExceptionsForm,
   },
   {
     path: '/configuration/reasonLists',
-    component: CreateReasonListItemForm
+    component: CreateReasonListItemForm,
   },
   {
     path: '/configuration/dispositionLists',
-    component: CreateDispositionListItemForm
+    component: CreateDispositionListItemForm,
   },
   {
     path: '/configuration/contactLayouts',
-    component: CreateUpdateContactLayoutsListItemsForm
-  }
+    component: CreateUpdateContactLayoutsListItemsForm,
+  },
 ];
 
 const updateSubEntityFormRoutes = [
   {
     path: '/configuration/lists',
-    component: UpdateListItemForm
+    component: UpdateListItemForm,
   },
   {
     path: '/configuration/outboundIdentifierLists',
-    component: AddMembersToList
+    component: AddMembersToList,
   },
   {
     path: '/configuration/roles',
-    component: AddMembersToList
+    component: AddMembersToList,
   },
   {
     path: '/configuration/skills',
-    component: AddMembersToListEntities
+    component: AddMembersToListEntities,
   },
   {
     path: '/configuration/groups',
-    component: AddMembersToListEntities
+    component: AddMembersToListEntities,
   },
   {
     path: '/configuration/users',
-    component: AddMembersToListEntities
+    component: AddMembersToListEntities,
   },
   {
     path: '/configuration/dataAccessReports',
-    component: AddMembersToList
+    component: AddMembersToList,
   },
   {
     path: '/configuration/flows',
-    component: CopyFlowForm
+    component: CopyFlowForm,
   },
   {
     path: '/configuration/slas',
-    component: InitialSlaVersionForm
+    component: InitialSlaVersionForm,
   },
   {
     path: '/configuration/transferLists',
-    component: UpdateTransferListItemsForm
+    component: UpdateTransferListItemsForm,
   },
   {
     path: '/configuration/reasonLists',
-    component: UpdateReasonListItemsForm
+    component: UpdateReasonListItemsForm,
   },
   {
     path: '/configuration/dispositionLists',
-    component: UpdateDispositionListItemsForm
+    component: UpdateDispositionListItemsForm,
   },
   {
     path: '/configuration/integrations',
-    component: IntegrationListenerForm
+    component: IntegrationListenerForm,
   },
   {
     path: '/configuration/contactLayouts',
-    component: CreateUpdateContactLayoutsListItemsForm
-  }
+    component: CreateUpdateContactLayoutsListItemsForm,
+  },
 ];
 
 export default class CrudEndpointUiLayout extends Component {
@@ -984,8 +1004,7 @@ export default class CrudEndpointUiLayout extends Component {
             tableType={this.props.tableType}
             currentVisibleSubMenu={this.props.currentVisibleSubMenu}
             selectionType="checkbox"
-            data-automation="entityTableColumnSelectionBtn"
-          >
+            data-automation="entityTableColumnSelectionBtn">
             Columns
           </InlineCheckboxFilterMenu>
         </Table>
@@ -1031,8 +1050,7 @@ export default class CrudEndpointUiLayout extends Component {
                 tableType={this.props.tableType}
                 currentVisibleSubMenu={this.props.currentVisibleSubMenu}
                 selectionType="checkbox"
-                data-automation="entityTableColumnSelectionBtn"
-              >
+                data-automation="entityTableColumnSelectionBtn">
                 Columns
               </InlineCheckboxFilterMenu>
             </Table>
@@ -1082,5 +1100,5 @@ CrudEndpointUiLayout.propTypes = {
   slidingWidth: PropTypes.number,
   entityName: PropTypes.string,
   currentTenantId: PropTypes.string,
-  insideIframe: PropTypes.bool
+  insideIframe: PropTypes.bool,
 };
