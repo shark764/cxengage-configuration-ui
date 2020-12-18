@@ -356,7 +356,7 @@ export default class Navigation extends Component {
                   data-automation="navigationLinkForecastDashboards"
                   to="/forecastDashboards"
                   onClick={(e) => this.setCurrentEntityAndEntityId('forecastDashboards', e)}>
-                  Forecast Dashboards
+                  <FormattedMessage id="navigation.reports.forecastDashboards" defaultMessage="Forecast Dashboards" />
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkDataAccessReports"

@@ -10,32 +10,32 @@ import { getHelpLink } from '../EntityTable/selectors';
 import {
   setFilterValue,
   setFilterDate,
-  setShowHideGraph
+  setShowHideGraph,
 } from '../../redux/modules/reporting/forecastDashboards/index';
 import {
-  isDependentEntitesFetched,
+  isDependentEntitesFetching,
   getQueues,
   getSelectedFilterOption,
-  selectShowHideGraph
+  selectShowHideGraph,
 } from '../../redux/modules/reporting/forecastDashboards/selectors';
 
-export const mapStateToProps = state => ({
+export const mapStateToProps = (state) => ({
   pageTitle: entitiesMetaData['forecastDashboards'] ? entitiesMetaData['forecastDashboards'].pageTitle : '',
   pageHelpLink: getHelpLink(state),
-  isDependentEntitesFetched: isDependentEntitesFetched(state),
+  isDependentEntitesFetching: isDependentEntitesFetching(state),
   queues: getQueues(state),
   getSelectedQueue: getSelectedFilterOption(state, 'queue'),
   getSelectedChannel: getSelectedFilterOption(state, 'channel'),
   getSelectedDirection: getSelectedFilterOption(state, 'direction'),
   isForeCastVolumeGraphHidden: selectShowHideGraph(state, 'forecastCallVolume'),
   isSlaGraphHidden: selectShowHideGraph(state, 'sla'),
-  isCallAbandonGraphHidden: selectShowHideGraph(state, 'callAbandons')
+  isQueueAbandonsGraphHidden: selectShowHideGraph(state, 'queueAbandons'),
 });
 
 export const actions = {
   setFilterValue,
   setFilterDate,
-  setShowHideGraph
+  setShowHideGraph,
 };
 
 export default connect(mapStateToProps, actions)(Layout);

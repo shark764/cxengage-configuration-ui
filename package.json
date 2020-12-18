@@ -1,6 +1,6 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.93.0",
+  "version": "0.94.0",
   "description": "CxEngage Configuration and Reporting",
   "repository": {
     "type": "git",
@@ -100,7 +100,7 @@
     "reselect": "3.0.1",
     "rxjs": "5.5.7",
     "sanitize.css": "^7.0.1",
-    "serenova-client-strings": "^0.4.22",
+    "serenova-client-strings": "^0.4.23",
     "serenova-js-utils": "^4.5.0",
     "style-loader": "0.20.3",
     "styled-components": "3.1.4",

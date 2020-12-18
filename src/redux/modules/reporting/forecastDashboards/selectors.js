@@ -4,11 +4,13 @@
 
 import { isEntityFetching, getEntityData } from '../../entities/selectors';
 
-export const isDependentEntitesFetched = state => isEntityFetching(state, 'queues');
+export const isDependentEntitesFetching = (state) => isEntityFetching(state, 'queues');
 
-export const getQueues = state => {
+export const getQueues = (state) => {
   const queues = getEntityData(state, 'queues');
-  return queues && queues.size > 0 ? queues.toJS().map(a => ({ label: a.name, value: a.id })) : [];
+  return queues && queues.size > 0 && queues.filter((a) => a.get('active') === true).size > 0
+    ? queues.map((a) => ({ label: a.get('name'), value: a.get('id') }))
+    : [];
 };
 
 export const getSelectedFilterOption = (state, filterType) =>

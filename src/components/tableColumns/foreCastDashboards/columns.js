@@ -6,7 +6,7 @@ export function forecastCallVolumeColumns() {
     constructGeneralTextColumn('interval'),
     constructGeneralTextColumn('forecast'),
     constructGeneralTextColumn('actual'),
-    constructGeneralTextColumn('forecastRunRate')
+    constructGeneralTextColumn('forecastRunRate'),
   ];
 }
 
@@ -14,15 +14,15 @@ export function slaColumns() {
   return [
     constructGeneralTextColumn('queue'),
     constructGeneralTextColumn('interval'),
-    constructGeneralTextColumn('sla')
+    constructGeneralTextColumn('SLA'),
   ];
 }
 
-export function callAbandonsColumns() {
+export function queueAbandonsColumns() {
   return [
     constructGeneralTextColumn('queue'),
     constructGeneralTextColumn('queueAbandons', 'Queue Abandons'),
     constructGeneralTextColumn('queueAbandonRate', 'Queue Abandon Rate'),
-    constructGeneralTextColumn('queueAbandonTime', 'Avg Queue Abandon Time')
+    constructGeneralTextColumn('queueAbandonTime', 'Avg Queue Abandon Time'),
   ];
 }
