@@ -1,4 +1,4 @@
-export const hasCustomCreateEntity = entityName =>
+export const hasCustomCreateEntity = (entityName) =>
   ![
     'users',
     'dataAccessReports',
@@ -6,10 +6,10 @@ export const hasCustomCreateEntity = entityName =>
     'dispatchMappings',
     'businessHours',
     'businessHoursV2',
-    'integrations'
+    'integrations',
   ].includes(entityName);
 
-export const hasCustomUpdateEntity = entityName =>
+export const hasCustomUpdateEntity = (entityName) =>
   ![
     'emailTemplates',
     'users',
@@ -22,12 +22,12 @@ export const hasCustomUpdateEntity = entityName =>
     'dispositionLists',
     'businessHoursV2',
     'contactLayouts',
-    'contactAttributes'
+    'contactAttributes',
   ].includes(entityName);
 
-export const hasCustomCreateEntityFullFilled = entityName => !['businessHoursV2', 'tenants'].includes(entityName);
+export const hasCustomCreateEntityFullFilled = (entityName) => !['businessHoursV2', 'tenants'].includes(entityName);
 
-export const hasCustomUpdateEntityFullFilled = entityName =>
+export const hasCustomUpdateEntityFullFilled = (entityName) =>
   ![
     'dispositionLists',
     'reasonLists',
@@ -36,32 +36,33 @@ export const hasCustomUpdateEntityFullFilled = entityName =>
     'businessHoursV2',
     'tenants',
     'contactLayouts',
-    'contactAttributes'
+    'contactAttributes',
   ].includes(entityName);
 
-export const hasCustomCreateSubEntity = entityName => !['businessHours'].includes(entityName);
+export const hasCustomCreateSubEntity = (entityName) => !['businessHours'].includes(entityName);
 
-export const hasCustomRemoveSubEntity = entityName =>
+export const hasCustomRemoveSubEntity = (entityName) =>
   !['roles', 'dataAccessReports', 'flows', 'businessHours', 'businessHoursV2'].includes(entityName);
 
-export const hasCustomFetchEntityData = entityName =>
+export const hasCustomFetchEntityData = (entityName) =>
   !['tenants', 'dispositionLists', 'customAttributes', 'userProfile'].includes(entityName);
 
-export const hasCustomFetchEntityItemData = entityName =>
+export const hasCustomFetchEntityItemData = (entityName) =>
   !['dispositionLists', 'flows', 'contactLayouts'].includes(entityName);
 
-export const entitiesUsingUpdateLogicForToggleEntity = entityName => ['customAttributes', 'identityProviders'].includes(entityName);
+export const entitiesUsingUpdateLogicForToggleEntity = (entityName) =>
+  ['customAttributes', 'identityProviders', 'whatsappIntegrations'].includes(entityName);
 
 export const hasCustomSubEntityUpdate = (entityName, subEntityName) => {
   const entityMap = {
-    businessHoursV2: 'drafts'
+    businessHoursV2: 'drafts',
   };
   return entityMap[entityName] === subEntityName;
 };
 
-export const hasCustomSetSelectedEntityId = entityName => !['tenants', 'contactLayouts'].includes(entityName);
+export const hasCustomSetSelectedEntityId = (entityName) => !['tenants', 'contactLayouts'].includes(entityName);
 
-export const hasCustomSubEntityFormSubmit = entityName =>
+export const hasCustomSubEntityFormSubmit = (entityName) =>
   !['transferLists', 'reasonLists', 'dispositionLists', 'contactLayouts'].includes(entityName);
 
 export const localeLanguages = [
@@ -82,5 +83,5 @@ export const localeLanguages = [
   { label: 'Polish', value: 'pl-PL', id: 'plPl' },
   { label: 'Portuguese - Brazil', value: 'pt-BR', id: 'ptBr' },
   { label: 'Spanish - Spain', value: 'es-ES', id: 'esEs' },
-  { label: 'Swedish', value: 'sv-SE', id: 'svSe' }
+  { label: 'Swedish', value: 'sv-SE', id: 'svSe' },
 ];

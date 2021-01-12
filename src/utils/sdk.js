@@ -14,7 +14,7 @@ function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
-export const sdkPromise = sdkCall => {
+export const sdkPromise = (sdkCall) => {
   if (isInIframe()) {
     return new Promise((resolve, reject) => {
       const currentEntity = getCurrentEntity(store.getState());
@@ -31,7 +31,7 @@ export const sdkPromise = sdkCall => {
               store.dispatch(
                 updateRealtimeStatisticsBatchData({
                   resources: response.resourceCapacity.body.results.resourceCapacity,
-                  agentStates: response.resourceStateList.body.results.json
+                  agentStates: response.resourceStateList.body.results.json,
                 })
               );
             } else {
@@ -43,7 +43,7 @@ export const sdkPromise = sdkCall => {
       } else {
         /* istanbul ignore next */
         function handleCall(error, topic, response) {
-          console.log('[SDK] SDK sending back:', error, topic, response);
+          console.log('%c[SDK] SDK sending back:', 'color: Green', error, topic, response);
           if (error) {
             console.warn('ERROR', error);
             if (error.data && error.data.apiResponse && error.data.apiResponse.status === 401) {
@@ -55,11 +55,12 @@ export const sdkPromise = sdkCall => {
           }
         }
 
+        console.log('%c[SDK] Asking the SDK for:', 'color: DodgerBlue', sdkCall);
         if (CxEngage[sdkCall.module][sdkCall.command] === undefined) {
           const requestObject = {
             path: sdkCall.path,
             body: sdkCall.data,
-            customTopic: sdkCall.topic
+            customTopic: sdkCall.topic,
           };
           if (sdkCall.apiVersion) {
             requestObject['apiVersion'] = sdkCall.apiVersion;
@@ -73,7 +74,7 @@ export const sdkPromise = sdkCall => {
   } else {
     return new Promise((resolve, reject) => {
       const completeSdkCall = { messageId: guid(), ...sdkCall };
-      const handleResponse = event => {
+      const handleResponse = (event) => {
         if (completeSdkCall.messageId === event.data.messageId) {
           const { error, response } = event.data;
           if (error) {
@@ -90,13 +91,13 @@ export const sdkPromise = sdkCall => {
   }
 };
 
-export const sdkCall = sdkCall =>
+export const sdkCall = (sdkCall) =>
   new Promise((resolve, reject) => {
     window.parent.postMessage(sdkCall, '*');
     resolve('Posted Message To Parent iFrame');
   });
 
-export const errorLabel = error => {
+export const errorLabel = (error) => {
   let errorDetails;
   if (
     error.data &&
@@ -116,7 +117,7 @@ export const errorLabel = error => {
 };
 
 //errorManager
-export const errorManager = error => {
+export const errorManager = (error) => {
   let messageFromAPI;
   let errorDetails;
   let attr;

@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WhatsappIntegrationsForm /> renders create form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="nameInput"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="Please enter a name..."
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="descriptionInput"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+    placeholder="Please enter a description..."
+  />
+  <SelectField
+    data-automation="whatsappIdList"
+    disabled={false}
+    label="App *"
+    name="whatsappId"
+    options={
+      Array [
+        Object {
+          "label": "mockLabel",
+          "value": "mockValue",
+        },
+      ]
+    }
+    required={false}
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    data-automation="clientDisconnectMinutesInput"
+    dataType="number"
+    disabled={false}
+    inputType="text"
+    label="Disconnect Time"
+    labelHelpText="(minutes)"
+    name="clientDisconnectMinutes"
+  />
+  <DetailsPanelMessage
+    text="If Disconnect Time is left blank, the client disconnection checker will not be applied."
+    type="info"
+  />
+</form>
+`;
+
+exports[`<WhatsappIntegrationsForm /> renders update form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <DetailHeader
+    text="Details"
+  />
+  <InputField
+    componentType="input"
+    data-automation="nameInput"
+    disabled={false}
+    inputType="text"
+    label="Name *"
+    name="name"
+    placeholder="Please enter a name..."
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="descriptionInput"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
+    placeholder="Please enter a description..."
+  />
+  <SelectField
+    data-automation="whatsappIdList"
+    disabled={false}
+    label="App *"
+    name="whatsappId"
+    options={
+      Array [
+        Object {
+          "label": "mockLabel",
+          "value": "mockValue",
+        },
+      ]
+    }
+    required={false}
+  />
+  <DetailHeader
+    text="Properties"
+  />
+  <InputField
+    componentType="input"
+    data-automation="clientDisconnectMinutesInput"
+    dataType="number"
+    disabled={false}
+    inputType="text"
+    label="Disconnect Time"
+    labelHelpText="(minutes)"
+    name="clientDisconnectMinutes"
+  />
+  <DetailsPanelMessage
+    text="If Disconnect Time is left blank, the client disconnection checker will not be applied."
+    type="info"
+  />
+</form>
+`;

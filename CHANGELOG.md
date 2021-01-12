@@ -5,28 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Alpha User Acceptance Testing]
-- Bulk actions
-- Chat Widgets
-- Queues
-- Flow Debugger
+- Integrations
 
 ## [Beta User Acceptance Testing]
-- Skills
-- Groups
-- Users
-- Dispatch Mappings
-- Outbound Identifiers / Outbound Identifier Lists
-- Roles (permissions)
-- Flows
-- Logi reportings
-- Business Hours
-- API Keys
-- Message Templates
-- Reasons
-- Reason Lists
-- Transfer Lists
-- Dispositions
-- Disposition Lists
+- IdentityProviders
+
+## [0.95.0] - 2020-12-17
+### Added
+- CXV1-21862 - Adding configuration page for Whatsapp Integrations.
 
 ## [0.94.0] - 2020-12-17
 ### Added

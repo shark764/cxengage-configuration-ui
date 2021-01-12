@@ -11,15 +11,15 @@ import { getDisplay, userHasNameSet } from './users/selectors';
 import { getUserDisplayName } from '../userIdMap/selectors';
 import { getSelectedSidePanelId, getSelectedAgentsBulkChangeItems } from '../reporting/agentStateMonitoring/selectors';
 
-export const getEntities = state => state.get('Entities');
+export const getEntities = (state) => state.get('Entities');
 
-export const getCurrentEntity = state => getEntities(state).get('currentEntity');
+export const getCurrentEntity = (state) => getEntities(state).get('currentEntity');
 
-export const getNextEntity = state => getEntities(state).get('nextEntity');
+export const getNextEntity = (state) => getEntities(state).get('nextEntity');
 
-export const getCurrentEntityStore = state => getEntities(state).get(getCurrentEntity(state));
+export const getCurrentEntityStore = (state) => getEntities(state).get(getCurrentEntity(state));
 
-export const getSelectedEntityId = state =>
+export const getSelectedEntityId = (state) =>
   getCurrentEntityStore(state) && getCurrentEntityStore(state).get('selectedEntityId');
 
 export const getSidePanelWidth = createSelector(
@@ -28,28 +28,28 @@ export const getSidePanelWidth = createSelector(
     selectedEntityId !== 'bulk' ? currentEntityStore.get('sidePanelWidth') : 550
 );
 
-export const itemApiPending = state => state.getIn(['Entities', 'loading']);
+export const itemApiPending = (state) => state.getIn(['Entities', 'loading']);
 
 export const getSelectedEntityBulkChangeItems = createSelector(
   [getCurrentEntityStore, getCurrentEntity],
   (currentEntityStore, curentEntity) => {
     if (curentEntity === 'contactAttributes') {
       return (
-        currentEntityStore.get('data') && currentEntityStore.get('data').filter(item => item.get('bulkChangeItem'))
+        currentEntityStore.get('data') && currentEntityStore.get('data').filter((item) => item.get('bulkChangeItem'))
       );
     } else {
       return (
         currentEntityStore.get('data') &&
         currentEntityStore
           .get('data')
-          .filter(item => item.get('bulkChangeItem'))
+          .filter((item) => item.get('bulkChangeItem'))
           .reduce((accum, item) => accum.push(item.get('id')), List())
       );
     }
   }
 );
 
-export const getBulkSelectedTotal = state =>
+export const getBulkSelectedTotal = (state) =>
   getSelectedEntityBulkChangeItems(state) ? getSelectedEntityBulkChangeItems(state).size : 0;
 
 /**
@@ -58,14 +58,14 @@ export const getBulkSelectedTotal = state =>
  */
 export const isBulkUpdating = createSelector(
   [getCurrentEntityStore],
-  currentEntity => currentEntity.get('bulkUpdating') || false
+  (currentEntity) => currentEntity.get('bulkUpdating') || false
 );
 
-export const getConfirmationDialogType = state => getCurrentEntityStore(state).get('confirmationDialogType');
+export const getConfirmationDialogType = (state) => getCurrentEntityStore(state).get('confirmationDialogType');
 
-export const getConfirmationDialogMetaData = state => getCurrentEntityStore(state).get('confirmationDialogMetaData');
+export const getConfirmationDialogMetaData = (state) => getCurrentEntityStore(state).get('confirmationDialogMetaData');
 
-export const getAllEntities = state => getCurrentEntityStore(state).get('data');
+export const getAllEntities = (state) => getCurrentEntityStore(state).get('data');
 
 export const isEntityFetching = (state, entityName) => {
   if (entityName) {
@@ -81,37 +81,37 @@ export const isEntityFetching = (state, entityName) => {
 
 export const getSelectedEntity = createSelector(
   [getAllEntities, getSelectedEntityId],
-  (allEntities, selectedEntityId) => selectedEntityId && allEntities.find(obj => obj.get('id') === selectedEntityId)
+  (allEntities, selectedEntityId) => selectedEntityId && allEntities.find((obj) => obj.get('id') === selectedEntityId)
 );
 
-export const getSelectedEntityName = state => getSelectedEntity(state) && getSelectedEntity(state).get('name');
+export const getSelectedEntityName = (state) => getSelectedEntity(state) && getSelectedEntity(state).get('name');
 
-export const getSelectedEntityStatus = state => getSelectedEntity(state) && getSelectedEntity(state).get('active');
+export const getSelectedEntityStatus = (state) => getSelectedEntity(state) && getSelectedEntity(state).get('active');
 
-export const userHasReadPermission = state =>
+export const userHasReadPermission = (state) =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('readPermission'));
 export const userHasReadPermissionManual = (state, entityName) =>
   hasPermission(getCurrentPermissions(state), state.getIn(['Entities', entityName, 'readPermission']));
-export const userHasUpdatePermission = state =>
+export const userHasUpdatePermission = (state) =>
   userHasViewOnlyPermission(state) && isTenantSetForReadAllMode(state)
     ? undefined
     : hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('updatePermission'));
-export const userHasCreatePermission = state =>
+export const userHasCreatePermission = (state) =>
   userHasViewOnlyPermission(state) && isTenantSetForReadAllMode(state)
     ? undefined
     : hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('createPermission'));
-export const userHasSharePermission = state =>
+export const userHasSharePermission = (state) =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('sharePermission'));
-export const userHasDisablePermission = state =>
+export const userHasDisablePermission = (state) =>
   hasPermission(getCurrentPermissions(state), getCurrentEntityStore(state).get('disablePermission'));
-export const userHasViewOnlyPermission = state => hasPermission(getCurrentPermissions(state), ['PLATFORM_VIEW_ALL']);
+export const userHasViewOnlyPermission = (state) => hasPermission(getCurrentPermissions(state), ['PLATFORM_VIEW_ALL']);
 
 export const userHasPermissions = (state, permissions) => hasPermission(getCurrentPermissions(state), permissions);
 
 export const hasPermission = (userPermissions, permissionsNeeded) => {
   if (permissionsNeeded !== undefined) {
     // Return true if they have at least one of the permissions
-    return permissionsNeeded.some(permissionNeeded => userPermissions && userPermissions.includes(permissionNeeded));
+    return permissionsNeeded.some((permissionNeeded) => userPermissions && userPermissions.includes(permissionNeeded));
   } else {
     return false;
   }
@@ -123,13 +123,13 @@ export const userHasEveryPermissions = (state, permissions) =>
 export const hasEveryPermission = (userPermissions, permissionsNeeded) => {
   if (permissionsNeeded !== undefined) {
     // Return true if they have at least one of the permissions
-    return permissionsNeeded.every(permissionNeeded => userPermissions && userPermissions.includes(permissionNeeded));
+    return permissionsNeeded.every((permissionNeeded) => userPermissions && userPermissions.includes(permissionNeeded));
   } else {
     return false;
   }
 };
 
-export const userHasTenantsBulkUpdatePermission = state => userHasPermissions(state, ['PLATFORM_MANAGE_ALL_TENANTS']);
+export const userHasTenantsBulkUpdatePermission = (state) => userHasPermissions(state, ['PLATFORM_MANAGE_ALL_TENANTS']);
 
 export const isItemInherited = (state, entityName = null, entityId = null) => {
   const currentEntity = entityName || getCurrentEntity(state);
@@ -146,16 +146,17 @@ export const isItemInherited = (state, entityName = null, entityId = null) => {
     case 'users':
     case 'agentStateMonitoring':
     case 'tenants':
+    case 'whatsappIntegrations':
       return false;
     default:
       return selectedEntity.get('tenantId') !== currentTenantId;
   }
 };
 
-export const isInherited = state =>
+export const isInherited = (state) =>
   getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk' ? isItemInherited(state) : false;
 
-export const isSystemRole = state => {
+export const isSystemRole = (state) => {
   if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
     return getSelectedEntity(state).get('type') === 'system';
   } else {
@@ -163,7 +164,7 @@ export const isSystemRole = state => {
   }
 };
 
-export const shouldDisableHeaderToggleField = state => {
+export const shouldDisableHeaderToggleField = (state) => {
   if (getSelectedEntityId(state) !== 'create' && getSelectedEntityId(state) !== 'bulk') {
     switch (getCurrentEntity(state)) {
       case 'businessHoursV2': {
@@ -203,19 +204,19 @@ export const shouldDisableHeaderToggleField = state => {
   }
 };
 
-export const isCreating = state => getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
+export const isCreating = (state) => getCurrentEntityStore(state) && getCurrentEntityStore(state).get('creating');
 
-export const isUpdating = state => getSelectedEntity(state) && getSelectedEntity(state).get('updating');
+export const isUpdating = (state) => getSelectedEntity(state) && getSelectedEntity(state).get('updating');
 
-export const isSaving = state => isCreating(state) || isUpdating(state);
+export const isSaving = (state) => isCreating(state) || isUpdating(state);
 
-export const getCurrentSubEntity = state => getCurrentEntityStore(state).get('subEntity');
+export const getCurrentSubEntity = (state) => getCurrentEntityStore(state).get('subEntity');
 
-export const getSelectedSubEntityId = state => getCurrentEntityStore(state).get('selectedSubEntityId');
+export const getSelectedSubEntityId = (state) => getCurrentEntityStore(state).get('selectedSubEntityId');
 
-export const getSelectedSubEntityName = state => getCurrentEntityStore(state).get('selectedSubEntityName');
+export const getSelectedSubEntityName = (state) => getCurrentEntityStore(state).get('selectedSubEntityName');
 
-export const getSelectedSubEntityData = state => getCurrentEntityStore(state).get('selectedSubEntityData');
+export const getSelectedSubEntityData = (state) => getCurrentEntityStore(state).get('selectedSubEntityData');
 
 export const getSelectedSubEntity = createSelector(
   [getSelectedEntity, getSelectedSubEntityId],
@@ -225,33 +226,33 @@ export const getSelectedSubEntity = createSelector(
     selectedEntity.get('items') &&
     selectedEntity
       .get('items')
-      .find(subEntity => subEntity.get('key') === selectedSubEntityId || subEntity.get('id') === selectedSubEntityId)
+      .find((subEntity) => subEntity.get('key') === selectedSubEntityId || subEntity.get('id') === selectedSubEntityId)
 );
 
-export const isSubEntitySaving = state => getCurrentEntityStore(state).get('subEntitySaving');
+export const isSubEntitySaving = (state) => getCurrentEntityStore(state).get('subEntitySaving');
 
 export const getSelectedEntityFormId = createSelector(
   [getCurrentEntity, getSelectedEntityId],
   (currentEntity, selectedEntityId) => `${currentEntity}:${selectedEntityId}`
 );
 
-export const getAllForms = state => state.get('form');
+export const getAllForms = (state) => state.get('form');
 
 export const getSelectedSubEntityFormsIds = createSelector(
   [getAllForms, getSelectedEntityFormId, getCurrentEntity, getSelectedSubEntityId],
   (allForms, selectedEntityFormId, getCurrentEntity, getSelectedSubEntityId) =>
     allForms &&
     [...allForms.keys()].filter(
-      key =>
+      (key) =>
         (key !== selectedEntityFormId && key !== 'businessHoursV2:rules') ||
         (getCurrentEntity === 'businessHoursV2' && key === 'businessHoursV2:rules' && getSelectedSubEntityId)
     )
 );
 
-export const availableEntitiesForList = state => {
+export const availableEntitiesForList = (state) => {
   const entityIndex = getCurrentEntityStore(state)
     .get('data')
-    .findIndex(entity => entity.get('id') === getSelectedEntityId(state));
+    .findIndex((entity) => entity.get('id') === getSelectedEntityId(state));
   const currentListMembers = getCurrentEntityStore(state)
     .getIn(['data', entityIndex, 'members'], new List([]))
     .toOrderedSet();
@@ -260,43 +261,43 @@ export const availableEntitiesForList = state => {
   return availableOptions.toJS();
 };
 
-export const getListDependency = state => getCurrentEntityStore(state).getIn(['metaData', 'listDependency']);
+export const getListDependency = (state) => getCurrentEntityStore(state).getIn(['metaData', 'listDependency']);
 
-export const getEntityListMembers = state =>
+export const getEntityListMembers = (state) =>
   getSelectedEntity(state)
     .getIn(['members'], new List([]))
     .toJS();
 
-export const getListSize = state => {
+export const getListSize = (state) => {
   const entityIndex = getCurrentEntityStore(state)
     .get('data')
-    .findIndex(entity => entity.get('id') === getSelectedEntityId(state));
+    .findIndex((entity) => entity.get('id') === getSelectedEntityId(state));
   return getCurrentEntityStore(state).getIn(['data', entityIndex, 'members'], new List([])).size;
 };
 
 export const findEntityIndex = (state, entityName, entityId) =>
   state.get(entityName) !== undefined
-    ? state.getIn([entityName, 'data']).findIndex(entity => entity.get('id') === entityId)
+    ? state.getIn([entityName, 'data']).findIndex((entity) => entity.get('id') === entityId)
     : getEntities(state)
         .getIn([entityName, 'data'])
-        .findIndex(entity => entity.get('id') === entityId);
+        .findIndex((entity) => entity.get('id') === entityId);
 
 export const findEntity = (state, entityName, entityId) =>
   state.get(entityName) !== undefined
-    ? state.getIn([entityName, 'data']).find(entity => entity.get('id') === entityId)
+    ? state.getIn([entityName, 'data']).find((entity) => entity.get('id') === entityId)
     : getEntities(state)
         .getIn([entityName, 'data'])
-        .find(entity => entity.get('id') === entityId);
+        .find((entity) => entity.get('id') === entityId);
 
 export const getEntityData = (state, entityName) => state.getIn(['Entities', entityName, 'data']);
 
 export const getSingleUsersData = (state, userId) => state.getIn(['Entities', 'users', 'data', userId]);
 
-export const getSelectedEntityWithIndex = immutableEntitiesMap => {
+export const getSelectedEntityWithIndex = (immutableEntitiesMap) => {
   const currentEntityName = immutableEntitiesMap.get('currentEntity');
   const currentSelectedEntityId = immutableEntitiesMap.getIn([currentEntityName, 'selectedEntityId']);
   const currentEntityList = immutableEntitiesMap.getIn([currentEntityName, 'data']);
-  const currentIndex = currentEntityList.findIndex(obj => obj.get('id') === currentSelectedEntityId);
+  const currentIndex = currentEntityList.findIndex((obj) => obj.get('id') === currentSelectedEntityId);
 
   if (currentIndex !== -1) {
     return currentEntityList
@@ -308,7 +309,7 @@ export const getSelectedEntityWithIndex = immutableEntitiesMap => {
   }
 };
 
-export const sidePanelHeader = state => {
+export const sidePanelHeader = (state) => {
   const currentEntity = getCurrentEntity(state);
   if (currentEntity === 'agentStateMonitoring') {
     if (getSelectedSidePanelId(state) === 'bulk') {
@@ -318,11 +319,11 @@ export const sidePanelHeader = state => {
   const selectedEntityId = getSelectedEntityId(state);
   if (selectedEntityId === 'create') {
     return {
-      title: `Creating New ${entitiesMetaData[currentEntity].title}`
+      title: `Creating New ${entitiesMetaData[currentEntity].title}`,
     };
   } else if (selectedEntityId === 'bulk') {
     return {
-      title: `Bulk Actions: ${getSelectedEntityBulkChangeItems(state).size} Selected`
+      title: `Bulk Actions: ${getSelectedEntityBulkChangeItems(state).size} Selected`,
     };
   } else if (selectedEntityId) {
     const selectedEntity = getSelectedEntity(state);
@@ -345,28 +346,28 @@ export const sidePanelHeader = state => {
       toggleStatus:
         entitiesMetaData[currentEntity].hideActiveToggle === true
           ? undefined
-          : Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted'
+          : Boolean(selectedEntity.get('active')) || selectedEntity.get('status') === 'accepted',
     };
   }
 };
 
-export const isUpdateForm = state => getSelectedEntity(state) !== undefined;
+export const isUpdateForm = (state) => getSelectedEntity(state) !== undefined;
 
-export const userHasCurrentFormPermission = state =>
+export const userHasCurrentFormPermission = (state) =>
   isUpdateForm(state) ? userHasUpdatePermission(state) : userHasCreatePermission(state);
 
 export const findEntityByProperty = (state, entityName, entityProperty, value) =>
   state.get(entityName) !== undefined
-    ? state.getIn([entityName, 'data']).find(entity => entity.get(entityProperty) === value)
+    ? state.getIn([entityName, 'data']).find((entity) => entity.get(entityProperty) === value)
     : getEntities(state)
         .getIn([entityName, 'data'])
-        .find(entity => entity.has(entityProperty) && entity.get(entityProperty) === value);
+        .find((entity) => entity.has(entityProperty) && entity.get(entityProperty) === value);
 
-export const getEntityParentTenantName = state => getSelectedEntity(state).get('tenantName') || '';
+export const getEntityParentTenantName = (state) => getSelectedEntity(state).get('tenantName') || '';
 
 export const getEntityDisplay = createSelector(
   [getSelectedEntity],
-  selectedEntity => (selectedEntity ? selectedEntity.get('name') || getDisplay(selectedEntity.toJS()) : null)
+  (selectedEntity) => (selectedEntity ? selectedEntity.get('name') || getDisplay(selectedEntity.toJS()) : null)
 );
 
 export const getEntityItemDisplay = (state, entityId) => {

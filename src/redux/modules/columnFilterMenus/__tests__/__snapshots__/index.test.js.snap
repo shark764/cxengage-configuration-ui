@@ -212,6 +212,10 @@ Immutable.Map {
       },
     ],
   },
+  "whatsappApps": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [],
+  },
   "flows": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [
@@ -547,6 +551,27 @@ Immutable.Map {
       },
       Immutable.Map {
         "name": "Is Default",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Status",
+        "active": true,
+      },
+    ],
+  },
+  "whatsappIntegrations": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Disconnect Minutes",
         "active": true,
       },
       Immutable.Map {

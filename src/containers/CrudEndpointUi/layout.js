@@ -63,6 +63,7 @@ import CreateUpdateContactLayoutsListItemsForm from '../Form/ContactLayoutsListI
 import ContactAttributesForm from '../Form/ContactAttributes';
 import IdentityProvidersForm from '../Form/IdentityProviders';
 import CapacityRulesForm from '../Form/CapacityRules';
+import WhatsappIntegrationsForm from '../Form/WhatsappIntegrations';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -99,6 +100,7 @@ import ContactLayoutsDetailsPanel from '../SidePanelDetails/ContactLayouts';
 import ContactAttributesDetailsPanel from '../SidePanelDetails/ContactAttributes';
 import IdentityProvidersDetailsPanel from '../SidePanelDetails/IdentityProviders';
 import CapacityRulesDetailsPanel from '../SidePanelDetails/CapacityRules';
+import WhatsappIntegrationsDetailsPanel from '../SidePanelDetails/WhatsappIntegrations';
 //hygen-inject-before4
 
 // Full page panel forms
@@ -368,6 +370,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <CapacityRulesForm />
+      </DetailsPanel>
+    ),
+  },
+  {
+    path: '/configuration/whatsappIntegrations',
+    component: () => (
+      <DetailsPanel>
+        <WhatsappIntegrationsForm />
       </DetailsPanel>
     ),
   },
@@ -686,6 +696,16 @@ const detailsPanelRoutes = [
       </DetailsPanel>
     ),
   },
+  {
+    path: '/configuration/whatsappIntegrations',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <WhatsappIntegrationsDetailsPanel>
+          <WhatsappIntegrationsForm />
+        </WhatsappIntegrationsDetailsPanel>
+      </NoScrollDetailsPanel>
+    ),
+  },
   //hygen-inject-before2
 ];
 
@@ -860,6 +880,14 @@ const bulkChangeFormRoutes = [
   },
   {
     path: '/configuration/identityProviders',
+    component: () => (
+      <DetailsPanel>
+        <GenericBulkActionsForm />
+      </DetailsPanel>
+    ),
+  },
+  {
+    path: '/configuration/whatsappIntegrations',
     component: () => (
       <DetailsPanel>
         <GenericBulkActionsForm />

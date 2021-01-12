@@ -26,6 +26,7 @@ import { skillColumn } from './columns/skill';
 import { groupColumn } from './columns/group';
 import { labelColumn } from './columns/label';
 import { capacityRuleActiveVersionColumn } from './columns/capacityRuleActiveVersion';
+import { disconnectMinutesColumn } from './columns/disconnectMinutes';
 
 export function getTableColumns(columns) {
   /**
@@ -79,6 +80,7 @@ export function getTableColumns(columns) {
     Default: constructGeneralTextColumn('default'),
     Mandatory: constructGeneralBooleanColumn('mandatory'),
     activeVersionCapacityRule: capacityRuleActiveVersionColumn,
+    'Disconnect Minutes': disconnectMinutesColumn,
   };
   let result = [];
   columns.forEach((x) => x.active && result.push(columnMap[x.name]));

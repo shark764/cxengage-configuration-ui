@@ -309,6 +309,9 @@ Immutable.Map {
       "IDENTITY_PROVIDERS_DELETE",
     ],
   },
+  "whatsappApps": Immutable.Map {
+    "data": Immutable.List [],
+  },
   "flows": Immutable.Map {
     "readPermission": Immutable.List [
       "VIEW_ALL_FLOWS",
@@ -594,6 +597,25 @@ Immutable.Map {
     ],
     "selectedEntityId": "",
     "sidePanelWidth": 550,
+  },
+  "whatsappIntegrations": Immutable.Map {
+    "readPermission": Immutable.List [
+      "WHATSAPP_INTEGRATIONS_APP_READ",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "WHATSAPP_INTEGRATIONS_APP_UPDATE",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "WHATSAPP_INTEGRATIONS_APP_UPDATE",
+    ],
+    "updatePermission": Immutable.List [
+      "WHATSAPP_INTEGRATIONS_APP_UPDATE",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [],
   },
   "messageTemplates": Immutable.Map {
     "readPermission": Immutable.List [

@@ -259,6 +259,15 @@ export default class Navigation extends Component {
                   <FormattedMessage id="navigation.configuration.chatWidgets" defaultMessage="Chat Widgets" />
                 </StyledLink>
                 <StyledLink
+                  data-automation="navigationLinkWhatsappIntegrations"
+                  to="/configuration/whatsappIntegrations"
+                  onClick={(e) => this.setCurrentEntityAndEntityId('whatsappIntegrations', e)}>
+                  <FormattedMessage
+                    id="navigation.configuration.whatsappIntegrations"
+                    defaultMessage="Whatsapp Integrations"
+                  />
+                </StyledLink>
+                <StyledLink
                   data-automation="navigationLinkTransferLists"
                   to="/configuration/transferLists"
                   onClick={(e) => this.setCurrentEntityAndEntityId('transferLists', e)}>

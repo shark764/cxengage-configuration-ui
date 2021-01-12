@@ -192,6 +192,8 @@ export const listOfEntities = [
   'contactLayouts',
   'forecastDashboards',
   'capacityRules',
+  'whatsappIntegrations',
+  'whatsappApps',
 
   //Hygen-insert-at-end-of-list
 ];
@@ -971,6 +973,25 @@ entities.capacityRules.columns = [
   { name: 'activeVersionCapacityRule', active: true, customName: 'Active Version' },
   { name: 'Status', active: true },
 ];
+
+// Whatsapp Integrations
+entities.whatsappIntegrations.pageTitle = 'Whatsapp Integrations Management';
+entities.whatsappIntegrations.helpLink =
+  '/Help/Content/Managing%20WhatsappIntegrations/Creating_WhatsappIntegrations.htm';
+entities.whatsappIntegrations.columns = [
+  { name: 'Name', active: true },
+  { name: 'Description', active: true },
+  { name: 'Disconnect Minutes', active: true },
+  { name: 'Status', active: true },
+];
+entities.whatsappIntegrations.defaultFilters = [{ id: 'active', value: 'enabled' }];
+entities.whatsappIntegrations.sdkCall.path = ['whatsapp-integrations'];
+entities.whatsappIntegrations.createFormDependencies.push('whatsappApps');
+entities.whatsappIntegrations.updateFormDependencies.push('whatsappApps');
+
+// Whatsapp Apps
+entities.whatsappApps.sdkCall.path = ['whatsapp-apps'];
+
 //Hygen-insert-new-entity-configuration
 
 // Birst

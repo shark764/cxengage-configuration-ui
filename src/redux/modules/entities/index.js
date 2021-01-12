@@ -363,6 +363,17 @@ const initialState = fromJS({
     updatePermission: ['MANAGE_ALL_CAPACITY_RULES'],
     createPermission: ['MANAGE_ALL_CAPACITY_RULES'],
   },
+  whatsappIntegrations: {
+    ...defaultEntity,
+    readPermission: ['WHATSAPP_INTEGRATIONS_APP_READ'],
+    updatePermission: ['WHATSAPP_INTEGRATIONS_APP_UPDATE'],
+    createPermission: ['WHATSAPP_INTEGRATIONS_APP_UPDATE'],
+    disablePermission: ['WHATSAPP_INTEGRATIONS_APP_UPDATE'],
+    assignPermission: [],
+  },
+  whatsappApps: {
+    data: [],
+  },
   //hygen-inject-before
 });
 

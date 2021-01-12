@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectWhatsappApps Does not get any IDPs from state 1`] = `Immutable.List []`;
+
+exports[`selectWhatsappApps Gets the correct IDPs 1`] = `
+Immutable.List [
+  Object {
+    "label": "undefined - undefined",
+    "value": "mockId2",
+  },
+]
+`;
