@@ -123,7 +123,7 @@ describe('entities reducer', () => {
         })
       ).toMatchSnapshot();
     });
-    it("data item doesn't exists in entity , return unchanged state if currentEntity it's not userProfile or entity being fetch it's not an user", () => {
+    it("data item doesn't exists in entity , return unchanged state if currentEntity it's not userProfile and entity being fetched it's users or currentEntity it's users and entity being fetched it's tenants", () => {
       const initialState = fromJS({
         mockEntity: {
           data: [],

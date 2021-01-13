@@ -51,3 +51,11 @@ export const getCurrentAgentName = (state) => {
   const currentAgent = findEntity(state, 'users', getCurrentAgentId(state));
   return currentAgent && currentAgent.get('firstName');
 };
+export const isCurrentTenantPlatformAuthenticationDisabled = createSelector(
+  [getCurrentTenantId, state => getEntityData(state, 'tenants')],
+  (currentTenantId, tenants) =>
+    tenants &&
+    tenants.size > 0 &&
+    tenants.find(tenant => tenant.get('id') === currentTenantId) &&
+    tenants.find(tenant => tenant.get('id') === currentTenantId).get('cxengageIdentityProvider') === 'disabled'
+);

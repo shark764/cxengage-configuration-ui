@@ -13,15 +13,18 @@ import {
   isCreating,
   userHasUpdatePermission,
   userHasPermissions,
-  isEntityFetching
+  isEntityFetching,
 } from '../../../redux/modules/entities/selectors';
-import { getCurrentAgentId } from '../../../redux/modules/userData/selectors';
+import {
+  getCurrentAgentId,
+  isCurrentTenantPlatformAuthenticationDisabled,
+} from '../../../redux/modules/userData/selectors';
 import { onFormSubmit, changeUserInviteStatus } from '../../../redux/modules/entities';
-import { createFormName } from '../../../redux/modules/form/selectors';
+import { createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import {
   selectUsersFormInitialValues,
   getUserInvitationStatus,
-  userHasNameSet
+  userHasNameSet,
 } from '../../../redux/modules/entities/users/selectors';
 import { selectTenantRoles, selectPlatformRoles } from '../../../redux/modules/entities/roles/selectors';
 import { selectTenantIdentityProviders } from '../../../redux/modules/entities/identityProviders/selectors';
@@ -34,7 +37,7 @@ const CreateUsersForm = compose(
       return dispatch(onFormSubmit(values, props));
     },
     validate: formValidation,
-    destroyOnUnmount: true
+    destroyOnUnmount: true,
   })
 )(UsersForm);
 
@@ -53,11 +56,13 @@ export function mapStateToProps(state) {
     currentAgentId: getCurrentAgentId(state),
     displayResetPassword: userHasPermissions(state, [
       'PLATFORM_MANAGE_ALL_USER_PASSWORDS',
-      'MANAGE_ALL_USER_PASSWORDS'
+      'MANAGE_ALL_USER_PASSWORDS',
     ]),
     usersFetching: isEntityFetching(state, 'users'),
     userHasNameSet: userHasNameSet(state),
-    canManageAllExtensions: userHasPermissions(state, ['MANAGE_ALL_USER_EXTENSIONS'])
+    canManageAllExtensions: userHasPermissions(state, ['MANAGE_ALL_USER_EXTENSIONS']),
+    formNoPasswordValue: getCurrentFormValueByFieldName(state, 'noPassword'),
+    isCurrentTenantPlatformAuthenticationDisabled: isCurrentTenantPlatformAuthenticationDisabled(state),
   };
 }
 const actions = { changeUserInviteStatus };

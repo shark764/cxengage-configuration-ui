@@ -19,7 +19,8 @@ import {
   ExtensionListField,
   Button,
   ConfirmationWrapper,
-  Detail
+  Detail,
+  DetailsPanelMessage,
 } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
 import store from '../../../redux/store';
@@ -38,7 +39,7 @@ const InviteButtons = styled(Button)`
   margin: 10px;
 `;
 
-const platformStatus = value => {
+const platformStatus = (value) => {
   switch (value) {
     case 'pending':
       return 'Pending Invite';
@@ -57,6 +58,10 @@ const platformStatus = value => {
   }
 };
 
+const MessagePanel = styled(DetailsPanelMessage)`
+  padding-top: 0;
+`;
+
 export default function UsersForm({
   handleSubmit,
   tenantRoles,
@@ -72,7 +77,9 @@ export default function UsersForm({
   displayResetPassword,
   usersFetching,
   userHasNameSet,
-  canManageAllExtensions
+  canManageAllExtensions,
+  formNoPasswordValue,
+  isCurrentTenantPlatformAuthenticationDisabled,
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -123,10 +130,32 @@ export default function UsersForm({
             options={[
               { label: 'Use Tenant Default', value: 'null' },
               { label: 'Enabled', value: false },
-              { label: 'Disabled', value: true }
-            ].filter(val => (currentAgentId === initialValues.get('id') ? val.value !== 'null' : val))}
+              { label: 'Disabled', value: true },
+            ].filter((val) => (currentAgentId === initialValues.get('id') ? val.value !== 'null' : val))}
             required
           />
+          {// For some weird reason this component is saving boolean values as strings so I have to check for their strings representations too
+          initialValues.get('status') === 'accepted' &&
+            ((initialValues.get('noPassword') !== true &&
+              (formNoPasswordValue === true || formNoPasswordValue === 'true')) ||
+              ((formNoPasswordValue === 'null' || formNoPasswordValue === null) &&
+                isCurrentTenantPlatformAuthenticationDisabled)) && (
+              <MessagePanel
+                text={`${
+                  initialValues.get('noPassword') !== true &&
+                  (formNoPasswordValue === true || formNoPasswordValue === 'true')
+                    ? 'Warning: Disabling Platform Authentication will immediately invalidate any active sessions this user is logged in with CxEngage credentials.'
+                    : ''
+                }\
+                    ${
+                      (formNoPasswordValue === 'null' || formNoPasswordValue === null) &&
+                      isCurrentTenantPlatformAuthenticationDisabled
+                        ? 'Warning: The tenant default has Platform Authentication disabled.  Disabling Platform Authentication will immediately invalidate any active sessions this user is logged in with CxEngage credentials.'
+                        : ''
+                    }`}
+                type="warning"
+              />
+            )}
           <SelectField
             className="frm-users-default-sso-provider"
             name="defaultIdentityProvider"
@@ -141,14 +170,12 @@ export default function UsersForm({
             <ConfirmationWrapper
               confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
               mainText={`This will send an email invitation to ${initialValues.get('email')}.`}
-              data-automation="pendingConfirmationWrapper"
-            >
+              data-automation="pendingConfirmationWrapper">
               <InviteButtons
                 type="button"
                 buttonType="secondary"
                 className="invite-now-button"
-                data-automation="inviteButton"
-              >
+                data-automation="inviteButton">
                 Send Invitation
               </InviteButtons>
             </ConfirmationWrapper>
@@ -158,14 +185,12 @@ export default function UsersForm({
             <ConfirmationWrapper
               confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
               mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
-              data-automation="expiredConfirmationWrapper"
-            >
+              data-automation="expiredConfirmationWrapper">
               <InviteButtons
                 type="button"
                 buttonType="secondary"
                 className="resend-invite-button"
-                data-automation="resendInviteButton"
-              >
+                data-automation="resendInviteButton">
                 Resend Invitation
               </InviteButtons>
             </ConfirmationWrapper>
@@ -176,14 +201,12 @@ export default function UsersForm({
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('invited', initialValues.get('id'))}
                 mainText={`Are you sure you want to resend an email invitation to ${initialValues.get('email')}?`}
-                data-automation="invitedConfirmationWrapper"
-              >
+                data-automation="invitedConfirmationWrapper">
                 <InviteButtons
                   type="button"
                   buttonType="secondary"
                   className="resend-invite-button"
-                  data-automation="resendInviteButton"
-                >
+                  data-automation="resendInviteButton">
                   Resend Invitation
                 </InviteButtons>
               </ConfirmationWrapper>
@@ -191,14 +214,12 @@ export default function UsersForm({
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('pending', initialValues.get('id'))}
                 mainText={`This will prevent the user ${initialValues.get('email')} from accepting the invitation.`}
-                data-automation="cancelConfirmationWrapper"
-              >
+                data-automation="cancelConfirmationWrapper">
                 <InviteButtons
                   type="button"
                   buttonType="secondary"
                   className="cancel-invite-button"
-                  data-automation="cancelInviteButton"
-                >
+                  data-automation="cancelInviteButton">
                   Cancel Invitation
                 </InviteButtons>
               </ConfirmationWrapper>
@@ -211,14 +232,12 @@ export default function UsersForm({
               <ConfirmationWrapper
                 confirmBtnCallback={() => changeUserInviteStatus('passwordReset', initialValues.get('id'))}
                 mainText={`Are you sure you want to send a password reset email to ${initialValues.get('email')}?`}
-                data-automation="resetPasswordConfirmationWrapper"
-              >
+                data-automation="resetPasswordConfirmationWrapper">
                 <InviteButtons
                   type="button"
                   buttonType="secondary"
                   className="reset-password-button"
-                  data-automation="resetPasswordButton"
-                >
+                  data-automation="resetPasswordButton">
                   Reset Password
                 </InviteButtons>
               </ConfirmationWrapper>
@@ -266,7 +285,7 @@ export default function UsersForm({
                     region: '',
                     description: '',
                     id: generateUUID(),
-                    hide: false
+                    hide: false,
                   })
                 );
               store.dispatch({
@@ -275,9 +294,9 @@ export default function UsersForm({
                   form: `users:${id}`,
                   field: 'extensions',
                   touch: false,
-                  persistentSubmitErrors: false
+                  persistentSubmitErrors: false,
                 },
-                payload: extensions
+                payload: extensions,
               });
             }}
           />
@@ -289,7 +308,7 @@ export default function UsersForm({
             canChangeRegion={canManageAllExtensions}
             placeholders={{
               extension: 'Enter Extension',
-              label: 'Description'
+              label: 'Description',
             }}
           />
         </DetailWrapper>
@@ -331,23 +350,23 @@ UsersForm.propTypes = {
   tenantIdentityProviders: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.string
+      value: PropTypes.string,
     })
   ),
   tenantRoles: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.string.isRequired
+      value: PropTypes.string.isRequired,
     })
   ),
   capacityRules: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,
-        value: PropTypes.string.isRequired
+        value: PropTypes.string.isRequired,
       })
     ),
-    PropTypes.object
+    PropTypes.object,
   ]),
   status: PropTypes.string,
   scenario: PropTypes.string,
@@ -355,5 +374,7 @@ UsersForm.propTypes = {
   displayResetPassword: PropTypes.bool,
   usersFetching: PropTypes.bool,
   userHasNameSet: PropTypes.bool,
-  canManageAllExtensions: PropTypes.bool
+  canManageAllExtensions: PropTypes.bool,
+  formNoPasswordValue: PropTypes.string,
+  isCurrentTenantPlatformAuthenticationDisabled: PropTypes.bool,
 };

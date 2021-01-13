@@ -886,8 +886,11 @@ export default function reducer(state = initialState, action) {
         return state
           .mergeIn([action.entityName, 'data', entityIndex], fromJS({ ...action.response.result, updating: false }))
           .deleteIn([action.entityName, 'fetching']);
-      } else if (currentEntity === 'userProfile' && action.entityName === 'users') {
-        // Add user when we're fetching user data for the userProfile
+      } else if (
+        (currentEntity === 'userProfile' && action.entityName === 'users') ||
+        (currentEntity === 'users' && action.entityName === 'tenants')
+      ) {
+        // Add user when we're fetching user data for the userProfile or fetching tenant data for users page
         return state
           .updateIn([action.entityName, 'data'], (data) => data.push(fromJS({ ...action.response.result })))
           .deleteIn([action.entityName, 'fetching']);

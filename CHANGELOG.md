@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+## [0.95.1] - 2021-01-05
+
+### Added
+- CXV1-13576 - SSO - Provide an user prompt when disabling CxEngage Auth
 ## [0.95.0] - 2020-12-17
 ### Added
 - CXV1-21862 - Adding configuration page for Whatsapp Integrations.

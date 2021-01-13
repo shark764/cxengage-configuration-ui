@@ -1,16 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FetchActualTenantInfo when create a new draft, it emits an action to fetch tenants info 1`] = `
+exports[`FetchActualTenantInfo when creating a new draft, it emits an action to fetch actual tenant info 1`] = `
 Object {
   "entityName": "tenants",
-  "type": "FETCH_DATA",
+  "id": "mockTenantId",
+  "type": "FETCH_DATA_ITEM",
 }
 `;
 
-exports[`FetchActualTenantInfo when selecting a draft, it emits an action to fetch tenants info 1`] = `
+exports[`FetchActualTenantInfo when selecting a draft, it emits an action to fetch actual tenant info 1`] = `
 Object {
   "entityName": "tenants",
-  "type": "FETCH_DATA",
+  "id": "mockTenantId",
+  "type": "FETCH_DATA_ITEM",
 }
 `;
 

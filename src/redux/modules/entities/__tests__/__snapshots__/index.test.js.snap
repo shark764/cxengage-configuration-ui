@@ -80,7 +80,7 @@ Immutable.Map {
 }
 `;
 
-exports[`entities reducer FETCH_DATA_ITEM_FULFILLED data item doesn't exists in entity , return unchanged state if currentEntity it's not userProfile or entity being fetch it's not an user 1`] = `
+exports[`entities reducer FETCH_DATA_ITEM_FULFILLED data item doesn't exists in entity , return unchanged state if currentEntity it's not userProfile and entity being fetched it's users or currentEntity it's users and entity being fetched it's tenants 1`] = `
 Immutable.Map {
   "mockEntity": Immutable.Map {
     "data": Immutable.List [],

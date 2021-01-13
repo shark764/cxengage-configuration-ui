@@ -25,6 +25,7 @@ import { changeUserInviteStatus } from '../../entities';
 import { validateEmail } from 'serenova-js-utils/validation';
 import { change } from 'redux-form';
 import { fetchData } from '../index';
+import { currentTenantId } from '../../userData/selectors';
 
 export const getRolesAfterFetchingUsers = (action$, store) =>
   action$
@@ -199,11 +200,18 @@ export const FetchSidePanelUserData = (action$, store) =>
       },
       ...a
     }))
-    .concatMap(a =>
+    .switchMap(a =>
       fromPromise(sdkPromise(a.sdkCall))
-        .map(response => {
+        .switchMap(response => {
           delete response.result.extensions;
-          return handleSuccess(response, a);
+          return [
+            handleSuccess(response, a),
+            {
+              type: 'FETCH_DATA_ITEM',
+              entityName: 'tenants',
+              id: currentTenantId(store.getState())
+            }
+          ];
         })
         .catch(error => handleError(error, a))
     );

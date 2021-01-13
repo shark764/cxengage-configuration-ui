@@ -38,6 +38,7 @@ import {
 } from '../selectors';
 import { getFormValues } from '../../form/selectors';
 import { getAllEntities } from '../../../../containers/EntityTable/selectors';
+import { currentTenantId } from '../../userData/selectors';
 
 import {
   fetchActiveVersionBusinessHoursFulfilled,
@@ -635,7 +636,8 @@ export const FetchActualTenantInfo = (action$, store) =>
   action$
     .ofType('CREATE_DRAFT_BUSINESS_HOURS_V2', 'SET_SELECTED_SUB_ENTITY_ID')
     .filter(() => getCurrentEntity(store.getState()) === 'businessHoursV2')
-    .mapTo({
-      type: 'FETCH_DATA',
-      entityName: 'tenants'
-    });
+    .map(a => ({
+      type: 'FETCH_DATA_ITEM',
+      entityName: 'tenants',
+      id: currentTenantId(store.getState())
+    }));

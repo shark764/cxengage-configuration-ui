@@ -6,10 +6,12 @@ Object {
   "capacityRules": undefined,
   "currentAgentId": "0000-0000-0000-0000",
   "displayResetPassword": undefined,
+  "formNoPasswordValue": undefined,
   "inherited": false,
   "initialValues": Object {
     "active": true,
   },
+  "isCurrentTenantPlatformAuthenticationDisabled": undefined,
   "isSaving": undefined,
   "key": "mockId",
   "platformRoles": Array [],

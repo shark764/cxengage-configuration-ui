@@ -33,11 +33,13 @@ import {
 } from '../../selectors';
 import { getAllEntities } from '../../../../../containers/EntityTable/selectors';
 import { getFormValues } from '../../../form/selectors';
+import { currentTenantId } from '../../../userData/selectors';
 
 jest.mock('../../selectors');
 jest.mock('../../../../../containers/EntityTable/selectors');
 jest.mock('../../../../../utils/sdk');
 jest.mock('../../../form/selectors');
+jest.mock('../../../userData/selectors');
 
 // This doesn't feel the right way to do this but it's the only way to make the snapshots to be consistent regardless of timezone
 jest.mock('moment', () => {
@@ -708,9 +710,10 @@ describe('RemoveBusinessHoursDraft', () => {
 describe('FetchActualTenantInfo', () => {
   beforeAll(() => {
     getCurrentEntity.mockReturnValue('businessHoursV2');
+    currentTenantId.mockReturnValue('mockTenantId');
   });
 
-  it('when create a new draft, it emits an action to fetch tenants info', done => {
+  it('when creating a new draft, it emits an action to fetch actual tenant info', done => {
     const action = ActionsObservable.of({
       type: 'CREATE_DRAFT_BUSINESS_HOURS_V2'
     });
@@ -720,7 +723,7 @@ describe('FetchActualTenantInfo', () => {
     });
   });
 
-  it('when selecting a draft, it emits an action to fetch tenants info', done => {
+  it('when selecting a draft, it emits an action to fetch actual tenant info', done => {
     const action = ActionsObservable.of({
       type: 'CREATE_DRAFT_BUSINESS_HOURS_V2'
     });
@@ -732,5 +735,6 @@ describe('FetchActualTenantInfo', () => {
 
   afterAll(() => {
     getCurrentEntity.mockReset();
+    currentTenantId.mockReset();
   });
 });
