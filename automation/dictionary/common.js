@@ -9,8 +9,8 @@ const Api = require('./apiClass');
 const commonBehavior = {
   login() {
     Brow.url(process.env.URI ? process.env.URI : process.ENV.URL);
-    Elem.username.waitForVisible();
-    Elem.username.setValue(process.ENV.userName);
+    Elem.email.waitForVisible();
+    Elem.email.setValue(process.ENV.userName);
     Elem.password.waitForVisible();
     Elem.password.setValue(process.ENV.password);
     Elem.signInButton.waitAndClick();
