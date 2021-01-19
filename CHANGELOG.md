@@ -10,13 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+## [0.95.3] - 2021-01-18
+### Fixed
+- CXV1-19975 - Flow Debug Logs - Add event filter.
+
 ## [0.95.2] - 2021-01-14
 - <no-jira> - Login fix automation.
 
 ## [0.95.1] - 2021-01-05
-
 ### Added
 - CXV1-13576 - SSO - Provide an user prompt when disabling CxEngage Auth
+
 ## [0.95.0] - 2020-12-17
 ### Added
 - CXV1-21862 - Adding configuration page for Whatsapp Integrations.

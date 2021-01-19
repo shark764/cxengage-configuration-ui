@@ -73,6 +73,14 @@ const WrapButton = styled.button`
   color: ${props => (props.wordwrap ? 'orange;' : 'black;')};
 `;
 
+const FiltersSelect = styled.select`
+  position: relative;
+  width: 15em;
+  height: 35px;
+  display: inline-block;
+  outline: none;
+`;
+
 const ToggleButtons = styled.div`
   margin-top: 15px;
   margin-bottom: 15px;
@@ -104,10 +112,11 @@ export default class FlowDebugLogs extends Component {
     this.state = {
       value: '',
       copySuccess: '',
-      showData: false,
       prettyView: false,
-      wordwrap: true
+      wordwrap: true,
+      filteredLogObject: ''  //used to display the logs in the text area
     };
+    this.filteredData;
   }
 
   handleValueChange = event => {
@@ -115,46 +124,113 @@ export default class FlowDebugLogs extends Component {
   };
 
   copyToClipboard = () => {
-    copyToClipboard(this.props.reportingEventsString);
+    copyToClipboard((this.filteredData) ? JSON.stringify(this.filteredData, null, 2) : this.props.reportingEventsString);
     Toast.success('Copied!');
   };
 
   handleSubmit() {
-    this.props.fetchReportingEvents(this.state.value);
-    this.setState({
-      showData: true
-    });
+    if (this.state.value !== '') {
+      this.props.fetchReportingEvents(this.state.value);
+      if (!this.state.selectedEvent) {
+        this.setState({ selectedEvent: 'all' });
+      }
+    }
   }
 
+  // the first time, filteredData will be empty, use props.reportingEvents to display the logs
   handleChangeRawData = () => {
+    const data = (this.filteredData) ? this.filteredData : this.props.reportingEvents;
+    if (this.state.wordwrap) {
+      this.setState({ filteredLogObject: JSON.stringify(data, null, 2) });
+    } else {
+      this.setState({ filteredLogObject: JSON.stringify(data) });
+    }
     this.setState({ prettyView: false });
   };
 
   handleChangeToJsonView = () => {
+    if (this.filteredData) {
+      this.setState({ filteredLogObject: this.filteredData });
+    } else {
+      this.setState({ filteredLogObject: this.props.reportingEvents });
+    }
     this.setState({ prettyView: true });
   };
 
   handletoggleView = () => {
+    const data = (this.filteredData) ? this.filteredData : this.props.reportingEvents;
+    if (this.state.wordwrap) {
+      this.setState({ filteredLogObject: JSON.stringify(data) });
+    } else {
+      this.setState({ filteredLogObject: JSON.stringify(data, null, 2) });
+    }
     this.setState({ wordwrap: !this.state.wordwrap });
   };
 
   search = event => {
-    if (event.key !== '') {
-      this.setState({ showData: true });
+    if (event.key === 'Enter') {
+      this.handleSubmit();
     }
   };
 
+  formatData(data) {
+    if (!this.state.prettyView && this.state.wordwrap) {
+      this.setState({ filteredLogObject: JSON.stringify(data, null, 2) });
+    } else if (!this.state.prettyView && !this.state.wordwrap) {
+      this.setState({ filteredLogObject: JSON.stringify(data) });
+    } else if (this.state.prettyView) {
+      this.setState({ filteredLogObject: data });
+    }
+  }
+
+  onChangeEvent = event => {
+    if (event.target.value === 'all') {
+      this.setState({ selectedEvent: 'all' });
+    } else {
+      this.setState({ selectedEvent: event.target.value });
+    }
+    this.filterData(event.target.value);
+  };
+
+  filterData = selected => {
+    let eventsList = [];
+    this.filteredData = undefined;
+    if (selected === 'all') {
+      this.formatData(this.props.reportingEvents);
+    } else {
+      this.filteredData = {
+          ...this.props.reportingEvents,
+         events: this.props.reportingEvents.events.filter(({ eventType }) => eventType === selected)
+      }
+      if (this.filteredData) {
+        this.formatData(this.filteredData);
+      }
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.reportingEvents && this.props.reportingEvents !== prevProps.reportingEvents) {
+      this.filterData(this.state.selectedEvent);
+    }
+  }
+
   render() {
+    let typeEventsTemp = [];
+    if (this.props.reportingEvents && this.props.reportingEvents.events.length > 0) {
+      typeEventsTemp = this.props.reportingEvents.events.filter(
+        ({ eventType }, i, events) => events.findIndex(({ eventType: type }) => type === eventType) === i
+      );
+    }
     return (
       <Wrapper>
         <PageHeader text="Flow Debug Logs">
           <ExportButton
-            disabled={!this.state.showData}
+            disabled={!this.state.filteredLogObject}
             onClick={() => {
               downloadFile(
-                this.props.reportingEventsString,
+                (this.filteredData) ? JSON.stringify(this.filteredData, null, 2) : this.props.reportingEventsString,
                 'text/plain',
-                'EventSummary - ' + this.state.value,
+                'EventSummary - ' + this.state.value + ((this.state.selectedEvent !== 'all') ? ' - ' + this.state.selectedEvent : ''),
                 '.txt'
               );
             }}
@@ -168,7 +244,7 @@ export default class FlowDebugLogs extends Component {
           onChange={this.handleValueChange}
           onKeyPress={this.search}
         />
-        <SubmitButton onClick={this.handleSubmit.bind(this)}>
+        <SubmitButton disabled={!this.state.value} onClick={this.handleSubmit.bind(this)}>
           <SearchIcon searchIconType="searchBox" size={10} />
         </SubmitButton>
         <ToggleButtons>
@@ -178,37 +254,42 @@ export default class FlowDebugLogs extends Component {
           <RawButton onClick={this.handleChangeRawData} prettyView={this.state.prettyView}>
             Raw
           </RawButton>
-          <WrapButton onClick={this.handletoggleView} wordwrap={this.state.wordwrap} title="Wrap">
+          <WrapButton onClick={this.handletoggleView} wordwrap={this.state.wordwrap} title="Wrap" disabled={this.state.prettyView}>
             <WordWrap wordWrapIconType="wordWrapOn" size={10} />
           </WrapButton>
+          <FiltersSelect
+            value={this.state.selectedEvent}
+            onChange={this.onChangeEvent}
+            disabled={!this.props.reportingEvents}
+          >
+            <option key="all" value="all">
+              All
+            </option>
+            {typeEventsTemp.map((item, i) =>
+              <option key={i} value={item.eventType}>
+                {item.eventType}
+              </option>
+            )}
+          </FiltersSelect>
           <Copy onClick={this.copyToClipboard}>
             <CopyIconSVG copyIconType="secondary" size={20} />
           </Copy>
         </ToggleButtons>
 
-        {!this.state.prettyView &&
-          this.state.wordwrap &&
-          this.state.showData && (
-            <StyledTextArea
-              id="rawData"
-              value={this.props.reportingEventsString}
-              readOnly="true"
-              ref={textarea => (this.textArea = textarea)}
-            />
-          )}
-        {!this.state.prettyView &&
-          !this.state.wordwrap && (
-            <StyledTextArea
-              id="wrapRawData"
-              value={this.props.reportingEventsRawData}
-              ref={textarea => (this.textArea = textarea)}
-            />
-          )}
-        {this.state.prettyView &&
-          this.state.showData && (
+        {((!this.state.prettyView && this.state.wordwrap) ||
+          (!this.state.prettyView && !this.state.wordwrap)) && (
+          <StyledTextArea
+            id="rawData"
+            value={this.state.filteredLogObject}
+            readOnly="true"
+            ref={textarea => (this.textArea = textarea)}
+          />
+        )}
+        {this.state.prettyView && (
             <ReactJson
               type="text"
-              src={this.props.reportingEvents}
+              src={(this.state.filteredLogObject)}
+              readOnly="true"
               style={{ border: '1px solid #c8cacc', height: '49em', width: '111em', overflow: 'auto' }}
             />
           )}
