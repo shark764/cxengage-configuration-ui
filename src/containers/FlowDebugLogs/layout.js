@@ -193,7 +193,6 @@ export default class FlowDebugLogs extends Component {
   };
 
   filterData = selected => {
-    let eventsList = [];
     this.filteredData = undefined;
     if (selected === 'all') {
       this.formatData(this.props.reportingEvents);
@@ -202,8 +201,11 @@ export default class FlowDebugLogs extends Component {
           ...this.props.reportingEvents,
          events: this.props.reportingEvents.events.filter(({ eventType }) => eventType === selected)
       }
-      if (this.filteredData) {
+      if (this.filteredData && this.filteredData.events.length > 0) {
         this.formatData(this.filteredData);
+      } else {
+        this.setState({ selectedEvent: 'all' });
+        this.formatData(this.props.reportingEvents);
       }
     }
   };
