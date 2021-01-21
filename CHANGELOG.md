@@ -10,11 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+## [0.95.5] - 2021-01-21
+### Fixed 
+- CXV1-23700 - Early access features page fails to load if branding style is null
+
 ## [0.95.4] - 2021-01-20
 ### Fixed
 - CXV1-19975 - Flow Debug Logs - Fix issue when an empty array is shown after searching a new id.
 
-## [0.95.3] - 2021-01-19
+## [0.95.3] - 2021-01-18
 ### Fixed
 - CXV1-19975 - Flow Debug Logs - Add event filter.
 

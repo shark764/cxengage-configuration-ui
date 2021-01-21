@@ -116,9 +116,14 @@ export default class BetaFeatures extends Component {
       <Wrapper>
         <PageHeader text="Early Access Features" helpLink="help link" />
         <Features>
-          <FeaturesTitle background={this.props.theme.navbar} accent={this.props.theme.navbarText}>
-            Early Access Features
-          </FeaturesTitle>
+          {this.props.theme ? (
+            <FeaturesTitle background={this.props.theme.navbar} accent={this.props.theme.navbarText}>
+              Early Access Features
+            </FeaturesTitle>
+          ) : (
+            <FeaturesTitle>Early Access Features</FeaturesTitle>
+          )}
+
           <Actions>
             <ActionButton buttonType="secondary" onClick={() => this.toggleAll(true)}>
               Enable All
