@@ -377,7 +377,9 @@ export class Login extends Component {
                     })}
                     onSelectedOptionChange={this.setTenant}
                     selectedOption={this.state.selectedTenant}
-                    noBackground={false}
+                    customStyle={{
+                      noBackground: true,
+                    }}
                   />
                   <Prefrences>
                     <Checkbox

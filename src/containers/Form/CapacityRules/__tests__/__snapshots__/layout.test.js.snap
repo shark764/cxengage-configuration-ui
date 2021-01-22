@@ -16,14 +16,6 @@ exports[`<CapacityRulesForm /> renders create form 1`] = `
     name="name"
     placeholder="Name"
   />
-  <InputField
-    componentType="textarea"
-    data-automation="CapacityRulesFormFieldDescription"
-    disabled={false}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
 </form>
 `;
 
@@ -43,13 +35,25 @@ exports[`<CapacityRulesForm /> renders update form 1`] = `
     name="name"
     placeholder="Name"
   />
-  <InputField
-    componentType="textarea"
-    data-automation="CapacityRulesFormFieldDescription"
+  <SelectField
+    data-automation="CapacityRulesFormFieldActiveVersion"
     disabled={false}
-    inputType="text"
-    label="Description"
-    name="description"
+    label="Version"
+    name="activeVersion"
+    options={
+      Array [
+        Object {
+          "label": "undefined - undefined",
+          "value": undefined,
+        },
+        Object {
+          "label": "undefined - undefined",
+          "value": undefined,
+        },
+      ]
+    }
+    placeholder="Select a version"
+    required={false}
   />
 </form>
 `;

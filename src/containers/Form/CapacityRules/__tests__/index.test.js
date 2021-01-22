@@ -4,10 +4,17 @@
 
 import React from 'react';
 import { createStore } from 'redux';
-import { shallow } from 'enzyme';
+import { fromJS } from 'immutable';
+
+import { shallowWithIntl } from '../../../../utils/testUtils';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import CapacityRulesForm, { mapStateToProps } from '../';
-import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
+import {
+  getSelectedEntityId,
+  isCreating,
+  userHasUpdatePermission,
+  getSelectedEntity,
+} from '../../../../redux/modules/entities/selectors';
 import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
@@ -17,11 +24,16 @@ getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
 selectFormInitialValues.mockImplementation(() => ({ active: true }));
+getSelectedEntity.mockReturnValue(
+  fromJS({
+    name: 'whatever',
+  })
+);
 
 describe('CapacityRules Renders', () => {
   it('renders', () => {
     const store = createStore((state) => state);
-    expect(shallow(<CapacityRulesForm store={store}>Child</CapacityRulesForm>)).toMatchSnapshot();
+    expect(shallowWithIntl(<CapacityRulesForm store={store}>Child</CapacityRulesForm>)).toMatchSnapshot();
   });
 });
 

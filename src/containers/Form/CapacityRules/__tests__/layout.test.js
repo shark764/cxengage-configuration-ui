@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Map } from 'immutable';
 
 import CapacityRulesForm from '../layout';
 
@@ -18,6 +19,13 @@ describe('<CapacityRulesForm />', () => {
         inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
+        intl={{
+          formatMessage: ({ defaultMessage }) => defaultMessage,
+        }}
+        initialValues={Map({
+          name: 'whatever',
+        })}
+        versions={[]}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -33,6 +41,14 @@ describe('<CapacityRulesForm />', () => {
         inherited={false}
         userHasUpdatePermission={true}
         handleSubmit={() => {}}
+        intl={{
+          formatMessage: ({ defaultMessage }) => defaultMessage,
+        }}
+        initialValues={Map({
+          name: 'whatever',
+          id: 'test',
+        })}
+        versions={['version1', 'version2']}
       />
     );
     expect(rendered).toMatchSnapshot();

@@ -5,7 +5,8 @@
 import React from 'react';
 import { Map } from 'immutable';
 import { createStore } from 'redux';
-import { shallow } from 'enzyme';
+
+import { shallowWithIntl } from '../../../../utils/testUtils';
 import CapacityRulesDetailsPanel from '../';
 import {
   getSelectedEntity,
@@ -30,6 +31,8 @@ isSaving.mockImplementation(() => false);
 describe('CapacityRulesDetailsPanel Renders', () => {
   it('renders', () => {
     const store = createStore((state) => state);
-    expect(shallow(<CapacityRulesDetailsPanel store={store}>Child</CapacityRulesDetailsPanel>)).toMatchSnapshot();
+    expect(
+      shallowWithIntl(<CapacityRulesDetailsPanel store={store}>Child</CapacityRulesDetailsPanel>)
+    ).toMatchSnapshot();
   });
 });

@@ -4,6 +4,21 @@
 
 import { isEmpty } from 'serenova-js-utils/strings';
 
-export const formValidation = (values) => ({
-  name: isEmpty(values.get('name')) && 'Please enter a name',
+import store from '../../../redux/store';
+import { getEntityData } from '../../../redux/modules/entities/selectors';
+
+export const formValidation = (values, { intl: { formatMessage } }) => ({
+  name:
+    (isEmpty(values.get('name')) &&
+      formatMessage({
+        id: 'identityProviders.details.name.error',
+        defaultMessage: 'Please enter a name...',
+      })) ||
+    (getEntityData(store.getState(), 'capacityRules').some(
+      (capacityRule) => capacityRule.get('name') === values.get('name')
+    ) &&
+      formatMessage({
+        id: 'capacityRules.details.name.duplicateError',
+        defaultMessage: "Two Capacity Rules can't have the same name",
+      })),
 });

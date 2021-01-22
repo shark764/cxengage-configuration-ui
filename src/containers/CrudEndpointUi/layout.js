@@ -63,6 +63,7 @@ import CreateUpdateContactLayoutsListItemsForm from '../Form/ContactLayoutsListI
 import ContactAttributesForm from '../Form/ContactAttributes';
 import IdentityProvidersForm from '../Form/IdentityProviders';
 import CapacityRulesForm from '../Form/CapacityRules';
+import CapacityRulesVersionsForm from '../Form/CapacityRules/Version';
 import WhatsappIntegrationsForm from '../Form/WhatsappIntegrations';
 //hygen-inject-before3
 
@@ -922,6 +923,10 @@ const createSubEntityFormRoutes = [
     path: '/configuration/contactLayouts',
     component: CreateUpdateContactLayoutsListItemsForm,
   },
+  {
+    path: '/configuration/capacityRules',
+    component: CapacityRulesVersionsForm,
+  },
 ];
 
 const updateSubEntityFormRoutes = [
@@ -980,6 +985,10 @@ const updateSubEntityFormRoutes = [
   {
     path: '/configuration/contactLayouts',
     component: CreateUpdateContactLayoutsListItemsForm,
+  },
+  {
+    path: '/configuration/capacityRules',
+    component: CapacityRulesVersionsForm,
   },
 ];
 

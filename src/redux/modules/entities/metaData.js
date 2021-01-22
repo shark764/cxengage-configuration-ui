@@ -968,10 +968,35 @@ entities.forecastDashboards.helpLink = '';
 // Capacity Rules
 entities.capacityRules.pageTitle = 'Capacity Rules Management';
 entities.capacityRules.helpLink = '/Help/Content/Managing%20Users/Capacity_Rules/Creating_Capacity_Rules.htm';
+entities.capacityRules.subEntityName = 'versions';
 entities.capacityRules.columns = [
   { name: 'Name', active: true },
   { name: 'activeVersionCapacityRule', active: true, customName: 'Active Version' },
   { name: 'Status', active: true },
+];
+entities.capacityRules.membersTableFields = [
+  {
+    label: 'Version',
+    name: 'numericOrderVersion',
+    customSortMethod: function(a, b) {
+      a = parseInt(a, 10);
+      b = parseInt(b, 10);
+      if (a === b) {
+        return 0;
+      }
+      return a > b ? 1 : -1;
+    },
+    customWidth: 35,
+  },
+  {
+    label: 'Name',
+    name: 'name',
+  },
+  {
+    label: 'Created On',
+    name: 'created',
+    format: 'datetime',
+  },
 ];
 
 // Whatsapp Integrations

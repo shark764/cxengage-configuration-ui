@@ -3,17 +3,27 @@
  */
 
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
+
 import CapacityRulesDetailsPanel from './layout';
 
-//
-// Erase 'mapStateToProps' if no custom props are needed
-// You'll probably use it for sidePanelTables props
-//
-// export function mapStateToProps(state, props) {
-//   return {
-//     anyUsedProp: anySelector(state),
-//   };
-// }
-//
+import { userHasUpdatePermission } from '../../../redux/modules/entities/selectors';
+import { selectCapacityRuleVersions } from '../../../redux/modules/entities/capacityRules/selectors';
 
-export default connect(/*mapStateToProps*/)(CapacityRulesDetailsPanel);
+import { setSelectedSubEntityId } from '../../../redux/modules/entities';
+import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
+
+export function mapStateToProps(state, props) {
+  return {
+    userHasUpdatePermission: userHasUpdatePermission(state),
+    userHasViewPermission: userHasUpdatePermission(state),
+    versions: selectCapacityRuleVersions(state),
+    tableFields: entitiesMetaData['capacityRules'].membersTableFields,
+  };
+}
+
+export const actions = {
+  setSelectedSubEntityId,
+};
+
+export default injectIntl(connect(mapStateToProps, actions)(CapacityRulesDetailsPanel));

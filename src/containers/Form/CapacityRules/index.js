@@ -5,15 +5,21 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form/immutable';
+import { injectIntl } from 'react-intl';
+
 import CapacityRulesForm from './layout';
 import { formValidation } from './validation';
+import {
+  selectCapacityRulesFormInitialValues,
+  selectCapacityRuleVersions,
+} from '../../../redux/modules/entities/capacityRules/selectors';
 import {
   getSelectedEntityId,
   isInherited,
   isCreating,
   userHasUpdatePermission,
 } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
 
 const CreateCapacityRulesForm = compose(
   connect((state) => createFormName(state)),
@@ -26,12 +32,13 @@ const CreateCapacityRulesForm = compose(
 
 export function mapStateToProps(state) {
   return {
-    initialValues: selectFormInitialValues(state),
+    initialValues: selectCapacityRulesFormInitialValues(state),
     isSaving: isCreating(state),
     inherited: isInherited(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),
+    versions: selectCapacityRuleVersions(state),
   };
 }
 
-export default connect(mapStateToProps)(CreateCapacityRulesForm);
+export default injectIntl(connect(mapStateToProps)(CreateCapacityRulesForm));

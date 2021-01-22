@@ -9,7 +9,13 @@ import CapacityRulesDetailsPanel from '../layout';
 
 describe('<CapacityRulesDetailsPanel />', () => {
   it('renders capacityRules detailsPanel', () => {
-    const rendered = shallow(<CapacityRulesDetailsPanel className="details-panel" children={'Mock Child'} />);
+    const rendered = shallow(
+      <CapacityRulesDetailsPanel
+        intl={{ formatMessage: ({ defaultMessage }) => defaultMessage }}
+        className="details-panel"
+        children={'Mock Child'}
+      />
+    );
     expect(rendered).toMatchSnapshot();
   });
 });

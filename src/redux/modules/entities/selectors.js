@@ -147,6 +147,7 @@ export const isItemInherited = (state, entityName = null, entityId = null) => {
     case 'agentStateMonitoring':
     case 'tenants':
     case 'whatsappIntegrations':
+    case 'capacityRules':
       return false;
     default:
       return selectedEntity.get('tenantId') !== currentTenantId;
@@ -195,6 +196,9 @@ export const shouldDisableHeaderToggleField = (state) => {
       }
       case 'contactAttributes': {
         return getSelectedEntity(state).get('mandatory') === true;
+      }
+      case 'capacityRules': {
+        return !getSelectedEntity(state).get('activeVersion');
       }
       default:
         return false;

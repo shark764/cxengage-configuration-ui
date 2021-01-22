@@ -3,5 +3,24 @@
 exports[`<CapacityRulesDetailsPanel /> renders capacityRules detailsPanel 1`] = `
 <styled.div>
   Mock Child
+  <DetailHeader
+    onActionButtonClick={[Function]}
+    open={true}
+    text="Published Versions"
+  />
+  <_class
+    contains="versions"
+    defaultSorted={
+      Array [
+        Object {
+          "desc": true,
+          "id": "numericOrderVersion",
+        },
+      ]
+    }
+    fetching={true}
+    tableType="sidePanel"
+    viewSubEntity={[Function]}
+  />
 </styled.div>
 `;

@@ -1703,6 +1703,16 @@ export default function reducer(state = initialState, action) {
             .deleteIn(['userProfile', 'updating'])
         : state.deleteIn(['userProfile', 'updating']);
     }
+    case 'FETCH_CAPACITY_RULE_VERSIONS_FULFILLED': {
+      const { entityId, response: { result } } = action;
+      const entityIndex = findEntityIndex(state, 'capacityRules', entityId);
+      return entityIndex !== -1
+        ? state.setIn(
+            ['capacityRules', 'data', entityIndex, 'items'],
+            fromJS(result.map(({ version, ...item }) => ({ ...item, id: version })))
+          )
+        : state;
+    }
     default:
       return state;
   }

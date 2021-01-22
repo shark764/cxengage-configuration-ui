@@ -23,6 +23,7 @@ export const hasCustomUpdateEntity = (entityName) =>
     'businessHoursV2',
     'contactLayouts',
     'contactAttributes',
+    'capacityRules',
   ].includes(entityName);
 
 export const hasCustomCreateEntityFullFilled = (entityName) => !['businessHoursV2', 'tenants'].includes(entityName);
@@ -39,7 +40,7 @@ export const hasCustomUpdateEntityFullFilled = (entityName) =>
     'contactAttributes',
   ].includes(entityName);
 
-export const hasCustomCreateSubEntity = (entityName) => !['businessHours'].includes(entityName);
+export const hasCustomCreateSubEntity = (entityName) => !['businessHours', 'capacityRules'].includes(entityName);
 
 export const hasCustomRemoveSubEntity = (entityName) =>
   !['roles', 'dataAccessReports', 'flows', 'businessHours', 'businessHoursV2'].includes(entityName);
@@ -51,7 +52,7 @@ export const hasCustomFetchEntityItemData = (entityName) =>
   !['dispositionLists', 'flows', 'contactLayouts'].includes(entityName);
 
 export const entitiesUsingUpdateLogicForToggleEntity = (entityName) =>
-  ['customAttributes', 'identityProviders', 'whatsappIntegrations'].includes(entityName);
+  ['customAttributes', 'identityProviders', 'whatsappIntegrations', 'capacityRules'].includes(entityName);
 
 export const hasCustomSubEntityUpdate = (entityName, subEntityName) => {
   const entityMap = {

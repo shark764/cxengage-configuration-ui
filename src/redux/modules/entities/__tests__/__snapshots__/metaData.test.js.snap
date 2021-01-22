@@ -551,6 +551,23 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Managing%20Users/Capacity_Rules/Creating_Capacity_Rules.htm",
+    "membersTableFields": Array [
+      Object {
+        "customSortMethod": [Function],
+        "customWidth": 35,
+        "label": "Version",
+        "name": "numericOrderVersion",
+      },
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "format": "datetime",
+        "label": "Created On",
+        "name": "created",
+      },
+    ],
     "modalListTableFields": Array [
       Object {
         "label": "Name",
@@ -576,7 +593,7 @@ Object {
         "name": "description",
       },
     ],
-    "subEntityName": "",
+    "subEntityName": "versions",
     "title": "Capacity Rule",
     "updateFormDependencies": Array [],
   },

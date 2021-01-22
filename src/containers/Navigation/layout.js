@@ -127,7 +127,9 @@ export default class Navigation extends Component {
               label: this.props.currentTenantName,
               value: this.props.currentTenantId,
             }}
-            noBackground={true}
+            customStyle={{
+              noBackground: true,
+            }}
           />
 
           <Divider />

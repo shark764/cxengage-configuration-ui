@@ -2,13 +2,13 @@
 
 exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
 Object {
-  "name": "Please enter a name",
+  "name": "Please enter a name...",
 }
 `;
 
 exports[`formValidation returns proper object (errors) when wrong values are provided 1`] = `
 Object {
-  "name": "Please enter a name",
+  "name": "Please enter a name...",
 }
 `;
 
