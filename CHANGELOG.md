@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Beta User Acceptance Testing]
 - IdentityProviders
+
+# [0.96.1] _ 2021-01-20
+### Fixed
+- CXV1-23809 - Hide bulk edit from capacity rules table
+- CXV1-23810 - Config UI 2 | Capacity Rules | Edit existing capacity rule name and revert it back will show same name error
+
 ## [0.96.0] - 2021-01-20
 ### Added
 - CXV1-18711 - Config2 - Capacity Rules | Side panel details table

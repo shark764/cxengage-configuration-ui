@@ -966,6 +966,7 @@ entities.forecastDashboards.pageTitle = 'Forecasting';
 entities.forecastDashboards.helpLink = '';
 
 // Capacity Rules
+entities.capacityRules.bulkEditsAvailable = false;
 entities.capacityRules.pageTitle = 'Capacity Rules Management';
 entities.capacityRules.helpLink = '/Help/Content/Managing%20Users/Capacity_Rules/Creating_Capacity_Rules.htm';
 entities.capacityRules.subEntityName = 'versions';

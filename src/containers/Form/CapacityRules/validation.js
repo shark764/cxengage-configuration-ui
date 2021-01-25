@@ -15,7 +15,7 @@ export const formValidation = (values, { intl: { formatMessage } }) => ({
         defaultMessage: 'Please enter a name...',
       })) ||
     (getEntityData(store.getState(), 'capacityRules').some(
-      (capacityRule) => capacityRule.get('name') === values.get('name')
+      (capacityRule) => capacityRule.get('id') !== values.get('id') && capacityRule.get('name') === values.get('name')
     ) &&
       formatMessage({
         id: 'capacityRules.details.name.duplicateError',

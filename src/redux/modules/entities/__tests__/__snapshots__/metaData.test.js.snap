@@ -506,7 +506,7 @@ Object {
   },
   "capacityRules": EntityMetaData {
     "betaFeature": false,
-    "bulkEditsAvailable": true,
+    "bulkEditsAvailable": false,
     "bulkFormDependencies": Array [],
     "columns": Array [
       Object {
