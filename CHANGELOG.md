@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.96.3] _ 2021-01-28
+### Fixed
+- CXV1-23837 - Config UI 2 | Capacity Rules | Updating a capacity rule version shows an error 400
+
 ## [0.96.2] - 2021-01-28
 ### Added
 - <no-Jira> - Capacity Rules - Add Beta feature to Config 1.

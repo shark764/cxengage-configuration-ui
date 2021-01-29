@@ -56,9 +56,9 @@ export default function CapacityRulesForm({
           data-automation="CapacityRulesFormFieldActiveVersion"
           options={
             versions &&
-            versions.map(({ numericOrderVersion, name, version }) => ({
+            versions.map(({ numericOrderVersion, name, id }) => ({
               label: `${numericOrderVersion} - ${name}`,
-              value: version,
+              value: id,
             }))
           }
           placeholder={formatMessage({
