@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+## [0.96.2] - 2021-01-28
+### Added
+- <no-Jira> - Capacity Rules - Add Beta feature to Config 1.
+
 # [0.96.1] _ 2021-01-20
 ### Fixed
 - CXV1-23809 - Hide bulk edit from capacity rules table
@@ -19,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - CXV1-18711 - Config2 - Capacity Rules | Side panel details table
 - CXV1-18712 - Config2 - Capacity Rules | mainEntityForm
+
 ## [0.95.5] - 2021-01-21
 ### Fixed 
 - CXV1-23700 - Early access features page fails to load if branding style is null

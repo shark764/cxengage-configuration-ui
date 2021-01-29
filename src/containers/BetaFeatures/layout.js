@@ -67,6 +67,7 @@ export default class BetaFeatures extends Component {
       tenants: false,
       integrations: false,
       identityProviders: false,
+      capacityRules: false
     };
     const pageTitles = {};
     Object.keys(features).forEach((entityName) => {
