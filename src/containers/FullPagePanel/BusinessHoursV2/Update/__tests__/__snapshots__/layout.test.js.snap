@@ -46,7 +46,7 @@ exports[`<UpdateBusinessHoursV2 /> it shows as inherited when editing an inherit
           ]
         }
         rules={
-          Immutable.List [
+          Array [
             Object {
               "every": 1,
               "hours": Object {
@@ -254,7 +254,7 @@ exports[`<UpdateBusinessHoursV2 /> it shows copy modal to copy a version/draft t
           ]
         }
         rules={
-          Immutable.List [
+          Array [
             Object {
               "every": 1,
               "hours": Object {
@@ -525,7 +525,7 @@ exports[`<UpdateBusinessHoursV2 /> it shows copy modal to create a new draft wit
           ]
         }
         rules={
-          Immutable.List [
+          Array [
             Object {
               "every": 1,
               "hours": Object {
@@ -795,7 +795,7 @@ exports[`<UpdateBusinessHoursV2 /> it shows create draft modal 1`] = `
           ]
         }
         rules={
-          Immutable.List [
+          Array [
             Object {
               "every": 1,
               "hours": Object {
@@ -1025,7 +1025,7 @@ exports[`<UpdateBusinessHoursV2 /> renders the component 1`] = `
           ]
         }
         rules={
-          Immutable.List [
+          Array [
             Object {
               "every": 1,
               "hours": Object {

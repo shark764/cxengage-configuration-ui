@@ -10,7 +10,7 @@ import {
   DetailHeader,
   SidePanelTable,
   AutoCompleteField,
-  DetailsPanelAlert
+  DetailsPanelAlert,
 } from 'cx-ui-components';
 import { isEmpty } from 'serenova-js-utils/strings';
 
@@ -72,7 +72,7 @@ const WrapperDiv = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  min-height: ${props => (props.minHeight ? props.minHeight : '100px')};
+  min-height: ${(props) => (props.minHeight ? props.minHeight : '100px')};
   overflow: auto;
   margin-top: 10px;
 `;
@@ -106,26 +106,26 @@ const eventType = [
     id: 0,
     state: true,
     name: 'Regular Hours',
-    color: '#51CE90'
+    color: '#51CE90',
   },
   {
     id: 1,
     state: true,
     name: 'One-Time extended Hours',
-    color: '#F1D29D'
+    color: '#F1D29D',
   },
   {
     id: 2,
     state: true,
     name: 'Blackout Exceptions',
-    color: '#F08695'
+    color: '#F08695',
   },
   {
     id: 3,
     state: true,
     name: 'Blackout One-Time Exceptions',
-    color: '#8383FD'
-  }
+    color: '#8383FD',
+  },
 ];
 
 const stringSortingMethod = (a, b) => a.localeCompare(b, undefined, { sensitivity: 'base', numeric: true });
@@ -136,14 +136,14 @@ const versionsEntitiyTableHeaders = [
     name: 'version',
     label: 'Version',
     required: true,
-    customSortMethod: stringSortingMethod
+    customSortMethod: stringSortingMethod,
   },
   {
     type: 'string',
     name: 'name',
     label: 'Name',
     required: true,
-    customSortMethod: stringSortingMethod
+    customSortMethod: stringSortingMethod,
   },
   {
     type: 'string',
@@ -158,14 +158,14 @@ const versionsEntitiyTableHeaders = [
       } else if (a && !b) {
         return 1;
       }
-    }
+    },
   },
   {
     type: 'string',
     name: 'createdBy',
     label: 'Created By',
     required: true,
-    customSortMethod: stringSortingMethod
+    customSortMethod: stringSortingMethod,
   },
   {
     format: 'datetime',
@@ -178,12 +178,12 @@ const versionsEntitiyTableHeaders = [
       } else {
         return -1;
       }
-    }
-  }
+    },
+  },
 ];
 
 const CreateDraftForm = reduxForm({
-  form: 'businessHoursV2:createDraft'
+  form: 'businessHoursV2:createDraft',
 })(function({ handleSubmit, onCancel, invalid, isSaving }) {
   return (
     <form onSubmit={handleSubmit}>
@@ -197,7 +197,7 @@ const CreateDraftForm = reduxForm({
 });
 
 const CreateCopyVersionForm = reduxForm({
-  form: 'businessHoursV2:copyVersion'
+  form: 'businessHoursV2:copyVersion',
 })(function({
   handleSubmit,
   onCancel,
@@ -209,10 +209,10 @@ const CreateCopyVersionForm = reduxForm({
   versions,
   drafts,
   businessHourId,
-  inherited
+  inherited,
 }) {
-  const businessHoursName = !inherited ? businessHoursList.find(bh => bh.id === businessHourId).name : '';
-  const { name, version } = versions.find(v => v.id === copyVersionId) || drafts.find(v => v.id === copyVersionId);
+  const businessHoursName = !inherited ? businessHoursList.find((bh) => bh.id === businessHourId).name : '';
+  const { name, version } = versions.find((v) => v.id === copyVersionId) || drafts.find((v) => v.id === copyVersionId);
   return (
     <form onSubmit={handleSubmit}>
       <ModalActions onCancel={onCancel} isSaving={isSaving} invalid={invalid} />
@@ -259,42 +259,60 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
     super();
     this.state = {
       isCreateModalOpen: false,
-      isCopyModalOpen: false
+      isCopyModalOpen: false,
     };
   }
 
   toggleCreateModal = () => {
     this.setState(({ isCreateModalOpen: prevIsCreateModalOpen }) => ({
-      isCreateModalOpen: !prevIsCreateModalOpen
+      isCreateModalOpen: !prevIsCreateModalOpen,
     }));
   };
 
   toggleCopyModal = () => {
     this.setState(({ isCopyModalOpen: prevIsCopyModalOpen }) => ({
-      isCopyModalOpen: !prevIsCopyModalOpen
+      isCopyModalOpen: !prevIsCopyModalOpen,
     }));
   };
 
-  copyBusinessHoursVersion = id => {
+  copyBusinessHoursVersion = (id) => {
     this.setState({
       copyVersionId: id,
       isCopyModalOpen: true,
-      isCopyVersion: true
+      isCopyVersion: true,
     });
   };
 
-  updateBusinessHoursVersion = selectedVersion => {
+  updateBusinessHoursVersion = (selectedVersion) => {
     if (selectedVersion.version === 'Draft') {
       this.props.setSelectedSubEntityId(selectedVersion.id);
     }
     this.setState({
       copyVersionId: selectedVersion.id,
       isCopyModalOpen: true,
-      isCopyVersion: false
+      isCopyVersion: false,
     });
   };
 
   render() {
+    let rules;
+    this.props.rules &&
+      this.props.rules.forEach(({ on, on: { type, value } = {}, ...rule }, i) => {
+        if (i === 0) {
+          rules = [];
+        }
+        rules.push({
+          ...rule,
+          ...(on && value && value === 'day'
+            ? {
+                on: {
+                  type: value,
+                  value: type,
+                },
+              }
+            : on ? { on } : {}),
+        });
+      });
     return (
       <Fragment>
         <HeaderContainer>
@@ -312,23 +330,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
             <BusinessHoursV2 />
           </FieldsColumn>
           <CalendarColumn>
-            <CalendarEvents
-              rules={
-                this.props.rules &&
-                this.props.rules.map(({ on, on: { type, value } = {}, ...rule }) => ({
-                  ...rule,
-                  ...(on && value && value === 'day'
-                    ? {
-                        on: {
-                          type: value,
-                          value: type
-                        }
-                      }
-                    : on ? { on } : {})
-                }))
-              }
-              eventType={eventType}
-            />
+            <CalendarEvents rules={rules} eventType={eventType} />
           </CalendarColumn>
           <br />
           <RowWrapper>
@@ -359,21 +361,21 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                     this.props.versions &&
                     (({ id }) => this.props.versions.find(({ id: versionId }) => id === versionId))
                   }
-                  shouldShowCopyButtonOnItem={version =>
-                    this.props.versions.find(v => v.id === version.id) ||
-                    this.props.drafts.find(v => v.id === version.id)
+                  shouldShowCopyButtonOnItem={(version) =>
+                    this.props.versions.find((v) => v.id === version.id) ||
+                    this.props.drafts.find((v) => v.id === version.id)
                   }
-                  shouldShowUpdateButtonOnItem={version =>
-                    this.props.versions.find(v => v.id === version.id) ||
-                    this.props.drafts.find(v => v.id === version.id)
+                  shouldShowUpdateButtonOnItem={(version) =>
+                    this.props.versions.find((v) => v.id === version.id) ||
+                    this.props.drafts.find((v) => v.id === version.id)
                   }
-                  shouldShowDeleteButtonOnItem={version => this.props.drafts.find(v => v.id === version.id)}
-                  viewSubEntity={id => this.props.setSelectedBusinessHourVersion(id)}
-                  copySubEntity={id => this.copyBusinessHoursVersion(id)}
+                  shouldShowDeleteButtonOnItem={(version) => this.props.drafts.find((v) => v.id === version.id)}
+                  viewSubEntity={(id) => this.props.setSelectedBusinessHourVersion(id)}
+                  copySubEntity={(id) => this.copyBusinessHoursVersion(id)}
                   deleteSubEntity={this.props.removeListItem}
-                  updateSubEntity={id =>
+                  updateSubEntity={(id) =>
                     this.updateBusinessHoursVersion(
-                      this.props.versions.find(v => v.id === id) || this.props.drafts.find(v => v.id === id)
+                      this.props.versions.find((v) => v.id === id) || this.props.drafts.find((v) => v.id === id)
                     )
                   }
                   confirmDeleteSubEntity={true}
@@ -412,24 +414,24 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
         {this.state.isCreateModalOpen && (
           <Modal onMaskClick={!this.props.isCreatingDraft && this.toggleCreateModal}>
             <CreateDraftForm
-              onSubmit={values => {
+              onSubmit={(values) => {
                 this.props.createDraft(this.props.businessHourId, values.toJS());
               }}
               initialValues={Map({
-                draftName: ''
+                draftName: '',
               })}
-              validate={values => ({
+              validate={(values) => ({
                 draftName:
                   (isEmpty(values.get('draftName')) && "Draft Name can't be empty") ||
                   (this.props.drafts.some(
-                    draft =>
+                    (draft) =>
                       draft.name.toLowerCase() ===
                       values
                         .get('draftName')
                         .trim()
                         .toLowerCase()
                   ) &&
-                    'Draft name should be unique')
+                    'Draft name should be unique'),
               })}
               isSaving={this.props.isCreatingDraft}
               onCancel={this.toggleCreateModal}
@@ -439,19 +441,19 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
         {this.state.isCopyModalOpen && (
           <Modal onMaskClick={!this.props.isCreatingDraft && this.toggleCopyModal}>
             <CreateCopyVersionForm
-              onSubmit={values => {
+              onSubmit={(values) => {
                 const versionOrDraft =
-                  this.props.versions.find(v => v.id === this.state.copyVersionId) ||
-                  this.props.drafts.find(v => v.id === this.state.copyVersionId);
+                  this.props.versions.find((v) => v.id === this.state.copyVersionId) ||
+                  this.props.drafts.find((v) => v.id === this.state.copyVersionId);
                 const newDraft = {
                   draftName: values.get('draftName'),
                   description: versionOrDraft.description,
                   timezone: versionOrDraft.timezone,
-                  rules: versionOrDraft.rules
+                  rules: versionOrDraft.rules,
                 };
                 if (this.state.isCopyVersion) {
                   const toBusinessHourName = values.get('toBusinessHours');
-                  const businessHourId = this.props.businessHoursList.find(v => v.name === toBusinessHourName.trim())
+                  const businessHourId = this.props.businessHoursList.find((v) => v.name === toBusinessHourName.trim())
                     .id;
                   this.props.createDraft(businessHourId, newDraft);
                 } else {
@@ -461,25 +463,25 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
               initialValues={Map({
                 draftName: `Copy of ${
                   (
-                    this.props.versions.find(v => v.id === this.state.copyVersionId) ||
-                    this.props.drafts.find(v => v.id === this.state.copyVersionId)
+                    this.props.versions.find((v) => v.id === this.state.copyVersionId) ||
+                    this.props.drafts.find((v) => v.id === this.state.copyVersionId)
                   ).name
-                }`
+                }`,
               })}
-              validate={values => ({
+              validate={(values) => ({
                 toBusinessHours:
                   (isEmpty(values.get('toBusinessHours')) && "Business Hours can't be empty") ||
-                  (!this.props.businessHoursList.find(bh => bh.name === values.get('toBusinessHours').trim()) &&
+                  (!this.props.businessHoursList.find((bh) => bh.name === values.get('toBusinessHours').trim()) &&
                     'You should select a business hours from the list'),
                 draftName:
                   (isEmpty(values.get('draftName')) && "Draft Name can't be empty") ||
                   (values.get('draftName') &&
                     values.get('toBusinessHours') &&
-                    this.props.businessHoursList.find(bh => bh.name === values.get('toBusinessHours').trim()) &&
-                    ((this.props.businessHoursList.find(bh => bh.name === values.get('toBusinessHours').trim())
+                    this.props.businessHoursList.find((bh) => bh.name === values.get('toBusinessHours').trim()) &&
+                    ((this.props.businessHoursList.find((bh) => bh.name === values.get('toBusinessHours').trim())
                       .versions &&
                       this.props.businessHoursList
-                        .find(bh => bh.name === values.get('toBusinessHours').trim())
+                        .find((bh) => bh.name === values.get('toBusinessHours').trim())
                         .versions.find(
                           ({ name }) =>
                             name.toLowerCase() ===
@@ -488,10 +490,10 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                               .trim()
                               .toLowerCase()
                         )) ||
-                      (this.props.businessHoursList.find(bh => bh.name === values.get('toBusinessHours').trim())
+                      (this.props.businessHoursList.find((bh) => bh.name === values.get('toBusinessHours').trim())
                         .items &&
                         this.props.businessHoursList
-                          .find(bh => bh.name === values.get('toBusinessHours').trim())
+                          .find((bh) => bh.name === values.get('toBusinessHours').trim())
                           .items.find(
                             ({ name }) =>
                               name.toLowerCase() ===
@@ -500,7 +502,7 @@ export default class BusinessHoursV2UpdateFullPage extends Component {
                                 .trim()
                                 .toLowerCase()
                           ))) &&
-                    'Draft name should be unique for given business hour')
+                    'Draft name should be unique for given business hour'),
               })}
               isSaving={this.props.isCreatingDraft}
               onCancel={this.toggleCopyModal}
@@ -536,25 +538,25 @@ BusinessHoursV2UpdateFullPage.propTypes = {
   selectedBusinessHourVersion: PropTypes.string,
   businessHoursList: PropTypes.array,
   removeListItem: PropTypes.func,
-  parentTenantName: PropTypes.string
+  parentTenantName: PropTypes.string,
 };
 
 CreateDraftForm.propTypes = {
   handleSubmit: PropTypes.func,
   onCancel: PropTypes.func,
   invalid: PropTypes.bool,
-  isSaving: PropTypes.bool
+  isSaving: PropTypes.bool,
 };
 
 CreateCopyVersionForm.propTypes = {
   handleSubmit: PropTypes.func,
   onCancel: PropTypes.func,
   invalid: PropTypes.bool,
-  isSaving: PropTypes.bool
+  isSaving: PropTypes.bool,
 };
 
 BusinessHoursV2UpdateFullPage.defaultProps = {
   events: [],
   drafts: [],
-  versions: []
+  versions: [],
 };

@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+## [0.96.5] - 2021-01-29
+### Fixed
+CXV1-23819 - Business Hours V2 - Delays / Performance issues when typing and switching versions.
 # [0.96.4] _ 2021-01-28
 ### Fixed
 - CXV1-23607 - Add localization to the capacity rules entity page

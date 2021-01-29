@@ -289,7 +289,7 @@ export default class Navigation extends Component {
                 </StyledLink>
                 <StyledLink
                   data-automation="navigationLinkBusinessHours"
-                  to="/configuration/businessHours"
+                  to="/configuration/businessHoursV2"
                   onClick={(e) => this.setCurrentEntityAndEntityId('businessHours', e)}>
                   <FormattedMessage id="navigation.configuration.businessHours" defaultMessage="Business Hours" />
                 </StyledLink>

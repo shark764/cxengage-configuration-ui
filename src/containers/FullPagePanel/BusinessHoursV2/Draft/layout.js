@@ -10,7 +10,7 @@ import {
   InputField,
   SidePanelActions,
   ToggleField,
-  DetailHeader
+  DetailHeader,
 } from 'cx-ui-components';
 import CalendarEvents from '../../../../components/BusinessHoursCalendar';
 import { isEmpty } from 'serenova-js-utils/strings';
@@ -88,30 +88,30 @@ const eventType = [
     id: 0,
     state: true,
     name: 'Regular Hours',
-    color: '#51CE90'
+    color: '#51CE90',
   },
   {
     id: 1,
     state: true,
     name: 'One-Time extended Hours',
-    color: '#F1D29D'
+    color: '#F1D29D',
   },
   {
     id: 2,
     state: true,
     name: 'Blackout Exceptions',
-    color: '#F08695'
+    color: '#F08695',
   },
   {
     id: 3,
     state: true,
     name: 'Blackout One-Time Exceptions',
-    color: '#8383FD'
-  }
+    color: '#8383FD',
+  },
 ];
 
 const PublishForm = reduxForm({
-  form: 'businessHoursV2:publishDraft'
+  form: 'businessHoursV2:publishDraft',
 })(function({ handleSubmit, isInitialDraft, onCancel, invalid, isSaving }) {
   return (
     <form onSubmit={handleSubmit}>
@@ -135,18 +135,19 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPublishModalOpen: false
+      isPublishModalOpen: false,
     };
   }
 
-  togglePublishModal = e => {
+  togglePublishModal = (e) => {
     e.preventDefault();
-    this.setState(prevProps => ({
-      isPublishModalOpen: !prevProps.isPublishModalOpen
+    this.setState((prevProps) => ({
+      isPublishModalOpen: !prevProps.isPublishModalOpen,
     }));
   };
 
   render() {
+    let rules;
     const {
       props: {
         cancel,
@@ -159,10 +160,30 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
         formsAreInvalid,
         draftName,
         versions,
-        isPublishingDraft
+        isPublishingDraft,
       },
-      state: { isPublishModalOpen }
+      state: { isPublishModalOpen },
     } = this;
+
+    this.props.rules &&
+      this.props.rules
+        .filter((rule) => !ruleValidation(rule, this.props.rules))
+        .forEach(({ on, on: { type, value } = {}, ...rule }, i) => {
+          if (i === 0) {
+            rules = [];
+          }
+          rules.push({
+            ...rule,
+            ...(on && value && value === 'day'
+              ? {
+                  on: {
+                    type: value,
+                    value: type,
+                  },
+                }
+              : on ? { on } : {}),
+          });
+        });
 
     return (
       <Fragment>
@@ -172,13 +193,11 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
               <ConfirmationWrapper
                 confirmBtnCallback={!isSubEntitySaving && !isPublishingDraft && formsAreDirty ? cancel : undefined}
                 mainText="You have unsaved changes that will be lost!."
-                secondaryText="Click Confirm to discard changes, or Cancel to continue editing."
-              >
+                secondaryText="Click Confirm to discard changes, or Cancel to continue editing.">
                 <Button
                   buttonType="secondary"
                   disabled={isSubEntitySaving || isPublishingDraft}
-                  onClick={!isSubEntitySaving && !isPublishingDraft && !formsAreDirty ? cancel : undefined}
-                >
+                  onClick={!isSubEntitySaving && !isPublishingDraft && !formsAreDirty ? cancel : undefined}>
                   Cancel
                 </Button>
               </ConfirmationWrapper>
@@ -187,8 +206,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
               <Button
                 buttonType="primary"
                 onClick={saveDraft}
-                disabled={isSubEntitySaving || !formsAreDirty || formsAreInvalid || isPublishingDraft}
-              >
+                disabled={isSubEntitySaving || !formsAreDirty || formsAreInvalid || isPublishingDraft}>
                 Save Draft
               </Button>
             </ButtonWrapper>
@@ -196,8 +214,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
               <Button
                 buttonType="primary"
                 disabled={!shouldPublish || isSubEntitySaving || formsAreInvalid || isPublishingDraft}
-                onClick={this.togglePublishModal}
-              >
+                onClick={this.togglePublishModal}>
                 {`${formsAreDirty ? 'Save and ' : ''}Publish`}
               </Button>
             </ButtonWrapper>
@@ -209,27 +226,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
             <BusinessHoursV2Draft />
           </DraftFormWrapper>
           <CalendarWrapper>
-            <CalendarEvents
-              rules={
-                this.props.rules
-                  ? this.props.rules
-                      .filter(rule => !ruleValidation(rule, this.props.rules))
-                      .toJS()
-                      .map(({ on, on: { type, value } = {}, ...rule }) => ({
-                        ...rule,
-                        ...(on && value && value === 'day'
-                          ? {
-                              on: {
-                                type: value,
-                                value: type
-                              }
-                            }
-                          : on ? { on } : {})
-                      }))
-                  : []
-              }
-              eventType={eventType}
-            />
+            <CalendarEvents rules={rules} eventType={eventType} />
           </CalendarWrapper>
         </FormPanel>
         <ExceptionsPanel>
@@ -247,7 +244,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
         {isPublishModalOpen && (
           <Modal onMaskClick={!this.props.isPublishingDraft && this.togglePublishModal}>
             <PublishForm
-              onSubmit={values => {
+              onSubmit={(values) => {
                 if (formsAreDirty) {
                   saveBeforePublish(values.set('isInitialDraft', !versions || versions.length === 0));
                 } else {
@@ -256,21 +253,21 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
               }}
               initialValues={Map({
                 versionName: draftName,
-                makeActive: !versions || versions.length === 0
+                makeActive: !versions || versions.length === 0,
               })}
-              validate={values => ({
+              validate={(values) => ({
                 versionName:
                   (isEmpty(values.get('versionName')) && "Version Name can't be empty") ||
                   (versions &&
                     versions.some(
-                      version =>
+                      (version) =>
                         version.name.toLowerCase() ===
                         values
                           .get('versionName')
                           .trim()
                           .toLowerCase()
                     ) &&
-                    'Version name should be unique')
+                    'Version name should be unique'),
               })}
               isInitialDraft={!versions || versions.length === 0}
               onCancel={this.togglePublishModal}
@@ -288,7 +285,7 @@ PublishForm.propTypes = {
   isInitialDraft: PropTypes.bool,
   onCancel: PropTypes.func,
   invalid: PropTypes.bool,
-  isSaving: PropTypes.bool
+  isSaving: PropTypes.bool,
 };
 
 BusinessHoursV2DraftEditFullPage.propTypes = {
@@ -305,5 +302,5 @@ BusinessHoursV2DraftEditFullPage.propTypes = {
   versions: PropTypes.array,
   isPublishingDraft: PropTypes.bool,
   rules: PropTypes.object,
-  addRule: PropTypes.func
+  addRule: PropTypes.func,
 };
