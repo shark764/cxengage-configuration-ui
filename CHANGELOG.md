@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.96.6] _ 2021-01-25
+### Fixed
+- <no jira> - Fix Automation Issue for random failing of test.
+
 ## [0.96.5] - 2021-01-29
 ### Fixed
 CXV1-23819 - Business Hours V2 - Delays / Performance issues when typing and switching versions.

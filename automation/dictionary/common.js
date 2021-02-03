@@ -50,6 +50,7 @@ const commonBehavior = {
     Elem.entityTableColumnSelectionBtn.validateElementsState('isVisible', true);
     Elem.entityTableColumnSelectionBtn.waitForEnabled();
     Elem.entityTableColumnSelectionBtn.validateElementsState('isEnabled', true);
+    this.waitForLoader();
     console.log("--end navigation---")
   },
   insertDataTextValues(parameter, param, entity, actionType) {
@@ -127,6 +128,7 @@ const commonBehavior = {
       Elem.sdpanelStatusToggle.waitForVisible();
       Elem.sdpanelStatusToggle.validateElementsState('isVisible', true);
     }
+    this.waitForLoader();
   },
   fillFormFields(parameter, entity, actionType) {
     Object.keys(parameter).forEach(param => {
@@ -211,6 +213,7 @@ const commonBehavior = {
         Elem.sdpanelSubmitButton.waitAndClick();
       }
     }
+    this.waitForLoader();
   },
   createEntityViaAPI(entity) {
     try {
@@ -339,6 +342,7 @@ const commonBehavior = {
   },
   deleteEntity(entity, actionType) {
     Brow.pause(2000);
+    this.waitForLoader();
     Elem.searchStatusColumnButton.waitAndClick();
     Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
     this.searchByNameAndClick(entity, dictionary[entity].deleteSearchValue);
@@ -477,6 +481,12 @@ const commonBehavior = {
       Elem.sdpanelSubmitButton.waitAndClick();
       this.verifyAction(entity, actionType);
       this.closeToastr(entity, actionType);
+    }
+  },
+  waitForLoader(){
+    if (Elem.loadingSpinnerIcon.isExisting()) {
+      Elem.loadingSpinnerIcon.waitForVisible(30000, false);
+      Elem.loadingSpinnerIcon.validateElementsState('isVisible', false);
     }
   },
   logout() {

@@ -1,6 +1,6 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.96.5",
+  "version": "0.96.6",
   "description": "CxEngage Configuration and Reporting",
   "repository": {
     "type": "git",
@@ -77,7 +77,7 @@
     "babel-plugin-create-automation-page-objects": "^2.0.0",
     "core-js": "^2.6.9",
     "css-loader": "0.28.11",
-    "cx-automation-utils": "^1.1.11",
+    "cx-automation-utils": "^1.1.13",
     "cx-js-sdk": "^1.0.1",
     "dotenv": "^8.2.0",
     "draft-js": "^0.10.5",
@@ -110,7 +110,7 @@
     "url-loader": "1.0.1",
     "wdio-jasmine-framework": "^0.3.8",
     "wdio-spec-reporter": "^0.1.5",
-    "webdriver-manager": "^12.1.7",
+    "webdriver-manager": "^12.1.8",
     "webdriverio": "^4.13.2",
     "webpack": "4.2.0",
     "webpack-bundle-analyzer": "2.11.1",

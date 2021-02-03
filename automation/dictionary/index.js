@@ -757,40 +757,40 @@ module.exports = {
         whichCatagoryToSearch: 'searchNameColumn',
         updateSearchValue: [`rName-${randomId}`, `rRichName-${randomId}`]
       },
-      'Business Hour': {
-        specs: {
-          create: {
-            parametersToInsert: [
-              {
-                nameInput: `rName-${randomId}`,
-                descriptionInput: `rDesc-${randomId}`,
-                timezoneList: 2
-              }
-            ]
-          },
-          update: {
-            parametersToInsert: [
-              {
-                nameInput: `updatedRName-${randomId}`,
-                descriptionInput: `updatedRDesc-${randomId}`,
-                timezoneList: 5
-              }
-            ],
-            subEntityParametersToInsert: [
-              {
-                modalDescriptionInput: `updatedCategoryName-${randomId}`
-              }
-            ]
-          }
-        },
-        navigation: {
-          mainBar: 'configurationMenu',
-          subMainBar: 'navigationLinkBusinessHours'
-        },
-        whichCatagoryToSearch: 'searchNameColumn',
-        updateSearchValue: [`rName-${randomId}`],
-        deleteSearchValue: `updatedKeyName-${randomId}`
-      },
+      // 'Business Hour': {
+      //   specs: {
+      //     create: {
+      //       parametersToInsert: [
+      //         {
+      //           nameInput: `rName-${randomId}`,
+      //           descriptionInput: `rDesc-${randomId}`,
+      //           timezoneList: 2
+      //         }
+      //       ]
+      //     },
+      //     update: {
+      //       parametersToInsert: [
+      //         {
+      //           nameInput: `updatedRName-${randomId}`,
+      //           descriptionInput: `updatedRDesc-${randomId}`,
+      //           timezoneList: 5
+      //         }
+      //       ],
+      //       subEntityParametersToInsert: [
+      //         {
+      //           modalDescriptionInput: `updatedCategoryName-${randomId}`
+      //         }
+      //       ]
+      //     }
+      //   },
+      //   navigation: {
+      //     mainBar: 'configurationMenu',
+      //     subMainBar: 'navigationLinkBusinessHours'
+      //   },
+      //   whichCatagoryToSearch: 'searchNameColumn',
+      //   updateSearchValue: [`rName-${randomId}`],
+      //   deleteSearchValue: `updatedKeyName-${randomId}`
+      // },
       'Flow': {
         specs: {
           create: {

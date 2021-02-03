@@ -91,12 +91,12 @@ pipeline {
             sh "docker exec ${docker_tag} npm run test:coverage"
           }
         }
-        // stage ('Automation Tests') {
-        //   steps { 
-        //     sh 'echo "Stage Description: Runs automation tests in the Dev temp pr build"'
-        //     sh "docker exec ${docker_tag} /bin/bash -c 'export URI=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ && npm run regression'"
-        //   }
-        // }
+        stage ('Automation Tests') {
+          steps { 
+            sh 'echo "Stage Description: Runs automation tests in the Dev temp pr build"'
+            sh "docker exec ${docker_tag} /bin/bash -c 'export URI=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ && npm run regression'"
+          }
+        }
       }
     }
     stage ('Preview PR') {
