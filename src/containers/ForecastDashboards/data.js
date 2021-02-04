@@ -6,6 +6,14 @@
 // forecast call volume data:
 
 export const forecastCallVolumeChartData = [
+  { name: '2:00-2:30', actualCalls: 1000, forecastedCalls: 900 },
+  { name: '2:30-3:00', actualCalls: 950, forecastedCalls: 670 },
+  { name: '3:00-3:30', actualCalls: 830, forecastedCalls: 500 },
+  { name: '3:30-4:00', actualCalls: 970, forecastedCalls: 945 },
+  { name: '4:00-4:30', actualCalls: 850, forecastedCalls: 930 },
+  { name: '4:30-5:00', actualCalls: 920, forecastedCalls: 825 },
+  { name: '5:00-5:30', actualCalls: 830, forecastedCalls: 1020 },
+  { name: '5:30-6:00', actualCalls: 1020, forecastedCalls: 1000 },
   { name: '8:00-8:30', actualCalls: 123, forecastedCalls: 90 },
   { name: '8:30-9:00', actualCalls: 90, forecastedCalls: 67 },
   { name: '9:00-9:30', actualCalls: 86, forecastedCalls: 50 },
@@ -42,7 +50,15 @@ export const slaChartData = [
   { name: '10:00-10:30', sla: '50' },
   { name: '10:30-11:00', sla: '40' },
   { name: '11:00-11:30', sla: '30' },
-  { name: '11:30-12:00', sla: '80' },
+  { name: '12:30-13:00', sla: '80' },
+  { name: '13:00-13:30', sla: '910' },
+  { name: '13:30-14:00', sla: '1000' },
+  { name: '14:00-14:30', sla: '940' },
+  { name: '14:30-15:00', sla: '882' },
+  { name: '15:00-15:30', sla: '860' },
+  { name: '15:30-16:00', sla: '770' },
+  { name: '16:00-16:30', sla: '850' },
+  { name: '16:30-17:00', sla: '940' },
 ];
 
 export const slaTableData = [
@@ -53,7 +69,7 @@ export const slaTableData = [
 
 export const slaDataKeys = ['sla'];
 
-export const slaGuageData = [{ name: 'sla', value: '75%' }];
+export const slaGuageData = [{ name: 'sla', value: 75 }];
 
 export const slaGuageDataKey = 'value';
 

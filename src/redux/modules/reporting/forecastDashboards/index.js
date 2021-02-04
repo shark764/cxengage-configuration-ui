@@ -7,7 +7,7 @@ import { fromJS } from 'immutable';
 // Initial Sub State
 export const initialState = fromJS({
   data: [],
-  filters: {}
+  filters: {},
 });
 
 // Actions
@@ -15,18 +15,18 @@ export const setFilterValue = (filterType, label, value) => ({
   type: 'SET_FILTER_VALUE',
   filterType,
   label,
-  value
+  value,
 });
 
-export const setFilterDate = filterDate => ({
+export const setFilterDate = (filterDate) => ({
   type: 'SET_FILTER_DATE',
-  filterDate
+  filterDate,
 });
 
-export const setShowHideGraph = (statType, hideGraph) => ({
+export const setShowHideGraph = (statType, showGraph) => ({
   type: 'SHOW_OR_HIDE_GRAPH',
   statType,
-  hideGraph
+  showGraph,
 });
 
 // Reducer
@@ -38,8 +38,8 @@ export default function ForecastDashboards(state = initialState, action) {
       return state.set('filterDate', action.filterDate);
     case 'SHOW_OR_HIDE_GRAPH': {
       return state.setIn(
-        ['stats', action.statType, 'hideGraph'],
-        !state.getIn(['stats', action.statType, 'hideGraph'])
+        ['stats', action.statType, 'showGraph'],
+        !state.getIn(['stats', action.statType, 'showGraph'])
       );
     }
     default:

@@ -15,6 +15,3 @@ export const getQueues = (state) => {
 
 export const getSelectedFilterOption = (state, filterType) =>
   state.getIn(['ForecastDashboards', 'filters', filterType]);
-
-export const selectShowHideGraph = (state, statType) =>
-  state.getIn(['ForecastDashboards', 'stats', statType, 'hideGraph']);

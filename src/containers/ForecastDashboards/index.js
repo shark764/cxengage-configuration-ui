@@ -16,7 +16,6 @@ import {
   isDependentEntitesFetching,
   getQueues,
   getSelectedFilterOption,
-  selectShowHideGraph,
 } from '../../redux/modules/reporting/forecastDashboards/selectors';
 
 export const mapStateToProps = (state) => ({
@@ -27,9 +26,6 @@ export const mapStateToProps = (state) => ({
   getSelectedQueue: getSelectedFilterOption(state, 'queue'),
   getSelectedChannel: getSelectedFilterOption(state, 'channel'),
   getSelectedDirection: getSelectedFilterOption(state, 'direction'),
-  isForeCastVolumeGraphHidden: selectShowHideGraph(state, 'forecastCallVolume'),
-  isSlaGraphHidden: selectShowHideGraph(state, 'sla'),
-  isQueueAbandonsGraphHidden: selectShowHideGraph(state, 'queueAbandons'),
 });
 
 export const actions = {

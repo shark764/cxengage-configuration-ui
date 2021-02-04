@@ -6,14 +6,13 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import { getCurrentDateTime, generatePdf } from 'serenova-js-utils/browser';
 
 import {
   PageHeader,
   Typeahead,
   DatePicker,
-  Button,
   LoadingSpinnerSVG,
-  RefreshIconSVG,
   BarChart,
   Gauge,
   ReportingWidget as Widget,
@@ -37,14 +36,16 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: #a9a9a9;
+  background-color: #1e1e1e;
 `;
 
 const FiltersContainer = styled.div`
   display: flex;
   padding: 10px;
-  border: 1px solid #999999;
   border-radius: 3px;
+  background-color: rgb(62, 62, 62);
+  box-shadow: rgba(0, 0, 0, 0.21) 0px 0px;
+  color: #ffffff;
 `;
 
 const FilterWrapper = styled.div`
@@ -54,6 +55,7 @@ const FilterWrapper = styled.div`
 
 const Label = styled.label`
   font-size: 16px;
+  color: #999999;
   text-align: left;
   margin-right: 3px;
   vertical-align: top;
@@ -65,49 +67,62 @@ const Selector = styled(Typeahead)`
   position: relative;
   height: 30px;
   width: 258px;
-  color: #000000;
+  color: #fff;
 `;
 
-const StyledButton = styled(Button)`
-  width: 160px;
-  border: none !important;
-`;
-
-const StatContainer = styled.div`
-  margin-top: 20px;
-`;
-
-const ChartWrapper = styled.div`
-  display: flex;
-`;
-
-const WidgetWrapper = styled.div`
+const StatsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 25%;
-  margin-left: 100px;
+`;
+
+const StatWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  grid-template-areas: 'chart .' 'table .';
+  justify-items: start;
+  background-color: rgb(62, 62, 62);
+  padding: 30px;
+  margin-top: 50px;
 `;
 
 const StyledWidget = styled(Widget)`
   ${(props) => props.marginTop && 'margin-top: 10px'};
-  border: 1px solid #999999;
   border-radius: 3px;
-  height: 250px;
+  width: 300px;
+  height: 270px;
+  background-color: rgb(73, 73, 73);
+  color: #999999;
+  grid-area: ${(props) => props.gridArea};
+  justify-self: center;
+  align-self: center;
 `;
 
-const ChartName = styled.h2`
-  display: inline-block;
-  font-size: 21px;
-  font-weight: 700;
-  color: #474747;
-  margin-bottom: 10px;
+const StyledButton = styled.button`
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #999999;
+  padding: 7px 15px;
+  cursor: pointer;
+  z-index: 1;
+  background-color: rgb(73, 73, 73);
+  width: 160px;
+  border: none !important;
+  &:hover {
+    color: #cccccc;
+  }
 `;
 
-const RefreshIcon = styled(RefreshIconSVG)`
-  display: inline-block;
-  margin-left: 10px;
-  margin-bottom: 10px;
-`;
+const customSelectorStyle = {
+  noBackground: true,
+  searchIconType: 'searchBox',
+  inputborder: '1px solid #4C4C4C',
+  suggestionBackgroundEvenListItem: 'rgb(62,62,62)',
+  suggestionBackgroundOddListItem: '#656565',
+  noOptionsTxtBackroundColor: 'rgb(62, 62, 62)',
+};
 
 const customDatePickerStyle = {
   fontSize: '16px',
@@ -117,23 +132,18 @@ const customDatePickerStyle = {
   boxSizing: 'border-box',
   backgroundColor: 'transparent',
   padding: '2px 35px 0 20px',
-  border: '1px solid #ccc',
+  border: '1px solid #4C4C4C',
+  color: '#dadada',
+  containerBackground: '#656565',
 };
 
 class ForecastDashboards extends Component {
-  refreshIconToolTip = (switchToChart) => {
-    switchToChart
-      ? this.props.intl.formatMessage({
-          id: 'forecastDashboards.toolTip.switchToChart',
-          defaultMessage: 'Switch to Chart',
-        })
-      : this.props.intl.formatMessage({
-          id: 'forecastDashboards.toolTip.switchToTable',
-          defaultMessage: 'Switch to Table',
-        });
-  };
-
   render() {
+    const pdfElementsReference = [
+      { ref: 'forecastCallVolumeWrapper', text: 'Forecast Call Volume' },
+      { ref: 'slaWrapper', text: 'SLA' },
+      { ref: 'queueAbandonsWrapper', text: 'Queue Abandons' },
+    ];
     return (
       <Fragment>
         {this.props.isDependentEntitesFetching ? (
@@ -141,11 +151,12 @@ class ForecastDashboards extends Component {
         ) : (
           <Wrapper className="wrapper">
             <PageHeader
+              headerColor="#FFFFFF"
+              helpLink={this.props.pageHelpLink}
               text={this.props.intl.formatMessage({
                 id: 'pageHeader.forecastDashboards',
                 defaultMessage: 'Forecasting Dashboards',
               })}
-              helpLink={this.props.pageHelpLink}
             />
             <FiltersContainer>
               <FilterWrapper>
@@ -170,19 +181,19 @@ class ForecastDashboards extends Component {
                 <Selector
                   listWidth={258}
                   listHeight={250}
-                  noBackground={true}
-                  customInputColor="#000"
+                  customInputColor="#dadada"
+                  options={this.props.queues}
+                  customStyle={customSelectorStyle}
+                  data-automation="queuesDropDownList"
+                  selectedOption={this.props.getSelectedQueue}
                   placeholder={this.props.intl.formatMessage({
                     id: 'input.placeholder.select.queue',
                     defaultMessage: 'Select a Queue',
                   })}
-                  options={this.props.queues}
                   noSuggestionsMessage={this.props.intl.formatMessage({
                     id: 'input.placeholder.noOptions',
                     defaultMessage: 'No Options',
                   })}
-                  data-automation="queuesDropDownList"
-                  selectedOption={this.props.getSelectedQueue}
                   onSelectedOptionChange={({ label, value }) => this.props.setFilterValue('queue', label, value)}
                 />
               </FilterWrapper>
@@ -194,19 +205,19 @@ class ForecastDashboards extends Component {
                 <Selector
                   listWidth={258}
                   listHeight={250}
-                  noBackground={true}
-                  customInputColor="#000"
+                  customInputColor="#dadada"
+                  options={d.directionOptions}
+                  customStyle={customSelectorStyle}
+                  data-automation="directionDropDownList"
+                  selectedOption={this.props.getSelectedDirection}
                   placeholder={this.props.intl.formatMessage({
                     id: 'input.placeholder.choose.direction',
                     defaultMessage: 'Choose Direction',
                   })}
-                  options={d.directionOptions}
                   noSuggestionsMessage={this.props.intl.formatMessage({
                     id: 'input.placeholder.noOptions',
                     defaultMessage: 'No Options',
                   })}
-                  data-automation="directionDropDownList"
-                  selectedOption={this.props.getSelectedDirection}
                   onSelectedOptionChange={({ label, value }) => this.props.setFilterValue('direction', label, value)}
                 />
               </FilterWrapper>
@@ -218,19 +229,19 @@ class ForecastDashboards extends Component {
                 <Selector
                   listWidth={258}
                   listHeight={250}
-                  noBackground={true}
-                  customInputColor="#000"
+                  customInputColor="#dadada"
+                  options={d.channelOptions}
+                  customStyle={customSelectorStyle}
+                  data-automation="channelDropDownList"
+                  selectedOption={this.props.getSelectedChannel}
                   placeholder={this.props.intl.formatMessage({
                     id: 'input.placeholder.select.channel',
                     defaultMessage: 'Select a Channel',
                   })}
-                  options={d.channelOptions}
                   noSuggestionsMessage={this.props.intl.formatMessage({
                     id: 'input.placeholder.noOptions',
                     defaultMessage: 'No Options',
                   })}
-                  data-automation="channelDropDownList"
-                  selectedOption={this.props.getSelectedChannel}
                   onSelectedOptionChange={({ label, value }) => this.props.setFilterValue('channel', label, value)}
                 />
               </FilterWrapper>
@@ -238,135 +249,112 @@ class ForecastDashboards extends Component {
               <FilterWrapper>
                 <StyledButton
                   disabled={false}
-                  buttonType="primary"
                   onClick={() => console.log('when apply button is clicked make an API request to get the stats')}>
                   <FormattedMessage id="button.text.apply" defaultMessage="Apply" />
                 </StyledButton>
               </FilterWrapper>
+
               <FilterWrapper>
-                <StyledButton
-                  className="generatePdfBtn"
-                  disabled={false}
-                  buttonType="primary"
-                  onClick={() => console.log('Generate PDF')}>
-                  <FormattedMessage id="button.text.generatePdfReport" defaultMessage="Generate pdf report" />
+                <StyledButton disabled={false} onClick={() => generatePdf(pdfElementsReference, getCurrentDateTime)}>
+                  <FormattedMessage id="button.text.pdf" defaultMessage="Save as PDF" />
                 </StyledButton>
               </FilterWrapper>
             </FiltersContainer>
 
-            <StatContainer>
-              <ChartName>
-                <FormattedMessage id="forecastDashboards.report.callVolume" defaultMessage="Forecast Call Volume" />
-              </ChartName>
-              <RefreshIcon
-                title={this.refreshIconToolTip(this.props.isForeCastVolumeGraphHidden)}
-                onClick={() => this.props.setShowHideGraph('forecastCallVolume')}
-              />
-              <ChartWrapper>
-                {!this.props.isForeCastVolumeGraphHidden ? (
-                  <BarChart
-                    width="60%"
-                    height={300}
-                    data={d.forecastCallVolumeChartData}
-                    dataKeys={d.forecastCallVolumeDataKeys}
-                    xDataKey="name"
-                  />
-                ) : (
-                  <StatTable columns={forecastCallVolumeColumns()} data={d.forecastCallVolumeTableData} />
-                )}
-                <WidgetWrapper>
-                  <StyledWidget
-                    label={this.props.intl.formatMessage({
-                      id: 'forecastDashboards.widget.forecastRunRate',
-                      defaultMessage: 'Forecast Run Rate',
-                    })}
-                    value="108%"
-                    color="green"
-                    componentType="info"
-                  />
-                </WidgetWrapper>
-              </ChartWrapper>
-            </StatContainer>
+            <StatsContainer id="dataContainer">
+              <StatWrapper>
+                <BarChart
+                  height={300}
+                  xDataKey="name"
+                  gridArea="chart"
+                  id="forecastCallVolumeWrapper"
+                  data={d.forecastCallVolumeChartData}
+                  dataKeys={d.forecastCallVolumeDataKeys}
+                  statName={this.props.intl.formatMessage({
+                    id: 'forecastDashboards.report.callVolume',
+                    defaultMessage: 'Forecast Call Volume',
+                  })}
+                />
+                <StyledWidget
+                  value="108%"
+                  color="green"
+                  componentType="info"
+                  label={this.props.intl.formatMessage({
+                    id: 'forecastDashboards.widget.forecastRunRate',
+                    defaultMessage: 'Forecast Run Rate',
+                  })}
+                />
+                <StatTable columns={forecastCallVolumeColumns()} data={d.forecastCallVolumeTableData} />
+              </StatWrapper>
 
-            <StatContainer>
-              <ChartName>
-                <FormattedMessage id="forecastDashboards.report.sla" defaultMessage="SLA" />
-              </ChartName>
-              <RefreshIcon
-                title={this.refreshIconToolTip(this.props.isSlaGraphHidden)}
-                onClick={() => this.props.setShowHideGraph('sla')}
-              />
-              <ChartWrapper>
-                {!this.props.isSlaGraphHidden ? (
-                  <BarChart width="60%" height={300} data={d.slaChartData} dataKeys={d.slaDataKeys} xDataKey="name" />
-                ) : (
-                  <StatTable columns={slaColumns()} data={d.slaTableData} />
-                )}
-                <WidgetWrapper>
-                  <StyledWidget
-                    label={this.props.intl.formatMessage({
-                      id: 'forecastDashboards.widget.overall.sla',
-                      defaultMessage: 'Overall SLA',
-                    })}
-                    marginTop="10px">
-                    <Gauge width="100%" height={200} data={d.slaGuageData} dataKey={d.slaGuageDataKey} />
-                  </StyledWidget>
-                  <StyledWidget
-                    label={this.props.intl.formatMessage({
-                      id: 'forecastDashboards.widget.avgTimeToAnswer',
-                      defaultMessage: 'Average Queue Time to Answer',
-                    })}
-                    value="00:06:32"
-                    color="red"
-                    componentType="info"
-                  />
-                </WidgetWrapper>
-              </ChartWrapper>
-            </StatContainer>
+              <StatWrapper>
+                <BarChart
+                  height={300}
+                  gridArea="chart"
+                  id="slaWrapper"
+                  xDataKey="name"
+                  data={d.slaChartData}
+                  dataKeys={d.slaDataKeys}
+                  statName={this.props.intl.formatMessage({
+                    id: 'forecastDashboards.report.sla',
+                    defaultMessage: 'SLA',
+                  })}
+                />
+                <StyledWidget
+                  marginTop="10px"
+                  label={this.props.intl.formatMessage({
+                    id: 'forecastDashboards.widget.overall.sla',
+                    defaultMessage: 'Overall SLA',
+                  })}>
+                  <Gauge width="100%" height={200} data={d.slaGuageData} dataKey={d.slaGuageDataKey} />
+                </StyledWidget>
+                <StatTable columns={slaColumns()} data={d.slaTableData} />
+                <StyledWidget
+                  color="red"
+                  value="00:06:32"
+                  componentType="info"
+                  label={this.props.intl.formatMessage({
+                    id: 'forecastDashboards.widget.avgTimeToAnswer',
+                    defaultMessage: 'Average Queue Time to Answer',
+                  })}
+                />
+              </StatWrapper>
 
-            <StatContainer>
-              <ChartName>
-                <FormattedMessage id="forecastDashboards.report.queueAbandons" defaultMessage="Queue Abandons" />
-              </ChartName>
-              <RefreshIcon
-                title={this.refreshIconToolTip(this.props.isQueueAbandonsGraphHidden)}
-                onClick={() => this.props.setShowHideGraph('queueAbandons')}
-              />
-              <ChartWrapper>
-                {!this.props.isQueueAbandonsGraphHidden ? (
-                  <BarChart
-                    width="60%"
-                    height={300}
-                    data={d.queueAbandonsChartData}
-                    dataKeys={d.queueAbandonsDataKeys}
-                    xDataKey="name"
-                  />
-                ) : (
-                  <StatTable columns={queueAbandonsColumns()} data={d.queueAbandonsTableData} />
-                )}
-                <WidgetWrapper>
-                  <StyledWidget
-                    label={this.props.intl.formatMessage({
-                      id: 'forecastDashboards.widget.queueAbandonRate',
-                      defaultMessage: 'Queue Abandon Rate',
-                    })}
-                    value="7.06%"
-                    color="green"
-                    componentType="info"
-                  />
-                  <StyledWidget
-                    label={this.props.intl.formatMessage({
-                      id: 'forecastDashboards.widget.avgQueueAbandonTime',
-                      defaultMessage: 'Average Queue Abandon Time',
-                    })}
-                    value="00:55:00'"
-                    color="red"
-                    componentType="info"
-                    marginTop="10px"
-                  />
-                </WidgetWrapper>
-              </ChartWrapper>
-            </StatContainer>
+              <StatWrapper>
+                <BarChart
+                  height={300}
+                  gridArea="chart"
+                  xDataKey="name"
+                  id="queueAbandonsWrapper"
+                  data={d.queueAbandonsChartData}
+                  dataKeys={d.queueAbandonsDataKeys}
+                  statName={this.props.intl.formatMessage({
+                    id: 'forecastDashboards.report.queueAbandons',
+                    defaultMessage: 'Queue Abandons',
+                  })}
+                />
+                <StyledWidget
+                  value="7.06%"
+                  color="green"
+                  componentType="info"
+                  label={this.props.intl.formatMessage({
+                    id: 'forecastDashboards.widget.queueAbandonRate',
+                    defaultMessage: 'Queue Abandon Rate',
+                  })}
+                />
+                <StatTable columns={queueAbandonsColumns()} data={d.queueAbandonsTableData} />
+                <StyledWidget
+                  color="red"
+                  marginTop="10px"
+                  value="00:55:00"
+                  componentType="info"
+                  label={this.props.intl.formatMessage({
+                    id: 'forecastDashboards.widget.avgQueueAbandonTime',
+                    defaultMessage: 'Average Queue Abandon Time',
+                  })}
+                />
+              </StatWrapper>
+            </StatsContainer>
           </Wrapper>
         )}
       </Fragment>
@@ -385,9 +373,6 @@ ForecastDashboards.propTypes = {
   getSelectedQueue: PropTypes.string,
   getSelectedChannel: PropTypes.string,
   getSelectedDirection: PropTypes.string,
-  isForeCastVolumeGraphHidden: PropTypes.bool,
-  isSlaGraphHidden: PropTypes.bool,
-  isQueueAbandonsGraphHidden: PropTypes.bool,
   setFilterValue: PropTypes.func,
   setFilterDate: PropTypes.func,
   setShowHideGraph: PropTypes.func,

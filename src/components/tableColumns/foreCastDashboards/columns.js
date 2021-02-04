@@ -14,7 +14,7 @@ export function slaColumns() {
   return [
     constructGeneralTextColumn('queue'),
     constructGeneralTextColumn('interval'),
-    constructGeneralTextColumn('SLA'),
+    constructGeneralTextColumn('sla', 'SLA'),
   ];
 }
 
@@ -23,6 +23,6 @@ export function queueAbandonsColumns() {
     constructGeneralTextColumn('queue'),
     constructGeneralTextColumn('queueAbandons', 'Queue Abandons'),
     constructGeneralTextColumn('queueAbandonRate', 'Queue Abandon Rate'),
-    constructGeneralTextColumn('queueAbandonTime', 'Avg Queue Abandon Time'),
+    constructGeneralTextColumn('avgQueueAbandonTime', 'Avg Queue Abandon Time'),
   ];
 }

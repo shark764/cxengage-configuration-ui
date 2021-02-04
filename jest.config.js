@@ -5,7 +5,7 @@ module.exports = {
     '\\.(jpg|jpeg|png|svg)$': '<rootDir>/config/jest/fileTransform.js',
     '^.+\\.(css)$': '<rootDir>/config/jest/cssTransform.js'
   },
-  setupFiles: ['<rootDir>/config/enzymeConfig.js'],
+  setupFiles: ['jest-canvas-mock', '<rootDir>/config/enzymeConfig.js'],
   transform: {
     '^.+\\.(js|jsx|mjs)$': './config/jest/jest-transformer.js'
   },
