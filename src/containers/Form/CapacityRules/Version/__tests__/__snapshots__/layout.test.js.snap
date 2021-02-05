@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VersionForm /> renders the component 1`] = `
+<form>
+  <styled.h3>
+    <FormattedMessage
+      defaultMessage="Create a new version"
+      id="capacityRules.versions.header.new"
+      values={Object {}}
+    />
+  </styled.h3>
+  <styled.div>
+    <InputField
+      componentType="input"
+      disabled={false}
+      label="Name *"
+      name="name"
+    />
+    <SelectField
+      disabled={false}
+      label="Rule Type *"
+      name="quantifier"
+      options={
+        Array [
+          Object {
+            "label": "All",
+            "value": "all",
+          },
+          Object {
+            "label": "Any",
+            "value": "any",
+          },
+        ]
+      }
+      required={false}
+    />
+    <CapacityRuleField
+      disabled={false}
+      messages={
+        Object {
+          "addGroupPopover": "Add Group",
+          "numInteractionsLabel": "Interactions",
+          "numInteractionsPlaceholder": "Enter a number",
+          "removeGroup": "Remove Group",
+          "removeItem": "Remove Item",
+          "selectPlaceholder": "Please select an option",
+        }
+      }
+      name="rule"
+      options={
+        Array [
+          Object {
+            "label": "Voice",
+            "value": "voice",
+          },
+          Object {
+            "label": "SMS",
+            "value": "sms",
+          },
+          Object {
+            "label": "Email",
+            "value": "email",
+          },
+          Object {
+            "label": "Messaging",
+            "value": "messaging",
+          },
+          Object {
+            "label": "Work Item",
+            "value": "work-item",
+          },
+        ]
+      }
+    />
+  </styled.div>
+  <SidePanelActions
+    bulkItemsAffected={0}
+    hideCancel={false}
+    hideSubmit={false}
+    invalid={false}
+    isSaving={false}
+    selectedEntityId=""
+  />
+</form>
+`;

@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ednRuleToImmutable parse a edn string rule with no voice value to an immutablejs object 1`] = `
+Immutable.Map {
+  "voice": false,
+  "groups": Immutable.List [
+    Immutable.Map {
+      "channels": Immutable.List [
+        "sms",
+        "email",
+      ],
+      "interactions": 2,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "work-item",
+      ],
+      "interactions": 5,
+    },
+  ],
+}
+`;
+
+exports[`ednRuleToImmutable parse a edn string rule with only voice value to an immutablejs object 1`] = `
+Immutable.Map {
+  "voice": true,
+  "groups": Immutable.List [],
+}
+`;
+
+exports[`ednRuleToImmutable parse a edn string rule with voice and other several channels value to an immutablejs object 1`] = `
+Immutable.Map {
+  "voice": true,
+  "groups": Immutable.List [
+    Immutable.Map {
+      "channels": Immutable.List [
+        "sms",
+        "email",
+      ],
+      "interactions": 2,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "work-item",
+      ],
+      "interactions": 5,
+    },
+  ],
+}
+`;
+
+exports[`jsRuletoEdn parse a edn string rule with voice and other several channels value to an immutablejs object 1`] = `"{[:voice] 1 [:sms :email] 2 [:work-item] NaN}"`;
+
+exports[`jsRuletoEdn parse a javascript rule with a false voice value to an edn string 1`] = `"{[:sms :email] 2 [:work-item] NaN}"`;
+
+exports[`jsRuletoEdn parse a javascript rule with a true voice value to a edn string 1`] = `"{[:voice] 1}"`;

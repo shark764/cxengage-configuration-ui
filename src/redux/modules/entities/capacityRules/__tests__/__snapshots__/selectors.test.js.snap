@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCapacityRulesSelector gets the capacity rules of a user 1`] = `
+Immutable.List [
+  Object {
+    "label": "mockName1",
+    "value": "mockId",
+  },
+]
+`;
+
+exports[`selectCapacityRuleVersionFormInitialValues Return initial form values when creating a new version 1`] = `
+Immutable.Map {
+  "rule": Immutable.Map {
+    "voice": true,
+    "groups": Immutable.List [
+      Immutable.Map {
+        "channels": Immutable.List [
+          "email",
+          "messaging",
+        ],
+        "interactions": 4,
+      },
+    ],
+  },
+  "quantifier": "any",
+}
+`;
+
+exports[`selectCapacityRuleVersionFormInitialValues Return initial form values when updating a version 1`] = `
+Immutable.Map {
+  "rule": Immutable.Map {
+    "voice": true,
+    "groups": Immutable.List [
+      Immutable.Map {
+        "channels": Immutable.List [
+          "email",
+          "messaging",
+        ],
+        "interactions": 4,
+      },
+    ],
+  },
+  "quantifier": "any",
+}
+`;
+
+exports[`selectCapacityRuleVersions Return an array if the capacity rules has versions 1`] = `Array []`;
+
+exports[`selectCapacityRuleVersions Return empty array if the capacity rules has no versions 1`] = `Array []`;
+
+exports[`selectCapacityRulesFormInitialValues Return initial form values when creating a new entity 1`] = `
+Immutable.Map {
+  "name": "",
+}
+`;
+
+exports[`selectCapacityRulesFormInitialValues Return initial form values when updating an entity 1`] = `
+Immutable.Map {
+  "name": "",
+  "activeVersion": "activeVersionMockId",
+  "id": "mockId",
+  "ruleSet": "{[:voice] 1 [:email :messaging] 2}",
+}
+`;

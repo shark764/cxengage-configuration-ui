@@ -1,0 +1,270 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateSubEntity a version its being created API call to create a capacity rule version it's succesfull 1`] = `
+Object {
+  "entityId": "mock-id",
+  "entityName": "capacityRules",
+  "response": Object {
+    "result": Object {
+      "itemValue": Object {
+        "id": "capacity-rule-version-id",
+        "version": "capacity-rule-version-id",
+      },
+    },
+  },
+  "sdkCall": Object {
+    "command": "createVersion",
+    "crudAction": "create",
+    "data": Object {
+      "name": "test",
+      "quantifier": "all",
+      "ruleSet": "{[:voice] 1 [:email :messaging] 3 [:work-item] 4}",
+    },
+    "module": "entities",
+    "path": Array [
+      "capacity-rules",
+      "mock-id",
+      "versions",
+    ],
+    "topic": "cxengage/entities/create-version-response",
+  },
+  "type": "CREATE_SUB_ENTITY_FULFILLED",
+  "values": Object {
+    "name": "test",
+    "quantifier": "all",
+    "rule": Object {
+      "groups": Array [
+        Object {
+          "channels": Array [
+            "email",
+            "messaging",
+          ],
+          "interactions": 3,
+        },
+        Object {
+          "channels": Array [
+            "work-item",
+          ],
+          "interactions": 4,
+        },
+      ],
+      "voice": true,
+    },
+  },
+}
+`;
+
+exports[`CreateSubEntity a version its being created API call to create a new capacity rule version fails and CREATE_SUB_ENTITY_REJECTED it's emitted 1`] = `
+Object {
+  "entityId": "mock-id",
+  "entityName": "capacityRules",
+  "sdkCall": Object {
+    "command": "createVersion",
+    "crudAction": "create",
+    "data": Object {
+      "name": "test",
+      "quantifier": "all",
+      "ruleSet": "{[:voice] 1 [:email :messaging] 3 [:work-item] 4}",
+    },
+    "module": "entities",
+    "path": Array [
+      "capacity-rules",
+      "mock-id",
+      "versions",
+    ],
+    "topic": "cxengage/entities/create-version-response",
+  },
+  "type": "CREATE_SUB_ENTITY_REJECTED",
+  "values": Object {
+    "name": "test",
+    "quantifier": "all",
+    "rule": Object {
+      "groups": Array [
+        Object {
+          "channels": Array [
+            "email",
+            "messaging",
+          ],
+          "interactions": 3,
+        },
+        Object {
+          "channels": Array [
+            "work-item",
+          ],
+          "interactions": 4,
+        },
+      ],
+      "voice": true,
+    },
+  },
+}
+`;
+
+exports[`CreateSubEntity a version its being created API call to create the capacity rule it's made and succesfull and the current version being created it's set as the active version 1`] = `
+Object {
+  "entityId": "mock-id",
+  "entityName": "capacityRules",
+  "response": Object {
+    "result": Object {
+      "itemValue": Object {
+        "id": "capacity-rule-version-id",
+        "version": "capacity-rule-version-id",
+      },
+    },
+  },
+  "sdkCall": Object {
+    "command": "createVersion",
+    "crudAction": "create",
+    "data": Object {
+      "name": "test",
+      "quantifier": "all",
+      "ruleSet": "{[:voice] 1 [:email :messaging] 3 [:work-item] 4}",
+    },
+    "module": "entities",
+    "path": Array [
+      "capacity-rules",
+      "mock-id",
+      "versions",
+    ],
+    "topic": "cxengage/entities/create-version-response",
+  },
+  "type": "CREATE_SUB_ENTITY_FULFILLED",
+  "values": Object {
+    "name": "test",
+    "quantifier": "all",
+    "rule": Object {
+      "groups": Array [
+        Object {
+          "channels": Array [
+            "email",
+            "messaging",
+          ],
+          "interactions": 3,
+        },
+        Object {
+          "channels": Array [
+            "work-item",
+          ],
+          "interactions": 4,
+        },
+      ],
+      "voice": true,
+    },
+  },
+}
+`;
+
+exports[`CreateSubEntity a version its being created API call to create the capacity rule it's made and succesfull and the current version being created it's set as the active version 2`] = `
+Object {
+  "entityId": "mock-id",
+  "entityName": "capacityRules",
+  "type": "UPDATE_ENTITY",
+  "values": Object {
+    "activeVersion": "capacity-rule-version-id",
+    "id": "mock-id",
+    "name": "capacity rule name",
+  },
+}
+`;
+
+exports[`FetchVersions Fetches versions of a selected capacity rule API call errors and and action that gets ignored by the store it's returned 1`] = `
+Object {
+  "type": "IGNORED_ACTION",
+}
+`;
+
+exports[`FetchVersions Fetches versions of a selected capacity rule Versions are fecthed correctly and FETCH_CAPACITY_RULE_VERSIONS it's emitted 1`] = `
+Object {
+  "entityId": "capacity-rule-id",
+  "response": Object {
+    "result": Object {
+      "id": "mock-id",
+    },
+  },
+  "type": "FETCH_CAPACITY_RULE_VERSIONS_FULFILLED",
+}
+`;
+
+exports[`UpdateCapacityRule a capacity rule its being updated API call to update a capacity rule fails and UPDATE_ENTITY_REJECTED it's emitted 1`] = `
+Object {
+  "entityId": "capacity-rule-id",
+  "entityName": "capacityRules",
+  "sdkCall": Object {
+    "command": "updateCapacityRule",
+    "crudAction": "update",
+    "data": Object {
+      "name": "test",
+    },
+    "module": "entities",
+    "path": Array [
+      "capacity-rules",
+      "capacity-rule-id",
+    ],
+    "topic": "cxengage/entities/update-capacity-rule-response",
+  },
+  "type": "UPDATE_ENTITY_REJECTED",
+  "values": Object {
+    "name": "test",
+  },
+}
+`;
+
+exports[`UpdateCapacityRule a capacity rule its being updated API call to update a capacity rule it's succesfull and the name and activeVersion of the capacity rule gets updated 1`] = `
+Object {
+  "entityId": "capacity-rule-id",
+  "entityName": "capacityRules",
+  "response": Object {
+    "result": Object {
+      "id": "mock-id",
+    },
+  },
+  "sdkCall": Object {
+    "command": "updateCapacityRule",
+    "crudAction": "update",
+    "data": Object {
+      "activeVersion": "active-version-id",
+      "name": "test",
+    },
+    "module": "entities",
+    "path": Array [
+      "capacity-rules",
+      "capacity-rule-id",
+    ],
+    "topic": "cxengage/entities/update-capacity-rule-response",
+  },
+  "type": "UPDATE_ENTITY_FULFILLED",
+  "values": Object {
+    "activeVersion": "active-version-id",
+    "name": "test",
+  },
+}
+`;
+
+exports[`UpdateCapacityRule a capacity rule its being updated API call to update a capacity rule it's succesfull and the name of the capacity rule gets updated 1`] = `
+Object {
+  "entityId": "capacity-rule-id",
+  "entityName": "capacityRules",
+  "response": Object {
+    "result": Object {
+      "id": "mock-id",
+    },
+  },
+  "sdkCall": Object {
+    "command": "updateCapacityRule",
+    "crudAction": "update",
+    "data": Object {
+      "name": "test",
+    },
+    "module": "entities",
+    "path": Array [
+      "capacity-rules",
+      "capacity-rule-id",
+    ],
+    "topic": "cxengage/entities/update-capacity-rule-response",
+  },
+  "type": "UPDATE_ENTITY_FULFILLED",
+  "values": Object {
+    "name": "test",
+  },
+}
+`;

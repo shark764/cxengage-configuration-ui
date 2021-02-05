@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CapacityRules Renders renders 1`] = `
+<Connect(ReduxForm)
+  intl={
+    Object {
+      "defaultFormats": Object {},
+      "defaultLocale": "en",
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "formats": Object {},
+      "formatters": Object {
+        "getDateTimeFormat": [Function],
+        "getMessageFormat": [Function],
+        "getNumberFormat": [Function],
+        "getPluralFormat": [Function],
+        "getRelativeFormat": [Function],
+      },
+      "locale": "en",
+      "messages": Object {},
+      "now": [Function],
+      "onError": [Function],
+      "textComponent": "span",
+      "timeZone": null,
+    }
+  }
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  Child
+</Connect(ReduxForm)>
+`;
+
+exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
+Object {
+  "disabled": false,
+  "initialValues": Immutable.Map {
+    "rule": Immutable.Map {
+      "voice": true,
+      "groups": Immutable.List [
+        Immutable.Map {
+          "channels": Immutable.List [
+            "email",
+            "messaging",
+          ],
+          "interactions": 4,
+        },
+      ],
+    },
+    "quantifier": "any",
+  },
+  "isSaving": true,
+  "key": "create",
+}
+`;
+
+exports[`subEntityFormSubmission returns proper values 1`] = `undefined`;
