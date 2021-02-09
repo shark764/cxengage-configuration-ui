@@ -14,6 +14,11 @@ describe('<CapacityRulesDetailsPanel />', () => {
         intl={{ formatMessage: ({ defaultMessage }) => defaultMessage }}
         className="details-panel"
         children={'Mock Child'}
+        tableFields={[
+          {
+            test: 'whatever',
+          },
+        ]}
       />
     );
     expect(rendered).toMatchSnapshot();

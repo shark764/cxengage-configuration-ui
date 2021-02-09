@@ -979,6 +979,7 @@ entities.capacityRules.membersTableFields = [
   {
     label: 'Version',
     name: 'numericOrderVersion',
+    messageId: 'capacityRules.details.version',
     customSortMethod: function(a, b) {
       a = parseInt(a, 10);
       b = parseInt(b, 10);
@@ -991,10 +992,12 @@ entities.capacityRules.membersTableFields = [
   },
   {
     label: 'Name',
+    messageId: 'identityProviders.details.name',
     name: 'name',
   },
   {
     label: 'Created On',
+    messageId: 'tables.header.createdOnColumn',
     name: 'created',
     format: 'datetime',
   },

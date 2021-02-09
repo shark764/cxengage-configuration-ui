@@ -10,7 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
-# [0.97.1] _ 2021-02-02
+# [0.97.2] - 2021-02-08
+### Fixed
+- CXV1-23841 - Missing localized messages for capacity rules page
+- CXV1-23860 - The Business hour component shows an end date of current date for a rule with no end date on view-mode
+
+# [0.97.1] - 2021-02-02
 ### Added
 - CXV1-23608 - Capacity Rules page Unit tests
 

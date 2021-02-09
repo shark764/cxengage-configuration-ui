@@ -25,7 +25,6 @@ export default function CapacityRulesDetailsPanel({
   versions,
   setSelectedSubEntityId,
   tableFields,
-  intl,
   intl: { formatMessage },
 }) {
   return (
@@ -47,9 +46,24 @@ export default function CapacityRulesDetailsPanel({
         userHasViewPermission={userHasUpdatePermission}
         viewSubEntity={(listItemId) => setSelectedSubEntityId(listItemId)}
         items={versions}
-        fields={tableFields}
+        fields={tableFields.map(({ messageId, label, ...field }) => ({
+          ...field,
+          label,
+          ...(messageId
+            ? {
+                label: formatMessage({
+                  id: messageId,
+                  defaultMessage: label,
+                }),
+              }
+            : {}),
+        }))}
         defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
         fetching={!versions}
+        actionHeaderMessage={formatMessage({
+          id: 'tables.header.actionColumn',
+          defaultMessage: 'Actions',
+        })}
       />
     </Wrapper>
   );

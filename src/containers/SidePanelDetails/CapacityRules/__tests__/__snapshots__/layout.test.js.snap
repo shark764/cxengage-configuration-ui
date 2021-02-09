@@ -9,6 +9,7 @@ exports[`<CapacityRulesDetailsPanel /> renders capacityRules detailsPanel 1`] = 
     text="Published Versions"
   />
   <_class
+    actionHeaderMessage="Actions"
     contains="versions"
     defaultSorted={
       Array [
@@ -19,6 +20,14 @@ exports[`<CapacityRulesDetailsPanel /> renders capacityRules detailsPanel 1`] = 
       ]
     }
     fetching={true}
+    fields={
+      Array [
+        Object {
+          "label": undefined,
+          "test": "whatever",
+        },
+      ]
+    }
     tableType="sidePanel"
     viewSubEntity={[Function]}
   />

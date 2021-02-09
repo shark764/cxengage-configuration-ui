@@ -64,11 +64,17 @@ export default function VersionForm({
           })} *`}
           options={[
             {
-              label: 'All',
+              label: formatMessage({
+                id: 'capacityRules.version.quantifier.all',
+                defaultMessage: 'All',
+              }),
               value: 'all',
             },
             {
-              label: 'Any',
+              label: formatMessage({
+                id: 'capacityRules.version.quantifier.any',
+                defaultMessage: 'Any',
+              }),
               value: 'any',
             },
           ]}

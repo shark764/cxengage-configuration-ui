@@ -556,15 +556,18 @@ Object {
         "customSortMethod": [Function],
         "customWidth": 35,
         "label": "Version",
+        "messageId": "capacityRules.details.version",
         "name": "numericOrderVersion",
       },
       Object {
         "label": "Name",
+        "messageId": "identityProviders.details.name",
         "name": "name",
       },
       Object {
         "format": "datetime",
         "label": "Created On",
+        "messageId": "tables.header.createdOnColumn",
         "name": "created",
       },
     ],
