@@ -861,7 +861,7 @@ export const memoizedRulesHandler = () => {
             ({ id }) =>
               !deletedRules.some(
                 ({ id: ruleId }) =>
-                  ruleId.includes('new-rule') ? id.includes(ruleId) : id.substring(id.indexOf('n')) === ruleId
+                  !ruleId.includes('new-rule') ? id.includes(ruleId) : id.substring(id.indexOf('n')) === ruleId
               )
           );
         }

@@ -1522,7 +1522,8 @@ export default function reducer(state = initialState, action) {
       return state.updateIn(['businessHoursV2', 'data'], (businessHours) =>
         businessHours.map((businessHour) => {
           return businessHour.update('versions', (versions = List()) => {
-            if (action.activeVersions[businessHour.get('id')]) {
+            if (action.activeVersions[businessHour.get('id')] && 
+              !versions.some(version => version.get('id') === action.activeVersions[businessHour.get('id')].id)) {
               return versions.push(fromJS(action.activeVersions[businessHour.get('id')]));
             } else {
               return versions;

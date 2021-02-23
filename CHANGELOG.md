@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.97.3] - 2021-02-19
+### Fixed
+- CXV1-23868 - Issues with business hours calendar and versions table
+
 # [0.97.2] - 2021-02-08
 ### Fixed
 - CXV1-23841 - Missing localized messages for capacity rules page
