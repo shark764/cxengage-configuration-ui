@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.97.4] - 2021-03-02
+### Fixed
+- CXV1-23805 - Agent State Monitoring Drop Down Filter views are truncated
+
 # [0.97.3] - 2021-02-19
 ### Fixed
 - CXV1-23868 - Issues with business hours calendar and versions table
@@ -59,7 +63,7 @@ CXV1-23819 - Business Hours V2 - Delays / Performance issues when typing and swi
 - CXV1-18712 - Config2 - Capacity Rules | mainEntityForm
 
 ## [0.95.5] - 2021-01-21
-### Fixed 
+### Fixed
 - CXV1-23700 - Early access features page fails to load if branding style is null
 
 ## [0.95.4] - 2021-01-20
@@ -105,7 +109,7 @@ CXV1-23819 - Business Hours V2 - Delays / Performance issues when typing and swi
 
 ## [0.92.2] - 2020-12-03
 ### Fixed
-- CXV1-2366 - changing language causes tenants dont appear in the search 
+- CXV1-2366 - changing language causes tenants dont appear in the search
 
 ## [0.92.1] - 2020-11-30
 ### Added
@@ -275,7 +279,7 @@ Removed the following changes:
 
 ## [0.81.29] - 2020-09-01
 ### Fixed
-- <no-Jira> - Update chinese & finnish language localization keys of contact attributes entity. 
+- <no-Jira> - Update chinese & finnish language localization keys of contact attributes entity.
 
 ## [0.81.28] - 2020-08-28
 ### Fixed
@@ -503,16 +507,16 @@ Removed the following changes:
 - CXV1-22566 - Disposition Items Added to a Disposition List add to the end of the list regardless of what Category the item was added to
 
 ## [0.78.4] - 2020-06-05
-- CXV1-22621 - Fix business hours component width to fit to smaller screens 
+- CXV1-22621 - Fix business hours component width to fit to smaller screens
 
 ## [0.78.3] - 2020-06-05
 - CXV1-22619 - Add Version Timezone in versions Table(entityTable)
 
 ## [0.78.2] - 2020-06-04
-- CXV1-22591 - Separate create Calendar into own component 
+- CXV1-22591 - Separate create Calendar into own component
 
 ## [0.78.1] - 2020-06-01
-- CXV1-22545 - resolutions changes in BH draft page 
+- CXV1-22545 - resolutions changes in BH draft page
 - CXV1-22567 - create a new BH
 
 ## [0.78.0] - 2020-05-26
@@ -530,7 +534,7 @@ Removed the following changes:
 - CXV1-18405 - Add Tenants page to config2.
 
 ## [0.76.3] - 2020-05-27
-- CXV1-22521 - create start and end date 
+- CXV1-22521 - create start and end date
 - CXV1-22520 - view draft
 - CXV1-22519 - Repeaters values
 - CXV1-21472 - Config 2 - Basic Page Structure - Edit Draft
@@ -678,7 +682,7 @@ Removed the following changes:
 
 ## [0.72.8] - 2020-17-02
 ## Fixed
-- <no-jira> - sdk version bump and general fixes related to business hours page V2 
+- <no-jira> - sdk version bump and general fixes related to business hours page V2
 
 ## [0.72.7] - 2020-02-27
 ## Fixed
@@ -721,12 +725,12 @@ Removed the following changes:
 
 ## [0.70.22] - 2020-01-30
 ## Added
-- CXV1-21413 - updating pstn/sip extensions on users spec. 
+- CXV1-21413 - updating pstn/sip extensions on users spec.
 
 ## [0.70.21] - 2020-01-29
 ## Fixed
 - CXV1-21317 - When inviting a existing user to a tenant, pre-select platform-role-id.
-- CXV1-21325 - user-management, first-name and last-name should be required if the user's status is still pending. 
+- CXV1-21325 - user-management, first-name and last-name should be required if the user's status is still pending.
 
 ## [0.70.20] - 2020-01-28
 ## Changed
@@ -974,7 +978,7 @@ Removed the following changes:
 
 ## [0.66.23] - 2019-10-29
 ## Fixed
-- CXV1-20437 - enable bulk sharing action | Presence list | config - UI 2 
+- CXV1-20437 - enable bulk sharing action | Presence list | config - UI 2
 
 ## [0.66.22] - 2019-10-29
 ## Fixed
@@ -982,7 +986,7 @@ Removed the following changes:
 
 ## [0.66.21] - 2019-10-25
 ## Added
-- <no-Jira> - Added automation tests to Jenkins Pipeline 
+- <no-Jira> - Added automation tests to Jenkins Pipeline
 
 ## [0.66.20] - 2019-10-25
 ## Added
@@ -1024,7 +1028,7 @@ Removed the following changes:
 
 ## [0.66.11] - 2019-10-17
 ## Changed
-- Bump sdk version to 9.2.1 
+- Bump sdk version to 9.2.1
 
 ## [0.66.10] - 2019-10-16
 ### Changed
@@ -1059,8 +1063,8 @@ Removed the following changes:
 - CXV1-20233 - Reasons - Missing bulk actions.
 
 ## [0.66.3] - 2019-10-09
-### Fixed 
-- CXV1-17305 - Groups2 - Outbound Identifiers & Presence Reason lists should be assignable to the "everyone" inherited group 
+### Fixed
+- CXV1-17305 - Groups2 - Outbound Identifiers & Presence Reason lists should be assignable to the "everyone" inherited group
 
 ## [0.66.2] - 2019-10-08
 ### Changed
@@ -1109,7 +1113,7 @@ Removed the following changes:
 -CXV1-19932 - Flow debug logs page - Fixed Text wrapping and also added space between the buttons and the display in pretty view.
 
 ## [0.65.6] - 2019-09-13
-- <no-jira> - Adding Business Hours, Api Keys and Message Templates page to beta features. 
+- <no-jira> - Adding Business Hours, Api Keys and Message Templates page to beta features.
 
 ## [0.65.5] - 2019-09-13
 ### Fixed
@@ -1133,7 +1137,7 @@ Removed the following changes:
 
 ## [0.65.2] - 2019-09-09
 ### Fixed
-- <no-jira> - Adding sprockets function to kill previous builds upon code change. 
+- <no-jira> - Adding sprockets function to kill previous builds upon code change.
 
 ## [0.65.1] - 2019-09-09
 ### Fixed
@@ -1352,7 +1356,7 @@ Removed the following changes:
 - CXV1-15515 - Users page bulk actions now allows to make just one action at a time.
 
 ## [0.58.0] - 2019-02-28
-### Added 
+### Added
 - CXV1-16902 - Update dispatch mapping panel to include flow version selection
 
 ## [0.57.1] - 2019-02-28
