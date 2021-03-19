@@ -757,40 +757,48 @@ module.exports = {
         whichCatagoryToSearch: 'searchNameColumn',
         updateSearchValue: [`rName-${randomId}`, `rRichName-${randomId}`]
       },
-      // 'Business Hour': {
-      //   specs: {
-      //     create: {
-      //       parametersToInsert: [
-      //         {
-      //           nameInput: `rName-${randomId}`,
-      //           descriptionInput: `rDesc-${randomId}`,
-      //           timezoneList: 2
-      //         }
-      //       ]
-      //     },
-      //     update: {
-      //       parametersToInsert: [
-      //         {
-      //           nameInput: `updatedRName-${randomId}`,
-      //           descriptionInput: `updatedRDesc-${randomId}`,
-      //           timezoneList: 5
-      //         }
-      //       ],
-      //       subEntityParametersToInsert: [
-      //         {
-      //           modalDescriptionInput: `updatedCategoryName-${randomId}`
-      //         }
-      //       ]
-      //     }
-      //   },
-      //   navigation: {
-      //     mainBar: 'configurationMenu',
-      //     subMainBar: 'navigationLinkBusinessHours'
-      //   },
-      //   whichCatagoryToSearch: 'searchNameColumn',
-      //   updateSearchValue: [`rName-${randomId}`],
-      //   deleteSearchValue: `updatedKeyName-${randomId}`
-      // },
+      'Business Hour': {
+        specs: {
+          create: {
+            parametersToInsert: [
+              {
+                nameInput: `rName-${randomId}`,
+                descriptionInput: `rDesc-${randomId}`
+              }
+            ],
+            draftEntityParametersToInsert: [
+              {
+                timezoneList: 1,
+                ruleNameInput:`ruleName-${randomId}`,
+                ruleTypeList:1,
+                ruleDescriptionInput:`Rule Description-${randomId}`,
+                ruleRepeatList:1,
+                ruleEveryInput:1
+              }],
+            subEntityParametersToInsert: [
+              {
+                versionNameInput: `version-${randomId}`,
+                makeActiveToggle: true,
+              },
+            ]
+          },
+          update: {
+            parametersToInsert: [
+              {
+                nameInput: `updatedRName-${randomId}`,
+                descriptionInput: `updatedRDesc-${randomId}`
+              }
+            ]
+          }
+        },
+        navigation: {
+          mainBar: 'configurationMenu',
+          subMainBar: 'navigationLinkBusinessHours'
+        },
+        whichCatagoryToSearch: 'searchNameColumn',
+        updateSearchValue: [`rName-${randomId}`],
+        deleteSearchValue: `updatedKeyName-${randomId}`
+      },
       'Flow': {
         specs: {
           create: {

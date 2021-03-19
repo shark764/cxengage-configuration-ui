@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.97.5] - 2021-03-10
+### Fixed
+- <no-jira> - Fix automation for business hours v2
+
 # [0.97.4] - 2021-03-02
 ### Fixed
 - CXV1-23805 - Agent State Monitoring Drop Down Filter views are truncated

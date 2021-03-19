@@ -12,6 +12,7 @@ exports[`<DraftFullPagePanel /> renders the component 1`] = `
         >
           <Button
             buttonType="secondary"
+            data-automation="btnCancel"
           >
             Cancel
           </Button>
@@ -20,6 +21,7 @@ exports[`<DraftFullPagePanel /> renders the component 1`] = `
       <styled.div>
         <Button
           buttonType="primary"
+          data-automation="btnSaveDraft"
           onClick={[Function]}
         >
           Save Draft
@@ -28,6 +30,7 @@ exports[`<DraftFullPagePanel /> renders the component 1`] = `
       <styled.div>
         <Button
           buttonType="primary"
+          data-automation="btnSaveAndPublish"
           onClick={[Function]}
         >
           Save and Publish
@@ -145,6 +148,7 @@ exports[`<DraftFullPagePanel /> renders the publish modal within the component 1
         >
           <Button
             buttonType="secondary"
+            data-automation="btnCancel"
           >
             Cancel
           </Button>
@@ -153,6 +157,7 @@ exports[`<DraftFullPagePanel /> renders the publish modal within the component 1
       <styled.div>
         <Button
           buttonType="primary"
+          data-automation="btnSaveDraft"
           onClick={[Function]}
         >
           Save Draft
@@ -161,6 +166,7 @@ exports[`<DraftFullPagePanel /> renders the publish modal within the component 1
       <styled.div>
         <Button
           buttonType="primary"
+          data-automation="btnSaveAndPublish"
           onClick={[Function]}
         >
           Save and Publish

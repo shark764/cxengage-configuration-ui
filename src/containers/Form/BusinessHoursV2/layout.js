@@ -22,7 +22,7 @@ export default function BusinessHoursV2Form({
   initialValues,
   sharedFormValue,
   toggleShared,
-  versions
+  versions,
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -31,7 +31,7 @@ export default function BusinessHoursV2Form({
         label="Name *"
         componentType="input"
         inputType="text"
-        data-automation="BusinessHoursV2FormFieldName"
+        data-automation="nameInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       <InputField
@@ -39,7 +39,7 @@ export default function BusinessHoursV2Form({
         label="Description"
         componentType="textarea"
         inputType="text"
-        data-automation="BusinessHoursV2FormFieldDescription"
+        data-automation="descriptionInput"
         disabled={isSaving || inherited || !userHasUpdatePermission}
       />
       {initialValues.get('id') && (
@@ -48,7 +48,7 @@ export default function BusinessHoursV2Form({
           label="Active Version"
           placeholder="Select a version..."
           options={versions}
-          data-automation="businessHourV2sActiveVersion"
+          data-automation="activeVersionList"
           disabled={
             isSaving ||
             inherited ||
@@ -72,8 +72,7 @@ export default function BusinessHoursV2Form({
         }
         mainText={`If you unshare this Business Hour it will become unavailable for all child tenants and it flows using this business hours rule on child tenants may become unusable.`}
         secondaryText={'Are you sure you want to continue?'}
-        data-automation="toggleSharedConfirmationWrapper"
-      >
+        data-automation="toggleSharedConfirmationWrapper">
         <ToggleField
           name="shared"
           label="Shared"
@@ -96,5 +95,5 @@ BusinessHoursV2Form.propTypes = {
   userHasSharePermission: PropTypes.bool,
   toggleShared: PropTypes.func,
   sharedFormValue: PropTypes.bool,
-  versions: PropTypes.array
+  versions: PropTypes.array,
 };

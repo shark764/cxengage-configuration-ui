@@ -6,7 +6,7 @@ exports[`<BusinessHoursV2Form /> renders create form 1`] = `
 >
   <InputField
     componentType="input"
-    data-automation="BusinessHoursV2FormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -14,7 +14,7 @@ exports[`<BusinessHoursV2Form /> renders create form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="BusinessHoursV2FormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
@@ -42,7 +42,7 @@ exports[`<BusinessHoursV2Form /> renders update form 1`] = `
 >
   <InputField
     componentType="input"
-    data-automation="BusinessHoursV2FormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Name *"
@@ -50,14 +50,14 @@ exports[`<BusinessHoursV2Form /> renders update form 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="BusinessHoursV2FormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
   <SelectField
-    data-automation="businessHourV2sActiveVersion"
+    data-automation="activeVersionList"
     disabled={false}
     label="Active Version"
     name="activeVersion"

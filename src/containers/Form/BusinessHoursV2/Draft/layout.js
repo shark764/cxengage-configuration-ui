@@ -10,7 +10,7 @@ export default function BusinessHoursV2DraftForm({
   timezones,
   initialValues,
   inherited,
-  isPublishing
+  isPublishing,
 }) {
   return (
     <form onSubmit={handleSubmit}>
@@ -19,7 +19,7 @@ export default function BusinessHoursV2DraftForm({
         label="Draft Name *"
         componentType="input"
         inputType="text"
-        data-automation="BusinessHoursV2DraftFormFieldName"
+        data-automation="nameInput"
         disabled={isSaving || inherited || !userHasUpdatePermission || isPublishing}
       />
       <Detail label="Created" value={moment(initialValues.get('created')).format('MMM M, YYYY hh:mm:ss A')} />
@@ -29,7 +29,7 @@ export default function BusinessHoursV2DraftForm({
         label="Description"
         componentType="textarea"
         inputType="text"
-        data-automation="BusinessHoursV2DraftFormFieldDescription"
+        data-automation="descriptionInput"
         disabled={isSaving || inherited || !userHasUpdatePermission || isPublishing}
       />
       <SelectField
@@ -37,7 +37,7 @@ export default function BusinessHoursV2DraftForm({
         label="Timezone"
         disabled={isSaving || inherited || !userHasUpdatePermission || isPublishing}
         options={timezones}
-        data-automation="BusinessHoursV2DraftTimezoneField"
+        data-automation="timezoneList"
         required
       />
     </form>
@@ -52,5 +52,5 @@ BusinessHoursV2DraftForm.propTypes = {
   userHasUpdatePermission: PropTypes.bool,
   timezones: PropTypes.array.isRequired,
   initialValues: PropTypes.object,
-  isPublishing: PropTypes.bool
+  isPublishing: PropTypes.bool,
 };

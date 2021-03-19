@@ -6,7 +6,7 @@ exports[`<DraftForm /> renders the component 1`] = `
 >
   <InputField
     componentType="input"
-    data-automation="BusinessHoursV2DraftFormFieldName"
+    data-automation="nameInput"
     disabled={false}
     inputType="text"
     label="Draft Name *"
@@ -22,14 +22,14 @@ exports[`<DraftForm /> renders the component 1`] = `
   />
   <InputField
     componentType="textarea"
-    data-automation="BusinessHoursV2DraftFormFieldDescription"
+    data-automation="descriptionInput"
     disabled={false}
     inputType="text"
     label="Description"
     name="description"
   />
   <SelectField
-    data-automation="BusinessHoursV2DraftTimezoneField"
+    data-automation="timezoneList"
     disabled={false}
     label="Timezone"
     name="timezone"

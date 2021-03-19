@@ -151,14 +151,18 @@ const commonBehavior = {
   },
   submitFormData(entity, actionType, parameter) {
     this.fillFormFields(parameter, entity, actionType);
+    const draftEntityFormParams = dictionary[entity].specs[actionType].draftEntityParametersToInsert;
     const subEntityFormParams = dictionary[entity].specs[actionType].subEntityParametersToInsert;
     const subEntityToAddThenRemove = dictionary[entity].specs[actionType].subEntityToAddAndRemove;
     if (actionType === 'create') {
+      this.draftEntity(draftEntityFormParams, entity, actionType);
       if (subEntityFormParams) {
         subEntityFormParams.forEach(parameter => {
-          Elem.sdpanelAddItem.waitAndClick();
+          if (entity !== "Business Hour") {
+           Elem.sdpanelAddItem.waitAndClick();
+          }
           this.fillFormFields(parameter, entity, actionType);
-          if (entity !== 'Sla') {
+          if (entity !== 'Sla' && entity !== "Business Hour") {
             Elem.modalSubmitButton.waitAndClick();
           }
         });
@@ -236,6 +240,9 @@ const commonBehavior = {
         Brow.pause(3000)
         this.navigationMainBar(entity);
         Brow.pause(3000)
+      }else if(entity === 'Business Hour'){
+        this.closeAllToastr();
+        Elem.sdpanelCancelButton.waitAndClick();
       }else{
         this.closeToastr(entity, actionType);
         this.verifyEntitySpecificAction(entity);
@@ -272,9 +279,11 @@ const commonBehavior = {
         Elem.toastSuccessMessage.validateElementsString('exact', 'Branding has been reset to default successfully!');
         this.closeToastr(entity, actionType);
       }
-      this.toggleEntity(entity);
-      this.closeSidePanel(entity);
-      this.revertUpdate(entity, actionType);
+      if(entity !== 'Business Hour'){
+        this.toggleEntity(entity);
+        this.closeSidePanel(entity);
+        this.revertUpdate(entity, actionType);
+      }
     });
   },
   addExtension(entity, actionType, type, ext, pos) {
@@ -296,6 +305,20 @@ const commonBehavior = {
     Elem.sdpanelSubmitButton.waitAndClick();
     this.verifyAction(entity, actionType);
     this.closeToastr(entity, actionType);
+  },
+  draftEntity(draftEntityFormParams, entity, actionType){
+    if(draftEntityFormParams){//continue draft
+      Elem.sdpanelSubmitButton.waitAndClick();
+      Brow.pause(1000);
+      draftEntityFormParams.forEach(parameter => {
+        this.fillFormFields(parameter, entity, actionType);
+        if (entity === "Business Hour") {
+          $('button[data-automation="btnSaveAndPublish"]').scroll();
+          Brow.pause(1000);
+          $('button[data-automation="btnSaveAndPublish"]').click();
+        }
+      });
+    }
   },
   addRemoveSubEntity(parameter, param, entity, actionType) {
     if (entity === 'User' && Elem.sdpanelAddItem.isExisting()) {
@@ -341,7 +364,6 @@ const commonBehavior = {
     }
   },
   deleteEntity(entity, actionType) {
-    Brow.pause(2000);
     this.waitForLoader();
     Elem.searchStatusColumnButton.waitAndClick();
     Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
@@ -401,7 +423,9 @@ const commonBehavior = {
       actionType === 'delete'
     ) {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was updated successfully!`);
-    } else if (entity === 'Business Hour' && actionType === 'exception') {
+    } else if (entity === 'Business Hour' && actionType === 'create') {
+      Elem.toastSuccessMessage.validateElementsString('exact', `Draft was updated successfully!`);
+    }else if (entity === 'Business Hour' && actionType === 'exception') {
       Elem.toastSuccessMessage.validateElementsString('exact', `Exception was created successfully!`);
     } else if (entity === 'Tenant') {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
@@ -414,12 +438,12 @@ const commonBehavior = {
     }
   },
   performEntitySpecificAction(entity,action=null){
-    if(entity === 'Contact Layout'){
+    if(entity === 'Contact Layout' || entity === "Business Hour"){
       if(action){
         Elem.searchStatusColumnButton.waitAndClick();
         Elem.searchStatusColumnButton.selectDropDownValue('byVisibleText', 'All');
       }
-      else if(!Elem.createListItemButton.isExisting()){
+      else if(entity !== "Business Hour" && !Elem.createListItemButton.isExisting()){
         Elem.entityCreateButton.waitAndClick();
         Elem.createListItemButton.waitForEnabled(3000);
       }
@@ -463,6 +487,12 @@ const commonBehavior = {
       }
       Elem.toastCloseButton.waitForVisible(30000, false);
       Elem.toastCloseButton.validateElementsState('isVisible', false);
+    }
+  },
+  closeAllToastr() {
+    while (Elem.toastCloseButton.isVisible()) {
+      Elem.toastCloseButton.waitAndClick();
+      Brow.pause(500);
     }
   },
   closeSidePanel(entity) {

@@ -123,9 +123,15 @@ const PublishForm = reduxForm({
           label="Version Name"
           componentType="input"
           inputType="text"
+          data-automation="versionNameInput"
           disabled={isSaving}
         />
-        <ToggleField name="makeActive" disabled={isSaving || isInitialDraft} label="Make active" />
+        <ToggleField
+          name="makeActive"
+          data-automation="makeActiveToggle"
+          disabled={isSaving || isInitialDraft}
+          label="Make active"
+        />
       </ModalWrapper>
     </form>
   );
@@ -196,6 +202,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
                 secondaryText="Click Confirm to discard changes, or Cancel to continue editing.">
                 <Button
                   buttonType="secondary"
+                  data-automation="btnCancel"
                   disabled={isSubEntitySaving || isPublishingDraft}
                   onClick={!isSubEntitySaving && !isPublishingDraft && !formsAreDirty ? cancel : undefined}>
                   Cancel
@@ -206,6 +213,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
               <Button
                 buttonType="primary"
                 onClick={saveDraft}
+                data-automation="btnSaveDraft"
                 disabled={isSubEntitySaving || !formsAreDirty || formsAreInvalid || isPublishingDraft}>
                 Save Draft
               </Button>
@@ -213,6 +221,7 @@ export default class BusinessHoursV2DraftEditFullPage extends Component {
             <ButtonWrapper>
               <Button
                 buttonType="primary"
+                data-automation="btnSaveAndPublish"
                 disabled={!shouldPublish || isSubEntitySaving || formsAreInvalid || isPublishingDraft}
                 onClick={this.togglePublishModal}>
                 {`${formsAreDirty ? 'Save and ' : ''}Publish`}

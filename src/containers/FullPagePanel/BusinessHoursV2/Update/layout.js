@@ -190,7 +190,14 @@ const CreateDraftForm = reduxForm({
       <ModalActions onCancel={onCancel} isSaving={isSaving} invalid={invalid} />
       <ModalTitle>New Draft</ModalTitle>
       <ModalWrapper>
-        <InputField name="draftName" label="Draft Name" componentType="input" inputType="text" disabled={isSaving} />
+        <InputField
+          name="draftName"
+          label="Draft Name"
+          data-automation="draftNameInput"
+          componentType="input"
+          inputType="text"
+          disabled={isSaving}
+        />
       </ModalWrapper>
     </form>
   );
