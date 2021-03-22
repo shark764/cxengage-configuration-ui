@@ -147,7 +147,10 @@ export const errorManager = (error) => {
 
       if (attribute && typeof attribute === 'object') {
         messageFromAPI = attribute[attr];
-        errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(attribute[attr])}`;
+        if (Array.isArray(messageFromAPI)) {
+          messageFromAPI = messageFromAPI.join('<br/>');
+        }
+        errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(messageFromAPI)}`;
       } else if (error.message && message) {
         messageFromAPI = message;
         errorDetails = ` ${error.message}<br/>${code}: ${capitalizeFirstLetter(message)}.`;
