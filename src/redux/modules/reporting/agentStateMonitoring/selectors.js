@@ -63,6 +63,13 @@ const isDataMatchingFilter = (data, filter, propNameForMatch = '') => {
         .replace(/\s./g, (match) => match.trim().toUpperCase());
       return data.getIn(['channelTypes', channelTypeName, 'active']) > 0;
     });
+  } else if (filter.get('name') === 'Direction') {
+    return menuItems.some((menuItem) => {
+      if (menuItem.get('name') === 'Do Not Disturb Outbound') {
+        return 'agent-initiated' === data.get(propNameForMatch).toLowerCase();
+      }
+      return menuItem.get('name').toLowerCase() === data.get(propNameForMatch).toLowerCase();
+    });
   } else {
     // Match on name.
     return menuItems.some(

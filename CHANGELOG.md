@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.97.6] - 2021-03-19
+### Fixed
+- CXV1-23874 - Data for Agent State Monitoring is being filtered properly for Direction column.
+
 # [0.97.5] - 2021-03-10
 ### Fixed
 - <no-jira> - Fix automation for business hours v2
