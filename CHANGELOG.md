@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.97.8] - 2021-03-30
+### Fixed
+- CXV1-24131 - Agent State Monitor - Filters no longer have scroll bar.
+
 # [0.97.7] - 2021-03-19
 ### Fixed
 - CXV1-24148 - Error comming from API when attempting to create a List Item is no longer freezing the page.
