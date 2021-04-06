@@ -11,11 +11,11 @@ export const constructInitialState = () => {
     silentMonitoring: {
       status: 'offline',
       interactionId: 'na',
-      sessionId: ''
+      sessionId: '',
     },
     canSilentMonitor: false,
     loadingUserStatus: false,
-    muted: true
+    muted: true,
   };
   // We want to keep the previous sessionId stored in localStorage. This handles cases where the
   // SupervisorToolbar gets destroyed + rebuilt when leaving and returning to the
@@ -33,11 +33,11 @@ export const constructInitialState = () => {
 
 // Actions
 export const getCanSilentMonitor = () => ({
-  type: 'GET_CAN_SILENT_MONITOR'
+  type: 'GET_CAN_SILENT_MONITOR',
 });
-export const supervisorSubscriptionsAdded = subscription => ({
+export const supervisorSubscriptionsAdded = (subscription) => ({
   type: 'SUPERVISOR_TOOLBAR_SUBSCRIPTIONS_ADDED_$',
-  subscription
+  subscription,
 });
 /**
  * 1.
@@ -50,10 +50,10 @@ export const supervisorSubscriptionsAdded = subscription => ({
 export const monitorInteractionInitialization = (interactionId, chosenExtension) => ({
   type: 'MONITOR_INTERACTION_INITIALIZATION',
   interactionId,
-  chosenExtension
+  chosenExtension,
 });
 export const monitorInteractionInitializationCompleted = () => ({
-  type: 'MONITOR_INTERACTION_INITIALIZATION_COMPLETED_$'
+  type: 'MONITOR_INTERACTION_INITIALIZATION_COMPLETED_$',
 });
 /**
  * 2.
@@ -65,16 +65,16 @@ export const requestingMonitorCall = (interactionId, transitionCall, chosenExten
   type: 'REQUESTING_MONITOR_CALL',
   interactionId,
   transitionCall,
-  chosenExtension
+  chosenExtension,
 });
 /**
  * 3.
   monitorInteractionRequested happens when the process is done and you should now be
   monitoring the call as long as there were no errors
  */
-export const monitorInteractionRequested = interactionId => ({
+export const monitorInteractionRequested = (interactionId) => ({
   type: 'MONITOR_INTERACTION_REQUESTED',
-  interactionId
+  interactionId,
 });
 export const toggleMuteRequested = () => ({ type: 'TOGGLE_MUTE_REQUESTED_$' });
 export const hangUpRequested = () => ({ type: 'HANG_UP_REQUESTED_$' });
@@ -82,11 +82,11 @@ export const transitionCallEnding = () => ({ type: 'TRANSITION_CALL_ENDING' });
 export const requestingToggleMute = () => ({ type: 'REQUESTING_TOGGLE_MUTE' });
 export const requestingHangUp = () => ({ type: 'REQUESTING_HANG_UP' });
 export const startSupervisorToolbarSubscriptions = () => ({
-  type: 'START_SUPERVISOR_TOOLBAR_$'
+  type: 'START_SUPERVISOR_TOOLBAR_$',
 });
-export const updateAllOfSupervisorToolbar = state => ({
+export const updateAllOfSupervisorToolbar = (state) => ({
   type: 'UPDATE_SUPERVISOR_TOOLBAR_STATE',
-  state
+  state,
 });
 
 // Reducer
@@ -101,28 +101,28 @@ export default function supervisorToolbarReducer(state = constructInitialState()
     case 'cxengage/interactions/voice/silent-monitor-start':
       return state.setIn(['silentMonitoring', 'status'], 'connected').set('muted', true);
     case 'cxengage/session/sqs-shut-down':
-      return state.update('silentMonitoring', silentMonitoring => silentMonitoring.set('status', 'sqsShutDown'));
+      return state.update('silentMonitoring', (silentMonitoring) => silentMonitoring.set('status', 'sqsShutDown'));
     case 'cxengage/interactions/voice/silent-monitor-end':
       if (state.getIn(['silentMonitoring', 'transitionCall'])) {
         return state;
       } else {
-        return state.update('silentMonitoring', silentMonitoring =>
+        return state.update('silentMonitoring', (silentMonitoring) =>
           silentMonitoring.set('status', 'offline').set('interactionId', 'na')
         );
       }
     case 'TRANSITION_CALL_ENDING':
       return state
-        .update('silentMonitoring', silentMonitoring => silentMonitoring.set('transitionCall', false))
+        .update('silentMonitoring', (silentMonitoring) => silentMonitoring.set('transitionCall', false))
         .set('muted', true);
     case 'REQUESTING_MONITOR_CALL':
-      return state.update('silentMonitoring', silentMonitoring =>
+      return state.update('silentMonitoring', (silentMonitoring) =>
         silentMonitoring
           .set('status', 'connecting')
           .set('interactionId', action.interactionId)
           .set('transitionCall', action.transitionCall)
       );
     case 'MONITOR_INTERACTION_REQUESTED':
-      return state.update('silentMonitoring', silentMonitoring =>
+      return state.update('silentMonitoring', (silentMonitoring) =>
         silentMonitoring.set('status', 'connecting').set('interactionId', action.interactionId)
       );
     case 'cxengage/interactions/voice/unmute-acknowledged':

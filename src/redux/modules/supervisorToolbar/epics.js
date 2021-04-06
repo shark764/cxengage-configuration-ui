@@ -28,7 +28,7 @@ import {
   selectSupervisorToolbarMuted,
   selectSupervisorToolbarTwilioEnabled,
   selectTransitionCall,
-  selectSessionId
+  selectSessionId,
 } from './selectors';
 
 import {
@@ -37,7 +37,7 @@ import {
   monitorInteractionInitializationCompleted,
   hangUpRequested,
   toggleMuteRequested,
-  transitionCallEnding
+  transitionCallEnding,
 } from './index';
 
 const WAIT_TIMEOUT = 10000;
@@ -54,28 +54,28 @@ const WaitTwilioDeviceReady = (action$, store) =>
     .ofType('cxengage/twilio/device-ready')
     .timeout(WAIT_TIMEOUT)
     .take(1)
-    .catch(error => handleError(error, store.getState()));
+    .catch((error) => handleError(error, store.getState()));
 
 const WaitSessionStarted = (action$, store) =>
   action$
     .ofType('cxengage/session/started')
     .timeout(WAIT_TIMEOUT)
     .take(1)
-    .catch(error => handleError(error, store.getState()));
+    .catch((error) => handleError(error, store.getState()));
 
 const WaitCurrentSessionEnd = (action$, store) =>
   action$
     .ofType('cxengage/interactions/voice/silent-monitor-end')
     .timeout(WAIT_TIMEOUT)
     .take(1)
-    .catch(error => handleError(error, store.getState()));
+    .catch((error) => handleError(error, store.getState()));
 
 // Start all the required subscriptions
 export const StartBatchRequest = (action$, store) =>
   action$
     .ofType('START_SUPERVISOR_TOOLBAR_$')
     .debounceTime(400)
-    .mergeMap(action =>
+    .mergeMap((action) =>
       from([
         'cxengage/twilio/device-ready',
         'cxengage/session/started',
@@ -84,8 +84,8 @@ export const StartBatchRequest = (action$, store) =>
         'cxengage/interactions/voice/silent-monitor-end',
         'cxengage/interactions/voice/unmute-acknowledged',
         'cxengage/interactions/voice/mute-acknowledged',
-        'cxengage/session/sqs-shut-down'
-      ]).mergeMap(subscription =>
+        'cxengage/session/sqs-shut-down',
+      ]).mergeMap((subscription) =>
         fromPromise(sdkCall({ module: 'subscribe', command: subscription })).mapTo(
           supervisorSubscriptionsAdded(subscription)
         )
@@ -93,26 +93,26 @@ export const StartBatchRequest = (action$, store) =>
     );
 
 export const CanSilentMonitor = (action$, store) =>
-  action$.ofType('GET_CAN_SILENT_MONITOR').concatMap(a =>
+  action$.ofType('GET_CAN_SILENT_MONITOR').concatMap((a) =>
     fromPromise(
       sdkPromise({
         module: 'session',
         command: 'getRunningSessionState',
-        topic: 'cxengage/session/get-running-session-state'
+        topic: 'cxengage/session/get-running-session-state',
       })
     )
-      .map(result => ({
+      .map((result) => ({
         ...a,
         canSilentMonitor:
           result.state === 'offline' ||
           (result.sessionId !== null && result.sessionId === selectSessionId(store.getState())),
-        type: 'SET_CAN_SILENT_MONITOR'
+        type: 'SET_CAN_SILENT_MONITOR',
       }))
-      .catch(error => {
+      .catch((error) => {
         Toast.error(errorLabel(error));
         return {
           canSilentMonitor: false,
-          type: 'SET_CAN_SILENT_MONITOR'
+          type: 'SET_CAN_SILENT_MONITOR',
         };
       })
   );
@@ -126,23 +126,23 @@ export const MonitorInteractionInitialization = (action$, store) =>
         sdkPromise({
           module: 'monitorCall',
           data: { interactionId, chosenExtension },
-          topic: 'monitorCall'
+          topic: 'monitorCall',
         })
       )
-        .filter(response => response !== 'cancelled')
+        .filter((response) => response !== 'cancelled')
         .mapTo(monitorInteractionInitializationCompleted())
     );
 
 export const MonitorInteraction = (action$, store) =>
   action$
     .ofType('REQUESTING_MONITOR_CALL')
-    .map(action => ({
+    .map((action) => ({
       ...action,
       twilioEnabled: selectSupervisorToolbarTwilioEnabled(store.getState()),
       transitionCall: selectTransitionCall(store.getState()),
-      sessionIsActive: selectSessionId(store.getState()) !== ''
+      sessionIsActive: selectSessionId(store.getState()) !== '',
     }))
-    .switchMap(a => {
+    .switchMap((a) => {
       if (a.chosenExtension.provider && a.chosenExtension.provider === 'twilio') {
         if (!a.twilioEnabled && !a.sessionIsActive) {
           // Waiting on twilio & call session to start
@@ -171,7 +171,7 @@ export const MonitorInteraction = (action$, store) =>
         return from([a]);
       }
     })
-    .switchMap(action =>
+    .switchMap((action) =>
       fromPromise(
         sdkCall(
           {
@@ -179,40 +179,40 @@ export const MonitorInteraction = (action$, store) =>
             command: `silentMonitor`,
             data: {
               interactionId: action.interactionId,
-              chosenExtension: action.chosenExtension
-            }
+              chosenExtension: action.chosenExtension,
+            },
           },
           `monitorCall`
         )
       )
         .mapTo(monitorInteractionRequested(action.interactionId))
-        .catch(error => handleError(error, store.getState()))
+        .catch((error) => handleError(error, store.getState()))
     );
 
 export const HangUpEpic = (action$, store) =>
   action$
     .ofType('REQUESTING_HANG_UP')
-    .map(action => ({
+    .map((action) => ({
       ...action,
       interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(store.getState()),
-      status: selectSupervisorToolbarSilentMonitoringStatus(store.getState())
+      status: selectSupervisorToolbarSilentMonitoringStatus(store.getState()),
     }))
     .filter(({ status }) => status === 'connected')
-    .mergeMap(a => {
+    .mergeMap((a) => {
       return fromPromise(
         sdkPromise({
           module: 'comfirmPrompt',
           command: `Stop monitoring Interaction? ${a.interactionId}`,
           data: { interactionId: a.interactionId },
-          topic: 'comfirmPrompt'
+          topic: 'comfirmPrompt',
         })
-      ).map(response => ({
+      ).map((response) => ({
         ...a,
-        confirmationResponse: response
+        confirmationResponse: response,
       }));
     })
     .filter(({ confirmationResponse }) => confirmationResponse)
-    .switchMap(a =>
+    .switchMap((a) =>
       concat(
         of(a).mapTo(transitionCallEnding()),
         fromPromise(
@@ -220,25 +220,36 @@ export const HangUpEpic = (action$, store) =>
             module: 'interactions.voice',
             command: 'resourceRemove',
             data: { interactionId: a.interactionId },
-            topic: 'cxengage/interactions/voice/resource-removed-acknowledged'
+            topic: 'cxengage/interactions/voice/resource-removed-acknowledged',
           })
         )
           .mapTo(hangUpRequested())
-          .catch(error => handleError(error, store.getState()))
+          .catch((error) => handleError(error, store.getState()))
       )
     );
+
+export const MonitorInteractionEnded = (action$, store) =>
+  action$.ofType('HANG_UP_REQUESTED_$').switchMap(({ interactionId }) =>
+    fromPromise(
+      sdkPromise({
+        module: 'monitorCallEnded',
+        data: { interactionId },
+        topic: 'monitorCallEnded',
+      })
+    ).mapTo({ type: 'HANG_UP_ENDED_$' })
+  );
 
 export const ToggleMuteEpic = (action$, store) =>
   action$
     .ofType('REQUESTING_TOGGLE_MUTE')
-    .map(action => ({
+    .map((action) => ({
       ...action,
       interactionId: selectSupervisorToolbarSilentMonitoringInteractionId(store.getState()),
       status: selectSupervisorToolbarSilentMonitoringStatus(store.getState()),
-      muted: selectSupervisorToolbarMuted(store.getState())
+      muted: selectSupervisorToolbarMuted(store.getState()),
     }))
     .filter(({ status }) => status === 'connected')
-    .switchMap(a =>
+    .switchMap((a) =>
       fromPromise(
         sdkPromise({
           module: 'interactions.voice',
@@ -246,17 +257,17 @@ export const ToggleMuteEpic = (action$, store) =>
           data: { interactionId: a.interactionId },
           topic: a.muted
             ? 'cxengage/interactions/voice/unmute-acknowledged'
-            : 'cxengage/interactions/voice/mute-acknowledged'
+            : 'cxengage/interactions/voice/mute-acknowledged',
         })
       )
         .mapTo(toggleMuteRequested())
-        .catch(error => handleError(error, store.getState()))
+        .catch((error) => handleError(error, store.getState()))
     );
 
-export const SqsSessionLost = action$ =>
+export const SqsSessionLost = (action$) =>
   action$
     .ofType('cxengage/session/sqs-shut-down')
-    .do(a => {
+    .do((a) => {
       alert('Session was lost or expired please refresh to monitor interactions.');
     })
     .mapTo({ type: 'SQS_SHUT_DOWN_ALERTED_$' });

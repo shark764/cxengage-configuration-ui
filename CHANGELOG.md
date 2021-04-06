@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.97.9] - 2021-04-05
+### Fixed
+- CXV1-23869 - Supervisor toolbar is no longer blocking pagination controls | Interaction Monitor.
+
 # [0.97.8] - 2021-03-30
 ### Fixed
 - CXV1-24131 - Agent State Monitor - Filters no longer have scroll bar.

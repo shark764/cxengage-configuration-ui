@@ -45,6 +45,9 @@ injectGlobal`
 .InteractionMonitoringTable .rt-td:last-child {
   overflow: visible;
 }
+.InteractionMonitoringTable.has-monitored-interaction .-pagination {
+  justify-content: flex-end;
+}
 `;
 
 export default class InteractionMonitoring extends Component {
@@ -53,7 +56,7 @@ export default class InteractionMonitoring extends Component {
     this.state = {
       filtered: [{ id: 'channel', value: 'voice' }],
       defaultRowsNumber: parseFloat((window.innerHeight / 32 - 8).toFixed(0)),
-      showNoExtensionsWarning: false
+      showNoExtensionsWarning: false,
     };
   }
 
@@ -78,7 +81,7 @@ export default class InteractionMonitoring extends Component {
 
   highlightRow = ({ row }) =>
     row.interactionId === this.props.monitoredId ||
-    row.monitoring.filter(x => x.agentId === this.props.getCurrentAgentId && x.endTimestamp === null).length === 1;
+    row.monitoring.filter((x) => x.agentId === this.props.getCurrentAgentId && x.endTimestamp === null).length === 1;
 
   getTableRowProps = (state, rowInfo) => {
     if (rowInfo) {
@@ -88,13 +91,13 @@ export default class InteractionMonitoring extends Component {
             return this.props.removeSelected();
           } else {
             return this.props.setSelected(rowInfo.row.interactionId, {
-              [rowInfo.viewIndex]: rowInfo.row.interactionId
+              [rowInfo.viewIndex]: rowInfo.row.interactionId,
             });
           }
         },
         style: {
-          background: this.highlightRow(rowInfo) ? 'rgba(253, 255, 50, 0.17)' : null
-        }
+          background: this.highlightRow(rowInfo) ? 'rgba(253, 255, 50, 0.17)' : null,
+        },
       };
     } else {
       return { style: {} };
@@ -102,10 +105,10 @@ export default class InteractionMonitoring extends Component {
   };
   getTdProps = () => ({ style: { fontSize: '11.5pt' } });
   getTheadProps = () => ({ style: { color: 'grey' } });
-  onFilteredChange = filtered => this.setState({ filtered: filtered });
-  onSortedChange = sorted => this.props.setSorted(sorted);
+  onFilteredChange = (filtered) => this.setState({ filtered: filtered });
+  onSortedChange = (sorted) => this.props.setSorted(sorted);
   SubComponent = ({
-    row: { startTimestamp, agentName, direction, channel, contactPoint, flowName, customer, monitoring }
+    row: { startTimestamp, agentName, direction, channel, contactPoint, flowName, customer, monitoring },
   }) =>
     this.props.userHasViewAllMonitoredCallsPermission && (
       <InteractionDetails
@@ -117,7 +120,7 @@ export default class InteractionMonitoring extends Component {
           contactPoint,
           flowName,
           customer,
-          monitoring
+          monitoring,
         }}
         twelveHourFormat={this.props.twelveHourFormat}
       />
@@ -138,16 +141,14 @@ export default class InteractionMonitoring extends Component {
               id="timeConversion"
               type="secondary"
               className="timeConversion"
-              onClick={this.toggleTimeFormat}
-            >
+              onClick={this.toggleTimeFormat}>
               {this.props.twelveHourFormat ? '12h' : '24h'}
             </ConverTimeButton>
             <InlineCheckboxFilterMenu
               type="secondary"
               menuType="Columns"
               tableType="interactionMonitoring"
-              selectionType="checkbox"
-            >
+              selectionType="checkbox">
               Columns
             </InlineCheckboxFilterMenu>
           </div>
@@ -161,7 +162,9 @@ export default class InteractionMonitoring extends Component {
             }
             defaultPageSize={this.state.defaultRowsNumber}
             pageSizeOptions={[this.state.defaultRowsNumber, 20, 50, 100]}
-            className="InteractionMonitoringTable -striped -highlight"
+            className={`InteractionMonitoringTable -striped -highlight${
+              this.props.monitoringStatus === 'connected' ? ' has-monitored-interaction' : ''
+            }`}
             data={this.props.tableData}
             filterable
             defaultFilterMethod={this.defaultFilterMethod}
@@ -211,7 +214,7 @@ export default class InteractionMonitoring extends Component {
                 this.props.canSilentMonitor,
                 this.props.loadingUserStatus,
                 this.showNoExtensionsWarning
-              )
+              ),
             ]}
           />
         )}
@@ -220,8 +223,8 @@ export default class InteractionMonitoring extends Component {
             mainText="You do not have any extensions configured in your user profile"
             openPopupBox={true}
             cancelBtnText="Okay"
-            cancelBtnCallback={e => this.showNoExtensionsWarning(e, false)}
-            onMaskClick={e => this.showNoExtensionsWarning(e, false)}
+            cancelBtnCallback={(e) => this.showNoExtensionsWarning(e, false)}
+            onMaskClick={(e) => this.showNoExtensionsWarning(e, false)}
           />
         )}
       </Wrapper>
@@ -265,5 +268,5 @@ InteractionMonitoring.propTypes = {
   activeSkillFilters: PropTypes.array,
   skillsAreAllActive: PropTypes.bool,
   groupsAreAllActive: PropTypes.bool,
-  isFetchingUserExtensions: PropTypes.bool
+  isFetchingUserExtensions: PropTypes.bool,
 };
