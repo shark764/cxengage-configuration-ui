@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Beta User Acceptance Testing]
 - IdentityProviders
 
+# [0.97.10] - 2021-04-01
+### removed
+- <no-jira> - Remove dev in the jenkins pipeline and added QE tenant for regression testing.
+
 # [0.97.9] - 2021-04-05
 ### Fixed
 - CXV1-23869 - Supervisor toolbar is no longer blocking pagination controls | Interaction Monitor.

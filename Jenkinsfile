@@ -72,13 +72,13 @@ pipeline {
         sh "docker cp ${docker_tag}:/home/node/app/build build"
       }
     }
-    stage ('Dev temp build') {
+    stage ('temp build') {
       when { changeRequest() }
       steps {
-        sh "echo 'Stage Description: Creates a temp build of the site in dev'"
+        sh "echo 'Stage Description: Creates a temp build of the site'"
         sh "aws s3 rm s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --recursive"
         sh "sed -i 's/\\\"\\/main/\\\"\\/config2\\/${pr}\\/main/g' build/build/index.html"
-        sh "cp config/dev/config.json build/build"
+        sh "cp config/qe/config.json build/build"
         sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --delete"
       }
     }
@@ -91,12 +91,12 @@ pipeline {
             sh "docker exec ${docker_tag} npm run test:coverage"
           }
         }
-        // stage ('Automation Tests') {
-        //   steps { 
-        //     sh 'echo "Stage Description: Runs automation tests in the Dev temp pr build"'
-        //     sh "docker exec ${docker_tag} /bin/bash -c 'export URI=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ && npm run regression'"
-        //   }
-        // }
+        stage ('Automation Tests') {
+          steps { 
+            sh 'echo "Stage Description: Runs automation tests in the temp pr build"'
+            sh "docker exec ${docker_tag} /bin/bash -c 'export URI=https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html#/ && npm run regression'"
+          }
+        }
       }
     }
     stage ('Preview PR') {
@@ -106,24 +106,6 @@ pipeline {
         script {
           f.invalidate("E23K7T1ARU8K88")
           office365ConnectorSend status:"Ready for review", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 Dev Preview</a>", webhookUrl:"https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6"
-        }
-      }
-    }
-    stage ('Ready for QE') {
-      when { changeRequest() }
-      steps {
-        timeout(time: 5, unit: 'DAYS') {
-          script {
-            input message: 'Ready for QE?', submittedParameter: 'submitter'
-          }
-          sh "echo 'Stage Description: Creates a temp build of the site in QE & notifies team members that the pr is reviewd and is ready to test'"
-          sh "aws s3 rm s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --recursive"
-          sh "sed -i 's/dev/qe/g' build/build/config.json"
-          sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/config2/${pr}/ --delete"
-          script {
-            f.invalidate("E23K7T1ARU8K88")
-            office365ConnectorSend status:"Ready for QE", color:"f6c342", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 QE Preview</a>", webhookUrl:"https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6"
-          }
         }
       }
     }
@@ -157,14 +139,6 @@ pipeline {
         }
       }
     }
-    stage ('Create dev build') {
-      when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
-      steps {
-        sh 'echo "Stage Description: Pushes built app to S3"'
-        sh "cp config/dev/config.json build/build"
-        sh "aws s3 sync build/build/ s3://frontend-prs.cxengagelabs.net/dev/builds/config2/${build_version}/ --delete"
-      }
-    }
     stage ('Create qe build') {
       when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
       steps {
@@ -193,38 +167,6 @@ pipeline {
     stage ('Deploy') {
       when { anyOf {branch 'master'; branch 'develop'; branch 'hotfix'}}
       steps {
-        build job: 'Deploy - Front-End', parameters: [
-          [
-            $class: 'StringParameterValue',
-            name: 'Service',
-            value: "Config-UI2"
-          ],
-          [
-            $class: 'StringParameterValue',
-            name: 'RefreshRate',
-            value: "9000"
-          ],
-          [
-            $class: 'StringParameterValue',
-            name: 'Version',
-            value: build_version
-          ],
-          [
-            $class: 'StringParameterValue',
-            name: 'Environment',
-            value: 'dev'
-          ],
-          [
-            $class: 'BooleanParameterValue',
-            name: 'blastSqsOutput',
-            value: true
-          ],
-          [
-            $class: 'StringParameterValue',
-            name: 'logLevel',
-            value: 'debug'
-          ]
-        ]
         build job: 'Deploy - Front-End', parameters: [
           [
               $class: 'StringParameterValue',
