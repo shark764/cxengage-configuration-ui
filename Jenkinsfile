@@ -105,7 +105,7 @@ pipeline {
         sh "echo 'Stage Description: Notifies team members that the PR is ready for review'"
         script {
           f.invalidate("E23K7T1ARU8K88")
-          office365ConnectorSend status:"Ready for review", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 Dev Preview</a>", webhookUrl:"https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6"
+          office365ConnectorSend status:"Ready for review", message:"<a href=\"https://frontend-prs.cxengagelabs.net/config2/${pr}/index.html\">Config-UI 2 QE Preview</a>", webhookUrl:"https://outlook.office.com/webhook/046fbedf-24a1-4c79-8e4a-3f73437d9de5@1d8e6215-577d-492c-9fe9-b3c9e7d65fdd/JenkinsCI/26ba2757836d431c8310fbfbfbb905dc/4060fcf8-0939-4695-932a-b8d400889db6"
         }
       }
     }

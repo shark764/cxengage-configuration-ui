@@ -45,8 +45,9 @@ const Api = {
 		if (webIntegrations.length > 0) {
             try {
                 for (let i = 0; i < webIntegrations.length; i++) {
-                    this.deleteChatWebIntegration('Config2 Automation Web Integration', process.ENV.tenantId);
-
+					if(webIntegrations[i].name === 'Config2 Automation Web Integration'){
+						this.deleteChatWebIntegration('Config2 Automation Web Integration', process.ENV.tenantId);
+					}
                 }
             } catch (err) {
                 throw new Error('Could not delete existing automation chat widget integrations due to ' + err);
@@ -59,8 +60,9 @@ const Api = {
 		if (apps.length > 0) {
             try {
                 for (let i = 0; i < apps.length; i++) {
-                    this.deleteChatWidgetApp('Chat Widget Automation App', process.ENV.tenantId);
-
+					if(apps[i].name === 'Chat Widget Automation App'){
+						this.deleteChatWidgetApp('Chat Widget Automation App', process.ENV.tenantId);
+					}
                 }
             } catch (err) {
                 throw new Error('Could not delete existing automation apps due to ' + err);

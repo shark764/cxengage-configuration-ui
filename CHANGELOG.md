@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Beta User Acceptance Testing]
 - IdentityProviders
+# [0.97.11] - 2021-04-15
+### removed
+- <no-jira> - Added fix to the chatwidgets, to check the name of the integrations and apps before deleting.
 
 # [0.97.10] - 2021-04-01
 ### removed

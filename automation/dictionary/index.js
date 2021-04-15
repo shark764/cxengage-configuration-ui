@@ -611,7 +611,7 @@ module.exports = {
         whichCatagoryToSearch: "searchNameColumn",
         updateSearchValue: ['password-reset']
       },
-      /* 'Chat Widget': {
+       'Chat Widget': {
         specs: {
           deleteBeforeAPI: {
             parameters: {}
@@ -672,7 +672,7 @@ module.exports = {
         },
         whichCatagoryToSearch: "searchNameColumn",
         updateSearchValue: ['Config2 Automation Web Integration']
-      }, */
+      }, 
       'Api Key': {
         specs: {
           create: {
