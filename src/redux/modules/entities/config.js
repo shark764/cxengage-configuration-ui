@@ -24,6 +24,7 @@ export const hasCustomUpdateEntity = (entityName) =>
     'contactLayouts',
     'contactAttributes',
     'capacityRules',
+    'integrations',
   ].includes(entityName);
 
 export const hasCustomCreateEntityFullFilled = (entityName) => !['businessHoursV2', 'tenants'].includes(entityName);
@@ -38,6 +39,7 @@ export const hasCustomUpdateEntityFullFilled = (entityName) =>
     'tenants',
     'contactLayouts',
     'contactAttributes',
+    'integrations',
   ].includes(entityName);
 
 export const hasCustomCreateSubEntity = (entityName) => !['businessHours', 'capacityRules'].includes(entityName);

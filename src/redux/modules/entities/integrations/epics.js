@@ -12,6 +12,7 @@ import { handleSuccess, handleError } from '../handleResult';
 import { getSelectedEntityId, getSelectedSubEntityId, getCurrentEntity, getSelectedEntity } from '../selectors';
 import { entitiesMetaData } from '../metaData';
 import { camelCaseToRegularFormAndRemoveLastLetter, camelCaseToKebabCase } from 'serenova-js-utils/strings';
+import { prepareIntegrationProperties } from './utilities';
 
 export const FetchData = (action$, store) =>
   action$
@@ -41,7 +42,8 @@ export const CreateEntity = (action$) =>
       a.sdkCall.path = entitiesMetaData[a.entityName].sdkCall.path
         ? entitiesMetaData[a.entityName].sdkCall.path
         : [camelCaseToKebabCase(a.entityName.replace(/[V|v]\d{1}/, ''))];
-      a.sdkCall.data = { ...a.values, 'integration-type': a.values.type };
+      const properties = prepareIntegrationProperties(a.values.type, a.values.authType, a.values.properties);
+      a.sdkCall.data = { ...a.values, 'integration-type': a.values.type, properties };
       a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;
       return { ...a };
     })
@@ -52,6 +54,35 @@ export const CreateEntity = (action$) =>
             response,
             a,
             `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was created successfully!`
+          )
+        )
+        .catch((error) => handleError(error, a))
+    );
+
+export const UpdateEntity = (action$) =>
+  action$
+    .ofType('UPDATE_ENTITY')
+    .filter(({ entityName }) => entityName === 'integrations')
+    .map((a) => {
+      a.sdkCall = entitiesMetaData[a.entityName].entityApiRequest('update', 'singleMainEntity');
+      a.sdkCall.path = [camelCaseToKebabCase(a.entityName), a.entityId];
+      a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;
+      const properties = prepareIntegrationProperties(a.values.type, a.values.authType, a.values.properties);
+      const { created, createdBy, updated, updatedBy, updating, bulkChangeItem, ...data } = a.values;
+      a.sdkCall.data = {
+        ...data,
+        integrationId: a.entityId,
+        properties,
+      };
+      return { ...a };
+    })
+    .concatMap((a) =>
+      fromPromise(sdkPromise(a.sdkCall))
+        .map((response) =>
+          handleSuccess(
+            response,
+            a,
+            `${camelCaseToRegularFormAndRemoveLastLetter(a.entityName)} was updated successfully!`
           )
         )
         .catch((error) => handleError(error, a))
@@ -109,4 +140,24 @@ export const RemoveTwilioGlobalDialParamFormSubmission = (action$, store) =>
     .map((a) => ({
       ...a,
       type: 'UPDATE_ENTITY',
+    }));
+
+export const ReInitBusinessHoursV2Form = (action$) =>
+  action$
+    .ofType('UPDATE_ENTITY_FULFILLED')
+    .filter((a) => a.entityName === 'integrations')
+    .map((a) => {
+      const { authType, bulkChangeItem } = a.values;
+      const result = { ...a.response.result, authType, bulkChangeItem };
+      delete result.active;
+      return { ...a, result };
+    })
+    .map((a) => ({
+      type: '@@redux-form/INITIALIZE',
+      meta: {
+        form: `${a.entityName}:${a.entityId}`,
+        keepDirty: false,
+        updateUnregisteredFields: false,
+      },
+      payload: { ...a.result },
     }));

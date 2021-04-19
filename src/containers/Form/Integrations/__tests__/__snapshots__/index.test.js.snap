@@ -12,7 +12,13 @@ exports[`Integrations Renders renders 1`] = `
     Immutable.Map {
       "active": true,
       "type": "rest",
-      "authType": "noAuth",
+      "authType": "basic",
+      "properties": Immutable.Map {
+        "endpointPrefix": "",
+        "password": "",
+        "token": "",
+        "username": "",
+      },
     }
   }
   integrationType={
@@ -136,7 +142,13 @@ Object {
   "initialValues": Immutable.Map {
     "active": true,
     "type": "rest",
-    "authType": "noAuth",
+    "authType": "basic",
+    "properties": Immutable.Map {
+      "endpointPrefix": "",
+      "password": "",
+      "token": "",
+      "username": "",
+    },
   },
   "integrationType": Immutable.Map {
     "type": "salesforce",

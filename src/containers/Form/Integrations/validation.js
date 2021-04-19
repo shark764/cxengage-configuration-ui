@@ -13,11 +13,16 @@ export const formValidation = (values, props) => {
 
   if (properties) {
     if (integrationType === 'rest' || integrationType === 'zendesk') {
+      /**
+       * endpointPrefix allows empty string for REST integrations,
+       * https://lifesize.atlassian.net/browse/CXV1-23989
+       */
       validation.properties = {
-        endpointPrefix: isEmpty(properties.get('endpointPrefix')) && 'Please enter an API URI',
+        endpointPrefix:
+          integrationType !== 'rest' && isEmpty(properties.get('endpointPrefix')) && 'Please enter an API URI',
         username: isEmpty(properties.get('username')) && 'Please enter a Username',
         password: isEmpty(properties.get('password')) && 'Please enter a Password',
-        token: isEmpty(properties.get('token')) && 'Please enter a Token'
+        token: isEmpty(properties.get('token')) && 'Please enter a Token',
       };
     }
 
@@ -26,7 +31,7 @@ export const formValidation = (values, props) => {
       validation.properties = {
         monetUrl: !pattern.test(properties.get('monetUrl')) && 'Please enter a valid URL',
         username: isEmpty(properties.get('username')) && 'Please enter a Username',
-        password: isEmpty(properties.get('password')) && 'Please enter a Password'
+        password: isEmpty(properties.get('password')) && 'Please enter a Password',
       };
     }
 
@@ -38,7 +43,7 @@ export const formValidation = (values, props) => {
         smtpPort: isEmpty(properties.get('smtpPort')) && 'Please enter a SMTP Port',
         smtpEncryptionType: isEmpty(properties.get('smtpEncryptionType')) && 'Please select an SMTP Encryption',
         smtpUser: isEmpty(properties.get('smtpUser')) && 'Please enter a SMTP User',
-        smtpPassword: isEmpty(properties.get('smtpPassword')) && 'Please enter a SMTP Password'
+        smtpPassword: isEmpty(properties.get('smtpPassword')) && 'Please enter a SMTP Password',
       };
     }
 
@@ -48,7 +53,7 @@ export const formValidation = (values, props) => {
         password: isEmpty(properties.get('password')) && 'Please enter a Password',
         consumerKey: isEmpty(properties.get('consumerKey')) && 'Please enter a Consumer Key',
         consumerSecret: isEmpty(properties.get('consumerSecret')) && 'Please enter a Consumer Secret',
-        securityToken: isEmpty(properties.get('securityToken')) && 'Please select a Security Token'
+        securityToken: isEmpty(properties.get('securityToken')) && 'Please select a Security Token',
       };
     }
 
@@ -58,7 +63,10 @@ export const formValidation = (values, props) => {
         accountSid: isEmpty(properties.get('accountSid')) && 'Please enter a valid URL',
         authToken: isEmpty(properties.get('authToken')) && 'Please enter an AuthToken',
         region: isEmpty(properties.get('region')) && 'Please select a Region',
-        extensionPrefix: !isEmpty(properties.get('extensionPrefix')) && !properties.get('extensionPrefix').match(extensionPrefixPattern) && 'Extension Prefix should only contain a 5 length numeric value'
+        extensionPrefix:
+          !isEmpty(properties.get('extensionPrefix')) &&
+          !properties.get('extensionPrefix').match(extensionPrefixPattern) &&
+          'Extension Prefix should only contain a 5 length numeric value',
       };
     }
   }

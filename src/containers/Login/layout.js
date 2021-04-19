@@ -20,7 +20,7 @@ const TempBackground = styled.div`
   width: 100%;
   height: 100%;
   background-repeat: repeat;
-  background-image: url('https://dev-config.cxengagelabs.net/assets/images/square_bg.png'),
+  background-image: url('https://qe-config.cxengagelabs.net/assets/images/square_bg.png'),
     linear-gradient(to bottom, #0a64aa, #3498db);
   z-index: -1;
 `;

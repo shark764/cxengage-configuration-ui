@@ -2,33 +2,32 @@
  * Copyright © 2015-2019 Serenova, LLC. All rights reserved.
  */
 
-import { Map } from 'immutable';
+import { fromJS, Map } from 'immutable';
 import { createSelector } from 'reselect';
 import { getSelectedEntity, getSelectedSubEntityId } from '../selectors';
 import { selectFormInitialValues, getCurrentFormValueByFieldName } from '../../form/selectors';
 import { onIntegrationListenerFormSubmit, onFormSubmit } from '../';
 import { renameObjectKey } from '../../../../utils';
+import { getIntegrationProperties } from './utilities';
 
-export const getIntegrations = state => state.getIn(['Entities', 'integrations', 'data']);
+export const getIntegrations = (state) => state.getIn(['Entities', 'integrations', 'data']);
 
-export const selectIntegrations = createSelector(getIntegrations, integrations => {
+export const selectIntegrations = createSelector(getIntegrations, (integrations) => {
   return integrations !== undefined
-    ? integrations.toJS().map(integration => ({
+    ? integrations.toJS().map((integration) => ({
         value: integration.type,
-        label: integration.type
+        label: integration.type,
       }))
     : undefined;
 });
 
-export const selectIntegrationsFormInitialValues = state => {
+export const selectIntegrationsFormInitialValues = (state) => {
+  const initialProperties = getIntegrationProperties('rest');
   if (getSelectedEntity(state) === undefined) {
-    return new Map({ active: true, type: 'rest', authType: 'noAuth' });
+    return fromJS({ active: true, type: 'rest', authType: 'basic', properties: initialProperties });
   }
   const initialValues = selectFormInitialValues(state);
 
-  //
-  // THIS SHOULD BE DONE IN THE REDUCER OR FROM SDK
-  //
   if (initialValues && initialValues.get('type') === 'monet') {
     return initialValues.setIn(
       ['properties', 'usernameAsAgentId'],
@@ -70,12 +69,12 @@ export const getTwilioRegions = () => [
   { awsId: null, twilioId: 'us2-ix', display: 'Interconnect - US West Coast (Oregon)' },
 ];
 
-export const selectTwilioRegions = state =>
+export const selectTwilioRegions = (state) =>
   getTwilioRegions()
-    .map(region => ({ value: region.twilioId, label: region.display }))
-    .filter(region => region.value !== 'default');
+    .map((region) => ({ value: region.twilioId, label: region.display }))
+    .filter((region) => region.value !== 'default');
 
-export const selectIntegrationListeners = state =>
+export const selectIntegrationListeners = (state) =>
   getSelectedEntity(state) && getSelectedEntity(state).get('listeners')
     ? getSelectedEntity(state)
         .get('listeners')
@@ -99,7 +98,7 @@ export const subEntityFormSubmission = (values, dispatch, props) => {
       newGlobalDialParam[key] = value;
       newState = twilioFormValues.setIn(['properties', 'globalDialParams'], {
         ...existingGlobalDialParams,
-        ...newGlobalDialParam
+        ...newGlobalDialParam,
       });
     } else {
       // update global param property
@@ -131,12 +130,12 @@ export const subEntityFormSubmission = (values, dispatch, props) => {
   }
 };
 
-export const selectIntegrationListenerFormInitialValues = state => {
+export const selectIntegrationListenerFormInitialValues = (state) => {
   const selectedSubEntityId = getSelectedSubEntityId(state);
   const integrationType = getCurrentFormValueByFieldName(state, 'type');
   if (integrationType === 'twilio') {
     const globalDialParamFound = selectTwilioGlobalDialParams(state).find(
-      globalDialParam => globalDialParam.key === selectedSubEntityId
+      (globalDialParam) => globalDialParam.key === selectedSubEntityId
     );
     return new Map({
       initialTwilioFormValues: getSelectedEntity(state),
@@ -145,7 +144,7 @@ export const selectIntegrationListenerFormInitialValues = state => {
       globalParamsProperties:
         getSelectedEntity(state).get('properties') &&
         getSelectedEntity(state).getIn(['properties', 'globalDialParams']) &&
-        getSelectedEntity(state).getIn(['properties', 'globalDialParams'])
+        getSelectedEntity(state).getIn(['properties', 'globalDialParams']),
     });
   } else {
     return selectedSubEntityId === 'listeners'
@@ -154,18 +153,18 @@ export const selectIntegrationListenerFormInitialValues = state => {
           active: false,
           ...(integrationType === 'salesforce' && {
             properties: new Map({
-              type: 'Case'
-            })
-          })
+              type: 'Case',
+            }),
+          }),
         })
       : getSelectedEntity(state).get('listeners') &&
           getSelectedEntity(state)
             .get('listeners')
-            .find(listener => listener.get('id') === selectedSubEntityId);
+            .find((listener) => listener.get('id') === selectedSubEntityId);
   }
 };
 
-export const selectTwilioGlobalDialParams = state => {
+export const selectTwilioGlobalDialParams = (state) => {
   const twilioGlobalDialParams =
     getSelectedEntity(state) && getSelectedEntity(state).getIn(['properties', 'globalDialParams'])
       ? getSelectedEntity(state)
@@ -175,14 +174,14 @@ export const selectTwilioGlobalDialParams = state => {
   return Object.entries(twilioGlobalDialParams).map(([key, value]) => ({ key, value }));
 };
 
-export const isIntegrationsFetched = state => state.getIn(['Entities', 'integrations', 'data']).size === 0;
+export const isIntegrationsFetched = (state) => state.getIn(['Entities', 'integrations', 'data']).size === 0;
 
 export const isTwilioWebRtcEnabled = createSelector(
   [getIntegrations],
-  integrations =>
+  (integrations) =>
     integrations && integrations.size > 0
       ? integrations.find(
-          integration =>
+          (integration) =>
             integration.get('type') === 'twilio' &&
             integration.get('active') &&
             integration.getIn(['properties', 'webRtc'])

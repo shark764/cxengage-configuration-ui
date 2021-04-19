@@ -29,14 +29,14 @@ export default function RestForm({ isSaving, inherited, userHasUpdatePermission,
         options={[
           { value: 'basic', label: 'Basic Authentication' },
           { value: 'token', label: 'Token Authentication' },
-          { value: 'noAuth', label: 'No Authentication' }
+          { value: 'noAuth', label: 'No Authentication' },
         ]}
         data-automation="integrationsAuthType"
         required
       />
       <InputField
         name="properties.endpointPrefix"
-        label="API URI *"
+        label="API URI"
         componentType="input"
         inputType="text"
         data-automation="integrationsEndpointPrefix"
@@ -84,9 +84,9 @@ RestForm.propTypes = {
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
-  authType: PropTypes.string
+  authType: PropTypes.string,
 };
 
 RestForm.defaultProps = {
-  authType: 'noAuth'
+  authType: 'noAuth',
 };

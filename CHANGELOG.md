@@ -5,10 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Alpha User Acceptance Testing]
-- Integrations
 
 ## [Beta User Acceptance Testing]
 - IdentityProviders
+- Integrations
+
+# [0.97.12] - 2021-04-09
+### Fixed
+- CXV1-23989 - Fixed bugs with integration properties when switching between authorization types for REST type | Integrations.
+
 # [0.97.11] - 2021-04-15
 ### removed
 - <no-jira> - Added fix to the chatwidgets, to check the name of the integrations and apps before deleting.
