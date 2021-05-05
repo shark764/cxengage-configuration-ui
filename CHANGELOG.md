@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.97.13] - 2021-04-30
+### Added
+- <NO-JIRA> - Added automation for WhatsApp.
+
 # [0.97.12] - 2021-04-09
 ### Fixed
 - CXV1-23989 - Fixed bugs with integration properties when switching between authorization types for REST type | Integrations.

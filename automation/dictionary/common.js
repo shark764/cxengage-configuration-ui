@@ -358,6 +358,9 @@ const commonBehavior = {
         Api.deleteAllSmoochAutomationWebIntegrations(integrations);
         let apps = Api.getChatWidgetApps(process.ENV.tenantId);
         Api.deleteAllSmoochAutomationApps(apps);
+      }else if(entity === 'Whatsapp Integration') {
+        const integrations = Api.getWhatsAppIntegrations(process.ENV.tenantId);
+        Api.deleteAllSmoochAutomationWhatsAppIntegrations(integrations);
       }
     } catch (err) {
       throw new Error('Could not delete entity via api due to ' + err);
@@ -433,7 +436,7 @@ const commonBehavior = {
       if (Elem.toastCloseButtonTwo.isVisible) {
         Elem.toastCloseButtonTwo.waitAndClick();
       }
-    } else {
+    }else {
       Elem.toastSuccessMessage.validateElementsString('exact', `${entity} was ${actionType}d successfully!`);
     }
   },

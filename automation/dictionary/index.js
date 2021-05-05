@@ -611,8 +611,8 @@ module.exports = {
         whichCatagoryToSearch: "searchNameColumn",
         updateSearchValue: ['password-reset']
       },
-       'Chat Widget': {
-        specs: {
+      'Chat Widget': {
+          specs: {
           deleteBeforeAPI: {
             parameters: {}
           },
@@ -673,6 +673,43 @@ module.exports = {
         whichCatagoryToSearch: "searchNameColumn",
         updateSearchValue: ['Config2 Automation Web Integration']
       }, 
+      'Whatsapp Integration': {
+        specs: {
+          deleteBeforeAPI: {
+            parameters: {}
+          },
+          create: {
+            parametersToInsert: [
+              {
+                nameInput: 'Config2 Automation WhatsApp Integration',
+                descriptionInput: `rDesc-${randomId}`,
+                whatsappIdList: 1,
+                clientDisconnectMinutesInput: '60'
+              }
+            ]
+          },
+          update: {
+            parametersToInsert: [
+              {
+                descriptionInput: `rUpdatedDesc-${randomId}`,
+                clientDisconnectMinutesInput: '88',
+              }
+            ]
+          },
+          deleteAfterAPI: {
+            parameters: {}
+          },
+          read: {
+            parameters: {}
+          }
+        },
+        navigation: {
+          mainBar: "configurationMenu",
+          subMainBar: "navigationLinkWhatsappIntegrations"
+        },
+        whichCatagoryToSearch: "searchNameColumn",
+        updateSearchValue: ['Config2 Automation WhatsApp Integration']
+      },
       'Api Key': {
         specs: {
           create: {
