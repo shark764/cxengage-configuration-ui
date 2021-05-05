@@ -494,7 +494,8 @@ export const memoizedRulesHandler = () => {
               // Manipulating initial days to calculate rule intervals and push to event list
               if (calendarEvent.repeats === 'yearly') {
                 for (let i = 0; i <= diffYears; i++) {
-                  const currentMonth = moment(dayOfMonth)
+                  const currentMonth = moment()
+                    .month(calendarEvent.every)
                     .add(i, 'year')
                     .endOf('month');
                   let yearlyDayOfMonth;

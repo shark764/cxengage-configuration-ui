@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.97.14] - 2021-05-05
+### Fixed
+- CXV1-24306 - Business HoursV2 - Unable to set yearly blackout recurring exceptions on fifth week dates in a month.
+
 # [0.97.13] - 2021-04-30
 ### Added
 - <NO-JIRA> - Added automation for WhatsApp.
