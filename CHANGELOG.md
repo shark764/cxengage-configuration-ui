@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.97.15] - 2021-05-07
+### Fixed
+- CXV1-24271 - Fixed bugs with config2: Capacity rule now checks and display duplicates channel
+
 # [0.97.14] - 2021-05-05
 ### Fixed
 - CXV1-24306 - Business HoursV2 - Unable to set yearly blackout recurring exceptions on fifth week dates in a month.

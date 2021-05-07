@@ -1,9 +1,20 @@
 import { isEmpty } from 'serenova-js-utils/strings';
+import { capitalizeFirstLetter } from 'serenova-js-utils/strings';
 
 import store from '../../../../redux/store';
 import { selectCapacityRuleVersions } from '../../../../redux/modules/entities/capacityRules/selectors';
 
 export const formValidation = (values, { intl: { formatMessage } }) => {
+  const ruleGroups = values.getIn(['rule', 'groups']);
+  const channelArr = ruleGroups.flatMap(a => a.get('channels')).toJS();
+  const findDuplicates = arr => arr.reduce((duplicates, channelType) =>
+    arr.filter(channelTypeInstance => channelTypeInstance === channelType ).length > 1 ?
+      duplicates.add(channelType)
+      :
+      duplicates
+  , new Set());
+  const duplicatesChannels = Array.from(findDuplicates(channelArr)).map(itemChannels => capitalizeFirstLetter(itemChannels)).join(', ');
+  
   const ruleMessages = values
     .getIn(['rule', 'groups'])
     .map((group) => {
@@ -18,7 +29,14 @@ export const formValidation = (values, { intl: { formatMessage } }) => {
           formatMessage({
             id: 'capacityRules.versions.rule.noNumber',
             defaultMessage: 'Please provide a valid integer number for the interactions field',
-          }));
+          })) ||
+        ((duplicatesChannels.length > 0) &&
+          formatMessage({
+            id: 'capacityRules.versions.rule.noDuplicates',
+            defaultMessage: '{channels} cannot be in multiple groups; please remove the duplicates',
+          },
+        {channels: duplicatesChannels}
+      ));
       return (
         message && {
           message,
@@ -27,7 +45,7 @@ export const formValidation = (values, { intl: { formatMessage } }) => {
       );
     })
     .toJS();
-
+    
   return {
     name:
       (isEmpty(values.get('name')) &&
