@@ -16,6 +16,7 @@ import {
 import { selectFormInitialValues, createFormName } from '../../../redux/modules/form/selectors';
 import { onFormSubmit } from '../../../redux/modules/entities';
 import { selectWhatsappApps } from '../../../redux/modules/entities/whatsappIntegrations/selectors';
+import { getDigitalChannelsApp } from '../../../redux/modules/entities/chatWidgets/selectors';
 
 const CreateWhatsappIntegrationsForm = compose(
   connect((state) => createFormName(state)),
@@ -31,6 +32,7 @@ export function mapStateToProps(state) {
     initialValues: selectFormInitialValues(state),
     whatsappApps: selectWhatsappApps(state),
     whatsappAppsFetching: isEntityFetching(state, 'whatsappApps'),
+    app: getDigitalChannelsApp(state),
     isSaving: isSaving(state),
     userHasUpdatePermission: userHasUpdatePermission(state),
     key: getSelectedEntityId(state),

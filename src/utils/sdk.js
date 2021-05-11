@@ -137,11 +137,14 @@ export const errorManager = (error) => {
       error.data.apiResponse.response.error;
     if (responseError instanceof Array) {
       messageFromAPI = responseError[0];
+    } else if (typeof responseError === 'string') {
+      messageFromAPI = responseError;
     } else if (typeof responseError === 'object') {
       // Not all APIs return the same error structure
       // in some cases message is null or undefined, so
       // we add the same default message as Config-UI1.
-      let { code, message = 'Some bulk actions could not be applied.', attribute } = responseError;
+      let message, attribute;
+      ({ code, message = 'Some bulk actions could not be applied.', attribute } = responseError);
       attr = attribute && Object.keys(attribute)[0];
       errorDetails = ` ${code}: ${message}`;
 
@@ -151,6 +154,22 @@ export const errorManager = (error) => {
           messageFromAPI = messageFromAPI.join('<br/>');
         }
         errorDetails = ` ${error.message} ${code}: ${capitalizeFirstLetter(messageFromAPI)}`;
+      } else if (responseError.body && responseError.body.errors) {
+        if (responseError.body.errors[0]) {
+          if (responseError.body.errors[0].code) { code = responseError.body.errors[0].code; }
+          if (responseError.body.errors[0].title) {
+            messageFromAPI = responseError.body.errors[0].title;
+          } else if (responseError.body.errors[0].message) {
+            messageFromAPI = responseError.body.errors[0].message;
+          } else {
+            messageFromAPI = message;
+          }
+        }
+        errorDetails = ` ${error.message}<br/>${code}: ${capitalizeFirstLetter(messageFromAPI)}`;
+      } else if (!responseError.body) {
+        code = responseError.code ? responseError.code : '';
+        messageFromAPI = responseError.message ? responseError.message : message;
+        errorDetails = ` ${error.message}<br/>${code}: ${capitalizeFirstLetter(messageFromAPI)}`;
       } else if (error.message && message) {
         messageFromAPI = message;
         errorDetails = ` ${error.message}<br/>${code}: ${capitalizeFirstLetter(message)}.`;
@@ -173,5 +192,15 @@ export const errorManager = (error) => {
       } ${code}: Resource with the same name or value already exists in the system, please enter a different value.`;
     }
   }
-  return { errorMessage: errorDetails ? errorDetails : 'An error has occurred.', attribute: attr };
+
+  let errorMsg;
+  if (errorDetails) {
+    errorMsg = errorDetails;
+  } else if (messageFromAPI) {
+    errorMsg = messageFromAPI;
+  } else {
+    errorMsg = 'An error has occurred.';
+  }
+
+  return { errorMessage: errorMsg, attribute: attr };
 };

@@ -1609,6 +1609,85 @@ Object {
     "title": "Email Template",
     "updateFormDependencies": Array [],
   },
+  "facebookIntegrations": EntityMetaData {
+    "betaFeature": false,
+    "bulkEditsAvailable": false,
+    "bulkFormDependencies": Array [],
+    "columns": Array [
+      Object {
+        "active": true,
+        "name": "Name",
+      },
+      Object {
+        "active": true,
+        "name": "Description",
+      },
+    ],
+    "confirmationDialog": Object {
+      "falseButtonText": "",
+      "message": "",
+      "trueButtonText": "",
+    },
+    "createFormDependencies": Array [
+      "digitalChannelsApps",
+    ],
+    "defaultAssociationFilters": Array [],
+    "defaultDependentEntityFilters": Array [],
+    "defaultFilters": Array [],
+    "defaultSorted": Array [
+      Object {
+        "alpha": true,
+        "id": "name",
+      },
+    ],
+    "dependentEntity": "",
+    "entityName": "facebookIntegrations",
+    "entityTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "helpLink": "/Help/Content/Managing%20FacebookIntegrations/Creating_FacebookIntegrations.htm",
+    "hideActiveToggle": true,
+    "modalListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "pageTitle": "Facebook Integrations Management",
+    "sdkCall": Object {
+      "data": Object {},
+      "module": "entities",
+      "path": Array [
+        "facebook-integrations",
+      ],
+    },
+    "sidePanelListTableFields": Array [
+      Object {
+        "label": "Name",
+        "name": "name",
+      },
+      Object {
+        "label": "Description",
+        "name": "description",
+      },
+    ],
+    "subEntityName": "",
+    "title": "Facebook Integration",
+    "updateFormDependencies": Array [
+      "digitalChannelsApps",
+    ],
+  },
   "flowDebugger": EntityMetaData {
     "betaFeature": false,
     "bulkEditsAvailable": true,
@@ -4441,6 +4520,7 @@ Object {
     "title": "Whatsapp Integration",
     "updateFormDependencies": Array [
       "whatsappApps",
+      "digitalChannelsApps",
     ],
   },
 }

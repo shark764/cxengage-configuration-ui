@@ -333,6 +333,25 @@ Immutable.Map {
       "MANAGE_ALL_FLOWS",
     ],
   },
+  "facebookIntegrations": Immutable.Map {
+    "readPermission": Immutable.List [
+      "FACEBOOK_INTEGRATIONS_APP_READ",
+    ],
+    "data": Immutable.List [],
+    "createPermission": Immutable.List [
+      "FACEBOOK_INTEGRATIONS_APP_UPDATE",
+    ],
+    "confirmationDialogType": undefined,
+    "disablePermission": Immutable.List [
+      "FACEBOOK_INTEGRATIONS_APP_UPDATE",
+    ],
+    "updatePermission": Immutable.List [
+      "FACEBOOK_INTEGRATIONS_APP_UPDATE",
+    ],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "assignPermission": Immutable.List [],
+  },
   "historicalReportFolders": Immutable.Map {
     "data": Immutable.List [],
     "selectedEntityId": "",

@@ -51,10 +51,15 @@ export const hasCustomFetchEntityData = (entityName) =>
   !['tenants', 'dispositionLists', 'customAttributes', 'userProfile'].includes(entityName);
 
 export const hasCustomFetchEntityItemData = (entityName) =>
-  !['dispositionLists', 'flows', 'contactLayouts'].includes(entityName);
+  !['dispositionLists', 'flows', 'contactLayouts', 'facebookIntegrations'].includes(entityName);
 
 export const entitiesUsingUpdateLogicForToggleEntity = (entityName) =>
-  ['customAttributes', 'identityProviders', 'whatsappIntegrations', 'capacityRules'].includes(entityName);
+  ['customAttributes',
+  'identityProviders',
+  'whatsappIntegrations',
+  'capacityRules',
+  'facebookIntegrations',]
+  .includes(entityName);
 
 export const hasCustomSubEntityUpdate = (entityName, subEntityName) => {
   const entityMap = {

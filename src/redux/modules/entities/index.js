@@ -374,6 +374,14 @@ const initialState = fromJS({
   whatsappApps: {
     data: [],
   },
+  facebookIntegrations: {
+    ...defaultEntity,
+    readPermission: ['FACEBOOK_INTEGRATIONS_APP_READ'],
+    updatePermission: ['FACEBOOK_INTEGRATIONS_APP_UPDATE'],
+    createPermission: ['FACEBOOK_INTEGRATIONS_APP_UPDATE'],
+    disablePermission: ['FACEBOOK_INTEGRATIONS_APP_UPDATE'],
+    assignPermission: [],
+  },
   //hygen-inject-before
 });
 

@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.98.0] - 2021-05-11
+### Added
+- CXV1-24145 - Config UI page for Smooch Facebook Integrations.
+
 # [0.97.15] - 2021-05-07
 ### Fixed
 - CXV1-24271 - Fixed bugs with config2: Capacity rule now checks and display duplicates channel

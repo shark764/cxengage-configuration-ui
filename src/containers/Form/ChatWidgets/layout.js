@@ -18,7 +18,8 @@ import {
   RadioGroupField,
   ColorField,
   ListField,
-  Detail
+  Detail,
+  DetailsPanelMessage
 } from 'cx-ui-components';
 import styled from 'styled-components';
 import { isSerializedOrigin } from 'serenova-js-utils/strings';
@@ -96,6 +97,10 @@ export default function ChatWidgetsForm({
         componentType="input"
         dataType="number"
         disabled={disabled}
+      />
+      <DetailsPanelMessage
+        text={`If Disconnect Time is left blank, the client disconnection checker will not be applied.`}
+        type="info"
       />
       {chatWidgetId === 'create' ? (
         <SelectField

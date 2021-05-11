@@ -40,9 +40,6 @@ exports[`<WhatsappIntegrationsForm /> renders create form 1`] = `
     }
     required={false}
   />
-  <DetailHeader
-    text="Properties"
-  />
   <InputField
     componentType="input"
     data-automation="clientDisconnectMinutesInput"
@@ -99,9 +96,6 @@ exports[`<WhatsappIntegrationsForm /> renders update form 1`] = `
       ]
     }
     required={false}
-  />
-  <DetailHeader
-    text="Properties"
   />
   <InputField
     componentType="input"

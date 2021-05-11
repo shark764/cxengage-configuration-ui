@@ -65,6 +65,7 @@ import IdentityProvidersForm from '../Form/IdentityProviders';
 import CapacityRulesForm from '../Form/CapacityRules';
 import CapacityRulesVersionsForm from '../Form/CapacityRules/Version';
 import WhatsappIntegrationsForm from '../Form/WhatsappIntegrations';
+import FacebookIntegrationsForm from '../Form/FacebookIntegrations';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -102,6 +103,7 @@ import ContactAttributesDetailsPanel from '../SidePanelDetails/ContactAttributes
 import IdentityProvidersDetailsPanel from '../SidePanelDetails/IdentityProviders';
 import CapacityRulesDetailsPanel from '../SidePanelDetails/CapacityRules';
 import WhatsappIntegrationsDetailsPanel from '../SidePanelDetails/WhatsappIntegrations';
+import FacebookIntegrationsDetailsPanel from '../SidePanelDetails/FacebookIntegrations';
 //hygen-inject-before4
 
 // Full page panel forms
@@ -379,6 +381,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <WhatsappIntegrationsForm />
+      </DetailsPanel>
+    ),
+  },
+  {
+    path: '/configuration/facebookIntegrations',
+    component: () => (
+      <DetailsPanel>
+        <FacebookIntegrationsForm />
       </DetailsPanel>
     ),
   },
@@ -704,6 +714,16 @@ const detailsPanelRoutes = [
         <WhatsappIntegrationsDetailsPanel>
           <WhatsappIntegrationsForm />
         </WhatsappIntegrationsDetailsPanel>
+      </NoScrollDetailsPanel>
+    ),
+  },
+  {
+    path: '/configuration/facebookIntegrations',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <FacebookIntegrationsDetailsPanel>
+          <FacebookIntegrationsForm />
+        </FacebookIntegrationsDetailsPanel>
       </NoScrollDetailsPanel>
     ),
   },

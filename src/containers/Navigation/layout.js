@@ -270,6 +270,15 @@ export default class Navigation extends Component {
                   />
                 </StyledLink>
                 <StyledLink
+                  data-automation="navigationLinkFacebookIntegrations"
+                  to="/configuration/facebookIntegrations"
+                  onClick={(e) => this.setCurrentEntityAndEntityId('facebookIntegrations', e)}>
+                  <FormattedMessage
+                    id="navigation.configuration.facebookIntegrations"
+                    defaultMessage="Facebook"
+                  />
+                </StyledLink>
+                <StyledLink
                   data-automation="navigationLinkTransferLists"
                   to="/configuration/transferLists"
                   onClick={(e) => this.setCurrentEntityAndEntityId('transferLists', e)}>

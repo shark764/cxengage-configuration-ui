@@ -21,6 +21,7 @@ export default function WhatsappIntegrationsForm({
   initialValues,
   whatsappApps,
   whatsappAppsFetching,
+  app,
 }) {
   const isDisabled = isSaving || inherited || !userHasUpdatePermission;
   return (
@@ -55,10 +56,10 @@ export default function WhatsappIntegrationsForm({
       ) : (
         <>
           <Detail label="Whatsapp Id" value={initialValues.get('id')} />
-          <Detail label="App Id" value={initialValues.get('appId')} />
+          <Detail label="App" value={app && app.get('name')} />
+          <Detail label="App Id" value={app && app.get('id')} />
         </>
       )}
-      <DetailHeader text="Properties" />
       <InputField
         name="clientDisconnectMinutes"
         label="Disconnect Time"
@@ -95,4 +96,5 @@ WhatsappIntegrationsForm.propTypes = {
   isSaving: PropTypes.bool,
   inherited: PropTypes.bool,
   userHasUpdatePermission: PropTypes.bool,
+  app: PropTypes.object,
 };

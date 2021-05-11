@@ -209,6 +209,8 @@ export const FormSubmission = (action$, store) =>
             })
           )
         );
+      } else if (a.entityName === 'facebookIntegrations') {
+        a.values = a.values.delete('active');
       }
       return a;
     })
@@ -382,7 +384,16 @@ export const UpdateEntity = action$ =>
           delete a.values.metadataFile;
         }
         a.sdkCall.data = {
-          ...a.values
+          ...a.values,
+        };
+      } else if (a.entityName === 'facebookIntegrations') {
+        delete a.values.facebookAppId;
+        delete a.values.facebookPageId;
+        delete a.values.status;
+        delete a.values.pageName;
+        delete a.values.type;
+        a.sdkCall.data = {
+          ...a.values,
         };
       }
       a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;

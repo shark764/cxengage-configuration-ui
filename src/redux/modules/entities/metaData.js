@@ -194,6 +194,7 @@ export const listOfEntities = [
   'capacityRules',
   'whatsappIntegrations',
   'whatsappApps',
+  'facebookIntegrations',
 
   //Hygen-insert-at-end-of-list
 ];
@@ -484,7 +485,7 @@ entities.chatWidgets.updateFormDependencies.push('digitalChannelsApps');
 entities.chatWidgets.hideActiveToggle = true;
 
 // Digital Channels Apps
-// These don't have a config ui page, but are a dependency of chat widgets
+// These don't have a config ui page, but are a dependency of chat widgets and facebook integrations
 entities.digitalChannelsApps.sdkCall.path = ['digital-channels-app'];
 
 // Presence Reasons Lists
@@ -1016,10 +1017,21 @@ entities.whatsappIntegrations.columns = [
 entities.whatsappIntegrations.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.whatsappIntegrations.sdkCall.path = ['whatsapp-integrations'];
 entities.whatsappIntegrations.createFormDependencies.push('whatsappApps');
-entities.whatsappIntegrations.updateFormDependencies.push('whatsappApps');
+entities.whatsappIntegrations.updateFormDependencies.push('whatsappApps', 'digitalChannelsApps');
 
 // Whatsapp Apps
 entities.whatsappApps.sdkCall.path = ['whatsapp-apps'];
+
+// Facebook Integrations
+entities.facebookIntegrations.bulkEditsAvailable = false;
+entities.facebookIntegrations.pageTitle = 'Facebook Integrations Management';
+entities.facebookIntegrations.helpLink =
+  '/Help/Content/Managing%20FacebookIntegrations/Creating_FacebookIntegrations.htm';
+entities.facebookIntegrations.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
+entities.facebookIntegrations.sdkCall.path = ['facebook-integrations'];
+entities.facebookIntegrations.hideActiveToggle = true;
+entities.facebookIntegrations.createFormDependencies.push('digitalChannelsApps');
+entities.facebookIntegrations.updateFormDependencies.push('digitalChannelsApps');
 
 //Hygen-insert-new-entity-configuration
 

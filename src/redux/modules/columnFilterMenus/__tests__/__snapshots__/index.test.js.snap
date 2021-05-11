@@ -241,6 +241,19 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "facebookIntegrations": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Description",
+        "active": true,
+      },
+    ],
+  },
   "historicalReportFolders": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
