@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FacebookIntegrationsDetailsPanel /> renders FacebookIntegrations detailsPanel 1`] = `
+<styled.div>
+  Mock Child
+</styled.div>
+`;

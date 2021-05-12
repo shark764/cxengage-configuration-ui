@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectFacebookIntegrationsFormInitialValues Gets the correct facebook integrations 1`] = `
+Object {
+  "appId": "mockAppId1",
+  "clientDisconnectMinutes": 1,
+  "description": "",
+  "id": "mockId1",
+  "name": "mockName1",
+}
+`;
+
+exports[`selectFacebookIntegrationsFormInitialValues Initial values when creating a new facebook integration 1`] = `undefined`;

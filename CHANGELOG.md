@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.98.1] - 2021-05-12
+### Added
+- CXV1-24145 - Unit tests for Smooch Facebook Integration page.
+
 # [0.98.0] - 2021-05-11
 ### Added
 - CXV1-24145 - Config UI page for Smooch Facebook Integrations.
