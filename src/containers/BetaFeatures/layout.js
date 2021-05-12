@@ -64,10 +64,10 @@ export default class BetaFeatures extends Component {
   constructor() {
     super();
     const features = {
-      tenants: false,
-      integrations: false,
-      identityProviders: false,
-      capacityRules: false
+      tenants: true,
+      integrations: true,
+      identityProviders: true,
+      capacityRules: true,
     };
     const pageTitles = {};
     Object.keys(features).forEach((entityName) => {
