@@ -66,6 +66,7 @@ import CapacityRulesForm from '../Form/CapacityRules';
 import CapacityRulesVersionsForm from '../Form/CapacityRules/Version';
 import WhatsappIntegrationsForm from '../Form/WhatsappIntegrations';
 import FacebookIntegrationsForm from '../Form/FacebookIntegrations';
+import MediaForm from '../Form/Media';
 //hygen-inject-before3
 
 // AddMembersToList table modal
@@ -104,6 +105,7 @@ import IdentityProvidersDetailsPanel from '../SidePanelDetails/IdentityProviders
 import CapacityRulesDetailsPanel from '../SidePanelDetails/CapacityRules';
 import WhatsappIntegrationsDetailsPanel from '../SidePanelDetails/WhatsappIntegrations';
 import FacebookIntegrationsDetailsPanel from '../SidePanelDetails/FacebookIntegrations';
+import MediaDetailsPanel from '../SidePanelDetails/Media';
 //hygen-inject-before4
 
 // Full page panel forms
@@ -389,6 +391,14 @@ const createFormRoutes = [
     component: () => (
       <DetailsPanel>
         <FacebookIntegrationsForm />
+      </DetailsPanel>
+    ),
+  },
+  {
+    path: '/configuration/media',
+    component: () => (
+      <DetailsPanel>
+        <MediaForm />
       </DetailsPanel>
     ),
   },
@@ -705,6 +715,16 @@ const detailsPanelRoutes = [
           <CapacityRulesForm />
         </CapacityRulesDetailsPanel>
       </DetailsPanel>
+    ),
+  },
+  {
+    path: '/configuration/media',
+    component: () => (
+      <NoScrollDetailsPanel>
+        <MediaDetailsPanel>
+          <MediaForm />
+        </MediaDetailsPanel>
+      </NoScrollDetailsPanel>
     ),
   },
   {

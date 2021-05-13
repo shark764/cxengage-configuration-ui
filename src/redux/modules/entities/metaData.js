@@ -195,7 +195,7 @@ export const listOfEntities = [
   'whatsappIntegrations',
   'whatsappApps',
   'facebookIntegrations',
-
+  'media',
   //Hygen-insert-at-end-of-list
 ];
 
@@ -1032,6 +1032,21 @@ entities.facebookIntegrations.sdkCall.path = ['facebook-integrations'];
 entities.facebookIntegrations.hideActiveToggle = true;
 entities.facebookIntegrations.createFormDependencies.push('digitalChannelsApps');
 entities.facebookIntegrations.updateFormDependencies.push('digitalChannelsApps');
+
+// Media
+entities.media.pageTitle = 'Media Management';
+entities.media.title = 'Media';
+entities.media.helpLink = '/Help/Content/Managing%20Flows/Media/Adding%20Media.htm';
+entities.media.dependentEntity = 'dependentEntity';
+entities.media.sdkCall.path = ['media'];
+entities.media.columns = [
+  { name: 'Name', active: true },
+  { name: 'Source', active: true },
+  { name: 'Media Type', active: true },
+  { name: 'Properties', active: true },
+];
+entities.media.defaultFilters = [{ id: 'active', value: 'enabled' }];
+entities.media.bulkEditsAvailable = false;
 
 //Hygen-insert-new-entity-configuration
 

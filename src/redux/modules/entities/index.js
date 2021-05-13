@@ -382,6 +382,13 @@ const initialState = fromJS({
     disablePermission: ['FACEBOOK_INTEGRATIONS_APP_UPDATE'],
     assignPermission: [],
   },
+  media: {
+    ...defaultEntity,
+    readPermission: ['VIEW_ALL_MEDIA', 'PLATFORM_VIEW_ALL'],
+    updatePermission: ['MANAGE_ALL_MEDIA', 'PLATFORM_VIEW_ALL'],
+    createPermission: ['MANAGE_ALL_MEDIA', 'PLATFORM_VIEW_ALL'],
+    disablePermission: ['MANAGE_ALL_MEDIA', 'PLATFORM_VIEW_ALL'],
+  },
   //hygen-inject-before
 });
 
@@ -1530,8 +1537,10 @@ export default function reducer(state = initialState, action) {
       return state.updateIn(['businessHoursV2', 'data'], (businessHours) =>
         businessHours.map((businessHour) => {
           return businessHour.update('versions', (versions = List()) => {
-            if (action.activeVersions[businessHour.get('id')] && 
-              !versions.some(version => version.get('id') === action.activeVersions[businessHour.get('id')].id)) {
+            if (
+              action.activeVersions[businessHour.get('id')] &&
+              !versions.some((version) => version.get('id') === action.activeVersions[businessHour.get('id')].id)
+            ) {
               return versions.push(fromJS(action.activeVersions[businessHour.get('id')]));
             } else {
               return versions;

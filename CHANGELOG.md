@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.100.0] _ 2021-05-13
+### Added
+- CXV1-16886: Main Entity Table and sidepanel boiler template for Media page
+
 # [0.99.0] - 2021-05-12
 ### Added
 - CXV1-24415 - Default Tenants, Integrations, Identity Providers, Capacity Rules to phase 2 (opt-out).

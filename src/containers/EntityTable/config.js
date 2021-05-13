@@ -27,6 +27,9 @@ import { groupColumn } from './columns/group';
 import { labelColumn } from './columns/label';
 import { capacityRuleActiveVersionColumn } from './columns/capacityRuleActiveVersion';
 import { disconnectMinutesColumn } from './columns/disconnectMinutes';
+import { mediaSourceColumn } from './columns/mediaSource';
+import { mediaPropertiesColumn } from './columns/mediaProperties';
+import { mediaTypeColumn } from './columns/mediaType';
 
 export function getTableColumns(columns) {
   /**
@@ -81,6 +84,9 @@ export function getTableColumns(columns) {
     Mandatory: constructGeneralBooleanColumn('mandatory'),
     activeVersionCapacityRule: capacityRuleActiveVersionColumn,
     'Disconnect Minutes': disconnectMinutesColumn,
+    Source: mediaSourceColumn,
+    Properties: mediaPropertiesColumn,
+    'Media Type': mediaTypeColumn,
   };
   let result = [];
   columns.forEach((x) => x.active && result.push(columnMap[x.name]));

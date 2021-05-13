@@ -216,6 +216,27 @@ Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [],
   },
+  "media": Immutable.Map {
+    "visibleMenu": "none",
+    "Columns": Immutable.List [
+      Immutable.Map {
+        "name": "Name",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Source",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Media Type",
+        "active": true,
+      },
+      Immutable.Map {
+        "name": "Properties",
+        "active": true,
+      },
+    ],
+  },
   "flows": Immutable.Map {
     "visibleMenu": "none",
     "Columns": Immutable.List [

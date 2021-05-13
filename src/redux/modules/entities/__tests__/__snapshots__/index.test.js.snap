@@ -312,6 +312,28 @@ Immutable.Map {
   "whatsappApps": Immutable.Map {
     "data": Immutable.List [],
   },
+  "media": Immutable.Map {
+    "data": Immutable.List [],
+    "selectedEntityId": "",
+    "sidePanelWidth": 550,
+    "confirmationDialogType": undefined,
+    "readPermission": Immutable.List [
+      "VIEW_ALL_MEDIA",
+      "PLATFORM_VIEW_ALL",
+    ],
+    "updatePermission": Immutable.List [
+      "MANAGE_ALL_MEDIA",
+      "PLATFORM_VIEW_ALL",
+    ],
+    "createPermission": Immutable.List [
+      "MANAGE_ALL_MEDIA",
+      "PLATFORM_VIEW_ALL",
+    ],
+    "disablePermission": Immutable.List [
+      "MANAGE_ALL_MEDIA",
+      "PLATFORM_VIEW_ALL",
+    ],
+  },
   "flows": Immutable.Map {
     "readPermission": Immutable.List [
       "VIEW_ALL_FLOWS",
