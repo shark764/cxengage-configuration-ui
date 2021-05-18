@@ -462,3 +462,48 @@ describe('CREATE_ENTITY_REJECTED', () => {
     spy.mockRestore();
   });
 });
+
+describe('BULK_ENTITY_UPDATE_FULFILLED', () => {
+  it('updates state when bulk remove skill is performed on the users page', () => {
+    const action = {
+      type: 'BULK_ENTITY_UPDATE_FULFILLED',
+      entityName: 'users',
+      values: {
+        removeSkill: 'mockSkill',
+      },
+      response: { result: { userId: 'mockUserId', skillId: 'mockSkillId' } },
+    };
+    const initialState = fromJS({
+      users: {
+        data: [
+          {
+            id: 'mockUserId',
+            skills: [{ id: 'mockSkillId', name: 'mockSkill' }, { id: 'mockSkillId2', name: 'mockSkill2' }],
+          },
+        ],
+      },
+    });
+    expect(entitiesReducer(initialState, action)).toMatchSnapshot();
+  });
+  it('updates state when bulk remove group is performed on the users page', () => {
+    const action = {
+      type: 'BULK_ENTITY_UPDATE_FULFILLED',
+      entityName: 'users',
+      values: {
+        removeGroup: 'mockGroup',
+      },
+      response: { result: { userId: 'mockUserId', groupId: 'mockGroupId' } },
+    };
+    const initialState = fromJS({
+      users: {
+        data: [
+          {
+            id: 'mockUserId',
+            groups: [{ id: 'mockGroupId', name: 'mockGroup' }, { id: 'mockGroupId2', name: 'mockGroup2' }],
+          },
+        ],
+      },
+    });
+    expect(entitiesReducer(initialState, action)).toMatchSnapshot();
+  });
+});

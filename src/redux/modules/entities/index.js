@@ -1056,9 +1056,9 @@ export default function reducer(state = initialState, action) {
         } else if (action.values.removeSkill) {
           const skillIndex = state.getIn(['users', 'data', userEntityIndex, 'skills']).findIndex((skill) => {
             if (typeof skill === 'object') {
-              return action.values.removeSkillId === (skill.get('skillId') || skill.get('id'));
+              return result.skillId === (skill.get('skillId') || skill.get('id'));
             } else {
-              return action.values.removeSkillId === skill;
+              return result.skillId === skill;
             }
           });
           return state
@@ -1071,9 +1071,9 @@ export default function reducer(state = initialState, action) {
         } else if (action.values.removeGroup) {
           const groupIndex = state.getIn(['users', 'data', userEntityIndex, 'groups']).findIndex((group) => {
             if (typeof group === 'object') {
-              return action.values.removeGroupId === (group.get('groupId') || group.get('id'));
+              return result.groupId === (group.get('groupId') || group.get('id'));
             } else {
-              return action.values.removeGroupId === group;
+              return result.groupId === group;
             }
           });
           return state

@@ -18,7 +18,7 @@ import {
   SelectField,
   ConfirmationWrapper,
   AutoCompleteField,
-  regions
+  regions,
 } from 'cx-ui-components';
 
 const Container = styled.div`
@@ -63,15 +63,15 @@ export default class UsersBulkActionsForm extends Component {
       addGroup: false,
       removeGroup: false,
       addSkill: false,
-      removeSkill: false
+      removeSkill: false,
     };
     this.state = {
       visibleFields,
-      initialVisibleFields: visibleFields
+      initialVisibleFields: visibleFields,
     };
   }
 
-  toggleFormField = name => {
+  toggleFormField = (name) => {
     const _that = this;
     for (
       let index = 0, fieldNames = ['inviteNow', 'resendInvitation', 'cancelInvitation', 'passwordReset'];
@@ -83,8 +83,8 @@ export default class UsersBulkActionsForm extends Component {
     this.setState({
       visibleFields: {
         ...this.state.initialVisibleFields,
-        [name]: !this.state.visibleFields[name]
-      }
+        [name]: !this.state.visibleFields[name],
+      },
     });
   };
 
@@ -120,8 +120,7 @@ export default class UsersBulkActionsForm extends Component {
               confirmBtnCallback={!this.props.inviteNowIsChecked ? () => this.toggleFormField('inviteNow') : undefined}
               mainText={`This will send an email invitation to all users selected`}
               secondaryText={'Are you sure you want to continue?'}
-              data-automation="inviteNowConfirmationWrapper"
-            >
+              data-automation="inviteNowConfirmationWrapper">
               <StyledToggleField
                 name="inviteNow"
                 label=""
@@ -140,8 +139,7 @@ export default class UsersBulkActionsForm extends Component {
               }
               mainText={`This will resend an email invitation to all users selected`}
               secondaryText={'Are you sure you want to continue?'}
-              data-automation="resendInvitationConfirmationWrapper"
-            >
+              data-automation="resendInvitationConfirmationWrapper">
               <StyledToggleField
                 name="resendInvitation"
                 label=""
@@ -160,8 +158,7 @@ export default class UsersBulkActionsForm extends Component {
               }
               mainText={`This will prevent all selected users from accepting the invitation.`}
               secondaryText={'Are you sure you want to continue?'}
-              data-automation="cancelInvitationConfirmationWrapper"
-            >
+              data-automation="cancelInvitationConfirmationWrapper">
               <StyledToggleField
                 name="cancelInvitation"
                 label=""
@@ -181,8 +178,7 @@ export default class UsersBulkActionsForm extends Component {
                 }
                 mainText={`This will send a password reset email to all users selected`}
                 secondaryText={'Are you sure you want to continue?'}
-                data-automation="passwordResetConfirmationWrapper"
-              >
+                data-automation="passwordResetConfirmationWrapper">
                 <StyledToggleField
                   name="passwordReset"
                   label=""
@@ -211,7 +207,7 @@ export default class UsersBulkActionsForm extends Component {
                 options={[
                   { label: 'Use Tenant Default', value: 'null' },
                   { label: 'Enabled', value: false },
-                  { label: 'Disabled', value: true }
+                  { label: 'Disabled', value: true },
                 ]}
                 required
                 data-automation="noPasswordList"
@@ -279,6 +275,7 @@ export default class UsersBulkActionsForm extends Component {
                 name="addGroup"
                 label="Group"
                 placeholder="Search..."
+                suggestedDropDownWidth="100%"
                 suggestions={this.props.groups.toJS().reduce((acc, group) => {
                   if (group.name !== 'everyone') {
                     acc.push(group.name);
@@ -307,6 +304,7 @@ export default class UsersBulkActionsForm extends Component {
                 name="removeGroup"
                 label="Group"
                 placeholder="Search..."
+                suggestedDropDownWidth="100%"
                 suggestions={this.props.groups.toJS().reduce((acc, group) => {
                   if (group.name !== 'everyone') {
                     acc.push(group.name);
@@ -335,7 +333,8 @@ export default class UsersBulkActionsForm extends Component {
                 name="addSkill"
                 label="Skill"
                 placeholder="Search..."
-                suggestions={this.props.skills.toJS().map(skill => skill.name)}
+                suggestedDropDownWidth="100%"
+                suggestions={this.props.skills.toJS().map((skill) => skill.name)}
                 data-automation="addSkillAutoComplete"
                 disabled={this.props.isSaving || this.props.isBulkUpdating}
               />
@@ -358,7 +357,8 @@ export default class UsersBulkActionsForm extends Component {
                 name="removeSkill"
                 label="Skill"
                 placeholder="Search..."
-                suggestions={this.props.skills.toJS().map(skill => skill.name)}
+                suggestedDropDownWidth="100%"
+                suggestions={this.props.skills.toJS().map((skill) => skill.name)}
                 data-automation="removeSkillAutoComplete"
                 disabled={this.props.isSaving || this.props.isBulkUpdating}
               />
@@ -377,7 +377,7 @@ UsersBulkActionsForm.propTypes = {
   identityProviders: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.string.isRequired
+      value: PropTypes.string.isRequired,
     })
   ),
   inviteNowIsChecked: PropTypes.bool,
@@ -389,5 +389,5 @@ UsersBulkActionsForm.propTypes = {
   groups: PropTypes.object,
   skills: PropTypes.object,
   isSaving: PropTypes.bool,
-  isBulkUpdating: PropTypes.bool
+  isBulkUpdating: PropTypes.bool,
 };

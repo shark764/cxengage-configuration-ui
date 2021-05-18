@@ -375,6 +375,6 @@ UsersForm.propTypes = {
   usersFetching: PropTypes.bool,
   userHasNameSet: PropTypes.bool,
   canManageAllExtensions: PropTypes.bool,
-  formNoPasswordValue: PropTypes.string,
+  formNoPasswordValue: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   isCurrentTenantPlatformAuthenticationDisabled: PropTypes.bool,
 };

@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.100.1] - 2021-05-14
+### Fixed
+- CXV1-24149 - unable to perform remove skills and remove groups bulk actions on users page.
+
 # [0.100.0] _ 2021-05-13
 ### Added
 - CXV1-16886: Main Entity Table and sidepanel boiler template for Media page

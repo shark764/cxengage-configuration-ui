@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`BULK_ENTITY_UPDATE_FULFILLED updates state when bulk remove group is performed on the users page 1`] = `
+Immutable.Map {
+  "users": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "id": "mockUserId",
+        "groups": Immutable.List [
+          Immutable.Map {
+            "id": "mockGroupId2",
+            "name": "mockGroup2",
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
+
+exports[`BULK_ENTITY_UPDATE_FULFILLED updates state when bulk remove skill is performed on the users page 1`] = `
+Immutable.Map {
+  "users": Immutable.Map {
+    "data": Immutable.List [
+      Immutable.Map {
+        "id": "mockUserId",
+        "skills": Immutable.List [
+          Immutable.Map {
+            "id": "mockSkillId2",
+            "name": "mockSkill2",
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
+
 exports[`CREATE_ENTITY sets creating to true on the entity that was passed in 1`] = `
 Immutable.Map {
   "mockEntity": Immutable.Map {
