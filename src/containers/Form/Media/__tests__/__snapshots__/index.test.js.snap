@@ -3,11 +3,18 @@
 exports[`Maps state to props only using selectors validates object created from mapStateToProps 1`] = `
 Object {
   "inherited": undefined,
-  "initialValues": Object {
-    "active": true,
+  "initialValues": Immutable.Map {
+    "description": "mockDescription",
   },
   "isSaving": true,
   "key": "mockId",
+  "mediaType": "mock-media-type",
+  "medias": Immutable.List [
+    Immutable.Map {
+      "value": "mockMediaId",
+      "label": "mockMediaName",
+    },
+  ],
   "userHasUpdatePermission": true,
 }
 `;
@@ -16,12 +23,21 @@ exports[`Media Renders renders 1`] = `
 <Connect(ReduxForm)
   dispatch={[Function]}
   initialValues={
-    Object {
-      "active": true,
+    Immutable.Map {
+      "description": "mockDescription",
     }
   }
   isSaving={true}
   key="mockId"
+  mediaType="mock-media-type"
+  medias={
+    Immutable.List [
+      Immutable.Map {
+        "value": "mockMediaId",
+        "label": "mockMediaName",
+      },
+    ]
+  }
   store={
     Object {
       "dispatch": [Function],

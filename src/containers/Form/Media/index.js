@@ -13,7 +13,8 @@ import {
   isCreating,
   userHasUpdatePermission,
 } from '../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
+import { selectMediaFormInitialValues, selectMedias } from '../../../redux/modules/entities/media/selectors';
 
 const CreateMediaForm = compose(
   connect((state) => createFormName(state)),
@@ -24,14 +25,14 @@ const CreateMediaForm = compose(
   })
 )(MediaForm);
 
-export function mapStateToProps(state) {
-  return {
-    initialValues: selectFormInitialValues(state),
-    isSaving: isCreating(state),
-    inherited: isInherited(state),
-    userHasUpdatePermission: userHasUpdatePermission(state),
-    key: getSelectedEntityId(state),
-  };
-}
+export const mapStateToProps = (state) => ({
+  initialValues: selectMediaFormInitialValues(state),
+  isSaving: isCreating(state),
+  inherited: isInherited(state),
+  userHasUpdatePermission: userHasUpdatePermission(state),
+  key: getSelectedEntityId(state),
+  mediaType: getCurrentFormValueByFieldName(state, 'type'),
+  medias: selectMedias(state),
+});
 
 export default connect(mapStateToProps)(CreateMediaForm);

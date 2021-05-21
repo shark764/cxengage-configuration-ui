@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.101.0] - 2021-05-17
+### Added
+- CXV1-23876: Media Forms with fields and Create/Update (no audio file upload functionality).
+
 # [0.100.1] - 2021-05-14
 ### Fixed
 - CXV1-24149 - unable to perform remove skills and remove groups bulk actions on users page.

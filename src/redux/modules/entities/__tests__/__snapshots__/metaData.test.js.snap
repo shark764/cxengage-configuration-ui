@@ -2710,6 +2710,7 @@ Object {
       },
     ],
     "helpLink": "/Help/Content/Managing%20Flows/Media/Adding%20Media.htm",
+    "hideActiveToggle": true,
     "modalListTableFields": Array [
       Object {
         "label": "Name",

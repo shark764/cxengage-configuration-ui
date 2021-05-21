@@ -1047,6 +1047,7 @@ entities.media.columns = [
 ];
 entities.media.defaultFilters = [{ id: 'active', value: 'enabled' }];
 entities.media.bulkEditsAvailable = false;
+entities.media.hideActiveToggle = true;
 
 //Hygen-insert-new-entity-configuration
 

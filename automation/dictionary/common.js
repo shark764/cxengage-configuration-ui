@@ -124,7 +124,7 @@ const commonBehavior = {
     Brow.pause(1000);
     columnElement.setValue(searchValue);
     new Element(`.//span[text()="${searchValue}"]`).waitAndClick();
-    if (entity !== "Chat Widget" && entity !== "Email Template") {
+    if (entity !== "Chat Widget" && entity !== "Email Template" && entity !== "Media") {
       Elem.sdpanelStatusToggle.waitForVisible();
       Elem.sdpanelStatusToggle.validateElementsState('isVisible', true);
     }
@@ -464,7 +464,7 @@ const commonBehavior = {
     }
   },
   toggleEntity(entity) {
-    if (entity !== 'Email Template' && entity !== 'Chat Widget') {
+    if (entity !== 'Email Template' && entity !== 'Chat Widget' && entity !== 'Media') {
       Elem.sdpanelStatusToggle.waitAndClick();
       Elem.confirmationWrapper.waitForVisible();
       Elem.confirmButton.waitForVisible();

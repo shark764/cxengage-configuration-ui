@@ -14,18 +14,6 @@ exports[`<MediaForm /> renders create form 1`] = `
     inputType="text"
     label="Name *"
     name="name"
-    placeholder="You are using Hygen!"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="MediaFormFieldDescription"
-    disabled={false}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Properties"
   />
   <SelectField
     data-automation="MediaFormFieldType"
@@ -35,12 +23,32 @@ exports[`<MediaForm /> renders create form 1`] = `
     options={
       Array [
         Object {
-          "label": "custom label",
-          "value": "custom value",
+          "label": "Select type...",
+          "value": "",
+        },
+        Object {
+          "label": "Audio",
+          "value": "audio",
+        },
+        Object {
+          "label": "Text-to-Speech",
+          "value": "tts",
+        },
+        Object {
+          "label": "Media List",
+          "value": "list",
         },
       ]
     }
     required={true}
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="MediaFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
   />
 </form>
 `;
@@ -59,18 +67,6 @@ exports[`<MediaForm /> renders update form 1`] = `
     inputType="text"
     label="Name *"
     name="name"
-    placeholder="You are using Hygen!"
-  />
-  <InputField
-    componentType="textarea"
-    data-automation="MediaFormFieldDescription"
-    disabled={false}
-    inputType="text"
-    label="Description"
-    name="description"
-  />
-  <DetailHeader
-    text="Properties"
   />
   <SelectField
     data-automation="MediaFormFieldType"
@@ -80,12 +76,32 @@ exports[`<MediaForm /> renders update form 1`] = `
     options={
       Array [
         Object {
-          "label": "custom label",
-          "value": "custom value",
+          "label": "Select type...",
+          "value": "",
+        },
+        Object {
+          "label": "Audio",
+          "value": "audio",
+        },
+        Object {
+          "label": "Text-to-Speech",
+          "value": "tts",
+        },
+        Object {
+          "label": "Media List",
+          "value": "list",
         },
       ]
     }
     required={true}
+  />
+  <InputField
+    componentType="textarea"
+    data-automation="MediaFormFieldDescription"
+    disabled={false}
+    inputType="text"
+    label="Description"
+    name="description"
   />
 </form>
 `;

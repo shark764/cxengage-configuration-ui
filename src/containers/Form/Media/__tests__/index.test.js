@@ -5,6 +5,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
+import { fromJS } from 'immutable';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import MediaForm, { mapStateToProps } from '../';
 import {
@@ -13,7 +14,12 @@ import {
   isCreating,
   userHasUpdatePermission,
 } from '../../../../redux/modules/entities/selectors';
-import { selectFormInitialValues, formSubmission, createFormName } from '../../../../redux/modules/form/selectors';
+import {
+  getCurrentFormValueByFieldName,
+  formSubmission,
+  createFormName,
+} from '../../../../redux/modules/form/selectors';
+import { selectMediaFormInitialValues, selectMedias } from '../../../../redux/modules/entities/media/selectors';
 
 jest.mock('../../../../redux/modules/entities/selectors');
 jest.mock('../../../../redux/modules/form/selectors');
@@ -21,7 +27,21 @@ getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedEntityId.mockImplementation(() => 'mockId');
 isCreating.mockImplementation(() => true);
 userHasUpdatePermission.mockImplementation(() => true);
-selectFormInitialValues.mockImplementation(() => ({ active: true }));
+getCurrentFormValueByFieldName.mockImplementation(() => 'mock-media-type');
+jest.mock('../../../../redux/modules/entities/media/selectors');
+selectMediaFormInitialValues.mockImplementation(() =>
+  fromJS({
+    description: 'mockDescription',
+  })
+);
+selectMedias.mockImplementation(() =>
+  fromJS([
+    {
+      value: 'mockMediaId',
+      label: 'mockMediaName',
+    },
+  ])
+);
 
 describe('Media Renders', () => {
   it('renders', () => {

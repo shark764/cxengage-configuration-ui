@@ -4,7 +4,38 @@
 
 import { isEmpty } from 'serenova-js-utils/strings';
 
-export const formValidation = (values) => ({
-  name: isEmpty(values.get('name')) && 'Please enter a ...',
-  type: !values.get('type') && 'Please select a ...',
-});
+export const formValidation = (values) => {
+  let validation = {};
+  const type = values.get('type');
+  validation.name = isEmpty(values.get('name')) && 'Please enter a name';
+  validation.type = !values.get('type') && 'Please select a type';
+
+  if (type) {
+    if (type === 'tts') {
+      validation.source = isEmpty(values.get('source')) && 'Please enter text';
+
+      const properties = values.get('properties');
+      if (properties) {
+        validation.properties = {
+          language: !properties.get('language') && 'Please select a language',
+          voice: !properties.get('voice') && 'Please select a voice',
+        };
+      } else {
+        validation.properties = {
+          language: 'Please select a language',
+          voice: 'Please select a voice',
+        };
+      }
+    }
+
+    if (type === 'audio') {
+      validation.source = isEmpty(values.get('source')) && 'Please enter a audio file or URL';
+    }
+
+    if (type === 'list') {
+      validation.source = values.get('source').size === 0 && 'Prevent save of form';
+    }
+  }
+
+  return validation;
+};

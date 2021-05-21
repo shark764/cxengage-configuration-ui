@@ -344,6 +344,12 @@ export default class Navigation extends Component {
                   <FormattedMessage id="navigation.flows.dispositionLists" defaultMessage="Disposition Lists" />
                 </StyledLink>
                 <StyledLink
+                  data-automation="navigationLinkMedia"
+                  to="/configuration/media"
+                  onClick={(e) => this.setCurrentEntityAndEntityId('media', e)}>
+                  <FormattedMessage id="navigation.flows.media" defaultMessage="Media" />
+                </StyledLink>
+                <StyledLink
                   data-automation="navigationLinkFlowDebugger"
                   to="/flowDebugLogs"
                   onClick={(e) => this.setCurrentEntityAndEntityId('flowDebugLogs', e)}>
