@@ -13,7 +13,7 @@ import {
   isCreating,
   isEntityFetching
 } from '../../../redux/modules/entities/selectors';
-import { formSubmission, createFormName } from '../../../redux/modules/form/selectors';
+import { formSubmission, createFormName, getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { selectFacebookIntegrationsFormInitialValues } from '../../../redux/modules/entities/facebookIntegrations/selectors';
 import {
   getDigitalChannelsAppIds,
@@ -39,6 +39,7 @@ export function mapStateToProps(state) {
     digitalChannelsAppsFetching: isEntityFetching(state, 'digitalChannelsApps'),
     digitalChannelsAppIds: getDigitalChannelsAppIds(state),
     app: getDigitalChannelsApp(state),
+    fbAppId: getCurrentFormValueByFieldName(state, 'facebookAppId'),
   };
 }
 

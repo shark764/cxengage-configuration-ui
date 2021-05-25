@@ -75,6 +75,16 @@ exports[`<FacebookIntegrationsForm /> renders create form 1`] = `
     name="facebookUserAccessToken"
     placeholder="Enter the access token of your facebook user..."
   />
+  <Styled(Button)
+    disabled={false}
+    onClick={[Function]}
+  >
+    Generate access token with Facebook Login
+  </Styled(Button)>
+  <DetailsPanelMessage
+    text="You can manually generate a User Access Token or use the Facebook Login button above to auto generate one."
+    type="info"
+  />
   <DetailsPanelMessage
     text="Facebook App Secret is required to update the User Access Token"
     type="warning"
@@ -166,6 +176,16 @@ exports[`<FacebookIntegrationsForm /> renders form when initialValues is null 1`
     name="facebookUserAccessToken"
     placeholder="Enter the access token of your facebook user..."
   />
+  <Styled(Button)
+    disabled={true}
+    onClick={[Function]}
+  >
+    Generate access token with Facebook Login
+  </Styled(Button)>
+  <DetailsPanelMessage
+    text="You can manually generate a User Access Token or use the Facebook Login button above to auto generate one."
+    type="info"
+  />
 </form>
 `;
 
@@ -243,6 +263,16 @@ exports[`<FacebookIntegrationsForm /> renders update form 1`] = `
     label="Facebook User Access Token"
     name="facebookUserAccessToken"
     placeholder="Enter the access token of your facebook user..."
+  />
+  <Styled(Button)
+    disabled={false}
+    onClick={[Function]}
+  >
+    Generate access token with Facebook Login
+  </Styled(Button)>
+  <DetailsPanelMessage
+    text="You can manually generate a User Access Token or use the Facebook Login button above to auto generate one."
+    type="info"
   />
   <DetailsPanelMessage
     text="Facebook App Secret is required to update the User Access Token"

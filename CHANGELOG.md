@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.102.0] - 2021-05-19
+### Added
+- CXV1-24254- Add Facebook login button/logic for token generation.
+
 # [0.101.0] - 2021-05-17
 ### Added
 - CXV1-23876: Media Forms with fields and Create/Update (no audio file upload functionality).

@@ -48,6 +48,7 @@ Object {
   "app": "mock-app",
   "digitalChannelsAppIds": "mock-app-ids",
   "digitalChannelsAppsFetching": undefined,
+  "fbAppId": undefined,
   "handleSubmit": [MockFunction],
   "initialValues": undefined,
   "isSaving": true,

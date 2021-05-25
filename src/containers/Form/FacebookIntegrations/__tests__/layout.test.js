@@ -15,7 +15,7 @@ describe('<FacebookIntegrationsForm />', () => {
   it('renders form when initialValues is null', () => {
     const rendered = shallow(
       <FacebookIntegrationsForm
-          initialValues={null}
+        initialValues={null}
       />
     );
     expect(rendered).toMatchSnapshot();
@@ -32,6 +32,7 @@ describe('<FacebookIntegrationsForm />', () => {
         facebookPageId="mockFacebookPageId"
         facebookUserAccessToken="mockFacebookUserAccessToken"
         clientDisconnectMinutes={1}
+        fbAppId="123456789012345"
         initialValues={initialValues}
         digitalChannelsAppsFetching={false}
         digitalChannelsAppIds={[{ value: 'mockValue', label: 'mockLabel' }]}
@@ -53,6 +54,7 @@ describe('<FacebookIntegrationsForm />', () => {
         facebookPageId="mockFacebookPageId"
         facebookUserAccessToken="mockFacebookUserAccessToken"
         clientDisconnectMinutes={1}
+        fbAppId="123456789012345"
         initialValues={initialValues}
         digitalChannelsAppsFetching={false}
         digitalChannelsAppIds={[{ value: 'mockValue', label: 'mockLabel' }]}
