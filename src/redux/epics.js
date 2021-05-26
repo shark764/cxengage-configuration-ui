@@ -31,6 +31,7 @@ import * as forecastDashboardsEpics from './modules/reporting/forecastDashboards
 import * as userProfileEpics from './modules/entities/userProfile/epics';
 import * as capacityRulesEpics from './modules/entities/capacityRules/epics';
 import * as facebookIntegrationsEpics from './modules/entities/facebookIntegrations/epics';
+import * as mediaEpics from './modules/entities/media/epics';
 
 export const rootEpic = combineEpics(
   ...Object.values(brandingEpics),
@@ -64,5 +65,6 @@ export const rootEpic = combineEpics(
   ...Object.values(forecastDashboardsEpics),
   ...Object.values(userProfileEpics),
   ...Object.values(capacityRulesEpics),
-  ...Object.values(facebookIntegrationsEpics)
+  ...Object.values(facebookIntegrationsEpics),
+  ...Object.values(mediaEpics)
 );

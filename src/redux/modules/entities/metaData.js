@@ -1037,7 +1037,6 @@ entities.facebookIntegrations.updateFormDependencies.push('digitalChannelsApps')
 entities.media.pageTitle = 'Media Management';
 entities.media.title = 'Media';
 entities.media.helpLink = '/Help/Content/Managing%20Flows/Media/Adding%20Media.htm';
-entities.media.dependentEntity = 'dependentEntity';
 entities.media.sdkCall.path = ['media'];
 entities.media.columns = [
   { name: 'Name', active: true },

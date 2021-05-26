@@ -2697,7 +2697,7 @@ Object {
         "id": "name",
       },
     ],
-    "dependentEntity": "dependentEntity",
+    "dependentEntity": "",
     "entityName": "media",
     "entityTableFields": Array [
       Object {

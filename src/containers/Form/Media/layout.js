@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DetailHeader, DetailsPanelMessage, InputField, SelectField, PageHeader, CloseIconSVG, FileUploadField } from 'cx-ui-components';
+import {
+  DetailHeader,
+  DetailsPanelMessage,
+  InputField,
+  SelectField,
+  PageHeader,
+  CloseIconSVG,
+  FileUploadField,
+} from 'cx-ui-components';
 import styled from 'styled-components';
 import { Field } from 'redux-form/immutable';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -54,6 +62,8 @@ const mediaTypesLabels = {
   tts: 'Text-to-Speech',
   list: 'Media List',
 };
+
+const acceptedFileTypeAllowed = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/wave'];
 
 const MediaListField = ({ input: { value, onChange }, userHasUpdatePermission, medias }) => {
   const displayValues = value.map((value) => ({ mediaId: value, fakeId: generateUUID() }));
@@ -124,7 +134,9 @@ const MediaListField = ({ input: { value, onChange }, userHasUpdatePermission, m
                             <StyledSelect
                               id={`MediaSelect-${mediaId}-${index}`}
                               value={selectedMedia.value}
-                              onChange={({ target: { value: newMediaId } }) => mediaSelectionChanged(newMediaId, index)}>
+                              onChange={({ target: { value: newMediaId } }) =>
+                                mediaSelectionChanged(newMediaId, index)
+                              }>
                               {medias.map((media, index) => (
                                 <option key={media.value + index} value={media.value}>
                                   {media.label}
@@ -264,17 +276,21 @@ export default function MediaForm(props) {
         <>
           <FileUploadField
             uploadFile={() => ''}
-            fileType="mp3"
-            acceptedFileType="audio/*"
+            acceptedFileType={acceptedFileTypeAllowed.toString()}
             label="Upload Audio File *"
             disabled={isDisabled}
-            name="source"
+            name="sourceFile"
             maxFileSize={1010241024}
             toastError={`File must be audio and under 10MB`}
             required
           />
           <OR>-OR-</OR>
-          <InputField name="source" label="Audio File URL *" componentType="input" inputType="text" />
+          <InputField
+            name="source"
+            label="Audio File URL *"
+            componentType="input"
+            inputType="text"
+          />
         </>
       )}
       {mediaType === 'list' && (

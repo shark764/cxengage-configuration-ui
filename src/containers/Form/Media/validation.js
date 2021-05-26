@@ -29,7 +29,8 @@ export const formValidation = (values) => {
     }
 
     if (type === 'audio') {
-      validation.source = isEmpty(values.get('source')) && 'Please enter a audio file or URL';
+      validation.source =
+        isEmpty(values.get('sourceFile')) && isEmpty(values.get('source')) && 'Please enter a audio file or URL';
     }
 
     if (type === 'list') {

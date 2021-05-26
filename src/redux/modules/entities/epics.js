@@ -161,7 +161,10 @@ export const FormSubmission = (action$, store) =>
       entityName: getCurrentEntity(store.getState()),
       selectedEntityId: getSelectedEntityId(store.getState()),
     }))
-    .filter(({ dirty, entityName }) => dirty && entityName !== 'tenants' && entityName !== 'contactLayouts')
+    .filter(
+      ({ dirty, entityName }) =>
+        dirty && entityName !== 'tenants' && entityName !== 'contactLayouts' && entityName !== 'media'
+    )
     .map((a) => {
       if (a.entityName === 'transferLists' && a.selectedEntityId !== 'bulk') {
         a.values = a.values.update('endpoints', (endpoints) =>
@@ -306,7 +309,7 @@ export const getTenantPermissions = (action$) =>
       })
     );
 
-export const CreateEntity = (action$) =>
+export const CreateEntity = (action$, store) =>
   action$
     .ofType('CREATE_ENTITY')
     .filter(({ entityName }) => hasCustomCreateEntity(entityName))
@@ -317,6 +320,15 @@ export const CreateEntity = (action$) =>
         : [camelCaseToKebabCase(a.entityName.replace(/[V|v]\d{1}/, ''))];
       a.sdkCall.data = a.values;
       a.sdkCall.apiVersion = entitiesMetaData[a.entityName].sdkCall.apiVersion;
+
+      if (a.entityName === 'media') {
+        const selectedEntityId = getSelectedEntityId(store.getState());
+        a.entityId = selectedEntityId;
+        a.sdkCall.path = [...entitiesMetaData[a.entityName].sdkCall.path];
+        a.sdkCall.data = {
+          ...a.values,
+        };
+      }
       return { ...a };
     })
     .concatMap((a) =>
@@ -366,7 +378,7 @@ export const CopyEntity = (action$, store) =>
         .catch((error) => handleError(error, a))
     );
 
-export const UpdateEntity = (action$) =>
+export const UpdateEntity = (action$, store) =>
   action$
     .ofType('UPDATE_ENTITY')
     .filter(({ entityName }) => hasCustomUpdateEntity(entityName))
@@ -394,6 +406,16 @@ export const UpdateEntity = (action$) =>
         delete a.values.status;
         delete a.values.pageName;
         delete a.values.type;
+        a.sdkCall.data = {
+          ...a.values,
+        };
+      } else if (a.entityName === 'media') {
+        const selectedEntityId = getSelectedEntityId(store.getState());
+        a.entityId = selectedEntityId;
+        a.sdkCall.path = [...entitiesMetaData[a.entityName].sdkCall.path, a.entityId];
+        if (a.values.type !== 'tts') {
+          delete a.values.properties;
+        }
         a.sdkCall.data = {
           ...a.values,
         };
@@ -1182,8 +1204,7 @@ export const MediaTypeChanged = (action$, store) =>
     .map((a) => {
       if (a.payload === 'list') {
         return change(getSelectedEntityFormId(store.getState()), 'source', new List([]));
-      }
-      else {
-        return change(getSelectedEntityFormId(store.getState()), 'source', "")
+      } else {
+        return change(getSelectedEntityFormId(store.getState()), 'source', '');
       }
     });

@@ -1,6 +1,6 @@
 {
   "name": "cxengage-configuration-ui",
-  "version": "0.102.1",
+  "version": "0.103.0",
   "description": "CxEngage Configuration and Reporting",
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "cx-ui-components": "^0.67.6",
+    "cx-ui-components": "^0.69.0",
     "edn-data": "^0.2.0",
     "http-server": "^0.11.1",
     "immutable": "^3.8.2",
