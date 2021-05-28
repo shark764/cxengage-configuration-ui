@@ -50,6 +50,7 @@ const StyledSelect = styled.select`
   border-radius: 5px;
   padding: 5px 5px;
   border-color: #808080a8;
+  width: 100%;
 `;
 const OR = styled.span`
   font-size: 14px;
@@ -285,12 +286,7 @@ export default function MediaForm(props) {
             required
           />
           <OR>-OR-</OR>
-          <InputField
-            name="source"
-            label="Audio File URL *"
-            componentType="input"
-            inputType="text"
-          />
+          <InputField name="source" label="Audio File URL *" componentType="input" inputType="text" />
         </>
       )}
       {mediaType === 'list' && (

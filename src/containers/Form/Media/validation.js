@@ -4,6 +4,15 @@
 
 import { isEmpty } from 'serenova-js-utils/strings';
 
+const validateUrl = (string) => {
+  try {
+    const url = new URL(string);
+  } catch (_) {
+    return 'Audio source must be a URL';
+  }
+  return false;
+};
+
 export const formValidation = (values) => {
   let validation = {};
   const type = values.get('type');
@@ -31,6 +40,9 @@ export const formValidation = (values) => {
     if (type === 'audio') {
       validation.source =
         isEmpty(values.get('sourceFile')) && isEmpty(values.get('source')) && 'Please enter a audio file or URL';
+      if (!values.get('sourceFile') && !isEmpty(values.get('source'))) {
+        validation.source = validateUrl(values.get('source'));
+      }
     }
 
     if (type === 'list') {
