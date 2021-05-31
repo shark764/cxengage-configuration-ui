@@ -20,10 +20,13 @@ export const selectMediaFormInitialValues = (state) => {
 
 export const selectMedias = createSelector(getMedias, (medias) => {
   return medias
-    ? medias.filter((media) => media.get('type') === 'audio' || media.get('type') === 'tts').map((media) => ({
-        value: media.get('id'),
-        label: media.get('name'),
-        type: media.get('type'),
-      }))
+    ? medias
+        .filter((media) => media.get('type') === 'audio' || media.get('type') === 'tts')
+        .map((media) => ({
+          value: media.get('id'),
+          label: media.get('name'),
+          type: media.get('type'),
+        }))
+        .sort((a, b) => (a.label.toUpperCase() < b.label.toUpperCase() ? -1 : 0))
     : new List([]);
 });

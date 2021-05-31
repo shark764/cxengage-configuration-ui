@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.1] - 2021-05-31
+### Added
+- CXV1-26915: Media is not alphabetized when adding to media list
+
 # [0.104.0] - 2021-05-21
 ### Added
 - CXV1-23856 - Capacity Rule by Percentage Layout (UI).
