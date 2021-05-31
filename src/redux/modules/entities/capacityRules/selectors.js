@@ -23,9 +23,9 @@ export const selectCapacityRuleVersions = createSelector(
   (capacityRule) =>
     capacityRule
       ? capacityRule
-          .get('items', List([]))
-          .map((capacityRule, i) => capacityRule.set('numericOrderVersion', `v${i + 1}`))
-          .toJS()
+        .get('items', List([]))
+        .map((capacityRule, i) => capacityRule.set('numericOrderVersion', `v${i + 1}`))
+        .toJS()
       : List([]).toJS()
 );
 
@@ -33,17 +33,45 @@ export const selectCapacityRuleVersionFormInitialValues = createSelector(
   getSelectedSubEntity,
   (version) =>
     version
-      ? version.get('ruleSet') && version.set('rule', ednRuleToImmutable(version.get('ruleSet')))
+      ? (version.get('ruleSet') || version.get('rules')) &&
+      version.set('rule', ednRuleToImmutable(version.get('ruleSet'))).set('rules', version.get('rules'))
       : fromJS({
-          rule: {
-            voice: true,
-            groups: [
-              {
-                channels: ['email', 'messaging'],
-                interactions: 4,
-              },
-            ],
+        rule: {
+          voice: true,
+          groups: [
+            {
+              channels: ['email', 'messaging'],
+              interactions: 4,
+            },
+          ],
+        },
+        rules: [
+          {
+            channels: ['voice'],
+            max: 1,
+            weight: 100
           },
-          quantifier: 'any',
-        })
+          {
+            channels: ['email'],
+            max: 1,
+            weight: 100,
+          },
+          {
+            channels: ['messaging'],
+            max: 1,
+            weight: 100,
+          },
+          {
+            channels: ['sms'],
+            max: 1,
+            weight: 100,
+          },
+          {
+            channels: ['work-item'],
+            max: 1,
+            weight: 100,
+          },
+        ],
+        quantifier: 'any',
+      })
 );

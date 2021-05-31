@@ -6,8 +6,9 @@ describe('formValidation', () => {
     const values = new Map({
       name: 'mockName',
       rule: new Map({
-        groups: new List()
-      })
+        groups: new List(),
+      }),
+      rules: new List(),
     });
     expect(
       formValidation(values, { intl: { formatMessage: ({ defaultMessage }) => defaultMessage } })
@@ -17,8 +18,9 @@ describe('formValidation', () => {
     const values = fromJS({
       name: '',
       rule: {
-        groups: []
-      }
+        groups: [],
+      },
+      rules: [],
     });
     expect(
       formValidation(values, { intl: { formatMessage: ({ defaultMessage }) => defaultMessage } })
@@ -28,8 +30,15 @@ describe('formValidation', () => {
     const values = fromJS({
       name: undefined,
       rule: {
-        groups: []
-      }
+        groups: [],
+      },
+      rules: [
+        {
+          channels: ['voice'],
+          max: 0,
+          weight: 0.5,
+        },
+      ],
     });
     expect(
       formValidation(values, { intl: { formatMessage: ({ defaultMessage }) => defaultMessage } })

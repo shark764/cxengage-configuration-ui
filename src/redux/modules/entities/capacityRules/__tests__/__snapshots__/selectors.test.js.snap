@@ -23,6 +23,43 @@ Immutable.Map {
       },
     ],
   },
+  "rules": Immutable.List [
+    Immutable.Map {
+      "channels": Immutable.List [
+        "voice",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "email",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "messaging",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "sms",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "work-item",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+  ],
   "quantifier": "any",
 }
 `;
@@ -41,6 +78,43 @@ Immutable.Map {
       },
     ],
   },
+  "rules": Immutable.List [
+    Immutable.Map {
+      "channels": Immutable.List [
+        "voice",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "email",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "messaging",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "sms",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+    Immutable.Map {
+      "channels": Immutable.List [
+        "work-item",
+      ],
+      "max": 1,
+      "weight": 100,
+    },
+  ],
   "quantifier": "any",
 }
 `;

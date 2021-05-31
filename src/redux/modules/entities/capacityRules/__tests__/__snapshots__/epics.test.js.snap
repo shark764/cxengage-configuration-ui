@@ -50,6 +50,29 @@ Object {
       ],
       "voice": true,
     },
+    "rules": Array [
+      Object {
+        "channels": Array [
+          "voice",
+        ],
+        "max": 1,
+        "weight": 100,
+      },
+      Object {
+        "channels": Array [
+          "email",
+        ],
+        "max": 4,
+        "weight": 100,
+      },
+      Object {
+        "channels": Array [
+          "messaging",
+        ],
+        "max": 5,
+        "weight": 20,
+      },
+    ],
   },
 }
 `;
@@ -96,6 +119,29 @@ Object {
       ],
       "voice": true,
     },
+    "rules": Array [
+      Object {
+        "channels": Array [
+          "voice",
+        ],
+        "max": 1,
+        "weight": 100,
+      },
+      Object {
+        "channels": Array [
+          "email",
+        ],
+        "max": 4,
+        "weight": 100,
+      },
+      Object {
+        "channels": Array [
+          "messaging",
+        ],
+        "max": 5,
+        "weight": 20,
+      },
+    ],
   },
 }
 `;
@@ -150,6 +196,29 @@ Object {
       ],
       "voice": true,
     },
+    "rules": Array [
+      Object {
+        "channels": Array [
+          "voice",
+        ],
+        "max": 1,
+        "weight": 100,
+      },
+      Object {
+        "channels": Array [
+          "email",
+        ],
+        "max": 4,
+        "weight": 100,
+      },
+      Object {
+        "channels": Array [
+          "messaging",
+        ],
+        "max": 5,
+        "weight": 20,
+      },
+    ],
   },
 }
 `;

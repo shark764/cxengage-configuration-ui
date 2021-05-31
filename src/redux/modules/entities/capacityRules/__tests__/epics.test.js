@@ -148,6 +148,23 @@ describe('CreateSubEntity', () => {
             },
           ],
         },
+        rules: [
+          {
+            channels: ['voice'],
+            max: 1,
+            weight: 100,
+          },
+          {
+            channels: ['email'],
+            max: 4,
+            weight: 100,
+          },
+          {
+            channels: ['messaging'],
+            max: 5,
+            weight: 20,
+          },
+        ],
       },
     });
   });

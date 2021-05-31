@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.0] - 2021-05-21
+### Added
+- CXV1-23856 - Capacity Rule by Percentage Layout (UI).
+
 # [0.103.1] - 2021-05-26
 ### Fixed
 - CXV1-26906: Media Form audio URL validation missing feature parity from Media v1

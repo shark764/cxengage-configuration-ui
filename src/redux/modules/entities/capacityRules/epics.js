@@ -81,12 +81,12 @@ export const CreateSubEntity = (action$, store) =>
     .map((a) => {
       a.sdkCall = entitiesMetaData['capacityRules'].entityApiRequest('create', 'subEntity');
       a.sdkCall.path = ['capacity-rules', a.entityId, 'versions'];
-      const { name, quantifier, rule } = a.values;
+      const { name, quantifier, rule, rules } = a.values;
       const ruleSet = jsRuletoEdn(rule);
       a.sdkCall.data = {
         name,
         quantifier,
-        ruleSet,
+        ...(quantifier !== 'percentage' ? { ruleSet } : { rules }),
       };
       return { ...a };
     })
@@ -101,17 +101,17 @@ export const CreateSubEntity = (action$, store) =>
           // Setting activeversion if capacity rule has no versions
           ...(!selectCapacityRuleVersions(store.getState()).length
             ? [
-                {
-                  type: 'UPDATE_ENTITY',
-                  entityName: 'capacityRules',
-                  entityId: a.entityId,
-                  values: {
-                    name: getSelectedEntity(store.getState()).get('name'),
-                    activeVersion: response.result.version,
-                    id: a.entityId,
-                  },
+              {
+                type: 'UPDATE_ENTITY',
+                entityName: 'capacityRules',
+                entityId: a.entityId,
+                values: {
+                  name: getSelectedEntity(store.getState()).get('name'),
+                  activeVersion: response.result.version,
+                  id: a.entityId,
                 },
-              ]
+              },
+            ]
             : []),
         ])
         .catch((error) => handleError(error, a))

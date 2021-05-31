@@ -10,7 +10,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CapacityRuleField, SidePanelActions, InputField, SelectField } from 'cx-ui-components';
+import {
+  CapacityRuleField,
+  CapacityRuleSliderField,
+  SidePanelActions,
+  InputField,
+  SelectField,
+} from 'cx-ui-components';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
@@ -25,8 +31,12 @@ const Header = styled.h3`
 const Wrapper = styled.div`
   min-height: 300px;
   max-height: 50vh;
-  overflow: auto;
+  overflow: ${(props) => (props.ruleQuantifier === 'percentage' ? 'inherit' : 'auto')};
   margin-bottom: 10px;
+`;
+
+const CapacityRuleSliderFieldWrapper = styled.div`
+  padding-top: 10px;
 `;
 
 export default function VersionForm({
@@ -36,6 +46,7 @@ export default function VersionForm({
   onCancel,
   invalid,
   disabled,
+  ruleQuantifier,
   intl: { formatMessage },
 }) {
   return (
@@ -47,7 +58,7 @@ export default function VersionForm({
           <FormattedMessage id="capacityRules.versions.header.publised" defaultMessage="Viewing a published version" />
         )}
       </Header>
-      <Wrapper>
+      <Wrapper ruleQuantifier={ruleQuantifier}>
         <InputField
           name="name"
           label={`${formatMessage({
@@ -77,76 +88,104 @@ export default function VersionForm({
               }),
               value: 'any',
             },
-          ]}
-          disabled={isSaving || disabled}
-        />
-        <CapacityRuleField
-          name="rule"
-          options={[
             {
               label: formatMessage({
-                id: 'capacityRules.versions.channels.voice',
-                defaultMessage: 'Voice',
+                id: 'capacityRules.version.quantifier.percentage',
+                defaultMessage: 'Percentage',
               }),
-              value: 'voice',
-            },
-            {
-              label: formatMessage({
-                id: 'capacityRules.versions.channels.sms',
-                defaultMessage: 'SMS',
-              }),
-              value: 'sms',
-            },
-            {
-              label: formatMessage({
-                id: 'capacityRules.versions.channels.email',
-                defaultMessage: 'Email',
-              }),
-              value: 'email',
-            },
-            {
-              label: formatMessage({
-                id: 'capacityRules.versions.channels.messaging',
-                defaultMessage: 'Messaging',
-              }),
-              value: 'messaging',
-            },
-            {
-              label: formatMessage({
-                id: 'capacityRules.versions.channels.workItem',
-                defaultMessage: 'Work Item',
-              }),
-              value: 'work-item',
+              value: 'percentage',
             },
           ]}
           disabled={isSaving || disabled}
-          messages={{
-            selectPlaceholder: formatMessage({
-              id: 'capacityRules.versions.channelPicker.placeholder',
-              defaultMessage: 'Please select an option',
-            }),
-            numInteractionsLabel: formatMessage({
-              id: 'capacityRules.versions.numInteractions.label',
-              defaultMessage: 'Interactions',
-            }),
-            numInteractionsPlaceholder: formatMessage({
-              id: 'capacityRules.versions.numInteractions.placeholder',
-              defaultMessage: 'Enter a number',
-            }),
-            addGroupPopover: formatMessage({
-              id: 'capacityRules.versions.addGroup',
-              defaultMessage: 'Add Group',
-            }),
-            removeGroup: formatMessage({
-              id: 'capacityRules.versions.removeGroup',
-              defaultMessage: 'Remove Group',
-            }),
-            removeItem: formatMessage({
-              id: 'capacityRules.versions.removeItem',
-              defaultMessage: 'Remove Item',
-            }),
-          }}
         />
+        {ruleQuantifier !== 'percentage' ? (
+          <CapacityRuleField
+            name="rule"
+            options={[
+              {
+                label: formatMessage({
+                  id: 'capacityRules.versions.channels.voice',
+                  defaultMessage: 'Voice',
+                }),
+                value: 'voice',
+              },
+              {
+                label: formatMessage({
+                  id: 'capacityRules.versions.channels.sms',
+                  defaultMessage: 'SMS',
+                }),
+                value: 'sms',
+              },
+              {
+                label: formatMessage({
+                  id: 'capacityRules.versions.channels.email',
+                  defaultMessage: 'Email',
+                }),
+                value: 'email',
+              },
+              {
+                label: formatMessage({
+                  id: 'capacityRules.versions.channels.messaging',
+                  defaultMessage: 'Messaging',
+                }),
+                value: 'messaging',
+              },
+              {
+                label: formatMessage({
+                  id: 'capacityRules.versions.channels.workItem',
+                  defaultMessage: 'Work Item',
+                }),
+                value: 'work-item',
+              },
+            ]}
+            disabled={isSaving || disabled}
+            messages={{
+              selectPlaceholder: formatMessage({
+                id: 'capacityRules.versions.channelPicker.placeholder',
+                defaultMessage: 'Please select an option',
+              }),
+              numInteractionsLabel: formatMessage({
+                id: 'capacityRules.versions.numInteractions.label',
+                defaultMessage: 'Interactions',
+              }),
+              numInteractionsPlaceholder: formatMessage({
+                id: 'capacityRules.versions.numInteractions.placeholder',
+                defaultMessage: 'Enter a number',
+              }),
+              addGroupPopover: formatMessage({
+                id: 'capacityRules.versions.addGroup',
+                defaultMessage: 'Add Group',
+              }),
+              removeGroup: formatMessage({
+                id: 'capacityRules.versions.removeGroup',
+                defaultMessage: 'Remove Group',
+              }),
+              removeItem: formatMessage({
+                id: 'capacityRules.versions.removeItem',
+                defaultMessage: 'Remove Item',
+              }),
+            }}
+          />
+        ) : (
+          <>
+            <CapacityRuleSliderFieldWrapper>
+              <CapacityRuleSliderField
+                name="rules"
+                min={0}
+                max={100}
+                handleLabel
+                step={1}
+                textFormatter={(v) => `${v}%`}
+                disabled={isSaving || disabled}
+                tooltip
+                sliderTooltip="Percentage of the agent's capacity each interaction of this channel type will occupy"
+                sliderTooltipProps={{ background: '#6F6F6F', fontColor: '#F5F5F5', width: '250px' }}
+                maxChannelDropdownTooltip="Maximum number of interactions of this channel type"
+                maxChannelDropdownTooltipProps={{ background: '#6F6F6F', fontColor: '#F5F5F5', width: '250px' }}
+              />
+            </CapacityRuleSliderFieldWrapper>
+          </>
+        )}
       </Wrapper>
       <SidePanelActions onCancel={onCancel} isSaving={isSaving} invalid={invalid || disabled} />
     </form>
@@ -160,5 +199,6 @@ VersionForm.propTypes = {
   isSaving: PropTypes.bool,
   invalid: PropTypes.bool,
   disabled: PropTypes.bool,
+  ruleQuantifier: PropTypes.string,
   intl: PropTypes.object.isRequired,
 };

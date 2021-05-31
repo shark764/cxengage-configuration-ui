@@ -13,13 +13,18 @@ import {
   isSubEntitySaving,
   getSelectedEntity,
 } from '../../../../../redux/modules/entities/selectors';
-import { subEntityFormSubmission, selectFormInitialValues } from '../../../../../redux/modules/form/selectors';
+import {
+  subEntityFormSubmission,
+  selectFormInitialValues,
+  getCurrentSubFormValueByFieldName,
+} from '../../../../../redux/modules/form/selectors';
 
 jest.mock('../../../../../redux/modules/entities/selectors');
 jest.mock('../../../../../redux/modules/form/selectors');
 getCurrentForm.mockImplementation(() => 'gets form from state');
 getSelectedSubEntityId.mockImplementation(() => 'create');
 isSubEntitySaving.mockImplementation(() => true);
+getCurrentSubFormValueByFieldName.mockImplementation(() => 'any');
 selectFormInitialValues.mockImplementation(() => ({
   rule: {
     voice: true,

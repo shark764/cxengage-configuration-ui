@@ -30,6 +30,10 @@ exports[`<VersionForm /> renders the component 1`] = `
             "label": "Any",
             "value": "any",
           },
+          Object {
+            "label": "Percentage",
+            "value": "percentage",
+          },
         ]
       }
       required={false}

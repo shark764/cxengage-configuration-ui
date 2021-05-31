@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import VersionForm from './layout';
 import { setSelectedSubEntityId } from '../../../../redux/modules/entities';
 import { isSubEntitySaving, getSelectedSubEntityId } from '../../../../redux/modules/entities/selectors';
-import { subEntityFormSubmission } from '../../../../redux/modules/form/selectors';
+import { getCurrentSubFormValueByFieldName, subEntityFormSubmission } from '../../../../redux/modules/form/selectors';
 import { selectCapacityRuleVersionFormInitialValues } from '../../../../redux/modules/entities/capacityRules/selectors';
 import { formValidation } from './validation';
 
@@ -21,6 +21,7 @@ export function mapStateToProps(state) {
     isSaving: isSubEntitySaving(state),
     key: 'create',
     disabled: getSelectedSubEntityId(state) !== 'create',
+    ruleQuantifier: getCurrentSubFormValueByFieldName(state, 'version:create', 'quantifier'),
     initialValues: selectCapacityRuleVersionFormInitialValues(state),
   };
 }
