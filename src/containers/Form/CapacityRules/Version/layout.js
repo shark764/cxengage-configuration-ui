@@ -16,6 +16,7 @@ import {
   SidePanelActions,
   InputField,
   SelectField,
+  CloseIconSVG,
 } from 'cx-ui-components';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
@@ -26,6 +27,10 @@ const Header = styled.h3`
   color: #474747;
   font-weight: 700;
   display: inline-block;
+`;
+
+const CloseButtonWrapper = styled.div`
+  float: right;
 `;
 
 const Wrapper = styled.div`
@@ -58,6 +63,11 @@ export default function VersionForm({
           <FormattedMessage id="capacityRules.versions.header.publised" defaultMessage="Viewing a published version" />
         )}
       </Header>
+      {disabled && (
+        <CloseButtonWrapper>
+          <CloseIconSVG onClick={onCancel} size={18} closeIconType="secondary" data-automation="dtpanelActionClose" />
+        </CloseButtonWrapper>
+      )}
       <Wrapper ruleQuantifier={ruleQuantifier}>
         <InputField
           name="name"
@@ -187,7 +197,13 @@ export default function VersionForm({
           </>
         )}
       </Wrapper>
-      <SidePanelActions onCancel={onCancel} isSaving={isSaving} invalid={invalid || disabled} />
+      <SidePanelActions
+        onCancel={onCancel}
+        hideCancel={disabled}
+        hideSubmit={disabled}
+        isSaving={isSaving}
+        invalid={invalid || disabled}
+      />
     </form>
   );
 }

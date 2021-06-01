@@ -503,7 +503,7 @@ entities.reasonLists.columns = [
   { name: 'Is Default', active: true },
   { name: 'Status', active: true },
 ];
-entities.reasonLists.customSortMethod = function(a, b) {
+entities.reasonLists.customSortMethod = function (a, b) {
   if (a === b) {
     return 0;
   }
@@ -701,7 +701,7 @@ entities.flows.membersTableFields = {
     {
       label: 'Version',
       name: 'numericOrderVersion',
-      customSortMethod: function(a, b) {
+      customSortMethod: function (a, b) {
         a = parseInt(a, 10);
         b = parseInt(b, 10);
         if (a === b) {
@@ -763,7 +763,7 @@ entities.slas.membersTableFields = {
     {
       label: 'Version',
       name: 'numericOrderVersion',
-      customSortMethod: function(a, b) {
+      customSortMethod: function (a, b) {
         a = parseInt(a, 10);
         b = parseInt(b, 10);
         if (a === b) {
@@ -981,13 +981,13 @@ entities.capacityRules.membersTableFields = [
     label: 'Version',
     name: 'numericOrderVersion',
     messageId: 'capacityRules.details.version',
-    customSortMethod: function(a, b) {
+    customSortMethod: function (a, b) {
       a = parseInt(a, 10);
       b = parseInt(b, 10);
       if (a === b) {
         return 0;
       }
-      return a > b ? 1 : -1;
+      return a < b ? -1 : 1;
     },
     customWidth: 35,
   },
