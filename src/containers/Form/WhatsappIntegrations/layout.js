@@ -48,16 +48,16 @@ export default function WhatsappIntegrationsForm({
       {initialValues.get('id') === undefined ? (
         <SelectField
           name="whatsappId"
-          label="App *"
+          label="WhatsApp Integration *"
           data-automation="whatsappIdList"
           options={!whatsappAppsFetching ? whatsappApps : undefined}
           disabled={isDisabled}
         />
       ) : (
         <>
-          <Detail label="Whatsapp Id" value={initialValues.get('id')} />
-          <Detail label="App" value={app && app.get('name')} />
-          <Detail label="App Id" value={app && app.get('id')} />
+          <Detail label="WhatsApp Integration Id" value={initialValues.get('id')} />
+          <Detail label="Digital Channels App" value={app && app.get('name')} />
+          <Detail label="Digital Channels App Id" value={app && app.get('id')} />
         </>
       )}
       <InputField

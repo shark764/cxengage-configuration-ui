@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.3] - 2021-06-01
+### Updated
+- CXV1-26914 - Config-UI | Standardize the label for Smooch App in Chat Widget, WhatsApp and Facebook.
+
 # [0.104.2] - 2021-05-31
 ### Changed
 - CXV1-26901 - Config-UI | Capacity Rules | Cancel/Submit buttons visible when viewing a Published version.

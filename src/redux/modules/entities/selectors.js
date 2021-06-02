@@ -322,9 +322,15 @@ export const sidePanelHeader = (state) => {
   }
   const selectedEntityId = getSelectedEntityId(state);
   if (selectedEntityId === 'create') {
-    return {
-      title: `Creating New ${entitiesMetaData[currentEntity].title}`,
-    };
+    if (currentEntity === 'whatsappIntegrations') {
+      return {
+        title: `Creating ${entitiesMetaData[currentEntity].title} Mapping`,
+      };
+    } else {
+      return {
+        title: `Creating New ${entitiesMetaData[currentEntity].title}`,
+      };
+    }
   } else if (selectedEntityId === 'bulk') {
     return {
       title: `Bulk Actions: ${getSelectedEntityBulkChangeItems(state).size} Selected`,

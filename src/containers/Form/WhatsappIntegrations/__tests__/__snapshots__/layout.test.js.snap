@@ -28,7 +28,7 @@ exports[`<WhatsappIntegrationsForm /> renders create form 1`] = `
   <SelectField
     data-automation="whatsappIdList"
     disabled={false}
-    label="App *"
+    label="WhatsApp Integration *"
     name="whatsappId"
     options={
       Array [
@@ -85,7 +85,7 @@ exports[`<WhatsappIntegrationsForm /> renders update form 1`] = `
   <SelectField
     data-automation="whatsappIdList"
     disabled={false}
-    label="App *"
+    label="WhatsApp Integration *"
     name="whatsappId"
     options={
       Array [

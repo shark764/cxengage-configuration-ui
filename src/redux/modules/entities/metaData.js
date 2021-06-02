@@ -1026,7 +1026,7 @@ entities.whatsappApps.sdkCall.path = ['whatsapp-apps'];
 entities.facebookIntegrations.bulkEditsAvailable = false;
 entities.facebookIntegrations.pageTitle = 'Facebook Integrations Management';
 entities.facebookIntegrations.helpLink =
-  '/Help/Content/Managing%20FacebookIntegrations/Creating_FacebookIntegrations.htm';
+  '/Help/Content/Configuration/Facebook/Managing-Facebook-Integration.htm';
 entities.facebookIntegrations.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 entities.facebookIntegrations.sdkCall.path = ['facebook-integrations'];
 entities.facebookIntegrations.hideActiveToggle = true;

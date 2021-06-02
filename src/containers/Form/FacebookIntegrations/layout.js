@@ -118,15 +118,15 @@ export default class FacebookIntegrationsForm extends Component {
         {!this.props.initialValues ? (
           <SelectField
             name="appId"
-            label="App Id *"
+            label="Digital Channels App *"
             data-automation="appIdList"
             options={!this.props.digitalChannelsAppsFetching ? this.props.digitalChannelsAppIds : undefined}
             disabled={isDisabled}
           />
         ) : (
           <Fragment>
-            <Detail label="App" value={this.props.app && this.props.app.get('name')} />
-            <Detail label="App Id" value={this.props.app && this.props.app.get('id')} />
+            <Detail label="Digital Channels App" value={this.props.app && this.props.app.get('name')} />
+            <Detail label="Digital Channels App Id" value={this.props.app && this.props.app.get('id')} />
           </Fragment>
         )}
         {!this.props.initialValues ? (
@@ -186,7 +186,7 @@ export default class FacebookIntegrationsForm extends Component {
         />
         {this.props.initialValues &&
           <DetailsPanelMessage
-            text={`Facebook App Secret is required to update the User Access Token`}
+            text={`Facebook App Secret and Facebook User Access token should not have to be updated again. Only include these fields in the update form when necessary.`}
             type="warning"
           />
         }

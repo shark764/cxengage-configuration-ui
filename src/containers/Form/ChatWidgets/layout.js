@@ -105,15 +105,15 @@ export default function ChatWidgetsForm({
       {chatWidgetId === 'create' ? (
         <SelectField
           name="appId"
-          label="App *"
+          label="Digital Channels App *"
           data-automation="appIdList"
           options={!digitalChannelsAppsFetching ? digitalChannelsAppIds : undefined}
           disabled={disabled}
         />
       ) : (
         <Fragment>
-          <Detail label="App" value={app && app.get('name')} />
-          <Detail label="App Id" value={app && app.get('id')} />
+          <Detail label="Digital Channels App" value={app && app.get('name')} />
+          <Detail label="Digital Channels App Id" value={app && app.get('id')} />
         </Fragment>
       )}
 

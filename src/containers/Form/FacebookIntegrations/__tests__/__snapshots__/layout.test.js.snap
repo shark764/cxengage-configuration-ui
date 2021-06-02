@@ -45,10 +45,10 @@ exports[`<FacebookIntegrationsForm /> renders create form 1`] = `
   />
   <React.Fragment>
     <Detail
-      label="App"
+      label="Digital Channels App"
     />
     <Detail
-      label="App Id"
+      label="Digital Channels App Id"
     />
   </React.Fragment>
   <Detail
@@ -86,7 +86,7 @@ exports[`<FacebookIntegrationsForm /> renders create form 1`] = `
     type="info"
   />
   <DetailsPanelMessage
-    text="Facebook App Secret is required to update the User Access Token"
+    text="Facebook App Secret and Facebook User Access token should not have to be updated again. Only include these fields in the update form when necessary."
     type="warning"
   />
 </form>
@@ -136,7 +136,7 @@ exports[`<FacebookIntegrationsForm /> renders form when initialValues is null 1`
   <SelectField
     data-automation="appIdList"
     disabled={true}
-    label="App Id *"
+    label="Digital Channels App *"
     name="appId"
     required={false}
   />
@@ -234,10 +234,10 @@ exports[`<FacebookIntegrationsForm /> renders update form 1`] = `
   />
   <React.Fragment>
     <Detail
-      label="App"
+      label="Digital Channels App"
     />
     <Detail
-      label="App Id"
+      label="Digital Channels App Id"
     />
   </React.Fragment>
   <Detail
@@ -275,7 +275,7 @@ exports[`<FacebookIntegrationsForm /> renders update form 1`] = `
     type="info"
   />
   <DetailsPanelMessage
-    text="Facebook App Secret is required to update the User Access Token"
+    text="Facebook App Secret and Facebook User Access token should not have to be updated again. Only include these fields in the update form when necessary."
     type="warning"
   />
 </form>

@@ -1652,7 +1652,7 @@ Object {
         "name": "description",
       },
     ],
-    "helpLink": "/Help/Content/Managing%20FacebookIntegrations/Creating_FacebookIntegrations.htm",
+    "helpLink": "/Help/Content/Configuration/Facebook/Managing-Facebook-Integration.htm",
     "hideActiveToggle": true,
     "modalListTableFields": Array [
       Object {

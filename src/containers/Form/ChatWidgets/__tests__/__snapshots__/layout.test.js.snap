@@ -46,10 +46,10 @@ exports[`<ChatWidgetsForm /> renders create chatWidgets 1`] = `
   />
   <React.Fragment>
     <Detail
-      label="App"
+      label="Digital Channels App"
     />
     <Detail
-      label="App Id"
+      label="Digital Channels App Id"
     />
   </React.Fragment>
   <DetailHeader
@@ -234,10 +234,10 @@ exports[`<ChatWidgetsForm /> renders update chatWidgets 1`] = `
   />
   <React.Fragment>
     <Detail
-      label="App"
+      label="Digital Channels App"
     />
     <Detail
-      label="App Id"
+      label="Digital Channels App Id"
     />
   </React.Fragment>
   <DetailHeader
