@@ -15,7 +15,6 @@ exports[`<SlasDetailsPanel /> renders slas detailsPanel 1`] = `
     defaultSorted={
       Array [
         Object {
-          "desc": true,
           "id": "numericOrderVersion",
         },
       ]

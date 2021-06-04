@@ -51,7 +51,7 @@ export default function SlasDetailsPanel({
         viewSubEntity={(listItemId, row) => setSelectedSubEntityId(row.versionId)}
         items={versionsItems}
         fields={versionsFields}
-        defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
+        defaultSorted={[{ id: 'numericOrderVersion' }]}
         fetching={slasFetching && !versionsItems.length}
         itemApiPending={itemApiPending}
       />

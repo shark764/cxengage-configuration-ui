@@ -9,16 +9,17 @@ Object {
   "userHasViewPermission": undefined,
   "versionsFields": Array [
     Object {
-      "customSortMethod": [Function],
       "customWidth": 35,
       "label": "Version",
       "name": "numericOrderVersion",
     },
     Object {
+      "customSortMethod": [Function],
       "label": "Name",
       "name": "versionName",
     },
     Object {
+      "customSortMethod": [Function],
       "label": "Description",
       "name": "description",
     },
@@ -69,16 +70,17 @@ exports[`SlasDetailsPanel Renders renders 1`] = `
   versionsFields={
     Array [
       Object {
-        "customSortMethod": [Function],
         "customWidth": 35,
         "label": "Version",
         "name": "numericOrderVersion",
       },
       Object {
+        "customSortMethod": [Function],
         "label": "Name",
         "name": "versionName",
       },
       Object {
+        "customSortMethod": [Function],
         "label": "Description",
         "name": "description",
       },

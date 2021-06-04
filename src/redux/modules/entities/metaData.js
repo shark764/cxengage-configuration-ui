@@ -5,6 +5,8 @@ import {
   camelCaseToRegularForm,
 } from 'serenova-js-utils/strings';
 
+import { customSortStringMethod } from './../../../utils/index';
+
 /**
  * All the information about an entity that it does not provide about itself
  *
@@ -701,20 +703,16 @@ entities.flows.membersTableFields = {
     {
       label: 'Version',
       name: 'numericOrderVersion',
-      customSortMethod: function (a, b) {
-        a = parseInt(a, 10);
-        b = parseInt(b, 10);
-        if (a === b) {
-          return 0;
-        }
-        return a > b ? 1 : -1;
-      },
       customWidth: 35,
     },
-    { label: 'Name', name: 'name' },
+    { label: 'Name', name: 'name', customSortMethod: customSortStringMethod },
+    { label: 'Description', name: 'description', customSortMethod: customSortStringMethod },
     { label: 'Created On', name: 'created', format: 'datetime' },
   ],
-  drafts: [{ label: 'Name', name: 'name' }, { label: 'Created On', name: 'created', format: 'datetime' }],
+  drafts: [
+    { label: 'Name', name: 'name', customSortMethod: customSortStringMethod },
+    { label: 'Created On', name: 'created', format: 'datetime' }
+  ],
 };
 
 // Dispatch Mappings
@@ -763,18 +761,10 @@ entities.slas.membersTableFields = {
     {
       label: 'Version',
       name: 'numericOrderVersion',
-      customSortMethod: function (a, b) {
-        a = parseInt(a, 10);
-        b = parseInt(b, 10);
-        if (a === b) {
-          return 0;
-        }
-        return a > b ? 1 : -1;
-      },
       customWidth: 35,
     },
-    { label: 'Name', name: 'versionName' },
-    { label: 'Description', name: 'description' },
+    { label: 'Name', name: 'versionName', customSortMethod: customSortStringMethod },
+    { label: 'Description', name: 'description', customSortMethod: customSortStringMethod },
     { label: 'Created On', name: 'created', format: 'datetime' },
   ],
 };
@@ -981,20 +971,13 @@ entities.capacityRules.membersTableFields = [
     label: 'Version',
     name: 'numericOrderVersion',
     messageId: 'capacityRules.details.version',
-    customSortMethod: function (a, b) {
-      a = parseInt(a, 10);
-      b = parseInt(b, 10);
-      if (a === b) {
-        return 0;
-      }
-      return a < b ? -1 : 1;
-    },
     customWidth: 35,
   },
   {
     label: 'Name',
     messageId: 'identityProviders.details.name',
     name: 'name',
+    customSortMethod: customSortStringMethod
   },
   {
     label: 'Created On',
@@ -1025,8 +1008,7 @@ entities.whatsappApps.sdkCall.path = ['whatsapp-apps'];
 // Facebook Integrations
 entities.facebookIntegrations.bulkEditsAvailable = false;
 entities.facebookIntegrations.pageTitle = 'Facebook Integrations Management';
-entities.facebookIntegrations.helpLink =
-  '/Help/Content/Configuration/Facebook/Managing-Facebook-Integration.htm';
+entities.facebookIntegrations.helpLink = '/Help/Content/Configuration/Facebook/Managing-Facebook-Integration.htm';
 entities.facebookIntegrations.columns = [{ name: 'Name', active: true }, { name: 'Description', active: true }];
 entities.facebookIntegrations.sdkCall.path = ['facebook-integrations'];
 entities.facebookIntegrations.hideActiveToggle = true;

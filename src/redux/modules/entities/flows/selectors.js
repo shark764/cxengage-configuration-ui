@@ -14,12 +14,12 @@ const getFlows = state => state.getIn(['Entities', 'flows', 'data']);
 export const selectFlowIds = createSelector(getFlows, flows => {
   return flows !== undefined
     ? flows
-        .filter(flow => flow.get('active'))
-        .map(flow => ({
-          value: flow.get('id'),
-          label: flow.get('name')
-        }))
-        .toJS()
+      .filter(flow => flow.get('active'))
+      .map(flow => ({
+        value: flow.get('id'),
+        label: flow.get('name')
+      }))
+      .toJS()
     : undefined;
 });
 
@@ -105,11 +105,10 @@ export const subEntityFormSubmission = (values, dispatch, props) => dispatch(onC
 export const getNewFlowDraftName = state =>
   getSelectedSubEntityId(state) !== 'drafts'
     ? `Copy of ${getSelectedEntity(state).get('name')}`
-    : `${
-        getSelectedSubEntityData(state) !== undefined
-          ? getSelectedSubEntityData(state).name
-          : getSelectedEntity(state).get('name')
-      } - draft`;
+    : `${getSelectedSubEntityData(state) !== undefined
+      ? getSelectedSubEntityData(state).name
+      : getSelectedEntity(state).get('name')
+    } - draft`;
 
 export const getFlowItemFields = (state, memberName) =>
   userHasPermissions(state, [
@@ -120,12 +119,12 @@ export const getFlowItemFields = (state, memberName) =>
     'PLATFORM_MANAGE_ALL_TENANTS_ENROLLMENT'
   ])
     ? [
-        ...entitiesMetaData.flows.membersTableFields[memberName],
-        {
-          label: 'Created By',
-          name: 'createdByName'
-        }
-      ]
+      ...entitiesMetaData.flows.membersTableFields[memberName],
+      {
+        label: 'Created By',
+        name: 'createdByName'
+      }
+    ]
     : entitiesMetaData.flows.membersTableFields[memberName];
 
 export const selectFlowFormInitialValues = state => {

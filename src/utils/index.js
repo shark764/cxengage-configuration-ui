@@ -17,3 +17,18 @@ export const renameObjectKey = (object, key, newKey) => {
   clonedObj[newKey] = targetKey;
   return clonedObj;
 };
+
+// Sort method to sort strings in entity tables
+export const customSortStringMethod = (a, b) => {
+  let tempArray = [];
+  tempArray = [a, b];
+
+  const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+  tempArray.sort(collator.compare);
+
+  if (tempArray[0] === a) {
+    return -1;
+  } else {
+    return 1;
+  }
+};

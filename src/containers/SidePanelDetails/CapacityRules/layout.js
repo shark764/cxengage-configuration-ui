@@ -51,11 +51,11 @@ export default function CapacityRulesDetailsPanel({
           label,
           ...(messageId
             ? {
-                label: formatMessage({
-                  id: messageId,
-                  defaultMessage: label,
-                }),
-              }
+              label: formatMessage({
+                id: messageId,
+                defaultMessage: label,
+              }),
+            }
             : {}),
         }))}
         defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}

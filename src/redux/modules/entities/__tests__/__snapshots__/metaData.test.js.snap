@@ -553,13 +553,13 @@ Object {
     "helpLink": "/Help/Content/Managing%20Users/Capacity_Rules/Creating_Capacity_Rules.htm",
     "membersTableFields": Array [
       Object {
-        "customSortMethod": [Function],
         "customWidth": 35,
         "label": "Version",
         "messageId": "capacityRules.details.version",
         "name": "numericOrderVersion",
       },
       Object {
+        "customSortMethod": [Function],
         "label": "Name",
         "messageId": "identityProviders.details.name",
         "name": "name",
@@ -1803,6 +1803,7 @@ Object {
     "membersTableFields": Object {
       "drafts": Array [
         Object {
+          "customSortMethod": [Function],
           "label": "Name",
           "name": "name",
         },
@@ -1814,14 +1815,19 @@ Object {
       ],
       "versions": Array [
         Object {
-          "customSortMethod": [Function],
           "customWidth": 35,
           "label": "Version",
           "name": "numericOrderVersion",
         },
         Object {
+          "customSortMethod": [Function],
           "label": "Name",
           "name": "name",
+        },
+        Object {
+          "customSortMethod": [Function],
+          "label": "Description",
+          "name": "description",
         },
         Object {
           "format": "datetime",
@@ -3873,16 +3879,17 @@ Object {
     "membersTableFields": Object {
       "versions": Array [
         Object {
-          "customSortMethod": [Function],
           "customWidth": 35,
           "label": "Version",
           "name": "numericOrderVersion",
         },
         Object {
+          "customSortMethod": [Function],
           "label": "Name",
           "name": "versionName",
         },
         Object {
+          "customSortMethod": [Function],
           "label": "Description",
           "name": "description",
         },
