@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.5] - 2021-06-04
+### Added
+- CXV1-23857 - Capacity Rule by Percentage - Unit Tests.
+
 # [0.104.4] - 2021-06-02
 ### Fixed
 - CXV1-26914 - Sort by numeric version fixed for published Flows, Capacity Rules V2 and SLA.

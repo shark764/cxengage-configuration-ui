@@ -34,6 +34,33 @@ selectFormInitialValues.mockImplementation(() => ({
         interactions: 4,
       },
     ],
+    rules: [
+      {
+        channels: ['voice'],
+        max: 1,
+        weight: 100,
+      },
+      {
+        channels: ['email'],
+        max: 1,
+        weight: 100,
+      },
+      {
+        channels: ['messaging'],
+        max: 1,
+        weight: 100,
+      },
+      {
+        channels: ['sms'],
+        max: 1,
+        weight: 100,
+      },
+      {
+        channels: ['work-item'],
+        max: 1,
+        weight: 100,
+      },
+    ],
   },
   quantifier: 'any',
 }));
@@ -66,6 +93,33 @@ describe('subEntityFormSubmission', () => {
         {
           channels: ['email', 'messaging'],
           interactions: 4,
+        },
+      ],
+      rules: [
+        {
+          channels: ['voice'],
+          max: 1,
+          weight: 100,
+        },
+        {
+          channels: ['email'],
+          max: 1,
+          weight: 100,
+        },
+        {
+          channels: ['messaging'],
+          max: 1,
+          weight: 100,
+        },
+        {
+          channels: ['sms'],
+          max: 1,
+          weight: 100,
+        },
+        {
+          channels: ['work-item'],
+          max: 1,
+          weight: 100,
         },
       ],
     },

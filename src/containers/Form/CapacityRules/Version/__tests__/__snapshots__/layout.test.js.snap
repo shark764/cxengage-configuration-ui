@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<VersionForm /> renders the component 1`] = `
+exports[`<VersionForm /> renders the component of any capacity rule 1`] = `
 <form>
   <styled.h3>
     <FormattedMessage
@@ -9,7 +9,9 @@ exports[`<VersionForm /> renders the component 1`] = `
       values={Object {}}
     />
   </styled.h3>
-  <styled.div>
+  <styled.div
+    ruleQuantifier="any"
+  >
     <InputField
       componentType="input"
       disabled={false}
@@ -76,6 +78,88 @@ exports[`<VersionForm /> renders the component 1`] = `
         ]
       }
     />
+  </styled.div>
+  <SidePanelActions
+    bulkItemsAffected={0}
+    hideCancel={false}
+    hideSubmit={false}
+    invalid={false}
+    isSaving={false}
+    selectedEntityId=""
+  />
+</form>
+`;
+
+exports[`<VersionForm /> renders the component of percentage capacity rule 1`] = `
+<form>
+  <styled.h3>
+    <FormattedMessage
+      defaultMessage="Create a new version"
+      id="capacityRules.versions.header.new"
+      values={Object {}}
+    />
+  </styled.h3>
+  <styled.div
+    ruleQuantifier="percentage"
+  >
+    <InputField
+      componentType="input"
+      disabled={false}
+      label="Name *"
+      name="name"
+    />
+    <SelectField
+      disabled={false}
+      label="Rule Type *"
+      name="quantifier"
+      options={
+        Array [
+          Object {
+            "label": "All",
+            "value": "all",
+          },
+          Object {
+            "label": "Any",
+            "value": "any",
+          },
+          Object {
+            "label": "Percentage",
+            "value": "percentage",
+          },
+        ]
+      }
+      required={false}
+    />
+    <React.Fragment>
+      <styled.div>
+        <CapacityRuleSliderField
+          disabled={false}
+          handleLabel={true}
+          max={100}
+          maxChannelDropdownTooltip="Maximum number of interactions of this channel type"
+          maxChannelDropdownTooltipProps={
+            Object {
+              "background": "#6F6F6F",
+              "fontColor": "#F5F5F5",
+              "width": "250px",
+            }
+          }
+          min={0}
+          name="rules"
+          sliderTooltip="Percentage of the agent's capacity each interaction of this channel type will occupy"
+          sliderTooltipProps={
+            Object {
+              "background": "#6F6F6F",
+              "fontColor": "#F5F5F5",
+              "width": "250px",
+            }
+          }
+          step={1}
+          textFormatter={[Function]}
+          tooltip={true}
+        />
+      </styled.div>
+    </React.Fragment>
   </styled.div>
   <SidePanelActions
     bulkItemsAffected={0}

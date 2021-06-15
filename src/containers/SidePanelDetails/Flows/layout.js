@@ -42,7 +42,7 @@ export default function FlowsDetailsPanel({
   createDraftItem,
   removeListItem,
   copyListItem,
-  itemApiPending
+  itemApiPending,
 }) {
   return (
     <Wrapper className="dtpanel-entity-flows">
@@ -67,12 +67,12 @@ export default function FlowsDetailsPanel({
               viewSubEntity={openFlowDesigner}
               copySubEntity={copyListItem}
               updateSubEntity={(listItemId, row, subEntityName) => createDraftItem('drafts', row, subEntityName)}
-              items={versionsItems.map(versionItem => ({
+              items={versionsItems.map((versionItem) => ({
                 ...versionItem,
-                viewSubEntityHyperLink: parentUrl + '#/flows/viewer/' + versionItem.flowId + '/' + versionItem.version
+                viewSubEntityHyperLink: parentUrl + '#/flows/viewer/' + versionItem.flowId + '/' + versionItem.version,
               }))}
               fields={versionsFields}
-              defaultSorted={[{ id: 'numericOrderVersion', desc: true }]}
+              defaultSorted={[{ id: 'numericOrderVersion' }]}
               fetching={flowsFetching && !versionsItems.length}
               itemApiPending={itemApiPending}
             />
@@ -91,9 +91,9 @@ export default function FlowsDetailsPanel({
               deleteSubEntity={removeListItem}
               confirmDeleteSubEntity={true}
               copySubEntity={copyListItem}
-              items={draftsItems.map(draftItem => ({
+              items={draftsItems.map((draftItem) => ({
                 ...draftItem,
-                updateSubEntityHyperLink: parentUrl + '#/flows/editor/' + draftItem.flowId + '/' + draftItem.id
+                updateSubEntityHyperLink: parentUrl + '#/flows/editor/' + draftItem.flowId + '/' + draftItem.id,
               }))}
               fields={draftsFields}
               defaultSorted={[{ id: 'created', desc: true }]}
@@ -120,10 +120,10 @@ FlowsDetailsPanel.propTypes = {
   removeListItem: PropTypes.func,
   copyListItem: PropTypes.func,
   itemApiPending: PropTypes.string,
-  createDraftItem: PropTypes.func
+  createDraftItem: PropTypes.func,
 };
 
 FlowsDetailsPanel.defaultProps = {
   versionsItems: [],
-  draftsItems: []
+  draftsItems: [],
 };

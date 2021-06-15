@@ -19,7 +19,6 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel 1`] = `
         defaultSorted={
           Array [
             Object {
-              "desc": true,
               "id": "numericOrderVersion",
             },
           ]
@@ -78,7 +77,6 @@ exports[`<FlowsDetailsPanel /> renders flows detailsPanel with no update permisi
         defaultSorted={
           Array [
             Object {
-              "desc": true,
               "id": "numericOrderVersion",
             },
           ]
