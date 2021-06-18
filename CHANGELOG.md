@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.6] - 2021-06-15
+### Fixed
+- CXV1-24294 - config2 | Integrations page - Global Dial Parameters keys are converted from uppercase to lowercase.
+
 # [0.104.5] - 2021-06-04
 ### Added
 - CXV1-23857 - Capacity Rule by Percentage - Unit Tests.

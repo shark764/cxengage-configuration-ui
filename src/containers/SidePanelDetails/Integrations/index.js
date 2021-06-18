@@ -9,16 +9,16 @@ import {
   userHasUpdatePermission,
   isEntityFetching,
   itemApiPending,
-  userHasPermissions
+  userHasPermissions,
 } from '../../../redux/modules/entities/selectors';
 import {
   setSelectedSubEntityId,
   removeTwilioGlobalDialParam,
-  updateTwilioGlobalDialParam
+  updateTwilioGlobalDialParam,
 } from '../../../redux/modules/entities';
 import {
   selectIntegrationListeners,
-  selectTwilioGlobalDialParams
+  selectTwilioGlobalDialParams,
 } from '../../../redux/modules/entities/integrations/selectors';
 import { getCurrentFormValueByFieldName } from '../../../redux/modules/form/selectors';
 import { entitiesMetaData } from '../../../redux/modules/entities/metaData';
@@ -34,8 +34,11 @@ export function mapStateToProps(state) {
     itemApiPending: itemApiPending(state),
     globalDialParamsItems: selectTwilioGlobalDialParams(state),
     sidePanelUpdatePermissions: {
-      twilioGlobalDialParams: userHasPermissions(state, ['TWILIO_GLOBAL_DIAL_PARAMS_MANAGE'])
-    }
+      twilioGlobalDialParams: userHasPermissions(state, [
+        'TWILIO_GLOBAL_DIAL_PARAMS_MANAGE',
+        'PLATFORM_TWILIO_GLOBAL_DIAL_PARAMS_MANAGE',
+      ]),
+    },
   };
 }
 
