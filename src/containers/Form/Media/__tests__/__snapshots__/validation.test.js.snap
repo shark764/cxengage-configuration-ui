@@ -1,9 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`formValidation returns proper object (errors) when required fields are not provided 1`] = `
+exports[`formValidation returns proper object (errors) when audio source is not provided 1`] = `
+Object {
+  "name": false,
+  "source": "Please enter a audio file or URL",
+  "type": false,
+}
+`;
+
+exports[`formValidation returns proper object (errors) when audio source is not valid url 1`] = `
+Object {
+  "name": false,
+  "source": "Audio source must be a URL",
+  "type": false,
+}
+`;
+
+exports[`formValidation returns proper object (errors) when list source is not provided 1`] = `
+Object {
+  "name": false,
+  "source": "Prevent save of form",
+  "type": false,
+}
+`;
+
+exports[`formValidation returns proper object (errors) when name and type field is not provided 1`] = `
 Object {
   "name": "Please enter a name",
   "type": "Please select a type",
+}
+`;
+
+exports[`formValidation returns proper object (errors) when tts source is not provided 1`] = `
+Object {
+  "name": false,
+  "properties": Object {
+    "language": "Please select a language",
+    "voice": "Please select a voice",
+  },
+  "source": "Please enter text",
+  "type": false,
+}
+`;
+
+exports[`formValidation returns proper object (errors) when tts source properties language and voice are not provided 1`] = `
+Object {
+  "name": false,
+  "properties": Object {
+    "language": "Please select a language",
+    "voice": "Please select a voice",
+  },
+  "source": false,
+  "type": false,
 }
 `;
 
@@ -14,7 +62,15 @@ Object {
 }
 `;
 
-exports[`formValidation returns proper object when required fields are provided 1`] = `
+exports[`formValidation returns proper object when audio source is valid url 1`] = `
+Object {
+  "name": false,
+  "source": false,
+  "type": false,
+}
+`;
+
+exports[`formValidation returns proper object when name and type are provided 1`] = `
 Object {
   "name": false,
   "type": false,

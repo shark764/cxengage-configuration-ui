@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateUpdateAfterFileUpload - create When CreateUpdateAfterFileUpload is on new record 1`] = `
+Object {
+  "entityName": "media",
+  "type": "CREATE_ENTITY",
+  "values": Object {
+    "id": "mockMediaId",
+    "name": "mockMediaName",
+    "source": "https://cxengagelabs-qe-configurator-media.s3.amazonaws.com/2d5ebdd3-cf4d-49f0-8d74-c2ae054b0780/9ed46feb-fc91-4024-be5b-b07e31ca3749/file_example_MP3_1MG%20%281%29.mp3",
+    "values": Object {
+      "description": "Listen to some music while you connect to customer.....",
+      "id": "132df310-4e9a-11ea-8f03-bae0982fb335",
+      "name": "Agent Wait Music",
+      "properties": Object {},
+      "source": "",
+      "sourceFile": Object {},
+      "tenantId": "2d5ebdd3-cf4d-49f0-8d74-c2ae054b0780",
+      "type": "audio",
+    },
+  },
+}
+`;
+
+exports[`CreateUpdateAfterFileUpload - update when CreateUpdateAfterFileUpload is update 1`] = `
+Object {
+  "entityId": undefined,
+  "entityName": "media",
+  "type": "UPDATE_ENTITY",
+  "values": Object {
+    "id": "mockMediaId",
+    "name": "mockMediaName",
+    "source": "https://cxengagelabs-qe-configurator-media.s3.amazonaws.com/2d5ebdd3-cf4d-49f0-8d74-c2ae054b0780/9ed46feb-fc91-4024-be5b-b07e31ca3749/file_example_MP3_1MG%20%281%29.mp3",
+    "values": Object {
+      "description": "Listen to some music while you connect to customer.....",
+      "id": "132df310-4e9a-11ea-8f03-bae0982fb335",
+      "name": "Agent Wait Music",
+      "properties": Object {},
+      "source": "",
+      "sourceFile": Object {},
+      "tenantId": "2d5ebdd3-cf4d-49f0-8d74-c2ae054b0780",
+      "type": "audio",
+    },
+  },
+}
+`;
+
+exports[`MediaFileSelected is populated when payload contains sourceFile 1`] = `
+Object {
+  "meta": Object {
+    "field": "source",
+    "form": undefined,
+    "persistentSubmitErrors": undefined,
+    "touch": undefined,
+  },
+  "payload": "",
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
+exports[`MediaTypeChanged payload is list when payload is list need to create new list[] 1`] = `
+Object {
+  "meta": Object {
+    "field": "source",
+    "form": undefined,
+    "persistentSubmitErrors": undefined,
+    "touch": undefined,
+  },
+  "payload": Immutable.List [],
+  "type": "@@redux-form/CHANGE",
+}
+`;
+
+exports[`MediaTypeChanged payload is not list when payload is tts need to blank out source 1`] = `
+Object {
+  "meta": Object {
+    "field": "source",
+    "form": undefined,
+    "persistentSubmitErrors": undefined,
+    "touch": undefined,
+  },
+  "payload": "",
+  "type": "@@redux-form/CHANGE",
+}
+`;

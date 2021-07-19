@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.7] - 2021-06-1225
+### Fixed
+- CXV1-23878 - Media Unit Tests and Media clean up
+
 # [0.104.6] - 2021-06-15
 ### Fixed
 - CXV1-24294 - config2 | Integrations page - Global Dial Parameters keys are converted from uppercase to lowercase.

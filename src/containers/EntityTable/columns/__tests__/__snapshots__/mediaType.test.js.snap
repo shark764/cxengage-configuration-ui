@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mediaTypeColumn Cell renders correctly audio 1`] = `
+<span
+  title="audio"
+>
+  Audio
+</span>
+`;
+
+exports[`mediaTypeColumn Cell renders correctly list 1`] = `
+<span
+  title="list"
+>
+  Media List
+</span>
+`;
+
+exports[`mediaTypeColumn Cell renders correctly tts 1`] = `
+<span
+  title="tts"
+>
+  Text-to-Speech
+</span>
+`;
+
+exports[`mediaTypeColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Type"
+  >
+    Type
+  </span>,
+  "accessor": [Function],
+  "filterMethod": [Function],
+  "id": "mediaType",
+  "sortMethod": [Function],
+}
+`;

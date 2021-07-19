@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mediaSourceColumn Cell renders correctly 1`] = `
+<span
+  title="mock media source"
+>
+  mock media source
+</span>
+`;
+
+exports[`mediaSourceColumn accessor accesses list type correctly 1`] = `""`;
+
+exports[`mediaSourceColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Source"
+  >
+    Source
+  </span>,
+  "accessor": [Function],
+  "id": "mediaSource",
+  "sortMethod": [Function],
+}
+`;

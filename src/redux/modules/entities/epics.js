@@ -1196,15 +1196,3 @@ export const SetIsCurrentFormDirtyInConfig1 = (action$) =>
         isDirty: response,
       }))
     );
-
-export const MediaTypeChanged = (action$, store) =>
-  action$
-    .ofType('@@redux-form/CHANGE')
-    .filter((a) => a.meta.form.includes('media') && a.meta.field.includes('type'))
-    .map((a) => {
-      if (a.payload === 'list') {
-        return change(getSelectedEntityFormId(store.getState()), 'source', new List([]));
-      } else {
-        return change(getSelectedEntityFormId(store.getState()), 'source', '');
-      }
-    });

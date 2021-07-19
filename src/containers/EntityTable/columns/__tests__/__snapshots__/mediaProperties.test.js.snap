@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mediaPropertiesColumn Cell renders correctly 1`] = `
+<span
+  title="{\\"language\\":\\"en-US\\",\\"voice\\":\\"alice\\"}"
+>
+  {"language":"en-US","voice":"alice"}
+</span>
+`;
+
+exports[`mediaPropertiesColumn is configured correctly 1`] = `
+Object {
+  "Cell": [Function],
+  "Filter": [Function],
+  "Header": <span
+    title="Properties"
+  >
+    Properties
+  </span>,
+  "accessor": [Function],
+  "id": "mediaProperties",
+  "sortMethod": [Function],
+}
+`;

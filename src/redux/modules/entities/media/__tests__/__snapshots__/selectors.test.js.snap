@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectMediaFormInitialValues Gets the correct media 1`] = `
+Object {
+  "description": "",
+  "id": "mediaMockId_1",
+  "name": "Flow Mock 1",
+}
+`;
+
+exports[`selectMediaFormInitialValues Initial values when creating a new media 1`] = `Immutable.Map {}`;
+
+exports[`selectMedias returns undefined when no data is available 1`] = `Immutable.List []`;
+
+exports[`selectMedias should get medias and filter out medias of type list 1`] = `
+Immutable.List [
+  Object {
+    "label": "Flow Mock 1",
+    "type": "tts",
+    "value": "mediaMockId_1",
+  },
+  Object {
+    "label": "Flow Mock 2",
+    "type": "audio",
+    "value": "mediaMockId_2",
+  },
+  Object {
+    "label": "Flow MOCK 4",
+    "type": "audio",
+    "value": "mediaMockId_4",
+  },
+]
+`;

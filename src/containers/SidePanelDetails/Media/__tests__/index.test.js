@@ -6,7 +6,7 @@ import React from 'react';
 import { Map } from 'immutable';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import MediaDetailsPanel, { mapStateToProps } from '../';
+import MediaDetailsPanel from '../';
 import {
   getSelectedEntity,
   userHasUpdatePermission,
@@ -33,11 +33,3 @@ describe('MediaDetailsPanel Renders', () => {
     expect(shallow(<MediaDetailsPanel store={store}>Child</MediaDetailsPanel>)).toMatchSnapshot();
   });
 });
-
-/*
-describe('Maps state to props only using selectors', () => {
-  it('validates object created from mapStateToProps', () => {
-    expect(mapStateToProps()).toMatchSnapshot();
-  });
-});
-*/

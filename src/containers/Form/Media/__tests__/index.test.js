@@ -8,12 +8,7 @@ import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 import { getCurrentForm } from '../../../../redux/modules/form/selectors';
 import MediaForm, { mapStateToProps } from '../';
-import {
-  getSelectedEntityId,
-  isInherited,
-  isCreating,
-  userHasUpdatePermission,
-} from '../../../../redux/modules/entities/selectors';
+import { getSelectedEntityId, isCreating, userHasUpdatePermission } from '../../../../redux/modules/entities/selectors';
 import {
   getCurrentFormValueByFieldName,
   formSubmission,

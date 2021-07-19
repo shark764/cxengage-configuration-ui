@@ -92,12 +92,6 @@ export const CreateUpdateAfterFileUpload = (action$, store) =>
           entityName: a.entityName,
           values: a.values,
         };
-      } else if (selectedEntityId === 'bulk') {
-        return {
-          type: 'BULK_ENTITY_UPDATE',
-          entityName: a.entityName,
-          values: a.values,
-        };
       } else {
         return {
           type: 'UPDATE_ENTITY',
