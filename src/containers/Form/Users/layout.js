@@ -305,7 +305,7 @@ export default function UsersForm({
             name="extensions"
             label="Inputs"
             data-automation="extensionsExtensionList"
-            canChangeRegion={canManageAllExtensions}
+            canUpdateRegion={canManageAllExtensions}
             placeholders={{
               extension: 'Enter Extension',
               label: 'Description',

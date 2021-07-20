@@ -340,7 +340,7 @@ const ExtensionsForm = reduxForm({
           }),
         }}
         label="extensions"
-        canChangeRegion={canManageAllExtensions}
+        canUpdateRegion={canManageAllExtensions}
         placeholders={{
           extension: formatMessage({
             id: 'user.details.extensions.value',

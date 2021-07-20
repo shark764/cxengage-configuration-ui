@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.8] - 2021-07-20
+### Fixed
+- CXV1-27050 - Config-2 | User extension PSTN region dropdown can be enabled for updates
+
 # [0.104.7] - 2021-06-1225
 ### Fixed
 - CXV1-23878 - Media Unit Tests and Media clean up
