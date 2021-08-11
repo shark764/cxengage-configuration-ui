@@ -83,10 +83,11 @@ export const CreateSubEntity = (action$, store) =>
       a.sdkCall.path = ['capacity-rules', a.entityId, 'versions'];
       const { name, quantifier, rule, rules } = a.values;
       const ruleSet = jsRuletoEdn(rule);
+      const filteredRules = rules.filter((rule) => rule.max > 0);
       a.sdkCall.data = {
         name,
         quantifier,
-        ...(quantifier !== 'percentage' ? { ruleSet } : { rules }),
+        ...(quantifier !== 'percentage' ? { ruleSet } : { rules: filteredRules }),
       };
       return { ...a };
     })
@@ -101,17 +102,17 @@ export const CreateSubEntity = (action$, store) =>
           // Setting activeversion if capacity rule has no versions
           ...(!selectCapacityRuleVersions(store.getState()).length
             ? [
-              {
-                type: 'UPDATE_ENTITY',
-                entityName: 'capacityRules',
-                entityId: a.entityId,
-                values: {
-                  name: getSelectedEntity(store.getState()).get('name'),
-                  activeVersion: response.result.version,
-                  id: a.entityId,
+                {
+                  type: 'UPDATE_ENTITY',
+                  entityName: 'capacityRules',
+                  entityId: a.entityId,
+                  values: {
+                    name: getSelectedEntity(store.getState()).get('name'),
+                    activeVersion: response.result.version,
+                    id: a.entityId,
+                  },
                 },
-              },
-            ]
+              ]
             : []),
         ])
         .catch((error) => handleError(error, a))

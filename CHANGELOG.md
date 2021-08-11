@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.9] - 2021-08-10
+### Fixed
+- CXV1-27180 - Capacity Rule Type : errors when trying to switch to from any rule type to percentage type.
+
 # [0.104.8] - 2021-07-20
 ### Fixed
 - CXV1-27050 - Config-2 | User extension PSTN region dropdown can be enabled for updates
