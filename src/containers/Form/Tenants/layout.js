@@ -20,7 +20,7 @@ import {
   ColorField,
   LoadingSpinnerSVG,
   ConfirmationWrapper,
-  Button
+  Button,
 } from 'cx-ui-components';
 import DetailWrapper from '../../../components/DetailWrapper';
 
@@ -77,7 +77,7 @@ export default function TenantsForm({
   userHasTenantBrandingUpdatePermissions,
   userHasBrandingProductNameUpdatePermissions,
   userHasTenantIdpViewPermissions,
-  userHasPlatformViewPermission
+  userHasPlatformViewPermission,
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -134,7 +134,7 @@ export default function TenantsForm({
                   <SelectField
                     name="cxengageIdentityProvider"
                     label="Platform Authentication"
-                    disabled={true}
+                    disabled={identityProviders.size !== 0 ? false : true}
                     data-automation="platformAuthenticationList"
                     options={[{ label: 'Enabled', value: 'enabled' }, { label: 'Disabled', value: 'disabled' }]}
                   />
@@ -166,13 +166,11 @@ export default function TenantsForm({
                     switchTenant(selectedEntityId, true);
                   }}
                   mainText="This will switch you over to this tenant"
-                  secondaryText="Do you want to continue?"
-                >
+                  secondaryText="Do you want to continue?">
                   <ResetButton
                     name="setAsActiveTenant"
                     data-automation="setActiveTenantButton"
-                    disabled={isSaving || !userHasTenantUpdatePermissions}
-                  >
+                    disabled={isSaving || !userHasTenantUpdatePermissions}>
                     Set as Active Tenant
                   </ResetButton>
                 </ResetModal>
@@ -219,14 +217,12 @@ export default function TenantsForm({
                       userHasTenantBrandingUpdatePermissions ? () => resetTenantBranding(selectedEntityId) : undefined
                     }
                     mainText="This will reset this tenant's branding to default"
-                    secondaryText="Do you want to continue?"
-                  >
+                    secondaryText="Do you want to continue?">
                     <ResetButton
                       children="Reset Branding to Default"
                       name="resetBranding"
                       data-automation="resetBrandingButton"
-                      disabled={!userHasTenantBrandingUpdatePermissions}
-                    >
+                      disabled={!userHasTenantBrandingUpdatePermissions}>
                       Reset Branding to Default
                     </ResetButton>
                   </ResetModal>
@@ -317,5 +313,5 @@ TenantsForm.propTypes = {
   tenantUsers: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   initialValues: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   identityProviders: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  outboundIntegrations: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
+  outboundIntegrations: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
