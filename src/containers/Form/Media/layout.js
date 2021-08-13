@@ -66,8 +66,11 @@ const mediaTypesLabels = {
 
 const acceptedFileTypeAllowed = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/wave'];
 
-const MediaListField = ({ input: { value, onChange }, userHasUpdatePermission, medias }) => {
+const MediaListField = ({ input: { value, onChange }, userHasUpdatePermission, medias, selectedEntityId }) => {
   const displayValues = value.map((value) => ({ mediaId: value, fakeId: generateUUID() }));
+
+  //Filter out itself when switching from non list type to list
+  medias = medias.filter((media) => media.value !== selectedEntityId)
 
   // When creating a new list start with at least one item
   if (value && value.size === 0) {
@@ -298,6 +301,7 @@ export default function MediaForm(props) {
             disabled: props.isSaving,
             userHasUpdatePermission: props.userHasUpdatePermission,
             medias: props.medias,
+            selectedEntityId: props.selectedEntityId
           }}
         />
       )}
@@ -321,6 +325,7 @@ MediaForm.propTypes = {
   initialValues: PropTypes.object.isRequired,
   mediaType: PropTypes.string,
   medias: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  selectedEntityId: PropTypes.string
 };
 
 const DragIndicatorIcon = ({ width = 24, fill = '#808080a8' }) => (

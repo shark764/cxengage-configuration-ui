@@ -33,6 +33,7 @@ export const mapStateToProps = (state) => ({
   key: getSelectedEntityId(state),
   mediaType: getCurrentFormValueByFieldName(state, 'type'),
   medias: selectMedias(state),
+  selectedEntityId: getSelectedEntityId(state),
 });
 
 export default connect(mapStateToProps)(CreateMediaForm);

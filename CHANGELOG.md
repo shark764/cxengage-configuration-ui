@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.11] - 2021-08-12
+### Fixed
+- CXV1-27132 - Config UI 2 | Media Page | Able to Select own media on media list
+
 # [0.104.10] - 2021-08-11
 ### Fixed
 - CXV1-27056 - Tenants v2 page, platform authentication dropdown greyed out.

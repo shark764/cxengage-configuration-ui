@@ -15,6 +15,7 @@ Object {
       "label": "mockMediaName",
     },
   ],
+  "selectedEntityId": "mockId",
   "userHasUpdatePermission": true,
 }
 `;
@@ -38,6 +39,7 @@ exports[`Media Renders renders 1`] = `
       },
     ]
   }
+  selectedEntityId="mockId"
   store={
     Object {
       "dispatch": [Function],
