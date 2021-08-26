@@ -11,6 +11,7 @@ def service = 'cxengage-configuration-ui'
 def docker_tag = BUILD_TAG.toLowerCase()
 def pr = env.CHANGE_ID
 def c = new common()
+def d = new container()
 def mt = new teams()
 def n = new node()
 def f = new frontend()
