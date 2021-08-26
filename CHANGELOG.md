@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [Unreleased] - 2021-08-26
+### Updated
+- <no-jira> - Publish to ECR to be its own stage in Jenkinsfile and not run in parallel
+
 # [0.104.12] - 2021-08-26
 ### Added
 - <no-jira> - Stage to Jenkinsfile to publish the docker image to ECR

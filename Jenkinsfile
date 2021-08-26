@@ -162,17 +162,17 @@ pipeline {
             sh "aws s3 sync ./build/build s3://cxengagelabs-jenkins/frontend/${service}/${build_version}/ --delete"
           }
         }
-        stage('Publishing the build') {
-          when { not { changeRequest() } }
-            steps {
-              sh 'echo "Stage Description: Sets up docker image for use in following stages"'
-              sh "docker build -t cxengage-configuration-ui -f Dockerfile ."
-              script {
-                d.publishDocker("${service}", build_version)
-                d.cleanupDocker(service, build_version)
-              }
-            }
-        }
+      }
+    }
+    stage('Publishing the build to ECR') {
+      when { not { changeRequest() } }
+        steps {
+          sh 'echo "Stage Description: Sets up docker image for use in following stages"'
+          sh "docker build -t cxengage-configuration-ui -f Dockerfile ."
+          script {
+            d.publishDocker("${service}", build_version)
+            d.cleanupDocker(service, build_version)
+          }
       }
     }
     stage ('Deploy') {
