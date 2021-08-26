@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.12] - 2021-08-26
+### Added
+- <no-jira> - Stage to Jenkinsfile to publish the docker image to ECR
+
 # [0.104.11] - 2021-08-12
 ### Fixed
 - CXV1-27132 - Config UI 2 | Media Page | Able to Select own media on media list
