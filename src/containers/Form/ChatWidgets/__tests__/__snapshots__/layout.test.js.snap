@@ -44,14 +44,21 @@ exports[`<ChatWidgetsForm /> renders create chatWidgets 1`] = `
     text="If Disconnect Time is left blank, the client disconnection checker will not be applied."
     type="info"
   />
-  <React.Fragment>
-    <Detail
-      label="Digital Channels App"
-    />
-    <Detail
-      label="Digital Channels App Id"
-    />
-  </React.Fragment>
+  <SelectField
+    data-automation="appIdList"
+    disabled={false}
+    label="Digital Channels App *"
+    name="appId"
+    options={
+      Array [
+        Object {
+          "label": "mockLabel",
+          "value": "mockValue",
+        },
+      ]
+    }
+    required={false}
+  />
   <DetailHeader
     text="Branding"
   />
@@ -233,6 +240,10 @@ exports[`<ChatWidgetsForm /> renders update chatWidgets 1`] = `
     type="info"
   />
   <React.Fragment>
+    <Detail
+      label="Web Integration Id"
+      value="Digital Channel Integration Name"
+    />
     <Detail
       label="Digital Channels App"
     />

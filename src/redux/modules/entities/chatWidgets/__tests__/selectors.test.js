@@ -4,7 +4,7 @@ import {
   selectChatWidgetFormInitialValues,
   getDigitalChannelsAppIds,
   getDigitalChannelsApp,
-  getDisplayStyleIsButton
+  getDisplayStyleIsButton,
 } from '../selectors';
 
 import { getSelectedEntity } from '../../selectors';
@@ -34,31 +34,14 @@ describe('selectChatWidgetFormInitialValues', () => {
 describe('getDigitalChannelsAppIds', () => {
   it('maps digital channels to id and name', () => {
     const state = fromJS({
-      Entities: { digitalChannelsApps: { data: [{ name: 'mock-name', id: 'mock-app-id', foo: 'bar' }] } }
-    });
-    expect(getDigitalChannelsAppIds(state)).toMatchSnapshot();
-  });
-  it('maps digital channels when at least one is available for assignment', () => {
-    const state = fromJS({
       Entities: {
         digitalChannelsApps: {
           data: [
             { name: 'mock-name', id: 'mock-app-id', foo: 'bar' },
             { name: 'mock-name-2', id: 'mock-app-id-2', foo: 'bar' },
-            { name: 'mock-name-3', id: 'mock-app-id-3', foo: 'bar' }
-          ]
+          ],
         },
-        chatWidgets: { data: [{ appId: 'mock-app-id' }, { appId: 'mock-app-id-2' }] }
-      }
-    });
-    expect(getDigitalChannelsAppIds(state)).toMatchSnapshot();
-  });
-  it('returns empty map when there is no app available for assignment', () => {
-    const state = fromJS({
-      Entities: {
-        digitalChannelsApps: { data: [{ name: 'mock-name', id: 'mock-app-id', foo: 'bar' }] },
-        chatWidgets: { data: [{ appId: 'mock-app-id' }] }
-      }
+      },
     });
     expect(getDigitalChannelsAppIds(state)).toMatchSnapshot();
   });
@@ -67,7 +50,7 @@ describe('getDigitalChannelsAppIds', () => {
 describe('getDigitalChannelsApp', () => {
   it('gets the app of the selected chat widget', () => {
     const state = fromJS({
-      Entities: { digitalChannelsApps: { data: [{ name: 'mock-name', id: 'mock-app-id', foo: 'bar' }] } }
+      Entities: { digitalChannelsApps: { data: [{ name: 'mock-name', id: 'mock-app-id', foo: 'bar' }] } },
     });
     expect(getDigitalChannelsApp(state)).toMatchSnapshot();
   });

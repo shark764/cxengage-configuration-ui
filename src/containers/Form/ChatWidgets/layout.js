@@ -19,7 +19,7 @@ import {
   ColorField,
   ListField,
   Detail,
-  DetailsPanelMessage
+  DetailsPanelMessage,
 } from 'cx-ui-components';
 import styled from 'styled-components';
 import { isSerializedOrigin } from 'serenova-js-utils/strings';
@@ -51,6 +51,7 @@ const error = (
 );
 
 export default function ChatWidgetsForm({
+  initialValues,
   handleSubmit,
   disabled,
   digitalChannelsAppsFetching,
@@ -58,7 +59,7 @@ export default function ChatWidgetsForm({
   key,
   chatWidgetId,
   app,
-  displayStyleIsButton
+  displayStyleIsButton,
 }) {
   return (
     <form onSubmit={handleSubmit} key={key}>
@@ -112,6 +113,7 @@ export default function ChatWidgetsForm({
         />
       ) : (
         <Fragment>
+          <Detail label="Web Integration Id" value={initialValues.get('id')} />
           <Detail label="Digital Channels App" value={app && app.get('name')} />
           <Detail label="Digital Channels App Id" value={app && app.get('id')} />
         </Fragment>
@@ -210,7 +212,7 @@ export default function ChatWidgetsForm({
         options={[
           { label: 'Name', value: 'name' },
           { label: 'Email', value: 'email' },
-          { label: 'None', value: 'none' }
+          { label: 'None', value: 'none' },
         ]}
         required
       />
@@ -230,6 +232,7 @@ export default function ChatWidgetsForm({
 
 ChatWidgetsForm.propTypes = {
   key: PropTypes.string,
+  initialValues: PropTypes.object,
   handleSubmit: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   chatWidgetId: PropTypes.string,
@@ -238,11 +241,11 @@ ChatWidgetsForm.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,
-        value: PropTypes.string.isRequired
+        value: PropTypes.string.isRequired,
       })
     ),
-    PropTypes.object
+    PropTypes.object,
   ]),
   app: PropTypes.object,
-  displayStyleIsButton: PropTypes.bool
+  displayStyleIsButton: PropTypes.bool,
 };

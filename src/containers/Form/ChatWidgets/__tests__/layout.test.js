@@ -8,7 +8,7 @@ import { shallow } from 'enzyme';
 import ChatWidgetsForm from '../layout';
 
 const initialValues = {
-  get: () => {}
+  get: () => 'Digital Channel Integration Name',
 };
 
 describe('<ChatWidgetsForm />', () => {
@@ -16,6 +16,7 @@ describe('<ChatWidgetsForm />', () => {
     const rendered = shallow(
       <ChatWidgetsForm
         name="mockName"
+        chatWidgetId="create"
         shared={false}
         welcome="hero"
         fontFamily="arial"

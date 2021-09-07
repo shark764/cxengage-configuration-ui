@@ -14,19 +14,12 @@ Immutable.List [
     "label": "mock-name",
     "value": "mock-app-id",
   },
-]
-`;
-
-exports[`getDigitalChannelsAppIds maps digital channels when at least one is available for assignment 1`] = `
-Immutable.List [
   Object {
-    "label": "mock-name-3",
-    "value": "mock-app-id-3",
+    "label": "mock-name-2",
+    "value": "mock-app-id-2",
   },
 ]
 `;
-
-exports[`getDigitalChannelsAppIds returns empty map when there is no app available for assignment 1`] = `Immutable.List []`;
 
 exports[`selectChatWidgetFormInitialValues create returns initial values 1`] = `
 Immutable.Map {

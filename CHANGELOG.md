@@ -10,9 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
-# [Unreleased] - 2021-08-26
+# [0.104.13] - 2021-08-31
 ### Updated
 - <no-jira> - Publish to ECR to be its own stage in Jenkinsfile and not run in parallel
+- CXV1-27349 - Show all apps when creating a web itegration to allow multiple web integrations on the same app.
+- CXV1-27349 - Show web integration id in side panel details when editing a web integration.
 
 # [0.104.12] - 2021-08-26
 ### Added
