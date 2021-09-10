@@ -15,9 +15,10 @@ import {
   selectedEntityIndex,
   availableEntityMembersForList,
   entityRemovedFromList,
-  entityAddedToList
+  entityAddedToList,
 } from '../listItemSelectors';
 import { EntityMetaData, entitiesMetaData } from '../metaData';
+import { getCurrentPermissions } from '../../userData/selectors';
 
 entitiesMetaData.mockEntity = new EntityMetaData('mockEntity');
 entitiesMetaData.mockEntity.dependentEntity = 'mockDependentEntity';
@@ -30,28 +31,28 @@ const initialState = fromJS({
           id: '0000',
           name: 'mockName',
           active: true,
-          mockDependentEntity: ['0001']
-        }
+          mockDependentEntity: ['0001'],
+        },
       ],
-      selectedEntityId: '0000'
+      selectedEntityId: '0000',
     },
     mockDependentEntity: {
       data: [
         {
           id: '0001',
           name: 'mockName',
-          active: true
-        }
-      ]
-    }
-  }
+          active: true,
+        },
+      ],
+    },
+  },
 });
 
 const mockSelectedEntity = fromJS({
   id: '0000',
   name: 'mockName',
   active: true,
-  mockDependentEntity: ['0001']
+  mockDependentEntity: ['0001'],
 });
 
 const mockCurrentEntityStore = fromJS({
@@ -60,17 +61,19 @@ const mockCurrentEntityStore = fromJS({
       id: '0000',
       name: 'mockName',
       active: true,
-      mockDependentEntity: ['0001']
-    }
+      mockDependentEntity: ['0001'],
+    },
   ],
-  selectedEntityId: '0000'
+  selectedEntityId: '0000',
 });
 
 jest.mock('../selectors');
+jest.mock('../../userData/selectors');
 getCurrentEntity.mockImplementation(() => 'mockEntity');
 getSelectedEntity.mockImplementation(() => mockSelectedEntity);
 getCurrentEntityStore.mockImplementation(() => mockCurrentEntityStore);
 getSelectedEntityId.mockImplementation(() => '0000');
+getCurrentPermissions.mockImplementation(() => ['mockPermissionName']);
 
 describe('listMemberIds', () => {
   it('should get dependentEntity, then return it as javascript collection', () => {
@@ -97,14 +100,14 @@ describe('getDependantEntityTableItems', () => {
               data: [
                 {
                   id: '0000',
-                  mockDependentEntity: ['0001']
-                }
-              ]
+                  mockDependentEntity: ['0001'],
+                },
+              ],
             },
             mockDependentEntity: {
-              data: undefined
-            }
-          }
+              data: undefined,
+            },
+          },
         })
       )
     ).toEqual([]);
@@ -114,7 +117,7 @@ describe('getDependantEntityTableItems', () => {
 describe('getSidePanelTableItems', () => {
   it('should get all current entity members for side panel use', () => {
     expect(getSidePanelTableItems(initialState, 'mockDependentEntity')).toEqual([
-      { active: true, id: '0001', name: 'mockName' }
+      { active: true, id: '0001', name: 'mockName' },
     ]);
   });
   it('should get empty array since dependentEntity has no entries in state', () => {
@@ -128,14 +131,14 @@ describe('getSidePanelTableItems', () => {
                   id: '0000',
                   name: 'mockName',
                   active: true,
-                  mockDependentEntity: ['0001']
-                }
-              ]
+                  mockDependentEntity: ['0001'],
+                },
+              ],
             },
             mockDependentEntity: {
-              data: undefined
-            }
-          }
+              data: undefined,
+            },
+          },
         }),
         'mockDependentEntity'
       )
@@ -158,25 +161,25 @@ describe('getModalTableItems', () => {
                   id: '0000',
                   name: 'mockName',
                   active: true,
-                  reasonLists: ['0001']
-                }
-              ]
+                  reasonLists: ['0001'],
+                },
+              ],
             },
             reasonLists: {
               data: [
                 {
                   id: '0001',
                   name: 'mockName',
-                  active: true
+                  active: true,
                 },
                 {
                   id: '0002',
                   name: 'mockNam2',
-                  active: true
-                }
-              ]
-            }
-          }
+                  active: true,
+                },
+              ],
+            },
+          },
         }),
         'reasonLists'
       )
@@ -196,14 +199,14 @@ describe('getModalTableItems', () => {
                   id: '0000',
                   name: 'mockName',
                   active: true,
-                  mockDependentEntity: ['0001']
-                }
-              ]
+                  mockDependentEntity: ['0001'],
+                },
+              ],
             },
             mockDependentEntity: {
-              data: undefined
-            }
-          }
+              data: undefined,
+            },
+          },
         }),
         'mockDependentEntity'
       )
@@ -223,25 +226,25 @@ describe('availableItemsForList', () => {
                   id: '0000',
                   name: 'mockName',
                   active: true,
-                  mockDependentEntity: ['0001']
-                }
-              ]
+                  mockDependentEntity: ['0001'],
+                },
+              ],
             },
             mockDependentEntity: {
               data: [
                 {
                   id: '0001',
                   name: 'mockName',
-                  active: true
+                  active: true,
                 },
                 {
                   id: '0002',
                   name: 'mockNam2',
-                  active: true
-                }
-              ]
-            }
-          }
+                  active: true,
+                },
+              ],
+            },
+          },
         })
       )
     ).toEqual([{ active: true, id: '0002', name: 'mockNam2' }]);
@@ -255,14 +258,14 @@ describe('availableItemsForList', () => {
               data: [
                 {
                   id: '0000',
-                  mockDependentEntity: ['0001']
-                }
-              ]
+                  mockDependentEntity: ['0001'],
+                },
+              ],
             },
             mockDependentEntity: {
-              data: undefined
-            }
-          }
+              data: undefined,
+            },
+          },
         })
       )
     ).toEqual([]);
@@ -282,14 +285,14 @@ describe('getEntityListMembers', () => {
               data: [
                 {
                   id: '0000',
-                  mockDependentEntity: undefined
-                }
-              ]
+                  mockDependentEntity: undefined,
+                },
+              ],
             },
             mockDependentEntity: {
-              data: undefined
-            }
-          }
+              data: undefined,
+            },
+          },
         })
       )
     ).toEqual([]);
@@ -314,25 +317,25 @@ describe('availableEntityMembersForList', () => {
                   id: '0000',
                   name: 'mockName',
                   active: true,
-                  mockDependentEntity: ['0001']
-                }
-              ]
+                  mockDependentEntity: ['0001'],
+                },
+              ],
             },
             mockDependentEntity: {
               data: [
                 {
                   id: '0001',
                   name: 'mockName',
-                  active: true
+                  active: true,
                 },
                 {
                   id: '0002',
                   name: 'mockNam2',
-                  active: true
-                }
-              ]
-            }
-          }
+                  active: true,
+                },
+              ],
+            },
+          },
         })
       )
     ).toEqual([{ active: true, id: '0002', name: 'mockNam2' }]);
@@ -346,17 +349,59 @@ describe('availableEntityMembersForList', () => {
               data: [
                 {
                   id: '0000',
-                  mockDependentEntity: ['0001']
-                }
-              ]
+                  mockDependentEntity: ['0001'],
+                },
+              ],
             },
             mockDependentEntity: {
-              data: undefined
-            }
-          }
+              data: undefined,
+            },
+          },
         })
       )
     ).toEqual([]);
+  });
+  it('should filter permissions when entity is roles', () => {
+    const mockTempSelectedEntity = fromJS({
+      id: '0000',
+      name: 'mockName',
+      active: true,
+      mockDependentEntity: ['permissions'],
+    });
+    getSelectedEntity.mockImplementationOnce(() => mockTempSelectedEntity);
+    getCurrentEntity.mockImplementationOnce(() => 'roles');
+    const mockCurrentRolesEntityStore = fromJS({
+      data: [
+        {
+          id: '0000',
+          name: 'mockRoleName',
+          active: true,
+          permissions: ['0001', '0002'],
+        },
+      ],
+      selectedEntityId: '0000',
+    });
+    const userDataPermissions = fromJS({
+      Entities: {
+        permissions: {
+          data: [
+            {
+              id: '0001',
+              name: 'mockPermissionName',
+              active: true,
+            },
+            {
+              id: '0002',
+              name: 'mockPermissionName2',
+              active: true,
+            },
+          ],
+        },
+      },
+    });
+    expect(availableEntityMembersForList(userDataPermissions)).toEqual([
+      { id: '0001', name: 'mockPermissionName', active: true },
+    ]);
   });
 });
 

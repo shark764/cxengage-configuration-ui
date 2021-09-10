@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IdentityProviders
 - Integrations
 
+# [0.104.14] - 2021-09-10
+### Added
+- CXV1-21584 - Remove permissions from ui that can't be added to roles
+
 # [0.104.13] - 2021-08-31
 ### Updated
 - <no-jira> - Publish to ECR to be its own stage in Jenkinsfile and not run in parallel
